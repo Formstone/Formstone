@@ -24,9 +24,64 @@
 		<![endif]-->
 
 		<script src="fs.core.js"></script>
+		<script>
+			// Usage ?
+
+			;(function ($, Formstone, undefined) {
+				var plugin = Formstone.Plugin("tipper", {
+						defaults: {
+							position: "top"
+						},
+						classes: [
+							"active",
+							"visible"
+						],
+						events: { },
+						functions: {
+							init: init,
+							construct: construct,
+							destruct: destruct
+						},
+						methods: {
+							reset: reset
+						}
+					}),
+					classes    = plugin.classes;
+					events     = plugin.events;
+					methods    = plugin.methods;
+
+				function init() {
+					console.log("Init", this);
+				}
+
+				function construct(data) {
+					console.log("Construct", this, data);
+
+					this.on(events.click, data, onClick);
+				}
+
+				function destruct(data) {
+					console.log("Destruct", this, data);
+				}
+
+				function reset(data) {
+					console.log("Reset", this, data);
+				}
+
+				function onClick(e) {
+					console.log("Click!", e);
+				}
+			})(jQuery, Formstone);
+
+
+
+			$(function() {
+				$a = $("a").tipper();
+			});
+		</script>
 
 	</head>
 	<body class="gridlock demo">
-
+		<a href="#">Test</a>
 	</body>
 </html>
