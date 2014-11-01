@@ -46,9 +46,10 @@
 							reset: reset
 						}
 					}),
-					classes    = plugin.classes;
-					events     = plugin.events;
-					methods    = plugin.methods;
+					classes      = plugin.classes;
+					events       = plugin.events;
+					methods      = plugin.methods,
+					functions    = plugin.functions;
 
 				function init() {
 					console.log("Init", this);
@@ -69,8 +70,15 @@
 				}
 
 				function onClick(e) {
-					console.log("Click!", e);
+					var data = functions.getData( $(e.target) );
+
+					if (data.$el.hasClass(classes.active)) {
+						data.$el.removeClass(classes.active);
+					} else {
+						data.$el.addClass(classes.active);
+					}
 				}
+
 			})(jQuery, Formstone);
 
 

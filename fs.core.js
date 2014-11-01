@@ -5,7 +5,9 @@ var Formstone = (function ($, window, document, undefined) {
 
 	// Namespace
 
-	var Formstone = {};
+	var Formstone = {
+		Plugins: {}
+	};
 
 	window.Formstone = Formstone;
 
@@ -109,60 +111,7 @@ var Formstone = (function ($, window, document, undefined) {
 	// Plugin Bridge
 
 	Formstone.Plugin = function(namespace, settings) {
-		return (function(namespace, settings) {
-			// Locals
-
-			settings.initialized = false;
-
-			// Localize Classes & Events
-
-			settings.classes   = localizeClasses(namespace, settings.classes);
-			settings.events    = localizeEvents(namespace, settings.events);
-
-			// Extend Internal Functions
-
-			settings.functions = $.extend({
-				init         : $.noop,
-				construct    : $.noop,
-				destruct     : $.noop
-			}, settings.functions);
-
-			// Extend Public Methods
-
-			settings.methods = $.extend({
-
-				/**
-				 * @method
-				 * @name defaults
-				 * @description Sets default plugin options
-				 * @param opts [object] <{}> "Options object"
-				 * @example $.tipper("defaults", opts);
-				 */
-				defaults: function(options) {
-					settings.defaults = $.extend(true, settings.defaults, options || {});
-					return this;
-				},
-
-				/**
-				 * @method
-				 * @name destroy
-				 * @description Removes instance of plugin
-				 * @example $(".target").tipper("destroy");
-				 */
-				destroy: function() {
-					return this.each(function() {
-						var $element = $(this),
-							data = getData($element);
-
-						if (data) {
-							settings.functions.destruct.call($element, data);
-
-							$element.removeData(namespace);
-						}
-					});
-				}
-
-			}, settings.methods);
+		Formstone.Plugins[namespace] = (function(namespace, settings) {
 
 			/**
 			 * @method private
@@ -184,7 +133,8 @@ var Formstone = (function ($, window, document, undefined) {
 
 					if (!getData($element)) {
 						var data = $.extend(true, {
-							$element: $element
+							$element: $element,
+							$el: $element
 						}, options, $element.data(namespace + "-options"));
 
 						settings.functions.construct.call($element, data);
@@ -243,21 +193,70 @@ var Formstone = (function ($, window, document, undefined) {
 				return "." + text;
 			}
 
+			/**
+			 * @method private
+			 * @name iterate
+			 * @description Loop function calls over jQuery object
+			 * @param func [string] "Function to call"
+			 * @return [object] "jQuery objects"
+			 */
+			function iterate(func) {
+				// Wrap public methods
+				return this.each(function() {
+					var $element = $(this),
+						data = getData($element);
+
+					if (data) {
+						func.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
+					}
+				});
+			}
+
+			// Locals
+
+			settings.initialized = false;
+
+			// Localize Classes & Events
+
+			settings.classes   = localizeClasses(namespace, settings.classes);
+			settings.events    = localizeEvents(namespace, settings.events);
+
+			// Extend Internal Functions
+
+			settings.functions = $.extend({
+				init            : $.noop,
+				construct       : $.noop,
+				destruct        : $.noop,
+
+				getData         : getData,
+				startTimer      : startTimer,
+				clearTimer      : clearTimer,
+				getClassName    : getClassName
+			}, settings.functions);
+
+			// Extend Public Methods
+
+			settings.methods = $.extend({
+
+				/**
+				 * @method
+				 * @name destroy
+				 * @description Removes instance of plugin
+				 * @example $(".target").tipper("destroy");
+				 */
+				destroy: function(data) {
+					settings.functions.destruct.call(this, data);
+
+					this.removeData(namespace);
+				}
+
+			}, settings.methods);
+
 			// Plugin Definition
 
 			$.fn[namespace] = function(method) {
 				if (settings.methods[method]) {
-					// return settings.settings[method].apply(this, Array.prototype.slice.call(arguments, 1));
-
-					// Wrap public methods
-					return this.each(function() {
-						var $element = $(this),
-							data = getData($element);
-
-						if (data) {
-							settings.methods[method].apply($element, [data].concat(Array.prototype.slice.call(arguments, 1)));
-						}
-					});
+					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
 				} else if (typeof method === 'object' || !method) {
 					return init.apply(this, arguments);
 				}
@@ -265,13 +264,22 @@ var Formstone = (function ($, window, document, undefined) {
 			};
 
 			$[namespace] = function(method) {
-				if (method === "fs") {
-					settings.methods.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
+				if (method === "defaults") {
+					/**
+					 * @method
+					 * @name defaults
+					 * @description Sets default plugin options
+					 * @param opts [object] <{}> "Options object"
+					 * @example $.tipper("defaults", opts);
+					 */
+					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
 				}
 			};
 
 			return settings;
 		})(namespace, settings);
+
+		return Formstone.Plugins[namespace];
 	};
 
 	/**
