@@ -1,23 +1,15 @@
 {
-  "name": "Core",
-  "id": "core",
-  "codename": "fs.core",
+  "name": "Formstone",
+  "id": "formstone",
+  "codename": "formstone",
   "version": "0.0.1",
-  "description": "Formstone Core.",
-  "keywords": [
-    "modal",
-    "slideshow",
-    "ui",
-    "javascript",
-    "jquery",
-    "formstone"
-  ],
+  "description": "Modular Javascript Library.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Formstone/Boxer"
+    "url": "https://github.com/Formstone/formstone"
   },
-  "homepage": "http://formstone.it/boxer/",
-  "demo": "http://formstone.it/components/Boxer/demo/index.html",
+  "homepage": "http://formstone.it/",
+  "demo": "http://formstone.it/demo/",
   "license": "MIT",
   "author": {
     "name": "Ben Plum",
@@ -26,9 +18,10 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
+    "grunt-autoprefixer": "^1.0.1",
     "grunt-banner": "^0.2.3",
-    "grunt-contrib-copy": "^0.6.0",
     "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-less": "^0.11.4",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jquerymanifest": "~0.1.3",

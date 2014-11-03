@@ -4,6 +4,10 @@
 
 module.exports = function(grunt) {
 
+	var cssFiles = {
+		"dist/widget/tipper.css" : [ "src/widget/tipper.less" ]
+	};
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
@@ -19,8 +23,9 @@ module.exports = function(grunt) {
 		jshint: {
 			options: {
 				globals: {
-					'jQuery': true,
-					'$'     : true
+					'jQuery'    : true,
+					'$'         : true,
+					'Formstone' : true
 				},
 				browser:   true,
 				curly:     true,
@@ -37,20 +42,7 @@ module.exports = function(grunt) {
 				undef:     true,
 				validthis: true
 			},
-			files: [
-				'src/<%= pkg.codename %>.js'
-			]
-		},
-		// Copy
-		copy: {
-			main: {
-				files: [
-					{
-						src: 'src/<%= pkg.codename %>.js',
-						dest: '<%= pkg.codename %>.js'
-					}
-				]
-			}
+			files: 'src/**/*.js',
 		},
 		// Uglify
 		uglify: {
@@ -58,27 +50,30 @@ module.exports = function(grunt) {
 				report: 'min'
 			},
 			target: {
-				files: {
-					'<%= pkg.codename %>.min.js': [ '<%= pkg.codename %>.js' ]
-				}
+				files: [{
+					expand: true,
+					cwd:    'src/',
+					src:    '**/*.js',
+					dest:   'dist/'
+				}]
 			}
 		},
-		// jQuery Manifest
-		jquerymanifest: {
+		// LESS
+		less: {
+			main: {
+				options: {
+					cleancss: true
+				},
+				files: cssFiles,
+			}
+		},
+		// Auto Prefixer
+		autoprefixer: {
 			options: {
-				source: grunt.file.readJSON('package.json'),
-				overrides: {
-					name:     '<%= pkg.id %>',
-					keywords: '<%= pkg.keywords %>',
-					homepage: '<%= pkg.homepage %>',
-					docs: 	  '<%= pkg.homepage %>',
-					demo: 	  '<%= pkg.homepage %>',
-					download: '<%= pkg.repository.url %>',
-					bugs: 	  '<%= pkg.repository.url %>/issues',
-					dependencies: {
-						jquery: '>=1.7'
-					}
-				}
+				browsers: [ '> 1%', 'last 5 versions', 'Firefox ESR', 'Opera 12.1', 'IE 8', 'IE 9' ]
+			},
+			no_dest: {
+				 src: 'dist/**/*.css'
 			}
 		},
 		// Banner
@@ -88,12 +83,7 @@ module.exports = function(grunt) {
 				banner: '<%= meta.banner %>'
 			},
 			files: {
-				src: [
-					'<%= pkg.codename %>.css',
-					'<%= pkg.codename %>.js',
-					'<%= pkg.codename %>.min.css',
-					'<%= pkg.codename %>.min.js'
-				]
+				src: "dist/**/*"
 			}
 		},
 		// Bower sync
@@ -105,8 +95,7 @@ module.exports = function(grunt) {
 						main: [
 							'<%= pkg.codename %>.js',
 							'<%= pkg.codename %>.css'
-						],
-						ignore: [ "*.jquery.json" ]
+						]
 					}
 				}
 			}
@@ -115,11 +104,20 @@ module.exports = function(grunt) {
 		watch: {
 			scripts: {
 				files: [
-					'src/**.js'
+					'src/**/*.js'
 				],
 				tasks: [
 					'jshint',
 					'copy'
+				]
+			},
+			scripts: {
+				files: [
+					'src/**/*.css'
+				],
+				tasks: [
+					'less',
+					'autoprefixer'
 				]
 			}
 		}
@@ -128,9 +126,9 @@ module.exports = function(grunt) {
 	// Load tasks
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-jquerymanifest');
+	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-banner');
 	grunt.loadNpmTasks('grunt-npm2bower-sync');
 
@@ -178,6 +176,6 @@ module.exports = function(grunt) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'copy', 'uglify'/* , 'jquerymanifest', 'usebanner', 'sync', 'buildReadme', 'buildLicense' */ ]);
+	grunt.registerTask('default', [ 'jshint', 'uglify', 'less', 'autoprefixer', 'usebanner', 'sync', 'buildReadme', 'buildLicense' ]);
 
 };

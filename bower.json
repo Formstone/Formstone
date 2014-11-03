@@ -1,0 +1,12 @@
+{
+  "name": "Formstone",
+  "version": "0.0.1",
+  "description": "Modular Javascript Library.",
+  "author": {
+    "name": "Ben Plum",
+    "email": "mr@benplum.com",
+    "url": "http://www.benplum.com"
+  },
+  "license": "MIT",
+  "homepage": "http://formstone.it/"
+}

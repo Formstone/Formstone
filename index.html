@@ -10,7 +10,7 @@
 		<script src="http://formstone.it/js/modernizr.js"></script>
 
 		<!-- Demo Resources -->
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet">
 		<script src="http://formstone.it/js/demo.js"></script>
 
 		<!--[if IE 8]>
@@ -23,73 +23,22 @@
         	<script src="http://formstone.it/js/site.ie9.js"></script>
 		<![endif]-->
 
-		<script src="fs.core.js"></script>
+		<script src="dist/core.js"></script>
+
+		<link href="dist/widget/tipper.css" rel="stylesheet">
+		<script src="dist/widget/tipper.js"></script>
+
 		<script>
-			// Usage ?
-
-			;(function ($, Formstone, undefined) {
-				var plugin = Formstone.Plugin("tipper", {
-						defaults: {
-							position: "top"
-						},
-						classes: [
-							"active",
-							"visible"
-						],
-						events: { },
-						functions: {
-							init: init,
-							construct: construct,
-							destruct: destruct
-						},
-						methods: {
-							reset: reset
-						}
-					}),
-					classes      = plugin.classes;
-					events       = plugin.events;
-					methods      = plugin.methods,
-					functions    = plugin.functions;
-
-				function init() {
-					console.log("Init", this);
-				}
-
-				function construct(data) {
-					console.log("Construct", this, data);
-
-					this.on(events.click, data, onClick);
-				}
-
-				function destruct(data) {
-					console.log("Destruct", this, data);
-				}
-
-				function reset(data) {
-					console.log("Reset", this, data);
-				}
-
-				function onClick(e) {
-					var data = functions.getData( $(e.target) );
-
-					if (data.$el.hasClass(classes.active)) {
-						data.$el.removeClass(classes.active);
-					} else {
-						data.$el.addClass(classes.active);
-					}
-				}
-
-			})(jQuery, Formstone);
-
-
-
 			$(function() {
-				$a = $("a").tipper();
+				$a = $("a").tipper({
+					// follow: true,
+					delay: 500
+				});
 			});
 		</script>
 
 	</head>
 	<body class="gridlock demo">
-		<a href="#">Test</a>
+		<a href="#" data-title="Tool Tip!" style="background: #eee; margin: 200px auto; width: 100px; text-align: center; display: block;">Test</a>
 	</body>
 </html>
