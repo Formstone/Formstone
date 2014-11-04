@@ -11,25 +11,16 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		Plugins: {}
 	};
 
-	// Globals
-
-	Formstone.$window              = $(window);
-	Formstone.$document            = $(document);
-	Formstone.$body                = null;
-	Formstone.trueMobile           = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test((window.navigator.userAgent||window.navigator.vendor||window.opera));
-	Formstone.transitionSupport    = false;
-	Formstone.matchMediaSupport    = window.matchMedia;
-
 	// Classes
 
-	Formstone.classes = {
+	var Classes= {
 		base                 : "{ns}",
 		element              : "{ns}-element"
 	};
 
 	// Events
 
-	Formstone.events = {
+	var Events = {
 		namespace            : ".{ns}",
 		click                : "click.{ns}",
 		dragEnter            : "dragenter.{ns}",
@@ -60,35 +51,20 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		touchEnd             : "touchend.{ns}"
 	};
 
-	// Localize Properties
+	// Globals
 
-	function localizeProperties(type, namespace, globalProps, customProps) {
-		var _props = {},
-			i;
-
-		customProps = customProps || {};
-
-		for (i in customProps) {
-			if (customProps.hasOwnProperty(i)) {
-				if (type === "classes") {
-					// Custom classes
-					_props[ customProps[i] ] = namespace + "-" + customProps[i];
-				} else {
-					// Custom events
-					_props[ customProps[i] ] = customProps[i] + "." + namespace;
-				}
-			}
-		}
-
-		for (i in globalProps) {
-			if (globalProps.hasOwnProperty(i)) {
-				// From Globals
-				_props[i] = globalProps[i].replace(/{ns}/g, namespace);
-			}
-		}
-
-		return _props;
-	}
+	Formstone.$window              = $(window);
+	Formstone.$document            = $(document);
+	Formstone.$body                = null;
+	Formstone.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
+	Formstone.isFirefox            = /Firefox/i.test( Formstone.userAgent );
+	Formstone.isChrome             = /Chrome/i.test(  Formstone.userAgent );
+	Formstone.isSafari             = (/Safari/i.test( Formstone.userAgent ) && !Formstone.isChrome);
+	Formstone.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( Formstone.userAgent );
+	Formstone.isFirefoxMobile      = (Formstone.isFirefox && Formstone.isMobile);
+	Formstone.transitionSupport    = false;
+	Formstone.matchMediaSupport    = !!(window.matchMedia);
+	Formstone.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
 
 	// Plugin Bridge
 
@@ -222,14 +198,53 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 				});
 			}
 
+			/**
+			 * @method private
+			 * @name publicRouter
+			 */
+			function publicRouter(method) {
+				if (settings.methods[method] && method.indexOf("_") > 0) {
+
+					// Wrap Public Methods
+
+					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
+				} else if (typeof method === 'object' || !method) {
+
+					// Initialize
+
+					return init.apply(this, arguments);
+				}
+
+				return this;
+			}
+
+			/**
+			 * @method private
+			 * @name publicDefaults
+			 */
+			function publicDefaults(method) {
+				if (method === "defaults") {
+					/**
+					 * @method
+					 * @name defaults
+					 * @description Sets default plugin options
+					 * @param opts [object] <{}> "Options object"
+					 * @example $.plugins("defaults", opts);
+					 */
+					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
+				}
+
+				return this;
+			}
+
 			// Locals
 
 			settings.initialized = false;
 
-			// Localize Classes & Events
+			// Namespace Classes & Events
 
-			settings.classes   = localizeProperties("classes", namespace, Formstone.classes, settings.classes);
-			settings.events    = localizeProperties("events", namespace, Formstone.events, settings.events);
+			settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
+			settings.events    = namespaceProperties("events", namespace, Events, settings.events);
 
 			// Extend Internal Functions
 
@@ -247,6 +262,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 				_setup          : $.noop,
 				_construct      : $.noop,
 				_destruct       : $.noop,
+				_route          : false,
 
 				/**
 				 * @method
@@ -262,44 +278,20 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			}, settings.methods);
 
-			// Plugin Definition
+
 
 			if (settings.widget) {
-				$.fn[namespace] = function(method) {
-					if (settings.methods[method] && method.indexOf("_") > 0) {
 
-						// Wrap Public Methods
+				// Widget Definition
 
-						return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
-					} else if (typeof method === 'object' || !method) {
+				$.fn[namespace]    = publicRouter;
+				$[namespace]       = publicDefaults;
+			} else {
 
-						// Initialize
+				// Utility Definition
 
-						return init.apply(this, arguments);
-					}
-					return this;
-				};
+				$[namespace] = settings.methods._route || publicRouter;
 			}
-
-			// Utility Definition
-
-			$[namespace] = function(method) {
-				if (method === "defaults") {
-					/**
-					 * @method
-					 * @name defaults
-					 * @description Sets default plugin options
-					 * @param opts [object] <{}> "Options object"
-					 * @example $.tipper("defaults", opts);
-					 */
-					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
-				} else if (settings.methods["_route"]) {
-
-					// Route Utility Methods
-
-					settings.methods._route.apply(this, arguments);
-				}
-			};
 
 			return settings;
 		})(namespace, settings);
@@ -307,12 +299,38 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		return Formstone.Plugins[namespace];
 	};
 
-	/**
-	 * @method private
-	 * @name getTransitionEvent
-	 * @description Retuns a properly prefixed transitionend event
-	 * @return [string] "Properly prefixed event"
-	 */
+	// Namespace Properties
+
+	function namespaceProperties(type, namespace, globalProps, customProps) {
+		var _props = {},
+			i;
+
+		customProps = customProps || {};
+
+		for (i in customProps) {
+			if (customProps.hasOwnProperty(i)) {
+				if (type === "classes") {
+					// Custom classes
+					_props[ customProps[i] ] = namespace + "-" + customProps[i];
+				} else {
+					// Custom events
+					_props[ customProps[i] ] = customProps[i] + "." + namespace;
+				}
+			}
+		}
+
+		for (i in globalProps) {
+			if (globalProps.hasOwnProperty(i)) {
+				// From Globals
+				_props[i] = globalProps[i].replace(/{ns}/g, namespace);
+			}
+		}
+
+		return _props;
+	}
+
+	// Transition Event
+
 	function getTransitionEvent() {
 		var transitions = {
 				"transition"          : "transitionend",
@@ -333,6 +351,41 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		return event + ".{ns}";
 	}
 
+	// RAF Polyfill
+
+	function checkRAFSupport() {
+		var time = 0,
+			vendors = [
+				'webkit',
+				'moz'
+			];
+
+		for (var i = 0; i < vendors.length && !window.requestAnimationFrame; i++) {
+			window.requestAnimationFrame = window[ vendors[i] + 'RequestAnimationFrame' ];
+			window.cancelAnimationFrame  = window[ vendors[i] + 'CancelAnimationFrame' ] || window[ vendors[i] + 'CancelRequestAnimationFrame' ];
+		}
+
+		if (typeof window.requestAnimationFrame === "undefined") {
+			window.requestAnimationFrame = function(callback, element) {
+				var now = new Date().getTime(),
+					diff = Math.max(0, 16 - (now - time)),
+					id = setTimeout(function() {
+						callback(now + diff);
+					}, diff);
+
+				time = now + diff;
+
+				return id;
+			};
+
+			window.cancelAnimationFrame = function(id) {
+				clearTimeout(id);
+			};
+		}
+	}
+
+	checkRAFSupport();
+
 	// Document Ready
 
 	Formstone.$document.ready(function() {
@@ -341,8 +394,8 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	// Custom Events
 
-	Formstone.events.transitionEnd      = getTransitionEvent();
-	Formstone.events.clickTouchStart    = Formstone.events.click + " " + Formstone.events.touchStart;
+	Events.transitionEnd      = getTransitionEvent();
+	Events.clickTouchStart    = Events.click + " " + Events.touchStart;
 
 	return Formstone;
 

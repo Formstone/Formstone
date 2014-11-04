@@ -12,10 +12,10 @@
 		// Set defaults
 
 		if (typeof key === "object") {
-			defaults = $.extend(defaults, key);
+			Defaults = $.extend(Defaults, key);
 			return null;
 		} else {
-			options = $.extend({}, defaults, options || {});
+			options = $.extend({}, Defaults, options || {});
 		}
 
 		// Delegate intent
@@ -23,26 +23,26 @@
 		if (typeof key !== "undefined") {
 			if (typeof value !== "undefined") {
 				if (value === null) {
-					erase(key);
+					eraseCookie(key);
 				} else {
-					create(key, value, options);
+					createCookie(key, value, options);
 				}
 			} else {
-				return read(key);
+				return readCookie(key);
 			}
 		}
 	}
 
 	/**
 	 * @method
-	 * @name create
+	 * @name createCookie
 	 * @description Creates a cookie
 	 * @param key [string] "Cookie key"
 	 * @param value [string] "Cookie value"
 	 * @param options [object] "Options object"
 	 * @example $.macaroon(key, value, options);
 	 */
-	function create(key, value, options) {
+	function createCookie(key, value, options) {
 		var expiration = false,
 			date = new Date();
 
@@ -66,13 +66,13 @@
 
 	/**
 	 * @method
-	 * @name read
+	 * @name readCookie
 	 * @description Returns a cookie's value, or null
 	 * @param key [string] "Cookie key"
 	 * @return [string | null] "Cookie's value, or null"
 	 * @example var value = $.macaroon(key);
 	 */
-	function read(key) {
+	function readCookie(key) {
 		var keyString    = key + "=",
 			cookies      = Document.cookie.split(';');
 
@@ -97,24 +97,22 @@
 
 	/**
 	 * @method
-	 * @name erase
+	 * @name eraseCookie
 	 * @description Deletes a cookie
 	 * @param key [string] "Cookie key"
 	 * @example $.macaroon(key, null);
 	 */
-	function erase(key) {
-		create(key, "", {
+	function eraseCookie(key) {
+		createCookie(key, "", {
 			expires: -604800000 // -7 days
 		});
 	}
 
 	// Register Plugin
 
-	var plugin = Formstone.Plugin("macaroon", {
+	var Plugin = Formstone.Plugin("macaroon", {
 			methods: {
-				_route:     route,
-				create:     create,
-				erase:      erase
+				_route:     route
 			}
 		}),
 		/**
@@ -123,7 +121,7 @@
 		 * @param expires [int] <604800000> "Time until cookie expires"
 		 * @param path [string] "Cookie path"
 		 */
-		defaults = {
+		Defaults = {
 			domain:     null,
 			expires:    604800000, // 7 days
 			path:       null,

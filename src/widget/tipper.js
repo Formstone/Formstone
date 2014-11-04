@@ -7,7 +7,7 @@
 	 * @name construct
 	 */
 	function construct(data) {
-		this.on(events.mouseEnter, data, onMouseEnter);
+		this.on(Events.mouseEnter, data, onMouseEnter);
 	}
 
 	/**
@@ -17,7 +17,7 @@
 	function destruct(data) {
 		removeTooltip();
 
-		this.off(events.namespace);
+		this.off(Events.namespace);
 	}
 
 	/**
@@ -34,11 +34,11 @@
 		data.left = e.pageX;
 		data.top  = e.pageY;
 
-		data.timer = functions.startTimer(data.timer, data.delay, function() {
+		data.timer = Functions.startTimer(data.timer, data.delay, function() {
 			buildTooltip(data);
 		});
 
-		data.$el.one(events.mouseLeave, data, onMouseLeave);
+		data.$el.one(Events.mouseLeave, data, onMouseLeave);
 	}
 
 	/**
@@ -50,7 +50,7 @@
 	function onMouseLeave(e) {
 		var data = e.data;
 
-		functions.clearTimer(data.timer);
+		Functions.clearTimer(data.timer);
 
 		removeTooltip();
 	}
@@ -65,7 +65,7 @@
 		var data = e.data,
 			position = {
 				left: e.pageX,
-				top: e.pageY
+				top:  e.pageY
 			};
 
 		positionTooltip(position);
@@ -83,11 +83,11 @@
 		var html = '';
 
 		html += '<div class="';
-		html += [classes.base, classes[data.direction] ].join(" ");
+		html += [Classes.base, Classes[data.direction] ].join(" ");
 		html += '">';
-		html += '<div class="' + classes.content + '">';
+		html += '<div class="' + Classes.content + '">';
 		html += data.formatter.call(data.$el, data);
-		html += '<span class="' + classes.caret + '"></span>';
+		html += '<span class="' + Classes.caret + '"></span>';
 		html += '</div>';
 		html += '</div>';
 
@@ -98,8 +98,8 @@
 
 		Formstone.$body.append(Instance.$tipper);
 
-		var $content = Instance.$tipper.find( functions.getClassName(classes.content) ),
-			$caret   = Instance.$tipper.find( functions.getClassName(classes.caret) ),
+		var $content = Instance.$tipper.find( Functions.getClassName(Classes.content) ),
+			$caret   = Instance.$tipper.find( Functions.getClassName(Classes.caret) ),
 
 			offset = data.$el.offset(),
 			height = data.$el.outerHeight(),
@@ -119,7 +119,7 @@
 
 		// position content
 		if (data.direction === "right" || data.direction === "left") {
-			caretTop = (contentHeight - caretHeight) / 2;
+			caretTop   = (contentHeight - caretHeight) / 2;
 			contentTop = -contentHeight / 2;
 
 			if (data.direction === "right") {
@@ -149,54 +149,60 @@
 			left: caretLeft
 		});
 
+		Instance.$tipper.addClass(Classes.visible);
+
 		// Position tipper
 		if (data.follow) {
-			data.$el.on(events.mouseMove, data, onMouseMove)
-					.trigger(events.mouseMove);
-		} else if (data.match) {
-			if (data.direction === "right" || data.direction === "left") {
-				tooltipTop = data.top; // mouse pos
+			data.$el.on(Events.mouseMove, data, onMouseMove);
 
-				if (data.direction === "right") {
-					tooltipLeft = offset.left + width;
-				} else if (data.direction === "left") {
-					tooltipLeft = offset.left;
-				}
-			} else {
-				tooltipLeft = data.left; // mouse pos
-
-				if (data.direction === "bottom") {
-					tooltipTop = offset.top + height;
-				} else if (data.direction === "top") {
-					tooltipTop = offset.top;
-				}
-			}
+			onMouseMove.call(data.$el, {
+				pageX: data.left,
+				pageY: data.top
+			});
 		} else {
-			if (data.direction === "right" || data.direction === "left") {
-				tooltipTop = offset.top + (height / 2);
+			if (data.match) {
+				if (data.direction === "right" || data.direction === "left") {
+					tooltipTop = data.top; // mouse pos
 
-				if (data.direction === "right") {
-					tooltipLeft = offset.left + width;
-				} else if (data.direction === "left") {
-					tooltipLeft = offset.left;
+					if (data.direction === "right") {
+						tooltipLeft = offset.left + width;
+					} else if (data.direction === "left") {
+						tooltipLeft = offset.left;
+					}
+				} else {
+					tooltipLeft = data.left; // mouse pos
+
+					if (data.direction === "bottom") {
+						tooltipTop = offset.top + height;
+					} else if (data.direction === "top") {
+						tooltipTop = offset.top;
+					}
 				}
 			} else {
-				tooltipLeft = offset.left + (width / 2);
+				if (data.direction === "right" || data.direction === "left") {
+					tooltipTop = offset.top + (height / 2);
 
-				if (data.direction === "bottom") {
-					tooltipTop = offset.top + height;
-				} else if (data.direction === "top") {
-					tooltipTop = offset.top;
+					if (data.direction === "right") {
+						tooltipLeft = offset.left + width;
+					} else if (data.direction === "left") {
+						tooltipLeft = offset.left;
+					}
+				} else {
+					tooltipLeft = offset.left + (width / 2);
+
+					if (data.direction === "bottom") {
+						tooltipTop = offset.top + height;
+					} else if (data.direction === "top") {
+						tooltipTop = offset.top;
+					}
 				}
 			}
+
+			positionTooltip({
+				top:  tooltipTop,
+				left: tooltipLeft
+			});
 		}
-
-		Instance.$tipper.addClass(classes.visible);
-
-		positionTooltip({
-			top:  tooltipTop,
-			left: tooltipLeft
-		});
 	}
 
 	/**
@@ -218,7 +224,7 @@
 	 */
 	function removeTooltip() {
 		if (Instance) {
-			Instance.$el.off( [events.mouseMove, events.mouseLeave].join(" ") );
+			Instance.$el.off( [Events.mouseMove, Events.mouseLeave].join(" ") );
 
 			Instance.$tipper.remove();
 			Instance = null;
@@ -237,7 +243,7 @@
 
 	// Register Plugin
 
-	var plugin = Formstone.Plugin("tipper", {
+	var Plugin = Formstone.Plugin("tipper", {
 			widget: true,
 			defaults: {
 				delay        : 0,
@@ -262,10 +268,9 @@
 			}
 		}),
 		// Localize References
-		classes      = plugin.classes,
-		events       = plugin.events,
-		methods      = plugin.methods,
-		functions    = plugin.functions,
+		Classes      = Plugin.classes,
+		Events       = Plugin.events,
+		Functions    = Plugin.functions,
 		// Singleton
 		Instance     = null;
 

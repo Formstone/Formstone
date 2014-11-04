@@ -9,19 +9,7 @@
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
 
-		<!-- Demo Resources -->
-		<link href="http://formstone.it/css/demo.css" rel="stylesheet">
-		<script src="http://formstone.it/js/demo.js"></script>
-
-		<!--[if IE 8]>
-        	<script>var IE8 = true;</script>
-        	<script src="http://formstone.it/js/site.ie8.js"></script>
-			<link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css">
-		<![endif]-->
-		<!--[if IE 9]>
-        	<script>var IE9 = true;</script>
-        	<script src="http://formstone.it/js/site.ie9.js"></script>
-		<![endif]-->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" ></script>
 
 		<script src="dist/core.js"></script>
 
@@ -30,12 +18,24 @@
 
 		<script src="dist/utility/macaroon.js"></script>
 
+		<script src="dist/utility/rubberband.js"></script>
+
 		<script>
 			$(function() {
 				$a = $("a").tipper({
-					// follow: true,
-					// delay: 500
+					follow: true,
+					delay: 500,
 					direction: "bottom"
+				});
+
+
+				$(window).on("snap", function(e, data) {
+					console.log(/* data */ "snap");
+				});
+
+				$.rubberband({
+					maxWidth: [ 1220, 980, 740, 500, 320 ]
+					// minWidth: [ 1220, 980, 740, 500, 320 ]
 				});
 			});
 		</script>
