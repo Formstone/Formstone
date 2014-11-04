@@ -1,7 +1,7 @@
 {
   "name": "Formstone",
   "version": "0.0.1",
-  "description": "Modular Javascript Library.",
+  "description": "Library of modular javascript components.",
   "author": {
     "name": "Ben Plum",
     "email": "mr@benplum.com",

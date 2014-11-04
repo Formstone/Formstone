@@ -1,5 +1,7 @@
 ;(function ($, Formstone, undefined) {
 
+	"use strict";
+
 	/**
 	 * @method private
 	 * @name construct
@@ -254,13 +256,12 @@
 				"right",
 				"left"
 			],
-			events: { },
 			methods: {
 				_construct: construct,
 				_destruct: destruct
 			}
 		}),
-		// Localize
+		// Localize References
 		classes      = plugin.classes,
 		events       = plugin.events,
 		methods      = plugin.methods,

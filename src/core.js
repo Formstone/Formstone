@@ -13,8 +13,8 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	// Globals
 
-	Formstone.$window              = null;
-	Formstone.$document            = null;
+	Formstone.$window              = $(window);
+	Formstone.$document            = $(document);
 	Formstone.$body                = null;
 	Formstone.trueMobile           = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test((window.navigator.userAgent||window.navigator.vendor||window.opera));
 	Formstone.transitionSupport    = false;
@@ -102,24 +102,40 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			 * @param opts [object] "Initialization options"
 			 */
 			function init(options) {
+
+				// Setup
+
 				if (!settings.initialized) {
 					settings.initialized = true;
 
-					settings.methods._init.call(window);
+					settings.methods._setup.call(window);
 				}
 
+				// Extend Defaults
+
 				options = $.extend(true, {}, settings.defaults, options);
+
+				// Maintain Chain
 
 				return this.each(function() {
 					var $element = $(this);
 
+					// Gaurd Against Exiting Instances
+
 					if (!getData($element)) {
+
+						// Extend w/ Local Options
+
 						var data = $.extend(true, {
 							$element: $element,
 							$el: $element
 						}, options, $element.data(namespace + "-options"));
 
+						// Constructor
+
 						settings.methods._construct.call($element, data);
+
+						// Cache Instance
 
 						$element.addClass(settings.classes.element)
 						        .data(namespace, data);
@@ -196,7 +212,6 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			 * @return [object] "jQuery objects"
 			 */
 			function iterate(func) {
-				// Wrap public methods
 				return this.each(function() {
 					var $element = $(this),
 						data = getData($element);
@@ -229,7 +244,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			settings.methods = $.extend({
 
-				_init           : $.noop,
+				_setup          : $.noop,
 				_construct      : $.noop,
 				_destruct       : $.noop,
 
@@ -252,13 +267,21 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			if (settings.widget) {
 				$.fn[namespace] = function(method) {
 					if (settings.methods[method] && method.indexOf("_") > 0) {
+
+						// Wrap Public Methods
+
 						return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
 					} else if (typeof method === 'object' || !method) {
+
+						// Initialize
+
 						return init.apply(this, arguments);
 					}
 					return this;
 				};
 			}
+
+			// Utility Definition
 
 			$[namespace] = function(method) {
 				if (method === "defaults") {
@@ -270,6 +293,11 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 					 * @example $.tipper("defaults", opts);
 					 */
 					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
+				} else if (settings.methods["_route"]) {
+
+					// Route Utility Methods
+
+					settings.methods._route.apply(this, arguments);
 				}
 			};
 
@@ -305,16 +333,13 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		return event + ".{ns}";
 	}
 
-	// Init Core
-
-	Formstone.$window      = $(window);
-	Formstone.$document    = $(document);
+	// Document Ready
 
 	Formstone.$document.ready(function() {
 		Formstone.$body = $("body");
 	});
 
-	// Custom events
+	// Custom Events
 
 	Formstone.events.transitionEnd      = getTransitionEvent();
 	Formstone.events.clickTouchStart    = Formstone.events.click + " " + Formstone.events.touchStart;

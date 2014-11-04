@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "version": "0.0.1",
-  "description": "Modular Javascript Library.",
+  "description": "Library of modular javascript components.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Formstone/formstone"
