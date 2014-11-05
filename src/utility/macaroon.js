@@ -4,14 +4,15 @@
 
 	/**
 	 * @method
-	 * @name delegateAction
+	 * @name delegate
 	 * @param key [string] "Cookie key"
 	 * @param value [string] "Cookie value"
 	 * @param options [object] "Options object"
 	 * @return [null || string] "Cookie value, if 'read'"
 	 */
 
-	function delegateAction(key, value, options) {
+	function delegate(key, value, options) {
+
 		if (typeof key === "object") {
 
 			// Set defaults
@@ -48,6 +49,7 @@
 	 * @param options [object] "Options object"
 	 * @example $.macaroon(key, value, options);
 	 */
+
 	function createCookie(key, value, options) {
 		var expiration = false,
 			date = new Date();
@@ -78,6 +80,7 @@
 	 * @return [string | null] "Cookie's value, or null"
 	 * @example var value = $.macaroon(key);
 	 */
+
 	function readCookie(key) {
 		var keyString    = key + "=",
 			cookies      = Document.cookie.split(';');
@@ -108,6 +111,7 @@
 	 * @param key [string] "Cookie key"
 	 * @example $.macaroon(key, null);
 	 */
+
 	function eraseCookie(key) {
 		createCookie(key, "", {
 			expires: -604800000 // -7 days
@@ -118,22 +122,26 @@
 
 	var Plugin = Formstone.Plugin("macaroon", {
 			methods: {
-				_delegate:     delegateAction
+				_delegate:     delegate
 			}
 		}),
+
 		/**
 		 * @options
 		 * @param domain [string] "Cookie domain"
 		 * @param expires [int] <604800000> "Time until cookie expires"
 		 * @param path [string] "Cookie path"
 		 */
+
 		Defaults = {
 			domain:     null,
 			expires:    604800000, // 7 days
 			path:       null,
 			secure:     null
 		},
+
 		// Localize References
+
 		Document    = Formstone.$document[0];
 
 })(jQuery, Formstone);

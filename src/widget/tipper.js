@@ -6,6 +6,7 @@
 	 * @method private
 	 * @name construct
 	 */
+
 	function construct(data) {
 		this.on(Events.mouseEnter, data, onMouseEnter);
 	}
@@ -14,6 +15,7 @@
 	 * @method private
 	 * @name destruct
 	 */
+
 	function destruct(data) {
 		removeTooltip();
 
@@ -26,6 +28,7 @@
 	 * @description Handles mouse enter event
 	 * @param e [object] "Event data"
 	 */
+
 	function onMouseEnter(e) {
 		removeTooltip();
 
@@ -47,6 +50,7 @@
 	 * @description Handles mouse leave event
 	 * @param e [object] "Event data"
 	 */
+
 	function onMouseLeave(e) {
 		var data = e.data;
 
@@ -61,6 +65,7 @@
 	 * @description Handles mouse move event
 	 * @param e [object] "Event data"
 	 */
+
 	function onMouseMove(e) {
 		var data = e.data,
 			position = {
@@ -77,6 +82,7 @@
 	 * @description Builds new tooltip instance
 	 * @param data [object] "Instance data"
 	 */
+
 	function buildTooltip(data) {
 		removeTooltip();
 
@@ -211,6 +217,7 @@
 	 * @description Positions active tooltip instance
 	 * @param position [object] "Position data"
 	 */
+
 	function positionTooltip(position) {
 		if (Instance) {
 			Instance.$tipper.css(position);
@@ -222,6 +229,7 @@
 	 * @name removeTooltip
 	 * @description Removes active tooltip instance
 	 */
+
 	function removeTooltip() {
 		if (Instance) {
 			Instance.$el.off( [Events.mouseMove, Events.mouseLeave].join(" ") );
@@ -237,6 +245,7 @@
 	 * @description Formats tooltip text
 	 * @return [string] "Tooltip text"
 	 */
+
 	function format(data) {
 		return this.data("title");
 	}
@@ -263,15 +272,19 @@
 				"left"
 			],
 			methods: {
-				_construct: construct,
-				_destruct: destruct
+				_construct:    construct,
+				_destruct:     destruct
 			}
 		}),
+
 		// Localize References
+
 		Classes      = Plugin.classes,
 		Events       = Plugin.events,
 		Functions    = Plugin.functions,
+
 		// Singleton
+
 		Instance     = null;
 
 })(jQuery, Formstone);

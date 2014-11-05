@@ -4,11 +4,11 @@
 
 	/**
 	 * @method
-	 * @name delegateAction
+	 * @name delegate
 	 * @param opts [object] "Plugin options"
 	 */
 
-	function delegateAction(options) {
+	function delegate(options) {
 		if (Formstone.matchMediaSupport) {
 			if (typeof options === "object") {
 				initialize.apply(this, arguments);
@@ -24,6 +24,7 @@
 	 * @description Initializes plugin
 	 * @param opts [object] "Plugin options"
 	 */
+
 	function initialize(options) {
 		if (!Plugin.initialized) {
 			options = options || {};
@@ -73,6 +74,7 @@
 	 * @name setState
 	 * @description Sets current media query match state
 	 */
+
 	function setState() {
 		State = {
 			unit: Defaults.unit
@@ -110,6 +112,7 @@
 	 * @return [object] "Current state object"
 	 * @example var state = $.rubberband("state");
 	 */
+
 	function getState() {
 		return State;
 	}
@@ -122,6 +125,7 @@
 	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
 	 * @example $.rubberband("bind", "(min-width: 500px)", { ... });
 	 */
+
 	function bind(media, data) {
 		if (!Bindings[ media ]) {
 			Bindings[ media ] = {
@@ -150,6 +154,7 @@
 	 * @param media [string] "Media query to match"
 	 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
 	 */
+
 	function unbind(media) {
 		if (Bindings[ media ]) {
 			Bindings[ media ].mq.removeListener( onBindingChange );
@@ -162,6 +167,7 @@
 	 * @name onStateChange
 	 * @description Handles media query changes
 	 */
+
 	function onStateChange() {
 		setState();
 
@@ -173,6 +179,7 @@
 	 * @name onBindingChange
 	 * @description Handles a binding's media query change
 	 */
+
 	function onBindingChange(mq) {
 		var binding    = Bindings[ mq.media ],
 			event      = mq.matches ? Events.enter : Events.leave;
@@ -196,6 +203,7 @@
 	 * @param b [mixed] "Second value"
 	 * @return Difference between second and first values
 	 */
+
 	function sortAsc(a, b) {
 		return (b - a);
 	}
@@ -208,6 +216,7 @@
 	 * @param b [mixed] "Second value"
 	 * @return Difference between first and second values
 	 */
+
 	function sortDesc(a, b) {
 		return (a - b);
 	}
@@ -216,9 +225,10 @@
 
 	var Plugin = Formstone.Plugin("rubberband", {
 			methods: {
-				_delegate:    delegateAction
+				_delegate:    delegate
 			}
 		}),
+
 		/**
 		 * @options
 		 * @param minWidth [array] <[ 0 ]> "Array of min-widths"
@@ -227,6 +237,7 @@
 		 * @param maxHeight [array] <[ Infinity ]> "Array of max-heights"
 		 * @param unit [string] <'px'> "Unit to use when matching widths and heights"
 		 */
+
 		Defaults = {
 			minWidth:     [ 0 ],
 			maxWidth:     [ Infinity ],
@@ -234,16 +245,22 @@
 			maxHeight:    [ Infinity ],
 			unit:         "px"
 		},
+
 		// Unprefixed Events
+
 		Events = {
 			snap     : "snap",
 			enter    : "enter",
 			leave    : "leave"
 		},
+
 		// Localize References
+
 		$Window      = Formstone.$window,
 		Window       = $Window[0],
-		// Singleton
+
+		// Internal
+
 		State        = null,
 		Bindings     = [],
 		MQMatches    = {},

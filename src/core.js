@@ -203,12 +203,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
-			 * @name delegateAction
+			 * @name delegateRoutine
 			 * @description Delegate public methods
 			 * @description Loop function calls over jQuery set
 			 * @param method [string || object] "Public method name; Options object if initializing"
 			 */
-			function delegateAction(method) {
+			function delegateRoutine(method) {
 
 				// Only allow "public" methods (no underscore prefix)
 
@@ -298,13 +298,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Widget
 
-				$.fn[namespace]    = delegateAction;    // Action Delegation:    $(".selector").plugin("method", ...);
+				$.fn[namespace]    = delegateRoutine;   // Method Delegation:    $(".selector").plugin("method", ...);
 				$[namespace]       = setDefaults;       // Set Defaults:         $.plugin("defaults", { ... });
 			} else {
 
 				// Utility
 
-				$[namespace]       = settings.methods._delegate || delegateAction;    // Custom Action Delegation:    $(".selector").plugin( ... );
+				$[namespace]       = settings.methods._delegate || delegateRoutine;    // Custom Delegation:    $(".selector").plugin( ... );
 			}
 
 			return settings;
