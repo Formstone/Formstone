@@ -4,33 +4,39 @@
 
 	/**
 	 * @method
-	 * @name Route
+	 * @name delegateAction
+	 * @param key [string] "Cookie key"
+	 * @param value [string] "Cookie value"
+	 * @param options [object] "Options object"
+	 * @return [null || string] "Cookie value, if 'read'"
 	 */
 
-	function route(key, value, options) {
-
-		// Set defaults
-
+	function delegateAction(key, value, options) {
 		if (typeof key === "object") {
+
+			// Set defaults
+
 			Defaults = $.extend(Defaults, key);
-			return null;
 		} else {
+
+			// Delegate intent
+
 			options = $.extend({}, Defaults, options || {});
-		}
 
-		// Delegate intent
-
-		if (typeof key !== "undefined") {
-			if (typeof value !== "undefined") {
-				if (value === null) {
-					eraseCookie(key);
+			if (typeof key !== "undefined") {
+				if (typeof value !== "undefined") {
+					if (value === null) {
+						eraseCookie(key);
+					} else {
+						createCookie(key, value, options);
+					}
 				} else {
-					createCookie(key, value, options);
+					return readCookie(key);
 				}
-			} else {
-				return readCookie(key);
 			}
 		}
+
+		return null;
 	}
 
 	/**
@@ -112,7 +118,7 @@
 
 	var Plugin = Formstone.Plugin("macaroon", {
 			methods: {
-				_route:     route
+				_delegate:     delegateAction
 			}
 		}),
 		/**

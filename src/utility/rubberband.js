@@ -4,28 +4,27 @@
 
 	/**
 	 * @method
-	 * @name Route
+	 * @name delegateAction
+	 * @param opts [object] "Plugin options"
 	 */
 
-	function route(options) {
-
+	function delegateAction(options) {
 		if (Formstone.matchMediaSupport) {
 			if (typeof options === "object") {
-				init.apply(this, arguments);
+				initialize.apply(this, arguments);
 			} else {
-				init.apply(this, arguments);
+				initialize.apply(this, arguments);
 			}
 		}
 	}
 
-
 	/**
 	 * @method private
-	 * @name init
+	 * @name initialize
 	 * @description Initializes plugin
-	 * @param opts [object] "Initialization options"
+	 * @param opts [object] "Plugin options"
 	 */
-	function init(options) {
+	function initialize(options) {
 		if (!Plugin.initialized) {
 			options = options || {};
 
@@ -217,7 +216,7 @@
 
 	var Plugin = Formstone.Plugin("rubberband", {
 			methods: {
-				_route:    route
+				_delegate:    delegateAction
 			}
 		}),
 		/**

@@ -1,83 +1,86 @@
 
 // Formstone Core
 
-var Formstone = window.Formstone = (function ($, window, document, undefined) {
+var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	"use strict";
 
 	// Namespace
 
-	var Formstone = {
-		Plugins: {}
-	};
+	var Core = function() {
+			this.Plugins = {};
 
-	// Classes
+			// Globals
 
-	var Classes= {
-		base                 : "{ns}",
-		element              : "{ns}-element"
-	};
+			this.$window              = $(window);
+			this.$document            = $(document);
+			this.$body                = null;
+			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
+			this.isFirefox            = /Firefox/i.test( this.userAgent );
+			this.isChrome             = /Chrome/i.test(  this.userAgent );
+			this.isSafari             = (/Safari/i.test( this.userAgent ) && !this.isChrome);
+			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
+			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
+			this.transitionSupport    = false;
+			this.matchMediaSupport    = !!(window.matchMedia);
+			this.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
+			this.rafSupport           = !!(window.requestAnimationFrame && window.cancelAnimationFrame);
+		},
 
-	// Events
+		Formstone = new Core(),
 
-	var Events = {
-		namespace            : ".{ns}",
-		click                : "click.{ns}",
-		dragEnter            : "dragenter.{ns}",
-		dragOver             : "dragover.{ns}",
-		dragLeave            : "dragleave.{ns}",
-		drop                 : "drop.{ns}",
-		fileError            : "fileError.{ns}",
-		fileStart            : "fileStart.{ns}",
-		fileProgress         : "fileProgress.{ns}",
-		fileComplete         : "fileComplete.{ns}",
-		beforeUnload         : "beforeunload.{ns}",
-		complete             : "complete.{ns}",
-		start                : "start.{ns}",
-		change               : "change.{ns}",
-		keyDown              : "keydown.{ns}",
-		keyUp                : "keyup.{ns}",
-		keyPress             : "keypress.{ns}",
-		resize               : "resize.{ns}",
-		load                 : "load.{ns}",
-		matchMedia           : "matchmedia.{ns}",
-		mouseEnter           : "mouseenter.{ns}",
-		mouseLeave           : "mouseleave.{ns}",
-		mouseOver            : "mouseover.{ns}",
-		mouseOut             : "mouseout.{ns}",
-		mouseMove            : "mousemove.{ns}",
-		touchStart           : "touchstart.{ns}",
-		touchMove            : "touchmove.{ns}",
-		touchEnd             : "touchend.{ns}"
-	};
+		// Classes
 
-	// Globals
+		Classes = {
+			base                 : "{ns}",
+			element              : "{ns}-element"
+		},
 
-	Formstone.$window              = $(window);
-	Formstone.$document            = $(document);
-	Formstone.$body                = null;
-	Formstone.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
-	Formstone.isFirefox            = /Firefox/i.test( Formstone.userAgent );
-	Formstone.isChrome             = /Chrome/i.test(  Formstone.userAgent );
-	Formstone.isSafari             = (/Safari/i.test( Formstone.userAgent ) && !Formstone.isChrome);
-	Formstone.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( Formstone.userAgent );
-	Formstone.isFirefoxMobile      = (Formstone.isFirefox && Formstone.isMobile);
-	Formstone.transitionSupport    = false;
-	Formstone.matchMediaSupport    = !!(window.matchMedia);
-	Formstone.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
+		// Events
 
-	// Plugin Bridge
+		Events = {
+			namespace            : ".{ns}",
+			click                : "click.{ns}",
+			dragEnter            : "dragenter.{ns}",
+			dragOver             : "dragover.{ns}",
+			dragLeave            : "dragleave.{ns}",
+			drop                 : "drop.{ns}",
+			fileError            : "fileError.{ns}",
+			fileStart            : "fileStart.{ns}",
+			fileProgress         : "fileProgress.{ns}",
+			fileComplete         : "fileComplete.{ns}",
+			beforeUnload         : "beforeunload.{ns}",
+			complete             : "complete.{ns}",
+			start                : "start.{ns}",
+			change               : "change.{ns}",
+			keyDown              : "keydown.{ns}",
+			keyUp                : "keyup.{ns}",
+			keyPress             : "keypress.{ns}",
+			resize               : "resize.{ns}",
+			load                 : "load.{ns}",
+			matchMedia           : "matchmedia.{ns}",
+			mouseEnter           : "mouseenter.{ns}",
+			mouseLeave           : "mouseleave.{ns}",
+			mouseOver            : "mouseover.{ns}",
+			mouseOut             : "mouseout.{ns}",
+			mouseMove            : "mousemove.{ns}",
+			touchStart           : "touchstart.{ns}",
+			touchMove            : "touchmove.{ns}",
+			touchEnd             : "touchend.{ns}"
+		};
 
-	Formstone.Plugin = function(namespace, settings) {
+	// Plugin Factory
+
+	Core.prototype.Plugin = function(namespace, settings) {
 		Formstone.Plugins[namespace] = (function(namespace, settings) {
 
 			/**
 			 * @method private
-			 * @name init
+			 * @name initialize
 			 * @description Initializes plugin
-			 * @param opts [object] "Initialization options"
+			 * @param opts [object] "Plugin options"
 			 */
-			function init(options) {
+			function initialize(options) {
 
 				// Setup
 
@@ -183,9 +186,9 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name iterate
-			 * @description Loop function calls over jQuery object
+			 * @description Loop function calls over jQuery set
 			 * @param func [string] "Function to call"
-			 * @return [object] "jQuery objects"
+			 * @return [object] "jQuery set"
 			 */
 			function iterate(func) {
 				return this.each(function() {
@@ -200,9 +203,15 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
-			 * @name publicRouter
+			 * @name delegateAction
+			 * @description Delegate public methods
+			 * @description Loop function calls over jQuery set
+			 * @param method [string || object] "Public method name; Options object if initializing"
 			 */
-			function publicRouter(method) {
+			function delegateAction(method) {
+
+				// Only allow "public" methods (no underscore prefix)
+
 				if (settings.methods[method] && method.indexOf("_") > 0) {
 
 					// Wrap Public Methods
@@ -212,7 +221,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 					// Initialize
 
-					return init.apply(this, arguments);
+					return initialize.apply(this, arguments);
 				}
 
 				return this;
@@ -220,16 +229,17 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
-			 * @name publicDefaults
+			 * @name setDefaults
+			 * @param method [string] "Public method name"
 			 */
-			function publicDefaults(method) {
+			function setDefaults(method) {
 				if (method === "defaults") {
 					/**
 					 * @method
 					 * @name defaults
-					 * @description Sets default plugin options
+					 * @description Sets default options
 					 * @param opts [object] <{}> "Options object"
-					 * @example $.plugins("defaults", opts);
+					 * @example $.plugin("defaults", opts);
 					 */
 					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
 				}
@@ -244,9 +254,9 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			// Namespace Classes & Events
 
 			settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
-			settings.events    = namespaceProperties("events", namespace, Events, settings.events);
+			settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
 
-			// Extend Internal Functions
+			// Extend Functions
 
 			settings.functions = $.extend({
 				getData         : getData,
@@ -255,20 +265,24 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 				getClassName    : getClassName
 			}, settings.functions);
 
-			// Extend Public Methods
+			// Extend Methods
 
 			settings.methods = $.extend({
 
-				_setup          : $.noop,
-				_construct      : $.noop,
-				_destruct       : $.noop,
-				_route          : false,
+				// Private Methods
+
+				_setup          : $.noop,    // Widget First Run
+				_construct      : $.noop,    // Widget Constructor
+				_destruct       : $.noop,    // Widget Destructor
+				_delegate       : false,     // Utility Delegation
+
+				// Public Methods
 
 				/**
 				 * @method
 				 * @name destroy
 				 * @description Removes instance of plugin
-				 * @example $(".target").tipper("destroy");
+				 * @example $(".target").plugin("destroy");
 				 */
 				destroy: function(data) {
 					iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
@@ -278,19 +292,19 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			}, settings.methods);
 
-
+			// Register Plugin
 
 			if (settings.widget) {
 
-				// Widget Definition
+				// Widget
 
-				$.fn[namespace]    = publicRouter;
-				$[namespace]       = publicDefaults;
+				$.fn[namespace]    = delegateAction;    // Action Delegation:    $(".selector").plugin("method", ...);
+				$[namespace]       = setDefaults;       // Set Defaults:         $.plugin("defaults", { ... });
 			} else {
 
-				// Utility Definition
+				// Utility
 
-				$[namespace] = settings.methods._route || publicRouter;
+				$[namespace]       = settings.methods._delegate || delegateAction;    // Custom Action Delegation:    $(".selector").plugin( ... );
 			}
 
 			return settings;
@@ -329,7 +343,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		return _props;
 	}
 
-	// Transition Event
+	// Get Transition Event
 
 	function getTransitionEvent() {
 		var transitions = {
@@ -351,41 +365,6 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		return event + ".{ns}";
 	}
 
-	// RAF Polyfill
-
-	function checkRAFSupport() {
-		var time = 0,
-			vendors = [
-				'webkit',
-				'moz'
-			];
-
-		for (var i = 0; i < vendors.length && !window.requestAnimationFrame; i++) {
-			window.requestAnimationFrame = window[ vendors[i] + 'RequestAnimationFrame' ];
-			window.cancelAnimationFrame  = window[ vendors[i] + 'CancelAnimationFrame' ] || window[ vendors[i] + 'CancelRequestAnimationFrame' ];
-		}
-
-		if (typeof window.requestAnimationFrame === "undefined") {
-			window.requestAnimationFrame = function(callback, element) {
-				var now = new Date().getTime(),
-					diff = Math.max(0, 16 - (now - time)),
-					id = setTimeout(function() {
-						callback(now + diff);
-					}, diff);
-
-				time = now + diff;
-
-				return id;
-			};
-
-			window.cancelAnimationFrame = function(id) {
-				clearTimeout(id);
-			};
-		}
-	}
-
-	checkRAFSupport();
-
 	// Document Ready
 
 	Formstone.$document.ready(function() {
@@ -399,4 +378,4 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	return Formstone;
 
-})(jQuery, window, document);
+})(jQuery, this, document);
