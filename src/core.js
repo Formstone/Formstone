@@ -85,7 +85,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				// Setup
 
 				if (!settings.initialized) {
-					settings.initialized = true;
+					settings.initialized    = true;
+					settings.namespace      = namespace;
 
 					settings.methods._setup.call(window);
 				}
@@ -212,13 +213,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Only allow "public" methods (no underscore prefix)
 
-				if (settings.methods[method] && method.indexOf("_") > 0) {
+				if (settings.methods[method] && method.indexOf("_") !== 0) {
 
 					// Wrap Public Methods
 
 					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
 				} else if (typeof method === 'object' || !method) {
-
 					// Initialize
 
 					return initialize.apply(this, arguments);
@@ -262,7 +262,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				getData         : getData,
 				startTimer      : startTimer,
 				clearTimer      : clearTimer,
-				getClassName    : getClassName
+				getClassName    : getClassName,
+				killEvent       : killEvent
 			}, settings.functions);
 
 			// Extend Methods
@@ -287,7 +288,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				destroy: function(data) {
 					iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
-					this.removeData(namespace);
+					this.removeClass(settings.classes.element)
+						.removeData(namespace);
 				}
 
 			}, settings.methods);

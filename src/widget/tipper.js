@@ -37,11 +37,7 @@
 		data.left = e.pageX;
 		data.top  = e.pageY;
 
-		data.timer = Functions.startTimer(data.timer, data.delay, function() {
-			buildTooltip(data);
-		});
-
-		data.$el.one(Events.mouseLeave, data, onMouseLeave);
+		buildTooltip(data);
 	}
 
 	/**
@@ -155,16 +151,9 @@
 			left: caretLeft
 		});
 
-		Instance.$tipper.addClass(Classes.visible);
-
 		// Position tipper
 		if (data.follow) {
 			data.$el.on(Events.mouseMove, data, onMouseMove);
-
-			onMouseMove.call(data.$el, {
-				pageX: data.left,
-				pageY: data.top
-			});
 		} else {
 			if (data.match) {
 				if (data.direction === "right" || data.direction === "left") {
@@ -209,6 +198,12 @@
 				left: tooltipLeft
 			});
 		}
+
+		data.timer = Functions.startTimer(data.timer, data.delay, function() {
+			Instance.$tipper.addClass(Classes.visible);
+		});
+
+		data.$el.one(Events.mouseLeave, data, onMouseLeave);
 	}
 
 	/**
@@ -254,6 +249,17 @@
 
 	var Plugin = Formstone.Plugin("tipper", {
 			widget: true,
+
+			/**
+			 * @options
+			 * @param delay [int] <0> "Hover delay"
+			 * @param direction [string] <'top'> "Tooltip direction"
+			 * @param follow [boolean] <false> "Flag to follow mouse"
+			 * @param formatter [function] <$.noop> "Text format function"
+			 * @param margin [int] <15> "Tooltip margin"
+			 * @param match [boolean] <false> "Flag to match mouse position"
+			 */
+
 			defaults: {
 				delay        : 0,
 				direction    : "top",
@@ -262,6 +268,7 @@
 				margin       : 15,
 				match        : false
 			},
+
 			classes: [
 				"content",
 				"caret",
@@ -271,6 +278,7 @@
 				"right",
 				"left"
 			],
+
 			methods: {
 				_construct:    construct,
 				_destruct:     destruct

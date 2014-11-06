@@ -5,6 +5,7 @@
 module.exports = function(grunt) {
 
 	var cssFiles = {
+		"dist/widget/naver.css" :  [ "src/widget/naver.less" ],
 		"dist/widget/tipper.css" : [ "src/widget/tipper.less" ]
 	};
 

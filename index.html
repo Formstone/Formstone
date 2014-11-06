@@ -16,17 +16,23 @@
 		<link href="dist/widget/tipper.css" rel="stylesheet">
 		<script src="dist/widget/tipper.js"></script>
 
+		<link href="dist/widget/naver.css" rel="stylesheet">
+		<script src="dist/widget/naver.js"></script>
+
 		<script src="dist/utility/macaroon.js"></script>
 
 		<script src="dist/utility/rubberband.js"></script>
 
 		<script>
 			$(function() {
-				$a = $("a").tipper({
+				$tipped = $(".js-tipped").tipper({
 					follow: true,
 					delay: 500,
 					direction: "bottom"
 				});
+
+
+				$naved = $(".js-naved").naver();
 
 
 				$(window).on("snap", function(e, data) {
@@ -42,6 +48,19 @@
 
 	</head>
 	<body class="gridlock demo">
-		<a href="#" data-title="Tool Tip!" style="background: #eee; margin: 200px auto; width: 100px; text-align: center; display: block;">Test</a>
+		<a href="#" data-title="Tool Tip!" class="js-tipped">Test</a>
+
+		<nav class="js-naved">
+			<a href="#">Home</a>
+			<a href="#">About</a>
+			<a href="#">Contact</a>
+		</nav>
+
+		<style>
+			.js-tipped { background: #eee; margin: 200px auto; width: 100px; text-align: center; display: block; }
+
+			.js-naved { margin: 50px auto; width: 400px; }
+			.js-naved a { display: block; padding: 10px; background: #eee; }
+		</style>
 	</body>
 </html>
