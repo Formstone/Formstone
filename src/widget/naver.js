@@ -201,7 +201,7 @@
 			data = e.data;
 
 		// Close other open instances
-		$( Functions.getClassName(Classes.base) ).not(data.$el).naver("close");
+		$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
 
 		if (data.open) {
 			close.call(data.$el, data);
@@ -226,7 +226,7 @@
 
 	// Register Plugin
 
-	var Plugin = Formstone.Plugin("naver", {
+	var Plugin = Formstone.Plugin("naver_new", {
 			widget: true,
 
 			/**

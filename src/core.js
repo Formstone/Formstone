@@ -97,8 +97,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Maintain Chain
 
-				return this.each(function() {
-					var $element = $(this);
+				var $targets = this;
+
+				for (var i = 0, count = $targets.length; i < count; i++) {
+					var $element = $targets.eq(i);
 
 					// Gaurd Against Exiting Instances
 
@@ -120,7 +122,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 						$element.addClass(settings.classes.element)
 						        .data(namespace, data);
 					}
-				});
+
+				}
+
+				return $targets;
 			}
 
 			/**
@@ -192,14 +197,18 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @return [object] "jQuery set"
 			 */
 			function iterate(func) {
-				return this.each(function() {
-					var $element = $(this),
+				var $targets = this;
+
+				for (var i = 0, count = $targets.length; i < count; i++) {
+					var $element = $targets.eq(i),
 						data = getData($element);
 
 					if (data) {
 						func.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
 					}
-				});
+				}
+
+				return $targets;
 			}
 
 			/**
