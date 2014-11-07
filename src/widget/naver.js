@@ -2,6 +2,8 @@
 
 	"use strict";
 
+	var clicks = 0;
+
 	/**
 	 * @method private
 	 * @name construct
@@ -149,6 +151,7 @@
 		data.touchStartEvent    = oe;
 		data.touchStartX        = oe.touches[0].clientX;
 		data.touchStartY        = oe.touches[0].clientY;
+		data.hasClicked         = false;
 
 		data.$el.on(Events.touchMove, data.eventDelegate, data, onTouchMove)
 				.on(Events.touchEnd, data.eventDelegate, data, onTouchEnd);
@@ -185,6 +188,11 @@
 		data.$el.off( [Events.touchMove, Events.touchEnd, Events.click].join(" ") );
 
 		onClick(e);
+
+		data.hasClicked = true;
+		data.timer = Functions.startTimer(data.timer, 300, function() {
+			data.hasClicked = false;
+		});
 	}
 
 	/**
@@ -200,13 +208,15 @@
 		var $target = $(e.currentTarget),
 			data = e.data;
 
-		// Close other open instances
-		$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
+		if (!data.hasClicked) {
+			// Close Open Instances
+			$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
 
-		if (data.open) {
-			close.call(data.$el, data);
-		} else {
-			open.call(data.$el, data);
+			if (data.open) {
+				close.call(data.$el, data);
+			} else {
+				open.call(data.$el, data);
+			}
 		}
 	}
 
