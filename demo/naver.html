@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Naver Demo</title>
+
+		<!-- Modernizer -->
+		<script src="http://formstone.it/js/modernizr.js"></script>
+
+		<!-- Demo Resources -->
+		<script src="http://formstone.it/js/demo.js"></script>
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" media="all">
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="http://formstone.it/js/site.ie8.js"></script>
+			<link href="http://formstone.it/css/demo.ie8.css" rel="stylesheet" media="all">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="http://formstone.it/js/site.ie9.js"></script>
+		<![endif]-->
+
+		<script src="../dist/core.js"></script>
+
+		<script src="../dist/widget/naver.js"></script>
+		<link href="../dist/widget/naver.css" rel="stylesheet" media="all">
+
+		<!--[DEMO:START-RESOURCES]-->
+
+		<style>
+			.demo .navigation a { background: #444; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+			.demo .navigation a:hover { background: #222; }
+
+			.demo .navigation.naver-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+			.demo .navigation.naver-enabled .naver-container { padding: 10px; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$(".demo .js-naved a").on("click", function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+				});
+
+				$(".demo .js-naved").naver();
+
+				$(window).one("pronto.load", function() {
+					$(".demo .js-naved a").off(".click");
+					$(".demo .js-naved").naver("destroy");
+				});
+			});
+		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
+	</head>
+
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Naver Demo</h1>
+					<br>
+					<a href="http://formstone.it/naver/" class="button">View Documentation</a>
+				</header>
+
+				<!--[DEMO:START-CONTENT]-->
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p>Naver will automatically turn a basic navigation system into a mobile friendly system. Feel free to style your links anyway you'd like:</p>
+
+				<pre class="example"><code class="language-javascript">$("nav").naver();</code></pre>
+				<pre class="example"><code class="language-markup">&lt;nav&gt;
+	&lt;a href="#"&gt;Home&lt;/a&gt;
+	&lt;a href="#"&gt;About&lt;/a&gt;
+	&lt;a href="#"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+				<h5>Demo</h5>
+				<nav class="navigation js-naved">
+					<a href="#">Home</a>
+					<a href="#">About</a>
+					<a href="#">Contact</a>
+				</nav>
+
+				<br>
+
+				<!-- BREAKPOINT -->
+				<h2>Breakpoint</h2>
+				<p>By default, Naver will enable itself on screens smaller then 980 pixels wide. You can specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
+
+				<pre class="example"><code class="language-javascript">$("nav").naver({
+	maxWidth: "740px"
+});</code></pre>
+
+				<h5>Demo</h5>
+				<nav class="navigation js-naved" data-naver-options='{"maxWidth":"740px"}'>
+					<h4 class="naver-handle">Navigation</h4>
+					<a href="#">Home</a>
+					<a href="#">About</a>
+					<a href="#">Contact</a>
+				</nav>
+
+				<br>
+
+				<!-- IE -->
+				<h2>IE Support</h2>
+				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>).</p>
+
+				<!--[DEMO:END-CONTENT]-->
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>

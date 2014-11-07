@@ -13,7 +13,9 @@
 		data.enabled    = false;
 		data.open       = false;
 
-		data.$handle = this.find( Functions.getClassName(Classes.handle) ).length ? this.find(Classes.handle).detach() : $('<span class="' + Classes.handle + '"></span>');
+		var $h = this.find( Functions.getClassName(Classes.handle) );
+
+		data.$handle = $h.length ? $h.detach() : $('<span class="' + Classes.handle + '"></span>');
 		data.$handle.text((data.label) ? data.labels.closed : '');
 
 		this.addClass( [Classes.base, data.customClass].join(" ") )
@@ -23,7 +25,6 @@
 
 		data.$container    = data.$el.find( Functions.getClassName(Classes.container) );
 		data.$wrapper      = data.$el.find( Functions.getClassName(Classes.wrapper) );
-
 		data.eventDelegate = Functions.getClassName(Classes.handle);
 
 		this.on(Events.touchStart, data.eventDelegate, data, onTouchStart)
@@ -236,7 +237,7 @@
 
 	// Register Plugin
 
-	var Plugin = Formstone.Plugin("naver_new", {
+	var Plugin = Formstone.Plugin("naver", {
 			widget: true,
 
 			/**
