@@ -1,3 +1,135 @@
 
-	@import "naver-config.less";
-	@import "naver-styles.less";
+	// Config
+
+	@naver-margin:					0;			// 0
+
+	@naver-handle-background:		#fff;		// #fff
+	@naver-handle-text-color:		#111;		// #111
+	@naver-handle-font-size:		16px;		// 16px
+	@naver-handle-padding:			10px 15px;	// 10px 15px
+
+	@naver-border-color:			#ccc;		// #ccc
+	@naver-border-size:				1px;		// 1px
+
+	@naver-icon-offset:				15px;		// 15px
+	@naver-icon-color:				#ccc;		// #ccc
+	@naver-icon-height:				3px;		// 3px
+	@naver-icon-width:				15px;		// 15px
+
+	@naver-icon-close-size:			15px;		// 15px
+	@naver-icon-close-font-size:	22px;		// 22px
+
+	@naver-container-background:	#fff;		// #fff;
+	@naver-container-border-color:	#ccc;		// #ccc
+	@naver-container-border-size:	1px;		// 1px
+
+
+	// Styles
+
+	.naver {
+
+		margin: @naver-margin;
+
+		* {
+			transition: none;
+		}
+
+		&,
+		& * {
+			user-select: none !important;
+		}
+
+		&,
+		& *,
+		& *:before,
+		& *:after {
+			box-sizing: border-box;
+		}
+
+		// .naver-handle
+
+		&-handle {
+			width: 100%;
+
+			background: @naver-handle-background;
+			border: @naver-border-size solid @naver-border-color;
+			color: @naver-handle-text-color;
+			cursor: pointer;
+			display: none;
+			font-size: @naver-handle-font-size;
+			margin: 0;
+			padding: @naver-handle-padding;
+			position: relative;
+			user-select: none;
+
+			&:after {
+				height: @naver-icon-height;
+				width: @naver-icon-width;
+
+				position: absolute;
+				top: 0;
+				right: @naver-icon-offset;
+				bottom: 0;
+
+				background: @naver-icon-color;
+				box-shadow:
+					0  (@naver-icon-height + 2) 0 @naver-icon-color,
+					0 -(@naver-icon-height + 2) 0 @naver-icon-color;
+				content: '';
+				display: block;
+				margin: auto 0;
+			}
+		}
+
+		&-open &-handle:after {
+			width: @naver-icon-close-size;
+			height: @naver-icon-close-size;
+
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			color: @naver-icon-color;
+			content: "\00d7";
+			font-size: @naver-icon-close-font-size;
+			font-weight: 700;
+			line-height: @naver-icon-close-size;
+			text-align: center;
+		}
+
+		// .naver-wrapper
+
+		&-wrapper {
+			border: none;
+			height: auto;
+			margin: 0;
+			padding: 0;
+		}
+
+		// .naver-container
+
+		&-container:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+		}
+
+		// .naver-enabled
+
+		&-enabled &-handle {
+			display: block;
+		}
+
+		&-enabled &-wrapper {
+			height: 0px;
+			overflow: hidden;
+		}
+
+		&-enabled &-container {
+			background: @naver-container-background;
+			border: @naver-container-border-size solid @naver-container-border-color;
+			border-width: 0 1px 1px;
+		}
+	}
