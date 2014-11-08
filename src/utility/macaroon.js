@@ -12,7 +12,6 @@
 	 */
 
 	function delegate(key, value, options) {
-
 		if (typeof key === "object") {
 
 			// Set defaults

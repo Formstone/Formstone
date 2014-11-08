@@ -3,17 +3,27 @@
 	"use strict";
 
 	/**
-	 * @method
+	 * @method private
 	 * @name delegate
 	 * @param opts [object] "Plugin options"
 	 */
 
 	function delegate(options) {
+
+		// Check Support
+
 		if (Formstone.matchMediaSupport) {
-			if (typeof options === "object") {
+			if (typeof options === "object" && !Plugin.initialized) {
+
+				// Initialize
+
 				initialize.apply(this, arguments);
-			} else {
-				initialize.apply(this, arguments);
+				Plugin.initialized = true;
+			} else if (Methods[ options ]) {
+
+				// Delegate intent
+
+				Methods[ options ].apply(this, Array.prototype.slice.call(arguments, 1));
 			}
 		}
 	}
@@ -26,47 +36,43 @@
 	 */
 
 	function initialize(options) {
-		if (!Plugin.initialized) {
-			options = options || {};
+		options = options || {};
 
-			// Build Media Queries
+		// Build Media Queries
 
-			for (var i in MQStrings) {
-				if (MQStrings.hasOwnProperty(i)) {
-					Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
-				}
+		for (var i in MQStrings) {
+			if (MQStrings.hasOwnProperty(i)) {
+				Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
 			}
+		}
 
-			Defaults = $.extend(Defaults, options);
+		Defaults = $.extend(Defaults, options);
 
-			// Sort
+		// Sort
 
-			Defaults.minWidth.sort( sortDesc );
-			Defaults.maxWidth.sort( sortAsc );
-			Defaults.minHeight.sort( sortDesc );
-			Defaults.maxHeight.sort( sortAsc );
+		Defaults.minWidth.sort( sortDesc );
+		Defaults.maxWidth.sort( sortAsc );
+		Defaults.minHeight.sort( sortDesc );
+		Defaults.maxHeight.sort( sortAsc );
 
-			// Bind Media Query Matches
+		// Bind Media Query Matches
 
-			for (var j in MQStrings) {
-				if (MQStrings.hasOwnProperty(j)) {
-					MQMatches[j] = {};
-					for (var k in Defaults[j]) {
-						if (Defaults[j].hasOwnProperty(k)) {
-							var mq = window.matchMedia( "(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")" );
-							mq.addListener( onStateChange );
-							MQMatches[j][ Defaults[j][k] ] = mq;
-						}
+		for (var j in MQStrings) {
+			if (MQStrings.hasOwnProperty(j)) {
+				MQMatches[j] = {};
+				for (var k in Defaults[j]) {
+					if (Defaults[j].hasOwnProperty(k)) {
+						var mq = window.matchMedia( "(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")" );
+						mq.addListener( onStateChange );
+						MQMatches[j][ Defaults[j][k] ] = mq;
 					}
 				}
 			}
-
-			// Initial Trigger
-
-			onStateChange();
-
-			Plugin.initialized = true;
 		}
+
+		// Initial Trigger
+
+		onStateChange();
 	}
 
 	/**
@@ -106,63 +112,6 @@
 	}
 
 	/**
-	 * @method
-	 * @name getState
-	 * @description Returns the current state
-	 * @return [object] "Current state object"
-	 * @example var state = $.rubberband("state");
-	 */
-
-	function getState() {
-		return State;
-	}
-
-	/**
-	 * @method
-	 * @name bind
-	 * @description Binds callbacks to media query matching
-	 * @param media [string] "Media query to match"
-	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-	 * @example $.rubberband("bind", "(min-width: 500px)", { ... });
-	 */
-
-	function bind(media, data) {
-		if (!Bindings[ media ]) {
-			Bindings[ media ] = {
-				mq:        Window.matchMedia(media),
-				active:    false,
-				enter:     [],
-				leave:     []
-			};
-
-			Bindings[ media ].mq.addListener( onBindingChange );
-		}
-
-		for (var i in data) {
-			if (data.hasOwnProperty(i) && Bindings[ media ].hasOwnProperty(i)) {
-				Bindings[ media ][i].push( data[i] );
-			}
-		}
-
-		onBindingChange( Bindings[ media ].mq );
-	}
-
-	/**
-	 * @method
-	 * @name unbind
-	 * @description Unbinds all callbacks from media query
-	 * @param media [string] "Media query to match"
-	 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
-	 */
-
-	function unbind(media) {
-		if (Bindings[ media ]) {
-			Bindings[ media ].mq.removeListener( onBindingChange );
-			Bindings = Bindings.splice(Bindings.indexOf( Bindings[ media ] ), 1);
-		}
-	}
-
-	/**
 	 * @method private
 	 * @name onStateChange
 	 * @description Handles media query changes
@@ -181,7 +130,9 @@
 	 */
 
 	function onBindingChange(mq) {
-		var binding    = Bindings[ mq.media ],
+
+		var key        = createKey(mq.media),
+			binding    = Bindings[ key ],
 			event      = mq.matches ? Events.enter : Events.leave;
 
 		if (binding.active || (!binding.active && mq.matches)) {
@@ -221,6 +172,79 @@
 		return (a - b);
 	}
 
+	/**
+	 * @method private
+	 * @name createKey
+	 * @description Creates valid object key from string
+	 * @param text [String] "String to create key from"
+	 * @return [string] Valid object key
+	 */
+
+	function createKey(text) {
+		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+	}
+
+	/**
+	 * @method
+	 * @name getState
+	 * @description Returns the current state
+	 * @return [object] "Current state object"
+	 * @example var state = $.rubberband("state");
+	 */
+
+	function getState() {
+		return State;
+	}
+
+	/**
+	 * @method
+	 * @name bind
+	 * @description Binds callbacks to media query matching
+	 * @param media [string] "Media query to match"
+	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
+	 * @example $.rubberband("bind", "(min-width: 500px)", { ... });
+	 */
+
+	function bind(media, data) {
+		var key = createKey(media);
+
+		if (!Bindings[ key ]) {
+			Bindings[ key ] = {
+				mq:        Window.matchMedia(media),
+				active:    false,
+				enter:     [],
+				leave:     []
+			};
+
+			Bindings[ key ].mq.addListener( onBindingChange );
+		}
+
+		for (var i in data) {
+			if (data.hasOwnProperty(i) && Bindings[ key ].hasOwnProperty(i)) {
+				Bindings[ key ][i].push( data[i] );
+			}
+		}
+
+		onBindingChange( Bindings[ key ].mq );
+	}
+
+	/**
+	 * @method
+	 * @name unbind
+	 * @description Unbinds all callbacks from media query
+	 * @param media [string] "Media query to match"
+	 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
+	 */
+
+	function unbind(media) {
+		var key = createKey(media);
+
+		if (Bindings[ key ]) {
+			Bindings[ key ].mq.removeListener( onBindingChange );
+			Bindings = Bindings.splice(Bindings.indexOf( Bindings[ key ] ), 1);
+		}
+	}
+
 	// Register Plugin
 
 	var Plugin = Formstone.Plugin("rubberband", {
@@ -252,6 +276,14 @@
 			snap     : "snap",
 			enter    : "enter",
 			leave    : "leave"
+		},
+
+		// Public methods
+
+		Methods      = {
+			state     : getState,
+			bind      : bind,
+			unbind    : unbind
 		},
 
 		// Localize References

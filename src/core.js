@@ -137,6 +137,19 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			}
 
 			/**
+			 * @method
+			 * @name destroy
+			 * @description Removes instance of plugin
+			 * @example $(".target").plugin("destroy");
+			 */
+			function destroy(data) {
+				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+
+				this.removeClass(settings.classes.element)
+					.removeData(namespace);
+			}
+
+			/**
 			 * @method private
 			 * @name killEvent
 			 * @description Kill event
@@ -296,18 +309,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Public Methods
 
-				/**
-				 * @method
-				 * @name destroy
-				 * @description Removes instance of plugin
-				 * @example $(".target").plugin("destroy");
-				 */
-				destroy: function(data) {
-					iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
-
-					this.removeClass(settings.classes.element)
-						.removeData(namespace);
-				}
+				destroy: destroy
 
 			}, settings.methods);
 

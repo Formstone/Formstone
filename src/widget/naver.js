@@ -2,8 +2,6 @@
 
 	"use strict";
 
-	var clicks = 0;
-
 	/**
 	 * @method private
 	 * @name construct
