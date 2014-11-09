@@ -63,13 +63,7 @@
 	 */
 
 	function onMouseMove(e) {
-		var data = e.data,
-			position = {
-				left: e.pageX,
-				top:  e.pageY
-			};
-
-		positionTooltip(position);
+		positionTooltip(e.pageX, e.pageY);
 	}
 
 	/**
@@ -193,10 +187,7 @@
 				}
 			}
 
-			positionTooltip({
-				top:  tooltipTop,
-				left: tooltipLeft
-			});
+			positionTooltip(tooltipLeft, tooltipTop);
 		}
 
 		data.timer = Functions.startTimer(data.timer, data.delay, function() {
@@ -210,12 +201,16 @@
 	 * @method private
 	 * @name positionTooltip
 	 * @description Positions active tooltip instance
-	 * @param position [object] "Position data"
+	 * @param left [int] "Left position"
+	 * @param top [int] "Top position"
 	 */
 
-	function positionTooltip(position) {
+	function positionTooltip(left, top) {
 		if (Instance) {
-			Instance.$tipper.css(position);
+			Instance.$tipper.css({
+				left : left,
+				top  : top
+			});
 		}
 	}
 
@@ -280,8 +275,8 @@
 			],
 
 			methods: {
-				_construct:    construct,
-				_destruct:     destruct
+				_construct    : construct,
+				_destruct     : destruct
 			}
 		}),
 

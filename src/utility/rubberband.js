@@ -13,12 +13,12 @@
 		// Check Support
 
 		if (Formstone.matchMediaSupport) {
-			if (typeof options === "object" && !Plugin.initialized) {
+			if (typeof options === "object" && !Initialized) {
 
 				// Initialize
 
 				initialize.apply(this, arguments);
-				Plugin.initialized = true;
+				Initialized = true;
 			} else if (Methods[ options ]) {
 
 				// Delegate intent
@@ -270,33 +270,37 @@
 			unit:         "px"
 		},
 
-		// Unprefixed Events
+		/**
+		 * @events
+		 * @event snap "Change to a media query match"
+		 */
 
 		Events = {
-			snap     : "snap",
-			enter    : "enter",
-			leave    : "leave"
+			snap       : "snap",
+			enter      : "enter",
+			leave      : "leave"
 		},
 
 		// Public methods
 
 		Methods      = {
-			state     : getState,
-			bind      : bind,
-			unbind    : unbind
+			state      : getState,
+			bind       : bind,
+			unbind     : unbind
 		},
 
 		// Localize References
 
-		$Window      = Formstone.$window,
-		Window       = $Window[0],
+		$Window        = Formstone.$window,
+		Window         = $Window[0],
 
 		// Internal
 
-		State        = null,
-		Bindings     = [],
-		MQMatches    = {},
-		MQStrings    = {
+		Initialized    = false,
+		State          = null,
+		Bindings       = [],
+		MQMatches      = {},
+		MQStrings      = {
 			minWidth:     "min-width",
 			maxWidth:     "max-width",
 			minHeight:    "min-height",

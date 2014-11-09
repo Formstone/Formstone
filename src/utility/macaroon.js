@@ -3,7 +3,7 @@
 	"use strict";
 
 	/**
-	 * @method
+	 * @method private
 	 * @name delegate
 	 * @param key [string] "Cookie key"
 	 * @param value [string] "Cookie value"

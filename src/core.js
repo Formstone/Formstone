@@ -1,5 +1,7 @@
 
-// Formstone Core
+/**
+ * Formstone Library core
+ */
 
 var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
@@ -77,27 +79,21 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			touchStart           : "touchstart.{ns}"
 		};
 
-	// Plugin Factory
+	/**
+	 * Plugin factory
+	 * @method Plugin
+	 */
 
 	Core.prototype.Plugin = function(namespace, settings) {
 		Formstone.Plugins[namespace] = (function(namespace, settings) {
 
-			/**
-			 * @method private
-			 * @name initialize
-			 * @description Initializes plugin
-			 * @param opts [object] "Plugin options"
+			/*!
+			 * Initialize plugin instances by building data, setting the base classname and scoping a _construct call.
+			 * @method initialize
+			 * @param {object} options Plugin options
 			 */
+
 			function initialize(options) {
-
-				// Setup
-
-				if (!settings.initialized) {
-					settings.initialized    = true;
-					settings.namespace      = namespace;
-
-					settings.methods._setup.call(window);
-				}
 
 				// Extend Defaults
 
@@ -136,11 +132,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				return $targets;
 			}
 
-			/**
-			 * @method
-			 * @name destroy
-			 * @description Removes instance of plugin
-			 * @example $(".target").plugin("destroy");
+			/*!
+			 * Removes plugin instance by scoping a _destruct call, and removing the base classname and data.
+			 * @param {object} data Plugin data
 			 */
 			function destroy(data) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
@@ -149,11 +143,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					.removeData(namespace);
 			}
 
-			/**
-			 * @method private
-			 * @name killEvent
-			 * @description Kill event
-			 * @param e [event] "Event object"
+			/*!
+			 * Stops event action and bubble
+			 * @param {event} e Event data
 			 */
 			function killEvent(e) {
 				if (typeof e !== "undefined") {
@@ -162,35 +154,29 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				}
 			}
 
-			/**
-			 * @method private
-			 * @name getData
-			 * @description Create class selector from text
-			 * @param $element [object] "Target jQuery object"
-			 * @return [object] "Plugin data"
+			/*!
+			 * Creates class selector from text
+			 * @param {object} $element Target jQuery object
+			 * @return {object} Plugin data
 			 */
 			function getData($element) {
 				return $element.data(namespace);
 			}
 
-			/**
-			 * @method private
-			 * @name startTimer
-			 * @description Starts an internal timer
-			 * @param timer [int] "Timer ID"
-			 * @param time [int] "Time until execution"
-			 * @param callback [int] "Function to execute"
+			/*!
+			 * Starts an internal timer
+			 * @param {int} timer Timer ID
+			 * @param {int} time Time until execution
+			 * @param {int} callback Function to execute
 			 */
 			function startTimer(timer, time, callback) {
 				clearTimer(timer);
 				return setTimeout(callback, time);
 			}
 
-			/**
-			 * @method private
-			 * @name clearTimer
-			 * @description Clears an internal timer
-			 * @param timer [int] "Timer ID"
+			/*!
+			 * Clears an internal timer
+			 * @param {int} timer Timer ID
 			 */
 			function clearTimer(timer) {
 				if (timer) {
@@ -199,23 +185,21 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				}
 			}
 
-			/**
-			 * @method private
-			 * @name getClassName
-			 * @description Create class selector from text
-			 * @param text [string] "Text to convert"
-			 * @return [string] "New class name"
+			/*!
+			 * Create class selector from text
+			 * @param {String} text Text to convert
+			 * @return {String} New class name
 			 */
 			function getClassName(text) {
 				return "." + text;
 			}
 
-			/**
-			 * @method private
-			 * @name iterate
-			 * @description Loop function calls over jQuery set
-			 * @param func [string] "Function to call"
-			 * @return [object] "jQuery set"
+			/*
+			 * &&method iterate
+			 *
+			 * &&overview Loop function calls over jQuery set
+			 * &&param func [string] "Function to call"
+			 * &&return [object] "jQuery set"
 			 */
 			function iterate(func) {
 				var $targets = this;
@@ -232,12 +216,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				return $targets;
 			}
 
-			/**
-			 * @method private
-			 * @name delegateRoutine
-			 * @description Delegate public methods
-			 * @description Loop function calls over jQuery set
-			 * @param method [string || object] "Public method name; Options object if initializing"
+			/*
+			 * &&method delegateRoutine
+			 *
+			 * &&overview Delegate public methods
+			 * &&overview Loop function calls over jQuery set
+			 * &&param method [string || object] "Public method name; Options object if initializing"
 			 */
 			function delegateRoutine(method) {
 
@@ -257,19 +241,19 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				return this;
 			}
 
-			/**
-			 * @method private
-			 * @name setDefaults
-			 * @param method [string] "Public method name"
+			/*
+			 * &&method setDefaults
+			 *
+			 * &&param method [string] "Public method name"
 			 */
 			function setDefaults(method) {
 				if (method === "defaults") {
-					/**
-					 * @method
-					 * @name defaults
-					 * @description Sets default options
-					 * @param opts [object] <{}> "Options object"
-					 * @example $.plugin("defaults", opts);
+					/*
+					 * &&method defaults
+					 *
+					 * &&overview Sets default options
+					 * &&param opts [object] <{}> "Options object"
+					 * &&example $.plugin("defaults", opts);
 					 */
 					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
 				}
@@ -319,14 +303,29 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Widget
 
-				$.fn[namespace]    = delegateRoutine;   // Method Delegation:    $(".selector").plugin("method", ...);
-				$[namespace]       = setDefaults;       // Set Defaults:         $.plugin("defaults", { ... });
+				// Method Delegation: $(".selector").plugin("method", ...);
+				$.fn[namespace]    = delegateRoutine;
+
+				// Set Defaults:      $.plugin("defaults", { ... });
+				$[namespace]       = setDefaults;
 			} else {
 
 				// Utility
 
-				$[namespace]       = settings.methods._delegate || delegateRoutine;    // Custom Delegation:    $(".selector").plugin( ... );
+				// Custom Delegation: $(".selector").plugin( ... );
+				$[namespace]       = settings.methods._delegate || delegateRoutine;
 			}
+
+			// Run Setup
+
+			$(function() {
+				if (!settings.initialized) {
+					settings.initialized    = true;
+					settings.namespace      = namespace;
+
+					settings.methods._setup.call(document);
+				}
+			});
 
 			return settings;
 		})(namespace, settings);
@@ -388,7 +387,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	// Document Ready
 
-	Formstone.$document.ready(function() {
+	$(function() {
 		Formstone.$body = $("body");
 	});
 

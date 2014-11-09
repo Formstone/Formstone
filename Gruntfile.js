@@ -5,14 +5,14 @@
 module.exports = function(grunt) {
 
 	var cssFiles = {
-		"dist/widget/naver.css" :  [ "src/widget/naver.less" ],
-		"dist/widget/tipper.css" : [ "src/widget/tipper.less" ]
+		'dist/widget/naver.css' :  [ 'src/widget/naver.less' ],
+		'dist/widget/tipper.css' : [ 'src/widget/tipper.less' ]
 	};
 
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
-			banner: '/* \n' +
+			banner: '/*! \n' +
 					' * <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n' +
 					' * <%= pkg.description %> \n' +
 					' * <%= pkg.homepage %> \n' +
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
 				banner: '<%= meta.banner %>'
 			},
 			files: {
-				src: "dist/**/*"
+				src: 'dist/**/*'
 			}
 		},
 		// Bower sync
@@ -132,12 +132,13 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-banner');
 	grunt.loadNpmTasks('grunt-npm2bower-sync');
+	grunt.loadNpmTasks('jsdoxy');
 
 	// Readme
 	grunt.registerTask('buildReadme', 'Build Formstone README.md file.', function () {
 		var pkg = grunt.file.readJSON('package.json'),
 			extra = grunt.file.exists('src/README.md') ? '\n\n---\n\n' + grunt.file.read('src/README.md') : '';
-			destination = "README.md",
+			destination = 'README.md',
 			markdown = '<a href="http://gruntjs.com" target="_blank"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a> \n' +
 					   '# ' + pkg.name + ' \n\n' +
 					   pkg.description + ' \n\n' +
@@ -153,9 +154,9 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('buildLicense', 'Build Formstone LICENSE.md file.', function () {
 		var pkg = grunt.file.readJSON('package.json'),
-			destination = "LICENSE.md",
+			destination = 'LICENSE.md',
 			markdown = 'The MIT License (MIT) \n\n' +
-					   'Copyright ' + grunt.template.today("yyyy") + ' ' + pkg.author.name + ' \n\n' +
+					   'Copyright ' + grunt.template.today('yyyy') + ' ' + pkg.author.name + ' \n\n' +
 					   'Permission is hereby granted, free of charge, to any person obtaining a copy \n' +
 					   'of this software and associated documentation files (the "Software"), to deal \n' +
 					   'in the Software without restriction, including without limitation the rights \n' +
@@ -174,6 +175,131 @@ module.exports = function(grunt) {
 
 		grunt.file.write(destination, markdown);
 		grunt.log.writeln('File "' + destination + '" created.');
+	});
+
+	grunt.registerTask('buildDocs', 'Build Formstone Docs.', function () {
+		function parseContent(content) {
+			var _return = {};
+			var parts = content.split("\n");
+			var keys = [
+					"name",
+					"description",
+					"version",
+					"example",
+					"param",
+					"event",
+					"return"
+				];
+
+			for (var pi in parts) {
+				var p = parts[pi];
+
+				for (var ki in keys) {
+					var key = keys[ki];
+
+					if (p.indexOf(key) > -1) {
+						var pset = p.split("@"+key);
+						var part = pset[ pset.length - 1 ].trim();
+
+						// Split down params, events and returns
+						if ( ["param","event","return"].indexOf(key) > -1 ) {
+							var parray = [];
+
+							if (key != "return") {
+								parray = part.split(" ", 1);
+								parray.push( part.replace(parray[0]+" ", "") );
+								part = {
+									"name": parray[0].trim()
+								};
+							} else {
+								parray[0] = ''
+								parray[1] = part;
+								part = {};
+							}
+
+							if (parray[1]) {
+								// 0 - all
+								// 1 - type
+								// 2 - default
+								// 3 - description
+
+								// Patterns: \[([^\]]*)\]|\<([^\]]*)\>|\"([^\]]*)\"
+								var matches = parray[1].match(/\[([^\]]*)\]|\<([^\]]*)\>|\"([^\]]*)\"/g);
+
+								for (var mi in matches) {
+									var match = matches[mi];
+
+									if (match.indexOf("[") === 0) {
+										part.type = match.replace("[", "").replace("]", "");
+									}
+									if (match.indexOf("<") === 0) {
+										part.default = match.replace("<", "").replace(">", "");
+									}
+									if (match.indexOf('"') === 0) {
+										part.description = match.replace('"', "").replace('"', "");
+									}
+								}
+							}
+						}
+
+						if (key == "param") {
+							if (!_return.params) {
+								_return["params"] = [];
+							}
+							_return["params"].push(part);
+						} else if (key == "event") {
+							if (!_return.params) {
+								_return["events"] = [];
+							}
+							_return["events"].push(part);
+						} else {
+							_return[key] = part;
+						}
+					}
+				}
+			}
+			return _return;
+		}
+
+		grunt.file.expand("src/**/*.js").forEach(function(f) {
+			var doc = {
+				options: [],
+				events: [],
+				methods: []
+			};
+
+			var file = grunt.file.read(f);
+			var destination = f.replace("src", "docs").replace(".js", ".json");
+			var matches = file.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
+
+			for (var i = 0, count = matches.length; i < count; i++) {
+				var content = matches[i];
+
+				if (content.indexOf("@options") > -1) {
+					var params = parseContent(content);
+					doc.options = params["params"];
+				} else if (content.indexOf("@events") > -1) {
+					var events = parseContent(content);
+					doc.events = events["events"];
+				} else if (content.indexOf("@method") > -1) {
+					if (!doc.methods) {
+						doc.methods = [];
+					}
+
+					var m = parseContent(content);
+					if (content.indexOf("private") > -1) {
+						m.private = true;
+					}
+					if (content.indexOf("global") > -1) {
+						m.global = true;
+					}
+					doc.methods.push(m);
+				}
+			}
+
+			grunt.file.write(destination, JSON.stringify(doc));
+			grunt.log.writeln('File "' + destination + '" created.');
+		});
 	});
 
 	// Default task.

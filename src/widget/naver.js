@@ -279,6 +279,9 @@
 			methods: {
 				_construct:    construct,
 				_destruct:     destruct,
+
+				// Public Methods
+
 				open:          open,
 				close:         close,
 				enable:        enable,
