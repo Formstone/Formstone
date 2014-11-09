@@ -5,7 +5,7 @@
 	/**
 	 * @method private
 	 * @name construct
-	 * @description Builds instance
+	 * @description Builds instance.
 	 * @param data [object] "Instance data"
 	 */
 
@@ -43,7 +43,7 @@
 	/**
 	 * @method private
 	 * @name destruct
-	 * @description Tears down instance
+	 * @description Tears down instance.
 	 * @param data [object] "Instance data"
 	 */
 
@@ -60,7 +60,7 @@
 	/**
 	 * @method
 	 * @name open
-	 * @description Opens instance
+	 * @description Opens instance.
 	 * @example $(".target").naver("open");
 	 */
 
@@ -84,7 +84,7 @@
 	/**
 	 * @method
 	 * @name close
-	 * @description Closes instance
+	 * @description Closes instance.
 	 * @example $(".target").naver("close");
 	 */
 
@@ -108,7 +108,7 @@
 	/**
 	 * @method
 	 * @name enable
-	 * @description Enables instance
+	 * @description Enables instance.
 	 * @example $(".target").naver("enable");
 	 */
 
@@ -125,7 +125,7 @@
 	/**
 	 * @method
 	 * @name disable
-	 * @description Disables instance
+	 * @description Disables instance.
 	 * @example $(".target").naver("disable");
 	 */
 
@@ -141,7 +141,7 @@
 	/**
 	 * @method private
 	 * @name onTouchStart
-	 * @description Handles touchstart to selected item
+	 * @description Handles touchstart to selected item.
 	 * @param e [object] "Event data"
 	 */
 
@@ -163,7 +163,7 @@
 	/**
 	 * @method private
 	 * @name onTouchMove
-	 * @description Handles touchmove to selected item
+	 * @description Handles touchmove to selected item.
 	 * @param e [object] "Event data"
 	 */
 
@@ -179,7 +179,7 @@
 	/**
 	 * @method private
 	 * @name onTouchEnd
-	 * @description Handles touchend to selected item
+	 * @description Handles touchend to selected item.
 	 * @param e [object] "Event data"
 	 */
 
@@ -201,7 +201,7 @@
 	/**
 	 * @method private
 	 * @name onClick
-	 * @description Handles click nav click
+	 * @description Handles click nav click.
 	 * @param e [object] "Event data"
 	 */
 
@@ -226,7 +226,7 @@
 	/**
 	 * @method private
 	 * @name onRespond
-	 * @description Handles media query match change
+	 * @description Handles media query match change.
 	 */
 
 	function onRespond(data) {
@@ -237,7 +237,12 @@
 		}
 	}
 
-	// Register Plugin
+	/**
+	 * @plugin
+	 * @name Naver
+	 * @description A jQuery plugin for simple responsive navigation.
+	 * @type widget
+	 */
 
 	var Plugin = Formstone.Plugin("naver", {
 			widget: true,

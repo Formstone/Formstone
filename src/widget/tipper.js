@@ -5,7 +5,7 @@
 	/**
 	 * @method private
 	 * @name construct
-	 * @description Builds instance
+	 * @description Builds instance.
 	 * @param data [object] "Instance data"
 	 */
 
@@ -16,7 +16,7 @@
 	/**
 	 * @method private
 	 * @name destruct
-	 * @description Tears down instance
+	 * @description Tears down instance.
 	 * @param data [object] "Instance data"
 	 */
 
@@ -29,7 +29,7 @@
 	/**
 	 * @method private
 	 * @name onMouseEnter
-	 * @description Handles mouse enter event
+	 * @description Handles mouse enter event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -47,7 +47,7 @@
 	/**
 	 * @method private
 	 * @name onMouseLeave
-	 * @description Handles mouse leave event
+	 * @description Handles mouse leave event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -62,7 +62,7 @@
 	/**
 	 * @method private
 	 * @name onMouseLeave
-	 * @description Handles mouse move event
+	 * @description Handles mouse move event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -73,7 +73,7 @@
 	/**
 	 * @method private
 	 * @name buildTooltip
-	 * @description Builds new tooltip instance
+	 * @description Builds new tooltip instance.
 	 * @param data [object] "Instance data"
 	 */
 
@@ -204,7 +204,7 @@
 	/**
 	 * @method private
 	 * @name positionTooltip
-	 * @description Positions active tooltip instance
+	 * @description Positions active tooltip instance.
 	 * @param left [int] "Left position"
 	 * @param top [int] "Top position"
 	 */
@@ -221,7 +221,7 @@
 	/**
 	 * @method private
 	 * @name removeTooltip
-	 * @description Removes active tooltip instance
+	 * @description Removes active tooltip instance.
 	 */
 
 	function removeTooltip() {
@@ -236,7 +236,7 @@
 	/**
 	 * @method private
 	 * @name format
-	 * @description Formats tooltip text
+	 * @description Formats tooltip text.
 	 * @return [string] "Tooltip text"
 	 */
 
@@ -244,7 +244,12 @@
 		return this.data("title");
 	}
 
-	// Register Plugin
+	/**
+	 * @plugin
+	 * @name Tipper
+	 * @description A jQuery plugin for simple tooltips.
+	 * @type widget
+	 */
 
 	var Plugin = Formstone.Plugin("tipper", {
 			widget: true,

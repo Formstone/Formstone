@@ -42,7 +42,7 @@
 	/**
 	 * @method
 	 * @name createCookie
-	 * @description Creates a cookie
+	 * @description Creates a cookie.
 	 * @param key [string] "Cookie key"
 	 * @param value [string] "Cookie value"
 	 * @param options [object] "Options object"
@@ -74,7 +74,7 @@
 	/**
 	 * @method
 	 * @name readCookie
-	 * @description Returns a cookie's value, or null
+	 * @description Returns a cookie's value, or null.
 	 * @param key [string] "Cookie key"
 	 * @return [string | null] "Cookie's value, or null"
 	 * @example var value = $.macaroon(key);
@@ -106,7 +106,7 @@
 	/**
 	 * @method
 	 * @name eraseCookie
-	 * @description Deletes a cookie
+	 * @description Deletes a cookie.
 	 * @param key [string] "Cookie key"
 	 * @example $.macaroon(key, null);
 	 */
@@ -117,7 +117,12 @@
 		});
 	}
 
-	// Register Plugin
+	/**
+	 * @plugin
+	 * @name Macaroon
+	 * @description A jQuery plugin for simple access to browser cookies.
+	 * @type utility
+	 */
 
 	var Plugin = Formstone.Plugin("macaroon", {
 			methods: {

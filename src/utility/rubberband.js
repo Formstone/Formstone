@@ -31,7 +31,7 @@
 	/**
 	 * @method private
 	 * @name initialize
-	 * @description Initializes plugin
+	 * @description Initializes plugin.
 	 * @param opts [object] "Plugin options"
 	 */
 
@@ -78,7 +78,7 @@
 	/**
 	 * @method private
 	 * @name setState
-	 * @description Sets current media query match state
+	 * @description Sets current media query match state.
 	 */
 
 	function setState() {
@@ -114,7 +114,7 @@
 	/**
 	 * @method private
 	 * @name onStateChange
-	 * @description Handles media query changes
+	 * @description Handles media query changes.
 	 */
 
 	function onStateChange() {
@@ -126,7 +126,7 @@
 	/**
 	 * @method private
 	 * @name onBindingChange
-	 * @description Handles a binding's media query change
+	 * @description Handles a binding's media query change.
 	 */
 
 	function onBindingChange(mq) {
@@ -149,7 +149,7 @@
 	/**
 	 * @method private
 	 * @name sortAsc
-	 * @description Sorts an array (ascending)
+	 * @description Sorts an array (ascending).
 	 * @param a [mixed] "First value"
 	 * @param b [mixed] "Second value"
 	 * @return Difference between second and first values
@@ -162,7 +162,7 @@
 	/**
 	 * @method private
 	 * @name sortDesc
-	 * @description Sorts an array (descending)
+	 * @description Sorts an array (descending).
 	 * @param a [mixed] "First value"
 	 * @param b [mixed] "Second value"
 	 * @return Difference between first and second values
@@ -175,7 +175,7 @@
 	/**
 	 * @method private
 	 * @name createKey
-	 * @description Creates valid object key from string
+	 * @description Creates valid object key from string.
 	 * @param text [String] "String to create key from"
 	 * @return [string] Valid object key
 	 */
@@ -187,7 +187,7 @@
 	/**
 	 * @method
 	 * @name getState
-	 * @description Returns the current state
+	 * @description Returns the current state.
 	 * @return [object] "Current state object"
 	 * @example var state = $.rubberband("state");
 	 */
@@ -199,7 +199,7 @@
 	/**
 	 * @method
 	 * @name bind
-	 * @description Binds callbacks to media query matching
+	 * @description Binds callbacks to media query matching.
 	 * @param media [string] "Media query to match"
 	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
 	 * @example $.rubberband("bind", "(min-width: 500px)", { ... });
@@ -231,9 +231,9 @@
 	/**
 	 * @method
 	 * @name unbind
-	 * @description Unbinds all callbacks from media query
+	 * @description Unbinds all callbacks from media query.
 	 * @param media [string] "Media query to match"
-	 * @example $.rubberband("unbind", "(min-width: 500px)", { ... });
+	 * @example $.rubberband("unbind", "(min-width: 500px)");
 	 */
 
 	function unbind(media) {
@@ -245,7 +245,12 @@
 		}
 	}
 
-	// Register Plugin
+	/**
+	 * @plugin
+	 * @name Rubberband
+	 * @description A jQuery plugin for responsive media query events.
+	 * @type utility
+	 */
 
 	var Plugin = Formstone.Plugin("rubberband", {
 			methods: {

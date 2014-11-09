@@ -1,5 +1,8 @@
 
-// Formstone core
+/**
+ * @plugin
+ * @name Formstone
+ */
 
 var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
@@ -80,9 +83,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	/**
 	 * @method
 	 * @name Plugin
-	 * @description Factory to register plugin with jQuery
+	 * @description Factory to register plugin with jQuery.
 	 * @param namespace [string] "Plugin namespace"
 	 * @param settings [object] "Plugin settings"
+	 * @example Formstone.Plugin("namespace", { ... });
 	 */
 
 	Core.prototype.Plugin = function(namespace, settings) {
@@ -91,7 +95,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name initialize
-			 * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call
+			 * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call.
 			 * @param options [object] <{}> "Instance options"
 			 */
 
@@ -141,6 +145,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @param data [object] <{}> "Instance data"
 			 */
 
+			/**
+			 * @method widget
+			 * @name destroy
+			 * @description Removes plugin instance.
+			 * @example $(".target").{ns}("destroy");
+			 */
+
 			function destroy(data) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
@@ -151,7 +162,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name killEvent
-			 * @description Stops event action and bubble
+			 * @description Stops event action and bubble.
 			 * @param e [object] "Event data"
 			 */
 
@@ -165,7 +176,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name getData
-			 * @description Creates class selector from text
+			 * @description Creates class selector from text.
 			 * @param $element [jQuery] "Target jQuery object"
 			 * @return [object] "Instance data"
 			 */
@@ -177,7 +188,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name startTimer
-			 * @description Starts an internal timer
+			 * @description Starts an internal timer.
 			 * @param timer [int] "Timer ID"
 			 * @param time [int] "Time until execution"
 			 * @param callback [function] "Function to execute"
@@ -192,7 +203,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name clearTimer
-			 * @description Clears an internal timer
+			 * @description Clears an internal timer.
 			 * @param timer [int] "Timer ID"
 			 */
 
@@ -206,7 +217,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name getClassName
-			 * @description Creates class selector from text
+			 * @description Creates class selector from text.
 			 * @param text [string] "Text to convert"
 			 * @return [string] "Class selector"
 			 */
@@ -218,7 +229,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name iterate
-			 * @description Loops scoped function calls over jQuery set with instance data as first parameter
+			 * @description Loops scoped function calls over jQuery set with instance data as first parameter.
 			 * @param func [function] "Function to execute"
 			 * @return [jQuery] "jQuery set"
 			 */
@@ -241,7 +252,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name delegateRoutine
-			 * @description Delegates public methods
+			 * @description Delegates public methods.
 			 * @param method [string] "Method to execute"
 			 * @return [jQuery] "jQuery set"
 			 */
@@ -267,20 +278,21 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name setDefaults
-			 * @description Extends plugin default settings
+			 * @description Extends plugin default settings.
 			 * @param method [string] "Method to execute"
 			 * @return [mixed] "Current context"
 			 */
 
+			/**
+			 * @method widget
+			 * @name defaults
+			 * @description Extends plugin default settings; effects instances created hereafter.
+			 * @param options [object] <{}> "New plugin defaults"
+			 * @example $.{ns}("defaults", { ... });
+			 */
+
 			function setDefaults(method) {
 				if (method === "defaults") {
-					/*
-					 * &&method defaults
-					 *
-					 * &&overview Sets default options
-					 * &&param opts [object] <{}> "Options object"
-					 * &&example $.plugin("defaults", opts);
-					 */
 					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
 				}
 
