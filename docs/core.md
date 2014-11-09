@@ -8,7 +8,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 ### Plugin
 
-Factory to register plugin with jQuery.
+Builds a plugin and registers it with jQuery.
 
 ```
 Formstone.Plugin("namespace", { ... });

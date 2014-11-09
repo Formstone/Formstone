@@ -4,7 +4,7 @@ A jQuery plugin for simple access to browser cookies.
 
 ## Options
 
-Options are set by passing a valid options object at initialization or to the public "defaults" method. You can also set custom options for a specific instance by attaching a data-macaroon-options attribute containing a properly formatted JSON object to the target element.
+Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-macaroon-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |

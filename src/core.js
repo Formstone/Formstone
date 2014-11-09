@@ -84,9 +84,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	/**
 	 * @method
 	 * @name Plugin
-	 * @description Factory to register plugin with jQuery.
+	 * @description Builds a plugin and registers it with jQuery.
 	 * @param namespace [string] "Plugin namespace"
 	 * @param settings [object] "Plugin settings"
+	 * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions` and `methods` keys"
 	 * @example Formstone.Plugin("namespace", { ... });
 	 */
 
