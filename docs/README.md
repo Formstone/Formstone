@@ -1,11 +1,15 @@
 # Documentation
 
+## Core
+
+* [Formstone](core.md)
+
 ## Utility
 
-* [Macaroon](widget-macaroon.md)
-* [Rubberband](widget-rubberband.md)
+* [Macaroon](utility-macaroon.md)
+* [Rubberband](utility-rubberband.md)
 
 ## Widget
 
-* [Macaroon](widget-macaroon.md)
-* [Rubberband](widget-rubberband.md)
+* [Naver](widget-naver.md)
+* [Tipper](widget-tipper.md)

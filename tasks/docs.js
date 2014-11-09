@@ -248,18 +248,22 @@ module.exports = function(grunt) {
 
 		md += '# Documentation';
 		md += '\n\n';
+		md += '## Core';
+		md += '\n\n';
+		md += '* [Formstone](core.md)';
+		md += '\n\n';
 		md += '## Utility';
 		md += '\n\n';
 		for (var i in allDocs.utility) {
 			var d = allDocs.utility[i];
-			md += '* [' + d.name + '](widget-' + d.name.toLowerCase() + '.md)';
+			md += '* [' + d.name + '](utility-' + d.name.toLowerCase() + '.md)';
 			md += '\n';
 		}
 		md += '\n';
 		md += '## Widget';
 		md += '\n\n';
-		for (var i in allDocs.utility) {
-			var d = allDocs.utility[i];
+		for (var i in allDocs.widget) {
+			var d = allDocs.widget[i];
 			md += '* [' + d.name + '](widget-' + d.name.toLowerCase() + '.md)';
 			md += '\n';
 		}
