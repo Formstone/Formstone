@@ -2,6 +2,7 @@
 /**
  * @plugin
  * @name Formstone
+ * @description Library core.
  */
 
 var Formstone = this.Formstone = (function ($, window, document, undefined) {

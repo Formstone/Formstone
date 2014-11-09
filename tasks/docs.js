@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 				for (var ki in keys) {
 					var key = keys[ki];
 
-					if (p.indexOf(key) > -1) {
+					if (p.indexOf("@"+key) > -1) {
 						var pset = p.split("@"+key);
 						var part = pset[ pset.length - 1 ].trim();
 
@@ -136,10 +136,12 @@ module.exports = function(grunt) {
 
 			var namespace = doc.name.toLowerCase();
 
-			for (var i in widgetMethods) {
-				var m = JSON.parse(JSON.stringify(widgetMethods[i]));
-				m.example = m.example.replace("{ns}", namespace);
-				doc.methods.push(m);
+			if (namespace !== "formstone") {
+				for (var i in widgetMethods) {
+					var m = JSON.parse(JSON.stringify(widgetMethods[i]));
+					m.example = m.example.replace("{ns}", namespace);
+					doc.methods.push(m);
+				}
 			}
 
 			doc.methods.sort(function(a, b) {

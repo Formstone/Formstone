@@ -1,12 +1,12 @@
 # Formstone
 
-undefined
+Library core.
 
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
-### * @example Formstone.Plugin("namespace", { ... });
+### Plugin
 
 Factory to register plugin with jQuery.
 
@@ -20,26 +20,4 @@ Formstone.Plugin("namespace", { ... });
 | --- | --- | --- | --- |
 | namespace | string |  | Plugin namespace |
 | settings | object |  | Plugin settings |
-
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.formstone("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
-
-### destroy
-
-Removes plugin instance.
-
-```
-$(".target").formstone("destroy");
-```
 
