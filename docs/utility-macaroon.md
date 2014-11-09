@@ -2,6 +2,9 @@
 
 A jQuery plugin for simple access to browser cookies.
 
+* [Options](#options)
+* [Methods](#methods)
+
 ## Options
 
 
@@ -13,8 +16,6 @@ A jQuery plugin for simple access to browser cookies.
 | path | string |  | Cookie path |
 
 ## Methods
-
-Methods are publicly available to all active instances, unless otherwise stated.
 
 ### create
 

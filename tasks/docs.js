@@ -105,7 +105,10 @@ module.exports = function(grunt) {
 			for (var i = 0, count = matches.length; i < count; i++) {
 				var content = matches[i];
 
-				if (content.indexOf("@plugin") > -1) {
+				if (content.indexOf("@use") > -1) {
+					use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
+					doc.use = use;
+				} else if (content.indexOf("@plugin") > -1) {
 					var plugin = parseContent(content);
 					doc.name = plugin.name;
 					doc.namespace = plugin.namespace;
@@ -151,10 +154,38 @@ module.exports = function(grunt) {
 			});
 
 			var md = "";
+
 			md += '# ' + doc.name;
 			md += '\n\n';
 			md += doc.description;
 			md += '\n\n';
+
+			if (doc.use) {
+				md += "* [Use](#use)";
+				md += '\n';
+			}
+			if (doc.options && doc.options.length) {
+				md += "* [Options](#options)";
+				md += '\n';
+			}
+			if (doc.events && doc.events.length) {
+				md += "* [Events](#events)";
+				md += '\n';
+			}
+			if (doc.methods && doc.methods.length) {
+				md += "* [Methods](#methods)";
+				md += '\n';
+			}
+
+			md += '\n';
+
+			if (doc.use) {
+				md += '\n';
+				md += '## Use ';
+				md += '\n';
+				md += doc.use
+				md += '\n\n';
+			}
 
 			if (doc.options && doc.options.length) {
 				md += '## Options';
@@ -181,8 +212,10 @@ module.exports = function(grunt) {
 			if (doc.events && doc.events.length) {
 				md += '## Events';
 				md += '\n\n';
-				md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
-				md += '\n\n';
+				if (doc.type == "widget") {
+					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
+					md += '\n\n';
+				}
 				md += '| Event | Description |';
 				md += '\n';
 				md += '| --- | --- |';
@@ -199,8 +232,10 @@ module.exports = function(grunt) {
 			if (doc.methods && doc.methods.length) {
 				md += '## Methods';
 				md += '\n\n';
-				md += 'Methods are publicly available to all active instances, unless otherwise stated.';
-				md += '\n\n';
+				if (doc.type == "widget") {
+					md += 'Methods are publicly available to all active instances, unless otherwise stated.';
+					md += '\n\n';
+				}
 				for (var i in doc.methods) {
 					var m = doc.methods[i];
 					md += '### ' + m.name;

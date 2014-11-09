@@ -2,6 +2,10 @@
 
 A jQuery plugin for responsive media query events.
 
+* [Options](#options)
+* [Events](#events)
+* [Methods](#methods)
+
 ## Options
 
 
@@ -16,15 +20,11 @@ A jQuery plugin for responsive media query events.
 
 ## Events
 
-Events are triggered on the target instance's element, unless otherwise stated.
-
 | Event | Description |
 | --- | --- |
 | snap | Change to a media query match |
 
 ## Methods
-
-Methods are publicly available to all active instances, unless otherwise stated.
 
 ### bind
 
