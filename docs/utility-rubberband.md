@@ -63,7 +63,7 @@ Removes plugin instance.
 $(".target").rubberband("destroy");
 ```
 
-### getState
+### state
 
 Returns the current state.
 

@@ -186,7 +186,7 @@
 
 	/**
 	 * @method
-	 * @name getState
+	 * @name state
 	 * @description Returns the current state.
 	 * @return [object] "Current state object"
 	 * @example var state = $.rubberband("state");

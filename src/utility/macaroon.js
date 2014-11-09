@@ -41,7 +41,7 @@
 
 	/**
 	 * @method
-	 * @name createCookie
+	 * @name create
 	 * @description Creates a cookie.
 	 * @param key [string] "Cookie key"
 	 * @param value [string] "Cookie value"
@@ -73,7 +73,7 @@
 
 	/**
 	 * @method
-	 * @name readCookie
+	 * @name read
 	 * @description Returns a cookie's value, or null.
 	 * @param key [string] "Cookie key"
 	 * @return [string | null] "Cookie's value, or null"
@@ -105,7 +105,7 @@
 
 	/**
 	 * @method
-	 * @name eraseCookie
+	 * @name erase
 	 * @description Deletes a cookie.
 	 * @param key [string] "Cookie key"
 	 * @example $.macaroon(key, null);

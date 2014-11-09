@@ -16,7 +16,7 @@ A jQuery plugin for simple access to browser cookies.
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
-### createCookie
+### create
 
 Creates a cookie.
 
@@ -54,7 +54,7 @@ Removes plugin instance.
 $(".target").macaroon("destroy");
 ```
 
-### eraseCookie
+### erase
 
 Deletes a cookie.
 
@@ -68,7 +68,7 @@ $.macaroon(key, null);
 | --- | --- | --- | --- |
 | key | string |  | Cookie key |
 
-### readCookie
+### read
 
 Returns a cookie's value, or null.
 
