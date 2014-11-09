@@ -5,6 +5,8 @@
 module.exports = function(grunt) {
 
 	var cssFiles = {
+		'dist/grid/gridlock.css' : [ 'src/grid/gridlock.less' ],
+		'dist/grid/gridlock.ie.css' : [ 'src/grid/gridlock.ie.less' ],
 		'dist/widget/naver.css' :  [ 'src/widget/naver.less' ],
 		'dist/widget/tipper.css' : [ 'src/widget/tipper.less' ]
 	};

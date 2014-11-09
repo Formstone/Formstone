@@ -1,0 +1,28 @@
+
+	@import "gridlock-config.less";
+	@import "gridlock-functions.less";
+
+ 	// !Reset Box-sizing
+	*,
+	*:before,
+	*:after {
+		*behavior: url(boxsizing.htc);
+	}
+
+ 	// !Dekstop, IE Specific
+ 	.@{class-container} .@{class-row} {
+ 		width: 960px;
+
+ 		.generateGridBase(@width-desktop, @class-desktop);
+
+ 		.generateGrid(@width-desktop, @class-desktop, @columns-desktop);
+
+ 		[class*="@{class-all}-"].@{class-padded},
+		[class*="@{class-min}-"].@{class-padded},
+		[class*="@{class-mobile}-"].@{class-padded},
+		[class*="@{class-tablet}-"].@{class-padded},
+		[class*="@{class-desktop}-"].@{class-padded},
+		[class*="@{class-max}-"].@{class-padded} {
+			*behavior: none;
+		}
+ 	}

@@ -1,0 +1,111 @@
+
+	// Column
+
+	.column (@parent-width, @count, @margin, @index) {
+		width: ((100% / @count) * @index) - (@margin * 2);
+	}
+
+	// Columns
+
+	.columns (@parent-width, @class, @margin, @count, @prefix:~"", @index:1) when (@index <= @count) {
+		// Percentage
+		@{prefix}.@{class}-@{index} {
+			.column(@parent-width, @count, @margin, @index);
+		}
+
+		.columns(@parent-width, @class, @margin, @count, @prefix, (@index + 1));
+	}
+
+	// Columns - Fractioned
+
+	.columnsFractioned (@parent-width, @class, @margin, @prefix:~"") {
+		// Percentage
+		@{prefix}.@{class}-fifth {
+			.column(@parent-width, 5, @margin, 1);
+		}
+		@{prefix}.@{class}-fourth {
+			.column(@parent-width, 4, @margin, 1);
+		}
+		@{prefix}.@{class}-third {
+			.column(@parent-width, 3, @margin, 1);
+		}
+		@{prefix}.@{class}-half {
+			.column(@parent-width, 2, @margin, 1);
+		}
+		@{prefix}.@{class}-full {
+			.column(@parent-width, 1, @margin, 1);
+		}
+	}
+
+	// Columns - Pushed
+
+	.columnPushed (@parent-width, @count, @margin, @index) {
+		margin-left: ((100% / @count) * @index) + @margin;
+	}
+
+	.columnsPushed (@parent-width, @class, @margin, @count, @prefix:~"", @index:1) when (@index < @count) {
+		@{prefix}.@{class}-push-@{index} {
+			.columnPushed(@parent-width, @count, @margin, @index);
+		}
+
+		.columnsPushed(@parent-width, @class, @margin, @count, @prefix, (@index + 1));
+	}
+
+	.columnsPushedFractioned (@parent-width, @class, @margin, @prefix:~"") {
+		@{prefix}.@{class}-push-fifth {
+			.columnPushed(@parent-width, 5, @margin, 1);
+		}
+		@{prefix}.@{class}-push-fourth {
+			.columnPushed(@parent-width, 4, @margin, 1);
+		}
+		@{prefix}.@{class}-push-third {
+			.columnPushed(@parent-width, 3, @margin, 1);
+		}
+		@{prefix}.@{class}-push-half {
+			.columnPushed(@parent-width, 2, @margin, 1);
+		}
+	}
+
+	// Generate - Base
+
+	.generateGridBase (@parent-width:0, @class) {
+		// Fractions
+		.columnsFractioned(@parent-width, @class, @gutter);
+
+		// Fractions Push
+		.columnsPushedFractioned(@parent-width, @class, @gutter);
+
+		// Fractions Contained
+		.columnsFractioned(@parent-width, @class, 0, ~".@{class-contained}");
+
+		// Fractions Contained Push
+		.columnsPushedFractioned(@parent-width, @class, 0, ~".@{class-contained}");
+
+		// Centered
+		[class*="@{class}-"].@{class-centered} {
+			float: none;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		// Hide
+		.@{class}-hide {
+			display: none;
+		}
+	}
+
+	// Generate - Grid
+
+	.generateGrid (@parent-width:0, @class, @columns) {
+		// Cells
+		.columns(@parent-width, @class, @gutter, @columns);
+
+		// Cells Push
+		.columnsPushed(@parent-width, @class, @gutter, @columns);
+
+		// Contained
+		.columns(@parent-width, @class, 0, @columns, ~".@{class-contained}");
+
+		// Contained Push
+		.columnsPushed(@parent-width, @class, 0, @columns, ~".@{class-contained}");
+	}
