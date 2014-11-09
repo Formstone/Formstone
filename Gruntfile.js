@@ -132,7 +132,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-banner');
 	grunt.loadNpmTasks('grunt-npm2bower-sync');
-	grunt.loadNpmTasks('jsdoxy');
 
 	// Readme
 	grunt.registerTask('buildReadme', 'Build Formstone README.md file.', function () {
@@ -303,6 +302,6 @@ module.exports = function(grunt) {
 	});
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'uglify', 'less', 'autoprefixer', 'usebanner', 'sync', 'buildReadme', 'buildLicense' ]);
+	grunt.registerTask('default', [ 'jshint', 'uglify', 'less', 'autoprefixer', 'usebanner', 'sync', 'buildReadme', 'buildLicense', 'buildDocs' ]);
 
 };

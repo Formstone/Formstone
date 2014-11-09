@@ -5,6 +5,8 @@
 	/**
 	 * @method private
 	 * @name construct
+	 * @description Builds instance
+	 * @param data [object] "Instance data"
 	 */
 
 	function construct(data) {
@@ -41,6 +43,8 @@
 	/**
 	 * @method private
 	 * @name destruct
+	 * @description Tears down instance
+	 * @param data [object] "Instance data"
 	 */
 
 	function destruct(data) {
