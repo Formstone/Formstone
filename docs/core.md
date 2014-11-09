@@ -12,31 +12,33 @@ Library core.
 The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:
 
 ```
-$window					// Object, Reference to jQuery wrapped window
-$document				// Object, Reference to jQuery wrapped document
-$body					// Object, Reference to jQuery wrapped body tag
+$window					// object, Reference to jQuery wrapped window
+$document				// object, Reference to jQuery wrapped document
+$body					// object, Reference to jQuery wrapped body tag
 
-Plugins					// Object containing all registered plugins
+Plugins					// object, Contains all registered plugins
 
-historySupport			// Boolean, history api support, including push and pop state
-matchMediaSupport		// Boolean, match media api support
-rafSupport				// Boolean, request animation frame api support
-transitionSupport		// Boolean, CSS3 transition support
+historySupport			// boolean, History api support, including push and pop state
+matchMediaSupport		// boolean, Match Media API support
+rafSupport				// boolean, Request Animation Frame API support
+transitionSupport		// boolean, CSS3 Transition support
 
-userAgent				// Raw user agent string
-isChrome				// Boolean, browser is Chrome
-isFirefox				// Boolean, browser is FireFox
-isSafari				// Boolean, browser is Safari
-isMobile				// Boolean, browser is Mobile
-isFirefoxMobile			// Boolean, browser is FireFox Mobile
+userAgent				// string, Raw user string
+isChrome				// boolean, Browser is Chrome
+isFirefox				// boolean, Browser is FireFox
+isSafari				// boolean, Browser is Safari
+isMobile				// boolean, Browser is Mobile
+isFirefoxMobile			// boolean, Browser is FireFox Mobile
 ```
+
+User agent sniffing isn't always reliable or considered a best practice - it should be used sparingly, if at all.
 
 ### Plugin Factory
 
 The `Formstone.Plugin` factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:
 
 ```
-$(“.selector”).plugin({
+$(“.target).plugin({
 	option: value
 });
 ```
@@ -115,7 +117,7 @@ this.data("namespace");
 Custom public methods can also be defined, provided their keys are not prefixed with an underscore (`_`). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it's plugin data as the first argument followed by any addition arguments:
 
 ```
-$(".selector").namespace("reset", 500);
+$(".target").namespace("reset", 500);
 ```
 
 A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance's target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.
@@ -155,7 +157,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 A utility can override the default method delegation by pointing the `_delegate` key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.
 
 ```
-$(".selector").namespace("reset", 500);
+$.namespace("reset", 500);
 ```
 
 #### Plugin Object
@@ -227,34 +229,42 @@ var Plugin = Formstone.Plugin(“namespace”, {
 
 ```
 namespace				// Default, ".namespace",
+blur					// Default, "blur.namespace",
+change					// Default, "change.namespace",
 click					// Default, "click.namespace",
 clickTouchStart			// Default, "click.namespace touchstart.namespace",
+dblClick				// Default, "dblClick.namespace",
+drag					// Default, "drag.namespace",
+dragEnd					// Default, "dragend.namespace",
 dragEnter				// Default, "dragenter.namespace",
-dragOver				// Default, "dragover.namespace",
 dragLeave				// Default, "dragleave.namespace",
+dragOver				// Default, "dragover.namespace",
+dragStart				// Default, "dragstart.namespace",
 drop					// Default, "drop.namespace",
-fileError				// Default, "fileError.namespace",
-fileStart				// Default, "fileStart.namespace",
-fileProgress			// Default, "fileProgress.namespace",
-fileComplete			// Default, "fileComplete.namespace",
-beforeUnload			// Default, "beforeunload.namespace",
-complete				// Default, "complete.namespace",
-start					// Default, "start.namespace",
-change					// Default, "change.namespace",
+error					// Default, "error.namespace",
+focus					// Default, "focus.namespace",
+focusIn					// Default, "focusin.namespace",
+focusOut				// Default, "focusout.namespace",
+input					// Default, "input.namespace",
 keyDown					// Default, "keydown.namespace",
-keyUp					// Default, "keyup.namespace",
 keyPress				// Default, "keypress.namespace",
-resize					// Default, "resize.namespace",
+keyUp					// Default, "keyup.namespace",
 load					// Default, "load.namespace",
-matchMedia				// Default, "matchmedia.namespace",
+mouseDown				// Default, "mousedown.namespace",
 mouseEnter				// Default, "mouseenter.namespace",
 mouseLeave				// Default, "mouseleave.namespace",
-mouseOver				// Default, "mouseover.namespace",
-mouseOut				// Default, "mouseout.namespace",
 mouseMove				// Default, "mousemove.namespace",
-touchStart				// Default, "touchstart.namespace",
-touchMove				// Default, "touchmove.namespace",
+mouseOut				// Default, "mouseout.namespace",
+mouseOver				// Default, "mouseover.namespace",
+mouseUp					// Default, "mouseup.namespace",
+resize					// Default, "resize.namespace",
+scroll					// Default, "scroll.namespace",
+select					// Default, "select.namespace",
+touchCancel				// Default, "touchcancel.namespace",
 touchEnd				// Default, "touchend.namespace"
+touchLeave				// Default, "touchleave.namespace",
+touchMove				// Default, "touchmove.namespace",
+touchStart				// Default, "touchstart.namespace",
 transitionEnd			// Default, "transitionEnd.namespace"
 
 enable					// Custom,  "enable.namespace"
