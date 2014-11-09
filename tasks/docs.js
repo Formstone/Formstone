@@ -271,7 +271,7 @@ module.exports = function(grunt) {
 			markdown = '<a href="http://gruntjs.com" target="_blank"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a> \n\n' +
 					   '# ' + pkg.name + ' \n\n' +
 					   pkg.description + ' \n\n' +
-					   '#' + md.replace("##", "###");
+					   '[Documentation](docs/README.md)';
 
 		grunt.file.write(destination, markdown);
 		grunt.log.writeln('File "' + destination + '" created.');

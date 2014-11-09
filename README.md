@@ -4,14 +4,4 @@
 
 Library of modular javascript components. 
 
-## Documentation
-
-### Utility
-
-* [Macaroon](widget-macaroon.md)
-* [Rubberband](widget-rubberband.md)
-
-## Widget
-
-* [Macaroon](widget-macaroon.md)
-* [Rubberband](widget-rubberband.md)
+[Documentation](docs/README.md)
