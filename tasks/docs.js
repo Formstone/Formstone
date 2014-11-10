@@ -3,6 +3,7 @@ module.exports = function(grunt) {
 
 		var widgetMethods = [],
 			allDocs = {
+				grid: [],
 				utility: [],
 				widget: []
 			};
@@ -190,6 +191,7 @@ module.exports = function(grunt) {
 							var grid = parseCSS(content);
 							doc.name = grid.name;
 							doc.namespace = grid.namespace;
+							doc.type = "grid";
 							doc.description = grid.description;
 
 							destinationMD = f.replace("src", "docs").replace(".less", ".md").replace("grid/", "grid-"),
@@ -384,6 +386,14 @@ module.exports = function(grunt) {
 		md += '\n\n';
 		md += '* [Formstone](core.md)';
 		md += '\n\n';
+		md += '## Grid';
+		md += '\n\n';
+		for (var i in allDocs.grid) {
+			var d = allDocs.grid[i];
+			md += '* [' + d.name + '](grid-' + d.name.toLowerCase() + '.md)';
+			md += '\n';
+		}
+		md += '\n';
 		md += '## Utility';
 		md += '\n\n';
 		for (var i in allDocs.utility) {
