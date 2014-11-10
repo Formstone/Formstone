@@ -186,7 +186,9 @@ module.exports = function(grunt) {
 
 						if (content.indexOf("@class") > -1) {
 							var klass = parseCSS(content);
-							doc.css.push(klass);
+							if (klass.name) {
+								doc.css.push(klass);
+							}
 						} else if (content.indexOf("@grid") > -1) {
 							var grid = parseCSS(content);
 							doc.name = grid.name;
@@ -204,8 +206,7 @@ module.exports = function(grunt) {
 			var namespace = doc.name.toLowerCase();
 
 			if (jsFile) {
-
-				if (namespace !== "formstone") {
+				if (namespace !== "formstone" && namespace !== "gridlock") {
 					for (var i in widgetMethods) {
 						var m = JSON.parse(JSON.stringify(widgetMethods[i]));
 						m.example = m.example.replace("{ns}", namespace);

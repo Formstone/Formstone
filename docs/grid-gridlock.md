@@ -3,8 +3,6 @@
 A responsive CSS grid.
 
 * [Use](#use)
-* [Methods](#methods)
-* [CSS](#css)
 
 
 ## Use 
@@ -163,34 +161,4 @@ Gridlock can also be configured and rebuilt using Grunt. Simply edit the variabl
 | `@width-break-max` | `1220px` | Max break width |
 | **Gutters** | | |
 | `@gutter` | `1.0416666666666667%;` | Gutter width |
-
-## Methods
-
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.gridlock("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
-
-### destroy
-
-Removes plugin instance.
-
-```
-$(".target").gridlock("destroy");
-```
-
-## CSS
-
-| Class | Type | Description |
-| --- | --- | --- |
-|  |  |  |
 
