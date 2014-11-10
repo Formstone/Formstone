@@ -1,5 +1,13 @@
 module.exports = function(grunt) {
 	grunt.registerTask('buildDocs', 'Build Formstone Docs.', function () {
+
+		var widgetMethods = [],
+			allDocs = {
+				utility: [],
+				widget: []
+			};
+
+
 		function parseJavascript(content) {
 			var _return = {};
 			var parts = content.split("\n");
@@ -112,57 +120,54 @@ module.exports = function(grunt) {
 		}
 
 
-		var widgetMethods = [],
-			allDocs = {
-				utility: [],
-				widget: []
-			};
-
-		grunt.file.expand("src/**/*.js").forEach(function(f) {
-			var doc = {
-				options: [],
-				events: [],
-				methods: []
-			};
+		function parseFiles(f) {
+			var doc = {};
 
 			var jsFile = grunt.file.read(f),
 				cssFile = grunt.file.exists( f.replace(".js", ".less") ) ? grunt.file.read( f.replace(".js", ".less") ) : false,
 				destinationMD = f.replace("src", "docs").replace(".js", ".md").replace("utility/", "utility-").replace("widget/", "widget-"),
-				destinationJSON = f.replace("src", "docs/json").replace(".js", ".json"),
-				jsMatches = jsFile.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
+				destinationJSON = f.replace("src", "docs/json").replace(".js", ".json");
 
 			// JS
-			if (jsMatches) {
-				for (var i = 0, count = jsMatches.length; i < count; i++) {
-					var content = jsMatches[i];
+			if (jsFile) {
+				var jsMatches = jsFile.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g)
 
-					if (content.indexOf("@use") > -1) {
-						var use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
-						doc.use = use;
-					} else if (content.indexOf("@plugin") > -1) {
-						var plugin = parseJavascript(content);
-						doc.name = plugin.name;
-						doc.namespace = plugin.namespace;
-						doc.type = plugin.type;
-						doc.description = plugin.description;
-					} else if (content.indexOf("@options") > -1) {
-						var params = parseJavascript(content);
-						doc.options = params["params"];
-					} else if (content.indexOf("@events") > -1) {
-						var events = parseJavascript(content);
-						doc.events = events["events"];
-					} else if (content.indexOf("@method") > -1) {
-						if (!doc.methods) {
-							doc.methods = [];
-						}
+				doc.options = [];
+				doc.events = [];
+				doc.methods = [];
 
-						var m = parseJavascript(content);
+				if (jsMatches) {
+					for (var i = 0, count = jsMatches.length; i < count; i++) {
+						var content = jsMatches[i];
 
-						if (content.indexOf("private") < 0) {
-							if (content.indexOf("@method widget") > -1) {
-								widgetMethods.push(m);
-							} else {
-								doc.methods.push(m);
+						if (content.indexOf("@use") > -1) {
+							var use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
+							doc.use = use;
+						} else if (content.indexOf("@plugin") > -1) {
+							var plugin = parseJavascript(content);
+							doc.name = plugin.name;
+							doc.namespace = plugin.namespace;
+							doc.type = plugin.type;
+							doc.description = plugin.description;
+						} else if (content.indexOf("@options") > -1) {
+							var params = parseJavascript(content);
+							doc.options = params["params"];
+						} else if (content.indexOf("@events") > -1) {
+							var events = parseJavascript(content);
+							doc.events = events["events"];
+						} else if (content.indexOf("@method") > -1) {
+							if (!doc.methods) {
+								doc.methods = [];
+							}
+
+							var m = parseJavascript(content);
+
+							if (content.indexOf("private") < 0) {
+								if (content.indexOf("@method widget") > -1) {
+									widgetMethods.push(m);
+								} else {
+									doc.methods.push(m);
+								}
 							}
 						}
 					}
@@ -181,6 +186,14 @@ module.exports = function(grunt) {
 						if (content.indexOf("@class") > -1) {
 							var klass = parseCSS(content);
 							doc.css.push(klass);
+						} else if (content.indexOf("@grid") > -1) {
+							var grid = parseCSS(content);
+							doc.name = grid.name;
+							doc.namespace = grid.namespace;
+							doc.description = grid.description;
+
+							destinationMD = f.replace("src", "docs").replace(".less", ".md").replace("grid/", "grid-"),
+							destinationJSON = f.replace("src", "docs/json").replace(".less", ".json");
 						}
 					}
 				}
@@ -188,19 +201,22 @@ module.exports = function(grunt) {
 
 			var namespace = doc.name.toLowerCase();
 
-			if (namespace !== "formstone") {
-				for (var i in widgetMethods) {
-					var m = JSON.parse(JSON.stringify(widgetMethods[i]));
-					m.example = m.example.replace("{ns}", namespace);
-					doc.methods.push(m);
-				}
-			}
+			if (jsFile) {
 
-			doc.methods.sort(function(a, b) {
-				if (a.name < b.name) return -1;
-			    if (a.name > b.name) return 1;
-			    return 0;
-			});
+				if (namespace !== "formstone") {
+					for (var i in widgetMethods) {
+						var m = JSON.parse(JSON.stringify(widgetMethods[i]));
+						m.example = m.example.replace("{ns}", namespace);
+						doc.methods.push(m);
+					}
+				}
+
+				doc.methods.sort(function(a, b) {
+					if (a.name < b.name) return -1;
+				    if (a.name > b.name) return 1;
+				    return 0;
+				});
+			}
 
 			var md = "";
 
@@ -353,7 +369,12 @@ module.exports = function(grunt) {
 			if (allDocs[doc.type]) {
 				allDocs[doc.type].push(doc);
 			}
-		});
+		}
+
+		// WORK
+
+		grunt.file.expand("src/**/*.js").forEach(parseFiles);
+		grunt.file.expand("src/grid/gridlock.less").forEach(parseFiles);
 
 		var md = '';
 
