@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Rubberband Demo</title>
+
+		<!-- Modernizer -->
+		<script src="http://formstone.it/js/modernizr.js"></script>
+
+		<!-- Demo Resources -->
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="http://formstone.it/js/site.ie8.js"></script>
+			<link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="http://formstone.it/js/site.ie9.js"></script>
+		<![endif]-->
+
+		<script src="../jquery.fs.rubberband.js"></script>
+
+		<!--[DEMO:START-RESOURCES]-->
+
+		<style>
+			.demo .output { vertical-align: top; }
+			.demo .output span { display: inline-block; width: 90px; }
+			.demo .output p:first-child { font-weight: 600; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$(window).on("snap.demo", logSnap);
+
+				if ($.rubberband("state") === null) {
+					$.rubberband({
+						minWidth: [ 320, 500, 740, 980, 1220 ],
+						maxWidth: [ 1220, 980, 740, 500, 320 ],
+						minHeight: [ 400, 800 ],
+						maxHeight: [ 800, 400 ]
+					});
+				}
+
+				$.rubberband("bind", "(min-width: 740px)", {
+					enter: logChange,
+					leave: logChange
+				});
+
+				$(window).one("pronto.load", function() {
+					$(window).off("snap.demo");
+					$.rubberband("unbind", "(min-width: 740px)");
+				});
+			});
+
+			function logSnap(e, data) {
+				var html = "";
+
+				html += "<p><span>Snap:</span><span>MinWidth:</span>" + data.minWidth + "<br>";
+				html += "<span></span><span>MaxWidth:</span>"+ data.maxWidth + "<br>";
+				html += "<span></span><span>MinHeight:</span>"+ data.minHeight + "<br>";
+				html += "<span></span><span>MaxHeight:</span>"+ data.maxHeight + "</p>";
+
+				$("#rubberband_demo").prepend(html);
+			}
+
+			function logChange() {
+				var mql = this,
+					type = mql.matches ? "Enter" : "Leave"
+					html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
+
+				$("#rubberband_demo_binding").prepend(html);
+			}
+		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Rubberband Demo</h1>
+					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
+					<br>
+					<a href="http://formstone.it/rubberband/" class="button">View Documentation</a>
+				</header>
+
+				<!--[DEMO:START-CONTENT]-->
+
+				<!-- Basic -->
+				<h2>Basic</h2>
+				<p>Rubberband can track global changes to screen size based on your existing grid system. This is useful when many elements need to be resized on all changes to screen size. Start by configuring the dimensions you'd like to track by passing arrays containing the target width and/or heights:</p>
+
+				<pre class="example"><code class="language-javascript">$.rubberband({
+	minWidth: [ 320, 500, 740, 980, 1220 ],
+	maxWidth: [ 1220, 980, 740, 500, 320 ],
+	minHeight: [ 400, 800 ],
+	maxHeight: [ 800, 400 ]
+});</code></pre>
+
+				<p>After initializing, simply listen for the "snap" event:
+
+				<pre class="example"><code class="language-javascript">$(window).on("snap", function(e, data) {
+	console.log(data.minWidth, data.maxWidth, data.minHeight, data.maxHeight);
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div id="rubberband_demo" class="output"></div>
+
+				<br>
+
+				<h2>Binding</h2>
+				<p>Rubberband can also bind events to specific media query changes for more fine grain control:</p>
+
+				<pre class="example"><code class="language-javascript">$.rubberband("bind", "(min-width: 740px)", {
+	enter: function() {
+		...
+	},
+	leave: function() {
+		...
+	}
+});</code></pre>
+
+				<p>Note: The <code>leave</code> callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.</p>
+
+				<h5>Demo</h5>
+				<div id="rubberband_demo_binding" class="output"></div>
+
+				<br>
+
+				<!-- IE -->
+				<h2>IE Support</h2>
+				<p>When supporting IE you will need to include a <a href="https://gist.github.com/benplum/8045366" target="_blank">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336" target="_blank">IE 8</a>, <a href="https://gist.github.com/benplum/8045327" target="_blank">IE 9</a>).</p>
+
+				<!--[DEMO:END-CONTENT]-->
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>

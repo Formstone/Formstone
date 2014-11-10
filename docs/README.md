@@ -15,5 +15,6 @@
 
 ## Widget
 
+* [Dropper](widget-dropper.md)
 * [Naver](widget-naver.md)
 * [Tipper](widget-tipper.md)

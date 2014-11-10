@@ -22,7 +22,7 @@
 			.wrapInner('<div class="' + Classes.container + '"></div>')
 			.prepend(data.$handle);
 
-		data.$container    = data.$el.find( Functions.getClassName(Classes.container) );
+		data.$container    = this.find( Functions.getClassName(Classes.container) );
 		data.eventDelegate = Functions.getClassName(Classes.handle);
 
 		this.on(Events.touchStart, data.eventDelegate, data, onTouchStart)
@@ -34,7 +34,7 @@
 			data.mediaQuery.addListener(function() {
 				onRespond.call(data.$el, data);
 			});
-			onRespond.call(data.$el, data);
+			onRespond.call(this, data);
 		}
 	}
 
@@ -50,8 +50,8 @@
 		data.$container.contents()
 					   .unwrap();
 
-		data.$el.removeClass( [Classes.base, Classes.enabled, Classes.open, data.customClass].join(" ") )
-				.off(Events.namespace);
+		this.removeClass( [Classes.base, Classes.enabled, Classes.open, data.customClass].join(" ") )
+			.off(Events.namespace);
 	}
 
 	/**
@@ -67,8 +67,8 @@
 				data.$handle.html(data.labels.open);
 			}
 
-			data.$el.addClass(Classes.open)
-					.trigger(Events.open);
+			this.addClass(Classes.open)
+				.trigger(Events.open);
 
 			data.open = true;
 		}
@@ -87,8 +87,8 @@
 				data.$handle.html(data.labels.closed);
 			}
 
-			data.$el.removeClass(Classes.open)
-					.trigger(Events.close);
+			this.removeClass(Classes.open)
+				.trigger(Events.close);
 
 			data.open = false;
 		}
@@ -103,11 +103,11 @@
 
 	function enable(data) {
 		if (!data.enabled) {
-			data.$el.addClass(Classes.enabled);
+			this.addClass(Classes.enabled);
 			data.enabled = true;
 			data.open    = true; // trick close method
 
-			close.call(data.$el, data);
+			close.call(this, data);
 		}
 	}
 
@@ -120,7 +120,7 @@
 
 	function disable(data) {
 		if (data.enabled) {
-			data.$el.removeClass( [Classes.enabled, Classes.open].join(" ") );
+			this.removeClass( [Classes.enabled, Classes.open].join(" ") );
 			data.enabled = false;
 		}
 	}
@@ -244,13 +244,13 @@
 			 */
 
 			defaults: {
-				customClass:    "",
-				label:          true,
+				customClass    : "",
+				label          : true,
 				labels: {
-					closed:     "Navigation",
-					open:       "Close"
+					closed     : "Navigation",
+					open       : "Close"
 				},
-				maxWidth:       "980px"
+				maxWidth       : "980px"
 			},
 
 			classes: [
@@ -272,15 +272,15 @@
 			],
 
 			methods: {
-				_construct:    construct,
-				_destruct:     destruct,
+				_construct    : construct,
+				_destruct     : destruct,
 
 				// Public Methods
 
-				open:          open,
-				close:         close,
-				enable:        enable,
-				disable:       disable
+				open          : open,
+				close         : close,
+				enable        : enable,
+				disable       : disable
 			}
 		}),
 

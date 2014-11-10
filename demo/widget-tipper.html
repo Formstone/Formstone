@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Tipper Demo</title>
+
+		<!-- Modernizer -->
+		<script src="http://formstone.it/js/modernizr.js"></script>
+
+		<!-- Demo Resources -->
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="http://formstone.it/js/site.ie8.js"></script>
+			<link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="http://formstone.it/js/site.ie9.js"></script>
+		<![endif]-->
+
+		<link href="../jquery.fs.tipper.css" rel="stylesheet" type="text/css" media="all">
+		<script src="../jquery.fs.tipper.js"></script>
+
+		<!--[DEMO:START-RESOURCES]-->
+
+		<style>
+			.tipped { background: #999; clear: both; float: none; display: block; margin: 20px auto; width: 50%; }
+			.tipped:hover { background: #777; }
+		</style>
+
+		<script>
+			$(document).ready(function() {
+				$(".demo .tipped").tipper();
+
+				$(window).one("pronto.load", function() {
+					$(".demo .tipped").tipper("destroy");
+				});
+			});
+		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
+	</head>
+	<body class="gridlock demo">
+		<header id="header">
+			<div class="row">
+				<div class="all-full">
+					<a href="http://formstone.it/" class="branding">Formstone</a>
+				</div>
+			</div>
+		</header>
+		<article class="row page">
+			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
+				<header class="header">
+					<h1>Tipper Demo</h1>
+					<br>
+					<a href="http://formstone.it/tipper/" class="button">View Documentation</a>
+				</header>
+
+				<!--[DEMO:START-CONTENT]-->
+
+				<!-- BASIC -->
+				<h2>Basic</h2>
+				<p>Tipper will generate a tooltip based on the target element's <code>data-title</code>. It can also be configured to open in multiple directions by passing the direction at initialization:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").tipper({
+	direction: "top"
+});</code></pre>
+				<pre class="example"><code class="language-markup">&lt;a href="#" data-title="ToolTip Text"&gt;Tooltip Target&lt;/a&gt;</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<a href="#" class="button tipped" data-title="Great New Tooltip" data-tipper-options='{"direction":"left"}'>Left</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip" data-tipper-options='{"direction":"right"}'>Right</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip" data-tipper-options='{"direction":"top"}'>Top</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip" data-tipper-options='{"direction":"bottom"}'>Bottom</a>
+				</div>
+
+				<br>
+
+				<!-- FOLLOW -->
+				<h2>Follow</h2>
+				<p>You can configure Tipper to follow the user's mouse:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").tipper({
+	follow: true
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"left","follow":"true"}'>Left</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"right","follow":"true"}'>Right</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"top","follow":"true"}'>Top</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"bottom","follow":"true"}'>Bottom</a>
+				</div>
+
+				<br>
+
+				<!-- MATCH -->
+				<h2>Match</h2>
+				<p>You can configure Tipper to match the user's mouse position relative to the target:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").tipper({
+	match: true
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"left","match":"true"}'>Left</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"right","match":"true"}'>Right</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"top","match":"true"}'>Top</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"bottom","match":"true"}'>Bottom</a>
+				</div>
+
+				<br>
+
+				<!-- DELAY -->
+				<h2>Delay</h2>
+				<p>You can set a delay to avoid accidental tooltips:</p>
+
+				<pre class="example"><code class="language-javascript">$(".target").tipper({
+	delay: 500
+});</code></pre>
+
+				<h5>Demo</h5>
+				<div class="clear_fix">
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"left","delay":"500"}'>Left</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"right","delay":"500"}'>Right</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"top","delay":"500"}'>Top</a>
+					<a href="#" class="button tipped" data-title="Great New Tooltip"  data-tipper-options='{"direction":"bottom","delay":"500"}'>Bottom</a>
+				</div>
+
+				<!--[DEMO:END-CONTENT]-->
+
+			</div>
+		</article>
+
+		<footer id="footer" class="row">
+			<div class="all-full copyright">
+				Made with &hearts; in Hampden
+			</div>
+		</footer>
+	</body>
+</html>
