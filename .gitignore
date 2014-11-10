@@ -1,1 +1,11 @@
+# OS Generated
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+*.swp
+
+# Node
+node_cache/*
 node_modules/*
+npm-debug.log
