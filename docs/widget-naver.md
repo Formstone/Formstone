@@ -2,10 +2,43 @@
 
 A jQuery plugin for simple responsive navigation.
 
+* [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
+
+
+## Use 
+### Basic
+
+Naver will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:
+
+```
+$("nav").naver();
+```
+
+```
+<nav>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+```
+
+### Breakpoint
+
+By default, Naver will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the `maxWidth` option on initialization.
+
+```
+$("nav").naver({
+	maxWidth: "740px"
+});
+```
+
+#### IE Support
+
+When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
 
 ## Options
 
