@@ -18,7 +18,47 @@
 	@tipper-caret-size: 			5px;					// 5px
 
 
-	// Styles
+	/**
+	 * @class
+	 * @name .tipper
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .tipper.tipper-visible
+	 * @type modifier
+	 * @description Inidcates visible state
+	 */
+
+	/**
+	 * @class
+	 * @name .tipper.tipper-right
+	 * @type modifier
+	 * @description Inidcates right side display
+	 */
+
+	/**
+	 * @class
+	 * @name .tipper.tipper-left
+	 * @type modifier
+	 * @description Inidcates left side display
+	 */
+
+	/**
+	 * @class
+	 * @name .tipper.tipper-top
+	 * @type modifier
+	 * @description Inidcates top display
+	 */
+
+	/**
+	 * @class
+	 * @name .tipper.tipper-bottom
+	 * @type modifier
+	 * @description Inidcates bottom display
+	 */
 
 	.tipper {
 		width: 1px;
@@ -49,13 +89,18 @@
 			box-sizing: border-box;
 		}
 
-		// .visible
+		// Visible
 
 		&-visible {
 			opacity: 1;
 		}
 
-		// .tipper-content
+		/**
+		 * @class
+		 * @name .tipper-content
+		 * @type element
+		 * @description Tooltip content wrapper
+		 */
 
 		&-content {
 			background: @tipper-background;
@@ -70,7 +115,12 @@
 			white-space: nowrap;
 		}
 
-		// .tipper-caret
+		/**
+		 * @class
+		 * @name .tipper-caret
+		 * @type element
+		 * @description Tooltip caret
+		 */
 
 		@tipper-caret-width: (@tipper-caret-size * 1.3);
 		@tipper-caret-height: (@tipper-caret-size * 1.3);

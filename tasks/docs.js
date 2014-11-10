@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
 	grunt.registerTask('buildDocs', 'Build Formstone Docs.', function () {
-		function parseContent(content) {
+		function parseJavascript(content) {
 			var _return = {};
 			var parts = content.split("\n");
 			var keys = [
@@ -84,6 +84,34 @@ module.exports = function(grunt) {
 			return _return;
 		}
 
+
+		function parseCSS(content) {
+			var _return = {};
+			var parts = content.split("\n");
+			var keys = [
+					"name",
+					"description",
+					"type"
+				];
+
+			for (var pi in parts) {
+				var p = parts[pi];
+
+				for (var ki in keys) {
+					var key = keys[ki];
+
+					if (p.indexOf("@"+key) > -1) {
+						var pset = p.split("@"+key);
+						var part = pset[ pset.length - 1 ].trim();
+
+						_return[key] = part;
+					}
+				}
+			}
+			return _return;
+		}
+
+
 		var widgetMethods = [],
 			allDocs = {
 				utility: [],
@@ -97,41 +125,62 @@ module.exports = function(grunt) {
 				methods: []
 			};
 
-			var file = grunt.file.read(f),
+			var jsFile = grunt.file.read(f),
+				cssFile = grunt.file.exists( f.replace(".js", ".less") ) ? grunt.file.read( f.replace(".js", ".less") ) : false,
 				destinationMD = f.replace("src", "docs").replace(".js", ".md").replace("utility/", "utility-").replace("widget/", "widget-"),
 				destinationJSON = f.replace("src", "docs/json").replace(".js", ".json"),
-				matches = file.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
+				jsMatches = jsFile.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
 
-			for (var i = 0, count = matches.length; i < count; i++) {
-				var content = matches[i];
+			// JS
+			if (jsMatches) {
+				for (var i = 0, count = jsMatches.length; i < count; i++) {
+					var content = jsMatches[i];
 
-				if (content.indexOf("@use") > -1) {
-					use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
-					doc.use = use;
-				} else if (content.indexOf("@plugin") > -1) {
-					var plugin = parseContent(content);
-					doc.name = plugin.name;
-					doc.namespace = plugin.namespace;
-					doc.type = plugin.type;
-					doc.description = plugin.description;
-				} else if (content.indexOf("@options") > -1) {
-					var params = parseContent(content);
-					doc.options = params["params"];
-				} else if (content.indexOf("@events") > -1) {
-					var events = parseContent(content);
-					doc.events = events["events"];
-				} else if (content.indexOf("@method") > -1) {
-					if (!doc.methods) {
-						doc.methods = [];
+					if (content.indexOf("@use") > -1) {
+						var use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
+						doc.use = use;
+					} else if (content.indexOf("@plugin") > -1) {
+						var plugin = parseJavascript(content);
+						doc.name = plugin.name;
+						doc.namespace = plugin.namespace;
+						doc.type = plugin.type;
+						doc.description = plugin.description;
+					} else if (content.indexOf("@options") > -1) {
+						var params = parseJavascript(content);
+						doc.options = params["params"];
+					} else if (content.indexOf("@events") > -1) {
+						var events = parseJavascript(content);
+						doc.events = events["events"];
+					} else if (content.indexOf("@method") > -1) {
+						if (!doc.methods) {
+							doc.methods = [];
+						}
+
+						var m = parseJavascript(content);
+
+						if (content.indexOf("private") < 0) {
+							if (content.indexOf("@method widget") > -1) {
+								widgetMethods.push(m);
+							} else {
+								doc.methods.push(m);
+							}
+						}
 					}
+				}
+			}
 
-					var m = parseContent(content);
+			if (cssFile) {
+				var cssMatches = cssFile.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
+				doc.css = [];
 
-					if (content.indexOf("private") < 0) {
-						if (content.indexOf("@method widget") > -1) {
-							widgetMethods.push(m);
-						} else {
-							doc.methods.push(m);
+				if (cssMatches) {
+					// CSS
+					for (var i = 0, count = cssMatches.length; i < count; i++) {
+						var content = cssMatches[i];
+
+						if (content.indexOf("@class") > -1) {
+							var klass = parseCSS(content);
+							doc.css.push(klass);
 						}
 					}
 				}
@@ -174,6 +223,10 @@ module.exports = function(grunt) {
 			}
 			if (doc.methods && doc.methods.length) {
 				md += "* [Methods](#methods)";
+				md += '\n';
+			}
+			if (doc.css && doc.css.length) {
+				md += "* [CSS](#css)";
 				md += '\n';
 			}
 
@@ -268,6 +321,29 @@ module.exports = function(grunt) {
 						md += '\n';
 					}
 				}
+			}
+
+			if (doc.css && doc.css.length) {
+				md += '## CSS';
+				md += '\n\n';
+				/*
+				if (doc.type == "widget") {
+					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
+					md += '\n\n';
+				}
+				*/
+				md += '| Class | Type | Description |';
+				md += '\n';
+				md += '| --- | --- | --- |';
+				md += '\n';
+				for (var i in doc.css) {
+					var e = doc.css[i];
+					md += '| ' + (e.name || "");
+					md += ' | ' + (e.type || "");
+					md += ' | ' + (e.description || "");
+					md += ' |\n';
+				}
+				md += '\n';
 			}
 
 			grunt.file.write(destinationMD, md);

@@ -4,6 +4,7 @@ A jQuery plugin for simple tooltips.
 
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Options
 
@@ -43,4 +44,17 @@ Removes plugin instance.
 ```
 $(".target").tipper("destroy");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| .tipper | element | Base widget class |
+| .tipper.tipper-visible | modifier | Inidcates visible state |
+| .tipper.tipper-right | modifier | Inidcates right side display |
+| .tipper.tipper-left | modifier | Inidcates left side display |
+| .tipper.tipper-top | modifier | Inidcates top display |
+| .tipper.tipper-bottom | modifier | Inidcates bottom display |
+| .tipper-content | element | Tooltip content wrapper |
+| .tipper-caret | element | Tooltip caret |
 

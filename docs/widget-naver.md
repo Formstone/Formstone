@@ -5,6 +5,7 @@ A jQuery plugin for simple responsive navigation.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Options
 
@@ -83,4 +84,15 @@ Opens instance.
 ```
 $(".target").naver("open");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| .naver | element | Base widget class |
+| .naver.naver-open | modifier | Indicates open state |
+| .naver.naver-enabled | modifier | Indicates enabled state |
+| .naver-handle | element | Click target to toggle navigation |
+| .naver-handle:after | element | Icon displayed in handle |
+| .naver-container | element | Wraps target navigation |
 

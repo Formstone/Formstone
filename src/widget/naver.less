@@ -24,7 +24,25 @@
 	@naver-container-border-size:	1px;		// 1px
 
 
-	// Styles
+	/**
+	 * @class
+	 * @name .naver
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .naver.naver-open
+	 * @type modifier
+	 * @description Indicates open state
+	 */
+	/**
+	 * @class
+	 * @name .naver.naver-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
 
 	.naver {
 
@@ -46,7 +64,12 @@
 			box-sizing: border-box;
 		}
 
-		// .naver-handle
+		/**
+		 * @class
+		 * @name .naver-handle
+		 * @type element
+		 * @description Click target to toggle navigation
+		 */
 
 		&-handle {
 			width: 100%;
@@ -61,6 +84,13 @@
 			padding: @naver-handle-padding;
 			position: relative;
 			user-select: none;
+
+			/**
+			 * @class
+			 * @name .naver-handle:after
+			 * @type element
+			 * @description Icon displayed in handle
+			 */
 
 			&:after {
 				height: @naver-icon-height;
@@ -81,6 +111,37 @@
 			}
 		}
 
+		/**
+		 * @class
+		 * @name .naver-container
+		 * @type element
+		 * @description Wraps target navigation
+		 */
+
+		&-container:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+		}
+
+		// Enabled
+
+		&-enabled &-handle {
+			display: block;
+		}
+
+		&-enabled &-container {
+			background: @naver-container-background;
+			border: @naver-container-border-size solid @naver-container-border-color;
+			border-width: 0 @naver-container-border-size @naver-container-border-size;
+			display: block;
+		}
+
+		// Open
+
 		&-open &-handle:after {
 			width: @naver-icon-close-size;
 			height: @naver-icon-close-size;
@@ -96,40 +157,7 @@
 			text-align: center;
 		}
 
-		// .naver-wrapper
-
-		&-wrapper {
-			border: none;
-			height: auto;
-			margin: 0;
-			padding: 0;
-		}
-
-		// .naver-container
-
-		&-container:after {
-			clear: both;
-			content: ".";
+		&-open &-container {
 			display: block;
-			height: 0;
-			line-height: 0;
-			visibility: hidden;
-		}
-
-		// .naver-enabled
-
-		&-enabled &-handle {
-			display: block;
-		}
-
-		&-enabled &-wrapper {
-			height: 0px;
-			overflow: hidden;
-		}
-
-		&-enabled &-container {
-			background: @naver-container-background;
-			border: @naver-container-border-size solid @naver-container-border-color;
-			border-width: 0 1px 1px;
 		}
 	}

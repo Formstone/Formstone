@@ -20,11 +20,9 @@
 
 		this.addClass( [Classes.base, data.customClass].join(" ") )
 			.wrapInner('<div class="' + Classes.container + '"></div>')
-			.wrapInner('<div class="' + Classes.wrapper + '"></div>')
 			.prepend(data.$handle);
 
 		data.$container    = data.$el.find( Functions.getClassName(Classes.container) );
-		data.$wrapper      = data.$el.find( Functions.getClassName(Classes.wrapper) );
 		data.eventDelegate = Functions.getClassName(Classes.handle);
 
 		this.on(Events.touchStart, data.eventDelegate, data, onTouchStart)
@@ -50,7 +48,6 @@
 	function destruct(data) {
 		data.$handle.remove();
 		data.$container.contents()
-					   .unwrap()
 					   .unwrap();
 
 		data.$el.removeClass( [Classes.base, Classes.enabled, Classes.open, data.customClass].join(" ") )
@@ -66,10 +63,6 @@
 
 	function open(data) {
 		if (data.enabled && !data.open) {
-			data.$wrapper.css({
-				height: data.$container.outerHeight(true)
-			});
-
 			if (data.label) {
 				data.$handle.html(data.labels.open);
 			}
@@ -90,10 +83,6 @@
 
 	function close(data) {
 		if (data.enabled && data.open) {
-			data.$wrapper.css({
-				height: 0
-			});
-
 			if (data.label) {
 				data.$handle.html(data.labels.closed);
 			}
@@ -131,10 +120,8 @@
 
 	function disable(data) {
 		if (data.enabled) {
-			data.$el.removeClass(Classes.enabled);
+			data.$el.removeClass( [Classes.enabled, Classes.open].join(" ") );
 			data.enabled = false;
-
-			data.$wrapper.css({ height: "" });
 		}
 	}
 
@@ -269,7 +256,6 @@
 			classes: [
 				"handle",
 				"container",
-				"wrapper",
 				"enabled",
 				"open"
 			],
