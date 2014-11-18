@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<title>Naver Demo</title>
+		<title>Navigation Demo</title>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -25,8 +25,10 @@
 
 		<script src="../dist/core.js"></script>
 
-		<script src="../dist/widget/naver.js"></script>
-		<link href="../dist/widget/naver.css" rel="stylesheet" media="all">
+		<script src="../dist/widget/touch.js"></script>
+
+		<script src="../dist/widget/navigation.js"></script>
+		<link href="../dist/widget/navigation.css" rel="stylesheet" media="all">
 
 		<!--[DEMO:START-RESOURCES]-->
 
@@ -34,8 +36,8 @@
 			.demo .navigation a { background: #444; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 			.demo .navigation a:hover { background: #222; }
 
-			.demo .navigation.naver-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-			.demo .navigation.naver-enabled .naver-container { padding: 10px; }
+			.demo .navigation.navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+			.demo .navigation.navigation-enabled .navigation-container { padding: 10px; }
 		</style>
 
 		<script>
@@ -45,11 +47,11 @@
 					e.stopPropagation();
 				});
 
-				$(".demo .js-naved").naver();
+				$(".demo .js-naved").navigation();
 
 				$(window).one("pronto.load", function() {
 					$(".demo .js-naved a").off(".click");
-					$(".demo .js-naved").naver("destroy");
+					$(".demo .js-naved").navigation("destroy");
 				});
 			});
 		</script>
@@ -69,18 +71,18 @@
 		<article class="row page">
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
-					<h1>Naver Demo</h1>
+					<h1>Navigation Demo</h1>
 					<br>
-					<a href="http://formstone.it/naver/" class="button">View Documentation</a>
+					<a href="http://formstone.it/navigation/" class="button">View Documentation</a>
 				</header>
 
 				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
-				<p>Naver will automatically turn a basic navigation system into a mobile friendly system. Feel free to style your links anyway you'd like:</p>
+				<p>Navigation will automatically turn a basic navigation system into a mobile friendly system. Feel free to style your links anyway you'd like:</p>
 
-				<pre class="example"><code class="language-javascript">$("nav").naver();</code></pre>
+				<pre class="example"><code class="language-javascript">$("nav").navigation();</code></pre>
 				<pre class="example"><code class="language-markup">&lt;nav&gt;
 	&lt;a href="#"&gt;Home&lt;/a&gt;
 	&lt;a href="#"&gt;About&lt;/a&gt;
@@ -98,15 +100,15 @@
 
 				<!-- BREAKPOINT -->
 				<h2>Breakpoint</h2>
-				<p>By default, Naver will enable itself on screens smaller then 980 pixels wide. You can specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
+				<p>By default, Navigation will enable itself on screens smaller then 980 pixels wide. You can specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
 
-				<pre class="example"><code class="language-javascript">$("nav").naver({
+				<pre class="example"><code class="language-javascript">$("nav").navigation({
 	maxWidth: "740px"
 });</code></pre>
 
 				<h5>Demo</h5>
-				<nav class="navigation js-naved" data-naver-options='{"maxWidth":"740px"}'>
-					<h4 class="naver-handle">Navigation</h4>
+				<nav class="navigation js-naved" data-navigation-options='{"maxWidth":"740px"}'>
+					<h4 class="navigation-handle">Navigation</h4>
 					<a href="#">Home</a>
 					<a href="#">About</a>
 					<a href="#">Contact</a>

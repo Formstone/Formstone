@@ -4,7 +4,7 @@
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 
-		<title>Gridlock Demo - 12 Column</title>
+		<title>Grid Demo - 12 Column</title>
 
 		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -14,20 +14,20 @@
 
 		<script src="http://formstone.it/js/demo.js"></script>
 
-		<link href="../dist/grid/gridlock.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="../dist/grid/grid.css" rel="stylesheet" type="text/css" media="all" />
 
 		<!--[if LTE IE 8]>
-			<link href="../dist/grid/gridlock-ie.css" rel="stylesheet" type="text/css" media="all" />
+			<link href="../dist/grid/grid-ie.css" rel="stylesheet" type="text/css" media="all" />
 		<![endif]-->
 
 		<style>
-			* { *behavior: url(/components/Gridlock/boxsizing.htc); }
+			* { *behavior: url(/components/Formstone/grid/boxsizing.htc); }
 
-			.gridlock.demo .example { margin-bottom: 30px; margin-top: 0; }
-			.gridlock.demo .example [class*="desktop-"] { background: #ccc; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; padding-top: 10px; padding-bottom: 10px; text-align: center; }
-			.gridlock.demo .example .row .row [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
-			.gridlock.demo .example .row:hover [class*="desktop-"] { background: #999; }
-			.gridlock.demo .example .row:hover [class*="desktop-"] [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
+			.grid.demo .example { margin-bottom: 30px; margin-top: 0; }
+			.grid.demo .example [class*="desktop-"] { background: #ccc; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; padding-top: 10px; padding-bottom: 10px; text-align: center; }
+			.grid.demo .example .row .row [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
+			.grid.demo .example .row:hover [class*="desktop-"] { background: #999; }
+			.grid.demo .example .row:hover [class*="desktop-"] [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
 
 			/*  */
 			.label_d { display: block; }
@@ -50,7 +50,7 @@
 		<script>
 		</script>
 	</head>
-	<body class="gridlock gridlock-fluid demo">
+	<body class="grid grid-fluid demo">
 		<header id="header">
 			<div class="row">
 				<div class="all-full">
@@ -61,14 +61,14 @@
 		<article class="row page">
 			<div class="mobile-full tablet-full desktop-full">
 				<header class="header">
-					<h1>Gridlock Demo</h1>
+					<h1>Grid Demo</h1>
 					<h3>Fluid Grid</h3>
 					<p>
 						<a href="grid-adaptive.html">Switch to Adaptive Grid</a>
 						<a href="grid-fluid-mobile.html">Switch to Fluid Mobile Grid</a>
 					</p>
 					<br>
-					<a href="http://formstone.it/gridlock/" class="button">View Documentation</a>
+					<a href="http://formstone.it/grid/" class="button">View Documentation</a>
 				</header>
 
 				<!-- Bookmarklet -->
@@ -85,7 +85,7 @@
 
 				<!-- Asymmetrical -->
 				<h2>Asymmetrical</h2>
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
 			Sidebar
@@ -118,7 +118,7 @@
 				<!-- Symmetrical -->
 				<h2>Symmetrical</h2>
 
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
 			One
@@ -167,7 +167,7 @@
 
 				<!-- 3 Column -->
 				<h2>3 Column</h2>
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
 			One
@@ -209,7 +209,7 @@
 				<!-- Push -->
 				<h2>Push</h2>
 
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-4 desktop-push-4 tablet-2 tablet-push-2 mobile-2 mobile-push-1&quot;&gt;&lt;/div&gt;
 	&lt;/div&gt;
@@ -257,7 +257,7 @@
 
 				<!-- Centered -->
 				<h2>Centered</h2>
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-7 tablet-3 mobile-1 centered&quot;&gt;
 			One
@@ -299,7 +299,7 @@
 				<!-- Padded -->
 				<h2>Padded</h2>
 
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 		&lt;div class=&quot;row&quot;&gt;
 			&lt;div class=&quot;desktop-4 tablet-2 mobile-1 padded&quot;&gt;
 				Sidebar
@@ -332,7 +332,7 @@
 				<!-- Contained -->
 				<h2>Contained</h2>
 
-				<pre class="example"><code class="language-markup">&lt;body class=&quot;gridlock&quot;&gt;
+				<pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 	&lt;div class=&quot;row&quot;&gt;
 		&lt;div class=&quot;desktop-4 tablet-2 mobile-1 contained&quot;&gt;
 			Sidebar

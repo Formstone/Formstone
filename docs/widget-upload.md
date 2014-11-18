@@ -1,4 +1,4 @@
-# Dropper
+# Upload
 
 A jQuery plugin for simple drag and drop uploads.
 
@@ -9,7 +9,7 @@ A jQuery plugin for simple drag and drop uploads.
 
 ## Options
 
-Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-dropper-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
+Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -27,7 +27,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| start.dropper | Uploads starting |
+| start.upload | Uploads starting |
 
 ## Methods
 
@@ -38,7 +38,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.dropper("defaults", { ... });
+$.upload("defaults", { ... });
 ```
 
 ##### Parameters
@@ -52,15 +52,15 @@ $.dropper("defaults", { ... });
 Removes plugin instance.
 
 ```
-$(".target").dropper("destroy");
+$(".target").upload("destroy");
 ```
 
 ## CSS
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .dropper | element | Base widget class |
-| .dropper.dropper-dropping | modifier | Indicates dropping state |
-| .dropper-input | element | Masked Input |
-| .dropper-dropzone | element | Drop target |
+| .upload | element | Base widget class |
+| .upload.upload-dropping | modifier | Indicates dropping state |
+| .upload-input | element | Masked Input |
+| .upload-dropzone | element | Drop target |
 

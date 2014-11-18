@@ -6,15 +6,15 @@
 
 ## Grid
 
-* [Gridlock](grid-gridlock.md)
 
 ## Utility
 
-* [Macaroon](utility-macaroon.md)
-* [Rubberband](utility-rubberband.md)
+* [Cookie](utility-cookie.md)
+* [Query](utility-query.md)
 
 ## Widget
 
-* [Dropper](widget-dropper.md)
-* [Naver](widget-naver.md)
-* [Tipper](widget-tipper.md)
+* [Navigation](widget-navigation.md)
+* [Tooltip](widget-tooltip.md)
+* [Touch](widget-touch.md)
+* [Upload](widget-upload.md)

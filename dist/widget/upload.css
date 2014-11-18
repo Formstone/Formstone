@@ -1,0 +1,9 @@
+/*! 
+ * Formstone v0.0.1 - 2014-11-18 
+ * Library of modular javascript components. 
+ * http://formstone.it/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */
+
+.upload{overflow:hidden}.upload,.upload *,.upload :before,.upload :after{box-sizing:border-box}.upload-input{position:absolute;left:100%;opacity:0}.no-opacity .upload-input{left:-999px}.upload-dropzone{background:#fff;border:3px dashed #ccc;border-radius:0;color:#666;cursor:pointer;font-size:14px;margin:0;padding:25px;text-align:center}.upload.dropping .upload-dropzone,.no-touch .upload:hover .upload-dropzone{background:#eee;border-color:#999;color:#333}

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<title>Rubberband Demo</title>
+		<title>Query Demo</title>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -23,7 +23,9 @@
         	<script src="http://formstone.it/js/site.ie9.js"></script>
 		<![endif]-->
 
-		<script src="../jquery.fs.rubberband.js"></script>
+		<script src="../dist/core.js"></script>
+
+		<script src="../dist/utility/query.js"></script>
 
 		<!--[DEMO:START-RESOURCES]-->
 
@@ -35,45 +37,45 @@
 
 		<script>
 			$(document).ready(function() {
-				$(window).on("snap.demo", logSnap);
+				$(window).on("change.query", logChange);
 
-				if ($.rubberband("state") === null) {
-					$.rubberband({
-						minWidth: [ 320, 500, 740, 980, 1220 ],
-						maxWidth: [ 1220, 980, 740, 500, 320 ],
-						minHeight: [ 400, 800 ],
-						maxHeight: [ 800, 400 ]
+				if (!$.query("state")) {
+					$.query({
+						minWidth     : [ 320, 500, 740, 980, 1220 ],
+						maxWidth     : [ 1220, 980, 740, 500, 320 ],
+						minHeight    : [ 400, 800 ],
+						maxHeight    : [ 800, 400 ]
 					});
 				}
 
-				$.rubberband("bind", "(min-width: 740px)", {
-					enter: logChange,
-					leave: logChange
+				$.query("bind", "(min-width: 740px)", {
+					enter: logBind,
+					leave: logBind
 				});
 
 				$(window).one("pronto.load", function() {
-					$(window).off("snap.demo");
-					$.rubberband("unbind", "(min-width: 740px)");
+					$(window).off("change.query");
+					$.query("unbind", "(min-width: 740px)");
 				});
 			});
 
-			function logSnap(e, data) {
+			function logChange(e, state) {
 				var html = "";
 
-				html += "<p><span>Snap:</span><span>MinWidth:</span>" + data.minWidth + "<br>";
-				html += "<span></span><span>MaxWidth:</span>"+ data.maxWidth + "<br>";
-				html += "<span></span><span>MinHeight:</span>"+ data.minHeight + "<br>";
-				html += "<span></span><span>MaxHeight:</span>"+ data.maxHeight + "</p>";
+				html += "<p><span>Change:</span><span>MinWidth:</span>" + state.minWidth + "<br>";
+				html += "<span></span><span>MaxWidth:</span>"+ state.maxWidth + "<br>";
+				html += "<span></span><span>MinHeight:</span>"+ state.minHeight + "<br>";
+				html += "<span></span><span>MaxHeight:</span>"+ state.maxHeight + "</p>";
 
-				$("#rubberband_demo").prepend(html);
+				$("#query_demo").prepend(html);
 			}
 
-			function logChange() {
+			function logBind() {
 				var mql = this,
 					type = mql.matches ? "Enter" : "Leave"
 					html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
 
-				$("#rubberband_demo_binding").prepend(html);
+				$("#query_demo_binding").prepend(html);
 			}
 		</script>
 
@@ -91,40 +93,39 @@
 		<article class="row page">
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
-					<h1>Rubberband Demo</h1>
-					<!-- <p>A technical demonstration of the jQuery plugin.</p> -->
+					<h1>Query Demo</h1>
 					<br>
-					<a href="http://formstone.it/rubberband/" class="button">View Documentation</a>
+					<a href="http://formstone.it/query/" class="button">View Documentation</a>
 				</header>
 
 				<!--[DEMO:START-CONTENT]-->
 
 				<!-- Basic -->
 				<h2>Basic</h2>
-				<p>Rubberband can track global changes to screen size based on your existing grid system. This is useful when many elements need to be resized on all changes to screen size. Start by configuring the dimensions you'd like to track by passing arrays containing the target width and/or heights:</p>
+				<p>Query can track global changes to screen size based on your existing grid system. This is useful when many elements need to be resized on all changes to screen size. Start by configuring the dimensions you'd like to track by passing arrays containing the target width and/or heights:</p>
 
-				<pre class="example"><code class="language-javascript">$.rubberband({
-	minWidth: [ 320, 500, 740, 980, 1220 ],
-	maxWidth: [ 1220, 980, 740, 500, 320 ],
-	minHeight: [ 400, 800 ],
-	maxHeight: [ 800, 400 ]
+				<pre class="example"><code class="language-javascript">$.query({
+	minWidth     : [ 320, 500, 740, 980, 1220 ],
+	maxWidth     : [ 1220, 980, 740, 500, 320 ],
+	minHeight    : [ 400, 800 ],
+	maxHeight    : [ 800, 400 ]
 });</code></pre>
 
-				<p>After initializing, simply listen for the "snap" event:
+				<p>After initializing, simply listen for the <code>change.query</code> event:
 
-				<pre class="example"><code class="language-javascript">$(window).on("snap", function(e, data) {
-	console.log(data.minWidth, data.maxWidth, data.minHeight, data.maxHeight);
+				<pre class="example"><code class="language-javascript">$(window).on("change.query", function(e, state) {
+	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });</code></pre>
 
 				<h5>Demo</h5>
-				<div id="rubberband_demo" class="output"></div>
+				<div id="query_demo" class="output"></div>
 
 				<br>
 
 				<h2>Binding</h2>
-				<p>Rubberband can also bind events to specific media query changes for more fine grain control:</p>
+				<p>Query can also bind events to specific media query changes for more fine grain control:</p>
 
-				<pre class="example"><code class="language-javascript">$.rubberband("bind", "(min-width: 740px)", {
+				<pre class="example"><code class="language-javascript">$.query("bind", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},
@@ -136,7 +137,7 @@
 				<p>Note: The <code>leave</code> callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.</p>
 
 				<h5>Demo</h5>
-				<div id="rubberband_demo_binding" class="output"></div>
+				<div id="query_demo_binding" class="output"></div>
 
 				<br>
 

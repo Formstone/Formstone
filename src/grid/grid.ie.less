@@ -10,19 +10,19 @@
 	}
 
  	// !Dekstop, IE Specific
- 	.@{class-container} .@{class-row} {
+ 	.@{fs-grid-class-container} .@{fs-grid-class-row} {
  		width: 960px;
 
- 		.generateGridBase(@width-desktop, @class-desktop);
+ 		.generateGridBase(@fs-grid-width-desktop, @fs-grid-class-desktop);
 
- 		.generateGrid(@width-desktop, @class-desktop, @columns-desktop);
+ 		.generateGrid(@fs-grid-width-desktop, @fs-grid-class-desktop, @fs-grid-columns-desktop);
 
- 		[class*="@{class-all}-"].@{class-padded},
-		[class*="@{class-min}-"].@{class-padded},
-		[class*="@{class-mobile}-"].@{class-padded},
-		[class*="@{class-tablet}-"].@{class-padded},
-		[class*="@{class-desktop}-"].@{class-padded},
-		[class*="@{class-max}-"].@{class-padded} {
+ 		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-padded} {
 			*behavior: none;
 		}
  	}

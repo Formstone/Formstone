@@ -15,9 +15,9 @@
 		box-sizing: border-box;
 	}
 
-	.@{class-container} .@{class-row} {
+	.@{fs-grid-class-container} .@{fs-grid-class-row} {
 		// !Row Default
-		width: @width-min;
+		width: @fs-grid-width-min;
 
 		margin-left: auto;
 		margin-right: auto;
@@ -32,14 +32,14 @@
 			visibility: hidden;
 		}
 
-		.@{class-row} {
-			width: 100% + (@gutter * 2);
+		.@{fs-grid-class-row} {
+			width: 100% + (@fs-grid-gutter * 2);
 
-			margin-left: -@gutter;
-			margin-right: -@gutter;
+			margin-left: -@fs-grid-gutter;
+			margin-right: -@fs-grid-gutter;
 		}
 
-		.@{class-contained} .@{class-row} {
+		.@{fs-grid-class-contained} .@{fs-grid-class-row} {
 			width: 100%;
 
 			margin-left: 0;
@@ -47,137 +47,137 @@
 		}
 
 		// !All Cells
-		[class*="@{class-all}-"],
-		[class*="@{class-min}-"],
-		[class*="@{class-mobile}-"],
-		[class*="@{class-tablet}-"],
-		[class*="@{class-desktop}-"],
-		[class*="@{class-max}-"] {
+		[class*="@{fs-grid-class-all}-"],
+		[class*="@{fs-grid-class-min}-"],
+		[class*="@{fs-grid-class-mobile}-"],
+		[class*="@{fs-grid-class-tablet}-"],
+		[class*="@{fs-grid-class-desktop}-"],
+		[class*="@{fs-grid-class-max}-"] {
 			float: left;
-			margin-left: @gutter;
-			margin-right: @gutter;
+			margin-left: @fs-grid-gutter;
+			margin-right: @fs-grid-gutter;
 		}
 
 		// !Padded Cells
-		[class*="@{class-all}-"].@{class-padded},
-		[class*="@{class-min}-"].@{class-padded},
-		[class*="@{class-mobile}-"].@{class-padded},
-		[class*="@{class-tablet}-"].@{class-padded},
-		[class*="@{class-desktop}-"].@{class-padded},
-		[class*="@{class-max}-"].@{class-padded} {
+		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-padded} {
 			box-sizing: content-box;
 			margin-left: 0;
 			margin-right: 0;
-			padding-left: @gutter;
-			padding-right: @gutter;
+			padding-left: @fs-grid-gutter;
+			padding-right: @fs-grid-gutter;
 		}
 
 		// !Contained Cells
-		[class*="@{class-all}-"].@{class-contained},
-		[class*="@{class-min}-"].@{class-contained},
-		[class*="@{class-mobile}-"].@{class-contained},
-		[class*="@{class-tablet}-"].@{class-contained},
-		[class*="@{class-desktop}-"].@{class-contained},
-		[class*="@{class-max}-"].@{class-contained} {
+		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-contained} {
 			margin-left: 0;
 			margin-right: 0;
 		}
 
 		// !Right Cells
-		[class*="@{class-all}-"].right,
-		[class*="@{class-min}-"].right,
-		[class*="@{class-mobile}-"].right,
-		[class*="@{class-tablet}-"].right,
-		[class*="@{class-desktop}-"].right,
-		[class*="@{class-max}-"].right {
+		[class*="@{fs-grid-class-all}-"].right,
+		[class*="@{fs-grid-class-min}-"].right,
+		[class*="@{fs-grid-class-mobile}-"].right,
+		[class*="@{fs-grid-class-tablet}-"].right,
+		[class*="@{fs-grid-class-desktop}-"].right,
+		[class*="@{fs-grid-class-max}-"].right {
 			float: right;
 		}
 	}
 
 	// !Rows, Thinest to Widest
-	@media screen and (min-width: @width-break-mobile) {
-		.@{class-container} .@{class-row} {
-			width: @width-mobile;
+	@media screen and (min-width: @fs-grid-width-break-mobile) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-mobile;
 		}
 	}
 
-	@media screen and (min-width: @width-break-tablet) {
-		.@{class-container} .@{class-row} {
-			width: @width-tablet;
+	@media screen and (min-width: @fs-grid-width-break-tablet) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-tablet;
 		}
 	}
 
-	@media screen and (min-width: @width-break-desktop) {
-		.@{class-container} .@{class-row} {
-			width: @width-desktop;
+	@media screen and (min-width: @fs-grid-width-break-desktop) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-desktop;
 		}
 	}
 
-	@media screen and (min-width: @width-break-max) {
-		.@{class-container} .@{class-row} {
-			width: @width-max;
+	@media screen and (min-width: @fs-grid-width-break-max) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-max;
 		}
 	}
 
 	// !Fluid Grid
-	.@{class-container}-fluid .@{class-row} {
+	.@{fs-grid-class-container}-fluid .@{fs-grid-class-row} {
 		width: 98%;
 	}
 
 	// !Fluid Grid - Mobile Only
-	@media screen and (max-width: (@width-break-tablet - 1px)) {
-		.@{class-container}-mobile-fluid .@{class-row} {
+	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
+		.@{fs-grid-class-container}-mobile-fluid .@{fs-grid-class-row} {
 			width: 98%;
 		}
 	}
 
 	// !All
-	.@{class-container} .@{class-row} {
-		.generateGridBase(0, @class-all);
+	.@{fs-grid-class-container} .@{fs-grid-class-row} {
+		.generateGridBase(0, @fs-grid-class-all);
 	}
 
 	// !Mobile, 540 (max 740)
-	@media screen and (max-width: (@width-break-tablet - 1px)) {
-		.@{class-container} .@{class-row} {
-			.generateGrid(@width-mobile, @class-mobile, @columns-mobile);
+	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-mobile, @fs-grid-class-mobile, @fs-grid-columns-mobile);
 
-			.generateGridBase(@width-mobile, @class-mobile);
+			.generateGridBase(@fs-grid-width-mobile, @fs-grid-class-mobile);
 		}
 	}
 
 	// !Min, 300 (max 500)
-	@media screen and (max-width: (@width-break-mobile - 1px)) {
-		.@{class-container} .@{class-row} {
-			.generateGrid(@width-min, @class-min, @columns-mobile);
+	@media screen and (max-width: (@fs-grid-width-break-mobile - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-min, @fs-grid-class-min, @fs-grid-columns-mobile);
 
-			.generateGridBase(@width-min, @class-min);
+			.generateGridBase(@fs-grid-width-min, @fs-grid-class-min);
 		}
 	}
 
 	// !Tablet, 6 column, 720 (min 740)
-	@media screen and (min-width: @width-break-tablet) and (max-width: (@width-break-desktop - 1px)) {
-		.@{class-container} .@{class-row} {
-			.generateGrid(@width-tablet, @class-tablet, @columns-tablet);
+	@media screen and (min-width: @fs-grid-width-break-tablet) and (max-width: (@fs-grid-width-break-desktop - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-tablet, @fs-grid-class-tablet, @fs-grid-columns-tablet);
 
-			.generateGridBase(@width-tablet, @class-tablet);
+			.generateGridBase(@fs-grid-width-tablet, @fs-grid-class-tablet);
 		}
 	}
 
 	// !Desktop, 12 column, 960 (min 980)
-	@media screen and (min-width: @width-break-desktop) {
-		.@{class-container} .@{class-row} {
-			.generateGrid(@width-desktop, @class-desktop, @columns-desktop);
+	@media screen and (min-width: @fs-grid-width-break-desktop) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-desktop, @fs-grid-class-desktop, @fs-grid-columns-desktop);
 
-			.generateGridBase(@width-desktop, @class-desktop);
+			.generateGridBase(@fs-grid-width-desktop, @fs-grid-class-desktop);
 		}
 	}
 
 	// !Max, 12 column, 1200 (min 1220)
-	@media screen and (min-width: @width-break-max) {
-		.@{class-container} .@{class-row} {
-			.generateGrid(@width-max, @class-max, @columns-desktop);
+	@media screen and (min-width: @fs-grid-width-break-max) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-max, @fs-grid-class-max, @fs-grid-columns-desktop);
 
-			.generateGridBase(@width-max, @class-max);
+			.generateGridBase(@fs-grid-width-max, @fs-grid-class-max);
 		}
 	}
 
@@ -185,14 +185,14 @@
  * @use
 
 
-Gridlock works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Gridlock renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
+Grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
 
 ### Markup
 
 A basic example may look something like:
 
 ```
-<body class="gridlock">
+<body class="grid">
 	<div class="row">
 		<div class="mobile-3 tablet-2 desktop-4">...</div>
 		<div class="mobile-3 tablet-2 desktop-4">...</div>
@@ -204,7 +204,7 @@ A basic example may look something like:
 This will create 3 cells that each span 3 columns on mobile, 2 columns on tablet and 4 columns on desktop screen sizes. Think of the nested structure like a directory tree:
 
 ```
-gridlock
+grid
 ├─ row
 |  ├─ cell
 |  |─ cell
@@ -219,13 +219,13 @@ gridlock
 
 ### Box-Sizing
 
-Gridlock relies on border-box and includes a global box-sizing reset:
+Grid relies on border-box and includes a global box-sizing reset:
 
 ```
-*, *:before, *:after {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
 }
 ```
 
@@ -305,40 +305,40 @@ Helper classes can be added to cells to modify their default behavior in predict
 
 ### LESS Configuration
 
-Gridlock can also be configured and rebuilt using Grunt. Simply edit the variables found in `/src/fs.gridlock-config.less` before running the default `grunt` process.
+Grid can also be configured and rebuilt using Grunt. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `grunt` process.
 
 | Variable | Default | Description |
 | --- | --- | --- |
 | **Structure** | | |
-| `@class-container` | `gridlock` | Container class |
-| `@class-row` | `row` | Row class |
-| `@class-contained` | `contained` | Contained helper class |
-| `@class-padded` | `padded` | Padded helper class |
-| `@class-centered` | `centered` | Centered helper class |
+| `@fs-grid-class-container` | `grid` | Container class |
+| `@fs-grid-class-row` | `row` | Row class |
+| `@fs-grid-class-contained` | `contained` | Contained helper class |
+| `@fs-grid-class-padded` | `padded` | Padded helper class |
+| `@fs-grid-class-centered` | `centered` | Centered helper class |
 | **Cells** | | |
-| `@class-all` | `all` | All cell class |
-| `@class-min` | `min` | Min cell class |
-| `@class-mobile` | `mobile` | Mobile cell class |
-| `@class-tablet` | `tablet` | Tablet cell class |
-| `@class-desktop` | `desktop` | Desktop cell class |
-| `@class-max` | `max` | Max cell class |
+| `@fs-grid-class-all` | `all` | All cell class |
+| `@fs-grid-class-min` | `min` | Min cell class |
+| `@fs-grid-class-mobile` | `mobile` | Mobile cell class |
+| `@fs-grid-class-tablet` | `tablet` | Tablet cell class |
+| `@fs-grid-class-desktop` | `desktop` | Desktop cell class |
+| `@fs-grid-class-max` | `max` | Max cell class |
 | **Columns** | | |
-| `@columns-mobile` | `3` | Mobile column count |
-| `@columns-tablet` | `6` | Tablet column count |
-| `@columns-desktop` | `12` | Desktop column count |
+| `@fs-grid-columns-mobile` | `3` | Mobile column count |
+| `@fs-grid-columns-tablet` | `6` | Tablet column count |
+| `@fs-grid-columns-desktop` | `12` | Desktop column count |
 | **Widths** | | |
-| `@width-min` | `300px` | Min row width |
-| `@width-mobile` | `480px` | Mobile row width |
-| `@width-tablet` | `720px` | Tablet row width |
-| `@width-desktop` | `960px` | Desktop row width |
-| `@width-max` | `1200px` | Max row width |
+| `@fs-grid-width-min` | `300px` | Min row width |
+| `@fs-grid-width-mobile` | `480px` | Mobile row width |
+| `@fs-grid-width-tablet` | `720px` | Tablet row width |
+| `@fs-grid-width-desktop` | `960px` | Desktop row width |
+| `@fs-grid-width-max` | `1200px` | Max row width |
 | **Breakpoints** | | |
-| `@width-break-min` | `320px` | Min break width |
-| `@width-break-mobile` | `500px` | Mobile break width |
-| `@width-break-tablet` | `740px` | Tablet break width |
-| `@width-break-desktop` | `980px` | Desktop break width |
-| `@width-break-max` | `1220px` | Max break width |
+| `@fs-grid-width-break-min` | `320px` | Min break width |
+| `@fs-grid-width-break-mobile` | `500px` | Mobile break width |
+| `@fs-grid-width-break-tablet` | `740px` | Tablet break width |
+| `@fs-grid-width-break-desktop` | `980px` | Desktop break width |
+| `@fs-grid-width-break-max` | `1220px` | Max break width |
 | **Gutters** | | |
-| `@gutter` | `1.0416666666666667%;` | Gutter width |
+| `@fs-grid-gutter` | `1.0416666666666667%;` | Gutter width |
 
  */

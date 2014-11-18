@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<title>Macaroon Demo</title>
+		<title>Cookie Demo</title>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -23,7 +23,9 @@
         	<script src="http://formstone.it/js/site.ie9.js"></script>
 		<![endif]-->
 
-		<script src="../jquery.fs.macaroon.js"></script>
+		<script src="../dist/core.js"></script>
+
+		<script src="../dist/utility/cookie.js"></script>
 
 		<!--[DEMO:START-RESOURCES]-->
 
@@ -48,7 +50,7 @@
 				var key = $(".demo .form [name=set_key]").val(),
 					value = $(".demo .form [name=set_value]").val();
 
-				$.macaroon(key, value);
+				$.cookie(key, value);
 
 				_output("Set", key + " = " + value);
 			}
@@ -58,7 +60,7 @@
 				e.stopPropagation();
 
 				var key = $(".demo .form [name=get_key]").val(),
-					value = $.macaroon(key);
+					value = $.cookie(key);
 
 				_output("Get", key + " = " + value);
 			}
@@ -69,7 +71,7 @@
 
 				var key = $(".demo .form [name=erase_key]").val();
 
-				$.macaroon(key, null);
+				$.cookie(key, null);
 
 				_output("Erase", key);
 			}
@@ -97,9 +99,9 @@
 		<article class="row page">
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
-					<h1>Macaroon Demo</h1>
+					<h1>Cookie Demo</h1>
 					<br>
-					<a href="http://formstone.it/macaroon/" class="button">View Documentation</a>
+					<a href="http://formstone.it/cookie/" class="button">View Documentation</a>
 				</header>
 
 				<!--[DEMO:START-CONTENT]-->

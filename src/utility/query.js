@@ -13,6 +13,7 @@
 		// Check Support
 
 		if (Formstone.matchMediaSupport) {
+
 			if (typeof options === "object" && !Initialized) {
 
 				// Initialize
@@ -120,7 +121,7 @@
 	function onStateChange() {
 		setState();
 
-		$Window.trigger(Events.snap, [ State ]);
+		$Window.trigger(Events.change, [ State ]);
 	}
 
 	/**
@@ -189,7 +190,7 @@
 	 * @name state
 	 * @description Returns the current state.
 	 * @return [object] "Current state object"
-	 * @example var state = $.rubberband("state");
+	 * @example var state = $.query("state");
 	 */
 
 	function getState() {
@@ -202,7 +203,7 @@
 	 * @description Binds callbacks to media query matching.
 	 * @param media [string] "Media query to match"
 	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-	 * @example $.rubberband("bind", "(min-width: 500px)", { ... });
+	 * @example $.query("bind", "(min-width: 500px)", { ... });
 	 */
 
 	function bind(media, data) {
@@ -233,7 +234,7 @@
 	 * @name unbind
 	 * @description Unbinds all callbacks from media query.
 	 * @param media [string] "Media query to match"
-	 * @example $.rubberband("unbind", "(min-width: 500px)");
+	 * @example $.query("unbind", "(min-width: 500px)");
 	 */
 
 	function unbind(media) {
@@ -247,12 +248,12 @@
 
 	/**
 	 * @plugin
-	 * @name Rubberband
+	 * @name Query
 	 * @description A jQuery plugin for responsive media query events.
 	 * @type utility
 	 */
 
-	var Plugin = Formstone.Plugin("rubberband", {
+	var Plugin = Formstone.Plugin("query", {
 			methods: {
 				_delegate:    delegate
 			}
@@ -277,11 +278,11 @@
 
 		/**
 		 * @events
-		 * @event snap "Change to a media query match"
+		 * @event change.query "Change to a media query match; Triggerd on window"
 		 */
 
 		Events = {
-			snap       : "snap",
+			change     : "change.query",
 			enter      : "enter",
 			leave      : "leave"
 		},
@@ -319,33 +320,33 @@
 
 ### Basic
 
-Rubberband can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
+Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
 
 ```
-$.rubberband({
-	minWidth: [ 320, 500, 740, 980, 1220 ],
-	maxWidth: [ 1220, 980, 740, 500, 320 ],
-	minHeight: [ 400, 800 ],
-	maxHeight: [ 800, 400 ]
+$.query({
+	minWidth     : [ 320, 500, 740, 980, 1220 ],
+	maxWidth     : [ 1220, 980, 740, 500, 320 ],
+	minHeight    : [ 400, 800 ],
+	maxHeight    : [ 800, 400 ]
 });
 ```
 
-After initializing, simply listen for the `snap` event:
+After initializing, simply listen for the `change` event:
 
 ```
-$(window).on("snap", function(e, data) {
-	console.log(data.minWidth, data.maxWidth, data.minHeight, data.maxHeight);
+$(window).on("change", function(e, state) {
+	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
 
-Note: In the example above, the `snap` event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the `min-width` and `max-width` changes.
+Note: In the example above, the `change` event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the `min-width` and `max-width` changes.
 
 ### Binding
 
-Rubberband can also bind events to specific media query changes for more fine grain control:
+Query can also bind events to specific media query changes for more fine grain control:
 
 ```
-$.rubberband("bind", "(min-width: 740px)", {
+$.query("bind", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},

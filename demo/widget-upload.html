@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<title>Dropper Demo</title>
+		<title>Upload Demo</title>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -25,8 +25,8 @@
 
 		<script src="../dist/core.js"></script>
 
-		<script src="../dist/widget/dropper.js"></script>
-		<link href="../dist/widget/dropper.css" rel="stylesheet" media="all">
+		<script src="../dist/widget/upload.js"></script>
+		<link href="../dist/widget/upload.css" rel="stylesheet" media="all">
 
 		<!--[DEMO:START-RESOURCES]-->
 
@@ -52,17 +52,17 @@
 				$filequeue = $(".demo .filelist.queue");
 				$filelist = $(".demo .filelist.complete");
 
-				$(".demo .dropped").dropper({
+				$(".demo .dropped").upload({
 					maxSize: 1048576
-				}).on("start.dropper", onStart)
-				  .on("complete.dropper", onComplete)
-				  .on("fileStart.dropper", onFileStart)
-				  .on("fileProgress.dropper", onFileProgress)
-				  .on("fileComplete.dropper", onFileComplete)
-				  .on("fileError.dropper", onFileError);
+				}).on("start.upload", onStart)
+				  .on("complete.upload", onComplete)
+				  .on("fileStart.upload", onFileStart)
+				  .on("fileProgress.upload", onFileProgress)
+				  .on("fileComplete.upload", onFileComplete)
+				  .on("fileError.upload", onFileError);
 
 				$(window).one("pronto.load", function() {
-					$(".demo .dropped").dropper("destroy").off(".dropper");
+					$(".demo .dropped").upload("destroy").off(".upload");
 				});
 			});
 
@@ -135,25 +135,25 @@
 		<article class="row page">
 			<div class="mobile-full tablet-full desktop-8 desktop-push-2">
 				<header class="header">
-					<h1>Dropper Demo</h1>
+					<h1>Upload Demo</h1>
 					<br>
-					<a href="http://formstone.it/dropper/" class="button">View Documentation</a>
+					<a href="http://formstone.it/upload/" class="button">View Documentation</a>
 				</header>
 
 				<!--[DEMO:START-CONTENT]-->
 
 				<!-- BASIC -->
 				<h2>Basic</h2>
-				<p>Dropper will create a simple 'drop zone' for file uploads:</p>
+				<p>Upload will create a simple 'drop zone' for file uploads:</p>
 
-				<pre class="example"><code class="language-javascript">$(".target").dropper({
+				<pre class="example"><code class="language-javascript">$(".target").upload({
 	action: "upload.php"
 });</code></pre>
 				<pre class="example"><code class="language-markup">&lt;div class="target"&gt;&lt;/div&gt;</code></pre>
 
 				<h5>Demo</h5>
 				<form action="#" class="demo_form">
-					<div class="dropped" data-dropper-options='{"action":"widget-dropper-upload.php"}'></div>
+					<div class="dropped" data-upload-options='{"action":"widget-upload.php"}'></div>
 
 					<div class="filelists">
 						<h5>Complete</h5>
@@ -167,7 +167,7 @@
 
 				<!-- UPLOADS -->
 				<h2>Uploads</h2>
-				<p>Dropper does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.</p>
+				<p>Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.</p>
 
 				<!--[DEMO:END-CONTENT]-->
 

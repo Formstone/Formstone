@@ -1,4 +1,4 @@
-# Rubberband
+# Query
 
 A jQuery plugin for responsive media query events.
 
@@ -11,33 +11,33 @@ A jQuery plugin for responsive media query events.
 ## Use 
 ### Basic
 
-Rubberband can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
+Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
 
 ```
-$.rubberband({
-	minWidth: [ 320, 500, 740, 980, 1220 ],
-	maxWidth: [ 1220, 980, 740, 500, 320 ],
-	minHeight: [ 400, 800 ],
-	maxHeight: [ 800, 400 ]
+$.query({
+	minWidth     : [ 320, 500, 740, 980, 1220 ],
+	maxWidth     : [ 1220, 980, 740, 500, 320 ],
+	minHeight    : [ 400, 800 ],
+	maxHeight    : [ 800, 400 ]
 });
 ```
 
-After initializing, simply listen for the `snap` event:
+After initializing, simply listen for the `change` event:
 
 ```
-$(window).on("snap", function(e, data) {
-	console.log(data.minWidth, data.maxWidth, data.minHeight, data.maxHeight);
+$(window).on("change", function(e, state) {
+	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
 
-Note: In the example above, the `snap` event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the `min-width` and `max-width` changes.
+Note: In the example above, the `change` event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the `min-width` and `max-width` changes.
 
 ### Binding
 
-Rubberband can also bind events to specific media query changes for more fine grain control:
+Query can also bind events to specific media query changes for more fine grain control:
 
 ```
-$.rubberband("bind", "(min-width: 740px)", {
+$.query("bind", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},
@@ -69,7 +69,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 | Event | Description |
 | --- | --- |
-| snap | Change to a media query match |
+| change.query | Change to a media query match; Triggerd on window |
 
 ## Methods
 
@@ -78,7 +78,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 Binds callbacks to media query matching.
 
 ```
-$.rubberband("bind", "(min-width: 500px)", { ... });
+$.query("bind", "(min-width: 500px)", { ... });
 ```
 
 ##### Parameters
@@ -93,7 +93,7 @@ $.rubberband("bind", "(min-width: 500px)", { ... });
 Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.rubberband("defaults", { ... });
+$.query("defaults", { ... });
 ```
 
 ##### Parameters
@@ -107,7 +107,7 @@ $.rubberband("defaults", { ... });
 Removes plugin instance.
 
 ```
-$(".target").rubberband("destroy");
+$(".target").query("destroy");
 ```
 
 ### state
@@ -115,7 +115,7 @@ $(".target").rubberband("destroy");
 Returns the current state.
 
 ```
-var state = $.rubberband("state");
+var state = $.query("state");
 ```
 
 ### unbind
@@ -123,7 +123,7 @@ var state = $.rubberband("state");
 Unbinds all callbacks from media query.
 
 ```
-$.rubberband("unbind", "(min-width: 500px)");
+$.query("unbind", "(min-width: 500px)");
 ```
 
 ##### Parameters

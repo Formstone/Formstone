@@ -1,4 +1,4 @@
-# Macaroon
+# Cookie
 
 A jQuery plugin for simple access to browser cookies.
 
@@ -48,7 +48,7 @@ $.macroon(key, null);
 Creates a cookie.
 
 ```
-$.macaroon(key, value, options);
+$.cookie(key, value, options);
 ```
 
 ##### Parameters
@@ -64,7 +64,7 @@ $.macaroon(key, value, options);
 Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.macaroon("defaults", { ... });
+$.cookie("defaults", { ... });
 ```
 
 ##### Parameters
@@ -78,7 +78,7 @@ $.macaroon("defaults", { ... });
 Removes plugin instance.
 
 ```
-$(".target").macaroon("destroy");
+$(".target").cookie("destroy");
 ```
 
 ### erase
@@ -86,7 +86,7 @@ $(".target").macaroon("destroy");
 Deletes a cookie.
 
 ```
-$.macaroon(key, null);
+$.cookie(key, null);
 ```
 
 ##### Parameters
@@ -100,7 +100,7 @@ $.macaroon(key, null);
 Returns a cookie's value, or null.
 
 ```
-var value = $.macaroon(key);
+var value = $.cookie(key);
 ```
 
 ##### Parameters

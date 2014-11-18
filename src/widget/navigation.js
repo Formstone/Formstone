@@ -25,8 +25,10 @@
 		data.$container    = this.find( Functions.getClassName(Classes.container) );
 		data.eventDelegate = Functions.getClassName(Classes.handle);
 
-		this.on(Events.touchStart, data.eventDelegate, data, onTouchStart)
-			.on(Events.click, data.eventDelegate, data, onClick);
+		// Touch Support
+		this.touch({
+			tap: true
+		}).on(Events.tap, data, onClick);
 
 		if (Formstone.matchMediaSupport !== undefined) {
 			data.mediaQuery = Formstone.$window[0].matchMedia("(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")");
@@ -127,66 +129,6 @@
 
 	/**
 	 * @method private
-	 * @name onTouchStart
-	 * @description Handles touchstart to selected item.
-	 * @param e [object] "Event data"
-	 */
-
-	function onTouchStart(e) {
-		e.stopPropagation();
-
-		var data    = e.data,
-			oe      = e.originalEvent;
-
-		data.touchStartEvent    = oe;
-		data.touchStartX        = oe.touches[0].clientX;
-		data.touchStartY        = oe.touches[0].clientY;
-		data.hasClicked         = false;
-
-		data.$el.on(Events.touchMove, data.eventDelegate, data, onTouchMove)
-				.on(Events.touchEnd, data.eventDelegate, data, onTouchEnd);
-	}
-
-	/**
-	 * @method private
-	 * @name onTouchMove
-	 * @description Handles touchmove to selected item.
-	 * @param e [object] "Event data"
-	 */
-
-	function onTouchMove(e) {
-		var data    = e.data,
-			oe      = e.originalEvent;
-
-		if (Math.abs(oe.touches[0].clientX - data.touchStartX) > 10 || Math.abs(oe.touches[0].clientY - data.touchStartY) > 10) {
-			data.$el.off( [Events.touchMove, Events.touchEnd].join(" ") );
-		}
-	}
-
-	/**
-	 * @method private
-	 * @name onTouchEnd
-	 * @description Handles touchend to selected item.
-	 * @param e [object] "Event data"
-	 */
-
-	function onTouchEnd(e) {
-		var data = e.data;
-
-		data.touchStartEvent.preventDefault();
-
-		data.$el.off( [Events.touchMove, Events.touchEnd, Events.click].join(" ") );
-
-		onClick(e);
-
-		data.hasClicked = true;
-		data.timer = Functions.startTimer(data.timer, 300, function() {
-			data.hasClicked = false;
-		});
-	}
-
-	/**
-	 * @method private
 	 * @name onClick
 	 * @description Handles click nav click.
 	 * @param e [object] "Event data"
@@ -195,18 +137,15 @@
 	function onClick(e) {
 		Functions.killEvent(e);
 
-		var $target = $(e.currentTarget),
-			data = e.data;
+		var data = e.data;
 
-		if (!data.hasClicked) {
-			// Close Open Instances
-			$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
+		// Close Open Instances
+		$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
 
-			if (data.open) {
-				close.call(data.$el, data);
-			} else {
-				open.call(data.$el, data);
-			}
+		if (data.open) {
+			close.call(data.$el, data);
+		} else {
+			open.call(data.$el, data);
 		}
 	}
 
@@ -268,7 +207,8 @@
 
 			events: [
 				"open",
-				"close"
+				"close",
+				"tap"
 			],
 
 			methods: {

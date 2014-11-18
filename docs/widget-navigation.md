@@ -1,4 +1,4 @@
-# Naver
+# Navigation
 
 A jQuery plugin for simple responsive navigation.
 
@@ -12,10 +12,10 @@ A jQuery plugin for simple responsive navigation.
 ## Use 
 ### Basic
 
-Naver will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:
+Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:
 
 ```
-$("nav").naver();
+$("nav").navigation();
 ```
 
 ```
@@ -28,10 +28,10 @@ $("nav").naver();
 
 ### Breakpoint
 
-By default, Naver will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the `maxWidth` option on initialization.
+By default, Navigation will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the `maxWidth` option on initialization.
 
 ```
-$("nav").naver({
+$("nav").navigation({
 	maxWidth: "740px"
 });
 ```
@@ -42,7 +42,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 ## Options
 
-Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-naver-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
+Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-navigation-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -58,7 +58,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| close.naver | Navigation closed |
+| close.navigation | Navigation closed |
 
 ## Methods
 
@@ -69,7 +69,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 Closes instance.
 
 ```
-$(".target").naver("close");
+$(".target").navigation("close");
 ```
 
 ### defaults
@@ -77,7 +77,7 @@ $(".target").naver("close");
 Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.naver("defaults", { ... });
+$.navigation("defaults", { ... });
 ```
 
 ##### Parameters
@@ -91,7 +91,7 @@ $.naver("defaults", { ... });
 Removes plugin instance.
 
 ```
-$(".target").naver("destroy");
+$(".target").navigation("destroy");
 ```
 
 ### disable
@@ -99,7 +99,7 @@ $(".target").naver("destroy");
 Disables instance.
 
 ```
-$(".target").naver("disable");
+$(".target").navigation("disable");
 ```
 
 ### enable
@@ -107,7 +107,7 @@ $(".target").naver("disable");
 Enables instance.
 
 ```
-$(".target").naver("enable");
+$(".target").navigation("enable");
 ```
 
 ### open
@@ -115,17 +115,17 @@ $(".target").naver("enable");
 Opens instance.
 
 ```
-$(".target").naver("open");
+$(".target").navigation("open");
 ```
 
 ## CSS
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .naver | element | Base widget class |
-| .naver.naver-open | modifier | Indicates open state |
-| .naver.naver-enabled | modifier | Indicates enabled state |
-| .naver-handle | element | Click target to toggle navigation |
-| .naver-handle:after | element | Icon displayed in handle |
-| .naver-container | element | Wraps target navigation |
+| .navigation | element | Base widget class |
+| .navigation.navigation-open | modifier | Indicates open state |
+| .navigation.navigation-enabled | modifier | Indicates enabled state |
+| .navigation-handle | element | Click target to toggle navigation |
+| .navigation-handle:after | element | Icon displayed in handle |
+| .navigation-container | element | Wraps target navigation |
 
