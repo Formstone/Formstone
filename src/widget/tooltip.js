@@ -92,14 +92,14 @@
 		html += '</div>';
 
 		Instance = {
-			$tipper: $(html),
-			$el: data.$el
+			$tooltip    : $(html),
+			$el         : data.$el
 		};
 
-		Formstone.$body.append(Instance.$tipper);
+		Formstone.$body.append(Instance.$tooltip);
 
-		var $content = Instance.$tipper.find( Functions.getClassName(Classes.content) ),
-			$caret   = Instance.$tipper.find( Functions.getClassName(Classes.caret) ),
+		var $content = Instance.$tooltip.find( Functions.getClassName(Classes.content) ),
+			$caret   = Instance.$tooltip.find( Functions.getClassName(Classes.caret) ),
 
 			offset = data.$el.offset(),
 			height = data.$el.outerHeight(),
@@ -149,7 +149,7 @@
 			left: caretLeft
 		});
 
-		// Position tipper
+		// Position tooltip
 		if (data.follow) {
 			data.$el.on(Events.mouseMove, data, onMouseMove);
 		} else {
@@ -195,7 +195,7 @@
 		}
 
 		data.timer = Functions.startTimer(data.timer, data.delay, function() {
-			Instance.$tipper.addClass(Classes.visible);
+			Instance.$tooltip.addClass(Classes.visible);
 		});
 
 		data.$el.one(Events.mouseLeave, data, onMouseLeave);
@@ -211,7 +211,7 @@
 
 	function positionTooltip(left, top) {
 		if (Instance) {
-			Instance.$tipper.css({
+			Instance.$tooltip.css({
 				left : left,
 				top  : top
 			});
@@ -228,7 +228,7 @@
 		if (Instance) {
 			Instance.$el.off( [Events.mouseMove, Events.mouseLeave].join(" ") );
 
-			Instance.$tipper.remove();
+			Instance.$tooltip.remove();
 			Instance = null;
 		}
 	}
@@ -246,12 +246,12 @@
 
 	/**
 	 * @plugin
-	 * @name Tipper
+	 * @name Tooltip
 	 * @description A jQuery plugin for simple tooltips.
 	 * @type widget
 	 */
 
-	var Plugin = Formstone.Plugin("tipper", {
+	var Plugin = Formstone.Plugin("tooltip", {
 			widget: true,
 
 			/**
@@ -306,10 +306,10 @@
 
 ### Basic
 
-Tipper will generate a tooltip based on the target element's `data-title` attribute. Tipper can be configured to open in a specific direction by setting the `direction` key at initialization:
+Tooltip will generate a tooltip based on the target element's `data-title` attribute. Tooltip can be configured to open in a specific direction by setting the `direction` key at initialization:
 
 ```
-$(".target").tipper({
+$(".target").tooltip({
 	direction: "top"
 });
 ```
@@ -320,20 +320,20 @@ $(".target").tipper({
 
 ### Follow
 
-Tipper can be configured to follow the user's mouse:
+Tooltip can be configured to follow the user's mouse:
 
 ```
-$(".target").tipper({
+$(".target").tooltip({
 	follow: true
 });
 ```
 
 ### Match
 
-Tipper can be configured to match the user's mouse position, relative to the target:
+Tooltip can be configured to match the user's mouse position, relative to the target:
 
 ```
-$(".target").tipper({
+$(".target").tooltip({
 	match: true
 });
 ```
@@ -343,7 +343,7 @@ $(".target").tipper({
 A delay can be set to avoid accidental tooltips:
 
 ```
-$(".target").tipper({
+$(".target").tooltip({
 	delay: 500
 });
 ```

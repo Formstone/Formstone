@@ -5,11 +5,11 @@
 module.exports = function(grunt) {
 
 	var cssFiles = {
-		'dist/grid/gridlock.css' : [ 'src/grid/gridlock.less' ],
-		'dist/grid/gridlock.ie.css' : [ 'src/grid/gridlock.ie.less' ],
-		'dist/widget/dropper.css' :  [ 'src/widget/dropper.less' ],
-		'dist/widget/naver.css' :  [ 'src/widget/naver.less' ],
-		'dist/widget/tipper.css' : [ 'src/widget/tipper.less' ]
+		'dist/grid/grid.css'            : [ 'src/grid/grid.less' ],
+		'dist/grid/grid.ie.css'         : [ 'src/grid/grid.ie.less' ],
+		'dist/widget/navigation.css'    : [ 'src/widget/navigation.less' ],
+		'dist/widget/tooltip.css'       : [ 'src/widget/tooltip.less' ],
+		'dist/widget/upload.css'        : [ 'src/widget/upload.less' ]
 	};
 
 	grunt.initConfig({

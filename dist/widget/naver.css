@@ -1,9 +1,0 @@
-/*! 
- * Formstone v0.0.1 - 2014-11-10 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
-
-.naver{margin:0}.naver *{-webkit-transition:none;transition:none}.naver,.naver *{-webkit-user-select:none!important;-moz-user-select:none!important;-ms-user-select:none!important;user-select:none!important}.naver,.naver *,.naver :before,.naver :after{box-sizing:border-box}.naver-handle{width:100%;background:#fff;border:1px solid #ccc;color:#111;cursor:pointer;display:none;font-size:16px;margin:0;padding:10px 15px;position:relative;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.naver-handle:after{height:3px;width:15px;position:absolute;top:0;right:15px;bottom:0;background:#ccc;box-shadow:0 5px 0 #ccc,0 -5px 0 #ccc;content:'';display:block;margin:auto 0}.naver-container:after{clear:both;content:".";display:block;height:0;line-height:0;visibility:hidden}.naver-enabled .naver-handle{display:block}.naver-enabled .naver-container{background:#fff;border:1px solid #ccc;border-width:0 1px 1px;display:block}.naver-open .naver-handle:after{width:15px;height:15px;background:0 0;border:none;box-shadow:none;color:#ccc;content:"\00d7";font-size:22px;font-weight:700;line-height:15px;text-align:center}.naver-open .naver-container{display:block}

@@ -58,7 +58,7 @@
 	 * @method
 	 * @name open
 	 * @description Opens instance.
-	 * @example $(".target").naver("open");
+	 * @example $(".target").navigation("open");
 	 */
 
 	function open(data) {
@@ -78,7 +78,7 @@
 	 * @method
 	 * @name close
 	 * @description Closes instance.
-	 * @example $(".target").naver("close");
+	 * @example $(".target").navigation("close");
 	 */
 
 	function close(data) {
@@ -98,7 +98,7 @@
 	 * @method
 	 * @name enable
 	 * @description Enables instance.
-	 * @example $(".target").naver("enable");
+	 * @example $(".target").navigation("enable");
 	 */
 
 	function enable(data) {
@@ -115,7 +115,7 @@
 	 * @method
 	 * @name disable
 	 * @description Disables instance.
-	 * @example $(".target").naver("disable");
+	 * @example $(".target").navigation("disable");
 	 */
 
 	function disable(data) {
@@ -226,12 +226,12 @@
 
 	/**
 	 * @plugin
-	 * @name Naver
+	 * @name Navigation
 	 * @description A jQuery plugin for simple responsive navigation.
 	 * @type widget
 	 */
 
-	var Plugin = Formstone.Plugin("naver", {
+	var Plugin = Formstone.Plugin("navigation", {
 			widget: true,
 
 			/**
@@ -262,8 +262,8 @@
 
 			/**
 			 * @events
-			 * @event open.naver "Navigation opened"
-			 * @event close.naver "Navigation closed"
+			 * @event open.navigation "Navigation opened"
+			 * @event close.navigation "Navigation closed"
 			 */
 
 			events: [
@@ -301,10 +301,10 @@
 
 ### Basic
 
-Naver will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:
+Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:
 
 ```
-$("nav").naver();
+$("nav").navigation();
 ```
 
 ```
@@ -317,10 +317,10 @@ $("nav").naver();
 
 ### Breakpoint
 
-By default, Naver will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the `maxWidth` option on initialization.
+By default, Navigation will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the `maxWidth` option on initialization.
 
 ```
-$("nav").naver({
+$("nav").navigation({
 	maxWidth: "740px"
 });
 ```

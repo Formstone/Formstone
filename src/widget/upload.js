@@ -308,12 +308,12 @@
 
 	/**
 	 * @plugin
-	 * @name Dropper
+	 * @name Upload
 	 * @description A jQuery plugin for simple drag and drop uploads.
 	 * @type widget
 	 */
 
-	var Plugin = Formstone.Plugin("dropper", {
+	var Plugin = Formstone.Plugin("upload", {
 			widget: true,
 
 			/**
@@ -347,12 +347,12 @@
 
 			/**
 			 * @events
-			 * @event complete.dropper "All uploads are complete"
-			 * @event fileComplete.dropper "Specific upload complete"
-			 * @event fileError.dropper "Specific upload error"
-			 * @event fileStart.dropper "Specific upload starting"
-			 * @event fileProgress.dropper "Specific upload progress"
-			 * @event start.dropper "Uploads starting"
+			 * @event complete.upload "All uploads are complete"
+			 * @event fileComplete.upload "Specific upload complete"
+			 * @event fileError.upload "Specific upload error"
+			 * @event fileStart.upload "Specific upload starting"
+			 * @event fileProgress.upload "Specific upload progress"
+			 * @event start.upload "Uploads starting"
 			 */
 
 			events: [
