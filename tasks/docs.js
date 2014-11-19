@@ -196,7 +196,7 @@ module.exports = function(grunt) {
 							doc.type = "grid";
 							doc.description = grid.description;
 
-							destinationMD = f.replace("src", "docs").replace(".less", ".md").replace("grid/", "grid-"),
+							destinationMD = f.replace("src", "docs").replace(".less", ".md").replace("grid/", ""),
 							destinationJSON = f.replace("src", "docs/json").replace(".less", ".json");
 						}
 					}
@@ -206,7 +206,7 @@ module.exports = function(grunt) {
 			var namespace = doc.name.toLowerCase();
 
 			if (jsFile) {
-				if (namespace !== "formstone" && namespace !== "gridlock") {
+				if (namespace !== "formstone" && namespace !== "grid") {
 					for (var i in widgetMethods) {
 						var m = JSON.parse(JSON.stringify(widgetMethods[i]));
 						m.example = m.example.replace("{ns}", namespace);
@@ -377,7 +377,7 @@ module.exports = function(grunt) {
 		// WORK
 
 		grunt.file.expand("src/**/*.js").forEach(parseFiles);
-		grunt.file.expand("src/grid/gridlock.less").forEach(parseFiles);
+		grunt.file.expand("src/grid/grid.less").forEach(parseFiles);
 
 		var md = '';
 
@@ -391,7 +391,7 @@ module.exports = function(grunt) {
 		md += '\n\n';
 		for (var i in allDocs.grid) {
 			var d = allDocs.grid[i];
-			md += '* [' + d.name + '](grid-' + d.name.toLowerCase() + '.md)';
+			md += '* [' + d.name + '](' + d.name.toLowerCase() + '.md)';
 			md += '\n';
 		}
 		md += '\n';

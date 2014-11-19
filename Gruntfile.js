@@ -62,13 +62,22 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		// Copy
+		copy: {
+			target: {
+				expand: true,
+				cwd:    'src/',
+				src:    '**/*.js',
+				dest:   'dist/'
+			}
+		},
 		// LESS
 		less: {
-			main: {
-				options: {
-					cleancss: true
-				},
-				files: cssFiles,
+			options: {
+				cleancss: true
+			},
+			target: {
+				files: cssFiles
 			}
 		},
 		// Auto Prefixer
@@ -86,51 +95,99 @@ module.exports = function(grunt) {
 				position: 'top',
 				banner: '<%= meta.banner %>'
 			},
-			files: {
-				src: 'dist/**/*'
+			target: {
+				files: {
+					src: 'dist/**/*'
+				}
 			}
 		},
 		// Bower sync
 		sync: {
-			all: {
-				options: {
-					sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage' ],
-					overrides: {
-						main: [
-							'<%= pkg.codename %>.js',
-							'<%= pkg.codename %>.css'
-						]
-					}
+			options: {
+				sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage' ],
+				overrides: {
+					main: [
+						'<%= pkg.codename %>.js',
+						'<%= pkg.codename %>.css'
+					]
 				}
 			}
 		},
-		// Watcher - For dev only!!
+		// Watcher - Dev Only
 		watch: {
 			scripts: {
 				files: [
 					'src/**/*.js'
 				],
 				tasks: [
-					'jshint',
-					'copy'
+					'newer:jshint',
+					'newer:copy'
 				]
 			},
-			scripts: {
+			styles: {
 				files: [
-					'src/**/*.css'
+					'src/**/*.less'
 				],
 				tasks: [
-					'less',
-					'autoprefixer'
+					'newer:less',
+					'newer:autoprefixer'
 				]
+			},
+			config: {
+				files: [
+					'Gruntfile.js'
+				],
+				options: {
+					reload: true
+				}
+			}
+		},
+		// Newer - Dev Only
+		newer: {
+			options: {
+				override: function(details, include) {
+					if (details.task === 'less') {
+						checkForNewerImports(details.path, details.time, include);
+					} else {
+						include(false);
+					}
+				}
 			}
 		}
 	});
 
+	// Newer LESS Imports
+	function checkForNewerImports(lessFile, mTime, include) {
+		var fs = require('fs'),
+			path = require('path');
+
+		fs.readFile(lessFile, "utf8", function(err, data) {
+			var lessDir = path.dirname(lessFile),
+				regex = /@import "(.+?)(\.less)?";/g,
+				shouldInclude = false,
+				match;
+
+			while ((match = regex.exec(data)) !== null) {
+				var importFile = lessDir + '/' + match[1] + '.less';
+				if (fs.existsSync(importFile)) {
+					var stat = fs.statSync(importFile);
+					if (stat.mtime > mTime) {
+						shouldInclude = true;
+						break;
+					}
+				}
+			}
+
+			include(shouldInclude);
+		});
+	}
+
 	// Load tasks
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-newer');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-banner');
