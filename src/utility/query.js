@@ -255,7 +255,7 @@
 
 	var Plugin = Formstone.Plugin("query", {
 			methods: {
-				_delegate:    delegate
+				_delegate    : delegate
 			}
 		}),
 
@@ -269,11 +269,11 @@
 		 */
 
 		Defaults = {
-			minWidth:     [ 0 ],
-			maxWidth:     [ Infinity ],
-			minHeight:    [ 0 ],
-			maxHeight:    [ Infinity ],
-			unit:         "px"
+			minWidth     : [ 0 ],
+			maxWidth     : [ Infinity ],
+			minHeight    : [ 0 ],
+			maxHeight    : [ Infinity ],
+			unit         : "px"
 		},
 
 		/**
@@ -281,7 +281,7 @@
 		 * @event change.query "Change to a media query match; Triggerd on window"
 		 */
 
-		Events = {
+		Events    = {
 			change     : "change.query",
 			enter      : "enter",
 			leave      : "leave"
@@ -289,7 +289,7 @@
 
 		// Public methods
 
-		Methods      = {
+		Methods    = {
 			state      : getState,
 			bind       : bind,
 			unbind     : unbind

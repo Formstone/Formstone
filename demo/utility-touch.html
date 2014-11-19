@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Tooltip Demo</title>
+
+		<!-- Modernizer -->
+		<script src="http://formstone.it/js/modernizr.js"></script>
+
+		<!-- Demo Resources -->
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="http://formstone.it/js/site.ie8.js"></script>
+			<link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="http://formstone.it/js/site.ie9.js"></script>
+		<![endif]-->
+
+		<script src="../dist/core.js"></script>
+
+		<script src="../dist/utility/touch.js"></script>
+
+		<!--[DEMO:START-RESOURCES]-->
+
+		<style>
+			html, body {
+				height: 200%;
+			}
+
+			.panit {
+				height: 50px;
+				width:  50px;
+
+				position: absolute;
+				top:  50px;
+				left: 50px;
+
+				background: red;
+			}
+
+			.tapit {
+				background: green;
+
+				height: 20px;
+				width:  200px;
+
+				margin: 250px auto;
+			}
+			.tapit.active {
+				background: blue;
+			}
+
+			.scaleit {
+				height: 1px;
+				width:  1px;
+
+				position: absolute;
+				top:  150px;
+				left: 150px;
+			}
+			.scaleit_box {
+				height: 100px;
+				width:  100px;
+
+				position: absolute;
+				top:  -50px;
+				left: -50px;
+
+				background: purple;
+			}
+
+
+			.panscaleit {
+				height: 1px;
+				width:  1px;
+
+				position: absolute;
+				top:  250px;
+				left: 0;
+			}
+			.panscaleit_box {
+				height: 100px;
+				width:  100px;
+
+				position: absolute;
+				top:  -50px;
+				left: -50px;
+
+				background: yellow;
+			}
+		</style>
+
+		<script>
+			$(document).ready(function() {
+
+				var diffX = 0,
+					diffY = 0,
+					minX = 10,
+					maxX = 200
+					minY = 10,
+					maxY = 200,
+					sDiffX = 0,
+					sDiffY = 0,
+					sOrigH = 0,
+					sOrigW = 0;
+
+				// Pan
+
+				$(".panit").touch({
+					pan: true
+				}).on("panstart.panit", function(e) {
+					console.log("pan start");
+
+					var offset = $(".panit").offset();
+
+					diffX = offset.left - e.pageX;
+					diffY = offset.top  - e.pageY;
+				})
+				.on("panend.panit", function(e) {
+					console.log("pan end");
+				})
+				.on("pan.panit", function(e) {
+					console.log("pan");
+
+					var data = e.data,
+						x = e.pageX + diffX,
+						y = e.pageY + diffY;
+
+					if (x < minX) {
+						x = minX;
+					}
+					if (x > maxX) {
+						x = maxX;
+					}
+
+					if (y < minY) {
+						y = minY;
+					}
+					if (y > maxY) {
+						y = maxY;
+					}
+
+					console.log(x, y);
+
+					$(".panit").css({
+						left: x,
+						top: y
+					})
+				});
+
+				// Tap
+
+				$(".tapit").touch({
+					tap: true
+				}).on("tap.tapit", function(e) {
+					console.log("tap");
+
+					$(".tapit").toggleClass("active");
+				});
+
+				// Scale
+
+				$(".scaleit").touch({
+					scale: true
+				}).on("scalestart.scaleit", function(e) {
+					console.log("scale start");
+
+					var offset = $(".scaleit").offset();
+
+					sDiffX = offset.left - e.pageX;
+					sDiffY = offset.top  - e.pageY;
+
+					sOrigH = $(".scaleit_box").outerHeight();
+					sOrigW = $(".scaleit_box").outerWidth();
+				})
+				.on("scaleend.scaleit", function(e) {
+					console.log("scale end");
+				})
+				.on("scale.scaleit", function(e) {
+					console.log("scale");
+
+					var w = sOrigW * e.scale,
+						h = sOrigH * e.scale;
+
+					if (w < 50) {
+						w = 50;
+					}
+					if (w > 300) {
+						w = 300;
+					}
+
+					if (h < 50) {
+						h = 50;
+					}
+					if (h > 300) {
+						h = 300;
+					}
+
+					var x = e.pageX + sDiffX,
+						y = e.pageY + sDiffY;
+
+					console.log(x, y, w, h);
+
+					$(".scaleit").css({
+						left: x,
+						top: y
+					});
+
+					$(".scaleit_box").css({
+						height: h,
+						width: w,
+						left: -(w / 2),
+						top: -(h / 2)
+					});
+				});
+
+				// Pan+Scale
+
+				$(".panscaleit").touch({
+					pan: true,
+					scale: true
+				}).on("scalestart.panscaleit", function(e) {
+					console.log("panscale start");
+
+					var offset = $(".panscaleit").offset();
+
+					sDiffX = offset.left - e.pageX;
+					sDiffY = offset.top  - e.pageY;
+
+					sOrigH = $(".panscaleit_box").outerHeight();
+					sOrigW = $(".panscaleit_box").outerWidth();
+				})
+				.on("scaleend.panscaleit", function(e) {
+					console.log("panscale end");
+				})
+				.on("scale.panscaleit", function(e) {
+					console.log("panscale");
+
+					var w = sOrigW * e.scale,
+						h = sOrigH * e.scale;
+
+					if (w < 50) {
+						w = 50;
+					}
+					if (w > 300) {
+						w = 300;
+					}
+
+					if (h < 50) {
+						h = 50;
+					}
+					if (h > 300) {
+						h = 300;
+					}
+
+					var x = e.pageX + sDiffX,
+						y = e.pageY + sDiffY;
+
+					console.log(x, y, w, h);
+
+					$(".panscaleit").css({
+						left: x,
+						top: y
+					});
+
+					$(".panscaleit_box").css({
+						height: h,
+						width: w,
+						left: -(w / 2),
+						top: -(h / 2)
+					});
+				});
+
+			});
+		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
+	</head>
+	<body class="gridlock demo">
+
+		<div class="panit"></div>
+
+		<div class="tapit"></div>
+
+		<div class="scaleit"><div class="scaleit_box"></div></div>
+
+		<div class="panscaleit"><div class="panscaleit_box"></div></div>
+
+	</body>
+</html>

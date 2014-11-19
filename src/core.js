@@ -30,6 +30,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.matchMediaSupport    = !!(window.matchMedia);
 			this.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
 			this.rafSupport           = !!(window.requestAnimationFrame && window.cancelAnimationFrame);
+			this.touchSupport         = !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
 		},
 
 		Formstone = new Core(),
@@ -122,8 +123,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 						// Extend w/ Local Options
 
 						var data = $.extend(true, {
-							$element: $element,
-							$el: $element
+							$element    : $element,
+							$el         : $element
 						}, options, $element.data(namespace + "-options"));
 
 						// Constructor
@@ -132,7 +133,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Cache Instance
 
-						$element.addClass(settings.classes.element)
+						$element.addClass(settings.classes !== false ? settings.classes.element : "")
 						        .data(namespace, data);
 					}
 
@@ -158,7 +159,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			function destroy(data) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
-				this.removeClass(settings.classes.element)
+				this.removeClass(settings.classes !== false ? settings.classes.element : "")
 					.removeData(namespace);
 			}
 
@@ -308,8 +309,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			// Namespace Classes & Events
 
-			settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
-			settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
+			if (settings.classes !== false) {
+				settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
+			}
+
+			if (settings.events !== false) {
+				settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
+			}
 
 			// Extend Functions
 

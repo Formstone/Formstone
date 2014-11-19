@@ -14,7 +14,7 @@
 
 ## Widget
 
+* [Touch](widget-touch.md)
 * [Navigation](widget-navigation.md)
 * [Tooltip](widget-tooltip.md)
-* [Touch](widget-touch.md)
 * [Upload](widget-upload.md)
