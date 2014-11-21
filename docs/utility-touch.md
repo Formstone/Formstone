@@ -1,6 +1,6 @@
 # Touch
 
-A jQuery plugin for simple tooltips.
+A jQuery plugin for multi-touch events.
 
 * [Use](#use)
 * [Options](#options)

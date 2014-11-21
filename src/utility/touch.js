@@ -356,7 +356,7 @@
 	/**
 	 * @plugin
 	 * @name Touch
-	 * @description A jQuery plugin for simple tooltips.
+	 * @description A jQuery plugin for multi-touch events.
 	 * @type utility
 	 */
 
