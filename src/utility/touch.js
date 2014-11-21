@@ -71,6 +71,14 @@
 	 * @param data [object] "Instance data"
 	 */
 
+	/**
+	 * @method
+	 * @name destroy
+	 * @description Destroys plugin instance.
+	 * @param data [object] <{}> "Instance data"
+	 * @example $.touch(".target", "destroy");
+	 */
+
 	function destruct(data) {
 		this.off(Events.namespace)
 			.removeData(Namespace);

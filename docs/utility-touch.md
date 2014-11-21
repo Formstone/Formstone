@@ -4,6 +4,7 @@ A jQuery plugin for multi-touch events.
 
 * [Use](#use)
 * [Options](#options)
+* [Methods](#methods)
 
 
 ## Use 
@@ -82,4 +83,20 @@ Note: `pan` and `scale` can also be used together to create a rich interface.
 | pan | boolean || object | false | Object to enable |
 | scale | boolean | false | True to enable |
 | tap | boolean | false | True to enable |
+
+## Methods
+
+### destroy
+
+Destroys plugin instance.
+
+```
+$.touch(".target", "destroy");
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| data | object | {} | Instance data |
 
