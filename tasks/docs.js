@@ -206,10 +206,11 @@ module.exports = function(grunt) {
 			var namespace = doc.name.toLowerCase();
 
 			if (jsFile) {
-				if (namespace !== "formstone" && namespace !== "grid") {
+				if (namespace !== "formstone" && namespace !== "grid" && doc.type === "widget") {
 					for (var i in widgetMethods) {
 						var m = JSON.parse(JSON.stringify(widgetMethods[i]));
 						m.example = m.example.replace("{ns}", namespace);
+
 						doc.methods.push(m);
 					}
 				}
