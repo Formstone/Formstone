@@ -415,13 +415,10 @@
 /*
  * @use
 
-### Basic
 
-Touch normalizes touch events and provides a few basic gestures: `tap`, `pan` and `scale`.
+### Events
 
-### Touch Event
-
-Event emitted by Touch will contain the following extra properties:
+Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. Events emitted by Touch will contain the following extra properties:
 
 ```
 pageX		// Current X position
@@ -483,6 +480,6 @@ $(".scale-it").on("scalestart", function(e) {
 });
 ```
 
-Note: `pan` or `scale` can be used together to create a rich interface.
+Note: `pan` and `scale` can also be used together to create a rich interface.
 
  */
