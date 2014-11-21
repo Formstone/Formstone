@@ -391,7 +391,7 @@ module.exports = function(grunt) {
 		md += '\n\n';
 		for (var i in allDocs.grid) {
 			var d = allDocs.grid[i];
-			md += '* [' + d.name + '](' + d.name.toLowerCase() + '.md)';
+			md += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
 			md += '\n';
 		}
 		md += '\n';
@@ -399,7 +399,7 @@ module.exports = function(grunt) {
 		md += '\n\n';
 		for (var i in allDocs.utility) {
 			var d = allDocs.utility[i];
-			md += '* [' + d.name + '](utility-' + d.name.toLowerCase() + '.md)';
+			md += '* [' + d.name + '](utility-' + d.name.toLowerCase().replace(" ", "") + '.md)';
 			md += '\n';
 		}
 		md += '\n';
@@ -407,7 +407,7 @@ module.exports = function(grunt) {
 		md += '\n\n';
 		for (var i in allDocs.widget) {
 			var d = allDocs.widget[i];
-			md += '* [' + d.name + '](widget-' + d.name.toLowerCase() + '.md)';
+			md += '* [' + d.name + '](widget-' + d.name.toLowerCase().replace(" ", "") + '.md)';
 			md += '\n';
 		}
 

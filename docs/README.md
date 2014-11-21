@@ -11,7 +11,7 @@
 ## Utility
 
 * [Cookie](utility-cookie.md)
-* [Media Query](utility-media query.md)
+* [Media Query](utility-mediaquery.md)
 * [Touch](utility-touch.md)
 
 ## Widget

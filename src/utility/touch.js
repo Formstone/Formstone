@@ -365,15 +365,12 @@
 			/**
 			 * @options
 			 * @param pan [boolean || object] <false> "Object to enable"
-			 * @param swipe [boolean || object] <false> "Object to enable"
-			 * @param swipe.direction [string] <"all"> "'all', 'horizontal', 'vertical'"
 			 * @param scale [boolean] <false> "True to enable"
 			 * @param tap [boolean] <false> "True to enable"
 			 */
 
 			defaults : {
 				pan      : false,
-				swipe    : false,
 				scale    : false,
 				tap      : false
 			},

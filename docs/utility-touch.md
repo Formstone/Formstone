@@ -81,8 +81,6 @@ Note: `pan` and `scale` can also be used together to create a rich interface.
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | pan | boolean || object | false | Object to enable |
-| swipe | boolean || object | false | Object to enable |
-| swipe.direction | string | "all" | 'all', 'horizontal', 'vertical' |
 | scale | boolean | false | True to enable |
 | tap | boolean | false | True to enable |
 
