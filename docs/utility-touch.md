@@ -80,7 +80,7 @@ Note: `pan` or `scale` can be used together to create a rich interface.
 
 ## Options
 
-Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-touch-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
+
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -91,8 +91,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | tap | boolean | false | True to enable |
 
 ## Methods
-
-Methods are publicly available to all active instances, unless otherwise stated.
 
 ### defaults
 

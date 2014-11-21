@@ -357,7 +357,7 @@
 	 * @plugin
 	 * @name Touch
 	 * @description A jQuery plugin for simple tooltips.
-	 * @type widget
+	 * @type utility
 	 */
 
 	var legacyPointer = !!(window.PointerEvent),
