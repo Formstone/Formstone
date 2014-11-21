@@ -4,32 +4,64 @@
 
 	/**
 	 * @method private
-	 * @name construct
-	 * @description Builds instance.
-	 * @param data [object] "Instance data"
+	 * @name delegate
+	 * @param opts [object] "Plugin options"
 	 */
 
-	function construct(data) {
-		data.touches = [];
-
-		if (data.tap) {
-			// Tap
-
-			data.pan = false;
-			data.scale = false;
-
-			this.on(Events.touchStart, data, onPointerStart)
-				.on(Events.click, data, onClick);
-		} else if (data.pan || data.scale) {
-			// Pan / Scale
-
-			data.tap      = false;
-
-			this.on( [Events.touchStart].join(" "), data, onTouch);
-
-			if (data.pan) {
-				this.on( Events.mouseDown, data, onPointerStart);
+	function delegate(selector, options) {
+		if (selector.length) {
+			if ($.type(options) === "string" && options === "destroy") {
+				Functions.iterate.apply($(selector), [ destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+			} else {
+				Functions.iterate.apply($(selector), [ construct ].concat(Array.prototype.slice.call(arguments, 1)));
 			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance Data"
+	 * @param opions [object] "Instance options"
+	 */
+
+	function construct(data, options) {
+		var $element = this;
+
+		if (!Functions.getData($element)) {
+
+			// Extend w/ Local Options
+
+			data = $.extend(true, data, {
+				$element    : $element,
+				$el         : $element,
+				touches     : []
+			}, options);
+
+			if (data.tap) {
+				// Tap
+
+				data.pan   = false;
+				data.scale = false;
+
+				$element.on(Events.touchStart, data, onPointerStart)
+						.on(Events.click, data, onClick);
+			} else if (data.pan || data.scale) {
+				// Pan / Scale
+
+				data.tap = false;
+
+				$element.on( [Events.touchStart].join(" "), data, onTouch);
+
+				if (data.pan) {
+					$element.on( Events.mouseDown, data, onPointerStart);
+				}
+			}
+
+			// Cache Instance
+
+			$element.data(Namespace, data);
 		}
 	}
 
@@ -41,7 +73,8 @@
 	 */
 
 	function destruct(data) {
-		this.off(Events.namespace);
+		this.off(Events.namespace)
+			.removeData(Namespace);
 	}
 
 	/**
@@ -110,7 +143,7 @@
 		e.stopPropagation();
 
 		var data     = e.data,
-			touch    = (typeof e.originalEvent.touches !== "undefined") ? e.originalEvent.touches[0] : null;
+			touch    = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null;
 
 		data.startE     = e.originalEvent;
 		data.startX     = (touch) ? touch.pageX : e.pageX;
@@ -119,7 +152,7 @@
 		if (data.tap) {
 			// Tap
 
-			data.clicked    = false;
+			data.clicked = false;
 
 			data.$el.on(Events.touchMove, data, onPointerMove)
 					.on( [Events.touchEnd, Events.touchCancel].join(" ") , data, onPointerEnd);
@@ -128,7 +161,7 @@
 
 			Functions.killEvent(e);
 
-			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, 1);
+			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, 1, 0, 0);
 
 			if (data.scale && data.touches && data.touches.length >= 2) {
 				data.pinchStartX0    = data.touches[0].pageX;
@@ -142,8 +175,8 @@
 
 				data.pinchDeltaStart = Math.sqrt(Math.pow((data.pinchStartX1 - data.pinchStartX0), 2) + Math.pow((data.pinchStartY1 - data.pinchStartY0), 2));
 
-				newE.pageX    = data.pinchStartX;
-				newE.pageY    = data.pinchStartY;
+				newE.pageX    = data.startX   = data.pinchStartX;
+				newE.pageY    = data.startY   = data.pinchStartY;
 			}
 
 			if (data.pan) {
@@ -165,10 +198,12 @@
 	 */
 
 	function onPointerMove(e) {
-		var data     = e.data,
-			touch    = (typeof e.originalEvent.touches !== "undefined") ? e.originalEvent.touches[0] : null,
-			newX     = (touch) ? touch.pageX : e.pageX,
-			newY     = (touch) ? touch.pageY : e.pageY;
+		var data      = e.data,
+			touch     = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null,
+			newX      = (touch) ? touch.pageX : e.pageX,
+			newY      = (touch) ? touch.pageY : e.pageY,
+			deltaX    = newX - data.startX,
+			deltaY    = newY - data.startY;
 
 		if (data.tap && (Math.abs(newX - data.startX) > 10 || Math.abs(newY - data.startY) > 10)) {
 			// Tap
@@ -178,7 +213,7 @@
 			// Pan / Scale
 
 			var fire    = true,
-				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, 1);
+				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, 1, deltaX, deltaY);
 
 			if (data.scale) {
 				if (data.touches && data.touches.length >= 2) {
@@ -194,9 +229,11 @@
 					data.pinchEndX     = ((data.pinchEndX0 + data.pinchEndX1) / 2.0);
 					data.pinchEndY     = ((data.pinchEndY0 + data.pinchEndY1) / 2.0);
 
-					newE.pageX    = data.pinchEndX;
-					newE.pageY    = data.pinchEndY;
-					newE.scale    = data.scale;
+					newE.pageX     = data.pinchEndX;
+					newE.pageY     = data.pinchEndY;
+					newE.scale     = data.scale;
+					newE.deltaX    = data.pinchEndX - data.pinchStartX;
+					newE.deltaY    = data.pinchEndY - data.pinchStartY;
 				} else if (!data.pan) {
 					fire = false;
 				}
@@ -229,10 +266,12 @@
 		} else if (data.pan || data.scale) {
 			// Pan / Scale
 
-			var touch    = (typeof e.originalEvent.touches !== "undefined") ? e.originalEvent.touches[0] : null,
-				newX     = (touch) ? touch.pageX : e.pageX,
-				newY     = (touch) ? touch.pageY : e.pageY,
-				newE     = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, 1);
+			var touch     = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null,
+				newX      = (touch) ? touch.pageX : e.pageX,
+				newY      = (touch) ? touch.pageY : e.pageY,
+				deltaX    = newX - data.startX,
+				deltaY    = newY - data.startY,
+				newE      = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, 1, deltaX, deltaY);
 
 			if (data.scale) {
 				if (e.originalEvent.pointerId) {
@@ -287,12 +326,15 @@
 	 * @param y [int] "Y value"
 	 */
 
-	function buildEvent(type, oe, x, y, s) {
+	function buildEvent(type, oe, x, y, s, dx, dy) {
 		return $.Event(type, {
 			pageX: x,
 			pageY: y,
 			scale: s,
-			originalEvent: oe
+			deltaX: dx,
+			deltaY: dy,
+			originalEvent: oe,
+			preventDefault: oe.preventDefault
 		});
 	}
 
@@ -305,9 +347,6 @@
 	 */
 
 	var Plugin = Formstone.Plugin("touch", {
-			widget :  true,
-			classes : false,
-
 			/**
 			 * @options
 			 * @param pan [boolean || object] <false> "Object to enable"
@@ -325,13 +364,13 @@
 			},
 
 			methods : {
-				_construct    : construct,
-				_destruct     : destruct
+				_delegate    : delegate
 			}
 		}),
 
 		// Localize References
 
+		Namespace     = Plugin.namespace,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
 

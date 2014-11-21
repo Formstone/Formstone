@@ -1,4 +1,4 @@
-# Query
+# Media Query
 
 A jQuery plugin for responsive media query events.
 
@@ -11,10 +11,10 @@ A jQuery plugin for responsive media query events.
 ## Use 
 ### Basic
 
-Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
+Media Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
 
 ```
-$.query({
+$.mediaquery({
 	minWidth     : [ 320, 500, 740, 980, 1220 ],
 	maxWidth     : [ 1220, 980, 740, 500, 320 ],
 	minHeight    : [ 400, 800 ],
@@ -34,10 +34,10 @@ Note: In the example above, the `change` event will be fire twice for each break
 
 ### Binding
 
-Query can also bind events to specific media query changes for more fine grain control:
+Media Query can also bind events to specific media query changes for more fine grain control:
 
 ```
-$.query("bind", "(min-width: 740px)", {
+$.mediaquery("bind", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},
@@ -69,7 +69,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 | Event | Description |
 | --- | --- |
-| change.query | Change to a media query match; Triggerd on window |
+| change.mediaquery | Change to a media query match; Triggerd on window |
 
 ## Methods
 
@@ -78,7 +78,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 Binds callbacks to media query matching.
 
 ```
-$.query("bind", "(min-width: 500px)", { ... });
+$.mediaquery("bind", "(min-width: 500px)", { ... });
 ```
 
 ##### Parameters
@@ -93,7 +93,7 @@ $.query("bind", "(min-width: 500px)", { ... });
 Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.query("defaults", { ... });
+$.media query("defaults", { ... });
 ```
 
 ##### Parameters
@@ -107,7 +107,7 @@ $.query("defaults", { ... });
 Removes plugin instance.
 
 ```
-$(".target").query("destroy");
+$(".target").media query("destroy");
 ```
 
 ### state
@@ -115,7 +115,7 @@ $(".target").query("destroy");
 Returns the current state.
 
 ```
-var state = $.query("state");
+var state = $.mediaquery("state");
 ```
 
 ### unbind
@@ -123,7 +123,7 @@ var state = $.query("state");
 Unbinds all callbacks from media query.
 
 ```
-$.query("unbind", "(min-width: 500px)");
+$.mediaquery("unbind", "(min-width: 500px)");
 ```
 
 ##### Parameters

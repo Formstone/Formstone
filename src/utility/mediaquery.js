@@ -14,7 +14,7 @@
 
 		if (Formstone.matchMediaSupport) {
 
-			if (typeof options === "object" && !Initialized) {
+			if ($.type(options) === "object" && !Initialized) {
 
 				// Initialize
 
@@ -190,7 +190,7 @@
 	 * @name state
 	 * @description Returns the current state.
 	 * @return [object] "Current state object"
-	 * @example var state = $.query("state");
+	 * @example var state = $.mediaquery("state");
 	 */
 
 	function getState() {
@@ -203,7 +203,7 @@
 	 * @description Binds callbacks to media query matching.
 	 * @param media [string] "Media query to match"
 	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-	 * @example $.query("bind", "(min-width: 500px)", { ... });
+	 * @example $.mediaquery("bind", "(min-width: 500px)", { ... });
 	 */
 
 	function bind(media, data) {
@@ -234,7 +234,7 @@
 	 * @name unbind
 	 * @description Unbinds all callbacks from media query.
 	 * @param media [string] "Media query to match"
-	 * @example $.query("unbind", "(min-width: 500px)");
+	 * @example $.mediaquery("unbind", "(min-width: 500px)");
 	 */
 
 	function unbind(media) {
@@ -248,12 +248,12 @@
 
 	/**
 	 * @plugin
-	 * @name Query
+	 * @name Media Query
 	 * @description A jQuery plugin for responsive media query events.
 	 * @type utility
 	 */
 
-	var Plugin = Formstone.Plugin("query", {
+	var Plugin = Formstone.Plugin("mediaquery", {
 			methods: {
 				_delegate    : delegate
 			}
@@ -278,11 +278,11 @@
 
 		/**
 		 * @events
-		 * @event change.query "Change to a media query match; Triggerd on window"
+		 * @event change.mediaquery "Change to a media query match; Triggerd on window"
 		 */
 
 		Events    = {
-			change     : "change.query",
+			change     : "change.mediaquery",
 			enter      : "enter",
 			leave      : "leave"
 		},
@@ -320,10 +320,10 @@
 
 ### Basic
 
-Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
+Media Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:
 
 ```
-$.query({
+$.mediaquery({
 	minWidth     : [ 320, 500, 740, 980, 1220 ],
 	maxWidth     : [ 1220, 980, 740, 500, 320 ],
 	minHeight    : [ 400, 800 ],
@@ -343,10 +343,10 @@ Note: In the example above, the `change` event will be fire twice for each break
 
 ### Binding
 
-Query can also bind events to specific media query changes for more fine grain control:
+Media Query can also bind events to specific media query changes for more fine grain control:
 
 ```
-$.query("bind", "(min-width: 740px)", {
+$.mediaquery("bind", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},

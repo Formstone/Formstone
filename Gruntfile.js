@@ -196,6 +196,10 @@ module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
 
 	// Default task.
-	grunt.registerTask('default', [ 'jshint', 'uglify', 'less', 'autoprefixer', 'usebanner', 'sync', 'buildLicense', 'buildDocs' ]);
+	grunt.registerTask('default', [ 'js', 'css', 'usebanner', 'sync', 'buildLicense', 'buildDocs' ]);
+
+	grunt.registerTask('js', [ 'jshint', 'uglify' ]);
+
+	grunt.registerTask('css', [ 'less', 'autoprefixer' ]);
 
 };

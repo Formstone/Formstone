@@ -133,7 +133,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Cache Instance
 
-						$element.addClass(settings.classes !== false ? settings.classes.element : "")
+						$element.addClass(settings.classes.element)
 						        .data(namespace, data);
 					}
 
@@ -159,7 +159,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			function destroy(data) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
-				this.removeClass(settings.classes !== false ? settings.classes.element : "")
+				this.removeClass(settings.classes.element)
 					.removeData(namespace);
 			}
 
@@ -171,7 +171,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function killEvent(e) {
-				if (typeof e !== "undefined") {
+				if ($.type(e) !== "undefined") {
 					e.preventDefault();
 					e.stopPropagation();
 				}
@@ -243,7 +243,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				for (var i = 0, count = $targets.length; i < count; i++) {
 					var $element = $targets.eq(i),
-						data = getData($element);
+						data = getData($element) || {};
 
 					if (data) {
 						func.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
@@ -270,7 +270,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					// Wrap Public Methods
 
 					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
-				} else if (typeof method === 'object' || !method) {
+				} else if ($.type(method) === 'object' || !method) {
 					// Initialize
 
 					return initialize.apply(this, arguments);
@@ -309,13 +309,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			// Namespace Classes & Events
 
-			if (settings.classes !== false) {
-				settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
-			}
-
-			if (settings.events !== false) {
-				settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
-			}
+			settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
+			settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
 
 			// Extend Functions
 
@@ -324,7 +319,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				startTimer      : startTimer,
 				clearTimer      : clearTimer,
 				getClassName    : getClassName,
-				killEvent       : killEvent
+				killEvent       : killEvent,
+				iterate         : iterate
 			}, settings.functions);
 
 			// Extend Methods

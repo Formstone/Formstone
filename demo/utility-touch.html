@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-		<title>Tooltip Demo</title>
+		<title>Touch Demo</title>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -100,7 +100,9 @@
 		<script>
 			$(document).ready(function() {
 
-				var diffX = 0,
+				var origX = 0,
+					origY = 0,
+					diffX = 0,
 					diffY = 0,
 					minX = 10,
 					maxX = 200
@@ -109,19 +111,30 @@
 					sDiffX = 0,
 					sDiffY = 0,
 					sOrigH = 0,
-					sOrigW = 0;
+					sOrigW = 0,
+					psDiffX = 0,
+					psDiffY = 0,
+					psOrigH = 0,
+					psOrigW = 0;
 
 				// Pan
 
-				$(".panit").touch({
+				var $panit = $(".panit");
+
+				$.touch(".panit", {
 					pan: true
-				}).on("panstart.panit", function(e) {
+				});
+
+				$panit.on("panstart.panit", function(e) {
 					console.log("pan start");
 
-					var offset = $(".panit").offset();
+					var offset = $panit.offset();
 
 					diffX = offset.left - e.pageX;
 					diffY = offset.top  - e.pageY;
+
+					origX = offset.left;
+					origY = offset.top;
 				})
 				.on("panend.panit", function(e) {
 					console.log("pan end");
@@ -130,8 +143,8 @@
 					console.log("pan");
 
 					var data = e.data,
-						x = e.pageX + diffX,
-						y = e.pageY + diffY;
+						x = origX + e.deltaX, //e.pageX + diffX,
+						y = origY + e.deltaY; //e.pageY + diffY;
 
 					if (x < minX) {
 						x = minX;
@@ -149,7 +162,7 @@
 
 					console.log(x, y);
 
-					$(".panit").css({
+					$panit.css({
 						left: x,
 						top: y
 					})
@@ -157,22 +170,30 @@
 
 				// Tap
 
-				$(".tapit").touch({
+				var $tapit = $(".tapit");
+
+				$.touch($tapit, {
 					tap: true
-				}).on("tap.tapit", function(e) {
+				});
+
+				$tapit.on("tap.tapit", function(e) {
 					console.log("tap");
 
-					$(".tapit").toggleClass("active");
+					$tapit.toggleClass("active");
 				});
 
 				// Scale
 
-				$(".scaleit").touch({
+				var $scaleit = $(".scaleit");
+
+				$.touch($scaleit, {
 					scale: true
-				}).on("scalestart.scaleit", function(e) {
+				});
+
+				$scaleit.on("scalestart.scaleit", function(e) {
 					console.log("scale start");
 
-					var offset = $(".scaleit").offset();
+					var offset = $scaleit.offset();
 
 					sDiffX = offset.left - e.pageX;
 					sDiffY = offset.top  - e.pageY;
@@ -208,7 +229,7 @@
 
 					console.log(x, y, w, h);
 
-					$(".scaleit").css({
+					$scaleit.css({
 						left: x,
 						top: y
 					});
@@ -223,19 +244,23 @@
 
 				// Pan+Scale
 
-				$(".panscaleit").touch({
+				var $panscaleit = $(".panscaleit");
+
+				$.touch($panscaleit, {
 					pan: true,
 					scale: true
-				}).on("scalestart.panscaleit", function(e) {
+				});
+
+				$panscaleit.on("scalestart.panscaleit", function(e) {
 					console.log("panscale start");
 
-					var offset = $(".panscaleit").offset();
+					var offset = $panscaleit.offset();
 
-					sDiffX = offset.left - e.pageX;
-					sDiffY = offset.top  - e.pageY;
+					psDiffX = offset.left - e.pageX;
+					psDiffY = offset.top  - e.pageY;
 
-					sOrigH = $(".panscaleit_box").outerHeight();
-					sOrigW = $(".panscaleit_box").outerWidth();
+					psOrigH = $(".panscaleit_box").outerHeight();
+					psOrigW = $(".panscaleit_box").outerWidth();
 				})
 				.on("scaleend.panscaleit", function(e) {
 					console.log("panscale end");
@@ -243,8 +268,8 @@
 				.on("scale.panscaleit", function(e) {
 					console.log("panscale");
 
-					var w = sOrigW * e.scale,
-						h = sOrigH * e.scale;
+					var w = psOrigW * e.scale,
+						h = psOrigH * e.scale;
 
 					if (w < 50) {
 						w = 50;
@@ -260,12 +285,12 @@
 						h = 300;
 					}
 
-					var x = e.pageX + sDiffX,
-						y = e.pageY + sDiffY;
+					var x = e.pageX + psDiffX,
+						y = e.pageY + psDiffY;
 
 					console.log(x, y, w, h);
 
-					$(".panscaleit").css({
+					$panscaleit.css({
 						left: x,
 						top: y
 					});
