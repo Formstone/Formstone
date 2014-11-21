@@ -34,9 +34,8 @@
 			// Extend w/ Local Options
 
 			data = $.extend(true, data, {
-				$element    : $element,
-				$el         : $element,
-				touches     : []
+				$el        : $element,
+				touches    : []
 			}, options);
 
 			if (data.tap) {
@@ -45,14 +44,14 @@
 				data.pan   = false;
 				data.scale = false;
 
-				$element.on(Events.touchStart, data, onPointerStart)
+				$element.on( Events.touchStart, data, onPointerStart)
 						.on(Events.click, data, onClick);
 			} else if (data.pan || data.scale) {
 				// Pan / Scale
 
 				data.tap = false;
 
-				$element.on( [Events.touchStart].join(" "), data, onTouch);
+				$element.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
 				if (data.pan) {
 					$element.on( Events.mouseDown, data, onPointerStart);
@@ -106,7 +105,7 @@
 			// Normalize MS pointer events back to standard touches
 			var activeTouch = false;
 			for (var i in data.touches) {
-				if (data.touches[i].identifier === oe.pointerId) {
+				if (data.touches[i].id === oe.pointerId) {
 					activeTouch = true;
 					data.touches[i].pageX    = oe.clientX;
 					data.touches[i].pageY    = oe.clientY;
@@ -148,10 +147,10 @@
 		data.startE     = e.originalEvent;
 		data.startX     = (touch) ? touch.pageX : e.pageX;
 		data.startY     = (touch) ? touch.pageY : e.pageY;
+		data.scaleD     = 1;
 
 		if (data.tap) {
 			// Tap
-
 			data.clicked = false;
 
 			data.$el.on(Events.touchMove, data, onPointerMove)
@@ -161,22 +160,19 @@
 
 			Functions.killEvent(e);
 
-			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, 1, 0, 0);
+			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0);
 
 			if (data.scale && data.touches && data.touches.length >= 2) {
-				data.pinchStartX0    = data.touches[0].pageX;
-				data.pinchStartY0    = data.touches[0].pageY;
+				var t = data.touches;
 
-				data.pinchStartX1    = data.touches[1].pageX;
-				data.pinchStartY1    = data.touches[1].pageY;
+				data.pinch = {
+					startX     : midpoint(t[0].pageX, t[1].pageX),
+					startY     : midpoint(t[0].pageY, t[1].pageY),
+					startD     : pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY))
+				};
 
-				data.pinchStartX     = ((data.pinchStartX0 + data.pinchStartX1) / 2.0);
-				data.pinchStartY     = ((data.pinchStartY0 + data.pinchStartY1) / 2.0);
-
-				data.pinchDeltaStart = Math.sqrt(Math.pow((data.pinchStartX1 - data.pinchStartX0), 2) + Math.pow((data.pinchStartY1 - data.pinchStartY0), 2));
-
-				newE.pageX    = data.startX   = data.pinchStartX;
-				newE.pageY    = data.startY   = data.pinchStartY;
+				newE.pageX    = data.startX   = data.pinch.startX;
+				newE.pageY    = data.startY   = data.pinch.startY;
 			}
 
 			if (data.pan) {
@@ -184,7 +180,7 @@
 					   .on(Events.mouseUp, data, onPointerEnd);
 			}
 
-			$Window.on( [Events.touchMove, Events.touchEnd, Events.touchCancel].join(" ") , data, onTouch);
+			$Window.on( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.pointerMove, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
 
 			data.$el.trigger( newE );
 		}
@@ -213,27 +209,22 @@
 			// Pan / Scale
 
 			var fire    = true,
-				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, 1, deltaX, deltaY);
+				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY);
 
 			if (data.scale) {
 				if (data.touches && data.touches.length >= 2) {
-					data.pinchEndX0    = data.touches[0].pageX;
-					data.pinchEndY0    = data.touches[0].pageY;
+					var t = data.touches;
 
-					data.pinchEndX1    = data.touches[1].pageX;
-					data.pinchEndY1    = data.touches[1].pageY;
+					data.pinch.endX     = midpoint(t[0].pageX, t[1].pageX);
+					data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
+					data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
+					data.scaleD    = (data.pinch.endD / data.pinch.startD);
 
-					data.pinchDeltaEnd = Math.sqrt(Math.pow((data.pinchEndX1 - data.pinchEndX0), 2) + Math.pow((data.pinchEndY1 - data.pinchEndY0), 2));
-					data.scale         = (data.pinchDeltaEnd / data.pinchDeltaStart);
-
-					data.pinchEndX     = ((data.pinchEndX0 + data.pinchEndX1) / 2.0);
-					data.pinchEndY     = ((data.pinchEndY0 + data.pinchEndY1) / 2.0);
-
-					newE.pageX     = data.pinchEndX;
-					newE.pageY     = data.pinchEndY;
-					newE.scale     = data.scale;
-					newE.deltaX    = data.pinchEndX - data.pinchStartX;
-					newE.deltaY    = data.pinchEndY - data.pinchStartY;
+					newE.pageX     = data.pinch.endX;
+					newE.pageY     = data.pinch.endY;
+					newE.scale     = data.scaleD;
+					newE.deltaX    = data.pinch.endX - data.pinch.startX;
+					newE.deltaY    = data.pinch.endY - data.pinch.startY;
 				} else if (!data.pan) {
 					fire = false;
 				}
@@ -271,8 +262,13 @@
 				newY      = (touch) ? touch.pageY : e.pageY,
 				deltaX    = newX - data.startX,
 				deltaY    = newY - data.startY,
-				newE      = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, 1, deltaX, deltaY);
+				newE      = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, data.scaleD, deltaX, deltaY);
 
+			$Window.off( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.mouseMove, Events.mouseUp, Events.pointerMove, Events.pointerUp, Events.pointerCancel].join(" ") );
+
+			data.$el.trigger( newE );
+
+/*
 			if (data.scale) {
 				if (e.originalEvent.pointerId) {
 					for (var i in data.touches) {
@@ -283,11 +279,17 @@
 				} else {
 					data.touches = e.originalEvent.touches;
 				}
+
+				if (data.touches.length) {
+					onPointerStart($.extend(e, {
+						data: data,
+						originalEvent: {
+							touches: data.touches
+						}
+					}));
+				}
 			}
-
-			$Window.off( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.mouseMove, Events.mouseUp].join(" ") );
-
-			data.$el.trigger( newE );
+*/
 		}
 	}
 
@@ -310,7 +312,7 @@
 
 			var newX    = (data.startE) ? data.startX : e.pageX,
 				newY    = (data.startE) ? data.startY : e.pageY,
-				newE    = buildEvent(Events.tap, data.oe, newX, newY, 1);
+				newE    = buildEvent(Events.tap, e.originalEvent, newX, newY, 1, 0, 0);
 
 			data.$el.trigger( newE );
 		}
@@ -324,18 +326,30 @@
 	 * @param oe [object] "Original event"
 	 * @param x [int] "X value"
 	 * @param y [int] "Y value"
+	 * @param scale [float] "Scale value"
+	 * @param dx [float] "Delta X value"
+	 * @param dy [float] "Delta Y value"
 	 */
 
 	function buildEvent(type, oe, x, y, s, dx, dy) {
 		return $.Event(type, {
-			pageX: x,
-			pageY: y,
-			scale: s,
-			deltaX: dx,
-			deltaY: dy,
+			pageX     : x,
+			pageY     : y,
+			scale     : s,
+			deltaX    : dx,
+			deltaY    : dy,
 			originalEvent: oe,
-			preventDefault: oe.preventDefault
+			bubbles: true
 		});
+	}
+
+
+	function midpoint(a, b) {
+		return (a + b) / 2.0;
+	}
+
+	function pythagorus(a, b) {
+		return Math.sqrt((a * a) + (b * b));
 	}
 
 
@@ -346,7 +360,8 @@
 	 * @type widget
 	 */
 
-	var Plugin = Formstone.Plugin("touch", {
+	var legacyPointer = !!(window.PointerEvent),
+		Plugin = Formstone.Plugin("touch", {
 			/**
 			 * @options
 			 * @param pan [boolean || object] <false> "Object to enable"
@@ -365,6 +380,13 @@
 
 			methods : {
 				_delegate    : delegate
+			},
+
+			events: {
+				pointerDown    : legacyPointer ? "MSPointerDown"   : "pointerdown",
+				pointerUp      : legacyPointer ? "MSPointerUp"     : "pointerup",
+				pointerMove    : legacyPointer ? "MSPointerMove"   : "pointermove",
+				pointerCancel  : legacyPointer ? "MSPointerCancel" : "pointercancel"
 			}
 		}),
 

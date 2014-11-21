@@ -128,7 +128,7 @@
 				$panit.on("panstart.panit", function(e) {
 					console.log("pan start");
 
-					var offset = $panit.offset();
+					var offset = $(this).offset();
 
 					diffX = offset.left - e.pageX;
 					diffY = offset.top  - e.pageY;
@@ -138,8 +138,10 @@
 				})
 				.on("panend.panit", function(e) {
 					console.log("pan end");
-				})
-				.on("pan.panit", function(e) {
+				});
+
+				// Bubbling
+				$(document).on("pan.panit", ".panit", function(e) {
 					console.log("pan");
 
 					var data = e.data,
@@ -162,7 +164,7 @@
 
 					console.log(x, y);
 
-					$panit.css({
+					$(this).css({
 						left: x,
 						top: y
 					})
@@ -229,10 +231,12 @@
 
 					console.log(x, y, w, h);
 
+/*
 					$scaleit.css({
 						left: x,
 						top: y
 					});
+*/
 
 					$(".scaleit_box").css({
 						height: h,

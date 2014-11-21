@@ -123,8 +123,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 						// Extend w/ Local Options
 
 						var data = $.extend(true, {
-							$element    : $element,
-							$el         : $element
+							$el : $element
 						}, options, $element.data(namespace + "-options"));
 
 						// Constructor
@@ -171,9 +170,11 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function killEvent(e) {
-				if ($.type(e) !== "undefined") {
+				try {
 					e.preventDefault();
 					e.stopPropagation();
+				} catch(error) {
+					//
 				}
 			}
 
