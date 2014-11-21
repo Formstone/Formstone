@@ -94,9 +94,3 @@ Destroys plugin instance.
 $.touch(".target", "destroy");
 ```
 
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| data | object | {} | Instance data |
-

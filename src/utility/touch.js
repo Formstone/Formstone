@@ -75,7 +75,6 @@
 	 * @method
 	 * @name destroy
 	 * @description Destroys plugin instance.
-	 * @param data [object] <{}> "Instance data"
 	 * @example $.touch(".target", "destroy");
 	 */
 
