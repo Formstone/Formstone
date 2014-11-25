@@ -12,10 +12,11 @@
 
 * [Cookie](utility-cookie.md)
 * [Media Query](utility-mediaquery.md)
-* [Touch](utility-touch.md)
 
 ## Widget
 
 * [Navigation](widget-navigation.md)
 * [Tooltip](widget-tooltip.md)
+* [Touch](widget-touch.md)
+* [Transition](widget-transition.md)
 * [Upload](widget-upload.md)

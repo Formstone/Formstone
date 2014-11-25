@@ -4,63 +4,32 @@
 
 	/**
 	 * @method private
-	 * @name delegate
-	 * @param opts [object] "Plugin options"
-	 */
-
-	function delegate(selector, options) {
-		if (selector.length) {
-			if ($.type(options) === "string" && options === "destroy") {
-				Functions.iterate.apply($(selector), [ destruct ].concat(Array.prototype.slice.call(arguments, 1)));
-			} else {
-				Functions.iterate.apply($(selector), [ construct ].concat(Array.prototype.slice.call(arguments, 1)));
-			}
-		}
-	}
-
-	/**
-	 * @method private
 	 * @name construct
 	 * @description Builds instance.
-	 * @param data [object] "Instance Data"
-	 * @param opions [object] "Instance options"
+	 * @param data [object] "Instance data"
 	 */
 
-	function construct(data, options) {
-		var $element = this;
+	function construct(data) {
+		data.touches = [];
 
-		if (!Functions.getData($element)) {
+		if (data.tap) {
+			// Tap
 
-			// Extend w/ Local Options
+			data.pan   = false;
+			data.scale = false;
 
-			data = $.extend(true, data, {
-				$el        : $element,
-				touches    : []
-			}, options);
+			this.on( Events.touchStart, data, onPointerStart)
+				.on(Events.click, data, onClick);
+		} else if (data.pan || data.scale) {
+			// Pan / Scale
 
-			if (data.tap) {
-				// Tap
+			data.tap = false;
 
-				data.pan   = false;
-				data.scale = false;
+			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
-				$element.on( Events.touchStart, data, onPointerStart)
-						.on(Events.click, data, onClick);
-			} else if (data.pan || data.scale) {
-				// Pan / Scale
-
-				data.tap = false;
-
-				$element.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
-
-				if (data.pan) {
-					$element.on( Events.mouseDown, data, onPointerStart);
-				}
+			if (data.pan) {
+				this.on( Events.mouseDown, data, onPointerStart);
 			}
-
-			// Cache Instance
-
-			$element.data(Namespace, data);
 		}
 	}
 
@@ -71,16 +40,8 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	/**
-	 * @method
-	 * @name destroy
-	 * @description Destroys plugin instance.
-	 * @example $.touch(".target", "destroy");
-	 */
-
 	function destruct(data) {
-		this.off(Events.namespace)
-			.removeData(Namespace);
+		this.off(Events.namespace);
 	}
 
 	/**
@@ -350,25 +311,41 @@
 		});
 	}
 
+	/**
+	 * @method private
+	 * @name midpoint
+	 * @description Calculates midpoint.
+	 * @param a [float] "Value 1"
+	 * @param b [float] "Value 2"
+	 */
 
 	function midpoint(a, b) {
 		return (a + b) / 2.0;
 	}
 
+	/**
+	 * @method private
+	 * @name pythagorus
+	 * @description Pythagorean theorem
+	 * @param a [float] "Value 1"
+	 * @param b [float] "Value 2"
+	 */
+
 	function pythagorus(a, b) {
 		return Math.sqrt((a * a) + (b * b));
 	}
-
 
 	/**
 	 * @plugin
 	 * @name Touch
 	 * @description A jQuery plugin for multi-touch events.
-	 * @type utility
+	 * @type widget
 	 */
 
 	var legacyPointer = !!(window.PointerEvent),
 		Plugin = Formstone.Plugin("touch", {
+			widget: true,
+
 			/**
 			 * @options
 			 * @param pan [boolean || object] <false> "Object to enable"
@@ -383,7 +360,8 @@
 			},
 
 			methods : {
-				_delegate    : delegate
+				_construct    : construct,
+				_destruct     : destruct
 			},
 
 			events: {
@@ -437,11 +415,9 @@ scale		// Current scale value
 Tap creates a basic 'fast click' event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user's scroll:
 
 ```
-$.touch(".tap-it", {
+$(".tap-it").touch({
 	tap: true
-});
-
-$(".tap-it").on("tap", function(e) {
+}).on("tap", function(e) {
 	console.log("Tapped");
 });
 ```
@@ -453,11 +429,9 @@ Note: `tap` can not be used in conjunction with `pan` or `scale`.
 Pan can be used for building touch-freindly drag and drop interfaces:
 
 ```
-$.touch(".pan-it", {
+$(".pan-it").touch({
 	pan: true
-});
-
-$(".pan-it").on("panstart", function(e) {
+}).on("panstart", function(e) {
 	console.log("Started panning");
 }).on("pan", function(e) {
 	console.log("Panning");
@@ -471,11 +445,9 @@ $(".pan-it").on("panstart", function(e) {
 Scale can be used for building touch-freindly scalable interfaces:
 
 ```
-$.touch(".scale-it", {
+$(".scale-it").touch({
 	scale: true
-});
-
-$(".scale-it").on("scalestart", function(e) {
+}).on("scalestart", function(e) {
 	console.log("Started scaling");
 }).on("scale", function(e) {
 	console.log("Scaling");

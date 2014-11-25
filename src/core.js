@@ -30,7 +30,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.matchMediaSupport    = !!(window.matchMedia);
 			this.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
 			this.rafSupport           = !!(window.requestAnimationFrame && window.cancelAnimationFrame);
-			this.touchSupport         = !!(('ontouchstart' in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
+			this.touchSupport         = !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
 		},
 
 		Formstone = new Core(),
@@ -104,7 +104,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function initialize(options) {
-
 				// Extend Defaults
 
 				options = $.extend(true, {}, settings.defaults, options);
@@ -271,7 +270,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					// Wrap Public Methods
 
 					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
-				} else if ($.type(method) === 'object' || !method) {
+				} else if ($.type(method) === "object" || !method) {
 					// Initialize
 
 					return initialize.apply(this, arguments);
@@ -417,7 +416,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				"WebkitTransition"    : "webkitTransitionEnd"
 			},
 			event = "transitionend",
-			test = document.createElement('div');
+			test = document.createElement("div");
 
 		for (var i in transitions) {
 			if (transitions.hasOwnProperty(i) && i in test.style) {
@@ -426,7 +425,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			}
 		}
 
-		return event + ".{ns}";
+		return event;
 	}
 
 	// Document Ready
@@ -437,8 +436,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	// Custom Events
 
-	Events.transitionEnd      = getTransitionEvent();
-	Events.clickTouchStart    = Events.click + " " + Events.touchStart;
+	Events.transitionEnd       = getTransitionEvent() + ".{ns}";
+	Events.clickTouchStart     = Events.click + " " + Events.touchStart;
 
 	return Formstone;
 

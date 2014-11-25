@@ -25,11 +25,9 @@ scale		// Current scale value
 Tap creates a basic 'fast click' event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user's scroll:
 
 ```
-$.touch(".tap-it", {
+$(".tap-it").touch({
 	tap: true
-});
-
-$(".tap-it").on("tap", function(e) {
+}).on("tap", function(e) {
 	console.log("Tapped");
 });
 ```
@@ -41,11 +39,9 @@ Note: `tap` can not be used in conjunction with `pan` or `scale`.
 Pan can be used for building touch-freindly drag and drop interfaces:
 
 ```
-$.touch(".pan-it", {
+$(".pan-it").touch({
 	pan: true
-});
-
-$(".pan-it").on("panstart", function(e) {
+}).on("panstart", function(e) {
 	console.log("Started panning");
 }).on("pan", function(e) {
 	console.log("Panning");
@@ -59,11 +55,9 @@ $(".pan-it").on("panstart", function(e) {
 Scale can be used for building touch-freindly scalable interfaces:
 
 ```
-$.touch(".scale-it", {
+$(".scale-it").touch({
 	scale: true
-});
-
-$(".scale-it").on("scalestart", function(e) {
+}).on("scalestart", function(e) {
 	console.log("Started scaling");
 }).on("scale", function(e) {
 	console.log("Scaling");
@@ -76,7 +70,7 @@ Note: `pan` and `scale` can also be used together to create a rich interface.
 
 ## Options
 
-
+Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-touch-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -86,11 +80,27 @@ Note: `pan` and `scale` can also be used together to create a rich interface.
 
 ## Methods
 
-### destroy
+Methods are publicly available to all active instances, unless otherwise stated.
 
-Destroys plugin instance.
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
 
 ```
-$.touch(".target", "destroy");
+$.touch("defaults", { ... });
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | object | {} | New plugin defaults |
+
+### destroy
+
+Removes plugin instance.
+
+```
+$(".target").touch("destroy");
 ```
 

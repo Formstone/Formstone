@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Transition Demo</title>
+
+		<!-- Modernizer -->
+		<script src="http://formstone.it/js/modernizr.js"></script>
+
+		<!-- Demo Resources -->
+		<link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all">
+		<script src="http://formstone.it/js/demo.js"></script>
+
+		<!--[if IE 8]>
+        	<script>var IE8 = true;</script>
+        	<script src="http://formstone.it/js/site.ie8.js"></script>
+			<link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css">
+		<![endif]-->
+		<!--[if IE 9]>
+        	<script>var IE9 = true;</script>
+        	<script src="http://formstone.it/js/site.ie9.js"></script>
+		<![endif]-->
+
+		<script src="../dist/core.js"></script>
+
+		<script src="../dist/widget/transition.js"></script>
+
+		<!--[DEMO:START-RESOURCES]-->
+
+		<style>
+			html, body {
+				height: 200%;
+			}
+
+			.transit {
+				height: 50px;
+				width: 50px;
+
+				background: blue;
+				margin-left: 0;
+
+				-webkit-transition: margin 0.5s ease, background 0.5s linear 0.5s;
+						transition: margin 0.5s ease, background 0.5s linear 0.5s;
+			}
+
+			.transit.move {
+				margin-left: 500px;
+			}
+
+			.transit_3.move {
+				background: green;
+			}
+		</style>
+
+		<script>
+			$(document).ready(function() {
+
+				$(".transit_1").transition({
+					complete: function() {
+						console.log("FINISHED 1!");
+
+						$(this).removeClass("animating");
+					}
+				});
+
+				$(".transit_parent").transition({
+					target: ".transit",
+					complete: function() {
+						console.log("FINISHED 2!");
+
+						$(this).find(".transit").removeClass("animating");
+					}
+				});
+
+				$(".transit_3").transition({
+					always: false,
+					property: "background-color",
+					complete: function() {
+						console.log("FINISHED 3!");
+					}
+				});
+
+				$(".button.trigger").on("click", function() {
+					var $t = $("." + $(this).data("target"));
+
+					if (!$t.hasClass("animating")) {
+						$t.toggleClass("move").addClass("animating");
+					}
+				});
+
+			});
+		</script>
+
+		<!--[DEMO:END-RESOURCES]-->
+
+	</head>
+	<body class="gridlock demo">
+
+		<div class="transit transit_1"></div>
+
+		<button class="button trigger" data-target="transit_1">Start</button>
+
+		<div class="transit_parent">
+			<div class="transit transit_2"></div>
+		</div>
+
+		<button class="button trigger" data-target="transit_2">Start</button>
+
+		<div class="transit transit_3"></div>
+
+		<button class="button trigger" data-target="transit_3">Start</button>
+
+	</body>
+</html>
