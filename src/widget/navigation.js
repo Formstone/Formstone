@@ -30,7 +30,7 @@
 			tap: true
 		}).on(Events.tap, data, onClick);
 
-		if (Formstone.matchMediaSupport !== undefined) {
+		if (Formstone.support.matchMedia !== undefined) {
 			data.mediaQuery = Formstone.$window[0].matchMedia("(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")");
 			// Stay in context
 			data.mediaQuery.addListener(function() {

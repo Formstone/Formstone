@@ -96,12 +96,12 @@ $(".target").tooltip("destroy");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .tooltip | element | Base widget class |
-| .tooltip.tooltip-visible | modifier | Inidcates visible state |
-| .tooltip.tooltip-right | modifier | Inidcates right side display |
-| .tooltip.tooltip-left | modifier | Inidcates left side display |
-| .tooltip.tooltip-top | modifier | Inidcates top display |
-| .tooltip.tooltip-bottom | modifier | Inidcates bottom display |
-| .tooltip-content | element | Tooltip content wrapper |
-| .tooltip-caret | element | Tooltip caret |
+| .fs-tooltip | element | Base widget class |
+| .fs-tooltip.fs-tooltip-visible | modifier | Inidcates visible state |
+| .fs-tooltip.fs-tooltip-right | modifier | Inidcates right side display |
+| .fs-tooltip.fs-tooltip-left | modifier | Inidcates left side display |
+| .fs-tooltip.fs-tooltip-top | modifier | Inidcates top display |
+| .fs-tooltip.fs-tooltip-bottom | modifier | Inidcates bottom display |
+| .fs-tooltip-content | element | Tooltip content wrapper |
+| .fs-tooltip-caret | element | Tooltip caret |
 

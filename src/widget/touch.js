@@ -374,7 +374,6 @@
 
 		// Localize References
 
-		Namespace     = Plugin.namespace,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
 

@@ -122,10 +122,10 @@ $(".target").navigation("open");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .navigation | element | Base widget class |
-| .navigation.navigation-open | modifier | Indicates open state |
-| .navigation.navigation-enabled | modifier | Indicates enabled state |
-| .navigation-handle | element | Click target to toggle navigation |
-| .navigation-handle:after | element | Icon displayed in handle |
-| .navigation-container | element | Wraps target navigation |
+| .fs-navigation | element | Base widget class |
+| .fs-navigation.fs-navigation-open | modifier | Indicates open state |
+| .fs-navigation.fs-navigation-enabled | modifier | Indicates enabled state |
+| .fs-navigation-handle | element | Click target to toggle navigation |
+| .fs-navigation-handle:after | element | Icon displayed in handle |
+| .fs-navigation-container | element | Wraps target navigation |
 

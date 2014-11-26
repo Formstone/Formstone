@@ -15,7 +15,7 @@
 
 		data.$target = data.$el.find(data.target);
 
-		if (Formstone.transitionSupport) {
+		if (Formstone.support.transition) {
 			// If supported
 
 			this.on(Events.transitionEnd, data, onTranistionEnd);
@@ -59,7 +59,7 @@
 			if (!data.always) {
 				// Unbind events, similiar to .one()
 
-				data.$el.off(Events.transitionEnd);
+				data.$el.off(Events.transitionEnd)[Plugin.namespace]("destroy"); // clean up old data?
 			}
 
 			// Otherwise, trigger callback
@@ -80,7 +80,7 @@
 
 			/**
 			 * @options
-			 * @param always [boolean] <true> "Flag to always react to transition end (.on vs .one)"
+			 * @param always [boolean] <False> "Flag to always react to transition end (.on vs .one)"
 			 * @param complete [function] <$.noop> "Callback function"
 			 * @param property [string] <null> "Property to react to"
 			 * @param target [string] <null> "Target child selector"
@@ -101,7 +101,6 @@
 
 		// Localize References
 
-		Namespace     = Plugin.namespace,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
 

@@ -11,7 +11,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| always | boolean | true | Flag to always react to transition end (.on vs .one) |
+| always | boolean | False | Flag to always react to transition end (.on vs .one) |
 | complete | function | $.noop | Callback function |
 | property | string | null | Property to react to |
 | target | string | null | Target child selector |

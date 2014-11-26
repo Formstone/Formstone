@@ -20,47 +20,47 @@
 
 	/**
 	 * @class
-	 * @name .tooltip
+	 * @name .fs-tooltip
 	 * @type element
 	 * @description Base widget class
 	 */
 
 	/**
 	 * @class
-	 * @name .tooltip.tooltip-visible
+	 * @name .fs-tooltip.fs-tooltip-visible
 	 * @type modifier
 	 * @description Inidcates visible state
 	 */
 
 	/**
 	 * @class
-	 * @name .tooltip.tooltip-right
+	 * @name .fs-tooltip.fs-tooltip-right
 	 * @type modifier
 	 * @description Inidcates right side display
 	 */
 
 	/**
 	 * @class
-	 * @name .tooltip.tooltip-left
+	 * @name .fs-tooltip.fs-tooltip-left
 	 * @type modifier
 	 * @description Inidcates left side display
 	 */
 
 	/**
 	 * @class
-	 * @name .tooltip.tooltip-top
+	 * @name .fs-tooltip.fs-tooltip-top
 	 * @type modifier
 	 * @description Inidcates top display
 	 */
 
 	/**
 	 * @class
-	 * @name .tooltip.tooltip-bottom
+	 * @name .fs-tooltip.fs-tooltip-bottom
 	 * @type modifier
 	 * @description Inidcates bottom display
 	 */
 
-	.tooltip {
+	.fs-tooltip {
 		width: 1px;
 		height: 1px;
 
@@ -97,7 +97,7 @@
 
 		/**
 		 * @class
-		 * @name .tooltip-content
+		 * @name .fs-tooltip-content
 		 * @type element
 		 * @description Tooltip content wrapper
 		 */
@@ -117,7 +117,7 @@
 
 		/**
 		 * @class
-		 * @name .tooltip-caret
+		 * @name .fs-tooltip-caret
 		 * @type element
 		 * @description Tooltip caret
 		 */
@@ -135,14 +135,14 @@
 			position: absolute;
 		}
 
-		// .tooltip-right
+		// .fs-tooltip-right
 
 		&-right {
-			.tooltip-content {
+			.fs-tooltip-content {
 				box-shadow: @fs-tooltip-box-shadow-offset 0 @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
 			}
 
-			.tooltip-caret {
+			.fs-tooltip-caret {
 				top: 0;
 				left: -@fs-tooltip-caret-size;
 
@@ -153,14 +153,14 @@
 		}
 
 
-		// .tooltip-left
+		// .fs-tooltip-left
 
 		&-left {
-			.tooltip-content {
+			.fs-tooltip-content {
 				box-shadow: -@fs-tooltip-box-shadow-offset 0 @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
 			}
 
-			.tooltip-caret {
+			.fs-tooltip-caret {
 				top: 0;
 				right: -@fs-tooltip-caret-size;
 
@@ -172,21 +172,21 @@
 
 		&-top,
 		&-bottom {
-			.tooltip-caret {
+			.fs-tooltip-caret {
 				display: block;
 				float: none;
 				margin: 0 auto;
 			}
 		}
 
-		// .tooltip-top
+		// .fs-tooltip-top
 
 		&-top {
-			.tooltip-content {
+			.fs-tooltip-content {
 				box-shadow: 0 -@fs-tooltip-box-shadow-offset @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
 			}
 
-			.tooltip-caret {
+			.fs-tooltip-caret {
 				bottom: -@fs-tooltip-caret-size;
 				left: 0;
 
@@ -196,14 +196,14 @@
 			}
 		}
 
-		// .tooltip-bottom
+		// .fs-tooltip-bottom
 
 		&-bottom {
-			.tooltip-content {
+			.fs-tooltip-content {
 				box-shadow: 0 @fs-tooltip-box-shadow-offset @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
 			}
 
-			.tooltip-caret {
+			.fs-tooltip-caret {
 				top: -@fs-tooltip-caret-size;
 				left: 0;
 

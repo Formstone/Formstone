@@ -12,7 +12,7 @@
 
 		// Check Support
 
-		if (Formstone.matchMediaSupport) {
+		if (Formstone.support.matchMedia) {
 
 			if ($.type(options) === "object" && !Initialized) {
 

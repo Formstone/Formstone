@@ -10,7 +10,7 @@
 	 */
 
 	function construct(data) {
-		if (Formstone.fileSupport) {
+		if (Formstone.support.file) {
 			var html = "";
 
 			html += '<div class="' + Classes.dropzone + '">';
@@ -48,7 +48,7 @@
 	 */
 
 	function destruct(data) {
-		if (Formstone.fileSupport) {
+		if (Formstone.support.file) {
 			data.$input.off(Events.namespace);
 
 			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )

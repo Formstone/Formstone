@@ -20,17 +20,20 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.$document            = $(document);
 			this.$body                = null;
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
-			this.isFirefox            = /Firefox/i.test( this.userAgent );
-			this.isChrome             = /Chrome/i.test(  this.userAgent );
-			this.isSafari             = (/Safari/i.test( this.userAgent ) && !this.isChrome);
+			this.isFirefox            = /Firefox/i.test(this.userAgent);
+			this.isChrome             = /Chrome/i.test(this.userAgent);
+			this.isSafari             = (/Safari/i.test(this.userAgent) && !this.isChrome);
 			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
 			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
-			this.transitionSupport    = false;
-			this.fileSupport          = !!(window.File && window.FileReader && window.FileList);
-			this.matchMediaSupport    = !!(window.matchMedia);
-			this.historySupport       = !!(window.history && window.history.pushState && window.history.replaceState);
-			this.rafSupport           = !!(window.requestAnimationFrame && window.cancelAnimationFrame);
-			this.touchSupport         = !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch);
+
+			this.support = {
+				file          : !!(window.File && window.FileList && window.FileReader),
+				history       : !!(window.history && window.history.pushState && window.history.replaceState),
+				matchMedia    : !!(window.matchMedia || window.msMatchMedia),
+				raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
+				touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
+				transition    : false
+			};
 		},
 
 		Formstone = new Core(),
@@ -96,6 +99,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	Core.prototype.Plugin = function(namespace, settings) {
 		Formstone.Plugins[namespace] = (function(namespace, settings) {
 
+			var namespaceDash = "fs-" + namespace,
+				namespaceDot  = "fs." + namespace;
+
 			/**
 			 * @method private
 			 * @name initialize
@@ -123,7 +129,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						var data = $.extend(true, {
 							$el : $element
-						}, options, $element.data(namespace + "-options"));
+						}, options, $element.data(namespaceDash + "-options"));
 
 						// Constructor
 
@@ -132,7 +138,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 						// Cache Instance
 
 						$element.addClass(settings.classes.element)
-						        .data(namespace, data);
+						        .data(namespaceDash, data);
 					}
 
 				}
@@ -158,7 +164,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
 				this.removeClass(settings.classes.element)
-					.removeData(namespace);
+					.removeData(namespaceDash);
 			}
 
 			/**
@@ -186,7 +192,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function getData($element) {
-				return $element.data(namespace);
+				return $element.data(namespaceDash);
 			}
 
 			/**
@@ -309,8 +315,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			// Namespace Classes & Events
 
-			settings.classes   = namespaceProperties("classes", namespace, Classes, settings.classes);
-			settings.events    = namespaceProperties("events",  namespace, Events,  settings.events);
+			settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
+			settings.events    = namespaceProperties("events",  namespaceDot,  Events,  settings.events);
 
 			// Extend Functions
 
@@ -421,7 +427,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		for (var i in transitions) {
 			if (transitions.hasOwnProperty(i) && i in test.style) {
 				event = transitions[i];
-				Formstone.transitionSupport = true;
+				Formstone.support.transition = true;
 			}
 		}
 
@@ -458,10 +464,12 @@ $body					// object, Reference to jQuery wrapped body tag
 
 Plugins					// object, Contains all registered plugins
 
-historySupport			// boolean, History api support, including push and pop state
-matchMediaSupport		// boolean, Match Media API support
-rafSupport				// boolean, Request Animation Frame API support
-transitionSupport		// boolean, CSS3 Transition support
+support.file			// boolean, File API support
+support.history			// boolean, History API support, including push and pop state
+support.matchMedia		// boolean, Match Media API support
+support.raf				// boolean, Request Animation Frame API support'
+support.touch			// boolean, Touch event support
+support.transition		// boolean, CSS3 Transition support
 
 userAgent				// string, Raw user string
 isChrome				// boolean, Browser is Chrome

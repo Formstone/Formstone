@@ -15,6 +15,7 @@
 
 ## Widget
 
+* [Lightbox](widget-lightbox.md)
 * [Navigation](widget-navigation.md)
 * [Tooltip](widget-tooltip.md)
 * [Touch](widget-touch.md)

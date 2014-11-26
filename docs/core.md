@@ -18,10 +18,12 @@ $body					// object, Reference to jQuery wrapped body tag
 
 Plugins					// object, Contains all registered plugins
 
-historySupport			// boolean, History api support, including push and pop state
-matchMediaSupport		// boolean, Match Media API support
-rafSupport				// boolean, Request Animation Frame API support
-transitionSupport		// boolean, CSS3 Transition support
+support.file			// boolean, File API support
+support.history			// boolean, History API support, including push and pop state
+support.matchMedia		// boolean, Match Media API support
+support.raf				// boolean, Request Animation Frame API support'
+support.touch			// boolean, Touch event support
+support.transition		// boolean, CSS3 Transition support
 
 userAgent				// string, Raw user string
 isChrome				// boolean, Browser is Chrome
