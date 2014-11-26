@@ -18,8 +18,7 @@
 		if (Formstone.support.transition) {
 			// If supported
 
-			this.on(Events.transitionEnd, data, onTranistionEnd)
-				.on(Events.transitionForce, data, resolve);
+			this.on(Events.transitionEnd, data, onTranistionEnd);
 		} else {
 			// Otherwise, trigger callback
 
@@ -49,18 +48,16 @@
 		e.stopPropagation();
 		e.preventDefault();
 
-		var data       = e.data,
-			oe         = e.originalEvent;
+		var data           = e.data,
+			oe             = e.originalEvent,
+			checkProp      = (!data.property || (oe && oe.propertyName === data.property)),
+			checkTarget    = (!data.target || (oe && $(oe.target).is(data.$target))),
+			checkEl        = (!data.target && oe && $(oe.target).is(data.$el));
 
 		// Check property and target
 
-		if ( (!data.property || (oe && oe.propertyName === data.property)) &&
-			 (!data.target || (oe && $(oe.target).is(data.$target))) &&
-			 (!data.target || (oe && $(oe.target).is(data.$el))) ) {
-
-			resolve({
-				data: data
-			});
+		if ( checkProp && checkTarget && checkEl ) {
+			resolve(data);
 		}
 	}
 
@@ -71,9 +68,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function resolve(e) {
-		var data = e.data;
-
+	function resolve(data) {
 		if (!data.always) {
 			// Unbind events, similiar to .one()
 
@@ -112,12 +107,9 @@
 
 			methods : {
 				_construct    : construct,
-				_destruct     : destruct
-			},
-
-			events: [
-				"transitionForce"
-			]
+				_destruct     : destruct,
+				resolve       : resolve
+			}
 		}),
 
 		// Localize References

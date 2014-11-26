@@ -269,29 +269,35 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			function delegateRoutine(method) {
 
-				// Only allow "public" methods (no underscore prefix)
+				// Public width OR public utility OR utility init OR false
 
-				if (settings.methods[method] && method.indexOf("_") !== 0) {
+				var _method = settings.methods[method] || settings.methods.utility[method] || settings.methods.utility._initialize || false;
 
-					// Wrap Public Methods
+				// If jQuery object
 
-					return iterate.apply(this, [ settings.methods[method] ].concat(Array.prototype.slice.call(arguments, 1)));
-				} else if ($.type(method) === "object" || !method) {
-					// Initialize
+				if (this instanceof $) {
 
-					return initialize.apply(this, arguments);
+					// Only allow "public" methods (no underscore prefix)
+
+					if ($.type(method) === "object" || !method) {
+						// Initialize
+
+						return initialize.apply(this, arguments);
+					} else if (_method && method.indexOf("_") !== 0) {
+
+						// Wrap Public Methods
+
+						return iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
+					}
+
+					return this;
+				} else if (_method) {
+
+					// Wrap Utility Methods
+
+					_method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
 				}
-
-				return this;
 			}
-
-			/**
-			 * @method private
-			 * @name setDefaults
-			 * @description Extends plugin default settings.
-			 * @param method [string] "Method to execute"
-			 * @return [mixed] "Current context"
-			 */
 
 			/**
 			 * @method widget
@@ -301,12 +307,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @example $.{ns}("defaults", { ... });
 			 */
 
-			function setDefaults(method) {
-				if (method === "defaults") {
-					settings.defaults = $.extend(true, settings.defaults, arguments[1] || {});
-				}
-
-				return this;
+			function setDefaults(options) {
+				settings.defaults = $.extend(true, settings.defaults, options || {});
 			}
 
 			// Locals
@@ -331,48 +333,56 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			// Extend Methods
 
-			settings.methods = $.extend({
+			settings.methods = $.extend(true, {
 
 				// Private Methods
 
-				_setup          : $.noop,    // Widget First Run
+				_setup          : $.noop,    // All First Run
 				_construct      : $.noop,    // Widget Constructor
 				_destruct       : $.noop,    // Widget Destructor
-				_delegate       : false,     // Utility Delegation
+				_delegate       : null,      // Utility Delegation
 
 				// Public Methods
 
-				destroy: destroy
+				destroy: destroy,
+
+				// Utility methods
+
+				utility: {
+					_initialize    : null,
+					defaults       : setDefaults
+				}
 
 			}, settings.methods);
 
 			// Register Plugin
 
-			if (settings.widget) {
+			// Widget
 
-				// Widget
+			if (settings.widget) {
 
 				// Method Delegation: $(".target").plugin("method", ...);
 				$.fn[namespace]    = delegateRoutine;
+			}
 
-				// Set Defaults:      $.plugin("defaults", { ... });
-				$[namespace]       = setDefaults;
-			} else {
+			// Utility
 
-				// Utility
+			if (settings.methods._delegate || objectSize(settings.methods.utility)) {
 
-				// Custom Delegation: $(".target").plugin( ... );
-				$[namespace]       = settings.methods._delegate || delegateRoutine;
+				// Utility Delegation: $.plugin("method", ... );
+
+				$[namespace] = settings.methods._delegate || delegateRoutine;
 			}
 
 			// Run Setup
 
+			settings.namespace = namespace;
+
 			$(function() {
 				if (!settings.initialized) {
-					settings.initialized    = true;
-					settings.namespace      = namespace;
-
 					settings.methods._setup.call(document);
+
+					settings.initialized = true;
 				}
 			});
 
@@ -410,6 +420,21 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		}
 
 		return _props;
+	}
+
+	// Object size
+
+	function objectSize(object) {
+		var size = 0,
+			key;
+
+		for (key in object) {
+			if (object.hasOwnProperty(key)) {
+				size++;
+			}
+		}
+
+		return size;
 	}
 
 	// Get Transition Event

@@ -8,6 +8,7 @@
 	 * @param opts [object] "Plugin options"
 	 */
 
+/*
 	function delegate(options) {
 
 		// Check Support
@@ -28,6 +29,7 @@
 			}
 		}
 	}
+*/
 
 	/**
 	 * @method private
@@ -255,7 +257,12 @@
 
 	var Plugin = Formstone.Plugin("mediaquery", {
 			methods: {
-				_delegate    : delegate
+				utility: {
+					_initialize    : initialize,
+					state          : getState,
+					bind           : bind,
+					unbind         : unbind
+				}
 			}
 		}),
 
@@ -281,7 +288,7 @@
 		 * @event change.mediaquery "Change to a media query match; Triggerd on window"
 		 */
 
-		Events    = {
+		Events = {
 			change     : "change.mediaquery",
 			enter      : "enter",
 			leave      : "leave"
@@ -289,11 +296,13 @@
 
 		// Public methods
 
-		Methods    = {
-			state      : getState,
-			bind       : bind,
-			unbind     : unbind
+/*
+		Methods = {
+			state     : getState,
+			bind      : bind,
+			unbind    : unbind
 		},
+*/
 
 		// Localize References
 

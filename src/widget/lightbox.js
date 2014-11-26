@@ -29,6 +29,24 @@
 
 	/**
 	 * @method private
+	 * @name initialize
+	 * @description Builds instance from $target.
+	 * @param $target [jQuery] "Target jQuery object"
+	 */
+
+	function initialize($target, options) {
+		if ($target instanceof $) {
+
+			// Emulate event
+
+			buildLightbox.apply($Window[0], [{ data: $.extend({}, {
+				$object: $target
+			}, Defaults, options || {}) }]);
+		}
+	}
+
+	/**
+	 * @method private
 	 * @name buildLightbox
 	 * @description Builds new lightbox.
 	 * @param e [object] "Event data"
@@ -40,11 +58,11 @@
 			var data           = e.data,
 				$el            = data.$el,
 				$object        = data.$object,
-				source         = ($el[0].href) ? $el[0].href || "" : "",
-				hash           = ($el[0].hash) ? $el[0].hash || "" : "",
+				source         = ($el && $el[0].href) ? $el[0].href || "" : "",
+				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
 				sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
 				extension      = sourceParts[0],
-				type           = $el.data(Classes.namespace + "-type") || "",
+				type           = ($el) ? $el.data(Classes.namespace + "-type") : "",
 				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
 				isVideo	       = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
 				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
@@ -114,10 +132,10 @@
 				html += Classes.mobile;
 			}
 			if (isUrl) {
-				html += Classes.frame;
+				html += Classes.iframe;
 			}
 			if (isElement || isObject) {
-				html += Classes.sInline;
+				html += Classes.inline;
 			}
 			html += '">';
 			html += '<span class="' + Classes.close + '">' + Instance.labels.close + '</span>';
@@ -291,7 +309,7 @@
 	 * @description Opens active instance
 	 */
 
-	function open() {
+	function openLightbox() {
 		var position = calculatePosition(),
 			durration = Instance.isMobile ? 0 : Instance.duration;
 
@@ -348,7 +366,7 @@
 		var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
 
 		if (Instance.isMobile || !contentHasChanged) {
-			Instance.$lightbox.trigger( Formstone.Plugins.transition.events.transitionForce ); // hacky (?)
+			Instance.$lightbox.transition("resolve");
 		}
 
 		// Track content size changes
@@ -464,7 +482,7 @@
 			// Size content to be sure it fits the viewport
 			sizeImage();
 
-			open();
+			openLightbox();
 
 		}).error(loadError)
 		  .attr("src", source)
@@ -632,7 +650,7 @@
 		Instance.$content.prepend(Instance.$videoWrapper);
 
 		sizeVideo();
-		open();
+		openLightbox();
 	}
 
 	/**
@@ -754,12 +772,12 @@
 					if (typeof Instance.$videoWrapper !== 'undefined') {
 						Instance.$videoWrapper.remove();
 					}
-					Instance.$target = Instance.gallery.$items.eq(Instance.gallery.index);
+					Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
 
-					Instance.$caption.html(Instance.formatter.apply($Body, [Instance.$target]));
+					Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
 					Instance.$position.find( Functions.getClassName(Classes.position_current) ).html(Instance.gallery.index + 1);
 
-					var source = Instance.$target.attr("href"),
+					var source = Instance.$el.attr("href"),
 						isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
 
 					if (isVideo) {
@@ -830,7 +848,7 @@
 
 	function loadURL(source) {
 		source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
-		var $iframe = $('<iframe class="' + Classes.iframe + '" src="' + source + '"></iframe>');
+		var $iframe = $('<iframe class="' + Classes.iframe_element + '" src="' + source + '"></iframe>');
 		appendObject($iframe);
 	}
 
@@ -844,7 +862,7 @@
 	function appendObject($object) {
 		Instance.$content.append($object);
 		sizeContent($object);
-		open();
+		openLightbox();
 	}
 
 	/**
@@ -859,8 +877,8 @@
 		Instance.windowWidth	  = $Window.width()  - Instance.paddingHorizontal;
 		Instance.objectHeight	  = $object.outerHeight(true);
 		Instance.objectWidth	  = $object.outerWidth(true);
-		Instance.targetHeight	  = Instance.targetHeight || Instance.$el.data(Classes.namespace + "-height");
-		Instance.targetWidth	  = Instance.targetWidth  || Instance.$el.data(Classes.namespace + "-width");
+		Instance.targetHeight	  = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
+		Instance.targetWidth	  = Instance.targetWidth  || (Instance.$el ? Instance.$el.data(Namespace + "-width")  : null);
 		Instance.maxHeight		  = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
 		Instance.isIframe		  = $object.is("iframe");
 		Instance.objectMarginTop  = 0;
@@ -871,8 +889,8 @@
 			Instance.windowWidth  -= Instance.margin;
 		}
 
-		Instance.contentHeight = (Instance.targetHeight !== undefined) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
-		Instance.contentWidth  = (Instance.targetWidth  !== undefined) ? Instance.targetWidth  : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth  : Instance.objectWidth;
+		Instance.contentHeight = (Instance.targetHeight) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
+		Instance.contentWidth  = (Instance.targetWidth)  ? Instance.targetWidth  : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth  : Instance.objectWidth;
 
 		if ((Instance.isIframe || Instance.isObject) && Instance.isMobile) {
 			Instance.contentHeight = Instance.windowHeight;
@@ -1107,6 +1125,7 @@
 				"position_total",
 				"caption",
 				"caption_gallery",
+				"iframe_element",
 				"error",
 				"loading",
 				"animating",
@@ -1135,12 +1154,20 @@
 				// Public Methods
 
 				open          : open,
-				close         : close
+				close         : close,
+
+				// Utility Methods
+
+				utility: {
+					_initialize    : initialize,
+					close          : close
+				}
 			}
 		}),
 
 		// Localize References
 
+		Namespace    = Plugin.namespace,
 		Defaults     = Plugin.defaults,
 		Classes      = Plugin.classes,
 		Events       = Plugin.events,

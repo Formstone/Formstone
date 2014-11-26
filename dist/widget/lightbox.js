@@ -1,9 +1,1186 @@
-/*! 
- * Formstone v0.0.1 - 2014-11-26 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
+;(function ($, window) {
+	"use strict";
 
-!function(a){"use strict";function b(a){a.formatter=l,this.on(G.click,a,d)}function c(){g(),this.off(G.namespace)}function d(b){if(!K){var c=b.data,d=c.$el,e=c.$object,h=d[0].href?d[0].href||"":"",i=d[0].hash?d[0].hash||"":"",k=h.toLowerCase().split(".").pop().split(/\#|\?/),l=k[0],n=d.data(F.namespace+"-type")||"",o="image"===n||a.inArray(l,c.extensions)>-1||"data:image"===h.substr(0,10),q=h.indexOf("youtube.com/embed")>-1||h.indexOf("player.vimeo.com/video")>-1,r="url"===n||!o&&!q&&"http"===h.substr(0,4)&&!i,y="element"===n||!o&&!q&&!r&&"#"===i.substr(0,1),z="undefined"!=typeof e;if(y&&(h=i),!(o||q||r||y||z))return;if(H.killEvent(b),K=a.extend({},{visible:!1,resizeTimer:null,touchTimer:null,gallery:{active:!1},isMobile:Formstone.isMobile||c.mobile,isAnimating:!0,oldContentHeight:0,oldContentWidth:0},c),K.margin*=2,K.type=o?"image":q?"video":"element",o||q){var A=d.data("gallery");A&&(K.gallery.active=!0,K.gallery.id=A,K.gallery.$items=a("a[data-gallery= "+K.gallery.id+"], a[rel= "+K.gallery.id+"]"),K.gallery.index=K.gallery.$items.index(K.$el),K.gallery.total=K.gallery.$items.length-1)}var B="";K.isMobile||(B+='<div class="'+[F.overlay,K.customClass].join(" ")+'"></div>'),B+='<div class="'+[F.base,F.loading,F.animating,K.customClass].join(" "),K.fixed&&(B+=F.fixed),K.isMobile&&(B+=F.mobile),r&&(B+=F.frame),(y||z)&&(B+=F.sInline),B+='">',B+='<span class="'+F.close+'">'+K.labels.close+"</span>",B+='<span class="'+F.loading_icon+'"></span>',B+='<div class="'+F.container+'">',B+='<div class="'+F.content+'">',(o||q)&&(B+='<div class="'+F.meta+'">',K.gallery.active?(B+='<div class="'+[F.control,F.control_previous].join(" ")+'">'+K.labels.previous+"</div>",B+='<div class="'+[F.control,F.control_next].join(" ")+'">'+K.labels.next+"</div>",B+='<p class="'+F.position+'"',K.gallery.total<1&&(B+=' style="display: none;"'),B+=">",B+='<span class="'+F.position_current+'">'+(K.gallery.index+1)+"</span> ",B+=K.labels.count,B+=' <span class="'+F.position_total+'">'+(K.gallery.total+1)+"</span>",B+="</p>",B+='<div class="'+[F.caption,F.caption_gallery].join(" ")+'">'):B+='<div class="'+F.caption+'">',B+=K.formatter.call(d,c),B+="</div></div>"),B+="</div></div></div>",J.append(B),K.$overlay=a(H.getClassName(F.overlay)),K.$lightbox=a(H.getClassName(F.base)),K.$close=a(H.getClassName(F.close)),K.$container=a(H.getClassName(F.container)),K.$content=a(H.getClassName(F.content)),K.$meta=a(H.getClassName(F.meta)),K.$position=a(H.getClassName(F.position)),K.$caption=a(H.getClassName(F.caption)),K.$controls=a(H.getClassName(F.control)),K.paddingVertical=K.isMobile?K.$close.outerHeight()/2:parseInt(K.$lightbox.css("paddingTop"),10)+parseInt(K.$lightbox.css("paddingBottom"),10),K.paddingHorizontal=K.isMobile?0:parseInt(K.$lightbox.css("paddingLeft"),10)+parseInt(K.$lightbox.css("paddingRight"),10),K.contentHeight=K.$lightbox.outerHeight()-K.paddingVertical,K.contentWidth=K.$lightbox.outerWidth()-K.paddingHorizontal,K.controlHeight=K.$controls.outerHeight(),j(),K.gallery.active&&t(),I.on(G.resize,f).on(G.keyDown,u),J.on(G.clickTouchStart,[H.getClassName(F.overlay),H.getClassName(F.close)].join(", "),g).on(G.touchMove,H.killEvent),K.gallery.active&&K.$lightbox.on(G.clickTouchStart,H.getClassName(F.control),s),K.$lightbox.transition({property:"opacity",complete:function(){o?m(h):q?p(h):r?w(h):y?v(h):z&&x(K.$object)}}),J.addClass(F.open)}}function e(){K.$lightbox.off(G.namespace),K.$overlay.trigger(G.click)}function f(a){"object"!=typeof a&&(K.targetHeight=arguments[0],K.targetWidth=arguments[1]),"element"===K.type?y(K.$content.find("> :first-child")):"image"===K.type?n():"video"===K.type&&q(),i()}function g(a){H.killEvent(a),K&&(K.$lightbox.transition({property:"opacity",complete:function(){K.$lightbox.off(G.namespace),K.$container.off(G.namespace),I.off(G.namespace),J.off(G.namespace),K.$overlay.remove(),K.$lightbox.remove(),K=null,I.trigger(G.close)}}).addClass(F.animating),J.removeClass(F.open),H.clearTimer(K.resizeTimer))}function h(){{var a=k();K.isMobile?0:K.duration}K.isMobile||K.$controls.css({marginTop:(K.contentHeight-K.controlHeight-K.metaHeight)/2}),!K.visible&&K.isMobile&&K.gallery.active&&K.$content.on(G.touchStart,H.getClassName(F.image),A),(K.isMobile||K.fixed)&&J.addClass(F.open),K.$lightbox.transition({property:"height",complete:function(){K.$container.transition({property:"opacity",complete:function(){K.$lightbox.removeClass(F.animating),K.isAnimating=!1}}),K.$lightbox.removeClass(F.loading),K.visible=!0,I.trigger(G.open),K.gallery.active&&r()}}),K.isMobile||K.$lightbox.css({height:K.contentHeight+K.paddingVertical,width:K.contentWidth+K.paddingHorizontal,top:K.fixed?0:a.top});var b=K.oldContentHeight!==K.contentHeight||K.oldContentWidth!==K.contentWidth;(K.isMobile||!b)&&K.$lightbox.trigger(Formstone.Plugins.transition.events.transitionForce),K.oldContentHeight=K.contentHeight,K.oldContentWidth=K.contentWidth}function i(){if(K.visible&&!K.isMobile){var a=k();K.$controls.css({marginTop:(K.contentHeight-K.controlHeight-K.metaHeight)/2}),K.$lightbox.css({height:K.contentHeight+K.paddingVertical,width:K.contentWidth+K.paddingHorizontal,top:K.fixed?0:a.top})}}function j(){var a=k();K.$lightbox.css({top:K.fixed?0:a.top})}function k(){if(K.isMobile)return{left:0,top:0};var a={left:(I.width()-K.contentWidth-K.paddingHorizontal)/2,top:K.top<=0?(I.height()-K.contentHeight-K.paddingVertical)/2:K.top};return K.fixed!==!0&&(a.top+=I.scrollTop()),a}function l(){var a=this.attr("title");return void 0!==a&&""!==a.trim()?'<p class="caption">'+a.trim()+"</p>":""}function m(b){K.$image=a("<img>"),K.$image.one(G.load,function(){var a=D(K.$image);K.naturalHeight=a.naturalHeight,K.naturalWidth=a.naturalWidth,K.retina&&(K.naturalHeight/=2,K.naturalWidth/=2),K.$content.prepend(K.$image),""===K.$caption.html()?K.$caption.hide():K.$caption.show(),n(),h()}).error(z).attr("src",b).addClass(F.image),(K.$image[0].complete||4===K.$image[0].readyState)&&K.$image.trigger(G.load)}function n(){var a=0;for(K.windowHeight=K.viewportHeight=I.height()-K.paddingVertical,K.windowWidth=K.viewportWidth=I.width()-K.paddingHorizontal,K.contentHeight=1/0,K.contentWidth=1/0,K.imageMarginTop=0,K.imageMarginLeft=0;K.contentHeight>K.viewportHeight&&2>a;)K.imageHeight=0===a?K.naturalHeight:K.$image.outerHeight(),K.imageWidth=0===a?K.naturalWidth:K.$image.outerWidth(),K.metaHeight=0===a?0:K.metaHeight,0===a&&(K.ratioHorizontal=K.imageHeight/K.imageWidth,K.ratioVertical=K.imageWidth/K.imageHeight,K.isWide=K.imageWidth>K.imageHeight),K.imageHeight<K.minHeight&&(K.minHeight=K.imageHeight),K.imageWidth<K.minWidth&&(K.minWidth=K.imageWidth),K.isMobile?(K.$meta.css({width:K.windowWidth}),K.metaHeight=K.$meta.outerHeight(!0),K.contentHeight=K.viewportHeight-K.paddingVertical,K.contentWidth=K.viewportWidth-K.paddingHorizontal,o(),K.imageMarginTop=(K.contentHeight-K.targetImageHeight-K.metaHeight)/2,K.imageMarginLeft=(K.contentWidth-K.targetImageWidth)/2):(0===a&&(K.viewportHeight-=K.margin+K.paddingVertical,K.viewportWidth-=K.margin+K.paddingHorizontal),K.viewportHeight-=K.metaHeight,o(),K.contentHeight=K.targetImageHeight,K.contentWidth=K.targetImageWidth),K.$meta.css({width:K.contentWidth}),K.$image.css({height:K.targetImageHeight,width:K.targetImageWidth,marginTop:K.imageMarginTop,marginLeft:K.imageMarginLeft}),K.isMobile||(K.metaHeight=K.$meta.outerHeight(!0),K.contentHeight+=K.metaHeight),a++}function o(){var a=K.isMobile?K.contentHeight-K.metaHeight:K.viewportHeight,b=K.isMobile?K.contentWidth:K.viewportWidth;K.isWide?(K.targetImageWidth=b,K.targetImageHeight=K.targetImageWidth*K.ratioHorizontal,K.targetImageHeight>a&&(K.targetImageHeight=a,K.targetImageWidth=K.targetImageHeight*K.ratioVertical)):(K.targetImageHeight=a,K.targetImageWidth=K.targetImageHeight*K.ratioVertical,K.targetImageWidth>b&&(K.targetImageWidth=b,K.targetImageHeight=K.targetImageWidth*K.ratioHorizontal)),(K.targetImageWidth>K.imageWidth||K.targetImageHeight>K.imageHeight)&&(K.targetImageHeight=K.imageHeight,K.targetImageWidth=K.imageWidth),(K.targetImageWidth<K.minWidth||K.targetImageHeight<K.minHeight)&&(K.targetImageWidth<K.minWidth?(K.targetImageWidth=K.minWidth,K.targetImageHeight=K.targetImageWidth*K.ratioHorizontal):(K.targetImageHeight=K.minHeight,K.targetImageWidth=K.targetImageHeight*K.ratioVertical))}function p(b){K.$videoWrapper=a('<div class="'+F.videoWrapper+'"></div>'),K.$video=a('<iframe class="'+F.video+'" seamless="seamless"></iframe>'),K.$video.attr("src",b).addClass(F.video).prependTo(K.$videoWrapper),K.$content.prepend(K.$videoWrapper),q(),h()}function q(){K.windowHeight=K.viewportHeight=K.contentHeight=I.height()-K.paddingVertical,K.windowWidth=K.viewportWidth=K.contentWidth=I.width()-K.paddingHorizontal,K.videoMarginTop=0,K.videoMarginLeft=0,K.isMobile?(K.$meta.css({width:K.windowWidth}),K.metaHeight=K.$meta.outerHeight(!0),K.viewportHeight-=K.metaHeight,K.targetVideoWidth=K.viewportWidth,K.targetVideoHeight=K.targetVideoWidth*K.videoRatio,K.targetVideoHeight>K.viewportHeight&&(K.targetVideoHeight=K.viewportHeight,K.targetVideoWidth=K.targetVideoHeight/K.videoRatio),K.videoMarginTop=(K.viewportHeight-K.targetVideoHeight)/2,K.videoMarginLeft=(K.viewportWidth-K.targetVideoWidth)/2):(K.viewportHeight=K.windowHeight-K.margin,K.viewportWidth=K.windowWidth-K.margin,K.targetVideoWidth=K.videoWidth>K.viewportWidth?K.viewportWidth:K.videoWidth,K.targetVideoWidth<K.minWidth&&(K.targetVideoWidth=K.minWidth),K.targetVideoHeight=K.targetVideoWidth*K.videoRatio,K.contentHeight=K.targetVideoHeight,K.contentWidth=K.targetVideoWidth),K.$meta.css({width:K.contentWidth}),K.$videoWrapper.css({height:K.targetVideoHeight,width:K.targetVideoWidth,marginTop:K.videoMarginTop,marginLeft:K.videoMarginLeft}),K.isMobile||(K.metaHeight=K.$meta.outerHeight(!0),K.contentHeight=K.targetVideoHeight+K.metaHeight)}function r(){var b="";K.gallery.index>0&&(b=K.gallery.$items.eq(K.gallery.index-1).attr("href"),b.indexOf("youtube.com/embed")<0&&b.indexOf("player.vimeo.com/video")<0&&a('<img src="'+b+'">')),K.gallery.index<K.gallery.total&&(b=K.gallery.$items.eq(K.gallery.index+1).attr("href"),b.indexOf("youtube.com/embed")<0&&b.indexOf("player.vimeo.com/video")<0&&a('<img src="'+b+'">'))}function s(b){H.killEvent(b);var c=a(b.currentTarget);K.isAnimating||c.hasClass(F.control_disabled)||(K.isAnimating=!0,K.gallery.index+=c.hasClass(F.control_next)?1:-1,K.gallery.index>K.gallery.total&&(K.gallery.index=K.gallery.total),K.gallery.index<0&&(K.gallery.index=0),K.$container.transition({property:"opacity",complete:function(){"undefined"!=typeof K.$image&&K.$image.remove(),"undefined"!=typeof K.$videoWrapper&&K.$videoWrapper.remove(),K.$target=K.gallery.$items.eq(K.gallery.index),K.$caption.html(K.formatter.apply(J,[K.$target])),K.$position.find(H.getClassName(F.position_current)).html(K.gallery.index+1);var a=K.$target.attr("href"),b=a.indexOf("youtube.com/embed")>-1||a.indexOf("player.vimeo.com/video")>-1;b?p(a):m(a),t()}}),K.$lightbox.addClass([F.loading,F.animating].join(" ")))}function t(){K.$controls.removeClass(F.control_disabled),0===K.gallery.index&&K.$controls.filter(H.getClassName(F.control_previous)).addClass(F.control_disabled),K.gallery.index===K.gallery.total&&K.$controls.filter(H.getClassName(F.control_next)).addClass(F.control_disabled)}function u(a){!K.gallery.active||37!==a.keyCode&&39!==a.keyCode?27===a.keyCode&&K.$close.trigger(G.click):(H.killEvent(a),K.$controls.filter(H.getClassName(37===a.keyCode?F.control_previous:F.control_next)).trigger(G.click))}function v(b){var c=a(b).find("> :first-child").clone();x(c)}function w(b){b+=b.indexOf("?")>-1?"&"+K.requestKey+"=true":"?"+K.requestKey+"=true";var c=a('<iframe class="'+F.iframe+'" src="'+b+'"></iframe>');x(c)}function x(a){K.$content.append(a),y(a),h()}function y(a){K.windowHeight=I.height()-K.paddingVertical,K.windowWidth=I.width()-K.paddingHorizontal,K.objectHeight=a.outerHeight(!0),K.objectWidth=a.outerWidth(!0),K.targetHeight=K.targetHeight||K.$el.data(F.namespace+"-height"),K.targetWidth=K.targetWidth||K.$el.data(F.namespace+"-width"),K.maxHeight=K.windowHeight<0?K.minHeight:K.windowHeight,K.isIframe=a.is("iframe"),K.objectMarginTop=0,K.objectMarginLeft=0,K.isMobile||(K.windowHeight-=K.margin,K.windowWidth-=K.margin),K.contentHeight=void 0!==K.targetHeight?K.targetHeight:K.isIframe||K.isMobile?K.windowHeight:K.objectHeight,K.contentWidth=void 0!==K.targetWidth?K.targetWidth:K.isIframe||K.isMobile?K.windowWidth:K.objectWidth,(K.isIframe||K.isObject)&&K.isMobile?(K.contentHeight=K.windowHeight,K.contentWidth=K.windowWidth):K.isObject&&(K.contentHeight=K.contentHeight>K.windowHeight?K.windowHeight:K.contentHeight,K.contentWidth=K.contentWidth>K.windowWidth?K.windowWidth:K.contentWidth)}function z(){var b=a('<div class="'+F.error+'"><p>Error Loading Resource</p></div>');K.type="element",K.$meta.remove(),K.$image.off(G.namespace),x(b)}function A(a){if(H.killEvent(a),H.clearTimer(K.touchTimer),!K.isAnimating){var b="undefined"!=typeof a.originalEvent.targetTouches?a.originalEvent.targetTouches[0]:null;K.xStart=b?b.pageX:a.clientX,K.leftPosition=0,K.touchMax=1/0,K.touchMin=-1/0,K.edge=.25*K.contentWidth,0===K.gallery.index&&(K.touchMax=0),K.gallery.index===K.gallery.total&&(K.touchMin=0),K.$lightbox.on(G.touchMove,B).one(G.touchEnd,C)}}function B(a){var b="undefined"!=typeof a.originalEvent.targetTouches?a.originalEvent.targetTouches[0]:null;K.delta=K.xStart-(b?b.pageX:a.clientX),K.delta>20&&H.killEvent(a),K.canSwipe=!0;var c=-K.delta;c<K.touchMin&&(c=K.touchMin,K.canSwipe=!1),c>K.touchMax&&(c=K.touchMax,K.canSwipe=!1),K.$image.css({transform:"translate3D("+c+"px,0,0)"}),K.touchTimer=H.startTimer(K.touchTimer,300,function(){C(a)})}function C(a){H.killEvent(a),H.clearTimer(K.touchTimer),K.$lightbox.off([G.touchMove,G.touchEnd].join("")),K.delta&&(K.$lightbox.addClass(F.animating),K.swipe=!1,K.canSwipe&&(K.delta>K.edge||K.delta<-K.edge)?(K.swipe=!0,K.$image.css(K.delta<=K.leftPosition?{transform:"translate3D("+K.contentWidth+"px,0,0)"}:{transform:"translate3D("+-K.contentWidth+"px,0,0)"})):K.$image.css({transform:"translate3D(0,0,0)"}),K.swipe&&K.$controls.filter(H.getClassName(K.delta<=K.leftPosition?F.control_previous:F.control_next)).trigger(G.click),H.startTimer(K.resetTimer,K.duration,function(){K.$lightbox.removeClass(F.animating)}))}function D(a){var b=a[0],c=new Image;return"undefined"!=typeof b.naturalHeight?{naturalHeight:b.naturalHeight,naturalWidth:b.naturalWidth}:"img"===b.tagName.toLowerCase()?(c.src=b.src,{naturalHeight:c.height,naturalWidth:c.width}):!1}var E=Formstone.Plugin("lightbox",{widget:!0,defaults:{customClass:"",extensions:["jpg","sjpg","jpeg","png","gif"],fixed:!1,formatter:a.noop,labels:{close:"Close",count:"of",next:"Next",previous:"Previous"},margin:50,minHeight:100,minWidth:100,mobile:!1,retina:!1,requestKey:"boxer",top:0,videoRatio:.5625,videoWidth:600},classes:["overlay","close","loading_icon","container","content","image","video","video_wrapper","meta","control","control_previous","control_next","control_disabled","position","position_current","position_total","caption","caption_gallery","error","loading","animating","fixed","mobile","inline","iframe","open"],events:["open","close"],methods:{_construct:b,_destruct:c,open:h,close:e}}),F=(E.defaults,E.classes),G=E.events,H=E.functions,I=Formstone.$window,J=null,K=null;a(function(){J=Formstone.$body})}(jQuery,window);
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		data.formatter = formatCaption;
+
+		this.on(Events.click, data, buildLightbox);
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		closeLightbox();
+
+		this.off(Events.namespace);
+	}
+
+	/**
+	 * @method private
+	 * @name initialize
+	 * @description Builds instance from $target.
+	 * @param $target [jQuery] "Target jQuery object"
+	 */
+
+	function initialize($target, options) {
+		if ($target instanceof $) {
+
+			// Emulate event
+
+			buildLightbox.apply($Window[0], [{ data: $.extend({}, {
+				$object: $target
+			}, Defaults, options || {}) }]);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name buildLightbox
+	 * @description Builds new lightbox.
+	 * @param e [object] "Event data"
+	 */
+
+	function buildLightbox(e) {
+		if (!Instance) {
+			// Check target type
+			var data           = e.data,
+				$el            = data.$el,
+				$object        = data.$object,
+				source         = ($el && $el[0].href) ? $el[0].href || "" : "",
+				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
+				sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
+				extension      = sourceParts[0],
+				type           = ($el) ? $el.data(Classes.namespace + "-type") : "",
+				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
+				isVideo	       = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
+				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
+				isElement      = ( (type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#")) ),
+				isObject       = ( (typeof $object !== "undefined") );
+
+			if (isElement) {
+				source = hash;
+			}
+
+			// Retain default click
+			if ( !(isImage || isVideo || isUrl || isElement || isObject) ) {
+				return;
+			}
+
+			// Kill event
+			Functions.killEvent(e);
+
+			// Cache internal data
+			Instance = $.extend({}, {
+				visible            : false,
+				resizeTimer        : null,
+				touchTimer         : null,
+				gallery: {
+					active         : false
+				},
+				isMobile           : (Formstone.isMobile || data.mobile),
+				isAnimating        : true,
+				oldContentHeight   : 0,
+				oldContentWidth    : 0
+			}, data);
+
+			// Double the margin
+			Instance.margin *= 2;
+
+			if (isImage) {
+				Instance.type = "image";
+			} else if (isVideo) {
+				Instance.type = "video";
+			} else {
+				Instance.type = "element";
+			}
+
+			if (isImage || isVideo) {
+				// Check for gallery
+				var id = $el.data("gallery");
+
+				if (id) {
+					Instance.gallery.active    = true;
+					Instance.gallery.id        = id;
+					Instance.gallery.$items    = $("a[data-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
+					Instance.gallery.index     = Instance.gallery.$items.index(Instance.$el);
+					Instance.gallery.total     = Instance.gallery.$items.length - 1;
+				}
+			}
+
+			// Assemble HTML
+			var html = '';
+			if (!Instance.isMobile) {
+				html += '<div class="' + [Classes.overlay, Instance.customClass].join(" ") + '"></div>';
+			}
+			html += '<div class="' + [Classes.base, Classes.loading, Classes.animating, Instance.customClass].join(" ");
+			if (Instance.fixed) {
+				html += Classes.fixed;
+			}
+			if (Instance.isMobile) {
+				html += Classes.mobile;
+			}
+			if (isUrl) {
+				html += Classes.iframe;
+			}
+			if (isElement || isObject) {
+				html += Classes.inline;
+			}
+			html += '">';
+			html += '<span class="' + Classes.close + '">' + Instance.labels.close + '</span>';
+			html += '<span class="' + Classes.loading_icon + '"></span>';
+			html += '<div class="' + Classes.container + '">';
+			html += '<div class="' + Classes.content + '">';
+			if (isImage || isVideo) {
+				html += '<div class="' + Classes.meta + '">';
+
+				if (Instance.gallery.active) {
+					html += '<div class="' + [Classes.control, Classes.control_previous].join(" ") + '">' + Instance.labels.previous + '</div>';
+					html += '<div class="' + [Classes.control, Classes.control_next].join(" ") + '">' + Instance.labels.next + '</div>';
+					html += '<p class="' + Classes.position + '"';
+					if (Instance.gallery.total < 1) {
+						html += ' style="display: none;"';
+					}
+					html += '>';
+					html += '<span class="' + Classes.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
+					html += Instance.labels.count;
+					html += ' <span class="' + Classes.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
+					html += '</p>';
+					html += '<div class="' + [Classes.caption, Classes.caption_gallery].join(" ") + '">';
+				} else {
+					html += '<div class="' + Classes.caption + '">';
+				}
+
+				html += Instance.formatter.call($el, data);
+				html += '</div></div>'; // caption, meta
+			}
+			html += '</div></div></div>'; //container, content, lightbox
+
+			// Modify Dom
+			$Body.append(html);
+
+			// Cache jquery objects
+			Instance.$overlay          = $( Functions.getClassName(Classes.overlay) );
+			Instance.$lightbox         = $( Functions.getClassName(Classes.base) );
+			Instance.$close            = $( Functions.getClassName(Classes.close) );
+			Instance.$container        = $( Functions.getClassName(Classes.container) );
+			Instance.$content          = $( Functions.getClassName(Classes.content) );
+			Instance.$meta             = $( Functions.getClassName(Classes.meta) );
+			Instance.$position         = $( Functions.getClassName(Classes.position) );
+			Instance.$caption          = $( Functions.getClassName(Classes.caption) );
+			Instance.$controls         = $( Functions.getClassName(Classes.control) );
+
+			Instance.paddingVertical   = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingTop"), 10) + parseInt(Instance.$lightbox.css("paddingBottom"), 10)) : (Instance.$close.outerHeight() / 2);
+			Instance.paddingHorizontal = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10)) : 0;
+			Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
+			Instance.contentWidth      = Instance.$lightbox.outerWidth()   - Instance.paddingHorizontal;
+			Instance.controlHeight     = Instance.$controls.outerHeight();
+
+			// Center
+			centerLightbox();
+
+			// Update gallery
+			if (Instance.gallery.active) {
+				updateGalleryControls();
+			}
+
+			// Bind events
+			$Window.on(Events.resize, resize)
+				   .on(Events.keyDown, onKeyDown);
+
+			$Body.on(Events.clickTouchStart, [ Functions.getClassName(Classes.overlay), Functions.getClassName(Classes.close) ].join(", "), closeLightbox)
+				 .on(Events.touchMove, Functions.killEvent);
+
+			if (Instance.gallery.active) {
+				Instance.$lightbox.on(Events.clickTouchStart, Functions.getClassName(Classes.control), advanceGallery);
+			}
+
+			Instance.$lightbox.transition({
+				property: "opacity",
+				complete: function() {
+					if (isImage) {
+						loadImage(source);
+					} else if (isVideo) {
+						loadVideo(source);
+					} else if (isUrl) {
+						loadURL(source);
+					} else if (isElement) {
+						cloneElement(source);
+					} else if (isObject) {
+						appendObject(Instance.$object);
+					} else {
+						//$.error("Lightbox: '" +  source + "' is not valid.");
+					}
+				}
+			});
+
+			$Body.addClass(Classes.open);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name close
+	 * @description Closes active instance of plugin
+	 * @example $.lightbox("close");
+	 */
+
+	function close(data) {
+		Instance.$lightbox.off(Events.namespace);
+		Instance.$overlay.trigger(Events.click);
+	}
+
+	/**
+	 * @method
+	 * @name resize
+	 * @description Triggers resize of instance
+	 * @example $.lightbox("resize");
+	 * @param height [int | false] "Target height or false to auto size"
+	 * @param width [int | false] "Target width or false to auto size"
+	 */
+
+	function resize(e) {
+		if (typeof e !== "object") {
+			Instance.targetHeight = arguments[0];
+			Instance.targetWidth  = arguments[1];
+		}
+
+		if (Instance.type === "element") {
+			sizeContent(Instance.$content.find("> :first-child"));
+		} else if (Instance.type === "image") {
+			sizeImage();
+		} else if (Instance.type === "video") {
+			sizeVideo();
+		}
+
+		size();
+	}
+
+	/**
+	 * @method private
+	 * @name closeLightbox
+	 * @description Closes active instance
+	 * @param e [object] "Event data"
+	 */
+
+	function closeLightbox(e) {
+		Functions.killEvent(e);
+
+		if (Instance) {
+			Instance.$lightbox.transition({
+				property: "opacity",
+				complete: function(e) {
+					// Clean up
+					Instance.$lightbox.off(Events.namespace);
+					Instance.$container.off(Events.namespace);
+					$Window.off(Events.namespace);
+					$Body.off(Events.namespace);
+
+					Instance.$overlay.remove();
+					Instance.$lightbox.remove();
+
+					// Reset Instance
+					Instance = null;
+
+					$Window.trigger(Events.close);
+				}
+			}).addClass(Classes.animating);
+
+			$Body.removeClass(Classes.open);
+
+			Functions.clearTimer(Instance.resizeTimer);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name open
+	 * @description Opens active instance
+	 */
+
+	function openLightbox() {
+		var position = calculatePosition(),
+			durration = Instance.isMobile ? 0 : Instance.duration;
+
+		if (!Instance.isMobile) {
+			Instance.$controls.css({
+				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight) / 2)
+			});
+		}
+
+		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
+			Instance.$content.on(Events.touchStart, Functions.getClassName(Classes.image), onTouchStart);
+		}
+
+		if (Instance.isMobile || Instance.fixed) {
+			$Body.addClass(Classes.open);
+		}
+
+		Instance.$lightbox.transition({
+			property: "height",
+			complete: function() {
+
+				Instance.$container.transition({
+					property: "opacity",
+					complete: function() {
+						Instance.$lightbox.removeClass(Classes.animating);
+
+						Instance.isAnimating = false;
+					}
+				});
+
+				Instance.$lightbox.removeClass(Classes.loading);
+
+				Instance.visible = true;
+
+				// Fire open event
+				$Window.trigger(Events.open);
+
+				// Start preloading
+				if (Instance.gallery.active) {
+					preloadGallery();
+				}
+			}
+		});
+
+		if (!Instance.isMobile) {
+			Instance.$lightbox.css({
+				height: Instance.contentHeight + Instance.paddingVertical,
+				width:  Instance.contentWidth  + Instance.paddingHorizontal,
+				top:    (!Instance.fixed) ? position.top : 0
+			});
+		}
+
+		// Trigger event in case the content size hasn't changed
+		var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
+
+		if (Instance.isMobile || !contentHasChanged) {
+			Instance.$lightbox.transition("resolve");
+		}
+
+		// Track content size changes
+		Instance.oldContentHeight = Instance.contentHeight;
+		Instance.oldContentWidth  = Instance.contentWidth;
+	}
+
+	/**
+	 * @method private
+	 * @name size
+	 * @description Sizes active instance
+	 */
+
+	function size() {
+		if (Instance.visible && !Instance.isMobile) {
+			var position = calculatePosition();
+
+			Instance.$controls.css({
+				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight) / 2)
+			});
+
+			Instance.$lightbox.css({
+				height: Instance.contentHeight + Instance.paddingVertical,
+				width:  Instance.contentWidth  + Instance.paddingHorizontal,
+				top:    (!Instance.fixed) ? position.top : 0
+			});
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name centerLightbox
+	 * @description Centers instance
+	 */
+
+	function centerLightbox() {
+		var position = calculatePosition();
+
+		Instance.$lightbox.css({
+			top: (!Instance.fixed) ? position.top : 0
+		});
+	}
+
+	/**
+	 * @method private
+	 * @name calculatePosition
+	 * @description Calculates positions
+	 * @return [object] "Object containing top and left positions"
+	 */
+
+	function calculatePosition() {
+		if (Instance.isMobile) {
+			return {
+				left: 0,
+				top: 0
+			};
+		}
+
+		var pos = {
+			left: ($Window.width() - Instance.contentWidth - Instance.paddingHorizontal) / 2,
+			top: (Instance.top <= 0) ? (($Window.height() - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
+		};
+
+		if (Instance.fixed !== true) {
+			pos.top += $Window.scrollTop();
+		}
+
+		return pos;
+	}
+
+	/**
+	 * @method private
+	 * @name formatCaption
+	 * @description Formats caption
+	 * @param $target [jQuery object] "Target element"
+	 */
+
+	function formatCaption() {
+		var title = this.attr("title");
+		return (title !== undefined && title.trim() !== "") ? '<p class="caption">' + title.trim() + '</p>' : "";
+	}
+
+	/**
+	 * @method private
+	 * @name loadImage
+	 * @description Loads source image
+	 * @param source [string] "Source image URL"
+	 */
+
+	function loadImage(source) {
+		// Cache current image
+		Instance.$image = $("<img>");
+
+		Instance.$image.one(Events.load, function() {
+			var naturalSize = calculateNaturalSize(Instance.$image);
+
+			Instance.naturalHeight = naturalSize.naturalHeight;
+			Instance.naturalWidth  = naturalSize.naturalWidth;
+
+			if (Instance.retina) {
+				Instance.naturalHeight /= 2;
+				Instance.naturalWidth  /= 2;
+			}
+
+			Instance.$content.prepend(Instance.$image);
+
+			if (Instance.$caption.html() === "") {
+				Instance.$caption.hide();
+			} else {
+				Instance.$caption.show();
+			}
+
+			// Size content to be sure it fits the viewport
+			sizeImage();
+
+			openLightbox();
+
+		}).error(loadError)
+		  .attr("src", source)
+		  .addClass(Classes.image);
+
+		// If image has already loaded into cache, trigger load event
+		if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
+			Instance.$image.trigger(Events.load);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name sizeImage
+	 * @description Sizes image to fit in viewport
+	 * @param count [int] "Number of resize attempts"
+	 */
+
+	function sizeImage() {
+		var count = 0;
+
+		Instance.windowHeight = Instance.viewportHeight = $Window.height() - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = $Window.width()  - Instance.paddingHorizontal;
+
+		Instance.contentHeight = Infinity;
+		Instance.contentWidth = Infinity;
+
+		Instance.imageMarginTop  = 0;
+		Instance.imageMarginLeft = 0;
+
+		while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
+			Instance.imageHeight = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+			Instance.imageWidth  = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
+			Instance.metaHeight  = (count === 0) ? 0 : Instance.metaHeight;
+
+			if (count === 0) {
+				Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
+				Instance.ratioVertical   = Instance.imageWidth  / Instance.imageHeight;
+
+				Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
+			}
+
+			// Double check min and max
+			if (Instance.imageHeight < Instance.minHeight) {
+				Instance.minHeight = Instance.imageHeight;
+			}
+			if (Instance.imageWidth < Instance.minWidth) {
+				Instance.minWidth = Instance.imageWidth;
+			}
+
+			if (Instance.isMobile) {
+				// Get meta height before sizing
+				Instance.$meta.css({
+					width: Instance.windowWidth
+				});
+				Instance.metaHeight = Instance.$meta.outerHeight(true);
+
+				// Content match viewport
+				Instance.contentHeight = Instance.viewportHeight - Instance.paddingVertical;
+				Instance.contentWidth  = Instance.viewportWidth  - Instance.paddingHorizontal;
+
+				fitImage();
+
+				Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.metaHeight) / 2;
+				Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
+			} else {
+				// Viewport should match window, less margin, padding and meta
+				if (count === 0) {
+					Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
+					Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
+				}
+				Instance.viewportHeight -= Instance.metaHeight;
+
+				fitImage();
+
+				Instance.contentHeight = Instance.targetImageHeight;
+				Instance.contentWidth  = Instance.targetImageWidth;
+			}
+
+			// Modify DOM
+
+			Instance.$meta.css({
+				width: Instance.contentWidth
+			});
+
+			Instance.$image.css({
+				height: Instance.targetImageHeight,
+				width:  Instance.targetImageWidth,
+				marginTop:  Instance.imageMarginTop,
+				marginLeft: Instance.imageMarginLeft
+			});
+
+			if (!Instance.isMobile) {
+				Instance.metaHeight = Instance.$meta.outerHeight(true);
+				Instance.contentHeight += Instance.metaHeight;
+			}
+
+			count ++;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name fitImage
+	 * @description Calculates target image size
+	 */
+
+	function fitImage() {
+		var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.metaHeight,
+			width  = (!Instance.isMobile) ? Instance.viewportWidth  : Instance.contentWidth;
+
+		if (Instance.isWide) {
+			//WIDE
+			Instance.targetImageWidth  = width;
+			Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+
+			if (Instance.targetImageHeight > height) {
+				Instance.targetImageHeight = height;
+				Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+			}
+		} else {
+			//TALL
+			Instance.targetImageHeight = height;
+			Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+
+			if (Instance.targetImageWidth > width) {
+				Instance.targetImageWidth  = width;
+				Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+			}
+		}
+
+		// MAX
+		if (Instance.targetImageWidth > Instance.imageWidth || Instance.targetImageHeight > Instance.imageHeight) {
+			Instance.targetImageHeight = Instance.imageHeight;
+			Instance.targetImageWidth  = Instance.imageWidth;
+		}
+
+		// MIN
+		if (Instance.targetImageWidth < Instance.minWidth || Instance.targetImageHeight < Instance.minHeight) {
+			if (Instance.targetImageWidth < Instance.minWidth) {
+				Instance.targetImageWidth  = Instance.minWidth;
+				Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+			} else {
+				Instance.targetImageHeight = Instance.minHeight;
+				Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name loadVideo
+	 * @description Loads source video
+	 * @param source [string] "Source video URL"
+	 */
+
+	function loadVideo(source) {
+		Instance.$videoWrapper = $('<div class="' + Classes.videoWrapper + '"></div>');
+		Instance.$video = $('<iframe class="' + Classes.video + '" seamless="seamless"></iframe>');
+
+		Instance.$video.attr("src", source)
+				   .addClass(Classes.video)
+				   .prependTo(Instance.$videoWrapper);
+
+		Instance.$content.prepend(Instance.$videoWrapper);
+
+		sizeVideo();
+		openLightbox();
+	}
+
+	/**
+	 * @method private
+	 * @name sizeVideo
+	 * @description Sizes video to fit in viewport
+	 */
+
+	function sizeVideo() {
+		// Set initial vars
+		Instance.windowHeight = Instance.viewportHeight = Instance.contentHeight = $Window.height() - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = Instance.contentWidth  = $Window.width()  - Instance.paddingHorizontal;
+		Instance.videoMarginTop = 0;
+		Instance.videoMarginLeft = 0;
+
+		if (Instance.isMobile) {
+			Instance.$meta.css({
+				width: Instance.windowWidth
+			});
+			Instance.metaHeight = Instance.$meta.outerHeight(true);
+			Instance.viewportHeight -= Instance.metaHeight;
+
+			Instance.targetVideoWidth  = Instance.viewportWidth;
+			Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+			if (Instance.targetVideoHeight > Instance.viewportHeight) {
+				Instance.targetVideoHeight = Instance.viewportHeight;
+				Instance.targetVideoWidth  = Instance.targetVideoHeight / Instance.videoRatio;
+			}
+
+			Instance.videoMarginTop = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
+			Instance.videoMarginLeft = (Instance.viewportWidth - Instance.targetVideoWidth) / 2;
+		} else {
+			Instance.viewportHeight = Instance.windowHeight - Instance.margin;
+			Instance.viewportWidth  = Instance.windowWidth - Instance.margin;
+
+			Instance.targetVideoWidth  = (Instance.videoWidth > Instance.viewportWidth) ? Instance.viewportWidth : Instance.videoWidth;
+			if (Instance.targetVideoWidth < Instance.minWidth) {
+				Instance.targetVideoWidth = Instance.minWidth;
+			}
+			Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+			Instance.contentHeight = Instance.targetVideoHeight;
+			Instance.contentWidth  = Instance.targetVideoWidth;
+		}
+
+		// Update dom
+
+		Instance.$meta.css({
+			width: Instance.contentWidth
+		});
+
+		Instance.$videoWrapper.css({
+			height: Instance.targetVideoHeight,
+			width: Instance.targetVideoWidth,
+			marginTop: Instance.videoMarginTop,
+			marginLeft: Instance.videoMarginLeft
+		});
+
+		if (!Instance.isMobile) {
+			Instance.metaHeight = Instance.$meta.outerHeight(true);
+			Instance.contentHeight = Instance.targetVideoHeight + Instance.metaHeight;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name preloadGallery
+	 * @description Preloads previous and next images in gallery for faster rendering
+	 * @param e [object] "Event Data"
+	 */
+
+	function preloadGallery(e) {
+		var source = '';
+
+		if (Instance.gallery.index > 0) {
+			source = Instance.gallery.$items.eq(Instance.gallery.index - 1).attr("href");
+			if (source.indexOf("youtube.com/embed") < 0 && source.indexOf("player.vimeo.com/video") < 0) {
+				$('<img src="' + source + '">');
+			}
+		}
+		if (Instance.gallery.index < Instance.gallery.total) {
+			source = Instance.gallery.$items.eq(Instance.gallery.index + 1).attr("href");
+			if (source.indexOf("youtube.com/embed") < 0 && source.indexOf("player.vimeo.com/video") < 0) {
+				$('<img src="' + source + '">');
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name advanceGallery
+	 * @description Advances gallery base on direction
+	 * @param e [object] "Event Data"
+	 */
+
+	function advanceGallery(e) {
+		Functions.killEvent(e);
+
+		var $control = $(e.currentTarget);
+
+		if (!Instance.isAnimating && !$control.hasClass(Classes.control_disabled)) {
+			Instance.isAnimating = true;
+
+			Instance.gallery.index += ($control.hasClass(Classes.control_next)) ? 1 : -1;
+			if (Instance.gallery.index > Instance.gallery.total) {
+				Instance.gallery.index = Instance.gallery.total;
+			}
+			if (Instance.gallery.index < 0) {
+				Instance.gallery.index = 0;
+			}
+
+			Instance.$container.transition({
+				property: "opacity",
+				complete: function() {
+					if (typeof Instance.$image !== 'undefined') {
+						Instance.$image.remove();
+					}
+					if (typeof Instance.$videoWrapper !== 'undefined') {
+						Instance.$videoWrapper.remove();
+					}
+					Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+
+					Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+					Instance.$position.find( Functions.getClassName(Classes.position_current) ).html(Instance.gallery.index + 1);
+
+					var source = Instance.$el.attr("href"),
+						isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
+
+					if (isVideo) {
+						loadVideo(source);
+					} else {
+						loadImage(source);
+					}
+
+					updateGalleryControls();
+				}
+			});
+
+			Instance.$lightbox.addClass( [Classes.loading, Classes.animating].join(" "));
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name updateGalleryControls
+	 * @description Updates gallery control states
+	 */
+
+	function updateGalleryControls() {
+		Instance.$controls.removeClass(Classes.control_disabled);
+		if (Instance.gallery.index === 0) {
+			Instance.$controls.filter( Functions.getClassName(Classes.control_previous) ).addClass(Classes.control_disabled);
+		}
+		if (Instance.gallery.index === Instance.gallery.total) {
+			Instance.$controls.filter( Functions.getClassName(Classes.control_next) ).addClass(Classes.control_disabled);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onKeyDown
+	 * @description Handles keypress in gallery
+	 * @param e [object] "Event data"
+	 */
+
+	function onKeyDown(e) {
+		if (Instance.gallery.active && (e.keyCode === 37 || e.keyCode === 39)) {
+			Functions.killEvent(e);
+
+			Instance.$controls.filter(Functions.getClassName((e.keyCode === 37) ? Classes.control_previous : Classes.control_next)).trigger(Events.click);
+		} else if (e.keyCode === 27) {
+			Instance.$close.trigger(Events.click);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name cloneElement
+	 * @description Clones target inline element
+	 * @param id [string] "Target element id"
+	 */
+
+	function cloneElement(id) {
+		var $clone = $(id).find("> :first-child").clone();
+		appendObject($clone);
+	}
+
+	/**
+	 * @method private
+	 * @name loadURL
+	 * @description Load URL into iframe
+	 * @param source [string] "Target URL"
+	 */
+
+	function loadURL(source) {
+		source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
+		var $iframe = $('<iframe class="' + Classes.iframe_element + '" src="' + source + '"></iframe>');
+		appendObject($iframe);
+	}
+
+	/**
+	 * @method private
+	 * @name appendObject
+	 * @description Appends and sizes object
+	 * @param $object [jQuery Object] "Object to append"
+	 */
+
+	function appendObject($object) {
+		Instance.$content.append($object);
+		sizeContent($object);
+		openLightbox();
+	}
+
+	/**
+	 * @method private
+	 * @name sizeContent
+	 * @description Sizes jQuery object to fir in viewport
+	 * @param $object [jQuery Object] "Object to size"
+	 */
+
+	function sizeContent($object) {
+		Instance.windowHeight	  = $Window.height() - Instance.paddingVertical;
+		Instance.windowWidth	  = $Window.width()  - Instance.paddingHorizontal;
+		Instance.objectHeight	  = $object.outerHeight(true);
+		Instance.objectWidth	  = $object.outerWidth(true);
+		Instance.targetHeight	  = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
+		Instance.targetWidth	  = Instance.targetWidth  || (Instance.$el ? Instance.$el.data(Namespace + "-width")  : null);
+		Instance.maxHeight		  = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
+		Instance.isIframe		  = $object.is("iframe");
+		Instance.objectMarginTop  = 0;
+		Instance.objectMarginLeft = 0;
+
+		if (!Instance.isMobile) {
+			Instance.windowHeight -= Instance.margin;
+			Instance.windowWidth  -= Instance.margin;
+		}
+
+		Instance.contentHeight = (Instance.targetHeight) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
+		Instance.contentWidth  = (Instance.targetWidth)  ? Instance.targetWidth  : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth  : Instance.objectWidth;
+
+		if ((Instance.isIframe || Instance.isObject) && Instance.isMobile) {
+			Instance.contentHeight = Instance.windowHeight;
+			Instance.contentWidth  = Instance.windowWidth;
+		} else if (Instance.isObject) {
+			Instance.contentHeight = (Instance.contentHeight > Instance.windowHeight) ? Instance.windowHeight : Instance.contentHeight;
+			Instance.contentWidth  = (Instance.contentWidth  > Instance.windowWidth)  ? Instance.windowWidth  : Instance.contentWidth;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name loadError
+	 * @description Error when resource fails to load
+	 * @param e [object] "Event data"
+	 */
+
+	function loadError(e) {
+		var $error = $('<div class="' + Classes.error + '"><p>Error Loading Resource</p></div>');
+
+		// Clean up
+		Instance.type = "element";
+		Instance.$meta.remove();
+
+		Instance.$image.off(Events.namespace);
+
+		appendObject($error);
+	}
+
+	/**
+	 * @method private
+	 * @name onTouchStart
+	 * @description Handle touch start event
+	 * @param e [object] "Event data"
+	 */
+
+	function onTouchStart(e) {
+		Functions.killEvent(e);
+		Functions.clearTimer(Instance.touchTimer);
+
+		if (!Instance.isAnimating) {
+			var touch = (typeof e.originalEvent.targetTouches !== "undefined") ? e.originalEvent.targetTouches[0] : null;
+			Instance.xStart = (touch) ? touch.pageX : e.clientX;
+			Instance.leftPosition = 0;
+
+			Instance.touchMax = Infinity;
+			Instance.touchMin = -Infinity;
+			Instance.edge = Instance.contentWidth * 0.25;
+
+			if (Instance.gallery.index === 0) {
+				Instance.touchMax = 0;
+			}
+			if (Instance.gallery.index === Instance.gallery.total) {
+				Instance.touchMin = 0;
+			}
+
+			Instance.$lightbox.on(Events.touchMove, onTouchMove)
+							  .one(Events.touchEnd, onTouchEnd);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onTouchMove
+	 * @description Handles touchmove event
+	 * @param e [object] "Event data"
+	 */
+
+	function onTouchMove(e) {
+		var touch = (typeof e.originalEvent.targetTouches !== "undefined") ? e.originalEvent.targetTouches[0] : null;
+
+		Instance.delta = Instance.xStart - ((touch) ? touch.pageX : e.clientX);
+
+		// Only prevent event if trying to swipe
+		if (Instance.delta > 20) {
+			Functions.killEvent(e);
+		}
+
+		Instance.canSwipe = true;
+
+		var newLeft = -Instance.delta;
+		if (newLeft < Instance.touchMin) {
+			newLeft = Instance.touchMin;
+			Instance.canSwipe = false;
+		}
+		if (newLeft > Instance.touchMax) {
+			newLeft = Instance.touchMax;
+			Instance.canSwipe = false;
+		}
+
+		Instance.$image.css({ transform: "translate3D("+newLeft+"px,0,0)" });
+
+		Instance.touchTimer = Functions.startTimer(Instance.touchTimer, 300, function() { onTouchEnd(e); });
+	}
+
+	/**
+	 * @method private
+	 * @name onTouchEnd
+	 * @description Handles touchend event
+	 * @param e [object] "Event data"
+	 */
+
+	function onTouchEnd(e) {
+		Functions.killEvent(e);
+		Functions.clearTimer(Instance.touchTimer);
+
+		Instance.$lightbox.off( [Events.touchMove, Events.touchEnd].join("") );
+
+		if (Instance.delta) {
+			Instance.$lightbox.addClass(Classes.animating);
+			Instance.swipe = false;
+
+			if (Instance.canSwipe && (Instance.delta > Instance.edge || Instance.delta < -Instance.edge)) {
+				Instance.swipe = true;
+				if (Instance.delta <= Instance.leftPosition) {
+					Instance.$image.css({ transform: "translate3D("+(Instance.contentWidth)+"px,0,0)" });
+				} else {
+					Instance.$image.css({ transform: "translate3D("+(-Instance.contentWidth)+"px,0,0)" });
+				}
+			} else {
+				Instance.$image.css({ transform: "translate3D(0,0,0)" });
+			}
+
+			if (Instance.swipe) {
+				Instance.$controls.filter(Functions.getClassName((Instance.delta <= Instance.leftPosition) ? Classes.control_previous : Classes.control_next)).trigger(Events.click);
+			}
+			Functions.startTimer(Instance.resetTimer, Instance.duration, function() {
+				Instance.$lightbox.removeClass(Classes.animating);
+			});
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name calculateNaturalSize
+	 * @description Determines natural size of target image
+	 * @param $img [jQuery object] "Source image object"
+	 * @return [object | boolean] "Object containing natural height and width values or false"
+	 */
+
+	function calculateNaturalSize($img) {
+		var node = $img[0],
+			img = new Image();
+
+		if (typeof node.naturalHeight !== "undefined") {
+			return {
+				naturalHeight: node.naturalHeight,
+				naturalWidth:  node.naturalWidth
+			};
+		} else {
+			if (node.tagName.toLowerCase() === 'img') {
+				img.src = node.src;
+				return {
+					naturalHeight: img.height,
+					naturalWidth:  img.width
+				};
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * @plugin
+	 * @name Lightbox
+	 * @description A jQuery plugin for simple modals.
+	 * @type widget
+	 */
+
+	var Plugin = Formstone.Plugin("lightbox", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param extensions [array] <"jpg", "sjpg", "jpeg", "png", "gif"> "Image type extensions"
+			 * @param fixed [boolean] <false> "Flag for fixed positioning"
+			 * @param formatter [function] <$.noop> "Caption format function"
+			 * @param labels.close [string] <'Close'> "Close button text"
+			 * @param labels.count [string] <'of'> "Gallery count separator text"
+			 * @param labels.next [string] <'Next'> "Gallery control text"
+			 * @param labels.previous [string] <'Previous'> "Gallery control text"
+			 * @param margin [int] <50> "Margin used when sizing (single side)"
+			 * @param minHeight [int] <100> "Minimum height of modal"
+			 * @param minWidth [int] <100> "Minimum width of modal"
+			 * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
+			 * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
+			 * @param requestKey [string] <'boxer'> "GET variable for ajax / iframe requests"
+			 * @param top [int] <0> "Target top position; over-rides centering"
+			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
+			 * @param videoWidth [int] <600> "Video target width"
+			 */
+
+			defaults: {
+				customClass    : "",
+				extensions     : [ "jpg", "sjpg", "jpeg", "png", "gif" ],
+				fixed          : false,
+				formatter      : $.noop,
+				labels: {
+					close      : "Close",
+					count      : "of",
+					next       : "Next",
+					previous   : "Previous"
+				},
+				margin         : 50,
+				minHeight      : 100,
+				minWidth       : 100,
+				mobile         : false,
+				retina         : false,
+				requestKey     : "boxer",
+				top            : 0,
+				videoRatio     : 0.5625,
+				videoWidth     : 600
+			},
+
+			classes: [
+				"overlay",
+				"close",
+				"loading_icon",
+				"container",
+				"content",
+				"image",
+				"video",
+				"video_wrapper",
+				"meta",
+				"control",
+				"control_previous",
+				"control_next",
+				"control_disabled",
+				"position",
+				"position_current",
+				"position_total",
+				"caption",
+				"caption_gallery",
+				"iframe_element",
+				"error",
+				"loading",
+				"animating",
+				"fixed",
+				"mobile",
+				"inline",
+				"iframe",
+				"open"
+			],
+
+			/**
+			 * @events
+			 * @event open.lightbox "Lightbox opened; Triggered on window"
+			 * @event close.lightbox "Lightbox closed; Triggered on window"
+			 */
+
+			events: [
+				"open",
+				"close"
+			],
+
+			methods: {
+				_construct    : construct,
+				_destruct     : destruct,
+
+				// Public Methods
+
+				open          : open,
+				close         : close,
+
+				// Utility Methods
+
+				utility: {
+					_initialize    : initialize,
+					close          : close
+				}
+			}
+		}),
+
+		// Localize References
+
+		Namespace    = Plugin.namespace,
+		Defaults     = Plugin.defaults,
+		Classes      = Plugin.classes,
+		Events       = Plugin.events,
+		Functions    = Plugin.functions,
+		$Window      = Formstone.$window,
+		$Body        = null,
+
+		// Singleton
+
+		Instance     = null;
+
+		$(function() {
+			$Body = Formstone.$body;
+		});
+
+})(jQuery, window);
