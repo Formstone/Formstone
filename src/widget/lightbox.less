@@ -665,7 +665,8 @@
 			opacity: @fs-lightbox-control-opacity;
 		}
 
-		.no-touch &-mobile &-control_disabled {
+		.no-touch &-mobile &-control_disabled,
+		.no-touch &-mobile:hover &-control_disabled {
 			opacity: 0;
 			cursor: default !important;
 		}

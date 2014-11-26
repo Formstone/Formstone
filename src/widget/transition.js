@@ -18,7 +18,8 @@
 		if (Formstone.support.transition) {
 			// If supported
 
-			this.on(Events.transitionEnd, data, onTranistionEnd);
+			this.on(Events.transitionEnd, data, onTranistionEnd)
+				.on(Events.transitionForce, data, resolve);
 		} else {
 			// Otherwise, trigger callback
 
@@ -48,24 +49,40 @@
 		e.stopPropagation();
 		e.preventDefault();
 
-		var data    = e.data,
-			oe      = e.originalEvent,
-			prop    = oe.propertyName;
+		var data       = e.data,
+			oe         = e.originalEvent;
 
 		// Check property and target
 
-		if ((!data.property || prop === data.property) && (!data.target || $(oe.target).is(data.$target))) {
+		if ( (!data.property || (oe && oe.propertyName === data.property)) &&
+			 (!data.target || (oe && $(oe.target).is(data.$target))) &&
+			 (!data.target || (oe && $(oe.target).is(data.$el))) ) {
 
-			if (!data.always) {
-				// Unbind events, similiar to .one()
-
-				data.$el.off(Events.transitionEnd)[Plugin.namespace]("destroy"); // clean up old data?
-			}
-
-			// Otherwise, trigger callback
-
-			data.complete.apply(data.$el);
+			resolve({
+				data: data
+			});
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name resolve
+	 * @description Resolves transition end events.
+	 * @param e [object] "Event data"
+	 */
+
+	function resolve(e) {
+		var data = e.data;
+
+		if (!data.always) {
+			// Unbind events, similiar to .one()
+
+			data.$el.off(Events.transitionEnd)[Plugin.namespace]("destroy"); // clean up old data?
+		}
+
+		// Otherwise, trigger callback
+
+		data.complete.apply(data.$el);
 	}
 
 	/**
@@ -87,7 +104,7 @@
 			 */
 
 			defaults: {
-				always      : true,
+				always      : false,
 				complete    : $.noop,
 				property    : null,
 				target      : null
@@ -96,7 +113,11 @@
 			methods : {
 				_construct    : construct,
 				_destruct     : destruct
-			}
+			},
+
+			events: [
+				"transitionForce"
+			]
 		}),
 
 		// Localize References

@@ -96,7 +96,7 @@
 					Instance.gallery.active    = true;
 					Instance.gallery.id        = id;
 					Instance.gallery.$items    = $("a[data-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
-					Instance.gallery.index     = Instance.gallery.$items.index(data.$target);
+					Instance.gallery.index     = Instance.gallery.$items.index(Instance.$el);
 					Instance.gallery.total     = Instance.gallery.$items.length - 1;
 				}
 			}
@@ -107,11 +107,11 @@
 				html += '<div class="' + [Classes.overlay, Instance.customClass].join(" ") + '"></div>';
 			}
 			html += '<div class="' + [Classes.base, Classes.loading, Classes.animating, Instance.customClass].join(" ");
-			if (data.fixed) {
+			if (Instance.fixed) {
 				html += Classes.fixed;
 			}
-			if (data.isMobile) {
-				html += Classes.obile;
+			if (Instance.isMobile) {
+				html += Classes.mobile;
 			}
 			if (isUrl) {
 				html += Classes.frame;
@@ -189,7 +189,7 @@
 			}
 
 			Instance.$lightbox.transition({
-				always: false,
+				property: "opacity",
 				complete: function() {
 					if (isImage) {
 						loadImage(source);
@@ -261,7 +261,7 @@
 
 		if (Instance) {
 			Instance.$lightbox.transition({
-				always: false,
+				property: "opacity",
 				complete: function(e) {
 					// Clean up
 					Instance.$lightbox.off(Events.namespace);
@@ -310,12 +310,11 @@
 		}
 
 		Instance.$lightbox.transition({
-			always: false,
 			property: "height",
 			complete: function() {
 
 				Instance.$container.transition({
-					always: false,
+					property: "opacity",
 					complete: function() {
 						Instance.$lightbox.removeClass(Classes.animating);
 
@@ -348,12 +347,9 @@
 		// Trigger event in case the content size hasn't changed
 		var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
 
-/*
 		if (Instance.isMobile || !contentHasChanged) {
-			Instance.$lightbox.trigger("transitionEnd.fs-transition");
-			console.log('sd');
+			Instance.$lightbox.trigger( Formstone.Plugins.transition.events.transitionForce ); // hacky (?)
 		}
-*/
 
 		// Track content size changes
 		Instance.oldContentHeight = Instance.contentHeight;
@@ -750,7 +746,7 @@
 			}
 
 			Instance.$container.transition({
-				always: false,
+				property: "opacity",
 				complete: function() {
 					if (typeof Instance.$image !== 'undefined') {
 						Instance.$image.remove();
@@ -863,8 +859,8 @@
 		Instance.windowWidth	  = $Window.width()  - Instance.paddingHorizontal;
 		Instance.objectHeight	  = $object.outerHeight(true);
 		Instance.objectWidth	  = $object.outerWidth(true);
-		Instance.targetHeight	  = Instance.targetHeight || Instance.$target.data(Classes.namespace + "-height");
-		Instance.targetWidth	  = Instance.targetWidth  || Instance.$target.data(Classes.namespace + "-width");
+		Instance.targetHeight	  = Instance.targetHeight || Instance.$el.data(Classes.namespace + "-height");
+		Instance.targetWidth	  = Instance.targetWidth  || Instance.$el.data(Classes.namespace + "-width");
 		Instance.maxHeight		  = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
 		Instance.isIframe		  = $object.is("iframe");
 		Instance.objectMarginTop  = 0;
