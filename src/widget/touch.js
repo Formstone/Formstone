@@ -381,7 +381,16 @@
 
 		$Window = Formstone.$window;
 
-		// Custom Events
+		/**
+		 * @events
+		 * @event tap ""
+		 * @event panstart ""
+		 * @event pan ""
+		 * @event panend ""
+		 * @event scalestart ""
+		 * @event scale ""
+		 * @event scaleend ""
+		 */
 
 		Events.tap           = "tap";
 		Events.pan           = "pan";

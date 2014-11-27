@@ -20,20 +20,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.transition("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
-
 ### destroy
 
 Removes plugin instance.

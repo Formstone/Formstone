@@ -125,7 +125,7 @@
 	 */
 
 	var Plugin = Formstone.Plugin("cookie", {
-			methods: {
+			utilities: {
 				_delegate:     delegate
 			}
 		}),

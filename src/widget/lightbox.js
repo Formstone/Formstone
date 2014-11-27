@@ -1136,32 +1136,14 @@
 				"open"
 			],
 
-			/**
-			 * @events
-			 * @event open.lightbox "Lightbox opened; Triggered on window"
-			 * @event close.lightbox "Lightbox closed; Triggered on window"
-			 */
-
-			events: [
-				"open",
-				"close"
-			],
-
 			methods: {
 				_construct    : construct,
-				_destruct     : destruct,
+				_destruct     : destruct
+			},
 
-				// Public Methods
-
-				open          : open,
-				close         : close,
-
-				// Utility Methods
-
-				utility: {
-					_initialize    : initialize,
-					close          : close
-				}
+			utilities: {
+				_initialize    : initialize,
+				close          : close
 			}
 		}),
 
@@ -1179,8 +1161,25 @@
 
 		Instance     = null;
 
+		/**
+		 * @events
+		 * @event open.lightbox "Lightbox opened; Triggered on window"
+		 * @event close.lightbox "Lightbox closed; Triggered on window"
+		 */
+
+		Events.open     = "open";
+		Events.close    = "close";
+
+		// Doc ready
+
 		$(function() {
 			$Body = Formstone.$body;
 		});
 
 })(jQuery, window);
+
+/**
+ * @use
+
+
+ */

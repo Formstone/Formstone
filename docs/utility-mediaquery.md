@@ -69,7 +69,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 | Event | Description |
 | --- | --- |
-| change.mediaquery | Change to a media query match; Triggerd on window |
+| change | Change to a media query match; Triggered on window |
 
 ## Methods
 

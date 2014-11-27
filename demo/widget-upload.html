@@ -56,10 +56,10 @@
 					maxSize: 1048576
 				}).on("start.upload", onStart)
 				  .on("complete.upload", onComplete)
-				  .on("fileStart.upload", onFileStart)
-				  .on("fileProgress.upload", onFileProgress)
-				  .on("fileComplete.upload", onFileComplete)
-				  .on("fileError.upload", onFileError);
+				  .on("filestart.upload", onFileStart)
+				  .on("fileprogress.upload", onFileProgress)
+				  .on("filecomplete.upload", onFileComplete)
+				  .on("fileerror.upload", onFileError);
 
 				$(window).one("pronto.load", function() {
 					$(".demo .dropped").upload("destroy").off(".upload");

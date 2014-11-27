@@ -1,5 +1,5 @@
 /*! 
- * Formstone v0.0.1 - 2014-11-26 
+ * Formstone v0.0.1 - 2014-11-27 
  * Library of modular javascript components. 
  * http://formstone.it/ 
  * 

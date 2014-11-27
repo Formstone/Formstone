@@ -4,35 +4,6 @@
 
 	/**
 	 * @method private
-	 * @name delegate
-	 * @param opts [object] "Plugin options"
-	 */
-
-/*
-	function delegate(options) {
-
-		// Check Support
-
-		if (Formstone.support.matchMedia) {
-
-			if ($.type(options) === "object" && !Initialized) {
-
-				// Initialize
-
-				initialize.apply(this, arguments);
-				Initialized = true;
-			} else if (Methods[ options ]) {
-
-				// Delegate intent
-
-				Methods[ options ].apply(this, Array.prototype.slice.call(arguments, 1));
-			}
-		}
-	}
-*/
-
-	/**
-	 * @method private
 	 * @name initialize
 	 * @description Initializes plugin.
 	 * @param opts [object] "Plugin options"
@@ -256,13 +227,11 @@
 	 */
 
 	var Plugin = Formstone.Plugin("mediaquery", {
-			methods: {
-				utility: {
-					_initialize    : initialize,
-					state          : getState,
-					bind           : bind,
-					unbind         : unbind
-				}
+			utilities: {
+				_initialize    : initialize,
+				state          : getState,
+				bind           : bind,
+				unbind         : unbind
 			}
 		}),
 
@@ -285,24 +254,16 @@
 
 		/**
 		 * @events
-		 * @event change.mediaquery "Change to a media query match; Triggerd on window"
+		 * @event change "Change to a media query match; Triggered on window"
 		 */
 
 		Events = {
-			change     : "change.mediaquery",
+			change     : "change",
 			enter      : "enter",
 			leave      : "leave"
 		},
 
 		// Public methods
-
-/*
-		Methods = {
-			state     : getState,
-			bind      : bind,
-			unbind    : unbind
-		},
-*/
 
 		// Localize References
 

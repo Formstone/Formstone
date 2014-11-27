@@ -272,7 +272,8 @@
 					var $xhr = $.ajaxSettings.xhr();
 
 					if ($xhr.upload) {
-						$xhr.upload.addEventListener(Events.progressClean, function(e) {
+						// Clean progress event
+						$xhr.upload.addEventListener("progress", function(e) {
 							var percent = 0,
 								position = e.loaded || e.position,
 								total = e.total;
@@ -345,25 +346,6 @@
 				"dropping"
 			],
 
-			/**
-			 * @events
-			 * @event complete.upload "All uploads are complete"
-			 * @event fileComplete.upload "Specific upload complete"
-			 * @event fileError.upload "Specific upload error"
-			 * @event fileStart.upload "Specific upload starting"
-			 * @event fileProgress.upload "Specific upload progress"
-			 * @event start.upload "Uploads starting"
-			 */
-
-			events: [
-				"complete",
-				"fileStart",
-				"fileProgress",
-				"fileComplete",
-				"fileError",
-				"start"
-			],
-
 			methods: {
 				_construct    : construct,
 				_destruct     : destruct
@@ -376,7 +358,22 @@
 		Events       = Plugin.events,
 		Functions    = Plugin.functions;
 
-		Events.progressClean = "progress";
+		/**
+		 * @events
+		 * @event complete "All uploads are complete"
+		 * @event filecomplete "Specific upload complete"
+		 * @event fileerror "Specific upload error"
+		 * @event filestart "Specific upload starting"
+		 * @event fileprogress "Specific upload progress"
+		 * @event start "Uploads starting"
+		 */
+
+		Events.complete        = "complete";
+		Events.fileStart       = "filestart";
+		Events.fileProgress    = "fileprogress";
+		Events.fileComplete    = "filecomplete";
+		Events.fileError       = "fileerror";
+		Events.start           = "start";
 
 })(jQuery, Formstone);
 

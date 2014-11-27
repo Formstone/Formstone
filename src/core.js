@@ -129,7 +129,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						var data = $.extend(true, {
 							$el : $element
-						}, options, $element.data(namespaceDash + "-options"));
+						}, options, $element.data(namespace + "-options"));
 
 						// Constructor
 
@@ -261,25 +261,24 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
-			 * @name delegateRoutine
+			 * @name delegateWidget
 			 * @description Delegates public methods.
 			 * @param method [string] "Method to execute"
 			 * @return [jQuery] "jQuery set"
 			 */
 
-			function delegateRoutine(method) {
-
-				// Public width OR public utility OR utility init OR false
-
-				var _method = settings.methods[method] || settings.methods.utility[method] || settings.methods.utility._initialize || false;
+			function delegateWidget(method) {
 
 				// If jQuery object
 
 				if (this instanceof $) {
 
-					// Only allow "public" methods (no underscore prefix)
+					var _method = settings.methods[method];
+
+					// Public method OR false
 
 					if ($.type(method) === "object" || !method) {
+
 						// Initialize
 
 						return initialize.apply(this, arguments);
@@ -291,7 +290,23 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					}
 
 					return this;
-				} else if (_method) {
+				}
+			}
+
+			/**
+			 * @method private
+			 * @name delegateUtility
+			 * @description Delegates utility methods.
+			 * @param method [string] "Method to execute"
+			 */
+
+			function delegateUtility(method) {
+
+				// public utility OR utility init OR false
+
+				var _method = settings.utilities[method] || settings.utilities._initialize || false;
+
+				if (_method) {
 
 					// Wrap Utility Methods
 
@@ -300,14 +315,14 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			}
 
 			/**
-			 * @method widget
+			 * @method
 			 * @name defaults
 			 * @description Extends plugin default settings; effects instances created hereafter.
 			 * @param options [object] <{}> "New plugin defaults"
 			 * @example $.{ns}("defaults", { ... });
 			 */
 
-			function setDefaults(options) {
+			function defaults(options) {
 				settings.defaults = $.extend(true, settings.defaults, options || {});
 			}
 
@@ -318,7 +333,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Namespace Classes & Events
 
 			settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
-			settings.events    = namespaceProperties("events",  namespaceDot,  Events,  settings.events);
+			settings.events    = namespaceProperties("events",  namespaceDash, Events,  settings.events);
 
 			// Extend Functions
 
@@ -337,23 +352,30 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Private Methods
 
-				_setup          : $.noop,    // All First Run
-				_construct      : $.noop,    // Widget Constructor
-				_destruct       : $.noop,    // Widget Destructor
-				_delegate       : null,      // Utility Delegation
+				_setup         : $.noop,    // First Run
+				_construct     : $.noop,    // Constructor
+				_destruct      : $.noop,    // Destructor
 
 				// Public Methods
 
-				destroy: destroy,
-
-				// Utility methods
-
-				utility: {
-					_initialize    : null,
-					defaults       : setDefaults
-				}
+				destroy        : destroy
 
 			}, settings.methods);
+
+			// Extend Utilities
+
+			settings.utilities = $.extend(true, {
+
+				// Private Utilities
+
+				_initialize    : false,    // First Run
+				_delegate      : false,    // Custom Delegation
+
+				// Public Utilities
+
+				defaults       : defaults
+
+			}, settings.utilities);
 
 			// Register Plugin
 
@@ -361,18 +383,14 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			if (settings.widget) {
 
-				// Method Delegation: $(".target").plugin("method", ...);
-				$.fn[namespace]    = delegateRoutine;
+				// Widget Delegation: $(".target").plugin("method", ...);
+				$.fn[namespace] = delegateWidget;
 			}
 
 			// Utility
 
-			if (settings.methods._delegate || objectSize(settings.methods.utility)) {
-
 				// Utility Delegation: $.plugin("method", ... );
-
-				$[namespace] = settings.methods._delegate || delegateRoutine;
-			}
+				$[namespace] = settings.utilities._delegate || delegateUtility;
 
 			// Run Setup
 
@@ -407,7 +425,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					_props[ customProps[i] ] = namespace + "-" + customProps[i];
 				} else {
 					// Custom events
-					_props[ customProps[i] ] = customProps[i] + "." + namespace;
+					_props[ i ] = customProps[i] + "." + namespace;
 				}
 			}
 		}
@@ -415,26 +433,11 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		for (i in globalProps) {
 			if (globalProps.hasOwnProperty(i)) {
 				// From Globals
-				_props[i] = globalProps[i].replace(/{ns}/g, namespace);
+				_props[ i ] = globalProps[i].replace(/{ns}/g, namespace);
 			}
 		}
 
 		return _props;
-	}
-
-	// Object size
-
-	function objectSize(object) {
-		var size = 0,
-			key;
-
-		for (key in object) {
-			if (object.hasOwnProperty(key)) {
-				size++;
-			}
-		}
-
-		return size;
 	}
 
 	// Get Transition Event
@@ -561,6 +564,9 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 				_construct:    construct,
 				_destruct:     destruct,
 				reset:         reset
+			},
+			utilities: {
+				close:         close
 			}
 		}),
 
@@ -609,7 +615,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 	// Register Plugin
 
 	var Plugin = Formstone.Plugin("namespace", {
-			methods: {
+			utilties: {
 				_delegate:     delegate
 			}
 		}),
@@ -643,6 +649,7 @@ initialized				// Boolean, initialized state
 defaults				// Object, default options extended with initialization and local options
 functions				// Object, private utility functions
 methods					// Object, public methods
+utilities				// Object, public utilities
 classes					// Object, namespaced classes strings
 events					// Object, namespaced event strings
 ```
@@ -656,6 +663,7 @@ var Plugin = Formstone.Plugin(“namespace”, {
 	Defaults     = Plugin.defaults,
 	Functions    = Plugin.functions,
 	Methods      = Plugin.methods,
+	Utilities    = Plugin.utilities,
 	Classes      = Plugin.classes,
 	Events       = Plugin.events;
 ```

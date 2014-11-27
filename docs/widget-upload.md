@@ -27,25 +27,11 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| start.upload | Uploads starting |
+| start | Uploads starting |
 
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
-
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.upload("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
 
 ### destroy
 

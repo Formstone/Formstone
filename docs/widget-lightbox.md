@@ -50,20 +50,6 @@ Closes active instance of plugin
 $.lightbox("close");
 ```
 
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.lightbox("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
-
 ### destroy
 
 Removes plugin instance.

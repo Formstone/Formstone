@@ -20,9 +20,9 @@
 
 			this.on(Events.transitionEnd, data, onTranistionEnd);
 		} else {
-			// Otherwise, trigger callback
+			// Otherwise, resolve
 
-			data.complete.apply(data.$el);
+			resolve(data);
 		}
 	}
 
@@ -52,7 +52,7 @@
 			oe             = e.originalEvent,
 			checkProp      = (!data.property || (oe && oe.propertyName === data.property)),
 			checkTarget    = (!data.target || (oe && $(oe.target).is(data.$target))),
-			checkEl        = (!data.target && oe && $(oe.target).is(data.$el));
+			checkEl        = (checkTarget || (!data.target && oe && $(oe.target).is(data.$el)));
 
 		// Check property and target
 
@@ -75,7 +75,7 @@
 			data.$el.off(Events.transitionEnd)[Plugin.namespace]("destroy"); // clean up old data?
 		}
 
-		// Otherwise, trigger callback
+		// fire callback
 
 		data.complete.apply(data.$el);
 	}

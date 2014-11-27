@@ -4,6 +4,7 @@ A jQuery plugin for multi-touch events.
 
 * [Use](#use)
 * [Options](#options)
+* [Events](#events)
 * [Methods](#methods)
 
 
@@ -78,23 +79,17 @@ Set instance options by passing a valid object at initialization, or to the publ
 | scale | boolean | false | True to enable |
 | tap | boolean | false | True to enable |
 
+## Events
+
+Events are triggered on the target instance's element, unless otherwise stated.
+
+| Event | Description |
+| --- | --- |
+| scaleend |  |
+
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
-
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.touch("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
 
 ### destroy
 

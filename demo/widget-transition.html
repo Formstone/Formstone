@@ -58,6 +58,7 @@
 			$(document).ready(function() {
 
 				$(".transit_1").transition({
+					always: true,
 					complete: function() {
 						console.log("FINISHED 1!");
 
@@ -66,6 +67,7 @@
 				});
 
 				$(".transit_parent").transition({
+					always: true,
 					target: ".transit",
 					complete: function() {
 						console.log("FINISHED 2!");
@@ -75,7 +77,6 @@
 				});
 
 				$(".transit_3").transition({
-					always: false,
 					property: "background-color",
 					complete: function() {
 						console.log("FINISHED 3!");

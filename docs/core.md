@@ -90,6 +90,9 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 				_construct:    construct,
 				_destruct:     destruct,
 				reset:         reset
+			},
+			utilities: {
+				close:         close
 			}
 		}),
 
@@ -138,7 +141,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 	// Register Plugin
 
 	var Plugin = Formstone.Plugin("namespace", {
-			methods: {
+			utilties: {
 				_delegate:     delegate
 			}
 		}),
@@ -172,6 +175,7 @@ initialized				// Boolean, initialized state
 defaults				// Object, default options extended with initialization and local options
 functions				// Object, private utility functions
 methods					// Object, public methods
+utilities				// Object, public utilities
 classes					// Object, namespaced classes strings
 events					// Object, namespaced event strings
 ```
@@ -185,6 +189,7 @@ var Plugin = Formstone.Plugin(“namespace”, {
 	Defaults     = Plugin.defaults,
 	Functions    = Plugin.functions,
 	Methods      = Plugin.methods,
+	Utilities    = Plugin.utilities,
 	Classes      = Plugin.classes,
 	Events       = Plugin.events;
 ```
@@ -289,4 +294,18 @@ Formstone.Plugin("namespace", { ... });
 | --- | --- | --- | --- |
 | namespace | string |  | Plugin namespace |
 | settings | object |  | Plugin settings |
+
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
+
+```
+$.{ns}("defaults", { ... });
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | object | {} | New plugin defaults |
 

@@ -36,8 +36,10 @@
 			.demo .navigation a { background: #444; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 			.demo .navigation a:hover { background: #222; }
 
-			.demo .navigation.navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-			.demo .navigation.navigation-enabled .navigation-container { padding: 10px; }
+			.demo .navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+			.demo .navigation.fs-navigation-enabled .fs-navigation-container { padding: 10px; }
+
+			.demo #nav-handle { background: #ccc; margin: 0; padding: 15px; }
 		</style>
 
 		<script>
@@ -107,8 +109,33 @@
 });</code></pre>
 
 				<h5>Demo</h5>
+
 				<nav class="navigation js-naved" data-navigation-options='{"maxWidth":"740px"}'>
-					<h4 class="navigation-handle">Navigation</h4>
+					<a href="#">Home</a>
+					<a href="#">About</a>
+					<a href="#">Contact</a>
+				</nav>
+
+				<br>
+
+				<!-- BREAKPOINT -->
+				<h2>Custom Handle</h2>
+				<p>Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.</p>
+
+				<pre class="example"><code class="language-javascript">$("nav").navigation({
+	handle: "#nav-handle"
+});</code></pre>
+				<pre class="example"><code class="language-markup">&lt;h4 id="nav-handle"&gt;Navigation&lt;/nav&gt;
+&lt;nav&gt;
+	&lt;a href="#"&gt;Home&lt;/a&gt;
+	&lt;a href="#"&gt;About&lt;/a&gt;
+	&lt;a href="#"&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+
+				<h5>Demo</h5>
+
+				<h4 id="nav-handle">Navigation</h4>
+				<nav class="navigation js-naved" data-navigation-options='{"maxWidth":"740px","handle":"#nav-handle"}'>
 					<a href="#">Home</a>
 					<a href="#">About</a>
 					<a href="#">Contact</a>

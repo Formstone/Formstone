@@ -13,20 +13,18 @@
 		data.enabled    = false;
 		data.open       = false;
 
-		var $h = this.find( Functions.getClassName(Classes.handle) );
-
-		data.$handle = $h.length ? $h.detach() : $('<span class="' + Classes.handle + '"></span>');
-		data.$handle.text((data.label) ? data.labels.closed : '');
-
 		this.addClass( [Classes.base, data.customClass].join(" ") )
-			.wrapInner('<div class="' + Classes.container + '"></div>')
-			.prepend(data.$handle);
+			.wrapInner('<div class="' + Classes.container + '"></div>');
 
 		data.$container    = this.find( Functions.getClassName(Classes.container) );
-		data.eventDelegate = Functions.getClassName(Classes.handle);
+		data.$handle       = (data.handle) ? $(data.handle).addClass(Classes.handle) : $('<span class="' + Classes.handle + '"></span>').prependTo(this);
+
+		if (data.label) {
+			data.$handle.text(data.labels.closed);
+		}
 
 		// Touch Support
-		this.touch({
+		data.$handle.touch({
 			tap: true
 		}).on(Events.tap, data, onClick);
 
@@ -176,6 +174,7 @@
 			/**
 			 * @options
 			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param handle [string] <null> "Handle element selector"
 			 * @param label [boolean] <true> "Display handle width label"
 			 * @param labels.closed [string] <'Navigation'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
@@ -184,6 +183,7 @@
 
 			defaults: {
 				customClass    : "",
+				handle         : null,
 				label          : true,
 				labels: {
 					closed     : "Navigation",
@@ -199,15 +199,7 @@
 				"open"
 			],
 
-			/**
-			 * @events
-			 * @event open.navigation "Navigation opened"
-			 * @event close.navigation "Navigation closed"
-			 */
-
 			events: [
-				"open",
-				"close",
 				"tap"
 			],
 
@@ -233,6 +225,15 @@
 		// Singleton
 
 		Instance     = null;
+
+		/**
+		 * @events
+		 * @event open "Navigation opened"
+		 * @event close "Navigation closed"
+		 */
+
+		Events.open     = "open";
+		Events.close    = "close";
 
 })(jQuery, Formstone);
 
@@ -263,6 +264,25 @@ By default, Navigation will enable itself on screens smaller then 980 pixels wid
 $("nav").navigation({
 	maxWidth: "740px"
 });
+```
+
+### Custom Handle
+
+Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.
+
+```
+$("nav").navigation({
+	handle: "#nav-handle"
+});
+```
+
+```
+<h4 id="nav-handle">Navigation</h4>
+<nav>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
 ```
 
 #### IE Support

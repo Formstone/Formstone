@@ -36,6 +36,25 @@ $("nav").navigation({
 });
 ```
 
+### Custom Handle
+
+Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.
+
+```
+$("nav").navigation({
+	handle: "#nav-handle"
+});
+```
+
+```
+<h4 id="nav-handle">Navigation</h4>
+<nav>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+```
+
 #### IE Support
 
 When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
@@ -47,6 +66,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | customClass | string | '' | Class applied to instance |
+| handle | string | null | Handle element selector |
 | label | boolean | true | Display handle width label |
 | labels.closed | string | 'Navigation' | Closed state text |
 | labels.open | string | 'Close' | Open state text |
@@ -58,7 +78,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| close.navigation | Navigation closed |
+| close | Navigation closed |
 
 ## Methods
 
@@ -71,20 +91,6 @@ Closes instance.
 ```
 $(".target").navigation("close");
 ```
-
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.navigation("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
 
 ### destroy
 
