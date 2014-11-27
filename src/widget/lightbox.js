@@ -1163,8 +1163,8 @@
 
 		/**
 		 * @events
-		 * @event open.lightbox "Lightbox opened; Triggered on window"
-		 * @event close.lightbox "Lightbox closed; Triggered on window"
+		 * @event open "Lightbox opened; Triggered on window"
+		 * @event close "Lightbox closed; Triggered on window"
 		 */
 
 		Events.open     = "open";

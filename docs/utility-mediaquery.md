@@ -55,7 +55,7 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 ## Options
 
-
+Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -67,11 +67,16 @@ When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) a
 
 ## Events
 
+Events are triggered on the `window`, unless otherwise stated.
+
 | Event | Description |
 | --- | --- |
+| s |  |
 | change | Change to a media query match; Triggered on window |
 
 ## Methods
+
+Methods are publicly available, unless otherwise stated.
 
 ### bind
 

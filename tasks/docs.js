@@ -11,9 +11,9 @@ module.exports = function(grunt) {
 
 
 		function parseJavascript(content) {
-			var _return = {};
-			var parts = content.split("\n");
-			var keys = [
+			var _return = {},
+				parts = content.split("\n"),
+				keys = [
 					"name",
 					"namespace",
 					"type",
@@ -31,14 +31,14 @@ module.exports = function(grunt) {
 					var key = keys[ki];
 
 					if (p.indexOf("@"+key) > -1) {
-						var pset = p.split("@"+key);
-						var part = pset[ pset.length - 1 ].trim();
+						var pset = p.split("@"+key),
+						part = pset[ pset.length - 1 ].trim();
 
 						// Split down params, events and returns
 						if ( ["param","event","return"].indexOf(key) > -1 ) {
 							var parray = [];
 
-							if (key != "return") {
+							if (key !== "return") {
 								parray = part.split(" ", 1);
 								parray.push( part.replace(parray[0]+" ", "") );
 								part = {
@@ -75,13 +75,13 @@ module.exports = function(grunt) {
 							}
 						}
 
-						if (key == "param") {
+						if (key === "param") {
 							if (!_return.params) {
 								_return["params"] = [];
 							}
 							_return["params"].push(part);
-						} else if (key == "event") {
-							if (!_return.params) {
+						} else if (key === "event") {
+							if (!_return.events) {
 								_return["events"] = [];
 							}
 							_return["events"].push(part);
@@ -91,14 +91,15 @@ module.exports = function(grunt) {
 					}
 				}
 			}
+
 			return _return;
 		}
 
 
 		function parseCSS(content) {
-			var _return = {};
-			var parts = content.split("\n");
-			var keys = [
+			var _return = {},
+				parts = content.split("\n"),
+				keys = [
 					"name",
 					"description",
 					"type"
@@ -111,8 +112,8 @@ module.exports = function(grunt) {
 					var key = keys[ki];
 
 					if (p.indexOf("@"+key) > -1) {
-						var pset = p.split("@"+key);
-						var part = pset[ pset.length - 1 ].trim();
+						var pset = p.split("@"+key),
+						part = pset[ pset.length - 1 ].trim();
 
 						_return[key] = part;
 					}
@@ -275,8 +276,11 @@ module.exports = function(grunt) {
 			if (doc.options && doc.options.length) {
 				md += '## Options';
 				md += '\n\n';
-				if (doc.type == "widget") {
+				if (doc.type === "widget") {
 					md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-' + namespace + '-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.';
+				}
+				if (doc.type === "utility") {
+					md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method.';
 				}
 				md += '\n\n';
 				md += '| Name | Type | Default | Description |';
@@ -297,8 +301,12 @@ module.exports = function(grunt) {
 			if (doc.events && doc.events.length) {
 				md += '## Events';
 				md += '\n\n';
-				if (doc.type == "widget") {
+				if (doc.type === "widget") {
 					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
+					md += '\n\n';
+				}
+				if (doc.type === "utility") {
+					md += 'Events are triggered on the `window`, unless otherwise stated.';
 					md += '\n\n';
 				}
 				md += '| Event | Description |';
@@ -317,8 +325,12 @@ module.exports = function(grunt) {
 			if (doc.methods && doc.methods.length) {
 				md += '## Methods';
 				md += '\n\n';
-				if (doc.type == "widget") {
+				if (doc.type === "widget") {
 					md += 'Methods are publicly available to all active instances, unless otherwise stated.';
+					md += '\n\n';
+				}
+				if (doc.type === "utility") {
+					md += 'Methods are publicly available, unless otherwise stated.';
 					md += '\n\n';
 				}
 				for (var i in doc.methods) {
@@ -358,12 +370,6 @@ module.exports = function(grunt) {
 			if (doc.css && doc.css.length) {
 				md += '## CSS';
 				md += '\n\n';
-				/*
-				if (doc.type == "widget") {
-					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
-					md += '\n\n';
-				}
-				*/
 				md += '| Class | Type | Description |';
 				md += '\n';
 				md += '| --- | --- | --- |';

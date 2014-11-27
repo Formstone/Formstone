@@ -33,7 +33,7 @@ $.macroon(key, null);
 
 ## Options
 
-
+Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -42,6 +42,8 @@ $.macroon(key, null);
 | path | string |  | Cookie path |
 
 ## Methods
+
+Methods are publicly available, unless otherwise stated.
 
 ### create
 

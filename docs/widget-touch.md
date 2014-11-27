@@ -85,6 +85,13 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
+| s |  |
+| tap |  |
+| panstart |  |
+| pan |  |
+| panend |  |
+| scalestart |  |
+| scale |  |
 | scaleend |  |
 
 ## Methods
