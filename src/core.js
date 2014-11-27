@@ -112,7 +112,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			function initialize(options) {
 				// Extend Defaults
 
-				options = $.extend(true, {}, settings.defaults, options);
+				var hasOptions = $.type(options) === "object";
+
+				options = $.extend(true, {}, settings.defaults, (hasOptions ? options : {}));
 
 				// Maintain Chain
 
@@ -133,7 +135,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Constructor
 
-						settings.methods._construct.call($element, data);
+						settings.methods._construct.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) )));
 
 						// Cache Instance
 

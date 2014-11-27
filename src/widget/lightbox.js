@@ -204,9 +204,11 @@
 				Instance.$lightbox.on(Events.clickTouchStart, Functions.getClassName(Classes.control), advanceGallery);
 			}
 
-			Instance.$lightbox.transition({
-				property: "opacity",
-				complete: function() {
+			Instance.$lightbox.transition(
+				{
+					property: "opacity"
+				},
+				function() {
 					if (isImage) {
 						loadImage(source);
 					} else if (isVideo) {
@@ -221,7 +223,7 @@
 						//$.error("Lightbox: '" +  source + "' is not valid.");
 					}
 				}
-			});
+			);
 
 			$Body.addClass(Classes.open);
 		}
@@ -276,9 +278,11 @@
 		Functions.killEvent(e);
 
 		if (Instance) {
-			Instance.$lightbox.transition({
-				property: "opacity",
-				complete: function(e) {
+			Instance.$lightbox.transition(
+				{
+					property: "opacity"
+				},
+				function(e) {
 					// Clean up
 					Instance.$lightbox.off(Events.namespace);
 					Instance.$container.off(Events.namespace);
@@ -293,7 +297,7 @@
 
 					$Window.trigger(Events.close);
 				}
-			}).addClass(Classes.animating);
+			).addClass(Classes.animating);
 
 			$Body.removeClass(Classes.open);
 
@@ -325,18 +329,22 @@
 			$Body.addClass(Classes.open);
 		}
 
-		Instance.$lightbox.transition({
-			property: "height",
-			complete: function() {
+		Instance.$lightbox.transition(
+			{
+				property: "height"
+			},
+			function() {
 
-				Instance.$container.transition({
-					property: "opacity",
-					complete: function() {
+				Instance.$container.transition(
+					{
+						property: "opacity"
+					},
+					function() {
 						Instance.$lightbox.removeClass(Classes.animating);
 
 						Instance.isAnimating = false;
 					}
-				});
+				);
 
 				Instance.$lightbox.removeClass(Classes.loading);
 
@@ -350,7 +358,7 @@
 					preloadGallery();
 				}
 			}
-		});
+		);
 
 		if (!Instance.isMobile) {
 			Instance.$lightbox.css({
@@ -761,9 +769,11 @@
 				Instance.gallery.index = 0;
 			}
 
-			Instance.$container.transition({
-				property: "opacity",
-				complete: function() {
+			Instance.$container.transition(
+				{
+					property: "opacity"
+				},
+				function() {
 					if (typeof Instance.$image !== 'undefined') {
 						Instance.$image.remove();
 					}
@@ -786,7 +796,7 @@
 
 					updateGalleryControls();
 				}
-			});
+			);
 
 			Instance.$lightbox.addClass( [Classes.loading, Classes.animating].join(" "));
 		}

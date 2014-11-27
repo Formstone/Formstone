@@ -2,8 +2,33 @@
 
 A jQuery plugin for CSS transition events.
 
+* [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+
+
+## Use 
+### Basic
+
+Transition provides a predicatable interface for moving to CSS based animations:
+
+```
+$(".target").transition({
+	complete: function() {
+		...
+	}
+}).addClass("visible");
+```
+
+### Resolve
+
+Tranistions can manually resolved, which will immediately fire the associated callback:
+
+```
+if (shouldResolve) {
+	$(".target").transition("resolve");
+}
+```
 
 ## Options
 
@@ -12,7 +37,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | always | boolean | False | Flag to always react to transition end (.on vs .one) |
-| complete | function | $.noop | Callback function |
 | property | string | null | Property to react to |
 | target | string | null | Target child selector |
 
