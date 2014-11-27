@@ -71,7 +71,6 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| s |  |
 | change | Change to a media query match; Triggered on window |
 
 ## Methods

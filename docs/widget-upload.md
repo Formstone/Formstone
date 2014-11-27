@@ -27,7 +27,6 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| s |  |
 | complete | All uploads are complete |
 | filecomplete | Specific upload complete |
 | fileerror | Specific upload error |

@@ -30,7 +30,7 @@ module.exports = function(grunt) {
 				for (var ki in keys) {
 					var key = keys[ki];
 
-					if (p.indexOf("@"+key) > -1) {
+					if (p.indexOf("@"+key) > -1 && p.indexOf("@events") < 0) {
 						var pset = p.split("@"+key),
 						part = pset[ pset.length - 1 ].trim();
 

@@ -36,7 +36,6 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| s |  |
 | open | Lightbox opened; Triggered on window |
 | close | Lightbox closed; Triggered on window |
 
