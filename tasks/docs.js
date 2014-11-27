@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('buildDocs', 'Build Formstone Docs.', function () {
 
 		var widgetMethods = [],
+			utilityMethods = [],
 			allDocs = {
 				grid: [],
 				utility: [],
@@ -166,6 +167,8 @@ module.exports = function(grunt) {
 							if (content.indexOf("private") < 0) {
 								if (content.indexOf("@method widget") > -1) {
 									widgetMethods.push(m);
+								} else if (content.indexOf("@method utility") > -1) {
+									utilityMethods.push(m);
 								} else {
 									doc.methods.push(m);
 								}
@@ -206,9 +209,18 @@ module.exports = function(grunt) {
 			var namespace = doc.name.toLowerCase();
 
 			if (jsFile) {
-				if (namespace !== "formstone" && namespace !== "grid" && doc.type === "widget") {
-					for (var i in widgetMethods) {
-						var m = JSON.parse(JSON.stringify(widgetMethods[i]));
+				if (namespace !== "formstone" && namespace !== "grid") {
+					if (doc.type === "widget") {
+						for (var i in widgetMethods) {
+							var m = JSON.parse(JSON.stringify(widgetMethods[i]));
+							m.example = m.example.replace("{ns}", namespace);
+
+							doc.methods.push(m);
+						}
+					}
+
+					for (var i in utilityMethods) {
+						var m = JSON.parse(JSON.stringify(utilityMethods[i]));
 						m.example = m.example.replace("{ns}", namespace);
 
 						doc.methods.push(m);

@@ -88,6 +88,20 @@ $.mediaquery("bind", "(min-width: 500px)", { ... });
 | media | string |  | Media query to match |
 | data | object |  | Object containing 'enter' and 'leave' callbacks |
 
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
+
+```
+$.media query("defaults", { ... });
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | object | {} | New plugin defaults |
+
 ### state
 
 Returns the current state.

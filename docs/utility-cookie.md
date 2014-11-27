@@ -59,6 +59,20 @@ $.cookie(key, value, options);
 | value | string |  | Cookie value |
 | options | object |  | Options object |
 
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
+
+```
+$.cookie("defaults", { ... });
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | object | {} | New plugin defaults |
+
 ### erase
 
 Deletes a cookie.

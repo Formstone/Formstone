@@ -295,17 +295,3 @@ Formstone.Plugin("namespace", { ... });
 | namespace | string |  | Plugin namespace |
 | settings | object |  | Plugin settings |
 
-### defaults
-
-Extends plugin default settings; effects instances created hereafter.
-
-```
-$.{ns}("defaults", { ... });
-```
-
-##### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
-

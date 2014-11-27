@@ -315,7 +315,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			}
 
 			/**
-			 * @method
+			 * @method utility
 			 * @name defaults
 			 * @description Extends plugin default settings; effects instances created hereafter.
 			 * @param options [object] <{}> "New plugin defaults"

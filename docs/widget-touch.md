@@ -91,6 +91,20 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
+
+```
+$.touch("defaults", { ... });
+```
+
+##### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| options | object | {} | New plugin defaults |
+
 ### destroy
 
 Removes plugin instance.
