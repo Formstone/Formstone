@@ -100,7 +100,7 @@ $.lightbox("resize");
 | .fs-lightbox.fs-lightbox-mobile | modifier | Indicates mobile display |
 | .fs-lightbox.fs-lightbox-fixed | modifier | Indicates fixed positioning |
 | .fs-lightbox.fs-lightbox-inline | modifier | Indicates inline content |
-| .fs-lightbox.fs-lightbox-iframe | modifier | Indicates iFrame content |
+| .fs-lightbox.fs-lightbox-iframed | modifier | Indicates iFrame content |
 | .fs-lightbox-lock | modifier | Indicates locked state; Applied to body element |
 | .fs-lightbox-overlay | element | Overlay element |
 | .fs-lightbox-close | element | Close element |
@@ -109,13 +109,15 @@ $.lightbox("resize");
 | .fs-lightbox-content | element | Content element |
 | .fs-lightbox-image | element | Image element |
 | .fs-lightbox-video | element | Video element |
-| .fs-lightbox-iframe_element | element | iFrame element |
+| .fs-lightbox-iframe | element | iFrame element |
 | .fs-lightbox-meta | element | Meta info element |
 | .fs-lightbox-control | element | Control element |
 | .fs-lightbox-control.fs-lightbox-control_previous | modifier | Indicates previous control |
 | .fs-lightbox-control.fs-lightbox-control_next | modifier | Indicates next control |
 | .fs-lightbox-control.fs-lightbox-control_disabled | modifier | Indicates disbaled state |
 | .fs-lightbox-position | element | Position element |
+| .fs-lightbox-position_current | element | Current position element |
+| .fs-lightbox-position_total | element | Total position element |
 | .fs-lightbox-caption | element | Caption element |
 | .fs-lightbox-error | element | Error message element |
 

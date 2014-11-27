@@ -132,7 +132,7 @@
 				html += Classes.mobile;
 			}
 			if (isUrl) {
-				html += Classes.iframe;
+				html += Classes.iframed;
 			}
 			if (isElement || isObject) {
 				html += Classes.inline;
@@ -157,11 +157,9 @@
 					html += Instance.labels.count;
 					html += ' <span class="' + Classes.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
 					html += '</p>';
-					html += '<div class="' + [Classes.caption, Classes.caption_gallery].join(" ") + '">';
-				} else {
-					html += '<div class="' + Classes.caption + '">';
 				}
 
+				html += '<div class="' + Classes.caption + '">';
 				html += Instance.formatter.call($el, data);
 				html += '</div></div>'; // caption, meta
 			}
@@ -848,7 +846,7 @@
 
 	function loadURL(source) {
 		source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
-		var $iframe = $('<iframe class="' + Classes.iframe_element + '" src="' + source + '"></iframe>');
+		var $iframe = $('<iframe class="' + Classes.iframe + '" src="' + source + '"></iframe>');
 		appendObject($iframe);
 	}
 
@@ -1107,6 +1105,13 @@
 			},
 
 			classes: [
+				"loading",
+				"animating",
+				"fixed",
+				"mobile",
+				"inline",
+				"iframed",
+				"open",
 				"overlay",
 				"close",
 				"loading_icon",
@@ -1124,16 +1129,8 @@
 				"position_current",
 				"position_total",
 				"caption",
-				"caption_gallery",
-				"iframe_element",
-				"error",
-				"loading",
-				"animating",
-				"fixed",
-				"mobile",
-				"inline",
 				"iframe",
-				"open"
+				"error"
 			],
 
 			methods: {
