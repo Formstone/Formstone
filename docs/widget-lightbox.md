@@ -5,6 +5,7 @@ A jQuery plugin for simple modals.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Options
 
@@ -87,4 +88,34 @@ $.lightbox("resize");
 | --- | --- | --- | --- |
 | height | int | false |  | Target height or false to auto size |
 | width | int | false |  | Target width or false to auto size |
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| .fs-lightbox | element | Base widget class |
+| .fs-lightbox.fs-lightbox-open | modifier | Indicates open state |
+| .fs-lightbox.fs-lightbox-loading | modifier | Indicates loading state |
+| .fs-lightbox.fs-lightbox-animating | modifier | Indicates animating state |
+| .fs-lightbox.fs-lightbox-mobile | modifier | Indicates mobile display |
+| .fs-lightbox.fs-lightbox-fixed | modifier | Indicates fixed positioning |
+| .fs-lightbox.fs-lightbox-inline | modifier | Indicates inline content |
+| .fs-lightbox.fs-lightbox-iframe | modifier | Indicates iFrame content |
+| .fs-lightbox-lock | modifier | Indicates locked state; Applied to body element |
+| .fs-lightbox-overlay | element | Overlay element |
+| .fs-lightbox-close | element | Close element |
+| .fs-lightbox-loading_icon | element | Loading icon element |
+| .fs-lightbox-container | element | Container element |
+| .fs-lightbox-content | element | Content element |
+| .fs-lightbox-image | element | Image element |
+| .fs-lightbox-video | element | Video element |
+| .fs-lightbox-iframe_element | element | iFrame element |
+| .fs-lightbox-meta | element | Meta info element |
+| .fs-lightbox-control | element | Control element |
+| .fs-lightbox-control.fs-lightbox-control_previous | modifier | Indicates previous control |
+| .fs-lightbox-control.fs-lightbox-control_next | modifier | Indicates next control |
+| .fs-lightbox-control.fs-lightbox-control_disabled | modifier | Indicates disbaled state |
+| .fs-lightbox-position | element | Position element |
+| .fs-lightbox-caption | element | Caption element |
+| .fs-lightbox-error | element | Error message element |
 
