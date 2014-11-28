@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" debug="true">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 		<title>Touch Demo</title>
+
+		<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
 
 		<!-- Modernizer -->
 		<script src="http://formstone.it/js/modernizr.js"></script>
@@ -32,6 +34,14 @@
 		<style>
 			html, body {
 				height: 200%;
+			}
+
+			.panit,
+			.touchit,
+			.scaleit,
+			.panscaleit {
+				-ms-touch-action: none;
+				touch-action: none;
 			}
 
 			.panit {
@@ -66,16 +76,15 @@
 				left: 150px;
 			}
 			.scaleit_box {
-				height: 100px;
-				width:  100px;
+				height: 200px;
+				width:  200px;
 
 				position: absolute;
-				top:  -50px;
-				left: -50px;
+				top:  -100px;
+				left: -100px;
 
 				background: purple;
 			}
-
 
 			.panscaleit {
 				height: 1px;
@@ -83,15 +92,15 @@
 
 				position: absolute;
 				top:  250px;
-				left: 0;
+				left: 100px;
 			}
 			.panscaleit_box {
-				height: 100px;
-				width:  100px;
+				height: 200px;
+				width:  200px;
 
 				position: absolute;
-				top:  -50px;
-				left: -50px;
+				top:  -100px;
+				left: -100px;
 
 				background: yellow;
 			}
@@ -124,7 +133,7 @@
 				$panit.touch({
 					pan: true
 				}).on("panstart.panit", function(e) {
-					console.log("pan start");
+					log("pan start");
 
 					var offset = $(this).offset();
 
@@ -135,12 +144,12 @@
 					origY = offset.top;
 				})
 				.on("panend.panit", function(e) {
-					console.log("pan end");
+					log("pan end");
 				});
 
 				// Bubbling
 				$(document).on("pan.panit", ".panit", function(e) {
-					console.log("pan");
+					log("pan");
 
 					var data = e.data,
 						x = origX + e.deltaX, //e.pageX + diffX,
@@ -160,7 +169,7 @@
 						y = maxY;
 					}
 
-					console.log(x, y);
+					log(x, y);
 
 					$(this).css({
 						left: x,
@@ -175,7 +184,7 @@
 				$tapit.touch({
 					tap: true
 				}).on("tap.tapit", function(e) {
-					console.log("tap");
+					log("tap");
 
 					$tapit.toggleClass("active");
 				});
@@ -187,7 +196,7 @@
 				$scaleit.touch({
 					scale: true
 				}).on("scalestart.scaleit", function(e) {
-					console.log("scale start");
+					log("scale start");
 
 					var offset = $scaleit.offset();
 
@@ -198,10 +207,10 @@
 					sOrigW = $(".scaleit_box").outerWidth();
 				})
 				.on("scaleend.scaleit", function(e) {
-					console.log("scale end");
+					log("scale end");
 				})
 				.on("scale.scaleit", function(e) {
-					console.log("scale");
+					log("scale");
 
 					var w = sOrigW * e.scale,
 						h = sOrigH * e.scale;
@@ -223,7 +232,7 @@
 					var x = e.pageX + sDiffX,
 						y = e.pageY + sDiffY;
 
-					console.log(x, y, w, h);
+					log(x, y, w, h);
 
 /*
 					$scaleit.css({
@@ -248,7 +257,7 @@
 					pan: true,
 					scale: true
 				}).on("scalestart.panscaleit", function(e) {
-					console.log("panscale start");
+					log("panscale start");
 
 					var offset = $panscaleit.offset();
 
@@ -259,10 +268,10 @@
 					psOrigW = $(".panscaleit_box").outerWidth();
 				})
 				.on("scaleend.panscaleit", function(e) {
-					console.log("panscale end");
+					log("panscale end");
 				})
 				.on("scale.panscaleit", function(e) {
-					console.log("panscale");
+					log("panscale");
 
 					var w = psOrigW * e.scale,
 						h = psOrigH * e.scale;
@@ -284,7 +293,7 @@
 					var x = e.pageX + psDiffX,
 						y = e.pageY + psDiffY;
 
-					console.log(x, y, w, h);
+					log(x, y, w, h);
 
 					$panscaleit.css({
 						left: x,
@@ -298,6 +307,10 @@
 						top: -(h / 2)
 					});
 				});
+
+				function log() {
+					//console.log(Array.prototype.slice.call(arguments, 0));
+				}
 
 			});
 		</script>

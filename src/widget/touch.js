@@ -12,6 +12,8 @@
 	function construct(data) {
 		data.touches = [];
 
+		touchAction(this, "none");
+
 		if (data.tap) {
 			// Tap
 
@@ -41,7 +43,7 @@
 	 */
 
 	function destruct(data) {
-		this.off(Events.namespace);
+		touchAction(this.off(Events.namespace), "");
 	}
 
 	/**
@@ -52,14 +54,12 @@
 	 */
 
 	function onTouch(e) {
-
 		// Stop ms panning and zooming
 		if (e.preventManipulation) {
 			e.preventManipulation();
 		}
 
-		e.preventDefault();
-		e.stopPropagation();
+		Functions.killEvent(e);
 
 		var data    = e.data,
 			oe      = e.originalEvent;
@@ -81,9 +81,9 @@
 			}
 			if (!activeTouch) {
 				data.touches.push({
-					identifier    : oe.pointerId,
-					pageX         : oe.clientX,
-					pageY         : oe.clientY
+					id       : oe.pointerId,
+					pageX    : oe.clientX,
+					pageY    : oe.clientY
 				});
 			}
 		} else {
@@ -236,8 +236,10 @@
 
 			data.$el.trigger( newE );
 
-/*
+			data.touches = [];
+
 			if (data.scale) {
+				/*
 				if (e.originalEvent.pointerId) {
 					for (var i in data.touches) {
 						if (data.touches[i].id === e.originalEvent.pointerId) {
@@ -247,7 +249,9 @@
 				} else {
 					data.touches = e.originalEvent.touches;
 				}
+				*/
 
+				/*
 				if (data.touches.length) {
 					onPointerStart($.extend(e, {
 						data: data,
@@ -256,8 +260,8 @@
 						}
 					}));
 				}
+				*/
 			}
-*/
 		}
 	}
 
@@ -336,13 +340,27 @@
 	}
 
 	/**
+	 * @method private
+	 * @name touchAction
+	 * @description Set ms touch action on target
+	 * @param action [string] "Touch action value"
+	 */
+
+	function touchAction($target, action) {
+		$target.css({
+			"-ms-touch-action": action,
+			    "touch-action": action
+		});
+	}
+
+	/**
 	 * @plugin
 	 * @name Touch
 	 * @description A jQuery plugin for multi-touch events.
 	 * @type widget
 	 */
 
-	var legacyPointer = !!(window.PointerEvent),
+	var legacyPointer = !(window.PointerEvent),
 		Plugin = Formstone.Plugin("touch", {
 			widget: true,
 
