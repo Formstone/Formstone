@@ -9,6 +9,7 @@
     "url": "https://github.com/Formstone/Formstone/"
   },
   "homepage": "http://formstone.it/",
+  "homepage_short": "formstone.it",
   "demo": "http://formstone.it/demo/",
   "license": "MIT",
   "author": {

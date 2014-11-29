@@ -16,13 +16,8 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
-			banner: '/*! \n' +
-					' * <%= pkg.name %> v<%= pkg.version %> [{{ local_name }}] <%= grunt.template.today("yyyy-mm-dd") %> \n' +
-					' * <%= pkg.description %> \n' +
-					' * <%= pkg.homepage %> \n' +
-					' * \n' +
-					' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; <%= pkg.license %> Licensed \n' +
-					' */\n'
+			banner: '/*! <%= pkg.name %> v<%= pkg.version %> [{{ local_name }}] <%= grunt.template.today("yyyy-mm-dd") %> |' +
+					' <%= pkg.license %> License | <%= pkg.homepage_short %> */\n'
 		},
 		// JS Hint
 		jshint: {

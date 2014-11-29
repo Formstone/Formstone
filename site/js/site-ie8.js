@@ -1,10 +1,4 @@
-/*! 
- * Formstone v0.0.1 [site-ie8.js] 2014-11-29 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
+/*! Formstone v0.0.1 [site-ie8.js] 2014-11-29 | MIT License | formstone.it */
 
 /**
 * @preserve HTML5 Shiv 3.7.2 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
