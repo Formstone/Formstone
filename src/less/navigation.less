@@ -1,0 +1,162 @@
+
+	// Config
+
+	@fs-navigation-margin:						0;			// 0
+
+	@fs-navigation-handle-background:			#fff;		// #fff
+	@fs-navigation-handle-text-color:			#111;		// #111
+	@fs-navigation-handle-font-size:			16px;		// 16px
+	@fs-navigation-handle-padding:				10px 15px;	// 10px 15px
+
+	@fs-navigation-border-color:				#ccc;		// #ccc
+	@fs-navigation-border-size:					1px;		// 1px
+
+	@fs-navigation-icon-offset:					15px;		// 15px
+	@fs-navigation-icon-color:					#ccc;		// #ccc
+	@fs-navigation-icon-height:					3px;		// 3px
+	@fs-navigation-icon-width:					15px;		// 15px
+
+	@fs-navigation-icon-close-size:				15px;		// 15px
+	@fs-navigation-icon-close-font-size:		22px;		// 22px
+
+	@fs-navigation-container-background:		#fff;		// #fff;
+	@fs-navigation-container-border-color:		#ccc;		// #ccc
+	@fs-navigation-container-border-size:		1px;		// 1px
+
+
+	/**
+	 * @class
+	 * @name .fs-navigation
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-navigation.fs-navigation-open
+	 * @type modifier
+	 * @description Indicates open state
+	 */
+	/**
+	 * @class
+	 * @name .fs-navigation.fs-navigation-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
+
+	.fs-navigation {
+
+		margin: @fs-navigation-margin;
+
+		* {
+			transition: none;
+		}
+
+		&,
+		& * {
+			user-select: none !important;
+		}
+
+		&,
+		& *,
+		& *:before,
+		& *:after {
+			box-sizing: border-box;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-handle
+		 * @type element
+		 * @description Click target to toggle navigation
+		 */
+
+		& &-handle {
+			width: 100%;
+
+			background: @fs-navigation-handle-background;
+			border: @fs-navigation-border-size solid @fs-navigation-border-color;
+			color: @fs-navigation-handle-text-color;
+			cursor: pointer;
+			font-size: @fs-navigation-handle-font-size;
+			margin: 0;
+			padding: @fs-navigation-handle-padding;
+			position: relative;
+			user-select: none;
+
+			/**
+			 * @class
+			 * @name .fs-navigation-handle:after
+			 * @type element
+			 * @description Icon displayed in handle
+			 */
+
+			&:after {
+				height: @fs-navigation-icon-height;
+				width: @fs-navigation-icon-width;
+
+				position: absolute;
+				top: 0;
+				right: @fs-navigation-icon-offset;
+				bottom: 0;
+
+				background: @fs-navigation-icon-color;
+				box-shadow:
+					0  (@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color,
+					0 -(@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color;
+				content: '';
+				display: block;
+				margin: auto 0;
+			}
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-container
+		 * @type element
+		 * @description Wraps target navigation
+		 */
+
+		&-container:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+		}
+
+		// Enabled
+
+		&-enabled &-handle {
+			display: block;
+		}
+
+		&-enabled &-container {
+			background: @fs-navigation-container-background;
+			border: @fs-navigation-container-border-size solid @fs-navigation-container-border-color;
+			border-width: 0 @fs-navigation-container-border-size @fs-navigation-container-border-size;
+			display: none;
+		}
+
+		// Open
+
+		&-open &-handle:after {
+			width: @fs-navigation-icon-close-size;
+			height: @fs-navigation-icon-close-size;
+
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			color: @fs-navigation-icon-color;
+			content: "\00d7";
+			font-size: @fs-navigation-icon-close-font-size;
+			font-weight: 700;
+			line-height: @fs-navigation-icon-close-size;
+			text-align: center;
+		}
+
+		&-open &-container {
+			display: block;
+		}
+	}

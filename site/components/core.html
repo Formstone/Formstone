@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Formstone &middot; Formstone</title><!-- Modernizer --><script src="http://formstone.it/js/modernizr.js"></script><!-- Demo Resources --><link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all"><script src="http://formstone.it/js/demo.js"></script><!--[if IE 8]> <script>var IE8 = true;</script> <script src="http://formstone.it/js/site.ie8.js"></script><link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="http://formstone.it/js/site.ie9.js"></script><![endif]--></head><body class="fs-grid"><div class="mobile-full tablet-full desktop-3 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div><div class="mobile-full tablet-full desktop-9 content"><h1 id="formstone">Formstone</h1>
+<p>Library core.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h3 id="formstone-object">Formstone Object</h3>
+<p>The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:</p>
+<pre><code>$window                    // object, Reference to jQuery wrapped window
+$document                // object, Reference to jQuery wrapped document
+$body                    // object, Reference to jQuery wrapped body tag
+
+Plugins                    // object, Contains all registered plugins
+
+support.file            // boolean, File API support
+support.history            // boolean, History API support, including push and pop state
+support.matchMedia        // boolean, Match Media API support
+support.raf                // boolean, Request Animation Frame API support&#39;
+support.touch            // boolean, Touch event support
+support.transition        // boolean, CSS3 Transition support
+
+userAgent                // string, Raw user string
+isChrome                // boolean, Browser is Chrome
+isFirefox                // boolean, Browser is FireFox
+isSafari                // boolean, Browser is Safari
+isMobile                // boolean, Browser is Mobile
+isFirefoxMobile            // boolean, Browser is FireFox Mobile</code></pre>
+<p>User agent sniffing isn&#39;t always reliable or considered a best practice - it should be used sparingly, if at all.</p>
+<h3 id="plugin-factory">Plugin Factory</h3>
+<p>The <code>Formstone.Plugin</code> factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:</p>
+<pre><code>$(“.target).plugin({
+    option: value
+});</code></pre>
+<h3 id="plugin-types">Plugin Types</h3>
+<p>There are two types of plugins that can be defined: Widget or Utility.</p>
+<h4 id="widget">Widget</h4>
+<p>Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:</p>
+<pre><code>;(function ($, Formstone, undefined) {
+
+    function setUp() {
+        // this = document
+    }
+
+    function construct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function destruct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function reset(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            widget: true,
+            defaults: {
+                option:    value
+            },
+            classes: [
+                &quot;visible&quot;
+            ],
+            methods: {
+                _setup         setup,
+                _construct:    construct,
+                _destruct:     destruct,
+                reset:         reset
+            },
+            utilities: {
+                close:         close
+            }
+        }),
+
+        // Localize References
+
+        Classes      = Plugin.classes,
+        Events       = Plugin.events,
+        Functions    = Plugin.functions;
+
+})(jQuery, Formstone);</code></pre>
+<p>As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:</p>
+<pre><code>_setup                    // Run once when document is ready, scoped to document
+_construct                // Run at initialization of each instance, scoped to specific instance
+_destruct                // Run at destruction of each instance, scoped to specific instance</code></pre>
+<p>When an instance is created or destroyed, the factory will automatically add or remove the instance&#39;s localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:</p>
+<pre><code>this.data(&quot;namespace&quot;);</code></pre>
+<p>Custom public methods can also be defined, provided their keys are not prefixed with an underscore (<code>_</code>). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it&#39;s plugin data as the first argument followed by any addition arguments:</p>
+<pre><code>$(&quot;.target&quot;).namespace(&quot;reset&quot;, 500);</code></pre>
+<p>A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance&#39;s target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.</p>
+<h4 id="utility">Utility</h4>
+<p>Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:</p>
+<pre><code>;(function ($, Formstone, undefined) {
+
+    function delegate() {
+        // Manually handle public methods
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            utilties: {
+                _delegate:     delegate
+            }
+        }),
+
+        // Internal Defaults
+
+        Defaults = {
+            option:    value
+        },
+
+        // Localize References
+
+        Document = Formstone.$document[0];
+
+})(jQuery, Formstone);</code></pre>
+<p>A utility can override the default method delegation by pointing the <code>_delegate</code> key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.</p>
+<pre><code>$.namespace(&quot;reset&quot;, 500);</code></pre>
+<h4 id="plugin-object">Plugin Object</h4>
+<p>Defining a plugin using the factory will return an object containing the follow keys:</p>
+<pre><code>namespace                // String, plugin namespace
+initialized                // Boolean, initialized state
+defaults                // Object, default options extended with initialization and local options
+functions                // Object, private utility functions
+methods                    // Object, public methods
+utilities                // Object, public utilities
+classes                    // Object, namespaced classes strings
+events                    // Object, namespaced event strings</code></pre>
+<p>These values can then be localized in the scope of the plugin for optimal minimization:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+        ...
+    }),
+    Defaults     = Plugin.defaults,
+    Functions    = Plugin.functions,
+    Methods      = Plugin.methods,
+    Utilities    = Plugin.utilities,
+    Classes      = Plugin.classes,
+    Events       = Plugin.events;</code></pre>
+<p>This may seem strangely redundant at first, however multi-dimensional objects do not minimize efficiently. This is also one reason standard prototypal inheritance is not used when building a plugin, however this is not to say a specific plugin could not contain locally scoped prototypes. Plugin design is always up to the developer, the factory simply provides a consistent, DRY approach to the basic plugin pattern.</p>
+<h4 id="classes">Classes</h4>
+<p>The <code>classes</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom classes. Custom classes will become object keys, while the namespaced class will become the value:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    classes: [
+        &quot;visible&quot;,
+        &quot;content&quot;
+    ],
+    ...
+});</code></pre>
+<pre><code>base                    // Default, &quot;namespace&quot;
+element                    // Default, &quot;namespace-element&quot;
+
+visible                    // Custom,  &quot;namespace-visible&quot;
+content                    // Custom,  &quot;namespace-content&quot;</code></pre>
+<h4 id="events">Events</h4>
+<p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    events: [
+        &quot;enable&quot;,
+        &quot;disable&quot;
+    ],
+    ...
+});</code></pre>
+<pre><code>namespace                // Default, &quot;.namespace&quot;,
+blur                    // Default, &quot;blur.namespace&quot;,
+change                    // Default, &quot;change.namespace&quot;,
+click                    // Default, &quot;click.namespace&quot;,
+clickTouchStart            // Default, &quot;click.namespace touchstart.namespace&quot;,
+dblClick                // Default, &quot;dblClick.namespace&quot;,
+drag                    // Default, &quot;drag.namespace&quot;,
+dragEnd                    // Default, &quot;dragend.namespace&quot;,
+dragEnter                // Default, &quot;dragenter.namespace&quot;,
+dragLeave                // Default, &quot;dragleave.namespace&quot;,
+dragOver                // Default, &quot;dragover.namespace&quot;,
+dragStart                // Default, &quot;dragstart.namespace&quot;,
+drop                    // Default, &quot;drop.namespace&quot;,
+error                    // Default, &quot;error.namespace&quot;,
+focus                    // Default, &quot;focus.namespace&quot;,
+focusIn                    // Default, &quot;focusin.namespace&quot;,
+focusOut                // Default, &quot;focusout.namespace&quot;,
+input                    // Default, &quot;input.namespace&quot;,
+keyDown                    // Default, &quot;keydown.namespace&quot;,
+keyPress                // Default, &quot;keypress.namespace&quot;,
+keyUp                    // Default, &quot;keyup.namespace&quot;,
+load                    // Default, &quot;load.namespace&quot;,
+mouseDown                // Default, &quot;mousedown.namespace&quot;,
+mouseEnter                // Default, &quot;mouseenter.namespace&quot;,
+mouseLeave                // Default, &quot;mouseleave.namespace&quot;,
+mouseMove                // Default, &quot;mousemove.namespace&quot;,
+mouseOut                // Default, &quot;mouseout.namespace&quot;,
+mouseOver                // Default, &quot;mouseover.namespace&quot;,
+mouseUp                    // Default, &quot;mouseup.namespace&quot;,
+resize                    // Default, &quot;resize.namespace&quot;,
+scroll                    // Default, &quot;scroll.namespace&quot;,
+select                    // Default, &quot;select.namespace&quot;,
+touchCancel                // Default, &quot;touchcancel.namespace&quot;,
+touchEnd                // Default, &quot;touchend.namespace&quot;
+touchLeave                // Default, &quot;touchleave.namespace&quot;,
+touchMove                // Default, &quot;touchmove.namespace&quot;,
+touchStart                // Default, &quot;touchstart.namespace&quot;,
+transitionEnd            // Default, &quot;transitionEnd.namespace&quot;
+
+enable                    // Custom,  &quot;enable.namespace&quot;
+disable                    // Custom,  &quot;disable.namespace&quot;</code></pre>
+<h2 id="methods">Methods</h2>
+<h3 id="plugin">Plugin</h3>
+<p>Builds a plugin and registers it with jQuery.</p>
+<pre><code>Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td>string</td>
+<td></td>
+<td>Plugin namespace</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>object</td>
+<td></td>
+<td>Plugin settings</td>
+</tr>
+</tbody>
+</table>
+</div></body></html>

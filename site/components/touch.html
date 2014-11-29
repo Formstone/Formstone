@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Touch &middot; Formstone</title><!-- Modernizer --><script src="http://formstone.it/js/modernizr.js"></script><!-- Demo Resources --><link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all"><script src="http://formstone.it/js/demo.js"></script><!--[if IE 8]> <script>var IE8 = true;</script> <script src="http://formstone.it/js/site.ie8.js"></script><link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="http://formstone.it/js/site.ie9.js"></script><![endif]--></head><body class="fs-grid"><div class="mobile-full tablet-full desktop-3 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div><div class="mobile-full tablet-full desktop-9 content"><h1 id="touch">Touch</h1>
+<p>A jQuery plugin for multi-touch events.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h3 id="events">Events</h3>
+<p>Touch normalizes mouse and touch events in the context of a few basic gestures: <code>tap</code>, <code>pan</code> and <code>scale</code>. Events emitted by Touch will contain the following extra properties:</p>
+<pre><code>pageX        // Current X position
+pageY        // Current Y position
+deltaX        // Change in X position
+deltaY        // Change in Y position
+scale        // Current scale value</code></pre>
+<h3 id="tap">Tap</h3>
+<p>Tap creates a basic &#39;fast click&#39; event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user&#39;s scroll:</p>
+<pre><code>$(&quot;.tap-it&quot;).touch({
+    tap: true
+}).on(&quot;tap&quot;, function(e) {
+    console.log(&quot;Tapped&quot;);
+});</code></pre>
+<p>Note: <code>tap</code> can not be used in conjunction with <code>pan</code> or <code>scale</code>.</p>
+<h3 id="pan">Pan</h3>
+<p>Pan can be used for building touch-freindly drag and drop interfaces:</p>
+<pre><code>$(&quot;.pan-it&quot;).touch({
+    pan: true
+}).on(&quot;panstart&quot;, function(e) {
+    console.log(&quot;Started panning&quot;);
+}).on(&quot;pan&quot;, function(e) {
+    console.log(&quot;Panning&quot;);
+}).on(&quot;panend&quot;, function(e) {
+    console.log(&quot;Stopped panning&quot;);
+});</code></pre>
+<h3 id="scale">Scale</h3>
+<p>Scale can be used for building touch-freindly scalable interfaces:</p>
+<pre><code>$(&quot;.scale-it&quot;).touch({
+    scale: true
+}).on(&quot;scalestart&quot;, function(e) {
+    console.log(&quot;Started scaling&quot;);
+}).on(&quot;scale&quot;, function(e) {
+    console.log(&quot;Scaling&quot;);
+}).on(&quot;scaleend&quot;, function(e) {
+    console.log(&quot;Stopped scaling&quot;);
+});</code></pre>
+<p>Note: <code>pan</code> and <code>scale</code> can also be used together to create a rich interface.</p>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-touch-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pan</td>
+<td>boolean</td>
+<td></td>
+<td>object</td>
+<td>false</td>
+<td>Object to enable</td>
+</tr>
+<tr>
+<td>scale</td>
+<td>boolean</td>
+<td>false</td>
+<td>True to enable</td>
+</tr>
+<tr>
+<td>tap</td>
+<td>boolean</td>
+<td>false</td>
+<td>True to enable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tap</td>
+<td></td>
+</tr>
+<tr>
+<td>panstart</td>
+<td></td>
+</tr>
+<tr>
+<td>pan</td>
+<td></td>
+</tr>
+<tr>
+<td>panend</td>
+<td></td>
+</tr>
+<tr>
+<td>scalestart</td>
+<td></td>
+</tr>
+<tr>
+<td>scale</td>
+<td></td>
+</tr>
+<tr>
+<td>scaleend</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code>$.touch(&quot;defaults&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>{}</td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code>$(&quot;.target&quot;).touch(&quot;destroy&quot;);</code></pre>
+</div></body></html>

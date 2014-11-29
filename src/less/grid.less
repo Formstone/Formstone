@@ -1,0 +1,344 @@
+
+/**
+ * @grid
+ * @name Grid
+ * @description A responsive CSS grid.
+ */
+
+	@import "imports/grid-config.less";
+	@import "imports/grid-functions.less";
+
+	// !Reset Box-sizing
+	*,
+	*:before,
+	*:after {
+		box-sizing: border-box;
+	}
+
+	.@{fs-grid-class-container} .@{fs-grid-class-row} {
+		// !Row Default
+		width: @fs-grid-width-min;
+
+		margin-left: auto;
+		margin-right: auto;
+
+		&:after {
+			height: 0;
+
+			clear: both;
+			content: ".";
+			display: block;
+			line-height: 0;
+			visibility: hidden;
+		}
+
+		.@{fs-grid-class-row} {
+			width: 100% + (@fs-grid-gutter * 2);
+
+			margin-left: -@fs-grid-gutter;
+			margin-right: -@fs-grid-gutter;
+		}
+
+		.@{fs-grid-class-contained} .@{fs-grid-class-row} {
+			width: 100%;
+
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		// !All Cells
+		[class*="@{fs-grid-class-all}-"],
+		[class*="@{fs-grid-class-min}-"],
+		[class*="@{fs-grid-class-mobile}-"],
+		[class*="@{fs-grid-class-tablet}-"],
+		[class*="@{fs-grid-class-desktop}-"],
+		[class*="@{fs-grid-class-max}-"] {
+			float: left;
+			margin-left: @fs-grid-gutter;
+			margin-right: @fs-grid-gutter;
+		}
+
+		// !Padded Cells
+		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-padded},
+		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-padded} {
+			box-sizing: content-box;
+			margin-left: 0;
+			margin-right: 0;
+			padding-left: @fs-grid-gutter;
+			padding-right: @fs-grid-gutter;
+		}
+
+		// !Contained Cells
+		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-contained},
+		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-contained} {
+			margin-left: 0;
+			margin-right: 0;
+		}
+
+		// !Right Cells
+		[class*="@{fs-grid-class-all}-"].right,
+		[class*="@{fs-grid-class-min}-"].right,
+		[class*="@{fs-grid-class-mobile}-"].right,
+		[class*="@{fs-grid-class-tablet}-"].right,
+		[class*="@{fs-grid-class-desktop}-"].right,
+		[class*="@{fs-grid-class-max}-"].right {
+			float: right;
+		}
+	}
+
+	// !Rows, Thinest to Widest
+	@media screen and (min-width: @fs-grid-width-break-mobile) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-mobile;
+		}
+	}
+
+	@media screen and (min-width: @fs-grid-width-break-tablet) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-tablet;
+		}
+	}
+
+	@media screen and (min-width: @fs-grid-width-break-desktop) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-desktop;
+		}
+	}
+
+	@media screen and (min-width: @fs-grid-width-break-max) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			width: @fs-grid-width-max;
+		}
+	}
+
+	// !Fluid Grid
+	.@{fs-grid-class-container}-fluid .@{fs-grid-class-row} {
+		width: 98%;
+	}
+
+	// !Fluid Grid - Mobile Only
+	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
+		.@{fs-grid-class-container}-mobile-fluid .@{fs-grid-class-row} {
+			width: 98%;
+		}
+	}
+
+	// !All
+	.@{fs-grid-class-container} .@{fs-grid-class-row} {
+		.generateGridBase(0, @fs-grid-class-all);
+	}
+
+	// !Mobile, 540 (max 740)
+	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-mobile, @fs-grid-class-mobile, @fs-grid-columns-mobile);
+
+			.generateGridBase(@fs-grid-width-mobile, @fs-grid-class-mobile);
+		}
+	}
+
+	// !Min, 300 (max 500)
+	@media screen and (max-width: (@fs-grid-width-break-mobile - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-min, @fs-grid-class-min, @fs-grid-columns-mobile);
+
+			.generateGridBase(@fs-grid-width-min, @fs-grid-class-min);
+		}
+	}
+
+	// !Tablet, 6 column, 720 (min 740)
+	@media screen and (min-width: @fs-grid-width-break-tablet) and (max-width: (@fs-grid-width-break-desktop - 1px)) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-tablet, @fs-grid-class-tablet, @fs-grid-columns-tablet);
+
+			.generateGridBase(@fs-grid-width-tablet, @fs-grid-class-tablet);
+		}
+	}
+
+	// !Desktop, 12 column, 960 (min 980)
+	@media screen and (min-width: @fs-grid-width-break-desktop) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-desktop, @fs-grid-class-desktop, @fs-grid-columns-desktop);
+
+			.generateGridBase(@fs-grid-width-desktop, @fs-grid-class-desktop);
+		}
+	}
+
+	// !Max, 12 column, 1200 (min 1220)
+	@media screen and (min-width: @fs-grid-width-break-max) {
+		.@{fs-grid-class-container} .@{fs-grid-class-row} {
+			.generateGrid(@fs-grid-width-max, @fs-grid-class-max, @fs-grid-columns-desktop);
+
+			.generateGridBase(@fs-grid-width-max, @fs-grid-class-max);
+		}
+	}
+
+/**
+ * @use
+
+
+Grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
+
+### Markup
+
+A basic example may look something like:
+
+```
+<body class="grid">
+	<div class="row">
+		<div class="mobile-3 tablet-2 desktop-4">...</div>
+		<div class="mobile-3 tablet-2 desktop-4">...</div>
+		<div class="mobile-3 tablet-2 desktop-4">...</div>
+	</div>
+</body>
+```
+
+This will create 3 cells that each span 3 columns on mobile, 2 columns on tablet and 4 columns on desktop screen sizes. Think of the nested structure like a directory tree:
+
+```
+grid
+├─ row
+|  ├─ cell
+|  |─ cell
+|  |  └─ row
+|  |     ├─ cell
+|  |     └─ cell
+|  └─ cell
+└─ row
+   ├─ cell
+   └─ cell
+```
+
+### Box-Sizing
+
+Grid relies on border-box and includes a global box-sizing reset:
+
+```
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+```
+
+This will effect every element on the page and can have unexpected results. In the long run it will help speed development by modifying how padding and borders effect the box model calculations. [Learn more about border-box](http://www.paulirish.com/2012/box-sizing-border-box-ftw/).
+
+### Row Widths and Columns Counts
+
+| Name | Screen Size | Row Width | Column Count |
+| --- | --- | --- | --- |
+| min | smaller than 500px | 300px | 3 |
+| mobile | smaller than 740px | 480px | 3 |
+| tablet | 740px to 960px | 720px | 6 |
+| desktop | 960px to 1220px | 960px | 12 |
+| max | larger than 1220px | 1200px | 12 |
+
+### Defining Cells
+
+| Class | Description |
+| --- | --- |
+| `min-X` | only min size |
+| `mobile-X` | both mobile and min sizes |
+| `tablet-X` | tablet size |
+| `desktop-X` | both desktop and max sizes |
+| `max-X` | only max size |
+| `all-X` | all sizes |
+
+Cells are defined by the target screen size and column count, relative to it's screen size. For example `mobile-2` will produce a cell spanning 2 of the 3 available columns in the mobile screen size range. Cell classes should be stacked to specify column spans across all screen sizes:
+
+```
+<div class="mobile-3 tablet-6 desktop-12">...</div>
+```
+
+The `max-X` and `min-X` classes adds level of control when targeting the desktop and mobile sizes. For example, a cell may need to span 2 columns at the larger mobile size, but span the full width at the smallest mobile size:
+
+```
+<div class="min-3 mobile-2 ...">...</div>
+```
+
+The `all-X` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cells):
+
+```
+<div class="all-full ...">...</div>
+```
+
+### Fraction Cells
+
+The fraction classes can be used in place of specific column counts:
+
+| Class | Description |
+| --- | --- |
+| `X-full` | entire row width |
+| `X-half` | 1/2 row width |
+| `X-third` | 1/3 row width |
+| `X-fourth` | 1/4 row width |
+
+### Hidden Cells
+
+To hide cells at specific screen sizes:
+
+| Class | Description |
+| --- | --- |
+| `min-hide` | Hide on min |
+| `mobile-hide` | Hide on mobile |
+| `tablet-hide` | Hide on tablet |
+| `desktop-hide` | Hide on desktop |
+| `max-hide` | Hide on max |
+
+### Helper Classes
+
+Helper classes can be added to cells to modify their default behavior in predictable ways.
+
+| Class | Description |
+| --- | --- |
+| `padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
+| `contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
+| `centered` | Centers cell. Useful for centering odd column count cells. |
+
+### LESS Configuration
+
+Grid can also be configured and rebuilt using Grunt. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `grunt` process.
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| **Structure** | | |
+| `@fs-grid-class-container` | `grid` | Container class |
+| `@fs-grid-class-row` | `row` | Row class |
+| `@fs-grid-class-contained` | `contained` | Contained helper class |
+| `@fs-grid-class-padded` | `padded` | Padded helper class |
+| `@fs-grid-class-centered` | `centered` | Centered helper class |
+| **Cells** | | |
+| `@fs-grid-class-all` | `all` | All cell class |
+| `@fs-grid-class-min` | `min` | Min cell class |
+| `@fs-grid-class-mobile` | `mobile` | Mobile cell class |
+| `@fs-grid-class-tablet` | `tablet` | Tablet cell class |
+| `@fs-grid-class-desktop` | `desktop` | Desktop cell class |
+| `@fs-grid-class-max` | `max` | Max cell class |
+| **Columns** | | |
+| `@fs-grid-columns-mobile` | `3` | Mobile column count |
+| `@fs-grid-columns-tablet` | `6` | Tablet column count |
+| `@fs-grid-columns-desktop` | `12` | Desktop column count |
+| **Widths** | | |
+| `@fs-grid-width-min` | `300px` | Min row width |
+| `@fs-grid-width-mobile` | `480px` | Mobile row width |
+| `@fs-grid-width-tablet` | `720px` | Tablet row width |
+| `@fs-grid-width-desktop` | `960px` | Desktop row width |
+| `@fs-grid-width-max` | `1200px` | Max row width |
+| **Breakpoints** | | |
+| `@fs-grid-width-break-min` | `320px` | Min break width |
+| `@fs-grid-width-break-mobile` | `500px` | Mobile break width |
+| `@fs-grid-width-break-tablet` | `740px` | Tablet break width |
+| `@fs-grid-width-break-desktop` | `980px` | Desktop break width |
+| `@fs-grid-width-break-max` | `1220px` | Max break width |
+| **Gutters** | | |
+| `@fs-grid-gutter` | `1.0416666666666667%;` | Gutter width |
+
+ */

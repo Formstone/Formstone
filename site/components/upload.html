@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Upload &middot; Formstone</title><!-- Modernizer --><script src="http://formstone.it/js/modernizr.js"></script><!-- Demo Resources --><link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all"><script src="http://formstone.it/js/demo.js"></script><!--[if IE 8]> <script>var IE8 = true;</script> <script src="http://formstone.it/js/site.ie8.js"></script><link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="http://formstone.it/js/site.ie9.js"></script><![endif]--></head><body class="fs-grid"><div class="mobile-full tablet-full desktop-3 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div><div class="mobile-full tablet-full desktop-9 content"><h1 id="upload">Upload</h1>
+<p>A jQuery plugin for simple drag and drop uploads.</p>
+<ul>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#css">CSS</a></li>
+</ul>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-upload-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action</td>
+<td>string</td>
+<td></td>
+<td>Where to submit uploads</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>&#39;Drag and drop files or click to select&#39;</td>
+<td>Dropzone text</td>
+</tr>
+<tr>
+<td>leave</td>
+<td>string</td>
+<td>&#39;You have uploads pending, are you sure you want to leave this page?&#39;</td>
+<td>Before leave message</td>
+</tr>
+<tr>
+<td>maxQueue</td>
+<td>int</td>
+<td>2</td>
+<td>Number of files to simultaneously upload</td>
+</tr>
+<tr>
+<td>maxSize</td>
+<td>int</td>
+<td>5242880</td>
+<td>Max file size allowed</td>
+</tr>
+<tr>
+<td>postData</td>
+<td>object</td>
+<td></td>
+<td>Extra data to post with upload</td>
+</tr>
+<tr>
+<td>postKey</td>
+<td>string</td>
+<td>&#39;file&#39;</td>
+<td>Key to upload file as</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>complete</td>
+<td>All uploads are complete</td>
+</tr>
+<tr>
+<td>filecomplete</td>
+<td>Specific upload complete</td>
+</tr>
+<tr>
+<td>fileerror</td>
+<td>Specific upload error</td>
+</tr>
+<tr>
+<td>filestart</td>
+<td>Specific upload starting</td>
+</tr>
+<tr>
+<td>fileprogress</td>
+<td>Specific upload progress</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Uploads starting</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code>$.upload(&quot;defaults&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>{}</td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code>$(&quot;.target&quot;).upload(&quot;destroy&quot;);</code></pre>
+<h2 id="css">CSS</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.fs-upload</td>
+<td>element</td>
+<td>Base widget class</td>
+</tr>
+<tr>
+<td>.fs-upload.fs-upload-dropping</td>
+<td>modifier</td>
+<td>Indicates dropping state</td>
+</tr>
+<tr>
+<td>.fs-upload-input</td>
+<td>element</td>
+<td>Masked Input</td>
+</tr>
+<tr>
+<td>.fs-upload-dropzone</td>
+<td>element</td>
+<td>Drop target</td>
+</tr>
+</tbody>
+</table>
+</div></body></html>

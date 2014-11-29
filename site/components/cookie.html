@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Cookie &middot; Formstone</title><!-- Modernizer --><script src="http://formstone.it/js/modernizr.js"></script><!-- Demo Resources --><link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all"><script src="http://formstone.it/js/demo.js"></script><!--[if IE 8]> <script>var IE8 = true;</script> <script src="http://formstone.it/js/site.ie8.js"></script><link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="http://formstone.it/js/site.ie9.js"></script><![endif]--></head><body class="fs-grid"><div class="mobile-full tablet-full desktop-3 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div><div class="mobile-full tablet-full desktop-9 content"><h1 id="cookie">Cookie</h1>
+<p>A jQuery plugin for simple access to browser cookies.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h3 id="basic">Basic</h3>
+<p>To create a new cookie, or update an existing one, simply pass the <code>key</code> and <code>value</code> as the first and second parameters, respectively:</p>
+<pre><code>// Set cookie
+$.macroon(key, value);</code></pre>
+<p>To return a cookie&#39;s value pass the <code>key</code> as the only parameter:</p>
+<pre><code>// Get Cookie
+var value = $.macroon(key);</code></pre>
+<p>To erase an existing cookie, set it to <code>null</code>:</p>
+<pre><code>// Erase Cookie
+$.macroon(key, null);</code></pre>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain</td>
+<td>string</td>
+<td></td>
+<td>Cookie domain</td>
+</tr>
+<tr>
+<td>expires</td>
+<td>int</td>
+<td>604800000</td>
+<td>Time until cookie expires</td>
+</tr>
+<tr>
+<td>path</td>
+<td>string</td>
+<td></td>
+<td>Cookie path</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available, unless otherwise stated.</p>
+<h3 id="create">create</h3>
+<p>Creates a cookie.</p>
+<pre><code>$.cookie(key, value, options);</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>string</td>
+<td></td>
+<td>Cookie key</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td></td>
+<td>Cookie value</td>
+</tr>
+<tr>
+<td>options</td>
+<td>object</td>
+<td></td>
+<td>Options object</td>
+</tr>
+</tbody>
+</table>
+<h3 id="erase">erase</h3>
+<p>Deletes a cookie.</p>
+<pre><code>$.cookie(key, null);</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>string</td>
+<td></td>
+<td>Cookie key</td>
+</tr>
+</tbody>
+</table>
+<h3 id="read">read</h3>
+<p>Returns a cookie&#39;s value, or null.</p>
+<pre><code>var value = $.cookie(key);</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>string</td>
+<td></td>
+<td>Cookie key</td>
+</tr>
+</tbody>
+</table>
+<p>o</p>
+<div class="demo">
+    <script>
+        $(function() {
+            $(&quot;.demo .form&quot;).on(&quot;click.cookie&quot;, &quot;.set&quot;, _setCookie)
+                            .on(&quot;click.cookie&quot;, &quot;.get&quot;, _getCookie)
+                            .on(&quot;click.cookie&quot;, &quot;.erase&quot;, _eraseCookie);
+
+            $(window).one(&quot;pronto.load&quot;, function() {
+                $(&quot;.demo .form&quot;).off(&quot;.cookie&quot;);
+            });
+        });
+
+        function _setCookie(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var key = $(&quot;.demo .form [name=set_key]&quot;).val(),
+                value = $(&quot;.demo .form [name=set_value]&quot;).val();
+
+            $.cookie(key, value);
+
+            _output(&quot;Set&quot;, key + &quot; = &quot; + value);
+        }
+
+        function _getCookie(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var key = $(&quot;.demo .form [name=get_key]&quot;).val(),
+                value = $.cookie(key);
+
+            _output(&quot;Get&quot;, key + &quot; = &quot; + value);
+        }
+
+        function _eraseCookie(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var key = $(&quot;.demo .form [name=erase_key]&quot;).val();
+
+            $.cookie(key, null);
+
+            _output(&quot;Erase&quot;, key);
+        }
+
+        function _output(label, value) {
+            var html = &#39;&#39;;
+            html += &#39;<p><span class="label">&#39; + label + &#39;:</span>&#39;;
+            html += &#39;<span class="value">&#39; + value + &#39;</p>&#39;;
+
+            $(&quot;.demo .output&quot;).prepend(html);
+        }
+    </script>
+
+    <div class="row form">
+        <form>
+            <fieldset class="mobile-third tablet-third desktop-third">
+                <h5>Set Cookie</h5>
+                <label>Key</label>
+                <input type="text" name="set_key" value="foo">
+                <label>value</label>
+                <input type="text" name="set_value" value="bar">
+                <input type="submit" class="button set" value="Set">
+            </fieldset>
+        </form>
+        <form>
+            <fieldset class="mobile-third tablet-third desktop-third">
+                <h5>Get Cookie</h5>
+                <label>Key</label>
+                <input type="text" name="get_key" value="foo">
+                <input type="submit" class="button get" value="Get">
+            </fieldset>
+        </form>
+        <form>
+            <fieldset class="mobile-third tablet-third desktop-third">
+                <h5>Erase Cookie</h5>
+                <label>Key</label>
+                <input type="text" name="erase_key" value="foo">
+                <input type="submit" class="button erase" value="Erase">
+            </fieldset>
+        </form>
+    </div>
+
+<p></div></p>
+</div></body></html>

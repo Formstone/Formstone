@@ -1,0 +1,88 @@
+
+	// Config
+
+	@fs-upload-background: 					#fff;				// #fff
+	@fs-upload-border: 						3px dashed #ccc;	// 3px dashed #ccc
+	@fs-upload-border-radius: 				0;					// 0
+
+	@fs-upload-font-size:					14px;				// 14px
+	@fs-upload-text-color: 					#666;				// #666
+
+	@fs-upload-margin: 						0;					// 0
+	@fs-upload-padding: 					25px; 				// 25px
+
+	// Dropping
+
+	@fs-upload-dropping-background: 		#eee;				// #eee
+	@fs-upload-dropping-border-color: 		#999;				// #999
+	@fs-upload-dropping-text-color: 		#333;				// #333
+
+	/**
+	 * @class
+	 * @name .fs-upload
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-upload.fs-upload-dropping
+	 * @type modifier
+	 * @description Indicates dropping state
+	 */
+
+	.fs-upload {
+		overflow: hidden;
+
+		&,
+		& *,
+		& *:before,
+		& *:after {
+			box-sizing: border-box;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-upload-input
+		 * @type element
+		 * @description Masked Input
+		 */
+
+		&-input {
+			position: absolute;
+			left: 100%;
+			opacity: 0;
+
+			// IE8 Opacity Check
+
+			.no-opacity & {
+				left: -999px;
+			}
+		}
+
+		/**
+		 * @class
+		 * @name .fs-upload-dropzone
+		 * @type element
+		 * @description Drop target
+		 */
+
+		&-dropzone {
+			background: @fs-upload-background;
+			border: @fs-upload-border;
+			border-radius: @fs-upload-border-radius;
+			color: @fs-upload-text-color;
+			cursor: pointer;
+			font-size: @fs-upload-font-size;
+			margin: @fs-upload-margin;
+			padding: @fs-upload-padding;
+			text-align: center;
+		}
+
+		&.dropping &-dropzone,
+		.no-touch &:hover &-dropzone {
+			background: @fs-upload-dropping-background;
+			border-color: @fs-upload-dropping-border-color;
+			color: @fs-upload-dropping-text-color;
+		}
+	}

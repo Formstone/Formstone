@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=600, initial-scale=1, maximum-scale=1, user-scalable=no"><title>Media Query &middot; Formstone</title><!-- Modernizer --><script src="http://formstone.it/js/modernizr.js"></script><!-- Demo Resources --><link href="http://formstone.it/css/demo.css" rel="stylesheet" type="text/css" media="all"><script src="http://formstone.it/js/demo.js"></script><!--[if IE 8]> <script>var IE8 = true;</script> <script src="http://formstone.it/js/site.ie8.js"></script><link rel="stylesheet" href="http://formstone.it/css/demo.ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="http://formstone.it/js/site.ie9.js"></script><![endif]--></head><body class="fs-grid"><div class="mobile-full tablet-full desktop-3 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div><div class="mobile-full tablet-full desktop-9 content"><h1 id="media-query">Media Query</h1>
+<p>A jQuery plugin for responsive media query events.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h3 id="basic">Basic</h3>
+<p>Media Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:</p>
+<pre><code>$.mediaquery({
+    minWidth     : [ 320, 500, 740, 980, 1220 ],
+    maxWidth     : [ 1220, 980, 740, 500, 320 ],
+    minHeight    : [ 400, 800 ],
+    maxHeight    : [ 800, 400 ]
+});</code></pre>
+<p>After initializing, simply listen for the <code>change</code> event:</p>
+<pre><code>$(window).on(&quot;change&quot;, function(e, state) {
+    console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
+});</code></pre>
+<p>Note: In the example above, the <code>change</code> event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the <code>min-width</code> and <code>max-width</code> changes.</p>
+<h3 id="binding">Binding</h3>
+<p>Media Query can also bind events to specific media query changes for more fine grain control:</p>
+<pre><code>$.mediaquery(&quot;bind&quot;, &quot;(min-width: 740px)&quot;, {
+    enter: function() {
+        ...
+    },
+    leave: function() {
+        ...
+    }
+});</code></pre>
+<p>Note: The <code>leave</code> callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.</p>
+<h4 id="ie-support">IE Support</h4>
+<p>When supporting IE, a <a href="https://gist.github.com/benplum/8045366">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336">IE 8</a>, <a href="https://gist.github.com/benplum/8045327">IE 9</a>) are required.</p>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>minWidth</td>
+<td>0</td>
+<td></td>
+<td>Array of min-widths</td>
+</tr>
+<tr>
+<td>maxWidth</td>
+<td>Infinity</td>
+<td></td>
+<td>Array of max-widths</td>
+</tr>
+<tr>
+<td>minHeight</td>
+<td>0</td>
+<td></td>
+<td>Array of min-heights</td>
+</tr>
+<tr>
+<td>maxHeight</td>
+<td>Infinity</td>
+<td></td>
+<td>Array of max-heights</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>string</td>
+<td>&#39;px&#39;</td>
+<td>Unit to use when matching widths and heights</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the <code>window</code>, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>change</td>
+<td>Change to a media query match; Triggered on window</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available, unless otherwise stated.</p>
+<h3 id="bind">bind</h3>
+<p>Binds callbacks to media query matching.</p>
+<pre><code>$.mediaquery(&quot;bind&quot;, &quot;(min-width: 500px)&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>media</td>
+<td>string</td>
+<td></td>
+<td>Media query to match</td>
+</tr>
+<tr>
+<td>data</td>
+<td>object</td>
+<td></td>
+<td>Object containing &#39;enter&#39; and &#39;leave&#39; callbacks</td>
+</tr>
+</tbody>
+</table>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code>$.media query(&quot;defaults&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>{}</td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="state">state</h3>
+<p>Returns the current state.</p>
+<pre><code>var state = $.mediaquery(&quot;state&quot;);</code></pre>
+<h3 id="unbind">unbind</h3>
+<p>Unbinds all callbacks from media query.</p>
+<pre><code>$.mediaquery(&quot;unbind&quot;, &quot;(min-width: 500px)&quot;);</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>media</td>
+<td>string</td>
+<td></td>
+<td>Media query to match</td>
+</tr>
+</tbody>
+</table>
+</div></body></html>
