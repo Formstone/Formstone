@@ -263,6 +263,7 @@ $.macroon(key, null);
 			</fieldset>
 		</form>
 	</div>
+	<div class="output"></div>
 
 </div>
 
