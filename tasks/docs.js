@@ -144,8 +144,15 @@ module.exports = function(grunt) {
 						var content = jsMatches[i];
 
 						if (content.indexOf("@use") > -1) {
-							var use = content.substr(content.indexOf("@use")+4, content.indexOf("*/")-2-content.indexOf("@use")-4).trim();
+							var open = content.indexOf("@use") + 4,
+								close = content.indexOf("*/") - content.indexOf("@use") - 6
+								use = content.substr(open, close).trim();
 							doc.use = use;
+						} else if (content.indexOf("@demo") > -1) {
+							var open = content.indexOf("@demo") + 4,
+								close = content.indexOf("*/") - content.indexOf("@demo") - 6
+								demo = content.substr(open, close).trim();
+							doc.demo = demo;
 						} else if (content.indexOf("@plugin") > -1) {
 							var plugin = parseJavascript(content);
 							doc.name = plugin.name;
@@ -398,39 +405,39 @@ module.exports = function(grunt) {
 		grunt.file.expand("src/**/*.js").forEach(parseFiles);
 		grunt.file.expand("src/grid/grid.less").forEach(parseFiles);
 
-		var md = '';
+		var docsmd = '';
 
-		md += '# Documentation';
-		md += '\n\n';
-		md += '## Core';
-		md += '\n\n';
-		md += '* [Formstone](core.md)';
-		md += '\n\n';
-		md += '## Grid';
-		md += '\n\n';
+		docsmd += '# Documentation';
+		docsmd += '\n\n';
+		docsmd += '## Core';
+		docsmd += '\n\n';
+		docsmd += '* [Formstone](core.md)';
+		docsmd += '\n\n';
+		docsmd += '## Grid';
+		docsmd += '\n\n';
 		for (var i in allDocs.grid) {
 			var d = allDocs.grid[i];
-			md += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			md += '\n';
+			docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
+			docsmd += '\n';
 		}
-		md += '\n';
-		md += '## Utility';
-		md += '\n\n';
+		docsmd += '\n';
+		docsmd += '## Utility';
+		docsmd += '\n\n';
 		for (var i in allDocs.utility) {
 			var d = allDocs.utility[i];
-			md += '* [' + d.name + '](utility-' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			md += '\n';
+			docsmd += '* [' + d.name + '](utility-' + d.name.toLowerCase().replace(" ", "") + '.md)';
+			docsmd += '\n';
 		}
-		md += '\n';
-		md += '## Widget';
-		md += '\n\n';
+		docsmd += '\n';
+		docsmd += '## Widget';
+		docsmd += '\n\n';
 		for (var i in allDocs.widget) {
 			var d = allDocs.widget[i];
-			md += '* [' + d.name + '](widget-' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			md += '\n';
+			docsmd += '* [' + d.name + '](widget-' + d.name.toLowerCase().replace(" ", "") + '.md)';
+			docsmd += '\n';
 		}
 
-		grunt.file.write("docs/README.md", md);
+		grunt.file.write("docs/README.md", docsmd);
 
 		var pkg = grunt.file.readJSON('package.json'),
 			destination = 'README.md',
