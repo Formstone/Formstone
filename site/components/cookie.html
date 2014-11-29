@@ -150,89 +150,87 @@ $.macroon(key, null);</code></pre>
 </tr>
 </tbody>
 </table>
-<p>o</p>
 <div class="demo">
-    <script>
-        $(function() {
-            $(&quot;.demo .form&quot;).on(&quot;click.cookie&quot;, &quot;.set&quot;, _setCookie)
-                            .on(&quot;click.cookie&quot;, &quot;.get&quot;, _getCookie)
-                            .on(&quot;click.cookie&quot;, &quot;.erase&quot;, _eraseCookie);
+	<script>
+		$(function() {
+			$(".demo .form").on("click.cookie", ".set", _setCookie)
+							.on("click.cookie", ".get", _getCookie)
+							.on("click.cookie", ".erase", _eraseCookie);
 
-            $(window).one(&quot;pronto.load&quot;, function() {
-                $(&quot;.demo .form&quot;).off(&quot;.cookie&quot;);
-            });
-        });
+			$(window).one("pronto.load", function() {
+				$(".demo .form").off(".cookie");
+			});
+		});
 
-        function _setCookie(e) {
-            e.preventDefault();
-            e.stopPropagation();
+		function _setCookie(e) {
+			e.preventDefault();
+			e.stopPropagation();
 
-            var key = $(&quot;.demo .form [name=set_key]&quot;).val(),
-                value = $(&quot;.demo .form [name=set_value]&quot;).val();
+			var key = $(".demo .form [name=set_key]").val(),
+				value = $(".demo .form [name=set_value]").val();
 
-            $.cookie(key, value);
+			$.cookie(key, value);
 
-            _output(&quot;Set&quot;, key + &quot; = &quot; + value);
-        }
+			_output("Set", key + " = " + value);
+		}
 
-        function _getCookie(e) {
-            e.preventDefault();
-            e.stopPropagation();
+		function _getCookie(e) {
+			e.preventDefault();
+			e.stopPropagation();
 
-            var key = $(&quot;.demo .form [name=get_key]&quot;).val(),
-                value = $.cookie(key);
+			var key = $(".demo .form [name=get_key]").val(),
+				value = $.cookie(key);
 
-            _output(&quot;Get&quot;, key + &quot; = &quot; + value);
-        }
+			_output("Get", key + " = " + value);
+		}
 
-        function _eraseCookie(e) {
-            e.preventDefault();
-            e.stopPropagation();
+		function _eraseCookie(e) {
+			e.preventDefault();
+			e.stopPropagation();
 
-            var key = $(&quot;.demo .form [name=erase_key]&quot;).val();
+			var key = $(".demo .form [name=erase_key]").val();
 
-            $.cookie(key, null);
+			$.cookie(key, null);
 
-            _output(&quot;Erase&quot;, key);
-        }
+			_output("Erase", key);
+		}
 
-        function _output(label, value) {
-            var html = &#39;&#39;;
-            html += &#39;<p><span class="label">&#39; + label + &#39;:</span>&#39;;
-            html += &#39;<span class="value">&#39; + value + &#39;</p>&#39;;
+		function _output(label, value) {
+			var html = '';
+			html += '<p><span class="label">' + label + ':</span>';
+			html += '<span class="value">' + value + '</p>';
 
-            $(&quot;.demo .output&quot;).prepend(html);
-        }
-    </script>
+			$(".demo .output").prepend(html);
+		}
+	</script>
 
-    <div class="row form">
-        <form>
-            <fieldset class="mobile-third tablet-third desktop-third">
-                <h5>Set Cookie</h5>
-                <label>Key</label>
-                <input type="text" name="set_key" value="foo">
-                <label>value</label>
-                <input type="text" name="set_value" value="bar">
-                <input type="submit" class="button set" value="Set">
-            </fieldset>
-        </form>
-        <form>
-            <fieldset class="mobile-third tablet-third desktop-third">
-                <h5>Get Cookie</h5>
-                <label>Key</label>
-                <input type="text" name="get_key" value="foo">
-                <input type="submit" class="button get" value="Get">
-            </fieldset>
-        </form>
-        <form>
-            <fieldset class="mobile-third tablet-third desktop-third">
-                <h5>Erase Cookie</h5>
-                <label>Key</label>
-                <input type="text" name="erase_key" value="foo">
-                <input type="submit" class="button erase" value="Erase">
-            </fieldset>
-        </form>
-    </div>
+	<div class="row form">
+		<form>
+			<fieldset class="mobile-third tablet-third desktop-third">
+				<h5>Set Cookie</h5>
+				<label>Key</label>
+				<input type="text" name="set_key" value="foo">
+				<label>value</label>
+				<input type="text" name="set_value" value="bar">
+				<input type="submit" class="button set" value="Set">
+			</fieldset>
+		</form>
+		<form>
+			<fieldset class="mobile-third tablet-third desktop-third">
+				<h5>Get Cookie</h5>
+				<label>Key</label>
+				<input type="text" name="get_key" value="foo">
+				<input type="submit" class="button get" value="Get">
+			</fieldset>
+		</form>
+		<form>
+			<fieldset class="mobile-third tablet-third desktop-third">
+				<h5>Erase Cookie</h5>
+				<label>Key</label>
+				<input type="text" name="erase_key" value="foo">
+				<input type="submit" class="button erase" value="Erase">
+			</fieldset>
+		</form>
+	</div>
 
-<p></div></p>
-</div></body></html>
+</div></div><!-- Compiled JS --> <script src="/js/site.js"></script><!-- Girdlock --> <script></script></body></html>

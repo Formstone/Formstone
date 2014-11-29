@@ -1,4 +1,4 @@
-{{= it.include("_header", { local_title: it.document.local_title }) }}
+{{= it.include("_header", { local_title: it.document.title }) }}
 
 		<div class="mobile-full tablet-full desktop-3 sidebar">
 			{{= it.include("navigation") }}
@@ -6,6 +6,8 @@
 
 		<div class="mobile-full tablet-full desktop-9 content">
 			{{= it.document }}
+
+			{{= it.document.demo }}
 		</div>
 
 {{= it.include("_footer") }}

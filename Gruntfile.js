@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
 			banner: '/*! \n' +
-					' * <%= pkg.name %> v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> \n' +
+					' * <%= pkg.name %> v<%= pkg.version %> [{{ local_name }}] <%= grunt.template.today("yyyy-mm-dd") %> \n' +
 					' * <%= pkg.description %> \n' +
 					' * <%= pkg.homepage %> \n' +
 					' * \n' +
@@ -65,6 +65,9 @@ module.exports = function(grunt) {
 				}]
 			},
 			site: {
+				options: {
+					preserveComments: 'some'
+				},
 				files: '<%= pkg.site.js %>'
 			}
 		},
@@ -105,7 +108,12 @@ module.exports = function(grunt) {
 		usebanner: {
 			options: {
 				position: 'top',
-				banner: '<%= meta.banner %>'
+				// banner: '<%= meta.banner %>',
+				process: function(filepath) {
+					var parts = filepath.split("/"),
+						filename = parts[ parts.length - 1 ];
+					return grunt.config.get("meta").banner.replace("{{ local_name }}", filename);
+				}
 			},
 			build: {
 				files: {
@@ -174,18 +182,18 @@ module.exports = function(grunt) {
 		zetzer: {
 			main: {
 				options: {
-					templates: "site/templates/",
-					partials: "site/templates/partials/",
+					templates: 'site/templates/',
+					partials: 'site/templates/partials/',
 					env: {
-						title: "Formstone"
+						title: 'Formstone'
 					}
 				},
 				files: [
 					{
 						expand: true,
-						src: "site/tmp/*.md",
-						dest: "site/components/",
-						ext: ".html",
+						src: 'site/tmp/*.md',
+						dest: 'site/components/',
+						ext: '.html',
 						flatten: true
 					}
 				]
@@ -193,7 +201,7 @@ module.exports = function(grunt) {
 		},
 		// remove temp site files
 		clean: [
-			"site/tmp/"
+			'site/tmp/'
 		]
 /*
 		// Strip MQ
@@ -216,7 +224,7 @@ module.exports = function(grunt) {
 		var fs = require('fs'),
 			path = require('path');
 
-		fs.readFile(lessFile, "utf8", function(err, data) {
+		fs.readFile(lessFile, 'utf8', function(err, data) {
 			var lessDir = path.dirname(lessFile),
 				regex = /@import "(.+?)(\.less)?";/g,
 				shouldInclude = false,

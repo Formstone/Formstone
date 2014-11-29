@@ -149,8 +149,8 @@ module.exports = function(grunt) {
 								use = content.substr(open, close).trim();
 							doc.use = use;
 						} else if (content.indexOf("@demo") > -1) {
-							var open = content.indexOf("@demo") + 4,
-								close = content.indexOf("*/") - content.indexOf("@demo") - 6
+							var open = content.indexOf("@demo") + 5,
+								close = content.indexOf("*/") - content.indexOf("@demo") - 7
 								demo = content.substr(open, close).trim();
 							doc.demo = demo;
 						} else if (content.indexOf("@plugin") > -1) {
@@ -392,11 +392,14 @@ module.exports = function(grunt) {
 					md += '\n';
 				}
 
-				var template = '{\n"template":"component.html",\n"local_title":"' + doc.name + '"\n}\n\n',
-					demo = doc.demo ? doc.demo : "";
+				var template = {
+						template: "component.html",
+						title: doc.name,
+						demo: doc.demo ? doc.demo : ""
+					};
 
 				grunt.file.write(destinationMD, md);
-				grunt.file.write(destinationMD.replace("docs/", "site/tmp/"), template + md + demo); // site
+				grunt.file.write(destinationMD.replace("docs/", "site/tmp/"), JSON.stringify(template) + '\n\n' + md); // site
 				grunt.file.write(destinationJSON, JSON.stringify(doc));
 				grunt.log.writeln('File "' + destinationMD + '" created.');
 
