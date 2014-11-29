@@ -1,11 +1,3 @@
-/*! 
- * Formstone v0.0.1 - 2014-11-29 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
-
 /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
  * Build: http://modernizr.com/download/#-backgroundsize-flexbox-flexboxlegacy-multiplebgs-rgba-cssanimations-csscolumns-generatedcontent-cssgradients-csstransforms-csstransforms3d-csstransitions-history-audio-video-svg-touch-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-css_pointerevents-load
  */

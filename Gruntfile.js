@@ -27,6 +27,7 @@ module.exports = function(grunt) {
 		// JS Hint
 		jshint: {
 			options: {
+				ignores: '<%= pkg.site.js_ignores %>',
 				globals: {
 					'jQuery'    : true,
 					'$'         : true,
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
 				validthis: true
 			},
 			build: 'src/js/*.js',
-			site: 'site/js/src/*.js'
+			site: 'site/js/src/**/*.js'
 		},
 		// Uglify
 		uglify: {
@@ -64,7 +65,6 @@ module.exports = function(grunt) {
 				}]
 			},
 			site: {
-				cwd: 'site/',
 				files: '<%= pkg.site.js %>'
 			}
 		},
@@ -115,8 +115,8 @@ module.exports = function(grunt) {
 			site: {
 				files: {
 					src: [
-						'site/css/**/*',
-						'site/js/**/*'
+						'site/css/*',
+						'site/js/*'
 					]
 				}
 			}
@@ -125,7 +125,13 @@ module.exports = function(grunt) {
 		sync: {
 			options: {
 				sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage' ],
-				overrides: {}
+				overrides: {
+					ignore: [
+						"demo/",
+						"docs/",
+						"site/"
+					]
+				}
 			}
 		},
 		// Watcher - Dev Only
@@ -174,7 +180,7 @@ module.exports = function(grunt) {
 			main: {
 				options: {
 					templates: "site/templates/",
-					partials: "site/partials/",
+					partials: "site/templates/partials/",
 					env: {
 						title: "Formstone"
 					}
@@ -252,14 +258,14 @@ module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
 
 	// Default task.
-	grunt.registerTask('default', [ 'js', 'css', 'build', 'site' ]);
+	grunt.registerTask('default', [ 'js', 'css', 'build', 'site_clean' ]);
 
 	grunt.registerTask('js', [ 'jshint:build', 'uglify:build' ]);
-
 	grunt.registerTask('css', [ 'less:build', 'autoprefixer:build' ]);
 
 	grunt.registerTask('build', [ 'usebanner:build', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('site', [ 'zetzer', 'clean', 'jshint:site', 'uglify:site', 'less:site', 'autoprefixer:site', 'usebanner:site' ]);
+	grunt.registerTask('site_clean', [ 'zetzer', 'clean', 'jshint:site', 'uglify:site', 'less:site', 'autoprefixer:site', 'usebanner:site' ]);
+	grunt.registerTask('site', [ 'buildDocs', 'site_clean' ]);
 
 };

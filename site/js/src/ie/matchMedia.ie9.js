@@ -1,11 +1,3 @@
-/*! 
- * Formstone v0.0.1 - 2014-11-29 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
-
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
 window.matchMedia || (window.matchMedia = function() {
     "use strict";

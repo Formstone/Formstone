@@ -39,15 +39,27 @@
     "js": {
       "site/js/site.js": [
         "site/components/jquery/dist/jquery.min.js",
+        "../dist/js/core.js",
+        "../dist/js/cookie.js",
+        "../dist/js/lightbox.js",
+        "../dist/js/mediaquery.js",
+        "../dist/js/navigation.js",
+        "../dist/js/tooltip.js",
+        "../dist/js/touch.js",
+        "../dist/js/transition.js",
+        "../dist/js/upload.js",
         "site/js/src/site.js"
       ],
       "site/js/site-ie8.js": [
         "site/components/html5shiv/dist/html5shiv.min.js",
         "site/components/html5shiv/dist/html5shiv-printshiv.min.js",
-        "site/jsite/s/src/ie/matchMedia.ie8.js"
+        "site/js/src/ie/matchMedia.ie8.js"
       ],
       "site/js/site-ie9.js": [
         "site/js/src/ie/matchMedia.ie9.js"
+      ],
+      "site/js/modernizr.js": [
+        "site/js/src/lib/modernizr.custom.js"
       ]
     },
     "js_ignores": [

@@ -1,0 +1,9 @@
+/*! 
+ * Formstone v0.0.1 - 2014-11-29 
+ * Library of modular javascript components. 
+ * http://formstone.it/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */
+
+window.matchMedia=window.matchMedia||function(a){var b=a.documentElement,c=b.firstElementChild||b.firstChild,d=a.createElement("body"),e=a.createElement("div");e.id="mq-test-1",e.style.cssText="position:absolute;top:-100em",d.style.background="none",d.appendChild(e);var f,g=function(a){return e.innerHTML='&shy;<style media="'+a+'"> #mq-test-1 { width: 42px; }</style>',b.insertBefore(d,c),bool=42===e.offsetWidth,b.removeChild(d),{matches:bool,media:a}},h=function(){var c,d=b.body,g=!1;return e.style.cssText="position:absolute;font-size:1em;width:1em",d||(d=g=a.createElement("body"),d.style.background="none"),d.appendChild(e),b.insertBefore(d,b.firstChild),g?b.removeChild(d):d.removeChild(e),c=f=parseFloat(e.offsetWidth)},i=g("(min-width: 0px)").matches;return function(b){if(i)return g(b);if(a.body){var c=b.match(/\(min\-width:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/)&&parseFloat(RegExp.$1)+(RegExp.$2||""),d=b.match(/\(max\-width:[\s]*([\s]*[0-9\.]+)(px|em)[\s]*\)/)&&parseFloat(RegExp.$1)+(RegExp.$2||""),e=null===c,j=null===d,k=a.body.offsetWidth,l="em";return c&&(c=parseFloat(c)*(c.indexOf(l)>-1?f||h():1)),d&&(d=parseFloat(d)*(d.indexOf(l)>-1?f||h():1)),bool=(!e||!j)&&(e||k>=c)&&(j||d>=k),{matches:bool,media:b}}return{matches:!1,media:{}}}}(document),function(){if("undefined"!=typeof window.matchMedia("")){var a=window.matchMedia;window.matchMedia=function(b){var c,d=a(b),e=[],f=!1,g=function(){var c=a(b),g=c.matches&&!f,h=!c.matches&&f;if(g||h)for(var i=0,j=e.length;j>i;i++)e[i].call(d,c);f=c.matches};return d.addListener=function(a){e.push(a),c||(c=setInterval(g,1e3))},d.removeListener=function(a){for(var b=0,d=e.length;d>b;b++)e[b]===a&&e.splice(b,1);!e.length&&c&&clearInterval(c)},d}}}();

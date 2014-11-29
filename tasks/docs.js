@@ -442,7 +442,7 @@ module.exports = function(grunt) {
 		}
 
 		grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
-		grunt.file.write("site/partials/navigation.md", docsmd.replace(/.md/g, ".html").replace(/##/g, "#####"));
+		grunt.file.write("site/templates/partials/navigation.md", docsmd.replace(/.md/g, ".html").replace(/##/g, "#####")); //site nav
 
 		var pkg = grunt.file.readJSON('package.json'),
 			destination = 'README.md',

@@ -1,11 +1,3 @@
-/*! 
- * Formstone v0.0.1 - 2014-11-29 
- * Library of modular javascript components. 
- * http://formstone.it/ 
- * 
- * Copyright 2014 Ben Plum; MIT Licensed 
- */
-
 // Console Polyfill <http://stackoverflow.com/questions/3326650/console-is-undefined-error-for-internet-explorer>
 (function(){window.console||(window.console={});for(var b="log info warn error debug trace dir group groupCollapsed groupEnd time timeEnd profile profileEnd dirxml assert count markTimeline timeStamp clear".split(" "),a=0;a<b.length;a++)window.console[b[a]]||(window.console[b[a]]=function(){})})();
 // Fix Missing .indexOf() - IE8
