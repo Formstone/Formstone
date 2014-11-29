@@ -6,7 +6,7 @@
   "description": "Library of modular javascript components.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Formstone/formstone"
+    "url": "https://github.com/Formstone/Formstone/"
   },
   "homepage": "http://formstone.it/",
   "demo": "http://formstone.it/demo/",
@@ -15,6 +15,9 @@
     "name": "Ben Plum",
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
+  },
+  "dependencies": {
+	"jquery": ">=1.11.1"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

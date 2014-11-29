@@ -8,5 +8,16 @@
     "url": "http://www.benplum.com"
   },
   "license": "MIT",
-  "homepage": "http://formstone.it/"
+  "homepage": "http://formstone.it/",
+  "dependencies": {
+    "jquery": ">=1.11.1"
+  },
+  "main": [
+    "dist/**/*"
+  ],
+  "ignore": [
+    "demo/",
+    "docs/",
+    "site/"
+  ]
 }

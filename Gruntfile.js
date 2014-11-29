@@ -123,14 +123,9 @@ module.exports = function(grunt) {
 		},
 		// Bower sync
 		sync: {
-			options: {
-				sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage' ],
-				overrides: {
-					ignore: [
-						"demo/",
-						"docs/",
-						"site/"
-					]
+			all: {
+				options: {
+					sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage', 'dependencies' ]
 				}
 			}
 		},
