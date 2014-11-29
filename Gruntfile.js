@@ -5,12 +5,12 @@
 module.exports = function(grunt) {
 
 	var cssFiles = {
-		'dist/grid/grid.css'            : [ 'src/grid/grid.less' ],
-		'dist/grid/grid.ie.css'         : [ 'src/grid/grid.ie.less' ],
-		'dist/widget/lightbox.css'      : [ 'src/widget/lightbox.less' ],
-		'dist/widget/navigation.css'    : [ 'src/widget/navigation.less' ],
-		'dist/widget/tooltip.css'       : [ 'src/widget/tooltip.less' ],
-		'dist/widget/upload.css'        : [ 'src/widget/upload.less' ]
+		'dist/css/grid.css'          : [ 'src/less/grid.less' ],
+		'dist/css/grid.ie.css'       : [ 'src/less/grid.ie.less' ],
+		'dist/css/lightbox.css'      : [ 'src/less/lightbox.less' ],
+		'dist/css/navigation.css'    : [ 'src/less/navigation.less' ],
+		'dist/css/tooltip.css'       : [ 'src/less/tooltip.less' ],
+		'dist/css/upload.css'        : [ 'src/less/upload.less' ]
 	};
 
 	grunt.initConfig({
@@ -47,25 +47,30 @@ module.exports = function(grunt) {
 				undef:     true,
 				validthis: true
 			},
-			files: 'src/**/*.js',
+			build: 'src/js/*.js',
+			site: 'site/js/src/*.js'
 		},
 		// Uglify
 		uglify: {
 			options: {
 				report: 'min'
 			},
-			target: {
+			build: {
 				files: [{
 					expand: true,
 					cwd:    'src/',
 					src:    '**/*.js',
 					dest:   'dist/'
 				}]
+			},
+			site: {
+				cwd: 'site/',
+				files: '<%= pkg.site.js %>'
 			}
 		},
 		// Copy
 		copy: {
-			target: {
+			build: {
 				expand: true,
 				cwd:    'src/',
 				src:    '**/*.js',
@@ -77,8 +82,11 @@ module.exports = function(grunt) {
 			options: {
 				cleancss: true
 			},
-			target: {
+			build: {
 				files: cssFiles
+			},
+			site: {
+				files: '<%= pkg.site.css %>'
 			}
 		},
 		// Auto Prefixer
@@ -86,8 +94,11 @@ module.exports = function(grunt) {
 			options: {
 				browsers: [ '> 1%', 'last 5 versions', 'Firefox ESR', 'Opera 12.1', 'IE 8', 'IE 9' ]
 			},
-			no_dest: {
+			build: {
 				 src: 'dist/**/*.css'
+			},
+			site: {
+				 src: 'site/css/*.css'
 			}
 		},
 		// Banner
@@ -96,9 +107,17 @@ module.exports = function(grunt) {
 				position: 'top',
 				banner: '<%= meta.banner %>'
 			},
-			target: {
+			build: {
 				files: {
 					src: 'dist/**/*'
+				}
+			},
+			site: {
+				files: {
+					src: [
+						'site/css/**/*',
+						'site/js/**/*'
+					]
 				}
 			}
 		},
@@ -106,12 +125,7 @@ module.exports = function(grunt) {
 		sync: {
 			options: {
 				sync: [ 'name', 'version', 'description', 'author', 'license', 'homepage' ],
-				overrides: {
-					main: [
-						'<%= pkg.codename %>.js',
-						'<%= pkg.codename %>.css'
-					]
-				}
+				overrides: {}
 			}
 		},
 		// Watcher - Dev Only
@@ -154,7 +168,46 @@ module.exports = function(grunt) {
 					}
 				}
 			}
+		},
+		// Zetzer - Site building
+		zetzer: {
+			main: {
+				options: {
+					templates: "site/templates/",
+					partials: "site/partials/",
+					env: {
+						title: "Formstone"
+					}
+				},
+				files: [
+					{
+						expand: true,
+						src: "site/tmp/*.md",
+						dest: "site/components/",
+						ext: ".html",
+						flatten: true
+					}
+				]
+			}
+		},
+		// remove temp site files
+		clean: [
+			"site/tmp/"
+		]
+/*
+		// Strip MQ
+		stripmq: {
+			options: {
+				width: 1024,
+				type: 'screen'
+			},
+			all: {
+				files: {
+					'css/site-ie8.css': [ 'css/site-ie8.css' ]
+				}
+			}
 		}
+*/
 	});
 
 	// Newer LESS Imports
@@ -193,14 +246,20 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-banner');
 	grunt.loadNpmTasks('grunt-npm2bower-sync');
+	grunt.loadNpmTasks('grunt-zetzer');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.loadTasks('tasks');
 
 	// Default task.
-	grunt.registerTask('default', [ 'js', 'css', 'usebanner', 'sync', 'buildLicense', 'buildDocs' ]);
+	grunt.registerTask('default', [ 'js', 'css', 'build', 'site' ]);
 
-	grunt.registerTask('js', [ 'jshint', 'uglify' ]);
+	grunt.registerTask('js', [ 'jshint:build', 'uglify:build' ]);
 
-	grunt.registerTask('css', [ 'less', 'autoprefixer' ]);
+	grunt.registerTask('css', [ 'less:build', 'autoprefixer:build' ]);
+
+	grunt.registerTask('build', [ 'usebanner:build', 'sync', 'buildLicense', 'buildDocs' ]);
+
+	grunt.registerTask('site', [ 'zetzer', 'clean', 'jshint:site', 'uglify:site', 'less:site', 'autoprefixer:site', 'usebanner:site' ]);
 
 };

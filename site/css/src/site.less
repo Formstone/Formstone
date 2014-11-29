@@ -1,0 +1,320 @@
+/*! 
+ * Formstone v0.0.1 - 2014-11-29 
+ * Library of modular javascript components. 
+ * http://formstone.it/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */
+
+/* ==================================================================
+   Imports
+================================================================== */
+
+	@import "setup.less";
+	@import (inline) "fonts.css";
+
+
+/* ==================================================================
+   Transitions
+================================================================== */
+	*,
+	*:link,
+	*:visited,
+	*:hover,
+	*:active,
+	*:focus {
+		transition:
+			background-color 0.15s linear,
+			border-color 0.15s linear,
+			color 0.15s linear,
+			opacity 0.15s linear;
+	}
+
+
+/* ==================================================================
+   Animations
+================================================================== */
+
+
+/* ==================================================================
+   Elements
+================================================================== */
+
+	html,
+	body {
+		background: #fff;
+	}
+
+	body {
+		overflow-x: hidden;
+		min-width: 300px;
+	}
+
+	::selection,
+	::-moz-selection {
+		background: #eee;
+		text-shadow: none;
+	}
+
+	h1, h2, h3, h4, h5, h6 {  }
+	h1 {  }
+	h2 {  }
+	h3 {  }
+	h4 {  }
+	h5 {  }
+	h6 {  }
+
+	p {  }
+
+	a {
+		text-decoration: none;
+
+		.no-touch &:hover {}
+	}
+
+	em {
+		font-style: italic;
+	}
+
+	strong {
+		font-weight: bold;
+	}
+
+	blockquote {}
+	blockquote p {}
+
+	ol,
+	ul {}
+
+	li {}
+
+	ol {}
+
+	ol li {}
+
+	ul {
+		list-style: none;
+	}
+
+	ul li {}
+
+	ul li:before {
+		background: #eee;
+		border-radius: 100%;
+		content: '';
+		display: block;
+		float: left;
+		height: 5px;
+		margin: 10px 0 0 -20px;
+		width: 5px;
+	}
+
+	hr {
+		background: #eee;
+		border: none;
+		clear: both;
+		height: 1px;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	iframe {
+		border: none;
+	}
+
+	audio,
+	canvas,
+	img,
+	svg,
+	video {
+		vertical-align: middle;
+	}
+
+	fieldset {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	input,
+	textarea {
+		border: none;
+		border-radius: 0;
+		padding: 0;
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	menu {
+		margin: 0;
+		padding: 0;
+	}
+
+	button {
+		background: none;
+		border: none;
+		padding: 0;
+	}
+
+	figure {
+		margin: 0;
+	}
+
+
+/* ==================================================================
+   Helpers
+================================================================== */
+
+	.left,
+	.block_left {
+		float: left;
+	}
+
+	.block_left {
+		margin: 0 20px 20px 0;
+	}
+
+	.right,
+	.block_right {
+		float: right;
+	}
+
+	.block_right {
+		margin: 0 0 20px 20px;
+	}
+
+	.clear {
+		clear: both;
+	}
+
+	.clearfix:after {
+		clear: both;
+		content: ".";
+		display: block;
+		height: 0;
+		line-height: 0;
+		visibility: hidden;
+	}
+
+	.contain {
+		overflow: hidden;
+	}
+
+	.no_select,
+	.no_select * {
+		user-select: none;
+	}
+
+	.hidden {
+		display: none !important;
+		visibility: hidden;
+	}
+
+	.visually_hidden {
+		border: 0;
+		clip: rect(0 0 0 0);
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
+		position: absolute;
+		width: 1px;
+
+		&.focusable:active,
+		&.focusable:focus {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+		}
+	}
+
+	.invisible {
+		visibility: hidden;
+	}
+
+
+/* ==================================================================
+   Media Queries
+================================================================== */
+
+	@media @mobile {
+
+    }
+    @media @tablet {
+
+    }
+    @media @desktop {
+
+    }
+    @media @max {
+
+    }
+
+
+/* ==================================================================
+   Print
+================================================================== */
+
+	@media print {
+	    * {
+	    	background: transparent !important;
+	    	box-shadow: none !important;
+	    	color: #000 !important;
+	    	text-shadow: none !important;
+	    }
+
+	    a,
+	    a:visited {
+	    	text-decoration: underline;
+	    }
+
+	    a[href]:after {
+	    	content: " (" attr(href) ")";
+	    }
+
+	    abbr[title]:after {
+	    	content: " (" attr(title) ")";
+	    }
+
+	    a[href^="javascript:"]:after,
+	    a[href^="#"]:after {
+	    	content: "";
+	    }
+
+	    pre,
+	    blockquote {
+	    	border: 1px solid #999;
+	    	page-break-inside: avoid;
+	    }
+
+	    thead {
+	    	display: table-header-group;
+	    }
+
+	    tr,
+	    img {
+	    	page-break-inside: avoid;
+	    }
+
+	    img {
+	    	max-width: 100% !important;
+	    }
+
+	    p,
+	    h2,
+	    h3 {
+	    	orphans: 3;
+	    	widows: 3;
+	    }
+
+	    h2,
+	    h3 {
+	    	page-break-after: avoid;
+	    }
+	}

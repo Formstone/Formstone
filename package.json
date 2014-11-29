@@ -20,12 +20,39 @@
     "grunt": "~0.4.2",
     "grunt-autoprefixer": "^1.0.1",
     "grunt-banner": "^0.2.3",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-less": "^0.11.4",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-npm2bower-sync": "~0.3.0",
     "grunt-newer": "^0.8.0",
-    "grunt-contrib-copy": "^0.7.0"
+    "grunt-npm2bower-sync": "~0.3.0",
+    "grunt-zetzer": "^2.0.0"
+  },
+  "site": {
+    "css": {
+      "site/css/site.css": "site/css/src/site.less",
+      "site/css/site-ie8.css": "site/css/src/ie/ie8.less",
+      "site/css/site-ie9.css": "site/css/src/ie/ie9.less"
+    },
+    "js": {
+      "site/js/site.js": [
+        "site/components/jquery/dist/jquery.min.js",
+        "site/js/src/site.js"
+      ],
+      "site/js/site-ie8.js": [
+        "site/components/html5shiv/dist/html5shiv.min.js",
+        "site/components/html5shiv/dist/html5shiv-printshiv.min.js",
+        "site/jsite/s/src/ie/matchMedia.ie8.js"
+      ],
+      "site/js/site-ie9.js": [
+        "site/js/src/ie/matchMedia.ie9.js"
+      ]
+    },
+    "js_ignores": [
+      "site/js/src/ie/*/",
+      "site/js/src/lib/*/"
+    ]
   }
 }

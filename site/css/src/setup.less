@@ -1,0 +1,131 @@
+/*! 
+ * Formstone v0.0.1 - 2014-11-29 
+ * Library of modular javascript components. 
+ * http://formstone.it/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */
+
+/* ==================================================================
+   Variables
+================================================================== */
+
+	@root_font_size: 16;
+
+	@mobile:		~"only screen and (min-width: 500px)";
+	@tablet:		~"only screen and (min-width: 740px)";
+	@desktop:		~"only screen and (min-width: 980px)";
+	@max:			~"only screen and (min-width: 1220px)";
+
+	@mobile_max:	~"only screen and (max-width: 499px)";
+	@tablet_max:	~"only screen and (max-width: 739px)";
+	@desktop_max:	~"only screen and (max-width: 979px)";
+	@max_max:		~"only screen and (max-width: 1219px)";
+
+/* ==================================================================
+   Mixins
+================================================================== */
+
+	.font_size(@px_size) {
+		@px: @px_size;
+		@rem: (@px_size / @root_font_size);
+		font-size: ~"@{px}px";
+		font-size: ~"@{rem}rem";
+	}
+
+	.rgba_background(@base, @alpha) {
+		background-color: rgba(red(@base), green(@base), blue(@base), @alpha);
+	}
+
+	.rgba_text(@base, @alpha) {
+		color: rgba(red(@base), green(@base), blue(@base), @alpha);
+	}
+
+	.columns(@count, @gap) {
+		-webkit-column-count: @count;
+		   -moz-column-count: @count;
+		        column-count: @count;
+		-webkit-column-gap: @gap;
+		   -moz-column-gap: @gap;
+		   	    column-gap: @gap;
+	}
+
+	.icon_sprite(@left:0, @top:0) {
+		background: url(../images/icons.png) no-repeat @left @top;
+		background-image: url(../images/icons.svg), none;
+	}
+
+	.icon_indent() {
+		overflow: hidden;
+		text-indent: 200%;
+		white-space: nowrap;
+	}
+
+	.columns(@count, @gap) {
+		column-count: @count;
+		column-gap: @gap;
+
+		> * {
+			column-break-inside: avoid;
+		}
+	}
+
+	.cover() {
+		height: 100%;
+		width: 100%;
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.center() {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		transform: translate(-50%, -50%);
+	}
+
+	.center_vertical() {
+		position: absolute;
+		top: 50%;
+
+		transform: translateY(-50%);
+	}
+
+	.absolute_center_parent() {
+		position: relative;
+	}
+
+	.absolute_center() {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		margin: auto;
+	}
+
+	.ellipsis() {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.gradient_vertical(@startColor: black, @endColor: white) {
+		background-color: @startColor;
+		background: linear-gradient(top, @startColor, @endColor);
+	}
+
+	.gradient_horizontal(@startColor: black, @endColor: white) {
+		background-color: @startColor;
+		background: linear-gradient(left, @startColor, @endColor);
+	}
+
+	.rgba_raw(@base, @alpha) {
+		@return: rgba(red(@base), green(@base), blue(@base), @alpha);
+	}
