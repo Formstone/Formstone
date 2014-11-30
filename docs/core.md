@@ -11,27 +11,24 @@ Library core.
 
 The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:
 
-```
-$window					// object, Reference to jQuery wrapped window
-$document				// object, Reference to jQuery wrapped document
-$body					// object, Reference to jQuery wrapped body tag
-
-Plugins					// object, Contains all registered plugins
-
-support.file			// boolean, File API support
-support.history			// boolean, History API support, including push and pop state
-support.matchMedia		// boolean, Match Media API support
-support.raf				// boolean, Request Animation Frame API support'
-support.touch			// boolean, Touch event support
-support.transition		// boolean, CSS3 Transition support
-
-userAgent				// string, Raw user string
-isChrome				// boolean, Browser is Chrome
-isFirefox				// boolean, Browser is FireFox
-isSafari				// boolean, Browser is Safari
-isMobile				// boolean, Browser is Mobile
-isFirefoxMobile			// boolean, Browser is FireFox Mobile
-```
+| Key | Type | Description |
+| --- | --- | --- |
+| $window | object | Reference to jQuery wrapped window |
+| $document | object | Reference to jQuery wrapped document |
+| $body | object | Reference to jQuery wrapped body tag |
+| Plugins | object | Contains all registered plugins |
+| support.file | boolean | File API support |
+| support.history | boolean | History API support, including push and pop state |
+| support.matchMedia | boolean | Match Media API support |
+| support.raf | boolean | Request Animation Frame API support |
+| support.touch | boolean | Touch event support |
+| support.transition | boolean | CSS3 Transition support |
+| userAgent | string | Raw user string |
+| isChrome | boolean | Browser is Chrome |
+| isFirefox | boolean | Browser is FireFox |
+| isSafari | boolean | Browser is Safari |
+| isMobile | boolean | Browser is Mobile |
+| isFirefoxMobile | boolean | Browser is FireFox Mobile |
 
 User agent sniffing isn't always reliable or considered a best practice - it should be used sparingly, if at all.
 
@@ -107,11 +104,11 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 
 As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:
 
-```
-_setup					// Run once when document is ready, scoped to document
-_construct				// Run at initialization of each instance, scoped to specific instance
-_destruct				// Run at destruction of each instance, scoped to specific instance
-```
+| Method | Description |
+| --- | --- |
+| _setup | Run once when document is ready, scoped to document |
+| _construct | Run at initialization of each instance, scoped to specific instance |
+| _destruct | Run at destruction of each instance, scoped to specific instance |
 
 When an instance is created or destroyed, the factory will automatically add or remove the instance's localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:
 
@@ -165,20 +162,20 @@ A utility can override the default method delegation by pointing the `_delegate`
 $.namespace("reset", 500);
 ```
 
-#### Plugin Object
+### Plugin Object
 
 Defining a plugin using the factory will return an object containing the follow keys:
 
-```
-namespace				// String, plugin namespace
-initialized				// Boolean, initialized state
-defaults				// Object, default options extended with initialization and local options
-functions				// Object, private utility functions
-methods					// Object, public methods
-utilities				// Object, public utilities
-classes					// Object, namespaced classes strings
-events					// Object, namespaced event strings
-```
+| Key | Type | Description |
+| --- | --- | --- |
+| namespace | string | plugin namespace |
+| initialized | boolean | initialized state |
+| defaults | object | default options extended with initialization and local options |
+| functions | object | private utility functions |
+| methods | object | public methods |
+| utilities | object | public utilities |
+| classes | object | namespaced classes strings |
+| events | object | namespaced event strings |
 
 These values can then be localized in the scope of the plugin for optimal minimization:
 
@@ -211,13 +208,12 @@ var Plugin = Formstone.Plugin(“namespace”, {
 });
 ```
 
-```
-base					// Default, "namespace"
-element					// Default, "namespace-element"
-
-visible					// Custom,  "namespace-visible"
-content					// Custom,  "namespace-content"
-```
+| Key | Type | Value |
+| --- | --- | --- |
+| base | Default | namespace |
+| element | Default | namespace-element |
+| visible | Custom | namespace-visible |
+| content | Custom | namespace-content |
 
 #### Events
 
@@ -234,49 +230,48 @@ var Plugin = Formstone.Plugin(“namespace”, {
 });
 ```
 
-```
-namespace				// Default, ".namespace",
-blur					// Default, "blur.namespace",
-change					// Default, "change.namespace",
-click					// Default, "click.namespace",
-clickTouchStart			// Default, "click.namespace touchstart.namespace",
-dblClick				// Default, "dblClick.namespace",
-drag					// Default, "drag.namespace",
-dragEnd					// Default, "dragend.namespace",
-dragEnter				// Default, "dragenter.namespace",
-dragLeave				// Default, "dragleave.namespace",
-dragOver				// Default, "dragover.namespace",
-dragStart				// Default, "dragstart.namespace",
-drop					// Default, "drop.namespace",
-error					// Default, "error.namespace",
-focus					// Default, "focus.namespace",
-focusIn					// Default, "focusin.namespace",
-focusOut				// Default, "focusout.namespace",
-input					// Default, "input.namespace",
-keyDown					// Default, "keydown.namespace",
-keyPress				// Default, "keypress.namespace",
-keyUp					// Default, "keyup.namespace",
-load					// Default, "load.namespace",
-mouseDown				// Default, "mousedown.namespace",
-mouseEnter				// Default, "mouseenter.namespace",
-mouseLeave				// Default, "mouseleave.namespace",
-mouseMove				// Default, "mousemove.namespace",
-mouseOut				// Default, "mouseout.namespace",
-mouseOver				// Default, "mouseover.namespace",
-mouseUp					// Default, "mouseup.namespace",
-resize					// Default, "resize.namespace",
-scroll					// Default, "scroll.namespace",
-select					// Default, "select.namespace",
-touchCancel				// Default, "touchcancel.namespace",
-touchEnd				// Default, "touchend.namespace"
-touchLeave				// Default, "touchleave.namespace",
-touchMove				// Default, "touchmove.namespace",
-touchStart				// Default, "touchstart.namespace",
-transitionEnd			// Default, "transitionEnd.namespace"
-
-enable					// Custom,  "enable.namespace"
-disable					// Custom,  "disable.namespace"
-```
+| Key | Type | Value |
+| --- | --- | --- |
+| namespace | Default | .namespace |
+| blur | Default | blur.namespace |
+| change | Default | change.namespace |
+| click | Default | click.namespace |
+| clickTouchStart | Default | click.namespace touchstart.namespace |
+| dblClick | Default | dblClick.namespace |
+| drag | Default | drag.namespace |
+| dragEnd | Default | dragend.namespace |
+| dragEnter | Default | dragenter.namespace |
+| dragLeave | Default | dragleave.namespace |
+| dragOver | Default | dragover.namespace |
+| dragStart | Default | dragstart.namespace |
+| drop | Default | drop.namespace |
+| error | Default | error.namespace |
+| focus | Default | focus.namespace |
+| focusIn | Default | focusin.namespace |
+| focusOut | Default | focusout.namespace |
+| input | Default | input.namespace |
+| keyDown | Default | keydown.namespace |
+| keyPress | Default | keypress.namespace |
+| keyUp | Default | keyup.namespace |
+| load | Default | load.namespace |
+| mouseDown | Default | mousedown.namespace |
+| mouseEnter | Default | mouseenter.namespace |
+| mouseLeave | Default | mouseleave.namespace |
+| mouseMove | Default | mousemove.namespace |
+| mouseOut | Default | mouseout.namespace |
+| mouseOver | Default | mouseover.namespace |
+| mouseUp | Default | mouseup.namespace |
+| resize | Default | resize.namespace |
+| scroll | Default | scroll.namespace |
+| select | Default | select.namespace |
+| touchCancel | Default | touchcancel.namespace |
+| touchEnd | Default | touchend.namespace |
+| touchLeave | Default | touchleave.namespace |
+| touchMove | Default | touchmove.namespace |
+| touchStart | Default | touchstart.namespace |
+| transitionEnd | Default | transitionEnd.namespace |
+| enable | Custom | enable.namespace |
+| disable | Custom | disable.namespace |
 
 ## Methods
 

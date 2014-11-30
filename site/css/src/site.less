@@ -5,7 +5,7 @@
 	@import "setup.less";
 
 	@import (inline) "../../bower/normalize-css/normalize.css";
-	@import (inline) "fonts.css";
+	// @import (inline) "fonts.css";
 
 	// Components
 
@@ -42,12 +42,30 @@
    Elements
 ================================================================== */
 
+	*:focus,
+	*:hover,
+	*:active { outline: none; }
+
 	html,
 	body {
-		background: #fff;
+		background: @white;
+		transition: none;
+
+		@media @tablet {
+			background: @gray;
+		}
+	}
+
+	html {
+		font-size: 16px;
 	}
 
 	body {
+		.sans();
+		.font_size(16);
+
+		color: @gray_4;
+		line-height: 1.5;
 		overflow-x: hidden;
 		min-width: 300px;
 	}
@@ -58,20 +76,53 @@
 		text-shadow: none;
 	}
 
-	h1, h2, h3, h4, h5, h6 {  }
-	h1 {  }
-	h2 {  }
-	h3 {  }
-	h4 {  }
-	h5 {  }
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		.sans();
+
+		color: @black;
+		margin: 20px 0;
+	}
+	h1 {
+		.font_size(42);
+	}
+	h2 {
+		.font_size(32);
+	}
+	h3 {
+		color: @orange;
+
+		.font_size(26);
+	}
+	h4 {
+		.font_size(20);
+
+		text-transform: uppercase;
+	}
+	h5 {
+		.font_size(12);
+
+		text-transform: uppercase;
+	}
 	h6 {  }
 
-	p {  }
+	p {
+		margin: 20px 0;
+	}
 
 	a {
+		border-bottom: 1px solid @gray_2;
+		color: @orange;
 		text-decoration: none;
 
-		.no-touch &:hover {}
+		.no-touch &:hover {
+			color: @black;
+			border-color: @gray_3;
+		}
 	}
 
 	em {
@@ -101,7 +152,7 @@
 	ul li {}
 
 	ul li:before {
-		background: #eee;
+		background: @gray_2;
 		border-radius: 100%;
 		content: '';
 		display: block;
@@ -112,7 +163,7 @@
 	}
 
 	hr {
-		background: #eee;
+		background: @gray_2;
 		border: none;
 		clear: both;
 		height: 1px;
@@ -142,7 +193,7 @@
 	input,
 	textarea {
 		border: none;
-		border-radius: 0;
+		border-radius: 3px;
 		padding: 0;
 	}
 
@@ -163,6 +214,55 @@
 
 	figure {
 		margin: 0;
+	}
+
+	// code
+
+	pre,
+	code {
+		.mono();
+		.font_size(14);
+
+		color: @gray_5;
+	}
+
+	pre {
+		background: @gray_1;
+		border-radius: 3px;
+		margin: 20px 0;
+		overflow-y: auto;
+		padding: 20px;
+	}
+
+	p code {
+		// .font_size(14);
+	}
+
+	// table
+
+	table {
+		width: 100%;
+		min-width: 700px;
+		margin: 20px 0;
+
+		& th {
+			.sans();
+			.font_size(12);
+
+			color: @gray_3;
+			letter-spacing: 0.2em;
+			padding: 0 15px 10px;
+			text-align: left;
+			text-transform: uppercase;
+		}
+
+		& td {
+			padding: 13px 15px 15px;
+		}
+
+		& tr:nth-child(odd) td {
+			background: @gray_1;
+		}
 	}
 
 
@@ -256,6 +356,33 @@
     }
     @media @max {
 
+    }
+
+
+
+    .content {
+	    background: @white;
+		padding: 0 10px;
+
+	    @media @tablet {
+	    	padding: 10px 30px;
+	    }
+
+	    @media @desktop {
+		    margin-bottom: 30px;
+	    	padding: 30px 50px;
+	    }
+    }
+
+
+    .sidebar {
+	    background: @gray;
+	    color: @white;
+
+	    a {
+		    color: @white;
+		    border-color: fade(@white, 25);
+	    }
     }
 
 
