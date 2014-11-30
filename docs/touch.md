@@ -6,7 +6,7 @@ A jQuery plugin for multi-touch events.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
-
+<br class="nav">
 
 ## Use 
 ### Events

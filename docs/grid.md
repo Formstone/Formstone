@@ -3,10 +3,10 @@
 A responsive CSS grid.
 
 * [Use](#use)
-
+<br class="nav">
 
 ## Use 
-Grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
+The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
 
 ### Markup
 
@@ -123,6 +123,7 @@ Helper classes can be added to cells to modify their default behavior in predict
 | `padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
 | `contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
 | `centered` | Centers cell. Useful for centering odd column count cells. |
+| `right` | Right aligns cell. Useful for changing document flow on different device sizes. |
 
 ### LESS Configuration
 

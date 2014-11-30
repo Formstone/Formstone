@@ -271,6 +271,8 @@ module.exports = function(grunt) {
 					md += '\n';
 				}
 
+				md += '<br class="nav">';
+
 				md += '\n';
 
 				if (doc.use) {
@@ -396,10 +398,13 @@ module.exports = function(grunt) {
 						template: "component.html",
 						title: doc.name,
 						demo: doc.demo ? doc.demo : ""
-					};
+					},
+					demoTitle = doc.demo ? "* [Demo](#demo)" + '\n <br class="nav">' : "";
 
 				grunt.file.write(destinationMD, md);
-				grunt.file.write(destinationMD.replace("docs/", "site/tmp/"), JSON.stringify(template) + '\n\n' + md); // site
+
+				grunt.file.write(destinationMD.replace("docs/", "site/tmp/"), JSON.stringify(template) + '\n\n' + md.replace('<br class="nav">', demoTitle)); // site
+
 				grunt.file.write(destinationJSON, JSON.stringify(doc));
 				grunt.log.writeln('File "' + destinationMD + '" created.');
 

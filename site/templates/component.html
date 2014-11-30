@@ -1,13 +1,19 @@
 {{= it.include("_header", { local_title: it.document.title }) }}
 
-		<div class="mobile-full tablet-full desktop-3 sidebar">
-			{{= it.include("navigation") }}
-		</div>
+<div class="row">
+	<div class="mobile-full tablet-full desktop-3 sidebar">
+		{{= it.include("navigation") }}
+	</div>
+	<div class="mobile-full tablet-full desktop-9 content">
+		{{= it.document }}
 
-		<div class="mobile-full tablet-full desktop-9 content">
-			{{= it.document }}
-
+		{{? it.document.demo }}
+		<div class="demo">
+			<h2 id="demo">Demo</h2>
 			{{= it.document.demo }}
 		</div>
+		{{?}}
+	</div>
+</div>
 
 {{= it.include("_footer") }}

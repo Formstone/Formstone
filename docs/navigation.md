@@ -7,7 +7,7 @@ A jQuery plugin for simple responsive navigation.
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
-
+<br class="nav">
 
 ## Use 
 ### Basic

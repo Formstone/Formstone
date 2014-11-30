@@ -66,7 +66,7 @@
 				for (var j in MQMatches[i]) {
 					if (MQMatches[i].hasOwnProperty(j) && MQMatches[i][j].matches) {
 
-						var state = (j === "Infinity" ? Infinity : parseInt(j, 10));
+						var state = (j === "Infinity") ? Infinity : parseInt(j, 10);
 
 						if (i.indexOf("max") > -1) {
 							if (!State[i] || state < State[i]) {
@@ -104,7 +104,6 @@
 	 */
 
 	function onBindingChange(mq) {
-
 		var key        = createKey(mq.media),
 			binding    = Bindings[ key ],
 			event      = mq.matches ? Events.enter : Events.leave;

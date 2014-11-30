@@ -204,26 +204,24 @@
 				Instance.$lightbox.on(Events.clickTouchStart, Functions.getClassName(Classes.control), advanceGallery);
 			}
 
-			Instance.$lightbox.transition(
-				{
-					property: "opacity"
-				},
-				function() {
-					if (isImage) {
-						loadImage(source);
-					} else if (isVideo) {
-						loadVideo(source);
-					} else if (isUrl) {
-						loadURL(source);
-					} else if (isElement) {
-						cloneElement(source);
-					} else if (isObject) {
-						appendObject(Instance.$object);
-					} else {
-						//$.error("Lightbox: '" +  source + "' is not valid.");
-					}
+			Instance.$lightbox.transition({
+				property: "opacity"
+			},
+			function() {
+				if (isImage) {
+					loadImage(source);
+				} else if (isVideo) {
+					loadVideo(source);
+				} else if (isUrl) {
+					loadURL(source);
+				} else if (isElement) {
+					cloneElement(source);
+				} else if (isObject) {
+					appendObject(Instance.$object);
+				} else {
+					//$.error("Lightbox: '" +  source + "' is not valid.");
 				}
-			);
+			});
 
 			$Body.addClass(Classes.open);
 		}
@@ -278,26 +276,24 @@
 		Functions.killEvent(e);
 
 		if (Instance) {
-			Instance.$lightbox.transition(
-				{
-					property: "opacity"
-				},
-				function(e) {
-					// Clean up
-					Instance.$lightbox.off(Events.namespace);
-					Instance.$container.off(Events.namespace);
-					$Window.off(Events.namespace);
-					$Body.off(Events.namespace);
+			Instance.$lightbox.transition({
+				property: "opacity"
+			},
+			function(e) {
+				// Clean up
+				Instance.$lightbox.off(Events.namespace);
+				Instance.$container.off(Events.namespace);
+				$Window.off(Events.namespace);
+				$Body.off(Events.namespace);
 
-					Instance.$overlay.remove();
-					Instance.$lightbox.remove();
+				Instance.$overlay.remove();
+				Instance.$lightbox.remove();
 
-					// Reset Instance
-					Instance = null;
+				// Reset Instance
+				Instance = null;
 
-					$Window.trigger(Events.close);
-				}
-			).addClass(Classes.animating);
+				$Window.trigger(Events.close);
+			}).addClass(Classes.animating);
 
 			$Body.removeClass(Classes.open);
 
@@ -329,36 +325,30 @@
 			$Body.addClass(Classes.open);
 		}
 
-		Instance.$lightbox.transition(
-			{
-				property: "height"
+		Instance.$lightbox.transition({
+			property: "height"
+		},
+		function() {
+			Instance.$container.transition({
+				property: "opacity"
 			},
 			function() {
+				Instance.$lightbox.removeClass(Classes.animating);
+				Instance.isAnimating = false;
+			});
 
-				Instance.$container.transition(
-					{
-						property: "opacity"
-					},
-					function() {
-						Instance.$lightbox.removeClass(Classes.animating);
+			Instance.$lightbox.removeClass(Classes.loading);
 
-						Instance.isAnimating = false;
-					}
-				);
+			Instance.visible = true;
 
-				Instance.$lightbox.removeClass(Classes.loading);
+			// Fire open event
+			$Window.trigger(Events.open);
 
-				Instance.visible = true;
-
-				// Fire open event
-				$Window.trigger(Events.open);
-
-				// Start preloading
-				if (Instance.gallery.active) {
-					preloadGallery();
-				}
+			// Start preloading
+			if (Instance.gallery.active) {
+				preloadGallery();
 			}
-		);
+		});
 
 		if (!Instance.isMobile) {
 			Instance.$lightbox.css({
@@ -769,34 +759,32 @@
 				Instance.gallery.index = 0;
 			}
 
-			Instance.$container.transition(
-				{
-					property: "opacity"
-				},
-				function() {
-					if (typeof Instance.$image !== 'undefined') {
-						Instance.$image.remove();
-					}
-					if (typeof Instance.$videoWrapper !== 'undefined') {
-						Instance.$videoWrapper.remove();
-					}
-					Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
-
-					Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
-					Instance.$position.find( Functions.getClassName(Classes.position_current) ).html(Instance.gallery.index + 1);
-
-					var source = Instance.$el.attr("href"),
-						isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
-
-					if (isVideo) {
-						loadVideo(source);
-					} else {
-						loadImage(source);
-					}
-
-					updateGalleryControls();
+			Instance.$container.transition({
+				property: "opacity"
+			},
+			function() {
+				if (typeof Instance.$image !== 'undefined') {
+					Instance.$image.remove();
 				}
-			);
+				if (typeof Instance.$videoWrapper !== 'undefined') {
+					Instance.$videoWrapper.remove();
+				}
+				Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+
+				Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+				Instance.$position.find( Functions.getClassName(Classes.position_current) ).html(Instance.gallery.index + 1);
+
+				var source = Instance.$el.attr("href"),
+					isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
+
+				if (isVideo) {
+					loadVideo(source);
+				} else {
+					loadImage(source);
+				}
+
+				updateGalleryControls();
+			});
 
 			Instance.$lightbox.addClass( [Classes.loading, Classes.animating].join(" "));
 		}

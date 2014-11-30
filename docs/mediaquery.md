@@ -6,7 +6,7 @@ A jQuery plugin for responsive media query events.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
-
+<br class="nav">
 
 ## Use 
 ### Basic

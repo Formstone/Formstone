@@ -92,7 +92,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	 * @description Builds a plugin and registers it with jQuery.
 	 * @param namespace [string] "Plugin namespace"
 	 * @param settings [object] "Plugin settings"
-	 * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions` and `methods` keys"
+	 * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions`, `methods` and `utilities` keys"
 	 * @example Formstone.Plugin("namespace", { ... });
 	 */
 
@@ -207,9 +207,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @return [int] "Timer ID"
 			 */
 
-			function startTimer(timer, time, callback) {
+			function startTimer(timer, time, callback, interval) {
 				clearTimer(timer);
-				return setTimeout(callback, time);
+
+				return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
 			}
 
 			/**
@@ -219,9 +220,14 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @param timer [int] "Timer ID"
 			 */
 
-			function clearTimer(timer) {
+			function clearTimer(timer, interval) {
 				if (timer) {
-					clearTimeout(timer);
+					if (interval) {
+						clearInterval(timer);
+					} else {
+						clearTimeout(timer);
+					}
+
 					timer = null;
 				}
 			}
@@ -241,9 +247,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			/**
 			 * @method private
 			 * @name iterate
-			 * @description Loops scoped function calls over jQuery set with instance data as first parameter.
+			 * @description Loops scoped function calls over jQuery object with instance data as first parameter.
 			 * @param func [function] "Function to execute"
-			 * @return [jQuery] "jQuery set"
+			 * @return [jQuery] "jQuery object"
 			 */
 
 			function iterate(func) {
@@ -266,7 +272,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @name delegateWidget
 			 * @description Delegates public methods.
 			 * @param method [string] "Method to execute"
-			 * @return [jQuery] "jQuery set"
+			 * @return [jQuery] "jQuery object"
 			 */
 
 			function delegateWidget(method) {
@@ -442,9 +448,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		return _props;
 	}
 
-	// Get Transition Event
+	// Set Transition Information
 
-	function getTransitionEvent() {
+	function setTransitionInformation() {
 		var transitions = {
 				"transition"          : "transitionend",
 				"MozTransition"       : "transitionend",
@@ -452,16 +458,30 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				"WebkitTransition"    : "webkitTransitionEnd"
 			},
 			event = "transitionend",
-			test = document.createElement("div");
+			properties = [
+				"-webkit-transition",
+				"transition"
+			],
+			property = "transitionend",
+			test = document.createElement("div"),
+			i;
 
-		for (var i in transitions) {
+		for (i in transitions) {
 			if (transitions.hasOwnProperty(i) && i in test.style) {
 				event = transitions[i];
 				Formstone.support.transition = true;
 			}
 		}
 
-		return event;
+		Events.transitionEnd = event + ".{ns}";
+
+		for (i in properties) {
+			if (properties.hasOwnProperty(i) && i in test.style) {
+				property = properties[i];
+			}
+		}
+
+		Formstone.transitionProperty = property;
 	}
 
 	// Document Ready
@@ -472,8 +492,11 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	// Custom Events
 
-	Events.transitionEnd       = getTransitionEvent() + ".{ns}";
 	Events.clickTouchStart     = Events.click + " " + Events.touchStart;
+
+	// Transitions
+
+	setTransitionInformation();
 
 	return Formstone;
 

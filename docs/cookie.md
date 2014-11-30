@@ -5,7 +5,7 @@ A jQuery plugin for simple access to browser cookies.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
-
+<br class="nav">
 
 ## Use 
 ### Basic

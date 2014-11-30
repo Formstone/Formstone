@@ -7,23 +7,32 @@
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance Data"
-	 * @param opions [object] "Instance options"
+	 * @param callback [object] "Function to call"
 	 */
 
 	function construct(data, callback) {
-		// Target child element, for delegation
+		if (callback) {
+			// Target child element, for event delegation
 
-		data.$target = data.$el.find(data.target);
-		data.callback = callback;
+			data.$target     = this.find(data.target);
+			data.$check      = data.target ? data.$target : this;
+			data.callback    = callback;
+			data.styles      = getStyles(data.$check);
+			data.timer       = null;
 
-		if (Formstone.support.transition) {
-			// If supported
+			var duration = data.$check.css( Formstone.transitionProperty + "-duration" );
 
-			this.on(Events.transitionEnd, data, onTranistionEnd);
-		} else {
-			// Otherwise, resolve
+			if (Formstone.support.transition && duration && parseFloat(duration)) {
+				// If transitions supported and active
 
-			resolve(data);
+				this.on(Events.transitionEnd, data, onTranistionEnd);
+			} else {
+				// Otherwise, watch for changes in properties
+
+				data.timer = Functions.startTimer(data.timer, 50, function() {
+					checkStyles(data);
+				}, true);
+			}
 		}
 	}
 
@@ -71,14 +80,98 @@
 
 	function resolve(data) {
 		if (!data.always) {
-			// Unbind events, similiar to .one()
+			// Unbind events, clear timers, similiar to .one()
 
-			data.$el.off(Events.transitionEnd)[Plugin.namespace]("destroy"); // clean up old data?
+			Functions.clearTimer(data.timer, true);
+
+			data.$el[Plugin.namespace]("destroy"); // clean up old data?
 		}
 
 		// fire callback
 
 		data.callback.apply(data.$el);
+	}
+
+	/**
+	 * @method private
+	 * @name checkStyles
+	 * @description Compares current CSS to previous styles.
+	 * @param data [object] "Instance data"
+	 */
+
+	function checkStyles(data) {
+		var styles = getStyles(data.$check);
+
+		if (!isEqual(data.styles, styles)) {
+			resolve(data);
+		}
+
+		data.styles = styles;
+	}
+
+	/**
+	 * @method private
+	 * @name getStyles
+	 * @description Returns element's styles
+	 * @param el [DOM] "Element to check"
+	 */
+
+	function getStyles(el) {
+		var computed,
+			styles = {},
+			prop,
+			val;
+
+		if (el instanceof $) {
+			el = el[0];
+		}
+
+		if (window.getComputedStyle) {
+			// FireFox, Chrome, Safari
+
+			computed = window.getComputedStyle(el, null);
+
+			for (var i = 0, count = computed.length; i < count; i++) {
+				prop = computed[i];
+				val = computed.getPropertyValue(prop);
+
+				styles[prop] = val;
+			}
+		} else if (el.currentStyle) {
+			// IE, Opera
+
+			computed = el.currentStyle;
+
+			for (prop in computed) {
+				if (computed.hasOwnProperty(computed)) {
+					styles[prop] = computed[prop];
+				}
+			}
+		}
+
+		return styles;
+	}
+
+	/**
+	 * @method private
+	 * @name isEqual
+	 * @description Compares two obejcts.
+	 * @param a [object] "Object to compare"
+	 * @param b [object] "Object to compare"
+	 */
+
+	function isEqual(a, b) {
+		if ($.type(a) !== $.type(b)) {
+			return false;
+		}
+
+		for (var i in a) {
+			if ( !(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i]) ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	/**
@@ -113,8 +206,8 @@
 
 		// Localize References
 
-		Events        = Plugin.events,
-		Functions     = Plugin.functions,
+		Events       = Plugin.events,
+		Functions    = Plugin.functions,
 
 		// Local
 
@@ -130,10 +223,8 @@
 Transition provides a predicatable interface for moving to CSS based animations:
 
 ```
-$(".target").transition({
-	complete: function() {
-		...
-	}
+$(".target").transition(function() {
+	...
 }).addClass("visible");
 ```
 

@@ -23,9 +23,9 @@
         	<script src="http://formstone.it/js/site.ie9.js"></script>
 		<![endif]-->
 
-		<script src="../dist/core.js"></script>
+		<script src="../dist/js/core.js"></script>
 
-		<script src="../dist/widget/transition.js"></script>
+		<script src="../dist/js/transition.js"></script>
 
 		<!--[DEMO:START-RESOURCES]-->
 
@@ -41,8 +41,12 @@
 				background: blue;
 				margin-left: 0;
 
+				-webkit-transition: none;
+						transition: none;
+
 				-webkit-transition: margin 0.5s ease, background 0.5s linear 0.5s;
 						transition: margin 0.5s ease, background 0.5s linear 0.5s;
+
 			}
 
 			.transit.move {
@@ -58,29 +62,26 @@
 			$(document).ready(function() {
 
 				$(".transit_1").transition({
-					always: true,
-					complete: function() {
-						console.log("FINISHED 1!");
+					always: true
+				}, function() {
+					console.log("FINISHED 1!");
 
-						$(this).removeClass("animating");
-					}
+					$(this).removeClass("animating");
 				});
 
 				$(".transit_parent").transition({
 					always: true,
 					target: ".transit",
-					complete: function() {
-						console.log("FINISHED 2!");
+				}, function() {
+					console.log("FINISHED 2!");
 
-						$(this).find(".transit").removeClass("animating");
-					}
+					$(this).find(".transit").removeClass("animating");
 				});
 
 				$(".transit_3").transition({
 					property: "background-color",
-					complete: function() {
-						console.log("FINISHED 3!");
-					}
+				}, function() {
+					console.log("FINISHED 3!");
 				});
 
 				$(".button.trigger").on("click", function() {

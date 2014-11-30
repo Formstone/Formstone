@@ -4,7 +4,7 @@ Library core.
 
 * [Use](#use)
 * [Methods](#methods)
-
+<br class="nav">
 
 ## Use 
 ### Formstone Object

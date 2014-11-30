@@ -6,7 +6,7 @@ A jQuery plugin for simple tooltips.
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
-
+<br class="nav">
 
 ## Use 
 ### Basic
