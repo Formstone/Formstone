@@ -330,7 +330,7 @@
 	/**
 	 * @method private
 	 * @name pythagorus
-	 * @description Pythagorean theorem
+	 * @description Pythagorean theorem.
 	 * @param a [float] "Value 1"
 	 * @param b [float] "Value 2"
 	 */
@@ -342,7 +342,7 @@
 	/**
 	 * @method private
 	 * @name touchAction
-	 * @description Set ms touch action on target
+	 * @description Set ms touch action on target.
 	 * @param action [string] "Touch action value"
 	 */
 
@@ -360,7 +360,7 @@
 	 * @type widget
 	 */
 
-	var legacyPointer = !(window.PointerEvent),
+	var legacyPointer = !(Formstone.window.PointerEvent),
 		Plugin = Formstone.Plugin("touch", {
 			widget: true,
 

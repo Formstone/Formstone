@@ -45,6 +45,7 @@
         "site/bower/jquery/dist/jquery.min.js",
         "dist/js/core.js",
         "dist/js/cookie.js",
+        "dist/js/dropdown.js",
         "dist/js/lightbox.js",
         "dist/js/mediaquery.js",
         "dist/js/navigation.js",

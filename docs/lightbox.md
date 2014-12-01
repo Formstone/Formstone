@@ -46,7 +46,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 ### close
 
-Closes active instance of plugin
+Closes active instance.
 
 ```
 $.lightbox("close");
@@ -76,7 +76,7 @@ $(".target").lightbox("destroy");
 
 ### resize
 
-Triggers resize of instance
+Resizes lightbox.
 
 ```
 $.lightbox("resize");
@@ -88,6 +88,12 @@ $.lightbox("resize");
 | --- | --- | --- | --- |
 | height | int | false |  | Target height or false to auto size |
 | width | int | false |  | Target width or false to auto size |
+
+### resizeLightbox
+
+Triggers resize of instance.
+
+
 
 ## CSS
 

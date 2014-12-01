@@ -83,11 +83,11 @@
 		var html = '';
 
 		html += '<div class="';
-		html += [Classes.base, Classes[data.direction] ].join(" ");
+		html += [RawClasses.base, RawClasses[data.direction] ].join(" ");
 		html += '">';
-		html += '<div class="' + Classes.content + '">';
+		html += '<div class="' + RawClasses.content + '">';
 		html += data.formatter.call(data.$el, data);
-		html += '<span class="' + Classes.caret + '"></span>';
+		html += '<span class="' + RawClasses.caret + '"></span>';
 		html += '</div>';
 		html += '</div>';
 
@@ -98,8 +98,8 @@
 
 		Formstone.$body.append(Instance.$tooltip);
 
-		var $content = Instance.$tooltip.find( Functions.getClassName(Classes.content) ),
-			$caret   = Instance.$tooltip.find( Functions.getClassName(Classes.caret) ),
+		var $content = Instance.$tooltip.find(Classes.content),
+			$caret   = Instance.$tooltip.find(Classes.caret),
 
 			offset = data.$el.offset(),
 			height = data.$el.outerHeight(),
@@ -195,7 +195,7 @@
 		}
 
 		data.timer = Functions.startTimer(data.timer, data.delay, function() {
-			Instance.$tooltip.addClass(Classes.visible);
+			Instance.$tooltip.addClass(RawClasses.visible);
 		});
 
 		data.$el.one(Events.mouseLeave, data, onMouseLeave);
@@ -291,9 +291,10 @@
 
 		// Localize References
 
-		Classes      = Plugin.classes,
-		Events       = Plugin.events,
-		Functions    = Plugin.functions,
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
 
 		// Singleton
 

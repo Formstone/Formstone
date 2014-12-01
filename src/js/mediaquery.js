@@ -154,7 +154,7 @@
 	 */
 
 	function createKey(text) {
-		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
 	}
 
 	/**
@@ -271,7 +271,6 @@
 
 		// Internal
 
-		Initialized    = false,
 		State          = null,
 		Bindings       = [],
 		MQMatches      = {},

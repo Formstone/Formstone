@@ -112,7 +112,7 @@
 	/**
 	 * @method private
 	 * @name getStyles
-	 * @description Returns element's styles
+	 * @description Returns element's styles.
 	 * @param el [DOM] "Element to check"
 	 */
 
@@ -126,10 +126,10 @@
 			el = el[0];
 		}
 
-		if (window.getComputedStyle) {
+		if (Window.getComputedStyle) {
 			// FireFox, Chrome, Safari
 
-			computed = window.getComputedStyle(el, null);
+			computed = Window.getComputedStyle(el, null);
 
 			for (var i = 0, count = computed.length; i < count; i++) {
 				prop = computed[i];
@@ -209,9 +209,7 @@
 		Events       = Plugin.events,
 		Functions    = Plugin.functions,
 
-		// Local
-
-		$Window = Formstone.$window;
+		Window       = Formstone.window;
 
 })(jQuery, Formstone);
 

@@ -16,7 +16,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			// Globals
 
+			this.window               = window;
 			this.$window              = $(window);
+			this.document             = document;
 			this.$document            = $(document);
 			this.$body                = null;
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
@@ -139,7 +141,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Cache Instance
 
-						$element.addClass(settings.classes.element)
+						$element.addClass(settings.classes.raw.element)
 						        .data(namespaceDash, data);
 					}
 
@@ -165,7 +167,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			function destroy(data) {
 				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
-				this.removeClass(settings.classes.element)
+				this.removeClass(settings.classes.raw.element)
 					.removeData(namespaceDash);
 			}
 
@@ -230,18 +232,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 					timer = null;
 				}
-			}
-
-			/**
-			 * @method private
-			 * @name getClassName
-			 * @description Creates class selector from text.
-			 * @param text [string] "Text to convert"
-			 * @return [string] "Class selector"
-			 */
-
-			function getClassName(text) {
-				return "." + text;
 			}
 
 			/**
@@ -349,7 +339,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				getData         : getData,
 				startTimer      : startTimer,
 				clearTimer      : clearTimer,
-				getClassName    : getClassName,
 				killEvent       : killEvent,
 				iterate         : iterate
 			}, settings.functions);
@@ -421,7 +410,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Namespace Properties
 
 	function namespaceProperties(type, namespace, globalProps, customProps) {
-		var _props = {},
+		var _props = { raw: {} },
 			i;
 
 		customProps = customProps || {};
@@ -429,19 +418,30 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		for (i in customProps) {
 			if (customProps.hasOwnProperty(i)) {
 				if (type === "classes") {
+
 					// Custom classes
-					_props[ customProps[i] ] = namespace + "-" + customProps[i];
+					_props.raw[ customProps[i] ] = namespace + "-" + customProps[i];
+					_props[ customProps[i] ]     = "." + namespace + "-" + customProps[i];
 				} else {
 					// Custom events
-					_props[ i ] = customProps[i] + "." + namespace;
+					_props.raw[ i ] = customProps[i];
+					_props[ i ]     = customProps[i] + "." + namespace;
 				}
 			}
 		}
 
 		for (i in globalProps) {
 			if (globalProps.hasOwnProperty(i)) {
-				// From Globals
-				_props[ i ] = globalProps[i].replace(/{ns}/g, namespace);
+				if (type === "classes") {
+
+					// Global classes
+					_props.raw[ i ] = globalProps[i].replace(/{ns}/g, namespace);
+					_props[ i ]     = globalProps[i].replace(/{ns}/g, "." + namespace);
+				} else {
+					// Global events
+					_props.raw[ i ] = globalProps[i].replace(/.{ns}/g, "");
+					_props[ i ]     = globalProps[i].replace(/{ns}/g, namespace);
+				}
 			}
 		}
 
@@ -462,7 +462,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				"-webkit-transition",
 				"transition"
 			],
-			property = "transitionend",
+			property = "",
 			test = document.createElement("div"),
 			i;
 
@@ -492,7 +492,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	// Custom Events
 
-	Events.clickTouchStart     = Events.click + " " + Events.touchStart;
+	Events.clickTouchStart = Events.click + " " + Events.touchStart;
 
 	// Transitions
 
@@ -513,7 +513,9 @@ The Formstone core is a dependency of all javascript based components and will c
 | Key | Type | Description |
 | --- | --- | --- |
 | $window | object | Reference to jQuery wrapped window |
+| window | object | Reference to original window |
 | $document | object | Reference to jQuery wrapped document |
+| document | object | Reference to original document |
 | $body | object | Reference to jQuery wrapped body tag |
 | Plugins | object | Contains all registered plugins |
 | support.file | boolean | File API support |

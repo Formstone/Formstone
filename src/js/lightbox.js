@@ -1,4 +1,5 @@
-;(function ($, window) {
+;(function ($, Formstone, undefined) {
+
 	"use strict";
 
 	/**
@@ -39,7 +40,7 @@
 
 			// Emulate event
 
-			buildLightbox.apply($Window[0], [{ data: $.extend({}, {
+			buildLightbox.apply(Window, [{ data: $.extend({}, {
 				$object: $target
 			}, Defaults, options || {}) }]);
 		}
@@ -62,7 +63,7 @@
 				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
 				sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
 				extension      = sourceParts[0],
-				type           = ($el) ? $el.data(Classes.namespace + "-type") : "",
+				type           = ($el) ? $el.data(Classes.raw.namespace + "-type") : "",
 				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
 				isVideo	       = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
 				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
@@ -122,44 +123,51 @@
 			// Assemble HTML
 			var html = '';
 			if (!Instance.isMobile) {
-				html += '<div class="' + [Classes.overlay, Instance.customClass].join(" ") + '"></div>';
+				html += '<div class="' + [Classes.raw.overlay, Instance.customClass].join(" ") + '"></div>';
 			}
-			html += '<div class="' + [Classes.base, Classes.loading, Classes.animating, Instance.customClass].join(" ");
+			var lightboxClasses = [
+				Classes.raw.base,
+				Classes.raw.loading,
+				Classes.raw.animating,
+				Instance.customClass
+			];
+
 			if (Instance.fixed) {
-				html += Classes.fixed;
+				lightboxClasses.push(Classes.raw.fixed);
 			}
 			if (Instance.isMobile) {
-				html += Classes.mobile;
+				lightboxClasses.push(Classes.raw.mobile);
 			}
 			if (isUrl) {
-				html += Classes.iframed;
+				lightboxClasses.push(Classes.raw.iframed);
 			}
 			if (isElement || isObject) {
-				html += Classes.inline;
+				lightboxClasses.push(Classes.raw.inline);
 			}
-			html += '">';
-			html += '<span class="' + Classes.close + '">' + Instance.labels.close + '</span>';
-			html += '<span class="' + Classes.loading_icon + '"></span>';
-			html += '<div class="' + Classes.container + '">';
-			html += '<div class="' + Classes.content + '">';
+
+			html += '<div class="' + lightboxClasses.join(" ") + '">';
+			html += '<span class="' + Classes.raw.close + '">' + Instance.labels.close + '</span>';
+			html += '<span class="' + Classes.raw.loading_icon + '"></span>';
+			html += '<div class="' + Classes.raw.container + '">';
+			html += '<div class="' + Classes.raw.content + '">';
 			if (isImage || isVideo) {
-				html += '<div class="' + Classes.meta + '">';
+				html += '<div class="' + Classes.raw.meta + '">';
 
 				if (Instance.gallery.active) {
-					html += '<div class="' + [Classes.control, Classes.control_previous].join(" ") + '">' + Instance.labels.previous + '</div>';
-					html += '<div class="' + [Classes.control, Classes.control_next].join(" ") + '">' + Instance.labels.next + '</div>';
-					html += '<p class="' + Classes.position + '"';
+					html += '<div class="' + [Classes.raw.control, Classes.raw.control_previous].join(" ") + '">' + Instance.labels.previous + '</div>';
+					html += '<div class="' + [Classes.raw.control, Classes.raw.control_next].join(" ") + '">' + Instance.labels.next + '</div>';
+					html += '<p class="' + Classes.raw.position + '"';
 					if (Instance.gallery.total < 1) {
 						html += ' style="display: none;"';
 					}
 					html += '>';
-					html += '<span class="' + Classes.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
+					html += '<span class="' + Classes.raw.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
 					html += Instance.labels.count;
-					html += ' <span class="' + Classes.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
+					html += ' <span class="' + Classes.raw.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
 					html += '</p>';
 				}
 
-				html += '<div class="' + Classes.caption + '">';
+				html += '<div class="' + Classes.raw.caption + '">';
 				html += Instance.formatter.call($el, data);
 				html += '</div></div>'; // caption, meta
 			}
@@ -169,20 +177,20 @@
 			$Body.append(html);
 
 			// Cache jquery objects
-			Instance.$overlay          = $( Functions.getClassName(Classes.overlay) );
-			Instance.$lightbox         = $( Functions.getClassName(Classes.base) );
-			Instance.$close            = $( Functions.getClassName(Classes.close) );
-			Instance.$container        = $( Functions.getClassName(Classes.container) );
-			Instance.$content          = $( Functions.getClassName(Classes.content) );
-			Instance.$meta             = $( Functions.getClassName(Classes.meta) );
-			Instance.$position         = $( Functions.getClassName(Classes.position) );
-			Instance.$caption          = $( Functions.getClassName(Classes.caption) );
-			Instance.$controls         = $( Functions.getClassName(Classes.control) );
+			Instance.$overlay          = $(Classes.overlay);
+			Instance.$lightbox         = $(Classes.base);
+			Instance.$close            = $(Classes.close);
+			Instance.$container        = $(Classes.container);
+			Instance.$content          = $(Classes.content);
+			Instance.$meta             = $(Classes.meta);
+			Instance.$position         = $(Classes.position);
+			Instance.$caption          = $(Classes.caption);
+			Instance.$controls         = $(Classes.control);
 
-			Instance.paddingVertical   = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingTop"), 10) + parseInt(Instance.$lightbox.css("paddingBottom"), 10)) : (Instance.$close.outerHeight() / 2);
-			Instance.paddingHorizontal = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10)) : 0;
+			Instance.paddingVertical   = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingTop"), 10)  + parseInt(Instance.$lightbox.css("paddingBottom"), 10)) : (Instance.$close.outerHeight() / 2);
+			Instance.paddingHorizontal = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10))  : 0;
 			Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
-			Instance.contentWidth      = Instance.$lightbox.outerWidth()   - Instance.paddingHorizontal;
+			Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
 			Instance.controlHeight     = Instance.$controls.outerHeight();
 
 			// Center
@@ -194,14 +202,14 @@
 			}
 
 			// Bind events
-			$Window.on(Events.resize, resize)
+			$Window.on(Events.resize, resizeLightbox)
 				   .on(Events.keyDown, onKeyDown);
 
-			$Body.on(Events.clickTouchStart, [ Functions.getClassName(Classes.overlay), Functions.getClassName(Classes.close) ].join(", "), closeLightbox)
+			$Body.on(Events.clickTouchStart, [Classes.overlay, Classes.close].join(", "), closeLightbox)
 				 .on(Events.touchMove, Functions.killEvent);
 
 			if (Instance.gallery.active) {
-				Instance.$lightbox.on(Events.clickTouchStart, Functions.getClassName(Classes.control), advanceGallery);
+				Instance.$lightbox.on(Events.clickTouchStart, Classes.control, advanceGallery);
 			}
 
 			Instance.$lightbox.transition({
@@ -218,37 +226,29 @@
 					cloneElement(source);
 				} else if (isObject) {
 					appendObject(Instance.$object);
-				} else {
-					//$.error("Lightbox: '" +  source + "' is not valid.");
 				}
 			});
 
-			$Body.addClass(Classes.open);
+			$Body.addClass(Classes.raw.open);
 		}
 	}
 
 	/**
 	 * @method
-	 * @name close
-	 * @description Closes active instance of plugin
-	 * @example $.lightbox("close");
-	 */
-
-	function close(data) {
-		Instance.$lightbox.off(Events.namespace);
-		Instance.$overlay.trigger(Events.click);
-	}
-
-	/**
-	 * @method
 	 * @name resize
-	 * @description Triggers resize of instance
+	 * @description Resizes lightbox.
 	 * @example $.lightbox("resize");
 	 * @param height [int | false] "Target height or false to auto size"
 	 * @param width [int | false] "Target width or false to auto size"
 	 */
 
-	function resize(e) {
+	/**
+	 * @method
+	 * @name resizeLightbox
+	 * @description Triggers resize of instance.
+	 */
+
+	function resizeLightbox(e) {
 		if (typeof e !== "object") {
 			Instance.targetHeight = arguments[0];
 			Instance.targetWidth  = arguments[1];
@@ -262,13 +262,20 @@
 			sizeVideo();
 		}
 
-		size();
+		sizeLightbox();
 	}
+
+	/**
+	 * @method
+	 * @name close
+	 * @description Closes active instance.
+	 * @example $.lightbox("close");
+	 */
 
 	/**
 	 * @method private
 	 * @name closeLightbox
-	 * @description Closes active instance
+	 * @description Closes active instance.
 	 * @param e [object] "Event data"
 	 */
 
@@ -293,9 +300,9 @@
 				Instance = null;
 
 				$Window.trigger(Events.close);
-			}).addClass(Classes.animating);
+			}).addClass(Classes.raw.animating);
 
-			$Body.removeClass(Classes.open);
+			$Body.removeClass(Classes.raw.open);
 
 			Functions.clearTimer(Instance.resizeTimer);
 		}
@@ -303,8 +310,8 @@
 
 	/**
 	 * @method private
-	 * @name open
-	 * @description Opens active instance
+	 * @name openLightbox
+	 * @description Opens active instance.
 	 */
 
 	function openLightbox() {
@@ -318,11 +325,11 @@
 		}
 
 		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
-			Instance.$content.on(Events.touchStart, Functions.getClassName(Classes.image), onTouchStart);
+			Instance.$content.on(Events.touchStart, Classes.image, onTouchStart);
 		}
 
 		if (Instance.isMobile || Instance.fixed) {
-			$Body.addClass(Classes.open);
+			$Body.addClass(Classes.raw.open);
 		}
 
 		Instance.$lightbox.transition({
@@ -333,11 +340,11 @@
 				property: "opacity"
 			},
 			function() {
-				Instance.$lightbox.removeClass(Classes.animating);
+				Instance.$lightbox.removeClass(Classes.raw.animating);
 				Instance.isAnimating = false;
 			});
 
-			Instance.$lightbox.removeClass(Classes.loading);
+			Instance.$lightbox.removeClass(Classes.raw.loading);
 
 			Instance.visible = true;
 
@@ -372,11 +379,11 @@
 
 	/**
 	 * @method private
-	 * @name size
-	 * @description Sizes active instance
+	 * @name sizeLightbox
+	 * @description Sizes active instance.
 	 */
 
-	function size() {
+	function sizeLightbox() {
 		if (Instance.visible && !Instance.isMobile) {
 			var position = calculatePosition();
 
@@ -395,7 +402,7 @@
 	/**
 	 * @method private
 	 * @name centerLightbox
-	 * @description Centers instance
+	 * @description Centers instance.
 	 */
 
 	function centerLightbox() {
@@ -409,7 +416,7 @@
 	/**
 	 * @method private
 	 * @name calculatePosition
-	 * @description Calculates positions
+	 * @description Calculates positions.
 	 * @return [object] "Object containing top and left positions"
 	 */
 
@@ -436,7 +443,7 @@
 	/**
 	 * @method private
 	 * @name formatCaption
-	 * @description Formats caption
+	 * @description Formats caption.
 	 * @param $target [jQuery object] "Target element"
 	 */
 
@@ -448,7 +455,7 @@
 	/**
 	 * @method private
 	 * @name loadImage
-	 * @description Loads source image
+	 * @description Loads source image.
 	 * @param source [string] "Source image URL"
 	 */
 
@@ -482,7 +489,7 @@
 
 		}).error(loadError)
 		  .attr("src", source)
-		  .addClass(Classes.image);
+		  .addClass(Classes.raw.image);
 
 		// If image has already loaded into cache, trigger load event
 		if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
@@ -493,7 +500,7 @@
 	/**
 	 * @method private
 	 * @name sizeImage
-	 * @description Sizes image to fit in viewport
+	 * @description Sizes image to fit in viewport.
 	 * @param count [int] "Number of resize attempts"
 	 */
 
@@ -583,7 +590,7 @@
 	/**
 	 * @method private
 	 * @name fitImage
-	 * @description Calculates target image size
+	 * @description Calculates target image size.
 	 */
 
 	function fitImage() {
@@ -631,16 +638,16 @@
 	/**
 	 * @method private
 	 * @name loadVideo
-	 * @description Loads source video
+	 * @description Loads source video.
 	 * @param source [string] "Source video URL"
 	 */
 
 	function loadVideo(source) {
-		Instance.$videoWrapper = $('<div class="' + Classes.videoWrapper + '"></div>');
-		Instance.$video = $('<iframe class="' + Classes.video + '" seamless="seamless"></iframe>');
+		Instance.$videoWrapper = $('<div class="' + Classes.raw.videoWrapper + '"></div>');
+		Instance.$video = $('<iframe class="' + Classes.raw.video + '" seamless="seamless"></iframe>');
 
 		Instance.$video.attr("src", source)
-				   .addClass(Classes.video)
+				   .addClass(Classes.raw.video)
 				   .prependTo(Instance.$videoWrapper);
 
 		Instance.$content.prepend(Instance.$videoWrapper);
@@ -652,7 +659,7 @@
 	/**
 	 * @method private
 	 * @name sizeVideo
-	 * @description Sizes video to fit in viewport
+	 * @description Sizes video to fit in viewport.
 	 */
 
 	function sizeVideo() {
@@ -715,7 +722,7 @@
 	/**
 	 * @method private
 	 * @name preloadGallery
-	 * @description Preloads previous and next images in gallery for faster rendering
+	 * @description Preloads previous and next images in gallery for faster rendering.
 	 * @param e [object] "Event Data"
 	 */
 
@@ -739,7 +746,7 @@
 	/**
 	 * @method private
 	 * @name advanceGallery
-	 * @description Advances gallery base on direction
+	 * @description Advances gallery base on direction.
 	 * @param e [object] "Event Data"
 	 */
 
@@ -748,16 +755,18 @@
 
 		var $control = $(e.currentTarget);
 
-		if (!Instance.isAnimating && !$control.hasClass(Classes.control_disabled)) {
+		if (!Instance.isAnimating && !$control.hasClass(Classes.raw.control_disabled)) {
 			Instance.isAnimating = true;
 
-			Instance.gallery.index += ($control.hasClass(Classes.control_next)) ? 1 : -1;
+			Instance.gallery.index += ($control.hasClass(Classes.raw.control_next)) ? 1 : -1;
 			if (Instance.gallery.index > Instance.gallery.total) {
 				Instance.gallery.index = Instance.gallery.total;
 			}
 			if (Instance.gallery.index < 0) {
 				Instance.gallery.index = 0;
 			}
+
+			Instance.$lightbox.addClass( [Classes.raw.loading, Classes.raw.animating].join(" "));
 
 			Instance.$container.transition({
 				property: "opacity"
@@ -772,7 +781,7 @@
 				Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
 
 				Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
-				Instance.$position.find( Functions.getClassName(Classes.position_current) ).html(Instance.gallery.index + 1);
+				Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
 
 				var source = Instance.$el.attr("href"),
 					isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
@@ -785,31 +794,29 @@
 
 				updateGalleryControls();
 			});
-
-			Instance.$lightbox.addClass( [Classes.loading, Classes.animating].join(" "));
 		}
 	}
 
 	/**
 	 * @method private
 	 * @name updateGalleryControls
-	 * @description Updates gallery control states
+	 * @description Updates gallery control states.
 	 */
 
 	function updateGalleryControls() {
-		Instance.$controls.removeClass(Classes.control_disabled);
+		Instance.$controls.removeClass(Classes.raw.control_disabled);
 		if (Instance.gallery.index === 0) {
-			Instance.$controls.filter( Functions.getClassName(Classes.control_previous) ).addClass(Classes.control_disabled);
+			Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
 		}
 		if (Instance.gallery.index === Instance.gallery.total) {
-			Instance.$controls.filter( Functions.getClassName(Classes.control_next) ).addClass(Classes.control_disabled);
+			Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
 		}
 	}
 
 	/**
 	 * @method private
 	 * @name onKeyDown
-	 * @description Handles keypress in gallery
+	 * @description Handles keypress in gallery.
 	 * @param e [object] "Event data"
 	 */
 
@@ -817,7 +824,7 @@
 		if (Instance.gallery.active && (e.keyCode === 37 || e.keyCode === 39)) {
 			Functions.killEvent(e);
 
-			Instance.$controls.filter(Functions.getClassName((e.keyCode === 37) ? Classes.control_previous : Classes.control_next)).trigger(Events.click);
+			Instance.$controls.filter((e.keyCode === 37) ? Classes.control_previous : Classes.control_next).trigger(Events.click);
 		} else if (e.keyCode === 27) {
 			Instance.$close.trigger(Events.click);
 		}
@@ -826,7 +833,7 @@
 	/**
 	 * @method private
 	 * @name cloneElement
-	 * @description Clones target inline element
+	 * @description Clones target inline element.
 	 * @param id [string] "Target element id"
 	 */
 
@@ -838,20 +845,20 @@
 	/**
 	 * @method private
 	 * @name loadURL
-	 * @description Load URL into iframe
+	 * @description Load URL into iframe.
 	 * @param source [string] "Target URL"
 	 */
 
 	function loadURL(source) {
 		source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
-		var $iframe = $('<iframe class="' + Classes.iframe + '" src="' + source + '"></iframe>');
+		var $iframe = $('<iframe class="' + Classes.raw.iframe + '" src="' + source + '"></iframe>');
 		appendObject($iframe);
 	}
 
 	/**
 	 * @method private
 	 * @name appendObject
-	 * @description Appends and sizes object
+	 * @description Appends and sizes object.
 	 * @param $object [jQuery Object] "Object to append"
 	 */
 
@@ -864,7 +871,7 @@
 	/**
 	 * @method private
 	 * @name sizeContent
-	 * @description Sizes jQuery object to fir in viewport
+	 * @description Sizes jQuery object to fir in viewport.
 	 * @param $object [jQuery Object] "Object to size"
 	 */
 
@@ -900,12 +907,12 @@
 	/**
 	 * @method private
 	 * @name loadError
-	 * @description Error when resource fails to load
+	 * @description Error when resource fails to load.
 	 * @param e [object] "Event data"
 	 */
 
 	function loadError(e) {
-		var $error = $('<div class="' + Classes.error + '"><p>Error Loading Resource</p></div>');
+		var $error = $('<div class="' + Classes.raw.error + '"><p>Error Loading Resource</p></div>');
 
 		// Clean up
 		Instance.type = "element";
@@ -919,7 +926,7 @@
 	/**
 	 * @method private
 	 * @name onTouchStart
-	 * @description Handle touch start event
+	 * @description Handle touch start event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -951,7 +958,7 @@
 	/**
 	 * @method private
 	 * @name onTouchMove
-	 * @description Handles touchmove event
+	 * @description Handles touchmove event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -985,7 +992,7 @@
 	/**
 	 * @method private
 	 * @name onTouchEnd
-	 * @description Handles touchend event
+	 * @description Handles touchend event.
 	 * @param e [object] "Event data"
 	 */
 
@@ -996,7 +1003,7 @@
 		Instance.$lightbox.off( [Events.touchMove, Events.touchEnd].join("") );
 
 		if (Instance.delta) {
-			Instance.$lightbox.addClass(Classes.animating);
+			Instance.$lightbox.addClass(Classes.raw.animating);
 			Instance.swipe = false;
 
 			if (Instance.canSwipe && (Instance.delta > Instance.edge || Instance.delta < -Instance.edge)) {
@@ -1011,10 +1018,10 @@
 			}
 
 			if (Instance.swipe) {
-				Instance.$controls.filter(Functions.getClassName((Instance.delta <= Instance.leftPosition) ? Classes.control_previous : Classes.control_next)).trigger(Events.click);
+				Instance.$controls.filter((Instance.delta <= Instance.leftPosition) ? Classes.control_previous : Classes.control_next).trigger(Events.click);
 			}
 			Functions.startTimer(Instance.resetTimer, Instance.duration, function() {
-				Instance.$lightbox.removeClass(Classes.animating);
+				Instance.$lightbox.removeClass(Classes.raw.animating);
 			});
 		}
 	}
@@ -1022,7 +1029,7 @@
 	/**
 	 * @method private
 	 * @name calculateNaturalSize
-	 * @description Determines natural size of target image
+	 * @description Determines natural size of target image.
 	 * @param $img [jQuery object] "Source image object"
 	 * @return [object | boolean] "Object containing natural height and width values or false"
 	 */
@@ -1133,28 +1140,33 @@
 
 			methods: {
 				_construct    : construct,
-				_destruct     : destruct
+				_destruct     : destruct,
+
+				resize        : resizeLightbox
 			},
 
 			utilities: {
 				_initialize    : initialize,
-				close          : close
+
+				close          : closeLightbox
 			}
 		}),
 
 		// Localize References
 
-		Namespace    = Plugin.namespace,
-		Defaults     = Plugin.defaults,
-		Classes      = Plugin.classes,
-		Events       = Plugin.events,
-		Functions    = Plugin.functions,
-		$Window      = Formstone.$window,
-		$Body        = null,
+		Namespace     = Plugin.namespace,
+		Defaults      = Plugin.defaults,
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
+		Window        = Formstone.window,
+		$Window       = Formstone.$window,
+		$Body         = null,
 
 		// Singleton
 
-		Instance     = null;
+		Instance      = null;
 
 		/**
 		 * @events
@@ -1171,7 +1183,7 @@
 			$Body = Formstone.$body;
 		});
 
-})(jQuery, window);
+})(jQuery, Formstone);
 
 /**
  * @use

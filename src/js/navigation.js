@@ -13,11 +13,11 @@
 		data.enabled    = false;
 		data.open       = false;
 
-		this.addClass( [Classes.base, data.customClass].join(" ") )
-			.wrapInner('<div class="' + Classes.container + '"></div>');
+		this.addClass( [RawClasses.base, data.customClass].join(" ") )
+			.wrapInner('<div class="' + RawClasses.container + '"></div>');
 
-		data.$container    = this.find( Functions.getClassName(Classes.container) );
-		data.$handle       = (data.handle) ? $(data.handle).addClass(Classes.handle) : $('<span class="' + Classes.handle + '"></span>').prependTo(this);
+		data.$container    = this.find(Classes.container);
+		data.$handle       = (data.handle) ? $(data.handle).addClass(RawClasses.handle) : $('<span class="' + RawClasses.handle + '"></span>').prependTo(this);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
@@ -26,16 +26,17 @@
 		// Touch Support
 		data.$handle.touch({
 			tap: true
-		}).on(Events.tap, data, onClick);
+		}).on( [Events.tap, Events.click].join(" ") , data, onClick);
 
-		if (Formstone.support.matchMedia !== undefined) {
-			data.mediaQuery = Formstone.$window[0].matchMedia("(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")");
-			// Stay in context
-			data.mediaQuery.addListener(function() {
-				onRespond.call(data.$el, data);
-			});
-			onRespond.call(this, data);
-		}
+		// Media Query support
+		$.mediaquery("bind", "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")", {
+			enter: function() {
+				enable.call(data.$el, data);
+			},
+			leave: function() {
+				disable.call(data.$el, data);
+			}
+		});
 	}
 
 	/**
@@ -50,7 +51,7 @@
 		data.$container.contents()
 					   .unwrap();
 
-		this.removeClass( [Classes.base, Classes.enabled, Classes.open, data.customClass].join(" ") )
+		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.open, data.customClass].join(" ") )
 			.off(Events.namespace);
 	}
 
@@ -67,7 +68,7 @@
 				data.$handle.html(data.labels.open);
 			}
 
-			this.addClass(Classes.open)
+			this.addClass(RawClasses.open)
 				.trigger(Events.open);
 
 			data.open = true;
@@ -87,7 +88,7 @@
 				data.$handle.html(data.labels.closed);
 			}
 
-			this.removeClass(Classes.open)
+			this.removeClass(RawClasses.open)
 				.trigger(Events.close);
 
 			data.open = false;
@@ -103,7 +104,7 @@
 
 	function enable(data) {
 		if (!data.enabled) {
-			this.addClass(Classes.enabled);
+			this.addClass(RawClasses.enabled);
 			data.enabled = true;
 			data.open    = true; // trick close method
 
@@ -120,7 +121,7 @@
 
 	function disable(data) {
 		if (data.enabled) {
-			this.removeClass( [Classes.enabled, Classes.open].join(" ") );
+			this.removeClass( [RawClasses.enabled, RawClasses.open].join(" ") );
 			data.enabled = false;
 		}
 	}
@@ -138,26 +139,12 @@
 		var data = e.data;
 
 		// Close Open Instances
-		$( Functions.getClassName(Classes.base) ).not(data.$el)[Plugin.namespace]("close");
+		$(Classes.base).not(data.$el)[Plugin.namespace]("close");
 
 		if (data.open) {
 			close.call(data.$el, data);
 		} else {
 			open.call(data.$el, data);
-		}
-	}
-
-	/**
-	 * @method private
-	 * @name onRespond
-	 * @description Handles media query match change.
-	 */
-
-	function onRespond(data) {
-		if (data.mediaQuery.matches) {
-			enable.call(data.$el, data);
-		} else {
-			disable.call(data.$el, data);
 		}
 	}
 
@@ -218,13 +205,14 @@
 
 		// Localize References
 
-		Classes      = Plugin.classes,
-		Events       = Plugin.events,
-		Functions    = Plugin.functions,
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
 
 		// Singleton
 
-		Instance     = null;
+		Instance      = null;
 
 		/**
 		 * @events

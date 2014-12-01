@@ -13,28 +13,28 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			html += '<div class="' + Classes.dropzone + '">';
+			html += '<div class="' + RawClasses.dropzone + '">';
 			html += data.label;
 			html += '</div>';
-			html += '<input class="' + Classes.input + '" type="file"';
+			html += '<input class="' + RawClasses.input + '" type="file"';
 			if (data.maxQueue > 1) {
-				html += ' ' + Classes.multiple;
+				html += ' ' + RawClasses.multiple;
 			}
 			html += '>';
 
-			this.addClass(Classes.base)
+			this.addClass(RawClasses.base)
 				.append(html);
 
-			data.$input       = this.find( Functions.getClassName(Classes.input) );
+			data.$input       = this.find(Classes.input);
 			data.queue        = [];
 			data.total        = 0;
 			data.uploading    = false;
 
-			this.on(Events.click, Functions.getClassName(Classes.dropzone), data, onClick)
+			this.on(Events.click, Classes.dropzone, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
 				.on(Events.dragOver, data, onDragOver)
 				.on(Events.dragLeave, data, onDragOut)
-				.on(Events.drop, Functions.getClassName(Classes.dropzone), data, onDrop);
+				.on(Events.drop, Classes.dropzone, data, onDrop);
 
 			data.$input.on(Events.change, data, onChange);
 		}
@@ -52,7 +52,7 @@
 			data.$input.off(Events.namespace);
 
 			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )
-				.removeClass(Classes.base)
+				.removeClass(RawClasses.base)
 				.html("");
 		}
 	}
@@ -60,7 +60,7 @@
 	/**
 	 * @method private
 	 * @name onClick
-	 * @description Handles click to dropzone
+	 * @description Handles click to dropzone.
 	 * @param e [object] "Event data"
 	 */
 	function onClick(e) {
@@ -75,7 +75,7 @@
 	/**
 	 * @method private
 	 * @name onChange
-	 * @description Handles change to hidden input
+	 * @description Handles change to hidden input.
 	 * @param e [object] "Event data"
 	 */
 	function onChange(e) {
@@ -93,7 +93,7 @@
 	/**
 	 * @method private
 	 * @name onDragEnter
-	 * @description Handles dragenter to dropzone
+	 * @description Handles dragenter to dropzone.
 	 * @param e [object] "Event data"
 	 */
 	function onDragEnter(e) {
@@ -102,13 +102,13 @@
 
 		var data = e.data;
 
-		data.$el.addClass(Classes.dropping);
+		data.$el.addClass(RawClasses.dropping);
 	}
 
 	/**
 	 * @method private
 	 * @name onDragOver
-	 * @description Handles dragover to dropzone
+	 * @description Handles dragover to dropzone.
 	 * @param e [object] "Event data"
 	 */
 	function onDragOver(e) {
@@ -117,13 +117,13 @@
 
 		var data = e.data;
 
-		data.$el.addClass(Classes.dropping);
+		data.$el.addClass(RawClasses.dropping);
 	}
 
 	/**
 	 * @method private
 	 * @name onDragOut
-	 * @description Handles dragout to dropzone
+	 * @description Handles dragout to dropzone.
 	 * @param e [object] "Event data"
 	 */
 	function onDragOut(e) {
@@ -132,13 +132,13 @@
 
 		var data = e.data;
 
-		data.$el.removeClass(Classes.dropping);
+		data.$el.removeClass(RawClasses.dropping);
 	}
 
 	/**
 	 * @method private
 	 * @name onDrop
-	 * @description Handles drop to dropzone
+	 * @description Handles drop to dropzone.
 	 * @param e [object] "Event data"
 	 */
 	function onDrop(e) {
@@ -147,7 +147,7 @@
 		var data = e.data,
 			files = e.originalEvent.dataTransfer.files;
 
-		data.$el.removeClass(Classes.dropping);
+		data.$el.removeClass(RawClasses.dropping);
 
 		handleUpload(data, files);
 	}
@@ -155,7 +155,7 @@
 	/**
 	 * @method private
 	 * @name handleUpload
-	 * @description Handles new files
+	 * @description Handles new files.
 	 * @param data [object] "Instance data"
 	 * @param files [object] "File list"
 	 */
@@ -176,10 +176,10 @@
 
 			newFiles.push(file);
 			data.queue.push(file);
-	   }
+		}
 
-	   if (!data.uploading) {
-		   $(window).on(Events.beforeUnload, function(){
+		if (!data.uploading) {
+			$Window.on(Events.beforeUnload, function(){
 				return data.leave;
 			});
 
@@ -194,7 +194,7 @@
 	/**
 	 * @method private
 	 * @name checkQueue
-	 * @description Checks and updates file queue
+	 * @description Checks and updates file queue.
 	 * @param data [object] "Instance data"
 	 */
 	function checkQueue(data) {
@@ -237,7 +237,7 @@
 		}
 
 		if (transfering === 0) {
-			$(window).off(Events.beforeUnload);
+			$Window.off(Events.beforeUnload);
 
 			data.uploading = false;
 
@@ -248,7 +248,7 @@
 	/**
 	 * @method private
 	 * @name uploadFile
-	 * @description Uploads file
+	 * @description Uploads file.
 	 * @param data [object] "Instance data"
 	 * @param file [object] "Target file"
 	 * @param formData [object] "Target form"
@@ -354,9 +354,12 @@
 
 		// Localize References
 
-		Classes      = Plugin.classes,
-		Events       = Plugin.events,
-		Functions    = Plugin.functions;
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
+
+		$Window       = Formstone.$window;
 
 		/**
 		 * @events

@@ -14,7 +14,9 @@ The Formstone core is a dependency of all javascript based components and will c
 | Key | Type | Description |
 | --- | --- | --- |
 | $window | object | Reference to jQuery wrapped window |
+| window | object | Reference to original window |
 | $document | object | Reference to jQuery wrapped document |
+| document | object | Reference to original document |
 | $body | object | Reference to jQuery wrapped body tag |
 | Plugins | object | Contains all registered plugins |
 | support.file | boolean | File API support |
