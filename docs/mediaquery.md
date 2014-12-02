@@ -22,10 +22,10 @@ $.mediaquery({
 });
 ```
 
-After initializing, simply listen for the `change` event:
+After initializing, simply listen for the `mqchange` event:
 
 ```
-$(window).on("change", function(e, state) {
+$(window).on("mqchange", function(e, state) {
 	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
@@ -71,7 +71,7 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| change | Change to a media query match; Triggered on window |
+| mqchange | Change to a media query match; Triggered on window |
 
 ## Methods
 

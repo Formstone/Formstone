@@ -15,8 +15,8 @@
     minHeight    : [ 400, 800 ],
     maxHeight    : [ 800, 400 ]
 });</code></pre>
-<p>After initializing, simply listen for the <code>change</code> event:</p>
-<pre><code>$(window).on(&quot;change&quot;, function(e, state) {
+<p>After initializing, simply listen for the <code>mqchange</code> event:</p>
+<pre><code>$(window).on(&quot;mqchange&quot;, function(e, state) {
     console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });</code></pre>
 <p>Note: In the example above, the <code>change</code> event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the <code>min-width</code> and <code>max-width</code> changes.</p>
@@ -88,7 +88,7 @@
 </thead>
 <tbody>
 <tr>
-<td>change</td>
+<td>mqchange</td>
 <td>Change to a media query match; Triggered on window</td>
 </tr>
 </tbody>

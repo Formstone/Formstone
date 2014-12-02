@@ -94,7 +94,7 @@
 	function onStateChange() {
 		setState();
 
-		$Window.trigger(Events.change, [ State ]);
+		$Window.trigger(Events.mqChange, [ State ]);
 	}
 
 	/**
@@ -253,13 +253,13 @@
 
 		/**
 		 * @events
-		 * @event change "Change to a media query match; Triggered on window"
+		 * @event mqchange "Change to a media query match; Triggered on window"
 		 */
 
 		Events = {
-			change     : "change",
-			enter      : "enter",
-			leave      : "leave"
+			mqChange    : "mqchange",
+			enter       : "enter",
+			leave       : "leave"
 		},
 
 		// Public methods
@@ -299,10 +299,10 @@ $.mediaquery({
 });
 ```
 
-After initializing, simply listen for the `change` event:
+After initializing, simply listen for the `mqchange` event:
 
 ```
-$(window).on("change", function(e, state) {
+$(window).on("mqchange", function(e, state) {
 	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
