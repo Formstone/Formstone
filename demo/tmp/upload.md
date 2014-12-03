@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Upload"}
+
 # Upload
 
 A jQuery plugin for simple drag and drop uploads.

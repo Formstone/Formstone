@@ -2,6 +2,8 @@
   Site
 -------------------------------------------*/
 
+	/* global Prism */
+
 	// !IE
 	var IE8 = IE8 || false,
 		IE9 = IE9 || false;
@@ -23,6 +25,12 @@
 			$window = $(window);
 			$doc    = $(document);
 			$body   = $("body");
+
+			$("[class*=lang-]").each(function() {
+				$(this).addClass( $(this).attr("class").replace("lang-", "language-") );
+			});
+
+			Prism.highlightAll();
 		}
 
 		return {

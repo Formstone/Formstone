@@ -13,7 +13,7 @@ The grid works by nesting 'cells' within 'rows'. Cells are defined by classes th
 
 A basic example may look something like:
 
-```
+```markup
 <body class="grid">
 	<div class="row">
 		<div class="mobile-3 tablet-2 desktop-4">...</div>
@@ -43,7 +43,7 @@ grid
 
 Grid relies on border-box and includes a global box-sizing reset:
 
-```
+```css
 *,
 *:before,
 *:after {
@@ -76,19 +76,19 @@ This will effect every element on the page and can have unexpected results. In t
 
 Cells are defined by the target screen size and column count, relative to it's screen size. For example `mobile-2` will produce a cell spanning 2 of the 3 available columns in the mobile screen size range. Cell classes should be stacked to specify column spans across all screen sizes:
 
-```
+```markup
 <div class="mobile-3 tablet-6 desktop-12">...</div>
 ```
 
 The `max-X` and `min-X` classes adds level of control when targeting the desktop and mobile sizes. For example, a cell may need to span 2 columns at the larger mobile size, but span the full width at the smallest mobile size:
 
-```
+```markup
 <div class="min-3 mobile-2 ...">...</div>
 ```
 
 The `all-X` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cells):
 
-```
+```markup
 <div class="all-full ...">...</div>
 ```
 

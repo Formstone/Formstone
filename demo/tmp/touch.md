@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Touch"}
+
 # Touch
 
 A jQuery plugin for multi-touch events.

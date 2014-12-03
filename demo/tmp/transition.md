@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Transition"}
+
 # Transition
 
 A jQuery plugin for CSS transition events.

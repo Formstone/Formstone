@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Grid &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="grid">Grid</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Grid &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="grid">Grid</h1>
 <p>A responsive CSS grid.</p>
 <ul>
 <li><a href="#use">Use</a></li>
@@ -8,7 +8,7 @@
 <p>The grid works by nesting &#39;cells&#39; within &#39;rows&#39;. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.</p>
 <h3 id="markup">Markup</h3>
 <p>A basic example may look something like:</p>
-<pre><code>&lt;body class=&quot;grid&quot;&gt;
+<pre><code class="lang-markup">&lt;body class=&quot;grid&quot;&gt;
     &lt;div class=&quot;row&quot;&gt;
         &lt;div class=&quot;mobile-3 tablet-2 desktop-4&quot;&gt;...&lt;/div&gt;
         &lt;div class=&quot;mobile-3 tablet-2 desktop-4&quot;&gt;...&lt;/div&gt;
@@ -29,7 +29,7 @@
    └─ cell</code></pre>
 <h3 id="box-sizing">Box-Sizing</h3>
 <p>Grid relies on border-box and includes a global box-sizing reset:</p>
-<pre><code>*,
+<pre><code class="lang-css">*,
 *:before,
 *:after {
     box-sizing: border-box;
@@ -114,11 +114,11 @@
 </tbody>
 </table>
 <p>Cells are defined by the target screen size and column count, relative to it&#39;s screen size. For example <code>mobile-2</code> will produce a cell spanning 2 of the 3 available columns in the mobile screen size range. Cell classes should be stacked to specify column spans across all screen sizes:</p>
-<pre><code>&lt;div class=&quot;mobile-3 tablet-6 desktop-12&quot;&gt;...&lt;/div&gt;</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;mobile-3 tablet-6 desktop-12&quot;&gt;...&lt;/div&gt;</code></pre>
 <p>The <code>max-X</code> and <code>min-X</code> classes adds level of control when targeting the desktop and mobile sizes. For example, a cell may need to span 2 columns at the larger mobile size, but span the full width at the smallest mobile size:</p>
-<pre><code>&lt;div class=&quot;min-3 mobile-2 ...&quot;&gt;...&lt;/div&gt;</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;min-3 mobile-2 ...&quot;&gt;...&lt;/div&gt;</code></pre>
 <p>The <code>all-X</code> classes will create a cell that spans the specified width on all screen sizes (only works with fraction cells):</p>
-<pre><code>&lt;div class=&quot;all-full ...&quot;&gt;...&lt;/div&gt;</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;all-full ...&quot;&gt;...&lt;/div&gt;</code></pre>
 <h3 id="fraction-cells">Fraction Cells</h3>
 <p>The fraction classes can be used in place of specific column counts:</p>
 <table>
@@ -375,37 +375,35 @@
 </tr>
 </tbody>
 </table>
-<h2 id="demo">Demo</h2>
-<div class="demo">
-<style>
-    <em> { </em>behavior: url(/components/Formstone/grid/boxsizing.htc); }
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	* { *behavior: url(/components/Formstone/grid/boxsizing.htc); }
 
-    .demo .example { margin-bottom: 30px; margin-top: 0; }
-    .demo .example [class<em>=&quot;desktop-&quot;] { background: #ccc; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; padding-top: 10px; padding-bottom: 10px; text-align: center; }
-    .demo .example .row .row [class</em>=&quot;desktop-&quot;] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
-    .demo .example .row:hover [class<em>=&quot;desktop-&quot;] { background: #999; }
-    .demo .example .row:hover [class</em>=&quot;desktop-&quot;] [class*=&quot;desktop-&quot;] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
+	.demo .example { margin-bottom: 30px; margin-top: 0; }
+	.demo .example [class*="desktop-"] { background: #ccc; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; padding-top: 10px; padding-bottom: 10px; text-align: center; }
+	.demo .example .row .row [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
+	.demo .example .row:hover [class*="desktop-"] { background: #999; }
+	.demo .example .row:hover [class*="desktop-"] [class*="desktop-"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
 
-    .label_d { display: block; }
-    .label_t,
-    .label_m { display: none; }
+	.label_d { display: block; }
+	.label_t,
+	.label_m { display: none; }
 
-    .button.bookmarklet { background: #999; clear: both; float: left; padding: 0 20px; width: auto; }
+	.button.bookmarklet { background: #999; clear: both; float: left; padding: 0 20px; width: auto; }
 
-    @media screen and (max-width: 979px) {
-        .label_d { display: none; }
-    }
-    @media screen and (min-width: 740px) and (max-width: 979px) {
-        .label_t { display: block; }
-    }
-    @media screen and (min-width: 0px) and (max-width: 739px) {
-        .label_m { display: block; }
-    }
+	@media screen and (max-width: 979px) {
+		.label_d { display: none; }
+	}
+	@media screen and (min-width: 740px) and (max-width: 979px) {
+		.label_t { display: block; }
+	}
+	@media screen and (min-width: 0px) and (max-width: 739px) {
+		.label_m { display: block; }
+	}
 </style>
 
 <p>
-    <a href="grid-adaptive.html">Switch to Adaptive Grid</a>
-    <a href="grid-fluid-mobile.html">Switch to Fluid Mobile Grid</a>
+	<a href="grid-adaptive.html">Switch to Adaptive Grid</a>
+	<a href="grid-fluid-mobile.html">Switch to Fluid Mobile Grid</a>
 </p>
 
 
@@ -416,36 +414,36 @@
 <br class="clear">
 <p>Or, include it on every page of your development site:</p>
 <pre class="example"><code class="language-markup">&lt;script&gt;
-(function(){if(typeof GridlockBookmarklet==&#39;undefined&#39;){document.body.appendChild(document.createElement(&#39;script&#39;)).src=&#39;<a href="http://formstone.it/js/gridlock.bookmarklet.js&#39;;}else{GridlockBookmarklet();}})(">http://formstone.it/js/gridlock.bookmarklet.js&#39;;}else{GridlockBookmarklet();}})(</a>);
+(function(){if(typeof GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
 &lt;/script&gt;</code></pre>
 
 <!-- Asymmetrical -->
 <h3>Asymmetrical</h3>
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
-        Sidebar
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-8 tablet-4 mobile-3&quot;&gt;
-        Content
-    &lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
+		Sidebar
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-8 tablet-4 mobile-3&quot;&gt;
+		Content
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 <div class="example">
-    <div class="row">
-        <div class="desktop-4 tablet-2 mobile-1">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-8 tablet-4 mobile-2">
-            <span class="label_d">desktop-8</span>
-            <span class="label_t">tablet-4</span>
-            <span class="label_m">mobile-2</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-4 tablet-2 mobile-1">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-8 tablet-4 mobile-2">
+			<span class="label_d">desktop-8</span>
+			<span class="label_t">tablet-4</span>
+			<span class="label_m">mobile-2</span>
+		</div>
+	</div>
 </div>
 <!-- END Asymmetrical -->
 
@@ -454,46 +452,46 @@
 
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
-        One
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
-        Two
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
-        Three
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
-        Four
-    &lt;/div&gt;
+	&lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
+		One
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
+		Two
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
+		Three
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-3 tablet-3 mobile-3&quot;&gt;
+		Four
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 
 <div class="example">
-    <div class="row">
-        <div class="desktop-3 tablet-3 mobile-3">
-            <span class="label_d">desktop-3</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-3</span>
-        </div>
-        <div class="desktop-3 tablet-3 mobile-3">
-            <span class="label_d">desktop-3</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-3</span>
-        </div>
-        <div class="desktop-3 tablet-3 mobile-3">
-            <span class="label_d">desktop-3</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-3</span>
-        </div>
-        <div class="desktop-3 tablet-3 mobile-3">
-            <span class="label_d">desktop-3</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-3</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-3 tablet-3 mobile-3">
+			<span class="label_d">desktop-3</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-3</span>
+		</div>
+		<div class="desktop-3 tablet-3 mobile-3">
+			<span class="label_d">desktop-3</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-3</span>
+		</div>
+		<div class="desktop-3 tablet-3 mobile-3">
+			<span class="label_d">desktop-3</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-3</span>
+		</div>
+		<div class="desktop-3 tablet-3 mobile-3">
+			<span class="label_d">desktop-3</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-3</span>
+		</div>
+	</div>
 </div>
 <!-- END Symmetrical -->
 
@@ -501,38 +499,38 @@
 <h3>3 Column</h3>
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
-        One
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
-        Two
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
-        Three
-    &lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
+		One
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
+		Two
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;
+		Three
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 
 <div class="example">
-    <div class="row">
-        <div class="desktop-4 tablet-2 mobile-1">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-4 tablet-2 mobile-1">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-4 tablet-2 mobile-1">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-4 tablet-2 mobile-1">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-4 tablet-2 mobile-1">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-4 tablet-2 mobile-1">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+	</div>
 </div>
 <!-- END 3 Column -->
 
@@ -541,45 +539,45 @@
 
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-4 desktop-push-4 tablet-2 tablet-push-2 mobile-2 mobile-push-1&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;desktop-4 desktop-push-4 tablet-2 tablet-push-2 mobile-2 mobile-push-1&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-4 desktop-push-2 tablet-2 tablet-push-1 mobile-1&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;desktop-4 desktop-push-2 tablet-2 tablet-push-1 mobile-1&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-12 tablet-6 mobile-3&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;desktop-12 tablet-6 mobile-3&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 <div class="example">
-    <div class="row">
-        <div class="desktop-4 desktop-push-4 tablet-2 tablet-push-2 mobile-2 mobile-push-1">
-            <span class="label_d">desktop-4 desktop-push-4</span>
-            <span class="label_t">tablet-2 tablet-push-2</span>
-            <span class="label_m">mobile-2 mobile-push-1</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="desktop-4 desktop-push-2 tablet-2 tablet-push-1 mobile-1">
-            <span class="label_d">desktop-4 desktop-push-2</span>
-            <span class="label_t">tablet-2 tablet-push-1</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-4 tablet-2 mobile-1 mobile-1">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="desktop-12 tablet-6 mobile-3">
-            <span class="label_d">desktop-12</span>
-            <span class="label_t">tablet-6</span>
-            <span class="label_m">mobile-3</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-4 desktop-push-4 tablet-2 tablet-push-2 mobile-2 mobile-push-1">
+			<span class="label_d">desktop-4 desktop-push-4</span>
+			<span class="label_t">tablet-2 tablet-push-2</span>
+			<span class="label_m">mobile-2 mobile-push-1</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="desktop-4 desktop-push-2 tablet-2 tablet-push-1 mobile-1">
+			<span class="label_d">desktop-4 desktop-push-2</span>
+			<span class="label_t">tablet-2 tablet-push-1</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-4 tablet-2 mobile-1 mobile-1">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="desktop-12 tablet-6 mobile-3">
+			<span class="label_d">desktop-12</span>
+			<span class="label_t">tablet-6</span>
+			<span class="label_m">mobile-3</span>
+		</div>
+	</div>
 </div>
 <!-- END Push -->
 
@@ -587,38 +585,38 @@
 <h3>Centered</h3>
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-7 tablet-3 mobile-1 centered&quot;&gt;
-        One
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
-        Two
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
-        Three
-    &lt;/div&gt;
+	&lt;div class=&quot;desktop-7 tablet-3 mobile-1 centered&quot;&gt;
+		One
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
+		Two
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-7 tablet-3 mobile-1  centered&quot;&gt;
+		Three
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 
 <div class="example">
-    <div class="row">
-        <div class="desktop-7 tablet-3 mobile-1  centered">
-            <span class="label_d">desktop-7</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-7 tablet-3 mobile-1  centered">
-            <span class="label_d">desktop-7</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-7 tablet-3 mobile-1  centered">
-            <span class="label_d">desktop-7</span>
-            <span class="label_t">tablet-3</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-7 tablet-3 mobile-1  centered">
+			<span class="label_d">desktop-7</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-7 tablet-3 mobile-1  centered">
+			<span class="label_d">desktop-7</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-7 tablet-3 mobile-1  centered">
+			<span class="label_d">desktop-7</span>
+			<span class="label_t">tablet-3</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+	</div>
 </div>
 <!-- END Centered -->
 
@@ -626,30 +624,30 @@
 <h3>Padded</h3>
 
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;desktop-4 tablet-2 mobile-1 padded&quot;&gt;
-            Sidebar
-        &lt;/div&gt;
-        &lt;div class=&quot;desktop-8 tablet-4 mobile-2 padded&quot;&gt;
-            Content
-        &lt;/div&gt;
-    &lt;/div&gt;
+	&lt;div class=&quot;row&quot;&gt;
+		&lt;div class=&quot;desktop-4 tablet-2 mobile-1 padded&quot;&gt;
+			Sidebar
+		&lt;/div&gt;
+		&lt;div class=&quot;desktop-8 tablet-4 mobile-2 padded&quot;&gt;
+			Content
+		&lt;/div&gt;
+	&lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 <div class="example">
-    <div class="row">
-        <div class="desktop-4 tablet-2 mobile-1 padded" style="background-color: #ccc;">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-8 tablet-4 mobile-2 padded" style="background-color: #999;">
-            <span class="label_d">desktop-8</span>
-            <span class="label_t">tablet-4</span>
-            <span class="label_m">mobile-2</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-4 tablet-2 mobile-1 padded" style="background-color: #ccc;">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-8 tablet-4 mobile-2 padded" style="background-color: #999;">
+			<span class="label_d">desktop-8</span>
+			<span class="label_t">tablet-4</span>
+			<span class="label_m">mobile-2</span>
+		</div>
+	</div>
 </div>
 <!-- END Padded -->
 
@@ -658,32 +656,31 @@
 
 <pre class="example"><code class="language-markup">&lt;body class=&quot;grid&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
-    &lt;div class=&quot;desktop-4 tablet-2 mobile-1 contained&quot;&gt;
-        Sidebar
-    &lt;/div&gt;
-    &lt;div class=&quot;desktop-8 tablet-4 mobile-2 contained&quot;&gt;
-        Content
-    &lt;/div&gt;
+	&lt;div class=&quot;desktop-4 tablet-2 mobile-1 contained&quot;&gt;
+		Sidebar
+	&lt;/div&gt;
+	&lt;div class=&quot;desktop-8 tablet-4 mobile-2 contained&quot;&gt;
+		Content
+	&lt;/div&gt;
 &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 
 <h5>Demo</h5>
 <div class="example">
-    <div class="row">
-        <div class="desktop-4 tablet-2 mobile-1 contained" style="background-color: #ccc;">
-            <span class="label_d">desktop-4</span>
-            <span class="label_t">tablet-2</span>
-            <span class="label_m">mobile-1</span>
-        </div>
-        <div class="desktop-8 tablet-4 mobile-2 contained" style="background-color: #999;">
-            <span class="label_d">desktop-8</span>
-            <span class="label_t">tablet-4</span>
-            <span class="label_m">mobile-2</span>
-        </div>
-    </div>
+	<div class="row">
+		<div class="desktop-4 tablet-2 mobile-1 contained" style="background-color: #ccc;">
+			<span class="label_d">desktop-4</span>
+			<span class="label_t">tablet-2</span>
+			<span class="label_m">mobile-1</span>
+		</div>
+		<div class="desktop-8 tablet-4 mobile-2 contained" style="background-color: #999;">
+			<span class="label_d">desktop-8</span>
+			<span class="label_t">tablet-4</span>
+			<span class="label_m">mobile-2</span>
+		</div>
+	</div>
 </div>
-<!-- END Contained -->
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<!-- END Contained --></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -706,4 +703,4 @@
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Girdlock --> <script></script></body></html>
+</div></div><!-- Gridlock --> <script></script></body></html>

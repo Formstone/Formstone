@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Tooltip"}
+
 # Tooltip
 
 A jQuery plugin for simple tooltips.

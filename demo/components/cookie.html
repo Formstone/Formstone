@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Cookie &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="cookie">Cookie</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Cookie &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="cookie">Cookie</h1>
 <p>A jQuery plugin for simple access to browser cookies.</p>
 <ul>
 <li><a href="#use">Use</a></li>
@@ -9,13 +9,13 @@
 <h2 id="use">Use</h2>
 <h3 id="basic">Basic</h3>
 <p>To create a new cookie, or update an existing one, simply pass the <code>key</code> and <code>value</code> as the first and second parameters, respectively:</p>
-<pre><code>// Set cookie
+<pre><code class="lang-javascript">// Set cookie
 $.macroon(key, value);</code></pre>
 <p>To return a cookie&#39;s value pass the <code>key</code> as the only parameter:</p>
-<pre><code>// Get Cookie
+<pre><code class="lang-javascript">// Get Cookie
 var value = $.macroon(key);</code></pre>
 <p>To erase an existing cookie, set it to <code>null</code>:</p>
-<pre><code>// Erase Cookie
+<pre><code class="lang-javascript">// Erase Cookie
 $.macroon(key, null);</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
@@ -32,7 +32,7 @@ $.macroon(key, null);</code></pre>
 <tr>
 <td>domain</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie domain</td>
 </tr>
 <tr>
@@ -44,7 +44,7 @@ $.macroon(key, null);</code></pre>
 <tr>
 <td>path</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie path</td>
 </tr>
 </tbody>
@@ -53,8 +53,8 @@ $.macroon(key, null);</code></pre>
 <p>Methods are publicly available, unless otherwise stated.</p>
 <h3 id="create">create</h3>
 <p>Creates a cookie.</p>
-<pre><code>$.cookie(key, value, options);</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$.cookie(key, value, options);</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -68,27 +68,27 @@ $.macroon(key, null);</code></pre>
 <tr>
 <td>key</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie key</td>
 </tr>
 <tr>
 <td>value</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie value</td>
 </tr>
 <tr>
 <td>options</td>
 <td>object</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Options object</td>
 </tr>
 </tbody>
 </table>
 <h3 id="erase">erase</h3>
 <p>Deletes a cookie.</p>
-<pre><code>$.cookie(key, null);</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$.cookie(key, null);</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -102,15 +102,15 @@ $.macroon(key, null);</code></pre>
 <tr>
 <td>key</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie key</td>
 </tr>
 </tbody>
 </table>
 <h3 id="read">read</h3>
 <p>Returns a cookie&#39;s value, or null.</p>
-<pre><code>var value = $.cookie(key);</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">var value = $.cookie(key);</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -124,96 +124,94 @@ $.macroon(key, null);</code></pre>
 <tr>
 <td>key</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Cookie key</td>
 </tr>
 </tbody>
 </table>
-<h2 id="demo">Demo</h2>
-<div class="demo">
-<script>
-    $(function() {
-        $(&quot;.demo .form&quot;).on(&quot;click.cookie&quot;, &quot;.set&quot;, _setCookie)
-                        .on(&quot;click.cookie&quot;, &quot;.get&quot;, _getCookie)
-                        .on(&quot;click.cookie&quot;, &quot;.erase&quot;, _eraseCookie);
+<div class="demo"><h2 id="demo">Demo</h2><script>
+	var $demoForm,
+		$demoOutput;
 
-        $(window).one(&quot;pronto.load&quot;, function() {
-            $(&quot;.demo .form&quot;).off(&quot;.cookie&quot;);
-        });
-    });
+	$(function() {
+		$demoForm = $(".demo_form");
+		$demoOutput = $(".demo_output");
 
-    function _setCookie(e) {
-        e.preventDefault();
-        e.stopPropagation();
+		$demoForm.on("click.cookie", ".set", setCookie)
+				 .on("click.cookie", ".get", getCookie)
+				 .on("click.cookie", ".erase", eraseCookie);
+	});
 
-        var key = $(&quot;.demo .form [name=set_key]&quot;).val(),
-            value = $(&quot;.demo .form [name=set_value]&quot;).val();
+	function setCookie(e) {
+		killEvent(e);
 
-        $.cookie(key, value);
+		var key   = $demoForm.find("[name=set_key]").val(),
+			value = $demoForm.find("[name=set_value]").val();
 
-        _output(&quot;Set&quot;, key + &quot; = &quot; + value);
-    }
+		$.cookie(key, value);
 
-    function _getCookie(e) {
-        e.preventDefault();
-        e.stopPropagation();
+		output("Set", key + " = " + value);
+	}
 
-        var key = $(&quot;.demo .form [name=get_key]&quot;).val(),
-            value = $.cookie(key);
+	function getCookie(e) {
+		killEvent(e);
 
-        _output(&quot;Get&quot;, key + &quot; = &quot; + value);
-    }
+		var key   = $demoForm.find("[name=get_key]").val(),
+			value = $.cookie(key);
 
-    function _eraseCookie(e) {
-        e.preventDefault();
-        e.stopPropagation();
+		output("Get", key + " = " + value);
+	}
 
-        var key = $(&quot;.demo .form [name=erase_key]&quot;).val();
+	function eraseCookie(e) {
+		killEvent(e);
 
-        $.cookie(key, null);
+		var key = $demoForm.find("[name=erase_key]").val();
 
-        _output(&quot;Erase&quot;, key);
-    }
+		$.cookie(key, null);
 
-    function _output(label, value) {
-        var html = &#39;&#39;;
-        html += &#39;<p><span class="label">&#39; + label + &#39;:</span>&#39;;
-        html += &#39;<span class="value">&#39; + value + &#39;</p>&#39;;
+		output("Erase", key);
+	}
 
-        $(&quot;.demo .output&quot;).prepend(html);
-    }
+	function output(label, value) {
+		$demoOutput.prepend('<strong>' + label + ': </strong>' + value + '</span><br>');
+	}
+
+	function killEvent(e) {
+		e.preventDefault();
+		e.stopPropagation();
+	}
 </script>
-
-<div class="row form">
-    <form>
-        <fieldset class="mobile-third tablet-third desktop-third">
-            <h5>Set Cookie</h5>
-            <label>Key</label>
-            <input type="text" name="set_key" value="foo">
-            <label>value</label>
-            <input type="text" name="set_value" value="bar">
-            <input type="submit" class="button set" value="Set">
-        </fieldset>
-    </form>
-    <form>
-        <fieldset class="mobile-third tablet-third desktop-third">
-            <h5>Get Cookie</h5>
-            <label>Key</label>
-            <input type="text" name="get_key" value="foo">
-            <input type="submit" class="button get" value="Get">
-        </fieldset>
-    </form>
-    <form>
-        <fieldset class="mobile-third tablet-third desktop-third">
-            <h5>Erase Cookie</h5>
-            <label>Key</label>
-            <input type="text" name="erase_key" value="foo">
-            <input type="submit" class="button erase" value="Erase">
-        </fieldset>
-    </form>
-</div>
-<div class="output"></div>
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<form action="#" medthod="GET" class="row form demo_form">
+	<div class="all-third">
+		<h4 class="no_margin_top">Set Cookie</h4>
+		<fieldset class="form_fieldset">
+			<label class="form_label">Key</label>
+			<input type="text" name="set_key" value="foo" class="form_input">
+		</fieldset>
+		<fieldset class="form_fieldset">
+			<label class="form_label">Value</label>
+			<input type="text" name="set_value" value="bar" class="form_input">
+		</fieldset>
+		<input type="submit" class="button form_button set" value="Set">
+	</div>
+	<div class="all-third">
+		<h4 class="no_margin_top">Get Cookie</h4>
+		<fieldset class="form_fieldset">
+			<label class="form_label">Key</label>
+			<input type="text" name="get_key" value="foo" class="form_input">
+		</fieldset>
+		<input type="submit" class="button form_button get" value="Get">
+	</div>
+	<div class="all-third">
+		<h4 class="no_margin_top">Erase Cookie</h4>
+		<fieldset class="form_fieldset">
+			<label class="form_label">Key</label>
+			<input type="text" name="erase_key" value="foo" class="form_input">
+		</fieldset>
+		<input type="submit" class="button form_button erase" value="Erase">
+	</div>
+</form>
+<div class="demo_output form_textarea"></div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -236,4 +234,4 @@ $.macroon(key, null);</code></pre>
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Girdlock --> <script></script></body></html>
+</div></div><!-- Gridlock --> <script></script></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Navigation &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="navigation">Navigation</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Navigation &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="navigation">Navigation</h1>
 <p>A jQuery plugin for simple responsive navigation.</p>
 <ul>
 <li><a href="#use">Use</a></li>
@@ -10,23 +10,23 @@
 <h2 id="use">Use</h2>
 <h3 id="basic">Basic</h3>
 <p>Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:</p>
-<pre><code>$(&quot;nav&quot;).navigation();</code></pre>
-<pre><code>&lt;nav&gt;
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation();</code></pre>
+<pre><code class="lang-markup">&lt;nav&gt;
     &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
 &lt;/nav&gt;</code></pre>
 <h3 id="breakpoint">Breakpoint</h3>
 <p>By default, Navigation will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
-<pre><code>$(&quot;nav&quot;).navigation({
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation({
     maxWidth: &quot;740px&quot;
 });</code></pre>
 <h3 id="custom-handle">Custom Handle</h3>
 <p>Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.</p>
-<pre><code>$(&quot;nav&quot;).navigation({
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation({
     handle: &quot;#nav-handle&quot;
 });</code></pre>
-<pre><code>&lt;h4 id=&quot;nav-handle&quot;&gt;Navigation&lt;/h4&gt;
+<pre><code class="lang-markup">&lt;h4 id=&quot;nav-handle&quot;&gt;Navigation&lt;/h4&gt;
 &lt;nav&gt;
     &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
@@ -108,11 +108,11 @@
 <p>Methods are publicly available to all active instances, unless otherwise stated.</p>
 <h3 id="close">close</h3>
 <p>Closes instance.</p>
-<pre><code>$(&quot;.target&quot;).navigation(&quot;close&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;close&quot;);</code></pre>
 <h3 id="defaults">defaults</h3>
 <p>Extends plugin default settings; effects instances created hereafter.</p>
-<pre><code>$.navigation(&quot;defaults&quot;, { ... });</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$.navigation(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -133,16 +133,16 @@
 </table>
 <h3 id="destroy">destroy</h3>
 <p>Removes plugin instance.</p>
-<pre><code>$(&quot;.target&quot;).navigation(&quot;destroy&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;destroy&quot;);</code></pre>
 <h3 id="disable">disable</h3>
 <p>Disables instance.</p>
-<pre><code>$(&quot;.target&quot;).navigation(&quot;disable&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;disable&quot;);</code></pre>
 <h3 id="enable">enable</h3>
 <p>Enables instance.</p>
-<pre><code>$(&quot;.target&quot;).navigation(&quot;enable&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;enable&quot;);</code></pre>
 <h3 id="open">open</h3>
 <p>Opens instance.</p>
-<pre><code>$(&quot;.target&quot;).navigation(&quot;open&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;open&quot;);</code></pre>
 <h2 id="css">CSS</h2>
 <table>
 <thead>
@@ -185,7 +185,7 @@
 </tr>
 </tbody>
 </table>
-</div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -208,4 +208,4 @@
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Girdlock --> <script></script></body></html>
+</div></div><!-- Gridlock --> <script></script></body></html>

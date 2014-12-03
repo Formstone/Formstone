@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Navigation"}
+
 # Navigation
 
 A jQuery plugin for simple responsive navigation.

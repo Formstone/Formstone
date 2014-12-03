@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Media Query"}
+
 # Media Query
 
 A jQuery plugin for responsive media query events.

@@ -39,7 +39,7 @@ User agent sniffing isn't always reliable or considered a best practice - it sho
 
 The `Formstone.Plugin` factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:
 
-```
+```javascript
 $(“.target).plugin({
 	option: value
 });
@@ -53,7 +53,7 @@ There are two types of plugins that can be defined: Widget or Utility.
 
 Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:
 
-```
+```javascript
 ;(function ($, Formstone, undefined) {
 
 	function setUp() {
@@ -115,13 +115,13 @@ As in the example above, Widgets can override three internal methods by pointing
 
 When an instance is created or destroyed, the factory will automatically add or remove the instance's localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:
 
-```
+```javascript
 this.data("namespace");
 ```
 
 Custom public methods can also be defined, provided their keys are not prefixed with an underscore (`_`). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it's plugin data as the first argument followed by any addition arguments:
 
-```
+```javascript
 $(".target").namespace("reset", 500);
 ```
 
@@ -131,7 +131,7 @@ A Widget can also operate as a singleton, like Boxer or Tipper. In this case, ev
 
 Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:
 
-```
+```javascript
 ;(function ($, Formstone, undefined) {
 
 	function delegate() {
@@ -161,7 +161,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 
 A utility can override the default method delegation by pointing the `_delegate` key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.
 
-```
+```javascript
 $.namespace("reset", 500);
 ```
 
@@ -182,7 +182,7 @@ Defining a plugin using the factory will return an object containing the follow 
 
 These values can then be localized in the scope of the plugin for optimal minimization:
 
-```
+```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
 		...
 	}),
@@ -200,7 +200,7 @@ This may seem strangely redundant at first, however multi-dimensional objects do
 
 The `classes` object returned when defining a plugin will contain properly namespaced strings of both default and custom classes. Custom classes will become object keys, while the namespaced class will become the value:
 
-```
+```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
 	...
 	classes: [
@@ -222,7 +222,7 @@ var Plugin = Formstone.Plugin(“namespace”, {
 
 The `events` object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:
 
-```
+```javascript
 var Plugin = Formstone.Plugin(“namespace”, {
 	...
 	events: [
@@ -282,14 +282,14 @@ var Plugin = Formstone.Plugin(“namespace”, {
 
 Builds a plugin and registers it with jQuery.
 
-```
+```javascript
 Formstone.Plugin("namespace", { ... });
 ```
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| namespace | string |  | Plugin namespace |
-| settings | object |  | Plugin settings |
+| namespace | string | &nbsp; | Plugin namespace |
+| settings | object | &nbsp; | Plugin settings |
 

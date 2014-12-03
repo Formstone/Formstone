@@ -20,6 +20,65 @@ module.exports = function(grunt) {
 			banner: '/*! <%= pkg.name %> v<%= pkg.version %> [{{ local_name }}] <%= grunt.template.today("yyyy-mm-dd") %> |' +
 					' <%= pkg.license %> License | <%= pkg.homepage_short %> */\n'
 		},
+		// Watcher - Dev Only
+		watch: {
+			scripts: {
+				files: [
+					'src/**/*.js'
+				],
+				tasks: [
+					'newer:jshint:library',
+					'newer:uglify:library'
+				]
+			},
+			styles: {
+				files: [
+					'src/**/*.less'
+				],
+				tasks: [
+					'newer:less:library',
+					'newer:autoprefixer'
+				]
+			},
+			demoscripts: {
+				files: [
+					'demo/js/src/*.js'
+				],
+				tasks: [
+					'newer:jshint:demo',
+					'newer:uglify:demo'
+				]
+			},
+			demostyles: {
+				files: [
+					'demo/css/src/*.less'
+				],
+				tasks: [
+					'newer:less:demo',
+					'newer:autoprefixer'
+				]
+			},
+			config: {
+				files: [
+					'Gruntfile.js'
+				],
+				options: {
+					reload: true
+				}
+			}
+		},
+		// Newer - Dev Only
+		newer: {
+			options: {
+				override: function(details, include) {
+					if (details.task === 'less') {
+						checkForNewerImports(details.path, details.time, include);
+					} else {
+						include(false);
+					}
+				}
+			}
+		},
 		// JS Hint
 		jshint: {
 			options: {
@@ -27,7 +86,8 @@ module.exports = function(grunt) {
 				globals: {
 					'jQuery'    : true,
 					'$'         : true,
-					'Formstone' : true
+					'Formstone' : true,
+					'console'   : true
 				},
 				browser:   true,
 				curly:     true,
@@ -65,15 +125,6 @@ module.exports = function(grunt) {
 					preserveComments: 'some'
 				},
 				files: '<%= pkg.site.js %>'
-			}
-		},
-		// Copy
-		copy: {
-			library: {
-				expand: true,
-				cwd:    'src/',
-				src:    '**/*.js',
-				dest:   'dist/'
 			}
 		},
 		// LESS
@@ -133,47 +184,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		// Watcher - Dev Only
-		watch: {
-			scripts: {
-				files: [
-					'src/**/*.js'
-				],
-				tasks: [
-					'newer:jshint',
-					'newer:copy'
-				]
-			},
-			styles: {
-				files: [
-					'src/**/*.less'
-				],
-				tasks: [
-					'newer:less',
-					'newer:autoprefixer'
-				]
-			},
-			config: {
-				files: [
-					'Gruntfile.js'
-				],
-				options: {
-					reload: true
-				}
-			}
-		},
-		// Newer - Dev Only
-		newer: {
-			options: {
-				override: function(details, include) {
-					if (details.task === 'less') {
-						checkForNewerImports(details.path, details.time, include);
-					} else {
-						include(false);
-					}
-				}
-			}
-		},
 		// Zetzer - Demo Site
 		zetzer: {
 			main: {
@@ -195,11 +205,10 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		// remove temp demo files
+		// Clean
 		clean: [
 			'demo/tmp/'
-		]
-/*
+		],
 		// Strip MQ
 		stripmq: {
 			options: {
@@ -208,11 +217,10 @@ module.exports = function(grunt) {
 			},
 			all: {
 				files: {
-					'css/demo-ie8.css': [ 'css/demo-ie8.css' ]
+					'demo/css/site-ie8.css': [ 'demo/css/site-ie8.css' ]
 				}
 			}
 		}
-*/
 	});
 
 	// Newer LESS Imports
@@ -242,29 +250,22 @@ module.exports = function(grunt) {
 	}
 
 	// Load tasks
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-newer');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-autoprefixer');
-	grunt.loadNpmTasks('grunt-banner');
-	grunt.loadNpmTasks('grunt-npm2bower-sync');
-	grunt.loadNpmTasks('grunt-zetzer');
-	grunt.loadNpmTasks('grunt-contrib-clean');
+
+	require('load-grunt-tasks')(grunt);
 
 	grunt.loadTasks('tasks');
 
-	// Default task.
-	grunt.registerTask('default', [ 'js', 'css', 'library', 'demo_clean' ]);
+	// Register Tasks
+
+	grunt.registerTask('default', [ 'js', 'css', 'library' ]);
+	grunt.registerTask('all', [ 'js', 'css', 'library', 'demoClean' ]);
 
 	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demo_clean', [ 'zetzer', 'clean', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo' ]);
-	grunt.registerTask('demo', [ 'buildDocs', 'demo_clean' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', /* 'clean', */ 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

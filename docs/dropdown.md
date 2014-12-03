@@ -17,7 +17,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | external | boolean | false | Open options as links in new window |
 | links | boolean | false | Open options as links in same window |
 | mobile | boolean | false | Force desktop interaction on mobile |
-| trim | int | 0 |  |
+| trim | int | 0 | &nbsp; |
 
 ## Methods
 
@@ -27,7 +27,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 Closes target instance.
 
-```
+```javascript
 $(".target").dropdown("close");
 ```
 
@@ -35,11 +35,11 @@ $(".target").dropdown("close");
 
 Extends plugin default settings; effects instances created hereafter.
 
-```
+```javascript
 $.dropdown("defaults", { ... });
 ```
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@ $.dropdown("defaults", { ... });
 
 Removes plugin instance.
 
-```
+```javascript
 $(".target").dropdown("destroy");
 ```
 
@@ -57,11 +57,11 @@ $(".target").dropdown("destroy");
 
 Disables target instance or option.
 
-```
+```javascript
 $(".target").dropdown("disable", "1");
 ```
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -71,11 +71,11 @@ $(".target").dropdown("disable", "1");
 
 Enables target instance or option.
 
-```
+```javascript
 $(".target").dropdown("enable", "1");
 ```
 
-##### Parameters
+#### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -85,7 +85,7 @@ $(".target").dropdown("enable", "1");
 
 Opens target instance.
 
-```
+```javascript
 $(".target").dropdown("open");
 ```
 
@@ -93,7 +93,7 @@ $(".target").dropdown("open");
 
 Updates instance.
 
-```
+```javascript
 $(".target").dropdown("update");
 ```
 

@@ -1,3 +1,15 @@
+{"template":"component.html","title":"Formstone"}
+
+# Formstone
+
+Library core.
+
+* [Use](#use)
+* [Methods](#methods)
+
+
+## Use 
+
 ### Formstone Object
 
 The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:
@@ -265,3 +277,21 @@ var Plugin = Formstone.Plugin(“namespace”, {
 | transitionEnd | Default | transitionEnd.namespace |
 | enable | Custom | enable.namespace |
 | disable | Custom | disable.namespace |
+
+## Methods
+
+### Plugin
+
+Builds a plugin and registers it with jQuery.
+
+```javascript
+Formstone.Plugin("namespace", { ... });
+```
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| namespace | string | &nbsp; | Plugin namespace |
+| settings | object | &nbsp; | Plugin settings |
+

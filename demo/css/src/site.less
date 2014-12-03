@@ -5,10 +5,13 @@
 	@import "setup.less";
 
 	@import (inline) "../../bower/normalize-css/normalize.css";
+	//@import (inline) "../../bower/prism/themes/prism.css";
+	@import (inline) "prism.less";
 
 	// Components
 
 	@import (inline) "../../../dist/css/grid.css";
+	@import (inline) "../../../dist/css/dropdown.css";
 	@import (inline) "../../../dist/css/lightbox.css";
 	@import (inline) "../../../dist/css/navigation.css";
 	@import (inline) "../../../dist/css/tooltip.css";
@@ -51,7 +54,7 @@
 		transition: none;
 
 		@media @tablet {
-			background: @gray;
+			background: @blue;
 		}
 	}
 
@@ -98,13 +101,14 @@
 		.font_size(26);
 	}
 	h4 {
-		.font_size(20);
+		.font_size(18);
 
 		text-transform: uppercase;
 	}
 	h5 {
-		.font_size(12);
+		.font_size(10);
 
+		letter-spacing: 0.2em;
 		text-transform: uppercase;
 	}
 	h6 {  }
@@ -192,7 +196,6 @@
 	input,
 	textarea {
 		border: none;
-		border-radius: 3px;
 		padding: 0;
 	}
 
@@ -218,14 +221,17 @@
 	// code
 
 	pre,
-	code {
+	code,
+	code[class*=language-],
+	pre[class*=language-] {
 		.mono();
 		.font_size(14);
 
 		color: @gray_5;
 	}
 
-	pre {
+	pre,
+	pre[class*=language-] {
 		background: @gray_1;
 		border-radius: 3px;
 		margin: 20px 0;
@@ -340,49 +346,118 @@
 	}
 
 
+	.no_margin {
+		&,
+		&_top {
+			margin-top: 0;
+		}
+
+		&,
+		&_bottom {
+			margin-bottom: 0;
+		}
+	}
+
+
 /* ==================================================================
    Media Queries
 ================================================================== */
 
-	@media @mobile {
-
-    }
-    @media @tablet {
-
-    }
-    @media @desktop {
-
-    }
-    @media @max {
-
-    }
-
-
-
-    .content {
-	    background: @white;
+	.content {
+		background: @white;
 		padding: 0 10px;
 
-	    @media @tablet {
-	    	padding: 10px 30px;
-	    }
+		@media @tablet {
+			padding: 10px 30px;
+		}
 
-	    @media @desktop {
-		    margin-bottom: 30px;
-	    	padding: 30px 50px;
-	    }
-    }
+		@media @desktop {
+			margin-bottom: 30px;
+			padding: 30px 50px;
+		}
+	}
+
+	.sidebar {
+		background: @blue;
+		color: @white;
+
+		padding: 50px 0;
+
+		a {
+			color: @white;
+			border-color: transparent;
+
+			.no-touch &:hover {
+				border-color: @white;
+				border-color: fade(@white, 50);
+				color: @white;
+			}
+		}
+
+		ul {
+			margin: 10px 0 25px;
+			padding: 0;
+
+			li {
+				line-height: 1.6;
+				margin: 5px 0;
+
+				&:before {
+					display: none;
+				}
+			}
+		}
+
+		h5 {
+			color: @white;
+			color: fade(@white, 50);
+			margin: 10px 0;
+		}
+	}
 
 
-    .sidebar {
-	    background: @gray;
-	    color: @white;
+	.form {
 
-	    a {
-		    color: @white;
-		    border-color: fade(@white, 25);
-	    }
-    }
+		margin: 20px 0;
+
+		&_fieldset {
+			margin: 10px 0;
+		}
+
+		&_label {
+			.font_size(14);
+
+			display: block;
+			margin: 0 0 5px;
+		}
+
+		&_input,
+		&_textarea {
+			.font_size(16);
+
+			width: 100%;
+
+			border: 1px solid @gray_2;
+			border-radius: 3px;
+			color: @gray_5;
+			line-height: 1.8;
+			padding: 5px 15px;
+		}
+
+		&_textarea {
+			height: 150px;
+		}
+
+		&_button {
+			.font_size(16);
+
+			background: @blue;
+			border-radius: 3px;
+			color: @white;
+			padding: 10px 20px;
+			text-transform: uppercase;
+		}
+	}
 
 
 /* ==================================================================
@@ -390,59 +465,59 @@
 ================================================================== */
 
 	@media print {
-	    * {
-	    	background: transparent !important;
-	    	box-shadow: none !important;
-	    	color: #000 !important;
-	    	text-shadow: none !important;
-	    }
+		* {
+			background: transparent !important;
+			box-shadow: none !important;
+			color: #000 !important;
+			text-shadow: none !important;
+		}
 
-	    a,
-	    a:visited {
-	    	text-decoration: underline;
-	    }
+		a,
+		a:visited {
+			text-decoration: underline;
+		}
 
-	    a[href]:after {
-	    	content: " (" attr(href) ")";
-	    }
+		a[href]:after {
+			content: " (" attr(href) ")";
+		}
 
-	    abbr[title]:after {
-	    	content: " (" attr(title) ")";
-	    }
+		abbr[title]:after {
+			content: " (" attr(title) ")";
+		}
 
-	    a[href^="javascript:"]:after,
-	    a[href^="#"]:after {
-	    	content: "";
-	    }
+		a[href^="javascript:"]:after,
+		a[href^="#"]:after {
+			content: "";
+		}
 
-	    pre,
-	    blockquote {
-	    	border: 1px solid #999;
-	    	page-break-inside: avoid;
-	    }
+		pre,
+		blockquote {
+			border: 1px solid #999;
+			page-break-inside: avoid;
+		}
 
-	    thead {
-	    	display: table-header-group;
-	    }
+		thead {
+			display: table-header-group;
+		}
 
-	    tr,
-	    img {
-	    	page-break-inside: avoid;
-	    }
+		tr,
+		img {
+			page-break-inside: avoid;
+		}
 
-	    img {
-	    	max-width: 100% !important;
-	    }
+		img {
+			max-width: 100% !important;
+		}
 
-	    p,
-	    h2,
-	    h3 {
-	    	orphans: 3;
-	    	widows: 3;
-	    }
+		p,
+		h2,
+		h3 {
+			orphans: 3;
+			widows: 3;
+		}
 
-	    h2,
-	    h3 {
-	    	page-break-after: avoid;
-	    }
+		h2,
+		h3 {
+			page-break-after: avoid;
+		}
 	}

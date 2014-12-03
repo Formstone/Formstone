@@ -1,3 +1,5 @@
+{"template":"component.html","title":"Lightbox"}
+
 # Lightbox
 
 A jQuery plugin for simple modals.

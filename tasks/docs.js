@@ -325,10 +325,10 @@ module.exports = function(grunt) {
 				md += '\n';
 				for (var i in doc.options) {
 					var o = doc.options[i];
-					md += '| ' + (o.name || "");
-					md += ' | ' + (o.type || "");
-					md += ' | ' + (o.default || "");
-					md += ' | ' + (o.description || "");
+					md += '| ' + (o.name || "&nbsp;");
+					md += ' | ' + (o.type || "&nbsp;");
+					md += ' | ' + (o.default || "&nbsp;");
+					md += ' | ' + (o.description || "&nbsp;");
 					md += ' |\n';
 				}
 				md += '\n';
@@ -351,8 +351,8 @@ module.exports = function(grunt) {
 				md += '\n';
 				for (var i in doc.events) {
 					var e = doc.events[i];
-					md += '| ' + (e.name || "");
-					md += ' | ' + (e.description || "");
+					md += '| ' + (e.name || "&nbsp;");
+					md += ' | ' + (e.description || "&nbsp;");
 					md += ' |\n';
 				}
 				md += '\n';
@@ -376,7 +376,7 @@ module.exports = function(grunt) {
 					md += m.description;
 					md += '\n\n';
 					if (m.example) {
-						md += '```';
+						md += '```javascript';
 						md += '\n';
 						md += m.example;
 						md += '\n';
@@ -384,7 +384,7 @@ module.exports = function(grunt) {
 					}
 					md += '\n\n';
 					if (m.params && m.params.length) {
-						md += heading + '#### Parameters';
+						md += heading + '### Parameters';
 						md += '\n\n';
 						md += '| Name | Type | Default | Description |';
 						md += '\n';
@@ -392,10 +392,10 @@ module.exports = function(grunt) {
 						md += '\n';
 						for (var j in m.params) {
 							var p = m.params[j];
-							md += '| ' + (p.name || "");
-							md += ' | ' + (p.type || "");
-							md += ' | ' + (p.default || "");
-							md += ' | ' + (p.description || "");
+							md += '| ' + (p.name || "&nbsp;");
+							md += ' | ' + (p.type || "&nbsp;");
+							md += ' | ' + (p.default || "&nbsp;");
+							md += ' | ' + (p.description || "&nbsp;");
 							md += ' |\n';
 						}
 						md += '\n';
@@ -412,14 +412,15 @@ module.exports = function(grunt) {
 				md += '\n';
 				for (var i in doc.css) {
 					var e = doc.css[i];
-					md += '| ' + (e.name || "");
-					md += ' | ' + (e.type || "");
-					md += ' | ' + (e.description || "");
+					md += '| ' + (e.name || "&nbsp;");
+					md += ' | ' + (e.type || "&nbsp;");
+					md += ' | ' + (e.description || "&nbsp;");
 					md += ' |\n';
 				}
 				md += '\n';
 			}
 
+			/*
 			if (includeDemo && doc.demo) {
 				md += heading + '# Demo';
 				md += '\n\n';
@@ -427,6 +428,7 @@ module.exports = function(grunt) {
 				md += doc.demo;
 				md += '\n</div>';
 			}
+			*/
 
 			return md;
 		}
@@ -450,7 +452,8 @@ module.exports = function(grunt) {
 				md = buildMarkdown(doc, "#", true),
 				template = {
 					template: "component.html",
-					title: doc.name
+					title: doc.name,
+					demo: doc.demo
 				};
 
 			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + md);

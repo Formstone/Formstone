@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Formstone &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="formstone">Formstone</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Formstone &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="formstone">Formstone</h1>
 <p>Library core.</p>
 <ul>
 <li><a href="#use">Use</a></li>
@@ -111,14 +111,14 @@
 <p>User agent sniffing isn&#39;t always reliable or considered a best practice - it should be used sparingly, if at all.</p>
 <h3 id="plugin-factory">Plugin Factory</h3>
 <p>The <code>Formstone.Plugin</code> factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:</p>
-<pre><code>$(“.target).plugin({
+<pre><code class="lang-javascript">$(“.target).plugin({
     option: value
 });</code></pre>
 <h3 id="plugin-types">Plugin Types</h3>
 <p>There are two types of plugins that can be defined: Widget or Utility.</p>
 <h4 id="widget">Widget</h4>
 <p>Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:</p>
-<pre><code>;(function ($, Formstone, undefined) {
+<pre><code class="lang-javascript">;(function ($, Formstone, undefined) {
 
     function setUp() {
         // this = document
@@ -191,13 +191,13 @@
 </tbody>
 </table>
 <p>When an instance is created or destroyed, the factory will automatically add or remove the instance&#39;s localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:</p>
-<pre><code>this.data(&quot;namespace&quot;);</code></pre>
+<pre><code class="lang-javascript">this.data(&quot;namespace&quot;);</code></pre>
 <p>Custom public methods can also be defined, provided their keys are not prefixed with an underscore (<code>_</code>). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it&#39;s plugin data as the first argument followed by any addition arguments:</p>
-<pre><code>$(&quot;.target&quot;).namespace(&quot;reset&quot;, 500);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).namespace(&quot;reset&quot;, 500);</code></pre>
 <p>A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance&#39;s target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.</p>
 <h4 id="utility">Utility</h4>
 <p>Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:</p>
-<pre><code>;(function ($, Formstone, undefined) {
+<pre><code class="lang-javascript">;(function ($, Formstone, undefined) {
 
     function delegate() {
         // Manually handle public methods
@@ -223,7 +223,7 @@
 
 })(jQuery, Formstone);</code></pre>
 <p>A utility can override the default method delegation by pointing the <code>_delegate</code> key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.</p>
-<pre><code>$.namespace(&quot;reset&quot;, 500);</code></pre>
+<pre><code class="lang-javascript">$.namespace(&quot;reset&quot;, 500);</code></pre>
 <h3 id="plugin-object">Plugin Object</h3>
 <p>Defining a plugin using the factory will return an object containing the follow keys:</p>
 <table>
@@ -278,7 +278,7 @@
 </tbody>
 </table>
 <p>These values can then be localized in the scope of the plugin for optimal minimization:</p>
-<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
         ...
     }),
     Defaults     = Plugin.defaults,
@@ -290,7 +290,7 @@
 <p>This may seem strangely redundant at first, however multi-dimensional objects do not minimize efficiently. This is also one reason standard prototypal inheritance is not used when building a plugin, however this is not to say a specific plugin could not contain locally scoped prototypes. Plugin design is always up to the developer, the factory simply provides a consistent, DRY approach to the basic plugin pattern.</p>
 <h4 id="classes">Classes</h4>
 <p>The <code>classes</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom classes. Custom classes will become object keys, while the namespaced class will become the value:</p>
-<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
     ...
     classes: [
         &quot;visible&quot;,
@@ -331,7 +331,7 @@
 </table>
 <h4 id="events">Events</h4>
 <p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
-<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
     ...
     events: [
         &quot;enable&quot;,
@@ -553,8 +553,8 @@
 <h2 id="methods">Methods</h2>
 <h3 id="plugin">Plugin</h3>
 <p>Builds a plugin and registers it with jQuery.</p>
-<pre><code>Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -568,18 +568,18 @@
 <tr>
 <td>namespace</td>
 <td>string</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Plugin namespace</td>
 </tr>
 <tr>
 <td>settings</td>
 <td>object</td>
-<td></td>
+<td>&nbsp;</td>
 <td>Plugin settings</td>
 </tr>
 </tbody>
 </table>
-</div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -602,4 +602,4 @@
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Girdlock --> <script></script></body></html>
+</div></div><!-- Gridlock --> <script></script></body></html>

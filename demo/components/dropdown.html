@@ -1,8 +1,9 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Dropdown &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="dropdown">Dropdown</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Dropdown &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="dropdown">Dropdown</h1>
 <p>A jQuery plugin for custom select elements.</p>
 <ul>
 <li><a href="#options">Options</a></li>
 <li><a href="#methods">Methods</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-dropdown-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
@@ -56,6 +57,7 @@
 <td>trim</td>
 <td>int</td>
 <td>0</td>
+<td>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -63,11 +65,11 @@
 <p>Methods are publicly available to all active instances, unless otherwise stated.</p>
 <h3 id="close">close</h3>
 <p>Closes target instance.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;close&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;close&quot;);</code></pre>
 <h3 id="defaults">defaults</h3>
 <p>Extends plugin default settings; effects instances created hereafter.</p>
-<pre><code>$.dropdown(&quot;defaults&quot;, { ... });</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$.dropdown(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -88,11 +90,11 @@
 </table>
 <h3 id="destroy">destroy</h3>
 <p>Removes plugin instance.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;destroy&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;destroy&quot;);</code></pre>
 <h3 id="disable">disable</h3>
 <p>Disables target instance or option.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;disable&quot;, &quot;1&quot;);</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;disable&quot;, &quot;1&quot;);</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -113,8 +115,8 @@
 </table>
 <h3 id="enable">enable</h3>
 <p>Enables target instance or option.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;enable&quot;, &quot;1&quot;);</code></pre>
-<h5 id="parameters">Parameters</h5>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;enable&quot;, &quot;1&quot;);</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -135,11 +137,308 @@
 </table>
 <h3 id="open">open</h3>
 <p>Opens target instance.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;open&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;open&quot;);</code></pre>
 <h3 id="update">update</h3>
 <p>Updates instance.</p>
-<pre><code>$(&quot;.target&quot;).dropdown(&quot;update&quot;);</code></pre>
-</div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;update&quot;);</code></pre>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	.demo .custom_select { max-width: 500px; }
+	.demo .custom_select .fs-dropdown-selected { border-width: 2px; }
+	.demo .custom_select .fs-dropdown-options { border-width: 0 2px 2px; padding: 1%; }
+	.demo .custom_select .fs-dropdown-item { border-radius: 3px !important; border: none; margin: 0 0 1%; }
+	.demo .custom_select .fs-dropdown-item:last-child { margin: 0; }
+</style>
+
+<script>
+	$(function() {
+		// All
+		$(".demo select").dropdown();
+	});
+
+	/*
+		// Disabled
+		$(".demo .toggle_select").on("click", toggleEnabled);
+		if (!$(".demo .select_disabled").is(":disabled")) {
+			$(".demo .toggle_select").text("Disable");
+		} else {
+			$(".demo .toggle_select").text("Enable");
+		}
+		// Disabled Option
+		$(".demo .toggle_select_option").on("click", toggleEnabledOption);
+		if (!$(".demo .select_disabled_option option").eq(0).is(":disabled")) {
+			$(".demo .toggle_select_option").text("Disable Option 'One'");
+		} else {
+			$(".demo .toggle_select_option").text("Enable Option 'One'");
+		}
+		$(window).one("pronto.load", function() {
+			$(".demo select").select("destroy");
+			$(".demo .toggle_select").off("click");
+			$(".demo .toggle_select_option").off("click");
+		});
+
+	function toggleEnabled(e) {
+		e.preventDefault();
+		if ($(".demo .select_disabled").is(":disabled")) {
+			$(".demo .select_disabled").dropdown("enable");
+			$(".demo .toggle_select").text("Disable");
+		} else {
+			$(".demo .select_disabled").dropdown("disable");
+			$(".demo .toggle_select").text("Enable");
+		}
+	}
+
+	function toggleEnabledOption(e) {
+		e.preventDefault();
+		if ($(".demo .select_disabled_option option").eq(0).is(":disabled")) {
+			$(".demo .select_disabled_option").dropdown("enable", "1");
+			$(".demo .toggle_select_option").text("Disable Option 'One'");
+		} else {
+			$(".demo .select_disabled_option").dropdown("disable", "1");
+			$(".demo .toggle_select_option").text("Enable Option 'One'");
+		}
+	}
+	*/
+</script>
+
+<h4>Basic</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_basic" class="form_label">Label</label>
+		<select name="demo_basic" id="demo_basic">
+			<option>One</option>
+			<option>Two</option>
+		</select>
+	</fieldset>
+</form>
+
+<h4>Option Groups</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_groups" class="form_label">Label</label>
+		<select name="demo_groups" id="demo_groups">
+			<optgroup label="Group One">
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</optgroup>
+			<optgroup label="Group One">
+				<option value="4">Four</option>
+				<option value="5">Five</option>
+				<option value="6">Six</option>
+				<option value="7">Seven</option>
+			</optgroup>
+			<optgroup label="Group Three">
+				<option value="8">Eight</option>
+				<option value="9">Nine</option>
+				<option value="10">Ten</option>
+			</optgroup>
+		</select>
+	</fieldset>
+</form>
+
+<h4>Multiple</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_multiple" class="form_label">Label</label>
+		<select name="demo_multiple" id="demo_multiple" multiple>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+			<option value="4">Four</option>
+			<option value="5">Five</option>
+			<option value="6">Six</option>
+			<option value="7">Seven</option>
+			<option value="8">Eight</option>
+			<option value="9">Nine</option>
+			<option value="10">Ten</option>
+		</select>
+	</fieldset>
+</form>
+
+<h4>Default Label</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_label" class="form_label">Label</label>
+		<select name="demo_label" id="demo_label" data-dropdown-options='{"label":"Select A State"}'>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District Of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">	Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+	</fieldset>
+</form>
+
+<h4>Links</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_links" class="form_label">Label</label>
+		<select name="demo_links" id="demo_links" data-dropdown-options='{"label":"Jump Sites","links":true}'>
+			<option value="http://google.com">Google Search</option>
+			<option value="http://boingboing.com">Boing	Boing</option>
+			<option value="http://cnn.com">CNN News</option>
+		</select>
+	</fieldset>
+</form>
+
+
+<!-- EXTERNAL LINKS -->
+<!--
+<h2	>External Links</h2>
+<p>The links can also open in 	a new windo	w or tab:	</p>
+
+	<pre class="example"><co	de class="language-javas	cript">$("select").dropdown({
+externalLinks: true
+});</c	ode></pre>
+
+<h5>Demo</h5>
+<form action="#" method="GET">
+	<select name="select_links_external" data-dropdown-options	='{"label":"Ju	mp Sites","external":"true"}'>
+			<option value="http://google.com">Google Search</option>
+		<option value="http://boingboing.com">Boing	Boing</option>
+		<option value="http://cnn.com">CNN News</o	ption>
+	</select>
+</form>
+
+<br>
+-->
+
+<!-- COVER -->
+<!--
+<h2>Cover</h	2>
+<p>The options list can cover the handle, sort o	f Safari-st	yle:</p>
+
+<pre 	class="example"	><code class="l	anguage-javascript">$("select").dropdown({
+cover: true
+});</code></pr	e>
+
+<h5>Demo</h5>
+<form action="#" method="GET">
+	<select name="select_cover" data-dropdown-options='{"cover	":"true"}'>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+		<option value="3">Three</option>
+		<	option value="4">Four</option>
+			<option value="5">Five</option>
+		</select>
+</form>
+
+<br>
+-->
+
+<!-- CLASS	 -->
+<!--
+<h2>Class</h2>
+<p>Define a cu	stom CSS class to have multiple vi	sually dist	inct Drop	downs 	on the same pag	e:</p>
+
+<pre cl	ass="example"><code class="language-javascript">$("select").dropdown({
+customClass: "custom"
+});<	/code></pre>
+
+<h5>Demo</h5>
+<form action="#" method="GET">
+	<select name="select_custom" data-dropdown-options='{"cust	omClass":"cust	om"}'>
+		<option value="1">One<	/option>
+		<option value="2">Two</option>
+		<option value="3">Three</option>
+		<	option value="4">Four</option>
+			<option value="5">Five</option>
+		</select>
+</form>
+
+<br>
+-->
+
+<!-- DISAB	LE -->
+<!--
+<h2>Disable</h2>
+<p>Dropdow	n will automatically detect disabl	ed fields, 	but you c	an alw	ays manually trig	ger the disable o	r enable event:</p>
+
+<pre class="example"><code class="language-javascript">$("select").dropdown("disable");
+
+$("select").dro	pdown("enable");</code></pre>
+
+<h5>Demo</h5>
+<button class="button small toggle_select">Enable</button>
+<form action="#" method="GET" c	lass="clear_fi	x">
+	<select name="select_disabled" class="select_disabled"	 disabled="disabled">
+		<option value="1">One</op	tion>
+		<option value="2">Two</option>
+		<option value="3">Three</option>
+		<	option value="4">Four</option>
+			<option value="5">Five</option>
+		</select>
+</form>
+
+<br>
+-->
+
+<!-- DISAB	LE ITEM -->
+<!--
+<p>You can also disabl	e and enable individual options by	 passing th	at option	's val	ue:</p>
+
+<pre class="e	xample"><code class="language-javascript">$("select").dropdown("disable", "value");
+
+$("sel	ect").dropdown("enable", "value");</code></pre>
+
+<h5>Demo</h5>
+<button class="button small toggle_select_option">Enable Option 'One'</button>
+<form actio	n="#" method="	GET">
+	<select name="select_disabled_option" class="select_disabled_option">
+			<option value="1" disabled>One<	/option>
+		<option value="2">Two</option>
+		<option value="3">Three</op	tion>
+		<option value="4">Four</option>
+			<option value="5">Five</option>
+		</select>
+</form>
+--></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -162,4 +461,4 @@
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Girdlock --> <script></script></body></html>
+</div></div><!-- Gridlock --> <script></script></body></html>
