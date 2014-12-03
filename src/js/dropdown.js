@@ -781,9 +781,3 @@
 		});
 
 })(jQuery, Formstone);
-
-/*
- * @use
-
-
- */

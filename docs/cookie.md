@@ -5,9 +5,10 @@ A jQuery plugin for simple access to browser cookies.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
-<br class="nav">
+
 
 ## Use 
+
 ### Basic
 
 To create a new cookie, or update an existing one, simply pass the `key` and `value` as the first and second parameters, respectively:

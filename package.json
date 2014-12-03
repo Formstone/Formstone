@@ -36,13 +36,13 @@
   },
   "site": {
     "css": {
-      "site/css/site.css": "site/css/src/site.less",
-      "site/css/site-ie8.css": "site/css/src/ie/ie8.less",
-      "site/css/site-ie9.css": "site/css/src/ie/ie9.less"
+      "demo/css/site.css": "demo/css/src/site.less",
+      "demo/css/site-ie8.css": "demo/css/src/ie/ie8.less",
+      "demo/css/site-ie9.css": "demo/css/src/ie/ie9.less"
     },
     "js": {
-      "site/js/site.js": [
-        "site/bower/jquery/dist/jquery.min.js",
+      "demo/js/site.js": [
+        "demo/bower/jquery/dist/jquery.min.js",
         "dist/js/core.js",
         "dist/js/cookie.js",
         "dist/js/dropdown.js",
@@ -53,23 +53,23 @@
         "dist/js/touch.js",
         "dist/js/transition.js",
         "dist/js/upload.js",
-        "site/js/src/site.js"
+        "demo/js/src/site.js"
       ],
-      "site/js/site-ie8.js": [
-        "site/bower/html5shiv/dist/html5shiv.min.js",
-        "site/bower/html5shiv/dist/html5shiv-printshiv.min.js",
-        "site/js/src/ie/matchMedia.ie8.js"
+      "demo/js/site-ie8.js": [
+        "demo/bower/html5shiv/dist/html5shiv.min.js",
+        "demo/bower/html5shiv/dist/html5shiv-printshiv.min.js",
+        "demo/js/src/ie/matchMedia.ie8.js"
       ],
-      "site/js/site-ie9.js": [
-        "site/js/src/ie/matchMedia.ie9.js"
+      "demo/js/site-ie9.js": [
+        "demo/js/src/ie/matchMedia.ie9.js"
       ],
-      "site/js/modernizr.js": [
-        "site/js/src/lib/modernizr.custom.js"
+      "demo/js/modernizr.js": [
+        "demo/js/src/lib/modernizr.custom.js"
       ]
     },
     "js_ignores": [
-      "site/js/src/ie/*/",
-      "site/js/src/lib/*/"
+      "demo/js/src/ie/*/",
+      "demo/js/src/lib/*/"
     ]
   }
 }

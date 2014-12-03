@@ -1,0 +1,605 @@
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Formstone &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right contained content"><h1 id="formstone">Formstone</h1>
+<p>Library core.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h3 id="formstone-object">Formstone Object</h3>
+<p>The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$window</td>
+<td>object</td>
+<td>Reference to jQuery wrapped window</td>
+</tr>
+<tr>
+<td>window</td>
+<td>object</td>
+<td>Reference to original window</td>
+</tr>
+<tr>
+<td>$document</td>
+<td>object</td>
+<td>Reference to jQuery wrapped document</td>
+</tr>
+<tr>
+<td>document</td>
+<td>object</td>
+<td>Reference to original document</td>
+</tr>
+<tr>
+<td>$body</td>
+<td>object</td>
+<td>Reference to jQuery wrapped body tag</td>
+</tr>
+<tr>
+<td>Plugins</td>
+<td>object</td>
+<td>Contains all registered plugins</td>
+</tr>
+<tr>
+<td>support.file</td>
+<td>boolean</td>
+<td>File API support</td>
+</tr>
+<tr>
+<td>support.history</td>
+<td>boolean</td>
+<td>History API support, including push and pop state</td>
+</tr>
+<tr>
+<td>support.matchMedia</td>
+<td>boolean</td>
+<td>Match Media API support</td>
+</tr>
+<tr>
+<td>support.raf</td>
+<td>boolean</td>
+<td>Request Animation Frame API support</td>
+</tr>
+<tr>
+<td>support.touch</td>
+<td>boolean</td>
+<td>Touch event support</td>
+</tr>
+<tr>
+<td>support.transition</td>
+<td>boolean</td>
+<td>CSS3 Transition support</td>
+</tr>
+<tr>
+<td>userAgent</td>
+<td>string</td>
+<td>Raw user string</td>
+</tr>
+<tr>
+<td>isChrome</td>
+<td>boolean</td>
+<td>Browser is Chrome</td>
+</tr>
+<tr>
+<td>isFirefox</td>
+<td>boolean</td>
+<td>Browser is FireFox</td>
+</tr>
+<tr>
+<td>isSafari</td>
+<td>boolean</td>
+<td>Browser is Safari</td>
+</tr>
+<tr>
+<td>isMobile</td>
+<td>boolean</td>
+<td>Browser is Mobile</td>
+</tr>
+<tr>
+<td>isFirefoxMobile</td>
+<td>boolean</td>
+<td>Browser is FireFox Mobile</td>
+</tr>
+</tbody>
+</table>
+<p>User agent sniffing isn&#39;t always reliable or considered a best practice - it should be used sparingly, if at all.</p>
+<h3 id="plugin-factory">Plugin Factory</h3>
+<p>The <code>Formstone.Plugin</code> factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:</p>
+<pre><code>$(“.target).plugin({
+    option: value
+});</code></pre>
+<h3 id="plugin-types">Plugin Types</h3>
+<p>There are two types of plugins that can be defined: Widget or Utility.</p>
+<h4 id="widget">Widget</h4>
+<p>Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:</p>
+<pre><code>;(function ($, Formstone, undefined) {
+
+    function setUp() {
+        // this = document
+    }
+
+    function construct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function destruct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function reset(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            widget: true,
+            defaults: {
+                option:    value
+            },
+            classes: [
+                &quot;visible&quot;
+            ],
+            methods: {
+                _setup         setup,
+                _construct:    construct,
+                _destruct:     destruct,
+                reset:         reset
+            },
+            utilities: {
+                close:         close
+            }
+        }),
+
+        // Localize References
+
+        Classes      = Plugin.classes,
+        Events       = Plugin.events,
+        Functions    = Plugin.functions;
+
+})(jQuery, Formstone);</code></pre>
+<p>As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_setup</td>
+<td>Run once when document is ready, scoped to document</td>
+</tr>
+<tr>
+<td>_construct</td>
+<td>Run at initialization of each instance, scoped to specific instance</td>
+</tr>
+<tr>
+<td>_destruct</td>
+<td>Run at destruction of each instance, scoped to specific instance</td>
+</tr>
+</tbody>
+</table>
+<p>When an instance is created or destroyed, the factory will automatically add or remove the instance&#39;s localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:</p>
+<pre><code>this.data(&quot;namespace&quot;);</code></pre>
+<p>Custom public methods can also be defined, provided their keys are not prefixed with an underscore (<code>_</code>). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it&#39;s plugin data as the first argument followed by any addition arguments:</p>
+<pre><code>$(&quot;.target&quot;).namespace(&quot;reset&quot;, 500);</code></pre>
+<p>A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance&#39;s target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.</p>
+<h4 id="utility">Utility</h4>
+<p>Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:</p>
+<pre><code>;(function ($, Formstone, undefined) {
+
+    function delegate() {
+        // Manually handle public methods
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            utilties: {
+                _delegate:     delegate
+            }
+        }),
+
+        // Internal Defaults
+
+        Defaults = {
+            option:    value
+        },
+
+        // Localize References
+
+        Document = Formstone.$document[0];
+
+})(jQuery, Formstone);</code></pre>
+<p>A utility can override the default method delegation by pointing the <code>_delegate</code> key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.</p>
+<pre><code>$.namespace(&quot;reset&quot;, 500);</code></pre>
+<h3 id="plugin-object">Plugin Object</h3>
+<p>Defining a plugin using the factory will return an object containing the follow keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td>string</td>
+<td>plugin namespace</td>
+</tr>
+<tr>
+<td>initialized</td>
+<td>boolean</td>
+<td>initialized state</td>
+</tr>
+<tr>
+<td>defaults</td>
+<td>object</td>
+<td>default options extended with initialization and local options</td>
+</tr>
+<tr>
+<td>functions</td>
+<td>object</td>
+<td>private utility functions</td>
+</tr>
+<tr>
+<td>methods</td>
+<td>object</td>
+<td>public methods</td>
+</tr>
+<tr>
+<td>utilities</td>
+<td>object</td>
+<td>public utilities</td>
+</tr>
+<tr>
+<td>classes</td>
+<td>object</td>
+<td>namespaced classes strings</td>
+</tr>
+<tr>
+<td>events</td>
+<td>object</td>
+<td>namespaced event strings</td>
+</tr>
+</tbody>
+</table>
+<p>These values can then be localized in the scope of the plugin for optimal minimization:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+        ...
+    }),
+    Defaults     = Plugin.defaults,
+    Functions    = Plugin.functions,
+    Methods      = Plugin.methods,
+    Utilities    = Plugin.utilities,
+    Classes      = Plugin.classes,
+    Events       = Plugin.events;</code></pre>
+<p>This may seem strangely redundant at first, however multi-dimensional objects do not minimize efficiently. This is also one reason standard prototypal inheritance is not used when building a plugin, however this is not to say a specific plugin could not contain locally scoped prototypes. Plugin design is always up to the developer, the factory simply provides a consistent, DRY approach to the basic plugin pattern.</p>
+<h4 id="classes">Classes</h4>
+<p>The <code>classes</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom classes. Custom classes will become object keys, while the namespaced class will become the value:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    classes: [
+        &quot;visible&quot;,
+        &quot;content&quot;
+    ],
+    ...
+});</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base</td>
+<td>Default</td>
+<td>namespace</td>
+</tr>
+<tr>
+<td>element</td>
+<td>Default</td>
+<td>namespace-element</td>
+</tr>
+<tr>
+<td>visible</td>
+<td>Custom</td>
+<td>namespace-visible</td>
+</tr>
+<tr>
+<td>content</td>
+<td>Custom</td>
+<td>namespace-content</td>
+</tr>
+</tbody>
+</table>
+<h4 id="events">Events</h4>
+<p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
+<pre><code>var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    events: [
+        &quot;enable&quot;,
+        &quot;disable&quot;
+    ],
+    ...
+});</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td>Default</td>
+<td>.namespace</td>
+</tr>
+<tr>
+<td>blur</td>
+<td>Default</td>
+<td>blur.namespace</td>
+</tr>
+<tr>
+<td>change</td>
+<td>Default</td>
+<td>change.namespace</td>
+</tr>
+<tr>
+<td>click</td>
+<td>Default</td>
+<td>click.namespace</td>
+</tr>
+<tr>
+<td>clickTouchStart</td>
+<td>Default</td>
+<td>click.namespace touchstart.namespace</td>
+</tr>
+<tr>
+<td>dblClick</td>
+<td>Default</td>
+<td>dblClick.namespace</td>
+</tr>
+<tr>
+<td>drag</td>
+<td>Default</td>
+<td>drag.namespace</td>
+</tr>
+<tr>
+<td>dragEnd</td>
+<td>Default</td>
+<td>dragend.namespace</td>
+</tr>
+<tr>
+<td>dragEnter</td>
+<td>Default</td>
+<td>dragenter.namespace</td>
+</tr>
+<tr>
+<td>dragLeave</td>
+<td>Default</td>
+<td>dragleave.namespace</td>
+</tr>
+<tr>
+<td>dragOver</td>
+<td>Default</td>
+<td>dragover.namespace</td>
+</tr>
+<tr>
+<td>dragStart</td>
+<td>Default</td>
+<td>dragstart.namespace</td>
+</tr>
+<tr>
+<td>drop</td>
+<td>Default</td>
+<td>drop.namespace</td>
+</tr>
+<tr>
+<td>error</td>
+<td>Default</td>
+<td>error.namespace</td>
+</tr>
+<tr>
+<td>focus</td>
+<td>Default</td>
+<td>focus.namespace</td>
+</tr>
+<tr>
+<td>focusIn</td>
+<td>Default</td>
+<td>focusin.namespace</td>
+</tr>
+<tr>
+<td>focusOut</td>
+<td>Default</td>
+<td>focusout.namespace</td>
+</tr>
+<tr>
+<td>input</td>
+<td>Default</td>
+<td>input.namespace</td>
+</tr>
+<tr>
+<td>keyDown</td>
+<td>Default</td>
+<td>keydown.namespace</td>
+</tr>
+<tr>
+<td>keyPress</td>
+<td>Default</td>
+<td>keypress.namespace</td>
+</tr>
+<tr>
+<td>keyUp</td>
+<td>Default</td>
+<td>keyup.namespace</td>
+</tr>
+<tr>
+<td>load</td>
+<td>Default</td>
+<td>load.namespace</td>
+</tr>
+<tr>
+<td>mouseDown</td>
+<td>Default</td>
+<td>mousedown.namespace</td>
+</tr>
+<tr>
+<td>mouseEnter</td>
+<td>Default</td>
+<td>mouseenter.namespace</td>
+</tr>
+<tr>
+<td>mouseLeave</td>
+<td>Default</td>
+<td>mouseleave.namespace</td>
+</tr>
+<tr>
+<td>mouseMove</td>
+<td>Default</td>
+<td>mousemove.namespace</td>
+</tr>
+<tr>
+<td>mouseOut</td>
+<td>Default</td>
+<td>mouseout.namespace</td>
+</tr>
+<tr>
+<td>mouseOver</td>
+<td>Default</td>
+<td>mouseover.namespace</td>
+</tr>
+<tr>
+<td>mouseUp</td>
+<td>Default</td>
+<td>mouseup.namespace</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>Default</td>
+<td>resize.namespace</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>Default</td>
+<td>scroll.namespace</td>
+</tr>
+<tr>
+<td>select</td>
+<td>Default</td>
+<td>select.namespace</td>
+</tr>
+<tr>
+<td>touchCancel</td>
+<td>Default</td>
+<td>touchcancel.namespace</td>
+</tr>
+<tr>
+<td>touchEnd</td>
+<td>Default</td>
+<td>touchend.namespace</td>
+</tr>
+<tr>
+<td>touchLeave</td>
+<td>Default</td>
+<td>touchleave.namespace</td>
+</tr>
+<tr>
+<td>touchMove</td>
+<td>Default</td>
+<td>touchmove.namespace</td>
+</tr>
+<tr>
+<td>touchStart</td>
+<td>Default</td>
+<td>touchstart.namespace</td>
+</tr>
+<tr>
+<td>transitionEnd</td>
+<td>Default</td>
+<td>transitionEnd.namespace</td>
+</tr>
+<tr>
+<td>enable</td>
+<td>Custom</td>
+<td>enable.namespace</td>
+</tr>
+<tr>
+<td>disable</td>
+<td>Custom</td>
+<td>disable.namespace</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<h3 id="plugin">Plugin</h3>
+<p>Builds a plugin and registers it with jQuery.</p>
+<pre><code>Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
+<h5 id="parameters">Parameters</h5>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td>string</td>
+<td></td>
+<td>Plugin namespace</td>
+</tr>
+<tr>
+<td>settings</td>
+<td>object</td>
+<td></td>
+<td>Plugin settings</td>
+</tr>
+</tbody>
+</table>
+</div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="dropdown.html">Dropdown</a></li>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div></div><!-- Girdlock --> <script></script></body></html>

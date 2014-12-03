@@ -1,0 +1,10 @@
+{{= it.include("_header", { local_title: it.document.title }) }}
+<div class="row">
+	<div class="mobile-full tablet-full desktop-10 right contained content">
+		{{= it.document }}
+	</div>
+	<div class="mobile-full tablet-full desktop-2 sidebar">
+		{{= it.include("navigation") }}
+	</div>
+</div>
+{{= it.include("_footer") }}

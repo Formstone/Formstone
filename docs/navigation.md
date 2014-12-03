@@ -7,9 +7,10 @@ A jQuery plugin for simple responsive navigation.
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
-<br class="nav">
+
 
 ## Use 
+
 ### Basic
 
 Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:

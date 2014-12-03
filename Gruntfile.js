@@ -44,15 +44,15 @@ module.exports = function(grunt) {
 				undef:     true,
 				validthis: true
 			},
-			build: 'src/js/*.js',
-			site: 'site/js/src/**/*.js'
+			library: 'src/js/*.js',
+			demo: 'demo/js/src/**/*.js'
 		},
 		// Uglify
 		uglify: {
 			options: {
 				report: 'min'
 			},
-			build: {
+			library: {
 				files: [{
 					expand: true,
 					cwd:    'src/',
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
 					dest:   'dist/'
 				}]
 			},
-			site: {
+			demo: {
 				options: {
 					preserveComments: 'some'
 				},
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 		},
 		// Copy
 		copy: {
-			build: {
+			library: {
 				expand: true,
 				cwd:    'src/',
 				src:    '**/*.js',
@@ -81,10 +81,10 @@ module.exports = function(grunt) {
 			options: {
 				cleancss: true
 			},
-			build: {
+			library: {
 				files: cssFiles
 			},
-			site: {
+			demo: {
 				files: '<%= pkg.site.css %>'
 			}
 		},
@@ -93,11 +93,11 @@ module.exports = function(grunt) {
 			options: {
 				browsers: [ '> 1%', 'last 5 versions', 'Firefox ESR', 'Opera 12.1', 'IE 8', 'IE 9' ]
 			},
-			build: {
+			library: {
 				 src: 'dist/**/*.css'
 			},
-			site: {
-				 src: 'site/css/*.css'
+			demo: {
+				 src: 'demo/css/*.css'
 			}
 		},
 		// Banner
@@ -111,16 +111,16 @@ module.exports = function(grunt) {
 					return grunt.config.get("meta").banner.replace("{{ local_name }}", filename);
 				}
 			},
-			build: {
+			library: {
 				files: {
 					src: 'dist/**/*'
 				}
 			},
-			site: {
+			demo: {
 				files: {
 					src: [
-						'site/css/*',
-						'site/js/*'
+						'demo/css/*',
+						'demo/js/*'
 					]
 				}
 			}
@@ -174,12 +174,12 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		// Zetzer - Site building
+		// Zetzer - Demo Site
 		zetzer: {
 			main: {
 				options: {
-					templates: 'site/templates/',
-					partials: 'site/templates/partials/',
+					templates: 'demo/templates/',
+					partials: 'demo/templates/partials/',
 					env: {
 						title: 'Formstone'
 					}
@@ -187,17 +187,17 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: 'site/tmp/*.md',
-						dest: 'site/components/',
+						src: 'demo/tmp/*.md',
+						dest: 'demo/components/',
 						ext: '.html',
 						flatten: true
 					}
 				]
 			}
 		},
-		// remove temp site files
+		// remove temp demo files
 		clean: [
-			'site/tmp/'
+			'demo/tmp/'
 		]
 /*
 		// Strip MQ
@@ -208,7 +208,7 @@ module.exports = function(grunt) {
 			},
 			all: {
 				files: {
-					'css/site-ie8.css': [ 'css/site-ie8.css' ]
+					'css/demo-ie8.css': [ 'css/demo-ie8.css' ]
 				}
 			}
 		}
@@ -257,14 +257,14 @@ module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
 
 	// Default task.
-	grunt.registerTask('default', [ 'js', 'css', 'build', 'site_clean' ]);
+	grunt.registerTask('default', [ 'js', 'css', 'library', 'demo_clean' ]);
 
-	grunt.registerTask('js', [ 'jshint:build', 'uglify:build' ]);
-	grunt.registerTask('css', [ 'less:build', 'autoprefixer:build' ]);
+	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
+	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
 
-	grunt.registerTask('build', [ 'usebanner:build', 'sync', 'buildLicense', 'buildDocs' ]);
+	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('site_clean', [ 'zetzer', 'clean', 'jshint:site', 'uglify:site', 'less:site', 'autoprefixer:site', 'usebanner:site' ]);
-	grunt.registerTask('site', [ 'buildDocs', 'site_clean' ]);
+	grunt.registerTask('demo_clean', [ 'zetzer', 'clean', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo' ]);
+	grunt.registerTask('demo', [ 'buildDocs', 'demo_clean' ]);
 
 };

@@ -6,9 +6,10 @@ A jQuery plugin for simple tooltips.
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
-<br class="nav">
+
 
 ## Use 
+
 ### Basic
 
 Tooltip will generate a tooltip based on the target element's `data-title` attribute. Tooltip can be configured to open in a specific direction by setting the `direction` key at initialization:

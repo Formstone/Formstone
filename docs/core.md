@@ -4,9 +4,10 @@ Library core.
 
 * [Use](#use)
 * [Methods](#methods)
-<br class="nav">
+
 
 ## Use 
+
 ### Formstone Object
 
 The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:

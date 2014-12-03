@@ -5,9 +5,10 @@ A jQuery plugin for CSS transition events.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
-<br class="nav">
+
 
 ## Use 
+
 ### Basic
 
 Transition provides a predicatable interface for moving to CSS based animations:

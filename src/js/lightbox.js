@@ -1184,9 +1184,3 @@
 		});
 
 })(jQuery, Formstone);
-
-/**
- * @use
-
-
- */

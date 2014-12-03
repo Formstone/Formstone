@@ -6,9 +6,10 @@ A jQuery plugin for multi-touch events.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
-<br class="nav">
+
 
 ## Use 
+
 ### Events
 
 Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. Events emitted by Touch will contain the following extra properties:

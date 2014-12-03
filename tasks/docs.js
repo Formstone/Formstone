@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 				widget: []
 			};
 
+		// Parse Javascript
 
 		function parseJavascript(content) {
 			var _return = {},
@@ -69,7 +70,7 @@ module.exports = function(grunt) {
 										part.default = match.replace("<", "").replace(">", "");
 									}
 									if (match.indexOf('"') === 0) {
-										part.description = match.replace('"', "").replace('"', "");
+										part.description = match.replace(/"/g, "");
 									}
 								}
 							}
@@ -95,6 +96,7 @@ module.exports = function(grunt) {
 			return _return;
 		}
 
+		// Parse CSS
 
 		function parseCSS(content) {
 			var _return = {},
@@ -122,14 +124,26 @@ module.exports = function(grunt) {
 			return _return;
 		}
 
+		// Build JSON file
 
-		function parseFiles(f) {
-			var doc = {};
+		function buildJSON(file) {
+			var doc   = {},
+				jsf   = file,
+				cssf  = file.replace(/js/g, "less"),
+				usef  = file.replace('src/js', "src/docs").replace('src/less', "src/docs").replace(/js/g, "md").replace(/less/g, "md"),
+				demof = file.replace('src/js', "src/docs").replace('src/less', "src/docs").replace(/js/g, "html").replace(/less/g, "html"),
+				jsFile   = grunt.file.exists( jsf )  ? grunt.file.read( jsf )  : false,
+				cssFile  = grunt.file.exists( cssf ) ? grunt.file.read( cssf ) : false,
+				useFile  = grunt.file.exists( usef ) ? grunt.file.read( usef ) : false,
+				demoFile = grunt.file.exists( demof ) ? grunt.file.read( demof ) : false,
+				destination;
 
-			var jsFile = grunt.file.read(f),
-				cssFile = grunt.file.exists( f.replace(/js/g, "less") ) ? grunt.file.read( f.replace(/js/g, "less") ) : false,
-				destinationMD = f.replace("src", "docs").replace(".js", ".md").replace("js/", ""),
-				destinationJSON = f.replace("src", "docs/json").replace(".js", ".json").replace("js/", "");
+			if (cssFile) {
+				destination = file.replace('src/less', "docs/json").replace('.less', ".json");
+			}
+			if (jsFile && cssf !== file) {
+				destination = file.replace('src/js', "docs/json").replace('.js', ".json");
+			}
 
 			// JS
 			if (jsFile) {
@@ -143,17 +157,7 @@ module.exports = function(grunt) {
 					for (var i = 0, count = jsMatches.length; i < count; i++) {
 						var content = jsMatches[i];
 
-						if (content.indexOf("@use") > -1) {
-							var open = content.indexOf("@use") + 4,
-								close = content.indexOf("*/") - content.indexOf("@use") - 6
-								use = content.substr(open, close).trim();
-							doc.use = use;
-						} else if (content.indexOf("@demo") > -1) {
-							var open = content.indexOf("@demo") + 5,
-								close = content.indexOf("*/") - content.indexOf("@demo") - 7
-								demo = content.substr(open, close).trim();
-							doc.demo = demo;
-						} else if (content.indexOf("@plugin") > -1) {
+						if (content.indexOf("@plugin") > -1) {
 							var plugin = parseJavascript(content);
 							doc.name = plugin.name;
 							doc.namespace = plugin.namespace;
@@ -187,6 +191,7 @@ module.exports = function(grunt) {
 			}
 
 			if (cssFile) {
+
 				var cssMatches = cssFile.match(/(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)/g);
 				doc.css = [];
 
@@ -206,9 +211,6 @@ module.exports = function(grunt) {
 							doc.namespace = grid.namespace;
 							doc.type = "grid";
 							doc.description = grid.description;
-
-							destinationMD = f.replace("src", "docs").replace(".less", ".md").replace("less/", ""),
-							destinationJSON = f.replace("src", "docs/json").replace(".less", ".json").replace("less/", "");
 						}
 					}
 				}
@@ -222,7 +224,7 @@ module.exports = function(grunt) {
 						if (doc.type === "widget") {
 							for (var i in widgetMethods) {
 								var m = JSON.parse(JSON.stringify(widgetMethods[i]));
-								m.example = m.example.replace("{ns}", namespace);
+								m.example = m.example.replace('{ns}', namespace);
 
 								doc.methods.push(m);
 							}
@@ -230,7 +232,7 @@ module.exports = function(grunt) {
 
 						for (var i in utilityMethods) {
 							var m = JSON.parse(JSON.stringify(utilityMethods[i]));
-							m.example = m.example.replace("{ns}", namespace);
+							m.example = m.example.replace('{ns}', namespace);
 
 							doc.methods.push(m);
 						}
@@ -243,170 +245,15 @@ module.exports = function(grunt) {
 					});
 				}
 
-				var md = "";
-
-				md += '# ' + doc.name;
-				md += '\n\n';
-				md += doc.description;
-				md += '\n\n';
-
-				if (doc.use) {
-					md += "* [Use](#use)";
-					md += '\n';
+				if (useFile) {
+					doc.use = useFile;
 				}
-				if (doc.options && doc.options.length) {
-					md += "* [Options](#options)";
-					md += '\n';
-				}
-				if (doc.events && doc.events.length) {
-					md += "* [Events](#events)";
-					md += '\n';
-				}
-				if (doc.methods && doc.methods.length) {
-					md += "* [Methods](#methods)";
-					md += '\n';
-				}
-				if (doc.css && doc.css.length) {
-					md += "* [CSS](#css)";
-					md += '\n';
+				if (demoFile) {
+					doc.demo = demoFile;
 				}
 
-				md += '<br class="nav">';
-
-				md += '\n';
-
-				if (doc.use) {
-					md += '\n';
-					md += '## Use ';
-					md += '\n';
-					md += doc.use
-					md += '\n\n';
-				}
-
-				if (doc.options && doc.options.length) {
-					md += '## Options';
-					md += '\n\n';
-					if (doc.type === "widget") {
-						md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-' + namespace + '-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.';
-					}
-					if (doc.type === "utility") {
-						md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method.';
-					}
-					md += '\n\n';
-					md += '| Name | Type | Default | Description |';
-					md += '\n';
-					md += '| --- | --- | --- | --- |';
-					md += '\n';
-					for (var i in doc.options) {
-						var o = doc.options[i];
-						md += '| ' + (o.name || "");
-						md += ' | ' + (o.type || "");
-						md += ' | ' + (o.default || "");
-						md += ' | ' + (o.description || "");
-						md += ' |\n';
-					}
-					md += '\n';
-				}
-
-				if (doc.events && doc.events.length) {
-					md += '## Events';
-					md += '\n\n';
-					if (doc.type === "widget") {
-						md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
-						md += '\n\n';
-					}
-					if (doc.type === "utility") {
-						md += 'Events are triggered on the `window`, unless otherwise stated.';
-						md += '\n\n';
-					}
-					md += '| Event | Description |';
-					md += '\n';
-					md += '| --- | --- |';
-					md += '\n';
-					for (var i in doc.events) {
-						var e = doc.events[i];
-						md += '| ' + (e.name || "");
-						md += ' | ' + (e.description || "");
-						md += ' |\n';
-					}
-					md += '\n';
-				}
-
-				if (doc.methods && doc.methods.length) {
-					md += '## Methods';
-					md += '\n\n';
-					if (doc.type === "widget") {
-						md += 'Methods are publicly available to all active instances, unless otherwise stated.';
-						md += '\n\n';
-					}
-					if (doc.type === "utility") {
-						md += 'Methods are publicly available, unless otherwise stated.';
-						md += '\n\n';
-					}
-					for (var i in doc.methods) {
-						var m = doc.methods[i];
-						md += '### ' + m.name;
-						md += '\n\n';
-						md += m.description;
-						md += '\n\n';
-						if (m.example) {
-							md += '```';
-							md += '\n';
-							md += m.example;
-							md += '\n';
-							md += '```';
-						}
-						md += '\n\n';
-						if (m.params && m.params.length) {
-							md += '##### Parameters';
-							md += '\n\n';
-							md += '| Name | Type | Default | Description |';
-							md += '\n';
-							md += '| --- | --- | --- | --- |';
-							md += '\n';
-							for (var j in m.params) {
-								var p = m.params[j];
-								md += '| ' + (p.name || "");
-								md += ' | ' + (p.type || "");
-								md += ' | ' + (p.default || "");
-								md += ' | ' + (p.description || "");
-								md += ' |\n';
-							}
-							md += '\n';
-						}
-					}
-				}
-
-				if (doc.css && doc.css.length) {
-					md += '## CSS';
-					md += '\n\n';
-					md += '| Class | Type | Description |';
-					md += '\n';
-					md += '| --- | --- | --- |';
-					md += '\n';
-					for (var i in doc.css) {
-						var e = doc.css[i];
-						md += '| ' + (e.name || "");
-						md += ' | ' + (e.type || "");
-						md += ' | ' + (e.description || "");
-						md += ' |\n';
-					}
-					md += '\n';
-				}
-
-				var template = {
-						template: "component.html",
-						title: doc.name,
-						demo: doc.demo ? doc.demo : ""
-					},
-					demoTitle = doc.demo ? "* [Demo](#demo)" + '\n <br class="nav">' : "";
-
-				grunt.file.write(destinationMD, md);
-
-				grunt.file.write(destinationMD.replace("docs/", "site/tmp/"), JSON.stringify(template) + '\n\n' + md.replace('<br class="nav">', demoTitle)); // site
-
-				grunt.file.write(destinationJSON, JSON.stringify(doc));
-				grunt.log.writeln('File "' + destinationMD + '" created.');
+				grunt.file.write(destination, JSON.stringify(doc));
+				grunt.log.writeln('File "' + destination + '" created.');
 
 				if (allDocs[doc.type]) {
 					allDocs[doc.type].push(doc);
@@ -414,43 +261,246 @@ module.exports = function(grunt) {
 			}
 		}
 
+		// build markdown
+
+		function buildMarkdown(doc, heading, includeDemo) {
+			var namespace = doc.name.toLowerCase(),
+				md = "";
+
+			md += heading + ' ' + doc.name;
+			md += '\n\n';
+			md += doc.description;
+			md += '\n\n';
+
+			if (doc.use) {
+				md += "* [Use](#use)";
+				md += '\n';
+			}
+			if (doc.options && doc.options.length) {
+				md += "* [Options](#options)";
+				md += '\n';
+			}
+			if (doc.events && doc.events.length) {
+				md += "* [Events](#events)";
+				md += '\n';
+			}
+			if (doc.methods && doc.methods.length) {
+				md += "* [Methods](#methods)";
+				md += '\n';
+			}
+			if (doc.css && doc.css.length) {
+				md += "* [CSS](#css)";
+				md += '\n';
+			}
+
+			// if demo
+			if (includeDemo && doc.demo) {
+				md += "* [Demo](#demo)";
+				md += '\n';
+			}
+
+			md += '\n';
+
+			if (doc.use) {
+				md += '\n';
+				md += heading + '# Use ';
+				md += '\n\n';
+				md += doc.use
+				md += '\n\n';
+			}
+
+			if (doc.options && doc.options.length) {
+				md += heading + '# Options';
+				md += '\n\n';
+				if (doc.type === "widget") {
+					md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-' + namespace + '-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.';
+				}
+				if (doc.type === "utility") {
+					md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method.';
+				}
+				md += '\n\n';
+				md += '| Name | Type | Default | Description |';
+				md += '\n';
+				md += '| --- | --- | --- | --- |';
+				md += '\n';
+				for (var i in doc.options) {
+					var o = doc.options[i];
+					md += '| ' + (o.name || "");
+					md += ' | ' + (o.type || "");
+					md += ' | ' + (o.default || "");
+					md += ' | ' + (o.description || "");
+					md += ' |\n';
+				}
+				md += '\n';
+			}
+
+			if (doc.events && doc.events.length) {
+				md += heading + '# Events';
+				md += '\n\n';
+				if (doc.type === "widget") {
+					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
+					md += '\n\n';
+				}
+				if (doc.type === "utility") {
+					md += 'Events are triggered on the `window`, unless otherwise stated.';
+					md += '\n\n';
+				}
+				md += '| Event | Description |';
+				md += '\n';
+				md += '| --- | --- |';
+				md += '\n';
+				for (var i in doc.events) {
+					var e = doc.events[i];
+					md += '| ' + (e.name || "");
+					md += ' | ' + (e.description || "");
+					md += ' |\n';
+				}
+				md += '\n';
+			}
+
+			if (doc.methods && doc.methods.length) {
+				md += heading + '# Methods';
+				md += '\n\n';
+				if (doc.type === "widget") {
+					md += 'Methods are publicly available to all active instances, unless otherwise stated.';
+					md += '\n\n';
+				}
+				if (doc.type === "utility") {
+					md += 'Methods are publicly available, unless otherwise stated.';
+					md += '\n\n';
+				}
+				for (var i in doc.methods) {
+					var m = doc.methods[i];
+					md += heading + '## ' + m.name;
+					md += '\n\n';
+					md += m.description;
+					md += '\n\n';
+					if (m.example) {
+						md += '```';
+						md += '\n';
+						md += m.example;
+						md += '\n';
+						md += '```';
+					}
+					md += '\n\n';
+					if (m.params && m.params.length) {
+						md += heading + '#### Parameters';
+						md += '\n\n';
+						md += '| Name | Type | Default | Description |';
+						md += '\n';
+						md += '| --- | --- | --- | --- |';
+						md += '\n';
+						for (var j in m.params) {
+							var p = m.params[j];
+							md += '| ' + (p.name || "");
+							md += ' | ' + (p.type || "");
+							md += ' | ' + (p.default || "");
+							md += ' | ' + (p.description || "");
+							md += ' |\n';
+						}
+						md += '\n';
+					}
+				}
+			}
+
+			if (doc.css && doc.css.length) {
+				md += heading + '# CSS';
+				md += '\n\n';
+				md += '| Class | Type | Description |';
+				md += '\n';
+				md += '| --- | --- | --- |';
+				md += '\n';
+				for (var i in doc.css) {
+					var e = doc.css[i];
+					md += '| ' + (e.name || "");
+					md += ' | ' + (e.type || "");
+					md += ' | ' + (e.description || "");
+					md += ' |\n';
+				}
+				md += '\n';
+			}
+
+			if (includeDemo && doc.demo) {
+				md += heading + '# Demo';
+				md += '\n\n';
+				md += '<div class="demo">\n';
+				md += doc.demo;
+				md += '\n</div>';
+			}
+
+			return md;
+		}
+
+		// Build Docs
+
+		function buildDocs(file) {
+			var doc = grunt.file.readJSON(file),
+				destination = file.replace('/json', "").replace('.json', ".md"),
+				md = buildMarkdown(doc, "#");
+
+			grunt.file.write(destination, md, false);
+			grunt.log.writeln('File "' + destination + '" created.');
+		}
+
+		// Build demo
+
+		function buildDemo(file) {
+			var doc = grunt.file.readJSON(file),
+				destination = file.replace('docs/json', "demo/tmp").replace('.json', ".md"),
+				md = buildMarkdown(doc, "#", true),
+				template = {
+					template: "component.html",
+					title: doc.name
+				};
+
+			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + md);
+			grunt.log.writeln('File "' + destination + '" created.');
+		}
+
+		// Build Index
+
+		function buildIndex() {
+			var docsmd = '';
+
+			docsmd += '## Core';
+			docsmd += '\n\n';
+			docsmd += '* [Formstone](core.md)';
+			docsmd += '\n\n';
+			docsmd += '## Grid';
+			docsmd += '\n\n';
+			for (var i in allDocs.grid) {
+				var d = allDocs.grid[i];
+				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
+				docsmd += '\n';
+			}
+			docsmd += '\n';
+			docsmd += '## Utility';
+			docsmd += '\n\n';
+			for (var i in allDocs.utility) {
+				var d = allDocs.utility[i];
+				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
+				docsmd += '\n';
+			}
+			docsmd += '\n';
+			docsmd += '## Widget';
+			docsmd += '\n\n';
+			for (var i in allDocs.widget) {
+				var d = allDocs.widget[i];
+				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
+				docsmd += '\n';
+			}
+
+			grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
+			grunt.file.write("site/templates/partials/navigation.md", docsmd.replace('.md', ".html").replace(/##/g, "#####")); //site nav
+		}
+
 		// WORK
 
-		grunt.file.expand("src/js/*.js").forEach(parseFiles);
-		grunt.file.expand("src/less/*.less").forEach(parseFiles);
-
-		var docsmd = '';
-
-		docsmd += '## Core';
-		docsmd += '\n\n';
-		docsmd += '* [Formstone](core.md)';
-		docsmd += '\n\n';
-		docsmd += '## Grid';
-		docsmd += '\n\n';
-		for (var i in allDocs.grid) {
-			var d = allDocs.grid[i];
-			docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			docsmd += '\n';
-		}
-		docsmd += '\n';
-		docsmd += '## Utility';
-		docsmd += '\n\n';
-		for (var i in allDocs.utility) {
-			var d = allDocs.utility[i];
-			docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			docsmd += '\n';
-		}
-		docsmd += '\n';
-		docsmd += '## Widget';
-		docsmd += '\n\n';
-		for (var i in allDocs.widget) {
-			var d = allDocs.widget[i];
-			docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(" ", "") + '.md)';
-			docsmd += '\n';
-		}
-
-		grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
-		grunt.file.write("site/templates/partials/navigation.md", docsmd.replace(/.md/g, ".html").replace(/##/g, "#####")); //site nav
+		grunt.file.expand("src/js/*.js").forEach(buildJSON);
+		grunt.file.expand("src/less/*.less").forEach(buildJSON);
+		grunt.file.expand("docs/json/*.json").forEach(buildDocs);
+		grunt.file.expand("docs/json/*.json").forEach(buildDemo);
+		buildIndex();
 
 		var pkg = grunt.file.readJSON('package.json'),
 			destination = 'README.md',

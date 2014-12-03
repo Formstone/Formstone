@@ -6,9 +6,10 @@ A jQuery plugin for responsive media query events.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
-<br class="nav">
+
 
 ## Use 
+
 ### Basic
 
 Media Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:

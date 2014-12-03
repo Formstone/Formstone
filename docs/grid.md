@@ -3,9 +3,10 @@
 A responsive CSS grid.
 
 * [Use](#use)
-<br class="nav">
+
 
 ## Use 
+
 The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
 
 ### Markup
