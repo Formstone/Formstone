@@ -72,7 +72,7 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| change | Change to a media query match; Triggered on window |
+| mqchange | Change to a media query match; Triggered on window |
 
 ## Methods
 

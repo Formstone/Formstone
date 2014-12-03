@@ -94,7 +94,7 @@
 	function onStateChange() {
 		setState();
 
-		$Window.trigger(Events.change, [ State ]);
+		$Window.trigger(Events.mqChange, [ State ]);
 	}
 
 	/**
@@ -253,13 +253,13 @@
 
 		/**
 		 * @events
-		 * @event change "Change to a media query match; Triggered on window"
+		 * @event mqchange "Change to a media query match; Triggered on window"
 		 */
 
 		Events = {
-			change     : "change",
-			enter      : "enter",
-			leave      : "leave"
+			mqChange    : "mqchange",
+			enter       : "enter",
+			leave       : "leave"
 		},
 
 		// Public methods
