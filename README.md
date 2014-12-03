@@ -2,6 +2,6 @@
 
 # Formstone 
 
-Library of modular javascript components. 
+Library of modular front end components. 
 
 [Documentation](docs/README.md)
