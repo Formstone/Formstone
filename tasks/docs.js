@@ -491,9 +491,6 @@ module.exports = function(grunt) {
 			}
 
 			grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
-
-			grunt.log.writeln(docsmd.replace('.md', ".html").replace(/##/g, "#####"));
-
 			grunt.file.write("demo/templates/partials/navigation.md", docsmd.replace(/.md/g, ".html").replace(/##/g, "#####")); //site nav
 		}
 
