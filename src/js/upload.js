@@ -312,6 +312,7 @@
 	 * @name Upload
 	 * @description A jQuery plugin for simple drag and drop uploads.
 	 * @type widget
+	 * @dependency core.js
 	 */
 
 	var Plugin = Formstone.Plugin("upload", {

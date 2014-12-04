@@ -9,27 +9,38 @@ A jQuery plugin for multi-touch events.
 * [Events](#events)
 * [Methods](#methods)
 
-
 ## Use 
+
+#### Main
+
+```markup
+touch.js
+```
+
+#### Dependencies
+
+```markup
+core.js
+```
 
 ### Events
 
 Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. Events emitted by Touch will contain the following extra properties:
 
-```javascript
-pageX		// Current X position
-pageY		// Current Y position
-deltaX		// Change in X position
-deltaY		// Change in Y position
-scale		// Current scale value
-```
+| Key | Description |
+| --- | --- |
+| `pageX` | Current X position |
+| `pageY` | Current Y position |
+| `deltaX` | Change in X position |
+| `deltaY` | Change in Y position |
+| `scale` | Current scale value |
 
 ### Tap
 
 Tap creates a basic 'fast click' event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user's scroll:
 
 ```javascript
-$(".tap-it").touch({
+$(".target").touch({
 	tap: true
 }).on("tap", function(e) {
 	console.log("Tapped");
@@ -43,7 +54,7 @@ Note: `tap` can not be used in conjunction with `pan` or `scale`.
 Pan can be used for building touch-freindly drag and drop interfaces:
 
 ```javascript
-$(".pan-it").touch({
+$(".target").touch({
 	pan: true
 }).on("panstart", function(e) {
 	console.log("Started panning");
@@ -59,7 +70,7 @@ $(".pan-it").touch({
 Scale can be used for building touch-freindly scalable interfaces:
 
 ```javascript
-$(".scale-it").touch({
+$(".target").touch({
 	scale: true
 }).on("scalestart", function(e) {
 	console.log("Started scaling");
@@ -78,9 +89,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| pan | boolean || object | false | Object to enable |
-| scale | boolean | false | True to enable |
-| tap | boolean | false | True to enable |
+| `pan` | `boolean || object` | `false` | Object to enable |
+| `scale` | `boolean` | `false` | True to enable |
+| `tap` | `boolean` | `false` | True to enable |
 
 ## Events
 
@@ -88,13 +99,13 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| tap | &nbsp; |
-| panstart | &nbsp; |
-| pan | &nbsp; |
-| panend | &nbsp; |
-| scalestart | &nbsp; |
-| scale | &nbsp; |
-| scaleend | &nbsp; |
+| `tap` | &nbsp; |
+| `panstart` | &nbsp; |
+| `pan` | &nbsp; |
+| `panend` | &nbsp; |
+| `scalestart` | &nbsp; |
+| `scale` | &nbsp; |
+| `scaleend` | &nbsp; |
 
 ## Methods
 
@@ -112,7 +123,7 @@ $.touch("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### destroy
 

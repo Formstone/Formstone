@@ -7,6 +7,11 @@
 <li><a href="#css">CSS</a></li>
 </ul>
 <h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">tooltip.js
+tooltip.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>Tooltip will generate a tooltip based on the target element&#39;s <code>data-title</code> attribute. Tooltip can be configured to open in a specific direction by setting the <code>direction</code> key at initialization:</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).tooltip({
@@ -41,39 +46,39 @@
 </thead>
 <tbody>
 <tr>
-<td>delay</td>
-<td>int</td>
-<td>0</td>
+<td><code>delay</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
 <td>Hover delay</td>
 </tr>
 <tr>
-<td>direction</td>
-<td>string</td>
-<td>&#39;top&#39;</td>
+<td><code>direction</code></td>
+<td><code>string</code></td>
+<td><code>&#39;top&#39;</code></td>
 <td>Tooltip direction</td>
 </tr>
 <tr>
-<td>follow</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>follow</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Flag to follow mouse</td>
 </tr>
 <tr>
-<td>formatter</td>
-<td>function</td>
-<td>$.noop</td>
+<td><code>formatter</code></td>
+<td><code>function</code></td>
+<td><code>$.noop</code></td>
 <td>Text format function</td>
 </tr>
 <tr>
-<td>margin</td>
-<td>int</td>
-<td>15</td>
+<td><code>margin</code></td>
+<td><code>int</code></td>
+<td><code>15</code></td>
 <td>Tooltip margin</td>
 </tr>
 <tr>
-<td>match</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>match</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Flag to match mouse position</td>
 </tr>
 </tbody>
@@ -95,9 +100,9 @@
 </thead>
 <tbody>
 <tr>
-<td>options</td>
-<td>object</td>
-<td>{}</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
 <td>New plugin defaults</td>
 </tr>
 </tbody>
@@ -116,43 +121,43 @@
 </thead>
 <tbody>
 <tr>
-<td>.fs-tooltip</td>
-<td>element</td>
+<td><code>.fs-tooltip</code></td>
+<td><code>element</code></td>
 <td>Base widget class</td>
 </tr>
 <tr>
-<td>.fs-tooltip.fs-tooltip-visible</td>
-<td>modifier</td>
+<td><code>.fs-tooltip.fs-tooltip-visible</code></td>
+<td><code>modifier</code></td>
 <td>Inidcates visible state</td>
 </tr>
 <tr>
-<td>.fs-tooltip.fs-tooltip-right</td>
-<td>modifier</td>
+<td><code>.fs-tooltip.fs-tooltip-right</code></td>
+<td><code>modifier</code></td>
 <td>Inidcates right side display</td>
 </tr>
 <tr>
-<td>.fs-tooltip.fs-tooltip-left</td>
-<td>modifier</td>
+<td><code>.fs-tooltip.fs-tooltip-left</code></td>
+<td><code>modifier</code></td>
 <td>Inidcates left side display</td>
 </tr>
 <tr>
-<td>.fs-tooltip.fs-tooltip-top</td>
-<td>modifier</td>
+<td><code>.fs-tooltip.fs-tooltip-top</code></td>
+<td><code>modifier</code></td>
 <td>Inidcates top display</td>
 </tr>
 <tr>
-<td>.fs-tooltip.fs-tooltip-bottom</td>
-<td>modifier</td>
+<td><code>.fs-tooltip.fs-tooltip-bottom</code></td>
+<td><code>modifier</code></td>
 <td>Inidcates bottom display</td>
 </tr>
 <tr>
-<td>.fs-tooltip-content</td>
-<td>element</td>
+<td><code>.fs-tooltip-content</code></td>
+<td><code>element</code></td>
 <td>Tooltip content wrapper</td>
 </tr>
 <tr>
-<td>.fs-tooltip-caret</td>
-<td>element</td>
+<td><code>.fs-tooltip-caret</code></td>
+<td><code>element</code></td>
 <td>Tooltip caret</td>
 </tr>
 </tbody>

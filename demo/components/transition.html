@@ -6,13 +6,17 @@
 <li><a href="#methods">Methods</a></li>
 </ul>
 <h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">transition.js</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Transition provides a predicatable interface for moving to CSS based animations:</p>
+<p>Transition provides a predictable interface for moving to CSS based animations:</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).transition(function() {
     ...
 }).addClass(&quot;visible&quot;);</code></pre>
 <h3 id="resolve">Resolve</h3>
-<p>Tranistions can manually resolved, which will immediately fire the associated callback:</p>
+<p>Transitions can manually resolved, which will immediately fire the associated callback:</p>
 <pre><code class="lang-javascript">if (shouldResolve) {
     $(&quot;.target&quot;).transition(&quot;resolve&quot;);
 }</code></pre>
@@ -29,21 +33,21 @@
 </thead>
 <tbody>
 <tr>
-<td>always</td>
-<td>boolean</td>
-<td>False</td>
+<td><code>always</code></td>
+<td><code>boolean</code></td>
+<td><code>False</code></td>
 <td>Flag to always react to transition end (.on vs .one)</td>
 </tr>
 <tr>
-<td>property</td>
-<td>string</td>
-<td>null</td>
+<td><code>property</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
 <td>Property to react to</td>
 </tr>
 <tr>
-<td>target</td>
-<td>string</td>
-<td>null</td>
+<td><code>target</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
 <td>Target child selector</td>
 </tr>
 </tbody>
@@ -65,9 +69,9 @@
 </thead>
 <tbody>
 <tr>
-<td>options</td>
-<td>object</td>
-<td>{}</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
 <td>New plugin defaults</td>
 </tr>
 </tbody>
@@ -75,6 +79,9 @@
 <h3 id="destroy">destroy</h3>
 <p>Removes plugin instance.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).transition(&quot;destroy&quot;);</code></pre>
+<h3 id="resolve">resolve</h3>
+<p>Resolves current transition end events.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).transition(&quot;resolve&quot;);</code></pre>
 </div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>

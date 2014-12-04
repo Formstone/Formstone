@@ -10,8 +10,22 @@ A jQuery plugin for simple responsive navigation.
 * [Methods](#methods)
 * [CSS](#css)
 
-
 ## Use 
+
+#### Main
+
+```markup
+navigation.js
+navigation.css
+```
+
+#### Dependencies
+
+```markup
+core.js
+mediaquery.js
+touch.js
+```
 
 ### Basic
 
@@ -68,12 +82,12 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| customClass | string | '' | Class applied to instance |
-| handle | string | null | Handle element selector |
-| label | boolean | true | Display handle width label |
-| labels.closed | string | 'Navigation' | Closed state text |
-| labels.open | string | 'Close' | Open state text |
-| maxWidth | string | '980px' | Width at which to auto-disable plugin |
+| `customClass` | `string` | `''` | Class applied to instance |
+| `handle` | `string` | `null` | Handle element selector |
+| `label` | `boolean` | `true` | Display handle width label |
+| `labels.closed` | `string` | `'Navigation'` | Closed state text |
+| `labels.open` | `string` | `'Close'` | Open state text |
+| `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
 
 ## Events
 
@@ -81,8 +95,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| open | Navigation opened |
-| close | Navigation closed |
+| `open` | Navigation opened |
+| `close` | Navigation closed |
 
 ## Methods
 
@@ -108,7 +122,7 @@ $.navigation("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### destroy
 
@@ -146,10 +160,10 @@ $(".target").navigation("open");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .fs-navigation | element | Base widget class |
-| .fs-navigation.fs-navigation-open | modifier | Indicates open state |
-| .fs-navigation.fs-navigation-enabled | modifier | Indicates enabled state |
-| .fs-navigation-handle | element | Click target to toggle navigation |
-| .fs-navigation-handle:after | element | Icon displayed in handle |
-| .fs-navigation-container | element | Wraps target navigation |
+| `.fs-navigation` | `element` | Base widget class |
+| `.fs-navigation.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-handle` | `element` | Click target to toggle navigation |
+| `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
+| `.fs-navigation-container` | `element` | Wraps target navigation |
 

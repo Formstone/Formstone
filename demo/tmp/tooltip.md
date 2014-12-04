@@ -9,8 +9,20 @@ A jQuery plugin for simple tooltips.
 * [Methods](#methods)
 * [CSS](#css)
 
-
 ## Use 
+
+#### Main
+
+```markup
+tooltip.js
+tooltip.css
+```
+
+#### Dependencies
+
+```markup
+core.js
+```
 
 ### Basic
 
@@ -62,12 +74,12 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| delay | int | 0 | Hover delay |
-| direction | string | 'top' | Tooltip direction |
-| follow | boolean | false | Flag to follow mouse |
-| formatter | function | $.noop | Text format function |
-| margin | int | 15 | Tooltip margin |
-| match | boolean | false | Flag to match mouse position |
+| `delay` | `int` | `0` | Hover delay |
+| `direction` | `string` | `'top'` | Tooltip direction |
+| `follow` | `boolean` | `false` | Flag to follow mouse |
+| `formatter` | `function` | `$.noop` | Text format function |
+| `margin` | `int` | `15` | Tooltip margin |
+| `match` | `boolean` | `false` | Flag to match mouse position |
 
 ## Methods
 
@@ -85,7 +97,7 @@ $.tooltip("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### destroy
 
@@ -99,12 +111,12 @@ $(".target").tooltip("destroy");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| .fs-tooltip | element | Base widget class |
-| .fs-tooltip.fs-tooltip-visible | modifier | Inidcates visible state |
-| .fs-tooltip.fs-tooltip-right | modifier | Inidcates right side display |
-| .fs-tooltip.fs-tooltip-left | modifier | Inidcates left side display |
-| .fs-tooltip.fs-tooltip-top | modifier | Inidcates top display |
-| .fs-tooltip.fs-tooltip-bottom | modifier | Inidcates bottom display |
-| .fs-tooltip-content | element | Tooltip content wrapper |
-| .fs-tooltip-caret | element | Tooltip caret |
+| `.fs-tooltip` | `element` | Base widget class |
+| `.fs-tooltip.fs-tooltip-visible` | `modifier` | Inidcates visible state |
+| `.fs-tooltip.fs-tooltip-right` | `modifier` | Inidcates right side display |
+| `.fs-tooltip.fs-tooltip-left` | `modifier` | Inidcates left side display |
+| `.fs-tooltip.fs-tooltip-top` | `modifier` | Inidcates top display |
+| `.fs-tooltip.fs-tooltip-bottom` | `modifier` | Inidcates bottom display |
+| `.fs-tooltip-content` | `element` | Tooltip content wrapper |
+| `.fs-tooltip-caret` | `element` | Tooltip caret |
 

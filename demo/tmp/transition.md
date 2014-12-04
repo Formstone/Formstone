@@ -8,12 +8,23 @@ A jQuery plugin for CSS transition events.
 * [Options](#options)
 * [Methods](#methods)
 
-
 ## Use 
+
+#### Main
+
+```markup
+transition.js
+```
+
+#### Dependencies
+
+```markup
+core.js
+```
 
 ### Basic
 
-Transition provides a predicatable interface for moving to CSS based animations:
+Transition provides a predictable interface for moving to CSS based animations:
 
 ```javascript
 $(".target").transition(function() {
@@ -23,7 +34,7 @@ $(".target").transition(function() {
 
 ### Resolve
 
-Tranistions can manually resolved, which will immediately fire the associated callback:
+Transitions can manually resolved, which will immediately fire the associated callback:
 
 ```javascript
 if (shouldResolve) {
@@ -37,9 +48,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| always | boolean | False | Flag to always react to transition end (.on vs .one) |
-| property | string | null | Property to react to |
-| target | string | null | Target child selector |
+| `always` | `boolean` | `False` | Flag to always react to transition end (.on vs .one) |
+| `property` | `string` | `null` | Property to react to |
+| `target` | `string` | `null` | Target child selector |
 
 ## Methods
 
@@ -57,7 +68,7 @@ $.transition("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### destroy
 
@@ -65,5 +76,13 @@ Removes plugin instance.
 
 ```javascript
 $(".target").transition("destroy");
+```
+
+### resolve
+
+Resolves current transition end events.
+
+```javascript
+$(".target").transition("resolve");
 ```
 

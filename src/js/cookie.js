@@ -122,6 +122,7 @@
 	 * @name Cookie
 	 * @description A jQuery plugin for simple access to browser cookies.
 	 * @type utility
+	 * @dependency core.js
 	 */
 
 	var Plugin = Formstone.Plugin("cookie", {

@@ -48,11 +48,11 @@ This will effect every element on the page and can have unexpected results. In t
 
 | Name | Screen Size | Row Width | Column Count |
 | --- | --- | --- | --- |
-| min | smaller than 500px | 300px | 3 |
-| mobile | smaller than 740px | 480px | 3 |
-| tablet | 740px to 960px | 720px | 6 |
-| desktop | 960px to 1220px | 960px | 12 |
-| max | larger than 1220px | 1200px | 12 |
+| `min` | smaller than 500px | 300px | 3 |
+| `mobile` | smaller than 740px | 480px | 3 |
+| `tablet` | 740px to 960px | 720px | 6 |
+| `desktop` | 960px to 1220px | 960px | 12 |
+| `max` | larger than 1220px | 1200px | 12 |
 
 ### Defining Cells
 

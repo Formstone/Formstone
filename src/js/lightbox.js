@@ -1061,6 +1061,8 @@
 	 * @name Lightbox
 	 * @description A jQuery plugin for simple modals.
 	 * @type widget
+	 * @dependency core.js
+	 * @dependency transition.js
 	 */
 
 	var Plugin = Formstone.Plugin("lightbox", {

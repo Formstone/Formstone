@@ -1,11 +1,19 @@
 <!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Lightbox &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="lightbox">Lightbox</h1>
 <p>A jQuery plugin for simple modals.</p>
 <ul>
+<li><a href="#use">Use</a></li>
 <li><a href="#options">Options</a></li>
 <li><a href="#events">Events</a></li>
 <li><a href="#methods">Methods</a></li>
 <li><a href="#css">CSS</a></li>
 </ul>
+<h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">lightbox.js
+lightbox.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js
+transition.js</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-lightbox-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
@@ -19,105 +27,105 @@
 </thead>
 <tbody>
 <tr>
-<td>customClass</td>
-<td>string</td>
-<td>&#39;&#39;</td>
+<td><code>customClass</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
 <td>Class applied to instance</td>
 </tr>
 <tr>
-<td>extensions</td>
-<td>array</td>
-<td>&quot;jpg&quot;, &quot;sjpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;</td>
+<td><code>extensions</code></td>
+<td><code>array</code></td>
+<td><code>&quot;jpg&quot;, &quot;sjpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;</code></td>
 <td>Image type extensions</td>
 </tr>
 <tr>
-<td>fixed</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>fixed</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Flag for fixed positioning</td>
 </tr>
 <tr>
-<td>formatter</td>
-<td>function</td>
-<td>$.noop</td>
+<td><code>formatter</code></td>
+<td><code>function</code></td>
+<td><code>$.noop</code></td>
 <td>Caption format function</td>
 </tr>
 <tr>
-<td>labels.close</td>
-<td>string</td>
-<td>&#39;Close&#39;</td>
+<td><code>labels.close</code></td>
+<td><code>string</code></td>
+<td><code>&#39;Close&#39;</code></td>
 <td>Close button text</td>
 </tr>
 <tr>
-<td>labels.count</td>
-<td>string</td>
-<td>&#39;of&#39;</td>
+<td><code>labels.count</code></td>
+<td><code>string</code></td>
+<td><code>&#39;of&#39;</code></td>
 <td>Gallery count separator text</td>
 </tr>
 <tr>
-<td>labels.next</td>
-<td>string</td>
-<td>&#39;Next&#39;</td>
+<td><code>labels.next</code></td>
+<td><code>string</code></td>
+<td><code>&#39;Next&#39;</code></td>
 <td>Gallery control text</td>
 </tr>
 <tr>
-<td>labels.previous</td>
-<td>string</td>
-<td>&#39;Previous&#39;</td>
+<td><code>labels.previous</code></td>
+<td><code>string</code></td>
+<td><code>&#39;Previous&#39;</code></td>
 <td>Gallery control text</td>
 </tr>
 <tr>
-<td>margin</td>
-<td>int</td>
-<td>50</td>
+<td><code>margin</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
 <td>Margin used when sizing (single side)</td>
 </tr>
 <tr>
-<td>minHeight</td>
-<td>int</td>
-<td>100</td>
+<td><code>minHeight</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
 <td>Minimum height of modal</td>
 </tr>
 <tr>
-<td>minWidth</td>
-<td>int</td>
-<td>100</td>
+<td><code>minWidth</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
 <td>Minimum width of modal</td>
 </tr>
 <tr>
-<td>mobile</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>mobile</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Flag to force &#39;mobile&#39; rendering</td>
 </tr>
 <tr>
-<td>retina</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>retina</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Flag to use &#39;retina&#39; sizing (halves natural sizes)</td>
 </tr>
 <tr>
-<td>requestKey</td>
-<td>string</td>
-<td>&#39;boxer&#39;</td>
+<td><code>requestKey</code></td>
+<td><code>string</code></td>
+<td><code>&#39;boxer&#39;</code></td>
 <td>GET variable for ajax / iframe requests</td>
 </tr>
 <tr>
-<td>top</td>
-<td>int</td>
-<td>0</td>
+<td><code>top</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
 <td>Target top position; over-rides centering</td>
 </tr>
 <tr>
-<td>videoRadio</td>
-<td>number</td>
-<td>0.5625</td>
+<td><code>videoRadio</code></td>
+<td><code>number</code></td>
+<td><code>0.5625</code></td>
 <td>Video height / width ratio (9 / 16 = 0.5625)</td>
 </tr>
 <tr>
-<td>videoWidth</td>
-<td>int</td>
-<td>600</td>
+<td><code>videoWidth</code></td>
+<td><code>int</code></td>
+<td><code>600</code></td>
 <td>Video target width</td>
 </tr>
 </tbody>
@@ -133,11 +141,11 @@
 </thead>
 <tbody>
 <tr>
-<td>open</td>
+<td><code>open</code></td>
 <td>Lightbox opened; Triggered on window</td>
 </tr>
 <tr>
-<td>close</td>
+<td><code>close</code></td>
 <td>Lightbox closed; Triggered on window</td>
 </tr>
 </tbody>
@@ -162,9 +170,9 @@
 </thead>
 <tbody>
 <tr>
-<td>options</td>
-<td>object</td>
-<td>{}</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
 <td>New plugin defaults</td>
 </tr>
 </tbody>
@@ -187,16 +195,16 @@
 </thead>
 <tbody>
 <tr>
-<td>height</td>
-<td>int</td>
-<td>false</td>
+<td><code>height</code></td>
+<td>`int</td>
+<td>false`</td>
 <td>&nbsp;</td>
 <td>Target height or false to auto size</td>
 </tr>
 <tr>
-<td>width</td>
-<td>int</td>
-<td>false</td>
+<td><code>width</code></td>
+<td>`int</td>
+<td>false`</td>
 <td>&nbsp;</td>
 <td>Target width or false to auto size</td>
 </tr>
@@ -215,138 +223,138 @@
 </thead>
 <tbody>
 <tr>
-<td>.fs-lightbox</td>
-<td>element</td>
+<td><code>.fs-lightbox</code></td>
+<td><code>element</code></td>
 <td>Base widget class</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-open</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-open</code></td>
+<td><code>modifier</code></td>
 <td>Indicates open state</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-loading</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-loading</code></td>
+<td><code>modifier</code></td>
 <td>Indicates loading state</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-animating</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-animating</code></td>
+<td><code>modifier</code></td>
 <td>Indicates animating state</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-mobile</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-mobile</code></td>
+<td><code>modifier</code></td>
 <td>Indicates mobile display</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-fixed</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-fixed</code></td>
+<td><code>modifier</code></td>
 <td>Indicates fixed positioning</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-inline</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-inline</code></td>
+<td><code>modifier</code></td>
 <td>Indicates inline content</td>
 </tr>
 <tr>
-<td>.fs-lightbox.fs-lightbox-iframed</td>
-<td>modifier</td>
+<td><code>.fs-lightbox.fs-lightbox-iframed</code></td>
+<td><code>modifier</code></td>
 <td>Indicates iFrame content</td>
 </tr>
 <tr>
-<td>.fs-lightbox-lock</td>
-<td>modifier</td>
+<td><code>.fs-lightbox-lock</code></td>
+<td><code>modifier</code></td>
 <td>Indicates locked state; Applied to body element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-overlay</td>
-<td>element</td>
+<td><code>.fs-lightbox-overlay</code></td>
+<td><code>element</code></td>
 <td>Overlay element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-close</td>
-<td>element</td>
+<td><code>.fs-lightbox-close</code></td>
+<td><code>element</code></td>
 <td>Close element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-loading_icon</td>
-<td>element</td>
+<td><code>.fs-lightbox-loading_icon</code></td>
+<td><code>element</code></td>
 <td>Loading icon element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-container</td>
-<td>element</td>
+<td><code>.fs-lightbox-container</code></td>
+<td><code>element</code></td>
 <td>Container element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-content</td>
-<td>element</td>
+<td><code>.fs-lightbox-content</code></td>
+<td><code>element</code></td>
 <td>Content element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-image</td>
-<td>element</td>
+<td><code>.fs-lightbox-image</code></td>
+<td><code>element</code></td>
 <td>Image element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-video</td>
-<td>element</td>
+<td><code>.fs-lightbox-video</code></td>
+<td><code>element</code></td>
 <td>Video element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-iframe</td>
-<td>element</td>
+<td><code>.fs-lightbox-iframe</code></td>
+<td><code>element</code></td>
 <td>iFrame element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-meta</td>
-<td>element</td>
+<td><code>.fs-lightbox-meta</code></td>
+<td><code>element</code></td>
 <td>Meta info element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-control</td>
-<td>element</td>
+<td><code>.fs-lightbox-control</code></td>
+<td><code>element</code></td>
 <td>Control element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-control.fs-lightbox-control_previous</td>
-<td>modifier</td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_previous</code></td>
+<td><code>modifier</code></td>
 <td>Indicates previous control</td>
 </tr>
 <tr>
-<td>.fs-lightbox-control.fs-lightbox-control_next</td>
-<td>modifier</td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_next</code></td>
+<td><code>modifier</code></td>
 <td>Indicates next control</td>
 </tr>
 <tr>
-<td>.fs-lightbox-control.fs-lightbox-control_disabled</td>
-<td>modifier</td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_disabled</code></td>
+<td><code>modifier</code></td>
 <td>Indicates disbaled state</td>
 </tr>
 <tr>
-<td>.fs-lightbox-position</td>
-<td>element</td>
+<td><code>.fs-lightbox-position</code></td>
+<td><code>element</code></td>
 <td>Position element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-position_current</td>
-<td>element</td>
+<td><code>.fs-lightbox-position_current</code></td>
+<td><code>element</code></td>
 <td>Current position element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-position_total</td>
-<td>element</td>
+<td><code>.fs-lightbox-position_total</code></td>
+<td><code>element</code></td>
 <td>Total position element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-caption</td>
-<td>element</td>
+<td><code>.fs-lightbox-caption</code></td>
+<td><code>element</code></td>
 <td>Caption element</td>
 </tr>
 <tr>
-<td>.fs-lightbox-error</td>
-<td>element</td>
+<td><code>.fs-lightbox-error</code></td>
+<td><code>element</code></td>
 <td>Error message element</td>
 </tr>
 </tbody>

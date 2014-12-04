@@ -223,6 +223,7 @@
 	 * @name Media Query
 	 * @description A jQuery plugin for responsive media query events.
 	 * @type utility
+	 * @dependency core.js
 	 */
 
 	var Plugin = Formstone.Plugin("mediaquery", {

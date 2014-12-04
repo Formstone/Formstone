@@ -71,6 +71,50 @@
 	@fs-dropdown-options-box-shadow:					0 1px 4px rgba(0, 0, 0, 0.15);
 
 
+	/**
+	 * @class
+	 * @name .fs-dropdown
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-multiple
+	 * @type modifer
+	 * @description Indicates multi-selected element
+	 */
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-cover
+	 * @type modifer
+	 * @description Indicates cover positioning
+	 */
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-bottom
+	 * @type modifer
+	 * @description Indicates bottom positioning
+	 */
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-disabled
+	 * @type modifer
+	 * @description Indicates disabled state
+	 */
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-open
+	 * @type modifer
+	 * @description Indicates open state
+	 */
+	/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-focus
+	 * @type modifer
+	 * @description Indicates focus state
+	 */
+
 	.fs-dropdown {
 		position: relative;
 
@@ -138,8 +182,12 @@
 			}
 		}
 
-
-		// .fs-dropdown-selected
+		/**
+		 * @class
+		 * @name .fs-dropdown-selected
+		 * @type element
+		 * @description Handle item
+		 */
 
 		&-selected {
 			position: relative;
@@ -184,7 +232,12 @@
 		}
 
 
-		// .fs-dropdown-options
+		/**
+		 * @class
+		 * @name .fs-dropdown-options
+		 * @type element
+		 * @description Options container
+		 */
 
 		&-options {
 			width: 100%;
@@ -219,8 +272,12 @@
 			}
 		}
 
-
-		// .fs-dropdown-group
+		/**
+		 * @class
+		 * @name .fs-dropdown-group
+		 * @type element
+		 * @description Option group label
+		 */
 
 		&-group {
 			border-bottom: @fs-dropdown-border-width solid @fs-dropdown-group-border-color;
@@ -231,8 +288,12 @@
 			text-transform: @fs-dropdown-group-text-transform;
 		}
 
-
-		// .fs-dropdown-item
+		/**
+		 * @class
+		 * @name .fs-dropdown-item
+		 * @type element
+		 * @description Option item
+		 */
 
 		&-item {
 			width: 100%;
@@ -249,13 +310,34 @@
 			text-decoration: none;
 			text-overflow: ellipsis;
 
+			/**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_placeholder
+			 * @type modifier
+			 * @description Indicates placeholder item
+			 */
+
 			&_placeholder {
 				display: none;
 			}
 
+			/**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_selected
+			 * @type modifier
+			 * @description Indicates selected item
+			 */
+
 			&_selected {
 				background: @fs-dropdown-item-selected-color;
 			}
+
+			/**
+			 * @class
+			 * @name .fs-dropdown-item.fs-dropdown-item_disabled
+			 * @type modifier
+			 * @description Indicates disabled item
+			 */
 
 			&_disabled {
 				color: @fs-dropdown-item-disabled-text-color;
@@ -285,7 +367,6 @@
 				border-color: @fs-dropdown-disabled-border-color;
 			}
 		}
-
 
 		// .fs-dropdown.fs-dropdown-open
 

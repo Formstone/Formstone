@@ -5,6 +5,8 @@
 <li><a href="#methods">Methods</a></li>
 </ul>
 <h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">core.js</code></pre>
 <h3 id="formstone-object">Formstone Object</h3>
 <p>The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:</p>
 <table>
@@ -17,98 +19,98 @@
 </thead>
 <tbody>
 <tr>
-<td>$window</td>
-<td>object</td>
+<td><code>$window</code></td>
+<td><code>object</code></td>
 <td>Reference to jQuery wrapped window</td>
 </tr>
 <tr>
-<td>window</td>
-<td>object</td>
+<td><code>window</code></td>
+<td><code>object</code></td>
 <td>Reference to original window</td>
 </tr>
 <tr>
-<td>$document</td>
-<td>object</td>
+<td><code>$document</code></td>
+<td><code>object</code></td>
 <td>Reference to jQuery wrapped document</td>
 </tr>
 <tr>
-<td>document</td>
-<td>object</td>
+<td><code>document</code></td>
+<td><code>object</code></td>
 <td>Reference to original document</td>
 </tr>
 <tr>
-<td>$body</td>
-<td>object</td>
+<td><code>$body</code></td>
+<td><code>object</code></td>
 <td>Reference to jQuery wrapped body tag</td>
 </tr>
 <tr>
-<td>Plugins</td>
-<td>object</td>
+<td><code>Plugins</code></td>
+<td><code>object</code></td>
 <td>Contains all registered plugins</td>
 </tr>
 <tr>
-<td>support.file</td>
-<td>boolean</td>
+<td><code>support.file</code></td>
+<td><code>boolean</code></td>
 <td>File API support</td>
 </tr>
 <tr>
-<td>support.history</td>
-<td>boolean</td>
+<td><code>support.history</code></td>
+<td><code>boolean</code></td>
 <td>History API support, including push and pop state</td>
 </tr>
 <tr>
-<td>support.matchMedia</td>
-<td>boolean</td>
+<td><code>support.matchMedia</code></td>
+<td><code>boolean</code></td>
 <td>Match Media API support</td>
 </tr>
 <tr>
-<td>support.raf</td>
-<td>boolean</td>
+<td><code>support.raf</code></td>
+<td><code>boolean</code></td>
 <td>Request Animation Frame API support</td>
 </tr>
 <tr>
-<td>support.touch</td>
-<td>boolean</td>
+<td><code>support.touch</code></td>
+<td><code>boolean</code></td>
 <td>Touch event support</td>
 </tr>
 <tr>
-<td>support.transition</td>
-<td>boolean</td>
+<td><code>support.transition</code></td>
+<td><code>boolean</code></td>
 <td>CSS3 Transition support</td>
 </tr>
 <tr>
-<td>userAgent</td>
-<td>string</td>
+<td><code>userAgent</code></td>
+<td><code>string</code></td>
 <td>Raw user string</td>
 </tr>
 <tr>
-<td>isChrome</td>
-<td>boolean</td>
+<td><code>isChrome</code></td>
+<td><code>boolean</code></td>
 <td>Browser is Chrome</td>
 </tr>
 <tr>
-<td>isFirefox</td>
-<td>boolean</td>
+<td><code>isFirefox</code></td>
+<td><code>boolean</code></td>
 <td>Browser is FireFox</td>
 </tr>
 <tr>
-<td>isSafari</td>
-<td>boolean</td>
+<td><code>isSafari</code></td>
+<td><code>boolean</code></td>
 <td>Browser is Safari</td>
 </tr>
 <tr>
-<td>isMobile</td>
-<td>boolean</td>
+<td><code>isMobile</code></td>
+<td><code>boolean</code></td>
 <td>Browser is Mobile</td>
 </tr>
 <tr>
-<td>isFirefoxMobile</td>
-<td>boolean</td>
+<td><code>isFirefoxMobile</code></td>
+<td><code>boolean</code></td>
 <td>Browser is FireFox Mobile</td>
 </tr>
 </tbody>
 </table>
-<p>User agent sniffing isn&#39;t always reliable or considered a best practice - it should be used sparingly, if at all.</p>
+<p>User agent sniffing isn&#39;t always reliable or considered best practice - it should be used sparingly, if at all.</p>
 <h3 id="plugin-factory">Plugin Factory</h3>
 <p>The <code>Formstone.Plugin</code> factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:</p>
 <pre><code class="lang-javascript">$(“.target).plugin({
@@ -177,15 +179,15 @@
 </thead>
 <tbody>
 <tr>
-<td>_setup</td>
+<td><code>_setup</code></td>
 <td>Run once when document is ready, scoped to document</td>
 </tr>
 <tr>
-<td>_construct</td>
+<td><code>_construct</code></td>
 <td>Run at initialization of each instance, scoped to specific instance</td>
 </tr>
 <tr>
-<td>_destruct</td>
+<td><code>_destruct</code></td>
 <td>Run at destruction of each instance, scoped to specific instance</td>
 </tr>
 </tbody>
@@ -236,43 +238,43 @@
 </thead>
 <tbody>
 <tr>
-<td>namespace</td>
-<td>string</td>
+<td><code>namespace</code></td>
+<td><code>string</code></td>
 <td>plugin namespace</td>
 </tr>
 <tr>
-<td>initialized</td>
-<td>boolean</td>
+<td><code>initialized</code></td>
+<td><code>boolean</code></td>
 <td>initialized state</td>
 </tr>
 <tr>
-<td>defaults</td>
-<td>object</td>
+<td><code>defaults</code></td>
+<td><code>object</code></td>
 <td>default options extended with initialization and local options</td>
 </tr>
 <tr>
-<td>functions</td>
-<td>object</td>
+<td><code>functions</code></td>
+<td><code>object</code></td>
 <td>private utility functions</td>
 </tr>
 <tr>
-<td>methods</td>
-<td>object</td>
+<td><code>methods</code></td>
+<td><code>object</code></td>
 <td>public methods</td>
 </tr>
 <tr>
-<td>utilities</td>
-<td>object</td>
+<td><code>utilities</code></td>
+<td><code>object</code></td>
 <td>public utilities</td>
 </tr>
 <tr>
-<td>classes</td>
-<td>object</td>
+<td><code>classes</code></td>
+<td><code>object</code></td>
 <td>namespaced classes strings</td>
 </tr>
 <tr>
-<td>events</td>
-<td>object</td>
+<td><code>events</code></td>
+<td><code>object</code></td>
 <td>namespaced event strings</td>
 </tr>
 </tbody>
@@ -298,6 +300,7 @@
     ],
     ...
 });</code></pre>
+<pre><code class="lang-javascript">var $element = $(Classes.content);</code></pre>
 <table>
 <thead>
 <tr>
@@ -308,27 +311,29 @@
 </thead>
 <tbody>
 <tr>
-<td>base</td>
+<td><code>base</code></td>
 <td>Default</td>
 <td>namespace</td>
 </tr>
 <tr>
-<td>element</td>
+<td><code>element</code></td>
 <td>Default</td>
-<td>namespace-element</td>
+<td><code>.namespace-element</code></td>
 </tr>
 <tr>
-<td>visible</td>
+<td><code>visible</code></td>
 <td>Custom</td>
-<td>namespace-visible</td>
+<td><code>.namespace-visible</code></td>
 </tr>
 <tr>
-<td>content</td>
+<td><code>content</code></td>
 <td>Custom</td>
-<td>namespace-content</td>
+<td><code>.namespace-content</code></td>
 </tr>
 </tbody>
 </table>
+<p>The <code>classes.raw</code> key will contain just the namespaced class name without the leading &#39;.&#39;, useful for building html:</p>
+<pre><code class="lang-javascript">html += &#39;&lt;div class=&quot;&#39; + Classes.raw.content &#39;&quot;&gt;;</code></pre>
 <h4 id="events">Events</h4>
 <p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
 <pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
@@ -339,6 +344,7 @@
     ],
     ...
 });</code></pre>
+<pre><code class="lang-javascript">$element.on(Events.click, onClick);</code></pre>
 <table>
 <thead>
 <tr>
@@ -349,204 +355,204 @@
 </thead>
 <tbody>
 <tr>
-<td>namespace</td>
+<td><code>namespace</code></td>
 <td>Default</td>
-<td>.namespace</td>
+<td><code>.namespace</code></td>
 </tr>
 <tr>
-<td>blur</td>
+<td><code>blur</code></td>
 <td>Default</td>
-<td>blur.namespace</td>
+<td><code>blur.namespace</code></td>
 </tr>
 <tr>
-<td>change</td>
+<td><code>change</code></td>
 <td>Default</td>
-<td>change.namespace</td>
+<td><code>change.namespace</code></td>
 </tr>
 <tr>
-<td>click</td>
+<td><code>click</code></td>
 <td>Default</td>
-<td>click.namespace</td>
+<td><code>click.namespace</code></td>
 </tr>
 <tr>
-<td>clickTouchStart</td>
+<td><code>clickTouchStart</code></td>
 <td>Default</td>
-<td>click.namespace touchstart.namespace</td>
+<td><code>click.namespace touchstart.namespace</code></td>
 </tr>
 <tr>
-<td>dblClick</td>
+<td><code>dblClick</code></td>
 <td>Default</td>
-<td>dblClick.namespace</td>
+<td><code>dblClick.namespace</code></td>
 </tr>
 <tr>
-<td>drag</td>
+<td><code>drag</code></td>
 <td>Default</td>
-<td>drag.namespace</td>
+<td><code>drag.namespace</code></td>
 </tr>
 <tr>
-<td>dragEnd</td>
+<td><code>dragEnd</code></td>
 <td>Default</td>
-<td>dragend.namespace</td>
+<td><code>dragend.namespace</code></td>
 </tr>
 <tr>
-<td>dragEnter</td>
+<td><code>dragEnter</code></td>
 <td>Default</td>
-<td>dragenter.namespace</td>
+<td><code>dragenter.namespace</code></td>
 </tr>
 <tr>
-<td>dragLeave</td>
+<td><code>dragLeave</code></td>
 <td>Default</td>
-<td>dragleave.namespace</td>
+<td><code>dragleave.namespace</code></td>
 </tr>
 <tr>
-<td>dragOver</td>
+<td><code>dragOver</code></td>
 <td>Default</td>
-<td>dragover.namespace</td>
+<td><code>dragover.namespace</code></td>
 </tr>
 <tr>
-<td>dragStart</td>
+<td><code>dragStart</code></td>
 <td>Default</td>
-<td>dragstart.namespace</td>
+<td><code>dragstart.namespace</code></td>
 </tr>
 <tr>
-<td>drop</td>
+<td><code>drop</code></td>
 <td>Default</td>
-<td>drop.namespace</td>
+<td><code>drop.namespace</code></td>
 </tr>
 <tr>
-<td>error</td>
+<td><code>error</code></td>
 <td>Default</td>
-<td>error.namespace</td>
+<td><code>error.namespace</code></td>
 </tr>
 <tr>
-<td>focus</td>
+<td><code>focus</code></td>
 <td>Default</td>
-<td>focus.namespace</td>
+<td><code>focus.namespace</code></td>
 </tr>
 <tr>
-<td>focusIn</td>
+<td><code>focusIn</code></td>
 <td>Default</td>
-<td>focusin.namespace</td>
+<td><code>focusin.namespace</code></td>
 </tr>
 <tr>
-<td>focusOut</td>
+<td><code>focusOut</code></td>
 <td>Default</td>
-<td>focusout.namespace</td>
+<td><code>focusout.namespace</code></td>
 </tr>
 <tr>
-<td>input</td>
+<td><code>input</code></td>
 <td>Default</td>
-<td>input.namespace</td>
+<td><code>input.namespace</code></td>
 </tr>
 <tr>
-<td>keyDown</td>
+<td><code>keyDown</code></td>
 <td>Default</td>
-<td>keydown.namespace</td>
+<td><code>keydown.namespace</code></td>
 </tr>
 <tr>
-<td>keyPress</td>
+<td><code>keyPress</code></td>
 <td>Default</td>
-<td>keypress.namespace</td>
+<td><code>keypress.namespace</code></td>
 </tr>
 <tr>
-<td>keyUp</td>
+<td><code>keyUp</code></td>
 <td>Default</td>
-<td>keyup.namespace</td>
+<td><code>keyup.namespace</code></td>
 </tr>
 <tr>
-<td>load</td>
+<td><code>load</code></td>
 <td>Default</td>
-<td>load.namespace</td>
+<td><code>load.namespace</code></td>
 </tr>
 <tr>
-<td>mouseDown</td>
+<td><code>mouseDown</code></td>
 <td>Default</td>
-<td>mousedown.namespace</td>
+<td><code>mousedown.namespace</code></td>
 </tr>
 <tr>
-<td>mouseEnter</td>
+<td><code>mouseEnter</code></td>
 <td>Default</td>
-<td>mouseenter.namespace</td>
+<td><code>mouseenter.namespace</code></td>
 </tr>
 <tr>
-<td>mouseLeave</td>
+<td><code>mouseLeave</code></td>
 <td>Default</td>
-<td>mouseleave.namespace</td>
+<td><code>mouseleave.namespace</code></td>
 </tr>
 <tr>
-<td>mouseMove</td>
+<td><code>mouseMove</code></td>
 <td>Default</td>
-<td>mousemove.namespace</td>
+<td><code>mousemove.namespace</code></td>
 </tr>
 <tr>
-<td>mouseOut</td>
+<td><code>mouseOut</code></td>
 <td>Default</td>
-<td>mouseout.namespace</td>
+<td><code>mouseout.namespace</code></td>
 </tr>
 <tr>
-<td>mouseOver</td>
+<td><code>mouseOver</code></td>
 <td>Default</td>
-<td>mouseover.namespace</td>
+<td><code>mouseover.namespace</code></td>
 </tr>
 <tr>
-<td>mouseUp</td>
+<td><code>mouseUp</code></td>
 <td>Default</td>
-<td>mouseup.namespace</td>
+<td><code>mouseup.namespace</code></td>
 </tr>
 <tr>
-<td>resize</td>
+<td><code>resize</code></td>
 <td>Default</td>
-<td>resize.namespace</td>
+<td><code>resize.namespace</code></td>
 </tr>
 <tr>
-<td>scroll</td>
+<td><code>scroll</code></td>
 <td>Default</td>
-<td>scroll.namespace</td>
+<td><code>scroll.namespace</code></td>
 </tr>
 <tr>
-<td>select</td>
+<td><code>select</code></td>
 <td>Default</td>
-<td>select.namespace</td>
+<td><code>select.namespace</code></td>
 </tr>
 <tr>
-<td>touchCancel</td>
+<td><code>touchCancel</code></td>
 <td>Default</td>
-<td>touchcancel.namespace</td>
+<td><code>touchcancel.namespace</code></td>
 </tr>
 <tr>
-<td>touchEnd</td>
+<td><code>touchEnd</code></td>
 <td>Default</td>
-<td>touchend.namespace</td>
+<td><code>touchend.namespace</code></td>
 </tr>
 <tr>
-<td>touchLeave</td>
+<td><code>touchLeave</code></td>
 <td>Default</td>
-<td>touchleave.namespace</td>
+<td><code>touchleave.namespace</code></td>
 </tr>
 <tr>
-<td>touchMove</td>
+<td><code>touchMove</code></td>
 <td>Default</td>
-<td>touchmove.namespace</td>
+<td><code>touchmove.namespace</code></td>
 </tr>
 <tr>
-<td>touchStart</td>
+<td><code>touchStart</code></td>
 <td>Default</td>
-<td>touchstart.namespace</td>
+<td><code>touchstart.namespace</code></td>
 </tr>
 <tr>
-<td>transitionEnd</td>
+<td><code>transitionEnd</code></td>
 <td>Default</td>
-<td>transitionEnd.namespace</td>
+<td><code>transitionEnd.namespace</code></td>
 </tr>
 <tr>
-<td>enable</td>
+<td><code>enable</code></td>
 <td>Custom</td>
-<td>enable.namespace</td>
+<td><code>enable.namespace</code></td>
 </tr>
 <tr>
-<td>disable</td>
+<td><code>disable</code></td>
 <td>Custom</td>
-<td>disable.namespace</td>
+<td><code>disable.namespace</code></td>
 </tr>
 </tbody>
 </table>
@@ -566,14 +572,14 @@
 </thead>
 <tbody>
 <tr>
-<td>namespace</td>
-<td>string</td>
+<td><code>namespace</code></td>
+<td><code>string</code></td>
 <td>&nbsp;</td>
 <td>Plugin namespace</td>
 </tr>
 <tr>
-<td>settings</td>
-<td>object</td>
+<td><code>settings</code></td>
+<td><code>object</code></td>
 <td>&nbsp;</td>
 <td>Plugin settings</td>
 </tr>

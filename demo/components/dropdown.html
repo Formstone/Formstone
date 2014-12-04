@@ -1,10 +1,34 @@
 <!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Dropdown &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="dropdown">Dropdown</h1>
 <p>A jQuery plugin for custom select elements.</p>
 <ul>
+<li><a href="#use">Use</a></li>
 <li><a href="#options">Options</a></li>
 <li><a href="#methods">Methods</a></li>
+<li><a href="#css">CSS</a></li>
 <li><a href="#demo">Demo</a></li>
 </ul>
+<h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">dropdown.js
+dropdown.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js
+touch.js</code></pre>
+<h3 id="basic">Basic</h3>
+<p>To customize a select element, simply apply the plugin to the target element:</p>
+<pre><code class="lang-javascript">&lt;select class=&quot;target&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown();</code></pre>
+<h3 id="events">Events</h3>
+<p>React to changes to the element&#39;s value by listening for the standard <code>change</code> event:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).on(&quot;change&quot;, function() {
+    var value = $(this).val();
+});</code></pre>
+<p>Updated the element&#39;s value externally by triggering the standard <code>change</code> event:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).val(1).trigger(&quot;change&quot;);</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-dropdown-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
@@ -18,45 +42,45 @@
 </thead>
 <tbody>
 <tr>
-<td>cover</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>cover</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Cover handle with option set</td>
 </tr>
 <tr>
-<td>customClass</td>
-<td>string</td>
-<td>&#39;&#39;</td>
+<td><code>customClass</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
 <td>Class applied to instance</td>
 </tr>
 <tr>
-<td>label</td>
-<td>string</td>
-<td>&#39;&#39;</td>
+<td><code>label</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
 <td>Label displayed before selection</td>
 </tr>
 <tr>
-<td>external</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>external</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Open options as links in new window</td>
 </tr>
 <tr>
-<td>links</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>links</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Open options as links in same window</td>
 </tr>
 <tr>
-<td>mobile</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>mobile</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>Force desktop interaction on mobile</td>
 </tr>
 <tr>
-<td>trim</td>
-<td>int</td>
-<td>0</td>
+<td><code>trim</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -81,9 +105,9 @@
 </thead>
 <tbody>
 <tr>
-<td>options</td>
-<td>object</td>
-<td>{}</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
 <td>New plugin defaults</td>
 </tr>
 </tbody>
@@ -106,9 +130,9 @@
 </thead>
 <tbody>
 <tr>
-<td>option</td>
-<td>string</td>
-<td>null</td>
+<td><code>option</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
 <td>Target option value</td>
 </tr>
 </tbody>
@@ -128,9 +152,9 @@
 </thead>
 <tbody>
 <tr>
-<td>option</td>
-<td>string</td>
-<td>null</td>
+<td><code>option</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
 <td>Target option value</td>
 </tr>
 </tbody>
@@ -141,6 +165,88 @@
 <h3 id="update">update</h3>
 <p>Updates instance.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).dropdown(&quot;update&quot;);</code></pre>
+<h2 id="css">CSS</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.fs-dropdown</code></td>
+<td><code>element</code></td>
+<td>Base widget class</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-multiple</code></td>
+<td><code>modifer</code></td>
+<td>Indicates multi-selected element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-cover</code></td>
+<td><code>modifer</code></td>
+<td>Indicates cover positioning</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-bottom</code></td>
+<td><code>modifer</code></td>
+<td>Indicates bottom positioning</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-disabled</code></td>
+<td><code>modifer</code></td>
+<td>Indicates disabled state</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-open</code></td>
+<td><code>modifer</code></td>
+<td>Indicates open state</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-focus</code></td>
+<td><code>modifer</code></td>
+<td>Indicates focus state</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-selected</code></td>
+<td><code>element</code></td>
+<td>Handle item</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-options</code></td>
+<td><code>element</code></td>
+<td>Options container</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-group</code></td>
+<td><code>element</code></td>
+<td>Option group label</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-item</code></td>
+<td><code>element</code></td>
+<td>Option item</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-item.fs-dropdown-item_placeholder</code></td>
+<td><code>modifier</code></td>
+<td>Indicates placeholder item</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-item.fs-dropdown-item_selected</code></td>
+<td><code>modifier</code></td>
+<td>Indicates selected item</td>
+</tr>
+<tr>
+<td><code>.fs-dropdown-item.fs-dropdown-item_disabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates disabled item</td>
+</tr>
+</tbody>
+</table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
 	.demo .custom_select { max-width: 500px; }
 	.demo .custom_select .fs-dropdown-selected { border-width: 2px; }

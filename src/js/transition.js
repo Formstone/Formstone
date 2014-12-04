@@ -77,6 +77,12 @@
 	 * @description Resolves transition end events.
 	 * @param e [object] "Event data"
 	 */
+	/**
+	 * @method
+	 * @name resolve
+	 * @description Resolves current transition end events.
+	 * @example $(".target").transition("resolve");
+	 */
 
 	function resolve(data) {
 		if (!data.always) {
@@ -179,6 +185,7 @@
 	 * @name Transition
 	 * @description A jQuery plugin for CSS transition events.
 	 * @type widget
+	 * @dependency core.js
 	 */
 
 	var Plugin = Formstone.Plugin("transition", {

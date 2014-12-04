@@ -9,8 +9,19 @@ A jQuery plugin for responsive media query events.
 * [Events](#events)
 * [Methods](#methods)
 
-
 ## Use 
+
+#### Main
+
+```markup
+mediaquery.js
+```
+
+#### Dependencies
+
+```markup
+core.js
+```
 
 ### Basic
 
@@ -62,11 +73,11 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| minWidth |  0  | &nbsp; | Array of min-widths |
-| maxWidth |  Infinity  | &nbsp; | Array of max-widths |
-| minHeight |  0  | &nbsp; | Array of min-heights |
-| maxHeight |  Infinity  | &nbsp; | Array of max-heights |
-| unit | string | 'px' | Unit to use when matching widths and heights |
+| `minWidth` | ` 0 ` | &nbsp; | Array of min-widths |
+| `maxWidth` | ` Infinity ` | &nbsp; | Array of max-widths |
+| `minHeight` | ` 0 ` | &nbsp; | Array of min-heights |
+| `maxHeight` | ` Infinity ` | &nbsp; | Array of max-heights |
+| `unit` | `string` | `'px'` | Unit to use when matching widths and heights |
 
 ## Events
 
@@ -74,7 +85,7 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| mqchange | Change to a media query match; Triggered on window |
+| `mqchange` | Change to a media query match; Triggered on window |
 
 ## Methods
 
@@ -92,8 +103,8 @@ $.mediaquery("bind", "(min-width: 500px)", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| media | string | &nbsp; | Media query to match |
-| data | object | &nbsp; | Object containing 'enter' and 'leave' callbacks |
+| `media` | `string` | &nbsp; | Media query to match |
+| `data` | `object` | &nbsp; | Object containing 'enter' and 'leave' callbacks |
 
 ### defaults
 
@@ -107,7 +118,7 @@ $.media query("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### state
 
@@ -129,5 +140,5 @@ $.mediaquery("unbind", "(min-width: 500px)");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| media | string | &nbsp; | Media query to match |
+| `media` | `string` | &nbsp; | Media query to match |
 

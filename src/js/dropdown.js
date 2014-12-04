@@ -669,6 +669,8 @@
 	 * @name Dropdown
 	 * @description A jQuery plugin for custom select elements.
 	 * @type widget
+	 * @dependency core.js
+	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("dropdown", {

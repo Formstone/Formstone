@@ -4,9 +4,59 @@
 
 A jQuery plugin for custom select elements.
 
+* [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 * [Demo](#demo)
+
+## Use 
+
+#### Main
+
+```markup
+dropdown.js
+dropdown.css
+```
+
+#### Dependencies
+
+```markup
+core.js
+touch.js
+```
+
+### Basic
+
+To customize a select element, simply apply the plugin to the target element:
+
+```javascript
+<select class="target">
+	<option value="1">One</option>
+	<option value="2">Two</option>
+	<option value="3">Three</option>
+</select>
+```
+
+```javascript
+$(".target").dropdown();
+```
+
+### Events
+
+React to changes to the element's value by listening for the standard `change` event:
+
+```javascript
+$(".target").on("change", function() {
+	var value = $(this).val();
+});
+```
+
+Updated the element's value externally by triggering the standard `change` event:
+
+```javascript
+$(".target").val(1).trigger("change");
+```
 
 ## Options
 
@@ -14,13 +64,13 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| cover | boolean | false | Cover handle with option set |
-| customClass | string | '' | Class applied to instance |
-| label | string | '' | Label displayed before selection |
-| external | boolean | false | Open options as links in new window |
-| links | boolean | false | Open options as links in same window |
-| mobile | boolean | false | Force desktop interaction on mobile |
-| trim | int | 0 | &nbsp; |
+| `cover` | `boolean` | `false` | Cover handle with option set |
+| `customClass` | `string` | `''` | Class applied to instance |
+| `label` | `string` | `''` | Label displayed before selection |
+| `external` | `boolean` | `false` | Open options as links in new window |
+| `links` | `boolean` | `false` | Open options as links in same window |
+| `mobile` | `boolean` | `false` | Force desktop interaction on mobile |
+| `trim` | `int` | `0` | &nbsp; |
 
 ## Methods
 
@@ -46,7 +96,7 @@ $.dropdown("defaults", { ... });
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| options | object | {} | New plugin defaults |
+| `options` | `object` | `{}` | New plugin defaults |
 
 ### destroy
 
@@ -68,7 +118,7 @@ $(".target").dropdown("disable", "1");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| option | string | null | Target option value |
+| `option` | `string` | `null` | Target option value |
 
 ### enable
 
@@ -82,7 +132,7 @@ $(".target").dropdown("enable", "1");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| option | string | null | Target option value |
+| `option` | `string` | `null` | Target option value |
 
 ### open
 
@@ -99,4 +149,23 @@ Updates instance.
 ```javascript
 $(".target").dropdown("update");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-dropdown` | `element` | Base widget class |
+| `.fs-lightbox.fs-lightbox-multiple` | `modifer` | Indicates multi-selected element |
+| `.fs-lightbox.fs-lightbox-cover` | `modifer` | Indicates cover positioning |
+| `.fs-lightbox.fs-lightbox-bottom` | `modifer` | Indicates bottom positioning |
+| `.fs-lightbox.fs-lightbox-disabled` | `modifer` | Indicates disabled state |
+| `.fs-lightbox.fs-lightbox-open` | `modifer` | Indicates open state |
+| `.fs-lightbox.fs-lightbox-focus` | `modifer` | Indicates focus state |
+| `.fs-dropdown-selected` | `element` | Handle item |
+| `.fs-dropdown-options` | `element` | Options container |
+| `.fs-dropdown-group` | `element` | Option group label |
+| `.fs-dropdown-item` | `element` | Option item |
+| `.fs-dropdown-item.fs-dropdown-item_placeholder` | `modifier` | Indicates placeholder item |
+| `.fs-dropdown-item.fs-dropdown-item_selected` | `modifier` | Indicates selected item |
+| `.fs-dropdown-item.fs-dropdown-item_disabled` | `modifier` | Indicates disabled item |
 

@@ -7,16 +7,45 @@
 <li><a href="#methods">Methods</a></li>
 </ul>
 <h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">touch.js</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js</code></pre>
 <h3 id="events">Events</h3>
 <p>Touch normalizes mouse and touch events in the context of a few basic gestures: <code>tap</code>, <code>pan</code> and <code>scale</code>. Events emitted by Touch will contain the following extra properties:</p>
-<pre><code class="lang-javascript">pageX        // Current X position
-pageY        // Current Y position
-deltaX        // Change in X position
-deltaY        // Change in Y position
-scale        // Current scale value</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pageX</code></td>
+<td>Current X position</td>
+</tr>
+<tr>
+<td><code>pageY</code></td>
+<td>Current Y position</td>
+</tr>
+<tr>
+<td><code>deltaX</code></td>
+<td>Change in X position</td>
+</tr>
+<tr>
+<td><code>deltaY</code></td>
+<td>Change in Y position</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>Current scale value</td>
+</tr>
+</tbody>
+</table>
 <h3 id="tap">Tap</h3>
 <p>Tap creates a basic &#39;fast click&#39; event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user&#39;s scroll:</p>
-<pre><code class="lang-javascript">$(&quot;.tap-it&quot;).touch({
+<pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
     tap: true
 }).on(&quot;tap&quot;, function(e) {
     console.log(&quot;Tapped&quot;);
@@ -24,7 +53,7 @@ scale        // Current scale value</code></pre>
 <p>Note: <code>tap</code> can not be used in conjunction with <code>pan</code> or <code>scale</code>.</p>
 <h3 id="pan">Pan</h3>
 <p>Pan can be used for building touch-freindly drag and drop interfaces:</p>
-<pre><code class="lang-javascript">$(&quot;.pan-it&quot;).touch({
+<pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
     pan: true
 }).on(&quot;panstart&quot;, function(e) {
     console.log(&quot;Started panning&quot;);
@@ -35,7 +64,7 @@ scale        // Current scale value</code></pre>
 });</code></pre>
 <h3 id="scale">Scale</h3>
 <p>Scale can be used for building touch-freindly scalable interfaces:</p>
-<pre><code class="lang-javascript">$(&quot;.scale-it&quot;).touch({
+<pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
     scale: true
 }).on(&quot;scalestart&quot;, function(e) {
     console.log(&quot;Started scaling&quot;);
@@ -58,23 +87,23 @@ scale        // Current scale value</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>pan</td>
-<td>boolean</td>
+<td><code>pan</code></td>
+<td>`boolean</td>
 <td></td>
-<td>object</td>
-<td>false</td>
+<td>object`</td>
+<td><code>false</code></td>
 <td>Object to enable</td>
 </tr>
 <tr>
-<td>scale</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>scale</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>True to enable</td>
 </tr>
 <tr>
-<td>tap</td>
-<td>boolean</td>
-<td>false</td>
+<td><code>tap</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
 <td>True to enable</td>
 </tr>
 </tbody>
@@ -90,31 +119,31 @@ scale        // Current scale value</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>tap</td>
+<td><code>tap</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>panstart</td>
+<td><code>panstart</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>pan</td>
+<td><code>pan</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>panend</td>
+<td><code>panend</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>scalestart</td>
+<td><code>scalestart</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>scale</td>
+<td><code>scale</code></td>
 <td>&nbsp;</td>
 </tr>
 <tr>
-<td>scaleend</td>
+<td><code>scaleend</code></td>
 <td>&nbsp;</td>
 </tr>
 </tbody>
@@ -136,9 +165,9 @@ scale        // Current scale value</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>options</td>
-<td>object</td>
-<td>{}</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
 <td>New plugin defaults</td>
 </tr>
 </tbody>

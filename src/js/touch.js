@@ -358,6 +358,7 @@
 	 * @name Touch
 	 * @description A jQuery plugin for multi-touch events.
 	 * @type widget
+	 * @dependency core.js
 	 */
 
 	var legacyPointer = !(Formstone.window.PointerEvent),

@@ -22,7 +22,8 @@ module.exports = function(grunt) {
 					"example",
 					"param",
 					"event",
-					"return"
+					"return",
+					"dependency"
 				];
 
 			for (var pi in parts) {
@@ -86,6 +87,11 @@ module.exports = function(grunt) {
 								_return["events"] = [];
 							}
 							_return["events"].push(part);
+						} else if (key === "dependency") {
+							if (!_return.dependencies) {
+								_return["dependencies"] = [];
+							}
+							_return["dependencies"].push(part);
 						} else {
 							_return[key] = part;
 						}
@@ -127,7 +133,9 @@ module.exports = function(grunt) {
 		// Build JSON file
 
 		function buildJSON(file) {
-			var doc   = {},
+			var doc   = {
+					main: []
+				},
 				jsf   = file,
 				cssf  = file.replace(/js/g, "less"),
 				usef  = file.replace('src/js', "src/docs").replace('src/less', "src/docs").replace(/js/g, "md").replace(/less/g, "md"),
@@ -163,6 +171,7 @@ module.exports = function(grunt) {
 							doc.namespace = plugin.namespace;
 							doc.type = plugin.type;
 							doc.description = plugin.description;
+							doc.dependencies = plugin.dependencies;
 						} else if (content.indexOf("@options") > -1) {
 							var params = parseJavascript(content);
 							doc.options = params["params"];
@@ -187,6 +196,13 @@ module.exports = function(grunt) {
 							}
 						}
 					}
+				}
+
+				var parts = jsf.split("/"),
+					p = parts[parts.length - 1];
+
+				if (doc.main.indexOf(p) < 0) {
+					doc.main.push(p);
 				}
 			}
 
@@ -213,6 +229,13 @@ module.exports = function(grunt) {
 							doc.description = grid.description;
 						}
 					}
+				}
+
+				var parts = cssf.split("/"),
+					p = parts[parts.length - 1];
+
+				if (doc.main.indexOf(p) < 0) {
+					doc.main.push(p.replace("less", "css"));
 				}
 			}
 
@@ -272,10 +295,10 @@ module.exports = function(grunt) {
 			md += doc.description;
 			md += '\n\n';
 
-			if (doc.use) {
+			//if (doc.use) {
 				md += "* [Use](#use)";
 				md += '\n';
-			}
+			//}
 			if (doc.options && doc.options.length) {
 				md += "* [Options](#options)";
 				md += '\n';
@@ -300,11 +323,36 @@ module.exports = function(grunt) {
 			}
 
 			md += '\n';
+			md += heading + '# Use ';
+			md += '\n\n';
+
+			if (doc.main && doc.main.length) {
+				md += heading + '### Main';
+				md += '\n\n';
+				md += '```markup';
+				md += '\n';
+				for (var i in doc.main) {
+					md += doc.main[i];
+					md += '\n';
+				}
+				md += '```';
+				md += '\n\n';
+			}
+
+			if (doc.dependencies && doc.dependencies.length) {
+				md += heading + '### Dependencies';
+				md += '\n\n';
+				md += '```markup';
+				md += '\n';
+				for (var i in doc.dependencies) {
+					md += doc.dependencies[i];
+					md += '\n';
+				}
+				md += '```';
+				md += '\n\n';
+			}
 
 			if (doc.use) {
-				md += '\n';
-				md += heading + '# Use ';
-				md += '\n\n';
 				md += doc.use
 				md += '\n\n';
 			}
@@ -325,9 +373,9 @@ module.exports = function(grunt) {
 				md += '\n';
 				for (var i in doc.options) {
 					var o = doc.options[i];
-					md += '| ' + (o.name || "&nbsp;");
-					md += ' | ' + (o.type || "&nbsp;");
-					md += ' | ' + (o.default || "&nbsp;");
+					md += '| ' + (o.name ? '`'+o.name+'`' : "&nbsp;");
+					md += ' | ' + (o.type ? '`'+o.type+'`' : "&nbsp;");
+					md += ' | ' + (o.default ? '`'+o.default+'`' : "&nbsp;");
 					md += ' | ' + (o.description || "&nbsp;");
 					md += ' |\n';
 				}
@@ -351,7 +399,7 @@ module.exports = function(grunt) {
 				md += '\n';
 				for (var i in doc.events) {
 					var e = doc.events[i];
-					md += '| ' + (e.name || "&nbsp;");
+					md += '| ' + (e.name ? '`'+e.name+'`' : "&nbsp;");
 					md += ' | ' + (e.description || "&nbsp;");
 					md += ' |\n';
 				}
@@ -392,9 +440,9 @@ module.exports = function(grunt) {
 						md += '\n';
 						for (var j in m.params) {
 							var p = m.params[j];
-							md += '| ' + (p.name || "&nbsp;");
-							md += ' | ' + (p.type || "&nbsp;");
-							md += ' | ' + (p.default || "&nbsp;");
+							md += '| ' + (p.name ? '`'+p.name+'`' : "&nbsp;");
+							md += ' | ' + (p.type ? '`'+p.type+'`' : "&nbsp;");
+							md += ' | ' + (p.default ? '`'+p.default+'`' : "&nbsp;");
 							md += ' | ' + (p.description || "&nbsp;");
 							md += ' |\n';
 						}
@@ -411,24 +459,14 @@ module.exports = function(grunt) {
 				md += '| --- | --- | --- |';
 				md += '\n';
 				for (var i in doc.css) {
-					var e = doc.css[i];
-					md += '| ' + (e.name || "&nbsp;");
-					md += ' | ' + (e.type || "&nbsp;");
-					md += ' | ' + (e.description || "&nbsp;");
+					var c = doc.css[i];
+					md += '| ' + (c.name ? '`'+c.name+'`' : "&nbsp;");
+					md += ' | ' + (c.type ? '`'+c.type+'`' : "&nbsp;");
+					md += ' | ' + (c.description || "&nbsp;");
 					md += ' |\n';
 				}
 				md += '\n';
 			}
-
-			/*
-			if (includeDemo && doc.demo) {
-				md += heading + '# Demo';
-				md += '\n\n';
-				md += '<div class="demo">\n';
-				md += doc.demo;
-				md += '\n</div>';
-			}
-			*/
 
 			return md;
 		}

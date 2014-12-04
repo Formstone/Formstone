@@ -6,8 +6,19 @@ A jQuery plugin for simple access to browser cookies.
 * [Options](#options)
 * [Methods](#methods)
 
-
 ## Use 
+
+#### Main
+
+```markup
+cookie.js
+```
+
+#### Dependencies
+
+```markup
+core.js
+```
 
 ### Basic
 
@@ -38,9 +49,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| domain | string | &nbsp; | Cookie domain |
-| expires | int | 604800000 | Time until cookie expires |
-| path | string | &nbsp; | Cookie path |
+| `domain` | `string` | &nbsp; | Cookie domain |
+| `expires` | `int` | `604800000` | Time until cookie expires |
+| `path` | `string` | &nbsp; | Cookie path |
 
 ## Methods
 
@@ -58,9 +69,9 @@ $.cookie(key, value, options);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| key | string | &nbsp; | Cookie key |
-| value | string | &nbsp; | Cookie value |
-| options | object | &nbsp; | Options object |
+| `key` | `string` | &nbsp; | Cookie key |
+| `value` | `string` | &nbsp; | Cookie value |
+| `options` | `object` | &nbsp; | Options object |
 
 ### erase
 
@@ -74,7 +85,7 @@ $.cookie(key, null);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| key | string | &nbsp; | Cookie key |
+| `key` | `string` | &nbsp; | Cookie key |
 
 ### read
 
@@ -88,5 +99,5 @@ var value = $.cookie(key);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| key | string | &nbsp; | Cookie key |
+| `key` | `string` | &nbsp; | Cookie key |
 
