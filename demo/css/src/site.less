@@ -19,23 +19,6 @@
 
 
 /* ==================================================================
-   Transitions
-================================================================== */
-	*,
-	*:link,
-	*:visited,
-	*:hover,
-	*:active,
-	*:focus {
-		transition:
-			background-color 0.15s linear,
-			border-color 0.15s linear,
-			color 0.15s linear,
-			opacity 0.15s linear;
-	}
-
-
-/* ==================================================================
    Animations
 ================================================================== */
 
@@ -51,7 +34,6 @@
 	html,
 	body {
 		background: @white;
-		transition: none;
 
 		@media @tablet {
 			background: @blue;
@@ -120,6 +102,8 @@
 	}
 
 	a {
+		.transition_link();
+
 		border-bottom: 1px solid @gray_2;
 		color: @orange;
 		text-decoration: none;
@@ -430,6 +414,22 @@
 	}
 
 
+	.button {
+		.font_size(16);
+
+		background: @blue;
+		border-radius: 3px;
+		color: @white;
+		display: inline-block;
+		padding: 10px 20px;
+		text-transform: uppercase;
+
+		.no-touch &:hover {
+			background: @black;
+			color: @white;
+		}
+	}
+
 	.form {
 
 		margin: 20px 0;
@@ -463,13 +463,7 @@
 		}
 
 		&_button {
-			.font_size(16);
-
-			background: @blue;
-			border-radius: 3px;
-			color: @white;
-			padding: 10px 20px;
-			text-transform: uppercase;
+			.button;
 		}
 	}
 

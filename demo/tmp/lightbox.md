@@ -1,4 +1,4 @@
-{"template":"component.html","title":"Lightbox"}
+{"template":"component.html","title":"Lightbox","demo":"<style>\n\t.gallery { margin: 20px 0; overflow: hidden; }\n\n\t.lightbox { border: none; }\n\t.lightbox img { border-radius: 3px; height: 100px; }\n\n\t.inline_content { width: 300px; overflow: hidden; padding: 0 20px; }\n\t.inline_content h2 { margin-top: 20px; }\n\n\t.fs-lightbox h3 { font-style: italic; font-size: 16px; margin: 0; padding: 5px 0; }\n</style>\n\n<script>\n\t$(function() {\n\t\t$(\".lightbox\").not(\".lightbox_format\").lightbox();\n\n\t\t$(\".lightbox_format\").lightbox({\n\t\t\tformatter: customFormat\n\t\t});\n\n\t\t$(\".lightbox_object\").click(launchObject);\n\t});\n\n\tfunction customFormat() {\n\t\treturn '<h3>' + this.attr(\"title\") + \"</h3>\";\n\t}\n\n\tfunction launchObject() {\n\t\t$.lightbox( $('<div class=\"inline_content\"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>') );\n\t}\n</script>\n\n<h4>Basic</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox\" title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t\t<img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>Gallery</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery\" title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery\" title=\"By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery\" title=\"By NASA on The Commons [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>YouTube &amp; Vimeo Videos</h4>\n<div class=\"gallery\">\n\t<a href=\"//www.youtube.com/embed/zsJpUCWfyPE?rel=0\" class=\"button lightbox\" data-lightbox-gallery=\"video_gallery\" title=\"STS-129 HD Launch\">\n\t\tYouTube Video\n\t</a>\n    <a href=\"//player.vimeo.com/video/15091562\" class=\"button lightbox\" data-lightbox-gallery=\"video_gallery\" title=\"Homemade Spacecraft\">\n\t\tVimeo Video\n\t</a>\n</div>\n\n<h4>Mobile</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_mobile\" data-lightbox-options='{\"mobile\":true}' title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t\t<img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_mobile\" data-lightbox-options='{\"mobile\":true}' title=\"By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_mobile\" data-lightbox-options='{\"mobile\":true}' title=\"By NASA on The Commons [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>Fixed Positioning</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_fixed\" data-lightbox-options='{\"fixed\":true}' title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_fixed\" data-lightbox-options='{\"fixed\":true}' title=\"By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_fixed\" data-lightbox-options='{\"fixed\":true}' title=\"By NASA on The Commons [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>Top Positioning</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_top\" data-lightbox-options='{\"top\":25}' title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t\t<img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_top\" data-lightbox-options='{\"top\":25}' title=\"By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-2.jpg\" alt=\"\">\n\t</a>\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" class=\"lightbox\" data-lightbox-gallery=\"gallery_top\" data-lightbox-options='{\"top\":25}' title=\"By NASA on The Commons [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-3.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>In-Line Content</h4>\n<div class=\"gallery\">\n\t<a href=\"#hidden_content\" class=\"button lightbox\">Show Hidden Content</a>\n</div>\n<div id=\"hidden_content\" style=\"display: none;\">\n\t<div class=\"inline_content\">\n\t\t<h2>Some Content!</h2>\n\t\t<p>This was hidden on the page and loaded into the new Boxer instance.</p>\n\t</div>\n</div>\n\n<h4>jQuery Objects</h4>\n<div class=\"gallery\">\n\t<button class=\"button lightbox lightbox_object\">Show jQuery Object</button>\n</div>\n\n<h4>iFrame</h4>\n<div class=\"gallery\">\n\t<a href=\"http://www.cnn.com/\" class=\"button lightbox\">View CNN.com</a>\n\t<a href=\"iframe.html\" class=\"button lightbox\">View Local iFrame</a>\n</div>\n\n<h4>Sizing</h4>\n<div class=\"gallery\">\n\t<a href=\"http://www.cnn.com/\" class=\"button lightbox\" data-lightbox-height=\"500\" data-lightbox-width=\"500\">View CNN.com</a>\n</div>\n\n<h4>Caption Formating</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" class=\"lightbox lightbox_format\" title=\"By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons\">\n\t    <img src=\"http://formstone.it/files/demo/nasa-bw-1.jpg\" alt=\"\">\n\t</a>\n</div>\n\n<h4>Retina Support</h4>\n<div class=\"gallery\">\n\t<a href=\"http://formstone.it/files/demo/nasa-bw-retina.jpg\" class=\"lightbox\" data-lightbox-options='{\"retina\":true}' title=\"By Apollo 15 astronaut.Bubba73 at en.wikipedia [Public domain], from Wikimedia Commons\">\n\t\t<img src=\"http://formstone.it/files/demo/nasa-bw-retina.jpg\" alt=\"\">\n\t</a>\n</div>"}
 
 # Lightbox
 
@@ -9,6 +9,7 @@ A jQuery plugin for simple modals.
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
+* [Demo](#demo)
 
 ## Use 
 
@@ -24,6 +25,36 @@ lightbox.css
 ```markup
 core.js
 transition.js
+```
+
+### Basic
+
+Display images and videos in an overlay:
+
+```javascript
+$("a").lightbox();
+```
+
+```markup
+<a href="one.jpg" title="Image Caption">
+	<img src="one_thumb.jpg" alt="">
+</a>
+```
+
+### Gallery
+
+Link multiple images or videos together with the `data-lightbox-gallery` attribute:
+
+```markup
+<a href="one.jpg" title="Image Caption One" data-lightbox-gallery="photo_gallery">
+	<img src="one_thumb.jpg" alt="">
+</a>
+<a href="two.jpg" title="Image Caption Two" data-lightbox-gallery="photo_gallery">
+	<img src="two_thumb.jpg" alt="">
+</a>
+<a href="three.jpg" title="Image Caption Three" data-lightbox-gallery="photo_gallery">
+	<img src="three_thumb.jpg" alt="">
+</a>
 ```
 
 ## Options

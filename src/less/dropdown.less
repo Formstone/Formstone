@@ -127,20 +127,15 @@
 			outline: none;
 		}
 
-		* {
-			transition: none;
-		}
-
 		&,
-		& * {
-			user-select: none !important;
-		}
-
-		&,
-		& *,
-		& *:before,
-		& *:after {
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
 			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
 		}
 
 		& when (@fs-dropdown-max-width = true) {

@@ -3,7 +3,7 @@
 Tooltip will generate a tooltip based on the target element's `data-title` attribute. Tooltip can be configured to open in a specific direction by setting the `direction` key at initialization:
 
 ```javascript
-$(".target").tooltip({
+$("a").tooltip({
 	direction: "top"
 });
 ```
@@ -17,7 +17,7 @@ $(".target").tooltip({
 Tooltip can be configured to follow the user's mouse:
 
 ```javascript
-$(".target").tooltip({
+$("a").tooltip({
 	follow: true
 });
 ```
@@ -27,7 +27,7 @@ $(".target").tooltip({
 Tooltip can be configured to match the user's mouse position, relative to the target:
 
 ```javascript
-$(".target").tooltip({
+$("a").tooltip({
 	match: true
 });
 ```
@@ -37,7 +37,7 @@ $(".target").tooltip({
 A delay can be set to avoid accidental tooltips:
 
 ```javascript
-$(".target").tooltip({
+$("a").tooltip({
 	delay: 500
 });
 ```

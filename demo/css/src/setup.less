@@ -4,6 +4,10 @@
 
 	@root_font_size: 16;
 
+	@base_transition_duration: 0.25s;
+	@base_transition_timing: linear;
+	@base_transition_delay: 0;
+
 	@mobile:		~"only screen and (min-width: 500px)";
 	@tablet:		~"only screen and (min-width: 740px)";
 	@desktop:		~"only screen and (min-width: 980px)";
@@ -43,6 +47,26 @@
 /* ==================================================================
    Mixins
 ================================================================== */
+
+	.transition(@duration:0.25s, @timing:linear, @delay:0) {
+		transition:
+			background-color @duration @timing,
+			border-color @duration @timing,
+			box-shadow @duration @timing,
+			color @duration @timing,
+			opacity @duration @timing;
+	}
+
+	.transition_link(@duration:0.25s, @timing:linear, @delay:0) {
+		&,
+		&:link,
+		&:visited,
+		&:hover,
+		&:active,
+		&:focus {
+			.transition(@duration, @timing, @delay)
+		}
+	}
 
 	.font_size(@px_size) {
 		@px: @px_size;

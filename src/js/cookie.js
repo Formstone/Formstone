@@ -147,6 +147,6 @@
 
 		// Localize References
 
-		Document    = Formstone.document;
+		Document = Formstone.document;
 
 })(jQuery, Formstone);

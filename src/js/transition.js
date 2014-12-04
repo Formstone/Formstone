@@ -20,9 +20,10 @@
 			data.styles      = getStyles(data.$check);
 			data.timer       = null;
 
-			var duration = data.$check.css( Formstone.transitionProperty + "-duration" );
+			var duration = data.$check.css( Formstone.transitionProperty + "-duration" ),
+				durationValue = parseFloat(duration);
 
-			if (Formstone.support.transition && duration && parseFloat(duration)) {
+			if (Formstone.support.transition && duration && durationValue) {
 				// If transitions supported and active
 
 				this.on(Events.transitionEnd, data, onTranistionEnd);
@@ -44,6 +45,8 @@
 	 */
 
 	function destruct(data) {
+		Functions.clearTimer(data.timer, true);
+
 		this.off(Events.namespace);
 	}
 
@@ -60,13 +63,10 @@
 
 		var data           = e.data,
 			oe             = e.originalEvent,
-			checkProp      = (!data.property || (oe && oe.propertyName === data.property)),
-			checkTarget    = (!data.target || (oe && $(oe.target).is(data.$target))),
-			checkEl        = (checkTarget || (!data.target && oe && $(oe.target).is(data.$el)));
+			$target        = data.target ? data.$target : data.$el;
 
 		// Check property and target
-
-		if ( checkProp && checkTarget && checkEl ) {
+		if ( (!data.property || oe.propertyName === data.property) && $(oe.target).is($target) ) {
 			resolve(data);
 		}
 	}
@@ -87,8 +87,6 @@
 	function resolve(data) {
 		if (!data.always) {
 			// Unbind events, clear timers, similiar to .one()
-
-			Functions.clearTimer(data.timer, true);
 
 			data.$el[Plugin.namespace]("destroy"); // clean up old data?
 		}

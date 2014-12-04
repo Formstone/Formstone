@@ -73,20 +73,15 @@
 		pointer-events: none;
 		transition: opacity @fs-tooltip-transition-duration linear;
 
-		* {
-			transition: none;
-		}
-
 		&,
-		& * {
-			user-select: none !important;
-		}
-
-		&,
-		& *,
-		& *:before,
-		& *:after {
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
 			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
 		}
 
 		// Visible

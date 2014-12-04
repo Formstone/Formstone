@@ -4,6 +4,16 @@
 
 	/**
 	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function setup() {
+		$Body = Formstone.$body;
+	}
+
+	/**
+	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
@@ -697,6 +707,7 @@
 			},
 
 			methods: {
+				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
 
@@ -747,9 +758,5 @@
 		$Window       = Formstone.$window,
 		Document      = Formstone.document,
 		$Body         = null;
-
-		$(function() {
-			$Body = Formstone.$body;
-		});
 
 })(jQuery, Formstone);

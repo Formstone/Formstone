@@ -48,20 +48,15 @@
 
 		margin: @fs-navigation-margin;
 
-		* {
-			transition: none;
-		}
-
 		&,
-		& * {
-			user-select: none !important;
-		}
-
-		&,
-		& *,
-		& *:before,
-		& *:after {
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
 			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
 		}
 
 		/**

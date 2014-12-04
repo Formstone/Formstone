@@ -131,9 +131,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Extend w/ Local Options
 
-						var data = $.extend(true, {
-							$el : $element
-						}, options, $element.data(namespace + "-options"));
+						var localOptions = $element.data(namespace + "-options"),
+							data = $.extend(true, {
+								$el : $element
+							}, options, ($.type(localOptions) === "object" ? localOptions : {}) );
 
 						// Constructor
 
@@ -349,7 +350,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				// Private Methods
 
-				_setup         : $.noop,    // First Run
+				_setup         : $.noop,    // Document ready
 				_construct     : $.noop,    // Constructor
 				_destruct      : $.noop,    // Destructor
 
@@ -392,14 +393,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Run Setup
 
 			settings.namespace = namespace;
-
-			$(function() {
-				if (!settings.initialized) {
-					settings.methods._setup.call(document);
-
-					settings.initialized = true;
-				}
-			});
 
 			return settings;
 		})(namespace, settings);
@@ -476,7 +469,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		Events.transitionEnd = event + ".{ns}";
 
 		for (i in properties) {
-			if (properties.hasOwnProperty(i) && i in test.style) {
+			if (properties.hasOwnProperty(i) && properties[i] in test.style) {
 				property = properties[i];
 			}
 		}
@@ -488,6 +481,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	$(function() {
 		Formstone.$body = $("body");
+
+		for (var i in Formstone.Plugins) {
+			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {
+				Formstone.Plugins[i].methods._setup.call(document);
+				Formstone.Plugins[i].initialized = true;
+			}
+		}
 	});
 
 	// Custom Events

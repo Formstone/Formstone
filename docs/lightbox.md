@@ -24,6 +24,36 @@ core.js
 transition.js
 ```
 
+### Basic
+
+Display images and videos in an overlay:
+
+```javascript
+$("a").lightbox();
+```
+
+```markup
+<a href="one.jpg" title="Image Caption">
+	<img src="one_thumb.jpg" alt="">
+</a>
+```
+
+### Gallery
+
+Link multiple images or videos together with the `data-lightbox-gallery` attribute:
+
+```markup
+<a href="one.jpg" title="Image Caption One" data-lightbox-gallery="photo_gallery">
+	<img src="one_thumb.jpg" alt="">
+</a>
+<a href="two.jpg" title="Image Caption Two" data-lightbox-gallery="photo_gallery">
+	<img src="two_thumb.jpg" alt="">
+</a>
+<a href="three.jpg" title="Image Caption Three" data-lightbox-gallery="photo_gallery">
+	<img src="three_thumb.jpg" alt="">
+</a>
+```
+
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

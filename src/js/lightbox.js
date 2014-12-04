@@ -4,14 +4,22 @@
 
 	/**
 	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function setup() {
+		$Body = Formstone.$body;
+	}
+
+	/**
+	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
 	 */
 
 	function construct(data) {
-		data.formatter = formatCaption;
-
 		this.on(Events.click, data, buildLightbox);
 	}
 
@@ -63,7 +71,7 @@
 				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
 				sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
 				extension      = sourceParts[0],
-				type           = ($el) ? $el.data(Classes.raw.namespace + "-type") : "",
+				type           = ($el) ? $el.data(Namespace + "-type") : "",
 				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
 				isVideo	       = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
 				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
@@ -109,12 +117,12 @@
 
 			if (isImage || isVideo) {
 				// Check for gallery
-				var id = $el.data("gallery");
+				var id = $el.data(Namespace + "-gallery");
 
 				if (id) {
 					Instance.gallery.active    = true;
 					Instance.gallery.id        = id;
-					Instance.gallery.$items    = $("a[data-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
+					Instance.gallery.$items    = $("a[data-lightbox-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
 					Instance.gallery.index     = Instance.gallery.$items.index(Instance.$el);
 					Instance.gallery.total     = Instance.gallery.$items.length - 1;
 				}
@@ -227,9 +235,9 @@
 				} else if (isObject) {
 					appendObject(Instance.$object);
 				}
-			});
+			}).addClass(Classes.raw.open);
 
-			$Body.addClass(Classes.raw.open);
+			Instance.$overlay.addClass(Classes.raw.open);
 		}
 	}
 
@@ -283,7 +291,10 @@
 		Functions.killEvent(e);
 
 		if (Instance) {
-			Instance.$lightbox.transition({
+			Instance.$lightbox.transition("destroy");
+			Instance.$container.transition("destroy");
+
+			Instance.$lightbox.addClass(Classes.raw.animating).transition({
 				property: "opacity"
 			},
 			function(e) {
@@ -300,9 +311,10 @@
 				Instance = null;
 
 				$Window.trigger(Events.close);
-			}).addClass(Classes.raw.animating);
+			});
 
-			$Body.removeClass(Classes.raw.open);
+			Instance.$lightbox.removeClass(Classes.raw.open);
+			Instance.$overlay.removeClass(Classes.raw.open);
 
 			Functions.clearTimer(Instance.resizeTimer);
 		}
@@ -328,9 +340,12 @@
 			Instance.$content.on(Events.touchStart, Classes.image, onTouchStart);
 		}
 
+/*
 		if (Instance.isMobile || Instance.fixed) {
-			$Body.addClass(Classes.raw.open);
+			Instance.$lightbox.addClass(Classes.raw.open);
+			Instance.$overlay.addClass(Classes.raw.open);
 		}
+*/
 
 		Instance.$lightbox.transition({
 			property: "height"
@@ -1093,7 +1108,7 @@
 				customClass    : "",
 				extensions     : [ "jpg", "sjpg", "jpeg", "png", "gif" ],
 				fixed          : false,
-				formatter      : $.noop,
+				formatter      : formatCaption,
 				labels: {
 					close      : "Close",
 					count      : "of",
@@ -1141,6 +1156,7 @@
 			],
 
 			methods: {
+				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
 
@@ -1178,11 +1194,5 @@
 
 		Events.open     = "open";
 		Events.close    = "close";
-
-		// Doc ready
-
-		$(function() {
-			$Body = Formstone.$body;
-		});
 
 })(jQuery, Formstone);

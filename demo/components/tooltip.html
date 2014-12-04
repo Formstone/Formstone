@@ -14,23 +14,23 @@ tooltip.css</code></pre>
 <pre><code class="lang-markup">core.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>Tooltip will generate a tooltip based on the target element&#39;s <code>data-title</code> attribute. Tooltip can be configured to open in a specific direction by setting the <code>direction</code> key at initialization:</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).tooltip({
+<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
     direction: &quot;top&quot;
 });</code></pre>
 <pre><code class="lang-markup">&lt;a href=&quot;#&quot; data-title=&quot;ToolTip Text&quot;&gt;Tooltip Target&lt;/a&gt;</code></pre>
 <h3 id="follow">Follow</h3>
 <p>Tooltip can be configured to follow the user&#39;s mouse:</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).tooltip({
+<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
     follow: true
 });</code></pre>
 <h3 id="match">Match</h3>
 <p>Tooltip can be configured to match the user&#39;s mouse position, relative to the target:</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).tooltip({
+<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
     match: true
 });</code></pre>
 <h3 id="delay">Delay</h3>
 <p>A delay can be set to avoid accidental tooltips:</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).tooltip({
+<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
     delay: 500
 });</code></pre>
 <h2 id="options">Options</h2>
