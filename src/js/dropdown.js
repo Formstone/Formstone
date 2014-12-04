@@ -13,19 +13,21 @@
 		data.multiple = this.prop("multiple");
 		data.disabled = this.is(":disabled");
 
-		if (data.external) {
+		if (data.multiple) {
+			data.links = false;
+		} else if (data.external) {
 			data.links = true;
 		}
 
 		// Grab true original index, only if selected attribute exits
-		var $originalOption = this.find("[selected]").not(":disabled"),
-			originalOptionIndex = this.find("option").index($originalOption);
+		var $originalOption = this.find(":selected").not(":disabled"),
+			originalLabel = $originalOption.text(),
+			originalIndex = this.find("option").index($originalOption);
 
 		if (!data.multiple && data.label !== "") {
-			this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
-			if (originalOptionIndex > -1) {
-				originalOptionIndex++;
-			}
+			$originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
+			originalLabel = data.label;
+			originalIndex = 0;
 		} else {
 			data.label = "";
 		}
@@ -34,19 +36,9 @@
 		var $allOptions = this.find("option, optgroup"),
 			$options = $allOptions.filter("option");
 
-		// If we didn't actually have a selected elemtn
-		if (!$originalOption.length) {
-			$originalOption = $options.eq(0);
-		}
-
-		// Determine original item
-		var originalIndex = (originalOptionIndex > -1) ? originalOptionIndex : 0,
-			originalLabel = (data.label !== "") ? data.label : $originalOption.text();
-
 		// Swap tab index, no more interacting with the actual select!
 		data.tabIndex = this[0].tabIndex;
 		this[0].tabIndex = -1;
-
 
 		// Build wrapper
 		var wrapperClasses = [
@@ -89,11 +81,11 @@
 		data.$options         = $options;
 		data.$selected        = data.$dropdown.find(Classes.selected);
 		data.$wrapper         = data.$dropdown.find(Classes.options);
+		data.$placeholder     = data.$dropdown.find(Classes.placeholder);
 		data.index            = -1;
 		data.guid             = GUID++;
 		data.closed           = true;
 
-		data.clickGUID        = Events.click + data.guid;
 		data.keyDownGUID      = Events.keyDown + data.guid;
 
 		buildOptions(data);
@@ -242,7 +234,6 @@
 
 	function buildOptions(data) {
 		var html = '',
-			itemTag = (data.links) ? "a" : "span",
 			j = 0;
 
 		for (var i = 0, count = data.$allOptions.length; i < count; i++) {
@@ -278,13 +269,10 @@
 					classes.push(RawClasses.item_disabled);
 				}
 
-				html += '<' + itemTag + ' class="' + classes.join(" ") + '" ';
-				if (data.links) {
-					html += 'href="' + opVal + '"';
-				} else {
-					html += 'data-value="' + opVal + '"';
-				}
-				html += '>' + $("<span></span>").text( trimText($option.text(), data.trim) ).html() + '</' + itemTag + '>';
+				html += '<span class="' + classes.join(" ") + '" ';
+				html += 'data-value="' + opVal + '">';
+				html += $("<span></span>").text( trimText($option.text(), data.trim) ).html();
+				html += '</span>';
 
 				j++;
 			}
@@ -358,26 +346,10 @@
 
 			// Bind Events
 			data.$dropdown.addClass(RawClasses.open);
-			$Body.on(data.clickGUID, ":not(" + Classes.base + ")", data, closeHelper);
 
 			scrollOptions(data);
 
 			data.closed = false;
-		}
-	}
-
-	/**
-	 * @method private
-	 * @name closeHelper
-	 * @description Determines if event target is outside instance before closing.
-	 * @param e [object] "Event data"
-	 */
-
-	function closeHelper(e) {
-		Functions.killEvent(e);
-
-		if ($(e.currentTarget).parents(Classes.base).length === 0) {
-			closeOptions(e.data);
 		}
 	}
 
@@ -399,8 +371,6 @@
 		// Make sure it's actually open
 		if (data && !data.closed) {
 			data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
-
-			$Body.off(data.clickGUID);
 
 			data.closed = true;
 		}

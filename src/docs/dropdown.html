@@ -9,52 +9,38 @@
 <script>
 	$(function() {
 		// All
-		$(".demo select").dropdown();
-	});
+		$(".demo_form select").dropdown();
 
-	/*
-		// Disabled
-		$(".demo .toggle_select").on("click", toggleEnabled);
-		if (!$(".demo .select_disabled").is(":disabled")) {
-			$(".demo .toggle_select").text("Disable");
-		} else {
-			$(".demo .toggle_select").text("Enable");
-		}
-		// Disabled Option
-		$(".demo .toggle_select_option").on("click", toggleEnabledOption);
-		if (!$(".demo .select_disabled_option option").eq(0).is(":disabled")) {
-			$(".demo .toggle_select_option").text("Disable Option 'One'");
-		} else {
-			$(".demo .toggle_select_option").text("Enable Option 'One'");
-		}
-		$(window).one("pronto.load", function() {
-			$(".demo select").select("destroy");
-			$(".demo .toggle_select").off("click");
-			$(".demo .toggle_select_option").off("click");
-		});
+		$(".demo_form").on("click", ".toggle", toggleEnabled);
+	});
 
 	function toggleEnabled(e) {
 		e.preventDefault();
-		if ($(".demo .select_disabled").is(":disabled")) {
-			$(".demo .select_disabled").dropdown("enable");
-			$(".demo .toggle_select").text("Disable");
-		} else {
-			$(".demo .select_disabled").dropdown("disable");
-			$(".demo .toggle_select").text("Enable");
-		}
-	}
+		e.stopPropagation();
 
-	function toggleEnabledOption(e) {
-		e.preventDefault();
-		if ($(".demo .select_disabled_option option").eq(0).is(":disabled")) {
-			$(".demo .select_disabled_option").dropdown("enable", "1");
-			$(".demo .toggle_select_option").text("Disable Option 'One'");
+		var $target = $(this),
+			$select = $target.parents(".demo_form").find("select");
+
+		if ($target.hasClass("toggle_item")) {
+			// Toggle item
+			if ($select.find("option").eq(0).is(":disabled")) {
+				$select.dropdown("enable", "1");
+				$target.text("Disable Item '1'");
+			} else {
+				$select.dropdown("disable", "1");
+				$target.text("Enable Item '1'");
+			}
 		} else {
-			$(".demo .select_disabled_option").dropdown("disable", "1");
-			$(".demo .toggle_select_option").text("Enable Option 'One'");
+			// Toggle select
+			if ($select.is(":disabled")) {
+				$select.dropdown("enable");
+				$target.text("Disable");
+			} else {
+				$select.dropdown("disable");
+				$target.text("Enable");
+			}
 		}
 	}
-	*/
 </script>
 
 <h4>Basic</h4>
@@ -184,115 +170,76 @@
 	</fieldset>
 </form>
 
-
-<!-- EXTERNAL LINKS -->
-<!--
-<h2	>External Links</h2>
-<p>The links can also open in 	a new windo	w or tab:	</p>
-
-	<pre class="example"><co	de class="language-javas	cript">$("select").dropdown({
-externalLinks: true
-});</c	ode></pre>
-
-<h5>Demo</h5>
-<form action="#" method="GET">
-	<select name="select_links_external" data-dropdown-options	='{"label":"Ju	mp Sites","external":"true"}'>
+<h4>External Links</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_external" class="form_label">Label</label>
+		<select name="demo_external" id="demo_external" data-dropdown-options='{"label":"Jump Sites","external":"true"}'>
 			<option value="http://google.com">Google Search</option>
-		<option value="http://boingboing.com">Boing	Boing</option>
-		<option value="http://cnn.com">CNN News</o	ption>
-	</select>
+			<option value="http://boingboing.com">Boing	Boing</option>
+			<option value="http://cnn.com">CNN News</option>
+		</select>
+	</fieldset>
 </form>
 
-<br>
--->
-
-<!-- COVER -->
-<!--
-<h2>Cover</h	2>
-<p>The options list can cover the handle, sort o	f Safari-st	yle:</p>
-
-<pre 	class="example"	><code class="l	anguage-javascript">$("select").dropdown({
-cover: true
-});</code></pr	e>
-
-<h5>Demo</h5>
-<form action="#" method="GET">
-	<select name="select_cover" data-dropdown-options='{"cover	":"true"}'>
+<h4>Cover</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_cover" class="form_label">Label</label>
+		<select name="demo_cover" id="demo_cover" data-dropdown-options='{"cover":"true"}'>
 			<option value="1">One</option>
 			<option value="2">Two</option>
-		<option value="3">Three</option>
-		<	option value="4">Four</option>
+			<option value="3">Three</option>
+			<option value="4">Four</option>
 			<option value="5">Five</option>
 		</select>
+	</fieldset>
 </form>
 
-<br>
--->
-
-<!-- CLASS	 -->
-<!--
-<h2>Class</h2>
-<p>Define a cu	stom CSS class to have multiple vi	sually dist	inct Drop	downs 	on the same pag	e:</p>
-
-<pre cl	ass="example"><code class="language-javascript">$("select").dropdown({
-customClass: "custom"
-});<	/code></pre>
-
-<h5>Demo</h5>
-<form action="#" method="GET">
-	<select name="select_custom" data-dropdown-options='{"cust	omClass":"cust	om"}'>
-		<option value="1">One<	/option>
-		<option value="2">Two</option>
-		<option value="3">Three</option>
-		<	option value="4">Four</option>
+<h4>Custom Class</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_custom" class="form_label">Label</label>
+		<select name="demo_custom" id="demo_custom" data-dropdown-options='{"customClass":"custom"}'>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+			<option value="4">Four</option>
 			<option value="5">Five</option>
 		</select>
+	</fieldset>
 </form>
 
-<br>
--->
-
-<!-- DISAB	LE -->
-<!--
-<h2>Disable</h2>
-<p>Dropdow	n will automatically detect disabl	ed fields, 	but you c	an alw	ays manually trig	ger the disable o	r enable event:</p>
-
-<pre class="example"><code class="language-javascript">$("select").dropdown("disable");
-
-$("select").dro	pdown("enable");</code></pre>
-
-<h5>Demo</h5>
-<button class="button small toggle_select">Enable</button>
-<form action="#" method="GET" c	lass="clear_fi	x">
-	<select name="select_disabled" class="select_disabled"	 disabled="disabled">
-		<option value="1">One</op	tion>
-		<option value="2">Two</option>
-		<option value="3">Three</option>
-		<	option value="4">Four</option>
+<h4>Disable</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_disable" class="form_label">Label</label>
+		<select name="demo_disable" id="demo_disable" disabled>
+			<option value="1">One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+			<option value="4">Four</option>
 			<option value="5">Five</option>
 		</select>
+	</fieldset>
+	<fieldset class="form_fieldset">
+		<button type="button" class="form_button toggle">Enable</button>
+	</fieldset>
 </form>
 
-<br>
--->
-
-<!-- DISAB	LE ITEM -->
-<!--
-<p>You can also disabl	e and enable individual options by	 passing th	at option	's val	ue:</p>
-
-<pre class="e	xample"><code class="language-javascript">$("select").dropdown("disable", "value");
-
-$("sel	ect").dropdown("enable", "value");</code></pre>
-
-<h5>Demo</h5>
-<button class="button small toggle_select_option">Enable Option 'One'</button>
-<form actio	n="#" method="	GET">
-	<select name="select_disabled_option" class="select_disabled_option">
-			<option value="1" disabled>One<	/option>
-		<option value="2">Two</option>
-		<option value="3">Three</op	tion>
-		<option value="4">Four</option>
+<h4>Disable Item</h4>
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label for="demo_disable_item" class="form_label">Label</label>
+		<select name="demo_disable_item" id="demo_disable_item">
+			<option value="1" disabled>One</option>
+			<option value="2">Two</option>
+			<option value="3">Three</option>
+			<option value="4">Four</option>
 			<option value="5">Five</option>
 		</select>
+	</fieldset>
+	<fieldset class="form_fieldset">
+		<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
+	</fieldset>
 </form>
--->
