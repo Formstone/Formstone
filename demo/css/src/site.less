@@ -247,7 +247,7 @@
 
 	table {
 		width: 100%;
-		min-width: 700px;
+		min-width: 600px;
 		margin: 20px 0;
 
 		& th {
@@ -267,6 +267,18 @@
 
 		& tr:nth-child(odd) td {
 			background: @gray_1;
+		}
+	}
+
+	.table_wrapper {
+		width: 100%;
+
+		margin: 20px 0;
+		overflow-y: hidden;
+		overflow-x: auto;
+
+		table {
+			margin: 0;
 		}
 	}
 

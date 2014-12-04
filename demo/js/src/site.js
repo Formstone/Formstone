@@ -30,6 +30,8 @@
 				$(this).addClass( $(this).attr("class").replace("lang-", "language-") );
 			});
 
+			$("table").wrap('<div class="table_wrapper"></div>');
+
 			Prism.highlightAll();
 		}
 
