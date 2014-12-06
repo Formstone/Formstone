@@ -12,8 +12,6 @@
 	function construct(data) {
 		data.touches = [];
 
-		touchAction(this, "none");
-
 		if (data.tap) {
 			// Tap
 
@@ -24,6 +22,8 @@
 				.on(Events.click, data, onClick);
 		} else if (data.pan || data.scale) {
 			// Pan / Scale
+
+			touchAction(this, "none");
 
 			data.tap = false;
 

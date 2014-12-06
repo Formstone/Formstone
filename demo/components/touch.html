@@ -399,9 +399,9 @@ $(document).ready(function() {
 	}
 
 	$(window).on("touchstart", function(e) {
-		console.log("Start", e);
+		console.log("Start", e.originalEvent.defaultPrevented);
 	}).on("touchmove", function(e) {
-		console.log("Move", e);
+		console.log("Move", e.originalEvent.defaultPrevented);
 	});
 });
 </script>
