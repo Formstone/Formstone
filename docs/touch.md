@@ -97,13 +97,13 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `tap` | &nbsp; |
-| `panstart` | &nbsp; |
-| `pan` | &nbsp; |
-| `panend` | &nbsp; |
-| `scalestart` | &nbsp; |
-| `scale` | &nbsp; |
-| `scaleend` | &nbsp; |
+| `tap` | 'Fastclick' event; Prevents ghost clicks on mobile |
+| `panstart` | Panning started |
+| `pan` | Panning |
+| `panend` | Panning ended |
+| `scalestart` | Scaling started |
+| `scale` | Scaling |
+| `scaleend` | Scaling ended |
 
 ## Methods
 

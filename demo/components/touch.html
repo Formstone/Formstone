@@ -5,6 +5,7 @@
 <li><a href="#options">Options</a></li>
 <li><a href="#events">Events</a></li>
 <li><a href="#methods">Methods</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
@@ -120,31 +121,31 @@
 <tbody>
 <tr>
 <td><code>tap</code></td>
-<td>&nbsp;</td>
+<td>&#39;Fastclick&#39; event; Prevents ghost clicks on mobile</td>
 </tr>
 <tr>
 <td><code>panstart</code></td>
-<td>&nbsp;</td>
+<td>Panning started</td>
 </tr>
 <tr>
 <td><code>pan</code></td>
-<td>&nbsp;</td>
+<td>Panning</td>
 </tr>
 <tr>
 <td><code>panend</code></td>
-<td>&nbsp;</td>
+<td>Panning ended</td>
 </tr>
 <tr>
 <td><code>scalestart</code></td>
-<td>&nbsp;</td>
+<td>Scaling started</td>
 </tr>
 <tr>
 <td><code>scale</code></td>
-<td>&nbsp;</td>
+<td>Scaling</td>
 </tr>
 <tr>
 <td><code>scaleend</code></td>
-<td>&nbsp;</td>
+<td>Scaling ended</td>
 </tr>
 </tbody>
 </table>
@@ -175,7 +176,243 @@
 <h3 id="destroy">destroy</h3>
 <p>Removes plugin instance.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).touch(&quot;destroy&quot;);</code></pre>
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+html, body {
+	height: 200%;
+}
+.panit,
+.touchit,
+.scaleit,
+.panscaleit {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.panit {
+	height: 50px;
+	width:  50px;
+	position: absolute;
+	top:  50px;
+	left: 50px;
+	background: red;
+}
+.tapit {
+	background: green;
+	height: 20px;
+	width:  200px;
+	margin: 250px auto;
+}
+.tapit.active {
+	background: blue;
+}
+.scaleit {
+	height: 1px;
+	width:  1px;
+	position: absolute;
+	top:  150px;
+	left: 150px;
+}
+.scaleit_box {
+	height: 200px;
+	width:  200px;
+	position: absolute;
+	top:  -100px;
+	left: -100px;
+	background: purple;
+}
+.panscaleit {
+	height: 1px;
+	width:  1px;
+	position: absolute;
+	top:  250px;
+	left: 100px;
+}
+.panscaleit_box {
+	height: 200px;
+	width:  200px;
+	position: absolute;
+	top:  -100px;
+	left: -100px;
+	background: yellow;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+	var origX = 0,
+		origY = 0,
+		diffX = 0,
+		diffY = 0,
+		minX = 10,
+		maxX = 200
+		minY = 10,
+		maxY = 200,
+		sDiffX = 0,
+		sDiffY = 0,
+		sOrigH = 0,
+		sOrigW = 0,
+		psDiffX = 0,
+		psDiffY = 0,
+		psOrigH = 0,
+		psOrigW = 0;
+	// Pan
+	var $panit = $(".panit");
+	$panit.touch({
+		pan: true
+	}).on("panstart.panit", function(e) {
+		log("pan start");
+		var offset = $(this).offset();
+		diffX = offset.left - e.pageX;
+		diffY = offset.top  - e.pageY;
+		origX = offset.left;
+		origY = offset.top;
+	})
+	.on("panend.panit", function(e) {
+		log("pan end");
+	});
+	// Bubbling
+	$(document).on("pan.panit", ".panit", function(e) {
+		log("pan");
+		var data = e.data,
+			x = origX + e.deltaX, //e.pageX + diffX,
+			y = origY + e.deltaY; //e.pageY + diffY;
+		if (x < minX) {
+			x = minX;
+		}
+		if (x > maxX) {
+			x = maxX;
+		}
+		if (y < minY) {
+			y = minY;
+		}
+		if (y > maxY) {
+			y = maxY;
+		}
+		log(x, y);
+		$(this).css({
+			left: x,
+			top: y
+		})
+	});
+	// Tap
+	var $tapit = $(".tapit");
+	$tapit.touch({
+		tap: true
+	}).on("tap.tapit", function(e) {
+		log("tap");
+		$tapit.toggleClass("active");
+	});
+	// Scale
+	var $scaleit = $(".scaleit");
+	$scaleit.touch({
+		scale: true
+	}).on("scalestart.scaleit", function(e) {
+		log("scale start");
+		var offset = $scaleit.offset();
+		sDiffX = offset.left - e.pageX;
+		sDiffY = offset.top  - e.pageY;
+		sOrigH = $(".scaleit_box").outerHeight();
+		sOrigW = $(".scaleit_box").outerWidth();
+	})
+	.on("scaleend.scaleit", function(e) {
+		log("scale end");
+	})
+	.on("scale.scaleit", function(e) {
+		log("scale");
+		var w = sOrigW * e.scale,
+			h = sOrigH * e.scale;
+		if (w < 50) {
+			w = 50;
+		}
+		if (w > 300) {
+			w = 300;
+		}
+		if (h < 50) {
+			h = 50;
+		}
+		if (h > 300) {
+			h = 300;
+		}
+		var x = e.pageX + sDiffX,
+			y = e.pageY + sDiffY;
+		log(x, y, w, h);
+/*
+		$scaleit.css({
+			left: x,
+			top: y
+		});
+*/
+		$(".scaleit_box").css({
+			height: h,
+			width: w,
+			left: -(w / 2),
+			top: -(h / 2)
+		});
+	});
+	// Pan+Scale
+	var $panscaleit = $(".panscaleit");
+	$panscaleit.touch({
+		pan: true,
+		scale: true
+	}).on("scalestart.panscaleit", function(e) {
+		log("panscale start");
+		var offset = $panscaleit.offset();
+		psDiffX = offset.left - e.pageX;
+		psDiffY = offset.top  - e.pageY;
+		psOrigH = $(".panscaleit_box").outerHeight();
+		psOrigW = $(".panscaleit_box").outerWidth();
+	})
+	.on("scaleend.panscaleit", function(e) {
+		log("panscale end");
+	})
+	.on("scale.panscaleit", function(e) {
+		log("panscale");
+		var w = psOrigW * e.scale,
+			h = psOrigH * e.scale;
+		if (w < 50) {
+			w = 50;
+		}
+		if (w > 300) {
+			w = 300;
+		}
+		if (h < 50) {
+			h = 50;
+		}
+		if (h > 300) {
+			h = 300;
+		}
+		var x = e.pageX + psDiffX,
+			y = e.pageY + psDiffY;
+		log(x, y, w, h);
+		$panscaleit.css({
+			left: x,
+			top: y
+		});
+		$(".panscaleit_box").css({
+			height: h,
+			width: w,
+			left: -(w / 2),
+			top: -(h / 2)
+		});
+	});
+	function log() {
+		//console.log(Array.prototype.slice.call(arguments, 0));
+	}
+
+	$(window).on("touchstart", function(e) {
+		console.log("Start", e);
+	}).on("touchmove", function(e) {
+		console.log("Move", e);
+	});
+});
+</script>
+
+<div class="panit"></div>
+
+<div class="tapit"></div>
+
+<div class="scaleit"><div class="scaleit_box"></div></div>
+
+<div class="panscaleit"><div class="panscaleit_box"></div></div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>

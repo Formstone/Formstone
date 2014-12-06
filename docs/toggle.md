@@ -38,8 +38,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `activate.toggle` | Toggle activate |
-| `deactivate.toggle` | Toggle deactivate |
+| `activate.toggle` | Toggle activated |
+| `deactivate.toggle` | Toggle deactivated |
 | `enable.toggle` | Toggle enabled |
 | `disable.toggle` | Toggle diabled |
 

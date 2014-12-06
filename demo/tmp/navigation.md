@@ -25,6 +25,7 @@ navigation.css
 ```markup
 core.js
 mediaquery.js
+toggle.js
 touch.js
 ```
 

@@ -261,6 +261,7 @@
 			unit         : "px"
 		},
 
+		// Raw events for switch
 		Events = $.extend(Plugin.events, {
 			enter       : "enter",
 			leave       : "leave"

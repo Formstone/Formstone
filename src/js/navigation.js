@@ -173,6 +173,7 @@
 	 * @type widget
 	 * @dependency core.js
 	 * @dependency mediaquery.js
+	 * @dependency toggle.js
 	 * @dependency touch.js
 	 */
 

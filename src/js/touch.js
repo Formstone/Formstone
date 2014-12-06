@@ -20,7 +20,7 @@
 			data.pan   = false;
 			data.scale = false;
 
-			this.on( Events.touchStart, data, onPointerStart)
+			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart)
 				.on(Events.click, data, onClick);
 		} else if (data.pan || data.scale) {
 			// Pan / Scale
@@ -58,8 +58,6 @@
 		if (e.preventManipulation) {
 			e.preventManipulation();
 		}
-
-		Functions.killEvent(e);
 
 		var data    = e.data,
 			oe      = e.originalEvent;
@@ -107,8 +105,6 @@
 	 */
 
 	function onPointerStart(e) {
-		e.stopPropagation();
-
 		var data     = e.data,
 			touch    = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null;
 
@@ -119,10 +115,14 @@
 
 		if (data.tap) {
 			// Tap
+
+			// data.startE.stopPropagation();
+
 			data.clicked = false;
 
-			data.$el.on(Events.touchMove, data, onPointerMove)
-					.on( [Events.touchEnd, Events.touchCancel].join(" ") , data, onPointerEnd);
+			data.$el.on( [Events.touchMove, Events.pointerMove].join(" "), data, onTouch)
+					.on( [Events.touchEnd, Events.touchCancel, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
+
 		} else if (data.pan || data.scale) {
 			// Pan / Scale
 
@@ -148,7 +148,14 @@
 					   .on(Events.mouseUp, data, onPointerEnd);
 			}
 
-			$Window.on( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.pointerMove, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
+			$Window.on( [
+				Events.touchMove,
+				Events.touchEnd,
+				Events.touchCancel,
+				Events.pointerMove,
+				Events.pointerUp,
+				Events.pointerCancel
+			].join(" ") , data, onTouch);
 
 			data.$el.trigger( newE );
 		}
@@ -169,10 +176,19 @@
 			deltaX    = newX - data.startX,
 			deltaY    = newY - data.startY;
 
-		if (data.tap && (Math.abs(newX - data.startX) > 10 || Math.abs(newY - data.startY) > 10)) {
+		if (data.tap) {
 			// Tap
 
-			data.$el.off( [Events.touchMove, Events.touchEnd, Events.touchCancel].join(" ") );
+			if (Math.abs(newX - data.startX) > 10 || Math.abs(newY - data.startY) > 10) {
+				data.$el.off( [
+					Events.touchMove,
+					Events.touchEnd,
+					Events.touchCancel,
+					Events.pointerMove,
+					Events.pointerUp,
+					Events.pointerCancel
+				].join(" ") );
+			}
 		} else if (data.pan || data.scale) {
 			// Pan / Scale
 
@@ -217,7 +233,16 @@
 		if (data.tap) {
 			// Tap
 
-			data.$el.off( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.mouseMove, Events.mouseUp].join(" ") );
+			data.$el.off( [
+				Events.touchMove,
+				Events.touchEnd,
+				Events.touchCancel,
+				Events.pointerMove,
+				Events.pointerUp,
+				Events.pointerCancel,
+				Events.mouseMove,
+				Events.mouseUp
+			].join(" ") );
 
 			data.startE.preventDefault();
 
@@ -232,7 +257,16 @@
 				deltaY    = newY - data.startY,
 				newE      = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, data.scaleD, deltaX, deltaY);
 
-			$Window.off( [Events.touchMove, Events.touchEnd, Events.touchCancel, Events.mouseMove, Events.mouseUp, Events.pointerMove, Events.pointerUp, Events.pointerCancel].join(" ") );
+			$Window.off( [
+				Events.touchMove,
+				Events.touchEnd,
+				Events.touchCancel,
+				Events.mouseMove,
+				Events.mouseUp,
+				Events.pointerMove,
+				Events.pointerUp,
+				Events.pointerCancel
+			].join(" ") );
 
 			data.$el.trigger( newE );
 
@@ -402,13 +436,13 @@
 
 		/**
 		 * @events
-		 * @event tap ""
-		 * @event panstart ""
-		 * @event pan ""
-		 * @event panend ""
-		 * @event scalestart ""
-		 * @event scale ""
-		 * @event scaleend ""
+		 * @event tap "'Fastclick' event; Prevents ghost clicks on mobile"
+		 * @event panstart "Panning started"
+		 * @event pan "Panning"
+		 * @event panend "Panning ended"
+		 * @event scalestart "Scaling started"
+		 * @event scale "Scaling"
+		 * @event scaleend "Scaling ended"
 		 */
 
 		Events.tap           = "tap";

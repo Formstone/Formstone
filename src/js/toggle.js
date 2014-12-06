@@ -65,9 +65,12 @@
 
 	function activate(data) {
 		if (data.enabled && !data.active) {
+			// index in group
+			var index = (data.group) ? data.$group.index(data.$el) : null;
+
 			data.$toggles.addClass(RawClasses.active);
 
-			this.trigger(Events.activate);
+			this.trigger(Events.activate, [index]);
 
 			data.active = true;
 		}
@@ -177,8 +180,8 @@
 
 			/**
 			 * @events
-			 * @event activate.toggle "Toggle activate"
-			 * @event deactivate.toggle "Toggle deactivate"
+			 * @event activate.toggle "Toggle activated"
+			 * @event deactivate.toggle "Toggle deactivated"
 			 * @event enable.toggle "Toggle enabled"
 			 * @event disable.toggle "Toggle diabled"
 			 */

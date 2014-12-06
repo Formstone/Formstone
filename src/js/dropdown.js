@@ -115,8 +115,8 @@
 		data.$dropdown.touch({
 						tap: true
 					  })
-					  .on( [Events.tap, Events.click].join(" ") , Classes.selected, data, onClick)
-					  .on( [Events.tap, Events.click].join(" ") , Classes.item, data, onSelect);
+					  .on(Events.tap, Classes.selected, data, onClick)
+					  .on(Events.tap, Classes.item, data, onSelect);
 
 		// Change events
 		this.on(Events.change, data, onChange);
