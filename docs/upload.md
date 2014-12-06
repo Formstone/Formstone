@@ -23,6 +23,24 @@ upload.css
 core.js
 ```
 
+### Basic
+
+Upload will create a simple 'drop zone' for file uploads:
+
+```javascript
+$(".target").upload({
+	action: "upload.php"
+});
+```
+
+```markup
+<div class="target"></div>
+```
+
+### Uploads
+
+Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
+
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

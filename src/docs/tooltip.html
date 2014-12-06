@@ -1,0 +1,43 @@
+<style>
+	.tooltips { margin: 20px 0; overflow: hidden; }
+
+	.tooltip { background: #eee; border: 1px solid #ccc; border-radius: 3px; clear: both; display: block; line-height: 50px; margin: 0 auto 15px; text-align: center; width: 50%; }
+</style>
+
+<script>
+	$(function() {
+		$(".tooltip").tooltip();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"   data-tooltip-options='{"direction":"left"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"  data-tooltip-options='{"direction":"right"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"    data-tooltip-options='{"direction":"top"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom"}'>Bottom</div>
+</div>
+
+<h4>Follow</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","follow":"true"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","follow":"true"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","follow":"true"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","follow":"true"}'>Bottom</div>
+</div>
+
+<h4>Match</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","match":"true"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","match":"true"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","match":"true"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","match":"true"}'>Bottom</div>
+</div>
+
+<h4>Delay</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","delay":"500"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","delay":"500"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
+</div>

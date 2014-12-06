@@ -366,6 +366,19 @@
    Media Queries
 ================================================================== */
 
+	.footer {
+		.font_size(14);
+
+		color: @white;
+		color: fade(@white, 75);
+		margin-bottom: 10px;
+		text-align: center;
+
+		@media @desktop {
+			margin-bottom: 20px;
+		}
+	}
+
 	.content {
 		background: @white;
 		padding: 0 10px;
@@ -376,7 +389,6 @@
 		}
 
 		@media @desktop {
-			margin-bottom: 30px;
 			padding: 30px 50px;
 		}
 	}
@@ -421,9 +433,10 @@
 
 
 	.button {
-		.font_size(16);
+		.font_size(14);
 
 		background: @blue;
+		border: none;
 		border-radius: 3px;
 		color: @white;
 		display: inline-block;
@@ -433,6 +446,12 @@
 		.no-touch &:hover {
 			background: @black;
 			color: @white;
+		}
+
+		@media @max_mobile {
+			width: 100%;
+
+			margin-bottom: 10px;
 		}
 	}
 
@@ -461,6 +480,7 @@
 			border-radius: 3px;
 			color: @gray_5;
 			line-height: 1.8;
+			overflow: auto;
 			padding: 5px 15px;
 		}
 

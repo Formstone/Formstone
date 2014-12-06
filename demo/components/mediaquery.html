@@ -5,6 +5,7 @@
 <li><a href="#options">Options</a></li>
 <li><a href="#events">Events</a></li>
 <li><a href="#methods">Methods</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
@@ -19,11 +20,12 @@
     minHeight    : [ 400, 800 ],
     maxHeight    : [ 800, 400 ]
 });</code></pre>
-<p>After initializing, simply listen for the <code>change</code> event:</p>
-<pre><code class="lang-javascript">$(window).on(&quot;change&quot;, function(e, state) {
+<h3 id="events">Events</h3>
+<p>After initializing, simply listen for the <code>mqchange.mediaquery</code> event:</p>
+<pre><code class="lang-javascript">$(window).on(&quot;mqchange.mediaquery&quot;, function(e, state) {
     console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });</code></pre>
-<p>Note: In the example above, the <code>change</code> event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the <code>min-width</code> and <code>max-width</code> changes.</p>
+<p>Note: In the example above, the <code>mqchange.mediaquery</code> event will be fire twice for each breakpoint. This is because Mediaquery will respond to both the <code>min-width</code> and <code>max-width</code> changes.</p>
 <h3 id="binding">Binding</h3>
 <p>Media Query can also bind events to specific media query changes for more fine grain control:</p>
 <pre><code class="lang-javascript">$.mediaquery(&quot;bind&quot;, &quot;(min-width: 740px)&quot;, {
@@ -92,7 +94,7 @@
 </thead>
 <tbody>
 <tr>
-<td><code>mqchange</code></td>
+<td><code>mqchange.mediaquery</code></td>
 <td>Change to a media query match; Triggered on window</td>
 </tr>
 </tbody>
@@ -174,7 +176,56 @@
 </tr>
 </tbody>
 </table>
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	.demo_output { margin: 20px 0; }
+	.demo_output span { display: inline-block; width: 90px; }
+	.demo_output p { margin: 0 0 20px; }
+	.demo_output p:first-child { font-weight: 600; }
+</style>
+
+<script>
+	$(function() {
+		$(window).on("mqchange.mediaquery", logChange);
+
+		if (!$.mediaquery("state")) {
+			$.mediaquery({
+				minWidth     : [ 320, 500, 740, 980, 1220 ],
+				maxWidth     : [ 1220, 980, 740, 500, 320 ],
+				minHeight    : [ 400, 800 ],
+				maxHeight    : [ 800, 400 ]
+			});
+		}
+
+		$.mediaquery("bind", "(min-width: 740px)", {
+			enter: logBind,
+			leave: logBind
+		});
+	});
+
+	function logChange(e, state) {
+		var html = "";
+		html += "<p><span>Change:</span><span>MinWidth:</span>" + state.minWidth + "<br>";
+		html += "<span></span><span>MaxWidth:</span>"+ state.maxWidth + "<br>";
+		html += "<span></span><span>MinHeight:</span>"+ state.minHeight + "<br>";
+		html += "<span></span><span>MaxHeight:</span>"+ state.maxHeight + "</p>";
+
+		$(".demo_basic").prepend(html);
+	}
+
+	function logBind() {
+		var mql = this,
+			type = mql.matches ? "Enter" : "Leave"
+			html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
+
+		$(".demo_binding").prepend(html);
+	}
+</script>
+
+<h4>Basic</h4>
+<div class="demo_output demo_basic form_textarea"></div>
+
+<h4>Binding</h2>
+<div class="demo_output demo_binding form_textarea"></div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -197,4 +248,4 @@
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Gridlock --> <script></script></body></html>
+</div></div><footer class="row footer"><div class="mobile-full tablet-full desktop-10 right padded"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --> <script></script></body></html>

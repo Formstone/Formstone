@@ -1,6 +1,6 @@
 <style>
 	.navigation { margin: 20px 0; }
-	.navigation a { background: #222; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 	.navigation a:hover { color: #fff; }
 
 	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
@@ -12,12 +12,10 @@
 
 <script>
 	$(function() {
-/*
-		$(".demo .naver a").on("click", function(e) {
+		$(".navigation a").on("click", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 		});
-*/
 
 		$(".navigation").navigation();
 	});

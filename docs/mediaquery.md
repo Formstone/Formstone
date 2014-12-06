@@ -34,15 +34,17 @@ $.mediaquery({
 });
 ```
 
-After initializing, simply listen for the `change` event:
+### Events
+
+After initializing, simply listen for the `mqchange.mediaquery` event:
 
 ```javascript
-$(window).on("change", function(e, state) {
+$(window).on("mqchange.mediaquery", function(e, state) {
 	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
 
-Note: In the example above, the `change` event will be fire twice for each breakpoint. This is becuase Rubbeband will respond to both the `min-width` and `max-width` changes.
+Note: In the example above, the `mqchange.mediaquery` event will be fire twice for each breakpoint. This is because Mediaquery will respond to both the `min-width` and `max-width` changes.
 
 ### Binding
 
@@ -83,7 +85,7 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `mqchange` | Change to a media query match; Triggered on window |
+| `mqchange.mediaquery` | Change to a media query match; Triggered on window |
 
 ## Methods
 

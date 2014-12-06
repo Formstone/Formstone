@@ -40,6 +40,13 @@ touch.js</code></pre>
     &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
 &lt;/nav&gt;</code></pre>
+<h3 id="events">Events</h3>
+<p>React to the navigation by listening for the <code>open.navigation</code> and <code>close.navigation</code> events:</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).on(&quot;open.navigation&quot;, function() {
+    // ...
+}).on(&quot;close.navigation&quot;, function() {
+    // ...
+});</code></pre>
 <h4 id="ie-support">IE Support</h4>
 <p>When supporting IE, a <a href="https://gist.github.com/benplum/8045366">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336">IE 8</a>, <a href="https://gist.github.com/benplum/8045327">IE 9</a>) are required.</p>
 <h2 id="options">Options</h2>
@@ -195,7 +202,7 @@ touch.js</code></pre>
 </table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
 	.navigation { margin: 20px 0; }
-	.navigation a { background: #222; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 	.navigation a:hover { color: #fff; }
 
 	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
@@ -207,12 +214,10 @@ touch.js</code></pre>
 
 <script>
 	$(function() {
-/*
-		$(".demo .naver a").on("click", function(e) {
+		$(".navigation a").on("click", function(e) {
 			e.preventDefault();
 			e.stopPropagation();
 		});
-*/
 
 		$(".navigation").navigation();
 	});
@@ -261,4 +266,4 @@ touch.js</code></pre>
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Gridlock --> <script></script></body></html>
+</div></div><footer class="row footer"><div class="mobile-full tablet-full desktop-10 right padded"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --> <script></script></body></html>

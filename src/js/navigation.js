@@ -10,7 +10,7 @@
 	 */
 
 	function construct(data) {
-		data.enabled    = false;
+		data.enabled    = true;
 		data.open       = false;
 
 		this.addClass( [RawClasses.base, data.customClass].join(" ") )
@@ -27,7 +27,9 @@
 		// Touch Support
 		data.$handle.touch({
 			tap: true
-		}).on( [Events.tap, Events.click].join(" ") , data, onClick);
+		}).on(Events.tap, data, onClick);
+
+		disable.call(data.$el, data);
 
 		// Media Query support
 		$.mediaquery("bind", "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")", {
@@ -205,9 +207,17 @@
 				"open"
 			],
 
-			events: [
-				"tap"
-			],
+			/**
+			 * @events
+			 * @event open "Navigation opened"
+			 * @event close "Navigation closed"
+			 */
+
+			events: {
+				tap      : "tap",
+				open     : "open",
+				close    : "close"
+			},
 
 			methods: {
 				_construct    : construct,
@@ -232,14 +242,5 @@
 		// Singleton
 
 		Instance      = null;
-
-		/**
-		 * @events
-		 * @event open "Navigation opened"
-		 * @event close "Navigation closed"
-		 */
-
-		Events.open     = "open";
-		Events.close    = "close";
 
 })(jQuery, Formstone);

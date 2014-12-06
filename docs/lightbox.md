@@ -54,6 +54,18 @@ Link multiple images or videos together with the `data-lightbox-gallery` attribu
 </a>
 ```
 
+### Events
+
+React to the lightbox by listening for the `open.lightbox` and `close.lightbox` events on the `window`:
+
+```javascript
+$(window).on("open.lightbox", function() {
+	// ...
+}).on("close.lightbox", function() {
+	// ...
+});
+```
+
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -84,8 +96,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `open` | Lightbox opened; Triggered on window |
-| `close` | Lightbox closed; Triggered on window |
+| `open.lightbox` | Lightbox opened; Triggered on window |
+| `close.lightbox` | Lightbox closed; Triggered on window |
 
 ## Methods
 

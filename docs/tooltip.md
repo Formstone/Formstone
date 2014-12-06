@@ -36,6 +36,7 @@ $("a").tooltip({
 <a href="#" data-title="ToolTip Text">Tooltip Target</a>
 ```
 
+<!--
 ### Follow
 
 Tooltip can be configured to follow the user's mouse:
@@ -55,6 +56,7 @@ $("a").tooltip({
 	match: true
 });
 ```
+-->
 
 ### Delay
 

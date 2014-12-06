@@ -5,6 +5,7 @@
 <li><a href="#options">Options</a></li>
 <li><a href="#methods">Methods</a></li>
 <li><a href="#css">CSS</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
@@ -18,16 +19,28 @@ tooltip.css</code></pre>
     direction: &quot;top&quot;
 });</code></pre>
 <pre><code class="lang-markup">&lt;a href=&quot;#&quot; data-title=&quot;ToolTip Text&quot;&gt;Tooltip Target&lt;/a&gt;</code></pre>
-<h3 id="follow">Follow</h3>
-<p>Tooltip can be configured to follow the user&#39;s mouse:</p>
-<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
+<!--
+### Follow
+
+Tooltip can be configured to follow the user's mouse:
+
+```javascript
+$("a").tooltip({
     follow: true
-});</code></pre>
-<h3 id="match">Match</h3>
-<p>Tooltip can be configured to match the user&#39;s mouse position, relative to the target:</p>
-<pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
+});
+```
+
+### Match
+
+Tooltip can be configured to match the user's mouse position, relative to the target:
+
+```javascript
+$("a").tooltip({
     match: true
-});</code></pre>
+});
+```
+-->
+
 <h3 id="delay">Delay</h3>
 <p>A delay can be set to avoid accidental tooltips:</p>
 <pre><code class="lang-javascript">$(&quot;a&quot;).tooltip({
@@ -162,7 +175,49 @@ tooltip.css</code></pre>
 </tr>
 </tbody>
 </table>
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	.tooltips { margin: 20px 0; overflow: hidden; }
+
+	.tooltip { background: #eee; border: 1px solid #ccc; border-radius: 3px; clear: both; display: block; line-height: 50px; margin: 0 auto 15px; text-align: center; width: 50%; }
+</style>
+
+<script>
+	$(function() {
+		$(".tooltip").tooltip();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"   data-tooltip-options='{"direction":"left"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"  data-tooltip-options='{"direction":"right"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"    data-tooltip-options='{"direction":"top"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom"}'>Bottom</div>
+</div>
+
+<h4>Follow</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","follow":"true"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","follow":"true"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","follow":"true"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","follow":"true"}'>Bottom</div>
+</div>
+
+<h4>Match</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","match":"true"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","match":"true"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","match":"true"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","match":"true"}'>Bottom</div>
+</div>
+
+<h4>Delay</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Left Tooltip"    data-tooltip-options='{"direction":"left","delay":"500"}'>Left</div>
+	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
+	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","delay":"500"}'>Top</div>
+	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
+</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -185,4 +240,4 @@ tooltip.css</code></pre>
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><!-- Gridlock --> <script></script></body></html>
+</div></div><footer class="row footer"><div class="mobile-full tablet-full desktop-10 right padded"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --> <script></script></body></html>

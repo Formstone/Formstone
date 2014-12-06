@@ -232,6 +232,15 @@
 				state          : getState,
 				bind           : bind,
 				unbind         : unbind
+			},
+
+			/**
+			 * @events
+			 * @event mqchange.mediaquery "Change to a media query match; Triggered on window"
+			 */
+
+			events: {
+				mqChange    : "mqchange"
 			}
 		}),
 
@@ -252,18 +261,10 @@
 			unit         : "px"
 		},
 
-		/**
-		 * @events
-		 * @event mqchange "Change to a media query match; Triggered on window"
-		 */
-
-		Events = {
-			mqChange    : "mqchange",
+		Events = $.extend(Plugin.events, {
 			enter       : "enter",
 			leave       : "leave"
-		},
-
-		// Public methods
+		}),
 
 		// Localize References
 

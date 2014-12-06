@@ -27,3 +27,15 @@ Link multiple images or videos together with the `data-lightbox-gallery` attribu
 	<img src="three_thumb.jpg" alt="">
 </a>
 ```
+
+### Events
+
+React to the lightbox by listening for the `open.lightbox` and `close.lightbox` events on the `window`:
+
+```javascript
+$(window).on("open.lightbox", function() {
+	// ...
+}).on("close.lightbox", function() {
+	// ...
+});
+```

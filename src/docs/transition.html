@@ -1,0 +1,86 @@
+<style>
+	.transitions { margin: 0 0 20px; }
+	.transition { background: #c65032; border-radius: 3px; height: 30px; margin: 20px 0; width: 10%;
+		-webkit-transition: none;
+				transition: none;
+		-webkit-transition: margin 0.5s ease, background 0.5s linear 0.5s;
+				transition: margin 0.5s ease, background 0.5s linear 0.5s;
+	}
+	.transition.move { margin-left: 90%; }
+	.transition_property.move { background: #393b3f; }
+
+	.demo_output { margin: 0 0 20px; }
+
+	@media screen and (min-width: 740px) {
+		.demo_output { display: inline-block; margin: 0 0 0 10px; }
+	}
+</style>
+
+<script>
+	$(function() {
+		$(".transition_basic").transition({
+			always: true
+		}, complete);
+
+		$(".transition_parent").transition({
+			always: true,
+			target: ".transition_delegate",
+		}, complete);
+
+		$(".transition_property").transition({
+			always: true,
+			property: "background-color",
+		}, complete);
+
+		$(".trigger").on("click", start);
+	});
+
+	function start() {
+		var $target = $(this).parent(".transitions").find(".transition");
+
+		if (!$target.hasClass("animating")) {
+			$target.toggleClass("move")
+				   .addClass("animating");
+
+			output($target, "&nbsp;");
+		}
+	}
+
+	function complete() {
+		var $target = $(this);
+
+		if (!$target.hasClass("transition")) {
+			$target = $(this).find(".transition");
+		}
+
+		$target.removeClass("animating");
+		output($target, "Complete");
+	}
+
+	function output($target, text) {
+		$target.parents(".transitions").find(".demo_output").html(text);
+	}
+</script>
+
+<h4>Basic</h4>
+<div class="transitions">
+	<div class="transition transition_basic"></div>
+	<button class="button trigger">Start</button>
+	<div class="demo_output">&nbsp;</div>
+</div>
+
+<h4>Delegation</h4>
+<div class="transitions">
+	<div class="transition_parent">
+		<div class="transition transition_delegate"></div>
+	</div>
+	<button class="button trigger">Start</button>
+	<div class="demo_output">&nbsp;</div>
+</div>
+
+<h4>Property</h4>
+<div class="transitions">
+	<div class="transition transition_property"></div>
+	<button class="button trigger">Start</button>
+	<div class="demo_output">&nbsp;</div>
+</div>

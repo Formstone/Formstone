@@ -1155,6 +1155,17 @@
 				"error"
 			],
 
+			/**
+			 * @events
+			 * @event open.lightbox "Lightbox opened; Triggered on window"
+			 * @event close.lightbox "Lightbox closed; Triggered on window"
+			 */
+
+			events: {
+				open     : "open",
+				close    : "close"
+			},
+
 			methods: {
 				_setup        : setup,
 				_construct    : construct,
@@ -1185,14 +1196,5 @@
 		// Singleton
 
 		Instance      = null;
-
-		/**
-		 * @events
-		 * @event open "Lightbox opened; Triggered on window"
-		 * @event close "Lightbox closed; Triggered on window"
-		 */
-
-		Events.open     = "open";
-		Events.close    = "close";
 
 })(jQuery, Formstone);

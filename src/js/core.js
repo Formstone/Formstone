@@ -332,7 +332,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Namespace Classes & Events
 
 			settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
-			settings.events    = namespaceProperties("events",  namespaceDash, Events,  settings.events);
+			settings.events    = namespaceProperties("events",  namespace,     Events,  settings.events);
 
 			// Extend Functions
 

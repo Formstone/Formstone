@@ -43,6 +43,18 @@ $("nav").navigation({
 </nav>
 ```
 
+### Events
+
+React to the navigation by listening for the `open.navigation` and `close.navigation` events:
+
+```javascript
+$("nav").on("open.navigation", function() {
+	// ...
+}).on("close.navigation", function() {
+	// ...
+});
+```
+
 #### IE Support
 
 When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
