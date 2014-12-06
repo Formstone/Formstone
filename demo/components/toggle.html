@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Toggle &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="toggle">Toggle</h1>
+<p>A jQuery plugin for toggling states.</p>
+<ul>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#demo">Demo</a></li>
+</ul>
+<h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">toggle.js</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js
+mediaquery.js
+touch.js</code></pre>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-toggle-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collapse</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Allow toggle to collapse it&#39;s target</td>
+</tr>
+<tr>
+<td><code>maxWidth</code></td>
+<td><code>string</code></td>
+<td><code>Infinity</code></td>
+<td>Width at which to auto-disable plugin</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>activate.toggle</code></td>
+<td>Toggle activate</td>
+</tr>
+<tr>
+<td><code>deactivate.toggle</code></td>
+<td>Toggle deactivate</td>
+</tr>
+<tr>
+<td><code>enable.toggle</code></td>
+<td>Toggle enabled</td>
+</tr>
+<tr>
+<td><code>disable.toggle</code></td>
+<td>Toggle diabled</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="activate">activate</h3>
+<p>Activate instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;activate&quot;);</code></pre>
+<h3 id="deactivate">deactivate</h3>
+<p>Deactivates instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;deactivate&quot;);</code></pre>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.toggle(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;destroy&quot;);</code></pre>
+<h3 id="disable">disable</h3>
+<p>Disables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;disable&quot;);</code></pre>
+<h3 id="enable">enable</h3>
+<p>Enables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;enable&quot;);</code></pre>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	.toggle.fs-toggle-enabled { color: #393b3f; }
+	.toggle.fs-toggle-active { color: #c65032; }
+
+	.toggle_target { background: #c65032; border-radius: 3px; color: #fff; height: 50px; line-height: 50px; margin: 10px 0; text-align: center; width: 100%; }
+	.toggle_target.fs-toggle-enabled.fs-toggle-target { display: none; }
+	.toggle_target.fs-toggle-enabled.fs-toggle-active { display: block; }
+</style>
+
+<script>
+	$(function() {
+		$(".toggle").toggle();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="toggle" data-toggle-target=".toggle_target_0">Toggle</div>
+<div class="toggle_target toggle_target_0">Target</div>
+
+<h4>Grouped</h4>
+<div class="toggle" data-toggle-target=".toggle_target_1" data-toggle-group="toggle_group_1">Toggle 1</div>
+<div class="toggle_target toggle_target_1">Target 1</div>
+
+<div class="toggle" data-toggle-target=".toggle_target_2" data-toggle-group="toggle_group_1">Toggle 2</div>
+<div class="toggle_target toggle_target_2">Target 2</div>
+
+<h4>Grouped (no collapse)</h4>
+<div class="toggle" data-toggle-active="true" data-toggle-options='{"collapse":false}' data-toggle-target=".toggle_target_3" data-toggle-group="toggle_group_2">Toggle 1</div>
+<div class="toggle_target toggle_target_3">Target 1</div>
+
+<div class="toggle" data-toggle-options='{"collapse":false}' data-toggle-target=".toggle_target_4" data-toggle-group="toggle_group_2">Toggle 2</div>
+<div class="toggle_target toggle_target_4">Target 2</div>
+
+<h4>Max Width</h4>
+<div class="toggle" data-toggle-options='{"maxWidth":"740px"}' data-toggle-target=".toggle_target_5">Toggle 1</div>
+<div class="toggle_target toggle_target_5">Target 1</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<ul>
+<li><a href="core.html">Formstone</a></li>
+</ul>
+<h5 id="grid">Grid</h5>
+<ul>
+<li><a href="grid.html">Grid</a></li>
+</ul>
+<h5 id="utility">Utility</h5>
+<ul>
+<li><a href="cookie.html">Cookie</a></li>
+<li><a href="mediaquery.html">Media Query</a></li>
+</ul>
+<h5 id="widget">Widget</h5>
+<ul>
+<li><a href="dropdown.html">Dropdown</a></li>
+<li><a href="lightbox.html">Lightbox</a></li>
+<li><a href="navigation.html">Navigation</a></li>
+<li><a href="toggle.html">Toggle</a></li>
+<li><a href="tooltip.html">Tooltip</a></li>
+<li><a href="touch.html">Touch</a></li>
+<li><a href="transition.html">Transition</a></li>
+<li><a href="upload.html">Upload</a></li>
+</ul>
+</div></div><footer class="row footer"><div class="mobile-full tablet-full desktop-10 right padded"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --> <script></script></body></html>

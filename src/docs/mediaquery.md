@@ -38,7 +38,9 @@ $.mediaquery("bind", "(min-width: 740px)", {
 });
 ```
 
+<!--
 Note: The `leave` callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.
+-->
 
 #### IE Support
 

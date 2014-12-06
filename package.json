@@ -51,6 +51,7 @@
         "dist/js/lightbox.js",
         "dist/js/mediaquery.js",
         "dist/js/navigation.js",
+        "dist/js/toggle.js",
         "dist/js/tooltip.js",
         "dist/js/touch.js",
         "dist/js/transition.js",

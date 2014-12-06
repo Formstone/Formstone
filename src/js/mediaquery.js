@@ -184,7 +184,7 @@
 		if (!Bindings[ key ]) {
 			Bindings[ key ] = {
 				mq:        Window.matchMedia(media),
-				active:    false,
+				active:    true,
 				enter:     [],
 				leave:     []
 			};

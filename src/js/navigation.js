@@ -209,8 +209,8 @@
 
 			/**
 			 * @events
-			 * @event open "Navigation opened"
-			 * @event close "Navigation closed"
+			 * @event open.navigation "Navigation opened"
+			 * @event close.navigation "Navigation closed"
 			 */
 
 			events: {
@@ -237,10 +237,6 @@
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions,
-
-		// Singleton
-
-		Instance      = null;
+		Functions     = Plugin.functions;
 
 })(jQuery, Formstone);

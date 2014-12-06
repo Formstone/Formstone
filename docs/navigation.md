@@ -105,8 +105,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `open` | Navigation opened |
-| `close` | Navigation closed |
+| `open.navigation` | Navigation opened |
+| `close.navigation` | Navigation closed |
 
 ## Methods
 
