@@ -1,4 +1,4 @@
-{"template":"component.html","title":"Navigation"}
+{"template":"component.html","title":"Navigation","demo":"<style>\n\t.navigation { margin: 20px 0; }\n\t.navigation a { background: #222; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }\n\t.navigation a:hover { color: #fff; }\n\n\t.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }\n\t.navigation.fs-navigation-enabled .fs-navigation-container { padding: 10px; }\n\n\t.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }\n\t.custom_navigation.fs-navigation-enabled { margin-top: 0; }\n</style>\n\n<script>\n\t$(function() {\n/*\n\t\t$(\".demo .naver a\").on(\"click\", function(e) {\n\t\t\te.preventDefault();\n\t\t\te.stopPropagation();\n\t\t});\n*/\n\n\t\t$(\".navigation\").navigation();\n\t});\n</script>\n\n<h4>Basic</h4>\n<nav class=\"navigation\">\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Custom Handle</h4>\n<h5 class=\"custom_handle\">Navigation</h5>\n<nav class=\"navigation custom_navigation\" data-navigation-options='{\"handle\":\".custom_handle\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Breakpoint</h4>\n<nav class=\"navigation\" data-navigation-options='{\"maxWidth\":\"740px\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>"}
 
 # Navigation
 
@@ -9,6 +9,7 @@ A jQuery plugin for simple responsive navigation.
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
+* [Demo](#demo)
 
 ## Use 
 

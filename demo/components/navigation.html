@@ -6,6 +6,7 @@
 <li><a href="#events">Events</a></li>
 <li><a href="#methods">Methods</a></li>
 <li><a href="#css">CSS</a></li>
+<li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
@@ -192,7 +193,52 @@ touch.js</code></pre>
 </tr>
 </tbody>
 </table>
-</div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="demo"><h2 id="demo">Demo</h2><style>
+	.navigation { margin: 20px 0; }
+	.navigation a { background: #222; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.navigation a:hover { color: #fff; }
+
+	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+	.navigation.fs-navigation-enabled .fs-navigation-container { padding: 10px; }
+
+	.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }
+	.custom_navigation.fs-navigation-enabled { margin-top: 0; }
+</style>
+
+<script>
+	$(function() {
+/*
+		$(".demo .naver a").on("click", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		});
+*/
+
+		$(".navigation").navigation();
+	});
+</script>
+
+<h4>Basic</h4>
+<nav class="navigation">
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+
+<h4>Custom Handle</h4>
+<h5 class="custom_handle">Navigation</h5>
+<nav class="navigation custom_navigation" data-navigation-options='{"handle":".custom_handle"}'>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+
+<h4>Breakpoint</h4>
+<nav class="navigation" data-navigation-options='{"maxWidth":"740px"}'>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>

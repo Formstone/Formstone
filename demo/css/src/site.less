@@ -236,6 +236,11 @@
 		min-width: 600px;
 		margin: 20px 0;
 
+		& th,
+		& td {
+			vertical-align: top;
+		}
+
 		& th {
 			.sans();
 			.font_size(12);
@@ -366,6 +371,7 @@
 		padding: 0 10px;
 
 		@media @tablet {
+			border-radius: 0 0 3px 3px;
 			padding: 10px 30px;
 		}
 

@@ -18,6 +18,7 @@
 
 		data.$container    = this.find(Classes.container);
 		data.$handle       = (data.handle) ? $(data.handle).addClass(RawClasses.handle) : $('<span class="' + RawClasses.handle + '"></span>').prependTo(this);
+		data.$toggles      = $().add(this).add(data.$handle);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
@@ -47,7 +48,10 @@
 	 */
 
 	function destruct(data) {
-		data.$handle.remove();
+		if (!data.handle) {
+			data.$handle.remove();
+		}
+
 		data.$container.contents()
 					   .unwrap();
 
@@ -68,8 +72,9 @@
 				data.$handle.html(data.labels.open);
 			}
 
-			this.addClass(RawClasses.open)
-				.trigger(Events.open);
+			data.$toggles.addClass(RawClasses.open);
+
+			this.trigger(Events.open);
 
 			data.open = true;
 		}
@@ -88,8 +93,9 @@
 				data.$handle.html(data.labels.closed);
 			}
 
-			this.removeClass(RawClasses.open)
-				.trigger(Events.close);
+			data.$toggles.removeClass(RawClasses.open);
+
+			this.trigger(Events.close);
 
 			data.open = false;
 		}
@@ -105,6 +111,11 @@
 	function enable(data) {
 		if (!data.enabled) {
 			this.addClass(RawClasses.enabled);
+
+			if (data.handle) {
+				data.$handle.addClass( [RawClasses.handle, RawClasses.enabled].join(" ") );
+			}
+
 			data.enabled = true;
 			data.open    = true; // trick close method
 
@@ -121,7 +132,12 @@
 
 	function disable(data) {
 		if (data.enabled) {
-			this.removeClass( [RawClasses.enabled, RawClasses.open].join(" ") );
+			data.$toggles.removeClass( [RawClasses.enabled, RawClasses.open].join(" ") );
+
+			if (data.handle) {
+				data.$handle.removeClass( [RawClasses.handle, RawClasses.enabled, RawClasses.open].join(" ") );
+			}
+
 			data.enabled = false;
 		}
 	}
