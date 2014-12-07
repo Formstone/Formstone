@@ -151,6 +151,7 @@ $(".target").dropdown("update");
 
 | Class | Type | Description |
 | --- | --- | --- |
+| `.fs-dropdown-element` | `element` | Target element |
 | `.fs-dropdown` | `element` | Base widget class |
 | `.fs-lightbox.fs-lightbox-multiple` | `modifer` | Indicates multi-selected element |
 | `.fs-lightbox.fs-lightbox-cover` | `modifer` | Indicates cover positioning |

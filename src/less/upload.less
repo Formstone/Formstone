@@ -19,6 +19,13 @@
 
 	/**
 	 * @class
+	 * @name .fs-upload-element
+	 * @type element
+	 * @description Target elmement
+	 */
+
+	/**
+	 * @class
 	 * @name .fs-upload
 	 * @type element
 	 * @description Base widget class
@@ -81,6 +88,10 @@
 			margin: @fs-upload-margin;
 			padding: @fs-upload-padding;
 			text-align: center;
+			transition:
+				background 0.15s linear,
+				border 0.15s linear,
+				opacity 0.15s linear;
 		}
 
 		&.dropping &-dropzone,

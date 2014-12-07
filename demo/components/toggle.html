@@ -5,15 +5,37 @@
 <li><a href="#options">Options</a></li>
 <li><a href="#events">Events</a></li>
 <li><a href="#methods">Methods</a></li>
+<li><a href="#css">CSS</a></li>
 <li><a href="#demo">Demo</a></li>
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">toggle.js</code></pre>
+<pre><code class="lang-markup">toggle.js
+toggle.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
 <pre><code class="lang-markup">core.js
 mediaquery.js
 touch.js</code></pre>
+<h3 id="basic">Basic</h3>
+<p>Toggle adds and removes classes based on configuration options and user interaction. It is up to the developer to utilize the classes.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle();</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-toggle-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;toggle&quot;&gt;Target&lt;/div&gt;</code></pre>
+<h3 id="groups">Groups</h3>
+<p>Toggles can be grouped together for a simple accordions or tabs.</p>
+<pre><code class="lang-markup">&lt;h4&gt;Grouped&lt;/h4&gt;
+&lt;div class=&quot;target&quot; data-toggle-target=&quot;.toggle_1&quot; data-toggle-group=&quot;group_1&quot;&gt;Toggle - 1&lt;/div&gt;
+&lt;div class=&quot;target&quot; data-toggle-target=&quot;.toggle_2&quot; data-toggle-group=&quot;group_1&quot;&gt;Toggle - 2&lt;/div&gt;
+
+&lt;div class=&quot;toggle_1&quot;&gt;Target - 1&lt;/div&gt;
+&lt;div class=&quot;toggle_2&quot;&gt;Target - 2&lt;/div&gt;</code></pre>
+<h3 id="max-width">Max Width</h3>
+<p>Toggles will auto-enable and disable themselves if the <code>maxWidth</code> property is set.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).toggle({
+    maxWidth: &quot;740px&quot;
+});</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-toggle-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;toggle&quot;&gt;Target&lt;/div&gt;</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-toggle-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
@@ -107,6 +129,38 @@ touch.js</code></pre>
 <h3 id="enable">enable</h3>
 <p>Enables instance.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).toggle(&quot;enable&quot;);</code></pre>
+<h2 id="css">CSS</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.fs-toggle-element</code></td>
+<td><code>element</code></td>
+<td>Target Element</td>
+</tr>
+<tr>
+<td><code>.fs-toggle-target</code></td>
+<td><code>element</code></td>
+<td>Toggled element</td>
+</tr>
+<tr>
+<td><code>.fs-toggle-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-toggle-active</code></td>
+<td><code>modifier</code></td>
+<td>Indicates active state</td>
+</tr>
+</tbody>
+</table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
 	.toggle.fs-toggle-enabled { color: #393b3f; }
 	.toggle.fs-toggle-active { color: #c65032; }
@@ -141,8 +195,8 @@ touch.js</code></pre>
 <div class="toggle_target toggle_target_4">Target 2</div>
 
 <h4>Max Width</h4>
-<div class="toggle" data-toggle-options='{"maxWidth":"740px"}' data-toggle-target=".toggle_target_5">Toggle 1</div>
-<div class="toggle_target toggle_target_5">Target 1</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="toggle" data-toggle-options='{"maxWidth":"740px"}' data-toggle-target=".toggle_target_5">Toggle</div>
+<div class="toggle_target toggle_target_5">Target</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>

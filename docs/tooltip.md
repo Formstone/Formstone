@@ -111,6 +111,7 @@ $(".target").tooltip("destroy");
 
 | Class | Type | Description |
 | --- | --- | --- |
+| `.fs-tooltip-element` | `element` | Target elmement |
 | `.fs-tooltip` | `element` | Base widget class |
 | `.fs-tooltip.fs-tooltip-visible` | `modifier` | Inidcates visible state |
 | `.fs-tooltip.fs-tooltip-right` | `modifier` | Inidcates right side display |

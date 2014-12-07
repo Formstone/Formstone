@@ -158,6 +158,7 @@ Triggers resize of instance.
 
 | Class | Type | Description |
 | --- | --- | --- |
+| `.fs-lightbox-element` | `element` | Target elmement |
 | `.fs-lightbox` | `element` | Base widget class |
 | `.fs-lightbox.fs-lightbox-open` | `modifier` | Indicates open state |
 | `.fs-lightbox.fs-lightbox-loading` | `modifier` | Indicates loading state |

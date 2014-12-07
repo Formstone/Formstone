@@ -171,6 +171,7 @@ $(".target").navigation("open");
 
 | Class | Type | Description |
 | --- | --- | --- |
+| `.fs-navigation-element` | `element` | Target elmement |
 | `.fs-navigation` | `element` | Base widget class |
 | `.fs-navigation.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation.fs-navigation-enabled` | `modifier` | Indicates enabled state |

@@ -101,6 +101,7 @@ $(".target").upload("destroy");
 
 | Class | Type | Description |
 | --- | --- | --- |
+| `.fs-upload-element` | `element` | Target elmement |
 | `.fs-upload` | `element` | Base widget class |
 | `.fs-upload.fs-upload-dropping` | `modifier` | Indicates dropping state |
 | `.fs-upload-input` | `element` | Masked Input |

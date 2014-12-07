@@ -1,6 +1,6 @@
-### Events
+### Basic
 
-Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. Events emitted by Touch will contain the following extra properties:
+Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
 
 | Key | Description |
 | --- | --- |

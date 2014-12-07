@@ -7,6 +7,7 @@ A jQuery plugin for CSS transition events.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 * [Demo](#demo)
 
 ## Use 
@@ -15,6 +16,7 @@ A jQuery plugin for CSS transition events.
 
 ```markup
 transition.js
+transition.css
 ```
 
 #### Dependencies
@@ -86,4 +88,10 @@ Resolves current transition end events.
 ```javascript
 $(".target").transition("resolve");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-transition-element` | `element` | Target Element |
 

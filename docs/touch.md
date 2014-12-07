@@ -6,6 +6,7 @@ A jQuery plugin for multi-touch events.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -13,6 +14,7 @@ A jQuery plugin for multi-touch events.
 
 ```markup
 touch.js
+touch.css
 ```
 
 #### Dependencies
@@ -21,9 +23,9 @@ touch.js
 core.js
 ```
 
-### Events
+### Basic
 
-Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. Events emitted by Touch will contain the following extra properties:
+Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
 
 | Key | Description |
 | --- | --- |
@@ -130,4 +132,10 @@ Removes plugin instance.
 ```javascript
 $(".target").touch("destroy");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-touch-element` | `element` | Target Element |
 
