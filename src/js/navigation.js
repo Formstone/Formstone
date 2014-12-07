@@ -25,19 +25,21 @@
 			data.$handle.text(data.labels.closed);
 		}
 
-		data.$handle.attr("data-toggle-target", "." + data.containerGuid).toggle({
-			classes: {
-				target  : Classes.container,
-				enabled : Classes.enabled,
-				active  : Classes.open,
-				raw: {
-					target  : RawClasses.container,
-					enabled : RawClasses.enabled,
-					active  : RawClasses.open
+		data.$handle
+			// .attr("data-toggle-group", RawClasses.base)
+			.attr("data-toggle-target", "." + data.containerGuid).toggle({
+				classes: {
+					target  : Classes.container,
+					enabled : Classes.enabled,
+					active  : Classes.open,
+					raw: {
+						target  : RawClasses.container,
+						enabled : RawClasses.enabled,
+						active  : RawClasses.open
+					}
 				}
-			}
-		}).on("activate.toggle" + data.eventGuid, data, onOpen)
-		  .on("deactivate.toggle" + data.eventGuid, data, onClose);
+			}).on("activate.toggle" + data.eventGuid, data, onOpen)
+			  .on("deactivate.toggle" + data.eventGuid, data, onClose);
 
 		disable.call(data.$el, data);
 
@@ -137,9 +139,6 @@
 		Functions.killEvent(e);
 
 		var data = e.data;
-
-		// Close Open Instances
-		$(Classes.base).not(data.$el)[Plugin.namespace]("close");
 
 		data.$el.trigger(Events.open);
 	}

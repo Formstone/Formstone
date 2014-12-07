@@ -18,8 +18,9 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
-		data.group      = this.data(Namespace + "-group");
-		data.$group     = $('[data-' + Namespace + '-group="' + data.group + '"]');
+		// live query for the group to avoid missing new elements
+		var group       = this.data(Namespace + "-group");
+		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
 		data.$toggles   = $().add(this).add(data.$target);
 
@@ -68,7 +69,7 @@
 	function activate(data) {
 		if (data.enabled && !data.active) {
 			// index in group
-			var index = (data.group) ? data.$group.index(data.$el) : null;
+			var index = (data.group) ? $(data.group).index(data.$el) : null;
 
 			data.$toggles.addClass(data.classes.raw.active);
 
@@ -141,7 +142,7 @@
 		var data = e.data;
 
 		// Deactivates grouped instances
-		data.$group.not(data.$el)[Plugin.namespace]("deactivate");
+		$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
 
 		if (data.active && data.collapse) {
 			deactivate.call(data.$el, data);
