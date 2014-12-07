@@ -13,8 +13,10 @@
 		data.enabled    = false;
 		data.active     = false;
 
+		data.classes    = $.extend(true, {}, Classes, data.classes);
+
 		data.target     = this.data(Namespace + "-target");
-		data.$target    = $(data.target).addClass(Classes.raw.target);
+		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
 		data.group      = this.data(Namespace + "-group");
 		data.$group     = $('[data-' + Namespace + '-group="' + data.group + '"]');
@@ -52,7 +54,7 @@
 	 */
 
 	function destruct(data) {
-		data.$toggles.removeClass( [RawClasses.enabled, RawClasses.active].join(" ") )
+		data.$toggles.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 					 .off(Events.namespace);
 	}
 
@@ -68,7 +70,7 @@
 			// index in group
 			var index = (data.group) ? data.$group.index(data.$el) : null;
 
-			data.$toggles.addClass(RawClasses.active);
+			data.$toggles.addClass(data.classes.raw.active);
 
 			this.trigger(Events.activate, [index]);
 
@@ -85,7 +87,7 @@
 
 	function deactivate(data) {
 		if (data.enabled && data.active) {
-			data.$toggles.removeClass(RawClasses.active);
+			data.$toggles.removeClass(data.classes.raw.active);
 
 			this.trigger(Events.deactivate);
 
@@ -102,7 +104,7 @@
 
 	function enable(data) {
 		if (!data.enabled) {
-			data.$toggles.addClass(RawClasses.enabled);
+			data.$toggles.addClass(data.classes.raw.enabled);
 
 			data.enabled    = true;
 			data.active     = true; // trick deactivate method
@@ -120,7 +122,7 @@
 
 	function disable(data) {
 		if (data.enabled) {
-			data.$toggles.removeClass( [RawClasses.enabled, RawClasses.active].join(" ") );
+			data.$toggles.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
 
 			data.enabled = false;
 		}
@@ -211,7 +213,6 @@
 
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
-		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions;
 

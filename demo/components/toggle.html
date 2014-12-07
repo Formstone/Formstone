@@ -173,6 +173,20 @@ touch.js</code></pre>
 <script>
 	$(function() {
 		$(".toggle").toggle();
+
+		// test custom classes
+		$(".test").toggle({
+			classes: {
+				target  : ".fs-navigtation-target",
+				enabled : ".fs-navigtation-enabled",
+				active  : ".fs-navigtation-active",
+				raw: {
+					target  : "fs-navigtation-target",
+					enabled : "fs-navigtation-enabled",
+					active  : "fs-navigtation-active"
+				}
+			}
+		});
 	});
 </script>
 
@@ -196,7 +210,12 @@ touch.js</code></pre>
 
 <h4>Max Width</h4>
 <div class="toggle" data-toggle-options='{"maxWidth":"740px"}' data-toggle-target=".toggle_target_5">Toggle</div>
-<div class="toggle_target toggle_target_5">Target</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+<div class="toggle_target toggle_target_5">Target</div>
+
+<!-- test custom classes -->
+<h4>Custom Classes</h4>
+<div class="test" data-toggle-target=".toggle_test">Toggle</div>
+<div class="toggle_target toggle_test">Target</div></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>

@@ -134,6 +134,8 @@ $.macroon(key, null);</code></pre>
 </tbody>
 </table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
+	.form_fieldset { margin-top: 0; margin-bottom: 20px; }
+
 	.demo_output { margin: 20px 0; }
 </style>
 
@@ -191,19 +193,25 @@ $.macroon(key, null);</code></pre>
 </script>
 
 <form action="#" medthod="GET" class="row form demo_form">
-	<div class="all-third">
+	<div class="min-full mobile-third tablet-third desktop-third">
 		<h4 class="no_margin_top">Set Cookie</h4>
-		<fieldset class="form_fieldset">
-			<label class="form_label">Key</label>
-			<input type="text" name="set_key" value="foo" class="form_input">
-		</fieldset>
-		<fieldset class="form_fieldset">
-			<label class="form_label">Value</label>
-			<input type="text" name="set_value" value="bar" class="form_input">
-		</fieldset>
+		<div class="row">
+			<div class="min-half mobile-full tablet-full desktop-full">
+				<fieldset class="form_fieldset">
+					<label class="form_label">Key</label>
+					<input type="text" name="set_key" value="foo" class="form_input">
+				</fieldset>
+			</div>
+			<div class="min-half mobile-full tablet-full desktop-full">
+				<fieldset class="form_fieldset">
+					<label class="form_label">Value</label>
+					<input type="text" name="set_value" value="bar" class="form_input">
+				</fieldset>
+			</div>
+		</div>
 		<input type="submit" class="button form_button set" value="Set">
 	</div>
-	<div class="all-third">
+	<div class="min-half mobile-third tablet-third desktop-third">
 		<h4 class="no_margin_top">Get Cookie</h4>
 		<fieldset class="form_fieldset">
 			<label class="form_label">Key</label>
@@ -211,7 +219,7 @@ $.macroon(key, null);</code></pre>
 		</fieldset>
 		<input type="submit" class="button form_button get" value="Get">
 	</div>
-	<div class="all-third">
+	<div class="min-half mobile-third tablet-third desktop-third">
 		<h4 class="no_margin_top">Erase Cookie</h4>
 		<fieldset class="form_fieldset">
 			<label class="form_label">Key</label>

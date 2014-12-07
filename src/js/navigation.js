@@ -10,24 +10,34 @@
 	 */
 
 	function construct(data) {
-		data.enabled    = true;
-		data.open       = false;
+		data.guid             = "__" + (GUID++);
+		data.eventGuid        = Events.namespace + data.guid;
+		data.containerGuid    = RawClasses.container + data.guid;
+
+		data.$container = $('<div class="' + data.containerGuid + '"></div>');
 
 		this.addClass( [RawClasses.base, data.customClass].join(" ") )
-			.wrapInner('<div class="' + RawClasses.container + '"></div>');
+			.wrapInner(data.$container);
 
-		data.$container    = this.find(Classes.container);
-		data.$handle       = (data.handle) ? $(data.handle).addClass(RawClasses.handle) : $('<span class="' + RawClasses.handle + '"></span>').prependTo(this);
-		data.$toggles      = $().add(this).add(data.$handle);
+		data.$handle = (data.handle) ? $(data.handle).addClass(RawClasses.handle) : $('<span class="' + RawClasses.handle + '"></span>').prependTo(this);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
 		}
 
-		// Touch Support
-		data.$handle.touch({
-			tap: true
-		}).on(Events.tap, data, onClick);
+		data.$handle.attr("data-toggle-target", "." + data.containerGuid).toggle({
+			classes: {
+				target  : Classes.container,
+				enabled : Classes.enabled,
+				active  : Classes.open,
+				raw: {
+					target  : RawClasses.container,
+					enabled : RawClasses.enabled,
+					active  : RawClasses.open
+				}
+			}
+		}).on("activate.toggle" + data.eventGuid, data, onOpen)
+		  .on("deactivate.toggle" + data.eventGuid, data, onClose);
 
 		disable.call(data.$el, data);
 
@@ -50,6 +60,9 @@
 	 */
 
 	function destruct(data) {
+		data.$handle.off("data.eventGuid")
+					.toggle("destroy");
+
 		if (!data.handle) {
 			data.$handle.remove();
 		}
@@ -57,7 +70,7 @@
 		data.$container.contents()
 					   .unwrap();
 
-		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.open, data.customClass].join(" ") )
+		this.removeClass( [RawClasses.base, data.customClass].join(" ") )
 			.off(Events.namespace);
 	}
 
@@ -69,17 +82,11 @@
 	 */
 
 	function open(data) {
-		if (data.enabled && !data.open) {
-			if (data.label) {
-				data.$handle.html(data.labels.open);
-			}
-
-			data.$toggles.addClass(RawClasses.open);
-
-			this.trigger(Events.open);
-
-			data.open = true;
+		if (data.label) {
+			data.$handle.html(data.labels.open);
 		}
+
+		data.$handle.toggle("activate");
 	}
 
 	/**
@@ -90,17 +97,11 @@
 	 */
 
 	function close(data) {
-		if (data.enabled && data.open) {
-			if (data.label) {
-				data.$handle.html(data.labels.closed);
-			}
-
-			data.$toggles.removeClass(RawClasses.open);
-
-			this.trigger(Events.close);
-
-			data.open = false;
+		if (data.label) {
+			data.$handle.html(data.labels.closed);
 		}
+
+		data.$handle.toggle("deactivate");
 	}
 
 	/**
@@ -111,18 +112,7 @@
 	 */
 
 	function enable(data) {
-		if (!data.enabled) {
-			this.addClass(RawClasses.enabled);
-
-			if (data.handle) {
-				data.$handle.addClass( [RawClasses.handle, RawClasses.enabled].join(" ") );
-			}
-
-			data.enabled = true;
-			data.open    = true; // trick close method
-
-			close.call(this, data);
-		}
+		data.$handle.toggle("enable");
 	}
 
 	/**
@@ -133,25 +123,17 @@
 	 */
 
 	function disable(data) {
-		if (data.enabled) {
-			data.$toggles.removeClass( [RawClasses.enabled, RawClasses.open].join(" ") );
-
-			if (data.handle) {
-				data.$handle.removeClass( [RawClasses.handle, RawClasses.enabled, RawClasses.open].join(" ") );
-			}
-
-			data.enabled = false;
-		}
+		data.$handle.toggle("disable");
 	}
 
 	/**
 	 * @method private
-	 * @name onClick
-	 * @description Handles click nav click.
+	 * @name onOpen
+	 * @description Handles nav open event.
 	 * @param e [object] "Event data"
 	 */
 
-	function onClick(e) {
+	function onOpen(e) {
 		Functions.killEvent(e);
 
 		var data = e.data;
@@ -159,11 +141,22 @@
 		// Close Open Instances
 		$(Classes.base).not(data.$el)[Plugin.namespace]("close");
 
-		if (data.open) {
-			close.call(data.$el, data);
-		} else {
-			open.call(data.$el, data);
-		}
+		data.$el.trigger(Events.open);
+	}
+
+	/**
+	 * @method private
+	 * @name onClose
+	 * @description Handles nav close event.
+	 * @param e [object] "Event data"
+	 */
+
+	function onClose(e) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		data.$el.trigger(Events.close);
 	}
 
 	/**
@@ -238,6 +231,7 @@
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions;
+		Functions     = Plugin.functions,
+		GUID          = 0;
 
 })(jQuery, Formstone);
