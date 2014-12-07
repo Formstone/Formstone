@@ -112,11 +112,11 @@
 */
 
 		// Bind events
-		data.$dropdown.touch({
-						tap: true
-					  })
-					  .on(Events.tap, Classes.selected, data, onClick)
-					  .on(Events.tap, Classes.item, data, onSelect);
+		data.$selected.touch({
+			tap: true
+		}).on(Events.tap, data, onClick);
+
+		data.$dropdown.on(Events.click, Classes.item, data, onSelect);
 
 		// Change events
 		this.on(Events.change, data, onChange);
