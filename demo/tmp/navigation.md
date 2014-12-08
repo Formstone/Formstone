@@ -1,4 +1,4 @@
-{"template":"component.html","title":"Navigation","demo":"<style>\n\t.navigation { margin: 0 0 20px; }\n\t.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }\n\t.navigation a:hover { color: #fff; }\n\n\t.fs-navigation-container.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }\n\t.fs-navigation-container.fs-navigation-enabled { padding: 10px; }\n\n\t.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }\n\t.custom_navigation.fs-navigation-enabled { margin-top: 0; }\n</style>\n\n<script>\n\t$(function() {\n\t\t$(\".navigation a\").on(\"click\", function(e) {\n\t\t\te.preventDefault();\n\t\t\te.stopPropagation();\n\t\t});\n\n\t\t$(\".navigation\").navigation();\n\t});\n</script>\n\n<h4>Basic</h4>\n<nav class=\"navigation\">\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Custom Handle</h4>\n<h5 class=\"custom_handle\">Navigation</h5>\n<nav class=\"navigation custom_navigation\" data-navigation-options='{\"handle\":\".custom_handle\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Breakpoint</h4>\n<nav class=\"navigation\" data-navigation-options='{\"maxWidth\":\"740px\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>"}
+{"template":"component.html","title":"Navigation","demo":"<style>\n\t.navigation { margin: 0 0 20px; }\n\t.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }\n\t.navigation a:hover { color: #fff; }\n\n\t.fs-navigation-container.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }\n\t.fs-navigation-container.fs-navigation-enabled { padding: 10px; }\n\n\t.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }\n\t.custom_navigation.fs-navigation-enabled { margin-top: 0; }\n</style>\n\n<script>\n\t$(function() {\n\t\t$(\".navigation a\").on(\"click\", function(e) {\n\t\t\te.preventDefault();\n\t\t\te.stopPropagation();\n\t\t});\n\n\t\t$(\".navigation\").navigation();\n\t});\n</script>\n\n<h4>Basic</h4>\n<nav class=\"navigation\">\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Custom Handle</h4>\n<h5 class=\"custom_handle\">Navigation</h5>\n<nav class=\"navigation custom_navigation\" data-navigation-options='{\"handle\":\".custom_handle\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Breakpoint</h4>\n<nav class=\"navigation\" data-navigation-options='{\"maxWidth\":\"740px\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>\n\n<h4>Custom Handle</h4>\n<h5 class=\"slide_handle\">Navigation</h5>\n<nav class=\"navigation custom_navigation\" data-navigation-options='{\"type\":\"slide_left\",\"handle\":\".slide_handle\",\"page\":\"#page\"}'>\n\t<a href=\"#\">Home</a>\n\t<a href=\"#\">About</a>\n\t<a href=\"#\">Contact</a>\n</nav>"}
 
 # Navigation
 
@@ -102,6 +102,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.closed` | `string` | `'Navigation'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'slide_left', 'slide_right', 'overlay' |
 
 ## Events
 
@@ -181,4 +182,9 @@ $(".target").navigation("open");
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
 | `.fs-navigation-container` | `element` | Wraps target navigation |
 | `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
+| `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
+| `.fs-navigation.fs-navigation-slide_left` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation.fs-navigation-slide_right` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation-page` | `element` | Target page for slide_left and slide_right |
+| `.fs-navigation.fs-navigation-overlay` | `modifier` | Indicates overlay interface |
 

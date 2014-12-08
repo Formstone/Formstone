@@ -110,6 +110,8 @@
 			data.enabled    = true;
 			data.active     = true; // trick deactivate method
 
+			this.trigger(Events.enable);
+
 			deactivate.call(this, data);
 		}
 	}
@@ -124,6 +126,8 @@
 	function disable(data) {
 		if (data.enabled) {
 			data.$toggles.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
+
+			this.trigger(Events.disable);
 
 			data.enabled = false;
 		}

@@ -99,6 +99,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.closed` | `string` | `'Navigation'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'slide_left', 'slide_right', 'overlay' |
 
 ## Events
 
@@ -178,4 +179,9 @@ $(".target").navigation("open");
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
 | `.fs-navigation-container` | `element` | Wraps target navigation |
 | `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
+| `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
+| `.fs-navigation.fs-navigation-slide_left` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation.fs-navigation-slide_right` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation-page` | `element` | Target page for slide_left and slide_right |
+| `.fs-navigation.fs-navigation-overlay` | `modifier` | Indicates overlay interface |
 
