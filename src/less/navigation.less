@@ -13,6 +13,10 @@
 
 	// Toggle
 
+	@fs-navigation-toggle-background:				#fff;
+	@fs-navigation-toggle-border-color:				#ccc;
+	@fs-navigation-toggle-border-size:				1px;
+
 	@fs-navigation-toggle-handle-background:		#fff;
 	@fs-navigation-toggle-handle-border-color:		#ccc;
 	@fs-navigation-toggle-handle-border-size:		1px;
@@ -21,11 +25,10 @@
 	@fs-navigation-toggle-handle-font-size:			16px;
 	@fs-navigation-toggle-handle-padding:			10px 15px;
 
-	@fs-navigation-toggle-container-background:		#fff;
-	@fs-navigation-toggle-container-border-color:	#ccc;
-	@fs-navigation-toggle-container-border-size:	1px;
-
 	// Slide
+
+	@fs-navigation-slide-background:		#fff;
+	@fs-navigation-slide-width:			270px;
 
 	@fs-navigation-slide-transition-speed:			0.2s;
 	@fs-navigation-slide-transition-timing:			ease;
@@ -37,9 +40,6 @@
 	@fs-navigation-slide-handle-text-color:			#111;
 	@fs-navigation-slide-handle-font-size:			16px;
 	@fs-navigation-slide-handle-padding:			10px 15px;
-
-	@fs-navigation-slide-container-background:		#fff;
-	@fs-navigation-slide-container-width:			270px;
 
 	@fs-navigation-slide-page-box-shadow-color: 	rgba(0, 0, 0, 0.15);
 	@fs-navigation-slide-page-box-shadow-blur: 		2px;
@@ -86,6 +86,17 @@
 			user-select: none !important;
 		}
 
+		// Clearfix
+
+		&:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+		}
+
 		/**
 		 * @class
 		 * @name .fs-navigation-handle
@@ -99,28 +110,12 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation-container
-		 * @type element
-		 * @description Wraps target navigation
-		 */
-
-		&-container:after {
-			clear: both;
-			content: ".";
-			display: block;
-			height: 0;
-			line-height: 0;
-			visibility: hidden;
-		}
-
-		/**
-		 * @class
 		 * @name .fs-navigation-handle:after
 		 * @type element
 		 * @description Icon displayed in handle
 		 */
 
-		& &-handle&-enabled:after {
+		&-handle&-enabled:after {
 			height: @fs-navigation-icon-height;
 			width: @fs-navigation-icon-width;
 
@@ -140,7 +135,7 @@
 
 		// Open
 
-		& &-handle&-open:after {
+		&-handle&-open:after {
 			width: @fs-navigation-icon-close-size;
 			height: @fs-navigation-icon-close-size;
 
@@ -164,7 +159,7 @@
 
 		// Enabled
 
-		& &-toggle&-handle&-enabled {
+		&-toggle&-handle&-enabled {
 			width: 100%;
 
 			background: @fs-navigation-toggle-handle-background;
@@ -179,16 +174,16 @@
 			user-select: none;
 		}
 
-		& &-toggle&-container&-enabled {
-			background: @fs-navigation-toggle-container-background;
-			border: @fs-navigation-toggle-container-border-size solid @fs-navigation-toggle-container-border-color;
-			border-width: 0 @fs-navigation-toggle-container-border-size @fs-navigation-toggle-container-border-size;
+		&-toggle&-element&-enabled {
+			background: @fs-navigation-toggle-background;
+			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
+			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
 			display: none;
 		}
 
 		// Open
 
-		& &-toggle&-container&-open {
+		&-toggle&-element&-open {
 			display: block;
 		}
 
@@ -205,16 +200,16 @@
 		 * @description Indicates off canvas slide interface
 		 */
 
-		&-slide_left&-container&-enabled,
-		&-slide_right&-container&-enabled {
-			width: @fs-navigation-slide-container-width;
+		&-slide_left&-element&-enabled,
+		&-slide_right&-element&-enabled {
+			width: @fs-navigation-slide-width;
 			height: 100%;
 
 			position: fixed;
 			top: 0;
 			z-index: 0;
 
-			background: @fs-navigation-slide-container-background;
+			background: @fs-navigation-slide-background;
 			display: block;
 			overflow: auto;
 			transition:
@@ -223,20 +218,20 @@
 			visibility: hidden;
 		}
 
-		&-slide_left&-container&-enabled {
+		&-slide_left&-element&-enabled {
 			left: 0;
 
-			transform: translate3D(-(@fs-navigation-slide-container-width), 0, 0);
+			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
-		&-slide_right&-container&-enabled {
+		&-slide_right&-element&-enabled {
 			right: 0;
 
-			transform: translate3D(@fs-navigation-slide-container-width, 0, 0);
+			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-slide_left&-container&-open,
-		&-slide_right&-container&-open {
+		&-slide_left&-element&-open,
+		&-slide_right&-element&-open {
 			transform: translate3D(0, 0, 0);
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
@@ -274,11 +269,11 @@
 		}
 
 		&-slide_left&-page&-open {
-			transform: translate3D(@fs-navigation-slide-container-width, 0, 0);
+			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
 		&-slide_right&-page&-open {
-			transform: translate3D(-(@fs-navigation-slide-container-width), 0, 0);
+			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
 /*

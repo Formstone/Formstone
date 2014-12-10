@@ -21,51 +21,52 @@
 
 	function construct(data) {
 
-		if (!data.handle && !data.handle && data.type !== "toggle") {
+		if (!data.handle && !data.navigation && data.type !== "toggle") {
 			$.warn("Navigation: You must specify a handle and page");
 			return;
 		}
 
 		// guid
-		data.guid             = "__" + (GUID++);
-		data.eventGuid        = Events.namespace + data.guid;
-		data.containerGuid    = RawClasses.container + data.guid;
+		data.guid         = "__" + (GUID++);
+		data.eventGuid    = Events.namespace + data.guid;
+		data.classGuid    = RawClasses.base + data.guid;
+
+		var typeClass     = RawClasses[data.type];
 
 		// nav type
-		data.handleClasses = [RawClasses.handle, RawClasses[data.type]].join(" ");
-		data.targetClasses = [RawClasses.container, RawClasses[data.type]].join(" ");
-		data.pageClasses   = [RawClasses.page, RawClasses[data.type]].join(" ");
+		data.handleClasses     = [RawClasses.handle, typeClass].join(" ");
+		data.navClasses        = [RawClasses.navigation, typeClass, data.classGuid].join(" ");
+		data.contentClasses    = [RawClasses.content, typeClass, data.classGuid].join(" ");
 
 		// DOM
 
-		data.$container = $();
+		this.addClass( [RawClasses.base, data.classGuid, data.customClass].join(" ") );
 
-		this.addClass( [RawClasses.base, data.customClass].join(" ") )
-			.wrapInner('<div class="' + data.containerGuid + '"></div>');
-
-		data.$container = this.find("." + data.containerGuid);
-		data.$handle    = (data.handle) ? $(data.handle).addClass(data.handleClasses) : $('<span class="' + data.handleClasses + '"></span>').prependTo(this);
-		data.$page      = $(data.page).addClass(data.pageClasses);
+		data.$handle     = $(data.handle).addClass(data.handleClasses);
+		data.$nav        = $(data.nav).addClass(data.navClasses);
+		data.$content    = $(data.content).addClass(data.contentClasses);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
 		}
 
+/*
 		if (data.type !== "toggle") {
-			data.$page.after(data.$container.detach());
+			data.$content.after(data.$container.detach());
 		}
+*/
 
 		// toggle
 
 		data.$handle
 			// .attr("data-toggle-group", RawClasses.base)
-			.attr("data-toggle-target", "." + data.containerGuid).toggle({
+			.attr("data-toggle-target", "." + data.classGuid).toggle({
 				classes: {
-					target  : Classes.container,
+					target  : data.classGuid,
 					enabled : Classes.enabled,
 					active  : Classes.open,
 					raw: {
-						target  : data.targetClasses,
+						target  : data.contentClasses,
 						enabled : RawClasses.enabled,
 						active  : RawClasses.open
 					}
@@ -96,11 +97,7 @@
 	 */
 
 	function destruct(data) {
-		if (data.type !== "toggle") {
-			this.append(data.$container);
-		}
-
-		data.$page.removeClass(data.pageClasses);
+		data.$content.removeClass(data.contentClasses);
 
 		data.$handle.removeClass(data.handleClasses)
 					.off("data.eventGuid")
@@ -109,9 +106,6 @@
 		if (!data.handle) {
 			data.$handle.remove();
 		}
-
-		data.$container.contents()
-					   .unwrap();
 
 		this.removeClass( [RawClasses.base, data.customClass].join(" ") )
 			.off(Events.namespace);
@@ -181,7 +175,7 @@
 
 		data.$el.trigger(Events.open);
 
-		data.$page.addClass(RawClasses.open);
+		data.$content.addClass(RawClasses.open);
 	}
 
 	/**
@@ -196,7 +190,7 @@
 
 		data.$el.trigger(Events.close);
 
-		data.$page.removeClass(RawClasses.open);
+		data.$content.removeClass(RawClasses.open);
 	}
 
 	/**
@@ -209,7 +203,7 @@
 	function onEnable(e) {
 		var data = e.data;
 
-		data.$page.addClass(RawClasses.enabled);
+		data.$content.addClass(RawClasses.enabled);
 	}
 
 	/**
@@ -222,7 +216,7 @@
 	function onDisable(e) {
 		var data = e.data;
 
-		data.$page.removeClass(RawClasses.enabled);
+		data.$content.removeClass(RawClasses.enabled);
 	}
 
 	/**
@@ -241,12 +235,14 @@
 
 			/**
 			 * @options
+			 * @param content [string] <null> "Content element selector"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param handle [string] <null> "Handle element selector"
 			 * @param label [boolean] <true> "Display handle width label"
 			 * @param labels.closed [string] <'Navigation'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+			 * @param navigation [string] <null> "Navigation element selector"
 			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'slide_left', 'slide_right', 'overlay'"
 			 */
 
@@ -259,13 +255,14 @@
 					open       : "Close"
 				},
 				maxWidth       : "980px",
+				naviation      : null,
 				type           : "toggle"
 			},
 
 			classes: [
 				"handle",
-				"container",
-				"page",
+				"navigation",
+				"content",
 				"enabled",
 				"open",
 				"toggle",

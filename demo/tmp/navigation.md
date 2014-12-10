@@ -180,7 +180,6 @@ $(".target").navigation("open");
 | `.fs-navigation.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
-| `.fs-navigation-container` | `element` | Wraps target navigation |
 | `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
 | `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
 | `.fs-navigation.fs-navigation-slide_left` | `modifier` | Indicates off canvas slide interface |
