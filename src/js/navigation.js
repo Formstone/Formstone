@@ -4,28 +4,12 @@
 
 	/**
 	 * @method private
-	 * @name setup
-	 * @description Setup plugin.
-	 */
-
-	function setup() {
-		$Body = $("body, html");
-	}
-
-	/**
-	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
 	 */
 
 	function construct(data) {
-
-		if (!data.handle && !data.navigation && data.type !== "toggle") {
-			$.warn("Navigation: You must specify a handle and page");
-			return;
-		}
-
 		// guid
 		data.guid         = "__" + (GUID++);
 		data.eventGuid    = Events.namespace + data.guid;
@@ -33,40 +17,36 @@
 
 		var typeClass     = RawClasses[data.type];
 
+		data.handle       = this.data(Namespace + "-handle");
+		data.content      = this.data(Namespace + "-content");
+
 		// nav type
-		data.handleClasses     = [RawClasses.handle, typeClass].join(" ");
-		data.navClasses        = [RawClasses.navigation, typeClass, data.classGuid].join(" ");
-		data.contentClasses    = [RawClasses.content, typeClass, data.classGuid].join(" ");
+		var classGroup         = [typeClass, data.classGuid, data.customClass].join(" ");
+		data.handleClasses     = [RawClasses.handle, classGroup].join(" ");
+		data.navClasses        = [RawClasses.navigation, classGroup].join(" ");
+		data.contentClasses    = [RawClasses.content, classGroup].join(" ");
 
 		// DOM
 
-		this.addClass( [RawClasses.base, data.classGuid, data.customClass].join(" ") );
-
+		data.$nav        = this.addClass(data.navClasses);
 		data.$handle     = $(data.handle).addClass(data.handleClasses);
-		data.$nav        = $(data.nav).addClass(data.navClasses);
 		data.$content    = $(data.content).addClass(data.contentClasses);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
 		}
 
-/*
-		if (data.type !== "toggle") {
-			data.$content.after(data.$container.detach());
-		}
-*/
-
 		// toggle
 
 		data.$handle
-			// .attr("data-toggle-group", RawClasses.base)
 			.attr("data-toggle-target", "." + data.classGuid).toggle({
+				maxWidth: data.maxWidth,
 				classes: {
-					target  : data.classGuid,
+					target  : "." + data.classGuid,
 					enabled : Classes.enabled,
 					active  : Classes.open,
 					raw: {
-						target  : data.contentClasses,
+						target  : data.classGuid,
 						enabled : RawClasses.enabled,
 						active  : RawClasses.open
 					}
@@ -76,17 +56,7 @@
 			  .on("enable.toggle" + data.eventGuid, data, onEnable)
 			  .on("disable.toggle" + data.eventGuid, data, onDisable);
 
-		disable.call(data.$el, data);
-
-		// Media Query support
-		$.mediaquery("bind", "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")", {
-			enter: function() {
-				enable.call(data.$el, data);
-			},
-			leave: function() {
-				disable.call(data.$el, data);
-			}
-		});
+		console.log(data);
 	}
 
 	/**
@@ -100,14 +70,10 @@
 		data.$content.removeClass(data.contentClasses);
 
 		data.$handle.removeClass(data.handleClasses)
-					.off("data.eventGuid")
+					.off(data.eventGuid)
 					.toggle("destroy");
 
-		if (!data.handle) {
-			data.$handle.remove();
-		}
-
-		this.removeClass( [RawClasses.base, data.customClass].join(" ") )
+		this.removeClass(data.navClasses)
 			.off(Events.namespace);
 	}
 
@@ -235,27 +201,22 @@
 
 			/**
 			 * @options
-			 * @param content [string] <null> "Content element selector"
 			 * @param customClass [string] <''> "Class applied to instance"
-			 * @param handle [string] <null> "Handle element selector"
 			 * @param label [boolean] <true> "Display handle width label"
 			 * @param labels.closed [string] <'Navigation'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
-			 * @param navigation [string] <null> "Navigation element selector"
-			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'slide_left', 'slide_right', 'overlay'"
+			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'slide_left', 'slide_right'"
 			 */
 
 			defaults: {
 				customClass    : "",
-				handle         : null,
 				label          : true,
 				labels: {
 					closed     : "Navigation",
 					open       : "Close"
 				},
 				maxWidth       : "980px",
-				naviation      : null,
 				type           : "toggle"
 			},
 
@@ -265,10 +226,11 @@
 				"content",
 				"enabled",
 				"open",
+				// types
 				"toggle",
 				"slide_left",
-				"slide_right",
-				"overlay"
+				"slide_right"
+				//"overlay"
 			],
 
 			/**
@@ -284,7 +246,6 @@
 			},
 
 			methods: {
-				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
 
@@ -299,11 +260,11 @@
 
 		// Localize References
 
+		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
-		GUID          = 0,
-		$Body         = null;
+		GUID          = 0;
 
 })(jQuery, Formstone);

@@ -7,7 +7,8 @@ $("nav").navigation();
 ```
 
 ```markup
-<nav>
+<h4 id="handle">Navigation</h4>
+<nav data-navigation-handle="#handle">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
@@ -24,22 +25,23 @@ $("nav").navigation({
 });
 ```
 
-### Custom Handle
+### Slide Out
 
-Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.
+Navigation can also slide out from the left or right hand side of the screen. The nav can 'push' the main page content by specifying the `data-navigation-content` attribute:
 
 ```javascript
-$("nav").navigation({
-	handle: "#nav-handle"
-});
+$("nav").navigation();
 ```
 
 ```markup
-<h4 id="nav-handle">Navigation</h4>
-<nav>
+<h4 id="handle">Navigation</h4>
+<nav data-navigation-handle="#handle" data-navigation-content="#content">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
+</nav>
+<div id="content">
+	...
 </nav>
 ```
 

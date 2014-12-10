@@ -1,13 +1,10 @@
 <style>
-	.navigation { margin: 0 0 20px; }
+	.navigation { margin: 0 0 20px; overflow: hidden; }
 	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 	.navigation a:hover { color: #fff; }
 
-	.fs-navigation-container.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-	.fs-navigation-container.fs-navigation-enabled { padding: 10px; }
-
-	.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }
-	.custom_navigation.fs-navigation-enabled { margin-top: 0; }
+	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+	.navigation.fs-navigation-enabled { padding: 10px; }
 </style>
 
 <script>
@@ -22,31 +19,27 @@
 </script>
 
 <h4>Basic</h4>
-<nav class="navigation">
-	<a href="#">Home</a>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
-</nav>
-
-<h4>Custom Handle</h4>
-<h5 class="custom_handle">Navigation</h5>
-<nav class="navigation custom_navigation" data-navigation-options='{"handle":".custom_handle"}'>
+<h5 id="nav_handle_1">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_1">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
 
 <h4>Breakpoint</h4>
-<nav class="navigation" data-navigation-options='{"maxWidth":"740px"}'>
+<h5 id="nav_handle_2">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
 
-<h4>Custom Handle</h4>
-<h5 class="slide_handle">Navigation</h5>
-<nav class="navigation custom_navigation" data-navigation-options='{"type":"slide_left","handle":".slide_handle","page":"#page"}'>
+<!--
+<h4>Overlay</h4>
+<h5 id="nav_handle_3">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_3" data-navigation-options='{"type":"overlay"}'>
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
+-->

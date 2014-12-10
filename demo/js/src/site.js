@@ -33,6 +33,8 @@
 			$("table").wrap('<div class="table_wrapper"></div>');
 
 			Prism.highlightAll();
+
+			$(".main_nav").navigation();
 		}
 
 		return {

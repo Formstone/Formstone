@@ -27,8 +27,8 @@
 
 	// Slide
 
-	@fs-navigation-slide-background:		#fff;
-	@fs-navigation-slide-width:			270px;
+	@fs-navigation-slide-background:				#fff;
+	@fs-navigation-slide-width:						270px;
 
 	@fs-navigation-slide-transition-speed:			0.2s;
 	@fs-navigation-slide-transition-timing:			ease;
@@ -41,8 +41,13 @@
 	@fs-navigation-slide-handle-font-size:			16px;
 	@fs-navigation-slide-handle-padding:			10px 15px;
 
-	@fs-navigation-slide-page-box-shadow-color: 	rgba(0, 0, 0, 0.15);
-	@fs-navigation-slide-page-box-shadow-blur: 		2px;
+	@fs-navigation-slide-content-box-shadow-color: 	rgba(0, 0, 0, 0.15);
+	@fs-navigation-slide-content-box-shadow-blur: 		2px;
+
+	// Overlay
+
+	// @fs-navigation-overlay-transition-speed: 		0.2s;
+	// @fs-navigation-overlay-transition-timing:		ease;
 
 	/**
 	 * @class
@@ -53,9 +58,9 @@
 
 	/**
 	 * @class
-	 * @name .fs-navigation
+	 * @name .fs-navigation-navigation
 	 * @type element
-	 * @description Base widget class
+	 * @description Navigation
 	 */
 
 	/**
@@ -86,17 +91,6 @@
 			user-select: none !important;
 		}
 
-		// Clearfix
-
-		&:after {
-			clear: both;
-			content: ".";
-			display: block;
-			height: 0;
-			line-height: 0;
-			visibility: hidden;
-		}
-
 		/**
 		 * @class
 		 * @name .fs-navigation-handle
@@ -104,9 +98,18 @@
 		 * @description Click target to toggle navigation
 		 */
 
-		& &-handle {
-			display: none;
-		}
+		/**
+		 * @class
+		 * @name .fs-navigation-handle.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-handle.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
 
 		/**
 		 * @class
@@ -174,7 +177,7 @@
 			user-select: none;
 		}
 
-		&-toggle&-element&-enabled {
+		&-toggle&-navigation&-enabled {
 			background: @fs-navigation-toggle-background;
 			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
 			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
@@ -183,7 +186,7 @@
 
 		// Open
 
-		&-toggle&-element&-open {
+		&-toggle&-navigation&-open {
 			display: block;
 		}
 
@@ -200,8 +203,8 @@
 		 * @description Indicates off canvas slide interface
 		 */
 
-		&-slide_left&-element&-enabled,
-		&-slide_right&-element&-enabled {
+		&-slide_left&-navigation&-enabled,
+		&-slide_right&-navigation&-enabled {
 			width: @fs-navigation-slide-width;
 			height: 100%;
 
@@ -218,20 +221,20 @@
 			visibility: hidden;
 		}
 
-		&-slide_left&-element&-enabled {
+		&-slide_left&-navigation&-enabled {
 			left: 0;
 
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
-		&-slide_right&-element&-enabled {
+		&-slide_right&-navigation&-enabled {
 			right: 0;
 
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-slide_left&-element&-open,
-		&-slide_right&-element&-open {
+		&-slide_left&-navigation&-open,
+		&-slide_right&-navigation&-open {
 			transform: translate3D(0, 0, 0);
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
@@ -241,15 +244,26 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation-page
+		 * @name .fs-navigation-content
 		 * @type element
 		 * @description Target page for slide_left and slide_right
 		 */
 
-		&-page&-slide_left&-enabled,
-		&-page&-slide_right&-enabled {
-			min-height: 100%;
+		/**
+		 * @class
+		 * @name .fs-navigation-content.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-content.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
 
+		&-slide_left&-content&-enabled,
+		&-slide_right&-content&-enabled {
 			position: relative;
 			z-index: 1;
 
@@ -260,204 +274,62 @@
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
 		}
 
-		&-slide_left&-page&-enabled {
-			box-shadow: -(@fs-navigation-slide-page-box-shadow-blur) 0 @fs-navigation-slide-page-box-shadow-blur @fs-navigation-slide-page-box-shadow-color;
+		&-slide_left&-content&-enabled {
+			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
-		&-slide_right&-page&-enabled {
-			box-shadow: @fs-navigation-slide-page-box-shadow-blur 0 @fs-navigation-slide-page-box-shadow-blur @fs-navigation-slide-page-box-shadow-color;
+		&-slide_right&-content&-enabled {
+			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
-		&-slide_left&-page&-open {
+		// open
+
+		&-slide_left&-content&-open {
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-slide_right&-page&-open {
+		&-slide_right&-content&-open {
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
-/*
-		&-slide {
-			&-open {
-				overflow: hidden;
-			}
-
-			&-open &-page *,
-			&-open &-header * {
-				pointer-events: none;
-			}
-
-			// default
-
-			&-navigation {
-				display: none;
-				opacity: 0;
-			}
-
-			&-handle {
-				display: none;
-			}
-
-			// enabled
-
-			&-enabled &-page {
-				min-height: 100%;
-
-				position: relative;
-				z-index: 1;
-
-				background: @fs-navigation-slide-page-background;
-				box-shadow: @fs-navigation-slide-page-box-shadow-blur 0 @fs-navigation-slide-page-box-shadow-blur @fs-navigation-slide-page-box-shadow-color;
-				display: block;
-				overflow: hidden;
-			}
-
-			&-enabled&-left &-page {
-				box-shadow: -(@fs-navigation-slide-page-box-shadow-blur) 0 @fs-navigation-slide-page-box-shadow-blur @fs-navigation-slide-page-box-shadow-color;
-			}
-
-			&-enabled &-navigation {
-				width: @fs-navigation-slide-nav-width;
-				height: 100%;
-
-				position: fixed;
-				top: 0;
-				z-index: 0;
-
-				background: @fs-navigation-slide-nav-background;
-				display: block;
-				// opacity: 1;
-				overflow: auto;
-				pointer-events: none;
-				transition:
-					opacity 0.001s linear @fs-navigation-slide-transition-speed, // delay when closing
-					transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
-			}
-
-			&-enabled &-page,
-			&-enabled &-header,
-			&-enabled &-navigation {
-				backface-visibility: hidden;
-			}
-
-			&-enabled &-page,
-			&-enabled &-header {
-				transform: translate3D(0, 0, 0);
-				transition: transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
-			}
-
-			&-enabled &-handle {
-				width: @fs-navigation-slide-handle-width;
-				height: @fs-navigation-slide-handle-height;
-
-				position: relative;
-
-				background: @fs-navigation-slide-handle-background;
-				cursor: pointer;
-				display: block;
-				overflow: hidden;
-				text-indent: 200%;
-				white-space: nowrap;
-				user-select: none;
-
-				&:after {
-					height: @fs-navigation-slide-icon-height;
-					width: @fs-navigation-slide-icon-width;
-
-					position: absolute;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
-
-					background: @fs-navigation-slide-icon-color;
-					box-shadow:
-						0  (@fs-navigation-slide-icon-height + 2) 0 @fs-navigation-slide-icon-color,
-						0 -(@fs-navigation-slide-icon-height + 2) 0 @fs-navigation-slide-icon-color;
-					content: '';
-					display: block;
-					margin: auto;
-				}
-			}
-
-			// right (default)
-
-			&-enabled &-navigation {
-				right: 0;
-
-				transform: translate3D(0, 0, 0);
-			}
-
-			&-open &-page,
-			&-open &-header {
-				transform: translate3D(-(@fs-navigation-slide-nav-width), 0, 0);
-			}
-
-			// left
-
-			&-enabled&-left &-navigation {
-				left: 0;
-
-				transform: translate3D(0, 0, 0);
-			}
-
-			&-enabled&-left&-open &-page,
-			&-enabled&-left&-open &-header {
-				transform: translate3D(@fs-navigation-slide-nav-width, 0, 0);
-			}
-
-			// open
-			&-open &-navigation {
-				opacity: 1;
-				pointer-events: all;
-				transform: translate3D(0, 0, 0);
-				transition:
-					opacity 0.001s linear 0s, // no delay when opening
-					transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
-			}
-
-
-			// IE8 / 9 - no 3d transforms
-
-			.no-csstransforms3d &-enabled&-navigation {
-				right: -@fs-navigation-slide-nav-width;
-			}
-
-			// left
-
-			.no-csstransforms3d &-enabled&-left &-navigation {
-				left: -@fs-navigation-slide-nav-width;
-			}
-
-			// open
-
-			.no-csstransforms3d &-enabled&-open &-page {
-				left: -@fs-navigation-slide-nav-width;
-			}
-
-			.no-csstransforms3d &-enabled&-open &-navigation {
-				right: 0;
-			}
-
-			// open left
-
-			.no-csstransforms3d &-enabled&-left&-open &-page {
-				left: auto;
-				right: -@fs-navigation-slide-nav-width;
-			}
-
-			.no-csstransforms3d &-enabled&-left&-open &-navigation {
-				left: 0;
-			}
-		}
-*/
-
-
-
 		/**
-		 * @class
+		 * class
 		 * @name .fs-navigation.fs-navigation-overlay
 		 * @type modifier
 		 * @description Indicates overlay interface
 		 */
+
+		/*
+		&-overlay&-navigation&-enabled {
+			width: 100%;
+			height: 100%;
+
+			position: fixed;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2;
+
+			background: @fs-navigation-overlay-background;
+			display: block;
+			overflow: auto;
+			transition:
+				transform @fs-navigation-overlay-transition-speed @fs-navigation-overlay-transition-timing,
+				visibility 0.001s linear @fs-navigation-overlay-transition-speed; // delay when closing
+			transform: scale(1.01);
+			visibility: hidden;
+		}
+
+		// open
+
+		&-overlay&-navigation&-open {
+			transform: translate3D(0, 0, 0);
+			transition:
+				transform @fs-navigation-overlay-transition-speed @fs-navigation-overlay-transition-timing,
+				visibility 0.001s @fs-navigation-overlay-transition-timing;
+			transform: scale(1);
+			visibility: visible;
+		}
+		*/
 	}

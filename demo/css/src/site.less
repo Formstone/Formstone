@@ -35,7 +35,7 @@
 	body {
 		background: @white;
 
-		@media @tablet {
+		@media @desktop {
 			background: @blue;
 		}
 	}
@@ -366,6 +366,34 @@
    Media Queries
 ================================================================== */
 
+	.header {
+		&.fs-navigation-content.fs-navigation-enabled {
+			width: 100%;
+
+			position: fixed;
+			z-index: 2;
+
+			background: @white;
+			box-shadow: none;
+			height: 40px;
+		}
+
+		@media @desktop {
+			display: none;
+		}
+
+		&_button {
+			position: relative;
+
+			float: right;
+			padding-right: 30px;
+
+			@media @desktop {
+				display: none;
+			}
+		}
+	}
+
 	.footer {
 		.font_size(14);
 
@@ -376,6 +404,14 @@
 
 		@media @desktop {
 			margin-bottom: 20px;
+		}
+	}
+
+	.page.fs-navigation-content.fs-navigation-enabled {
+		box-shadow: none;
+
+		@media @max_desktop {
+			background: @white;
 		}
 	}
 
@@ -397,7 +433,17 @@
 		background: @blue;
 		color: @white;
 
-		padding: 50px 0;
+		&_content {
+			&.fs-navigation-navigation.fs-navigation-enabled {
+				padding: 50px 20px;
+
+				background: @blue;
+			}
+
+			@media @desktop {
+				padding: 50px 0;
+			}
+		}
 
 		a {
 			color: @white;

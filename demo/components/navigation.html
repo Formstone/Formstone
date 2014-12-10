@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Navigation &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"> --><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><div id="page"><div class="row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="content"><h1 id="navigation">Navigation</h1>
+<!DOCTYPE html><html lang="en" class="no-js"> <head> <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Navigation &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="/favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="/favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="/mstile-144x144.png"><!-- Modernizer --><script src="../js/modernizr.js"></script><!-- Google Fonts --><!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"> --><!-- Compiled CSS --> <!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css"><!--<![endif]--> <!--[if IE 8]> <script>var IE8 = true;</script> <script src="../js/site-ie8.js"></script><link rel="stylesheet" href="../css/site-ie8.css"><![endif]--><!--[if IE 9]> <script>var IE9 = true;</script> <script src="../js/site-ie9.js"></script><link rel="stylesheet" href="../css/site-ie9.css"><![endif]--><!-- Compiled JS --> <script src="../js/site.js"></script> </head><body class="fs-grid fs-grid-mobile-fluid"><header class="header main_nav_move"><a href="#" class="header_logo">Formstone</a><button class="header_button" id="main_nav_handle">Menu</button></header><div class="row page_row"><div class="mobile-full tablet-full desktop-10 right padded"><div class="page main_nav_move"><div class="content"><h1 id="navigation">Navigation</h1>
 <p>A jQuery plugin for simple responsive navigation.</p>
 <ul>
 <li><a href="#use">Use</a></li>
@@ -20,7 +20,8 @@ touch.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:</p>
 <pre><code class="lang-javascript">$(&quot;nav&quot;).navigation();</code></pre>
-<pre><code class="lang-markup">&lt;nav&gt;
+<pre><code class="lang-markup">&lt;h4 id=&quot;handle&quot;&gt;Navigation&lt;/h4&gt;
+&lt;nav data-navigation-handle=&quot;#handle&quot;&gt;
     &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
@@ -30,16 +31,17 @@ touch.js</code></pre>
 <pre><code class="lang-javascript">$(&quot;nav&quot;).navigation({
     maxWidth: &quot;740px&quot;
 });</code></pre>
-<h3 id="custom-handle">Custom Handle</h3>
-<p>Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.</p>
-<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation({
-    handle: &quot;#nav-handle&quot;
-});</code></pre>
-<pre><code class="lang-markup">&lt;h4 id=&quot;nav-handle&quot;&gt;Navigation&lt;/h4&gt;
-&lt;nav&gt;
+<h3 id="slide-out">Slide Out</h3>
+<p>Navigation can also slide out from the left or right hand side of the screen. The nav can &#39;push&#39; the main page content by specifying the <code>data-navigation-content</code> attribute:</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation();</code></pre>
+<pre><code class="lang-markup">&lt;h4 id=&quot;handle&quot;&gt;Navigation&lt;/h4&gt;
+&lt;nav data-navigation-handle=&quot;#handle&quot; data-navigation-content=&quot;#content&quot;&gt;
     &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
     &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;
+&lt;div id=&quot;content&quot;&gt;
+    ...
 &lt;/nav&gt;</code></pre>
 <h3 id="events">Events</h3>
 <p>React to the navigation by listening for the <code>open.navigation</code> and <code>close.navigation</code> events:</p>
@@ -69,12 +71,6 @@ touch.js</code></pre>
 <td>Class applied to instance</td>
 </tr>
 <tr>
-<td><code>handle</code></td>
-<td><code>string</code></td>
-<td><code>null</code></td>
-<td>Handle element selector</td>
-</tr>
-<tr>
 <td><code>label</code></td>
 <td><code>boolean</code></td>
 <td><code>true</code></td>
@@ -102,7 +98,7 @@ touch.js</code></pre>
 <td><code>type</code></td>
 <td><code>string</code></td>
 <td><code>&#39;toggle&#39;</code></td>
-<td>Type of navigation; &#39;toggle&#39;, &#39;slide_left&#39;, &#39;slide_right&#39;, &#39;overlay&#39;</td>
+<td>Type of navigation; &#39;toggle&#39;, &#39;slide_left&#39;, &#39;slide_right&#39;</td>
 </tr>
 </tbody>
 </table>
@@ -181,9 +177,9 @@ touch.js</code></pre>
 <td>Target elmement</td>
 </tr>
 <tr>
-<td><code>.fs-navigation</code></td>
+<td><code>.fs-navigation-navigation</code></td>
 <td><code>element</code></td>
-<td>Base widget class</td>
+<td>Navigation</td>
 </tr>
 <tr>
 <td><code>.fs-navigation.fs-navigation-open</code></td>
@@ -199,6 +195,16 @@ touch.js</code></pre>
 <td><code>.fs-navigation-handle</code></td>
 <td><code>element</code></td>
 <td>Click target to toggle navigation</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-handle.fs-navigation-open</code></td>
+<td><code>modifier</code></td>
+<td>Indicates open state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-handle.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
 </tr>
 <tr>
 <td><code>.fs-navigation-handle:after</code></td>
@@ -221,27 +227,29 @@ touch.js</code></pre>
 <td>Indicates off canvas slide interface</td>
 </tr>
 <tr>
-<td><code>.fs-navigation-page</code></td>
+<td><code>.fs-navigation-content</code></td>
 <td><code>element</code></td>
 <td>Target page for slide_left and slide_right</td>
 </tr>
 <tr>
-<td><code>.fs-navigation.fs-navigation-overlay</code></td>
+<td><code>.fs-navigation-content.fs-navigation-open</code></td>
 <td><code>modifier</code></td>
-<td>Indicates overlay interface</td>
+<td>Indicates open state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-content.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
 </tr>
 </tbody>
 </table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
-	.navigation { margin: 0 0 20px; }
+	.navigation { margin: 0 0 20px; overflow: hidden; }
 	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
 	.navigation a:hover { color: #fff; }
 
-	.fs-navigation-container.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-	.fs-navigation-container.fs-navigation-enabled { padding: 10px; }
-
-	.custom_handle.fs-navigation-enabled { background: #ccc; font-size: 14px; margin: 0; padding: 10px 15px; text-align: center; }
-	.custom_navigation.fs-navigation-enabled { margin-top: 0; }
+	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+	.navigation.fs-navigation-enabled { padding: 10px; }
 </style>
 
 <script>
@@ -256,34 +264,30 @@ touch.js</code></pre>
 </script>
 
 <h4>Basic</h4>
-<nav class="navigation">
-	<a href="#">Home</a>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
-</nav>
-
-<h4>Custom Handle</h4>
-<h5 class="custom_handle">Navigation</h5>
-<nav class="navigation custom_navigation" data-navigation-options='{"handle":".custom_handle"}'>
+<h5 id="nav_handle_1">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_1">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
 
 <h4>Breakpoint</h4>
-<nav class="navigation" data-navigation-options='{"maxWidth":"740px"}'>
+<h5 id="nav_handle_2">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
 
-<h4>Custom Handle</h4>
-<h5 class="slide_handle">Navigation</h5>
-<nav class="navigation custom_navigation" data-navigation-options='{"type":"slide_left","handle":".slide_handle","page":"#page"}'>
+<!--
+<h4>Overlay</h4>
+<h5 id="nav_handle_3">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_3" data-navigation-options='{"type":"overlay"}'>
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
-</nav></div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><h5 id="core">Core</h5>
+</nav>
+--></div></div><footer class="row footer"><p>&copy; 2014 Formstone</p></footer></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"slide_right"}'><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -307,4 +311,4 @@ touch.js</code></pre>
 <li><a href="transition.html">Transition</a></li>
 <li><a href="upload.html">Upload</a></li>
 </ul>
-</div></div><footer class="row footer"><div class="mobile-full tablet-full desktop-10 right padded"><p>&copy; 2014 Formstone</p></div></footer></div><!-- Gridlock --> <script></script></body></html>
+</nav></div></div><!-- Gridlock --> <script></script></body></html>

@@ -35,7 +35,8 @@ $("nav").navigation();
 ```
 
 ```markup
-<nav>
+<h4 id="handle">Navigation</h4>
+<nav data-navigation-handle="#handle">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
@@ -52,22 +53,23 @@ $("nav").navigation({
 });
 ```
 
-### Custom Handle
+### Slide Out
 
-Specify a custom handle element by passing a selector to the <code>handle</code> option on initialization.
+Navigation can also slide out from the left or right hand side of the screen. The nav can 'push' the main page content by specifying the `data-navigation-content` attribute:
 
 ```javascript
-$("nav").navigation({
-	handle: "#nav-handle"
-});
+$("nav").navigation();
 ```
 
 ```markup
-<h4 id="nav-handle">Navigation</h4>
-<nav>
+<h4 id="handle">Navigation</h4>
+<nav data-navigation-handle="#handle" data-navigation-content="#content">
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
+</nav>
+<div id="content">
+	...
 </nav>
 ```
 
@@ -94,12 +96,11 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `customClass` | `string` | `''` | Class applied to instance |
-| `handle` | `string` | `null` | Handle element selector |
 | `label` | `boolean` | `true` | Display handle width label |
 | `labels.closed` | `string` | `'Navigation'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
-| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'slide_left', 'slide_right', 'overlay' |
+| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'slide_left', 'slide_right' |
 
 ## Events
 
@@ -173,14 +174,17 @@ $(".target").navigation("open");
 | Class | Type | Description |
 | --- | --- | --- |
 | `.fs-navigation-element` | `element` | Target elmement |
-| `.fs-navigation` | `element` | Base widget class |
+| `.fs-navigation-navigation` | `element` | Navigation |
 | `.fs-navigation.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
+| `.fs-navigation-handle.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
 | `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
 | `.fs-navigation.fs-navigation-slide_left` | `modifier` | Indicates off canvas slide interface |
 | `.fs-navigation.fs-navigation-slide_right` | `modifier` | Indicates off canvas slide interface |
-| `.fs-navigation-page` | `element` | Target page for slide_left and slide_right |
-| `.fs-navigation.fs-navigation-overlay` | `modifier` | Indicates overlay interface |
+| `.fs-navigation-content` | `element` | Target page for slide_left and slide_right |
+| `.fs-navigation-content.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-content.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 
