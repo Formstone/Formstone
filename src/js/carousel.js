@@ -234,7 +234,7 @@
 				.on(Events.clickTouchStart, Classes.page, data, onSelect);
 
 			data.$canister.touch({
-				axis: "horizontal",
+				axis: "x",
 				pan: true,
 				swipe: true
 			}).on(Events.panStart, data, onPanStart)

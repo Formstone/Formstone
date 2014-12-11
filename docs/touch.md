@@ -103,7 +103,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `axis` | `string` | `null` | Limit axis for pan and swipe; 'horizontal' or 'vertical' |
+| `axis` | `string` | `null` | Limit axis for pan and swipe; 'x' or 'y' |
 | `pan` | `boolean` | `false` | Pan events |
 | `scale` | `boolean` | `false` | Scale events |
 | `swipe` | `boolean` | `false` | Swipe events |

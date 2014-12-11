@@ -30,6 +30,10 @@
 				data.pan = true;
 			}
 
+			if (data.scale) {
+				data.axis = false;
+			}
+
 			if (!data.axis) {
 				touchAction(this, "none");
 			}
@@ -120,6 +124,7 @@
 		data.startY     = (touch) ? touch.pageY : e.pageY;
 		data.startT     = new Date().getTime();
 		data.scaleD     = 1;
+		data.passed     = false;
 
 		if (data.tap) {
 			// Tap
@@ -181,8 +186,8 @@
 			deltaY    = newY - data.startY,
 			dirX      = (deltaX > 0) ? "right" : "left",
 			dirY      = (deltaY > 0) ? "down"  : "up",
-			movedX    = Math.abs(newX - data.startX) > 10,
-			movedY    = Math.abs(newY - data.startY) > 10;
+			movedX    = Math.abs(newX - data.startX) > TouchThreshold,
+			movedY    = Math.abs(newY - data.startY) > TouchThreshold;
 
 		if (data.tap) {
 			// Tap
@@ -198,9 +203,19 @@
 				].join(" ") );
 			}
 		} else if (data.pan || data.scale) {
-			if (data.pan && data.axis && ((data.axis === "horizontal" && movedY) || (data.axis === "vertical" && movedX)) ) {
+			if (!data.passed && data.axis && ((data.axis === "x" && movedY) || (data.axis === "y" && movedX)) ) {
+				// if axis and moved in opposite direction
 				onPointerEnd(e);
 			} else {
+				if (!data.axis || (data.axis && (data.axis === "x" && movedX) || (data.axis === "y" && movedY))) {
+					// if axis and moved in same direction
+					data.passed = true;
+				}
+
+				if (data.passed) {
+					Functions.killEvent(e);
+					Functions.killEvent(data.startE);
+				}
 
 				// Pan / Scale
 
@@ -276,7 +291,7 @@
 
 			// Swipe
 
-			if (data.swipe && (deltaX > 20 || deltaX < -20) && (endT - data.startT) < 200) {
+			if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
 				eType = Events.swipe;
 			}
 
@@ -428,7 +443,7 @@
 
 			/**
 			 * @options
-			 * @param axis [string] <null> "Limit axis for pan and swipe; 'horizontal' or 'vertical'"
+			 * @param axis [string] <null> "Limit axis for pan and swipe; 'x' or 'y'"
 			 * @param pan [boolean] <false> "Pan events"
 			 * @param scale [boolean] <false> "Scale events"
 			 * @param swipe [boolean] <false> "Swipe events"
@@ -436,7 +451,7 @@
 			 */
 
 			defaults : {
-				axis     : null,
+				axis     : false,
 				pan      : false,
 				scale    : false,
 				swipe    : false,
@@ -463,7 +478,9 @@
 
 		// Local
 
-		$Window = Formstone.$window;
+		$Window           = Formstone.$window,
+		TouchThreshold    = 20,
+		TouchTime         = 200;
 
 		/**
 		 * @events
