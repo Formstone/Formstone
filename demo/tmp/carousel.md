@@ -122,4 +122,5 @@ $(".target").carousel("resize");
 | `.fs-carousel-pagination` | `element` | Item element |
 | `.fs-carousel-pagination.fs-carousel-visible` | `modifier` | Indicates visible state |
 | `.fs-carousel-page` | `element` | Pagiantion item element |
+| `.fs-carousel-page.fs-carousel-active` | `modifier` | Indicates active state |
 

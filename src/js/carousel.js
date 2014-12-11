@@ -26,6 +26,15 @@
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name cacheInstances
+	 * @description Caches active instances
+	 */
+
+	function cacheInstances() {
+		$Instances = $(Classes.base);
+	}
 
 	/**
 	 * @method private
@@ -116,7 +125,7 @@
 			}, true);
 		}
 
-		$Instances = $(Classes.base);
+		cacheInstances();
 	}
 
 	/**
@@ -144,7 +153,7 @@
 
 		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.single, data.customClass].join(" ") );
 
-		$Instances = $(Classes.base);
+		cacheInstances();
 	}
 
 	/**
@@ -437,8 +446,9 @@
 	 */
 
 	function updateControls(data) {
-		data.$paginationItems.filter(Classes.active).removeClass(RawClasses.active);
-		data.$paginationItems.eq(data.index).addClass(RawClasses.active);
+		data.$paginationItems.removeClass(RawClasses.active)
+							 .eq(data.index)
+							 .addClass(RawClasses.active);
 
 		if (data.infinite) {
 			data.$controlItems.addClass(RawClasses.enabled);
