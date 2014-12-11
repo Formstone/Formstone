@@ -2,7 +2,7 @@
 	// Config
 
 	@fs-carousel-overflow:						hidden;
-	@fs-carousel-transition-speed:				0.5s;
+	@fs-carousel-transition-duration:			0.5s;
 	@fs-carousel-transition-timing:				ease;
 
 	// Controls
@@ -12,12 +12,15 @@
 	@fs-carousel-control-width:					40px;
 
 	@fs-carousel-control-transition-duration:	0.15s;
-	@fs-carousel-control-box-shadow: 			0 0 5px fade(#000, 25);
+	@fs-carousel-control-transition-timing:		ease;
 
+	@fs-carousel-control-box-shadow: 			0 0 5px fade(#000, 25);
 	@fs-carousel-control-border-radius:			100%;
 
 	@fs-carousel-control-previous-left:			20px;
 	@fs-carousel-control-next-right:			20px;
+
+	@fs-carousel-control-disabled-opacity:		0;
 
 	// Control Carets
 
@@ -38,6 +41,14 @@
 	@fs-carousel-page-opacity:					0.5;
 	@fs-carousel-page-height:					10px;
 	@fs-carousel-page-width:					10px;
+
+	.fs_clearfix() {
+		&:after {
+			clear: both;
+			content: '';
+			display: table;
+		}
+	}
 
 	/**
 	 * @class
@@ -80,6 +91,20 @@
 
 		/**
 		 * @class
+		 * @name .fs-carousel-viewport
+		 * @type element
+		 * @description Item container
+		 */
+
+		&-enabled &-viewport {
+			position: relative;
+			overflow: @fs-carousel-overflow;
+
+			.fs_clearfix();
+		}
+
+		/**
+		 * @class
 		 * @name .fs-carousel-canister
 		 * @type element
 		 * @description Item container
@@ -91,7 +116,7 @@
 			backface-visibility: hidden;
 			margin: 0;
 			overflow: hidden;
-			transition: transform @fs-carousel-transition-speed @fs-carousel-transition-timing;
+			transition: transform @fs-carousel-transition-duration @fs-carousel-transition-timing;
 			transform: translate3d(0, 0, 0);
 		}
 
@@ -103,8 +128,8 @@
 		 */
 
 		&-enabled &-item {
+			display: block;
 			float: left;
-			margin: 0;
 		}
 
 		/**
@@ -157,8 +182,13 @@
 			cursor: pointer;
 			display: block;
 			margin: auto;
+			opacity: @fs-carousel-control-disabled-opacity;
 			overflow: hidden;
 			text-indent: 200%;
+			transition:
+				opacity @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing,
+				visibility @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing;
+			visibility: hidden;
 			white-space: nowrap;
 
 			&:before {
@@ -180,6 +210,11 @@
 			.no-opacity & {
 				text-indent: -999px;
 			}
+		}
+
+		&-enabled &-control&-visible {
+			opacity: 1;
+			visibility: visible;
 		}
 
 		/**

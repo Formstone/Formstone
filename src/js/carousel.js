@@ -55,25 +55,29 @@
 		}
 
 		// Build controls and pagination
-		var html = '';
+		var controlsHtml = '',
+			paginationHtml = '';
 
 		if (data.controls) {
-			html += '<div class="' + RawClasses.controls + '">';
-			html += '<button class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
-			html += '<button class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
-			html += '</div>';
+			controlsHtml += '<div class="' + RawClasses.controls + '">';
+			controlsHtml += '<button class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
+			controlsHtml += '</div>';
 		}
 
 		if (data.pagination) {
-			html += '<div class="' + RawClasses.pagination + '">';
-			html += '</div>';
+			paginationHtml += '<div class="' + RawClasses.pagination + '">';
+			paginationHtml += '</div>';
 		}
 
 		// Modify dom
 		this.addClass( [RawClasses.base, data.customClass].join(" ") )
 			.wrapInner('<div class="' + RawClasses.canister + '"></div>')
-			.append(html);
+			.append(controlsHtml)
+			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
+			.append(paginationHtml);
 
+		data.$viewport           = this.find(Classes.viewport).eq(0);
 		data.$canister           = this.find(Classes.canister).eq(0);
 		data.$controls           = this.find(Classes.controls).eq(0);
 		data.$pagination         = this.find(Classes.pagination).eq(0);
@@ -159,11 +163,10 @@
 	function destruct(data) {
 		Functions.clearTimer(data.autoTimer);
 
-		if (data.canister) {
-			data.$items.unwrap();
-		}
+		disable.call(this, data);
 
-		data.$items.removeClass(RawClasses.visible);
+		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
+				   .unwrap().unwrap();
 
 		if (data.pagination) {
 			data.$pagination.remove();
@@ -172,7 +175,7 @@
 			data.$controls.remove();
 		}
 
-		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.single, data.customClass].join(" ") );
+		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
 
 		cacheInstances();
 	}
@@ -285,15 +288,16 @@
 
 			data.width     = this.outerWidth(false);
 			data.visible   = calculateVisible(data);
-
-			data.itemWidth = data.width / data.visible;
-
 			data.perPage   = data.paged ? 1 : data.visible;
+
+			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
+			data.itemWidth  = (data.width - (data.itemMargin * (data.visible - 1))) / data.visible;
+
 			data.pageWidth = data.paged ? data.itemWidth : data.width;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
 			data.$canister.css({
-				width: (data.pageWidth * data.pageCount)
+				width: ((data.pageWidth + data.itemMargin) * data.pageCount)
 			});
 
 			data.$items.css({
@@ -502,16 +506,16 @@
 							 .addClass(RawClasses.active);
 
 		if (data.infinite) {
-			data.$controlItems.addClass(RawClasses.enabled);
+			data.$controlItems.addClass(RawClasses.visible);
 		} else if (data.pageCount < 1) {
-			data.$controlItems.removeClass(RawClasses.enabled);
+			data.$controlItems.removeClass(RawClasses.visible);
 		} else {
-			data.$controlItems.addClass(RawClasses.enabled);
+			data.$controlItems.addClass(RawClasses.visible);
 
 			if (data.index <= 0) {
-				data.$controlItems.filter(Classes.control_previous).removeClass(RawClasses.enabled);
+				data.$controlItems.filter(Classes.control_previous).removeClass(RawClasses.visible);
 			} else if (data.index >= data.pageCount || data.leftPosition === data.maxMove) {
-				data.$controlItems.filter(Classes.control_next).removeClass(RawClasses.enabled);
+				data.$controlItems.filter(Classes.control_next).removeClass(RawClasses.visible);
 			}
 		}
 	}
@@ -716,6 +720,7 @@
 			},
 
 			classes: [
+				"viewport",
 				"canister",
 				"item",
 				"controls",
