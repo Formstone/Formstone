@@ -25,7 +25,7 @@ core.js
 
 ### Basic
 
-Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
+Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan`, `swipe` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
 
 | Key | Description |
 | --- | --- |
@@ -34,6 +34,8 @@ Touch normalizes mouse and touch events in the context of a few basic gestures: 
 | `deltaX` | Change in X position |
 | `deltaY` | Change in Y position |
 | `scale` | Current scale value |
+| `directionX` | Current X movement |
+| `directionY` | Current Y movement |
 
 ### Tap
 
@@ -51,7 +53,7 @@ Note: `tap` can not be used in conjunction with `pan` or `scale`.
 
 ### Pan
 
-Pan can be used for building touch-freindly drag and drop interfaces:
+Pan can be used for building touch-friendly draggable interfaces:
 
 ```javascript
 $(".target").touch({
@@ -65,9 +67,21 @@ $(".target").touch({
 });
 ```
 
+### Swipe
+
+Swipe can be used for building touch-friendly swipable interfaces:
+
+```javascript
+$(".target").touch({
+	swipe: true
+}).on("swipe", function(e) {
+	console.log("Swiped");
+});
+```
+
 ### Scale
 
-Scale can be used for building touch-freindly scalable interfaces:
+Scale can be used for building touch-friendly scalable interfaces:
 
 ```javascript
 $(".target").touch({
@@ -81,7 +95,7 @@ $(".target").touch({
 });
 ```
 
-Note: `pan` and `scale` can also be used together to create a rich interface.
+Note: `pan`, `swipe` and `scale` can also be used together to create a rich interface.
 
 ## Options
 
@@ -106,6 +120,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `scalestart` | Scaling started |
 | `scale` | Scaling |
 | `scaleend` | Scaling ended |
+| `swipe` | Swipe |
 
 ## Methods
 

@@ -45,7 +45,7 @@
 
 	function construct(data) {
 		// Legacy browser support
-		if (!data.useMargin && !Formstone.support.transform) {
+		if (!Formstone.support.transform) {
 			data.useMargin = true;
 		}
 
@@ -169,12 +169,13 @@
 
 			data.enabled = false;
 
-			this.removeClass(RawClasses.enabled);
-				//.off("touchstart.roller click.roller");
+			this.removeClass(RawClasses.enabled)
+				.off(Events.namespace);
 
-			data.$canister.attr("style", "")
+			data.$canister.touch("destroy")
+						  .off(Events.namespace)
+						  .attr("style", "")
 						  .css( Functions.prefix(TransitionProperty, "none") );
-						  //.off("touchstart.roller");
 
 			data.$controls.removeClass(RawClasses.visible);
 			data.$pagination.removeClass(RawClasses.visible)
@@ -207,7 +208,14 @@
 				.on(Events.clickTouchStart, Classes.control, data, onAdvance)
 				.on(Events.clickTouchStart, Classes.page, data, onSelect);
 
-			data.$canister.css( Functions.prefix(TransitionProperty, "") );
+			data.$canister.touch({
+				pan: true,
+				swipe: true
+			}).on(Events.panStart, data, onPanStart)
+			  .on(Events.pan, data, onPan)
+			  .on(Events.panEnd, data, onPanEnd)
+			  .on(Events.swipe, data, onSwipe)
+			  .css( Functions.prefix(TransitionProperty, "") );
 
 			resize.call(this, data);
 		}
@@ -237,7 +245,9 @@
 
 	function resize(data) {
 		if (data.enabled) {
-			var i, j;
+			var i,
+				j,
+				$items;
 
 			data.count = data.$items.length;
 
@@ -248,11 +258,14 @@
 			this.removeClass(RawClasses.animated);
 
 			data.width     = this.outerWidth(false);
-			data.itemWidth = Math.floor(data.width / data.show);
-			data.pageCount = Math.ceil(data.count / data.show);
+			data.itemWidth = data.width / data.show;
+
+			data.perPage   = data.paged ? 1 : data.show;
+			data.pageWidth = data.paged ? data.itemWidth : data.width;
+			data.pageCount = Math.ceil(data.count / data.perPage);
 
 			data.$canister.css({
-				width: (data.width * data.pageCount)
+				width: (data.pageWidth * data.pageCount)
 			});
 
 			data.$items.css({
@@ -262,16 +275,26 @@
 			// initial page
 			data.pages = [];
 
-			for (i = 0, j = 0; i < data.count; i += data.show) {
+			for (i = 0, j = 0; i < data.count; i += data.perPage) {
+				$items = data.$items.slice(i, i + data.perPage);
+
+				if ($items.length < data.perPage) {
+					$items = data.$items.slice(data.$items.length - data.perPage);
+				}
+
 				data.pages.push({
-					left      : j * data.width,
-					$items    : data.$items.slice(i, i + data.show)
+					left      : $items.eq(0).position().left,
+					$items    : $items
 				});
+
 				j++;
 			}
 
-			data.width += data.extraMargin;
-			data.maxMove = -data.pages[ data.pages.length - 1 ].left;
+			if (data.paged) {
+				data.pageCount -=  (data.count % data.show);
+			}
+
+			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
 
 			// Reset Page Count
 			var html = '';
@@ -295,8 +318,6 @@
 			setTimeout(function() {
 				data.$el.addClass(RawClasses.animated);
 			}, 5);
-
-			console.log(data);
 		}
 	}
 
@@ -399,7 +420,7 @@
 		}
 
 		if (data.pages[index]) {
-			data.leftPosition = -data.pages[index].left + data.extraMargin;
+			data.leftPosition = -data.pages[index].left;
 		}
 
 		if (data.leftPosition < data.maxMove) {
@@ -410,7 +431,9 @@
 		}
 
 		if (data.useMargin) {
-			data.$canister.css({ marginLeft: data.leftPosition });
+			data.$canister.css({
+				marginLeft: data.leftPosition
+			});
 		} else {
 			if (animate === false) {
 				data.$canister.css( Functions.prefix(TransitionProperty, "none") )
@@ -476,13 +499,6 @@
 	function calculateIndex(data) {
 		var i = 0;
 
-/*
-		if ((data.deltaX > 20 || data.deltaX < -20) && (data.touchStart && data.touchEnd) && data.touchEnd - data.touchStart < 200) {
-			// Swipe
-			return data.index + ((data.deltaX > 0) ? 1 : -1);
-		} else if (data.paged) {
-*/
-
 		if (data.leftPosition === 0) {
 			return 0;
 		} else {
@@ -497,6 +513,94 @@
 		}
 
 		return 0;
+	}
+
+	/**
+	 * @method private
+	 * @name onPanStart
+	 * @description Handles pan start event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPanStart(e) {
+		var data = e.data;
+
+		data.$canister.css( Functions.prefix(TransitionProperty, "none") );
+
+		data.isTouching = true;
+	}
+
+	/**
+	 * @method private
+	 * @name onPan
+	 * @description Handles pan event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPan(e) {
+		var data = e.data;
+
+		data.touchLeft = data.leftPosition + e.deltaX;
+
+		if (data.touchLeft > 0) {
+			data.touchLeft = 0;
+		}
+		if (data.touchLeft < data.maxMove) {
+			data.touchLeft = data.maxMove;
+		}
+
+		if (data.useMargin) {
+			data.$canister.css({
+				marginLeft: data.touchLeft
+			});
+		} else {
+			data.$canister.css( Functions.prefix(TransformProperty, "translate3d("+data.touchLeft+"px, 0, 0)") );
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onPanEnd
+	 * @description Handles pan end event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPanEnd(e) {
+		var data = e.data,
+			index = (e.deltaX > -50 && e.deltaX < 50) ? data.index : data.index + ((e.directionX === "left") ? 1 : -1);
+
+		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name onSwipe
+	 * @description Handles swipe event
+	 * @param e [object] "Event data"
+	 */
+
+	function onSwipe(e) {
+		var data = e.data,
+			index = data.index + ((e.directionX === "left") ? 1 : -1);
+
+		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name endTouch
+	 * @description Cleans up touch interactions
+	 * @param data [object] "Instance data"
+	 * @param index [object] "New index"
+	 */
+
+	function endTouch(data, index) {
+		data.$canister.css( Functions.prefix(TransitionProperty, "") );
+
+		position(data, index);
+
+		data.isSwiping  = false;
+		data.isTouching = false;
 	}
 
 	/**
@@ -526,17 +630,15 @@
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
 			 * @param show [int | object] <1> "Items visible per page; Object for responsive counts"
-			 * @param touchPaged [boolean] <true> "Flag for paged touch interaction"
+			 * @param sized [boolean] <true> "Flag for auto-sizing items"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
 
 			defaults: {
 				autoAdvance    : false,
 				autoTime       : 8000,
-				autoWidth      : false,
 				controls       : true,
 				customClass    : "",
-				extraMargin    : 0,
 				infinite       : false,
 				labels: {
 					next       : "Next",
@@ -547,7 +649,7 @@
 				paged          : false,
 				pagination     : true,
 				show           : 1,
-				touchPaged     : true,
+				sized          : true,
 				useMargin      : false
 			},
 
@@ -574,7 +676,11 @@
 			 */
 
 			events: {
-				update    : "update"
+				update      : "update",
+				panStart    : "panstart",
+				pan         : "pan",
+				panEnd      : "panend",
+				swipe       : "swipe"
 			},
 
 			methods: {

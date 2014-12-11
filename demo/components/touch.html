@@ -15,7 +15,7 @@ touch.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
 <pre><code class="lang-markup">core.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Touch normalizes mouse and touch events in the context of a few basic gestures: <code>tap</code>, <code>pan</code> and <code>scale</code>. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:</p>
+<p>Touch normalizes mouse and touch events in the context of a few basic gestures: <code>tap</code>, <code>pan</code>, <code>swipe</code> and <code>scale</code>. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:</p>
 <table>
 <thead>
 <tr>
@@ -44,6 +44,14 @@ touch.css</code></pre>
 <td><code>scale</code></td>
 <td>Current scale value</td>
 </tr>
+<tr>
+<td><code>directionX</code></td>
+<td>Current X movement</td>
+</tr>
+<tr>
+<td><code>directionY</code></td>
+<td>Current Y movement</td>
+</tr>
 </tbody>
 </table>
 <h3 id="tap">Tap</h3>
@@ -55,7 +63,7 @@ touch.css</code></pre>
 });</code></pre>
 <p>Note: <code>tap</code> can not be used in conjunction with <code>pan</code> or <code>scale</code>.</p>
 <h3 id="pan">Pan</h3>
-<p>Pan can be used for building touch-freindly drag and drop interfaces:</p>
+<p>Pan can be used for building touch-friendly draggable interfaces:</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
     pan: true
 }).on(&quot;panstart&quot;, function(e) {
@@ -65,8 +73,15 @@ touch.css</code></pre>
 }).on(&quot;panend&quot;, function(e) {
     console.log(&quot;Stopped panning&quot;);
 });</code></pre>
+<h3 id="swipe">Swipe</h3>
+<p>Swipe can be used for building touch-friendly swipable interfaces:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
+    swipe: true
+}).on(&quot;swipe&quot;, function(e) {
+    console.log(&quot;Swiped&quot;);
+});</code></pre>
 <h3 id="scale">Scale</h3>
-<p>Scale can be used for building touch-freindly scalable interfaces:</p>
+<p>Scale can be used for building touch-friendly scalable interfaces:</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).touch({
     scale: true
 }).on(&quot;scalestart&quot;, function(e) {
@@ -76,7 +91,7 @@ touch.css</code></pre>
 }).on(&quot;scaleend&quot;, function(e) {
     console.log(&quot;Stopped scaling&quot;);
 });</code></pre>
-<p>Note: <code>pan</code> and <code>scale</code> can also be used together to create a rich interface.</p>
+<p>Note: <code>pan</code>, <code>swipe</code> and <code>scale</code> can also be used together to create a rich interface.</p>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-touch-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
@@ -148,6 +163,10 @@ touch.css</code></pre>
 <tr>
 <td><code>scaleend</code></td>
 <td>Scaling ended</td>
+</tr>
+<tr>
+<td><code>swipe</code></td>
+<td>Swipe</td>
 </tr>
 </tbody>
 </table>
@@ -233,7 +252,6 @@ touch.css</code></pre>
 		}).on("tap", function(e) {
 			$(this).toggleClass("active");
 		});
-
 
 		// Pan
 		$(".pan").touch({

@@ -32,10 +32,10 @@
 	@fs-carousel-pagination-margin:				10px 0 0;
 	@fs-carousel-pagination-padding:			0;
 
-	@fs-carousel-page-background:				#ccc;
-	@fs-carousel-page-active-background:		#999;
+	@fs-carousel-page-background:				#fff;
 	@fs-carousel-page-border-radius:			100%;
 	@fs-carousel-page-margin:					0 3px;
+	@fs-carousel-page-opacity:					0.5;
 	@fs-carousel-page-height:					10px;
 	@fs-carousel-page-width:					10px;
 
@@ -85,7 +85,7 @@
 		 * @description Item container
 		 */
 
-		&-canister {
+		&-enabled &-canister {
 			position: relative;
 
 			backface-visibility: hidden;
@@ -102,7 +102,7 @@
 		 * @description Individual item
 		 */
 
-		&-item {
+		&-enabled &-item {
 			float: left;
 			margin: 0;
 		}
@@ -121,7 +121,7 @@
 		 * @description Indicates visible state
 		 */
 
-		&-controls {
+		&-enabled &-controls {
 			width: 100%;
 
 			//display: none;
@@ -129,7 +129,7 @@
 			padding: 0;
 		}
 
-		&-controls&-visible {
+		&-enabled &-controls&-visible {
 			display: block;
 		}
 
@@ -140,20 +140,20 @@
 		 * @description Control element
 		 */
 
-		&-control {
+		&-enabled &-control {
 			width: @fs-carousel-control-width;
 			height: @fs-carousel-control-height;
 
 			position: absolute;
 			top: 0;
+			bottom: 0;
 
 			background: @fs-carousel-control-background;
 			border-radius: @fs-carousel-control-border-radius;
 			box-shadow: @fs-carousel-control-box-shadow;
 			cursor: pointer;
 			display: block;
-			margin-right: auto;
-			margin-left: auto;
+			margin: auto;
 			overflow: hidden;
 			text-indent: 200%;
 			white-space: nowrap;
@@ -186,7 +186,7 @@
 		 * @description Indicates previous control
 		 */
 
-		&-control_previous {
+		&-enabled &-control_previous {
 			left: @fs-carousel-control-previous-left;
 
 			&:before {
@@ -204,7 +204,7 @@
 		 * @description Indicates next control
 		 */
 
-		&-control_next {
+		&-enabled &-control_next {
 			right: @fs-carousel-control-next-right;
 
 			&:before {
@@ -222,7 +222,7 @@
 		 * @description Indicates disbaled state
 		 */
 
-		&-control_disabled {
+		&-enabled &-control_disabled {
 			opacity: 0;
 		}
 
@@ -240,8 +240,13 @@
 		 * @description Indicates visible state
 		 */
 
-		&-pagination {
+		&-enabled &-pagination {
 			width: 100%;
+
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
 
 			display: none;
 			margin: @fs-carousel-pagination-margin;
@@ -249,7 +254,7 @@
 			text-align: center;
 		}
 
-		&-pagination&-visible {
+		&-enabled &-pagination&-visible {
 			display: block;
 		}
 
@@ -260,7 +265,7 @@
 		 * @description Pagiantion item element
 		 */
 
-		&-page {
+		&-enabled &-page {
 			width: @fs-carousel-page-width;
 			height: @fs-carousel-page-height;
 
@@ -269,6 +274,7 @@
 			cursor: pointer;
 			display: inline-block;
 			margin: @fs-carousel-page-margin;
+			opacity: @fs-carousel-page-opacity;
 			overflow: hidden;
 			text-indent: 200%;
 			white-space: nowrap;
@@ -287,7 +293,7 @@
 		 * @description Indicates active state
 		 */
 
-		&-page&-active {
-			background: @fs-carousel-page-active-background;
+		&-enabled &-page&-active {
+			opacity: 1;
 		}
 	}

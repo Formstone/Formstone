@@ -17,15 +17,20 @@
 
 			data.pan   = false;
 			data.scale = false;
+			data.swipe = false;
 
 			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart)
 				.on(Events.click, data, onClick);
-		} else if (data.pan || data.scale) {
-			// Pan / Scale
-
-			touchAction(this, "none");
+		} else if (data.pan || data.swipe || data.scale) {
+			// Pan / Swipe / Scale
 
 			data.tap = false;
+
+			if (data.swipe) {
+				data.pan = true;
+			}
+
+			touchAction(this, "none");
 
 			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
@@ -106,29 +111,29 @@
 
 	function onPointerStart(e) {
 		var data     = e.data,
-			touch    = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null;
+			touch    = ($.type(data.touches) !== "undefined") ? data.touches[0] : null;
 
 		data.startE     = e.originalEvent;
 		data.startX     = (touch) ? touch.pageX : e.pageX;
 		data.startY     = (touch) ? touch.pageY : e.pageY;
+		data.startT     = new Date().getTime();
 		data.scaleD     = 1;
 
 		if (data.tap) {
 			// Tap
-
-			// data.startE.stopPropagation();
 
 			data.clicked = false;
 
 			data.$el.on( [Events.touchMove, Events.pointerMove].join(" "), data, onTouch)
 					.on( [Events.touchEnd, Events.touchCancel, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
 
-		} else if (data.pan || data.scale) {
+		} else if (data.pan || data.swipe || data.scale) {
+
 			// Pan / Scale
 
 			Functions.killEvent(e);
 
-			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0);
+			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
 
 			if (data.scale && data.touches && data.touches.length >= 2) {
 				var t = data.touches;
@@ -170,11 +175,13 @@
 
 	function onPointerMove(e) {
 		var data      = e.data,
-			touch     = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null,
+			touch     = ($.type(data.touches) !== "undefined") ? data.touches[0] : null,
 			newX      = (touch) ? touch.pageX : e.pageX,
 			newY      = (touch) ? touch.pageY : e.pageY,
 			deltaX    = newX - data.startX,
-			deltaY    = newY - data.startY;
+			deltaY    = newY - data.startY,
+			dirX      = (deltaX > 0) ? "right" : "left",
+			dirY      = (deltaY > 0) ? "down"  : "up";
 
 		if (data.tap) {
 			// Tap
@@ -189,11 +196,12 @@
 					Events.pointerCancel
 				].join(" ") );
 			}
-		} else if (data.pan || data.scale) {
+		} else if (data.pan || data.swipe || data.scale) {
+
 			// Pan / Scale
 
 			var fire    = true,
-				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY);
+				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
 
 			if (data.scale) {
 				if (data.touches && data.touches.length >= 2) {
@@ -247,15 +255,27 @@
 			data.startE.preventDefault();
 
 			onClick(e);
-		} else if (data.pan || data.scale) {
-			// Pan / Scale
+		} else if (data.pan || data.swipe || data.scale) {
 
-			var touch     = ($.type(e.originalEvent.touches) !== "undefined") ? e.originalEvent.touches[0] : null,
+			// Pan / Swipe / Scale
+
+			var touch     = ($.type(data.touches) !== "undefined") ? data.touches[0] : null,
 				newX      = (touch) ? touch.pageX : e.pageX,
 				newY      = (touch) ? touch.pageY : e.pageY,
 				deltaX    = newX - data.startX,
 				deltaY    = newY - data.startY,
-				newE      = buildEvent(data.scale ? Events.scaleEnd : Events.panEnd, e, newX, newY, data.scaleD, deltaX, deltaY);
+				endT      = new Date().getTime(),
+				eType     = data.scale ? Events.scaleEnd : Events.panEnd,
+				dirX      = (deltaX > 0) ? "right" : "left",
+				dirY      = (deltaY > 0) ? "down"  : "up";
+
+			// Swipe
+
+			if (data.swipe && (deltaX > 20 || deltaX < -20) && (endT - data.startT) < 200) {
+				eType = Events.swipe;
+			}
+
+			var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
 
 			$Window.off( [
 				Events.touchMove,
@@ -337,15 +357,17 @@
 	 * @param dy [float] "Delta Y value"
 	 */
 
-	function buildEvent(type, oe, x, y, s, dx, dy) {
+	function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
 		return $.Event(type, {
-			pageX     : x,
-			pageY     : y,
-			scale     : s,
-			deltaX    : dx,
-			deltaY    : dy,
-			originalEvent: oe,
-			bubbles: true
+			originalEvent : oe,
+			bubbles       : true,
+			pageX         : px,
+			pageY         : py,
+			scale         : s,
+			deltaX        : dx,
+			deltaY        : dy,
+			directionX    : dirx,
+			directionY    : diry
 		});
 	}
 
@@ -409,6 +431,7 @@
 			defaults : {
 				pan      : false,
 				scale    : false,
+				swipe    : false,
 				tap      : false
 			},
 
@@ -443,6 +466,7 @@
 		 * @event scalestart "Scaling started"
 		 * @event scale "Scaling"
 		 * @event scaleend "Scaling ended"
+		 * @event swipe "Swipe"
 		 */
 
 		Events.tap           = "tap";
@@ -452,5 +476,6 @@
 		Events.scale         = "scale";
 		Events.scaleStart    = "scalestart";
 		Events.scaleEnd      = "scaleend";
+		Events.swipe         = "swipe";
 
 })(jQuery, Formstone);

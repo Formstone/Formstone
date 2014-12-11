@@ -45,6 +45,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
+| `sized` | `boolean` | `true` | Flag for auto-sizing items |
 | `show` | `int | object` | `1` | Items visible per page; Object for responsive counts |
 | `touchPaged` | `boolean` | `true` | Flag for paged touch interaction |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
