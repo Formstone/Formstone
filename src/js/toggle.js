@@ -38,13 +38,6 @@
 				disable.call(data.$el, data);
 			}
 		});
-
-		// Initial state
-		if (this.data(Namespace + "-active")) {
-			activate.call(data.$el, data);
-		} else if (data.collapse) {
-			deactivate.call(data.$el, data);
-		}
 	}
 
 	/**

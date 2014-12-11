@@ -27,6 +27,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.isSafari             = (/Safari/i.test(this.userAgent) && !this.isChrome);
 			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
 			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
+			this.transition           = null;
+			this.transform            = null;
 
 			this.support = {
 				file          : !!(window.File && window.FileList && window.FileReader),
@@ -34,7 +36,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				matchMedia    : !!(window.matchMedia || window.msMatchMedia),
 				raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
 				touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
-				transition    : false
+				transition    : false,
+				transform     : false
 			};
 		},
 
@@ -260,6 +263,22 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
+			 * @name prefix
+			 * @description Builds vendor-prefixed styles
+			 * @param property [string] "Property to prefix"
+			 * @param value [string] "Property value"
+			 * @return [object] "Vendor-prefixed styles"
+			 */
+			function prefix(property, value) {
+				var r = {};
+
+				r[property] = value;
+
+				return r;
+			}
+
+			/**
+			 * @method private
 			 * @name delegateWidget
 			 * @description Delegates public methods.
 			 * @param method [string] "Method to execute"
@@ -341,7 +360,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				startTimer      : startTimer,
 				clearTimer      : clearTimer,
 				killEvent       : killEvent,
-				iterate         : iterate
+				iterate         : iterate,
+				prefix          : prefix
 			}, settings.functions);
 
 			// Extend Methods
@@ -444,37 +464,58 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Set Transition Information
 
 	function setTransitionInformation() {
-		var transitions = {
+		var transitionEvents = {
 				"transition"          : "transitionend",
 				"MozTransition"       : "transitionend",
 				"OTransition"         : "otransitionend",
 				"WebkitTransition"    : "webkitTransitionEnd"
 			},
-			event = "transitionend",
-			properties = [
-				"-webkit-transition",
-				"transition"
+			transitionProperties = [
+				"transition",
+				"-webkit-transition"
 			],
-			property = "",
-			test = document.createElement("div"),
+			transformProperties = {
+				'transform'          : 'transform',
+				'MozTransform'       : '-moz-transform',
+				'OTransform'         : '-o-transform',
+				'msTransform'        : '-ms-transform',
+				'webkitTransform'    : '-webkit-transform'
+			},
+			transitionEvent       = "transitionend",
+			transitionProperty    = "",
+			transformProperty     = "",
+			test                  = document.createElement("div"),
 			i;
 
-		for (i in transitions) {
-			if (transitions.hasOwnProperty(i) && i in test.style) {
-				event = transitions[i];
+
+		for (i in transitionEvents) {
+			if (transitionEvents.hasOwnProperty(i) && i in test.style) {
+				transitionEvent = transitionEvents[i];
 				Formstone.support.transition = true;
+				break;
 			}
 		}
 
-		Events.transitionEnd = event + ".{ns}";
+		Events.transitionEnd = transitionEvent + ".{ns}";
 
-		for (i in properties) {
-			if (properties.hasOwnProperty(i) && properties[i] in test.style) {
-				property = properties[i];
+		for (i in transitionProperties) {
+			if (transitionProperties.hasOwnProperty(i) && transitionProperties[i] in test.style) {
+				transitionProperty = transitionProperties[i];
+				break;
 			}
 		}
 
-		Formstone.transitionProperty = property;
+		Formstone.transition = transitionProperty;
+
+		for (i in transformProperties) {
+			if (transformProperties.hasOwnProperty(i) && transformProperties[i] in test.style) {
+				Formstone.support.transform = true;
+				transformProperty = transformProperties[i];
+				break;
+			}
+		}
+
+		Formstone.transform = transformProperty;
 	}
 
 	// Document Ready

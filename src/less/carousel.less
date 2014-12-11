@@ -1,0 +1,264 @@
+
+	// Config
+
+	@fs-carousel-control-background:			#fff;
+	@fs-carousel-control-opacity:				1;
+	@fs-carousel-control-height:				40px;
+	@fs-carousel-control-width:					40px;
+
+	@fs-carousel-control-transition-duration:	0.15s;
+	@fs-carousel-control-box-shadow: 			0 0 5px fade(#000, 25);
+
+	@fs-carousel-control-border-radius:			100%;
+
+	@fs-carousel-control-previous-left:			20px;
+	@fs-carousel-control-next-right:			20px;
+
+	// Control Carets
+
+	@fs-carousel-control-caret-color:			#333;
+	@fs-carousel-control-caret-size:			8px;
+
+	@fs-carousel-control-caret-width:   		(@fs-carousel-control-caret-size * 1.3);
+	@fs-carousel-control-caret-margin:  		(@fs-carousel-control-width - (@fs-carousel-control-caret-size * 1.5)) / 2;
+
+	/**
+	 * @class
+	 * @name .fs-carousel-element
+	 * @type element
+	 * @description Target elmement
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-carousel
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-upload.fs-upload-dropping
+	 * @type modifier
+	 * @description Indicates dropping state
+	 */
+
+ 	.fs-carousel {
+	 	width: 100%;
+
+	 	position: relative;
+
+ 		&,
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
+			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-canister
+		 * @type element
+		 * @description Item container
+		 */
+
+		&-canister {
+			position: relative;
+
+			backface-visibility: hidden;
+			margin: 0;
+			overflow: hidden;
+			transition: transform 0.4s ease;
+			transform: translate3d(0, 0, 0);
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-item
+		 * @type element
+		 * @description Individual item
+		 */
+
+		&-item {
+			float: left;
+			margin: 0;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-controls
+		 * @type element
+		 * @description Controls container
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-carousel-controls.fs-carousel-visible
+		 * @type modifier
+		 * @description Indicates visible state
+		 */
+
+		&-controls {
+			width: 100%;
+
+			//display: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		&-controls&-visible {
+			display: block;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-control
+		 * @type element
+		 * @description Control element
+		 */
+
+		&-control {
+			width: @fs-carousel-control-width;
+			height: @fs-carousel-control-height;
+
+			position: absolute;
+			top: 0;
+
+			background: @fs-carousel-control-background;
+			border-radius: @fs-carousel-control-border-radius;
+			box-shadow: @fs-carousel-control-box-shadow;
+			cursor: pointer;
+			display: block;
+			margin-right: auto;
+			margin-left: auto;
+			//opacity: @fs-carousel-control-opacity;
+			overflow: hidden;
+			text-indent: 200%;
+			transition: opacity @fs-carousel-control-transition-duration linear;
+			white-space: nowrap;
+
+			&:before {
+				width: 0;
+				height: 0;
+
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+
+				content: '';
+				margin: auto;
+			}
+
+			// IE8 - opacity check
+
+			.no-opacity & {
+				text-indent: -999px;
+			}
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-control.fs-carousel-control_previous
+		 * @type modifier
+		 * @description Indicates previous control
+		 */
+
+		&-control_previous {
+			left: @fs-carousel-control-previous-left;
+
+			&:before {
+				border-top: @fs-carousel-control-caret-size solid transparent;
+				border-bottom: @fs-carousel-control-caret-size solid transparent;
+				border-right: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+				margin-left: @fs-carousel-control-caret-margin;
+			}
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-control.fs-carousel-control_next
+		 * @type modifier
+		 * @description Indicates next control
+		 */
+
+		&-control_next {
+			right: @fs-carousel-control-next-right;
+
+			&:before {
+				border-top: @fs-carousel-control-caret-size solid transparent;
+				border-bottom: @fs-carousel-control-caret-size solid transparent;
+				border-left: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+				margin-right: @fs-carousel-control-caret-margin;
+			}
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-control.fs-carousel-control_disabled
+		 * @type modifier
+		 * @description Indicates disbaled state
+		 */
+
+		&-control_disabled {
+			opacity: 0;
+		}
+
+		// controls hovers
+
+		.no-touch & &-control {
+			opacity: 0;
+		}
+
+		.no-touch &:hover &-control {
+			opacity: @fs-carousel-control-opacity;
+		}
+
+		.no-touch & &-control_disabled,
+		.no-touch &:hover &-control_disabled {
+			opacity: 0;
+			cursor: default;
+		}
+
+
+		/**
+		 * @class
+		 * @name .fs-carousel-pagination
+		 * @type element
+		 * @description Item element
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-carousel-pagination.fs-carousel-visible
+		 * @type modifier
+		 * @description Indicates visible state
+		 */
+
+		&-pagination {
+			display: none;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+		}
+
+		&-pagination&-visible {
+			display: block;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-page
+		 * @type element
+		 * @description Pagiantion item element
+		 */
+
+		&-page {
+			cursor: pointer;
+		}
+	}

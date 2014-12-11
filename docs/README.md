@@ -15,6 +15,7 @@
 
 ## Widget
 
+* [Carousel](carousel.md)
 * [Dropdown](dropdown.md)
 * [Lightbox](lightbox.md)
 * [Navigation](navigation.md)

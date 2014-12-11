@@ -15,16 +15,21 @@
 		data.eventGuid    = Events.namespace + data.guid;
 		data.classGuid    = RawClasses.base + data.guid;
 
-		var typeClass     = RawClasses[data.type];
+		if (data.type === "toggle") {
+			data.gravity  = "";
+		}
+
+		var typeClass     = RawClasses[data.type] || "",
+			gravityClass  = RawClasses[data.gravity] || "",
+			classGroup    = [typeClass, data.classGuid, data.customClass].join(" ");
 
 		data.handle       = this.data(Namespace + "-handle");
 		data.content      = this.data(Namespace + "-content");
 
 		// nav type
-		var classGroup         = [typeClass, data.classGuid, data.customClass].join(" ");
 		data.handleClasses     = [RawClasses.handle, classGroup].join(" ");
-		data.navClasses        = [RawClasses.navigation, classGroup].join(" ");
-		data.contentClasses    = [RawClasses.content, classGroup].join(" ");
+		data.navClasses        = [RawClasses.navigation, classGroup, gravityClass].join(" ");
+		data.contentClasses    = [RawClasses.content, classGroup, (data.type === "push" ? gravityClass : "")].join(" ");
 
 		// DOM
 
@@ -55,8 +60,6 @@
 			  .on("deactivate.toggle" + data.eventGuid, data, onClose)
 			  .on("enable.toggle" + data.eventGuid, data, onEnable)
 			  .on("disable.toggle" + data.eventGuid, data, onDisable);
-
-		console.log(data);
 	}
 
 	/**
@@ -202,15 +205,17 @@
 			/**
 			 * @options
 			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param gravity [string] <'left'> "Gravity of 'push' and 'overlay' navigation; 'right', 'left'"
 			 * @param label [boolean] <true> "Display handle width label"
 			 * @param labels.closed [string] <'Navigation'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
-			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'slide_left', 'slide_right'"
+			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'overlay'"
 			 */
 
 			defaults: {
 				customClass    : "",
+				gravity        : "left",
 				label          : true,
 				labels: {
 					closed     : "Navigation",
@@ -228,9 +233,10 @@
 				"open",
 				// types
 				"toggle",
-				"slide_left",
-				"slide_right"
-				//"overlay"
+				"push",
+				"overlay",
+				"left",
+				"right"
 			],
 
 			/**

@@ -29,6 +29,7 @@
 
 	@fs-navigation-slide-background:				#fff;
 	@fs-navigation-slide-width:						270px;
+	@fs-navigation-slide-zindex:                    0;
 
 	@fs-navigation-slide-transition-speed:			0.2s;
 	@fs-navigation-slide-transition-timing:			ease;
@@ -42,7 +43,12 @@
 	@fs-navigation-slide-handle-padding:			10px 15px;
 
 	@fs-navigation-slide-content-box-shadow-color: 	rgba(0, 0, 0, 0.15);
-	@fs-navigation-slide-content-box-shadow-blur: 		2px;
+	@fs-navigation-slide-content-box-shadow-blur: 	2px;
+
+	@fs-navigation-overlay-zindex:					1;
+
+	@fs-navigation-push-zindex:						0;
+	@fs-navigation-push-content-zindex:				1;
 
 	// Overlay
 
@@ -192,25 +198,37 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation.fs-navigation-slide_left
+		 * @name .fs-navigation.fs-navigation-overlay
+		 * @type modifier
+		 * @description Indicates toggle interface
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation.fs-navigation-push
+		 * @type modifier
+		 * @description Indicates toggle interface
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-navigation-push.fs-navigation-left
 		 * @type modifier
 		 * @description Indicates off canvas slide interface
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation.fs-navigation-slide_right
+		 * @name .fs-navigation-push.fs-navigation-right
 		 * @type modifier
 		 * @description Indicates off canvas slide interface
 		 */
 
-		&-slide_left&-navigation&-enabled,
-		&-slide_right&-navigation&-enabled {
+		&-push&-navigation&-enabled,
+		&-overlay&-navigation&-enabled {
 			width: @fs-navigation-slide-width;
 			height: 100%;
 
 			position: fixed;
 			top: 0;
-			z-index: 0;
 
 			background: @fs-navigation-slide-background;
 			display: block;
@@ -221,20 +239,28 @@
 			visibility: hidden;
 		}
 
-		&-slide_left&-navigation&-enabled {
+		&-push&-navigation&-enabled {
+			z-index: @fs-navigation-push-zindex;
+		}
+
+		&-overlay&-navigation&-enabled {
+			z-index: @fs-navigation-overlay-zindex;
+		}
+
+		&-left&-navigation&-enabled {
 			left: 0;
 
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
-		&-slide_right&-navigation&-enabled {
+		&-right&-navigation&-enabled {
 			right: 0;
 
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-slide_left&-navigation&-open,
-		&-slide_right&-navigation&-open {
+		&-push&-navigation&-open,
+		&-overlay&-navigation&-open {
 			transform: translate3D(0, 0, 0);
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
@@ -244,9 +270,9 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation-content
+		 * @name .fs-navigation-content.fs-navigation-push
 		 * @type element
-		 * @description Target page for slide_left and slide_right
+		 * @description Target page for push
 		 */
 
 		/**
@@ -262,10 +288,9 @@
 		 * @description Indicates enabled state
 		 */
 
-		&-slide_left&-content&-enabled,
-		&-slide_right&-content&-enabled {
+		&-push&-content&-enabled {
 			position: relative;
-			z-index: 1;
+			z-index: @fs-navigation-push-content-zindex;
 
 			display: block;
 			overflow: hidden;
@@ -274,62 +299,21 @@
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
 		}
 
-		&-slide_left&-content&-enabled {
+		&-left&-content&-enabled {
 			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
-		&-slide_right&-content&-enabled {
+		&-right&-content&-enabled {
 			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
 		// open
 
-		&-slide_left&-content&-open {
+		&-left&-content&-open {
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-slide_right&-content&-open {
+		&-right&-content&-open {
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
-
-		/**
-		 * class
-		 * @name .fs-navigation.fs-navigation-overlay
-		 * @type modifier
-		 * @description Indicates overlay interface
-		 */
-
-		/*
-		&-overlay&-navigation&-enabled {
-			width: 100%;
-			height: 100%;
-
-			position: fixed;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 2;
-
-			background: @fs-navigation-overlay-background;
-			display: block;
-			overflow: auto;
-			transition:
-				transform @fs-navigation-overlay-transition-speed @fs-navigation-overlay-transition-timing,
-				visibility 0.001s linear @fs-navigation-overlay-transition-speed; // delay when closing
-			transform: scale(1.01);
-			visibility: hidden;
-		}
-
-		// open
-
-		&-overlay&-navigation&-open {
-			transform: translate3D(0, 0, 0);
-			transition:
-				transform @fs-navigation-overlay-transition-speed @fs-navigation-overlay-transition-timing,
-				visibility 0.001s @fs-navigation-overlay-transition-timing;
-			transform: scale(1);
-			visibility: visible;
-		}
-		*/
 	}

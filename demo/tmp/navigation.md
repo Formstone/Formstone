@@ -99,11 +99,12 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `customClass` | `string` | `''` | Class applied to instance |
+| `gravity` | `string` | `'left'` | Gravity of 'push' and 'overlay' navigation; 'right', 'left' |
 | `label` | `boolean` | `true` | Display handle width label |
 | `labels.closed` | `string` | `'Navigation'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
-| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'slide_left', 'slide_right' |
+| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'push', 'overlay' |
 
 ## Events
 
@@ -185,9 +186,11 @@ $(".target").navigation("open");
 | `.fs-navigation-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
 | `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
-| `.fs-navigation.fs-navigation-slide_left` | `modifier` | Indicates off canvas slide interface |
-| `.fs-navigation.fs-navigation-slide_right` | `modifier` | Indicates off canvas slide interface |
-| `.fs-navigation-content` | `element` | Target page for slide_left and slide_right |
+| `.fs-navigation.fs-navigation-overlay` | `modifier` | Indicates toggle interface |
+| `.fs-navigation.fs-navigation-push` | `modifier` | Indicates toggle interface |
+| `.fs-navigation-push.fs-navigation-left` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation-push.fs-navigation-right` | `modifier` | Indicates off canvas slide interface |
+| `.fs-navigation-content.fs-navigation-push` | `element` | Target page for push |
 | `.fs-navigation-content.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-content.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 

@@ -71,6 +71,12 @@ touch.js</code></pre>
 <td>Class applied to instance</td>
 </tr>
 <tr>
+<td><code>gravity</code></td>
+<td><code>string</code></td>
+<td><code>&#39;left&#39;</code></td>
+<td>Gravity of &#39;push&#39; and &#39;overlay&#39; navigation; &#39;right&#39;, &#39;left&#39;</td>
+</tr>
+<tr>
 <td><code>label</code></td>
 <td><code>boolean</code></td>
 <td><code>true</code></td>
@@ -98,7 +104,7 @@ touch.js</code></pre>
 <td><code>type</code></td>
 <td><code>string</code></td>
 <td><code>&#39;toggle&#39;</code></td>
-<td>Type of navigation; &#39;toggle&#39;, &#39;slide_left&#39;, &#39;slide_right&#39;</td>
+<td>Type of navigation; &#39;toggle&#39;, &#39;push&#39;, &#39;overlay&#39;</td>
 </tr>
 </tbody>
 </table>
@@ -217,19 +223,29 @@ touch.js</code></pre>
 <td>Indicates toggle interface</td>
 </tr>
 <tr>
-<td><code>.fs-navigation.fs-navigation-slide_left</code></td>
+<td><code>.fs-navigation.fs-navigation-overlay</code></td>
+<td><code>modifier</code></td>
+<td>Indicates toggle interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation.fs-navigation-push</code></td>
+<td><code>modifier</code></td>
+<td>Indicates toggle interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-push.fs-navigation-left</code></td>
 <td><code>modifier</code></td>
 <td>Indicates off canvas slide interface</td>
 </tr>
 <tr>
-<td><code>.fs-navigation.fs-navigation-slide_right</code></td>
+<td><code>.fs-navigation-push.fs-navigation-right</code></td>
 <td><code>modifier</code></td>
 <td>Indicates off canvas slide interface</td>
 </tr>
 <tr>
-<td><code>.fs-navigation-content</code></td>
+<td><code>.fs-navigation-content.fs-navigation-push</code></td>
 <td><code>element</code></td>
-<td>Target page for slide_left and slide_right</td>
+<td>Target page for push</td>
 </tr>
 <tr>
 <td><code>.fs-navigation-content.fs-navigation-open</code></td>
@@ -287,7 +303,7 @@ touch.js</code></pre>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
---></div></div><footer class="row footer"><p>&copy; 2014 Formstone</p></footer></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"slide_right"}'><h5 id="core">Core</h5>
+--></div></div><footer class="row footer"><p>&copy; 2014 Formstone</p></footer></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -302,6 +318,7 @@ touch.js</code></pre>
 </ul>
 <h5 id="widget">Widget</h5>
 <ul>
+<li><a href="carousel.html">Carousel</a></li>
 <li><a href="dropdown.html">Dropdown</a></li>
 <li><a href="lightbox.html">Lightbox</a></li>
 <li><a href="navigation.html">Navigation</a></li>

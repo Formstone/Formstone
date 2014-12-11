@@ -7,6 +7,7 @@ module.exports = function(grunt) {
 	var cssFiles = {
 		'dist/css/grid.css'          : [ 'src/less/grid.less' ],
 		'dist/css/grid.ie.css'       : [ 'src/less/grid.ie.less' ],
+		'dist/css/carousel.css'      : [ 'src/less/carousel.less' ],
 		'dist/css/dropdown.css'      : [ 'src/less/dropdown.less' ],
 		'dist/css/lightbox.css'      : [ 'src/less/lightbox.less' ],
 		'dist/css/navigation.css'    : [ 'src/less/navigation.less' ],

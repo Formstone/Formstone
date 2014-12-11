@@ -50,6 +50,58 @@
 	}
 
 	/**
+	 * @method
+	 * @name bind
+	 * @description Binds callbacks to media query matching.
+	 * @param media [string] "Media query to match"
+	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
+	 * @example $.mediaquery("bind", "(min-width: 500px)", { ... });
+	 */
+
+	function bind(media, data) {
+		var mq = Window.matchMedia(media),
+			key = createKey(mq.media);
+
+		if (!Bindings[ key ]) {
+			Bindings[ key ] = {
+				mq        : mq,
+				active    : true,
+				enter     : [],
+				leave     : []
+			};
+
+			Bindings[ key ].mq.addListener( onBindingChange );
+		}
+
+		for (var i in data) {
+			if (data.hasOwnProperty(i) && Bindings[ key ].hasOwnProperty(i)) {
+				Bindings[ key ][i].push( data[i] );
+			}
+		}
+
+		onBindingChange( Bindings[ key ].mq );
+	}
+
+	/**
+	 * method
+	 * @name unbind
+	 * @description Unbinds all callbacks from media query.
+	 * @param media [string] "Media query to match"
+	 * @example $.mediaquery("unbind", "(min-width: 500px)");
+	 */
+
+/*
+	function unbind(media) {
+		var key = createKey(media);
+
+		if (Bindings[ key ]) {
+			Bindings[ key ].mq.removeListener( onBindingChange );
+			Bindings = Bindings.splice(Bindings.indexOf( Bindings[ key ] ), 1);
+		}
+	}
+*/
+
+	/**
 	 * @method private
 	 * @name setState
 	 * @description Sets current media query match state.
@@ -108,7 +160,7 @@
 			binding    = Bindings[ key ],
 			event      = mq.matches ? Events.enter : Events.leave;
 
-		if (binding.active || (!binding.active && mq.matches)) {
+		if (binding && binding.active || (!binding.active && mq.matches)) {
 			for (var i in binding[ event ]) {
 				if (binding[ event ].hasOwnProperty(i)) {
 					binding[ event ][i].apply( binding.mq );
@@ -154,7 +206,7 @@
 	 */
 
 	function createKey(text) {
-		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '');
+		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').trim();
 	}
 
 	/**
@@ -170,55 +222,6 @@
 	}
 
 	/**
-	 * @method
-	 * @name bind
-	 * @description Binds callbacks to media query matching.
-	 * @param media [string] "Media query to match"
-	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-	 * @example $.mediaquery("bind", "(min-width: 500px)", { ... });
-	 */
-
-	function bind(media, data) {
-		var key = createKey(media);
-
-		if (!Bindings[ key ]) {
-			Bindings[ key ] = {
-				mq:        Window.matchMedia(media),
-				active:    true,
-				enter:     [],
-				leave:     []
-			};
-
-			Bindings[ key ].mq.addListener( onBindingChange );
-		}
-
-		for (var i in data) {
-			if (data.hasOwnProperty(i) && Bindings[ key ].hasOwnProperty(i)) {
-				Bindings[ key ][i].push( data[i] );
-			}
-		}
-
-		onBindingChange( Bindings[ key ].mq );
-	}
-
-	/**
-	 * @method
-	 * @name unbind
-	 * @description Unbinds all callbacks from media query.
-	 * @param media [string] "Media query to match"
-	 * @example $.mediaquery("unbind", "(min-width: 500px)");
-	 */
-
-	function unbind(media) {
-		var key = createKey(media);
-
-		if (Bindings[ key ]) {
-			Bindings[ key ].mq.removeListener( onBindingChange );
-			Bindings = Bindings.splice(Bindings.indexOf( Bindings[ key ] ), 1);
-		}
-	}
-
-	/**
 	 * @plugin
 	 * @name Media Query
 	 * @description A jQuery plugin for responsive media query events.
@@ -230,8 +233,8 @@
 			utilities: {
 				_initialize    : initialize,
 				state          : getState,
-				bind           : bind,
-				unbind         : unbind
+				bind           : bind
+				// unbind         : unbind
 			},
 
 			/**

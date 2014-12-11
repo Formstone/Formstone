@@ -157,28 +157,6 @@ Note: The `leave` callback will only fire after the target media query has been 
 <h3 id="state">state</h3>
 <p>Returns the current state.</p>
 <pre><code class="lang-javascript">var state = $.mediaquery(&quot;state&quot;);</code></pre>
-<h3 id="unbind">unbind</h3>
-<p>Unbinds all callbacks from media query.</p>
-<pre><code class="lang-javascript">$.mediaquery(&quot;unbind&quot;, &quot;(min-width: 500px)&quot;);</code></pre>
-<h4 id="parameters">Parameters</h4>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>media</code></td>
-<td><code>string</code></td>
-<td>&nbsp;</td>
-<td>Media query to match</td>
-</tr>
-</tbody>
-</table>
 <div class="demo"><h2 id="demo">Demo</h2><style>
 	.demo_output { margin: 20px 0; }
 	.demo_output span { display: inline-block; width: 90px; }
@@ -228,7 +206,7 @@ Note: The `leave` callback will only fire after the target media query has been 
 <div class="demo_output demo_basic form_textarea"></div>
 
 <h4>Binding</h2>
-<div class="demo_output demo_binding form_textarea"></div></div></div><footer class="row footer"><p>&copy; 2014 Formstone</p></footer></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"slide_right"}'><h5 id="core">Core</h5>
+<div class="demo_output demo_binding form_textarea"></div></div></div><footer class="row footer"><p>&copy; 2014 Formstone</p></footer></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><h5 id="core">Core</h5>
 <ul>
 <li><a href="core.html">Formstone</a></li>
 </ul>
@@ -243,6 +221,7 @@ Note: The `leave` callback will only fire after the target media query has been 
 </ul>
 <h5 id="widget">Widget</h5>
 <ul>
+<li><a href="carousel.html">Carousel</a></li>
 <li><a href="dropdown.html">Dropdown</a></li>
 <li><a href="lightbox.html">Lightbox</a></li>
 <li><a href="navigation.html">Navigation</a></li>

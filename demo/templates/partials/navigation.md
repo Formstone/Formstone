@@ -13,6 +13,7 @@
 
 ##### Widget
 
+* [Carousel](carousel.html)
 * [Dropdown](dropdown.html)
 * [Lightbox](lightbox.html)
 * [Navigation](navigation.html)
