@@ -1,4 +1,4 @@
-{"template":"component.html","title":"Carousel","demo":"<style>\n\t.carousel { margin: 20px 0; width: 100%; }\n\t.carousel_item { background: #c65032; color: #fff; font-size: 100px; height: 200px; line-height: 200px; margin: 0; text-align: center; width: 100%; }\n\t.carousel_item:nth-child(even) { background: #393b3f; }\n\n\t.carousel_item.extra {\n\t\t-webkit-transition: margin 0.4s ease;\n\t\t\t\ttransition: margin 0.4s ease;\n\t}\n\t.carousel_item.extra.fs-carousel-first { margin-left: 100px; }\n</style>\n\n<script>\n\t$(function() {\n\t\t$(\".carousel\").carousel();\n\t});\n</script>\n\n<h4>Basic</h4>\n<div class=\"carousel\">\n\t<div class=\"carousel_item\">1</div>\n\t<div class=\"carousel_item\">2</div>\n\t<div class=\"carousel_item\">3</div>\n\t<div class=\"carousel_item\">4</div>\n\t<div class=\"carousel_item\">5</div>\n</div>\n\n<h4>Paged</h4>\n<div class=\"carousel\" data-carousel-options='{\"paged\":true,\"show\":2}'>\n\t<div class=\"carousel_item\">1</div>\n\t<div class=\"carousel_item\">2</div>\n\t<div class=\"carousel_item\">3</div>\n\t<div class=\"carousel_item\">4</div>\n\t<div class=\"carousel_item\">5</div>\n</div>\n\n<h4>Uneven</h4>\n<div class=\"carousel\" data-carousel-options='{\"show\":3}'>\n\t<div class=\"carousel_item\">1</div>\n\t<div class=\"carousel_item\">2</div>\n\t<div class=\"carousel_item\">3</div>\n\t<div class=\"carousel_item\">4</div>\n\t<div class=\"carousel_item\">5</div>\n</div>\n\n<h4>Infinite</h4>\n<div class=\"carousel\" data-carousel-options='{\"infinite\":true}'>\n\t<div class=\"carousel_item\">1</div>\n\t<div class=\"carousel_item\">2</div>\n\t<div class=\"carousel_item\">3</div>\n\t<div class=\"carousel_item\">4</div>\n\t<div class=\"carousel_item\">5</div>\n</div>\n\n<h4>Breakpoint</h4>\n<div class=\"carousel\" data-carousel-options='{\"minWidth\":\"740px\"}'>\n\t<div class=\"carousel_item\">1</div>\n\t<div class=\"carousel_item\">2</div>\n</div>\n\n<h4>Extra Margin</h4>\n<div class=\"carousel\" data-carousel-options='{\"extraMargin\":\"100px\"}'>\n\t<div class=\"carousel_item extra\">1</div>\n\t<div class=\"carousel_item extra\">2</div>\n\t<div class=\"carousel_item extra\">3</div>\n\t<div class=\"carousel_item extra\">4</div>\n\t<div class=\"carousel_item extra\">5</div>\n</div>"}
+{"template":"component.html","title":"Carousel","demo":"<style>\n\t.carousel { margin: 20px 0; width: 100%; }\n\t.carousel_item { padding: 0 5px; }\n\t.carousel_item div { background: #c65032; color: #fff; font-size: 100px; height: 200px; line-height: 200px; margin: 0; text-align: center; width: 100%; }\n\t.carousel_item:nth-child(even) div { background: #393b3f; }\n</style>\n\n<script>\n\t$(function() {\n\t\t$(\".carousel\").carousel();\n\t});\n</script>\n\n<h4>Basic</h4>\n<div class=\"row carousel\">\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n\t<div class=\"carousel_item\"><div>3</div></div>\n\t<div class=\"carousel_item\"><div>4</div></div>\n\t<div class=\"carousel_item\"><div>5</div></div>\n</div>\n\n<h4>Paged</h4>\n<div class=\"row carousel\" data-carousel-options='{\"paged\":true,\"show\":2}'>\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n\t<div class=\"carousel_item\"><div>3</div></div>\n\t<div class=\"carousel_item\"><div>4</div></div>\n\t<div class=\"carousel_item\"><div>5</div></div>\n</div>\n\n<h4>Uneven</h4>\n<div class=\"row carousel\" data-carousel-options='{\"show\":3}'>\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n\t<div class=\"carousel_item\"><div>3</div></div>\n\t<div class=\"carousel_item\"><div>4</div></div>\n\t<div class=\"carousel_item\"><div>5</div></div>\n</div>\n\n<h4>Infinite</h4>\n<div class=\"row carousel\" data-carousel-options='{\"infinite\":true}'>\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n\t<div class=\"carousel_item\"><div>3</div></div>\n\t<div class=\"carousel_item\"><div>4</div></div>\n\t<div class=\"carousel_item\"><div>5</div></div>\n</div>\n\n<h4>Breakpoint</h4>\n<div class=\"row carousel\" data-carousel-options='{\"minWidth\":\"740px\"}'>\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n</div>\n\n<h4>Responsive</h4>\n<div class=\"row carousel\" data-carousel-options='{\"show\":{\"740px\":2,\"960px\":3}}'>\n\t<div class=\"carousel_item\"><div>1</div></div>\n\t<div class=\"carousel_item\"><div>2</div></div>\n\t<div class=\"carousel_item\"><div>3</div></div>\n\t<div class=\"carousel_item\"><div>4</div></div>\n\t<div class=\"carousel_item\"><div>5</div></div>\n</div>"}
 
 # Carousel
 
@@ -30,6 +30,40 @@ touch.js
 
 ### Basic
 
+Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.
+
+```javascript
+$(".target").carousel();
+```
+
+```markup
+<div class="carousel">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+</div>
+```
+
+### Show
+
+Set the `show` option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
+
+```javascript
+$(".target").carousel({
+	show: 2
+});
+```
+
+```javascript
+$(".target").carousel({
+	show: {
+		"740px" : 2,
+		"960px" : 3
+	}
+});
+```
 
 ## Options
 
@@ -48,9 +82,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
+| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `sized` | `boolean` | `true` | Flag for auto-sizing items |
-| `show` | `int | object` | `1` | Items visible per page; Object for responsive counts |
-| `touchPaged` | `boolean` | `true` | Flag for paged touch interaction |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 ## Events

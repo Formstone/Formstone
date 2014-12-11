@@ -27,6 +27,40 @@ touch.js
 
 ### Basic
 
+Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.
+
+```javascript
+$(".target").carousel();
+```
+
+```markup
+<div class="carousel">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+</div>
+```
+
+### Show
+
+Set the `show` option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
+
+```javascript
+$(".target").carousel({
+	show: 2
+});
+```
+
+```javascript
+$(".target").carousel({
+	show: {
+		"740px" : 2,
+		"960px" : 3
+	}
+});
+```
 
 ## Options
 
@@ -45,9 +79,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
+| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `sized` | `boolean` | `true` | Flag for auto-sizing items |
-| `show` | `int | object` | `1` | Items visible per page; Object for responsive counts |
-| `touchPaged` | `boolean` | `true` | Flag for paged touch interaction |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 ## Events

@@ -24,10 +24,10 @@
 
 		// Sort
 
-		Defaults.minWidth.sort( sortDesc );
-		Defaults.maxWidth.sort( sortAsc );
-		Defaults.minHeight.sort( sortDesc );
-		Defaults.maxHeight.sort( sortAsc );
+		Defaults.minWidth.sort(sortDesc);
+		Defaults.maxWidth.sort(sortAsc);
+		Defaults.minHeight.sort(sortDesc);
+		Defaults.maxHeight.sort(sortAsc);
 
 		// Bind Media Query Matches
 

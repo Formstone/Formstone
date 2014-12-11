@@ -32,7 +32,7 @@
 	@fs-carousel-pagination-margin:				10px 0 0;
 	@fs-carousel-pagination-padding:			0;
 
-	@fs-carousel-page-background:				#fff;
+	@fs-carousel-page-background:				#333;
 	@fs-carousel-page-border-radius:			100%;
 	@fs-carousel-page-margin:					0 3px;
 	@fs-carousel-page-opacity:					0.5;
@@ -121,10 +121,13 @@
 		 * @description Indicates visible state
 		 */
 
+		&-controls {
+			display: none;
+		}
+
 		&-enabled &-controls {
 			width: 100%;
 
-			//display: none;
 			margin: 0;
 			padding: 0;
 		}
@@ -240,15 +243,13 @@
 		 * @description Indicates visible state
 		 */
 
+		&-pagination {
+			display: none;
+		}
+
 		&-enabled &-pagination {
 			width: 100%;
 
-			position: absolute;
-			right: 0;
-			bottom: 0;
-			left: 0;
-
-			display: none;
 			margin: @fs-carousel-pagination-margin;
 			padding: @fs-carousel-pagination-padding;
 			text-align: center;

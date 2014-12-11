@@ -10,6 +10,7 @@
 
 	function setup() {
 		$Window.on(Events.resize, onResize);
+		onResize();
 	}
 
 	/**
@@ -24,6 +25,8 @@
 				Functions.iterate.call($Instances, resize);
 			});
 		}
+
+		WindowWidth = $Window.width();
 	}
 
 	/**
@@ -44,6 +47,8 @@
 	 */
 
 	function construct(data) {
+		var i;
+
 		// Legacy browser support
 		if (!Formstone.support.transform) {
 			data.useMargin = true;
@@ -92,6 +97,29 @@
 		data.touchstart      = 0;
 		data.touchEnd        = 0;
 
+		if ($.type(data.show) === "object") {
+			var show = data.show,
+				keys = [];
+
+			for (i in show) {
+				if (show.hasOwnProperty(i)) {
+					keys.push(i);
+				}
+			}
+
+			keys.sort(sortAsc);
+			data.show = {};
+
+			for (i in keys) {
+				if (keys.hasOwnProperty(i)) {
+					data.show[ keys[i] ] = {
+						width: parseInt( keys[i] ),
+						count: show[ keys[i] ]
+					};
+				}
+			}
+		}
+
 		// Media Query support
 
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
@@ -108,7 +136,7 @@
 		// Watch images
 		if (data.totalImages > 0) {
 			data.loadedImages = 0;
-			for (var i = 0; i < data.totalImages; i++) {
+			for (i = 0; i < data.totalImages; i++) {
 				var $img = data.$images.eq(i);
 				$img.one(Events.load, data, onImageLoad);
 
@@ -176,6 +204,10 @@
 						  .off(Events.namespace)
 						  .attr("style", "")
 						  .css( Functions.prefix(TransitionProperty, "none") );
+
+			data.$items.css({
+				width: ""
+			});
 
 			data.$controls.removeClass(RawClasses.visible);
 			data.$pagination.removeClass(RawClasses.visible)
@@ -258,9 +290,11 @@
 			this.removeClass(RawClasses.animated);
 
 			data.width     = this.outerWidth(false);
-			data.itemWidth = data.width / data.show;
+			data.visible   = calculateVisible(data);
 
-			data.perPage   = data.paged ? 1 : data.show;
+			data.itemWidth = data.width / data.visible;
+
+			data.perPage   = data.paged ? 1 : data.visible;
 			data.pageWidth = data.paged ? data.itemWidth : data.width;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
@@ -291,7 +325,7 @@
 			}
 
 			if (data.paged) {
-				data.pageCount -=  (data.count % data.show);
+				data.pageCount -=  (data.count % data.visible);
 			}
 
 			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
@@ -517,6 +551,40 @@
 
 	/**
 	 * @method private
+	 * @name calculateVisible
+	 * @description Determines how many items should show at screen width
+	 * @param data [object] "Instance data"
+	 * @return [int] "New visible count"
+	 */
+
+	function calculateVisible(data) {
+		if ($.type(data.show) === "object") {
+			for (var i in data.show) {
+				if (data.show.hasOwnProperty(i) && WindowWidth >= data.show[i].width) {
+					return (data.show[i].count > data.count) ? data.count : data.show[i].count;
+				}
+			}
+			return 1;
+		} else {
+			return data.show;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name sortAsc
+	 * @description Sorts an array (ascending).
+	 * @param a [mixed] "First value"
+	 * @param b [mixed] "Second value"
+	 * @return Difference between second and first values
+	 */
+
+	function sortAsc(a, b) {
+		return ( parseInt(b) - parseInt(a) );
+	}
+
+	/**
+	 * @method private
 	 * @name onPanStart
 	 * @description Handles pan start event
 	 * @param e [object] "Event data"
@@ -629,7 +697,7 @@
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
-			 * @param show [int | object] <1> "Items visible per page; Object for responsive counts"
+			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
 			 * @param sized [boolean] <true> "Flag for auto-sizing items"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
@@ -706,6 +774,7 @@
 		$Window        = Formstone.$window,
 		$Instances     = [],
 
+		WindowWidth    = 0,
 		ResizeTimer    = null,
 		Debounce       = 20,
 

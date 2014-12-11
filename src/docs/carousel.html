@@ -1,7 +1,8 @@
 <style>
 	.carousel { margin: 20px 0; width: 100%; }
-	.carousel_item { background: #c65032; color: #fff; font-size: 100px; height: 200px; line-height: 200px; margin: 0; text-align: center; width: 100%; }
-	.carousel_item:nth-child(even) { background: #393b3f; }
+	.carousel_item { padding: 0 5px; }
+	.carousel_item div { background: #c65032; color: #fff; font-size: 100px; height: 200px; line-height: 200px; margin: 0; text-align: center; width: 100%; }
+	.carousel_item:nth-child(even) div { background: #393b3f; }
 </style>
 
 <script>
@@ -11,43 +12,52 @@
 </script>
 
 <h4>Basic</h4>
-<div class="carousel">
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
-	<div class="carousel_item">3</div>
-	<div class="carousel_item">4</div>
-	<div class="carousel_item">5</div>
+<div class="row carousel">
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+	<div class="carousel_item"><div>3</div></div>
+	<div class="carousel_item"><div>4</div></div>
+	<div class="carousel_item"><div>5</div></div>
 </div>
 
 <h4>Paged</h4>
-<div class="carousel" data-carousel-options='{"paged":true,"show":2}'>
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
-	<div class="carousel_item">3</div>
-	<div class="carousel_item">4</div>
-	<div class="carousel_item">5</div>
+<div class="row carousel" data-carousel-options='{"paged":true,"show":2}'>
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+	<div class="carousel_item"><div>3</div></div>
+	<div class="carousel_item"><div>4</div></div>
+	<div class="carousel_item"><div>5</div></div>
 </div>
 
 <h4>Uneven</h4>
-<div class="carousel" data-carousel-options='{"show":3}'>
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
-	<div class="carousel_item">3</div>
-	<div class="carousel_item">4</div>
-	<div class="carousel_item">5</div>
+<div class="row carousel" data-carousel-options='{"show":3}'>
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+	<div class="carousel_item"><div>3</div></div>
+	<div class="carousel_item"><div>4</div></div>
+	<div class="carousel_item"><div>5</div></div>
 </div>
 
 <h4>Infinite</h4>
-<div class="carousel" data-carousel-options='{"infinite":true}'>
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
-	<div class="carousel_item">3</div>
-	<div class="carousel_item">4</div>
-	<div class="carousel_item">5</div>
+<div class="row carousel" data-carousel-options='{"infinite":true}'>
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+	<div class="carousel_item"><div>3</div></div>
+	<div class="carousel_item"><div>4</div></div>
+	<div class="carousel_item"><div>5</div></div>
 </div>
 
 <h4>Breakpoint</h4>
-<div class="carousel" data-carousel-options='{"minWidth":"740px"}'>
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
+<div class="row carousel" data-carousel-options='{"minWidth":"740px"}'>
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+</div>
+
+<h4>Responsive</h4>
+<div class="row carousel" data-carousel-options='{"show":{"740px":2,"960px":3}}'>
+	<div class="carousel_item"><div>1</div></div>
+	<div class="carousel_item"><div>2</div></div>
+	<div class="carousel_item"><div>3</div></div>
+	<div class="carousel_item"><div>4</div></div>
+	<div class="carousel_item"><div>5</div></div>
 </div>
