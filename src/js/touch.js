@@ -30,7 +30,9 @@
 				data.pan = true;
 			}
 
-			touchAction(this, "none");
+			if (!data.axis) {
+				touchAction(this, "none");
+			}
 
 			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
@@ -127,11 +129,8 @@
 			data.$el.on( [Events.touchMove, Events.pointerMove].join(" "), data, onTouch)
 					.on( [Events.touchEnd, Events.touchCancel, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
 
-		} else if (data.pan || data.swipe || data.scale) {
-
+		} else if (data.pan || data.scale) {
 			// Pan / Scale
-
-			Functions.killEvent(e);
 
 			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
 
@@ -181,12 +180,14 @@
 			deltaX    = newX - data.startX,
 			deltaY    = newY - data.startY,
 			dirX      = (deltaX > 0) ? "right" : "left",
-			dirY      = (deltaY > 0) ? "down"  : "up";
+			dirY      = (deltaY > 0) ? "down"  : "up",
+			movedX    = Math.abs(newX - data.startX) > 10,
+			movedY    = Math.abs(newY - data.startY) > 10;
 
 		if (data.tap) {
 			// Tap
 
-			if (Math.abs(newX - data.startX) > 10 || Math.abs(newY - data.startY) > 10) {
+			if (movedX || movedY) {
 				data.$el.off( [
 					Events.touchMove,
 					Events.touchEnd,
@@ -196,34 +197,38 @@
 					Events.pointerCancel
 				].join(" ") );
 			}
-		} else if (data.pan || data.swipe || data.scale) {
+		} else if (data.pan || data.scale) {
+			if (data.pan && data.axis && ((data.axis === "horizontal" && movedY) || (data.axis === "vertical" && movedX)) ) {
+				onPointerEnd(e);
+			} else {
 
-			// Pan / Scale
+				// Pan / Scale
 
-			var fire    = true,
-				newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+				var fire    = true,
+					newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
 
-			if (data.scale) {
-				if (data.touches && data.touches.length >= 2) {
-					var t = data.touches;
+				if (data.scale) {
+					if (data.touches && data.touches.length >= 2) {
+						var t = data.touches;
 
-					data.pinch.endX     = midpoint(t[0].pageX, t[1].pageX);
-					data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
-					data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
-					data.scaleD    = (data.pinch.endD / data.pinch.startD);
+						data.pinch.endX     = midpoint(t[0].pageX, t[1].pageX);
+						data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
+						data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
+						data.scaleD    = (data.pinch.endD / data.pinch.startD);
 
-					newE.pageX     = data.pinch.endX;
-					newE.pageY     = data.pinch.endY;
-					newE.scale     = data.scaleD;
-					newE.deltaX    = data.pinch.endX - data.pinch.startX;
-					newE.deltaY    = data.pinch.endY - data.pinch.startY;
-				} else if (!data.pan) {
-					fire = false;
+						newE.pageX     = data.pinch.endX;
+						newE.pageY     = data.pinch.endY;
+						newE.scale     = data.scaleD;
+						newE.deltaX    = data.pinch.endX - data.pinch.startX;
+						newE.deltaY    = data.pinch.endY - data.pinch.startY;
+					} else if (!data.pan) {
+						fire = false;
+					}
 				}
-			}
 
-			if (fire) {
-				data.$el.trigger( newE );
+				if (fire) {
+					data.$el.trigger( newE );
+				}
 			}
 		}
 	}
@@ -255,7 +260,7 @@
 			data.startE.preventDefault();
 
 			onClick(e);
-		} else if (data.pan || data.swipe || data.scale) {
+		} else if (data.pan || data.scale) {
 
 			// Pan / Swipe / Scale
 
@@ -423,12 +428,15 @@
 
 			/**
 			 * @options
-			 * @param pan [boolean || object] <false> "Object to enable"
-			 * @param scale [boolean] <false> "True to enable"
-			 * @param tap [boolean] <false> "True to enable"
+			 * @param axis [string] <null> "Limit axis for pan and swipe; 'horizontal' or 'vertical'"
+			 * @param pan [boolean] <false> "Pan events"
+			 * @param scale [boolean] <false> "Scale events"
+			 * @param swipe [boolean] <false> "Swipe events"
+			 * @param tap [boolean] <false> "'Fastclick' event"
 			 */
 
 			defaults : {
+				axis     : null,
 				pan      : false,
 				scale    : false,
 				swipe    : false,

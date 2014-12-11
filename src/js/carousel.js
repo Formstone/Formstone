@@ -90,13 +90,6 @@
 		data.resizeTimer     = null;
 		data.autoTimer       = null;
 
-		data.deltaX          = null;
-		data.deltaY          = null;
-		data.xStart          = 0;
-		data.yStart          = 0;
-		data.touchstart      = 0;
-		data.touchEnd        = 0;
-
 		if ($.type(data.show) === "object") {
 			var show = data.show,
 				keys = [];
@@ -241,6 +234,7 @@
 				.on(Events.clickTouchStart, Classes.page, data, onSelect);
 
 			data.$canister.touch({
+				axis: "horizontal",
 				pan: true,
 				swipe: true
 			}).on(Events.panStart, data, onPanStart)

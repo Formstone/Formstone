@@ -106,9 +106,11 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `pan` | `boolean || object` | `false` | Object to enable |
-| `scale` | `boolean` | `false` | True to enable |
-| `tap` | `boolean` | `false` | True to enable |
+| `axis` | `string` | `null` | Limit axis for pan and swipe; 'horizontal' or 'vertical' |
+| `pan` | `boolean` | `false` | Pan events |
+| `scale` | `boolean` | `false` | Scale events |
+| `swipe` | `boolean` | `false` | Swipe events |
+| `tap` | `boolean` | `false` | 'Fastclick' event |
 
 ## Events
 
