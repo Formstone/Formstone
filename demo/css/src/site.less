@@ -411,10 +411,9 @@
 			z-index: 2;
 
 			background: @white;
-			border-bottom: 1px solid @gray_2;
-			border-color: fade(@gray_2, 50);
+			border-bottom: 2px solid @gray_1;
 			box-shadow: none;
-			height: 45px;
+			height: 47px;
 		}
 
 		@media @desktop {
@@ -434,7 +433,7 @@
 
 		&_button,
 		&_button.fs-navigation-handle.fs-navigation-enabled {
-			height: 44px;
+			height: 45px;
 
 			.font_size(12);
 
@@ -482,7 +481,45 @@
 		}
 
 		@media @desktop {
-			padding: 30px 50px;
+			padding: 20px 50px 30px;
+		}
+
+
+// 		h1,
+		h2 {
+			position: relative;
+
+			border-top: 2px solid @gray_1;
+			margin-left:  -175px;
+			margin-right: -175px;
+			padding-left:  175px;
+			padding-right: 175px;
+			padding-top:   30px;
+
+			@media @desktop {
+				margin-left:  -50px;
+				margin-right: -50px;
+				padding-left:  50px;
+				padding-right: 50px;
+			}
+
+/*
+			&:before {
+				height: 2px;
+				width: 100%;
+
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: -50px;
+				z-index: 2;
+
+				background: @gray_1;
+				content: '';
+				display: block;
+				margin: auto 0;
+			}
+*/
 		}
 	}
 
