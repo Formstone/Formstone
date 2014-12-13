@@ -37,6 +37,8 @@ The Formstone core is a dependency of all javascript based components and will c
 | `isSafari` | `boolean` | Browser is Safari |
 | `isMobile` | `boolean` | Browser is Mobile |
 | `isFirefoxMobile` | `boolean` | Browser is FireFox Mobile |
+| `transform` | `string` | Prefixed transform property |
+| `transition` | `string` | Prefixed transition property |
 
 User agent sniffing isn't always reliable or considered best practice - it should be used sparingly, if at all.
 
@@ -45,7 +47,7 @@ User agent sniffing isn't always reliable or considered best practice - it shoul
 The `Formstone.Plugin` factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:
 
 ```javascript
-$(“.target).plugin({
+$(".target").plugin({
 	option: value
 });
 ```
@@ -222,7 +224,7 @@ var $element = $(Classes.content);
 
 | Key | Type | Value |
 | --- | --- | --- |
-| `base` | Default | namespace |
+| `base` | Default | `namespace` |
 | `element` | Default | `.namespace-element` |
 | `visible` | Custom | `.namespace-visible` |
 | `content` | Custom | `.namespace-content` |

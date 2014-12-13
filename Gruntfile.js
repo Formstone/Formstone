@@ -208,7 +208,8 @@ module.exports = function(grunt) {
 		},
 		// Clean
 		clean: [
-			'demo/tmp/'
+			'demo/tmp/',
+			'demo/templates/partials/tmp/'
 		],
 		// Strip MQ
 		stripmq: {
@@ -266,7 +267,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', /* 'clean', */ 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'clean', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

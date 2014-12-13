@@ -294,11 +294,8 @@ module.exports = function(grunt) {
 			md += '\n\n';
 			md += doc.description;
 			md += '\n\n';
-
-			//if (doc.use) {
-				md += "* [Use](#use)";
-				md += '\n';
-			//}
+			md += "* [Use](#use)";
+			md += '\n';
 
 			// if demo
 			if (includeDemo && doc.demo) {
@@ -356,6 +353,10 @@ module.exports = function(grunt) {
 			if (doc.use) {
 				md += doc.use
 				md += '\n\n';
+			}
+
+			if (includeDemo) {
+				md += '<br class="split">\n';
 			}
 
 			if (doc.options && doc.options.length) {
@@ -488,14 +489,19 @@ module.exports = function(grunt) {
 		function buildDemo(file) {
 			var doc = grunt.file.readJSON(file),
 				destination = file.replace('docs/json', "demo/tmp").replace('.json', ".md"),
+				destinationBottom = destination.replace("demo/tmp", "demo/templates/partials/tmp"),
 				md = buildMarkdown(doc, "#", true),
+				use = md.split('<br class="split">'),
 				template = {
 					template: "component.html",
 					title: doc.name,
-					demo: doc.demo
+					demo: doc.demo,
+					bottom: "tmp/" + doc.name.toLowerCase().replace(/ /g, "")
 				};
 
-			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + md);
+			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + use[0]);
+			grunt.file.write(destinationBottom, use[1]);
+
 			grunt.log.writeln('File "' + destination + '" created.');
 		}
 

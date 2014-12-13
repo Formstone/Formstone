@@ -34,7 +34,7 @@ $(".target").carousel();
 ```
 
 ```markup
-<div class="carousel">
+<div class="target">
 	<div>1</div>
 	<div>2</div>
 	<div>3</div>

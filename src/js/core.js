@@ -27,8 +27,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.isSafari             = (/Safari/i.test(this.userAgent) && !this.isChrome);
 			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
 			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
-			this.transition           = null;
 			this.transform            = null;
+			this.transition           = null;
 
 			this.support = {
 				file          : !!(window.File && window.FileList && window.FileReader),
