@@ -7,6 +7,6 @@
 		{{= it.document.demo }}
 	</div>
 	{{?}}
-	{{= it.include('components/carousel') }}
+	{{= it.include(it.document.bottom) }}
 </div>
 {{= it.include("_footer", { site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root }) }}

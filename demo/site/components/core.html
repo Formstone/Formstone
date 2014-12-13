@@ -6,35 +6,571 @@
 </ul>
 <h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
-<h4 id="dependencies">Dependencies</h4>
-<pre><code class="lang-markup">core.js
-mediaquery.js
-touch.js</code></pre>
-<h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
+<pre><code class="lang-markup">core.js</code></pre>
+<h3 id="formstone-object">Formstone Object</h3>
+<p>The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$window</code></td>
+<td><code>object</code></td>
+<td>Reference to jQuery wrapped window</td>
+</tr>
+<tr>
+<td><code>window</code></td>
+<td><code>object</code></td>
+<td>Reference to original window</td>
+</tr>
+<tr>
+<td><code>$document</code></td>
+<td><code>object</code></td>
+<td>Reference to jQuery wrapped document</td>
+</tr>
+<tr>
+<td><code>document</code></td>
+<td><code>object</code></td>
+<td>Reference to original document</td>
+</tr>
+<tr>
+<td><code>$body</code></td>
+<td><code>object</code></td>
+<td>Reference to jQuery wrapped body tag</td>
+</tr>
+<tr>
+<td><code>Plugins</code></td>
+<td><code>object</code></td>
+<td>Contains all registered plugins</td>
+</tr>
+<tr>
+<td><code>support.file</code></td>
+<td><code>boolean</code></td>
+<td>File API support</td>
+</tr>
+<tr>
+<td><code>support.history</code></td>
+<td><code>boolean</code></td>
+<td>History API support, including push and pop state</td>
+</tr>
+<tr>
+<td><code>support.matchMedia</code></td>
+<td><code>boolean</code></td>
+<td>Match Media API support</td>
+</tr>
+<tr>
+<td><code>support.raf</code></td>
+<td><code>boolean</code></td>
+<td>Request Animation Frame API support</td>
+</tr>
+<tr>
+<td><code>support.touch</code></td>
+<td><code>boolean</code></td>
+<td>Touch event support</td>
+</tr>
+<tr>
+<td><code>support.transition</code></td>
+<td><code>boolean</code></td>
+<td>CSS3 Transition support</td>
+</tr>
+<tr>
+<td><code>userAgent</code></td>
+<td><code>string</code></td>
+<td>Raw user string</td>
+</tr>
+<tr>
+<td><code>isChrome</code></td>
+<td><code>boolean</code></td>
+<td>Browser is Chrome</td>
+</tr>
+<tr>
+<td><code>isFirefox</code></td>
+<td><code>boolean</code></td>
+<td>Browser is FireFox</td>
+</tr>
+<tr>
+<td><code>isSafari</code></td>
+<td><code>boolean</code></td>
+<td>Browser is Safari</td>
+</tr>
+<tr>
+<td><code>isMobile</code></td>
+<td><code>boolean</code></td>
+<td>Browser is Mobile</td>
+</tr>
+<tr>
+<td><code>isFirefoxMobile</code></td>
+<td><code>boolean</code></td>
+<td>Browser is FireFox Mobile</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td><code>string</code></td>
+<td>Prefixed transform property</td>
+</tr>
+<tr>
+<td><code>transition</code></td>
+<td><code>string</code></td>
+<td>Prefixed transition property</td>
+</tr>
+</tbody>
+</table>
+<p>User agent sniffing isn&#39;t always reliable or considered best practice - it should be used sparingly, if at all.</p>
+<h3 id="plugin-factory">Plugin Factory</h3>
+<p>The <code>Formstone.Plugin</code> factory function is used to define a plugin. The factory will use the provided namespace to register the plugin with jQuery. The plugin is then available like any other:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).plugin({
+    option: value
 });</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
+<h3 id="plugin-types">Plugin Types</h3>
+<p>There are two types of plugins that can be defined: Widget or Utility.</p>
+<h4 id="widget">Widget</h4>
+<p>Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:</p>
+<pre><code class="lang-javascript">;(function ($, Formstone, undefined) {
+
+    function setUp() {
+        // this = document
     }
+
+    function construct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function destruct(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    function reset(data) {
+        // this = jQuery wrapped target element
+        // data = instance data
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            widget: true,
+            defaults: {
+                option:    value
+            },
+            classes: [
+                &quot;visible&quot;
+            ],
+            methods: {
+                _setup         setup,
+                _construct:    construct,
+                _destruct:     destruct,
+                reset:         reset
+            },
+            utilities: {
+                close:         close
+            }
+        }),
+
+        // Localize References
+
+        Classes      = Plugin.classes,
+        Events       = Plugin.events,
+        Functions    = Plugin.functions;
+
+})(jQuery, Formstone);</code></pre>
+<p>As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_setup</code></td>
+<td>Run once when document is ready, scoped to document</td>
+</tr>
+<tr>
+<td><code>_construct</code></td>
+<td>Run at initialization of each instance, scoped to specific instance</td>
+</tr>
+<tr>
+<td><code>_destruct</code></td>
+<td>Run at destruction of each instance, scoped to specific instance</td>
+</tr>
+</tbody>
+</table>
+<p>When an instance is created or destroyed, the factory will automatically add or remove the instance&#39;s localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:</p>
+<pre><code class="lang-javascript">this.data(&quot;namespace&quot;);</code></pre>
+<p>Custom public methods can also be defined, provided their keys are not prefixed with an underscore (<code>_</code>). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it&#39;s plugin data as the first argument followed by any addition arguments:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).namespace(&quot;reset&quot;, 500);</code></pre>
+<p>A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance&#39;s target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.</p>
+<h4 id="utility">Utility</h4>
+<p>Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:</p>
+<pre><code class="lang-javascript">;(function ($, Formstone, undefined) {
+
+    function delegate() {
+        // Manually handle public methods
+    }
+
+    // Register Plugin
+
+    var Plugin = Formstone.Plugin(&quot;namespace&quot;, {
+            utilties: {
+                _delegate:     delegate
+            }
+        }),
+
+        // Internal Defaults
+
+        Defaults = {
+            option:    value
+        },
+
+        // Localize References
+
+        Document = Formstone.$document[0];
+
+})(jQuery, Formstone);</code></pre>
+<p>A utility can override the default method delegation by pointing the <code>_delegate</code> key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.</p>
+<pre><code class="lang-javascript">$.namespace(&quot;reset&quot;, 500);</code></pre>
+<h3 id="plugin-object">Plugin Object</h3>
+<p>Defining a plugin using the factory will return an object containing the follow keys:</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namespace</code></td>
+<td><code>string</code></td>
+<td>plugin namespace</td>
+</tr>
+<tr>
+<td><code>initialized</code></td>
+<td><code>boolean</code></td>
+<td>initialized state</td>
+</tr>
+<tr>
+<td><code>defaults</code></td>
+<td><code>object</code></td>
+<td>default options extended with initialization and local options</td>
+</tr>
+<tr>
+<td><code>functions</code></td>
+<td><code>object</code></td>
+<td>private utility functions</td>
+</tr>
+<tr>
+<td><code>methods</code></td>
+<td><code>object</code></td>
+<td>public methods</td>
+</tr>
+<tr>
+<td><code>utilities</code></td>
+<td><code>object</code></td>
+<td>public utilities</td>
+</tr>
+<tr>
+<td><code>classes</code></td>
+<td><code>object</code></td>
+<td>namespaced classes strings</td>
+</tr>
+<tr>
+<td><code>events</code></td>
+<td><code>object</code></td>
+<td>namespaced event strings</td>
+</tr>
+</tbody>
+</table>
+<p>These values can then be localized in the scope of the plugin for optimal minimization:</p>
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
+        ...
+    }),
+    Defaults     = Plugin.defaults,
+    Functions    = Plugin.functions,
+    Methods      = Plugin.methods,
+    Utilities    = Plugin.utilities,
+    Classes      = Plugin.classes,
+    Events       = Plugin.events;</code></pre>
+<p>This may seem strangely redundant at first, however multi-dimensional objects do not minimize efficiently. This is also one reason standard prototypal inheritance is not used when building a plugin, however this is not to say a specific plugin could not contain locally scoped prototypes. Plugin design is always up to the developer, the factory simply provides a consistent, DRY approach to the basic plugin pattern.</p>
+<h4 id="classes">Classes</h4>
+<p>The <code>classes</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom classes. Custom classes will become object keys, while the namespaced class will become the value:</p>
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    classes: [
+        &quot;visible&quot;,
+        &quot;content&quot;
+    ],
+    ...
 });</code></pre>
-<h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<pre><code class="lang-javascript">var $element = $(Classes.content);</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>base</code></td>
+<td>Default</td>
+<td><code>namespace</code></td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>Default</td>
+<td><code>.namespace-element</code></td>
+</tr>
+<tr>
+<td><code>visible</code></td>
+<td>Custom</td>
+<td><code>.namespace-visible</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>Custom</td>
+<td><code>.namespace-content</code></td>
+</tr>
+</tbody>
+</table>
+<p>The <code>classes.raw</code> key will contain just the namespaced class name without the leading &#39;.&#39;, useful for building html:</p>
+<pre><code class="lang-javascript">html += &#39;&lt;div class=&quot;&#39; + Classes.raw.content &#39;&quot;&gt;;</code></pre>
+<h4 id="events">Events</h4>
+<p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
+<pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
+    ...
+    events: [
+        &quot;enable&quot;,
+        &quot;disable&quot;
+    ],
+    ...
+});</code></pre>
+<pre><code class="lang-javascript">$element.on(Events.click, onClick);</code></pre>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namespace</code></td>
+<td>Default</td>
+<td><code>.namespace</code></td>
+</tr>
+<tr>
+<td><code>blur</code></td>
+<td>Default</td>
+<td><code>blur.namespace</code></td>
+</tr>
+<tr>
+<td><code>change</code></td>
+<td>Default</td>
+<td><code>change.namespace</code></td>
+</tr>
+<tr>
+<td><code>click</code></td>
+<td>Default</td>
+<td><code>click.namespace</code></td>
+</tr>
+<tr>
+<td><code>clickTouchStart</code></td>
+<td>Default</td>
+<td><code>click.namespace touchstart.namespace</code></td>
+</tr>
+<tr>
+<td><code>dblClick</code></td>
+<td>Default</td>
+<td><code>dblClick.namespace</code></td>
+</tr>
+<tr>
+<td><code>drag</code></td>
+<td>Default</td>
+<td><code>drag.namespace</code></td>
+</tr>
+<tr>
+<td><code>dragEnd</code></td>
+<td>Default</td>
+<td><code>dragend.namespace</code></td>
+</tr>
+<tr>
+<td><code>dragEnter</code></td>
+<td>Default</td>
+<td><code>dragenter.namespace</code></td>
+</tr>
+<tr>
+<td><code>dragLeave</code></td>
+<td>Default</td>
+<td><code>dragleave.namespace</code></td>
+</tr>
+<tr>
+<td><code>dragOver</code></td>
+<td>Default</td>
+<td><code>dragover.namespace</code></td>
+</tr>
+<tr>
+<td><code>dragStart</code></td>
+<td>Default</td>
+<td><code>dragstart.namespace</code></td>
+</tr>
+<tr>
+<td><code>drop</code></td>
+<td>Default</td>
+<td><code>drop.namespace</code></td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>Default</td>
+<td><code>error.namespace</code></td>
+</tr>
+<tr>
+<td><code>focus</code></td>
+<td>Default</td>
+<td><code>focus.namespace</code></td>
+</tr>
+<tr>
+<td><code>focusIn</code></td>
+<td>Default</td>
+<td><code>focusin.namespace</code></td>
+</tr>
+<tr>
+<td><code>focusOut</code></td>
+<td>Default</td>
+<td><code>focusout.namespace</code></td>
+</tr>
+<tr>
+<td><code>input</code></td>
+<td>Default</td>
+<td><code>input.namespace</code></td>
+</tr>
+<tr>
+<td><code>keyDown</code></td>
+<td>Default</td>
+<td><code>keydown.namespace</code></td>
+</tr>
+<tr>
+<td><code>keyPress</code></td>
+<td>Default</td>
+<td><code>keypress.namespace</code></td>
+</tr>
+<tr>
+<td><code>keyUp</code></td>
+<td>Default</td>
+<td><code>keyup.namespace</code></td>
+</tr>
+<tr>
+<td><code>load</code></td>
+<td>Default</td>
+<td><code>load.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseDown</code></td>
+<td>Default</td>
+<td><code>mousedown.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseEnter</code></td>
+<td>Default</td>
+<td><code>mouseenter.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseLeave</code></td>
+<td>Default</td>
+<td><code>mouseleave.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseMove</code></td>
+<td>Default</td>
+<td><code>mousemove.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseOut</code></td>
+<td>Default</td>
+<td><code>mouseout.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseOver</code></td>
+<td>Default</td>
+<td><code>mouseover.namespace</code></td>
+</tr>
+<tr>
+<td><code>mouseUp</code></td>
+<td>Default</td>
+<td><code>mouseup.namespace</code></td>
+</tr>
+<tr>
+<td><code>resize</code></td>
+<td>Default</td>
+<td><code>resize.namespace</code></td>
+</tr>
+<tr>
+<td><code>scroll</code></td>
+<td>Default</td>
+<td><code>scroll.namespace</code></td>
+</tr>
+<tr>
+<td><code>select</code></td>
+<td>Default</td>
+<td><code>select.namespace</code></td>
+</tr>
+<tr>
+<td><code>touchCancel</code></td>
+<td>Default</td>
+<td><code>touchcancel.namespace</code></td>
+</tr>
+<tr>
+<td><code>touchEnd</code></td>
+<td>Default</td>
+<td><code>touchend.namespace</code></td>
+</tr>
+<tr>
+<td><code>touchLeave</code></td>
+<td>Default</td>
+<td><code>touchleave.namespace</code></td>
+</tr>
+<tr>
+<td><code>touchMove</code></td>
+<td>Default</td>
+<td><code>touchmove.namespace</code></td>
+</tr>
+<tr>
+<td><code>touchStart</code></td>
+<td>Default</td>
+<td><code>touchstart.namespace</code></td>
+</tr>
+<tr>
+<td><code>transitionEnd</code></td>
+<td>Default</td>
+<td><code>transitionEnd.namespace</code></td>
+</tr>
+<tr>
+<td><code>enable</code></td>
+<td>Custom</td>
+<td><code>enable.namespace</code></td>
+</tr>
+<tr>
+<td><code>disable</code></td>
+<td>Custom</td>
+<td><code>disable.namespace</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<h3 id="plugin">Plugin</h3>
+<p>Builds a plugin and registers it with jQuery.</p>
+<pre><code class="lang-javascript">Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
@@ -46,213 +582,38 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
-</tr>
-<tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
-</tr>
-<tr>
-<td><code>controls</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw controls</td>
-</tr>
-<tr>
-<td><code>customClass</code></td>
+<td><code>namespace</code></td>
 <td><code>string</code></td>
-<td><code>&#39;&#39;</code></td>
-<td>Class applied to instance</td>
+<td>&nbsp;</td>
+<td>Plugin namespace</td>
 </tr>
 <tr>
-<td><code>infinite</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for looping items</td>
-</tr>
-<tr>
-<td><code>labels.next</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
-</tr>
-<tr>
-<td><code>labels.previous</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
-</tr>
-<tr>
-<td><code>maxWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>minWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
-</tr>
-<tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
-</tr>
-<tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
-</tr>
-<tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
-</tr>
-<tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
+<td><code>settings</code></td>
+<td><code>object</code></td>
+<td>&nbsp;</td>
+<td>Plugin settings</td>
 </tr>
 </tbody>
 </table>
-<h2 id="events">Events</h2>
-<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.core(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
-<th>Event</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
-</tr>
-</tbody>
-</table>
-<h2 id="methods">Methods</h2>
-<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
-<h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
-<h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
-<h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
-<h2 id="css">CSS</h2>
-<table>
-<thead>
-<tr>
-<th>Class</th>
+<th>Name</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>.fs-carousel-element</code></td>
-<td><code>element</code></td>
-<td>Target elmement</td>
-</tr>
-<tr>
-<td><code>.fs-carousel</code></td>
-<td><code>element</code></td>
-<td>Base widget class</td>
-</tr>
-<tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
-<td><code>modifier</code></td>
-<td>Indicates dropping state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control</code></td>
-<td><code>element</code></td>
-<td>Control element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
-<td><code>modifier</code></td>
-<td>Indicates previous control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
-<td><code>modifier</code></td>
-<td>Indicates next control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
-<td><code>modifier</code></td>
-<td>Indicates disbaled state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination</code></td>
-<td><code>element</code></td>
-<td>Item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page</code></td>
-<td><code>element</code></td>
-<td>Pagiantion item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
-<td><code>modifier</code></td>
-<td>Indicates active state</td>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
 </tr>
 </tbody>
 </table>

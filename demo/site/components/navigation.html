@@ -54,35 +54,50 @@
 </nav>
 --></div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
+<pre><code class="lang-markup">navigation.js
+navigation.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
 <pre><code class="lang-markup">core.js
 mediaquery.js
+toggle.js
 touch.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
+<p>Navigation will automatically turn a basic navigation into a mobile friendly system. Links can be styled independently:</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation();</code></pre>
+<pre><code class="lang-markup">&lt;h4 id=&quot;handle&quot;&gt;Navigation&lt;/h4&gt;
+&lt;nav data-navigation-handle=&quot;#handle&quot;&gt;
+    &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+<h3 id="breakpoint">Breakpoint</h3>
+<p>By default, Navigation will enable itself on screens smaller then 980 pixels wide. Specify a different width by setting the <code>maxWidth</code> option on initialization.</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation({
+    maxWidth: &quot;740px&quot;
 });</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
-    }
+<h3 id="slide-out">Slide Out</h3>
+<p>Navigation can also slide out from the left or right hand side of the screen. The nav can &#39;push&#39; the main page content by specifying the <code>data-navigation-content</code> attribute:</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).navigation();</code></pre>
+<pre><code class="lang-markup">&lt;h4 id=&quot;handle&quot;&gt;Navigation&lt;/h4&gt;
+&lt;nav data-navigation-handle=&quot;#handle&quot; data-navigation-content=&quot;#content&quot;&gt;
+    &lt;a href=&quot;#&quot;&gt;Home&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Contact&lt;/a&gt;
+&lt;/nav&gt;
+&lt;div id=&quot;content&quot;&gt;
+    ...
+&lt;/nav&gt;</code></pre>
+<h3 id="events">Events</h3>
+<p>React to the navigation by listening for the <code>open.navigation</code> and <code>close.navigation</code> events:</p>
+<pre><code class="lang-javascript">$(&quot;nav&quot;).on(&quot;open.navigation&quot;, function() {
+    // ...
+}).on(&quot;close.navigation&quot;, function() {
+    // ...
 });</code></pre>
+<h4 id="ie-support">IE Support</h4>
+<p>When supporting IE, a <a href="https://gist.github.com/benplum/8045366">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336">IE 8</a>, <a href="https://gist.github.com/benplum/8045327">IE 9</a>) are required.</p>
 <h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-navigation-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
 <thead>
 <tr>
@@ -94,88 +109,46 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
-</tr>
-<tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
-</tr>
-<tr>
-<td><code>controls</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw controls</td>
-</tr>
-<tr>
 <td><code>customClass</code></td>
 <td><code>string</code></td>
 <td><code>&#39;&#39;</code></td>
 <td>Class applied to instance</td>
 </tr>
 <tr>
-<td><code>infinite</code></td>
+<td><code>gravity</code></td>
+<td><code>string</code></td>
+<td><code>&#39;left&#39;</code></td>
+<td>Gravity of &#39;push&#39; and &#39;overlay&#39; navigation; &#39;right&#39;, &#39;left&#39;</td>
+</tr>
+<tr>
+<td><code>label</code></td>
 <td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for looping items</td>
+<td><code>true</code></td>
+<td>Display handle width label</td>
 </tr>
 <tr>
-<td><code>labels.next</code></td>
+<td><code>labels.closed</code></td>
 <td><code>string</code></td>
-<td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
+<td><code>&#39;Menu&#39;</code></td>
+<td>Closed state text</td>
 </tr>
 <tr>
-<td><code>labels.previous</code></td>
+<td><code>labels.open</code></td>
 <td><code>string</code></td>
-<td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
+<td><code>&#39;Close&#39;</code></td>
+<td>Open state text</td>
 </tr>
 <tr>
 <td><code>maxWidth</code></td>
 <td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
+<td><code>&#39;980px&#39;</code></td>
 <td>Width at which to auto-disable plugin</td>
 </tr>
 <tr>
-<td><code>minWidth</code></td>
+<td><code>type</code></td>
 <td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
-</tr>
-<tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
-</tr>
-<tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
-</tr>
-<tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
-</tr>
-<tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
+<td><code>&#39;toggle&#39;</code></td>
+<td>Type of navigation; &#39;toggle&#39;, &#39;push&#39;, &#39;overlay&#39;</td>
 </tr>
 </tbody>
 </table>
@@ -190,28 +163,54 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
+<td><code>open.navigation</code></td>
+<td>Navigation opened</td>
+</tr>
+<tr>
+<td><code>close.navigation</code></td>
+<td>Navigation closed</td>
 </tr>
 </tbody>
 </table>
 <h2 id="methods">Methods</h2>
 <p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="close">close</h3>
+<p>Closes instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;close&quot;);</code></pre>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.navigation(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;destroy&quot;);</code></pre>
 <h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
+<p>Disables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;disable&quot;);</code></pre>
 <h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
-<h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
+<p>Enables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;enable&quot;);</code></pre>
+<h3 id="open">open</h3>
+<p>Opens instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).navigation(&quot;open&quot;);</code></pre>
 <h2 id="css">CSS</h2>
 <table>
 <thead>
@@ -223,84 +222,99 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>.fs-carousel-element</code></td>
+<td><code>.fs-navigation-element</code></td>
 <td><code>element</code></td>
 <td>Target elmement</td>
 </tr>
 <tr>
-<td><code>.fs-carousel</code></td>
+<td><code>.fs-navigation-navigation</code></td>
 <td><code>element</code></td>
-<td>Base widget class</td>
+<td>Navigation</td>
 </tr>
 <tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
+<td><code>.fs-navigation.fs-navigation-open</code></td>
 <td><code>modifier</code></td>
-<td>Indicates dropping state</td>
+<td>Indicates open state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
+<td><code>.fs-navigation.fs-navigation-enabled</code></td>
 <td><code>modifier</code></td>
-<td>Indicates visible state</td>
+<td>Indicates enabled state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control</code></td>
+<td><code>.fs-navigation.fs-navigation-animated</code></td>
+<td><code>modifier</code></td>
+<td>Indicates animated state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation.fs-navigation-toggle</code></td>
+<td><code>modifier</code></td>
+<td>Indicates toggle interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation.fs-navigation-overlay</code></td>
+<td><code>modifier</code></td>
+<td>Indicates toggle interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation.fs-navigation-push</code></td>
+<td><code>modifier</code></td>
+<td>Indicates toggle interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-push.fs-navigation-left</code></td>
+<td><code>modifier</code></td>
+<td>Indicates off canvas slide interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-push.fs-navigation-right</code></td>
+<td><code>modifier</code></td>
+<td>Indicates off canvas slide interface</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-content</code></td>
 <td><code>element</code></td>
-<td>Control element</td>
+<td>Target page content</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
+<td><code>.fs-navigation-content.fs-navigation-push</code></td>
 <td><code>modifier</code></td>
-<td>Indicates previous control</td>
+<td>Indicates toggle interface</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
+<td><code>.fs-navigation-content.fs-navigation-animated</code></td>
 <td><code>modifier</code></td>
-<td>Indicates next control</td>
+<td>Indicates animted state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
+<td><code>.fs-navigation-content.fs-navigation-open</code></td>
 <td><code>modifier</code></td>
-<td>Indicates disbaled state</td>
+<td>Indicates open state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination</code></td>
+<td><code>.fs-navigation-content.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-handle</code></td>
 <td><code>element</code></td>
-<td>Item element</td>
+<td>Click target to toggle navigation</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
+<td><code>.fs-navigation-handle.fs-navigation-open</code></td>
 <td><code>modifier</code></td>
-<td>Indicates visible state</td>
+<td>Indicates open state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-page</code></td>
+<td><code>.fs-navigation-handle.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-handle:after</code></td>
 <td><code>element</code></td>
-<td>Pagiantion item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
-<td><code>modifier</code></td>
-<td>Indicates active state</td>
+<td>Icon displayed in handle</td>
 </tr>
 </tbody>
 </table>

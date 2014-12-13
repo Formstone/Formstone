@@ -45,35 +45,34 @@
 <div class="toggle" data-switch-options='{"maxWidth":"740px"}' data-switch-target=".toggle_target_5">Heading</div>
 <div class="toggle_target toggle_target_5">Content</div></div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
+<pre><code class="lang-markup">switch.js
+switch.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
 <pre><code class="lang-markup">core.js
 mediaquery.js
 touch.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
+<p>Switch toggles classes on groups of elements based on configuration options and user interaction. It is up to the developer to utilize the classes.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch();</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-switch-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;toggle&quot;&gt;Target&lt;/div&gt;</code></pre>
+<h3 id="groups">Groups</h3>
+<p>Switches can be grouped together for a simple accordions or tabs.</p>
+<pre><code class="lang-markup">&lt;h4&gt;Grouped&lt;/h4&gt;
+&lt;div class=&quot;target&quot; data-switch-target=&quot;.toggle_1&quot; data-switch-group=&quot;group_1&quot;&gt;Toggle - 1&lt;/div&gt;
+&lt;div class=&quot;target&quot; data-switch-target=&quot;.toggle_2&quot; data-switch-group=&quot;group_1&quot;&gt;Toggle - 2&lt;/div&gt;
+
+&lt;div class=&quot;toggle_1&quot;&gt;Target - 1&lt;/div&gt;
+&lt;div class=&quot;toggle_2&quot;&gt;Target - 2&lt;/div&gt;</code></pre>
+<h3 id="max-width">Max Width</h3>
+<p>Switches will auto-enable and disable themselves if the <code>maxWidth</code> property is set.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch({
+    maxWidth: &quot;740px&quot;
 });</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
-    }
-});</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-switch-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;switch&quot;&gt;Target&lt;/div&gt;</code></pre>
 <h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-switch-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
 <thead>
 <tr>
@@ -85,88 +84,16 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
-</tr>
-<tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
-</tr>
-<tr>
-<td><code>controls</code></td>
+<td><code>collapse</code></td>
 <td><code>boolean</code></td>
 <td><code>true</code></td>
-<td>Flag to draw controls</td>
-</tr>
-<tr>
-<td><code>customClass</code></td>
-<td><code>string</code></td>
-<td><code>&#39;&#39;</code></td>
-<td>Class applied to instance</td>
-</tr>
-<tr>
-<td><code>infinite</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for looping items</td>
-</tr>
-<tr>
-<td><code>labels.next</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
-</tr>
-<tr>
-<td><code>labels.previous</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
+<td>Allow switch to collapse it&#39;s target</td>
 </tr>
 <tr>
 <td><code>maxWidth</code></td>
 <td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
+<td><code>Infinity</code></td>
 <td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>minWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
-</tr>
-<tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
-</tr>
-<tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
-</tr>
-<tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
-</tr>
-<tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
 </tr>
 </tbody>
 </table>
@@ -181,28 +108,62 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
+<td><code>activate.switch</code></td>
+<td>Switch activated</td>
+</tr>
+<tr>
+<td><code>deactivate.switch</code></td>
+<td>Switch deactivated</td>
+</tr>
+<tr>
+<td><code>enable.switch</code></td>
+<td>Switch enabled</td>
+</tr>
+<tr>
+<td><code>disable.switch</code></td>
+<td>Switch diabled</td>
 </tr>
 </tbody>
 </table>
 <h2 id="methods">Methods</h2>
 <p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="activate">activate</h3>
+<p>Activate instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch(&quot;activate&quot;);</code></pre>
+<h3 id="deactivate">deactivate</h3>
+<p>Deactivates instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch(&quot;deactivate&quot;);</code></pre>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.switch(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch(&quot;destroy&quot;);</code></pre>
 <h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
+<p>Disables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch(&quot;disable&quot;);</code></pre>
 <h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
-<h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
+<p>Enables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).switch(&quot;enable&quot;);</code></pre>
 <h2 id="css">CSS</h2>
 <table>
 <thead>
@@ -214,82 +175,22 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>.fs-carousel-element</code></td>
+<td><code>.fs-switch-element</code></td>
 <td><code>element</code></td>
-<td>Target elmement</td>
+<td>Target Element</td>
 </tr>
 <tr>
-<td><code>.fs-carousel</code></td>
+<td><code>.fs-switch-target</code></td>
 <td><code>element</code></td>
-<td>Base widget class</td>
+<td>Toggled element</td>
 </tr>
 <tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
+<td><code>.fs-switch-enabled</code></td>
 <td><code>modifier</code></td>
-<td>Indicates dropping state</td>
+<td>Indicates enabled state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control</code></td>
-<td><code>element</code></td>
-<td>Control element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
-<td><code>modifier</code></td>
-<td>Indicates previous control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
-<td><code>modifier</code></td>
-<td>Indicates next control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
-<td><code>modifier</code></td>
-<td>Indicates disbaled state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination</code></td>
-<td><code>element</code></td>
-<td>Item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page</code></td>
-<td><code>element</code></td>
-<td>Pagiantion item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
+<td><code>.fs-switch-active</code></td>
 <td><code>modifier</code></td>
 <td>Indicates active state</td>
 </tr>

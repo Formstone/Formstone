@@ -58,35 +58,41 @@
 <h4>Binding</h2>
 <div class="demo_output demo_binding form_textarea"></div></div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
+<pre><code class="lang-markup">mediaquery.js</code></pre>
 <h4 id="dependencies">Dependencies</h4>
-<pre><code class="lang-markup">core.js
-mediaquery.js
-touch.js</code></pre>
+<pre><code class="lang-markup">core.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
+<p>Media Query can track global changes to screen size based on an existing grid system. This is useful when many elements need to be resized at any change to the target screen size. Start by configuring the dimensions to be tracked by passing arrays at initialization. These arrays should contain the target width and/or heights to react to:</p>
+<pre><code class="lang-javascript">$.mediaquery({
+    minWidth     : [ 320, 500, 740, 980, 1220 ],
+    maxWidth     : [ 1220, 980, 740, 500, 320 ],
+    minHeight    : [ 400, 800 ],
+    maxHeight    : [ 800, 400 ]
 });</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
+<h3 id="events">Events</h3>
+<p>After initializing, simply listen for the <code>mqchange.mediaquery</code> event:</p>
+<pre><code class="lang-javascript">$(window).on(&quot;mqchange.mediaquery&quot;, function(e, state) {
+    console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
+});</code></pre>
+<p>Note: In the example above, the <code>mqchange.mediaquery</code> event will be fire twice for each breakpoint. This is because Mediaquery will respond to both the <code>min-width</code> and <code>max-width</code> changes.</p>
+<h3 id="binding">Binding</h3>
+<p>Media Query can also bind events to specific media query changes for more fine grain control:</p>
+<pre><code class="lang-javascript">$.mediaquery(&quot;bind&quot;, &quot;(min-width: 740px)&quot;, {
+    enter: function() {
+        ...
+    },
+    leave: function() {
+        ...
     }
 });</code></pre>
+<!--
+Note: The `leave` callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.
+-->
+
+<h4 id="ie-support">IE Support</h4>
+<p>When supporting IE, a <a href="https://gist.github.com/benplum/8045366">HTML5 enabler</a> and matchMedia polyfill (<a href="https://gist.github.com/benplum/8045336">IE 8</a>, <a href="https://gist.github.com/benplum/8045327">IE 9</a>) are required.</p>
 <h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
 <table>
 <thead>
 <tr>
@@ -98,93 +104,39 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
-</tr>
-<tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
-</tr>
-<tr>
-<td><code>controls</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw controls</td>
-</tr>
-<tr>
-<td><code>customClass</code></td>
-<td><code>string</code></td>
-<td><code>&#39;&#39;</code></td>
-<td>Class applied to instance</td>
-</tr>
-<tr>
-<td><code>infinite</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for looping items</td>
-</tr>
-<tr>
-<td><code>labels.next</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
-</tr>
-<tr>
-<td><code>labels.previous</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
+<td><code>minWidth</code></td>
+<td><code>0</code></td>
+<td>&nbsp;</td>
+<td>Array of min-widths</td>
 </tr>
 <tr>
 <td><code>maxWidth</code></td>
+<td><code>Infinity</code></td>
+<td>&nbsp;</td>
+<td>Array of max-widths</td>
+</tr>
+<tr>
+<td><code>minHeight</code></td>
+<td><code>0</code></td>
+<td>&nbsp;</td>
+<td>Array of min-heights</td>
+</tr>
+<tr>
+<td><code>maxHeight</code></td>
+<td><code>Infinity</code></td>
+<td>&nbsp;</td>
+<td>Array of max-heights</td>
+</tr>
+<tr>
+<td><code>unit</code></td>
 <td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>minWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
-</tr>
-<tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
-</tr>
-<tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
-</tr>
-<tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
-</tr>
-<tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
-</tr>
-<tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
+<td><code>&#39;px&#39;</code></td>
+<td>Unit to use when matching widths and heights</td>
 </tr>
 </tbody>
 </table>
 <h2 id="events">Events</h2>
-<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<p>Events are triggered on the <code>window</code>, unless otherwise stated.</p>
 <table>
 <thead>
 <tr>
@@ -194,118 +146,64 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
+<td><code>mqchange.mediaquery</code></td>
+<td>Change to a media query match; Triggered on window</td>
 </tr>
 </tbody>
 </table>
 <h2 id="methods">Methods</h2>
-<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
-<h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
-<h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
-<h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
-<h2 id="css">CSS</h2>
+<p>Methods are publicly available, unless otherwise stated.</p>
+<h3 id="bind">bind</h3>
+<p>Binds callbacks to media query matching.</p>
+<pre><code class="lang-javascript">$.mediaquery(&quot;bind&quot;, &quot;(min-width: 500px)&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
 <table>
 <thead>
 <tr>
-<th>Class</th>
+<th>Name</th>
 <th>Type</th>
+<th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>.fs-carousel-element</code></td>
-<td><code>element</code></td>
-<td>Target elmement</td>
+<td><code>media</code></td>
+<td><code>string</code></td>
+<td>&nbsp;</td>
+<td>Media query to match</td>
 </tr>
 <tr>
-<td><code>.fs-carousel</code></td>
-<td><code>element</code></td>
-<td>Base widget class</td>
-</tr>
-<tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
-<td><code>modifier</code></td>
-<td>Indicates dropping state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control</code></td>
-<td><code>element</code></td>
-<td>Control element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
-<td><code>modifier</code></td>
-<td>Indicates previous control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
-<td><code>modifier</code></td>
-<td>Indicates next control</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
-<td><code>modifier</code></td>
-<td>Indicates disbaled state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination</code></td>
-<td><code>element</code></td>
-<td>Item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page</code></td>
-<td><code>element</code></td>
-<td>Pagiantion item element</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
-<td><code>modifier</code></td>
-<td>Indicates active state</td>
+<td><code>data</code></td>
+<td><code>object</code></td>
+<td>&nbsp;</td>
+<td>Object containing &#39;enter&#39; and &#39;leave&#39; callbacks</td>
 </tr>
 </tbody>
 </table>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.media query(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="state">state</h3>
+<p>Returns the current state.</p>
+<pre><code class="lang-javascript">var state = $.mediaquery(&quot;state&quot;);</code></pre>
 </div></div></div><div class="mobile-full tablet-full desktop-2 sidebar"><nav class="main_nav sidebar_content" data-navigation-handle="#main_nav_handle" data-navigation-content=".main_nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><a href="../" class="logo sidebar_logo">Formstone</a><h5>Library</h5><ul><li><a href="core.html">Core</a></li><li><a href="grid.html">Grid</a></li></ul><h5>Utility</h5><ul><li><a href="cookie.html">Cookie</a></li><li><a href="mediaquery.html">Media Query</a></li></ul><h5>Widget</h5><ul><li><a href="carousel.html">Carousel</a></li><li><a href="dropdown.html">Dropdown</a></li><li><a href="lightbox.html">Lightbox</a></li><li><a href="navigation.html">Navigation</a></li><li><a href="switch.html">Switch</a></li><li><a href="tooltip.html">Tooltip</a></li><li><a href="touch.html">Touch</a></li><li><a href="transition.html">Transition</a></li><li><a href="upload.html">Upload</a></li></ul></nav></div></div><footer class="row footer main_nav_move"><div class="mobile-full tablet-full desktop-10 right"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --> <script></script></body></html>

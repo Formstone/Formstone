@@ -311,253 +311,374 @@
 </div>
 <!-- END Contained --></div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
-<h4 id="dependencies">Dependencies</h4>
-<pre><code class="lang-markup">core.js
-mediaquery.js
-touch.js</code></pre>
-<h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
-});</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
-    }
-});</code></pre>
-<h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<pre><code class="lang-markup">grid.less</code></pre>
+<p>The grid works by nesting &#39;cells&#39; within &#39;rows&#39;. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.</p>
+<h3 id="markup">Markup</h3>
+<p>A basic example may look something like:</p>
+<pre><code class="lang-markup">&lt;body class=&quot;grid&quot;&gt;
+    &lt;div class=&quot;row&quot;&gt;
+        &lt;div class=&quot;mobile-3 tablet-2 desktop-4&quot;&gt;...&lt;/div&gt;
+        &lt;div class=&quot;mobile-3 tablet-2 desktop-4&quot;&gt;...&lt;/div&gt;
+        &lt;div class=&quot;mobile-3 tablet-2 desktop-4&quot;&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;</code></pre>
+<p>This will create 3 cells that each span 3 columns on mobile, 2 columns on tablet and 4 columns on desktop screen sizes. Think of the nested structure like a directory tree:</p>
+<pre><code>grid
+├─ row
+|  ├─ cell
+|  |─ cell
+|  |  └─ row
+|  |     ├─ cell
+|  |     └─ cell
+|  └─ cell
+└─ row
+   ├─ cell
+   └─ cell</code></pre>
+<h3 id="box-sizing">Box-Sizing</h3>
+<p>Grid relies on border-box and includes a global box-sizing reset:</p>
+<pre><code class="lang-css">*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}</code></pre>
+<p>This will effect every element on the page and can have unexpected results. In the long run it will help speed development by modifying how padding and borders effect the box model calculations. <a href="http://www.paulirish.com/2012/box-sizing-border-box-ftw/">Learn more about border-box</a>.</p>
+<h3 id="row-widths-and-columns-counts">Row Widths and Columns Counts</h3>
 <table>
 <thead>
 <tr>
 <th>Name</th>
-<th>Type</th>
+<th>Screen Size</th>
+<th>Row Width</th>
+<th>Column Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min</code></td>
+<td>smaller than 500px</td>
+<td>300px</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>mobile</code></td>
+<td>smaller than 740px</td>
+<td>480px</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>tablet</code></td>
+<td>740px to 960px</td>
+<td>720px</td>
+<td>6</td>
+</tr>
+<tr>
+<td><code>desktop</code></td>
+<td>960px to 1220px</td>
+<td>960px</td>
+<td>12</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>larger than 1220px</td>
+<td>1200px</td>
+<td>12</td>
+</tr>
+</tbody>
+</table>
+<h3 id="defining-cells">Defining Cells</h3>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min-X</code></td>
+<td>only min size</td>
+</tr>
+<tr>
+<td><code>mobile-X</code></td>
+<td>both mobile and min sizes</td>
+</tr>
+<tr>
+<td><code>tablet-X</code></td>
+<td>tablet size</td>
+</tr>
+<tr>
+<td><code>desktop-X</code></td>
+<td>both desktop and max sizes</td>
+</tr>
+<tr>
+<td><code>max-X</code></td>
+<td>only max size</td>
+</tr>
+<tr>
+<td><code>all-X</code></td>
+<td>all sizes</td>
+</tr>
+</tbody>
+</table>
+<p>Cells are defined by the target screen size and column count, relative to it&#39;s screen size. For example <code>mobile-2</code> will produce a cell spanning 2 of the 3 available columns in the mobile screen size range. Cell classes should be stacked to specify column spans across all screen sizes:</p>
+<pre><code class="lang-markup">&lt;div class=&quot;mobile-3 tablet-6 desktop-12&quot;&gt;...&lt;/div&gt;</code></pre>
+<p>The <code>max-X</code> and <code>min-X</code> classes adds level of control when targeting the desktop and mobile sizes. For example, a cell may need to span 2 columns at the larger mobile size, but span the full width at the smallest mobile size:</p>
+<pre><code class="lang-markup">&lt;div class=&quot;min-3 mobile-2 ...&quot;&gt;...&lt;/div&gt;</code></pre>
+<p>The <code>all-X</code> classes will create a cell that spans the specified width on all screen sizes (only works with fraction cells):</p>
+<pre><code class="lang-markup">&lt;div class=&quot;all-full ...&quot;&gt;...&lt;/div&gt;</code></pre>
+<h3 id="fraction-cells">Fraction Cells</h3>
+<p>The fraction classes can be used in place of specific column counts:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-full</code></td>
+<td>entire row width</td>
+</tr>
+<tr>
+<td><code>X-half</code></td>
+<td>1/2 row width</td>
+</tr>
+<tr>
+<td><code>X-third</code></td>
+<td>1/3 row width</td>
+</tr>
+<tr>
+<td><code>X-fourth</code></td>
+<td>1/4 row width</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hidden-cells">Hidden Cells</h3>
+<p>To hide cells at specific screen sizes:</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min-hide</code></td>
+<td>Hide on min</td>
+</tr>
+<tr>
+<td><code>mobile-hide</code></td>
+<td>Hide on mobile</td>
+</tr>
+<tr>
+<td><code>tablet-hide</code></td>
+<td>Hide on tablet</td>
+</tr>
+<tr>
+<td><code>desktop-hide</code></td>
+<td>Hide on desktop</td>
+</tr>
+<tr>
+<td><code>max-hide</code></td>
+<td>Hide on max</td>
+</tr>
+</tbody>
+</table>
+<h3 id="helper-classes">Helper Classes</h3>
+<p>Helper classes can be added to cells to modify their default behavior in predictable ways.</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>padded</code></td>
+<td>Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters.</td>
+</tr>
+<tr>
+<td><code>contained</code></td>
+<td>Removes cell margin. Allows backgrounds to touch by removing gutters.</td>
+</tr>
+<tr>
+<td><code>centered</code></td>
+<td>Centers cell. Useful for centering odd column count cells.</td>
+</tr>
+<tr>
+<td><code>right</code></td>
+<td>Right aligns cell. Useful for changing document flow on different device sizes.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="less-configuration">LESS Configuration</h3>
+<p>Grid can also be configured and rebuilt using Grunt. Simply edit the variables found in <code>/src/grid/grid-config.less</code> before running the default <code>grunt</code> process.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
 <th>Default</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
+<td><strong>Structure</strong></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
+<td><code>@fs-grid-class-container</code></td>
+<td><code>grid</code></td>
+<td>Container class</td>
 </tr>
 <tr>
-<td><code>controls</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw controls</td>
+<td><code>@fs-grid-class-row</code></td>
+<td><code>row</code></td>
+<td>Row class</td>
 </tr>
 <tr>
-<td><code>customClass</code></td>
-<td><code>string</code></td>
-<td><code>&#39;&#39;</code></td>
-<td>Class applied to instance</td>
+<td><code>@fs-grid-class-contained</code></td>
+<td><code>contained</code></td>
+<td>Contained helper class</td>
 </tr>
 <tr>
-<td><code>infinite</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for looping items</td>
+<td><code>@fs-grid-class-padded</code></td>
+<td><code>padded</code></td>
+<td>Padded helper class</td>
 </tr>
 <tr>
-<td><code>labels.next</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
+<td><code>@fs-grid-class-centered</code></td>
+<td><code>centered</code></td>
+<td>Centered helper class</td>
 </tr>
 <tr>
-<td><code>labels.previous</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
+<td><strong>Cells</strong></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><code>maxWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
+<td><code>@fs-grid-class-all</code></td>
+<td><code>all</code></td>
+<td>All cell class</td>
 </tr>
 <tr>
-<td><code>minWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
+<td><code>@fs-grid-class-min</code></td>
+<td><code>min</code></td>
+<td>Min cell class</td>
 </tr>
 <tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
+<td><code>@fs-grid-class-mobile</code></td>
+<td><code>mobile</code></td>
+<td>Mobile cell class</td>
 </tr>
 <tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
+<td><code>@fs-grid-class-tablet</code></td>
+<td><code>tablet</code></td>
+<td>Tablet cell class</td>
 </tr>
 <tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
+<td><code>@fs-grid-class-desktop</code></td>
+<td><code>desktop</code></td>
+<td>Desktop cell class</td>
 </tr>
 <tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
+<td><code>@fs-grid-class-max</code></td>
+<td><code>max</code></td>
+<td>Max cell class</td>
 </tr>
 <tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
-</tr>
-</tbody>
-</table>
-<h2 id="events">Events</h2>
-<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
-<table>
-<thead>
-<tr>
-<th>Event</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
-</tr>
-</tbody>
-</table>
-<h2 id="methods">Methods</h2>
-<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
-<h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
-<h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
-<h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
-<h2 id="css">CSS</h2>
-<table>
-<thead>
-<tr>
-<th>Class</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>.fs-carousel-element</code></td>
-<td><code>element</code></td>
-<td>Target elmement</td>
+<td><strong>Columns</strong></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><code>.fs-carousel</code></td>
-<td><code>element</code></td>
-<td>Base widget class</td>
+<td><code>@fs-grid-columns-mobile</code></td>
+<td><code>3</code></td>
+<td>Mobile column count</td>
 </tr>
 <tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
-<td><code>modifier</code></td>
-<td>Indicates dropping state</td>
+<td><code>@fs-grid-columns-tablet</code></td>
+<td><code>6</code></td>
+<td>Tablet column count</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
+<td><code>@fs-grid-columns-desktop</code></td>
+<td><code>12</code></td>
+<td>Desktop column count</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
+<td><strong>Widths</strong></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
+<td><code>@fs-grid-width-min</code></td>
+<td><code>300px</code></td>
+<td>Min row width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
+<td><code>@fs-grid-width-mobile</code></td>
+<td><code>480px</code></td>
+<td>Mobile row width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
+<td><code>@fs-grid-width-tablet</code></td>
+<td><code>720px</code></td>
+<td>Tablet row width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control</code></td>
-<td><code>element</code></td>
-<td>Control element</td>
+<td><code>@fs-grid-width-desktop</code></td>
+<td><code>960px</code></td>
+<td>Desktop row width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
-<td><code>modifier</code></td>
-<td>Indicates previous control</td>
+<td><code>@fs-grid-width-max</code></td>
+<td><code>1200px</code></td>
+<td>Max row width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
-<td><code>modifier</code></td>
-<td>Indicates next control</td>
+<td><strong>Breakpoints</strong></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
-<td><code>modifier</code></td>
-<td>Indicates disbaled state</td>
+<td><code>@fs-grid-width-break-min</code></td>
+<td><code>320px</code></td>
+<td>Min break width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination</code></td>
-<td><code>element</code></td>
-<td>Item element</td>
+<td><code>@fs-grid-width-break-mobile</code></td>
+<td><code>500px</code></td>
+<td>Mobile break width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
+<td><code>@fs-grid-width-break-tablet</code></td>
+<td><code>740px</code></td>
+<td>Tablet break width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-page</code></td>
-<td><code>element</code></td>
-<td>Pagiantion item element</td>
+<td><code>@fs-grid-width-break-desktop</code></td>
+<td><code>980px</code></td>
+<td>Desktop break width</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
-<td><code>modifier</code></td>
-<td>Indicates active state</td>
+<td><code>@fs-grid-width-break-max</code></td>
+<td><code>1220px</code></td>
+<td>Max break width</td>
+</tr>
+<tr>
+<td><strong>Gutters</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>@fs-grid-gutter</code></td>
+<td><code>1.0416666666666667%;</code></td>
+<td>Gutter width</td>
 </tr>
 </tbody>
 </table>

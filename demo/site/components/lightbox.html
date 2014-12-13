@@ -154,35 +154,37 @@
 	</a>
 </div></div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
-<pre><code class="lang-markup">carousel.js
-carousel.css</code></pre>
+<pre><code class="lang-markup">lightbox.js
+lightbox.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
 <pre><code class="lang-markup">core.js
-mediaquery.js
-touch.js</code></pre>
+transition.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
-<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
-    &lt;div&gt;1&lt;/div&gt;
-    &lt;div&gt;2&lt;/div&gt;
-    &lt;div&gt;3&lt;/div&gt;
-    &lt;div&gt;4&lt;/div&gt;
-    &lt;div&gt;5&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: 2
-});</code></pre>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
-    show: {
-        &quot;740px&quot; : 2,
-        &quot;960px&quot; : 3
-    }
+<p>Display images and videos in an overlay:</p>
+<pre><code class="lang-javascript">$(&quot;a&quot;).lightbox();</code></pre>
+<pre><code class="lang-markup">&lt;a href=&quot;one.jpg&quot; title=&quot;Image Caption&quot;&gt;
+    &lt;img src=&quot;one_thumb.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/a&gt;</code></pre>
+<h3 id="gallery">Gallery</h3>
+<p>Link multiple images or videos together with the <code>data-lightbox-gallery</code> attribute:</p>
+<pre><code class="lang-markup">&lt;a href=&quot;one.jpg&quot; title=&quot;Image Caption One&quot; data-lightbox-gallery=&quot;photo_gallery&quot;&gt;
+    &lt;img src=&quot;one_thumb.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/a&gt;
+&lt;a href=&quot;two.jpg&quot; title=&quot;Image Caption Two&quot; data-lightbox-gallery=&quot;photo_gallery&quot;&gt;
+    &lt;img src=&quot;two_thumb.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/a&gt;
+&lt;a href=&quot;three.jpg&quot; title=&quot;Image Caption Three&quot; data-lightbox-gallery=&quot;photo_gallery&quot;&gt;
+    &lt;img src=&quot;three_thumb.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/a&gt;</code></pre>
+<h3 id="events">Events</h3>
+<p>React to the lightbox by listening for the <code>open.lightbox</code> and <code>close.lightbox</code> events on the <code>window</code>:</p>
+<pre><code class="lang-javascript">$(window).on(&quot;open.lightbox&quot;, function() {
+    // ...
+}).on(&quot;close.lightbox&quot;, function() {
+    // ...
 });</code></pre>
 <h2 id="options">Options</h2>
-<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-lightbox-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
 <thead>
 <tr>
@@ -194,88 +196,106 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>autoAdvance</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag to auto advance items</td>
-</tr>
-<tr>
-<td><code>autoTime</code></td>
-<td><code>int</code></td>
-<td><code>8000</code></td>
-<td>Auto advance time</td>
-</tr>
-<tr>
-<td><code>controls</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw controls</td>
-</tr>
-<tr>
 <td><code>customClass</code></td>
 <td><code>string</code></td>
 <td><code>&#39;&#39;</code></td>
 <td>Class applied to instance</td>
 </tr>
 <tr>
-<td><code>infinite</code></td>
+<td><code>extensions</code></td>
+<td><code>array</code></td>
+<td><code>&quot;jpg&quot;, &quot;sjpg&quot;, &quot;jpeg&quot;, &quot;png&quot;, &quot;gif&quot;</code></td>
+<td>Image type extensions</td>
+</tr>
+<tr>
+<td><code>fixed</code></td>
 <td><code>boolean</code></td>
 <td><code>false</code></td>
-<td>Flag for looping items</td>
+<td>Flag for fixed positioning</td>
+</tr>
+<tr>
+<td><code>formatter</code></td>
+<td><code>function</code></td>
+<td><code>$.noop</code></td>
+<td>Caption format function</td>
+</tr>
+<tr>
+<td><code>labels.close</code></td>
+<td><code>string</code></td>
+<td><code>&#39;Close&#39;</code></td>
+<td>Close button text</td>
+</tr>
+<tr>
+<td><code>labels.count</code></td>
+<td><code>string</code></td>
+<td><code>&#39;of&#39;</code></td>
+<td>Gallery count separator text</td>
 </tr>
 <tr>
 <td><code>labels.next</code></td>
 <td><code>string</code></td>
 <td><code>&#39;Next&#39;</code></td>
-<td>Control text</td>
+<td>Gallery control text</td>
 </tr>
 <tr>
 <td><code>labels.previous</code></td>
 <td><code>string</code></td>
 <td><code>&#39;Previous&#39;</code></td>
-<td>Control text</td>
+<td>Gallery control text</td>
 </tr>
 <tr>
-<td><code>maxWidth</code></td>
-<td><code>string</code></td>
-<td><code>&#39;Infinity&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
+<td><code>margin</code></td>
+<td><code>int</code></td>
+<td><code>50</code></td>
+<td>Margin used when sizing (single side)</td>
+</tr>
+<tr>
+<td><code>minHeight</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>Minimum height of modal</td>
 </tr>
 <tr>
 <td><code>minWidth</code></td>
+<td><code>int</code></td>
+<td><code>100</code></td>
+<td>Minimum width of modal</td>
+</tr>
+<tr>
+<td><code>mobile</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Flag to force &#39;mobile&#39; rendering</td>
+</tr>
+<tr>
+<td><code>retina</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Flag to use &#39;retina&#39; sizing (halves natural sizes)</td>
+</tr>
+<tr>
+<td><code>requestKey</code></td>
 <td><code>string</code></td>
-<td><code>&#39;0&#39;</code></td>
-<td>Width at which to auto-disable plugin</td>
+<td><code>&#39;boxer&#39;</code></td>
+<td>GET variable for ajax / iframe requests</td>
 </tr>
 <tr>
-<td><code>paged</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for paged items</td>
+<td><code>top</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Target top position; over-rides centering</td>
 </tr>
 <tr>
-<td><code>pagination</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag to draw pagination</td>
+<td><code>videoRadio</code></td>
+<td><code>number</code></td>
+<td><code>0.5625</code></td>
+<td>Video height / width ratio (9 / 16 = 0.5625)</td>
 </tr>
 <tr>
-<td><code>show</code></td>
-<td><code>int / object</code></td>
-<td><code>1</code></td>
-<td>Items visible per page; Object for responsive counts</td>
-</tr>
-<tr>
-<td><code>sized</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Flag for auto-sizing items</td>
-</tr>
-<tr>
-<td><code>useMargin</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Use margins instead of css transitions (legacy browser support)</td>
+<td><code>videoWidth</code></td>
+<td><code>int</code></td>
+<td><code>600</code></td>
+<td>Video target width</td>
 </tr>
 </tbody>
 </table>
@@ -290,28 +310,77 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>update.carousel</code></td>
-<td>Carousel position updated</td>
+<td><code>open.lightbox</code></td>
+<td>Lightbox opened; Triggered on window</td>
+</tr>
+<tr>
+<td><code>close.lightbox</code></td>
+<td>Lightbox closed; Triggered on window</td>
 </tr>
 </tbody>
 </table>
 <h2 id="methods">Methods</h2>
 <p>Methods are publicly available to all active instances, unless otherwise stated.</p>
-<h3 id="disable">disable</h3>
-<p>Disables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;disable&quot;);</code></pre>
-<h3 id="enable">enable</h3>
-<p>Enables instance of plugin</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;enable&quot;);</code></pre>
-<h3 id="jump">jump</h3>
-<p>Jump instance of plugin to specific page</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;jump&quot;, 1);</code></pre>
-<h3 id="reset">reset</h3>
-<p>Resets instance after item change</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;reset&quot;);</code></pre>
+<h3 id="close">close</h3>
+<p>Closes active instance.</p>
+<pre><code class="lang-javascript">$.lightbox(&quot;close&quot;);</code></pre>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.lightbox(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).lightbox(&quot;destroy&quot;);</code></pre>
 <h3 id="resize">resize</h3>
-<p>Resizes each instance</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
+<p>Resizes lightbox.</p>
+<pre><code class="lang-javascript">$.lightbox(&quot;resize&quot;);</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>height</code></td>
+<td>`int</td>
+<td>false`</td>
+<td>&nbsp;</td>
+<td>Target height or false to auto size</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td>`int</td>
+<td>false`</td>
+<td>&nbsp;</td>
+<td>Target width or false to auto size</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resizelightbox">resizeLightbox</h3>
+<p>Triggers resize of instance.</p>
 <h2 id="css">CSS</h2>
 <table>
 <thead>
@@ -323,84 +392,144 @@ touch.js</code></pre>
 </thead>
 <tbody>
 <tr>
-<td><code>.fs-carousel-element</code></td>
+<td><code>.fs-lightbox-element</code></td>
 <td><code>element</code></td>
 <td>Target elmement</td>
 </tr>
 <tr>
-<td><code>.fs-carousel</code></td>
+<td><code>.fs-lightbox</code></td>
 <td><code>element</code></td>
 <td>Base widget class</td>
 </tr>
 <tr>
-<td><code>.fs-upload.fs-upload-dropping</code></td>
+<td><code>.fs-lightbox.fs-lightbox-open</code></td>
 <td><code>modifier</code></td>
-<td>Indicates dropping state</td>
+<td>Indicates open state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-viewport</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-canister</code></td>
-<td><code>element</code></td>
-<td>Item container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-item</code></td>
-<td><code>element</code></td>
-<td>Individual item</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls</code></td>
-<td><code>element</code></td>
-<td>Controls container</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-controls.fs-carousel-visible</code></td>
+<td><code>.fs-lightbox.fs-lightbox-loading</code></td>
 <td><code>modifier</code></td>
-<td>Indicates visible state</td>
+<td>Indicates loading state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control</code></td>
+<td><code>.fs-lightbox.fs-lightbox-animating</code></td>
+<td><code>modifier</code></td>
+<td>Indicates animating state</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-mobile</code></td>
+<td><code>modifier</code></td>
+<td>Indicates mobile display</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-fixed</code></td>
+<td><code>modifier</code></td>
+<td>Indicates fixed positioning</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-inline</code></td>
+<td><code>modifier</code></td>
+<td>Indicates inline content</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox.fs-lightbox-iframed</code></td>
+<td><code>modifier</code></td>
+<td>Indicates iFrame content</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-lock</code></td>
+<td><code>modifier</code></td>
+<td>Indicates locked state; Applied to body element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-overlay</code></td>
+<td><code>element</code></td>
+<td>Overlay element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-close</code></td>
+<td><code>element</code></td>
+<td>Close element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-loading_icon</code></td>
+<td><code>element</code></td>
+<td>Loading icon element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-container</code></td>
+<td><code>element</code></td>
+<td>Container element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-content</code></td>
+<td><code>element</code></td>
+<td>Content element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-image</code></td>
+<td><code>element</code></td>
+<td>Image element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-video</code></td>
+<td><code>element</code></td>
+<td>Video element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-iframe</code></td>
+<td><code>element</code></td>
+<td>iFrame element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-meta</code></td>
+<td><code>element</code></td>
+<td>Meta info element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-control</code></td>
 <td><code>element</code></td>
 <td>Control element</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_previous</code></td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_previous</code></td>
 <td><code>modifier</code></td>
 <td>Indicates previous control</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_next</code></td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_next</code></td>
 <td><code>modifier</code></td>
 <td>Indicates next control</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-control.fs-carousel-control_disabled</code></td>
+<td><code>.fs-lightbox-control.fs-lightbox-control_disabled</code></td>
 <td><code>modifier</code></td>
 <td>Indicates disbaled state</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination</code></td>
+<td><code>.fs-lightbox-position</code></td>
 <td><code>element</code></td>
-<td>Item element</td>
+<td>Position element</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-pagination.fs-carousel-visible</code></td>
-<td><code>modifier</code></td>
-<td>Indicates visible state</td>
-</tr>
-<tr>
-<td><code>.fs-carousel-page</code></td>
+<td><code>.fs-lightbox-position_current</code></td>
 <td><code>element</code></td>
-<td>Pagiantion item element</td>
+<td>Current position element</td>
 </tr>
 <tr>
-<td><code>.fs-carousel-page.fs-carousel-active</code></td>
-<td><code>modifier</code></td>
-<td>Indicates active state</td>
+<td><code>.fs-lightbox-position_total</code></td>
+<td><code>element</code></td>
+<td>Total position element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-caption</code></td>
+<td><code>element</code></td>
+<td>Caption element</td>
+</tr>
+<tr>
+<td><code>.fs-lightbox-error</code></td>
+<td><code>element</code></td>
+<td>Error message element</td>
 </tr>
 </tbody>
 </table>
