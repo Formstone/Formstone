@@ -20,7 +20,8 @@
 			data.styles      = getStyles(data.$check);
 			data.timer       = null;
 
-			var duration = data.$check.css( Formstone.transitionProperty + "-duration" ),
+
+			var duration = data.$check.css( Formstone.transition + "-duration" ),
 				durationValue = parseFloat(duration);
 
 			if (Formstone.support.transition && duration && durationValue) {
