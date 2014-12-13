@@ -13,7 +13,8 @@
 		// guid
 		data.guid         = "__" + (GUID++);
 		data.eventGuid    = Events.namespace + data.guid;
-		data.classGuid    = RawClasses.base + data.guid;
+		data.rawClassGuid = RawClasses.base + data.guid;
+		data.classGuid    = "." + data.rawClassGuid;
 
 		if (data.type === "toggle") {
 			data.gravity  = "";
@@ -21,7 +22,7 @@
 
 		var typeClass     = RawClasses[data.type] || "",
 			gravityClass  = RawClasses[data.gravity] || "",
-			classGroup    = [typeClass, data.classGuid, data.customClass].join(" ");
+			classGroup    = [typeClass, data.rawClassGuid, data.customClass].join(" ");
 
 		data.handle       = this.data(Namespace + "-handle");
 		data.content      = this.data(Namespace + "-content");
@@ -36,6 +37,7 @@
 		data.$nav        = this.addClass(data.navClasses);
 		data.$handle     = $(data.handle).addClass(data.handleClasses);
 		data.$content    = $(data.content).addClass(data.contentClasses);
+		data.$animate    = $().add(data.$nav).add(data.$content);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
@@ -43,23 +45,24 @@
 
 		// toggle
 
-		data.$handle
-			.attr("data-toggle-target", "." + data.classGuid).toggle({
-				maxWidth: data.maxWidth,
-				classes: {
-					target  : "." + data.classGuid,
-					enabled : Classes.enabled,
-					active  : Classes.open,
-					raw: {
-						target  : data.classGuid,
-						enabled : RawClasses.enabled,
-						active  : RawClasses.open
-					}
-				}
-			}).on("activate.toggle" + data.eventGuid, data, onOpen)
-			  .on("deactivate.toggle" + data.eventGuid, data, onClose)
-			  .on("enable.toggle" + data.eventGuid, data, onEnable)
-			  .on("disable.toggle" + data.eventGuid, data, onDisable);
+		data.$handle.attr("data-toggle-target", data.classGuid)
+					.on("activate.toggle" + data.eventGuid, data, onOpen)
+					.on("deactivate.toggle" + data.eventGuid, data, onClose)
+					.on("enable.toggle" + data.eventGuid, data, onEnable)
+					.on("disable.toggle" + data.eventGuid, data, onDisable)
+					.toggle({
+						maxWidth: data.maxWidth,
+						classes: {
+							target  : data.classGuid,
+							enabled : Classes.enabled,
+							active  : Classes.open,
+							raw: {
+								target  : data.rawClassGuid,
+								enabled : RawClasses.enabled,
+								active  : RawClasses.open
+							}
+						}
+					});
 	}
 
 	/**
@@ -88,10 +91,6 @@
 	 */
 
 	function open(data) {
-		if (data.label) {
-			data.$handle.html(data.labels.open);
-		}
-
 		data.$handle.toggle("activate");
 	}
 
@@ -103,10 +102,6 @@
 	 */
 
 	function close(data) {
-		if (data.label) {
-			data.$handle.html(data.labels.closed);
-		}
-
 		data.$handle.toggle("deactivate");
 	}
 
@@ -145,6 +140,10 @@
 		data.$el.trigger(Events.open);
 
 		data.$content.addClass(RawClasses.open);
+
+		if (data.label) {
+			data.$handle.text(data.labels.open);
+		}
 	}
 
 	/**
@@ -160,6 +159,10 @@
 		data.$el.trigger(Events.close);
 
 		data.$content.removeClass(RawClasses.open);
+
+		if (data.label) {
+			data.$handle.text(data.labels.closed);
+		}
 	}
 
 	/**
@@ -173,6 +176,10 @@
 		var data = e.data;
 
 		data.$content.addClass(RawClasses.enabled);
+
+		setTimeout(function() {
+			data.$animate.addClass(RawClasses.animated);
+		}, 0);
 	}
 
 	/**
@@ -185,7 +192,8 @@
 	function onDisable(e) {
 		var data = e.data;
 
-		data.$content.removeClass(RawClasses.enabled);
+		data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
+		data.$animate.removeClass(RawClasses.animated);
 	}
 
 	/**
@@ -207,7 +215,7 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param gravity [string] <'left'> "Gravity of 'push' and 'overlay' navigation; 'right', 'left'"
 			 * @param label [boolean] <true> "Display handle width label"
-			 * @param labels.closed [string] <'Navigation'> "Closed state text"
+			 * @param labels.closed [string] <'Menu'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
 			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'overlay'"
@@ -218,7 +226,7 @@
 				gravity        : "left",
 				label          : true,
 				labels: {
-					closed     : "Navigation",
+					closed     : "Menu",
 					open       : "Close"
 				},
 				maxWidth       : "980px",
@@ -229,6 +237,7 @@
 				"handle",
 				"navigation",
 				"content",
+				"animated",
 				"enabled",
 				"open",
 				// types

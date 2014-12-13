@@ -23,7 +23,7 @@
 
 	@fs-navigation-toggle-handle-text-color:		#111;
 	@fs-navigation-toggle-handle-font-size:			16px;
-	@fs-navigation-toggle-handle-padding:			10px 15px;
+	@fs-navigation-toggle-handle-padding:			10px 40px 10px 15px;
 
 	// Slide
 
@@ -35,12 +35,10 @@
 	@fs-navigation-slide-transition-timing:			ease;
 
 	@fs-navigation-slide-handle-background:			#fff;
-	@fs-navigation-slide-handle-border-color:		#ccc;
-	@fs-navigation-slide-handle-border-size:		1px;
 
 	@fs-navigation-slide-handle-text-color:			#111;
 	@fs-navigation-slide-handle-font-size:			16px;
-	@fs-navigation-slide-handle-padding:			10px 15px;
+	@fs-navigation-slide-handle-padding:			10px 40px 10px 15px;
 
 	@fs-navigation-slide-content-box-shadow-color: 	rgba(0, 0, 0, 0.15);
 	@fs-navigation-slide-content-box-shadow-blur: 	2px;
@@ -81,6 +79,12 @@
 	 * @type modifier
 	 * @description Indicates enabled state
 	 */
+	/**
+	 * @class
+	 * @name .fs-navigation.fs-navigation-animated
+	 * @type modifier
+	 * @description Indicates animated state
+	 */
 
 	.fs-navigation {
 
@@ -95,68 +99,6 @@
 			box-sizing: border-box;
 			transition: none;
 			user-select: none !important;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-navigation-handle
-		 * @type element
-		 * @description Click target to toggle navigation
-		 */
-
-		/**
-		 * @class
-		 * @name .fs-navigation-handle.fs-navigation-open
-		 * @type modifier
-		 * @description Indicates open state
-		 */
-		/**
-		 * @class
-		 * @name .fs-navigation-handle.fs-navigation-enabled
-		 * @type modifier
-		 * @description Indicates enabled state
-		 */
-
-		/**
-		 * @class
-		 * @name .fs-navigation-handle:after
-		 * @type element
-		 * @description Icon displayed in handle
-		 */
-
-		&-handle&-enabled:after {
-			height: @fs-navigation-icon-height;
-			width: @fs-navigation-icon-width;
-
-			position: absolute;
-			top: 0;
-			right: @fs-navigation-icon-offset;
-			bottom: 0;
-
-			background: @fs-navigation-icon-color;
-			box-shadow:
-				0  (@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color,
-				0 -(@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color;
-			content: '';
-			display: block;
-			margin: auto 0;
-		}
-
-		// Open
-
-		&-handle&-open:after {
-			width: @fs-navigation-icon-close-size;
-			height: @fs-navigation-icon-close-size;
-
-			background: transparent;
-			border: none;
-			box-shadow: none;
-			color: @fs-navigation-icon-color;
-			content: "\00d7";
-			font-size: @fs-navigation-icon-close-font-size;
-			font-weight: 700;
-			line-height: @fs-navigation-icon-close-size;
-			text-align: center;
 		}
 
 		/**
@@ -222,6 +164,21 @@
 		 * @description Indicates off canvas slide interface
 		 */
 
+		&-push&-handle&-enabled,
+		&-overlay&-handle&-enabled {
+			padding: @fs-navigation-slide-handle-padding;
+
+			background: @fs-navigation-toggle-handle-background;
+			color: @fs-navigation-toggle-handle-text-color;
+			cursor: pointer;
+			display: block;
+			font-size: @fs-navigation-toggle-handle-font-size;
+			margin: 0;
+			padding: @fs-navigation-toggle-handle-padding;
+			position: relative;
+			user-select: none;
+		}
+
 		&-push&-navigation&-enabled,
 		&-overlay&-navigation&-enabled {
 			width: @fs-navigation-slide-width;
@@ -233,10 +190,14 @@
 			background: @fs-navigation-slide-background;
 			display: block;
 			overflow: auto;
+			visibility: hidden;
+		}
+
+		&-push&-navigation&-animated,
+		&-overlay&-navigation&-animated {
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
 				visibility 0.001s linear @fs-navigation-slide-transition-speed; // delay when closing
-			visibility: hidden;
 		}
 
 		&-push&-navigation&-enabled {
@@ -270,9 +231,21 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation-content.fs-navigation-push
+		 * @name .fs-navigation-content
 		 * @type element
-		 * @description Target page for push
+		 * @description Target page content
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-content.fs-navigation-push
+		 * @type modifier
+		 * @description Indicates toggle interface
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-content.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animted state
 		 */
 
 		/**
@@ -295,6 +268,9 @@
 			display: block;
 			overflow: hidden;
 			transform: translate3D(0, 0, 0);
+		}
+
+		&-push&-content&-animated {
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
 		}
@@ -315,5 +291,66 @@
 
 		&-right&-content&-open {
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-handle
+		 * @type element
+		 * @description Click target to toggle navigation
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-handle.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-handle.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-navigation-handle:after
+		 * @type element
+		 * @description Icon displayed in handle
+		 */
+
+		&-handle&-enabled:after {
+			height: @fs-navigation-icon-height;
+			width: @fs-navigation-icon-width;
+
+			position: absolute;
+			top: 0;
+			right: @fs-navigation-icon-offset;
+			bottom: 0;
+
+			background: @fs-navigation-icon-color;
+			box-shadow:
+				0  (@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color,
+				0 -(@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color;
+			content: '';
+			display: block;
+			margin: auto 0;
+		}
+
+		// Open
+
+		&-handle&-open:after {
+			width: @fs-navigation-icon-close-size;
+			height: @fs-navigation-icon-close-size;
+
+			background: transparent;
+			border: none;
+			box-shadow: none;
+			color: @fs-navigation-icon-color;
+			content: "\00d7";
+			font-size: @fs-navigation-icon-close-font-size;
+			font-weight: 700;
+			line-height: @fs-navigation-icon-close-size;
+			text-align: center;
 		}
 	}
