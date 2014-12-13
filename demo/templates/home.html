@@ -1,12 +1,5 @@
 {{= it.include("_header", { local_title: it.document.title, site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root }) }}
 <div class="content">
 	{{= it.document }}
-	{{? it.document.demo }}
-	<div class="demo">
-		<h2 id="demo">Demo</h2>
-		{{= it.document.demo }}
-	</div>
-	{{?}}
-	{{= it.include('components/carousel') }}
 </div>
 {{= it.include("_footer", { site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root }) }}

@@ -488,15 +488,18 @@ module.exports = function(grunt) {
 
 		function buildDemo(file) {
 			var doc = grunt.file.readJSON(file),
-				destination = file.replace('docs/json', "demo/tmp").replace('.json', ".md"),
-				destinationBottom = destination.replace("demo/tmp", "demo/templates/partials/tmp"),
+				destination = file.replace('docs/json', "demo/pages/components").replace('.json', ".md"),
+				destinationBottom = destination.replace("demo/pages/components", "demo/templates/partials/components"),
 				md = buildMarkdown(doc, "#", true),
 				use = md.split('<br class="split">'),
 				template = {
 					template: "component.html",
 					title: doc.name,
 					demo: doc.demo,
-					bottom: "tmp/" + doc.name.toLowerCase().replace(/ /g, "")
+					bottom: "components/" + doc.name.toLowerCase().replace(/ /g, ""),
+					site_root: "../",
+					asset_root: "../../",
+					component_root: "",
 				};
 
 			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + use[0]);
@@ -537,7 +540,35 @@ module.exports = function(grunt) {
 			}
 
 			grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
-			grunt.file.write("demo/templates/partials/navigation.md", docsmd.replace(/.md/g, ".html").replace(/##/g, "#####")); //site nav
+		}
+
+		function buildNav() {
+			var docshtml = '';
+
+			docshtml += '<h5>Library</h5>';
+			docshtml += '<ul>';
+			docshtml += '<li><a href="{{= it.component_root }}core.html">Core</a></li>';
+			for (var i in allDocs.grid) {
+				var d = allDocs.grid[i];
+				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+			}
+			docshtml += '</ul>';
+			docshtml += '<h5>Utility</h5>';
+			docshtml += '<ul>';
+			for (var i in allDocs.utility) {
+				var d = allDocs.utility[i];
+				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+			}
+			docshtml += '</ul>';
+			docshtml += '<h5>Widget</h5>';
+			docshtml += '<ul>';
+			for (var i in allDocs.widget) {
+				var d = allDocs.widget[i];
+				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+			}
+			docshtml += '</ul>';
+
+			grunt.file.write("demo/templates/partials/navigation.html", docshtml);
 		}
 
 		// WORK
@@ -547,6 +578,7 @@ module.exports = function(grunt) {
 		grunt.file.expand("docs/json/*.json").forEach(buildDocs);
 		grunt.file.expand("docs/json/*.json").forEach(buildDemo);
 		buildIndex();
+		buildNav();
 
 		var pkg = grunt.file.readJSON('package.json'),
 			destination = 'README.md',

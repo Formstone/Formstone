@@ -9,7 +9,3 @@ Thumbs.db
 node_cache/*
 node_modules/*
 npm-debug.log
-
-
-#clean
-demo_b/*

@@ -198,19 +198,21 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: 'demo/tmp/*.md',
-						dest: 'demo/components/',
+						src: 'demo/pages/*.md',
+						dest: 'demo/site/',
+						ext: '.html',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'demo/pages/components/*.md',
+						dest: 'demo/site/components/',
 						ext: '.html',
 						flatten: true
 					}
 				]
 			}
 		},
-		// Clean
-		clean: [
-			'demo/tmp/',
-			'demo/templates/partials/tmp/'
-		],
 		// Strip MQ
 		stripmq: {
 			options: {
@@ -267,7 +269,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'clean', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };
