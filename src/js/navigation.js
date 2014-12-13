@@ -45,12 +45,12 @@
 
 		// toggle
 
-		data.$handle.attr("data-toggle-target", data.classGuid)
-					.on("activate.toggle" + data.eventGuid, data, onOpen)
-					.on("deactivate.toggle" + data.eventGuid, data, onClose)
-					.on("enable.toggle" + data.eventGuid, data, onEnable)
-					.on("disable.toggle" + data.eventGuid, data, onDisable)
-					.toggle({
+		data.$handle.attr("data-switch-target", data.classGuid)
+					.on("activate.switch" + data.eventGuid, data, onOpen)
+					.on("deactivate.switch" + data.eventGuid, data, onClose)
+					.on("enable.switch" + data.eventGuid, data, onEnable)
+					.on("disable.switch" + data.eventGuid, data, onDisable)
+					.switch({
 						maxWidth: data.maxWidth,
 						classes: {
 							target  : data.classGuid,

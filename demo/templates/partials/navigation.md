@@ -14,7 +14,7 @@
 * [Dropdown](dropdown.html)
 * [Lightbox](lightbox.html)
 * [Navigation](navigation.html)
-* [Toggle](toggle.html)
+* [Switch](switch.html)
 * [Tooltip](tooltip.html)
 * [Touch](touch.html)
 * [Transition](transition.html)

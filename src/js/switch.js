@@ -18,11 +18,13 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
+		data.onEnable   = this.data(Namespace + "-active");
+
 		// live query for the group to avoid missing new elements
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
-		data.$toggles   = $().add(this).add(data.$target);
+		data.$switches = $().add(this).add(data.$target);
 
 		this.touch({
 				tap: true
@@ -48,15 +50,15 @@
 	 */
 
 	function destruct(data) {
-		data.$toggles.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
-					 .off(Events.namespace);
+		data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
+					  .off(Events.namespace);
 	}
 
 	/**
 	 * @method
 	 * @name activate
 	 * @description Activate instance.
-	 * @example $(".target").toggle("activate");
+	 * @example $(".target").switch("activate");
 	 */
 
 	function activate(data) {
@@ -64,7 +66,7 @@
 			// index in group
 			var index = (data.group) ? $(data.group).index(data.$el) : null;
 
-			data.$toggles.addClass(data.classes.raw.active);
+			data.$switches.addClass(data.classes.raw.active);
 
 			this.trigger(Events.activate, [index]);
 
@@ -76,12 +78,12 @@
 	 * @method
 	 * @name deactivate
 	 * @description Deactivates instance.
-	 * @example $(".target").toggle("deactivate");
+	 * @example $(".target").switch("deactivate");
 	 */
 
 	function deactivate(data) {
 		if (data.enabled && data.active) {
-			data.$toggles.removeClass(data.classes.raw.active);
+			data.$switches.removeClass(data.classes.raw.active);
 
 			this.trigger(Events.deactivate);
 
@@ -93,19 +95,24 @@
 	 * @method
 	 * @name enable
 	 * @description Enables instance.
-	 * @example $(".target").toggle("enable");
+	 * @example $(".target").switch("enable");
 	 */
 
 	function enable(data) {
 		if (!data.enabled) {
-			data.$toggles.addClass(data.classes.raw.enabled);
+			data.$switches.addClass(data.classes.raw.enabled);
 
-			data.enabled    = true;
-			data.active     = true; // trick deactivate method
+			data.enabled = true;
 
 			this.trigger(Events.enable);
 
-			deactivate.call(this, data);
+			if (data.onEnable) {
+				data.active = false;
+				activate.call(this, data);
+			} else {
+				data.active = true;
+				deactivate.call(this, data);
+			}
 		}
 	}
 
@@ -113,12 +120,12 @@
 	 * @method
 	 * @name disable
 	 * @description Disables instance.
-	 * @example $(".target").toggle("disable");
+	 * @example $(".target").switch("disable");
 	 */
 
 	function disable(data) {
 		if (data.enabled) {
-			data.$toggles.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
+			data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
 
 			this.trigger(Events.disable);
 
@@ -150,7 +157,7 @@
 
 	/**
 	 * @plugin
-	 * @name Toggle
+	 * @name Switch
 	 * @description A jQuery plugin for toggling states.
 	 * @type widget
 	 * @dependency core.js
@@ -158,12 +165,12 @@
 	 * @dependency touch.js
 	 */
 
-	var Plugin = Formstone.Plugin("toggle", {
+	var Plugin = Formstone.Plugin("switch", {
 			widget: true,
 
 			/**
 			 * @options
-			 * @param collapse [boolean] <true> "Allow toggle to collapse it's target"
+			 * @param collapse [boolean] <true> "Allow switch to collapse it's target"
 			 * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
 			 */
 
@@ -180,10 +187,10 @@
 
 			/**
 			 * @events
-			 * @event activate.toggle "Toggle activated"
-			 * @event deactivate.toggle "Toggle deactivated"
-			 * @event enable.toggle "Toggle enabled"
-			 * @event disable.toggle "Toggle diabled"
+			 * @event activate.switch "Switch activated"
+			 * @event deactivate.switch "Switch deactivated"
+			 * @event enable.switch "Switch enabled"
+			 * @event disable.switch "Switch diabled"
 			 */
 
 			events: {
