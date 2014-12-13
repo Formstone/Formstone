@@ -1,8 +1,8 @@
 
 /**
  * @plugin
- * @name Formstone
- * @description Library core.
+ * @name Core
+ * @description Formstone Library core. Required for all plugins.
  */
 
 var Formstone = this.Formstone = (function ($, window, document, undefined) {

@@ -5,11 +5,11 @@
 A jQuery plugin for simple drag and drop uploads.
 
 * [Use](#use)
+* [Demo](#demo)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
-* [Demo](#demo)
 
 ## Use 
 

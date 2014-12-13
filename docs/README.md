@@ -1,11 +1,8 @@
 # Documentation 
 
-## Core
+## Library
 
-* [Formstone](core.md)
-
-## Grid
-
+* [Core](core.md)
 * [Grid](grid.md)
 
 ## Utility

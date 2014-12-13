@@ -1,9 +1,6 @@
-##### Core
+##### Library
 
-* [Formstone](core.html)
-
-##### Grid
-
+* [Core](core.html)
 * [Grid](grid.html)
 
 ##### Utility

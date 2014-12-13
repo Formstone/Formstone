@@ -5,10 +5,10 @@
 A jQuery plugin for responsive media query events.
 
 * [Use](#use)
+* [Demo](#demo)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
-* [Demo](#demo)
 
 ## Use 
 

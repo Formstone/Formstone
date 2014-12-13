@@ -299,6 +299,13 @@ module.exports = function(grunt) {
 				md += "* [Use](#use)";
 				md += '\n';
 			//}
+
+			// if demo
+			if (includeDemo && doc.demo) {
+				md += "* [Demo](#demo)";
+				md += '\n';
+			}
+
 			if (doc.options && doc.options.length) {
 				md += "* [Options](#options)";
 				md += '\n';
@@ -313,12 +320,6 @@ module.exports = function(grunt) {
 			}
 			if (doc.css && doc.css.length) {
 				md += "* [CSS](#css)";
-				md += '\n';
-			}
-
-			// if demo
-			if (includeDemo && doc.demo) {
-				md += "* [Demo](#demo)";
 				md += '\n';
 			}
 
@@ -503,12 +504,10 @@ module.exports = function(grunt) {
 		function buildIndex() {
 			var docsmd = '';
 
-			docsmd += '## Core';
+			docsmd += '## Library';
 			docsmd += '\n\n';
-			docsmd += '* [Formstone](core.md)';
-			docsmd += '\n\n';
-			docsmd += '## Grid';
-			docsmd += '\n\n';
+			docsmd += '* [Core](core.md)';
+			docsmd += '\n';
 			for (var i in allDocs.grid) {
 				var d = allDocs.grid[i];
 				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';

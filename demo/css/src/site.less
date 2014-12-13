@@ -50,10 +50,11 @@
 		.sans();
 		.font_size(16);
 
+		min-width: 300px;
+
 		color: @gray_4;
 		line-height: 1.5;
 		overflow-x: hidden;
-		min-width: 300px;
 	}
 
 	::selection,
@@ -368,7 +369,41 @@
    Media Queries
 ================================================================== */
 
+	.logo {
+		.font_size(18);
+
+		position: relative;
+
+		border: none;
+		display: inline-block;
+		line-height: 45px;
+		padding: 0 15px 0 30px;
+
+		.no-touch &:hover {
+			border: none;
+		}
+
+		&:before {
+			.icon_sprite(-90px, 0);
+
+			width: 20px;
+			height: 20px;
+
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+
+			content: '';
+			display: block;
+			float: left;
+			margin: auto;
+		}
+	}
+
 	.header {
+		min-width: 300px;
+
 		&.fs-navigation-content.fs-navigation-enabled {
 			width: 100%;
 
@@ -387,15 +422,13 @@
 		}
 
 		&_logo {
-			.font_size(18);
-
-			border: none;
 			color: @blue;
-			line-height: 45px;
-			padding: 0 15px;
+			padding-left: 50px;
 
-			.no-touch &:hover {
-				border: none;
+			&:before {
+				left: 20px;
+
+				background-position: 0 0;
 			}
 		}
 
@@ -459,24 +492,27 @@
 
 		&_content {
 			&.fs-navigation-navigation.fs-navigation-enabled {
-				padding: 65px 20px 50px;
+				padding: 65px 30px 50px;
 
 				background: @blue;
 			}
 
 			@media @desktop {
-				padding-top: 50px;
+				padding: 50px 0;
 			}
 		}
 
-		a {
+		&_logo {
+			.font_size(18);
+
 			color: @white;
-			border-color: transparent;
 
 			.no-touch &:hover {
-				border-color: @white;
-				border-color: fade(@white, 50);
 				color: @white;
+			}
+
+			@media @max_desktop {
+				display: none;
 			}
 		}
 
@@ -486,10 +522,31 @@
 
 			li {
 				line-height: 1.6;
-				margin: 5px 0;
+				margin: 5px 0 10px;
 
 				&:before {
 					display: none;
+				}
+
+				@media @desktop {
+					margin: 5px 0;
+				}
+			}
+
+			a {
+				.font_size(18);
+
+				color: @white;
+				border-color: transparent;
+
+				.no-touch &:hover {
+					border-color: @white;
+					border-color: fade(@white, 50);
+					color: @white;
+				}
+
+				@media @desktop {
+					.font_size(16);
 				}
 			}
 		}

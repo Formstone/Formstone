@@ -1,8 +1,8 @@
-{"template":"component.html","title":"Formstone"}
+{"template":"component.html","title":"Core"}
 
-# Formstone
+# Core
 
-Library core.
+Formstone Library core. Required for all plugins.
 
 * [Use](#use)
 * [Methods](#methods)
@@ -313,4 +313,18 @@ Formstone.Plugin("namespace", { ... });
 | --- | --- | --- | --- |
 | `namespace` | `string` | &nbsp; | Plugin namespace |
 | `settings` | `object` | &nbsp; | Plugin settings |
+
+### defaults
+
+Extends plugin default settings; effects instances created hereafter.
+
+```javascript
+$.core("defaults", { ... });
+```
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | `object` | `{}` | New plugin defaults |
 

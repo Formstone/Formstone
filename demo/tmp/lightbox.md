@@ -5,11 +5,11 @@
 A jQuery plugin for simple modals.
 
 * [Use](#use)
+* [Demo](#demo)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
-* [Demo](#demo)
 
 ## Use 
 

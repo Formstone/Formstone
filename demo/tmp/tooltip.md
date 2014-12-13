@@ -5,10 +5,10 @@
 A jQuery plugin for simple tooltips.
 
 * [Use](#use)
+* [Demo](#demo)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
-* [Demo](#demo)
 
 ## Use 
 

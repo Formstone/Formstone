@@ -5,10 +5,10 @@
 A jQuery plugin for CSS transition events.
 
 * [Use](#use)
+* [Demo](#demo)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
-* [Demo](#demo)
 
 ## Use 
 
