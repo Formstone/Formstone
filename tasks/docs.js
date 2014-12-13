@@ -294,14 +294,15 @@ module.exports = function(grunt) {
 			md += '\n\n';
 			md += doc.description;
 			md += '\n\n';
-			md += "* [Use](#use)";
-			md += '\n';
 
 			// if demo
 			if (includeDemo && doc.demo) {
 				md += "* [Demo](#demo)";
 				md += '\n';
 			}
+
+			md += "* [Use](#use)";
+			md += '\n';
 
 			if (doc.options && doc.options.length) {
 				md += "* [Options](#options)";
@@ -318,6 +319,10 @@ module.exports = function(grunt) {
 			if (doc.css && doc.css.length) {
 				md += "* [CSS](#css)";
 				md += '\n';
+			}
+
+			if (includeDemo) {
+				md += '<br class="split">\n';
 			}
 
 			md += '\n';
@@ -353,10 +358,6 @@ module.exports = function(grunt) {
 			if (doc.use) {
 				md += doc.use
 				md += '\n\n';
-			}
-
-			if (includeDemo) {
-				md += '<br class="split">\n';
 			}
 
 			if (doc.options && doc.options.length) {
