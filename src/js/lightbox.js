@@ -94,7 +94,6 @@
 			Instance = $.extend({}, {
 				visible            : false,
 				resizeTimer        : null,
-				touchTimer         : null,
 				gallery: {
 					active         : false
 				},
@@ -213,8 +212,7 @@
 			$Window.on(Events.resize, resizeLightbox)
 				   .on(Events.keyDown, onKeyDown);
 
-			$Body.on(Events.clickTouchStart, [Classes.overlay, Classes.close].join(", "), closeLightbox)
-				 .on(Events.touchMove, Functions.killEvent);
+			$Body.on(Events.clickTouchStart, [Classes.overlay, Classes.close].join(", "), closeLightbox);
 
 			if (Instance.gallery.active) {
 				Instance.$lightbox.on(Events.clickTouchStart, Classes.control, advanceGallery);
@@ -337,15 +335,11 @@
 		}
 
 		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
-			Instance.$content.on(Events.touchStart, Classes.image, onTouchStart);
+			Instance.$content.touch({
+				axis: "x",
+				swipe: true
+			}).on(Events.swipe, onSwipe);
 		}
-
-/*
-		if (Instance.isMobile || Instance.fixed) {
-			Instance.$lightbox.addClass(Classes.raw.open);
-			Instance.$overlay.addClass(Classes.raw.open);
-		}
-*/
 
 		Instance.$lightbox.transition({
 			property: "height"
@@ -940,11 +934,23 @@
 
 	/**
 	 * @method private
+	 * @name onSwipe
+	 * @description Handles swipe event
+	 * @param e [object] "Event data"
+	 */
+
+	function onSwipe(e) {
+		Instance.$controls.filter((e.directionX === "left") ? Classes.control_next : Classes.control_previous).trigger(Events.click);
+	}
+
+	/**
+	 * @method private
 	 * @name onTouchStart
 	 * @description Handle touch start event.
 	 * @param e [object] "Event data"
 	 */
 
+/*
 	function onTouchStart(e) {
 		Functions.killEvent(e);
 		Functions.clearTimer(Instance.touchTimer);
@@ -969,6 +975,7 @@
 							  .one(Events.touchEnd, onTouchEnd);
 		}
 	}
+*/
 
 	/**
 	 * @method private
@@ -977,6 +984,7 @@
 	 * @param e [object] "Event data"
 	 */
 
+/*
 	function onTouchMove(e) {
 		var touch = (typeof e.originalEvent.targetTouches !== "undefined") ? e.originalEvent.targetTouches[0] : null;
 
@@ -1003,6 +1011,7 @@
 
 		Instance.touchTimer = Functions.startTimer(Instance.touchTimer, 300, function() { onTouchEnd(e); });
 	}
+*/
 
 	/**
 	 * @method private
@@ -1011,6 +1020,7 @@
 	 * @param e [object] "Event data"
 	 */
 
+/*
 	function onTouchEnd(e) {
 		Functions.killEvent(e);
 		Functions.clearTimer(Instance.touchTimer);
@@ -1040,6 +1050,7 @@
 			});
 		}
 	}
+*/
 
 	/**
 	 * @method private
@@ -1163,7 +1174,9 @@
 
 			events: {
 				open     : "open",
-				close    : "close"
+				close    : "close",
+
+				swipe    : "swipe"
 			},
 
 			methods: {
