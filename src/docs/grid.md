@@ -1,20 +1,20 @@
-The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on mobile, 6 columns on tablet and 12 columns on desktop.
+The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
 
 ### Markup
 
 A basic example may look something like:
 
 ```markup
-<body class="grid">
+<body class="fs-grid">
 	<div class="row">
-		<div class="mobile-3 tablet-2 desktop-4">...</div>
-		<div class="mobile-3 tablet-2 desktop-4">...</div>
-		<div class="mobile-3 tablet-2 desktop-4">...</div>
+		<div class="cell small-3 medium-2 large-4">...</div>
+		<div class="cell small-3 medium-2 large-4">...</div>
+		<div class="cell small-3 medium-2 large-4">...</div>
 	</div>
 </body>
 ```
 
-This will create 3 cells that each span 3 columns on mobile, 2 columns on tablet and 4 columns on desktop screen sizes. Think of the nested structure like a directory tree:
+This will create 3 cells that each span 3 columns on 'small', 2 columns on 'medium' and 4 columns on 'large' screens. Think of the nested structure like a directory tree:
 
 ```
 grid
@@ -49,9 +49,9 @@ This will effect every element on the page and can have unexpected results. In t
 | Name | Screen Size | Row Width | Column Count |
 | --- | --- | --- | --- |
 | `min` | smaller than 500px | 300px | 3 |
-| `mobile` | smaller than 740px | 480px | 3 |
-| `tablet` | 740px to 960px | 720px | 6 |
-| `desktop` | 960px to 1220px | 960px | 12 |
+| `small` | smaller than 740px | 480px | 3 |
+| `medium` | 740px to 960px | 720px | 6 |
+| `large` | 960px to 1220px | 960px | 12 |
 | `max` | larger than 1220px | 1200px | 12 |
 
 ### Defining Cells
@@ -59,28 +59,28 @@ This will effect every element on the page and can have unexpected results. In t
 | Class | Description |
 | --- | --- |
 | `min-X` | only min size |
-| `mobile-X` | both mobile and min sizes |
-| `tablet-X` | tablet size |
-| `desktop-X` | both desktop and max sizes |
+| `small-X` | both small and min sizes |
+| `medium-X` | medium size |
+| `large-X` | both large and max sizes |
 | `max-X` | only max size |
 | `all-X` | all sizes |
 
-Cells are defined by the target screen size and column count, relative to it's screen size. For example `mobile-2` will produce a cell spanning 2 of the 3 available columns in the mobile screen size range. Cell classes should be stacked to specify column spans across all screen sizes:
+Cells will default to filling the available horizontal space but can be defined by the target screen size and column count. For example `small-2` will produce a cell spanning 2 of the 3 available columns within the 'small' screen size range. Cell classes can be stacked to specify column spans across all screen sizes:
 
 ```markup
-<div class="mobile-3 tablet-6 desktop-12">...</div>
+<div class="cell small-3 medium-6 large-12">...</div>
 ```
 
-The `max-X` and `min-X` classes adds level of control when targeting the desktop and mobile sizes. For example, a cell may need to span 2 columns at the larger mobile size, but span the full width at the smallest mobile size:
+The `max-X` and `min-X` classes adds level of control when targeting large and small screens. For example, a cell may need to span 2 columns at the small size, but span the full width at the min size:
 
 ```markup
-<div class="min-3 mobile-2 ...">...</div>
+<div class="cell min-3 small-2 ...">...</div>
 ```
 
-The `all-X` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cells):
+The `all-X` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cell counts):
 
 ```markup
-<div class="all-full ...">...</div>
+<div class="cell all-third">...</div>
 ```
 
 ### Fraction Cells
@@ -93,6 +93,7 @@ The fraction classes can be used in place of specific column counts:
 | `X-half` | 1/2 row width |
 | `X-third` | 1/3 row width |
 | `X-fourth` | 1/4 row width |
+| `X-fifth` | 1/5 row width |
 
 ### Hidden Cells
 
@@ -101,9 +102,9 @@ To hide cells at specific screen sizes:
 | Class | Description |
 | --- | --- |
 | `min-hide` | Hide on min |
-| `mobile-hide` | Hide on mobile |
-| `tablet-hide` | Hide on tablet |
-| `desktop-hide` | Hide on desktop |
+| `small-hide` | Hide on small |
+| `medium-hide` | Hide on medium |
+| `large-hide` | Hide on large |
 | `max-hide` | Hide on max |
 
 ### Helper Classes
@@ -132,25 +133,25 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | **Cells** | | |
 | `@fs-grid-class-all` | `all` | All cell class |
 | `@fs-grid-class-min` | `min` | Min cell class |
-| `@fs-grid-class-mobile` | `mobile` | Mobile cell class |
-| `@fs-grid-class-tablet` | `tablet` | Tablet cell class |
-| `@fs-grid-class-desktop` | `desktop` | Desktop cell class |
+| `@fs-grid-class-small` | `small` | Small cell class |
+| `@fs-grid-class-medium` | `medium` | Medium cell class |
+| `@fs-grid-class-large` | `large` | Large cell class |
 | `@fs-grid-class-max` | `max` | Max cell class |
 | **Columns** | | |
-| `@fs-grid-columns-mobile` | `3` | Mobile column count |
-| `@fs-grid-columns-tablet` | `6` | Tablet column count |
-| `@fs-grid-columns-desktop` | `12` | Desktop column count |
+| `@fs-grid-columns-small` | `3` | Small column count |
+| `@fs-grid-columns-medium` | `6` | Medium column count |
+| `@fs-grid-columns-large` | `12` | Large column count |
 | **Widths** | | |
 | `@fs-grid-width-min` | `300px` | Min row width |
-| `@fs-grid-width-mobile` | `480px` | Mobile row width |
-| `@fs-grid-width-tablet` | `720px` | Tablet row width |
-| `@fs-grid-width-desktop` | `960px` | Desktop row width |
+| `@fs-grid-width-small` | `480px` | Small row width |
+| `@fs-grid-width-medium` | `720px` | Medium row width |
+| `@fs-grid-width-large` | `960px` | Large row width |
 | `@fs-grid-width-max` | `1200px` | Max row width |
 | **Breakpoints** | | |
 | `@fs-grid-width-break-min` | `320px` | Min break width |
-| `@fs-grid-width-break-mobile` | `500px` | Mobile break width |
-| `@fs-grid-width-break-tablet` | `740px` | Tablet break width |
-| `@fs-grid-width-break-desktop` | `980px` | Desktop break width |
+| `@fs-grid-width-break-small` | `500px` | Small break width |
+| `@fs-grid-width-break-medium` | `740px` | Medium break width |
+| `@fs-grid-width-break-large` | `980px` | Large break width |
 | `@fs-grid-width-break-max` | `1220px` | Max break width |
 | **Gutters** | | |
 | `@fs-grid-gutter` | `1.0416666666666667%;` | Gutter width |

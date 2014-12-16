@@ -1,85 +1,85 @@
 
 	// Column
 
-	.column (@parent-width, @count, @margin, @index) {
+	.column (@count, @margin, @index) {
 		width: ((100% / @count) * @index) - (@margin * 2);
 	}
 
 	// Columns
 
-	.columns (@parent-width, @class, @margin, @count, @prefix:~"", @index:1) when (@index <= @count) {
+	.columns (@class, @margin, @count, @prefix:~"", @index:1) when (@index <= @count) {
 		// Percentage
 		@{prefix}.@{class}-@{index} {
-			.column(@parent-width, @count, @margin, @index);
+			.column(@count, @margin, @index);
 		}
 
-		.columns(@parent-width, @class, @margin, @count, @prefix, (@index + 1));
+		.columns(@class, @margin, @count, @prefix, (@index + 1));
 	}
 
 	// Columns - Fractioned
 
-	.columnsFractioned (@parent-width, @class, @margin, @prefix:~"") {
+	.columnsFractioned (@class, @margin, @prefix:~"") {
 		// Percentage
 		@{prefix}.@{class}-fifth {
-			.column(@parent-width, 5, @margin, 1);
+			.column(5, @margin, 1);
 		}
 		@{prefix}.@{class}-fourth {
-			.column(@parent-width, 4, @margin, 1);
+			.column(4, @margin, 1);
 		}
 		@{prefix}.@{class}-third {
-			.column(@parent-width, 3, @margin, 1);
+			.column(3, @margin, 1);
 		}
 		@{prefix}.@{class}-half {
-			.column(@parent-width, 2, @margin, 1);
+			.column(2, @margin, 1);
 		}
 		@{prefix}.@{class}-full {
-			.column(@parent-width, 1, @margin, 1);
+			.column(1, @margin, 1);
 		}
 	}
 
 	// Columns - Pushed
 
-	.columnPushed (@parent-width, @count, @margin, @index) {
+	.columnPushed (@count, @margin, @index) {
 		margin-left: ((100% / @count) * @index) + @margin;
 	}
 
-	.columnsPushed (@parent-width, @class, @margin, @count, @prefix:~"", @index:1) when (@index < @count) {
+	.columnsPushed (@class, @margin, @count, @prefix:~"", @index:1) when (@index < @count) {
 		@{prefix}.@{class}-push-@{index} {
-			.columnPushed(@parent-width, @count, @margin, @index);
+			.columnPushed(@count, @margin, @index);
 		}
 
-		.columnsPushed(@parent-width, @class, @margin, @count, @prefix, (@index + 1));
+		.columnsPushed(@class, @margin, @count, @prefix, (@index + 1));
 	}
 
-	.columnsPushedFractioned (@parent-width, @class, @margin, @prefix:~"") {
+	.columnsPushedFractioned (@class, @margin, @prefix:~"") {
 		@{prefix}.@{class}-push-fifth {
-			.columnPushed(@parent-width, 5, @margin, 1);
+			.columnPushed(5, @margin, 1);
 		}
 		@{prefix}.@{class}-push-fourth {
-			.columnPushed(@parent-width, 4, @margin, 1);
+			.columnPushed(4, @margin, 1);
 		}
 		@{prefix}.@{class}-push-third {
-			.columnPushed(@parent-width, 3, @margin, 1);
+			.columnPushed(3, @margin, 1);
 		}
 		@{prefix}.@{class}-push-half {
-			.columnPushed(@parent-width, 2, @margin, 1);
+			.columnPushed(2, @margin, 1);
 		}
 	}
 
 	// Generate - Base
 
-	.generateGridBase (@parent-width:0, @class) {
+	.generateGridBase (@class) {
 		// Fractions
-		.columnsFractioned(@parent-width, @class, @fs-grid-gutter);
+		.columnsFractioned(@class, @fs-grid-gutter);
 
 		// Fractions Push
-		.columnsPushedFractioned(@parent-width, @class, @fs-grid-gutter);
+		.columnsPushedFractioned(@class, @fs-grid-gutter);
 
 		// Fractions Contained
-		.columnsFractioned(@parent-width, @class, 0, ~".@{fs-grid-class-contained}");
+		.columnsFractioned(@class, 0, ~".@{fs-grid-class-contained}");
 
 		// Fractions Contained Push
-		.columnsPushedFractioned(@parent-width, @class, 0, ~".@{fs-grid-class-contained}");
+		.columnsPushedFractioned(@class, 0, ~".@{fs-grid-class-contained}");
 
 		// Centered
 		[class*="@{class}-"].@{fs-grid-class-centered} {
@@ -96,16 +96,16 @@
 
 	// Generate - Grid
 
-	.generateGrid (@parent-width:0, @class, @columns) {
+	.generateGrid (@class, @columns) {
 		// Cells
-		.columns(@parent-width, @class, @fs-grid-gutter, @columns);
+		.columns(@class, @fs-grid-gutter, @columns);
 
 		// Cells Push
-		.columnsPushed(@parent-width, @class, @fs-grid-gutter, @columns);
+		.columnsPushed(@class, @fs-grid-gutter, @columns);
 
 		// Contained
-		.columns(@parent-width, @class, 0, @columns, ~".@{fs-grid-class-contained}");
+		.columns(@class, 0, @columns, ~".@{fs-grid-class-contained}");
 
 		// Contained Push
-		.columnsPushed(@parent-width, @class, 0, @columns, ~".@{fs-grid-class-contained}");
+		.columnsPushed(@class, 0, @columns, ~".@{fs-grid-class-contained}");
 	}

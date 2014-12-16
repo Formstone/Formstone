@@ -47,24 +47,16 @@
 		}
 
 		// !All Cells
-		[class*="@{fs-grid-class-all}-"],
-		[class*="@{fs-grid-class-min}-"],
-		[class*="@{fs-grid-class-mobile}-"],
-		[class*="@{fs-grid-class-tablet}-"],
-		[class*="@{fs-grid-class-desktop}-"],
-		[class*="@{fs-grid-class-max}-"] {
+		.@{fs-grid-class-cell} {
+			.column(1, @fs-grid-gutter, 1);
+
 			float: left;
 			margin-left: @fs-grid-gutter;
 			margin-right: @fs-grid-gutter;
 		}
 
 		// !Padded Cells
-		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-padded} {
+		.@{fs-grid-class-cell}.@{fs-grid-class-padded} {
 			box-sizing: content-box;
 			margin-left: 0;
 			margin-right: 0;
@@ -73,43 +65,33 @@
 		}
 
 		// !Contained Cells
-		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-contained},
-		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-contained},
-		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-contained},
-		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-contained},
-		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-contained},
-		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-contained} {
+		.@{fs-grid-class-cell}.@{fs-grid-class-contained} {
 			margin-left: 0;
 			margin-right: 0;
 		}
 
 		// !Right Cells
-		[class*="@{fs-grid-class-all}-"].right,
-		[class*="@{fs-grid-class-min}-"].right,
-		[class*="@{fs-grid-class-mobile}-"].right,
-		[class*="@{fs-grid-class-tablet}-"].right,
-		[class*="@{fs-grid-class-desktop}-"].right,
-		[class*="@{fs-grid-class-max}-"].right {
+		.@{fs-grid-class-cell}.right {
 			float: right;
 		}
 	}
 
 	// !Rows, Thinest to Widest
-	@media screen and (min-width: @fs-grid-width-break-mobile) {
+	@media screen and (min-width: @fs-grid-width-break-small) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			width: @fs-grid-width-mobile;
+			width: @fs-grid-width-small;
 		}
 	}
 
-	@media screen and (min-width: @fs-grid-width-break-tablet) {
+	@media screen and (min-width: @fs-grid-width-break-medium) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			width: @fs-grid-width-tablet;
+			width: @fs-grid-width-medium;
 		}
 	}
 
-	@media screen and (min-width: @fs-grid-width-break-desktop) {
+	@media screen and (min-width: @fs-grid-width-break-large) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			width: @fs-grid-width-desktop;
+			width: @fs-grid-width-large;
 		}
 	}
 
@@ -124,59 +106,59 @@
 		width: 98%;
 	}
 
-	// !Fluid Grid - Mobile Only
-	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
-		.@{fs-grid-class-container}-mobile-fluid .@{fs-grid-class-row} {
+	// !Fluid Grid - Small Only
+	@media screen and (max-width: (@fs-grid-width-break-medium - 1px)) {
+		.@{fs-grid-class-container}-small-fluid .@{fs-grid-class-row} {
 			width: 98%;
 		}
 	}
 
 	// !All
 	.@{fs-grid-class-container} .@{fs-grid-class-row} {
-		.generateGridBase(0, @fs-grid-class-all);
+		.generateGridBase(@fs-grid-class-all);
 	}
 
-	// !Mobile, 540 (max 740)
-	@media screen and (max-width: (@fs-grid-width-break-tablet - 1px)) {
+	// !Small, 540 (max 740)
+	@media screen and (max-width: (@fs-grid-width-break-medium - 1px)) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			.generateGrid(@fs-grid-width-mobile, @fs-grid-class-mobile, @fs-grid-columns-mobile);
+			.generateGrid(@fs-grid-class-small, @fs-grid-columns-small);
 
-			.generateGridBase(@fs-grid-width-mobile, @fs-grid-class-mobile);
+			.generateGridBase(@fs-grid-class-small);
 		}
 	}
 
 	// !Min, 300 (max 500)
-	@media screen and (max-width: (@fs-grid-width-break-mobile - 1px)) {
+	@media screen and (max-width: (@fs-grid-width-break-small - 1px)) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			.generateGrid(@fs-grid-width-min, @fs-grid-class-min, @fs-grid-columns-mobile);
+			.generateGrid(@fs-grid-class-min, @fs-grid-columns-small);
 
-			.generateGridBase(@fs-grid-width-min, @fs-grid-class-min);
+			.generateGridBase(@fs-grid-class-min);
 		}
 	}
 
-	// !Tablet, 6 column, 720 (min 740)
-	@media screen and (min-width: @fs-grid-width-break-tablet) and (max-width: (@fs-grid-width-break-desktop - 1px)) {
+	// !Medium, 6 column, 720 (min 740)
+	@media screen and (min-width: @fs-grid-width-break-medium) and (max-width: (@fs-grid-width-break-large - 1px)) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			.generateGrid(@fs-grid-width-tablet, @fs-grid-class-tablet, @fs-grid-columns-tablet);
+			.generateGrid(@fs-grid-class-medium, @fs-grid-columns-medium);
 
-			.generateGridBase(@fs-grid-width-tablet, @fs-grid-class-tablet);
+			.generateGridBase(@fs-grid-class-medium);
 		}
 	}
 
-	// !Desktop, 12 column, 960 (min 980)
-	@media screen and (min-width: @fs-grid-width-break-desktop) {
+	// !Large, 12 column, 960 (min 980)
+	@media screen and (min-width: @fs-grid-width-break-large) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			.generateGrid(@fs-grid-width-desktop, @fs-grid-class-desktop, @fs-grid-columns-desktop);
+			.generateGrid(@fs-grid-class-large, @fs-grid-columns-large);
 
-			.generateGridBase(@fs-grid-width-desktop, @fs-grid-class-desktop);
+			.generateGridBase(@fs-grid-class-large);
 		}
 	}
 
 	// !Max, 12 column, 1200 (min 1220)
 	@media screen and (min-width: @fs-grid-width-break-max) {
 		.@{fs-grid-class-container} .@{fs-grid-class-row} {
-			.generateGrid(@fs-grid-width-max, @fs-grid-class-max, @fs-grid-columns-desktop);
+			.generateGrid(@fs-grid-class-max, @fs-grid-columns-large);
 
-			.generateGridBase(@fs-grid-width-max, @fs-grid-class-max);
+			.generateGridBase(@fs-grid-class-max);
 		}
 	}

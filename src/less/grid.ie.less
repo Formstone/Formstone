@@ -6,23 +6,18 @@
 	*,
 	*:before,
 	*:after {
-		*behavior: url(boxsizing.htc);
+		behavior: url(boxsizing.htc);
 	}
 
  	// !Dekstop, IE Specific
  	.@{fs-grid-class-container} .@{fs-grid-class-row} {
- 		width: 960px;
+ 		width: @fs-grid-width-large;
 
- 		.generateGridBase(@fs-grid-width-desktop, @fs-grid-class-desktop);
+ 		.generateGridBase(@fs-grid-class-large);
 
- 		.generateGrid(@fs-grid-width-desktop, @fs-grid-class-desktop, @fs-grid-columns-desktop);
+ 		.generateGrid(@fs-grid-class-large, @fs-grid-columns-large);
 
- 		[class*="@{fs-grid-class-all}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-min}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-mobile}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-tablet}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-desktop}-"].@{fs-grid-class-padded},
-		[class*="@{fs-grid-class-max}-"].@{fs-grid-class-padded} {
-			*behavior: none;
+ 		.@{fs-grid-class-cell}.@{fs-grid-class-padded} {
+			behavior: none;
 		}
  	}

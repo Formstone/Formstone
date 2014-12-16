@@ -35,6 +35,8 @@
 			Prism.highlightAll();
 
 			$(".main_nav").navigation();
+
+			$(".intro ul").navigation();
 		}
 
 		return {
