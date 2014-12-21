@@ -40,6 +40,10 @@
 				disable.call(data.$el, data);
 			}
 		});
+
+		if (!data.collapse && data.group) {
+			$(data.group).eq(0).switch("activate");
+		}
 	}
 
 	/**
@@ -63,6 +67,9 @@
 
 	function activate(data) {
 		if (data.enabled && !data.active) {
+			// Deactivates grouped instances
+			$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
+
 			// index in group
 			var index = (data.group) ? $(data.group).index(data.$el) : null;
 
@@ -144,9 +151,6 @@
 		Functions.killEvent(e);
 
 		var data = e.data;
-
-		// Deactivates grouped instances
-		$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
 
 		if (data.active && data.collapse) {
 			deactivate.call(data.$el, data);

@@ -22,7 +22,7 @@ navigation.css
 ```markup
 core.js
 mediaquery.js
-toggle.js
+switch.js
 touch.js
 ```
 

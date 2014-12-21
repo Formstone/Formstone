@@ -75,9 +75,10 @@
 	function destruct(data) {
 		data.$content.removeClass(data.contentClasses);
 
-		data.$handle.removeClass(data.handleClasses)
+		data.$handle.attr("data-switch-target", "")
+					.removeClass(data.handleClasses)
 					.off(data.eventGuid)
-					.toggle("destroy");
+					.switch("destroy");
 
 		this.removeClass(data.navClasses)
 			.off(Events.namespace);
@@ -91,7 +92,7 @@
 	 */
 
 	function open(data) {
-		data.$handle.toggle("activate");
+		data.$handle.switch("activate");
 	}
 
 	/**
@@ -102,7 +103,7 @@
 	 */
 
 	function close(data) {
-		data.$handle.toggle("deactivate");
+		data.$handle.switch("deactivate");
 	}
 
 	/**
@@ -113,7 +114,7 @@
 	 */
 
 	function enable(data) {
-		data.$handle.toggle("enable");
+		data.$handle.switch("enable");
 	}
 
 	/**
@@ -124,7 +125,7 @@
 	 */
 
 	function disable(data) {
-		data.$handle.toggle("disable");
+		data.$handle.switch("disable");
 	}
 
 	/**
@@ -203,7 +204,7 @@
 	 * @type widget
 	 * @dependency core.js
 	 * @dependency mediaquery.js
-	 * @dependency toggle.js
+	 * @dependency switch.js
 	 * @dependency touch.js
 	 */
 

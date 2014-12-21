@@ -1,0 +1,59 @@
+
+	.fs_clearfix() {
+		&:after {
+			clear: both;
+			content: '';
+			display: table;
+		}
+	}
+
+	.fs-tabs {
+		.fs_clearfix();
+
+		&-tab&-enabled {
+			cursor: pointer;
+		}
+
+		// content
+
+		&-content&-enabled {
+			.fs_clearfix();
+
+			display: none;
+		}
+
+		&-content&-active {
+			display: block;
+		}
+
+		// mobile
+
+		&-tab&-mobile,
+		&-tab_mobile,
+		&-tab_mobile&-active {
+			display: none;
+		}
+
+		&-tab_mobile&-mobile,
+		&-tab_mobile&-mobile&-active {
+			display: block;
+		}
+	}
+
+	/* Vertical */
+/*
+	.tabber.vertical .tabber-menu { float: left; width: 20%; }
+	.tabber.vertical .tabber-handle { display: block; width: 100%; }
+	.tabber.vertical .tabber-handle.mobile { display: none; }
+
+	.tabber.vertical .tabber-tab { clear: none; float: right; min-height: 100%; width: 80%; }
+*/
+
+	/* Mobile */
+/*
+	.tabber.mobile .tabber-handle { display: none; }
+	.tabber.mobile .tabber-handle.mobile { display: block; }
+
+	.tabber.vertical.mobile .tabber-menu,
+	.tabber.vertical.mobile .tabber-tab { float: none; width: 100%; }
+*/
