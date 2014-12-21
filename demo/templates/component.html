@@ -1,13 +1,11 @@
 {{= it.include("_header", { local_title: it.document.title, site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root }) }}
-<article class="content">
+<article class="content demo">
 	<header class="intro">
 		{{= it.document }}
 	</header>
 	{{? it.document.demo }}
-	<div class="demo">
-		<h2 id="demo">Demo</h2>
-		{{= it.document.demo }}
-	</div>
+	<h2 id="demo">Demo</h2>
+	{{= it.document.demo }}
 	{{?}}
 	{{= it.include(it.document.bottom) }}
 </article>

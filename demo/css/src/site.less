@@ -78,20 +78,33 @@
 		.sans();
 
 		color: @black;
+		line-height: 1.2;
 		margin: 20px 0;
 	}
 	h1 {
-		.font_size(42);
+		.font_size(36);
+
+		@media @tablet {
+			.font_size(42);
+		}
 	}
 	h2 {
-		.font_size(32);
+		.font_size(28);
 
 		margin-top: 40px;
+
+		@media @tablet {
+			.font_size(32);
+		}
 	}
 	h3 {
+		.font_size(22);
+
 		color: @orange;
 
-		.font_size(26);
+		@media @tablet {
+			.font_size(26);
+		}
 	}
 	h4 {
 		.font_size(18);
@@ -410,17 +423,17 @@
 	.header {
 		min-width: 300px;
 
-		&.fs-navigation-content.fs-navigation-enabled {
+		// &.fs-navigation-content.fs-navigation-enabled {
 			width: 100%;
 
 			position: fixed;
-			z-index: 2;
+			z-index: 3;
 
 			background: @white;
 			border-bottom: 2px solid @gray_1;
 			box-shadow: none;
 			height: 47px;
-		}
+		// }
 
 		@media @desktop {
 			display: none;
@@ -479,19 +492,27 @@
 
 	.content {
 		background: @white;
-		padding: 0 10px;
+		padding: 10px;
 
 		@media @tablet {
 			border-radius: 0 0 3px 3px;
-			padding: 10px 30px;
+			padding: 20px 30px;
 		}
 
 		@media @desktop {
-			padding: 20px 50px 30px;
+			padding: 30px 50px 30px;
 		}
 
+		@media @max {
+			padding: 30px 75px 30px;
+		}
 
-// 		h1,
+		.intro {
+			.font_size(18);
+		}
+	}
+
+	.demo {
 		h2 {
 			position: relative;
 
@@ -509,24 +530,37 @@
 				padding-right: 50px;
 			}
 
-/*
-			&:before {
-				height: 2px;
-				width: 100%;
-
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				left: -50px;
-				z-index: 2;
-
-				background: @gray_1;
-				content: '';
-				display: block;
-				margin: auto 0;
+			@media @max {
+				margin-left:  -75px;
+				margin-right: -75px;
+				padding-left:  75px;
+				padding-right: 75px;
 			}
-*/
 		}
+	}
+
+	.alert {
+		background: @gray_1;
+		border-radius: 3px;
+		margin: 40px 0 20px;
+		overflow-y: auto;
+		padding: 20px 25px;
+
+		h2 {
+			.font_size(20);
+
+			margin: 0 0 10px;
+		}
+
+		p {
+			.font_size(16);
+
+			margin: 10px 0 0;
+		}
+	}
+
+	.feature {
+		padding-right: 20px;
 	}
 
 	.sidebar {
@@ -549,6 +583,7 @@
 			.font_size(18);
 
 			color: @white;
+			margin-bottom: 10px;
 
 			.no-touch &:hover {
 				color: @white;

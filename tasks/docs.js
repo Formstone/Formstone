@@ -500,7 +500,7 @@ module.exports = function(grunt) {
 					bottom: "components/" + doc.name.toLowerCase().replace(/ /g, ""),
 					site_root: "../",
 					asset_root: "../../",
-					component_root: "",
+					component_root: "../../components/",
 				};
 
 			grunt.file.write(destination, JSON.stringify(template) + '\n\n' + use[0]);
@@ -545,6 +545,13 @@ module.exports = function(grunt) {
 
 		function buildNav() {
 			var docshtml = '';
+
+			docshtml += '<h5>About</h5>';
+			docshtml += '<ul>';
+			docshtml += '<li><a href="{{= it.site_root }}start.html">Getting Started</a></li>';
+			docshtml += '<li><a href="{{= it.site_root }}upgrade.html">Upgrade Guide</a></li>';
+			docshtml += '<li><a href="{{= it.site_root }}contribute.html">Contributing</a></li>';
+			docshtml += '</ul>';
 
 			docshtml += '<h5>Library</h5>';
 			docshtml += '<ul>';
