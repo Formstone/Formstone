@@ -72,6 +72,8 @@
 	 */
 
  	.fs-carousel {
+	 	.fs_clearfix();
+
 	 	width: 100%;
 
 	 	position: relative;
@@ -97,10 +99,10 @@
 		 */
 
 		&-enabled &-viewport {
+			.fs_clearfix();
+
 			position: relative;
 			overflow: @fs-carousel-overflow;
-
-			.fs_clearfix();
 		}
 
 		/**
