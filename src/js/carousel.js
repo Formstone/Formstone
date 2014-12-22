@@ -244,7 +244,6 @@
 			  .on(Events.pan, data, onPan)
 			  .on(Events.panEnd, data, onPanEnd)
 			  .on(Events.swipe, data, onSwipe)
-			  .on(Events.click, data, onClick)
 			  .css( Functions.prefix(TransitionProperty, "") );
 
 			resize.call(this, data);
@@ -665,24 +664,6 @@
 		data.$canister.css( Functions.prefix(TransitionProperty, "") );
 
 		position(data, index);
-
-		//data.isTouching = false;
-	}
-
-	/**
-	 * @method private
-	 * @name onClick
-	 * @description Cleans up touch interactions
-	 * @param data [object] "Instance data"
-	 * @param index [object] "New index"
-	 */
-
-	function onClick(e) {
-		var data = e.data;
-
-		if (data.isTouching) {
-			Functions.killEvent(e);
-		}
 
 		data.isTouching = false;
 	}
