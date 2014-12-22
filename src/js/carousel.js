@@ -381,7 +381,7 @@
 		data.loadedImages++;
 
 		if (data.loadedImages === data.totalImages) {
-			resize.call(data.$roller, data);
+			resize.call(data.$el, data);
 		}
 	}
 
