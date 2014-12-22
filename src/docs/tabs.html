@@ -1,12 +1,17 @@
 <style>
-/*
-	.tabs { margin: 0 0 20px; overflow: hidden; }
-	.tabs a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
-	.tabs a:hover { color: #fff; }
+	.tabs { overflow: hidden; }
+	.tab { display: block; float: left; }
 
-	.tabs.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-	.tabs.fs-navigation-enabled { padding: 10px; }
-*/
+	.tab,
+	.fs-tabs-tab.fs-tabs-enabled { background: #393b3f; border: none; color: #fff; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.tab:hover,
+	.fs-tabs-tab.fs-tabs-enabled:hover { color: #fff; }
+
+	.fs-tabs-tab.fs-tabs-active { background: #c65032; }
+
+	.fs-tabs-tab_mobile.fs-tabs-enabled { width: 100%; }
+
+	.tab_content { background: #f2f2f2; border-radius: 3px; padding: 5px 20px; }
 </style>
 
 <script>
@@ -23,7 +28,7 @@
 </script>
 
 <h4>Basic</h4>
-<nav>
+<nav class="tabs">
 	<a href="#tab-1-1" class="tab" data-tabs-group="tab-1">One</a>
 	<a href="#tab-1-2" class="tab" data-tabs-group="tab-1">Two</a>
 	<a href="#tab-1-3" class="tab" data-tabs-group="tab-1">Three</a>
