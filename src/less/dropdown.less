@@ -1,5 +1,4 @@
 	@fs-dropdown-max-height:							260px;
-	@fs-dropdown-max-width:								true;
 
 	@fs-dropdown-text-color:							#222;
 	@fs-dropdown-font-size:								13px;
@@ -124,10 +123,16 @@
 
 	.fs-dropdown {
 		position: relative;
+		z-index: 1;
 
 		display: block;
 		margin: 10px 0;
-		z-index: 1;
+
+		max-width: 100%;
+
+		@media screen and (min-width: 740px) {
+			max-width: 30%;
+		}
 
 		&:focus {
 			box-shadow: none;
@@ -143,19 +148,6 @@
 			box-sizing: border-box;
 			transition: none;
 			user-select: none !important;
-		}
-
-		& when (@fs-dropdown-max-width = true) {
-
-			max-width: 30%;
-
-			@media screen and (max-width: 740px) {
-				max-width: 40%;
-			}
-
-			@media screen and (max-width: 500px) {
-				max-width: 100%;
-			}
 		}
 
 		// .fs-dropdown-element

@@ -12,20 +12,28 @@
 	function construct(data) {
 		var $parent      = this.closest("label"),
 			$label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
-			type         = this.attr("type"),
 			baseClass    = [RawClasses.base, data.customClass].join(" "),
-			html         = '<div class="' + RawClasses.marker + '"></div>';
+			html         = "";
 
-			/*
-			if (opts.toggle) {
-				typeClass += " picker-toggle";
-				html = '<span class="picker-toggle-label on">' + opts.labels.on + '</span><span class="picker-toggle-label off">' + opts.labels.off + '</span>' + html;
-			}
-			*/
+		data.radio = (this.attr("type") === "radio");
+		data.group = this.attr("name");
+
+		html += '<div class="' + RawClasses.marker + '">';
+		html += '<div class="' + RawClasses.flag + '"></div>';
+
+		if (data.toggle) {
+			baseClass += " " + RawClasses.toggle;
+			html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">'  + data.labels.on  + '</span>';
+			html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
+		}
+
+		if (data.radio) {
+			baseClass += " " + RawClasses.radio;
+		}
+
+		html += '</div>';
 
 		// Modify DOM
-
-		// this.addClass(RawClasses.element);
 
 		if ($label.length) {
 			$label.addClass(RawClasses.label)
@@ -36,9 +44,10 @@
 		}
 
 		// Store plugin data
-		data.$checkbox = ($label.length) ? $label.parents(Classes.base) : this.prev(Classes.base);
-		data.$handle = data.$checkbox.find(Classes.handle);
-		data.$labels = data.$checkbox.find(Classes.label);
+		data.$checkbox    = ($label.length) ? $label.parents(Classes.base) : this.prev(Classes.base);
+		data.$marker      = data.$checkbox.find(Classes.marker);
+		data.$states      = data.$checkbox.find(Classes.state);
+		data.$label       = $label;
 
 		// Check checked
 		if (this.is(":checked")) {
@@ -54,8 +63,8 @@
 		this.on(Events.focus, data, onFocus)
 			.on(Events.blur, data, onBlur)
 			.on(Events.change, data, onChange)
-			.on(Events.click, data, onClick);
-			//.on("deselect.picker", data, _onDeselect)
+			.on(Events.click, data, onClick)
+			.on(Events.deselect, data, onDeselect);
 
 		data.$checkbox.touch({
 			tap: true
@@ -70,19 +79,15 @@
 	 */
 
 	function destruct(data) {
-/*
-		data.$mobileTab.off(Events.namespace)
-					   .touch("destroy")
-					   .remove();
+		data.$checkbox.off(Events.namespace)
+					  .touch("destroy");
 
-		data.$content.removeClass(RawClasses.content);
+		data.$marker.remove();
+		data.$states.remove();
+		data.$label.unwrap()
+				   .removeClass(RawClasses.label);
 
-		this.attr("data-switch-target", "")
-			.attr("data-switch-group", "")
-			.removeClass(RawClasses.tab)
-			.off(Events.namespace)
-			.switch("destroy");
-*/
+		this.off(Events.namespace);
 	}
 
 	/**
@@ -116,22 +121,90 @@
 	 */
 
 	function onClick(e) {
+		e.stopPropagation();
+
 		var data = e.data;
 
-		if (!$(e.target).is(data.$input)) {
+		if (!$(e.target).is(data.$el)) {
 			e.preventDefault();
 
 			data.$el.trigger("click");
 		}
 	}
 
-	function onFocus(e) {
-	}
-
-	function onBlur(e) {
-	}
+	/**
+	 * @method private
+	 * @name onChange
+	 * @description Handles external changes
+	 * @param e [object] "Event data"
+	 */
 
 	function onChange(e) {
+		var data        = e.data,
+			disabled    = data.$el.is(":disabled"),
+			checked     = data.$el.is(":checked");
+
+		if (!disabled) {
+			if (data.radio) {
+				// radio
+				// if (checked || (isIE8 && !checked)) {
+					onSelect(e);
+				// }
+			} else {
+				// Checkbox change events fire after state has changed
+				if (checked) {
+					onSelect(e);
+				} else {
+					onDeselect(e);
+				}
+			}
+		}
+	}
+
+	/*
+	 * @method private
+	 * @name onSelect
+	 * @description Changes input to "checked"
+	 * @param e [object] "Event data"
+	 */
+	function onSelect(e) {
+		if (e.data.radio) {
+			$('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
+		}
+
+		e.data.$checkbox.addClass(RawClasses.checked);
+	}
+
+	/**
+	 * @method private
+	 * @name onDeselect
+	 * @description Changes input to "checked"
+	 * @param e [object] "Event data"
+	 */
+	function onDeselect(e) {
+		e.data.$checkbox.removeClass(RawClasses.checked);
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		e.data.$checkbox.addClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e) {
+		e.data.$checkbox.removeClass(RawClasses.focus);
 	}
 
 	/**
@@ -166,8 +239,15 @@
 			classes: [
 				"label",
 				"marker",
+				"flag",
+				"radio",
+				"focus",
 				"checked",
-				"disabled"
+				"disabled",
+				"toggle",
+				"state",
+				"state_on",
+				"state_off"
 			],
 
 			methods: {
@@ -181,7 +261,8 @@
 			},
 
 			events: {
-				tap    : "tap"
+				deselect : "deselect",
+				tap      : "tap"
 			}
 		}),
 

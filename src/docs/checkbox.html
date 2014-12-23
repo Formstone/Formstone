@@ -3,26 +3,66 @@
 
 <script>
 	$(function() {
-		$("input[type=checkbox]").checkbox();
+		$("input[type=checkbox], input[type=radio]").checkbox();
 	});
 </script>
 
 <h4>Basic</h4>
 <form action="#" method="GET">
-	<input type="checkbox" value="One" id="checkbox-1" name="checkbox-1" checked="checked" class="checkbox">
-	<label for="checkbox-1">One</label>
+	<fieldset>
+		<input type="checkbox" value="1" id="checkbox-1" name="checkbox-1" checked>
+		<label for="checkbox-1">One</label>
+	</fieldset>
+	<fieldset>
+		<label for="checkbox-2">
+			<input type="checkbox" value="2" id="checkbox-2" name="checkbox-2"> Two
+		</label>
+	</fieldset>
+	<fieldset>
+		<input type="checkbox" value="3" id="checkbox-3" name="checkbox-3" disabled>
+		<label for="checkbox-3">Three</label>
+	</fieldset>
+	<fieldset>
+		<label>
+			<span>
+				<input type="checkbox" value="4" id="checkbox-4" name="checkbox-4"> Four
+			</span>
+		</label>
+	</fieldset>
+</form>
 
-	<label for="checkbox-2">
-		<input type="checkbox" value="Two" id="checkbox-2" name="checkbox-2" class="checkbox"> Two
-	</label>
-	<!--
+<h4>Toggle</h4>
+<form action="#" method="GET">
+	<fieldset>
+		<input type="checkbox" value="One" id="toggle-1" name="toggle-1" checked data-checkbox-options='{"toggle":true}'>
+		<label for="toggle-1">One</label>
+	</fieldset>
+	<fieldset>
+		<input type="checkbox" value="One" id="toggle-2" name="toggle-2" data-checkbox-options='{"toggle":true}'>
+		<label for="toggle-2">Two</label>
+	</fieldset>
+</form>
 
-	<input class="checkbox" disabled="disabled" id="checkbox_3" name="checkbox_3" type="checkbox" value="Three">
-	<label for="checkbox_3">Three</label>
-	<label>
-		<span>
-			<input class="checkbox" id="checkbox_4" name="checkbox_4" type="checkbox" value="Four"> Four
-		</span>
-	</label>
-	-->
+<h4>Radio</h4>
+<form action="#" method="GET">
+	<fieldset>
+		<input type="radio" value="1" id="radio-1" name="radio-group" checked>
+		<label for="radio-1">One</label>
+	</fieldset>
+	<fieldset>
+		<label for="radio-2">
+			<input type="radio" value="2" id="radio-2" name="radio-group"> Two
+		</label>
+	</fieldset>
+	<fieldset>
+		<input type="radio" value="3" id="radio-3" name="radio-group" disabled>
+		<label for="radio-3">Three</label>
+	</fieldset>
+	<fieldset>
+		<label>
+			<span>
+				<input type="radio" value="4" id="radio-4" name="radio-group"> Four
+			</span>
+		</label>
+	</fieldset>
 </form>
