@@ -20,17 +20,32 @@
 			data.gravity  = "";
 		}
 
-		var typeClass     = RawClasses[data.type] || "",
-			gravityClass  = RawClasses[data.gravity] || "",
-			classGroup    = [typeClass, data.rawClassGuid, data.customClass].join(" ");
+		var baseClass     = RawClasses.base,
+			typeClass     = [baseClass, data.type].join("-"),
+			gravityClass  = data.gravity ? [typeClass, data.gravity].join("-") : "",
+			classGroup    = [data.rawClassGuid, data.customClass].join(" ");
 
 		data.handle       = this.data(Namespace + "-handle");
 		data.content      = this.data(Namespace + "-content");
 
-		// nav type
-		data.handleClasses     = [RawClasses.handle, classGroup].join(" ");
-		data.navClasses        = [RawClasses.navigation, classGroup, gravityClass].join(" ");
-		data.contentClasses    = [RawClasses.content, classGroup, (data.type === "push" ? gravityClass : "")].join(" ");
+		data.handleClasses = [
+			RawClasses.handle,
+			RawClasses.handle.replace(baseClass, typeClass),
+			RawClasses.handle.replace(baseClass, gravityClass),
+			classGroup
+		].join(" ");
+
+		data.navClasses = [
+			RawClasses.nav.replace(baseClass, typeClass),
+			RawClasses.nav.replace(baseClass, gravityClass),
+			classGroup
+		].join(" ");
+
+		data.contentClasses = [
+			RawClasses.content.replace(baseClass, typeClass),
+			RawClasses.content.replace(baseClass, gravityClass),
+			classGroup
+		].join(" ");
 
 		// DOM
 
@@ -236,15 +251,17 @@
 
 			classes: [
 				"handle",
-				"navigation",
+				"nav",
 				"content",
 				"animated",
 				"enabled",
 				"open",
 				// types
+
 				"toggle",
 				"push",
 				"overlay",
+
 				"left",
 				"right"
 			],

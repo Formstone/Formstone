@@ -22,7 +22,7 @@
 	@fs-navigation-toggle-handle-border-size:		1px;
 
 	@fs-navigation-toggle-handle-text-color:		#111;
-	@fs-navigation-toggle-handle-font-size:			16px;
+	@fs-navigation-toggle-handle-font-size:			14px;
 	@fs-navigation-toggle-handle-padding:			10px 40px 10px 15px;
 
 	// Slide
@@ -37,7 +37,7 @@
 	@fs-navigation-slide-handle-background:			#fff;
 
 	@fs-navigation-slide-handle-text-color:			#111;
-	@fs-navigation-slide-handle-font-size:			16px;
+	@fs-navigation-slide-handle-font-size:			14px;
 	@fs-navigation-slide-handle-padding:			10px 40px 10px 15px;
 
 	@fs-navigation-slide-content-box-shadow-color: 	rgba(0, 0, 0, 0.15);
@@ -114,7 +114,7 @@
 
 		// Enabled
 
-		&-toggle&-handle&-enabled {
+		&-toggle-handle&-enabled {
 			width: 100%;
 
 			background: @fs-navigation-toggle-handle-background;
@@ -129,7 +129,7 @@
 			user-select: none;
 		}
 
-		&-toggle&-navigation&-enabled {
+		&-toggle-nav&-enabled {
 			background: @fs-navigation-toggle-background;
 			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
 			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
@@ -138,7 +138,7 @@
 
 		// Open
 
-		&-toggle&-navigation&-open {
+		&-toggle-nav&-open {
 			display: block;
 		}
 
@@ -168,8 +168,8 @@
 		 * @description Indicates off canvas slide interface
 		 */
 
-		&-push&-handle&-enabled,
-		&-overlay&-handle&-enabled {
+		&-push-handle&-enabled,
+		&-overlay-handle&-enabled {
 			padding: @fs-navigation-slide-handle-padding;
 
 			background: @fs-navigation-toggle-handle-background;
@@ -183,8 +183,8 @@
 			user-select: none;
 		}
 
-		&-push&-navigation&-enabled,
-		&-overlay&-navigation&-enabled {
+		&-push-nav&-enabled,
+		&-overlay-nav&-enabled {
 			width: @fs-navigation-slide-width;
 			height: 100%;
 
@@ -197,35 +197,37 @@
 			visibility: hidden;
 		}
 
-		&-push&-navigation&-animated,
-		&-overlay&-navigation&-animated {
+		&-push-nav&-animated,
+		&-overlay-nav&-animated {
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
 				visibility 0.001s linear @fs-navigation-slide-transition-speed; // delay when closing
 		}
 
-		&-push&-navigation&-enabled {
+		&-push-nav&-enabled {
 			z-index: @fs-navigation-push-zindex;
 		}
 
-		&-overlay&-navigation&-enabled {
+		&-overlay-nav&-enabled {
 			z-index: @fs-navigation-overlay-zindex;
 		}
 
-		&-left&-navigation&-enabled {
+		&-overlay-left-nav&-enabled {
 			left: 0;
 
+			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
-		&-right&-navigation&-enabled {
+		&-overlay-right-nav&-enabled {
 			right: 0;
 
+			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-push&-navigation&-open,
-		&-overlay&-navigation&-open {
+		&-push-nav&-open,
+		&-overlay-nav&-open {
 			transform: translate3D(0, 0, 0);
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing,
@@ -233,7 +235,7 @@
 			visibility: visible;
 		}
 
-		&-overlay&-content:before {
+		&-overlay-content:before {
 			height: 100%;
 			width: 100%;
 
@@ -255,7 +257,7 @@
 			visibility: hidden;
 		}
 
-		&-overlay&-content&-open:before {
+		&-overlay-content&-open:before {
 			opacity: 1;
 			visibility: visible;
 		}
@@ -292,7 +294,7 @@
 		 * @description Indicates enabled state
 		 */
 
-		&-push&-content&-enabled {
+		&-push-content&-enabled {
 			position: relative;
 			z-index: @fs-navigation-push-content-zindex;
 
@@ -301,26 +303,26 @@
 			transform: translate3D(0, 0, 0);
 		}
 
-		&-push&-content&-animated {
+		&-push-content&-animated {
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
 		}
 
-		&-left&-content&-enabled {
+		&-push-left-content&-enabled {
 			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
-		&-right&-content&-enabled {
+		&-push-right-content&-enabled {
 			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
 		// open
 
-		&-left&-content&-open {
+		&-push-left-content&-open {
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
-		&-right&-content&-open {
+		&-push-right-content&-open {
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 

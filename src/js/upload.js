@@ -13,7 +13,7 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			html += '<div class="' + RawClasses.dropzone + '">';
+			html += '<div class="' + RawClasses.target + '">';
 			html += data.label;
 			html += '</div>';
 			html += '<input class="' + RawClasses.input + '" type="file"';
@@ -30,11 +30,11 @@
 			data.total        = 0;
 			data.uploading    = false;
 
-			this.on(Events.click, Classes.dropzone, data, onClick)
+			this.on(Events.click, Classes.target, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
 				.on(Events.dragOver, data, onDragOver)
 				.on(Events.dragLeave, data, onDragOut)
-				.on(Events.drop, Classes.dropzone, data, onDrop);
+				.on(Events.drop, Classes.target, data, onDrop);
 
 			data.$input.on(Events.change, data, onChange);
 		}
@@ -60,7 +60,7 @@
 	/**
 	 * @method private
 	 * @name onClick
-	 * @description Handles click to dropzone.
+	 * @description Handles click to target.
 	 * @param e [object] "Event data"
 	 */
 	function onClick(e) {
@@ -93,7 +93,7 @@
 	/**
 	 * @method private
 	 * @name onDragEnter
-	 * @description Handles dragenter to dropzone.
+	 * @description Handles dragenter to target.
 	 * @param e [object] "Event data"
 	 */
 	function onDragEnter(e) {
@@ -108,7 +108,7 @@
 	/**
 	 * @method private
 	 * @name onDragOver
-	 * @description Handles dragover to dropzone.
+	 * @description Handles dragover to target.
 	 * @param e [object] "Event data"
 	 */
 	function onDragOver(e) {
@@ -123,7 +123,7 @@
 	/**
 	 * @method private
 	 * @name onDragOut
-	 * @description Handles dragout to dropzone.
+	 * @description Handles dragout to target.
 	 * @param e [object] "Event data"
 	 */
 	function onDragOut(e) {
@@ -138,7 +138,7 @@
 	/**
 	 * @method private
 	 * @name onDrop
-	 * @description Handles drop to dropzone.
+	 * @description Handles drop to target.
 	 * @param e [object] "Event data"
 	 */
 	function onDrop(e) {
@@ -321,7 +321,7 @@
 			/**
 			 * @options
 			 * @param action [string] "Where to submit uploads"
-			 * @param label [string] <'Drag and drop files or click to select'> "Dropzone text"
+			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text"
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
 			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
 			 * @param maxSize [int] <5242880> "Max file size allowed"
@@ -342,7 +342,7 @@
 
 			classes: [
 				"input",
-				"dropzone",
+				"target",
 				"multiple",
 				"dropping"
 			],

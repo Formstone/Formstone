@@ -48,7 +48,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `action` | `string` | &nbsp; | Where to submit uploads |
-| `label` | `string` | `'Drag and drop files or click to select'` | Dropzone text |
+| `label` | `string` | `'Drag and drop files or click to select'` | Drop target text |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxQueue` | `int` | `2` | Number of files to simultaneously upload |
 | `maxSize` | `int` | `5242880` | Max file size allowed |
@@ -102,5 +102,5 @@ $(".target").upload("destroy");
 | `.fs-upload` | `element` | Base widget class |
 | `.fs-upload.fs-upload-dropping` | `modifier` | Indicates dropping state |
 | `.fs-upload-input` | `element` | Masked Input |
-| `.fs-upload-dropzone` | `element` | Drop target |
+| `.fs-upload-target` | `element` | Drop target |
 

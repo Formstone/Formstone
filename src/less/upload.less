@@ -73,12 +73,12 @@
 
 		/**
 		 * @class
-		 * @name .fs-upload-dropzone
+		 * @name .fs-upload-target
 		 * @type element
 		 * @description Drop target
 		 */
 
-		&-dropzone {
+		&-target {
 			background: @fs-upload-background;
 			border: @fs-upload-border;
 			border-radius: @fs-upload-border-radius;
@@ -94,8 +94,8 @@
 				opacity 0.15s linear;
 		}
 
-		&.dropping &-dropzone,
-		.no-touch &:hover &-dropzone {
+		&.dropping &-target,
+		.no-touch &:hover &-target {
 			background: @fs-upload-dropping-background;
 			border-color: @fs-upload-dropping-border-color;
 			color: @fs-upload-dropping-text-color;

@@ -423,18 +423,15 @@
 
 	.header {
 		min-width: 300px;
+		width: 100%;
 
-		// &.fs-navigation-content.fs-navigation-enabled {
-			width: 100%;
+		position: fixed;
+		z-index: 3;
 
-			position: fixed;
-			z-index: 3;
-
-			background: @white;
-			border-bottom: 2px solid @gray_1;
-			box-shadow: none;
-			height: 47px;
-		// }
+		background: @white;
+		border-bottom: 2px solid @gray_1;
+		box-shadow: none;
+		height: 47px;
 
 		@media @desktop {
 			display: none;
@@ -452,7 +449,7 @@
 		}
 
 		&_button,
-		&_button.fs-navigation-handle.fs-navigation-enabled {
+		&_button.fs-navigation-enabled {
 			height: 45px;
 
 			.font_size(12);
@@ -482,7 +479,7 @@
 		}
 	}
 
-	.page.fs-navigation-content.fs-navigation-enabled {
+	.page.fs-navigation-enabled {
 		box-shadow: none;
 
 		@media @max_desktop {
@@ -569,9 +566,10 @@
 		color: @white;
 
 		&_content {
-			&.fs-navigation-navigation.fs-navigation-enabled {
+			&.fs-navigation-enabled {
 				padding: 65px 30px 50px;
 
+				box-shadow: none;
 				background: @blue;
 			}
 
