@@ -243,7 +243,7 @@ module.exports = function(grunt) {
 				var namespace = doc.name.toLowerCase();
 
 				if (jsFile) {
-					if (namespace !== "formstone" && namespace !== "grid") {
+					if (namespace !== "formstone" && namespace !== "core" && namespace !== "grid") {
 						if (doc.type === "widget") {
 							for (var i in widgetMethods) {
 								var m = JSON.parse(JSON.stringify(widgetMethods[i]));

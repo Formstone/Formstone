@@ -64,32 +64,6 @@
 	 * @description Target elmement
 	 */
 
-	/**
-	 * @class
-	 * @name .fs-navigation-navigation
-	 * @type element
-	 * @description Navigation
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animated state
-	 */
-
 	.fs-navigation {
 
 		margin: @fs-navigation-margin;
@@ -107,12 +81,47 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation.fs-navigation-toggle
+		 * @name .fs-navigation-toggle-nav
+		 * @type element
+		 * @description Toggle navigation
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-toggle-nav.fs-navigation-enabled
 		 * @type modifier
-		 * @description Indicates toggle interface
+		 * @description Indicates enabled state
 		 */
 
-		// Enabled
+		&-toggle-nav&-enabled {
+			background: @fs-navigation-toggle-background;
+			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
+			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
+			display: none;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-toggle-nav.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+
+		&-toggle-nav&-open {
+			display: block;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-toggle-handle
+		 * @type element
+		 * @description Toggle handle
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-toggle-handle.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
 
 		&-toggle-handle&-enabled {
 			width: 100%;
@@ -129,59 +138,79 @@
 			user-select: none;
 		}
 
-		&-toggle-nav&-enabled {
-			background: @fs-navigation-toggle-background;
-			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
-			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
-			display: none;
-		}
-
-		// Open
-
-		&-toggle-nav&-open {
-			display: block;
-		}
-
 		/**
 		 * @class
-		 * @name .fs-navigation.fs-navigation-overlay
-		 * @type modifier
-		 * @description Indicates toggle interface
+		 * @name .fs-navigation-overlay-nav
+		 * @type element
+		 * @description Overlay nav
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation.fs-navigation-push
+		 * @name .fs-navigation-overlay-nav.fs-navigation-enabled
 		 * @type modifier
-		 * @description Indicates toggle interface
+		 * @description Indicates enabled state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-nav.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animated state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-nav.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-left-nav
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-right-nav
+		 * @type modifier
+		 * @description Indicates right hand nav
 		 */
 
 		/**
 		 * @class
-		 * @name .fs-navigation-push.fs-navigation-left
-		 * @type modifier
-		 * @description Indicates off canvas slide interface
+		 * @name .fs-navigation-push-nav
+		 * @type element
+		 * @description Overlay nav
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation-push.fs-navigation-right
+		 * @name .fs-navigation-push-nav.fs-navigation-enabled
 		 * @type modifier
-		 * @description Indicates off canvas slide interface
+		 * @description Indicates enabled state
 		 */
-
-		&-push-handle&-enabled,
-		&-overlay-handle&-enabled {
-			padding: @fs-navigation-slide-handle-padding;
-
-			background: @fs-navigation-toggle-handle-background;
-			color: @fs-navigation-toggle-handle-text-color;
-			cursor: pointer;
-			display: block;
-			font-size: @fs-navigation-toggle-handle-font-size;
-			margin: 0;
-			padding: @fs-navigation-toggle-handle-padding;
-			position: relative;
-			user-select: none;
-		}
+		/**
+		 * @class
+		 * @name .fs-navigation-push-nav.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animated state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-push-nav.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-push-left-nav
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-push-right-nav
+		 * @type modifier
+		 * @description Indicates right hand nav
+		 */
 
 		&-push-nav&-enabled,
 		&-overlay-nav&-enabled {
@@ -235,6 +264,60 @@
 			visibility: visible;
 		}
 
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-handle
+		 * @type element
+		 * @description Overlay handle
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-handle.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-navigation-push-handle
+		 * @type element
+		 * @description Push handle
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-push-handle.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+
+		&-push-handle&-enabled,
+		&-overlay-handle&-enabled {
+			padding: @fs-navigation-slide-handle-padding;
+
+			background: @fs-navigation-toggle-handle-background;
+			color: @fs-navigation-toggle-handle-text-color;
+			cursor: pointer;
+			display: block;
+			font-size: @fs-navigation-toggle-handle-font-size;
+			margin: 0;
+			padding: @fs-navigation-toggle-handle-padding;
+			position: relative;
+			user-select: none;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-content:before
+		 * @type element
+		 * @description Overlay mask
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-overlay-content.fs-navigation-open:before
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+
 		&-overlay-content:before {
 			height: 100%;
 			width: 100%;
@@ -264,34 +347,40 @@
 
 		/**
 		 * @class
-		 * @name .fs-navigation-content
+		 * @name .fs-navigation-push-content
 		 * @type element
 		 * @description Target page content
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation-content.fs-navigation-push
+		 * @name .fs-navigation-push-content.fs-navigation-enabled
 		 * @type modifier
-		 * @description Indicates toggle interface
+		 * @description Indicates enabled state
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation-content.fs-navigation-animated
+		 * @name .fs-navigation-push-content.fs-navigation-animated
 		 * @type modifier
 		 * @description Indicates animted state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-push-content.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
 		 */
 
 		/**
 		 * @class
-		 * @name .fs-navigation-content.fs-navigation-open
+		 * @name .fs-navigation-push-left-content
 		 * @type modifier
-		 * @description Indicates open state
+		 * @description Indicates left hand nav
 		 */
 		/**
 		 * @class
-		 * @name .fs-navigation-content.fs-navigation-enabled
+		 * @name .fs-navigation-push-right-content
 		 * @type modifier
-		 * @description Indicates enabled state
+		 * @description Indicates right hand nav
 		 */
 
 		&-push-content&-enabled {

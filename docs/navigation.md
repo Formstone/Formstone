@@ -175,20 +175,35 @@ $(".target").navigation("open");
 | Class | Type | Description |
 | --- | --- | --- |
 | `.fs-navigation-element` | `element` | Target elmement |
-| `.fs-navigation-navigation` | `element` | Navigation |
-| `.fs-navigation.fs-navigation-open` | `modifier` | Indicates open state |
-| `.fs-navigation.fs-navigation-enabled` | `modifier` | Indicates enabled state |
-| `.fs-navigation.fs-navigation-animated` | `modifier` | Indicates animated state |
-| `.fs-navigation.fs-navigation-toggle` | `modifier` | Indicates toggle interface |
-| `.fs-navigation.fs-navigation-overlay` | `modifier` | Indicates toggle interface |
-| `.fs-navigation.fs-navigation-push` | `modifier` | Indicates toggle interface |
-| `.fs-navigation-push.fs-navigation-left` | `modifier` | Indicates off canvas slide interface |
-| `.fs-navigation-push.fs-navigation-right` | `modifier` | Indicates off canvas slide interface |
-| `.fs-navigation-content` | `element` | Target page content |
-| `.fs-navigation-content.fs-navigation-push` | `modifier` | Indicates toggle interface |
-| `.fs-navigation-content.fs-navigation-animated` | `modifier` | Indicates animted state |
-| `.fs-navigation-content.fs-navigation-open` | `modifier` | Indicates open state |
-| `.fs-navigation-content.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-toggle-nav` | `element` | Toggle navigation |
+| `.fs-navigation-toggle-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-toggle-nav.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-toggle-handle` | `element` | Toggle handle |
+| `.fs-navigation-toggle-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-overlay-nav` | `element` | Overlay nav |
+| `.fs-navigation-overlay-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-overlay-nav.fs-navigation-animated` | `modifier` | Indicates animated state |
+| `.fs-navigation-overlay-nav.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-overlay-left-nav` | `modifier` | Indicates left hand nav |
+| `.fs-navigation-overlay-right-nav` | `modifier` | Indicates right hand nav |
+| `.fs-navigation-push-nav` | `element` | Overlay nav |
+| `.fs-navigation-push-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-push-nav.fs-navigation-animated` | `modifier` | Indicates animated state |
+| `.fs-navigation-push-nav.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-push-left-nav` | `modifier` | Indicates left hand nav |
+| `.fs-navigation-push-right-nav` | `modifier` | Indicates right hand nav |
+| `.fs-navigation-overlay-handle` | `element` | Overlay handle |
+| `.fs-navigation-overlay-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-push-handle` | `element` | Push handle |
+| `.fs-navigation-push-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-overlay-content:before` | `element` | Overlay mask |
+| `.fs-navigation-overlay-content.fs-navigation-open:before` | `modifier` | Indicates open state |
+| `.fs-navigation-push-content` | `element` | Target page content |
+| `.fs-navigation-push-content.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-push-content.fs-navigation-animated` | `modifier` | Indicates animted state |
+| `.fs-navigation-push-content.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-push-left-content` | `modifier` | Indicates left hand nav |
+| `.fs-navigation-push-right-content` | `modifier` | Indicates right hand nav |
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
 | `.fs-navigation-handle.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
