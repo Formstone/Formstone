@@ -1,4 +1,4 @@
-{"template":"content.html","local_title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
+{"template":"content.html","title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
 
 # Thoughtfully Crafted<br>Front-End Components
 

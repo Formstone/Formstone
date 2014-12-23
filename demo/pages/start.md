@@ -1,4 +1,4 @@
-{"template":"content.html","local_title":"Getting Started","site_root":"../","asset_root":"../","component_root":"../components/"}
+{"template":"content.html","title":"Getting Started","site_root":"../","asset_root":"../","component_root":"../components/"}
 
 # Getting Started
 
