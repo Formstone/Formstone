@@ -18,11 +18,15 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
-		data.onEnable   = this.data(Namespace + "-active");
-
 		// live query for the group to avoid missing new elements
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
+
+		if (!data.collapse && data.group) {
+			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
+		}
+
+		data.onEnable = this.data(Namespace + "-active");
 
 		data.$switches = $().add(this).add(data.$target);
 
@@ -40,10 +44,6 @@
 				disable.call(data.$el, data);
 			}
 		});
-
-		if (!data.collapse && data.group) {
-			$(data.group).eq(0).switch("activate");
-		}
 	}
 
 	/**
@@ -56,6 +56,8 @@
 	function destruct(data) {
 		data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 					  .off(Events.namespace);
+
+		this.touch("destroy");
 	}
 
 	/**

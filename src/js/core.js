@@ -253,7 +253,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					var $element = $targets.eq(i),
 						data = getData($element) || {};
 
-					if (data) {
+					if ($.type(data.$el) !== "undefined") {
 						func.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
 					}
 				}
