@@ -13,6 +13,7 @@
 ## Widget
 
 * [Carousel](carousel.md)
+* [Checkbox](checkbox.md)
 * [Dropdown](dropdown.md)
 * [Lightbox](lightbox.md)
 * [Navigation](navigation.md)

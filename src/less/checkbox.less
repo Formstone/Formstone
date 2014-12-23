@@ -1,0 +1,172 @@
+
+	// Config
+
+	@fs-checkbox-margin:						0 0 10px 0;
+
+	// Label
+
+	@fs-checkbox-label-color:					#999;
+	@fs-checkbox-label-font-size:				14px;
+
+	// Marker
+
+	@fs-checkbox-marker-border-color:			#ccc;
+	@fs-checkbox-marker-border-radius:			3px;
+	@fs-checkbox-marker-height-width:			16px;
+	@fs-checkbox-marker-margin:					16px;
+
+	// Hover
+
+	@fs-checkbox-hover-label-color:				#666;
+
+	@fs-checkbox-hover-marker-border-color:		#999;
+
+	// Disabled
+
+	@fs-checkbox-disabled-opacity:				0.5;
+
+
+	.fs-checkbox {
+		cursor: pointer;
+		margin: @fs-checkbox-margin;
+		overflow: hidden;
+
+		&-element {
+			position: absolute;
+			z-index: -1;
+
+			opacity: 0;
+			pointer-events: none;
+			transition: none;
+
+			.no-touch & {
+				left: -99999px;
+			}
+		}
+
+		&-label {
+			color: @fs-checkbox-label-color;
+			cursor: pointer;
+			display: block;
+			float: left;
+			font-size: @fs-checkbox-label-font-size;
+			line-height: 1;
+			user-select: none;
+		}
+
+		&-marker {
+			width: @fs-checkbox-marker-height-width;
+			height: @fs-checkbox-marker-height-width;
+
+			border: 1px solid @fs-checkbox-marker-border-color;
+			border-radius: @fs-checkbox-marker-border-radius;
+			display: block;
+			float: left;
+			margin: @fs-checkbox-marker-margin;
+		}
+
+		&-marker:before {
+			width: 100%;
+			height: 100%;
+
+			content: "\2713";
+			display: block;
+			line-height: 1;
+			margin: 0;
+			text-align: center;
+		}
+
+		// Focus
+
+		&-focus &-label,
+		.no-touch &:hover &-label {
+			color: @fs-checkbox-hover-label-color;
+		}
+
+		&-focus &-marker,
+		.no-touch &:hover &-marker {
+			border-color: @fs-checkbox-hover-marker-border-color;
+		}
+
+		// Disabled
+
+		&-disabled {
+			cursor: default;
+			opacity: @fs-checkbox-disabled-opacity;
+		}
+
+		&-disabled &-label {
+			color: @fs-checkbox-label-color;
+			cursor: default;
+		}
+
+		&-disabled &-marker {
+			border-color: @fs-checkbox-marker-border-color;
+			cursor: default;
+		}
+
+		// Toggle
+
+/*
+		&.picker-toggle {
+			padding: 20px 0 0;
+			position: relative;
+
+			.picker-toggle-label {
+				color: #999;
+				font-size: 12px;
+				position: absolute;
+				text-transform: uppercase;
+				top: 0;
+
+				&.on {
+					left: 0;
+				}
+
+				&.off {
+					color: #333;
+					right: 0;
+				}
+			}
+
+			.picker-label {
+				display: none;
+			}
+
+			.picker-handle {
+				border-radius: 3px;
+				height: 20px;
+				position: relative;
+				width: 100%;
+			}
+
+			.picker-flag {
+				background: #666;
+				border-radius: 2px;
+				display: block;
+				height: 100%;
+				left: 50%;
+				margin: 0;
+				position: absolute;
+				top: 0;
+				width: 50%;
+				transition: left 0.1s linear;
+			}
+
+			&.checked {
+				.picker-toggle-label.on {
+					color: #333;
+				}
+
+				.picker-toggle-label.off {
+					color: #999;
+				}
+
+				.picker-flag {
+					background: #666;
+					left: 0;
+				}
+			}
+		}
+*/
+	}

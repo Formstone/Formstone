@@ -46,6 +46,7 @@
         "demo/bower/prism/prism.js",
         "dist/js/core.js",
         "dist/js/carousel.js",
+        "dist/js/checkbox.js",
         "dist/js/cookie.js",
         "dist/js/dropdown.js",
         "dist/js/lightbox.js",
