@@ -1,6 +1,6 @@
-{"template":"content.html","site_root":"","asset_root":"../","component_root":"components/"}
+{"template":"content.html","local_title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
 
-<h1>Thoughtfully Crafted<br>Front-End Components</h1>
+# Thoughtfully Crafted<br>Front-End Components
 
 <p class="intro">Because you know how style an H1.</p>
 

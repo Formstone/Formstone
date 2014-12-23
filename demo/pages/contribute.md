@@ -1,4 +1,4 @@
-{"template":"content.html","site_root":"../","asset_root":"../","component_root":"../components/"}
+{"template":"content.html","local_title":"Contributing","site_root":"../","asset_root":"../","component_root":"../components/"}
 
 # Contributing
 

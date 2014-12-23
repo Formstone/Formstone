@@ -1,6 +1,6 @@
-{"template":"content.html","site_root":"../","asset_root":"../","component_root":"../components/"}
+{"template":"content.html","local_title":"Getting Started","site_root":"../","asset_root":"../","component_root":"../components/"}
 
-#Getting Started
+# Getting Started
 
 Formstone components are designed to be implemented easily without impacting your existing project. Scripts are wrapped in self-executing closures and styles are individually name spaced to avoid collisions.
 
