@@ -263,8 +263,8 @@ module.exports = function(grunt) {
 
 	// Register Tasks
 
-	grunt.registerTask('default', [ 'js', 'css', 'library' ]);
-	grunt.registerTask('all', [ 'js', 'css', 'library', 'demoClean' ]);
+	grunt.registerTask('default', [ 'js', 'css', 'library', 'demoClean' ]);
+	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
 	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);

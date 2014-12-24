@@ -493,7 +493,7 @@
 
 	.content {
 		background: @white;
-		padding: 10px;
+		padding: 20px 10px;
 
 		@media @tablet {
 			border-radius: 0 0 3px 3px;
@@ -505,7 +505,7 @@
 		}
 
 		@media @max {
-			padding: 30px 75px 30px;
+			padding: 40px 75px 40px;
 		}
 
 		.intro {
@@ -520,22 +520,27 @@
 			border-top: 2px solid @gray_1;
 			margin-left:  -175px;
 			margin-right: -175px;
+			margin-top:    60px;
 			padding-left:  175px;
 			padding-right: 175px;
-			padding-top:   30px;
+			padding-top:   60px;
 
 			@media @desktop {
 				margin-left:  -50px;
 				margin-right: -50px;
+				margin-top:    40px;
 				padding-left:  50px;
 				padding-right: 50px;
+				padding-top:   40px;
 			}
 
 			@media @max {
 				margin-left:  -75px;
-				margin-right: -75px;
+				margin-right: -60px;
+				margin-top:    50px;
 				padding-left:  75px;
 				padding-right: 75px;
+				padding-top:   50px;
 			}
 		}
 	}
@@ -570,7 +575,7 @@
 
 		&_content {
 			&.fs-navigation-enabled {
-				padding: 65px 30px 50px;
+				padding: 70px 30px 50px;
 
 				box-shadow: none;
 				background: @blue;
@@ -578,6 +583,10 @@
 
 			@media @desktop {
 				padding: 50px 0;
+			}
+
+			@media @max {
+				padding: 60px 0;
 			}
 		}
 
