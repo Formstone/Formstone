@@ -10,7 +10,7 @@
 	.container { border: 1px solid #ccc; border-radius: 3px; height: 400px; margin: 20px 0; overflow: hidden; position: relative; width: 100%; }
 
 	.register { height: 1px; left: 50%; position: absolute; top: 50%; width: 1px; }
-	.box { height: 100px; line-height: 100px; left: -50px; position: absolute; top: -50px; width: 100px; }
+	.box { height: 150px; line-height: 150px; left: -75px; position: absolute; top: -75px; width: 150px; }
 </style>
 
 <script>
@@ -105,8 +105,8 @@
 				data = $target.data("demo")
 				width  = data.origWidth  * e.scale,
 				height = data.origHeight * e.scale,
-				minWidth  = 50,
-				minHeight = 50,
+				minWidth  = 150,
+				minHeight = 150,
 				maxH = data.$container.outerHeight() - 20,
 				maxW = data.$container.outerWidth()  - 20,
 				maxWidth  = (maxH > maxW) ? maxW : maxH,
@@ -166,8 +166,8 @@
 				maxX = data.$container.outerWidth()  - minX,
 				maxY = data.$container.outerHeight() - minY,
 				// scale
-				minWidth  = 100,
-				minHeight = 100,
+				minWidth  = 150,
+				minHeight = 150,
 				maxWidth = 600,
 				maxHeight = 600;
 

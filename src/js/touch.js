@@ -10,7 +10,8 @@
 	 */
 
 	function construct(data) {
-		data.touches = [];
+		data.touches     = [];
+		data.touching    = false;
 
 		if (data.tap) {
 			// Tap
@@ -34,7 +35,9 @@
 				data.axis = false;
 			}
 
-			if (!data.axis) {
+			if (data.axis) {
+				touchAction(this, "pan-" + (data.axis === "x" ? "y" : "x"));
+			} else {
 				touchAction(this, "none");
 			}
 
@@ -65,7 +68,7 @@
 	 */
 
 	function onTouch(e) {
-		// Stop ms panning and zooming
+		// Stop panning and zooming
 		if (e.preventManipulation) {
 			e.preventManipulation();
 		}
@@ -119,12 +122,14 @@
 		var data     = e.data,
 			touch    = ($.type(data.touches) !== "undefined") ? data.touches[0] : null;
 
-		data.startE     = e.originalEvent;
-		data.startX     = (touch) ? touch.pageX : e.pageX;
-		data.startY     = (touch) ? touch.pageY : e.pageY;
-		data.startT     = new Date().getTime();
-		data.scaleD     = 1;
-		data.passed     = false;
+		if (!data.touching) {
+			data.startE      = e.originalEvent;
+			data.startX      = (touch) ? touch.pageX : e.pageX;
+			data.startY      = (touch) ? touch.pageY : e.pageY;
+			data.startT      = new Date().getTime();
+			data.scaleD      = 1;
+			data.passed      = false;
+		}
 
 		if (data.tap) {
 			// Tap
@@ -152,21 +157,26 @@
 				newE.pageY    = data.startY   = data.pinch.startY;
 			}
 
-			if (data.pan) {
-				$Window.on(Events.mouseMove, data, onPointerMove)
-					   .on(Events.mouseUp, data, onPointerEnd);
+			// Only bind at first touch
+			if (!data.touching) {
+				data.touching = true;
+
+				if (data.pan) {
+					$Window.on(Events.mouseMove, data, onPointerMove)
+						   .on(Events.mouseUp, data, onPointerEnd);
+				}
+
+				$Window.on( [
+					Events.touchMove,
+					Events.touchEnd,
+					Events.touchCancel,
+					Events.pointerMove,
+					Events.pointerUp,
+					Events.pointerCancel
+				].join(" ") , data, onTouch);
+
+				data.$el.trigger( newE );
 			}
-
-			$Window.on( [
-				Events.touchMove,
-				Events.touchEnd,
-				Events.touchCancel,
-				Events.pointerMove,
-				Events.pointerUp,
-				Events.pointerCancel
-			].join(" ") , data, onTouch);
-
-			data.$el.trigger( newE );
 		}
 	}
 
@@ -337,6 +347,8 @@
 				*/
 			}
 		}
+
+		data.touching = false;
 	}
 
 	/**
