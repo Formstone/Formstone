@@ -34,9 +34,11 @@
 
 			Prism.highlightAll();
 
-			$(".main_nav").navigation();
+			$(".js-navigation").navigation();
 
 			$(".intro ul").navigation();
+
+			$(".js-dropdown").dropdown();
 		}
 
 		return {

@@ -8,13 +8,25 @@
 	session_start();
 
 	// Figure out www_root
-	$url = strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-	$cwd = strtolower(getcwd());
-	$end = end(explode("/", $cwd));
-	$www_root = ((strpos($url, $end) > -1) ? substr($url, 0, strpos($url, $end) + strlen($end)) : $url) . "/";
+
+	if (!strpos($_SERVER["REQUEST_URI"], "demo")) {
+		$www_root = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"]));
+	} else {
+		$url = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
+
+		$cwd = strtolower(getcwd());
+		$end = end(explode("/", $cwd));
+
+		if (strpos($url, $end) > -1) {
+			$www_root = trailingSlash(substr($url, 0, strpos($url, $end) + strlen($end)));
+		} else {
+			$www_root = trailingSlash($url);
+		}
+	}
 
 	// Get requested URL
 	$current_url = $_GET["request_url"];
+
 	$path = cleanURL(str_ireplace($www_root, "", $current_url));
 
 	// Compute route
@@ -79,6 +91,13 @@
 			$url = substr($url, 0, strlen($url) - 1);
 		}
 
+		return $url;
+	}
+
+	function trailingSlash($url) {
+		if (substr($url, strlen($url) - 1, 1) !== "/") {
+			$url .= "/";
+		}
 		return $url;
 	}
 

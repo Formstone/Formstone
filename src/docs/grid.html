@@ -22,89 +22,98 @@
 	@media screen and (min-width: 980px) {
 		.label_large { display: block; }
 	}
+
+	.swap_grid.active,
+	.no-touch .swap_grid.active:hover { background: #c65032; }
 </style>
 
-<p>
-	<button data-type="fluid">Switch to Fluid Grid</button>
-	<button data-type="fluid_small">Switch to Fluid (Small) Grid</button>
-	<button data-type="adaptive">Switch to Adaptive Grid</button>
-</p>
+<script>
+	$(function() {
+		var $body = $("body");
+			$gridSelect = $("#grid_select").on("change", function() {
+				var $target = $(this),
+					type = $target.val();
+
+				$body.removeClass("fs-grid-fluid fs-grid-small-fluid")
+					 .addClass(type);
+			});
+	});
+</script>
+
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<label class="form_label" for="grid_select">Select Grid Type</label>
+		<select class="js-dropdown" name="grid_select" id="grid_select">
+			<option value="fs-grid-small-fluid">Small Fluid Grid</option>
+			<option value="fs-grid-fluid">Full Fluid Grid</option>
+			<option value="__grid-adpative">Adaptive Grid</option>
+		</select>
+	</fieldset>
+</form>
 
 <!-- Bookmarklet -->
-<!--
-<h3>Bookmarklet</h3>
+<h5>Bookmarklet</h5>
 <p>Drag the bookmarklet to your bookmarks bar.</p>
-<a href="javascript:(function(){if(typeof%20GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();" class="button bookmarklet">Gridlock</a>
+<a href="javascript:(function(){if(typeof%20FSGridBookmarklet==='undefined'){document.body.appendChild(document.createElement('script')).src='http://beta.formstone.it/js/bookmarklet/grid.js';}else{FSGridBookmarklet();}})();" class="button bookmarklet">Formstone Grid</a>
 <br class="clear">
 <p>Or, include it on every page of your development site:</p>
 <pre class="example"><code class="language-markup">&lt;script&gt;
-(function(){if(typeof GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
+(function(){if(typeof FSGridBookmarklet==='undefined'){document.body.appendChild(document.createElement('script')).src='http://beta.formstone.it/js/bookmarklet/grid.js';}else{FSGridBookmarklet();}})();
 &lt;/script&gt;</code></pre>
--->
 
 <h5>Asymmetrical</h5>
 <div class="example row">
-	<div class="row">
-		<div class="cell small-1 medium-2 large-4">
-			<span class="label_small">small-1</span>
-			<span class="label_medium">medium-2</span>
-			<span class="label_large">large-4</span>
-		</div>
-		<div class="cell small-2 medium-4 large-8">
-			<span class="label_small">small-2</span>
-			<span class="label_medium">medium-4</span>
-			<span class="label_large">large-8</span>
-		</div>
+	<div class="cell small-1 medium-2 large-4">
+		<span class="label_small">small-1</span>
+		<span class="label_medium">medium-2</span>
+		<span class="label_large">large-4</span>
+	</div>
+	<div class="cell small-2 medium-4 large-8">
+		<span class="label_small">small-2</span>
+		<span class="label_medium">medium-4</span>
+		<span class="label_large">large-8</span>
 	</div>
 </div>
 
 <h5>Symmetrical</h5>
 <div class="example row">
-	<div class="row">
-		<div class="cell small-3 medium-3 large-6">
-			<span class="label_small">small-3</span>
-			<span class="label_medium">medium-3</span>
-			<span class="label_large">large-6</span>
-		</div>
-		<div class="cell small-3 medium-3 large-6">
-			<span class="label_small">small-3</span>
-			<span class="label_medium">medium-3</span>
-			<span class="label_large">large-6</span>
-		</div>
+	<div class="cell small-3 medium-3 large-6">
+		<span class="label_small">small-3</span>
+		<span class="label_medium">medium-3</span>
+		<span class="label_large">large-6</span>
+	</div>
+	<div class="cell small-3 medium-3 large-6">
+		<span class="label_small">small-3</span>
+		<span class="label_medium">medium-3</span>
+		<span class="label_large">large-6</span>
 	</div>
 </div>
 
 <h5>3 Column</h5>
 <div class="example row">
-	<div class="row">
-		<div class="cell all-third">
-			<span class="label">all-third</span>
-		</div>
-		<div class="cell all-third">
-			<span class="label">all-third</span>
-		</div>
-		<div class="cell all-third">
-			<span class="label">all-third</span>
-		</div>
+	<div class="cell all-third">
+		<span class="label">all-third</span>
+	</div>
+	<div class="cell all-third">
+		<span class="label">all-third</span>
+	</div>
+	<div class="cell all-third">
+		<span class="label">all-third</span>
 	</div>
 </div>
 
 <h5>Push</h5>
-<div class="example">
-	<div class="row">
-		<div class="cell small-2 small-push-1 medium-3 medium-push-3 large-8 large-push-4">
-			<span class="label_small">small-2 small-push-1</span>
-			<span class="label_medium">medium-3 medium-push-3</span>
-			<span class="label_large">large-8 large-push-4</span>
-		</div>
+<div class="example row">
+	<div class="cell small-2 small-push-1 medium-3 medium-push-3 large-8 large-push-4">
+		<span class="label_small">small-2 small-push-1</span>
+		<span class="label_medium">medium-3 medium-push-3</span>
+		<span class="label_large">large-8 large-push-4</span>
 	</div>
 </div>
 
 <h5>Centered</h5>
 <div class="example row">
-	<div class="row">
-		<div class="cell all-half centered">
-			<span class="label">all-half centered</span>
-		</div>
+	<div class="cell all-half centered">
+		<span class="label">all-half centered</span>
 	</div>
 </div>
