@@ -12,6 +12,7 @@
 
 ## Widget
 
+* [Background](background.md)
 * [Carousel](carousel.md)
 * [Checkbox](checkbox.md)
 * [Dropdown](dropdown.md)

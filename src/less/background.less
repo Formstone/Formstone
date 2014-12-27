@@ -1,0 +1,89 @@
+
+
+	.fs-background {
+		overflow: hidden;
+		position: relative;
+
+		&,
+		&-container,
+		&-media {
+			transition: none;
+		}
+
+		&-container {
+			width: 100%;
+			height: 100%;
+
+			position: absolute;
+			top: 0;
+			z-index: 0;
+
+			overflow: hidden;
+		}
+
+		&-media {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+
+			opacity: 0;
+		}
+
+		&-media&-animated {
+			transition: opacity 0.5s linear;
+		}
+
+		&-media img,
+		&-media video,
+		&-media iframe {
+			width: 100%;
+			height: 100%;
+
+			display: block;
+		}
+
+		// Native / Fixed
+
+		&-media&-native,
+		&-media&-fixed {
+			width: 100%;
+			height: 100%;
+		}
+
+		&-media&-native img,
+		&-media&-fixed img {
+			display: none;
+		}
+
+		&-media&-native {
+			background-position: center;
+			background-size: cover;
+		}
+
+		&-media&-fixed {
+			background-position: center;
+			background-attachment: fixed;
+		}
+
+		// Embeds
+
+		&-embed&-ready:after {
+			width: 100%;
+			height: 100%;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 1;
+
+			content: '';
+		}
+
+		&-embed&-ready iframe {
+			z-index: 0;
+
+			// pointer-events: none; // safari doesn't like this :/
+		}
+	}

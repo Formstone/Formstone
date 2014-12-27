@@ -1,0 +1,23 @@
+<style>
+	.background { background: #eee; margin: 0 0 20px; padding-top: 50%; width: 100%; }
+	.background.square { padding-top: 100%; }
+	.background.bar { margin: -25px 0; }
+</style>
+
+<script>
+	$(function() {
+		$(".background").background();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="background" data-background-options='{"source":"http://formstone.it/files/demo/space.jpg"}'></div>
+
+<h4>Responsive</h4>
+<div class="background" data-background-options='{"source":{"fallback":"http://formstone.it/files/demo/nasa-bw-1.jpg","(min-width: 980px)":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
+
+<h4>Video</h4>
+<div class="background" data-background-options='{"source":{"webm":"http://formstone.it/files/demo/oranges.webm","mp4":"http://formstone.it/files/demo/oranges.mp4","ogg":"http://formstone.it/files/demo/oranges.ogv","poster":"http://formstone.it/files/demo/oranges.jpg"}}'></div>
+
+<h4>YouTube</h4>
+<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"}}'></div>

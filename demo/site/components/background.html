@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en" class="no-js" temp-debug="true"><head><!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script> --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Background &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="../../apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="../../apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="../../apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="../../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="../../favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="../../favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="../../mstile-144x144.png"><!-- Modernizer --><script src="../../js/modernizr.js"></script><!-- Google Fonts --><!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"> --><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../../js/site-ie8.js"></script><link rel="stylesheet" href="../../css/site-ie8.css"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../../js/site-ie9.js"></script><link rel="stylesheet" href="../../css/site-ie9.css"><![endif]--><!-- Compiled JS --><script src="../../js/site.js"></script></head><body class="fs-grid fs-grid-small-fluid"><header class="header"><a href="../" class="logo header_logo">Formstone</a><button class="header_button" id="js-nav_handle">Menu</button></header><div class="wrapper"><div class="row page_row"><div class="cell large-10 right padded"><div class="page js-nav_move"><article class="content demo"><header class="intro"><h1 id="background">Background</h1>
+<p>A jQuery plugin for full-frame image and video backgrounds.</p>
+<ul>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+</header><h2 id="demo">Demo</h2><style>
+	.background { background: #eee; margin: 0 0 20px; padding-top: 50%; width: 100%; }
+	.background.square { padding-top: 100%; }
+	.background.bar { margin: -25px 0; }
+</style>
+
+<script>
+	$(function() {
+		$(".background").background();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="background" data-background-options='{"source":"http://formstone.it/files/demo/space.jpg"}'></div>
+
+<h4>Responsive</h4>
+<div class="background" data-background-options='{"source":{"fallback":"http://formstone.it/files/demo/nasa-bw-1.jpg","(min-width: 980px)":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
+
+<h4>Video</h4>
+<div class="background" data-background-options='{"source":{"webm":"http://formstone.it/files/demo/oranges.webm","mp4":"http://formstone.it/files/demo/oranges.mp4","ogg":"http://formstone.it/files/demo/oranges.ogv","poster":"http://formstone.it/files/demo/oranges.jpg"}}'></div>
+
+<h4>YouTube</h4>
+<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"}}'></div><h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">background.js
+background.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js
+transition.js</code></pre>
+<h3 id="basic">Basic</h3>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-background-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>autoPlay</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Autoplay video</td>
+</tr>
+<tr>
+<td><code>customClass</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
+<td>Class applied to instance</td>
+</tr>
+<tr>
+<td><code>embedRatio</code></td>
+<td><code>number</code></td>
+<td><code>1.777777</code></td>
+<td>Video / embed ratio (16/9)</td>
+</tr>
+<tr>
+<td><code>hoverPlay</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Play video on hover</td>
+</tr>
+<tr>
+<td><code>loop</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Loop video</td>
+</tr>
+<tr>
+<td><code>mute</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Mute video</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>`string</td>
+<td>object`</td>
+<td><code>null</code></td>
+<td>Source image (string or object) or video (object) or YouTube (object)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loaded.background</code></td>
+<td>Background media loaded</td>
+</tr>
+<tr>
+<td><code>ready.background</code></td>
+<td>Background media ready</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="load">load</h3>
+<p>Loads source media</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;load&quot;, &quot;path/to/image.jpg&quot;);</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>`string</td>
+<td>object`</td>
+<td>&nbsp;</td>
+<td>Source image (string) or video (object) or YouTube (object); { source: { poster: &lt;&gt;, video: &lt; or {}&gt;  } }</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pause">pause</h3>
+<p>Pauses target video</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;stop&quot;);</code></pre>
+<h3 id="play">play</h3>
+<p>Plays target video</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;play&quot;);</code></pre>
+<h3 id="unload">unload</h3>
+<p>Unloads current media</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;unload&quot;);</code></pre>
+</article></div></div><div class="cell large-2 sidebar"><nav class="main_nav sidebar_content js-navigation" data-navigation-handle="#js-nav_handle" data-navigation-content=".js-nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><a href="../" class="logo sidebar_logo">Formstone</a><h5>About</h5><ul><li><a href="../start.html">Getting Started</a></li><li><a href="../upgrade.html">Upgrade Guide</a></li><li><a href="../contribute.html">Contributing</a></li></ul><h5>Library</h5><ul><li><a href="../../components/core.html">Core</a></li><li><a href="../../components/grid.html">Grid</a></li></ul><h5>Utility</h5><ul><li><a href="../../components/cookie.html">Cookie</a></li><li><a href="../../components/mediaquery.html">Media Query</a></li></ul><h5>Widget</h5><ul><li><a href="../../components/background.html">Background</a></li><li><a href="../../components/carousel.html">Carousel</a></li><li><a href="../../components/checkbox.html">Checkbox</a></li><li><a href="../../components/dropdown.html">Dropdown</a></li><li><a href="../../components/lightbox.html">Lightbox</a></li><li><a href="../../components/navigation.html">Navigation</a></li><li><a href="../../components/switch.html">Switch</a></li><li><a href="../../components/tabs.html">Tabs</a></li><li><a href="../../components/tooltip.html">Tooltip</a></li><li><a href="../../components/touch.html">Touch</a></li><li><a href="../../components/transition.html">Transition</a></li><li><a href="../../components/upload.html">Upload</a></li></ul></nav></div></div></div><footer class="row footer"><div class="cell large-10 right"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --><script></script></body></html>
