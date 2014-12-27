@@ -29,6 +29,12 @@
 
 	$path = cleanURL(str_ireplace($www_root, "", $current_url));
 
+	// Run scripts
+	if (strpos($path, ".php") && file_exists("site/" . $path)) {
+		include "site/" . $path;
+		die();
+	}
+
 	// Compute route
 	$route = routeRecursive("site/", explode("/", $path));
 
