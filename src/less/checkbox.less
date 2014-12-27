@@ -2,6 +2,8 @@
 	// Config
 
 	@fs-checkbox-margin:						0 0 10px 0;
+	@fs-checkbox-transition-duration:			0.15s;
+	@fs-checkbox-transition-timing:				ease;
 
 	// Label
 
@@ -10,10 +12,13 @@
 
 	// Marker
 
+	@fs-checkbox-marker-background:				#fff;
 	@fs-checkbox-marker-border-color:			#ccc;
 	@fs-checkbox-marker-border-radius:			3px;
 	@fs-checkbox-marker-height-width:			16px;
 	@fs-checkbox-marker-margin:					0 10px 0 0;
+
+	@fs-checkbox-flag-background:				#999;
 
 	// Focus
 
@@ -36,7 +41,7 @@
 
 	@fs-checkbox-toggle-state-color:			#666;
 	@fs-checkbox-toggle-state-font-size:		12px;
-	@fs-checkbox-toggle-state-margin:			5px 10px;
+	@fs-checkbox-toggle-state-margin:			5px 0;
 
 
 	.fs_clearfix() {
@@ -52,6 +57,22 @@
 		cursor: pointer;
 		margin: @fs-checkbox-margin;
 		overflow: hidden;
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+
+		&,
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
+			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
+		}
 
 		&-element {
 			position: absolute;
@@ -80,6 +101,7 @@
 			width: @fs-checkbox-marker-height-width;
 			height: @fs-checkbox-marker-height-width;
 
+			background: @fs-checkbox-marker-background;
 			border: 1px solid @fs-checkbox-marker-border-color;
 			border-radius: @fs-checkbox-marker-border-radius;
 			display: block;
@@ -92,21 +114,45 @@
 			height: 100%;
 
 			margin: 0;
+		}
 
-			&:before {
-				width: 100%;
-				height: 100%;
+		&-flag:before {
+			width: 5px;
+			height: 10px;
 
-				content: "\2713";
-				display: none;
-				line-height: 1;
-				text-align: center;
-			}
+			border: 2px solid @fs-checkbox-flag-background;
+			border-top: 0;
+			border-left: 0;
+			content: '';
+			display: block;
+			margin: 1px 0 0 4px;
+			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+			transform:
+				rotate(45deg)
+				scale(0);
+		}
+
+		&-checked &-flag:before {
+			transform:
+				rotate(45deg)
+				scale(1);
 		}
 
 		// Checked
 
-		&-checked &-flag:before {
+		// IE8, no transforms
+
+		.no-csstransforms &-flag:before {
+			width: 100%;
+			height: 100%;
+
+			content: "\2713";
+			display: none;
+			line-height: 1;
+			text-align: center;
+		}
+
+		.no-csstransforms &-checked &-flag:before {
 			display: block;
 		}
 
@@ -117,16 +163,33 @@
 		}
 
 		&-radio &-flag {
+			background: @fs-checkbox-flag-background;
+			border: 2px solid @fs-checkbox-marker-background;
 			border-radius: 100%;
-			border: 2px solid #fff;
-		}
-
-		&-radio&-checked &-flag {
-			background: #999;
+			transform: scale(0);
+			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
 
 			&:before {
 				display: none;
 			}
+		}
+
+		&-radio&-checked &-flag {
+			transform: scale(1);
+
+			&:before {
+				display: none;
+			}
+		}
+
+		// IE8  -no transitions
+
+		.no-csstransforms &-radio &-flag:before {
+			display: none;
+		}
+
+		.no-csstransforms &-radio&-checked &-flag:before {
+			display: block;
 		}
 
 		// Focus
@@ -191,7 +254,7 @@
 			border-radius: @fs-checkbox-marker-border-radius;
 			display: block;
 			margin: 0;
-			transition: left 0.1s ease;
+			transition: left @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
 
 			&:before {
 				display: none;
@@ -219,13 +282,20 @@
 
 		&-toggle&-checked &-flag {
 			left: 50%;
+
+			&:before {
+				display: none;
+			}
 		}
 
 		&-toggle &-state {
+			width: 50%;
+
 			color: @fs-checkbox-toggle-state-color;
 			display: block;
 			font-size: @fs-checkbox-toggle-state-font-size;
 			margin: @fs-checkbox-toggle-state-margin;
+			text-align: center;
 			text-transform: uppercase;
 
 			&_on {
