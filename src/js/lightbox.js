@@ -342,7 +342,7 @@
 		}
 
 		Instance.$lightbox.transition({
-			property: "height"
+			property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
 		},
 		function() {
 			Instance.$container.transition({
