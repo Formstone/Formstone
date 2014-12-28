@@ -11,17 +11,20 @@
 
 	function construct(data) {
 		// guid
-		data.guid         = "__" + (GUID++);
-		data.eventGuid    = Events.namespace + data.guid;
-		data.rawClassGuid = RawClasses.base + data.guid;
-		data.classGuid    = "." + data.rawClassGuid;
+		var guid         = "__" + (GUID++);
+
+		data.eventGuid    = Events.namespace + guid;
+		data.rawGuid      = RawClasses.base + guid;
+		data.classGuid    = "." + data.rawGuid;
+
+		data.mq           = "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")";
 
 		data.content      = this.attr("href");
 		data.group        = this.data(Namespace + "-group");
 
-		data.tabClasses          = [RawClasses.tab, data.rawClassGuid].join(" ");
-		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawClassGuid].join(" ");
-		data.contentClasses      = [RawClasses.content, data.rawClassGuid].join(" ");
+		data.tabClasses          = [RawClasses.tab, data.rawGuid].join(" ");
+		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid].join(" ");
+		data.contentClasses      = [RawClasses.content, data.rawGuid].join(" ");
 
 		// DOM
 
@@ -46,7 +49,7 @@
 					enabled : Classes.enabled,
 					active  : Classes.active,
 					raw: {
-						target  : data.rawClassGuid,
+						target  : data.rawGuid,
 						enabled : RawClasses.enabled,
 						active  : RawClasses.active
 					}
@@ -59,7 +62,7 @@
 		}).on("tap" + data.eventGuid, data, onMobileActivate);
 
 		// Media Query support
-		$.mediaquery("bind", "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")", {
+		$.mediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				mobileEnable.call(data.$el, data);
 			},
@@ -77,6 +80,8 @@
 	 */
 
 	function destruct(data) {
+		$.mediaquery("unbind", data.rawGuid, data.mq);
+
 		data.$mobileTab.off(Events.namespace)
 					   .touch("destroy")
 					   .remove();

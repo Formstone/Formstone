@@ -98,13 +98,14 @@ Methods are publicly available, unless otherwise stated.
 Binds callbacks to media query matching.
 
 ```javascript
-$.mediaquery("bind", "(min-width: 500px)", { ... });
+$.mediaquery("bind", "key", "(min-width: 500px)", { ... });
 ```
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `key` | `string` | &nbsp; | Instance key |
 | `media` | `string` | &nbsp; | Media query to match |
 | `data` | `object` | &nbsp; | Object containing 'enter' and 'leave' callbacks |
 

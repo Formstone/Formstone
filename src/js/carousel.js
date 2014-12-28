@@ -49,6 +49,10 @@
 	function construct(data) {
 		var i;
 
+		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+		data.mqGuid   = RawClasses.base + "__" + (GUID++);
+
 		// Legacy browser support
 		if (!Formstone.support.transform) {
 			data.useMargin = true;
@@ -119,9 +123,7 @@
 
 		// Media Query support
 
-		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
-
-		$.mediaquery("bind", "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")", {
+		$.mediaquery("bind", data.mqGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -164,6 +166,8 @@
 		Functions.clearTimer(data.autoTimer);
 
 		disable.call(this, data);
+
+		$.mediaquery("unbind", data.mqGuid, data.mq);
 
 		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
 				   .unwrap().unwrap();
@@ -768,6 +772,7 @@
 		RawClasses     = Classes.raw,
 		Events         = Plugin.events,
 		Functions      = Plugin.functions,
+		GUID           = 0,
 
 		$Window        = Formstone.$window,
 		$Instances     = [],

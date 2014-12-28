@@ -53,53 +53,62 @@
 	 * @method
 	 * @name bind
 	 * @description Binds callbacks to media query matching.
+	 * @param key [string] "Instance key"
 	 * @param media [string] "Media query to match"
 	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-	 * @example $.mediaquery("bind", "(min-width: 500px)", { ... });
+	 * @example $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
 	 */
 
-	function bind(media, data) {
+	function bind(key, media, data) {
 		var mq = Window.matchMedia(media),
-			key = createKey(mq.media);
+			mqKey = createKey(mq.media);
 
-		if (!Bindings[ key ]) {
-			Bindings[ key ] = {
+		if (!Bindings[mqKey]) {
+			Bindings[mqKey] = {
 				mq        : mq,
 				active    : true,
-				enter     : [],
-				leave     : []
+				enter     : {},
+				leave     : {}
 			};
 
-			Bindings[ key ].mq.addListener( onBindingChange );
+			Bindings[mqKey].mq.addListener(onBindingChange);
 		}
 
 		for (var i in data) {
-			if (data.hasOwnProperty(i) && Bindings[ key ].hasOwnProperty(i)) {
-				Bindings[ key ][i].push( data[i] );
+			if (data.hasOwnProperty(i) && Bindings[mqKey].hasOwnProperty(i)) {
+				Bindings[mqKey][i][key] = data[i];
 			}
 		}
 
-		onBindingChange( Bindings[ key ].mq );
+		console.log(Bindings);
+
+		onBindingChange(Bindings[mqKey].mq);
 	}
 
 	/**
 	 * method
 	 * @name unbind
 	 * @description Unbinds all callbacks from media query.
+	 * @param key [string] "Instance key"
 	 * @param media [string] "Media query to match"
-	 * @example $.mediaquery("unbind", "(min-width: 500px)");
+	 * @example $.mediaquery("key");
 	 */
 
-/*
-	function unbind(media) {
-		var key = createKey(media);
+	function unbind(key, media) {
+		var mqkey = createKey(media);
 
-		if (Bindings[ key ]) {
-			Bindings[ key ].mq.removeListener( onBindingChange );
-			Bindings = Bindings.splice(Bindings.indexOf( Bindings[ key ] ), 1);
+		// all media
+		for (var i in Bindings) {
+			if (Bindings.hasOwnProperty(i)) {
+				// all events
+				for (var j in Bindings[i]) {
+					if (Bindings[i].hasOwnProperty(j) && Bindings[i][j].hasOwnProperty(key)) {
+						delete Bindings[i][j];
+					}
+				}
+			}
 		}
 	}
-*/
 
 	/**
 	 * @method private
@@ -156,14 +165,14 @@
 	 */
 
 	function onBindingChange(mq) {
-		var key        = createKey(mq.media),
-			binding    = Bindings[ key ],
+		var mqkey      = createKey(mq.media),
+			binding    = Bindings[mqkey],
 			event      = mq.matches ? Events.enter : Events.leave;
 
 		if (binding && binding.active || (!binding.active && mq.matches)) {
-			for (var i in binding[ event ]) {
-				if (binding[ event ].hasOwnProperty(i)) {
-					binding[ event ][i].apply( binding.mq );
+			for (var i in binding[event]) {
+				if (binding[event].hasOwnProperty(i)) {
+					binding[event][i].apply(binding.mq);
 				}
 			}
 

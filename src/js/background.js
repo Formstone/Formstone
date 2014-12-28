@@ -51,8 +51,8 @@
 		data.guid         = "__" + (GUID++);
 		data.youTubeGuid  = 0;
 		data.eventGuid    = Events.namespace + data.guid;
-		data.rawClassGuid = RawClasses.base + data.guid;
-		data.classGuid    = "." + data.rawClassGuid;
+		data.rawGuid      = RawClasses.base + data.guid;
+		data.classGuid    = "." + data.rawGuid;
 
 		data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
 
@@ -86,7 +86,7 @@
 	 * @method
 	 * @name load
 	 * @description Loads source media
-	 * @param source [string | object] "Source image (string) or video (object) or YouTube (object); { source: { poster: <"">, video: <"" or {}>  } }"
+	 * @param source [string | object] "Source image (string) or video (object) or YouTube (object);"
 	 * @example $(".target").background("load", "path/to/image.jpg");
 	 */
 
@@ -127,46 +127,45 @@
 				// html5 video
 				loadVideo(data, source, firstLoad);
 			} else {
-				// regular old image
-				if (data.responsiveSource) {
-					for (var i in data.responsiveSource) {
-						if (data.responsiveSource.hasOwnProperty(i)) {
-							data.responsiveSource[i].mq.removeListener(onRespond);
-						}
-					}
-				}
-
 				data.responsive = false;
-				data.responsiveSource = null;
+				data.rSource = null;
 
 				// Responsive image handling
 				if ($.type(source) === "object") {
-					var sources = [],
-						newSource;
+					data.rSource = {};
 
-/*
-					for (var j in source) {
-						if (source.hasOwnProperty(j)) {
-							var media = (j === "fallback") ? "(min-width: 0px)" : j;
+					var keys = [];
 
-							if (media) {
-								var _mq = window.matchMedia(media.replace(Infinity, "100000px"));
-								_mq.addListener(onRespond);
+					for (i in source) {
+						if (show.hasOwnProperty(i)) {
+							keys.push(i);
+						}
+					}
+
+					keys.sort(sortAsc);
+					data.show = {};
+
+					////
+
+					for (i in keys) {
+						if (keys.hasOwnProperty(i)) {
+							data.show[ keys[i] ] = {
+								width: parseInt( keys[i] ),
+								count: show[ keys[i] ]
+							};
+						}
+					}
+
 								sources.push({
-									mq: _mq,
+									mq: media,
 									source: source[j]
 								});
-
-								if (_mq.matches) {
-									newSource = source[j];
-								}
 							}
 						}
 					}
-*/
 
 					data.responsive = true;
-					data.responsiveSource = sources;
+					data.rSource = sources;
 					source = newSource;
 				}
 
@@ -590,19 +589,19 @@
 
 	/**
 	 * @method private
-	 * @name onRespond
+	 * @name onMediaQueryChange
 	 * @description Handle media query changes
 	 */
 
-	function onRespond() {
-		//clearTimer(respondTimer);
+	function onMediaQueryChange(e, data) {
+		console.log(this, e, data);
 
 /*
 		$responders.each(function() {
 			var $target = $(this),
 				$image = $target.find("img"),
 				data = $target.parents(".wallpaper").data("wallpaper"),
-				sources = data.responsiveSource,
+				sources = data.rSource,
 				index = 0;
 
 			for (var i = 0, count = sources.length; i < count; i++) {

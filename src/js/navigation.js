@@ -13,8 +13,8 @@
 		// guid
 		data.guid         = "__" + (GUID++);
 		data.eventGuid    = Events.namespace + data.guid;
-		data.rawClassGuid = RawClasses.base + data.guid;
-		data.classGuid    = "." + data.rawClassGuid;
+		data.rawGuid      = RawClasses.base + data.guid;
+		data.classGuid    = "." + data.rawGuid;
 
 		if (data.type === "toggle") {
 			data.gravity  = "";
@@ -23,7 +23,7 @@
 		var baseClass     = RawClasses.base,
 			typeClass     = [baseClass, data.type].join("-"),
 			gravityClass  = data.gravity ? [typeClass, data.gravity].join("-") : "",
-			classGroup    = [data.rawClassGuid, data.customClass].join(" ");
+			classGroup    = [data.rawGuid, data.customClass].join(" ");
 
 		data.handle       = this.data(Namespace + "-handle");
 		data.content      = this.data(Namespace + "-content");
@@ -72,7 +72,7 @@
 							enabled : Classes.enabled,
 							active  : Classes.open,
 							raw: {
-								target  : data.rawClassGuid,
+								target  : data.rawGuid,
 								enabled : RawClasses.enabled,
 								active  : RawClasses.open
 							}

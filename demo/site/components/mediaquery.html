@@ -27,7 +27,7 @@
 			});
 		}
 
-		$.mediaquery("bind", "(min-width: 740px)", {
+		$.mediaquery("bind", "demo", "(min-width: 740px)", {
 			enter: logBind,
 			leave: logBind
 		});
@@ -155,7 +155,7 @@ Note: The `leave` callback will only fire after the target media query has been 
 <p>Methods are publicly available, unless otherwise stated.</p>
 <h3 id="bind">bind</h3>
 <p>Binds callbacks to media query matching.</p>
-<pre><code class="lang-javascript">$.mediaquery(&quot;bind&quot;, &quot;(min-width: 500px)&quot;, { ... });</code></pre>
+<pre><code class="lang-javascript">$.mediaquery(&quot;bind&quot;, &quot;key&quot;, &quot;(min-width: 500px)&quot;, { ... });</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -167,6 +167,12 @@ Note: The `leave` callback will only fire after the target media query has been 
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>key</code></td>
+<td><code>string</code></td>
+<td>&nbsp;</td>
+<td>Instance key</td>
+</tr>
 <tr>
 <td><code>media</code></td>
 <td><code>string</code></td>

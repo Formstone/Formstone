@@ -18,6 +18,9 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
+		data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
+		data.mqGuid     = data.classes.raw.base + "__" + (GUID++);
+
 		// live query for the group to avoid missing new elements
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
@@ -35,8 +38,9 @@
 			})
 			.on(Events.tap, data, onClick);
 
+
 		// Media Query support
-		$.mediaquery("bind", "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")", {
+		$.mediaquery("bind", data.mqGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -54,6 +58,8 @@
 	 */
 
 	function destruct(data) {
+		$.mediaquery("unbind", data.mqGuid, data.mq);
+
 		data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 					  .off(Events.namespace);
 
@@ -225,6 +231,7 @@
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions;
+		Functions     = Plugin.functions,
+		GUID          = 0;
 
 })(jQuery, Formstone);

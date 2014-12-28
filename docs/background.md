@@ -65,7 +65,7 @@ $(".target").background("load", "path/to/image.jpg");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `source` | `string | object` | &nbsp; | Source image (string) or video (object) or YouTube (object); { source: { poster: <>, video: < or {}>  } } |
+| `source` | `string | object` | &nbsp; | Source image (string) or video (object) or YouTube (object); |
 
 ### pause
 
