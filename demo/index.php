@@ -7,21 +7,30 @@
 
 	session_start();
 
+	include "redirects.php";
+
 	// Figure out www_root
 
-	if (!strpos($_SERVER["REQUEST_URI"], "demo")) {
+	$url = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
+
+	if (strpos($_SERVER["DOCUMENT_ROOT"], "demo") >= 0) {
 		$www_root = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"]));
 	} else {
-		$url = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
-
-		$cwd = strtolower(getcwd());
-		$end = end(explode("/", $cwd));
+		$end = end(explode("/", $_SERVER["DOCUMENT_ROOT"]));
 
 		if (strpos($url, $end) > -1) {
 			$www_root = trailingSlash(substr($url, 0, strpos($url, $end) + strlen($end)));
 		} else {
 			$www_root = trailingSlash($url);
 		}
+	}
+
+	$check = rtrim(str_ireplace($www_root, "", $url), "/");
+
+	if (array_key_exists($check, $redirects)) {
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location: " . $www_root . $redirects[$check]);
+		die();
 	}
 
 	// Get requested URL
@@ -48,6 +57,7 @@
 	if (file_exists("site/" . $route["path"] . ".html") && count($route["commands"]) == 0) {
 		$file = "site/" . $route["path"] . ".html";
 	} else {
+		header("HTTP/1.0 404 Not Found");
 		$file = "site/404.html";
 	}
 
