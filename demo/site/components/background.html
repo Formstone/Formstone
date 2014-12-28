@@ -9,7 +9,7 @@
 </ul>
 </header><h2 id="demo">Demo</h2><style>
 	.background { background: #eee; margin: 0 0 20px; padding-top: 50%; width: 100%; }
-	.background.square { padding-top: 100%; }
+	.background.square { padding-top: 150%; }
 	.background.bar { margin: -25px 0; }
 </style>
 
@@ -23,7 +23,7 @@
 <div class="background" data-background-options='{"source":"http://formstone.it/files/demo/space.jpg"}'></div>
 
 <h4>Responsive</h4>
-<div class="background" data-background-options='{"source":{"fallback":"http://formstone.it/files/demo/nasa-bw-1.jpg","(min-width: 980px)":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
+<div class="background" data-background-options='{"source":{"0px":"http://formstone.it/files/demo/nasa-bw-1.jpg","980px":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
 
 <h4>Video</h4>
 <div class="background" data-background-options='{"source":{"webm":"http://formstone.it/files/demo/oranges.webm","mp4":"http://formstone.it/files/demo/oranges.mp4","ogg":"http://formstone.it/files/demo/oranges.ogv","poster":"http://formstone.it/files/demo/oranges.jpg"}}'></div>
@@ -37,6 +37,39 @@ background.css</code></pre>
 <pre><code class="lang-markup">core.js
 transition.js</code></pre>
 <h3 id="basic">Basic</h3>
+<p>Create a new Background by passing the source image URL at initialization:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background({
+    source: &quot;http://example.com/image.jpg&quot;
+});</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
+    ...
+&lt;/div&gt;</code></pre>
+<h3 id="responsive">Responsive</h3>
+<p>Create a responsive-friendly Background by defining key/value pairs containing the <code>min-width</code> image URLs:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background({
+    source: {
+        &quot;0px&quot;: &quot;http://example.com/image-small.jpg&quot;,
+        &quot;980px&quot;: &quot;http://example.com/image-large.jpg&quot;
+    }
+});</code></pre>
+<h3 id="html5-video">HTML5 Video</h3>
+<p>Create a video Background by defining proper browser-specific source video URLs, as well as a poster image URL:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background({
+    source: {
+        poster: &quot;http://example.com/poster.jpg&quot;,
+        webm: &quot;http://example.com/video.webm&quot;,
+        mp4: &quot;http://example.com/video.mp4&quot;,
+        ogg: &quot;http://example.com/video.ogv&quot;
+    }
+});</code></pre>
+<h3 id="youtube-video">YouTube Video</h3>
+<p>Create a YouTube video Background by passing the YouTube embed URL as the source. If you do not define a poster, the YouTube thumbnail will be used:</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background({
+    source: {
+        poster: &quot;http://example.com/poster.jpg&quot;,
+        video: &quot;//www.youtube.com/embed/VIDEO_ID&quot;
+    }
+});</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-background-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
@@ -68,12 +101,6 @@ transition.js</code></pre>
 <td>Video / embed ratio (16/9)</td>
 </tr>
 <tr>
-<td><code>hoverPlay</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Play video on hover</td>
-</tr>
-<tr>
 <td><code>loop</code></td>
 <td><code>boolean</code></td>
 <td><code>true</code></td>
@@ -87,8 +114,7 @@ transition.js</code></pre>
 </tr>
 <tr>
 <td><code>source</code></td>
-<td>`string</td>
-<td>object`</td>
+<td><code>string OR object</code></td>
 <td><code>null</code></td>
 <td>Source image (string or object) or video (object) or YouTube (object)</td>
 </tr>
@@ -132,8 +158,7 @@ transition.js</code></pre>
 <tbody>
 <tr>
 <td><code>source</code></td>
-<td>`string</td>
-<td>object`</td>
+<td><code>string OR object</code></td>
 <td>&nbsp;</td>
 <td>Source image (string) or video (object) or YouTube (object);</td>
 </tr>
@@ -141,7 +166,7 @@ transition.js</code></pre>
 </table>
 <h3 id="pause">pause</h3>
 <p>Pauses target video</p>
-<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;stop&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;pause&quot;);</code></pre>
 <h3 id="play">play</h3>
 <p>Plays target video</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;play&quot;);</code></pre>

@@ -20,13 +20,13 @@
 	 */
 
 	function onResize(e) {
+		WindowWidth = $Window.width();
+
 		if ($Instances.length) {
 			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
-				Functions.iterate.call($Instances, resize);
+				Functions.iterate.call($Instances, windowResize);
 			});
 		}
-
-		WindowWidth = $Window.width();
 	}
 
 	/**
@@ -56,7 +56,7 @@
 
 		data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
 
-		this.addClass(RawClasses.base);
+		this.addClass( [RawClasses.base, data.customClass].join(" ") );
 
 		var source = data.source;
 		data.source = null;
@@ -76,7 +76,7 @@
 	function destruct(data) {
 		data.$container.remove();
 
-		this.removeClass(RawClasses.base)
+		this.removeClass( [RawClasses.base, data.customClass].join(" ") )
 			.off(Events.namespace);
 
 		cacheInstances();
@@ -86,7 +86,7 @@
 	 * @method
 	 * @name load
 	 * @description Loads source media
-	 * @param source [string | object] "Source image (string) or video (object) or YouTube (object);"
+	 * @param source [string OR object] "Source image (string) or video (object) or YouTube (object);"
 	 * @example $(".target").background("load", "path/to/image.jpg");
 	 */
 
@@ -95,15 +95,16 @@
 	 * @name loadMedia
 	 * @description Determines how to handle source media
 	 * @param data [object] "Instance data"
-	 * @param source [string | object] "Source image (string) or video (object)"
+	 * @param source [string OR object] "Source image (string) or video (object)"
 	 * @param firstLoad [boolean] "Flag for first load"
 	 */
 
 	function loadMedia(data, source, firstLoad) {
 		// Check if the source is new
 		if (source !== data.source) {
-			data.source = source;
-			data.isYouTube = false;
+			data.source        = source;
+			data.responsive    = false;
+			data.isYouTube     = false;
 
 			// Check YouTube
 			if ($.type(source) === "object" && $.type(source.video) === "string") {
@@ -123,54 +124,42 @@
 				data.posterLoaded = false;
 
 				loadYouTube(data, source, firstLoad);
-			} else if ($.type(source) === "object" && !source.hasOwnProperty("fallback")) {
+			} else if ($.type(source) === "object" && source.hasOwnProperty("poster")) {
 				// html5 video
 				loadVideo(data, source, firstLoad);
 			} else {
-				data.responsive = false;
-				data.rSource = null;
+				var newSource = source;
 
 				// Responsive image handling
 				if ($.type(source) === "object") {
-					data.rSource = {};
-
-					var keys = [];
+					var sources    = {},
+						keys       = [],
+						i;
 
 					for (i in source) {
-						if (show.hasOwnProperty(i)) {
+						if (source.hasOwnProperty(i)) {
 							keys.push(i);
 						}
 					}
 
-					keys.sort(sortAsc);
-					data.show = {};
-
-					////
+					keys.sort(Functions.sortAsc);
 
 					for (i in keys) {
 						if (keys.hasOwnProperty(i)) {
-							data.show[ keys[i] ] = {
-								width: parseInt( keys[i] ),
-								count: show[ keys[i] ]
+							sources[ keys[i] ] = {
+								width    : parseInt( keys[i] ),
+								url      : source[ keys[i] ]
 							};
 						}
 					}
 
-								sources.push({
-									mq: media,
-									source: source[j]
-								});
-							}
-						}
-					}
-
 					data.responsive = true;
-					data.rSource = sources;
-					source = newSource;
+					data.sources = sources;
+
+					newSource = calculateSource(data);
 				}
 
-				// single or responsive set
-				loadImage(data, source, false, firstLoad);
+				loadImage(data, newSource, false, firstLoad);
 			}
 		} else {
 			data.$el.trigger(Events.loaded);
@@ -178,52 +167,23 @@
 	}
 
 	/**
-	 * @method
-	 * @name pause
-	 * @description Pauses target video
-	 * @example $(".target").background("stop");
+	 * @method private
+	 * @name calculateSource
+	 * @description Determines responsive source
+	 * @param data [object] "Instance data"
+	 * @return [string] "New source url"
 	 */
 
-	function pause(data) {
-		if (data.isYouTube && data.playerReady) {
-			data.player.pauseVideo();
-		} else {
-			var $video = data.$container.find("video");
-
-			if ($video.length) {
-				$video[0].pause();
+	function calculateSource(data) {
+		if (data.responsive) {
+			for (var i in data.sources) {
+				if (data.sources.hasOwnProperty(i) && WindowWidth >= data.sources[i].width) {
+					return data.sources[i].url;
+				}
 			}
 		}
-	}
 
-	/**
-	 * @method
-	 * @name play
-	 * @description Plays target video
-	 * @example $(".target").background("play");
-	 */
-
-	function play(data) {
-		if (data.isYouTube && data.playerReady) {
-			data.player.playVideo();
-		} else {
-			var $video = data.$container.find("video");
-
-			if ($video.length) {
-				$video[0].play();
-			}
-		}
-	}
-
-	/**
-	 * @method
-	 * @name unload
-	 * @description Unloads current media
-	 * @example $(".target").background("unload");
-	 */
-
-	function unload(data) {
-		unloadMedia(data);
+		return data.source;
 	}
 
 	/**
@@ -259,20 +219,11 @@
 				}
 			}).css({ opacity: 1 });
 
-			resize(data);
-
-/*
-			if (data.responsive && firstLoad) {
-				cleanMedia(data);
-			}
-*/
+			resizeInstance(data);
 
 			if (!poster || firstLoad) {
 				data.$el.trigger(Events.loaded);
 			}
-
-			// caches responsive images
-			//$responders = $(Classes.responsive);
 		}).attr("src", newSource);
 
 		if (data.responsive) {
@@ -338,15 +289,12 @@
 					cleanMedia(data);
 				}).css({ opacity: 1 });
 
-				resize(data);
+				resizeInstance(data);
 
 				data.$el.trigger(Events.loaded);
 
 				// Events
-				if (data.hoverPlay) {
-					data.$el.on(Events.mouseOver, play)
-							.on(Events.mouseOut, pause);
-				} else if (data.autoPlay) {
+				if (data.autoPlay) {
 					this.play();
 				}
 			});
@@ -434,10 +382,7 @@
 								data.player.mute();
 							}
 
-							if (data.hoverPlay) {
-								data.$el.on(Events.mouseOver, play)
-										.on(Events.mouseOut, pause);
-							} else if (data.autoPlay) {
+							if (data.autoPlay) {
 								// make sure the video plays
 								data.player.playVideo();
 							}
@@ -448,7 +393,7 @@
 							if (!data.playing && e.data === window.YT.PlayerState.PLAYING) {
 								data.playing = true;
 
-								if (data.hoverPlay || !data.autoPlay) {
+								if (!data.autoPlay) {
 									data.player.pauseVideo();
 								}
 
@@ -459,7 +404,7 @@
 									cleanMedia(data);
 								}).css({ opacity: 1 });
 
-								resize(data);
+								resizeInstance(data);
 
 								data.$el.trigger(Events.loaded);
 							} else if (data.loop && data.playing && e.data === window.YT.PlayerState.ENDED) {
@@ -489,7 +434,7 @@
 		        });
 
 				// Resize
-				resize(data);
+				resizeInstance(data);
 			}
 		}
 	}
@@ -508,9 +453,14 @@
 			$media.not(":last").remove();
 			data.oldPlayer = null;
 		}
-
-		//$responders = $(Classes.responsive);
 	}
+
+	/**
+	 * @method
+	 * @name unload
+	 * @description Unloads current media
+	 * @example $(".target").background("unload");
+	 */
 
 	/**
 	 * @method private
@@ -534,13 +484,79 @@
 	}
 
 	/**
+	 * @method
+	 * @name pause
+	 * @description Pauses target video
+	 * @example $(".target").background("pause");
+	 */
+
+	function pause(data) {
+		if (data.isYouTube && data.playerReady) {
+			data.player.pauseVideo();
+		} else {
+			var $video = data.$container.find("video");
+
+			if ($video.length) {
+				$video[0].pause();
+			}
+		}
+	}
+
+	/**
+	 * @method
+	 * @name play
+	 * @description Plays target video
+	 * @example $(".target").background("play");
+	 */
+
+	function play(data) {
+		if (data.isYouTube && data.playerReady) {
+			data.player.playVideo();
+		} else {
+			var $video = data.$container.find("video");
+
+			if ($video.length) {
+				$video[0].play();
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name windowResize
+	 * @description Handle window resize event
+	 * @param data [object] "Instance data"
+	 */
+
+	function windowResize(data) {
+		if (data.responsive) {
+			var newSource = calculateSource(data);
+
+			if (newSource !== data.source) {
+				loadImage(data, newSource, false, true);
+			} else {
+				resizeInstance(data);
+			}
+		} else {
+			resizeInstance(data);
+		}
+	}
+
+	/**
 	 * @method private
 	 * @name resize
+	 * @description Resize target instance
+	 * @example $(".target").background("resize");
+	 */
+
+	/**
+	 * @method private
+	 * @name resizeInstance
 	 * @description Resize target instance
 	 * @param data [object] "Instance data"
 	 */
 
-	function resize(data) {
+	function resizeInstance(data) {
 		// Target all media
 		var $all = data.$container.find(Classes.media);
 
@@ -589,46 +605,13 @@
 
 	/**
 	 * @method private
-	 * @name onMediaQueryChange
-	 * @description Handle media query changes
-	 */
-
-	function onMediaQueryChange(e, data) {
-		console.log(this, e, data);
-
-/*
-		$responders.each(function() {
-			var $target = $(this),
-				$image = $target.find("img"),
-				data = $target.parents(".wallpaper").data("wallpaper"),
-				sources = data.rSource,
-				index = 0;
-
-			for (var i = 0, count = sources.length; i < count; i++) {
-				if (sources.hasOwnProperty(i)) {
-					var match = sources[i].mq;
-
-					if (match && match.matches) {
-						index = i;
-					}
-				}
-			}
-
-			loadImage(data, sources[index].source, false, true);
-
-			$target.trigger("change.wallpaper");
-		});
-*/
-	}
-
-	/**
-	 * @method private
 	 * @name naturalSize
 	 * @description Determines natural size of target media
 	 * @param data [object] "Instance data"
 	 * @param $media [jQuery object] "Source media object"
-	 * @return [object | boolean] "Object containing natural height and width values or false"
+	 * @return [object OR boolean] "Object containing natural height and width values or false"
 	 */
+
 	function naturalSize(data, $media) {
 		if (data.isYouTube) {
 			return {
@@ -677,16 +660,14 @@
 			 * @param autoPlay [boolean] <true> "Autoplay video"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param embedRatio [number] <1.777777> "Video / embed ratio (16/9)"
-			 * @param hoverPlay [boolean] <false> "Play video on hover"
 			 * @param loop [boolean] <true> "Loop video"
 			 * @param mute [boolean] <true> "Mute video"
-			 * @param source [string | object] <null> "Source image (string or object) or video (object) or YouTube (object)"
+			 * @param source [string OR object] <null> "Source image (string or object) or video (object) or YouTube (object)"
 			 */
 			defaults: {
 				autoPlay       : true,
 				customClass    : "",
 				embedRatio     : 1.777777,
-				hoverPlay      : false,
 				loop           : true,
 				mute           : true,
 				source         : null
@@ -721,7 +702,9 @@
 
 				play          : play,
 				pause         : pause,
-				load          : loadMedia
+				resize        : resizeInstance,
+				load          : loadMedia,
+				unload        : unloadMedia
 			}
 		}),
 
@@ -734,7 +717,6 @@
 
 		Window          = Formstone.window,
 		$Window         = Formstone.$window,
-		Doc             = Formstone.document,
 		$Instances      = [],
 		GUID            = 0,
 
@@ -742,7 +724,7 @@
 		ResizeTimer     = null,
 		Debounce        = 20,
 
-		BGSupport       = ("backgroundSize" in Doc.documentElement.style),
+		BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
 		YouTubeReady    = false,
 		YouTubeQueue    = [];
 

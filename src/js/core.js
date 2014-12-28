@@ -279,6 +279,32 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
+			 * @name sortAsc
+			 * @description Sorts an array (ascending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			function sortAsc(a, b) {
+				return (parseInt(b) - parseInt(a));
+			}
+
+			/**
+			 * @method private
+			 * @name sortDesc
+			 * @description Sorts an array (descending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			function sortDesc(a, b) {
+				return (parseInt(b) - parseInt(a));
+			}
+
+			/**
+			 * @method private
 			 * @name delegateWidget
 			 * @description Delegates public methods.
 			 * @param method [string] "Method to execute"
@@ -361,7 +387,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				clearTimer      : clearTimer,
 				killEvent       : killEvent,
 				iterate         : iterate,
-				prefix          : prefix
+				prefix          : prefix,
+				sortAsc         : sortAsc,
+				sortDesc        : sortDesc
 			}, settings.functions);
 
 			// Extend Methods

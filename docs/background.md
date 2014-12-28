@@ -25,6 +25,61 @@ transition.js
 
 ### Basic
 
+Create a new Background by passing the source image URL at initialization:
+
+```javascript
+$(".target").background({
+	source: "http://example.com/image.jpg"
+});
+```
+
+```markup
+<div class="target">
+	...
+</div>
+```
+
+### Responsive
+
+Create a responsive-friendly Background by defining key/value pairs containing the `min-width` image URLs:
+
+
+```javascript
+$(".target").background({
+	source: {
+		"0px": "http://example.com/image-small.jpg",
+		"980px": "http://example.com/image-large.jpg"
+	}
+});
+```
+
+### HTML5 Video
+
+Create a video Background by defining proper browser-specific source video URLs, as well as a poster image URL:
+
+```javascript
+$(".target").background({
+	source: {
+		poster: "http://example.com/poster.jpg",
+		webm: "http://example.com/video.webm",
+		mp4: "http://example.com/video.mp4",
+		ogg: "http://example.com/video.ogv"
+	}
+});
+```
+
+### YouTube Video
+
+Create a YouTube video Background by passing the YouTube embed URL as the source. If you do not define a poster, the YouTube thumbnail will be used:
+
+```javascript
+$(".target").background({
+	source: {
+		poster: "http://example.com/poster.jpg",
+		video: "//www.youtube.com/embed/VIDEO_ID"
+	}
+});
+```
 
 ## Options
 
@@ -35,10 +90,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoPlay` | `boolean` | `true` | Autoplay video |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `embedRatio` | `number` | `1.777777` | Video / embed ratio (16/9) |
-| `hoverPlay` | `boolean` | `false` | Play video on hover |
 | `loop` | `boolean` | `true` | Loop video |
 | `mute` | `boolean` | `true` | Mute video |
-| `source` | `string | object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
+| `source` | `string OR object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
 
 ## Events
 
@@ -65,14 +119,14 @@ $(".target").background("load", "path/to/image.jpg");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `source` | `string | object` | &nbsp; | Source image (string) or video (object) or YouTube (object); |
+| `source` | `string OR object` | &nbsp; | Source image (string) or video (object) or YouTube (object); |
 
 ### pause
 
 Pauses target video
 
 ```javascript
-$(".target").background("stop");
+$(".target").background("pause");
 ```
 
 ### play

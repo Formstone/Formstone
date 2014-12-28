@@ -24,10 +24,10 @@
 
 		// Sort
 
-		Defaults.minWidth.sort(sortDesc);
-		Defaults.maxWidth.sort(sortAsc);
-		Defaults.minHeight.sort(sortDesc);
-		Defaults.maxHeight.sort(sortAsc);
+		Defaults.minWidth.sort(Functions.sortDesc);
+		Defaults.maxWidth.sort(Functions.sortAsc);
+		Defaults.minHeight.sort(Functions.sortDesc);
+		Defaults.maxHeight.sort(Functions.sortAsc);
 
 		// Bind Media Query Matches
 
@@ -79,8 +79,6 @@
 				Bindings[mqKey][i][key] = data[i];
 			}
 		}
-
-		console.log(Bindings);
 
 		onBindingChange(Bindings[mqKey].mq);
 	}
@@ -182,32 +180,6 @@
 
 	/**
 	 * @method private
-	 * @name sortAsc
-	 * @description Sorts an array (ascending).
-	 * @param a [mixed] "First value"
-	 * @param b [mixed] "Second value"
-	 * @return Difference between second and first values
-	 */
-
-	function sortAsc(a, b) {
-		return (b - a);
-	}
-
-	/**
-	 * @method private
-	 * @name sortDesc
-	 * @description Sorts an array (descending).
-	 * @param a [mixed] "First value"
-	 * @param b [mixed] "Second value"
-	 * @return Difference between first and second values
-	 */
-
-	function sortDesc(a, b) {
-		return (a - b);
-	}
-
-	/**
-	 * @method private
 	 * @name createKey
 	 * @description Creates valid object key from string.
 	 * @param text [String] "String to create key from"
@@ -283,6 +255,8 @@
 
 		$Window        = Formstone.$window,
 		Window         = $Window[0],
+
+		Functions      = Formstone.functions,
 
 		// Internal
 

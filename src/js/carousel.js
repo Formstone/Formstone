@@ -20,13 +20,13 @@
 	 */
 
 	function onResize(e) {
+		WindowWidth = $Window.width();
+
 		if ($Instances.length) {
 			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
 				Functions.iterate.call($Instances, resize);
 			});
 		}
-
-		WindowWidth = $Window.width();
 	}
 
 	/**
@@ -108,7 +108,7 @@
 				}
 			}
 
-			keys.sort(sortAsc);
+			keys.sort(Functions.sortAsc);
 			data.show = {};
 
 			for (i in keys) {
@@ -570,19 +570,6 @@
 		} else {
 			return data.show;
 		}
-	}
-
-	/**
-	 * @method private
-	 * @name sortAsc
-	 * @description Sorts an array (ascending).
-	 * @param a [mixed] "First value"
-	 * @param b [mixed] "Second value"
-	 * @return Difference between second and first values
-	 */
-
-	function sortAsc(a, b) {
-		return ( parseInt(b) - parseInt(a) );
 	}
 
 	/**
