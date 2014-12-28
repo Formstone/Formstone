@@ -53,6 +53,7 @@
         "dist/js/lightbox.js",
         "dist/js/mediaquery.js",
         "dist/js/navigation.js",
+        "dist/js/scrollbar.js",
         "dist/js/switch.js",
         "dist/js/tabs.js",
         "dist/js/tooltip.js",

@@ -14,9 +14,11 @@ Formstone components are now bundled as a single package. Developers should stil
 | Picker | [Checkbox](../components/checkbox/) |
 | Roller | [Carousel](../components/carousel/) |
 | Rubberband | [Media Query](../components/mediaquery/) |
+| Scroller | [Scrollbar](../components/scrollbar/) |
 | Selecter | [Dropdown](../components/dropdown/) |
 | Shifter | [Navigation](../components/navigation/) |
 | Tabber | [Tabs](../components/tabs/) |
 | Tipper | [Tooltip](../components/tooltip/) |
+| Wallpaper | [Background](../components/background/) |
 
 Customized components will need to be updated as selectors and based styles have changed. There will also be some breaking changes that will require testing all javascript before deployment - this is not a drop-in update.

@@ -13,6 +13,7 @@ module.exports = function(grunt) {
 		'dist/css/dropdown.css'      : [ 'src/less/dropdown.less' ],
 		'dist/css/lightbox.css'      : [ 'src/less/lightbox.less' ],
 		'dist/css/navigation.css'    : [ 'src/less/navigation.less' ],
+		'dist/css/scrollbar.css'     : [ 'src/less/scrollbar.less' ],
 		'dist/css/tabs.css'          : [ 'src/less/tabs.less' ],
 		'dist/css/tooltip.css'       : [ 'src/less/tooltip.less' ],
 		'dist/css/upload.css'        : [ 'src/less/upload.less' ]

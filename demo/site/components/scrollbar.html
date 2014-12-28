@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="en" class="no-js" temp-debug="true"><head><!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script> --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Scrollbar &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="../../apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="../../apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="../../apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="../../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="../../favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="../../favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="../../mstile-144x144.png"><!-- Modernizer --><script src="../../js/modernizr.js"></script><!-- Google Fonts --><!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"> --><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../../js/site-ie8.js"></script><link rel="stylesheet" href="../../css/site-ie8.css"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../../js/site-ie9.js"></script><link rel="stylesheet" href="../../css/site-ie9.css"><![endif]--><!-- Compiled JS --><script src="../../js/site.js"></script></head><body class="fs-grid fs-grid-small-fluid"><header class="header"><a href="../" class="logo header_logo">Formstone</a><button class="header_button" id="js-nav_handle">Menu</button></header><div class="wrapper"><div class="row page_row"><div class="cell large-10 right padded"><div class="page js-nav_move"><article class="content demo"><header class="intro"><h1 id="scrollbar">Scrollbar</h1>
+<p>A jQuery plugin for .</p>
+<ul>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#methods">Methods</a></li>
+</ul>
+</header><h2 id="demo">Demo</h2><style>
+	.scrollbar { border: 1px solid #eee; height: 200px; overflow: auto; margin: 20px 0 0; padding: 10px 20px 10px 20px; }
+	.scrollbar.fs-scrollbar { padding: 0; }
+	.scrollbar.fs-scrollbar .fs-scrollbar-content,
+	.scrollbar.fs-scrollbar-active .fs-scrollbar-content { padding: 20px 40px 20px 20px; }
+
+	.scrollbar p { margin: 0 0 20px; }
+
+	.scrollbar.horizontal { height: 320px; padding: 0; }
+
+	.wide_load { width: 2400px; overflow: hidden; padding: 20px 0 20px 20px; }
+	.wide_load p { float: left; margin: 0 25px 0 0; width: 450px; }
+
+	.custom_scrollbar .fs-scrollbar-handle { background: #900; border: none; border-radius: 0; right: 0; width: 100%; }
+</style>
+
+<script>
+	$(function() {
+		$(".scrollbar").scrollbar();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="scrollbar">
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi. Aenean rutrum, enim sit amet rutrum fermentum, magna justo volutpat massa, lacinia adipiscing nisl magna eget nibh. In auctor, nibh eget faucibus tristique, arcu turpis molestie orci, placerat suscipit diam nibh et erat. Curabitur tempus lectus quis odio ornare porta.</p>
+	<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+	<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+	<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies. Praesent porttitor nulla non risus porta consequat. Nunc vulputate porta nulla non ultrices. Donec et magna eu nisl elementum scelerisque. Curabitur in vehicula dui.</p>
+	<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. Aliquam ornare, nunc sit amet porttitor ornare, libero lectus congue enim, vitae tincidunt sapien justo et ligula. Proin vestibulum blandit fringilla. </p>
+</div>
+
+<h4>Customized</h4>
+<div class="scrollbar" data-scrollbar-options='{"customClass":"custom_scrollbar","trackMargin":15,"handleSize":40}'>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi. Aenean rutrum, enim sit amet rutrum fermentum, magna justo volutpat massa, lacinia adipiscing nisl magna eget nibh. In auctor, nibh eget faucibus tristique, arcu turpis molestie orci, placerat suscipit diam nibh et erat. Curabitur tempus lectus quis odio ornare porta.</p>
+	<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+	<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+	<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies. Praesent porttitor nulla non risus porta consequat. Nunc vulputate porta nulla non ultrices. Donec et magna eu nisl elementum scelerisque. Curabitur in vehicula dui.</p>
+	<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. Aliquam ornare, nunc sit amet porttitor ornare, libero lectus congue enim, vitae tincidunt sapien justo et ligula. Proin vestibulum blandit fringilla. </p>
+</div>
+
+<h4>Horizontal</h4>
+<div class="scrollbar horizontal" data-scrollbar-options='{"horizontal":true}'>
+	<div class="wide_load">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi.</p>
+		<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+		<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+		<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies.</p>
+		<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. </p>
+	</div>
+</div><h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">scrollbar.js
+scrollbar.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js</code></pre>
+<h3 id="basic">Basic</h3>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-scrollbar-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>customClass</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
+<td>Class applied to instance</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Scroll animation length</td>
+</tr>
+<tr>
+<td><code>handleSize</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Handle size; 0 to auto size</td>
+</tr>
+<tr>
+<td><code>horizontal</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Scroll horizontally</td>
+</tr>
+<tr>
+<td><code>trackMargin</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.scrollbar(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).scrollbar(&quot;destroy&quot;);</code></pre>
+<h3 id="resize">resize</h3>
+<p>Resizes layout on instance of plugin</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).scrollbar(&quot;resize&quot;);</code></pre>
+<h3 id="scroll">scroll</h3>
+<p>Scrolls instance of plugin to element or position</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).scrollbar(&quot;scroll&quot;, position, duration);</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>position</code></td>
+<td>`string</td>
+<td></td>
+<td>int`</td>
+<td><code>null</code></td>
+<td>Target element selector or static position</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td><code>int</code></td>
+<td><code>null</code></td>
+<td>Optional scroll duration</td>
+</tr>
+</tbody>
+</table>
+</article></div></div><div class="cell large-2 sidebar"><nav class="main_nav sidebar_content js-navigation" data-navigation-handle="#js-nav_handle" data-navigation-content=".js-nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><a href="../" class="logo sidebar_logo">Formstone</a><h5>About</h5><ul><li><a href="../start.html">Getting Started</a></li><li><a href="../upgrade.html">Upgrade Guide</a></li><li><a href="../contribute.html">Contributing</a></li></ul><h5>Library</h5><ul><li><a href="../../components/core.html">Core</a></li><li><a href="../../components/grid.html">Grid</a></li></ul><h5>Utility</h5><ul><li><a href="../../components/cookie.html">Cookie</a></li><li><a href="../../components/mediaquery.html">Media Query</a></li></ul><h5>Widget</h5><ul><li><a href="../../components/background.html">Background</a></li><li><a href="../../components/carousel.html">Carousel</a></li><li><a href="../../components/checkbox.html">Checkbox</a></li><li><a href="../../components/dropdown.html">Dropdown</a></li><li><a href="../../components/lightbox.html">Lightbox</a></li><li><a href="../../components/navigation.html">Navigation</a></li><li><a href="../../components/scrollbar.html">Scrollbar</a></li><li><a href="../../components/switch.html">Switch</a></li><li><a href="../../components/tabs.html">Tabs</a></li><li><a href="../../components/tooltip.html">Tooltip</a></li><li><a href="../../components/touch.html">Touch</a></li><li><a href="../../components/transition.html">Transition</a></li><li><a href="../../components/upload.html">Upload</a></li></ul></nav></div></div></div><footer class="row footer"><div class="cell large-10 right"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --><script></script></body></html>

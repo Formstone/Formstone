@@ -1,0 +1,50 @@
+<style>
+	.scrollbar { border: 1px solid #eee; height: 200px; overflow: auto; margin: 20px 0 0; padding: 10px 20px 10px 20px; }
+	.scrollbar.fs-scrollbar { padding: 0; }
+	.scrollbar.fs-scrollbar .fs-scrollbar-content,
+	.scrollbar.fs-scrollbar-active .fs-scrollbar-content { padding: 20px 40px 20px 20px; }
+
+	.scrollbar p { margin: 0 0 20px; }
+
+	.scrollbar.horizontal { height: 320px; padding: 0; }
+
+	.wide_load { width: 2400px; overflow: hidden; padding: 20px 0 20px 20px; }
+	.wide_load p { float: left; margin: 0 25px 0 0; width: 450px; }
+
+	.custom_scrollbar .fs-scrollbar-handle { background: #900; border: none; border-radius: 0; right: 0; width: 100%; }
+</style>
+
+<script>
+	$(function() {
+		$(".scrollbar").scrollbar();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="scrollbar">
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi. Aenean rutrum, enim sit amet rutrum fermentum, magna justo volutpat massa, lacinia adipiscing nisl magna eget nibh. In auctor, nibh eget faucibus tristique, arcu turpis molestie orci, placerat suscipit diam nibh et erat. Curabitur tempus lectus quis odio ornare porta.</p>
+	<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+	<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+	<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies. Praesent porttitor nulla non risus porta consequat. Nunc vulputate porta nulla non ultrices. Donec et magna eu nisl elementum scelerisque. Curabitur in vehicula dui.</p>
+	<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. Aliquam ornare, nunc sit amet porttitor ornare, libero lectus congue enim, vitae tincidunt sapien justo et ligula. Proin vestibulum blandit fringilla. </p>
+</div>
+
+<h4>Customized</h4>
+<div class="scrollbar" data-scrollbar-options='{"customClass":"custom_scrollbar","trackMargin":15,"handleSize":40}'>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi. Aenean rutrum, enim sit amet rutrum fermentum, magna justo volutpat massa, lacinia adipiscing nisl magna eget nibh. In auctor, nibh eget faucibus tristique, arcu turpis molestie orci, placerat suscipit diam nibh et erat. Curabitur tempus lectus quis odio ornare porta.</p>
+	<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+	<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+	<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies. Praesent porttitor nulla non risus porta consequat. Nunc vulputate porta nulla non ultrices. Donec et magna eu nisl elementum scelerisque. Curabitur in vehicula dui.</p>
+	<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. Aliquam ornare, nunc sit amet porttitor ornare, libero lectus congue enim, vitae tincidunt sapien justo et ligula. Proin vestibulum blandit fringilla. </p>
+</div>
+
+<h4>Horizontal</h4>
+<div class="scrollbar horizontal" data-scrollbar-options='{"horizontal":true}'>
+	<div class="wide_load">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla porta aliquet gravida. Aenean pulvinar blandit orci vel fermentum. Phasellus viverra pulvinar viverra. Quisque et sagittis ante. Nulla sem neque, fermentum at laoreet vel, rhoncus sit amet nisl. Donec consectetur urna ac massa placerat ac pharetra sem mollis. Integer nibh urna, placerat vel placerat in, tempor at nisi.</p>
+		<p>Aenean odio libero, eleifend eu luctus quis, accumsan ac risus. Mauris egestas bibendum tortor vel semper. Ut egestas, erat ut rutrum tempus, massa erat commodo arcu, id congue justo odio ac erat. Quisque non purus et nunc consequat scelerisque. Vestibulum vitae tristique dolor. Suspendisse ac quam interdum libero euismod tempus. Sed a ante justo, varius commodo urna.</p>
+		<p>Ut ante felis, malesuada eu eleifend convallis, tempor eget tellus. Vestibulum rhoncus elementum dui a sagittis. Praesent eu nunc vitae massa cursus luctus ac eget massa. Etiam sagittis nibh nisi, vel sagittis felis. Aliquam vulputate mauris id nunc pellentesque at fermentum lacus dapibus. Donec pretium consectetur magna sit amet egestas. Ut dignissim adipiscing purus sit amet lobortis.</p>
+		<p>Curabitur ullamcorper, nisi quis convallis luctus, nunc nisi mollis felis, eu mattis nunc sapien sed sapien. Vestibulum in nisi mauris, mattis sagittis lacus. Pellentesque in sem augue, a blandit augue. Aliquam bibendum diam ac erat imperdiet vestibulum. Vivamus dignissim, quam in feugiat scelerisque, enim risus interdum turpis, in vehicula ante lorem eu erat. Mauris ac turpis luctus libero pulvinar ultricies.</p>
+		<p>Suspendisse eu nibh in libero euismod condimentum eget nec enim. Suspendisse nec ligula nec augue tristique semper sed suscipit erat. Integer et nunc a augue pellentesque fringilla. Nullam leo ligula, mattis id pretium ac, suscipit sed nunc. Duis ac lorem nec velit malesuada tempus hendrerit ut metus. Quisque a lacus vel lectus rhoncus luctus. </p>
+	</div>
+</div>

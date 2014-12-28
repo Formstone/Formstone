@@ -18,6 +18,7 @@
 * [Dropdown](dropdown.md)
 * [Lightbox](lightbox.md)
 * [Navigation](navigation.md)
+* [Scrollbar](scrollbar.md)
 * [Switch](switch.md)
 * [Tabs](tabs.md)
 * [Tooltip](tooltip.md)
