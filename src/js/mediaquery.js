@@ -256,7 +256,7 @@
 		$Window        = Formstone.$window,
 		Window         = $Window[0],
 
-		Functions      = Formstone.functions,
+		Functions      = Plugin.functions,
 
 		// Internal
 
