@@ -55,6 +55,7 @@
 		data.$animate    = $().add(data.$nav).add(data.$content);
 
 		if (data.label) {
+			data.originalLabel = data.$handle.text();
 			data.$handle.text(data.labels.closed);
 		}
 
@@ -93,6 +94,7 @@
 		data.$handle.attr("data-switch-target", "")
 					.removeClass(data.handleClasses)
 					.off(data.eventGuid)
+					.text(data.originalLabel)
 					.switch("destroy");
 
 		this.removeClass(data.navClasses)
@@ -140,7 +142,8 @@
 	 */
 
 	function disable(data) {
-		data.$handle.switch("disable");
+		data.$handle.text(data.originalLabel)
+					.switch("disable");
 	}
 
 	/**

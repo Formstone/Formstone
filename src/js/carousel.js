@@ -309,7 +309,8 @@
 			});
 
 			data.$items.css({
-				width: data.itemWidth
+				width: data.itemWidth,
+				height: ""
 			}).removeClass(RawClasses.visible);
 
 			// initial page
