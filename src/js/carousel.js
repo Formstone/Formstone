@@ -206,7 +206,8 @@
 						  .css( Functions.prefix(TransitionProperty, "none") );
 
 			data.$items.css({
-				width: ""
+				width: "",
+				height: ""
 			});
 
 			data.$controls.removeClass(RawClasses.visible);
@@ -280,7 +281,9 @@
 		if (data.enabled) {
 			var i,
 				j,
-				$items;
+				$items,
+				$first,
+				height;
 
 			data.count = data.$items.length;
 
@@ -296,6 +299,7 @@
 
 			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
 			data.itemWidth  = (data.width - (data.itemMargin * (data.visible - 1))) / data.visible;
+			data.itemHeight = 0;
 
 			data.pageWidth = data.paged ? data.itemWidth : data.width;
 			data.pageCount = Math.ceil(data.count / data.perPage);
@@ -318,10 +322,18 @@
 					$items = data.$items.slice(data.$items.length - data.perPage);
 				}
 
+				$first = $items.eq(0);
+				height = $first.outerHeight();
+
 				data.pages.push({
-					left      : $items.eq(0).position().left,
+					left      : $first.position().left,
+					height    : height,
 					$items    : $items
 				});
+
+				if (height > data.itemHeight) {
+					data.itemHeight = height;
+				}
 
 				j++;
 			}
@@ -331,6 +343,13 @@
 			}
 
 			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
+
+			// auto height
+			if (data.autoHeight) {
+				data.$items.css({
+					height: data.itemHeight
+				});
+			}
 
 			// Reset Page Count
 			var html = '';
@@ -675,6 +694,7 @@
 			/**
 			 * @options
 			 * @param autoAdvance [boolean] <false> "Flag to auto advance items"
+			 * @param autoHeight [boolean] <false> "Flag to auto-size items"
 			 * @param autoTime [int] <8000> "Auto advance time"
 			 * @param controls [boolean] <true> "Flag to draw controls"
 			 * @param customClass [string] <''> "Class applied to instance"
@@ -692,6 +712,7 @@
 
 			defaults: {
 				autoAdvance    : false,
+				autoHeight     : false,
 				autoTime       : 8000,
 				controls       : true,
 				customClass    : "",

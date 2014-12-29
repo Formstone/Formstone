@@ -69,6 +69,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `autoAdvance` | `boolean` | `false` | Flag to auto advance items |
+| `autoHeight` | `boolean` | `false` | Flag to auto-size items |
 | `autoTime` | `int` | `8000` | Auto advance time |
 | `controls` | `boolean` | `true` | Flag to draw controls |
 | `customClass` | `string` | `''` | Class applied to instance |
