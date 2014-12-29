@@ -429,10 +429,10 @@
 	 */
 
 	function previousItem(data) {
-		var index = data.index + 1;
+		var index = data.index - 1;
 
-		if (index >= data.pageCount) {
-			index = 0;
+		if (data.infinite && index < 0) {
+			index = data.pageCount;
 		}
 
 		position(data, index);
@@ -455,7 +455,7 @@
 	function nextItem(data) {
 		var index = data.index + 1;
 
-		if (index >= data.pageCount) {
+		if (data.infinite && index >= data.pageCount) {
 			index = 0;
 		}
 
