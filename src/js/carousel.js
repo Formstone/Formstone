@@ -24,7 +24,7 @@
 
 		if ($Instances.length) {
 			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
-				Functions.iterate.call($Instances, resize);
+				Functions.iterate.call($Instances, resizeInstance);
 			});
 		}
 	}
@@ -251,22 +251,7 @@
 			  .on(Events.swipe, data, onSwipe)
 			  .css( Functions.prefix(TransitionProperty, "") );
 
-			resize.call(this, data);
-		}
-	}
-
-	/**
-	 * @method
-	 * @name jump
-	 * @description Jump instance of plugin to specific page
-	 * @example $(".target").carousel("jump", 1);
-	 */
-
-	function jump(data, index) {
-		if (data.enabled) {
-			Functions.clearTimer(data.autoTimer);
-
-			position(data, index-1);
+			resizeInstance.call(this, data);
 		}
 	}
 
@@ -277,7 +262,14 @@
 	 * @example $(".target").carousel("resize");
 	 */
 
-	function resize(data) {
+	/**
+	 * @method private
+	 * @name resizeInstance
+	 * @description Resizes each instance
+	 * @param data [object] "Instance data"
+	 */
+
+	function resizeInstance(data) {
 		if (data.enabled) {
 			var i,
 				j,
@@ -384,12 +376,90 @@
 	 * @example $(".target").carousel("reset");
 	 */
 
-	function reset(data) {
+	/**
+	 * @method private
+	 * @name resetInstance
+	 * @description Resets instance after item change
+	 * @param data [object] "Instance data"
+	 */
+
+	function resetInstance(data) {
 		if (data.enabled) {
 			data.$items = data.$canister.children().addClass(RawClasses.item);
 
-			resize.call(this, data);
+			resizeInstance.call(this, data);
 		}
+	}
+
+	/**
+	 * @method
+	 * @name jump
+	 * @description Jump instance of plugin to specific page
+	 * @example $(".target").carousel("jump", 1);
+	 */
+
+	/**
+	 * @method private
+	 * @name jumpToItem
+	 * @description Jump instance of plugin to specific page
+	 * @param data [object] "Instance data"
+	 * @param index [int] "New index"
+	 */
+
+	function jumpToItem(data, index) {
+		if (data.enabled) {
+			Functions.clearTimer(data.autoTimer);
+
+			position(data, index-1);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name previous
+	 * @description Move to the previous item
+	 * @example $(".target").carousel("previous");
+	 */
+
+	/**
+	 * @method private
+	 * @name previousItem
+	 * @description Move to next item
+	 * @param data [object] "Instance data"
+	 */
+
+	function previousItem(data) {
+		var index = data.index + 1;
+
+		if (index >= data.pageCount) {
+			index = 0;
+		}
+
+		position(data, index);
+	}
+
+	/**
+	 * @method
+	 * @name next
+	 * @description Move to next item
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method private
+	 * @name nextItem
+	 * @description Move to next item
+	 * @example $(".target").carousel("next");
+	 */
+
+	function nextItem(data) {
+		var index = data.index + 1;
+
+		if (index >= data.pageCount) {
+			index = 0;
+		}
+
+		position(data, index);
 	}
 
 	/**
@@ -405,7 +475,7 @@
 		data.loadedImages++;
 
 		if (data.loadedImages === data.totalImages) {
-			resize.call(data.$el, data);
+			resizeInstance.call(data.$el, data);
 		}
 	}
 
@@ -415,6 +485,7 @@
 	 * @description Handles auto advancement
 	 * @param data [object] "Instance data"
 	 */
+
 	function autoAdvance(data) {
 		var index = data.index + 1;
 
@@ -769,9 +840,11 @@
 
 				disable       : disable,
 				enable        : enable,
-				jump          : jump,
-				reset         : reset,
-				resize        : resize
+				jump          : jumpToItem,
+				previous      : previousItem,
+				next          : nextItem,
+				reset         : resetInstance,
+				resize        : resizeInstance
 			}
 		}),
 

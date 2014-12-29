@@ -56,7 +56,6 @@
 
 		if (data.label) {
 			data.originalLabel = data.$handle.text();
-			data.$handle.text(data.labels.closed);
 		}
 
 		// toggle
@@ -142,8 +141,7 @@
 	 */
 
 	function disable(data) {
-		data.$handle.text(data.originalLabel)
-					.switch("disable");
+		data.$handle.switch("disable");
 	}
 
 	/**
@@ -199,6 +197,10 @@
 		setTimeout(function() {
 			data.$animate.addClass(RawClasses.animated);
 		}, 0);
+
+		if (data.label) {
+			data.$handle.text(data.labels.closed);
+		}
 	}
 
 	/**
@@ -213,6 +215,10 @@
 
 		data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
 		data.$animate.removeClass(RawClasses.animated);
+
+		if (data.label) {
+			data.$handle.text(data.originalLabel);
+		}
 	}
 
 	/**
