@@ -13,10 +13,10 @@
 
 	$url = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
 
-	if (strpos($_SERVER["DOCUMENT_ROOT"], "demo") >= 0) {
+	if (strpos($_SERVER["DOCUMENT_ROOT"], "demo") !== false) {
 		$www_root = trailingSlash(strtolower("http" . (($_SERVER["HTTPS"]) ? "s://" : "://") . $_SERVER["HTTP_HOST"]));
 	} else {
-		$end = end(explode("/", $_SERVER["DOCUMENT_ROOT"]));
+		$end = end(explode("/", getcwd()));
 
 		if (strpos($url, $end) > -1) {
 			$www_root = trailingSlash(substr($url, 0, strpos($url, $end) + strlen($end)));
@@ -64,10 +64,7 @@
 	// Fix resources
 	$content = file_get_contents($file);
 
-	$html = str_ireplace(array("../../", "../", ".html"), array($www_root, $www_root, "/"), $content);
-	//$html = $content;
-
-	echo $html;
+	echo str_ireplace(array("../../", "../", ".html"), array($www_root, $www_root, "/"), $content);
 
 	// Functions
 	function routeRecursive($base = "site/", $route, $level = 0) {

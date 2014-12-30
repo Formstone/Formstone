@@ -361,7 +361,7 @@
 			}
 			data.$paginationItems = data.$el.find(Classes.page);
 
-			position(data, data.index, false);
+			positionCanister(data, data.index, false);
 
 			setTimeout(function() {
 				data.$el.addClass(RawClasses.animated);
@@ -410,7 +410,7 @@
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
-			position(data, index-1);
+			positionCanister(data, index-1);
 		}
 	}
 
@@ -435,7 +435,7 @@
 			index = data.pageCount;
 		}
 
-		position(data, index);
+		positionCanister(data, index);
 	}
 
 	/**
@@ -459,7 +459,7 @@
 			index = 0;
 		}
 
-		position(data, index);
+		positionCanister(data, index);
 	}
 
 	/**
@@ -493,7 +493,7 @@
 			index = 0;
 		}
 
-		position(data, index);
+		positionCanister(data, index);
 	}
 
 	/**
@@ -510,7 +510,7 @@
 			index = data.index + ($(e.currentTarget).hasClass(RawClasses.control_next) ? 1 : -1);
 
 		Functions.clearTimer(data.autoTimer);
-		position(data, index);
+		positionCanister(data, index);
 	}
 
 	/**
@@ -527,7 +527,7 @@
 			index = data.$paginationItems.index($(e.currentTarget));
 
 		Functions.clearTimer(data.autoTimer);
-		position(data, index);
+		positionCanister(data, index);
 	}
 
 	/**
@@ -538,7 +538,7 @@
 	 * @param index [int] "Item index"
 	 */
 
-	function position(data, index, animate) {
+	function positionCanister(data, index, animate) {
 		if (index < 0) {
 			index = (data.infinite) ? data.pageCount-1 : 0;
 		}
@@ -745,7 +745,7 @@
 	function endTouch(data, index) {
 		data.$canister.css( Functions.prefix(TransitionProperty, "") );
 
-		position(data, index);
+		positionCanister(data, index);
 
 		data.isTouching = false;
 	}

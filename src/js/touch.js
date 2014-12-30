@@ -175,7 +175,7 @@
 					Events.pointerCancel
 				].join(" ") , data, onTouch);
 
-				data.$el.trigger( newE );
+				data.$el.trigger(newE);
 			}
 		}
 	}
@@ -217,9 +217,11 @@
 				// if axis and moved in opposite direction
 				onPointerEnd(e);
 			} else {
-				if (!data.axis || (data.axis && (data.axis === "x" && movedX) || (data.axis === "y" && movedY))) {
+				if (!data.passed && (!data.axis || (data.axis && (data.axis === "x" && movedX) || (data.axis === "y" && movedY)))) {
 					// if axis and moved in same direction
 					data.passed = true;
+
+					data.$el.one(Events.click, data, Functions.killEvent);
 				}
 
 				if (data.passed) {
@@ -318,7 +320,7 @@
 				Events.pointerCancel
 			].join(" ") );
 
-			data.$el.trigger( newE );
+			data.$el.trigger(newE);
 
 			data.touches = [];
 
