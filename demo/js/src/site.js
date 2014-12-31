@@ -32,6 +32,8 @@
 
 			$("table").wrap('<div class="table_wrapper"></div>');
 
+			$("pre").wrap('<div class="pre_wrapper"></div>');
+
 			Prism.highlightAll();
 
 			$(".js-navigation").navigation();

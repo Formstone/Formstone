@@ -8,14 +8,14 @@
 	@base_transition_timing: linear;
 	@base_transition_delay: 0;
 
-	@mobile:		~"only screen and (min-width: 500px)";
-	@tablet:		~"only screen and (min-width: 740px)";
-	@desktop:		~"only screen and (min-width: 980px)";
-	@max:			~"only screen and (min-width: 1220px)";
+	@small:		~"only screen and (min-width: 500px)";
+	@medium:	~"only screen and (min-width: 740px)";
+	@large:		~"only screen and (min-width: 980px)";
+	@max:		~"only screen and (min-width: 1220px)";
 
-	@max_mobile:	~"only screen and (max-width: 499px)";
-	@max_tablet:	~"only screen and (max-width: 739px)";
-	@max_desktop:	~"only screen and (max-width: 979px)";
+	@max_small:		~"only screen and (max-width: 499px)";
+	@max_medium:	~"only screen and (max-width: 739px)";
+	@max_large:		~"only screen and (max-width: 979px)";
 	@max_max:		~"only screen and (max-width: 1219px)";
 
 	// Colors
@@ -27,11 +27,16 @@
 	@orange: #C65032;
 	@blue: #393B3F;
 
-	@gray_1: #f2f2f2;
+	@gray_1: #f0f0f0;
 	@gray_2: #ccc;
 	@gray_3: #999;
 	@gray_4: #666;
 	@gray_5: #333;
+
+
+/* ==================================================================
+   Fonts
+================================================================== */
 
 	.sans(@weight:300) {
 		font-family: 'Lato', sans-serif;

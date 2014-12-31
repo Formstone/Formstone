@@ -41,7 +41,7 @@
 	body {
 		background: @white;
 
-		@media @desktop {
+		@media @large {
 			background: @blue;
 		}
 	}
@@ -85,12 +85,12 @@
 
 		color: @black;
 		line-height: 1.2;
-		margin: 20px 0;
+		margin: 30px 0 20px;
 	}
 	h1 {
 		.font_size(36);
 
-		@media @tablet {
+		@media @medium {
 			.font_size(42);
 		}
 	}
@@ -99,7 +99,7 @@
 
 		margin-top: 40px;
 
-		@media @tablet {
+		@media @medium {
 			.font_size(32);
 		}
 	}
@@ -108,7 +108,7 @@
 
 		color: @orange;
 
-		@media @tablet {
+		@media @medium {
 			.font_size(26);
 		}
 	}
@@ -247,10 +247,32 @@
 	pre,
 	pre[class*=language-] {
 		background: @gray_1;
-		border-radius: 3px;
-		margin: 20px 0;
+		margin: 25px 0;
 		overflow-y: auto;
-		padding: 20px;
+		padding: 25px 0;
+	}
+
+	.pre_wrapper {
+		background: @gray_1;
+
+		margin-left:  -175px;
+		margin-right: -175px;
+		padding-left:  175px;
+		padding-right: 175px;
+
+		@media @large {
+			margin-left:  -50px;
+			margin-right: -1000px; //-50px;
+			padding-left:  50px;
+			padding-right: 1000px; //50px;
+		}
+
+		@media @max {
+			margin-left:  -75px;
+			margin-right: -2000px; //-75px;
+			padding-left:  75px;
+			padding-right: 2000px; //75px;
+		}
 	}
 
 	p code {
@@ -262,12 +284,7 @@
 	table {
 		width: 100%;
 		min-width: 600px;
-		margin: 20px 0;
-
-		& th,
-		& td {
-			vertical-align: top;
-		}
+		margin: 30px 0;
 
 		& th {
 			.sans();
@@ -284,8 +301,18 @@
 			padding: 13px 15px 15px;
 		}
 
+		& th,
+		& td {
+			border-bottom: 1px solid @gray_1;
+			vertical-align: top;
+
+			&:first-child {
+				padding-left: 0;
+			}
+		}
+
 		& tr:nth-child(odd) td {
-			background: @gray_1;
+			// background: @gray_1;
 		}
 	}
 
@@ -298,6 +325,14 @@
 
 		table {
 			margin: 0;
+		}
+	}
+
+
+
+	.fs-grid .row {
+		@media @large {
+			margin-left: 25px;
 		}
 	}
 
@@ -438,7 +473,7 @@
 		box-shadow: none;
 		height: 47px;
 
-		@media @desktop {
+		@media @large {
 			display: none;
 		}
 
@@ -464,7 +499,7 @@
 			line-height: 25px;
 			text-transform: uppercase;
 
-			@media @desktop {
+			@media @large {
 				display: none;
 			}
 		}
@@ -477,7 +512,7 @@
 		margin-bottom: 10px;
 		text-align: center;
 
-		@media @desktop {
+		@media @large {
 			color: @white;
 			color: fade(@white, 75);
 			margin-bottom: 20px;
@@ -487,7 +522,7 @@
 	.page.fs-navigation-enabled {
 		box-shadow: none;
 
-		@media @max_desktop {
+		@media @max_large {
 			background: @white;
 			padding-top: 45px;
 		}
@@ -497,17 +532,19 @@
 		background: @white;
 		padding: 20px 10px;
 
-		@media @tablet {
+		@media @medium {
 			border-radius: 0 0 3px 3px;
 			padding: 20px 30px;
 		}
 
-		@media @desktop {
-			padding: 30px 50px 30px;
+		@media @large {
+			margin-right: -1000px;
+			padding: 30px 1000px 30px 50px;
 		}
 
 		@media @max {
-			padding: 40px 75px 40px;
+			margin-right: -2000px;
+			padding: 40px 2000px 40px 75px;
 		}
 
 		.intro {
@@ -527,21 +564,21 @@
 			padding-right: 175px;
 			padding-top:   60px;
 
-			@media @desktop {
+			@media @large {
 				margin-left:  -50px;
-				margin-right: -50px;
+				margin-right: -1000px; //-50px;
 				margin-top:    40px;
 				padding-left:  50px;
-				padding-right: 50px;
+				padding-right: 1000px; //50px;
 				padding-top:   40px;
 			}
 
 			@media @max {
 				margin-left:  -75px;
-				margin-right: -60px;
+				margin-right: -1000px; //-75px;
 				margin-top:    50px;
 				padding-left:  75px;
-				padding-right: 75px;
+				padding-right: 1000px; //75px;
 				padding-top:   50px;
 			}
 		}
@@ -575,6 +612,23 @@
 		background: @blue;
 		color: @white;
 
+		@media @large {
+			position: absolute;
+			top: 0;
+			left: 30px;
+
+			background: transparent;
+			margin: 0 !important;
+		}
+
+		@media @max {
+			left: 40px;
+		}
+
+		@media @large and (min-height: 900px) {
+			position: fixed;
+		}
+
 		&_content {
 			&.fs-navigation-enabled {
 				padding: 70px 30px 50px;
@@ -583,12 +637,12 @@
 				background: @blue;
 			}
 
-			@media @desktop {
-				padding: 50px 0;
+			@media @large {
+				padding: 60px 0;
 			}
 
 			@media @max {
-				padding: 60px 0;
+				padding: 70px 0;
 			}
 		}
 
@@ -602,7 +656,7 @@
 				color: @white;
 			}
 
-			@media @max_desktop {
+			@media @max_large {
 				display: none;
 			}
 		}
@@ -619,7 +673,7 @@
 					display: none;
 				}
 
-				@media @desktop {
+				@media @large {
 					margin: 5px 0;
 				}
 			}
@@ -636,7 +690,7 @@
 					color: @white;
 				}
 
-				@media @desktop {
+				@media @large {
 					.font_size(16);
 				}
 			}
@@ -666,7 +720,7 @@
 			color: @white;
 		}
 
-		@media @max_mobile {
+		@media @max_small {
 			width: 100%;
 
 			margin-bottom: 10px;
