@@ -122,19 +122,22 @@
 	 */
 
 	.fs-dropdown {
-		position: relative;
-		z-index: 1;
 
-		display: block;
-		margin: 10px 0;
+		&&-enabled {
+			position: relative;
+			z-index: 1;
 
-		max-width: 100%;
+			display: block;
+			margin: 10px 0;
 
-		/*
-		@media screen and (min-width: 740px) {
-			max-width: 30%;
+			max-width: 100%;
+
+			/*
+			@media screen and (min-width: 740px) {
+				max-width: 30%;
+			}
+			*/
 		}
-		*/
 
 		&:focus {
 			box-shadow: none;

@@ -65,8 +65,9 @@
 	 */
 
 	.fs-navigation {
-
-		margin: @fs-navigation-margin;
+		&&-enabled {
+			margin: @fs-navigation-margin;
+		}
 
 		&,
 		&:after,
