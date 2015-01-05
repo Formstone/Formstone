@@ -197,7 +197,7 @@
 
 			data.enabled = false;
 
-			this.removeClass(RawClasses.enabled)
+			this.removeClass( [RawClasses.enabled, animated].join(" ") )
 				.off(Events.namespace);
 
 			data.$canister.touch("destroy")
@@ -219,7 +219,7 @@
 					marginLeft: ""
 				});
 			} else {
-				data.$canister.css( Functions.prefix(TransformProperty, "translate3d(0px, 0, 0)") );
+				data.$canister.css( Functions.prefix(TransformProperty, "") );
 			}
 
 			data.index = 0;
