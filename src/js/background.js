@@ -236,6 +236,8 @@
 		if ($img[0].complete || $img[0].readyState === 4) {
 			$img.trigger(Events.load);
 		}
+
+		data.currentSource = newSource;
 	}
 
 	/**
@@ -532,7 +534,7 @@
 		if (data.responsive) {
 			var newSource = calculateSource(data);
 
-			if (newSource !== data.source) {
+			if (newSource !== data.currentSource) {
 				loadImage(data, newSource, false, true);
 			} else {
 				resizeInstance(data);
