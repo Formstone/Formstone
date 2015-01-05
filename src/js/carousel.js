@@ -197,7 +197,7 @@
 
 			data.enabled = false;
 
-			this.removeClass( [RawClasses.enabled, animated].join(" ") )
+			this.removeClass( [RawClasses.enabled, RawClasses.animated].join(" ") )
 				.off(Events.namespace);
 
 			data.$canister.touch("destroy")
