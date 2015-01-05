@@ -227,7 +227,7 @@
 		}).attr("src", newSource);
 
 		if (data.responsive) {
-			$media.addClass(Classes.responsive);
+			$media.addClass(RawClasses.responsive);
 		}
 
 		data.$container.append($media);
