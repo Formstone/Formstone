@@ -18,9 +18,7 @@
 	 * @description Handles window resize
 	 */
 
-	function resize(e) {
-		WindowWidth = $Window.width();
-
+	function resize(windowWidth) {
 		Functions.iterate.call($Instances, resizeInstance);
 	}
 
@@ -515,9 +513,7 @@
 
 		$Body,
 		$Window        = Formstone.$window,
-		$Instances     = [],
-
-		WindowWidth    = 0;
+		$Instances     = [];
 
 		Events.touchMouseDown    = [Events.touchStart, Events.mouseDown].join(" ");
 		Events.touchMouseMove    = [Events.touchMove,  Events.mouseMove].join(" ");

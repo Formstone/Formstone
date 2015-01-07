@@ -21,6 +21,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.document             = document;
 			this.$document            = $(document);
 			this.$body                = null;
+
+			this.windowWidth          = 0;
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
 			this.isFirefox            = /Firefox/i.test(this.userAgent);
 			this.isChrome             = /Chrome/i.test(this.userAgent);
@@ -551,18 +553,21 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		Debounce = 20;
 
 	function onWindowResize() {
+		Formstone.windowWidth = Formstone.$window.width();
+
 		ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
 	}
 
 	function handleWindowResize() {
 		for (var i in Formstone.Plugins) {
 			if (Formstone.Plugins.hasOwnProperty(i) && Formstone.Plugins[i].initialized) {
-				Formstone.Plugins[i].methods._resize.call(window);
+				Formstone.Plugins[i].methods._resize.call(window, Formstone.windowWidth);
 			}
 		}
 	}
 
 	Formstone.$window.on("resize.fs", onWindowResize);
+	onWindowResize();
 
 	// Document Ready
 

@@ -8,9 +8,7 @@
 	 * @description Handles window resize
 	 */
 
-	function resize(e) {
-		WindowWidth = $Window.width();
-
+	function resize(windowWidth) {
 		Functions.iterate.call($Instances, resizeInstance);
 	}
 
@@ -163,9 +161,6 @@
 		Functions      = Plugin.functions,
 		GUID           = 0,
 
-		$Window        = Formstone.$window,
-		$Instances     = [],
-
-		WindowWidth    = 0;
+		$Instances     = [];
 
 })(jQuery, Formstone);

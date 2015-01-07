@@ -8,9 +8,7 @@
 	 * @description Handles window resize
 	 */
 
-	function resize() {
-		WindowWidth = $Window.width();
-
+	function resize(windowWidth) {
 		Functions.iterate.call($Instances, resizeInstance);
 	}
 
@@ -162,7 +160,7 @@
 	function calculateSource(data) {
 		if (data.responsive) {
 			for (var i in data.sources) {
-				if (data.sources.hasOwnProperty(i) && WindowWidth >= data.sources[i].width) {
+				if (data.sources.hasOwnProperty(i) && Formstone.windowWidth >= data.sources[i].width) {
 					return data.sources[i].url;
 				}
 			}
@@ -344,7 +342,7 @@
 					data.player = null;
 				}
 
-				data.player = new window.YT.Player(guid, {
+				data.player = new Window.YT.Player(guid, {
 					videoId: data.videoId,
 					playerVars: {
 						controls: 0,
@@ -356,7 +354,7 @@
 						playerapiid: guid,
 						loop: (data.loop) ? 1 : 0,
 						autoplay: 1,
-						origin: window.location.protocol + "//" + window.location.host
+						origin: Window.location.protocol + "//" + Window.location.host
 					},
 					events: {
 						onReady: function (e) {
@@ -377,7 +375,7 @@
 						onStateChange: function (e) {
 							/* console.log("onStateChange", e); */
 
-							if (!data.playing && e.data === window.YT.PlayerState.PLAYING) {
+							if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
 								data.playing = true;
 
 								if (!data.autoPlay) {
@@ -394,7 +392,7 @@
 								doResizeInstance(data);
 
 								data.$el.trigger(Events.loaded);
-							} else if (data.loop && data.playing && e.data === window.YT.PlayerState.ENDED) {
+							} else if (data.loop && data.playing && e.data === Window.YT.PlayerState.ENDED) {
 								// fix looping option
 								data.player.playVideo();
 							}
@@ -703,11 +701,8 @@
 		Functions       = Plugin.functions,
 
 		Window          = Formstone.window,
-		$Window         = Formstone.$window,
 		$Instances      = [],
 		GUID            = 0,
-
-		WindowWidth     = 0,
 
 		BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
 		YouTubeReady    = false,

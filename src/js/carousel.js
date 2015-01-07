@@ -8,9 +8,7 @@
 	 * @description Handles window resize
 	 */
 
-	function resize(e) {
-		WindowWidth = $Window.width();
-
+	function resize(windowWidth) {
 		Functions.iterate.call($Instances, resizeInstance);
 	}
 
@@ -637,7 +635,7 @@
 	function calculateVisible(data) {
 		if ($.type(data.show) === "object") {
 			for (var i in data.show) {
-				if (data.show.hasOwnProperty(i) && WindowWidth >= data.show[i].width) {
+				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
 					return (data.show[i].count > data.count) ? data.count : data.show[i].count;
 				}
 			}
@@ -840,10 +838,7 @@
 		Functions      = Plugin.functions,
 		GUID           = 0,
 
-		$Window        = Formstone.$window,
 		$Instances     = [],
-
-		WindowWidth    = 0,
 
 		TransformProperty     = Formstone.transform,
 		TransitionProperty    = Formstone.transition;
