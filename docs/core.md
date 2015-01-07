@@ -93,10 +93,12 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 				"visible"
 			],
 			methods: {
-				_setup         setup,
-				_construct:    construct,
-				_destruct:     destruct,
-				reset:         reset
+				_setup        : setup,
+				_construct    : construct,
+				_destruct     : destruct,
+				_resize       : resize,
+
+				reset         : reset
 			},
 			utilities: {
 				close:         close
@@ -119,6 +121,7 @@ As in the example above, Widgets can override three internal methods by pointing
 | `_setup` | Run once when document is ready, scoped to document |
 | `_construct` | Run at initialization of each instance, scoped to specific instance |
 | `_destruct` | Run at destruction of each instance, scoped to specific instance |
+| `_resize` | Run on window resize, scoped to window |
 
 When an instance is created or destroyed, the factory will automatically add or remove the instance's localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:
 
@@ -132,11 +135,11 @@ Custom public methods can also be defined, provided their keys are not prefixed 
 $(".target").namespace("reset", 500);
 ```
 
-A Widget can also operate as a singleton, like Boxer or Tipper. In this case, events are bound to the instance's target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.
+A Widget can also operate as a singleton, like Lightbox or Tooltip. In this case, events are bound to the instance's target element, while DOM manipulations are tied to a single internal instance. This helps prevent unwanted duplication when the interface pattern calls for a single instance.
 
 #### Utility
 
-Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Rubberband. A simple Utility plugin might look like:
+Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Media Query. A simple Utility plugin might look like:
 
 ```javascript
 ;(function ($, Formstone, undefined) {
@@ -156,7 +159,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 		// Internal Defaults
 
 		Defaults = {
-			option:    value
+			option    : value
 		},
 
 		// Localize References

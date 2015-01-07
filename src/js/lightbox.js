@@ -14,6 +14,18 @@
 
 	/**
 	 * @method private
+	 * @name resize
+	 * @description Handles window resize
+	 */
+
+	function resize() {
+		if (Instance) {
+			resizeLightbox();
+		}
+	}
+
+	/**
+	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
@@ -93,7 +105,6 @@
 			// Cache internal data
 			Instance = $.extend({}, {
 				visible            : false,
-				resizeTimer        : null,
 				gallery: {
 					active         : false
 				},
@@ -209,8 +220,7 @@
 			}
 
 			// Bind events
-			$Window.on(Events.resize, resizeLightbox)
-				   .on(Events.keyDown, onKeyDown);
+			$Window.on(Events.keyDown, onKeyDown);
 
 			$Body.on(Events.clickTouchStart, [Classes.overlay, Classes.close].join(", "), closeLightbox);
 
@@ -313,8 +323,6 @@
 
 			Instance.$lightbox.removeClass(Classes.raw.open);
 			Instance.$overlay.removeClass(Classes.raw.open);
-
-			Functions.clearTimer(Instance.resizeTimer);
 		}
 	}
 
@@ -1074,6 +1082,7 @@
 				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
+				_resize       : resize,
 
 				resize        : resizeLightbox
 			},

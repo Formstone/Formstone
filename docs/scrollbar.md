@@ -63,7 +63,7 @@ Removes plugin instance.
 $(".target").scrollbar("destroy");
 ```
 
-### resize
+### resizeInstance
 
 Resizes layout on instance of plugin
 

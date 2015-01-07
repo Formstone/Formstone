@@ -41,6 +41,103 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			};
 		},
 
+		Functions = {
+
+			/**
+			 * @method private
+			 * @name killEvent
+			 * @description Stops event action and bubble.
+			 * @param e [object] "Event data"
+			 */
+
+			killEvent: function(e) {
+				try {
+					e.preventDefault();
+					e.stopPropagation();
+				} catch(error) {
+					//
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name startTimer
+			 * @description Starts an internal timer.
+			 * @param timer [int] "Timer ID"
+			 * @param time [int] "Time until execution"
+			 * @param callback [function] "Function to execute"
+			 * @return [int] "Timer ID"
+			 */
+
+			startTimer: function(timer, time, callback, interval) {
+				Functions.clearTimer(timer);
+
+				return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
+			},
+
+			/**
+			 * @method private
+			 * @name clearTimer
+			 * @description Clears an internal timer.
+			 * @param timer [int] "Timer ID"
+			 */
+
+			clearTimer: function(timer, interval) {
+				if (timer) {
+					if (interval) {
+						clearInterval(timer);
+					} else {
+						clearTimeout(timer);
+					}
+
+					timer = null;
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name prefix
+			 * @description Builds vendor-prefixed styles
+			 * @param property [string] "Property to prefix"
+			 * @param value [string] "Property value"
+			 * @return [object] "Vendor-prefixed styles"
+			 */
+
+			prefix: function(property, value) {
+				var r = {};
+
+				r[property] = value;
+
+				return r;
+			},
+
+			/**
+			 * @method private
+			 * @name sortAsc
+			 * @description Sorts an array (ascending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			sortAsc: function(a, b) {
+				return (parseInt(b) - parseInt(a));
+			},
+
+			/**
+			 * @method private
+			 * @name sortDesc
+			 * @description Sorts an array (descending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			sortDesc: function(a, b) {
+				return (parseInt(b) - parseInt(a));
+			}
+		},
+
 		Formstone = new Core(),
 
 		// Classes
@@ -119,7 +216,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				var hasOptions = $.type(options) === "object";
 
-				options = $.extend(true, {}, settings.defaults, (hasOptions ? options : {}));
+				options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
 
 				// Maintain Chain
 
@@ -139,14 +236,14 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 								$el : $element
 							}, options, ($.type(localOptions) === "object" ? localOptions : {}) );
 
-						// Constructor
-
-						settings.methods._construct.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) )));
-
 						// Cache Instance
 
 						$element.addClass(settings.classes.raw.element)
 						        .data(namespaceDash, data);
+
+						// Constructor
+
+						settings.methods._construct.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) )));
 					}
 
 				}
@@ -169,26 +266,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function destroy(data) {
-				iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+				settings.functions.iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
 				this.removeClass(settings.classes.raw.element)
 					.removeData(namespaceDash);
-			}
-
-			/**
-			 * @method private
-			 * @name killEvent
-			 * @description Stops event action and bubble.
-			 * @param e [object] "Event data"
-			 */
-
-			function killEvent(e) {
-				try {
-					e.preventDefault();
-					e.stopPropagation();
-				} catch(error) {
-					//
-				}
 			}
 
 			/**
@@ -201,106 +282,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			function getData($element) {
 				return $element.data(namespaceDash);
-			}
-
-			/**
-			 * @method private
-			 * @name startTimer
-			 * @description Starts an internal timer.
-			 * @param timer [int] "Timer ID"
-			 * @param time [int] "Time until execution"
-			 * @param callback [function] "Function to execute"
-			 * @return [int] "Timer ID"
-			 */
-
-			function startTimer(timer, time, callback, interval) {
-				clearTimer(timer);
-
-				return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
-			}
-
-			/**
-			 * @method private
-			 * @name clearTimer
-			 * @description Clears an internal timer.
-			 * @param timer [int] "Timer ID"
-			 */
-
-			function clearTimer(timer, interval) {
-				if (timer) {
-					if (interval) {
-						clearInterval(timer);
-					} else {
-						clearTimeout(timer);
-					}
-
-					timer = null;
-				}
-			}
-
-			/**
-			 * @method private
-			 * @name iterate
-			 * @description Loops scoped function calls over jQuery object with instance data as first parameter.
-			 * @param func [function] "Function to execute"
-			 * @return [jQuery] "jQuery object"
-			 */
-
-			function iterate(func) {
-				var $targets = this;
-
-				for (var i = 0, count = $targets.length; i < count; i++) {
-					var $element = $targets.eq(i),
-						data = getData($element) || {};
-
-					if ($.type(data.$el) !== "undefined") {
-						func.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
-					}
-				}
-
-				return $targets;
-			}
-
-			/**
-			 * @method private
-			 * @name prefix
-			 * @description Builds vendor-prefixed styles
-			 * @param property [string] "Property to prefix"
-			 * @param value [string] "Property value"
-			 * @return [object] "Vendor-prefixed styles"
-			 */
-			function prefix(property, value) {
-				var r = {};
-
-				r[property] = value;
-
-				return r;
-			}
-
-			/**
-			 * @method private
-			 * @name sortAsc
-			 * @description Sorts an array (ascending).
-			 * @param a [mixed] "First value"
-			 * @param b [mixed] "Second value"
-			 * @return Difference between second and first values
-			 */
-
-			function sortAsc(a, b) {
-				return (parseInt(b) - parseInt(a));
-			}
-
-			/**
-			 * @method private
-			 * @name sortDesc
-			 * @description Sorts an array (descending).
-			 * @param a [mixed] "First value"
-			 * @param b [mixed] "Second value"
-			 * @return Difference between second and first values
-			 */
-
-			function sortDesc(a, b) {
-				return (parseInt(b) - parseInt(a));
 			}
 
 			/**
@@ -330,7 +311,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Wrap Public Methods
 
-						return iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
+						return settings.functions.iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
 					}
 
 					return this;
@@ -370,6 +351,29 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				settings.defaults = $.extend(true, settings.defaults, options || {});
 			}
 
+			/**
+			 * @method private
+			 * @name iterate
+			 * @description Loops scoped function calls over jQuery object with instance data as first parameter.
+			 * @param func [function] "Function to execute"
+			 * @return [jQuery] "jQuery object"
+			 */
+
+			function iterate(fn) {
+				var $targets = this;
+
+				for (var i = 0, count = $targets.length; i < count; i++) {
+					var $element = $targets.eq(i),
+						data = getData($element) || {};
+
+					if ($.type(data.$el) !== "undefined") {
+						fn.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
+					}
+				}
+
+				return $targets;
+			}
+
 			// Locals
 
 			settings.initialized = false;
@@ -382,15 +386,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Extend Functions
 
 			settings.functions = $.extend({
-				getData         : getData,
-				startTimer      : startTimer,
-				clearTimer      : clearTimer,
-				killEvent       : killEvent,
-				iterate         : iterate,
-				prefix          : prefix,
-				sortAsc         : sortAsc,
-				sortDesc        : sortDesc
-			}, settings.functions);
+				getData    : getData,
+				iterate    : iterate
+			}, Functions, settings.functions);
 
 			// Extend Methods
 
@@ -401,6 +399,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				_setup         : $.noop,    // Document ready
 				_construct     : $.noop,    // Constructor
 				_destruct      : $.noop,    // Destructor
+				_resize        : $.noop,    // Window resize
 
 				// Public Methods
 
@@ -545,6 +544,25 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 		Formstone.transform = transformProperty;
 	}
+
+	// Window resize
+
+	var ResizeTimer = null,
+		Debounce = 20;
+
+	function onWindowResize() {
+		ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
+	}
+
+	function handleWindowResize() {
+		for (var i in Formstone.Plugins) {
+			if (Formstone.Plugins.hasOwnProperty(i) && Formstone.Plugins[i].initialized) {
+				Formstone.Plugins[i].methods._resize.call(window);
+			}
+		}
+	}
+
+	Formstone.$window.on("resize.fs", onWindowResize);
 
 	// Document Ready
 

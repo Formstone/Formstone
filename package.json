@@ -50,6 +50,7 @@
         "dist/js/checkbox.js",
         "dist/js/cookie.js",
         "dist/js/dropdown.js",
+        "dist/js/equalize.js",
         "dist/js/lightbox.js",
         "dist/js/mediaquery.js",
         "dist/js/navigation.js",

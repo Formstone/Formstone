@@ -4,29 +4,14 @@
 
 	/**
 	 * @method private
-	 * @name setup
-	 * @description Setup plugin.
-	 */
-
-	function setup() {
-		$Window.on(Events.resize, onResize);
-		onResize();
-	}
-
-	/**
-	 * @method private
-	 * @name onResize
+	 * @name resize
 	 * @description Handles window resize
 	 */
 
-	function onResize(e) {
+	function resize(e) {
 		WindowWidth = $Window.width();
 
-		if ($Instances.length) {
-			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
-				Functions.iterate.call($Instances, resizeInstance);
-			});
-		}
+		Functions.iterate.call($Instances, resizeInstance);
 	}
 
 	/**
@@ -95,7 +80,6 @@
 		data.leftPosition    = 0;
 		data.totalImages     = data.$images.length;
 
-		data.resizeTimer     = null;
 		data.autoTimer       = null;
 
 		if ($.type(data.show) === "object") {
@@ -834,9 +818,9 @@
 			},
 
 			methods: {
-				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
+				_resize       : resize,
 
 				disable       : disable,
 				enable        : enable,
@@ -860,8 +844,6 @@
 		$Instances     = [],
 
 		WindowWidth    = 0,
-		ResizeTimer    = null,
-		Debounce       = 20,
 
 		TransformProperty     = Formstone.transform,
 		TransitionProperty    = Formstone.transition;

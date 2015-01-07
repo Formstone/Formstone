@@ -10,24 +10,18 @@
 
 	function setup() {
 		$Body = Formstone.$body;
-		$Window.on(Events.resize, onResize);
-		onResize();
 	}
 
 	/**
 	 * @method private
-	 * @name onResize
+	 * @name resize
 	 * @description Handles window resize
 	 */
 
-	function onResize(e) {
+	function resize(e) {
 		WindowWidth = $Window.width();
 
-		if ($Instances.length) {
-			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
-				Functions.iterate.call($Instances, resize);
-			});
-		}
+		Functions.iterate.call($Instances, resizeInstance);
 	}
 
 	/**
@@ -74,7 +68,7 @@
 		this.on(Events.touchMouseDown, Classes.track, data, onTrackDown)
 			.on(Events.touchMouseDown, Classes.handle, data, onHandleDown);
 
-		resize(data);
+		resizeInstance(data);
 
 		cacheInstances();
 	}
@@ -133,12 +127,12 @@
 
 	/**
 	 * @method
-	 * @name resize
+	 * @name resizeInstance
 	 * @description Resizes layout on instance of plugin
 	 * @example $(".target").scrollbar("resize");
 	 */
 
-	function resize(data)  {
+	function resizeInstance(data)  {
 		data.$el.addClass(RawClasses.isSetup);
 
 		var barStyles = {},
@@ -504,10 +498,11 @@
 				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
+				_resize       : resize,
 
 				// Public Methods
 				scroll        : scroll,
-				resize        : resize
+				resize        : resizeInstance
 			}
 		}),
 
@@ -522,9 +517,7 @@
 		$Window        = Formstone.$window,
 		$Instances     = [],
 
-		WindowWidth    = 0,
-		ResizeTimer    = null,
-		Debounce       = 20;
+		WindowWidth    = 0;
 
 		Events.touchMouseDown    = [Events.touchStart, Events.mouseDown].join(" ");
 		Events.touchMouseMove    = [Events.touchMove,  Events.mouseMove].join(" ");

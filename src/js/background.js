@@ -4,29 +4,14 @@
 
 	/**
 	 * @method private
-	 * @name setup
-	 * @description Setup plugin.
-	 */
-
-	function setup() {
-		$Window.on(Events.resize, onResize);
-		onResize();
-	}
-
-	/**
-	 * @method private
-	 * @name onResize
+	 * @name resize
 	 * @description Handles window resize
 	 */
 
-	function onResize(e) {
+	function resize() {
 		WindowWidth = $Window.width();
 
-		if ($Instances.length) {
-			ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, function() {
-				Functions.iterate.call($Instances, windowResize);
-			});
-		}
+		Functions.iterate.call($Instances, resizeInstance);
 	}
 
 	/**
@@ -219,7 +204,7 @@
 				}
 			}).css({ opacity: 1 });
 
-			resizeInstance(data);
+			doResizeInstance(data);
 
 			if (!poster || firstLoad) {
 				data.$el.trigger(Events.loaded);
@@ -291,7 +276,7 @@
 					cleanMedia(data);
 				}).css({ opacity: 1 });
 
-				resizeInstance(data);
+				doResizeInstance(data);
 
 				data.$el.trigger(Events.loaded);
 
@@ -406,7 +391,7 @@
 									cleanMedia(data);
 								}).css({ opacity: 1 });
 
-								resizeInstance(data);
+								doResizeInstance(data);
 
 								data.$el.trigger(Events.loaded);
 							} else if (data.loop && data.playing && e.data === window.YT.PlayerState.ENDED) {
@@ -436,7 +421,7 @@
 		        });
 
 				// Resize
-				resizeInstance(data);
+				doResizeInstance(data);
 			}
 		}
 	}
@@ -525,22 +510,22 @@
 
 	/**
 	 * @method private
-	 * @name windowResize
+	 * @name resizeInstance
 	 * @description Handle window resize event
 	 * @param data [object] "Instance data"
 	 */
 
-	function windowResize(data) {
+	function resizeInstance(data) {
 		if (data.responsive) {
 			var newSource = calculateSource(data);
 
 			if (newSource !== data.currentSource) {
 				loadImage(data, newSource, false, true);
 			} else {
-				resizeInstance(data);
+				doResizeInstance(data);
 			}
 		} else {
-			resizeInstance(data);
+			doResizeInstance(data);
 		}
 	}
 
@@ -553,12 +538,12 @@
 
 	/**
 	 * @method private
-	 * @name resizeInstance
+	 * @name doResizeInstance
 	 * @description Resize target instance
 	 * @param data [object] "Instance data"
 	 */
 
-	function resizeInstance(data) {
+	function doResizeInstance(data) {
 		// Target all media
 		var $all = data.$container.find(Classes.media);
 
@@ -698,13 +683,13 @@
 			},
 
 			methods: {
-				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
+				_resize       : resize,
 
 				play          : play,
 				pause         : pause,
-				resize        : resizeInstance,
+				resize        : doResizeInstance,
 				load          : loadMedia,
 				unload        : unloadMedia
 			}
@@ -723,8 +708,6 @@
 		GUID            = 0,
 
 		WindowWidth     = 0,
-		ResizeTimer     = null,
-		Debounce        = 20,
 
 		BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
 		YouTubeReady    = false,
