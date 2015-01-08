@@ -131,6 +131,7 @@
 
 	var Plugin = Formstone.Plugin("equalize", {
 			widget: true,
+			priority: 5,
 
 			/**
 			 * @options

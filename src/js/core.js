@@ -12,7 +12,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Namespace
 
 	var Core = function() {
-			this.Plugins = [];
+			this.Plugins = {};
+			this.ResizeHandlers = [];
 
 			// Globals
 
@@ -402,7 +403,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				_setup         : $.noop,    // Document ready
 				_construct     : $.noop,    // Constructor
 				_destruct      : $.noop,    // Destructor
-				_resize        : $.noop,    // Window resize
+				_resize        : false,    // Window resize
 
 				// Public Methods
 
@@ -443,6 +444,16 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Run Setup
 
 			settings.namespace = namespace;
+
+			// Resize handler
+
+			if (settings.methods._resize) {
+				Formstone.ResizeHandlers.push({
+					namespace: namespace,
+					priority: settings.priority,
+					callback: settings.methods._resize
+				});
+			}
 
 			return settings;
 		})(namespace, settings);
@@ -562,9 +573,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	}
 
 	function handleWindowResize() {
-		for (var i in Formstone.Plugins) {
-			if (Formstone.Plugins.hasOwnProperty(i) && Formstone.Plugins[i].initialized) {
-				Formstone.Plugins[i].methods._resize.call(window, Formstone.windowWidth);
+		for (var i in Formstone.ResizeHandlers) {
+			if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
+				Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth);
 			}
 		}
 	}
@@ -575,7 +586,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Sort Priority
 
 	function sortPriority(a, b) {
-		return (parseInt(b.priority) - parseInt(a.priority));
+		return (parseInt(a.priority) - parseInt(b.priority));
 	}
 
 	// Document Ready
@@ -583,7 +594,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	$(function() {
 		Formstone.$body = $("body");
 
-		Formstone.Plugins.sort(sortPriority);
+		Formstone.ResizeHandlers.sort(sortPriority);
 
 		for (var i in Formstone.Plugins) {
 			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {
