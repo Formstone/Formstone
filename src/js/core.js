@@ -12,7 +12,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Namespace
 
 	var Core = function() {
-			this.Plugins = {};
+			this.Plugins = [];
 
 			// Globals
 
@@ -26,7 +26,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
 			this.isFirefox            = /Firefox/i.test(this.userAgent);
 			this.isChrome             = /Chrome/i.test(this.userAgent);
-			this.isSafari             = (/Safari/i.test(this.userAgent) && !this.isChrome);
+			this.isSafari             = /Safari/i.test(this.userAgent) && !this.isChrome;
 			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
 			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
 			this.transform            = null;
@@ -379,6 +379,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			// Locals
 
 			settings.initialized = false;
+			settings.priority    = settings.priority || 10;
 
 			// Namespace Classes & Events
 
@@ -452,7 +453,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Namespace Properties
 
 	function namespaceProperties(type, namespace, globalProps, customProps) {
-		var _props = { raw: {} },
+		var _props = {
+				raw: {}
+			},
 			i;
 
 		customProps = customProps || {};
@@ -569,10 +572,18 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	Formstone.$window.on("resize.fs", onWindowResize);
 	onWindowResize();
 
+	// Sort Priority
+
+	function sortPriority(a, b) {
+		return (parseInt(b.priority) - parseInt(a.priority));
+	}
+
 	// Document Ready
 
 	$(function() {
 		Formstone.$body = $("body");
+
+		Formstone.Plugins.sort(sortPriority);
 
 		for (var i in Formstone.Plugins) {
 			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {
