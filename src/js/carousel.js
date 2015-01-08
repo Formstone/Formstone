@@ -655,7 +655,16 @@
 	function onPanStart(e) {
 		var data = e.data;
 
+		if (data.useMargin) {
+			data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+		} else {
+			var matrix = data.$canister.css(TransformProperty).split(",");
+			data.leftPosition = parseInt(matrix[4]); // ?
+		}
+
 		data.$canister.css( Functions.prefix(TransitionProperty, "none") );
+
+		onPan(e);
 
 		data.isTouching = true;
 	}
