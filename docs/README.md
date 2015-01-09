@@ -19,6 +19,7 @@
 * [Equalize](equalize.md)
 * [Lightbox](lightbox.md)
 * [Navigation](navigation.md)
+* [Number](number.md)
 * [Scrollbar](scrollbar.md)
 * [Switch](switch.md)
 * [Tabs](tabs.md)

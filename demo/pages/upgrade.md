@@ -13,9 +13,10 @@ Formstone components are now bundled as a single package. Developers should stil
 | Naver | [Navigation](../components/navigation/) |
 | Picker | [Checkbox](../components/checkbox/) |
 | Roller | [Carousel](../components/carousel/) |
-| Rubberband | [Media Query](../components/mediaquery/) |
+| Rubberband | [Mediaquery](../components/mediaquery/) |
 | Scroller | [Scrollbar](../components/scrollbar/) |
 | Selecter | [Dropdown](../components/dropdown/) |
+| Sizer | [Equalize](../components/equalize/) |
 | Shifter | [Navigation](../components/navigation/) |
 | Tabber | [Tabs](../components/tabs/) |
 | Tipper | [Tooltip](../components/tooltip/) |
