@@ -5,6 +5,7 @@ A jQuery plugin for equal dimensions.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -12,6 +13,7 @@ A jQuery plugin for equal dimensions.
 
 ```markup
 equalize.js
+equalize.css
 ```
 
 #### Dependencies
@@ -123,4 +125,10 @@ Enables instance of plugin
 ```javascript
 $(".target").equalize("enable");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-equalize-element` | `element` | Target Element |
 

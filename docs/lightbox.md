@@ -167,7 +167,6 @@ Triggers resize of instance.
 | `.fs-lightbox.fs-lightbox-fixed` | `modifier` | Indicates fixed positioning |
 | `.fs-lightbox.fs-lightbox-inline` | `modifier` | Indicates inline content |
 | `.fs-lightbox.fs-lightbox-iframed` | `modifier` | Indicates iFrame content |
-| `.fs-lightbox-lock` | `modifier` | Indicates locked state; Applied to body element |
 | `.fs-lightbox-overlay` | `element` | Overlay element |
 | `.fs-lightbox-close` | `element` | Close element |
 | `.fs-lightbox-loading_icon` | `element` | Loading icon element |
@@ -186,4 +185,5 @@ Triggers resize of instance.
 | `.fs-lightbox-position_total` | `element` | Total position element |
 | `.fs-lightbox-caption` | `element` | Caption element |
 | `.fs-lightbox-error` | `element` | Error message element |
+| `.fs-lightbox-lock` | `modifier` | Indicates locked state; Applied to body element |
 

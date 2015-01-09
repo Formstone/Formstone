@@ -4,6 +4,16 @@
 
 	/**
 	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function setup() {
+		$Locks = $("html, body");
+	}
+
+	/**
+	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
@@ -16,7 +26,9 @@
 		data.rawGuid      = RawClasses.base + data.guid;
 		data.classGuid    = "." + data.rawGuid;
 
-		if (data.type === "toggle") {
+		data.isToggle     = (data.type === "toggle");
+
+		if (data.isToggle) {
 			data.gravity  = "";
 		}
 
@@ -161,6 +173,10 @@
 		if (data.label) {
 			data.$handle.text(data.labels.open);
 		}
+
+		if (!data.isToggle) {
+			$Locks.addClass(RawClasses.lock);
+		}
 	}
 
 	/**
@@ -179,6 +195,10 @@
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
+		}
+
+		if (!data.isToggle) {
+			$Locks.removeClass(RawClasses.lock);
 		}
 	}
 
@@ -265,14 +285,12 @@
 				"animated",
 				"enabled",
 				"open",
-				// types
-
 				"toggle",
 				"push",
 				"overlay",
-
 				"left",
-				"right"
+				"right",
+				"lock"
 			],
 
 			/**
@@ -288,6 +306,7 @@
 			},
 
 			methods: {
+				_setup        : setup,
 				_construct    : construct,
 				_destruct     : destruct,
 
@@ -307,6 +326,10 @@
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
-		GUID          = 0;
+
+		// Internal
+
+		GUID          = 0,
+		$Locks        = null;
 
 })(jQuery, Formstone);

@@ -10,6 +10,7 @@
 
 	function setup() {
 		$Body = Formstone.$body;
+		$Locks = $("html, body");
 	}
 
 	/**
@@ -323,6 +324,10 @@
 
 			Instance.$lightbox.removeClass(Classes.raw.open);
 			Instance.$overlay.removeClass(Classes.raw.open);
+
+			if (Instance.isMobile) {
+				$Locks.removeClass(RawClasses.lock);
+			}
 		}
 	}
 
@@ -392,6 +397,10 @@
 		// Track content size changes
 		Instance.oldContentHeight = Instance.contentHeight;
 		Instance.oldContentWidth  = Instance.contentWidth;
+
+		if (Instance.isMobile) {
+			$Locks.addClass(RawClasses.lock);
+		}
 	}
 
 	/**
@@ -1062,7 +1071,8 @@
 				"position_total",
 				"caption",
 				"iframe",
-				"error"
+				"error",
+				"lock"
 			],
 
 			/**
@@ -1105,6 +1115,10 @@
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
 		$Body         = null,
+
+		// Internal
+
+		$Locks        = null,
 
 		// Singleton
 
