@@ -5,6 +5,7 @@ A jQuery plugin for .
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -85,4 +86,18 @@ $(".target").scrollbar("scroll", position, duration);
 | --- | --- | --- | --- |
 | `position` | `string || int` | `null` | Target element selector or static position |
 | `duration` | `int` | `null` | Optional scroll duration |
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-scrollbar-element` | `element` | Target elmement |
+| `.fs-scrollbar` | `element` | Base widget class |
+| `.fs-scrollbar.fs-scrollbar-horizontal` | `modifier` | Indicates horizontal scrolling |
+| `.fs-scrollbar.fs-scrollbar-setup` | `modifier` | Indicates setup state |
+| `.fs-scrollbar.fs-scrollbar-active` | `modifier` | Indicates active state |
+| `.fs-scrollbar-content` | `element` | Scrolling content |
+| `.fs-scrollbar-bar` | `element` | Scrollbar container |
+| `.fs-scrollbar-track` | `element` | Scrollbar track container |
+| `.fs-scrollbar-handle` | `element` | Scrollbar handle |
 

@@ -6,6 +6,7 @@ A jQuery plugin for simple tabs.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -118,4 +119,21 @@ Enables instance.
 ```javascript
 $(".target").tabs("enable");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-tabs-element` | `element` | Target elmement |
+| `.fs-tabs` | `element` | Base widget class |
+| `.fs-tabs.fs-tabs-enabled` | `modifier` | Indicates enabled state |
+| `.fs-tabs-tab` | `element` | Tab handle element |
+| `.fs-tabs-tab.fs-tabs-enabled` | `modifier` | Indicates enabled state |
+| `.fs-tabs-tab.fs-tabs-active` | `modifier` | Indicates active state |
+| `.fs-tabs-tab.fs-tabs-mobile` | `modifier` | Indicates mobile interface |
+| `.fs-tabs-content` | `element` | Tab content element |
+| `.fs-tabs-content.fs-tabs-enabled` | `modifier` | Indicates enabled state |
+| `.fs-tabs-content.fs-tabs-active` | `modifier` | Indicates active state |
+| `.fs-tabs-tab_mobile` | `element` | Mobile tab handle element |
+| `.fs-tabs-tab_mobile.fs-tabs-active` | `modifier` | Indicates active state |
 

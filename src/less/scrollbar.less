@@ -22,6 +22,40 @@
 
 	@fs-scrollbar-content-padding:			20px;		// 20px
 
+	/**
+	 * @class
+	 * @name .fs-scrollbar-element
+	 * @type element
+	 * @description Target elmement
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-scrollbar
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-scrollbar.fs-scrollbar-horizontal
+	 * @type modifier
+	 * @description Indicates horizontal scrolling
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-scrollbar.fs-scrollbar-setup
+	 * @type modifier
+	 * @description Indicates setup state
+	 */
+
+	 /**
+	 * @class
+	 * @name .fs-scrollbar.fs-scrollbar-active
+	 * @type modifier
+	 * @description Indicates active state
+	 */
 
 	.fs-scrollbar {
 		// &&-enabled {
@@ -43,6 +77,13 @@
 		&-handle {
 			box-sizing: border-box;
 		}
+
+		/**
+		 * @class
+		 * @name .fs-scrollbar-content
+		 * @type element
+		 * @description Scrolling content
+		 */
 
 		&-content {
 			position: relative;
@@ -69,6 +110,13 @@
 			}
 		}
 
+		/**
+		 * @class
+		 * @name .fs-scrollbar-bar
+		 * @type element
+		 * @description Scrollbar container
+		 */
+
 		&-bar {
 			width: @fs-scrollbar-bar-size;
 			height: 100%;
@@ -84,6 +132,13 @@
 			display: none;
 		}
 
+		/**
+		 * @class
+		 * @name .fs-scrollbar-track
+		 * @type element
+		 * @description Scrollbar track container
+		 */
+
 		&-track {
 			width: 100%;
 			height: 100%;
@@ -93,6 +148,13 @@
 			background: @fs-scrollbar-track-background;
 			overflow: hidden;
 		}
+
+		/**
+		 * @class
+		 * @name .fs-scrollbar-handle
+		 * @type element
+		 * @description Scrollbar handle
+		 */
 
 		@fs-scrollbar-handle-position: ((@fs-scrollbar-bar-size - @fs-scrollbar-handle-size) / 2);
 

@@ -1,4 +1,25 @@
 
+	/**
+	 * @class
+	 * @name .fs-tabs-element
+	 * @type element
+	 * @description Target elmement
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-tabs
+	 * @type element
+	 * @description Base widget class
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-tabs.fs-tabs-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
+
 	.fs_clearfix() {
 		&:after {
 			clear: both;
@@ -12,11 +33,58 @@
 			.fs_clearfix();
 		}
 
+		/**
+		 * @class
+		 * @name .fs-tabs-tab
+		 * @type element
+		 * @description Tab handle element
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-tab.fs-tabs-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-tab.fs-tabs-active
+		 * @type modifier
+		 * @description Indicates active state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-tab.fs-tabs-mobile
+		 * @type modifier
+		 * @description Indicates mobile interface
+		 */
+
 		&-tab&-enabled {
 			cursor: pointer;
 		}
 
-		// content
+		/**
+		 * @class
+		 * @name .fs-tabs-content
+		 * @type element
+		 * @description Tab content element
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-content.fs-tabs-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-content.fs-tabs-active
+		 * @type modifier
+		 * @description Indicates active state
+		 */
 
 		&-content&-enabled {
 			.fs_clearfix();
@@ -28,7 +96,19 @@
 			display: block;
 		}
 
-		// mobile
+		/**
+		 * @class
+		 * @name .fs-tabs-tab_mobile
+		 * @type element
+		 * @description Mobile tab handle element
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-tabs-tab_mobile.fs-tabs-active
+		 * @type modifier
+		 * @description Indicates active state
+		 */
 
 		&-tab&-mobile,
 		&-tab_mobile,
