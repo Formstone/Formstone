@@ -171,7 +171,7 @@ Defining a plugin using the factory will return an object containing the follow 
 | `defaults` | `object` | default options extended with initialization and local options |
 | `functions` | `object` | private utility functions |
 | `methods` | `object` | public methods |
-| `utilities` | `object` | public utilities |
+| `utilities` | `object` | public utility methods |
 | `classes` | `object` | namespaced classes strings |
 | `events` | `object` | namespaced event strings |
 
@@ -212,15 +212,15 @@ var $element = $(Classes.content);
 
 | Key | Type | Value |
 | --- | --- | --- |
-| `base` | Default | `namespace` |
+| `base` | Default | `.namespace` |
 | `element` | Default | `.namespace-element` |
 | `visible` | Custom | `.namespace-visible` |
 | `content` | Custom | `.namespace-content` |
 
-The `classes.raw` key will contain just the namespaced class name without the leading '.', useful for building html:
+The `classes.raw` key will contain just the namespaced class without the leading '.', useful for building html:
 
 ```javascript
-html += '<div class="' + Classes.raw.content '">;
+html += '<div class="' + Classes.raw.content + '">';
 ```
 
 #### Events
@@ -239,7 +239,7 @@ var Plugin = Formstone.Plugin(“namespace”, {
 ```
 
 ```javascript
-$element.on(Events.click, onClick);
+data.$el.on(Events.click, onClick);
 ```
 
 | Key | Type | Value |

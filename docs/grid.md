@@ -139,7 +139,7 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | Variable | Default | Description |
 | --- | --- | --- |
 | **Structure** | | |
-| `@fs-grid-class-container` | `grid` | Container class |
+| `@fs-grid-class-container` | `fs-grid` | Container class |
 | `@fs-grid-class-row` | `row` | Row class |
 | `@fs-grid-class-contained` | `contained` | Contained helper class |
 | `@fs-grid-class-padded` | `padded` | Padded helper class |

@@ -8,14 +8,14 @@
     &quot;directory&quot;: &quot;components&quot;
 }</code></pre>
 <h2 id="implement">Implement</h2>
-<p>Once deployed, components can be implemented by including the required files and dependencies directly, or by hooking into a current build scripts:</p>
-<pre><code class="lang-markup">&lt;link href=&quot;/components/formstone/dist/css/component.css&quot; rel=&quot;stylesheet&quot;&gt;
-&lt;script src=&quot;/components/formstone/dist/js/component.js&quot;&gt;&lt;/script&gt;</code></pre>
 <p>The <code>core.js</code> file is a main dependency for all javascript based components:</p>
 <pre><code class="lang-markup">&lt;script src=&quot;/components/formstone/dist/js/core.js&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Components can be implemented by including the required files and dependencies directly, or by hooking into a current build scripts:</p>
+<pre><code class="lang-markup">&lt;link href=&quot;/components/formstone/dist/css/component.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;/components/formstone/dist/js/component.js&quot;&gt;&lt;/script&gt;</code></pre>
 <h2 id="customize">Customize</h2>
 <p>When customizing any component, best practice is to deploy the production files as provided then implement and extend the component&#39;s properties in local scripts and styles. This ensures the ability to update any component without overwriting custom styles. LESS variables can be &#39;lazy-loaded&#39; for specific components when compiling directly:</p>
-<pre><code class="lang-css">@import &#39;../components/formstone/dist/css/component.css&#39;;
+<pre><code class="lang-css">@import &#39;components/formstone/src/less/component.less&#39;;
 
 @fs-component-variable: #fff;</code></pre>
 <h2 id="contribute">Contribute</h2>

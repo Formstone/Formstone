@@ -281,7 +281,7 @@
 <tr>
 <td><code>utilities</code></td>
 <td><code>object</code></td>
-<td>public utilities</td>
+<td>public utility methods</td>
 </tr>
 <tr>
 <td><code>classes</code></td>
@@ -329,7 +329,7 @@
 <tr>
 <td><code>base</code></td>
 <td>Default</td>
-<td><code>namespace</code></td>
+<td><code>.namespace</code></td>
 </tr>
 <tr>
 <td><code>element</code></td>
@@ -348,8 +348,8 @@
 </tr>
 </tbody>
 </table>
-<p>The <code>classes.raw</code> key will contain just the namespaced class name without the leading &#39;.&#39;, useful for building html:</p>
-<pre><code class="lang-javascript">html += &#39;&lt;div class=&quot;&#39; + Classes.raw.content &#39;&quot;&gt;;</code></pre>
+<p>The <code>classes.raw</code> key will contain just the namespaced class without the leading &#39;.&#39;, useful for building html:</p>
+<pre><code class="lang-javascript">html += &#39;&lt;div class=&quot;&#39; + Classes.raw.content + &#39;&quot;&gt;&#39;;</code></pre>
 <h4 id="events">Events</h4>
 <p>The <code>events</code> object returned when defining a plugin will contain properly namespaced strings of both default and custom events. Custom events will become object keys, while the namespaced event will become the value:</p>
 <pre><code class="lang-javascript">var Plugin = Formstone.Plugin(“namespace”, {
@@ -360,7 +360,7 @@
     ],
     ...
 });</code></pre>
-<pre><code class="lang-javascript">$element.on(Events.click, onClick);</code></pre>
+<pre><code class="lang-javascript">data.$el.on(Events.click, onClick);</code></pre>
 <table>
 <thead>
 <tr>

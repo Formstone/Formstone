@@ -22,17 +22,17 @@ Note: Bower will install the package in a `bower-components` directory by defaul
 
 ## Implement
 
-Once deployed, components can be implemented by including the required files and dependencies directly, or by hooking into a current build scripts:
-
-```markup
-<link href="/components/formstone/dist/css/component.css" rel="stylesheet">
-<script src="/components/formstone/dist/js/component.js"></script>
-```
-
 The `core.js` file is a main dependency for all javascript based components:
 
 ```markup
 <script src="/components/formstone/dist/js/core.js"></script>
+```
+
+Components can be implemented by including the required files and dependencies directly, or by hooking into a current build scripts:
+
+```markup
+<link href="/components/formstone/dist/css/component.css" rel="stylesheet">
+<script src="/components/formstone/dist/js/component.js"></script>
 ```
 
 ## Customize
@@ -40,7 +40,7 @@ The `core.js` file is a main dependency for all javascript based components:
 When customizing any component, best practice is to deploy the production files as provided then implement and extend the component's properties in local scripts and styles. This ensures the ability to update any component without overwriting custom styles. LESS variables can be 'lazy-loaded' for specific components when compiling directly:
 
 ```css
-@import '../components/formstone/dist/css/component.css';
+@import 'components/formstone/src/less/component.less';
 
 @fs-component-variable: #fff;
 ```

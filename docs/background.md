@@ -6,6 +6,7 @@ A jQuery plugin for full-frame image and video backgrounds.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -144,4 +145,18 @@ Unloads current media
 ```javascript
 $(".target").background("unload");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-background-element` | `element` | Target elmement |
+| `.fs-background` | `element` | Base widget class |
+| `.fs-background-container` | `element` | Container element |
+| `.fs-background-media` | `element` | Media element |
+| `.fs-background-media.fs-background-animated` | `modifier` | Indicates animated state |
+| `.fs-background-media.fs-background-navtive` | `modifier` | Indicates native support |
+| `.fs-background-media.fs-background-fixed` | `modifier` | Indicates fixed positioning |
+| `.fs-background-embed` | `element` | Embed/iFrame element |
+| `.fs-background-embed.fs-background-embed-ready` | `modifier` | Indicates ready state |
 

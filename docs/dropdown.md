@@ -153,12 +153,12 @@ $(".target").dropdown("update");
 | --- | --- | --- |
 | `.fs-dropdown-element` | `element` | Target element |
 | `.fs-dropdown` | `element` | Base widget class |
-| `.fs-lightbox.fs-lightbox-multiple` | `modifer` | Indicates multi-selected element |
-| `.fs-lightbox.fs-lightbox-cover` | `modifer` | Indicates cover positioning |
-| `.fs-lightbox.fs-lightbox-bottom` | `modifer` | Indicates bottom positioning |
-| `.fs-lightbox.fs-lightbox-disabled` | `modifer` | Indicates disabled state |
-| `.fs-lightbox.fs-lightbox-open` | `modifer` | Indicates open state |
-| `.fs-lightbox.fs-lightbox-focus` | `modifer` | Indicates focus state |
+| `.fs-dropdown.fs-dropdown-multiple` | `modifer` | Indicates multi-selected element |
+| `.fs-dropdown.fs-dropdown-cover` | `modifer` | Indicates cover positioning |
+| `.fs-dropdown.fs-dropdown-bottom` | `modifer` | Indicates bottom positioning |
+| `.fs-dropdown.fs-dropdown-disabled` | `modifer` | Indicates disabled state |
+| `.fs-dropdown.fs-dropdown-open` | `modifer` | Indicates open state |
+| `.fs-dropdown.fs-dropdown-focus` | `modifer` | Indicates focus state |
 | `.fs-dropdown-selected` | `element` | Handle item |
 | `.fs-dropdown-options` | `element` | Options container |
 | `.fs-dropdown-group` | `element` | Option group label |

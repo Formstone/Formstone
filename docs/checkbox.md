@@ -5,6 +5,7 @@ A jQuery plugin for replacing checkboxes.
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -55,4 +56,20 @@ Enables target instance
 ```javascript
 $(".target").checkbox("enable");
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-checkbox-element` | `element` | Target elmement |
+| `.fs-checkbox` | `element` | Base widget class |
+| `.fs-checkbox.fs-checkbox-checked` | `modifier` | Indicates checked state |
+| `.fs-checkbox.fs-checkbox-radio` | `modifier` | Indicates radio interface |
+| `.fs-checkbox.fs-checkbox-toggle` | `modifier` | Indicates toggle interface |
+| `.fs-checkbox.fs-checkbox-focus` | `modifier` | Indicates focused state |
+| `.fs-checkbox.fs-checkbox-disabled` | `modifier` | Indicates disabled state |
+| `.fs-checkbox-enabled` | `modifier` | Indicates enabled state |
+| `.fs-checkbox-label` | `element` | Label element |
+| `.fs-checkbox-marker` | `element` | Marker element |
+| `.fs-checkbox-flag` | `element` | Flag element |
 

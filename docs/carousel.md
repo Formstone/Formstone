@@ -162,7 +162,7 @@ $(".target").carousel("resize");
 | --- | --- | --- |
 | `.fs-carousel-element` | `element` | Target elmement |
 | `.fs-carousel` | `element` | Base widget class |
-| `.fs-upload.fs-upload-dropping` | `modifier` | Indicates dropping state |
+| `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-carousel-viewport` | `element` | Item container |
 | `.fs-carousel-canister` | `element` | Item container |
 | `.fs-carousel-item` | `element` | Individual item |
