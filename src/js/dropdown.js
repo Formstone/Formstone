@@ -56,7 +56,7 @@
 			RawClasses.customClass
 		];
 
-		if (Formstone.isMobile) {
+		if (data.mobile || Formstone.isMobile) {
 			wrapperClasses.push(RawClasses.mobile);
 		} else if (data.cover) {
 			wrapperClasses.push(RawClasses.cover);

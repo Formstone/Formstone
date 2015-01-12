@@ -18,6 +18,7 @@ Formstone components are now bundled as a single package. Developers should stil
 | Selecter | [Dropdown](../components/dropdown/) |
 | Sizer | [Equalize](../components/equalize/) |
 | Shifter | [Navigation](../components/navigation/) |
+| Stepper | [Number](../components/number/) |
 | Tabber | [Tabs](../components/tabs/) |
 | Tipper | [Tooltip](../components/tooltip/) |
 | Wallpaper | [Background](../components/background/) |
