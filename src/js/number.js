@@ -28,10 +28,6 @@
 		data.digits       = significantDigits(data.step);
 		data.disabled     = this.prop("disabled");
 
-		// Store data
-		data.$container    = this.parent(Classes.base);
-		data.$arrows       = data.$container.find(Classes.arrow);
-
 		var html = "";
 		html += '<button class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '">'   + data.labels.up + '</button>';
 		html += '<button class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
@@ -39,6 +35,10 @@
 		// Modify DOM
 		this.wrap('<div class="' + [RawClasses.base, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
 			.after(html);
+
+		// Store data
+		data.$container    = this.parent(Classes.base);
+		data.$arrows       = data.$container.find(Classes.arrow);
 
 		// Bind keyboard events
 		this.on(Events.keyPress, Classes.element, data, onKeyup);
@@ -55,7 +55,10 @@
 	 */
 
 	function destruct(data) {
-		this.off(Events.namespace);
+		data.$arrows.remove();
+
+		this.unwrap()
+			.off(Events.namespace);
 	}
 
 	/**

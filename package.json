@@ -53,6 +53,7 @@
         "dist/js/equalize.js",
         "dist/js/lightbox.js",
         "dist/js/mediaquery.js",
+        "dist/js/pagination.js",
         "dist/js/navigation.js",
         "dist/js/number.js",
         "dist/js/range.js",

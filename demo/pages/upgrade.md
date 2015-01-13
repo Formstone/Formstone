@@ -12,6 +12,7 @@ Formstone components are now bundled as a single package. Developers should stil
 | Macaroon | [Cookie](../components/cookie/) |
 | Naver | [Navigation](../components/navigation/) |
 | Picker | [Checkbox](../components/checkbox/) |
+| Ranger | [Range](../components/range/) |
 | Roller | [Carousel](../components/carousel/) |
 | Rubberband | [Mediaquery](../components/mediaquery/) |
 | Scroller | [Scrollbar](../components/scrollbar/) |

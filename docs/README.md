@@ -20,6 +20,7 @@
 * [Lightbox](lightbox.md)
 * [Navigation](navigation.md)
 * [Number](number.md)
+* [Pagination](pagination.md)
 * [Range](range.md)
 * [Scrollbar](scrollbar.md)
 * [Switch](switch.md)

@@ -128,7 +128,7 @@
 
 			// Handle clicks to associated labels
 			this.on(Events.focusIn, data, function(e) {
-				e.data.$dropdown.trigger("focus");
+				e.data.$dropdown.trigger(Events.raw.focus);
 			});
 		}
 	}

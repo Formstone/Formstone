@@ -1,0 +1,53 @@
+	.fs-pagination {
+
+		&-pages {
+			text-align: center;
+		}
+
+		&-page,
+		&-ellipsis {
+			display: none;
+			margin: 0 5px;
+		}
+
+		&-active,
+		&-first,
+		&-last,
+		&-visible {
+			display: inline-block;
+		}
+
+		&-control {
+			display: block;
+
+			&_previous {
+				float: left;
+			}
+
+			&_next {
+				float: right;
+			}
+		}
+
+		&-position,
+		&-select {
+			display: none;
+		}
+
+		&-mobile &-pages {
+			display: none;
+		}
+
+		&-mobile &-position {
+			display: block;
+			text-align: center;
+		}
+
+		&-mobile &-select {
+			position: absolute;
+			z-index: -1;
+
+			display: block;
+			opacity: 0;
+		}
+	}

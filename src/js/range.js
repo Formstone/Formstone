@@ -77,6 +77,8 @@
 						   .append( (data.vertical) ? labelMin : labelMax);
 		}
 
+		data.$labels = data.$container.find(Classes.label);
+
 		// Bind click events
 		this.on(Events.focus, data, onFocus)
 			.on(Events.blur, data, onBlur)
@@ -102,7 +104,11 @@
 	 */
 
 	function destruct(data) {
-		data.$container.off(Events.namespace);
+		data.$container.off(Events.namespace)
+					   .touch("destroy");
+
+		data.$track.remove();
+		data.$labels.remove();
 
 		this.unwrap()
 			.removeClass(RawClasses.element)
