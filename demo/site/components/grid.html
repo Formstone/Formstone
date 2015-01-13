@@ -129,10 +129,10 @@
 <h3 id="markup">Markup</h3>
 <p>A basic example may look something like:</p>
 <pre><code class="lang-markup">&lt;body class=&quot;fs-grid&quot;&gt;
-    &lt;div class=&quot;row&quot;&gt;
-        &lt;div class=&quot;cell small-3 medium-2 large-4&quot;&gt;...&lt;/div&gt;
-        &lt;div class=&quot;cell small-3 medium-2 large-4&quot;&gt;...&lt;/div&gt;
-        &lt;div class=&quot;cell small-3 medium-2 large-4&quot;&gt;...&lt;/div&gt;
+    &lt;div class=&quot;fs-row&quot;&gt;
+        &lt;div class=&quot;fs-cell fs-sm-3 fs-md-2 fs-lg-4&quot;&gt;...&lt;/div&gt;
+        &lt;div class=&quot;fs-cell fs-sm-3 fs-md-2 fs-lg-4&quot;&gt;...&lt;/div&gt;
+        &lt;div class=&quot;fs-cell fs-sm-3 fs-md-2 fs-lg-4&quot;&gt;...&lt;/div&gt;
     &lt;/div&gt;
 &lt;/body&gt;</code></pre>
 <p>This will create 3 cells that each span 3 columns on &#39;small&#39;, 2 columns on &#39;medium&#39; and 4 columns on &#39;large&#39; screens. Think of the nested structure like a directory tree:</p>
@@ -167,31 +167,31 @@
 </thead>
 <tbody>
 <tr>
-<td><code>min</code></td>
+<td><code>xs</code></td>
 <td>smaller than 500px</td>
 <td>300px</td>
 <td>3</td>
 </tr>
 <tr>
-<td><code>small</code></td>
+<td><code>sm</code></td>
 <td>smaller than 740px</td>
 <td>480px</td>
 <td>3</td>
 </tr>
 <tr>
-<td><code>medium</code></td>
+<td><code>md</code></td>
 <td>740px to 960px</td>
 <td>720px</td>
 <td>6</td>
 </tr>
 <tr>
-<td><code>large</code></td>
+<td><code>lg</code></td>
 <td>960px to 1220px</td>
 <td>960px</td>
 <td>12</td>
 </tr>
 <tr>
-<td><code>max</code></td>
+<td><code>xl</code></td>
 <td>larger than 1220px</td>
 <td>1200px</td>
 <td>12</td>
@@ -208,24 +208,24 @@
 </thead>
 <tbody>
 <tr>
-<td><code>min-X</code></td>
-<td>only min size</td>
+<td><code>xs-X</code></td>
+<td>only extra small size</td>
 </tr>
 <tr>
-<td><code>small-X</code></td>
-<td>both small and min sizes</td>
+<td><code>sm-X</code></td>
+<td>both small and extra small sizes</td>
 </tr>
 <tr>
-<td><code>medium-X</code></td>
+<td><code>md-X</code></td>
 <td>medium size</td>
 </tr>
 <tr>
-<td><code>large-X</code></td>
-<td>both large and max sizes</td>
+<td><code>lg-X</code></td>
+<td>both large and extra large sizes</td>
 </tr>
 <tr>
-<td><code>max-X</code></td>
-<td>only max size</td>
+<td><code>xl-X</code></td>
+<td>only extra large size</td>
 </tr>
 <tr>
 <td><code>all-X</code></td>
@@ -233,12 +233,12 @@
 </tr>
 </tbody>
 </table>
-<p>Cells will default to filling the available horizontal space but can be defined by the target screen size and column count. For example <code>small-2</code> will produce a cell spanning 2 of the 3 available columns within the &#39;small&#39; screen size range. Cell classes can be stacked to specify column spans across all screen sizes:</p>
-<pre><code class="lang-markup">&lt;div class=&quot;cell small-3 medium-6 large-12&quot;&gt;...&lt;/div&gt;</code></pre>
-<p>The <code>max-X</code> and <code>min-X</code> classes adds level of control when targeting large and small screens. For example, a cell may need to span 2 columns at the small size, but span the full width at the min size:</p>
-<pre><code class="lang-markup">&lt;div class=&quot;cell min-3 small-2 ...&quot;&gt;...&lt;/div&gt;</code></pre>
-<p>The <code>all-X</code> classes will create a cell that spans the specified width on all screen sizes (only works with fraction cell counts):</p>
-<pre><code class="lang-markup">&lt;div class=&quot;cell all-third&quot;&gt;...&lt;/div&gt;</code></pre>
+<p>Cells will default to filling the available horizontal space but can be defined by the target screen size and column count. For example <code>fs-sm-2</code> will produce a cell spanning 2 of the 3 available columns within the &#39;small&#39; screen size range. Cell classes can be stacked to specify column spans across all screen sizes:</p>
+<pre><code class="lang-markup">&lt;div class=&quot;fs-cell fs-sm-3 fs-md-6 fs-lg-12&quot;&gt;...&lt;/div&gt;</code></pre>
+<p>The <code>fs-xl-X</code> and <code>fs-xs-X</code> classes adds level of control when targeting large and small screens. For example, a cell may need to span 2 columns at the small size, but span the full width at the extra small size:</p>
+<pre><code class="lang-markup">&lt;div class=&quot;fs-cell fs-xs-3 fs-sm-2 ...&quot;&gt;...&lt;/div&gt;</code></pre>
+<p>The <code>fs-all-X</code> classes will create a cell that spans the specified width on all screen sizes (only works with fraction cell counts):</p>
+<pre><code class="lang-markup">&lt;div class=&quot;fs-cell fs-all-third&quot;&gt;...&lt;/div&gt;</code></pre>
 <h3 id="fraction-cells">Fraction Cells</h3>
 <p>The fraction classes can be used in place of specific column counts:</p>
 <table>
@@ -250,23 +250,23 @@
 </thead>
 <tbody>
 <tr>
-<td><code>X-full</code></td>
+<td><code>fs-X-full</code></td>
 <td>entire row width</td>
 </tr>
 <tr>
-<td><code>X-half</code></td>
+<td><code>fs-X-half</code></td>
 <td>1/2 row width</td>
 </tr>
 <tr>
-<td><code>X-third</code></td>
+<td><code>fs-X-third</code></td>
 <td>1/3 row width</td>
 </tr>
 <tr>
-<td><code>X-fourth</code></td>
+<td><code>fs-X-fourth</code></td>
 <td>1/4 row width</td>
 </tr>
 <tr>
-<td><code>X-fifth</code></td>
+<td><code>fs-X-fifth</code></td>
 <td>1/5 row width</td>
 </tr>
 </tbody>
@@ -282,24 +282,24 @@
 </thead>
 <tbody>
 <tr>
-<td><code>min-hide</code></td>
-<td>Hide on min</td>
+<td><code>fs-xs-hide</code></td>
+<td>Hide on extra small</td>
 </tr>
 <tr>
-<td><code>small-hide</code></td>
+<td><code>fs-sm-hide</code></td>
 <td>Hide on small</td>
 </tr>
 <tr>
-<td><code>medium-hide</code></td>
+<td><code>fs-md-hide</code></td>
 <td>Hide on medium</td>
 </tr>
 <tr>
-<td><code>large-hide</code></td>
+<td><code>fs-lg-hide</code></td>
 <td>Hide on large</td>
 </tr>
 <tr>
-<td><code>max-hide</code></td>
-<td>Hide on max</td>
+<td><code>fs-xl-hide</code></td>
+<td>Hide on extra large</td>
 </tr>
 </tbody>
 </table>
@@ -314,19 +314,19 @@
 </thead>
 <tbody>
 <tr>
-<td><code>padded</code></td>
+<td><code>fs-padded</code></td>
 <td>Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters.</td>
 </tr>
 <tr>
-<td><code>contained</code></td>
+<td><code>fs-contained</code></td>
 <td>Removes cell margin. Allows backgrounds to touch by removing gutters.</td>
 </tr>
 <tr>
-<td><code>centered</code></td>
+<td><code>fs-centered</code></td>
 <td>Centers cell. Useful for centering odd column count cells.</td>
 </tr>
 <tr>
-<td><code>right</code></td>
+<td><code>fs-right</code></td>
 <td>Right aligns cell. Useful for changing document flow on different device sizes.</td>
 </tr>
 </tbody>
@@ -354,22 +354,22 @@
 </tr>
 <tr>
 <td><code>@fs-grid-class-row</code></td>
-<td><code>row</code></td>
+<td><code>fs-row</code></td>
 <td>Row class</td>
 </tr>
 <tr>
 <td><code>@fs-grid-class-contained</code></td>
-<td><code>contained</code></td>
+<td><code>fs-contained</code></td>
 <td>Contained helper class</td>
 </tr>
 <tr>
 <td><code>@fs-grid-class-padded</code></td>
-<td><code>padded</code></td>
+<td><code>fs-padded</code></td>
 <td>Padded helper class</td>
 </tr>
 <tr>
 <td><code>@fs-grid-class-centered</code></td>
-<td><code>centered</code></td>
+<td><code>fs-centered</code></td>
 <td>Centered helper class</td>
 </tr>
 <tr>
@@ -379,33 +379,33 @@
 </tr>
 <tr>
 <td><code>@fs-grid-class-all</code></td>
-<td><code>all</code></td>
+<td><code>fs-all</code></td>
 <td>All cell class</td>
 </tr>
 <tr>
-<td><code>@fs-grid-class-min</code></td>
-<td><code>min</code></td>
-<td>Min cell class</td>
+<td><code>@fs-grid-class-xs</code></td>
+<td><code>fs-xs</code></td>
+<td>Extra Small cell class</td>
 </tr>
 <tr>
-<td><code>@fs-grid-class-small</code></td>
-<td><code>small</code></td>
+<td><code>@fs-grid-class-sm</code></td>
+<td><code>fs-sm</code></td>
 <td>Small cell class</td>
 </tr>
 <tr>
-<td><code>@fs-grid-class-medium</code></td>
-<td><code>medium</code></td>
+<td><code>@fs-grid-class-md</code></td>
+<td><code>fs-md</code></td>
 <td>Medium cell class</td>
 </tr>
 <tr>
-<td><code>@fs-grid-class-large</code></td>
-<td><code>large</code></td>
+<td><code>@fs-grid-class-lg</code></td>
+<td><code>fs-lg</code></td>
 <td>Large cell class</td>
 </tr>
 <tr>
-<td><code>@fs-grid-class-max</code></td>
-<td><code>max</code></td>
-<td>Max cell class</td>
+<td><code>@fs-grid-class-xl</code></td>
+<td><code>fs-xl</code></td>
+<td>Extra Large cell class</td>
 </tr>
 <tr>
 <td><strong>Columns</strong></td>
@@ -413,17 +413,17 @@
 <td></td>
 </tr>
 <tr>
-<td><code>@fs-grid-columns-small</code></td>
+<td><code>@fs-grid-columns-sm</code></td>
 <td><code>3</code></td>
 <td>Small column count</td>
 </tr>
 <tr>
-<td><code>@fs-grid-columns-medium</code></td>
+<td><code>@fs-grid-columns-md</code></td>
 <td><code>6</code></td>
 <td>Medium column count</td>
 </tr>
 <tr>
-<td><code>@fs-grid-columns-large</code></td>
+<td><code>@fs-grid-columns-lg</code></td>
 <td><code>12</code></td>
 <td>Large column count</td>
 </tr>
@@ -433,29 +433,29 @@
 <td></td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-min</code></td>
+<td><code>@fs-grid-width-xs</code></td>
 <td><code>300px</code></td>
-<td>Min row width</td>
+<td>Extra Small row width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-small</code></td>
+<td><code>@fs-grid-width-sm</code></td>
 <td><code>480px</code></td>
 <td>Small row width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-medium</code></td>
+<td><code>@fs-grid-width-md</code></td>
 <td><code>720px</code></td>
 <td>Medium row width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-large</code></td>
+<td><code>@fs-grid-width-lg</code></td>
 <td><code>960px</code></td>
 <td>Large row width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-max</code></td>
+<td><code>@fs-grid-width-xl</code></td>
 <td><code>1200px</code></td>
-<td>Max row width</td>
+<td>Extra Large row width</td>
 </tr>
 <tr>
 <td><strong>Breakpoints</strong></td>
@@ -463,29 +463,29 @@
 <td></td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-break-min</code></td>
+<td><code>@fs-grid-width-break-xs</code></td>
 <td><code>320px</code></td>
-<td>Min break width</td>
+<td>Extra Small break width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-break-small</code></td>
+<td><code>@fs-grid-width-break-sm</code></td>
 <td><code>500px</code></td>
 <td>Small break width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-break-medium</code></td>
+<td><code>@fs-grid-width-break-md</code></td>
 <td><code>740px</code></td>
 <td>Medium break width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-break-large</code></td>
+<td><code>@fs-grid-width-break-lg</code></td>
 <td><code>980px</code></td>
 <td>Large break width</td>
 </tr>
 <tr>
-<td><code>@fs-grid-width-break-max</code></td>
+<td><code>@fs-grid-width-break-xl</code></td>
 <td><code>1220px</code></td>
-<td>Max break width</td>
+<td>Extra Large break width</td>
 </tr>
 <tr>
 <td><strong>Gutters</strong></td>
