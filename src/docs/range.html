@@ -1,0 +1,33 @@
+<style>
+</style>
+
+<script>
+	$(function() {
+		$("input[type=range]").range();
+	});
+</script>
+
+<h4>Basic</h4>
+<fieldset class="form_fieldset">
+	<input type="range" class="form_input">
+</fieldset>
+
+<h4>Custom Labels</h4>
+<fieldset class="form_fieldset">
+	<input type="range" class="form_input" data-range-options='{"labels":{"min":"Min","max":"Max"}}'>
+</fieldset>
+
+<h4>No Labels</h4>
+<fieldset class="form_fieldset">
+	<input type="range" class="form_input" data-range-options='{"labels":false}'>
+</fieldset>
+
+<h4>Custom Range</h4>
+<fieldset class="form_fieldset">
+	<input type="range" class="form_input" min="25" max="75" step="5">
+</fieldset>
+
+<h4>Vertical</h4>
+<fieldset class="form_fieldset">
+	<input type="range" class="form_input" orient="vertical">
+</fieldset>

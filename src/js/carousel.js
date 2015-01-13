@@ -240,7 +240,7 @@
 	/**
 	 * @method
 	 * @name resize
-	 * @description Resizes each instance
+	 * @description Resizes instance
 	 * @example $(".target").carousel("resize");
 	 */
 

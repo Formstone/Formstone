@@ -150,7 +150,7 @@ $(".target").carousel("reset");
 
 ### resize
 
-Resizes each instance
+Resizes instance
 
 ```javascript
 $(".target").carousel("resize");

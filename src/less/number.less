@@ -52,6 +52,17 @@
 		margin: @fs-number-margin;
 		overflow: hidden;
 
+		&,
+		&:after,
+		&:before,
+		*,
+		*:after,
+		*:before {
+			box-sizing: border-box;
+			transition: none;
+			user-select: none !important;
+		}
+
 		&-element {
 			width: 100%;
 

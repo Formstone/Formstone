@@ -21,36 +21,24 @@
 
 	function construct(data) {
 		// HTML5 attributes
-		var min = parseFloat(this.attr("min")),
-			max = parseFloat(this.attr("max")),
-			step = parseFloat(this.attr("step")) || 1,
-			arrows = "";
-
-		arrows += '<button class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '">'   + data.labels.up + '</button>';
-		arrows += '<button class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
-
-		// Modify DOM
-		this.wrap('<div class="' + [RawClasses.base, data.customClass].join(" ") + '"></div>')
-			.after(arrows);
+		data.min = parseFloat(this.attr("min"))   || false;
+		data.max = parseFloat(this.attr("max"))   || false;
+		data.step = parseFloat(this.attr("step")) || 1;
+		data.timer        = null;
+		data.digits       = significantDigits(data.step);
+		data.disabled     = this.prop("disabled");
 
 		// Store data
 		data.$container    = this.parent(Classes.base);
 		data.$arrows       = data.$container.find(Classes.arrow);
 
-		data.min       = (typeof min !== undefined && !isNaN(min))   ? min  : false;
-		data.max       = (typeof max !== undefined && !isNaN(max))   ? max  : false;
-		data.step      = (typeof step !== undefined && !isNaN(step)) ? step : 1;
+		var html = "";
+		html += '<button class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '">'   + data.labels.up + '</button>';
+		html += '<button class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
 
-		data.timer        = null;
-		data.digits       = significantDigits(data.step);
-		data.disabled     = this.prop("disabled");
-
-		console.log("ads", data, this.prop("disabled"));
-
-		// Check disabled
-		if (data.disabled) {
-			data.$container.addClass(RawClasses.disabled);
-		}
+		// Modify DOM
+		this.wrap('<div class="' + [RawClasses.base, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+			.after(html);
 
 		// Bind keyboard events
 		this.on(Events.keyPress, Classes.element, data, onKeyup);
@@ -67,8 +55,6 @@
 	 */
 
 	function destruct(data) {
-
-
 		this.off(Events.namespace);
 	}
 
@@ -289,7 +275,7 @@
 			},
 
 			events: {
-				tap      : "tap"
+				tap    : "tap"
 			}
 		}),
 
