@@ -100,7 +100,8 @@
 	 */
 
 	function destruct(data) {
-		data.$content.removeClass(data.contentClasses);
+		data.$content.removeClass(data.contentClasses)
+					 .off(Events.namespace);
 
 		data.$handle.attr("data-switch-target", "")
 					.removeClass(data.handleClasses)
@@ -168,7 +169,10 @@
 
 		data.$el.trigger(Events.open);
 
-		data.$content.addClass(RawClasses.open);
+		data.$content.addClass(RawClasses.open)
+					 .one(Events.clickTouchStart, function() {
+						close(data);
+					 });
 
 		if (data.label) {
 			data.$handle.text(data.labels.open);
@@ -191,7 +195,8 @@
 
 		data.$el.trigger(Events.close);
 
-		data.$content.removeClass(RawClasses.open);
+		data.$content.removeClass(RawClasses.open)
+					 .off(Events.namespace);
 
 		if (data.label) {
 			data.$handle.text(data.labels.closed);
