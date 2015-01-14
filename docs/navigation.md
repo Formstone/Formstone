@@ -181,6 +181,7 @@ $(".target").navigation("open");
 | `.fs-navigation-toggle-nav.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-toggle-handle` | `element` | Toggle handle |
 | `.fs-navigation-toggle-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-toggle-handle.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-overlay-nav` | `element` | Overlay nav |
 | `.fs-navigation-overlay-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-overlay-nav.fs-navigation-animated` | `modifier` | Indicates animated state |

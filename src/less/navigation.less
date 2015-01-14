@@ -7,6 +7,7 @@
 	@fs-navigation-icon-color:						#ccc;
 	@fs-navigation-icon-height:						3px;
 	@fs-navigation-icon-width:						15px;
+	@fs-navigation-icon-gap:						2px;
 
 	@fs-navigation-icon-close-size:					15px;
 	@fs-navigation-icon-close-font-size:			22px;
@@ -16,14 +17,12 @@
 	@fs-navigation-toggle-background:				#fff;
 	@fs-navigation-toggle-border-color:				#ccc;
 	@fs-navigation-toggle-border-size:				1px;
-
-	@fs-navigation-toggle-handle-background:		#fff;
-	@fs-navigation-toggle-handle-border-color:		#ccc;
-	@fs-navigation-toggle-handle-border-size:		1px;
+	@fs-navigation-toggle-border-radius:			3px;
 
 	@fs-navigation-toggle-handle-text-color:		#111;
 	@fs-navigation-toggle-handle-font-size:			14px;
-	@fs-navigation-toggle-handle-padding:			10px 40px 10px 15px;
+	@fs-navigation-toggle-handle-height:			40px;
+	@fs-navigation-toggle-handle-padding:			0 45px 0 15px;
 
 	// Slide
 
@@ -100,6 +99,7 @@
 			background: @fs-navigation-toggle-background;
 			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
 			border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
+			border-radius: 0 0 @fs-navigation-toggle-border-radius @fs-navigation-toggle-border-radius;
 			display: none;
 		}
 
@@ -126,20 +126,33 @@
 		 * @type modifier
 		 * @description Indicates enabled state
 		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-toggle-handle.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
 
 		&-toggle-handle&-enabled {
 			width: 100%;
 
-			background: @fs-navigation-toggle-handle-background;
-			border: @fs-navigation-toggle-handle-border-size solid @fs-navigation-toggle-handle-border-color;
+			background: @fs-navigation-toggle-background;
+			border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
+			border-radius: @fs-navigation-toggle-border-radius;
 			color: @fs-navigation-toggle-handle-text-color;
 			cursor: pointer;
 			display: block;
 			font-size: @fs-navigation-toggle-handle-font-size;
+			height: @fs-navigation-toggle-handle-height;
+			line-height: @fs-navigation-toggle-handle-height;
 			margin: 0;
 			padding: @fs-navigation-toggle-handle-padding;
 			position: relative;
 			user-select: none;
+		}
+
+		&-toggle-handle&-open {
+			border-radius: @fs-navigation-toggle-border-radius @fs-navigation-toggle-border-radius 0 0;
 		}
 
 		/**
@@ -298,7 +311,7 @@
 		&-overlay-handle&-enabled {
 			padding: @fs-navigation-slide-handle-padding;
 
-			background: @fs-navigation-toggle-handle-background;
+			background: @fs-navigation-toggle-background;
 			color: @fs-navigation-toggle-handle-text-color;
 			cursor: pointer;
 			display: block;
@@ -460,8 +473,8 @@
 
 			background: @fs-navigation-icon-color;
 			box-shadow:
-				0  (@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color,
-				0 -(@fs-navigation-icon-height + 2) 0 @fs-navigation-icon-color;
+				0  (@fs-navigation-icon-height + @fs-navigation-icon-gap) 0 @fs-navigation-icon-color,
+				0 -(@fs-navigation-icon-height + @fs-navigation-icon-gap) 0 @fs-navigation-icon-color;
 			content: '';
 			display: block;
 			margin: auto 0;
