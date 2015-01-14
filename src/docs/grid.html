@@ -1,26 +1,24 @@
 <style>
-	/* * { *behavior: url(/components/Formstone/grid/boxsizing.htc); } */
-
 	.button.bookmarklet { background: #999; clear: both; }
 
 	.example { margin-top: 20px; margin-bottom: 20px; }
-	.example .fs-cell { background: #ccc; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; padding-top: 10px; padding-bottom: 10px; text-align: center; }
-	.example .fs-row .fs-row .fs-cell { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
-	.example .fs-row:hover .fs-cell { background: #999; }
-	.example .fs-row:hover .fs-cell .fs-cell { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
+	.example [class*="fs-cell"] { background: #ddd; color: #666; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; text-align: center; }
+	.example .fs-row .fs-row [class*="fs-cell"] { background: rgba(255, 255, 255, 0.25); margin-bottom: 0; }
 
-	.label_small,
-	.label_medium,
-	.label_large { display: none; }
+	.example [class*="label"] { background: #ccc; display: block; padding-top: 15px; padding-bottom: 15px; }
+
+	.example .label_small,
+	.example .label_medium,
+	.example .label_large { display: none; }
 
 	@media screen and (min-width: 0px) and (max-width: 739px) {
-		.label_small { display: block; }
+		.example .label_small { display: block; }
 	}
 	@media screen and (min-width: 740px) and (max-width: 979px) {
-		.label_medium { display: block; }
+		.example .label_medium { display: block; }
 	}
 	@media screen and (min-width: 980px) {
-		.label_large { display: block; }
+		.example .label_large { display: block; }
 	}
 
 	.swap_grid.active,
@@ -113,7 +111,34 @@
 
 <h5>Centered</h5>
 <div class="example fs-row">
-	<div class="fs-cell fs-all-half fs-centered">
-		<span class="label">all-half centered</span>
+	<div class="fs-cell-centered fs-all-half">
+		<span class="label">-centered all-half</span>
+	</div>
+</div>
+
+<h5>Contained</h5>
+<div class="example fs-row">
+	<div class="fs-cell-contained fs-all-half">
+		<span class="label">-contained all-half</span>
+	</div>
+	<div class="fs-cell-contained fs-all-half">
+		<span class="label">-contained all-half</span>
+	</div>
+</div>
+
+<h5>Padded</h5>
+<div class="example fs-row">
+	<div class="fs-cell-padded fs-all-half">
+		<span class="label">-Padded all-half</span>
+	</div>
+	<div class="fs-cell-padded fs-all-half">
+		<span class="label">-Padded all-half</span>
+	</div>
+</div>
+
+<h5>Right</h5>
+<div class="example fs-row">
+	<div class="fs-cell-right fs-all-half">
+		<span class="label">-right all-half</span>
 	</div>
 </div>

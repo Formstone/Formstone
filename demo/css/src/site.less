@@ -111,7 +111,7 @@
 		}
 	}
 	h4 {
-		.font_size(18);
+		.font_size(14);
 
 		text-transform: uppercase;
 	}
@@ -328,7 +328,7 @@
 
 
 
-	.fs-grid .fs-row {
+	.fs-row {
 		@media @large {
 			margin-left: 25px;
 		}
@@ -759,13 +759,19 @@
 			border: 1px solid @gray_2;
 			border-radius: 3px;
 			color: @gray_5;
-			line-height: 1.8;
 			overflow: auto;
+		}
+
+		&_input {
+			height: 40px;
+			line-height: 40px;
 			padding: 5px 15px;
 		}
 
 		&_textarea {
 			height: 150px;
+			line-height: 1.8;
+			padding: 10px 15px;
 		}
 
 		&_button {

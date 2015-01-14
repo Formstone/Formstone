@@ -1,88 +1,145 @@
 
 	// Column
 
-	.column (@count, @margin, @index) {
-		width: ((100% / @count) * @index) - (@margin * 2);
+	.column(@count, @margin, @index) {
+		width: (((100% / @count) * @index) - (@margin * 2));
 	}
 
 	// Columns
 
-	.columns (@class, @margin, @count, @prefix:~"", @index:1) when (@index <= @count) {
+	.columns(@class, @margin, @count, @combo:~"", @index:1) when (@index <= @count) {
 		// Percentage
-		@{prefix}.@{class}-@{index} {
-			.column(@count, @margin, @index);
+		& when (@combo = "") {
+			.@{class}-@{index} {
+				.column(@count, @margin, @index);
+			}
+		}
+		& when not (@combo = "") {
+			[class*="@{combo}"] {
+				&.@{class}-@{index} {
+					.column(@count, @margin, @index);
+				}
+			}
 		}
 
-		.columns(@class, @margin, @count, @prefix, (@index + 1));
+		.columns(@class, @margin, @count, @combo, (@index + 1));
 	}
 
 	// Columns - Fractioned
 
-	.columnsFractioned (@class, @margin, @prefix:~"") {
+	.columnsFractioned(@class, @margin, @combo:~"") {
 		// Percentage
-		@{prefix}.@{class}-fifth {
-			.column(5, @margin, 1);
+		& when (@combo = "") {
+			.@{class}-fifth {
+				.column(5, @margin, 1);
+			}
+			.@{class}-fourth {
+				.column(4, @margin, 1);
+			}
+			.@{class}-third {
+				.column(3, @margin, 1);
+			}
+			.@{class}-half {
+				.column(2, @margin, 1);
+			}
+			.@{class}-full {
+				.column(1, @margin, 1);
+			}
 		}
-		@{prefix}.@{class}-fourth {
-			.column(4, @margin, 1);
-		}
-		@{prefix}.@{class}-third {
-			.column(3, @margin, 1);
-		}
-		@{prefix}.@{class}-half {
-			.column(2, @margin, 1);
-		}
-		@{prefix}.@{class}-full {
-			.column(1, @margin, 1);
+		& when not (@combo = "") {
+			[class*="@{combo}"] {
+				&.@{class}-fifth {
+					.column(5, @margin, 1);
+				}
+				&.@{class}-fourth {
+					.column(4, @margin, 1);
+				}
+				&.@{class}-third {
+					.column(3, @margin, 1);
+				}
+				&.@{class}-half {
+					.column(2, @margin, 1);
+				}
+				&.@{class}-full {
+					.column(1, @margin, 1);
+				}
+			}
 		}
 	}
 
 	// Columns - Pushed
 
-	.columnPushed (@count, @margin, @index) {
-		margin-left: ((100% / @count) * @index) + @margin;
+	.columnPushed(@count, @margin, @index) {
+		margin-left:((100% / @count) * @index) + @margin;
 	}
 
-	.columnsPushed (@class, @margin, @count, @prefix:~"", @index:1) when (@index < @count) {
-		@{prefix}.@{class}-push-@{index} {
-			.columnPushed(@count, @margin, @index);
+	.columnsPushed(@class, @margin, @count, @combo:~"", @index:1) when (@index < @count) {
+		& when (@combo = "") {
+			.@{class}-push-@{index} {
+				.columnPushed(@count, @margin, @index);
+			}
+		}
+		& when not (@combo = "") {
+			[class*="@{combo}"] {
+				&.@{class}-push-@{index} {
+					.columnPushed(@count, @margin, @index);
+				}
+			}
 		}
 
-		.columnsPushed(@class, @margin, @count, @prefix, (@index + 1));
+		.columnsPushed(@class, @margin, @count, @combo, (@index + 1));
 	}
 
-	.columnsPushedFractioned (@class, @margin, @prefix:~"") {
-		@{prefix}.@{class}-push-fifth {
-			.columnPushed(5, @margin, 1);
+	.columnsPushedFractioned(@class, @margin, @combo:~"") {
+		& when (@combo = "") {
+			.@{class}-push-fifth {
+				.columnPushed(5, @margin, 1);
+			}
+			.@{class}-push-fourth {
+				.columnPushed(4, @margin, 1);
+			}
+			.@{class}-push-third {
+				.columnPushed(3, @margin, 1);
+			}
+			.@{class}-push-half {
+				.columnPushed(2, @margin, 1);
+			}
 		}
-		@{prefix}.@{class}-push-fourth {
-			.columnPushed(4, @margin, 1);
-		}
-		@{prefix}.@{class}-push-third {
-			.columnPushed(3, @margin, 1);
-		}
-		@{prefix}.@{class}-push-half {
-			.columnPushed(2, @margin, 1);
+		& when not (@combo = "") {
+			[class*="@{combo}"] {
+				.@{class}-push-fifth {
+					.columnPushed(5, @margin, 1);
+				}
+				.@{class}-push-fourth {
+					.columnPushed(4, @margin, 1);
+				}
+				.@{class}-push-third {
+					.columnPushed(3, @margin, 1);
+				}
+				.@{class}-push-half {
+					.columnPushed(2, @margin, 1);
+				}
+			}
 		}
 	}
 
 	// Generate - Base
 
-	.generateGridBase (@class) {
+	.generateGridBase(@class) {
 		// Fractions
-		.columnsFractioned(@class, @fs-grid-gutter);
+		.columnsFractioned(@class, @fs-grid-gutter, "");
 
 		// Fractions Push
-		.columnsPushedFractioned(@class, @fs-grid-gutter);
+		.columnsPushedFractioned(@class, @fs-grid-gutter, "");
 
 		// Fractions Contained
-		.columnsFractioned(@class, 0, ~".@{fs-grid-class-contained}");
+		.columnsFractioned(@class, 0, ~"@{fs-grid-class-contained}");
 
 		// Fractions Contained Push
-		.columnsPushedFractioned(@class, 0, ~".@{fs-grid-class-contained}");
+		.columnsPushedFractioned(@class, 0, ~"@{fs-grid-class-contained}");
 
 		// Centered
-		[class*="@{class}-"].@{fs-grid-class-centered} {
+		[class*="@{class}"][class*="@{fs-grid-class-centered}"] {
 			float: none;
 			margin-left: auto;
 			margin-right: auto;
@@ -96,16 +153,16 @@
 
 	// Generate - Grid
 
-	.generateGrid (@class, @columns) {
+	.generateGrid(@class, @columns) {
 		// Cells
-		.columns(@class, @fs-grid-gutter, @columns);
+		.columns(@class, @fs-grid-gutter, @columns, "");
 
 		// Cells Push
-		.columnsPushed(@class, @fs-grid-gutter, @columns);
+		.columnsPushed(@class, @fs-grid-gutter, @columns, "");
 
 		// Contained
-		.columns(@class, 0, @columns, ~".@{fs-grid-class-contained}");
+		.columns(@class, 0, @columns, ~"@{fs-grid-class-contained}");
 
 		// Contained Push
-		.columnsPushed(@class, 0, @columns, ~".@{fs-grid-class-contained}");
+		.columnsPushed(@class, 0, @columns, ~"@{fs-grid-class-contained}");
 	}
