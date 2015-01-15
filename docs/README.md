@@ -23,7 +23,7 @@
 * [Pagination](pagination.md)
 * [Range](range.md)
 * [Scrollbar](scrollbar.md)
-* [Switch](switch.md)
+* [Swap](swap.md)
 * [Tabs](tabs.md)
 * [Tooltip](tooltip.md)
 * [Touch](touch.md)

@@ -72,12 +72,12 @@
 
 		// toggle
 
-		data.$handle.attr("data-switch-target", data.classGuid)
-					.on("activate.switch" + data.eventGuid, data, onOpen)
-					.on("deactivate.switch" + data.eventGuid, data, onClose)
-					.on("enable.switch" + data.eventGuid, data, onEnable)
-					.on("disable.switch" + data.eventGuid, data, onDisable)
-					.switch({
+		data.$handle.attr("data-swap-target", data.classGuid)
+					.on("activate.swap" + data.eventGuid, data, onOpen)
+					.on("deactivate.swap" + data.eventGuid, data, onClose)
+					.on("enable.swap" + data.eventGuid, data, onEnable)
+					.on("disable.swap" + data.eventGuid, data, onDisable)
+					.swap({
 						maxWidth: data.maxWidth,
 						classes: {
 							target  : data.classGuid,
@@ -103,11 +103,11 @@
 		data.$content.removeClass(data.contentClasses)
 					 .off(Events.namespace);
 
-		data.$handle.attr("data-switch-target", "")
+		data.$handle.attr("data-swap-target", "")
 					.removeClass(data.handleClasses)
 					.off(data.eventGuid)
 					.text(data.originalLabel)
-					.switch("destroy");
+					.swap("destroy");
 
 		this.removeClass(data.navClasses)
 			.off(Events.namespace);
@@ -121,7 +121,7 @@
 	 */
 
 	function open(data) {
-		data.$handle.switch("activate");
+		data.$handle.swap("activate");
 	}
 
 	/**
@@ -132,7 +132,7 @@
 	 */
 
 	function close(data) {
-		data.$handle.switch("deactivate");
+		data.$handle.swap("deactivate");
 	}
 
 	/**
@@ -143,7 +143,7 @@
 	 */
 
 	function enable(data) {
-		data.$handle.switch("enable");
+		data.$handle.swap("enable");
 	}
 
 	/**
@@ -154,7 +154,7 @@
 	 */
 
 	function disable(data) {
-		data.$handle.switch("disable");
+		data.$handle.swap("disable");
 	}
 
 	/**
@@ -253,7 +253,7 @@
 	 * @type widget
 	 * @dependency core.js
 	 * @dependency mediaquery.js
-	 * @dependency switch.js
+	 * @dependency swap.js
 	 * @dependency touch.js
 	 */
 

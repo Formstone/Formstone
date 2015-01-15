@@ -22,7 +22,7 @@ tabs.css
 ```markup
 core.js
 mediaquery.js
-switch.js
+swap.js
 touch.js
 ```
 

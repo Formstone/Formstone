@@ -35,14 +35,14 @@
 
 		// toggle
 
-		this.attr("data-switch-target", data.content)
-			.attr("data-switch-group", data.group)
+		this.attr("data-swap-target", data.content)
+			.attr("data-swap-group", data.group)
 			.addClass(data.tabClasses)
-			.on("activate.switch" + data.eventGuid, data, onActivate)
-			.on("deactivate.switch" + data.eventGuid, data, onDeactivate)
-			.on("enable.switch" + data.eventGuid, data, onEnable)
-			.on("disable.switch" + data.eventGuid, data, onDisable)
-			.switch({
+			.on("activate.swap" + data.eventGuid, data, onActivate)
+			.on("deactivate.swap" + data.eventGuid, data, onDeactivate)
+			.on("enable.swap" + data.eventGuid, data, onEnable)
+			.on("disable.swap" + data.eventGuid, data, onDisable)
+			.swap({
 				maxWidth: data.maxWidth,
 				classes: {
 					target  : data.classGuid,
@@ -88,11 +88,11 @@
 
 		data.$content.removeClass(RawClasses.content);
 
-		this.attr("data-switch-target", "")
-			.attr("data-switch-group", "")
+		this.attr("data-swap-target", "")
+			.attr("data-swap-group", "")
 			.removeClass(RawClasses.tab)
 			.off(Events.namespace)
-			.switch("destroy");
+			.swap("destroy");
 	}
 
 	/**
@@ -103,7 +103,7 @@
 	 */
 
 	function activate(data) {
-		this.switch("activate");
+		this.swap("activate");
 	}
 
 	/**
@@ -114,7 +114,7 @@
 	 */
 
 	function enable(data) {
-		this.switch("enable");
+		this.swap("enable");
 	}
 
 	/**
@@ -125,7 +125,7 @@
 	 */
 
 	function disable(data) {
-		this.switch("disable");
+		this.swap("disable");
 	}
 
 	/**
@@ -197,7 +197,7 @@
 	 */
 
 	function onMobileActivate(e) {
-		e.data.$el.switch("activate");
+		e.data.$el.swap("activate");
 	}
 
 	/**
@@ -231,7 +231,7 @@
 	 * @type widget
 	 * @dependency core.js
 	 * @dependency mediaquery.js
-	 * @dependency switch.js
+	 * @dependency swap.js
 	 * @dependency touch.js
 	 */
 

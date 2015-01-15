@@ -58,7 +58,7 @@
         "dist/js/number.js",
         "dist/js/range.js",
         "dist/js/scrollbar.js",
-        "dist/js/switch.js",
+        "dist/js/swap.js",
         "dist/js/tabs.js",
         "dist/js/tooltip.js",
         "dist/js/touch.js",

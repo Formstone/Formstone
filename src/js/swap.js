@@ -31,7 +31,7 @@
 
 		data.onEnable = this.data(Namespace + "-active");
 
-		data.$switches = $().add(this).add(data.$target);
+		data.$swaps = $().add(this).add(data.$target);
 
 		this.touch({
 				tap: true
@@ -60,8 +60,8 @@
 	function destruct(data) {
 		$.mediaquery("unbind", data.mqGuid, data.mq);
 
-		data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
-					  .off(Events.namespace);
+		data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
+				   .off(Events.namespace);
 
 		this.touch("destroy");
 	}
@@ -70,7 +70,7 @@
 	 * @method
 	 * @name activate
 	 * @description Activate instance.
-	 * @example $(".target").switch("activate");
+	 * @example $(".target").swap("activate");
 	 */
 
 	function activate(data) {
@@ -81,7 +81,7 @@
 			// index in group
 			var index = (data.group) ? $(data.group).index(data.$el) : null;
 
-			data.$switches.addClass(data.classes.raw.active);
+			data.$swaps.addClass(data.classes.raw.active);
 
 			this.trigger(Events.activate, [index]);
 
@@ -93,12 +93,12 @@
 	 * @method
 	 * @name deactivate
 	 * @description Deactivates instance.
-	 * @example $(".target").switch("deactivate");
+	 * @example $(".target").swap("deactivate");
 	 */
 
 	function deactivate(data) {
 		if (data.enabled && data.active) {
-			data.$switches.removeClass(data.classes.raw.active);
+			data.$swaps.removeClass(data.classes.raw.active);
 
 			this.trigger(Events.deactivate);
 
@@ -110,12 +110,12 @@
 	 * @method
 	 * @name enable
 	 * @description Enables instance.
-	 * @example $(".target").switch("enable");
+	 * @example $(".target").swap("enable");
 	 */
 
 	function enable(data) {
 		if (!data.enabled) {
-			data.$switches.addClass(data.classes.raw.enabled);
+			data.$swaps.addClass(data.classes.raw.enabled);
 
 			data.enabled = true;
 
@@ -135,12 +135,12 @@
 	 * @method
 	 * @name disable
 	 * @description Disables instance.
-	 * @example $(".target").switch("disable");
+	 * @example $(".target").swap("disable");
 	 */
 
 	function disable(data) {
 		if (data.enabled) {
-			data.$switches.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
+			data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
 
 			this.trigger(Events.disable);
 
@@ -169,7 +169,7 @@
 
 	/**
 	 * @plugin
-	 * @name Switch
+	 * @name Swap
 	 * @description A jQuery plugin for toggling states.
 	 * @type widget
 	 * @dependency core.js
@@ -177,12 +177,12 @@
 	 * @dependency touch.js
 	 */
 
-	var Plugin = Formstone.Plugin("switch", {
+	var Plugin = Formstone.Plugin("swap", {
 			widget: true,
 
 			/**
 			 * @options
-			 * @param collapse [boolean] <true> "Allow switch to collapse it's target"
+			 * @param collapse [boolean] <true> "Allow swap to collapse it's target"
 			 * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
 			 */
 
@@ -199,10 +199,10 @@
 
 			/**
 			 * @events
-			 * @event activate.switch "Switch activated"
-			 * @event deactivate.switch "Switch deactivated"
-			 * @event enable.switch "Switch enabled"
-			 * @event disable.switch "Switch diabled"
+			 * @event activate.swap "Swap activated"
+			 * @event deactivate.swap "Swap deactivated"
+			 * @event enable.swap "Swap enabled"
+			 * @event disable.swap "Swap diabled"
 			 */
 
 			events: {

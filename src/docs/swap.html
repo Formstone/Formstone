@@ -1,0 +1,36 @@
+<style>
+	.toggle.fs-swap-enabled { color: #393b3f; cursor: pointer; }
+	.toggle.fs-swap-active { color: #c65032; }
+
+	.toggle_target { background: #c65032; border-radius: 3px; color: #fff; height: 75px; line-height: 75px; margin: 10px 0; text-align: center; width: 100%; }
+	.toggle_target.fs-swap-enabled.fs-swap-target { display: none; }
+	.toggle_target.fs-swap-enabled.fs-swap-active { display: block; }
+</style>
+
+<script>
+	$(function() {
+		$(".toggle").swap();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="toggle" data-swap-target=".toggle_target_0">Heading</div>
+<div class="toggle_target toggle_target_0">Content</div>
+
+<h4>Grouped</h4>
+<div class="toggle" data-swap-target=".toggle_target_1" data-swap-group="toggle_group_1">Heading 1</div>
+<div class="toggle_target toggle_target_1">Content 1</div>
+
+<div class="toggle" data-swap-target=".toggle_target_2" data-swap-group="toggle_group_1">Heading 2</div>
+<div class="toggle_target toggle_target_2">Content 2</div>
+
+<h4>Grouped (no collapse)</h4>
+<div class="toggle" data-swap-active="true" data-swap-options='{"collapse":false}' data-swap-target=".toggle_target_3" data-swap-group="toggle_group_2">Heading 1</div>
+<div class="toggle_target toggle_target_3">Content 1</div>
+
+<div class="toggle" data-swap-options='{"collapse":false}' data-swap-target=".toggle_target_4" data-swap-group="toggle_group_2">Heading 2</div>
+<div class="toggle_target toggle_target_4">Content 2</div>
+
+<h4>Max Width</h4>
+<div class="toggle" data-swap-options='{"maxWidth":"740px"}' data-swap-target=".toggle_target_5">Heading</div>
+<div class="toggle_target toggle_target_5">Content</div>

@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en" class="no-js" temp-debug="true"><head><!-- <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script> --><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Swap &middot; Formstone</title><meta name="description" content=""><!-- Favions / Touch Icons --><link rel="apple-touch-icon" sizes="57x57"   href="../../apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="114x114" href="../../apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="72x72"   href="../../apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="144x144" href="../../apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="60x60"   href="../../apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="120x120" href="../../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="76x76"   href="../../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="152x152" href="../../apple-touch-icon-152x152.png"><link rel="icon" type="image/png" href="../../favicon-196x196.png" sizes="196x196"><link rel="icon" type="image/png" href="../../favicon-160x160.png" sizes="160x160"><link rel="icon" type="image/png" href="../../favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16"><link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32"><meta name="msapplication-TileColor" content="#D0021B"><meta name="msapplication-TileImage" content="../../mstile-144x144.png"><!-- Modernizer --><script src="../../js/modernizr.js"></script><!-- Google Fonts --><!-- <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic|PT+Mono"> --><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../../js/site-ie8.js"></script><link rel="stylesheet" href="../../css/site-ie8.css"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../../js/site-ie9.js"></script><link rel="stylesheet" href="../../css/site-ie9.css"><![endif]--><!-- Compiled JS --><script src="../../js/site.js"></script></head><body class="fs-grid fs-grid-sm-fluid"><header class="header"><a href="../" class="logo header_logo">Formstone</a><button class="header_button" id="js-nav_handle">Menu</button></header><div class="wrapper"><div class="fs-row page_row"><div class="fs-cell-right fs-lg-10 padded"><div class="page js-nav_move"><article class="content demo"><header class="intro"><h1 id="swap">Swap</h1>
+<p>A jQuery plugin for toggling states.</p>
+<ul>
+<li><a href="#demo">Demo</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#events">Events</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#css">CSS</a></li>
+</ul>
+</header><h2 id="demo">Demo</h2><style>
+	.toggle.fs-swap-enabled { color: #393b3f; cursor: pointer; }
+	.toggle.fs-swap-active { color: #c65032; }
+
+	.toggle_target { background: #c65032; border-radius: 3px; color: #fff; height: 75px; line-height: 75px; margin: 10px 0; text-align: center; width: 100%; }
+	.toggle_target.fs-swap-enabled.fs-swap-target { display: none; }
+	.toggle_target.fs-swap-enabled.fs-swap-active { display: block; }
+</style>
+
+<script>
+	$(function() {
+		$(".toggle").swap();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="toggle" data-swap-target=".toggle_target_0">Heading</div>
+<div class="toggle_target toggle_target_0">Content</div>
+
+<h4>Grouped</h4>
+<div class="toggle" data-swap-target=".toggle_target_1" data-swap-group="toggle_group_1">Heading 1</div>
+<div class="toggle_target toggle_target_1">Content 1</div>
+
+<div class="toggle" data-swap-target=".toggle_target_2" data-swap-group="toggle_group_1">Heading 2</div>
+<div class="toggle_target toggle_target_2">Content 2</div>
+
+<h4>Grouped (no collapse)</h4>
+<div class="toggle" data-swap-active="true" data-swap-options='{"collapse":false}' data-swap-target=".toggle_target_3" data-swap-group="toggle_group_2">Heading 1</div>
+<div class="toggle_target toggle_target_3">Content 1</div>
+
+<div class="toggle" data-swap-options='{"collapse":false}' data-swap-target=".toggle_target_4" data-swap-group="toggle_group_2">Heading 2</div>
+<div class="toggle_target toggle_target_4">Content 2</div>
+
+<h4>Max Width</h4>
+<div class="toggle" data-swap-options='{"maxWidth":"740px"}' data-swap-target=".toggle_target_5">Heading</div>
+<div class="toggle_target toggle_target_5">Content</div><h2 id="use">Use</h2>
+<h4 id="main">Main</h4>
+<pre><code class="lang-markup">swap.js
+swap.css</code></pre>
+<h4 id="dependencies">Dependencies</h4>
+<pre><code class="lang-markup">core.js
+mediaquery.js
+touch.js</code></pre>
+<h3 id="basic">Basic</h3>
+<p>Swap toggles classes on groups of elements based on configuration options and user interaction. It is up to the developer to utilize the classes.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap();</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-swap-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;toggle&quot;&gt;Target&lt;/div&gt;</code></pre>
+<h3 id="groups">Groups</h3>
+<p>Swaps can be grouped together for a simple accordions or tabs.</p>
+<pre><code class="lang-markup">&lt;h4&gt;Grouped&lt;/h4&gt;
+&lt;div class=&quot;target&quot; data-swap-target=&quot;.toggle_1&quot; data-swap-group=&quot;group_1&quot;&gt;Toggle - 1&lt;/div&gt;
+&lt;div class=&quot;target&quot; data-swap-target=&quot;.toggle_2&quot; data-swap-group=&quot;group_1&quot;&gt;Toggle - 2&lt;/div&gt;
+
+&lt;div class=&quot;toggle_1&quot;&gt;Target - 1&lt;/div&gt;
+&lt;div class=&quot;toggle_2&quot;&gt;Target - 2&lt;/div&gt;</code></pre>
+<h3 id="max-width">Max Width</h3>
+<p>Swaps will auto-enable and disable themselves if the <code>maxWidth</code> property is set.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap({
+    maxWidth: &quot;740px&quot;
+});</code></pre>
+<pre><code class="lang-markup">&lt;div class=&quot;target&quot; data-swap-target=&quot;.toggle&quot;&gt;Toggle&lt;/div&gt;
+&lt;div class=&quot;toggle&quot;&gt;Target&lt;/div&gt;</code></pre>
+<h2 id="options">Options</h2>
+<p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-swap-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>collapse</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Allow swap to collapse it&#39;s target</td>
+</tr>
+<tr>
+<td><code>maxWidth</code></td>
+<td><code>string</code></td>
+<td><code>Infinity</code></td>
+<td>Width at which to auto-disable plugin</td>
+</tr>
+</tbody>
+</table>
+<h2 id="events">Events</h2>
+<p>Events are triggered on the target instance&#39;s element, unless otherwise stated.</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>activate.swap</code></td>
+<td>Swap activated</td>
+</tr>
+<tr>
+<td><code>deactivate.swap</code></td>
+<td>Swap deactivated</td>
+</tr>
+<tr>
+<td><code>enable.swap</code></td>
+<td>Swap enabled</td>
+</tr>
+<tr>
+<td><code>disable.swap</code></td>
+<td>Swap diabled</td>
+</tr>
+</tbody>
+</table>
+<h2 id="methods">Methods</h2>
+<p>Methods are publicly available to all active instances, unless otherwise stated.</p>
+<h3 id="activate">activate</h3>
+<p>Activate instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap(&quot;activate&quot;);</code></pre>
+<h3 id="deactivate">deactivate</h3>
+<p>Deactivates instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap(&quot;deactivate&quot;);</code></pre>
+<h3 id="defaults">defaults</h3>
+<p>Extends plugin default settings; effects instances created hereafter.</p>
+<pre><code class="lang-javascript">$.swap(&quot;defaults&quot;, { ... });</code></pre>
+<h4 id="parameters">Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>options</code></td>
+<td><code>object</code></td>
+<td><code>{}</code></td>
+<td>New plugin defaults</td>
+</tr>
+</tbody>
+</table>
+<h3 id="destroy">destroy</h3>
+<p>Removes plugin instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap(&quot;destroy&quot;);</code></pre>
+<h3 id="disable">disable</h3>
+<p>Disables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap(&quot;disable&quot;);</code></pre>
+<h3 id="enable">enable</h3>
+<p>Enables instance.</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).swap(&quot;enable&quot;);</code></pre>
+<h2 id="css">CSS</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.fs-switch-element</code></td>
+<td><code>element</code></td>
+<td>Target Element</td>
+</tr>
+<tr>
+<td><code>.fs-switch-target</code></td>
+<td><code>element</code></td>
+<td>Toggled element</td>
+</tr>
+<tr>
+<td><code>.fs-switch-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-switch-active</code></td>
+<td><code>modifier</code></td>
+<td>Indicates active state</td>
+</tr>
+</tbody>
+</table>
+</article></div></div><div class="fs-cell fs-lg-2 sidebar"><nav class="main_nav sidebar_content js-navigation" data-navigation-handle="#js-nav_handle" data-navigation-content=".js-nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'><a href="../" class="logo sidebar_logo">Formstone</a><h5>About</h5><ul><li><a href="../start.html">Getting Started</a></li><li><a href="../upgrade.html">Upgrade Guide</a></li><li><a href="../contribute.html">Contributing</a></li></ul><h5>Library</h5><ul><li><a href="../../components/core.html">Core</a></li><li><a href="../../components/grid.html">Grid</a></li></ul><h5>Utility</h5><ul><li><a href="../../components/cookie.html">Cookie</a></li><li><a href="../../components/mediaquery.html">Media Query</a></li></ul><h5>Widget</h5><ul><li><a href="../../components/background.html">Background</a></li><li><a href="../../components/carousel.html">Carousel</a></li><li><a href="../../components/checkbox.html">Checkbox</a></li><li><a href="../../components/dropdown.html">Dropdown</a></li><li><a href="../../components/equalize.html">Equalize</a></li><li><a href="../../components/lightbox.html">Lightbox</a></li><li><a href="../../components/navigation.html">Navigation</a></li><li><a href="../../components/number.html">Number</a></li><li><a href="../../components/pagination.html">Pagination</a></li><li><a href="../../components/range.html">Range</a></li><li><a href="../../components/scrollbar.html">Scrollbar</a></li><li><a href="../../components/swap.html">Swap</a></li><li><a href="../../components/tabs.html">Tabs</a></li><li><a href="../../components/tooltip.html">Tooltip</a></li><li><a href="../../components/touch.html">Touch</a></li><li><a href="../../components/transition.html">Transition</a></li><li><a href="../../components/upload.html">Upload</a></li></ul></nav></div></div></div><footer class="fs-row footer"><div class="fs-cell fs-lg-10 right"><p>&copy; 2014 Formstone</p></div></footer><!-- Gridlock --><script></script></body></html>
