@@ -18,6 +18,9 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
+		data.linked     = this.data(Namespace + "-linked");
+		data.$linked    = $('[data-' + Namespace + '-linked="' + data.linked + '"]').not(this);
+
 		data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
 		data.mqGuid     = data.classes.raw.base + "__" + (GUID++);
 
@@ -83,6 +86,8 @@
 
 			data.$swaps.addClass(data.classes.raw.active);
 
+			data.$linked.swap("activate");
+
 			this.trigger(Events.activate, [index]);
 
 			data.active = true;
@@ -100,6 +105,8 @@
 		if (data.enabled && data.active) {
 			data.$swaps.removeClass(data.classes.raw.active);
 
+			data.$linked.swap("deactivate");
+
 			this.trigger(Events.deactivate);
 
 			data.active = false;
@@ -116,6 +123,8 @@
 	function enable(data) {
 		if (!data.enabled) {
 			data.$swaps.addClass(data.classes.raw.enabled);
+
+			data.$linked.swap("enable");
 
 			data.enabled = true;
 
@@ -141,6 +150,8 @@
 	function disable(data) {
 		if (data.enabled) {
 			data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
+
+			data.$linked.swap("disable");
 
 			this.trigger(Events.disable);
 
