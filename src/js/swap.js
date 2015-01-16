@@ -19,7 +19,6 @@
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
 		data.linked     = this.data(Namespace + "-linked");
-		data.linkedSel  = '[data-' + Namespace + '-linked="' + data.linked + '"]';
 
 		data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
 		data.mqGuid     = data.classes.raw.base + "__" + (GUID++);
@@ -88,7 +87,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linkedSel).not(data.$el).swap("activate", true);
+				$(data.linked).not(data.$el).swap("activate", true);
 			}
 
 			this.trigger(Events.activate, [index]);
@@ -110,7 +109,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linkedSel).not(data.$el).swap("deactivate", true);
+				$(data.linked).not(data.$el).swap("deactivate", true);
 			}
 
 			this.trigger(Events.deactivate);
@@ -132,7 +131,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linkedSel).not(data.$el).swap("enable");
+				$(data.linked).not(data.$el).swap("enable");
 			}
 
 			data.enabled = true;
@@ -162,7 +161,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linkedSel).not(data.$el).swap("disable");
+				$(data.linked).not(data.$el).swap("disable");
 			}
 
 			this.trigger(Events.disable);
