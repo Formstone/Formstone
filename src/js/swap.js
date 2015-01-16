@@ -76,7 +76,7 @@
 	 * @example $(".target").swap("activate");
 	 */
 
-	function activate(data) {
+	function activate(data, fromLinked) {
 		if (data.enabled && !data.active) {
 			// Deactivates grouped instances
 			$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
@@ -86,7 +86,10 @@
 
 			data.$swaps.addClass(data.classes.raw.active);
 
-			data.$linked.swap("activate");
+			if (!fromLinked) {
+				// Linked handles
+				data.$linked.swap("activate", true);
+			}
 
 			this.trigger(Events.activate, [index]);
 
@@ -101,11 +104,14 @@
 	 * @example $(".target").swap("deactivate");
 	 */
 
-	function deactivate(data) {
+	function deactivate(data, fromLinked) {
 		if (data.enabled && data.active) {
 			data.$swaps.removeClass(data.classes.raw.active);
 
-			data.$linked.swap("deactivate");
+			if (!fromLinked) {
+				// Linked handles
+				data.$linked.swap("deactivate", true);
+			}
 
 			this.trigger(Events.deactivate);
 
