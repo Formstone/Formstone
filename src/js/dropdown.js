@@ -53,7 +53,7 @@
 		// Build wrapper
 		var wrapperClasses = [
 			RawClasses.base,
-			RawClasses.customClass
+			data.customClass
 		];
 
 		if (data.mobile || Formstone.isMobile) {
