@@ -267,7 +267,7 @@
 
 			this.removeClass(RawClasses.animated);
 
-			data.width     = this.outerWidth(false);
+			data.width     = data.$viewport.outerWidth(false);
 			data.visible   = calculateVisible(data);
 			data.perPage   = data.paged ? 1 : data.visible;
 
