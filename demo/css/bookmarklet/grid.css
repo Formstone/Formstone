@@ -130,7 +130,7 @@
 		pointer-events: none;
 	}
 
-	#fs-grid-overlay .row {
+	#fs-grid-overlay .fs-row {
 		height: 100%;
 
 		background: rgba(198, 80, 50, 0.3);
@@ -138,7 +138,7 @@
 		margin: 0 auto !important;
 	}
 
-	#fs-grid-overlay .row [class*="large-"] {
+	#fs-grid-overlay .fs-row [class*="fs-cell-"] {
 		height: 100%;
 
 		background: rgba(198, 80, 50, 0.3);
@@ -147,13 +147,13 @@
 		overflow: hidden;
 	}
 
-	#fs-grid-overlay .row [class*="large-"] span {
+	#fs-grid-overlay .fs-row [class*="fs-cell-"] span {
 		width: 100%;
 
 		display: block;
 		padding-top: 10000px;
 	}
 
-	#fs-grid-overlay.fs-grid-visible .row {
+	#fs-grid-overlay.fs-grid-visible .fs-row {
 		display: block;
 	}

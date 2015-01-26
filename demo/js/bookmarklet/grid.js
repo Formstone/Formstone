@@ -36,9 +36,9 @@ function FSGridBookmarklet() {
 					html += '<button class="fs-grid-icon fs-grid-remove">Close</button>';
 					html += '</menu>';
 					html += '<section id="fs-grid-overlay">';
-					html += '<div class="row">';
+					html += '<div class="fs-row">';
 					for (var i = 0; i < desktopCount; i++) {
-						html += '<div class="cell small-1 medium-1 large-1"><span></span></div>';
+						html += '<div class="fs-cell fs-sm-1 fs-md-1 fs-lg-1"><span></span></div>';
 					}
 					html += '</div>';
 					html += '</section>';
