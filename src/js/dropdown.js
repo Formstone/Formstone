@@ -269,10 +269,10 @@
 
 				classes.push(RawClasses.item);
 
-				if ($option.hasClass(RawClasses.placeholder)) {
+				if ($option.hasClass(RawClasses.item_placeholder)) {
 					classes.push(RawClasses.item_placeholder);
 				}
-				if ($option.is(':selected')) {
+				if ($option.is(":selected")) {
 					classes.push(RawClasses.item_selected);
 				}
 				if ($option.is(":disabled")) {
@@ -568,8 +568,7 @@
 					$item.addClass(RawClasses.item_selected);
 				}
 			} else if (index > -1 && index < data.$items.length) {
-				var label = $item.html(),
-					calue = $item.data("value");
+				var label = $option.data("label") || $item.html();
 
 				data.$selected.html(label)
 							  .removeClass(Classes.item_placeholder);
