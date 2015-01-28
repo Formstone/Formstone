@@ -56,6 +56,9 @@
 	@fs-dropdown-item-height:							40px;
 	@fs-dropdown-item-padding:							0 15px;
 
+	@fs-dropdown-item-hover-text-color:					#222;
+	@fs-dropdown-item-hover-background-color:			#ddd;
+
 		// Item - Selected
 
 		@fs-dropdown-item-selected-background-color:	#eee;
@@ -358,8 +361,8 @@
 
 			.no-touch &:hover,
 			.no-touch &_selected:hover {
-				color: @fs-dropdown-hover-text-color;
-				background-color: @fs-dropdown-hover-background-color;
+				color: @fs-dropdown-item-hover-text-color;
+				background-color: @fs-dropdown-item-hover-background-color;
 				border-color: @fs-dropdown-item-border-color;
 			}
 
