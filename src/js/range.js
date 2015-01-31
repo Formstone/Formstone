@@ -47,9 +47,9 @@
 		data.vertical = this.attr("orient") === "vertical" || data.vertical;
 
 		html += '<div class="' + RawClasses.track + '">';
-		html += '<span class="' + RawClasses.handle + '">';
-		html += '<span class="' + RawClasses.marker + '"></span>';
-		html += '</span>';
+		html += '<div class="' + RawClasses.handle + '">';
+		html += '<span type="button" class="' + RawClasses.marker + '"></span>';
+		html += '</div>';
 		html += '</div>';
 
 		var baseClasses = [

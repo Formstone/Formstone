@@ -44,8 +44,8 @@
 
 		html += '<div class="' + RawClasses.bar + '">';
 		html += '<div class="' + RawClasses.track + '">';
-		html += '<div class="' + RawClasses.handle + '">';
-		html += '</div></div></div>';
+		html += '<button type="button" class="' + RawClasses.handle + '"></button>';
+		html += '</div></div>';
 
 		data.paddingRight     = parseInt(this.css("padding-right"), 10);
 		data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
