@@ -74,9 +74,9 @@
 
 		// Build inner
 		if (!data.multiple) {
-			innerHtml += '<span class="' + RawClasses.selected + '">';
+			innerHtml += '<button type="button" class="' + RawClasses.selected + '">';
 			innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
-			innerHtml += '</span>';
+			innerHtml += '</button>';
 		}
 		innerHtml += '<div class="' + RawClasses.options + '">';
 		innerHtml += '</div>';
@@ -279,10 +279,10 @@
 					classes.push(RawClasses.item_disabled);
 				}
 
-				html += '<span class="' + classes.join(" ") + '" ';
+				html += '<button type="button" class="' + classes.join(" ") + '" ';
 				html += 'data-value="' + opVal + '">';
 				html += $("<span></span>").text( trimText($option.text(), data.trim) ).html();
-				html += '</span>';
+				html += '</button>';
 
 				j++;
 			}

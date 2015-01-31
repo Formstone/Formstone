@@ -47,8 +47,8 @@
 
 		if (data.controls) {
 			controlsHtml += '<div class="' + RawClasses.controls + '">';
-			controlsHtml += '<button class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
-			controlsHtml += '<button class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
+			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
@@ -329,7 +329,7 @@
 			// Reset Page Count
 			var html = '';
 			for (i = 0; i < data.pageCount; i++) {
-				html += '<button class="' + RawClasses.page + '">' + (i + 1) + '</button>';
+				html += '<button type="button" class="' + RawClasses.page + '">' + (i + 1) + '</button>';
 			}
 			data.$pagination.html(html);
 

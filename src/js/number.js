@@ -29,8 +29,8 @@
 		data.disabled     = this.prop("disabled");
 
 		var html = "";
-		html += '<button class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '">'   + data.labels.up + '</button>';
-		html += '<button class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
+		html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '">'   + data.labels.up + '</button>';
+		html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
 
 		// Modify DOM
 		this.wrap('<div class="' + [RawClasses.base, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')

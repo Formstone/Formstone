@@ -28,7 +28,7 @@
 
 		// DOM
 
-		data.$mobileTab    = $('<button class="' + data.mobileTabClasses + '">' + this.text() + '</button>');
+		data.$mobileTab    = $('<button type="button" class="' + data.mobileTabClasses + '">' + this.text() + '</button>');
 		data.$content      = $(data.content).addClass(data.contentClasses);
 
 		data.$content.before(data.$mobileTab);

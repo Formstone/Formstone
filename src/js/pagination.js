@@ -14,8 +14,8 @@
 		data.mqGuid   = RawClasses.base + "__" + (GUID++);
 
 		var html = "";
-		html += '<button class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
-		html += '<button class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
+		html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
+		html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
 		html += '<div class="' + RawClasses.position + '">';
 		html += '<span class="' + RawClasses.current + '">0</span>';
 		html += ' ' + data.labels.count + ' ';

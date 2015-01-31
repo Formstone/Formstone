@@ -165,7 +165,7 @@
 			}
 
 			html += '<div class="' + lightboxClasses.join(" ") + '">';
-			html += '<span class="' + Classes.raw.close + '">' + Instance.labels.close + '</span>';
+			html += '<button type="button" class="' + Classes.raw.close + '">' + Instance.labels.close + '</button>';
 			html += '<span class="' + Classes.raw.loading_icon + '"></span>';
 			html += '<div class="' + Classes.raw.container + '">';
 			html += '<div class="' + Classes.raw.content + '">';
@@ -173,8 +173,8 @@
 				html += '<div class="' + Classes.raw.meta + '">';
 
 				if (Instance.gallery.active) {
-					html += '<div class="' + [Classes.raw.control, Classes.raw.control_previous].join(" ") + '">' + Instance.labels.previous + '</div>';
-					html += '<div class="' + [Classes.raw.control, Classes.raw.control_next].join(" ") + '">' + Instance.labels.next + '</div>';
+					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
+					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
 					html += '<p class="' + Classes.raw.position + '"';
 					if (Instance.gallery.total < 1) {
 						html += ' style="display: none;"';
