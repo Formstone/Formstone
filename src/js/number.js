@@ -23,8 +23,8 @@
 		var min = parseFloat(this.attr("min")),
 			max = parseFloat(this.attr("max"));
 
-		data.min  = (min === 0) ? false : min;
-		data.max  = (max === 0) ? false : max;
+		data.min  = (min || min === 0) ? min : false;
+		data.max  = (max || max === 0) ? max : false;
 		data.step = parseFloat(this.attr("step")) || 1;
 		data.timer        = null;
 		data.digits       = significantDigits(data.step);
@@ -172,7 +172,7 @@
 		var oValue = parseFloat(data.$el.val()),
 			value = change;
 
-		if (typeof oValue === undefined || isNaN(oValue)) {
+		if ($.type(oValue) === "undefined" || isNaN(oValue)) {
 			if (data.min !== false) {
 				value = data.min;
 			} else {
