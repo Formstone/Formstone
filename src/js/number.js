@@ -20,9 +20,11 @@
 	 */
 
 	function construct(data) {
-		// HTML5 attributes
-		data.min = parseFloat(this.attr("min"))   || false;
-		data.max = parseFloat(this.attr("max"))   || false;
+		var min = parseFloat(this.attr("min")),
+			max = parseFloat(this.attr("max"));
+
+		data.min  = (min === 0) ? false : min;
+		data.max  = (max === 0) ? false : max;
 		data.step = parseFloat(this.attr("step")) || 1;
 		data.timer        = null;
 		data.digits       = significantDigits(data.step);
