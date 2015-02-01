@@ -163,7 +163,8 @@ $(".target").carousel("resize");
 | `.fs-carousel-element` | `element` | Target elmement |
 | `.fs-carousel` | `element` | Base widget class |
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
-| `.fs-carousel-viewport` | `element` | Item container |
+| `.fs-carousel-viewport` | `element` | Carousel container |
+| `.fs-carousel-container` | `element` | Canister container |
 | `.fs-carousel-canister` | `element` | Item container |
 | `.fs-carousel-item` | `element` | Individual item |
 | `.fs-carousel-controls` | `element` | Controls container |

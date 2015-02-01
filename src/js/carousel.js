@@ -59,12 +59,13 @@
 
 		// Modify dom
 		this.addClass( [RawClasses.base, data.customClass].join(" ") )
-			.wrapInner('<div class="' + RawClasses.canister + '"></div>')
+			.wrapInner('<div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
 			.append(paginationHtml);
 
 		data.$viewport           = this.find(Classes.viewport).eq(0);
+		data.$container          = this.find(Classes.container).eq(0);
 		data.$canister           = this.find(Classes.canister).eq(0);
 		data.$controls           = this.find(Classes.controls).eq(0);
 		data.$pagination         = this.find(Classes.pagination).eq(0);
@@ -795,6 +796,7 @@
 
 			classes: [
 				"viewport",
+				"container",
 				"canister",
 				"item",
 				"controls",

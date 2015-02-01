@@ -97,10 +97,24 @@
 		 * @class
 		 * @name .fs-carousel-viewport
 		 * @type element
-		 * @description Item container
+		 * @description Carousel container
 		 */
 
 		&-enabled &-viewport {
+			.fs_clearfix();
+
+			position: relative;
+			overflow: @fs-carousel-overflow;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-carousel-container
+		 * @type element
+		 * @description Canister container
+		 */
+
+		&-enabled &-container {
 			.fs_clearfix();
 
 			position: relative;
