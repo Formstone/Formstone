@@ -293,7 +293,7 @@
 				$items = data.$items.slice(i, i + data.perPage);
 
 				if ($items.length < data.perPage) {
-					$items = data.$items.slice(data.$items.length - data.perPage);
+					$items = data.$items;
 				}
 
 				$first = $items.eq(0);
@@ -598,33 +598,6 @@
 
 	/**
 	 * @method private
-	 * @name calculateIndex
-	 * @description Determines new index based on current position
-	 * @param data [object] "Instance data"
-	 * @return [int] "New item index"
-	 */
-
-	function calculateIndex(data) {
-		var i = 0;
-
-		if (data.leftPosition === 0) {
-			return 0;
-		} else {
-			var page;
-			for (i = 0; i < data.pages.length; i++) {
-				page = data.pages[i];
-
-				if (-page.left < data.leftPosition) {
-					return i;
-				}
-			}
-		}
-
-		return 0;
-	}
-
-	/**
-	 * @method private
 	 * @name calculateVisible
 	 * @description Determines how many items should show at screen width
 	 * @param data [object] "Instance data"
@@ -635,13 +608,13 @@
 		if ($.type(data.show) === "object") {
 			for (var i in data.show) {
 				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
-					return data.show[i].count;
+					return (data.fill && data.count < data.show[i].count) ? data.count : data.show[i].count;
 				}
 			}
 			return 1;
 		}
 
-		return data.show;
+		return (data.fill && data.count < data.show) ? data.count : data.show;
 	}
 
 	/**
@@ -760,6 +733,7 @@
 			 * @param autoTime [int] <8000> "Auto advance time"
 			 * @param controls [boolean] <true> "Flag to draw controls"
 			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
 			 * @param infinite [boolean] <false> "Flag for looping items"
 			 * @param labels.next [string] <'Next'> "Control text"
 			 * @param labels.previous [string] <'Previous'> "Control text"
@@ -778,6 +752,7 @@
 				autoTime       : 8000,
 				controls       : true,
 				customClass    : "",
+				fill           : false,
 				infinite       : false,
 				labels: {
 					next       : "Next",

@@ -73,6 +73,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoTime` | `int` | `8000` | Auto advance time |
 | `controls` | `boolean` | `true` | Flag to draw controls |
 | `customClass` | `string` | `''` | Class applied to instance |
+| `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
 | `infinite` | `boolean` | `false` | Flag for looping items |
 | `labels.next` | `string` | `'Next'` | Control text |
 | `labels.previous` | `string` | `'Previous'` | Control text |
