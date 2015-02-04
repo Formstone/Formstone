@@ -78,7 +78,6 @@
 		data.enabled         = false;
 		data.leftPosition    = 0;
 		data.totalImages     = data.$images.length;
-
 		data.autoTimer       = null;
 
 		if ($.type(data.show) === "object") {
@@ -105,7 +104,6 @@
 		}
 
 		// Media Query support
-
 		$.mediaquery("bind", data.mqGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
@@ -115,7 +113,7 @@
 			}
 		});
 
-		// Watch images
+		// Watch Images
 		if (data.totalImages > 0) {
 			data.loadedImages = 0;
 			for (i = 0; i < data.totalImages; i++) {
@@ -335,7 +333,7 @@
 			data.$pagination.html(html);
 
 			// update pagination
-			if (data.pageCount < 1) {
+			if (data.pageCount <= 1) {
 				data.$controls.removeClass(RawClasses.visible);
 				data.$pagination.removeClass(RawClasses.visible);
 			} else {
@@ -637,13 +635,13 @@
 		if ($.type(data.show) === "object") {
 			for (var i in data.show) {
 				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
-					return (data.show[i].count > data.count) ? data.count : data.show[i].count;
+					return data.show[i].count;
 				}
 			}
 			return 1;
-		} else {
-			return data.show;
 		}
+
+		return data.show;
 	}
 
 	/**
