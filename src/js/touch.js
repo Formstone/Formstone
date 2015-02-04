@@ -36,7 +36,10 @@
 			}
 
 			if (data.axis) {
-				touchAction(this, "pan-" + (data.axis === "x" ? "y" : "x"));
+				data.axisX = data.axis === "x";
+				data.axisY = data.axis === "y";
+
+				touchAction(this, "pan-" + (data.axisY ? "y" : "x"));
 			} else {
 				touchAction(this, "none");
 			}
@@ -140,6 +143,12 @@
 					.on( [Events.touchEnd, Events.touchCancel, Events.pointerUp, Events.pointerCancel].join(" ") , data, onTouch);
 
 		} else if (data.pan || data.scale) {
+			// Clear old click events
+
+			if (data.$links) {
+				data.$links.off(Events.click);
+			}
+
 			// Pan / Scale
 
 			var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
@@ -196,8 +205,8 @@
 			deltaY    = newY - data.startY,
 			dirX      = (deltaX > 0) ? "right" : "left",
 			dirY      = (deltaY > 0) ? "down"  : "up",
-			movedX    = Math.abs(newX - data.startX) > TouchThreshold,
-			movedY    = Math.abs(newY - data.startY) > TouchThreshold;
+			movedX    = Math.abs(deltaX) > TouchThreshold,
+			movedY    = Math.abs(deltaY) > TouchThreshold;
 
 		if (data.tap) {
 			// Tap
@@ -213,15 +222,15 @@
 				].join(" ") );
 			}
 		} else if (data.pan || data.scale) {
-			if (!data.passed && data.axis && ((data.axis === "x" && movedY) || (data.axis === "y" && movedX)) ) {
+			if (!data.passed && data.axis && ((data.axisX && movedY) || (data.axisY && movedX)) ) {
 				// if axis and moved in opposite direction
 				onPointerEnd(e);
 			} else {
-				if (!data.passed && (!data.axis || (data.axis && (data.axis === "x" && movedX) || (data.axis === "y" && movedY)))) {
-					// if axis and moved in same direction
+				if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
+					// if has axis and moved in same direction
 					data.passed = true;
 
-					data.$el.one(Events.click, data, Functions.killEvent);
+					// data.$el.one(Events.click, data, Functions.killEvent);
 				}
 
 				if (data.passed) {
@@ -258,6 +267,19 @@
 				}
 			}
 		}
+	}
+
+	function bindLink($link, data) {
+		$link.on(Events.click, data, onLinkClick);
+
+		// http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+		var events = $._data($link[0], "events")["click"];
+		events.unshift(events.pop());
+	}
+
+	function onLinkClick(e) {
+		Functions.killEvent(e, true);
+		e.data.$links.off(Events.click);
 	}
 
 	/**
@@ -300,8 +322,8 @@
 				eType     = data.scale ? Events.scaleEnd : Events.panEnd,
 				dirX      = (deltaX > 0) ? "right" : "left",
 				dirY      = (deltaY > 0) ? "down"  : "up",
-				movedX    = Math.abs(newX - data.startX) > 1,
-				movedY    = Math.abs(newY - data.startY) > 1;
+				movedX    = Math.abs(deltaX) > 1,
+				movedY    = Math.abs(deltaY) > 1;
 
 			// Swipe
 
@@ -311,15 +333,12 @@
 
 			// Kill clicks to internal links
 
-			if ( (data.axis && ((data.axis === "x" && movedY) || (data.axis === "y" && movedX))) || (movedX || movedY) ) {
-				data.$el.on(Events.click, function (e) {
-					Functions.killEvent(e);
-					data.$el.off(Events.click);
-				});
+			if ( (data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) || (movedX || movedY) ) {
+				data.$links = data.$el.find("a");
 
-				// http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
-				var events = $._data(data.$el[0], "events")["click"];
-				events.push(events.shift());
+				for (var i = 0, count = data.$links.length; i < count; i++) {
+					bindLink(data.$links.eq(i), data);
+				}
 			}
 
 			var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);

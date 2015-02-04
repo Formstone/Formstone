@@ -53,10 +53,14 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 * @param e [object] "Event data"
 			 */
 
-			killEvent: function(e) {
+			killEvent: function(e, immediate) {
 				try {
 					e.preventDefault();
 					e.stopPropagation();
+
+					if (immediate) {
+						e.stopImmediatePropagation();
+					}
 				} catch(error) {
 					//
 				}
