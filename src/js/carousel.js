@@ -293,7 +293,11 @@
 				$items = data.$items.slice(i, i + data.perPage);
 
 				if ($items.length < data.perPage) {
-					$items = data.$items;
+					if (i === 0) {
+						$items = data.$items;
+					} else {
+						$items = data.$items.slice(data.$items.length - data.perPage);
+					}
 				}
 
 				$first = $items.eq(0);
