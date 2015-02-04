@@ -299,12 +299,27 @@
 				endT      = new Date().getTime(),
 				eType     = data.scale ? Events.scaleEnd : Events.panEnd,
 				dirX      = (deltaX > 0) ? "right" : "left",
-				dirY      = (deltaY > 0) ? "down"  : "up";
+				dirY      = (deltaY > 0) ? "down"  : "up",
+				movedX    = Math.abs(newX - data.startX) > 1,
+				movedY    = Math.abs(newY - data.startY) > 1;
 
 			// Swipe
 
 			if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
 				eType = Events.swipe;
+			}
+
+			// Kill clicks to internal links
+
+			if ( (data.axis && ((data.axis === "x" && movedY) || (data.axis === "y" && movedX))) || (movedX || movedY) ) {
+				data.$el.on(Events.click, function (e) {
+					Functions.killEvent(e);
+					data.$el.off(Events.click);
+				});
+
+				// http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+				var events = $._data(data.$el[0], "events")["click"];
+				events.push(events.shift());
 			}
 
 			var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
