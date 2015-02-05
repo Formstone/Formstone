@@ -124,7 +124,7 @@
 		// Focus/Blur events
 		if (!Formstone.isMobile) {
 			data.$dropdown.on(Events.focusIn, data, onFocus)
-						  .on(Events.blur, data, onBlur);
+						  .on(Events.focusOut, data, onBlur);
 
 			// Handle clicks to associated labels
 			this.on(Events.focusIn, data, function(e) {
