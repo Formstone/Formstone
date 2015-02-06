@@ -28,7 +28,7 @@
 		e.stopPropagation();
 
 		var $target = $(this),
-			$select = $target.parents(".demo_form").find("select");
+			$select = $target.parents(".form_fieldset").find("select");
 
 		if ($target.hasClass("toggle_item")) {
 			// Toggle item
@@ -222,8 +222,6 @@
 					<option value="4">Four</option>
 					<option value="5">Five</option>
 				</select>
-			</fieldset>
-			<fieldset class="form_fieldset">
 				<button type="button" class="form_button toggle">Enable</button>
 			</fieldset>
 		</div>
@@ -238,8 +236,6 @@
 					<option value="4">Four</option>
 					<option value="5">Five</option>
 				</select>
-			</fieldset>
-			<fieldset class="form_fieldset">
 				<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
 			</fieldset>
 		</div>
