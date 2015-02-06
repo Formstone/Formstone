@@ -266,15 +266,17 @@
 
 			this.removeClass(RawClasses.animated);
 
-			data.width     = data.$viewport.outerWidth(false);
+			// data.viewportWidth  = data.$viewport.outerWidth(false);
+			data.containerWidth = data.$container.outerWidth(false);
+
 			data.visible   = calculateVisible(data);
 			data.perPage   = data.paged ? 1 : data.visible;
 
 			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
-			data.itemWidth  = (data.width - (data.itemMargin * (data.visible - 1))) / data.visible;
+			data.itemWidth  = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
 			data.itemHeight = 0;
 
-			data.pageWidth = data.paged ? data.itemWidth : data.width;
+			data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
 			data.$canister.css({
