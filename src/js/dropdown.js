@@ -104,12 +104,12 @@
 			updateOption(originalIndex, data);
 		}
 
-/*
+		/*
 		// Scroller support
 		if ($.fn.scroller !== undefined) {
 			data.$wrapper.scroller();
 		}
-*/
+		*/
 
 		// Bind events
 		data.$selected.touch({
@@ -123,8 +123,8 @@
 
 		// Focus/Blur events
 		if (!Formstone.isMobile) {
-			data.$dropdown.on(Events.focusIn, data, onFocus)
-						  .on(Events.focusOut, data, onBlur);
+			data.$dropdown.on(Events.focus, data, onFocus)
+						  .on(Events.blur, data, onBlur);
 
 			// Handle clicks to associated labels
 			this.on(Events.focusIn, data, function(e) {
@@ -146,19 +146,20 @@
 		}
 
 		// Scrollbar support
-/*
+		/*
 		if ($.fn.scroller !== undefined) {
 			data.$dropdown.find(".selecter-options").scroller("destroy");
 		}
-*/
+		*/
 
 		data.$el[0].tabIndex = data.tabIndex;
+
+		data.$dropdown.off(Events.namespace);
+		data.$options.off(Events.namespace);
 
 		data.$placeholder.remove();
 		data.$selected.remove();
 		data.$wrapper.remove();
-
-		data.$dropdown.off(Events.namespace);
 
 		data.$el.off(Events.namespace)
 				.show()
@@ -597,14 +598,14 @@
 		var $selected = data.$items.eq(data.index),
 			selectedOffset = (data.index >= 0 && !$selected.hasClass(Classes.item_placeholder)) ? $selected.position() : { left: 0, top: 0 };
 
-/*
+		/*
 		if ($.fn.scroller !== undefined) {
 			data.$wrapper.scroller("scroll", (data.$wrapper.find(".scroller-content").scrollTop() + selectedOffset.top), 0)
 							  .scroller("reset");
 		} else {
-*/
+		*/
 			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top );
-//		}
+		// }
 	}
 
 	/**
