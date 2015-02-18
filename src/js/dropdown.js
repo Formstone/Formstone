@@ -97,6 +97,7 @@
 		data.closed           = true;
 
 		data.keyDownGUID      = Events.keyDown + data.guid;
+		data.clickGUID        = Events.click + data.guid;
 
 		buildOptions(data);
 
@@ -116,7 +117,8 @@
 			tap: true
 		}).on(Events.tap, data, onClick);
 
-		data.$dropdown.on(Events.click, Classes.item, data, onSelect);
+		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
+					  .on(Events.close, data, onClose);
 
 		// Change events
 		this.on(Events.change, data, onChange);
@@ -127,7 +129,7 @@
 						  .on(Events.blur, data, onBlur);
 
 			// Handle clicks to associated labels
-			this.on(Events.focusIn, data, function(e) {
+			this.on(Events.focus, data, function(e) {
 				e.data.$dropdown.trigger(Events.raw.focus);
 			});
 		}
@@ -343,8 +345,12 @@
 	 */
 
 	function openOptions(data) {
+		console.log("open", data.closed);
+
 		// Make sure it's not already open
 		if (data.closed) {
+			$(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
+
 			var offset = data.$dropdown.offset(),
 				bodyHeight = $Body.outerHeight(),
 				optionsHeight = data.$wrapper.outerHeight(true),
@@ -356,8 +362,9 @@
 			}
 
 			// Bind Events
-			data.$dropdown.addClass(RawClasses.open);
+			$Body.on(data.clickGUID, ":not(" + Classes.options + ")", data, closeOptionsHelper);
 
+			data.$dropdown.addClass(RawClasses.open);
 			scrollOptions(data);
 
 			data.closed = false;
@@ -381,9 +388,43 @@
 	function closeOptions(data) {
 		// Make sure it's actually open
 		if (data && !data.closed) {
+			$Body.off(data.clickGUID);
+
 			data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
 
 			data.closed = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name closeOptionsHelper
+	 * @description Determines if event target is outside instance before closing
+	 * @param e [object] "Event data"
+	 */
+
+	function closeOptionsHelper(e) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
+			closeOptions(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onClose
+	 * @description Handles close event.
+	 * @param e [object] "Event data"
+	 */
+
+	function onClose(e) {
+		var data = e.data;
+
+		if (data) {
+			closeOptions(data);
 		}
 	}
 
@@ -462,7 +503,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onBlur(e, internal, two) {
+	function onBlur(e, internal) {
 		Functions.killEvent(e);
 
 		var data = e.data;
@@ -736,11 +777,11 @@
 				"item_disabled",
 				"item_selected",
 				"item_placeholder"
-
 			],
 
 			events: {
-				tap: "tap"
+				tap:   "tap",
+				close: "close"
 			}
 		}),
 
