@@ -1017,7 +1017,7 @@
 			 * @param minWidth [int] <100> "Minimum width of modal"
 			 * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
 			 * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
-			 * @param requestKey [string] <'boxer'> "GET variable for ajax / iframe requests"
+			 * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <600> "Video target width"
@@ -1039,7 +1039,7 @@
 				minWidth       : 100,
 				mobile         : false,
 				retina         : false,
-				requestKey     : "boxer",
+				requestKey     : "fs-lightbox",
 				top            : 0,
 				videoRatio     : 0.5625,
 				videoWidth     : 600

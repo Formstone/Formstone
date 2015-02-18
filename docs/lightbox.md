@@ -85,7 +85,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `int` | `100` | Minimum width of modal |
 | `mobile` | `boolean` | `false` | Flag to force 'mobile' rendering |
 | `retina` | `boolean` | `false` | Flag to use 'retina' sizing (halves natural sizes) |
-| `requestKey` | `string` | `'boxer'` | GET variable for ajax / iframe requests |
+| `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `videoRadio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `600` | Video target width |
