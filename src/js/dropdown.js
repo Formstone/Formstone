@@ -345,8 +345,6 @@
 	 */
 
 	function openOptions(data) {
-		console.log("open", data.closed);
-
 		// Make sure it's not already open
 		if (data.closed) {
 			$(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
