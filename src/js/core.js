@@ -7,6 +7,8 @@
 
 var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
+	/* global ga */
+
 	"use strict";
 
 	// Namespace

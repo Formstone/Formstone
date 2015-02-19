@@ -93,17 +93,15 @@
 	 */
 
 	function unbind(key, media) {
-		var mqkey = createKey(media);
+		var mqKey = createKey(media);
 
-		// all media
-		for (var i in Bindings) {
-			if (Bindings.hasOwnProperty(i)) {
-				// all events
-				for (var j in Bindings[i]) {
-					if (Bindings[i].hasOwnProperty(j) && Bindings[i][j].hasOwnProperty(key)) {
-						delete Bindings[i][j];
-					}
-				}
+		if (Bindings[mqKey]) {
+			if (Bindings[mqKey].enter[key]) {
+				delete Bindings[mqKey].enter[key];
+			}
+
+			if (Bindings[mqKey].leave[key]) {
+				delete Bindings[mqKey].leave[key];
 			}
 		}
 	}
@@ -214,8 +212,8 @@
 			utilities: {
 				_initialize    : initialize,
 				state          : getState,
-				bind           : bind
-				// unbind         : unbind
+				bind           : bind,
+				unbind         : unbind
 			},
 
 			/**
