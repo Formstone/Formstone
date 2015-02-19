@@ -471,7 +471,7 @@
 		 * @param force [boolean] <false> "Forces new requests when navigating back/forward"
 		 * @param jump [boolean] <false> "Jump page to top on render"
 		 * @param modal [boolean] <false> "Flag for content loaded into modal"
-		 * @param selecter [string] <'a'> "Selecter to target in the DOM"
+		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
 		 * @param target [object] <{ title: 'title', content: '#fs-asap' }> "Key / value pair for rendering responses (key is response key, value is target selector)"

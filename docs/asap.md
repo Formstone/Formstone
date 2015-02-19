@@ -34,7 +34,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `force` | `boolean` | `false` | Forces new requests when navigating back/forward |
 | `jump` | `boolean` | `false` | Jump page to top on render |
 | `modal` | `boolean` | `false` | Flag for content loaded into modal |
-| `selecter` | `string` | `'a'` | Selecter to target in the DOM |
+| `selector` | `string` | `'a'` | Target DOM Selector |
 | `render` | `function` | `$.noop` | Custom render function |
 | `requestKey` | `string` | `'fs-asap'` | GET variable for requests |
 | `target` | `object` | `{ title: 'title', content: '#fs-asap' }` | Key / value pair for rendering responses (key is response key, value is target selector) |
