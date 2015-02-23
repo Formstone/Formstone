@@ -27,13 +27,14 @@
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
+		/*
 		if (!data.collapse && data.group) {
 			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
 		}
+		*/
 
-		// should be activate when enabled
-		// data.onEnable = this.data(Namespace + "-active");
-		data.onEnable = this.hasClass(data.classes.active);
+		// Should be activate when enabled
+		data.onEnable = this.data(Namespace + "-active");
 
 		data.$swaps = $().add(this).add(data.$target);
 
