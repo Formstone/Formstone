@@ -3,17 +3,6 @@
 	/* global ga */
 
 	"use strict";
-
-	/**
-	 * @method private
-	 * @name setup
-	 * @description Setup plugin.
-	 */
-
-	function setup() {
-		$Body = Formstone.$body;
-	}
-
 	/**
 	 * @method private
 	 * @name initialize
@@ -30,6 +19,8 @@
 		if (!Formstone.support.history) {
 			return;
 		}
+
+		$Body = Formstone.$body;
 
 		Instance = $.extend(Defaults, options);
 
@@ -49,7 +40,7 @@
 		CurrentURL = window.location.href;
 
 		// Set initial state
-		saveState();
+		// saveState();
 
 		// Bind state events
 		$Window.on(Events.popState, onPop);
@@ -127,7 +118,7 @@
 
 		// Update state on hash change
 		if (url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#")) {
-			saveState();
+			// saveState();
 			return;
 		}
 
@@ -135,7 +126,7 @@
 		e.stopImmediatePropagation();
 
 		if (url.href === CurrentURL) {
-			saveState();
+			// saveState();
 		} else {
 			requestURL(url.href);
 		}
@@ -235,7 +226,7 @@
 				return xhr;
 			},
 			success: function(resp, status, jqXHR) {
-				response  = (typeof resp === "string") ? $.parseJSON(resp) : resp;
+				response  = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
 
 				// handle redirects - requires passing new location with json response
 				if (resp.location) {
@@ -270,13 +261,13 @@
 
 	function process(url, hash, data, scrollTop, doPush) {
 		// Fire load event
-		$Window.trigger(Events.load);
+		$Window.trigger(Events.load, [ data ]);
 
 		// Trigger analytics page view
 		track(url);
 
 		// Update current state before rendering new state
-		saveState();
+		saveState(data);
 
 		// Render before updating
 		Instance.render.call(this, data, hash);
@@ -296,10 +287,10 @@
 			Visited++;
 		} else {
 			// Update state with history data
-			saveState();
+			saveState(data);
 		}
 
-		$Window.trigger(Events.render);
+		$Window.trigger(Events.render, [ data ]);
 
 		if (hash !== "") {
 			var $el = $(hash);
@@ -324,10 +315,16 @@
 
 	function renderState(data, hash) {
 		// Update DOM
-		if (typeof data !== "undefined") {
-			for (var key in Instance.target) {
-				if (Instance.target.hasOwnProperty(key) && data.hasOwnProperty(key)) {
-					$(Instance.target[key]).html(data[key]);
+		if ($.type(data) !== "undefined") {
+			var $target;
+
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {
+					$target = $(key);
+
+					if ($target.length) {
+						$target.html(data[key]);
+					}
 				}
 			}
 		}
@@ -337,21 +334,30 @@
 	 * @method private
 	 * @name saveState
 	 * @description Saves the current state
+	 * @param data [object] "State Data"
 	 */
 
-	function saveState() {
-		// Save state data before updating history
-		var data = [];
-		for (var key in Instance.target) {
-			if (Instance.target.hasOwnProperty(key)) {
-				data[key] = $(Instance.target[key]).html();
+	function saveState(data) {
+		var cache = [];
+
+		if ($.type(data) !== "undefined") {
+			var $target;
+
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {
+					$target = $(key);
+
+					if ($target.length) {
+						cache[key] = $target.html();
+					}
+				}
 			}
 		}
 
 		// Update state
 		history.replaceState({
 			url: CurrentURL,
-			data: data,
+			data: cache,
 			scroll: $Window.scrollTop()
 		}, "state-" + CurrentURL, CurrentURL);
 	}
@@ -400,9 +406,9 @@
 				Window.dataLayer.push({ "event": Instance.tracking.event });
 			} else {
 				// Basic
-				if (typeof ga === "function") {
-					ga("send", "pageview", url);
-				}
+				// if ($.type(ga) !== "undefined") {
+				// 	ga("send", "pageview", url);
+				// }
 
 				// Specific tracker - only needed if using mutiple and/or tag manager
 				// var t = ga.getAll();
@@ -441,7 +447,6 @@
 
 	var Plugin = Formstone.Plugin("asap", {
 			utilities: {
-				_setup         : setup,
 				_initialize    : initialize,
 
 				load           : load
@@ -474,7 +479,6 @@
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
-		 * @param target [object] <{ title: 'title', content: '#fs-asap' }> "Key / value pair for rendering responses (key is response key, value is target selector)"
 		 * @param tracking.legacy [boolean] <false> "Flag for legacy Google Analytics tracking"
 		 * @param tracking.manager [boolean] <false> "Flag for Tag Manager tracking"
 		 * @param tracking.variable [string] <'currentURL'> "Tag Manager dataLayer variable name (macro in Tag Manager)"
@@ -490,10 +494,6 @@
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",
-			target: {
-				title     : "title",
-				content   : "#fs-asap"
-			},
 			tracking: {
 				legacy      : false,        // Use legacy ga code
 				manager     : false,        // Use tag manager events
@@ -501,10 +501,6 @@
 				event       : "PageView"    // event name - rule in tag manager
 			},
 			transitionOut   : $.noop
-		},
-
-		RawClasses = {
-			base: Plugin.namespace
 		},
 
 		// Localize References
@@ -515,12 +511,13 @@
 
 		Functions     = Plugin.functions,
 		Events        = Plugin.events,
+		RawClasses    = Plugin.classes.raw,
 
 		// Internal
 
 		CurrentURL    = '',
 		Visited       = 0,
-		Request       = null,
-		Instance      = null;
+		Request,
+		Instance;
 
 })(jQuery, Formstone);

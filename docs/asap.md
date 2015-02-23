@@ -37,7 +37,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `selector` | `string` | `'a'` | Target DOM Selector |
 | `render` | `function` | `$.noop` | Custom render function |
 | `requestKey` | `string` | `'fs-asap'` | GET variable for requests |
-| `target` | `object` | `{ title: 'title', content: '#fs-asap' }` | Key / value pair for rendering responses (key is response key, value is target selector) |
 | `tracking.legacy` | `boolean` | `false` | Flag for legacy Google Analytics tracking |
 | `tracking.manager` | `boolean` | `false` | Flag for Tag Manager tracking |
 | `tracking.variable` | `string` | `'currentURL'` | Tag Manager dataLayer variable name (macro in Tag Manager) |

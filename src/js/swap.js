@@ -31,7 +31,9 @@
 			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
 		}
 
-		data.onEnable = this.data(Namespace + "-active");
+		// should be activate when enabled
+		// data.onEnable = this.data(Namespace + "-active");
+		data.onEnable = this.hasClass(data.classes.active);
 
 		data.$swaps = $().add(this).add(data.$target);
 
