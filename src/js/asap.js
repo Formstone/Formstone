@@ -183,7 +183,7 @@
 
 		var queryIndex = url.indexOf("?"),
 			hashIndex  = url.indexOf("#"),
-			data       = (queryIndex > -1) ? getQueryParams( url.slice( queryIndex + 1 ) ) : {},
+			data       = {},
 			hash       = "",
 			cleanURL   = url,
 			error      = "User error",
@@ -193,6 +193,11 @@
 		if (hashIndex > -1) {
 			hash = url.slice(hashIndex);
 			cleanURL = url.slice(0, hashIndex);
+		}
+
+		if (queryIndex > -1) {
+			data = getQueryParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
+			cleanURL = url.slice(0, queryIndex);
 		}
 
 		data[ Instance.requestKey ] = true;
