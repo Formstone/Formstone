@@ -96,7 +96,7 @@
 	 */
 
 	function jump(data, index) {
-		data.$items.eq(index).trigger(Events.click);
+		data.$items.eq(index).trigger(Events.raw.click);
 	}
 
 	/**
@@ -113,7 +113,7 @@
 			index = data.index + ( $(e.currentTarget).hasClass(RawClasses.control_previous) ? -1 : 1 );
 
 		if (index >= 0) {
-			data.$items.eq(index).trigger(Events.click);
+			data.$items.eq(index).trigger(Events.raw.click);
 		}
 	}
 
@@ -131,7 +131,7 @@
 			$target = $(e.currentTarget),
 			index = parseInt($target.val(), 10);
 
-		data.$items.eq(index).trigger(Events.click);
+		data.$items.eq(index).trigger(Events.raw.click);
 	}
 
 	/**
