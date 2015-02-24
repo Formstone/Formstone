@@ -190,7 +190,7 @@
 			requestDeferred = $.Deferred();
 
 		if (hashIndex > -1) {
-			hash = (queryIndex > -1) ? url.slice(hashIndex, queryIndex) : url.slice(hashIndex);
+			hash = url.slice(hashIndex);
 		}
 
 		data[ Instance.requestKey ] = true;
