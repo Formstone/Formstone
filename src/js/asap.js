@@ -185,19 +185,21 @@
 			hashIndex  = url.indexOf("#"),
 			data       = (queryIndex > -1) ? getQueryParams( url.slice( queryIndex + 1 ) ) : {},
 			hash       = "",
+			cleanURL   = url,
 			error      = "User error",
 			response   = null,
 			requestDeferred = $.Deferred();
 
 		if (hashIndex > -1) {
 			hash = url.slice(hashIndex);
+			cleanURL = url.slice(0, hashIndex);
 		}
 
 		data[ Instance.requestKey ] = true;
 
 		// Request new content
 		Request = $.ajax({
-			url: url,
+			url: cleanURL,
 			data: data,
 			dataType: "json",
 			cache: Instance.cache,
