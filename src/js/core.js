@@ -344,7 +344,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 					// Wrap Utility Methods
 
-					_method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
+					return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
 				}
 			}
 

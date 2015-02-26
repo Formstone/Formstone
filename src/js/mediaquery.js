@@ -196,6 +196,13 @@
 	 * @example var state = $.mediaquery("state");
 	 */
 
+	/**
+	 * @method private
+	 * @name getState
+	 * @description Returns the current state.
+	 * @return [object] "Current state object"
+	 */
+
 	function getState() {
 		return State;
 	}
