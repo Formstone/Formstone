@@ -20,7 +20,7 @@ Specify a valid `target` selector to equalize specific child elements:
 
 ```javascript
 $(".target").equalize({
-	target: "child"
+	target: ".child"
 });
 ```
 
