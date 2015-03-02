@@ -133,3 +133,17 @@ Returns the current state.
 var state = $.mediaquery("state");
 ```
 
+### unbind
+
+Unbinds all callbacks from media query.
+
+```javascript
+$.mediaquery("unbind", "key");
+```
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `key` | `string` | &nbsp; | Instance key |
+

@@ -179,6 +179,8 @@ module.exports = function(grunt) {
 							var events = parseJavascript(content);
 							doc.events = events["events"];
 						} else if (content.indexOf("@method") > -1) {
+
+
 							if (!doc.methods) {
 								doc.methods = [];
 							}

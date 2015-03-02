@@ -84,11 +84,10 @@
 	}
 
 	/**
-	 * method
+	 * @method
 	 * @name unbind
 	 * @description Unbinds all callbacks from media query.
 	 * @param key [string] "Instance key"
-	 * @param media [string] "Media query to match"
 	 * @example $.mediaquery("unbind", "key");
 	 */
 
