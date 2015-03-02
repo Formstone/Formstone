@@ -51,7 +51,7 @@ Note: In the example above, the `mqchange.mediaquery` event will be fire twice f
 Media Query can also bind events to specific media query changes for more fine grain control:
 
 ```javascript
-$.mediaquery("bind", "(min-width: 740px)", {
+$.mediaquery("bind", "mq-key", "(min-width: 740px)", {
 	enter: function() {
 		...
 	},
@@ -61,9 +61,11 @@ $.mediaquery("bind", "(min-width: 740px)", {
 });
 ```
 
-<!--
-Note: The `leave` callback will only fire after the target media query has been matched at least once. If the media query never matches, neither callback will fire.
--->
+To unbind a Media Query:
+
+```javascript
+$.mediaquery("unbind", "mq-key");
+```
 
 #### IE Support
 

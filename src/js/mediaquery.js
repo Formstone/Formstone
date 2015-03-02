@@ -89,7 +89,7 @@
 	 * @description Unbinds all callbacks from media query.
 	 * @param key [string] "Instance key"
 	 * @param media [string] "Media query to match"
-	 * @example $.mediaquery("key");
+	 * @example $.mediaquery("unbind", "key");
 	 */
 
 	function unbind(key, media) {
