@@ -88,19 +88,40 @@
 	 * @name unbind
 	 * @description Unbinds all callbacks from media query.
 	 * @param key [string] "Instance key"
+	 * @param media [string] "Media query to unbind; defaults to all"
 	 * @example $.mediaquery("unbind", "key");
 	 */
 
 	function unbind(key, media) {
-		var mqKey = createKey(media);
+		if (!key) {
+			return;
+		}
 
-		if (Bindings[mqKey]) {
-			if (Bindings[mqKey].enter[key]) {
-				delete Bindings[mqKey].enter[key];
+		if (media) {
+			// unbind specific query
+			var mqKey = createKey(media);
+
+			if (Bindings[mqKey]) {
+				if (Bindings[mqKey].enter[key]) {
+					delete Bindings[mqKey].enter[key];
+				}
+
+				if (Bindings[mqKey].leave[key]) {
+					delete Bindings[mqKey].leave[key];
+				}
 			}
+		} else {
+			// unbind all
+			for (var i in Bindings) {
+				if (Bindings.hasOwnProperty(i)) {
+					if (Bindings[i].enter[key]) {
+						delete Bindings[i].enter[key];
+					}
 
-			if (Bindings[mqKey].leave[key]) {
-				delete Bindings[mqKey].leave[key];
+					if (Bindings[i].leave[key]) {
+						delete Bindings[i].leave[key];
+					}
+				}
 			}
 		}
 	}

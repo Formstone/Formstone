@@ -146,4 +146,5 @@ $.mediaquery("unbind", "key");
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `key` | `string` | &nbsp; | Instance key |
+| `media` | `string` | &nbsp; | Media query to unbind; defaults to all |
 
