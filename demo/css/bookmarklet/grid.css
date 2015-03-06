@@ -30,6 +30,10 @@
 		overflow: hidden;
 	}
 
+	#fs-grid-menu *:focus {
+		outline: none;
+	}
+
 	#fs-grid-menu .fs-grid-icon,
 	#fs-grid-menu .fs-grid-option {
 		height: 35px;
