@@ -32,7 +32,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | --- | --- | --- | --- |
 | `cache` | `boolean` | `true` | Cache AJAX responses |
 | `force` | `boolean` | `false` | Forces new requests when navigating back/forward |
-| `jump` | `boolean` | `false` | Jump page to top on render |
+| `jump` | `boolean` | `true` | Jump page to top on render |
 | `modal` | `boolean` | `false` | Flag for content loaded into modal |
 | `selector` | `string` | `'a'` | Target DOM Selector |
 | `render` | `function` | `$.noop` | Custom render function |

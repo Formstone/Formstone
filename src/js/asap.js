@@ -481,7 +481,7 @@
 		 * @options
 		 * @param cache [boolean] <true> "Cache AJAX responses"
 		 * @param force [boolean] <false> "Forces new requests when navigating back/forward"
-		 * @param jump [boolean] <false> "Jump page to top on render"
+		 * @param jump [boolean] <true> "Jump page to top on render"
 		 * @param modal [boolean] <false> "Flag for content loaded into modal"
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
