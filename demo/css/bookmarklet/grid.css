@@ -24,7 +24,8 @@
 
 		background: #222;
 		box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
-		font-family: Helvetica, sans-serif;
+		font-family: Helvetica, Arial, sans-serif;
+		line-height: 1;
 		margin: 0;
 		padding: 0;
 		overflow: hidden;
@@ -32,6 +33,62 @@
 
 	#fs-grid-menu *:focus {
 		outline: none;
+	}
+
+	#fs-grid-menu .fs-grid-statuses {
+		height: 35px;
+
+		border-right: 1px solid #000;
+		float: left;
+		line-height: 17px;
+		padding: 10px;
+	}
+
+	#fs-grid-menu .fs-grid-status {
+		width: 25px;
+		height: 15px;
+
+		border-radius: 3px;
+		display: block;
+		float: left;
+		font-size: 10px;
+		margin: 0 1px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	@media screen and (max-width: 499px) {
+		#fs-grid-menu .fs-grid-status-xs {
+			background: #ccc;
+			color: #333;
+		}
+	}
+
+	@media screen and (max-width: 739px) {
+		#fs-grid-menu .fs-grid-status-sm {
+			background: #ccc;
+			color: #333;
+		}
+	}
+
+	@media screen and (min-width: 740px) and (max-width: 979px) {
+		#fs-grid-menu .fs-grid-status-md {
+			background: #ccc;
+			color: #333;
+		}
+	}
+	@media screen and (min-width: 980px) {
+		#fs-grid-menu .fs-grid-status-lg {
+			background: #ccc;
+			color: #333;
+		}
+	}
+
+	@media screen and (min-width: 1220px) {
+		#fs-grid-menu .fs-grid-status-xl {
+			background: #ccc;
+			color: #333;
+		}
 	}
 
 	#fs-grid-menu .fs-grid-icon,

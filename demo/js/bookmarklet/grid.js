@@ -32,6 +32,15 @@ function FSGridBookmarklet() {
 					var html = '';
 
 					html += '<menu id="fs-grid-menu" class="' + config.position + '">';
+
+					html += '<div class="fs-grid-statuses">';
+					html += '<span class="fs-grid-status fs-grid-status-xs">xs</span>';
+					html += '<span class="fs-grid-status fs-grid-status-sm">sm</span>';
+					html += '<span class="fs-grid-status fs-grid-status-md">md</span>';
+					html += '<span class="fs-grid-status fs-grid-status-lg">lg</span>';
+					html += '<span class="fs-grid-status fs-grid-status-xl">xl</span>';
+					html += '</div>';
+
 					html += '<button class="fs-grid-show fs-grid-option">Show Grid</button>';
 					html += '<button class="fs-grid-icon fs-grid-remove">Close</button>';
 					html += '</menu>';
