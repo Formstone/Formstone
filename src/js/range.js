@@ -48,7 +48,7 @@
 
 		html += '<div class="' + RawClasses.track + '">';
 		html += '<div class="' + RawClasses.handle + '">';
-		html += '<span type="button" class="' + RawClasses.marker + '"></span>';
+		html += '<span class="' + RawClasses.marker + '"></span>';
 		html += '</div>';
 		html += '</div>';
 

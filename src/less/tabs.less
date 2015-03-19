@@ -1,4 +1,6 @@
 
+	@import "imports/utils.less";
+
 	/**
 	 * @class
 	 * @name .fs-tabs-element
@@ -19,14 +21,6 @@
 	 * @type modifier
 	 * @description Indicates enabled state
 	 */
-
-	.fs_clearfix() {
-		&:after {
-			clear: both;
-			content: '';
-			display: table;
-		}
-	}
 
 	.fs-tabs {
 		&&-enabled {
@@ -62,7 +56,13 @@
 		 */
 
 		&-tab&-enabled {
+			box-sizing: border-box;
+			border: none;
 			cursor: pointer;
+
+			&:focus {
+				outline: none;
+			}
 		}
 
 		/**
@@ -89,6 +89,7 @@
 		&-content&-enabled {
 			.fs_clearfix();
 
+			box-sizing: border-box;
 			display: none;
 		}
 

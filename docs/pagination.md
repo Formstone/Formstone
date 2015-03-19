@@ -6,6 +6,7 @@ A jQuery plugin for simple pagination.
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
+* [CSS](#css)
 
 ## Use 
 
@@ -83,4 +84,24 @@ Jump instance of plugin to specific page
 ```javascript
 $(".target").pagination("jump", 1);
 ```
+
+## CSS
+
+| Class | Type | Description |
+| --- | --- | --- |
+| `.fs-pagination-element` | `element` | Target elmement |
+| `.fs-pagination` | `element` | Base widget class |
+| `.fs-pagination.fs-pagination-mobile` | `modifier` | Indicates mobile display |
+| `.fs-pagination` | `element` | Pages container |
+| `.fs-pagination-page` | `element` | Page element |
+| `.fs-pagination-ellipsis` | `element` | Ellipsis element |
+| `.fs-pagination-page.fs-pagination-active` | `modifier` | Indicates active page |
+| `.fs-pagination-page.fs-pagination-first` | `modifier` | Indicates first page |
+| `.fs-pagination-page.fs-pagination-last` | `modifier` | Indicates last page |
+| `.fs-pagination-page.fs-pagination-visible` | `modifier` | Indicates visible page |
+| `.fs-pagination-control` | `element` | Pagination button |
+| `.fs-pagination-control.fs-pagination-control_previous` | `modifier` | Indicates previous control |
+| `.fs-pagination-control.fs-pagination-control_next` | `modifier` | Indicates next control |
+| `.fs-pagination-position` | `element` | Mobile position indicator |
+| `.fs-pagination-select` | `element` | Mobile page dropdown |
 

@@ -4,14 +4,19 @@
  * @description A responsive CSS grid.
  */
 
+	@import "imports/utils.less";
 	@import "imports/grid-config.less";
 	@import "imports/grid-functions.less";
 
 	// !Reset Box-sizing
-	*,
-	*:before,
-	*:after {
+
+	* {
 		box-sizing: border-box;
+
+		*:before,
+		*:after {
+			box-sizing: inherit;
+		}
 	}
 
 	.@{fs-grid-class-container} {
