@@ -105,23 +105,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			/**
 			 * @method private
-			 * @name prefix
-			 * @description Builds vendor-prefixed styles
-			 * @param property [string] "Property to prefix"
-			 * @param value [string] "Property value"
-			 * @return [object] "Vendor-prefixed styles"
-			 */
-
-			prefix: function(property, value) {
-				var r = {};
-
-				r[property] = value;
-
-				return r;
-			},
-
-			/**
-			 * @method private
 			 * @name sortAsc
 			 * @description Sorts an array (ascending).
 			 * @param a [mixed] "First value"

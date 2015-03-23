@@ -184,7 +184,7 @@
 			data.$canister.touch("destroy")
 						  .off(Events.namespace)
 						  .attr("style", "")
-						  .css( Functions.prefix(TransitionProperty, "none") );
+						  .css(TransitionProperty, "none");
 
 			data.$items.css({
 				width: "",
@@ -200,7 +200,7 @@
 					marginLeft: ""
 				});
 			} else {
-				data.$canister.css( Functions.prefix(TransformProperty, "") );
+				data.$canister.css(TransformProperty, "");
 			}
 
 			data.index = 0;
@@ -230,7 +230,7 @@
 			  .on(Events.pan, data, onPan)
 			  .on(Events.panEnd, data, onPanEnd)
 			  .on(Events.swipe, data, onSwipe)
-			  .css( Functions.prefix(TransitionProperty, "") );
+			  .css(TransitionProperty, "");
 
 			resizeInstance.call(this, data);
 		}
@@ -550,15 +550,15 @@
 			});
 		} else {
 			if (animate === false) {
-				data.$canister.css( Functions.prefix(TransitionProperty, "none") )
-							  .css( Functions.prefix(TransformProperty, "translate3d("+data.leftPosition+"px, 0, 0)") );
+				data.$canister.css(TransitionProperty, "none")
+							  .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
 
-				// Slight delay before adding transitions backs
+				// Slight delay before adding transitions back
 				setTimeout(function() {
-					data.$canister.css( Functions.prefix(TransitionProperty, "") );
+					data.$canister.css(TransitionProperty, "");
 				}, 5);
 			} else {
-				data.$canister.css( Functions.prefix(TransformProperty, "translate3d("+data.leftPosition+"px, 0, 0)") );
+				data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
 			}
 		}
 
@@ -640,7 +640,7 @@
 			data.leftPosition = parseInt(matrix[4]); // ?
 		}
 
-		data.$canister.css( Functions.prefix(TransitionProperty, "none") );
+		data.$canister.css(TransitionProperty, "none");
 
 		onPan(e);
 
@@ -671,7 +671,7 @@
 				marginLeft: data.touchLeft
 			});
 		} else {
-			data.$canister.css( Functions.prefix(TransformProperty, "translate3d("+data.touchLeft+"px, 0, 0)") );
+			data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
 		}
 	}
 
@@ -712,7 +712,7 @@
 	 */
 
 	function endTouch(data, index) {
-		data.$canister.css( Functions.prefix(TransitionProperty, "") );
+		data.$canister.css(TransitionProperty, "");
 
 		positionCanister(data, index);
 
