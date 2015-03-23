@@ -135,6 +135,23 @@ module.exports = function(grunt) {
 				files: '<%= pkg.site.js %>'
 			}
 		},
+		// Copy
+		copy: {
+			library: {
+				files: [{
+					expand: true,
+					cwd:    'src/',
+					src:    '**/*.js',
+					dest:   'dist/'
+				}]
+			}
+		},
+		// Concat
+		concat: {
+			demo: {
+				files: '<%= pkg.site.js %>'
+			}
+		},
 		// LESS
 		less: {
 			options: {
@@ -271,12 +288,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'js', 'css', 'library', 'demoClean' ]);
 	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
-	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
+	// grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
+	grunt.registerTask('js', [ 'jshint:library', 'copy:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	// grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'concat:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

@@ -205,7 +205,7 @@
 	 */
 
 	function createKey(text) {
-		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').trim();
+		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g,'');
 	}
 
 	/**

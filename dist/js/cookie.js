@@ -1,3 +1,154 @@
 /*! Formstone v0.2.0 [cookie.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(b,c,h){if("object"===a.type(b))g=a.extend(g,b);else if(h=a.extend({},g,h||{}),"undefined"!==a.type(b)){if("undefined"===a.type(c))return e(b);null===c?f(b):d(b,c,h)}return null}function d(b,c,d){var e=!1,f=new Date;d.expires&&"number"===a.type(d.expires)&&(f.setTime(f.getTime()+d.expires),e=f.toGMTString());var g=d.domain?"; domain="+d.domain:"",i=e?"; expires="+e:"",j=e?"; max-age="+d.expires/1e3:"",k=d.path?"; path="+d.path:"",l=d.secure?"; secure":"";h.cookie=b+"="+c+i+j+g+k+l}function e(a){for(var b=a+"=",c=h.cookie.split(";"),d=0;d<c.length;d++){for(var e=c[d];" "===e.charAt(0);)e=e.substring(1,e.length);if(0===e.indexOf(b))return e.substring(b.length,e.length)}return null}function f(a){d(a,"",{expires:-6048e5})}var g=(b.Plugin("cookie",{utilities:{_delegate:c}}),{domain:null,expires:6048e5,path:null,secure:null}),h=b.document}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name delegate
+	 * @param key [string] "Cookie key"
+	 * @param value [string] "Cookie value"
+	 * @param options [object] "Options object"
+	 * @return [null || string] "Cookie value, if 'read'"
+	 */
+
+	function delegate(key, value, options) {
+		if ($.type(key) === "object") {
+
+			// Set defaults
+
+			Defaults = $.extend(Defaults, key);
+		} else {
+
+			// Delegate intent
+
+			options = $.extend({}, Defaults, options || {});
+
+			if ($.type(key) !== "undefined") {
+				if ($.type(value) !== "undefined") {
+					if (value === null) {
+						eraseCookie(key);
+					} else {
+						createCookie(key, value, options);
+					}
+				} else {
+					return readCookie(key);
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @method
+	 * @name create
+	 * @description Creates a cookie.
+	 * @param key [string] "Cookie key"
+	 * @param value [string] "Cookie value"
+	 * @param options [object] "Options object"
+	 * @example $.cookie(key, value, options);
+	 */
+
+	function createCookie(key, value, options) {
+		var expiration = false,
+			date = new Date();
+
+		// Check Expiration Date
+
+		if (options.expires && $.type(options.expires) === "number") {
+			date.setTime( date.getTime() + options.expires );
+			expiration = date.toGMTString();
+		}
+
+		var domain     = (options.domain)    ? "; domain=" + options.domain : "",
+			expires    = (expiration)        ? "; expires=" + expiration : "",
+			maxAge     = (expiration)        ? "; max-age=" + (options.expires / 1000) : "", // to seconds
+			path       = (options.path)      ? "; path=" + options.path : "",
+			secure     = (options.secure)    ? "; secure" : "";
+
+		// Set Cookie
+
+		Document.cookie = key + "=" + value + expires + maxAge + domain + path + secure;
+	}
+
+	/**
+	 * @method
+	 * @name read
+	 * @description Returns a cookie's value, or null.
+	 * @param key [string] "Cookie key"
+	 * @return [string | null] "Cookie's value, or null"
+	 * @example var value = $.cookie(key);
+	 */
+
+	function readCookie(key) {
+		var keyString    = key + "=",
+			cookies      = Document.cookie.split(';');
+
+		// Loop Cookies
+
+		for(var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i];
+
+			while (cookie.charAt(0) === ' ') {
+				cookie = cookie.substring(1, cookie.length);
+			}
+
+			// Return Match
+
+			if (cookie.indexOf(keyString) === 0) {
+				return cookie.substring(keyString.length, cookie.length);
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @method
+	 * @name erase
+	 * @description Deletes a cookie.
+	 * @param key [string] "Cookie key"
+	 * @example $.cookie(key, null);
+	 */
+
+	function eraseCookie(key) {
+		createCookie(key, "", {
+			expires: -604800000 // -7 days
+		});
+	}
+
+	/**
+	 * @plugin
+	 * @name Cookie
+	 * @description A jQuery plugin for simple access to browser cookies.
+	 * @type utility
+	 * @dependency core.js
+	 */
+
+	var Plugin = Formstone.Plugin("cookie", {
+			utilities: {
+				_delegate:     delegate
+			}
+		}),
+
+		/**
+		 * @options
+		 * @param domain [string] "Cookie domain"
+		 * @param expires [int] <604800000> "Time until cookie expires"
+		 * @param path [string] "Cookie path"
+		 */
+
+		Defaults = {
+			domain:     null,
+			expires:    604800000, // 7 days
+			path:       null,
+			secure:     null
+		},
+
+		// Localize References
+
+		Document = Formstone.document;
+
+})(jQuery, Formstone);

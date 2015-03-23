@@ -1,3 +1,300 @@
 /*! Formstone v0.2.0 [mediaquery.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(b){b=b||{};for(var c in t)t.hasOwnProperty(c)&&(l[c]=b[c]?a.merge(b[c],l[c]):l[c]);l=a.extend(l,b),l.minWidth.sort(p.sortDesc),l.maxWidth.sort(p.sortAsc),l.minHeight.sort(p.sortDesc),l.maxHeight.sort(p.sortAsc);for(var d in t)if(t.hasOwnProperty(d)){s[d]={};for(var e in l[d])if(l[d].hasOwnProperty(e)){var f=window.matchMedia("("+t[d]+": "+(1/0===l[d][e]?1e5:l[d][e])+l.unit+")");f.addListener(g),s[d][l[d][e]]=f}}g()}function d(a,b,c){var d=o.matchMedia(b),e=i(d.media);r[e]||(r[e]={mq:d,active:!0,enter:{},leave:{}},r[e].mq.addListener(h));for(var f in c)c.hasOwnProperty(f)&&r[e].hasOwnProperty(f)&&(r[e][f][a]=c[f]);h(r[e].mq)}function e(a,b){if(a)if(b){var c=i(b);r[c]&&(r[c].enter[a]&&delete r[c].enter[a],r[c].leave[a]&&delete r[c].leave[a])}else for(var d in r)r.hasOwnProperty(d)&&(r[d].enter[a]&&delete r[d].enter[a],r[d].leave[a]&&delete r[d].leave[a])}function f(){q={unit:l.unit};for(var a in t)if(t.hasOwnProperty(a))for(var b in s[a])if(s[a].hasOwnProperty(b)&&s[a][b].matches){var c="Infinity"===b?1/0:parseInt(b,10);a.indexOf("max")>-1?(!q[a]||c<q[a])&&(q[a]=c):(!q[a]||c>q[a])&&(q[a]=c)}}function g(){f(),n.trigger(m.mqChange,[q])}function h(a){var b=i(a.media),c=r[b],d=a.matches?m.enter:m.leave;if(c&&c.active||!c.active&&a.matches){for(var e in c[d])c[d].hasOwnProperty(e)&&c[d][e].apply(c.mq);c.active=!0}}function i(a){return a.replace(/[^a-z0-9\s]/gi,"").replace(/[_\s]/g,"").trim()}function j(){return q}var k=b.Plugin("mediaquery",{utilities:{_initialize:c,state:j,bind:d,unbind:e},events:{mqChange:"mqchange"}}),l={minWidth:[0],maxWidth:[1/0],minHeight:[0],maxHeight:[1/0],unit:"px"},m=a.extend(k.events,{enter:"enter",leave:"leave"}),n=b.$window,o=n[0],p=k.functions,q=null,r=[],s={},t={minWidth:"min-width",maxWidth:"max-width",minHeight:"min-height",maxHeight:"max-height"}}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name initialize
+	 * @description Initializes plugin.
+	 * @param opts [object] "Plugin options"
+	 */
+
+	function initialize(options) {
+		options = options || {};
+
+		// Build Media Queries
+
+		for (var i in MQStrings) {
+			if (MQStrings.hasOwnProperty(i)) {
+				Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
+			}
+		}
+
+		Defaults = $.extend(Defaults, options);
+
+		// Sort
+
+		Defaults.minWidth.sort(Functions.sortDesc);
+		Defaults.maxWidth.sort(Functions.sortAsc);
+		Defaults.minHeight.sort(Functions.sortDesc);
+		Defaults.maxHeight.sort(Functions.sortAsc);
+
+		// Bind Media Query Matches
+
+		for (var j in MQStrings) {
+			if (MQStrings.hasOwnProperty(j)) {
+				MQMatches[j] = {};
+				for (var k in Defaults[j]) {
+					if (Defaults[j].hasOwnProperty(k)) {
+						var mq = window.matchMedia( "(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")" );
+						mq.addListener( onStateChange );
+						MQMatches[j][ Defaults[j][k] ] = mq;
+					}
+				}
+			}
+		}
+
+		// Initial Trigger
+
+		onStateChange();
+	}
+
+	/**
+	 * @method
+	 * @name bind
+	 * @description Binds callbacks to media query matching.
+	 * @param key [string] "Instance key"
+	 * @param media [string] "Media query to match"
+	 * @param data [object] "Object containing 'enter' and 'leave' callbacks"
+	 * @example $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
+	 */
+
+	function bind(key, media, data) {
+		var mq = Window.matchMedia(media),
+			mqKey = createKey(mq.media);
+
+		if (!Bindings[mqKey]) {
+			Bindings[mqKey] = {
+				mq        : mq,
+				active    : true,
+				enter     : {},
+				leave     : {}
+			};
+
+			Bindings[mqKey].mq.addListener(onBindingChange);
+		}
+
+		for (var i in data) {
+			if (data.hasOwnProperty(i) && Bindings[mqKey].hasOwnProperty(i)) {
+				Bindings[mqKey][i][key] = data[i];
+			}
+		}
+
+		onBindingChange(Bindings[mqKey].mq);
+	}
+
+	/**
+	 * @method
+	 * @name unbind
+	 * @description Unbinds all callbacks from media query.
+	 * @param key [string] "Instance key"
+	 * @param media [string] "Media query to unbind; defaults to all"
+	 * @example $.mediaquery("unbind", "key");
+	 */
+
+	function unbind(key, media) {
+		if (!key) {
+			return;
+		}
+
+		if (media) {
+			// unbind specific query
+			var mqKey = createKey(media);
+
+			if (Bindings[mqKey]) {
+				if (Bindings[mqKey].enter[key]) {
+					delete Bindings[mqKey].enter[key];
+				}
+
+				if (Bindings[mqKey].leave[key]) {
+					delete Bindings[mqKey].leave[key];
+				}
+			}
+		} else {
+			// unbind all
+			for (var i in Bindings) {
+				if (Bindings.hasOwnProperty(i)) {
+					if (Bindings[i].enter[key]) {
+						delete Bindings[i].enter[key];
+					}
+
+					if (Bindings[i].leave[key]) {
+						delete Bindings[i].leave[key];
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name setState
+	 * @description Sets current media query match state.
+	 */
+
+	function setState() {
+		State = {
+			unit: Defaults.unit
+		};
+
+		for (var i in MQStrings) {
+			if (MQStrings.hasOwnProperty(i)) {
+
+				for (var j in MQMatches[i]) {
+					if (MQMatches[i].hasOwnProperty(j) && MQMatches[i][j].matches) {
+
+						var state = (j === "Infinity") ? Infinity : parseInt(j, 10);
+
+						if (i.indexOf("max") > -1) {
+							if (!State[i] || state < State[i]) {
+								State[i] = state;
+							}
+						} else {
+							if (!State[i] || state > State[i]) {
+								State[i] = state;
+							}
+						}
+
+					}
+				}
+
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onStateChange
+	 * @description Handles media query changes.
+	 */
+
+	function onStateChange() {
+		setState();
+
+		$Window.trigger(Events.mqChange, [ State ]);
+	}
+
+	/**
+	 * @method private
+	 * @name onBindingChange
+	 * @description Handles a binding's media query change.
+	 */
+
+	function onBindingChange(mq) {
+		var mqkey      = createKey(mq.media),
+			binding    = Bindings[mqkey],
+			event      = mq.matches ? Events.enter : Events.leave;
+
+		if (binding && binding.active || (!binding.active && mq.matches)) {
+			for (var i in binding[event]) {
+				if (binding[event].hasOwnProperty(i)) {
+					binding[event][i].apply(binding.mq);
+				}
+			}
+
+			binding.active = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name createKey
+	 * @description Creates valid object key from string.
+	 * @param text [String] "String to create key from"
+	 * @return [string] Valid object key
+	 */
+
+	function createKey(text) {
+		return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g,'');
+	}
+
+	/**
+	 * @method
+	 * @name state
+	 * @description Returns the current state.
+	 * @return [object] "Current state object"
+	 * @example var state = $.mediaquery("state");
+	 */
+
+	/**
+	 * @method private
+	 * @name getState
+	 * @description Returns the current state.
+	 * @return [object] "Current state object"
+	 */
+
+	function getState() {
+		return State;
+	}
+
+	/**
+	 * @plugin
+	 * @name Media Query
+	 * @description A jQuery plugin for responsive media query events.
+	 * @type utility
+	 * @dependency core.js
+	 */
+
+	var Plugin = Formstone.Plugin("mediaquery", {
+			utilities: {
+				_initialize    : initialize,
+				state          : getState,
+				bind           : bind,
+				unbind         : unbind
+			},
+
+			/**
+			 * @events
+			 * @event mqchange.mediaquery "Change to a media query match; Triggered on window"
+			 */
+
+			events: {
+				mqChange    : "mqchange"
+			}
+		}),
+
+		/**
+		 * @options
+		 * @param minWidth [array] <[ 0 ]> "Array of min-widths"
+		 * @param maxWidth [array] <[ Infinity ]> "Array of max-widths"
+		 * @param minHeight [array] <[ 0 ]> "Array of min-heights"
+		 * @param maxHeight [array] <[ Infinity ]> "Array of max-heights"
+		 * @param unit [string] <'px'> "Unit to use when matching widths and heights"
+		 */
+
+		Defaults = {
+			minWidth     : [ 0 ],
+			maxWidth     : [ Infinity ],
+			minHeight    : [ 0 ],
+			maxHeight    : [ Infinity ],
+			unit         : "px"
+		},
+
+		// Raw events for switch
+		Events = $.extend(Plugin.events, {
+			enter       : "enter",
+			leave       : "leave"
+		}),
+
+		// Localize References
+
+		$Window        = Formstone.$window,
+		Window         = $Window[0],
+
+		Functions      = Plugin.functions,
+
+		// Internal
+
+		State          = null,
+		Bindings       = [],
+		MQMatches      = {},
+		MQStrings      = {
+			minWidth:     "min-width",
+			maxWidth:     "max-width",
+			minHeight:    "min-height",
+			maxHeight:    "max-height"
+		};
+
+})(jQuery, Formstone);

@@ -34,7 +34,7 @@
 
 			$("pre").wrap('<div class="pre_wrapper"></div>');
 
-			Prism.highlightAll();
+			// Prism.highlightAll();
 
 			$(".js-navigation").navigation();
 

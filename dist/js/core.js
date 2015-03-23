@@ -1,3 +1,608 @@
 /*! Formstone v0.2.0 [core.js] 2015-03-23 | MIT License | formstone.it */
 
-var Formstone=this.Formstone=function(a,b,c){"use strict";function d(a,b,c,d){var e,f={raw:{}};d=d||{};for(e in d)d.hasOwnProperty(e)&&("classes"===a?(f.raw[d[e]]=b+"-"+d[e],f[d[e]]="."+b+"-"+d[e]):(f.raw[e]=d[e],f[e]=d[e]+"."+b));for(e in c)c.hasOwnProperty(e)&&("classes"===a?(f.raw[e]=c[e].replace(/{ns}/g,b),f[e]=c[e].replace(/{ns}/g,"."+b)):(f.raw[e]=c[e].replace(/.{ns}/g,""),f[e]=c[e].replace(/{ns}/g,b)));return f}function e(){var a,b={transition:"transitionend",MozTransition:"transitionend",OTransition:"otransitionend",WebkitTransition:"webkitTransitionEnd"},d=["transition","-webkit-transition"],e={transform:"transform",MozTransform:"-moz-transform",OTransform:"-o-transform",msTransform:"-ms-transform",webkitTransform:"-webkit-transform"},f="transitionend",g="",h="",i=c.createElement("div");for(a in b)if(b.hasOwnProperty(a)&&a in i.style){f=b[a],k.support.transition=!0;break}m.transitionEnd=f+".{ns}";for(a in d)if(d.hasOwnProperty(a)&&d[a]in i.style){g=d[a];break}k.transition=g;for(a in e)if(e.hasOwnProperty(a)&&e[a]in i.style){k.support.transform=!0,h=e[a];break}k.transform=h}function f(){k.windowWidth=k.$window.width(),n=j.startTimer(n,o,g)}function g(){for(var a in k.ResizeHandlers)k.ResizeHandlers.hasOwnProperty(a)&&k.ResizeHandlers[a].callback.call(b,k.windowWidth)}function h(a,b){return parseInt(a.priority)-parseInt(b.priority)}var i=function(){this.Plugins={},this.ResizeHandlers=[],this.window=b,this.$window=a(b),this.document=c,this.$document=a(c),this.$body=null,this.windowWidth=0,this.userAgent=b.navigator.userAgent||b.navigator.vendor||b.opera,this.isFirefox=/Firefox/i.test(this.userAgent),this.isChrome=/Chrome/i.test(this.userAgent),this.isSafari=/Safari/i.test(this.userAgent)&&!this.isChrome,this.isMobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(this.userAgent),this.isFirefoxMobile=this.isFirefox&&this.isMobile,this.transform=null,this.transition=null,this.support={file:!!(b.File&&b.FileList&&b.FileReader),history:!!(b.history&&b.history.pushState&&b.history.replaceState),matchMedia:!(!b.matchMedia&&!b.msMatchMedia),raf:!(!b.requestAnimationFrame||!b.cancelAnimationFrame),touch:!!("ontouchstart"in b||b.DocumentTouch&&c instanceof b.DocumentTouch),transition:!1,transform:!1}},j={killEvent:function(a,b){try{a.preventDefault(),a.stopPropagation(),b&&a.stopImmediatePropagation()}catch(c){}},startTimer:function(a,b,c,d){return j.clearTimer(a),d?setInterval(c,b):setTimeout(c,b)},clearTimer:function(a,b){a&&(b?clearInterval(a):clearTimeout(a),a=null)},sortAsc:function(a,b){return parseInt(b)-parseInt(a)},sortDesc:function(a,b){return parseInt(b)-parseInt(a)}},k=new i,l={base:"{ns}",element:"{ns}-element"},m={namespace:".{ns}",blur:"blur.{ns}",change:"change.{ns}",click:"click.{ns}",dblClick:"dblclick.{ns}",drag:"drag.{ns}",dragEnd:"dragend.{ns}",dragEnter:"dragenter.{ns}",dragLeave:"dragleave.{ns}",dragOver:"dragover.{ns}",dragStart:"dragstart.{ns}",drop:"drop.{ns}",error:"error.{ns}",focus:"focus.{ns}",focusIn:"focusin.{ns}",focusOut:"focusout.{ns}",input:"input.{ns}",keyDown:"keydown.{ns}",keyPress:"keypress.{ns}",keyUp:"keyup.{ns}",load:"load.{ns}",mouseDown:"mousedown.{ns}",mouseEnter:"mouseenter.{ns}",mouseLeave:"mouseleave.{ns}",mouseMove:"mousemove.{ns}",mouseOut:"mouseout.{ns}",mouseOver:"mouseover.{ns}",mouseUp:"mouseup.{ns}",resize:"resize.{ns}",scroll:"scroll.{ns}",select:"select.{ns}",touchCancel:"touchcancel.{ns}",touchEnd:"touchend.{ns}",touchLeave:"touchleave.{ns}",touchMove:"touchmove.{ns}",touchStart:"touchstart.{ns}"};i.prototype.Plugin=function(c,e){return k.Plugins[c]=function(c,e){function f(b){var d="object"===a.type(b);b=a.extend(!0,{},e.defaults||{},d?b:{});for(var f=this,g=0,i=f.length;i>g;g++){var j=f.eq(g);if(!h(j)){var k=j.data(c+"-options"),l=a.extend(!0,{$el:j},b,"object"===a.type(k)?k:{});j.addClass(e.classes.raw.element).data(q,l),e.methods._construct.apply(j,[l].concat(Array.prototype.slice.call(arguments,d?1:0)))}}return f}function g(){e.functions.iterate.apply(this,[e.methods._destruct].concat(Array.prototype.slice.call(arguments,1))),this.removeClass(e.classes.raw.element).removeData(q)}function h(a){return a.data(q)}function i(b){if(this instanceof a){var c=e.methods[b];return"object"!==a.type(b)&&b?c&&0!==b.indexOf("_")?e.functions.iterate.apply(this,[c].concat(Array.prototype.slice.call(arguments,1))):this:f.apply(this,arguments)}}function n(c){var d=e.utilities[c]||e.utilities._initialize||!1;return d?d.apply(b,Array.prototype.slice.call(arguments,"object"===a.type(c)?0:1)):void 0}function o(b){e.defaults=a.extend(!0,e.defaults,b||{})}function p(b){for(var c=this,d=0,e=c.length;e>d;d++){var f=c.eq(d),g=h(f)||{};"undefined"!==a.type(g.$el)&&b.apply(f,[g].concat(Array.prototype.slice.call(arguments,1)))}return c}var q="fs-"+c;return e.initialized=!1,e.priority=e.priority||10,e.classes=d("classes",q,l,e.classes),e.events=d("events",c,m,e.events),e.functions=a.extend({getData:h,iterate:p},j,e.functions),e.methods=a.extend(!0,{_setup:a.noop,_construct:a.noop,_destruct:a.noop,_resize:!1,destroy:g},e.methods),e.utilities=a.extend(!0,{_initialize:!1,_delegate:!1,defaults:o},e.utilities),e.widget&&(a.fn[c]=i),a[c]=e.utilities._delegate||n,e.namespace=c,e.methods._resize&&k.ResizeHandlers.push({namespace:c,priority:e.priority,callback:e.methods._resize}),e}(c,e),k.Plugins[c]};var n=null,o=20;return k.$window.on("resize.fs",f),f(),a(function(){k.$body=a("body"),k.ResizeHandlers.sort(h);for(var b in k.Plugins)k.Plugins.hasOwnProperty(b)&&!k.Plugins[b].initialized&&(k.Plugins[b].methods._setup.call(c),k.Plugins[b].initialized=!0)}),m.clickTouchStart=m.click+" "+m.touchStart,e(),k}(jQuery,this,document);
+
+/**
+ * @plugin
+ * @name Core
+ * @description Formstone Library core. Required for all plugins.
+ */
+
+var Formstone = this.Formstone = (function ($, window, document, undefined) {
+
+	/* global ga */
+
+	"use strict";
+
+	// Namespace
+
+	var Core = function() {
+			this.Plugins = {};
+			this.ResizeHandlers = [];
+
+			// Globals
+
+			this.window               = window;
+			this.$window              = $(window);
+			this.document             = document;
+			this.$document            = $(document);
+			this.$body                = null;
+
+			this.windowWidth          = 0;
+			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
+			this.isFirefox            = /Firefox/i.test(this.userAgent);
+			this.isChrome             = /Chrome/i.test(this.userAgent);
+			this.isSafari             = /Safari/i.test(this.userAgent) && !this.isChrome;
+			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
+			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
+			this.transform            = null;
+			this.transition           = null;
+
+			this.support = {
+				file          : !!(window.File && window.FileList && window.FileReader),
+				history       : !!(window.history && window.history.pushState && window.history.replaceState),
+				matchMedia    : !!(window.matchMedia || window.msMatchMedia),
+				raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
+				touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
+				transition    : false,
+				transform     : false
+			};
+		},
+
+		Functions = {
+
+			/**
+			 * @method private
+			 * @name killEvent
+			 * @description Stops event action and bubble.
+			 * @param e [object] "Event data"
+			 */
+
+			killEvent: function(e, immediate) {
+				try {
+					e.preventDefault();
+					e.stopPropagation();
+
+					if (immediate) {
+						e.stopImmediatePropagation();
+					}
+				} catch(error) {
+					//
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name startTimer
+			 * @description Starts an internal timer.
+			 * @param timer [int] "Timer ID"
+			 * @param time [int] "Time until execution"
+			 * @param callback [function] "Function to execute"
+			 * @return [int] "Timer ID"
+			 */
+
+			startTimer: function(timer, time, callback, interval) {
+				Functions.clearTimer(timer);
+
+				return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
+			},
+
+			/**
+			 * @method private
+			 * @name clearTimer
+			 * @description Clears an internal timer.
+			 * @param timer [int] "Timer ID"
+			 */
+
+			clearTimer: function(timer, interval) {
+				if (timer) {
+					if (interval) {
+						clearInterval(timer);
+					} else {
+						clearTimeout(timer);
+					}
+
+					timer = null;
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name sortAsc
+			 * @description Sorts an array (ascending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			sortAsc: function(a, b) {
+				return (parseInt(b) - parseInt(a));
+			},
+
+			/**
+			 * @method private
+			 * @name sortDesc
+			 * @description Sorts an array (descending).
+			 * @param a [mixed] "First value"
+			 * @param b [mixed] "Second value"
+			 * @return Difference between second and first values
+			 */
+
+			sortDesc: function(a, b) {
+				return (parseInt(b) - parseInt(a));
+			}
+		},
+
+		Formstone = new Core(),
+
+		// Classes
+
+		Classes = {
+			base                 : "{ns}",
+			element              : "{ns}-element"
+		},
+
+		// Events
+
+		Events = {
+			namespace            : ".{ns}",
+			blur                 : "blur.{ns}",
+			change               : "change.{ns}",
+			click                : "click.{ns}",
+			dblClick             : "dblclick.{ns}",
+			drag                 : "drag.{ns}",
+			dragEnd              : "dragend.{ns}",
+			dragEnter            : "dragenter.{ns}",
+			dragLeave            : "dragleave.{ns}",
+			dragOver             : "dragover.{ns}",
+			dragStart            : "dragstart.{ns}",
+			drop                 : "drop.{ns}",
+			error                : "error.{ns}",
+			focus                : "focus.{ns}",
+			focusIn              : "focusin.{ns}",
+			focusOut             : "focusout.{ns}",
+			input                : "input.{ns}",
+			keyDown              : "keydown.{ns}",
+			keyPress             : "keypress.{ns}",
+			keyUp                : "keyup.{ns}",
+			load                 : "load.{ns}",
+			mouseDown            : "mousedown.{ns}",
+			mouseEnter           : "mouseenter.{ns}",
+			mouseLeave           : "mouseleave.{ns}",
+			mouseMove            : "mousemove.{ns}",
+			mouseOut             : "mouseout.{ns}",
+			mouseOver            : "mouseover.{ns}",
+			mouseUp              : "mouseup.{ns}",
+			resize               : "resize.{ns}",
+			scroll               : "scroll.{ns}",
+			select               : "select.{ns}",
+			touchCancel          : "touchcancel.{ns}",
+			touchEnd             : "touchend.{ns}",
+			touchLeave           : "touchleave.{ns}",
+			touchMove            : "touchmove.{ns}",
+			touchStart           : "touchstart.{ns}"
+		};
+
+	/**
+	 * @method
+	 * @name Plugin
+	 * @description Builds a plugin and registers it with jQuery.
+	 * @param namespace [string] "Plugin namespace"
+	 * @param settings [object] "Plugin settings"
+	 * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions`, `methods` and `utilities` keys"
+	 * @example Formstone.Plugin("namespace", { ... });
+	 */
+
+	Core.prototype.Plugin = function(namespace, settings) {
+		Formstone.Plugins[namespace] = (function(namespace, settings) {
+
+			var namespaceDash = "fs-" + namespace,
+				namespaceDot  = "fs." + namespace;
+
+			/**
+			 * @method private
+			 * @name initialize
+			 * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call.
+			 * @param options [object] <{}> "Instance options"
+			 */
+
+			function initialize(options) {
+				// Extend Defaults
+
+				var hasOptions = $.type(options) === "object";
+
+				options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
+
+				// Maintain Chain
+
+				var $targets = this;
+
+				for (var i = 0, count = $targets.length; i < count; i++) {
+					var $element = $targets.eq(i);
+
+					// Gaurd Against Exiting Instances
+
+					if (!getData($element)) {
+
+						// Extend w/ Local Options
+
+						var localOptions = $element.data(namespace + "-options"),
+							data = $.extend(true, {
+								$el : $element
+							}, options, ($.type(localOptions) === "object" ? localOptions : {}) );
+
+						// Cache Instance
+
+						$element.addClass(settings.classes.raw.element)
+						        .data(namespaceDash, data);
+
+						// Constructor
+
+						settings.methods._construct.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) )));
+					}
+
+				}
+
+				return $targets;
+			}
+
+			/**
+			 * @method private
+			 * @name destroy
+			 * @description Removes plugin instance by scoping a _destruct call, and removing the base classname and data.
+			 * @param data [object] <{}> "Instance data"
+			 */
+
+			/**
+			 * @method widget
+			 * @name destroy
+			 * @description Removes plugin instance.
+			 * @example $(".target").{ns}("destroy");
+			 */
+
+			function destroy(data) {
+				settings.functions.iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+
+				this.removeClass(settings.classes.raw.element)
+					.removeData(namespaceDash);
+			}
+
+			/**
+			 * @method private
+			 * @name getData
+			 * @description Creates class selector from text.
+			 * @param $element [jQuery] "Target jQuery object"
+			 * @return [object] "Instance data"
+			 */
+
+			function getData($element) {
+				return $element.data(namespaceDash);
+			}
+
+			/**
+			 * @method private
+			 * @name delegateWidget
+			 * @description Delegates public methods.
+			 * @param method [string] "Method to execute"
+			 * @return [jQuery] "jQuery object"
+			 */
+
+			function delegateWidget(method) {
+
+				// If jQuery object
+
+				if (this instanceof $) {
+
+					var _method = settings.methods[method];
+
+					// Public method OR false
+
+					if ($.type(method) === "object" || !method) {
+
+						// Initialize
+
+						return initialize.apply(this, arguments);
+					} else if (_method && method.indexOf("_") !== 0) {
+
+						// Wrap Public Methods
+
+						return settings.functions.iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
+					}
+
+					return this;
+				}
+			}
+
+			/**
+			 * @method private
+			 * @name delegateUtility
+			 * @description Delegates utility methods.
+			 * @param method [string] "Method to execute"
+			 */
+
+			function delegateUtility(method) {
+
+				// public utility OR utility init OR false
+
+				var _method = settings.utilities[method] || settings.utilities._initialize || false;
+
+				if (_method) {
+
+					// Wrap Utility Methods
+
+					return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
+				}
+			}
+
+			/**
+			 * @method utility
+			 * @name defaults
+			 * @description Extends plugin default settings; effects instances created hereafter.
+			 * @param options [object] <{}> "New plugin defaults"
+			 * @example $.{ns}("defaults", { ... });
+			 */
+
+			function defaults(options) {
+				settings.defaults = $.extend(true, settings.defaults, options || {});
+			}
+
+			/**
+			 * @method private
+			 * @name iterate
+			 * @description Loops scoped function calls over jQuery object with instance data as first parameter.
+			 * @param func [function] "Function to execute"
+			 * @return [jQuery] "jQuery object"
+			 */
+
+			function iterate(fn) {
+				var $targets = this;
+
+				for (var i = 0, count = $targets.length; i < count; i++) {
+					var $element = $targets.eq(i),
+						data = getData($element) || {};
+
+					if ($.type(data.$el) !== "undefined") {
+						fn.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, 1)));
+					}
+				}
+
+				return $targets;
+			}
+
+			// Locals
+
+			settings.initialized = false;
+			settings.priority    = settings.priority || 10;
+
+			// Namespace Classes & Events
+
+			settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
+			settings.events    = namespaceProperties("events",  namespace,     Events,  settings.events);
+
+			// Extend Functions
+
+			settings.functions = $.extend({
+				getData    : getData,
+				iterate    : iterate
+			}, Functions, settings.functions);
+
+			// Extend Methods
+
+			settings.methods = $.extend(true, {
+
+				// Private Methods
+
+				_setup         : $.noop,    // Document ready
+				_construct     : $.noop,    // Constructor
+				_destruct      : $.noop,    // Destructor
+				_resize        : false,    // Window resize
+
+				// Public Methods
+
+				destroy        : destroy
+
+			}, settings.methods);
+
+			// Extend Utilities
+
+			settings.utilities = $.extend(true, {
+
+				// Private Utilities
+
+				_initialize    : false,    // First Run
+				_delegate      : false,    // Custom Delegation
+
+				// Public Utilities
+
+				defaults       : defaults
+
+			}, settings.utilities);
+
+			// Register Plugin
+
+			// Widget
+
+			if (settings.widget) {
+
+				// Widget Delegation: $(".target").plugin("method", ...);
+				$.fn[namespace] = delegateWidget;
+			}
+
+			// Utility
+
+				// Utility Delegation: $.plugin("method", ... );
+				$[namespace] = settings.utilities._delegate || delegateUtility;
+
+			// Run Setup
+
+			settings.namespace = namespace;
+
+			// Resize handler
+
+			if (settings.methods._resize) {
+				Formstone.ResizeHandlers.push({
+					namespace: namespace,
+					priority: settings.priority,
+					callback: settings.methods._resize
+				});
+			}
+
+			return settings;
+		})(namespace, settings);
+
+		return Formstone.Plugins[namespace];
+	};
+
+	// Namespace Properties
+
+	function namespaceProperties(type, namespace, globalProps, customProps) {
+		var _props = {
+				raw: {}
+			},
+			i;
+
+		customProps = customProps || {};
+
+		for (i in customProps) {
+			if (customProps.hasOwnProperty(i)) {
+				if (type === "classes") {
+
+					// Custom classes
+					_props.raw[ customProps[i] ] = namespace + "-" + customProps[i];
+					_props[ customProps[i] ]     = "." + namespace + "-" + customProps[i];
+				} else {
+					// Custom events
+					_props.raw[ i ] = customProps[i];
+					_props[ i ]     = customProps[i] + "." + namespace;
+				}
+			}
+		}
+
+		for (i in globalProps) {
+			if (globalProps.hasOwnProperty(i)) {
+				if (type === "classes") {
+
+					// Global classes
+					_props.raw[ i ] = globalProps[i].replace(/{ns}/g, namespace);
+					_props[ i ]     = globalProps[i].replace(/{ns}/g, "." + namespace);
+				} else {
+					// Global events
+					_props.raw[ i ] = globalProps[i].replace(/.{ns}/g, "");
+					_props[ i ]     = globalProps[i].replace(/{ns}/g, namespace);
+				}
+			}
+		}
+
+		return _props;
+	}
+
+	// Set Transition Information
+
+	function setTransitionInformation() {
+		var transitionEvents = {
+				"transition"          : "transitionend",
+				"MozTransition"       : "transitionend",
+				"OTransition"         : "otransitionend",
+				"WebkitTransition"    : "webkitTransitionEnd"
+			},
+			transitionProperties = [
+				"transition",
+				"-webkit-transition"
+			],
+			transformProperties = {
+				'transform'          : 'transform',
+				'MozTransform'       : '-moz-transform',
+				'OTransform'         : '-o-transform',
+				'msTransform'        : '-ms-transform',
+				'webkitTransform'    : '-webkit-transform'
+			},
+			transitionEvent       = "transitionend",
+			transitionProperty    = "",
+			transformProperty     = "",
+			test                  = document.createElement("div"),
+			i;
+
+
+		for (i in transitionEvents) {
+			if (transitionEvents.hasOwnProperty(i) && i in test.style) {
+				transitionEvent = transitionEvents[i];
+				Formstone.support.transition = true;
+				break;
+			}
+		}
+
+		Events.transitionEnd = transitionEvent + ".{ns}";
+
+		for (i in transitionProperties) {
+			if (transitionProperties.hasOwnProperty(i) && transitionProperties[i] in test.style) {
+				transitionProperty = transitionProperties[i];
+				break;
+			}
+		}
+
+		Formstone.transition = transitionProperty;
+
+		for (i in transformProperties) {
+			if (transformProperties.hasOwnProperty(i) && transformProperties[i] in test.style) {
+				Formstone.support.transform = true;
+				transformProperty = transformProperties[i];
+				break;
+			}
+		}
+
+		Formstone.transform = transformProperty;
+	}
+
+	// Window resize
+
+	var ResizeTimer = null,
+		Debounce = 20;
+
+	function onWindowResize() {
+		Formstone.windowWidth = Formstone.$window.width();
+
+		ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
+	}
+
+	function handleWindowResize() {
+		for (var i in Formstone.ResizeHandlers) {
+			if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
+				Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth);
+			}
+		}
+	}
+
+	Formstone.$window.on("resize.fs", onWindowResize);
+	onWindowResize();
+
+	// Sort Priority
+
+	function sortPriority(a, b) {
+		return (parseInt(a.priority) - parseInt(b.priority));
+	}
+
+	// Document Ready
+
+	$(function() {
+		Formstone.$body = $("body");
+
+		Formstone.ResizeHandlers.sort(sortPriority);
+
+		for (var i in Formstone.Plugins) {
+			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {
+				Formstone.Plugins[i].methods._setup.call(document);
+				Formstone.Plugins[i].initialized = true;
+			}
+		}
+	});
+
+	// Custom Events
+
+	Events.clickTouchStart = Events.click + " " + Events.touchStart;
+
+	// Transitions
+
+	setTransitionInformation();
+
+	return Formstone;
+
+})(jQuery, this, document);

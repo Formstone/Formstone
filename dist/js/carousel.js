@@ -1,3 +1,838 @@
 /*! Formstone v0.2.0 [carousel.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(){D.iterate.call(F,i)}function d(){F=a(A.base)}function e(c){var e;c.maxWidth=1/0===c.maxWidth?"100000px":c.maxWidth,c.mq="(min-width:"+c.minWidth+") and (max-width:"+c.maxWidth+")",c.mqGuid=B.base+"__"+E++,b.support.transform||(c.useMargin=!0);var f="",i="";if(c.controls&&(f+='<div class="'+B.controls+'">',f+='<button type="button" class="'+[B.control,B.control_previous].join(" ")+'">'+c.labels.previous+"</button>",f+='<button type="button" class="'+[B.control,B.control_next].join(" ")+'">'+c.labels.next+"</button>",f+="</div>"),c.pagination&&(i+='<div class="'+B.pagination+'">',i+="</div>"),this.addClass([B.base,c.customClass].join(" ")).wrapInner('<div class="'+B.container+'"><div class="'+B.canister+'"></div></div>').append(f).wrapInner('<div class="'+B.viewport+'"></div>').append(i),c.$viewport=this.find(A.viewport).eq(0),c.$container=this.find(A.container).eq(0),c.$canister=this.find(A.canister).eq(0),c.$controls=this.find(A.controls).eq(0),c.$pagination=this.find(A.pagination).eq(0),c.$items=c.$canister.children().addClass(B.item),c.$controlItems=c.$controls.find(A.control),c.$paginationItems=c.$pagination.find(A.page),c.$images=c.$canister.find("img"),c.index=0,c.enabled=!1,c.leftPosition=0,c.totalImages=c.$images.length,c.autoTimer=null,"object"===a.type(c.show)){var j=c.show,k=[];for(e in j)j.hasOwnProperty(e)&&k.push(e);k.sort(D.sortAsc),c.show={};for(e in k)k.hasOwnProperty(e)&&(c.show[k[e]]={width:parseInt(k[e]),count:j[k[e]]})}if(a.mediaquery("bind",c.mqGuid,c.mq,{enter:function(){h.call(c.$el,c)},leave:function(){g.call(c.$el,c)}}),c.totalImages>0)for(c.loadedImages=0,e=0;e<c.totalImages;e++){var l=c.$images.eq(e);l.one(C.load,c,n),(l[0].complete||l[0].height)&&l.trigger(C.load)}c.autoAdvance&&(c.autoTimer=D.startTimer(c.autoTimer,c.autoTime,function(){o(c)},!0)),d()}function f(b){D.clearTimer(b.autoTimer),g.call(this,b),a.mediaquery("unbind",b.mqGuid,b.mq),b.$items.removeClass([B.item,B.visible].join(" ")).unwrap().unwrap(),b.pagination&&b.$pagination.remove(),b.controls&&b.$controls.remove(),this.removeClass([B.base,B.enabled,B.animated,b.customClass].join(" ")),d()}function g(a){a.enabled&&(D.clearTimer(a.autoTimer),a.enabled=!1,this.removeClass([B.enabled,B.animated].join(" ")).off(C.namespace),a.$canister.touch("destroy").off(C.namespace).attr("style","").css(H,"none"),a.$items.css({width:"",height:""}),a.$controls.removeClass(B.visible),a.$pagination.removeClass(B.visible).html(""),a.useMargin?a.$canister.css({marginLeft:""}):a.$canister.css(G,""),a.index=0)}function h(a){a.enabled||(a.enabled=!0,this.addClass(B.enabled).on(C.clickTouchStart,A.control,a,p).on(C.clickTouchStart,A.page,a,q),a.$canister.touch({axis:"x",pan:!0,swipe:!0}).on(C.panStart,a,u).on(C.pan,a,v).on(C.panEnd,a,w).on(C.swipe,a,x).css(H,""),i.call(this,a))}function i(a){if(a.enabled){var b,c,d,e,f;if(a.count=a.$items.length,a.count<1)return;for(this.removeClass(B.animated),a.containerWidth=a.$container.outerWidth(!1),a.visible=t(a),a.perPage=a.paged?1:a.visible,a.itemMargin=parseInt(a.$items.eq(0).css("marginRight"))+parseInt(a.$items.eq(0).css("marginLeft")),a.itemWidth=(a.containerWidth-a.itemMargin*(a.visible-1))/a.visible,a.itemHeight=0,a.pageWidth=a.paged?a.itemWidth:a.containerWidth,a.pageCount=Math.ceil(a.count/a.perPage),a.$canister.css({width:(a.pageWidth+a.itemMargin)*a.pageCount}),a.$items.css({width:a.itemWidth,height:""}).removeClass(B.visible),a.pages=[],b=0,c=0;b<a.count;b+=a.perPage)d=a.$items.slice(b,b+a.perPage),d.length<a.perPage&&(d=0===b?a.$items:a.$items.slice(a.$items.length-a.perPage)),e=d.eq(0),f=e.outerHeight(),a.pages.push({left:e.position().left,height:f,$items:d}),f>a.itemHeight&&(a.itemHeight=f),c++;a.paged&&(a.pageCount-=a.count%a.visible),a.maxMove=-a.pages[a.pageCount-1].left,a.autoHeight&&a.$items.css({height:a.itemHeight});var g="";for(b=0;b<a.pageCount;b++)g+='<button type="button" class="'+B.page+'">'+(b+1)+"</button>";a.$pagination.html(g),a.pageCount<=1?(a.$controls.removeClass(B.visible),a.$pagination.removeClass(B.visible)):(a.$controls.addClass(B.visible),a.$pagination.addClass(B.visible)),a.$paginationItems=a.$el.find(A.page),r(a,a.index,!1),setTimeout(function(){a.$el.addClass(B.animated)},5)}}function j(a){a.enabled&&(a.$items=a.$canister.children().addClass(B.item),i.call(this,a))}function k(a,b){a.enabled&&(D.clearTimer(a.autoTimer),r(a,b-1))}function l(a){var b=a.index-1;a.infinite&&0>b&&(b=a.pageCount),r(a,b)}function m(a){var b=a.index+1;a.infinite&&b>=a.pageCount&&(b=0),r(a,b)}function n(a){var b=a.data;b.loadedImages++,b.loadedImages===b.totalImages&&i.call(b.$el,b)}function o(a){var b=a.index+1;b>=a.pageCount&&(b=0),r(a,b)}function p(b){D.killEvent(b);var c=b.data,d=c.index+(a(b.currentTarget).hasClass(B.control_next)?1:-1);D.clearTimer(c.autoTimer),r(c,d)}function q(b){D.killEvent(b);var c=b.data,d=c.$paginationItems.index(a(b.currentTarget));D.clearTimer(c.autoTimer),r(c,d)}function r(a,b,c){0>b&&(b=a.infinite?a.pageCount-1:0),b>=a.pageCount&&(b=a.infinite?0:a.pageCount-1),a.pages[b]&&(a.leftPosition=-a.pages[b].left),a.leftPosition<a.maxMove&&(a.leftPosition=a.maxMove),(a.leftPosition>0||isNaN(a.leftPosition))&&(a.leftPosition=0),a.useMargin?a.$canister.css({marginLeft:a.leftPosition}):c===!1?(a.$canister.css(H,"none").css(G,"translateX("+a.leftPosition+"px)"),setTimeout(function(){a.$canister.css(H,"")},5)):a.$canister.css(G,"translateX("+a.leftPosition+"px)"),a.$items.removeClass(B.visible),a.pages[b].$items.addClass(B.visible),c!==!1&&b!==a.index&&(a.infinite||b>-1&&b<a.pageCount)&&a.$el.trigger(C.update,[b]),a.index=b,s(a)}function s(a){a.$paginationItems.removeClass(B.active).eq(a.index).addClass(B.active),a.infinite?a.$controlItems.addClass(B.visible):a.pageCount<1?a.$controlItems.removeClass(B.visible):(a.$controlItems.addClass(B.visible),a.index<=0?a.$controlItems.filter(A.control_previous).removeClass(B.visible):(a.index>=a.pageCount||a.leftPosition===a.maxMove)&&a.$controlItems.filter(A.control_next).removeClass(B.visible))}function t(c){if("object"===a.type(c.show)){for(var d in c.show)if(c.show.hasOwnProperty(d)&&b.windowWidth>=c.show[d].width)return c.fill&&c.count<c.show[d].count?c.count:c.show[d].count;return 1}return c.fill&&c.count<c.show?c.count:c.show}function u(a){var b=a.data;if(b.useMargin)b.leftPosition=parseInt(b.$canister.css("marginLeft"));else{var c=b.$canister.css(G).split(",");b.leftPosition=parseInt(c[4])}b.$canister.css(H,"none"),v(a),b.isTouching=!0}function v(a){var b=a.data;b.touchLeft=b.leftPosition+a.deltaX,b.touchLeft>0&&(b.touchLeft=0),b.touchLeft<b.maxMove&&(b.touchLeft=b.maxMove),b.useMargin?b.$canister.css({marginLeft:b.touchLeft}):b.$canister.css(G,"translateX("+b.touchLeft+"px)")}function w(a){var b=a.data,c=a.deltaX>-50&&a.deltaX<50?b.index:b.index+("left"===a.directionX?1:-1);y(b,c)}function x(a){var b=a.data,c=b.index+("left"===a.directionX?1:-1);y(b,c)}function y(a,b){a.$canister.css(H,""),r(a,b),a.isTouching=!1}var z=b.Plugin("carousel",{widget:!0,defaults:{autoAdvance:!1,autoHeight:!1,autoTime:8e3,controls:!0,customClass:"",fill:!1,infinite:!1,labels:{next:"Next",previous:"Previous"},maxWidth:1/0,minWidth:"0px",paged:!1,pagination:!0,show:1,sized:!0,useMargin:!1},classes:["viewport","container","canister","item","controls","control","pagination","page","animated","enabled","visible","active","control_previous","control_next"],events:{update:"update",panStart:"panstart",pan:"pan",panEnd:"panend",swipe:"swipe"},methods:{_construct:e,_destruct:f,_resize:c,disable:g,enable:h,jump:k,previous:l,next:m,reset:j,resize:i}}),A=z.classes,B=A.raw,C=z.events,D=z.functions,E=0,F=[],G=b.transform,H=b.transition}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name resize
+	 * @description Handles window resize
+	 */
+
+	function resize(windowWidth) {
+		Functions.iterate.call($Instances, resizeInstance);
+	}
+
+	/**
+	 * @method private
+	 * @name cacheInstances
+	 * @description Caches active instances
+	 */
+
+	function cacheInstances() {
+		$Instances = $(Classes.base);
+	}
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		var i;
+
+		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+		data.mqGuid   = RawClasses.base + "__" + (GUID++);
+
+		// Legacy browser support
+		if (!Formstone.support.transform) {
+			data.useMargin = true;
+		}
+
+		// Build controls and pagination
+		var controlsHtml = '',
+			paginationHtml = '';
+
+		if (data.controls) {
+			controlsHtml += '<div class="' + RawClasses.controls + '">';
+			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
+			controlsHtml += '</div>';
+		}
+
+		if (data.pagination) {
+			paginationHtml += '<div class="' + RawClasses.pagination + '">';
+			paginationHtml += '</div>';
+		}
+
+		// Modify dom
+		this.addClass( [RawClasses.base, data.customClass].join(" ") )
+			.wrapInner('<div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div>')
+			.append(controlsHtml)
+			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
+			.append(paginationHtml);
+
+		data.$viewport           = this.find(Classes.viewport).eq(0);
+		data.$container          = this.find(Classes.container).eq(0);
+		data.$canister           = this.find(Classes.canister).eq(0);
+		data.$controls           = this.find(Classes.controls).eq(0);
+		data.$pagination         = this.find(Classes.pagination).eq(0);
+		data.$items              = data.$canister.children().addClass(RawClasses.item);
+		data.$controlItems       = data.$controls.find(Classes.control);
+		data.$paginationItems    = data.$pagination.find(Classes.page);
+		data.$images             = data.$canister.find("img");
+
+		data.index           = 0;
+		data.enabled         = false;
+		data.leftPosition    = 0;
+		data.totalImages     = data.$images.length;
+		data.autoTimer       = null;
+
+		if ($.type(data.show) === "object") {
+			var show = data.show,
+				keys = [];
+
+			for (i in show) {
+				if (show.hasOwnProperty(i)) {
+					keys.push(i);
+				}
+			}
+
+			keys.sort(Functions.sortAsc);
+			data.show = {};
+
+			for (i in keys) {
+				if (keys.hasOwnProperty(i)) {
+					data.show[ keys[i] ] = {
+						width: parseInt( keys[i] ),
+						count: show[ keys[i] ]
+					};
+				}
+			}
+		}
+
+		// Media Query support
+		$.mediaquery("bind", data.mqGuid, data.mq, {
+			enter: function() {
+				enable.call(data.$el, data);
+			},
+			leave: function() {
+				disable.call(data.$el, data);
+			}
+		});
+
+		// Watch Images
+		if (data.totalImages > 0) {
+			data.loadedImages = 0;
+			for (i = 0; i < data.totalImages; i++) {
+				var $img = data.$images.eq(i);
+				$img.one(Events.load, data, onImageLoad);
+
+				if ($img[0].complete || $img[0].height) {
+					$img.trigger(Events.load);
+				}
+			}
+		}
+
+		// Auto timer
+		if (data.autoAdvance) {
+			data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function() {
+				autoAdvance(data);
+			}, true);
+		}
+
+		cacheInstances();
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		Functions.clearTimer(data.autoTimer);
+
+		disable.call(this, data);
+
+		$.mediaquery("unbind", data.mqGuid, data.mq);
+
+		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
+				   .unwrap().unwrap();
+
+		if (data.pagination) {
+			data.$pagination.remove();
+		}
+		if (data.controls) {
+			data.$controls.remove();
+		}
+
+		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
+
+		cacheInstances();
+	}
+
+	/**
+	 * @method
+	 * @name disable
+	 * @description Disables instance of plugin
+	 * @example $(".target").carousel("disable");
+	 */
+
+	function disable(data) {
+		if (data.enabled) {
+			Functions.clearTimer(data.autoTimer);
+
+			data.enabled = false;
+
+			this.removeClass( [RawClasses.enabled, RawClasses.animated].join(" ") )
+				.off(Events.namespace);
+
+			data.$canister.touch("destroy")
+						  .off(Events.namespace)
+						  .attr("style", "")
+						  .css(TransitionProperty, "none");
+
+			data.$items.css({
+				width: "",
+				height: ""
+			});
+
+			data.$controls.removeClass(RawClasses.visible);
+			data.$pagination.removeClass(RawClasses.visible)
+							.html("");
+
+			if (data.useMargin) {
+				data.$canister.css({
+					marginLeft: ""
+				});
+			} else {
+				data.$canister.css(TransformProperty, "");
+			}
+
+			data.index = 0;
+		}
+	}
+
+	/**
+	 * @method
+	 * @name enable
+	 * @description Enables instance of plugin
+	 * @example $(".target").carousel("enable");
+	 */
+
+	function enable(data) {
+		if (!data.enabled) {
+			data.enabled = true;
+
+			this.addClass(RawClasses.enabled)
+				.on(Events.clickTouchStart, Classes.control, data, onAdvance)
+				.on(Events.clickTouchStart, Classes.page, data, onSelect);
+
+			data.$canister.touch({
+				axis: "x",
+				pan: true,
+				swipe: true
+			}).on(Events.panStart, data, onPanStart)
+			  .on(Events.pan, data, onPan)
+			  .on(Events.panEnd, data, onPanEnd)
+			  .on(Events.swipe, data, onSwipe)
+			  .css(TransitionProperty, "");
+
+			resizeInstance.call(this, data);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name resize
+	 * @description Resizes instance
+	 * @example $(".target").carousel("resize");
+	 */
+
+	/**
+	 * @method private
+	 * @name resizeInstance
+	 * @description Resizes each instance
+	 * @param data [object] "Instance data"
+	 */
+
+	function resizeInstance(data) {
+		if (data.enabled) {
+			var i,
+				j,
+				$items,
+				$first,
+				height;
+
+			data.count = data.$items.length;
+
+			if (data.count < 1) { // avoid empty carousels
+				return;
+			}
+
+			this.removeClass(RawClasses.animated);
+
+			// data.viewportWidth  = data.$viewport.outerWidth(false);
+			data.containerWidth = data.$container.outerWidth(false);
+
+			data.visible   = calculateVisible(data);
+			data.perPage   = data.paged ? 1 : data.visible;
+
+			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
+			data.itemWidth  = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
+			data.itemHeight = 0;
+
+			data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
+			data.pageCount = Math.ceil(data.count / data.perPage);
+
+			data.$canister.css({
+				width: ((data.pageWidth + data.itemMargin) * data.pageCount)
+			});
+
+			data.$items.css({
+				width: data.itemWidth,
+				height: ""
+			}).removeClass(RawClasses.visible);
+
+			// initial page
+			data.pages = [];
+
+			for (i = 0, j = 0; i < data.count; i += data.perPage) {
+				$items = data.$items.slice(i, i + data.perPage);
+
+				if ($items.length < data.perPage) {
+					if (i === 0) {
+						$items = data.$items;
+					} else {
+						$items = data.$items.slice(data.$items.length - data.perPage);
+					}
+				}
+
+				$first = $items.eq(0);
+				height = $first.outerHeight();
+
+				data.pages.push({
+					left      : $first.position().left,
+					height    : height,
+					$items    : $items
+				});
+
+				if (height > data.itemHeight) {
+					data.itemHeight = height;
+				}
+
+				j++;
+			}
+
+			if (data.paged) {
+				data.pageCount -=  (data.count % data.visible);
+			}
+
+			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
+
+			// auto height
+			if (data.autoHeight) {
+				data.$items.css({
+					height: data.itemHeight
+				});
+			}
+
+			// Reset Page Count
+			var html = '';
+			for (i = 0; i < data.pageCount; i++) {
+				html += '<button type="button" class="' + RawClasses.page + '">' + (i + 1) + '</button>';
+			}
+			data.$pagination.html(html);
+
+			// update pagination
+			if (data.pageCount <= 1) {
+				data.$controls.removeClass(RawClasses.visible);
+				data.$pagination.removeClass(RawClasses.visible);
+			} else {
+				data.$controls.addClass(RawClasses.visible);
+				data.$pagination.addClass(RawClasses.visible);
+			}
+			data.$paginationItems = data.$el.find(Classes.page);
+
+			positionCanister(data, data.index, false);
+
+			setTimeout(function() {
+				data.$el.addClass(RawClasses.animated);
+			}, 5);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name reset
+	 * @description Resets instance after item change
+	 * @example $(".target").carousel("reset");
+	 */
+
+	/**
+	 * @method private
+	 * @name resetInstance
+	 * @description Resets instance after item change
+	 * @param data [object] "Instance data"
+	 */
+
+	function resetInstance(data) {
+		if (data.enabled) {
+			data.$items = data.$canister.children().addClass(RawClasses.item);
+
+			resizeInstance.call(this, data);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name jump
+	 * @description Jump instance of plugin to specific page
+	 * @example $(".target").carousel("jump", 1);
+	 */
+
+	/**
+	 * @method private
+	 * @name jumpToItem
+	 * @description Jump instance of plugin to specific page
+	 * @param data [object] "Instance data"
+	 * @param index [int] "New index"
+	 */
+
+	function jumpToItem(data, index) {
+		if (data.enabled) {
+			Functions.clearTimer(data.autoTimer);
+
+			positionCanister(data, index-1);
+		}
+	}
+
+	/**
+	 * @method
+	 * @name previous
+	 * @description Move to the previous item
+	 * @example $(".target").carousel("previous");
+	 */
+
+	/**
+	 * @method private
+	 * @name previousItem
+	 * @description Move to next item
+	 * @param data [object] "Instance data"
+	 */
+
+	function previousItem(data) {
+		var index = data.index - 1;
+
+		if (data.infinite && index < 0) {
+			index = data.pageCount;
+		}
+
+		positionCanister(data, index);
+	}
+
+	/**
+	 * @method
+	 * @name next
+	 * @description Move to next item
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method private
+	 * @name nextItem
+	 * @description Move to next item
+	 * @example $(".target").carousel("next");
+	 */
+
+	function nextItem(data) {
+		var index = data.index + 1;
+
+		if (data.infinite && index >= data.pageCount) {
+			index = 0;
+		}
+
+		positionCanister(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name onImageLoad
+	 * @description Handles child image load
+	 * @param e [object] "Event data"
+	 */
+
+	function onImageLoad(e) {
+		var data = e.data;
+
+		data.loadedImages++;
+
+		if (data.loadedImages === data.totalImages) {
+			resizeInstance.call(data.$el, data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name autoAdvance
+	 * @description Handles auto advancement
+	 * @param data [object] "Instance data"
+	 */
+
+	function autoAdvance(data) {
+		var index = data.index + 1;
+
+		if (index >= data.pageCount) {
+			index = 0;
+		}
+
+		positionCanister(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name onAdvance
+	 * @description Handles item advancement
+	 * @param e [object] "Event data"
+	 */
+
+	function onAdvance(e) {
+		Functions.killEvent(e);
+
+		var data = e.data,
+			index = data.index + ($(e.currentTarget).hasClass(RawClasses.control_next) ? 1 : -1);
+
+		Functions.clearTimer(data.autoTimer);
+		positionCanister(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name onSelect
+	 * @description Handles item select
+	 * @param e [object] "Event data"
+	 */
+
+	function onSelect(e) {
+		Functions.killEvent(e);
+
+		var data = e.data,
+			index = data.$paginationItems.index($(e.currentTarget));
+
+		Functions.clearTimer(data.autoTimer);
+		positionCanister(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name position
+	 * @description Handles updating instance position
+	 * @param data [object] "Instance data"
+	 * @param index [int] "Item index"
+	 */
+
+	function positionCanister(data, index, animate) {
+		if (index < 0) {
+			index = (data.infinite) ? data.pageCount-1 : 0;
+		}
+		if (index >= data.pageCount) {
+			index = (data.infinite) ? 0 : data.pageCount-1;
+		}
+
+		if (data.pages[index]) {
+			data.leftPosition = -data.pages[index].left;
+		}
+
+		if (data.leftPosition < data.maxMove) {
+			data.leftPosition = data.maxMove;
+		}
+		if (data.leftPosition > 0 || isNaN(data.leftPosition)) {
+			data.leftPosition = 0;
+		}
+
+		if (data.useMargin) {
+			data.$canister.css({
+				marginLeft: data.leftPosition
+			});
+		} else {
+			if (animate === false) {
+				data.$canister.css(TransitionProperty, "none")
+							  .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
+
+				// Slight delay before adding transitions back
+				setTimeout(function() {
+					data.$canister.css(TransitionProperty, "");
+				}, 5);
+			} else {
+				data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
+			}
+		}
+
+		// Update classes
+		data.$items.removeClass(RawClasses.visible);
+		data.pages[index].$items.addClass(RawClasses.visible);
+
+		if (animate !== false && index !== data.index && (data.infinite || (index > -1 && index < data.pageCount)) ) {
+			data.$el.trigger(Events.update, [ index ]);
+		}
+
+		data.index = index;
+
+		updateControls(data);
+	}
+
+	/**
+	 * @method private
+	 * @name updateControls
+	 * @description Handles updating instance controls
+	 * @param data [object] "Instance data"
+	 */
+
+	function updateControls(data) {
+		data.$paginationItems.removeClass(RawClasses.active)
+							 .eq(data.index)
+							 .addClass(RawClasses.active);
+
+		if (data.infinite) {
+			data.$controlItems.addClass(RawClasses.visible);
+		} else if (data.pageCount < 1) {
+			data.$controlItems.removeClass(RawClasses.visible);
+		} else {
+			data.$controlItems.addClass(RawClasses.visible);
+
+			if (data.index <= 0) {
+				data.$controlItems.filter(Classes.control_previous).removeClass(RawClasses.visible);
+			} else if (data.index >= data.pageCount || data.leftPosition === data.maxMove) {
+				data.$controlItems.filter(Classes.control_next).removeClass(RawClasses.visible);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name calculateVisible
+	 * @description Determines how many items should show at screen width
+	 * @param data [object] "Instance data"
+	 * @return [int] "New visible count"
+	 */
+
+	function calculateVisible(data) {
+		if ($.type(data.show) === "object") {
+			for (var i in data.show) {
+				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
+					return (data.fill && data.count < data.show[i].count) ? data.count : data.show[i].count;
+				}
+			}
+			return 1;
+		}
+
+		return (data.fill && data.count < data.show) ? data.count : data.show;
+	}
+
+	/**
+	 * @method private
+	 * @name onPanStart
+	 * @description Handles pan start event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPanStart(e) {
+		var data = e.data;
+
+		if (data.useMargin) {
+			data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+		} else {
+			var matrix = data.$canister.css(TransformProperty).split(",");
+			data.leftPosition = parseInt(matrix[4]); // ?
+		}
+
+		data.$canister.css(TransitionProperty, "none");
+
+		onPan(e);
+
+		data.isTouching = true;
+	}
+
+	/**
+	 * @method private
+	 * @name onPan
+	 * @description Handles pan event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPan(e) {
+		var data = e.data;
+
+		data.touchLeft = data.leftPosition + e.deltaX;
+
+		if (data.touchLeft > 0) {
+			data.touchLeft = 0;
+		}
+		if (data.touchLeft < data.maxMove) {
+			data.touchLeft = data.maxMove;
+		}
+
+		if (data.useMargin) {
+			data.$canister.css({
+				marginLeft: data.touchLeft
+			});
+		} else {
+			data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onPanEnd
+	 * @description Handles pan end event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPanEnd(e) {
+		var data = e.data,
+			index = (e.deltaX > -50 && e.deltaX < 50) ? data.index : data.index + ((e.directionX === "left") ? 1 : -1);
+
+		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name onSwipe
+	 * @description Handles swipe event
+	 * @param e [object] "Event data"
+	 */
+
+	function onSwipe(e) {
+		var data = e.data,
+			index = data.index + ((e.directionX === "left") ? 1 : -1);
+
+		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name endTouch
+	 * @description Cleans up touch interactions
+	 * @param data [object] "Instance data"
+	 * @param index [object] "New index"
+	 */
+
+	function endTouch(data, index) {
+		data.$canister.css(TransitionProperty, "");
+
+		positionCanister(data, index);
+
+		data.isTouching = false;
+	}
+
+	/**
+	 * @plugin
+	 * @name Carousel
+	 * @description A jQuery plugin for simple content carousels.
+	 * @type widget
+	 * @dependency core.js
+	 * @dependency mediaquery.js
+	 * @dependency touch.js
+	 */
+
+	var Plugin = Formstone.Plugin("carousel", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param autoAdvance [boolean] <false> "Flag to auto advance items"
+			 * @param autoHeight [boolean] <false> "Flag to auto-size items"
+			 * @param autoTime [int] <8000> "Auto advance time"
+			 * @param controls [boolean] <true> "Flag to draw controls"
+			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
+			 * @param infinite [boolean] <false> "Flag for looping items"
+			 * @param labels.next [string] <'Next'> "Control text"
+			 * @param labels.previous [string] <'Previous'> "Control text"
+			 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
+			 * @param paged [boolean] <false> "Flag for paged items"
+			 * @param pagination [boolean] <true> "Flag to draw pagination"
+			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
+			 * @param sized [boolean] <true> "Flag for auto-sizing items"
+			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
+			 */
+
+			defaults: {
+				autoAdvance    : false,
+				autoHeight     : false,
+				autoTime       : 8000,
+				controls       : true,
+				customClass    : "",
+				fill           : false,
+				infinite       : false,
+				labels: {
+					next       : "Next",
+					previous   : "Previous"
+				},
+				maxWidth       : Infinity,
+				minWidth       : '0px',
+				paged          : false,
+				pagination     : true,
+				show           : 1,
+				sized          : true,
+				useMargin      : false
+			},
+
+			classes: [
+				"viewport",
+				"container",
+				"canister",
+				"item",
+				"controls",
+				"control",
+				"pagination",
+				"page",
+
+				"animated",
+				"enabled",
+				"visible",
+				"active",
+
+				"control_previous",
+				"control_next"
+			],
+
+			/**
+			 * @events
+			 * @event update.carousel "Carousel position updated"
+			 */
+
+			events: {
+				update      : "update",
+				panStart    : "panstart",
+				pan         : "pan",
+				panEnd      : "panend",
+				swipe       : "swipe"
+			},
+
+			methods: {
+				_construct    : construct,
+				_destruct     : destruct,
+				_resize       : resize,
+
+				disable       : disable,
+				enable        : enable,
+				jump          : jumpToItem,
+				previous      : previousItem,
+				next          : nextItem,
+				reset         : resetInstance,
+				resize        : resizeInstance
+			}
+		}),
+
+		// Localize References
+
+		Classes        = Plugin.classes,
+		RawClasses     = Classes.raw,
+		Events         = Plugin.events,
+		Functions      = Plugin.functions,
+		GUID           = 0,
+
+		$Instances     = [],
+
+		TransformProperty     = Formstone.transform,
+		TransitionProperty    = Formstone.transition;
+
+})(jQuery, Formstone);

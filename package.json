@@ -32,7 +32,9 @@
     "grunt-npm2bower-sync": "~0.3.0",
     "grunt-stripmq": "0.0.6",
     "grunt-zetzer": "^2.0.0",
-    "load-grunt-tasks": "^1.0.0"
+    "load-grunt-tasks": "^1.0.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0"
   },
   "site": {
     "css": {
@@ -42,8 +44,8 @@
     },
     "js": {
       "demo/js/site.js": [
+	    "dist/js/lib/utils.js",
         "demo/bower/jquery/dist/jquery.min.js",
-        "demo/bower/prism/prism.js",
         "dist/js/core.js",
         "dist/js/background.js",
         "dist/js/carousel.js",

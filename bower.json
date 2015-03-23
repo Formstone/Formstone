@@ -19,5 +19,8 @@
     "demo/",
     "docs/",
     "site/"
-  ]
+  ],
+  "devDependencies": {
+    "jquery": "~1"
+  }
 }

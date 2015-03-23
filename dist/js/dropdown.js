@@ -1,3 +1,803 @@
 /*! Formstone v0.2.0 [dropdown.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(){H=b.$body}function d(c){c.multiple=this.prop("multiple"),c.disabled=this.is(":disabled"),c.multiple?c.links=!1:c.external&&(c.links=!0);var d=this.find(":selected").not(":disabled"),e=d.text(),f=this.find("option").index(d);c.multiple||""===c.label?c.label="":(d=this.prepend('<option value="" class="'+B.item_placeholder+'" selected>'+c.label+"</option>"),e=c.label,f=0);var g=this.find("option, optgroup"),h=g.filter("option");c.tabIndex=this[0].tabIndex,this[0].tabIndex=-1;var k=[B.base,c.customClass];c.mobile||b.isMobile?k.push(B.mobile):c.cover&&k.push(B.cover),c.multiple&&k.push(B.multiple),c.disabled&&k.push(B.disabled);var l='<div class="'+k.join(" ")+'" tabindex="'+c.tabIndex+'"></div>',m="";c.multiple||(m+='<button type="button" class="'+B.selected+'">',m+=a("<span></span>").text(x(e,c.trim)).html(),m+="</button>"),m+='<div class="'+B.options+'">',m+="</div>",this.wrap(l).after(m),c.$dropdown=this.parent(A.base),c.$allOptions=g,c.$options=h,c.$selected=c.$dropdown.find(A.selected),c.$wrapper=c.$dropdown.find(A.options),c.$placeholder=c.$dropdown.find(A.placeholder),c.index=-1,c.guid=E++,c.closed=!0,c.keyDownGUID=C.keyDown+c.guid,c.clickGUID=C.click+c.guid,i(c),c.multiple||t(f,c),c.$selected.touch({tap:!0}).on(C.tap,c,j),c.$dropdown.on(C.click,A.item,c,o).on(C.close,c,n),this.on(C.change,c,p),b.isMobile||(c.$dropdown.on(C.focus,c,q).on(C.blur,c,r),this.on(C.focus,c,function(a){a.data.$dropdown.trigger(C.raw.focus)}))}function e(a){a.$dropdown.hasClass(B.open)&&a.$selected.trigger(C.click),a.$el[0].tabIndex=a.tabIndex,a.$dropdown.off(C.namespace),a.$options.off(C.namespace),a.$placeholder.remove(),a.$selected.remove(),a.$wrapper.remove(),a.$el.off(C.namespace).show().unwrap()}function f(a,b){if("undefined"!=typeof b){var c=a.$items.index(a.$items.filter("[data-value="+b+"]"));a.$items.eq(c).addClass(B.item_disabled),a.$options.eq(c).prop("disabled",!0)}else a.$dropdown.hasClass(B.open)&&a.$selected.trigger(C.click),a.$dropdown.addClass(B.disabled),a.$el.prop("disabled",!0),a.disabled=!0}function g(a,b){if("undefined"!=typeof b){var c=a.$items.index(a.$items.filter("[data-value="+b+"]"));a.$items.eq(c).removeClass(B.item_disabled),a.$options.eq(c).prop("disabled",!1)}else a.$dropdown.removeClass(B.disabled),a.$el.prop("disabled",!1),a.disabled=!1}function h(a){var b=a.index;a.$allOptions=a.$el.find("option, optgroup"),a.$options=a.$allOptions.filter("option"),a.index=-1,b=a.$options.index(a.$options.filter(":selected")),i(a),a.multiple||t(b,a)}function i(b){for(var c="",d=0,e=0,f=b.$allOptions.length;f>e;e++){var g=b.$allOptions.eq(e),h=[];if("OPTGROUP"===g[0].tagName)h.push(B.group),g.is(":disabled")&&h.push(B.disabled),c+='<span class="'+h.join(" ")+'">'+g.attr("label")+"</span>";else{var i=g.val();g.attr("value")||g.attr("value",i),h.push(B.item),g.hasClass(B.item_placeholder)&&h.push(B.item_placeholder),g.is(":selected")&&h.push(B.item_selected),g.is(":disabled")&&h.push(B.item_disabled),c+='<button type="button" class="'+h.join(" ")+'" ',c+='data-value="'+i+'">',c+=a("<span></span>").text(x(g.text(),b.trim)).html(),c+="</button>",d++}}b.$items=b.$wrapper.html(c).find(A.item)}function j(a){D.killEvent(a);var c=a.data;if(!c.disabled)if(c.mobile||!b.isMobile||b.isFirefoxMobile)c.closed?k(c):l(c);else{var d=c.$el[0];if(G.createEvent){var e=G.createEvent("MouseEvents");e.initMouseEvent("mousedown",!1,!0,F,0,0,0,0,0,!1,!1,!1,!1,0,null),d.dispatchEvent(e)}else d.fireEvent&&d.fireEvent("onmousedown")}}function k(b){if(b.closed){a(A.base).not(b.$dropdown).trigger(C.close,[b]);{var c=b.$dropdown.offset(),d=H.outerHeight(),e=b.$wrapper.outerHeight(!0);b.index>=0?b.$items.eq(b.index).position():{left:0,top:0}}c.top+e>d&&b.$dropdown.addClass(B.bottom),H.on(b.clickGUID,":not("+A.options+")",b,m),b.$dropdown.addClass(B.open),u(b),b.closed=!1}}function l(a){a&&!a.closed&&(H.off(a.clickGUID),a.$dropdown.removeClass([B.open,B.bottom].join(" ")),a.closed=!0)}function m(b){D.killEvent(b);var c=b.data;c&&0===a(b.currentTarget).parents(A.base).length&&l(c)}function n(a){var b=a.data;b&&l(b)}function o(b){D.killEvent(b);var c=a(this),d=b.data;if(!d.disabled){if(d.$wrapper.is(":visible")){var e=d.$items.index(c);e!==d.index&&(t(e,d),v(d))}d.multiple||l(d)}}function p(b,c){var d=a(this),e=b.data;if(!c&&!e.multiple){var f=e.$options.index(e.$options.filter("[value='"+y(d.val())+"']"));t(f,e),v(e)}}function q(a){D.killEvent(a);var b=a.data;b.disabled||b.multiple||b.$dropdown.addClass(B.focus).on(b.keyDownGUID,b,s)}function r(a){D.killEvent(a);var b=a.data;b.$dropdown.removeClass(B.focus).off(b.keyDownGUID),b.multiple||l(b)}function s(c){var d=c.data;if(13===c.keyCode)d.closed||(l(d),t(d.index,d)),v(d);else if(!(9===c.keyCode||c.metaKey||c.altKey||c.ctrlKey||c.shiftKey)){D.killEvent(c);var e=d.$items.length-1,f=d.index<0?0:d.index;if(a.inArray(c.keyCode,b.isFirefox?[38,40,37,39]:[38,40])>-1)f+=38===c.keyCode||b.isFirefox&&37===c.keyCode?-1:1,0>f&&(f=0),f>e&&(f=e);else{var g,h,i=String.fromCharCode(c.keyCode).toUpperCase();for(h=d.index+1;e>=h;h++)if(g=d.$options.eq(h).text().charAt(0).toUpperCase(),g===i){f=h;break}if(0>f||f===d.index)for(h=0;e>=h;h++)if(g=d.$options.eq(h).text().charAt(0).toUpperCase(),g===i){f=h;break}}f>=0&&(t(f,d),u(d))}}function t(a,b){var c=b.$items.eq(a),d=b.$options.eq(a),e=c.hasClass(B.item_selected),f=c.hasClass(B.item_disabled);if(!f)if(b.multiple)e?(d.prop("selected",null),c.removeClass(B.item_selected)):(d.prop("selected",!0),c.addClass(B.item_selected));else if(a>-1&&a<b.$items.length){var g=d.data("label")||c.html();b.$selected.html(g).removeClass(A.item_placeholder),b.$items.filter(A.item_selected).removeClass(B.item_selected),b.$el[0].selectedIndex=a,c.addClass(B.item_selected),b.index=a}else""!==b.label&&b.$selected.html(b.label)}function u(a){var b=a.$items.eq(a.index),c=a.index>=0&&!b.hasClass(A.item_placeholder)?b.position():{left:0,top:0};a.$wrapper.scrollTop(a.$wrapper.scrollTop()+c.top)}function v(a){a.links?w(a):a.$el.trigger(C.raw.change,[!0])}function w(a){var b=a.$el.val();a.external?F.open(b):F.location.href=b}function x(a,b){return 0===b?a:a.length>b?a.substring(0,b)+"...":a}function y(a){return"string"==typeof a?a.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g,"\\$1"):a}var z=b.Plugin("dropdown",{widget:!0,defaults:{cover:!1,customClass:"",label:"",external:!1,links:!1,mobile:!1,trim:0},methods:{_setup:c,_construct:d,_destruct:e,disable:f,enable:g,update:h,open:k,close:l},classes:["cover","bottom","multiple","mobile","open","disabled","focus","selected","options","group","item","item_disabled","item_selected","item_placeholder"],events:{tap:"tap",close:"close"}}),A=z.classes,B=A.raw,C=z.events,D=z.functions,E=0,F=b.window,G=(b.$window,b.document),H=null}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function setup() {
+		$Body = Formstone.$body;
+	}
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		data.multiple = this.prop("multiple");
+		data.disabled = this.is(":disabled");
+
+		if (data.multiple) {
+			data.links = false;
+		} else if (data.external) {
+			data.links = true;
+		}
+
+		// Grab true original index, only if selected attribute exits
+		var $originalOption = this.find(":selected").not(":disabled"),
+			originalLabel = $originalOption.text(),
+			originalIndex = this.find("option").index($originalOption);
+
+		if (!data.multiple && data.label !== "") {
+			$originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
+			originalLabel = data.label;
+			originalIndex = 0;
+		} else {
+			data.label = "";
+		}
+
+		// Build options array
+		var $allOptions = this.find("option, optgroup"),
+			$options = $allOptions.filter("option");
+
+		// Swap tab index, no more interacting with the actual select!
+		data.tabIndex = this[0].tabIndex;
+		this[0].tabIndex = -1;
+
+		// Build wrapper
+		var wrapperClasses = [
+			RawClasses.base,
+			data.customClass
+		];
+
+		if (data.mobile || Formstone.isMobile) {
+			wrapperClasses.push(RawClasses.mobile);
+		} else if (data.cover) {
+			wrapperClasses.push(RawClasses.cover);
+		}
+		if (data.multiple) {
+			wrapperClasses.push(RawClasses.multiple);
+		}
+		if (data.disabled) {
+			wrapperClasses.push(RawClasses.disabled);
+		}
+
+		// Build html
+		var wrapperHtml = '<div class="' + wrapperClasses.join(" ") + '" tabindex="' + data.tabIndex + '"></div>',
+			innerHtml = "";
+
+		// Build inner
+		if (!data.multiple) {
+			innerHtml += '<button type="button" class="' + RawClasses.selected + '">';
+			innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
+			innerHtml += '</button>';
+		}
+		innerHtml += '<div class="' + RawClasses.options + '">';
+		innerHtml += '</div>';
+
+		// Modify DOM
+		this.wrap(wrapperHtml)
+			.after(innerHtml);
+
+		// Store plugin data
+		data.$dropdown        = this.parent(Classes.base);
+		data.$allOptions      = $allOptions;
+		data.$options         = $options;
+		data.$selected        = data.$dropdown.find(Classes.selected);
+		data.$wrapper         = data.$dropdown.find(Classes.options);
+		data.$placeholder     = data.$dropdown.find(Classes.placeholder);
+		data.index            = -1;
+		data.guid             = GUID++;
+		data.closed           = true;
+
+		data.keyDownGUID      = Events.keyDown + data.guid;
+		data.clickGUID        = Events.click + data.guid;
+
+		buildOptions(data);
+
+		if (!data.multiple) {
+			updateOption(originalIndex, data);
+		}
+
+		/*
+		// Scroller support
+		if ($.fn.scroller !== undefined) {
+			data.$wrapper.scroller();
+		}
+		*/
+
+		// Bind events
+		data.$selected.touch({
+			tap: true
+		}).on(Events.tap, data, onClick);
+
+		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
+					  .on(Events.close, data, onClose);
+
+		// Change events
+		this.on(Events.change, data, onChange);
+
+		// Focus/Blur events
+		if (!Formstone.isMobile) {
+			data.$dropdown.on(Events.focus, data, onFocus)
+						  .on(Events.blur, data, onBlur);
+
+			// Handle clicks to associated labels
+			this.on(Events.focus, data, function(e) {
+				e.data.$dropdown.trigger(Events.raw.focus);
+			});
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		if (data.$dropdown.hasClass(RawClasses.open)) {
+			data.$selected.trigger(Events.click);
+		}
+
+		// Scrollbar support
+		/*
+		if ($.fn.scroller !== undefined) {
+			data.$dropdown.find(".selecter-options").scroller("destroy");
+		}
+		*/
+
+		data.$el[0].tabIndex = data.tabIndex;
+
+		data.$dropdown.off(Events.namespace);
+		data.$options.off(Events.namespace);
+
+		data.$placeholder.remove();
+		data.$selected.remove();
+		data.$wrapper.remove();
+
+		data.$el.off(Events.namespace)
+				.show()
+				.unwrap();
+	}
+
+	/**
+	 * @method
+	 * @name disable
+	 * @description Disables target instance or option.
+	 * @param option [string] <null> "Target option value"
+	 * @example $(".target").dropdown("disable", "1");
+	 */
+
+	function disableDropdown(data, option) {
+		if (typeof option !== "undefined") {
+			var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+
+			data.$items.eq(index).addClass(RawClasses.item_disabled);
+			data.$options.eq(index).prop("disabled", true);
+		} else {
+			if (data.$dropdown.hasClass(RawClasses.open)) {
+				data.$selected.trigger(Events.click);
+			}
+
+			data.$dropdown.addClass(RawClasses.disabled);
+			data.$el.prop("disabled", true);
+
+			data.disabled = true;
+		}
+	}
+
+	/**
+	 * @method
+	 * @name enable
+	 * @description Enables target instance or option.
+	 * @param option [string] <null> "Target option value"
+	 * @example $(".target").dropdown("enable", "1");
+	 */
+
+	function enableDropdown(data, option) {
+		if (typeof option !== "undefined") {
+			var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+			data.$items.eq(index).removeClass(RawClasses.item_disabled);
+			data.$options.eq(index).prop("disabled", false);
+		} else {
+			data.$dropdown.removeClass(RawClasses.disabled);
+			data.$el.prop("disabled", false);
+
+			data.disabled = false;
+		}
+	}
+
+	/**
+	* @method
+	* @name update
+	* @description Updates instance.
+	* @example $(".target").dropdown("update");
+	*/
+
+	function updateDropdown(data) {
+		var index = data.index;
+
+		data.$allOptions = data.$el.find("option, optgroup");
+		data.$options = data.$allOptions.filter("option");
+		data.index = -1;
+
+		index = data.$options.index(data.$options.filter(":selected"));
+
+		buildOptions(data);
+
+		if (!data.multiple) {
+			updateOption(index, data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name buildOptions
+	 * @description Builds instance's option set.
+	 * @param data [object] "Instance data"
+	 */
+
+	function buildOptions(data) {
+		var html = '',
+			j = 0;
+
+		for (var i = 0, count = data.$allOptions.length; i < count; i++) {
+			var $option = data.$allOptions.eq(i),
+				classes = [];
+
+			// Option group
+			if ($option[0].tagName === "OPTGROUP") {
+				classes.push(RawClasses.group);
+
+				// Disabled groups
+				if ($option.is(":disabled")) {
+					classes.push(RawClasses.disabled);
+				}
+
+				html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
+			} else {
+				var opVal = $option.val();
+
+				if (!$option.attr("value")) {
+					$option.attr("value", opVal);
+				}
+
+				classes.push(RawClasses.item);
+
+				if ($option.hasClass(RawClasses.item_placeholder)) {
+					classes.push(RawClasses.item_placeholder);
+				}
+				if ($option.is(":selected")) {
+					classes.push(RawClasses.item_selected);
+				}
+				if ($option.is(":disabled")) {
+					classes.push(RawClasses.item_disabled);
+				}
+
+				html += '<button type="button" class="' + classes.join(" ") + '" ';
+				html += 'data-value="' + opVal + '">';
+				html += $("<span></span>").text( trimText($option.text(), data.trim) ).html();
+				html += '</button>';
+
+				j++;
+			}
+		}
+
+		data.$items = data.$wrapper.html(html)
+								   .find(Classes.item);
+	}
+
+	/**
+	 * @method private
+	 * @name onClick
+	 * @description Handles click to selected item.
+	 * @param e [object] "Event data"
+	 */
+
+	function onClick(e) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		if (!data.disabled) {
+			// Handle mobile, but not Firefox, unless desktop forced
+			if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile) {
+				var el = data.$el[0];
+
+				if (Document.createEvent) { // All
+					var evt = Document.createEvent("MouseEvents");
+					evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+					el.dispatchEvent(evt);
+				} else if (el.fireEvent) { // IE
+					el.fireEvent("onmousedown");
+				}
+			} else {
+				// Delegate intent
+				if (data.closed) {
+					openOptions(data);
+				} else {
+					closeOptions(data);
+				}
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name openOptions
+	 * @description Opens option set.
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name open
+	 * @description Opens target instance.
+	 * @example $(".target").dropdown("open");
+	 */
+
+	function openOptions(data) {
+		// Make sure it's not already open
+		if (data.closed) {
+			$(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
+
+			var offset = data.$dropdown.offset(),
+				bodyHeight = $Body.outerHeight(),
+				optionsHeight = data.$wrapper.outerHeight(true),
+				selectedOffset = (data.index >= 0) ? data.$items.eq(data.index).position() : { left: 0, top: 0 };
+
+			// Calculate bottom of document
+			if (offset.top + optionsHeight > bodyHeight) {
+				data.$dropdown.addClass(RawClasses.bottom);
+			}
+
+			// Bind Events
+			$Body.on(data.clickGUID, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+
+			data.$dropdown.addClass(RawClasses.open);
+			scrollOptions(data);
+
+			data.closed = false;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name closeOptions
+	 * @description Closes option set.
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name close
+	 * @description Closes target instance.
+	 * @example $(".target").dropdown("close");
+	 */
+
+	function closeOptions(data) {
+		// Make sure it's actually open
+		if (data && !data.closed) {
+			$Body.off(data.clickGUID);
+
+			data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
+
+			data.closed = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name closeOptionsHelper
+	 * @description Determines if event target is outside instance before closing
+	 * @param e [object] "Event data"
+	 */
+
+	function closeOptionsHelper(e) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
+			closeOptions(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onClose
+	 * @description Handles close event.
+	 * @param e [object] "Event data"
+	 */
+
+	function onClose(e) {
+		var data = e.data;
+
+		if (data) {
+			closeOptions(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onSelect
+	 * @description Handles option select.
+	 * @param e [object] "Event data"
+	 */
+
+	function onSelect(e) {
+		Functions.killEvent(e);
+
+		var $target = $(this),
+			data = e.data;
+
+		if (!data.disabled) {
+			if (data.$wrapper.is(":visible")) {
+				// Update
+				var index = data.$items.index($target);
+
+				if (index !== data.index) {
+					updateOption(index, data);
+					handleChange(data);
+				}
+			}
+
+			if (!data.multiple) {
+				// Clean up
+				closeOptions(data);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onChange
+	 * @description Handles external changes.
+	 * @param e [object] "Event data"
+	 */
+
+	function onChange(e, internal) {
+		var $target = $(this),
+			data = e.data;
+
+		if (!internal && !data.multiple) {
+			var index = data.$options.index( data.$options.filter("[value='" + escapeText($target.val()) + "']") );
+
+			updateOption(index, data);
+			handleChange(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus.
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		if (!data.disabled && !data.multiple) {
+			data.$dropdown.addClass(RawClasses.focus)
+						  .on(data.keyDownGUID, data, onKeypress);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur.
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e, internal) {
+		Functions.killEvent(e);
+
+		var data = e.data;
+
+		data.$dropdown.removeClass(RawClasses.focus)
+					  .off(data.keyDownGUID);
+
+		if (!data.multiple) {
+			// Clean up
+			closeOptions(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onKeypress
+	 * @description Handles instance keypress, once focused.
+	 * @param e [object] "Event data"
+	 */
+
+	function onKeypress(e) {
+		var data = e.data;
+
+		if (e.keyCode === 13) {
+			if (!data.closed) {
+				closeOptions(data);
+				updateOption(data.index, data);
+			}
+			handleChange(data);
+		} else if (e.keyCode !== 9 && (!e.metaKey && !e.altKey && !e.ctrlKey && !e.shiftKey)) {
+			// Ignore modifiers & tabs
+			Functions.killEvent(e);
+
+			var total = data.$items.length - 1,
+				index = (data.index < 0) ? 0 : data.index;
+
+			// Firefox left/right support thanks to Kylemade
+			if ($.inArray(e.keyCode, (Formstone.isFirefox) ? [38, 40, 37, 39] : [38, 40]) > -1) {
+				// Increment / decrement using the arrow keys
+				index = index + ((e.keyCode === 38 || (Formstone.isFirefox && e.keyCode === 37)) ? -1 : 1);
+
+				if (index < 0) {
+					index = 0;
+				}
+				if (index > total) {
+					index = total;
+				}
+			} else {
+				var input = String.fromCharCode(e.keyCode).toUpperCase(),
+					letter,
+					i;
+
+				// Search for input from original index
+				for (i = data.index + 1; i <= total; i++) {
+					letter = data.$options.eq(i).text().charAt(0).toUpperCase();
+					if (letter === input) {
+						index = i;
+						break;
+					}
+				}
+
+				// If not, start from the beginning
+				if (index < 0 || index === data.index) {
+					for (i = 0; i <= total; i++) {
+						letter = data.$options.eq(i).text().charAt(0).toUpperCase();
+						if (letter === input) {
+							index = i;
+							break;
+						}
+					}
+				}
+			}
+
+			// Update
+			if (index >= 0) {
+				updateOption(index, data);
+				scrollOptions(data);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name updateOption
+	 * @description Updates instance based on new target index.
+	 * @param index [int] "Selected option index"
+	 * @param data [object] "instance data"
+	 */
+
+	function updateOption(index, data) {
+		var $item      = data.$items.eq(index),
+			$option    = data.$options.eq(index),
+			isSelected = $item.hasClass(RawClasses.item_selected),
+			isDisabled = $item.hasClass(RawClasses.item_disabled);
+
+		// Check for disabled options
+		if (!isDisabled) {
+			if (data.multiple) {
+				if (isSelected) {
+					$option.prop("selected", null);
+					$item.removeClass(RawClasses.item_selected);
+				} else {
+					$option.prop("selected", true);
+					$item.addClass(RawClasses.item_selected);
+				}
+			} else if (index > -1 && index < data.$items.length) {
+				var label = $option.data("label") || $item.html();
+
+				data.$selected.html(label)
+							  .removeClass(Classes.item_placeholder);
+
+				data.$items.filter(Classes.item_selected)
+						   .removeClass(RawClasses.item_selected);
+
+				data.$el[0].selectedIndex = index;
+
+				$item.addClass(RawClasses.item_selected);
+				data.index = index;
+			} else if (data.label !== "") {
+				data.$selected.html(data.label);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name scrollOptions
+	 * @description Scrolls options wrapper to specific option.
+	 * @param data [object] "Instance data"
+	 */
+
+	function scrollOptions(data) {
+		var $selected = data.$items.eq(data.index),
+			selectedOffset = (data.index >= 0 && !$selected.hasClass(Classes.item_placeholder)) ? $selected.position() : { left: 0, top: 0 };
+
+		/*
+		if ($.fn.scroller !== undefined) {
+			data.$wrapper.scroller("scroll", (data.$wrapper.find(".scroller-content").scrollTop() + selectedOffset.top), 0)
+							  .scroller("reset");
+		} else {
+		*/
+			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top );
+		// }
+	}
+
+	/**
+	 * @method private
+	 * @name handleChange
+	 * @description Handles change events.
+	 * @param data [object] "Instance data"
+	 */
+
+	function handleChange(data) {
+		if (data.links) {
+			launchLink(data);
+		} else {
+			data.$el.trigger(Events.raw.change, [ true ]);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name launchLink
+	 * @description Launches link.
+	 * @param data [object] "Instance data"
+	 */
+
+	function launchLink(data) {
+		var url = data.$el.val();
+
+		if (data.external) {
+			// Open link in a new tab/window
+			Window.open(url);
+		} else {
+			// Open link in same tab/window
+			Window.location.href = url;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name trimText
+	 * @description Trims text, if specified length is greater then 0.
+	 * @param length [int] "Length to trim at"
+	 * @param text [string] "Text to trim"
+	 * @return [string] "Trimmed string"
+	 */
+
+	function trimText(text, length) {
+		if (length === 0) {
+			return text;
+		} else {
+			if (text.length > length) {
+				return text.substring(0, length) + "...";
+			} else {
+				return text;
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name escapeText
+	 * @description Escapes text.
+	 * @param text [string] "Text to escape"
+	 */
+
+	function escapeText(text) {
+		return (typeof text === "string") ? text.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') : text;
+	}
+
+	/**
+	 * @plugin
+	 * @name Dropdown
+	 * @description A jQuery plugin for custom select elements.
+	 * @type widget
+	 * @dependency core.js
+	 * @dependency touch.js
+	 */
+
+	var Plugin = Formstone.Plugin("dropdown", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param cover [boolean] <false> "Cover handle with option set"
+			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param label [string] <''> "Label displayed before selection"
+			 * @param external [boolean] <false> "Open options as links in new window"
+			 * @param links [boolean] <false> "Open options as links in same window"
+			 * @param mobile [boolean] <false> "Force desktop interaction on mobile"
+			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
+			 */
+			defaults: {
+				cover          : false,
+				customClass    : "",
+				label          : "",
+				external       : false,
+				links          : false,
+				mobile         : false,
+				trim           : 0
+			},
+
+			methods: {
+				_setup        : setup,
+				_construct    : construct,
+				_destruct     : destruct,
+
+				disable       : disableDropdown,
+				enable        : enableDropdown,
+				update        : updateDropdown,
+				open          : openOptions,
+				close         : closeOptions
+			},
+
+			classes: [
+				"cover",
+				"bottom",
+				"multiple",
+				"mobile",
+
+				"open",
+				"disabled",
+				"focus",
+
+				"selected",
+				"options",
+				"group",
+				"item",
+
+				"item_disabled",
+				"item_selected",
+				"item_placeholder"
+			],
+
+			events: {
+				tap:   "tap",
+				close: "close"
+			}
+		}),
+
+		// Localize References
+
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
+
+		// Local
+
+		GUID          = 0,
+		Window        = Formstone.window,
+		$Window       = Formstone.$window,
+		Document      = Formstone.document,
+		$Body         = null;
+
+})(jQuery, Formstone);

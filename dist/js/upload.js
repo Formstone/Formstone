@@ -1,3 +1,384 @@
 /*! Formstone v0.2.0 [upload.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(a){if(b.support.file){var c="";c+='<div class="'+p.target+'">',c+=a.label,c+="</div>",c+='<input class="'+p.input+'" type="file"',a.maxQueue>1&&(c+=" "+p.multiple),c+=">",this.addClass(p.base).append(c),a.$input=this.find(o.input),a.queue=[],a.total=0,a.uploading=!1,this.on(q.click,o.target,a,e).on(q.dragEnter,a,g).on(q.dragOver,a,h).on(q.dragLeave,a,i).on(q.drop,o.target,a,j),a.$input.on(q.change,a,f)}}function d(a){b.support.file&&(a.$input.off(q.namespace),this.off([q.click,q.dragEnter,q.dragOver,q.dragLeave,q.drop].join(" ")).removeClass(p.base).html(""))}function e(a){a.stopPropagation(),a.preventDefault();var b=a.data;b.$input.trigger(q.click)}function f(a){a.stopPropagation(),a.preventDefault();var b=a.data,c=b.$input[0].files;c.length&&k(b,c)}function g(a){a.stopPropagation(),a.preventDefault();var b=a.data;b.$el.addClass(p.dropping)}function h(a){a.stopPropagation(),a.preventDefault();var b=a.data;b.$el.addClass(p.dropping)}function i(a){a.stopPropagation(),a.preventDefault();var b=a.data;b.$el.removeClass(p.dropping)}function j(a){a.preventDefault();var b=a.data,c=a.originalEvent.dataTransfer.files;b.$el.removeClass(p.dropping),k(b,c)}function k(a,b){for(var c=[],d=0;d<b.length;d++){var e={index:a.total++,file:b[d],name:b[d].name,size:b[d].size,started:!1,complete:!1,error:!1,transfer:null};c.push(e),a.queue.push(e)}a.uploading||(r.on(q.beforeUnload,function(){return a.leave}),a.uploading=!0),a.$el.trigger(q.start,[c]),l(a)}function l(a){var b=0,c=[];for(var d in a.queue)!a.queue.hasOwnProperty(d)||a.queue[d].complete||a.queue[d].error||c.push(a.queue[d]);a.queue=c;for(var e in a.queue)if(a.queue.hasOwnProperty(e)){if(!a.queue[e].started){var f=new FormData;f.append(a.postKey,a.queue[e].file);for(var g in a.postData)a.postData.hasOwnProperty(g)&&f.append(g,a.postData[g]);m(a,a.queue[e],f)}if(b++,b>=a.maxQueue)return;d++}0===b&&(r.off(q.beforeUnload),a.uploading=!1,a.$el.trigger(q.complete))}function m(b,c,d){c.size>=b.maxSize?(c.error=!0,b.$el.trigger(q.fileError,[c,"Too large"]),l(b)):(c.started=!0,c.transfer=a.ajax({url:b.action,data:d,type:"POST",contentType:!1,processData:!1,cache:!1,xhr:function(){var d=a.ajaxSettings.xhr();return d.upload&&d.upload.addEventListener("progress",function(a){var d=0,e=a.loaded||a.position,f=a.total;a.lengthComputable&&(d=Math.ceil(e/f*100)),b.$el.trigger(q.fileProgress,[c,d])},!1),d},beforeSend:function(){b.$el.trigger(q.fileStart,[c])},success:function(a){c.complete=!0,b.$el.trigger(q.fileComplete,[c,a]),l(b)},error:function(a,d,e){c.error=!0,b.$el.trigger(q.fileError,[c,e]),l(b)}}))}var n=b.Plugin("upload",{widget:!0,defaults:{customClass:"",action:"",label:"Drag and drop files or click to select",leave:"You have uploads pending, are you sure you want to leave this page?",maxQueue:2,maxSize:5242880,postData:{},postKey:"file"},classes:["input","target","multiple","dropping"],methods:{_construct:c,_destruct:d}}),o=n.classes,p=o.raw,q=n.events,r=(n.functions,b.$window);q.complete="complete",q.fileStart="filestart",q.fileProgress="fileprogress",q.fileComplete="filecomplete",q.fileError="fileerror",q.start="start"}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		if (Formstone.support.file) {
+			var html = "";
+
+			html += '<div class="' + RawClasses.target + '">';
+			html += data.label;
+			html += '</div>';
+			html += '<input class="' + RawClasses.input + '" type="file"';
+			if (data.maxQueue > 1) {
+				html += ' ' + RawClasses.multiple;
+			}
+			html += '>';
+
+			this.addClass(RawClasses.base)
+				.append(html);
+
+			data.$input       = this.find(Classes.input);
+			data.queue        = [];
+			data.total        = 0;
+			data.uploading    = false;
+
+			this.on(Events.click, Classes.target, data, onClick)
+				.on(Events.dragEnter, data, onDragEnter)
+				.on(Events.dragOver, data, onDragOver)
+				.on(Events.dragLeave, data, onDragOut)
+				.on(Events.drop, Classes.target, data, onDrop);
+
+			data.$input.on(Events.change, data, onChange);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		if (Formstone.support.file) {
+			data.$input.off(Events.namespace);
+
+			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )
+				.removeClass(RawClasses.base)
+				.html("");
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onClick
+	 * @description Handles click to target.
+	 * @param e [object] "Event data"
+	 */
+	function onClick(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var data = e.data;
+
+		data.$input.trigger(Events.click);
+	}
+
+	/**
+	 * @method private
+	 * @name onChange
+	 * @description Handles change to hidden input.
+	 * @param e [object] "Event data"
+	 */
+	function onChange(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var data = e.data,
+			files = data.$input[0].files;
+
+		if (files.length) {
+			handleUpload(data, files);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onDragEnter
+	 * @description Handles dragenter to target.
+	 * @param e [object] "Event data"
+	 */
+	function onDragEnter(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var data = e.data;
+
+		data.$el.addClass(RawClasses.dropping);
+	}
+
+	/**
+	 * @method private
+	 * @name onDragOver
+	 * @description Handles dragover to target.
+	 * @param e [object] "Event data"
+	 */
+	function onDragOver(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var data = e.data;
+
+		data.$el.addClass(RawClasses.dropping);
+	}
+
+	/**
+	 * @method private
+	 * @name onDragOut
+	 * @description Handles dragout to target.
+	 * @param e [object] "Event data"
+	 */
+	function onDragOut(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		var data = e.data;
+
+		data.$el.removeClass(RawClasses.dropping);
+	}
+
+	/**
+	 * @method private
+	 * @name onDrop
+	 * @description Handles drop to target.
+	 * @param e [object] "Event data"
+	 */
+	function onDrop(e) {
+		e.preventDefault();
+
+		var data = e.data,
+			files = e.originalEvent.dataTransfer.files;
+
+		data.$el.removeClass(RawClasses.dropping);
+
+		handleUpload(data, files);
+	}
+
+	/**
+	 * @method private
+	 * @name handleUpload
+	 * @description Handles new files.
+	 * @param data [object] "Instance data"
+	 * @param files [object] "File list"
+	 */
+	function handleUpload(data, files) {
+		var newFiles = [];
+
+		for (var i = 0; i < files.length; i++) {
+			var file = {
+				index: data.total++,
+				file: files[i],
+				name: files[i].name,
+				size: files[i].size,
+				started: false,
+				complete: false,
+				error: false,
+				transfer: null
+			};
+
+			newFiles.push(file);
+			data.queue.push(file);
+		}
+
+		if (!data.uploading) {
+			$Window.on(Events.beforeUnload, function(){
+				return data.leave;
+			});
+
+			data.uploading = true;
+		}
+
+		data.$el.trigger(Events.start, [ newFiles ]);
+
+		checkQueue(data);
+	}
+
+	/**
+	 * @method private
+	 * @name checkQueue
+	 * @description Checks and updates file queue.
+	 * @param data [object] "Instance data"
+	 */
+	function checkQueue(data) {
+		var transfering = 0,
+			newQueue = [];
+
+		// remove lingering items from queue
+		for (var i in data.queue) {
+			if (data.queue.hasOwnProperty(i) && !data.queue[i].complete && !data.queue[i].error) {
+				newQueue.push(data.queue[i]);
+			}
+		}
+
+		data.queue = newQueue;
+
+		for (var j in data.queue) {
+			if (data.queue.hasOwnProperty(j)) {
+				if (!data.queue[j].started) {
+					var formData = new FormData();
+
+					formData.append(data.postKey, data.queue[j].file);
+
+					for (var k in data.postData) {
+						if (data.postData.hasOwnProperty(k)) {
+							formData.append(k, data.postData[k]);
+						}
+					}
+
+					uploadFile(data, data.queue[j], formData);
+				}
+
+				transfering++;
+
+				if (transfering >= data.maxQueue) {
+					return;
+				} else {
+					i++;
+				}
+			}
+		}
+
+		if (transfering === 0) {
+			$Window.off(Events.beforeUnload);
+
+			data.uploading = false;
+
+			data.$el.trigger(Events.complete);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name uploadFile
+	 * @description Uploads file.
+	 * @param data [object] "Instance data"
+	 * @param file [object] "Target file"
+	 * @param formData [object] "Target form"
+	 */
+	function uploadFile(data, file, formData) {
+		if (file.size >= data.maxSize) {
+			file.error = true;
+			data.$el.trigger(Events.fileError, [ file, "Too large" ]);
+
+			checkQueue(data);
+		} else {
+			file.started = true;
+			file.transfer = $.ajax({
+				url: data.action,
+				data: formData,
+				type: "POST",
+				contentType:false,
+				processData: false,
+				cache: false,
+				xhr: function() {
+					var $xhr = $.ajaxSettings.xhr();
+
+					if ($xhr.upload) {
+						// Clean progress event
+						$xhr.upload.addEventListener("progress", function(e) {
+							var percent = 0,
+								position = e.loaded || e.position,
+								total = e.total;
+
+							if (e.lengthComputable) {
+								percent = Math.ceil(position / total * 100);
+							}
+
+							data.$el.trigger(Events.fileProgress, [ file, percent ]);
+						}, false);
+					}
+
+					return $xhr;
+				},
+				beforeSend: function(e) {
+					data.$el.trigger(Events.fileStart, [ file ]);
+				},
+				success: function(response, status, jqXHR) {
+					file.complete = true;
+					data.$el.trigger(Events.fileComplete, [ file, response ]);
+
+					checkQueue(data);
+				},
+				error: function(jqXHR, status, error) {
+					file.error = true;
+					data.$el.trigger(Events.fileError, [ file, error ]);
+
+					checkQueue(data);
+				}
+			});
+		}
+	}
+
+	/**
+	 * @plugin
+	 * @name Upload
+	 * @description A jQuery plugin for simple drag and drop uploads.
+	 * @type widget
+	 * @dependency core.js
+	 */
+
+	var Plugin = Formstone.Plugin("upload", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param action [string] "Where to submit uploads"
+			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text"
+			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
+			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
+			 * @param maxSize [int] <5242880> "Max file size allowed"
+			 * @param postData [object] "Extra data to post with upload"
+			 * @param postKey [string] <'file'> "Key to upload file as"
+			 */
+
+			defaults: {
+				customClass    : "",
+				action         : "",
+				label          : "Drag and drop files or click to select",
+				leave          : "You have uploads pending, are you sure you want to leave this page?",
+				maxQueue       : 2,
+				maxSize        : 5242880, // 5 mb
+				postData       : {},
+				postKey        : "file"
+			},
+
+			classes: [
+				"input",
+				"target",
+				"multiple",
+				"dropping"
+			],
+
+			methods: {
+				_construct    : construct,
+				_destruct     : destruct
+			}
+		}),
+
+		// Localize References
+
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
+
+		$Window       = Formstone.$window;
+
+		/**
+		 * @events
+		 * @event complete "All uploads are complete"
+		 * @event filecomplete "Specific upload complete"
+		 * @event fileerror "Specific upload error"
+		 * @event filestart "Specific upload starting"
+		 * @event fileprogress "Specific upload progress"
+		 * @event start "Uploads starting"
+		 */
+
+		Events.complete        = "complete";
+		Events.fileStart       = "filestart";
+		Events.fileProgress    = "fileprogress";
+		Events.fileComplete    = "filecomplete";
+		Events.fileError       = "fileerror";
+		Events.start           = "start";
+
+})(jQuery, Formstone);

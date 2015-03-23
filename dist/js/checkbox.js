@@ -1,3 +1,278 @@
 /*! Formstone v0.2.0 [checkbox.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(b){var c=this.closest("label"),d=c.length?c.eq(0):a("label[for="+this.attr("id")+"]"),e=[o.base,b.customClass].join(" "),f="";b.radio="radio"===this.attr("type"),b.group=this.attr("name"),f+='<div class="'+o.marker+'">',f+='<div class="'+o.flag+'"></div>',b.toggle&&(e+=" "+o.toggle,f+='<span class="'+[o.state,o.state_on].join(" ")+'">'+b.labels.on+"</span>",f+='<span class="'+[o.state,o.state_off].join(" ")+'">'+b.labels.off+"</span>"),b.radio&&(e+=" "+o.radio),f+="</div>",d.length?d.addClass(o.label).wrap('<div class="'+e+'"></div>').before(f):this.before('<div class=" '+e+'">'+f+"</div>"),b.$checkbox=d.length?d.parents(n.base):this.prev(n.base),b.$marker=b.$checkbox.find(n.marker),b.$states=b.$checkbox.find(n.state),b.$label=d,this.is(":checked")&&b.$checkbox.addClass(o.checked),this.is(":disabled")&&b.$checkbox.addClass(o.disabled),this.on(p.focus,b,k).on(p.blur,b,l).on(p.change,b,h).on(p.click,b,g).on(p.deselect,b,j),b.$checkbox.touch({tap:!0}).on(p.tap,b,g)}function d(a){a.$checkbox.off(p.namespace).touch("destroy"),a.$marker.remove(),a.$states.remove(),a.$label.unwrap().removeClass(o.label),this.off(p.namespace)}function e(a){this.prop("disabled",!1),a.$checkbox.removeClass(o.disabled)}function f(a){this.prop("disabled",!0),a.$checkbox.addClass(o.disabled)}function g(b){b.stopPropagation();var c=b.data;a(b.target).is(c.$el)||(b.preventDefault(),c.$el.trigger("click"))}function h(a){var b=a.data,c=b.$el.is(":disabled"),d=b.$el.is(":checked");c||(b.radio?i(a):d?i(a):j(a))}function i(b){b.data.radio&&a('input[name="'+b.data.group+'"]').not(b.data.$el).trigger("deselect"),b.data.$checkbox.addClass(o.checked)}function j(a){a.data.$checkbox.removeClass(o.checked)}function k(a){a.data.$checkbox.addClass(o.focus)}function l(a){a.data.$checkbox.removeClass(o.focus)}{var m=b.Plugin("checkbox",{widget:!0,defaults:{customClass:"",toggle:!1,labels:{on:"ON",off:"OFF"}},classes:["label","marker","flag","radio","focus","checked","disabled","toggle","state","state_on","state_off"],methods:{_construct:c,_destruct:d,enable:e,disable:f},events:{deselect:"deselect",tap:"tap"}}),n=m.classes,o=n.raw,p=m.events;m.functions}}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		var $parent      = this.closest("label"),
+			$label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
+			baseClass    = [RawClasses.base, data.customClass].join(" "),
+			html         = "";
+
+		data.radio = (this.attr("type") === "radio");
+		data.group = this.attr("name");
+
+		html += '<div class="' + RawClasses.marker + '">';
+		html += '<div class="' + RawClasses.flag + '"></div>';
+
+		if (data.toggle) {
+			baseClass += " " + RawClasses.toggle;
+			html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">'  + data.labels.on  + '</span>';
+			html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
+		}
+
+		if (data.radio) {
+			baseClass += " " + RawClasses.radio;
+		}
+
+		html += '</div>';
+
+		// Modify DOM
+
+		if ($label.length) {
+			$label.addClass(RawClasses.label)
+				  .wrap('<div class="' + baseClass + '"></div>')
+				  .before(html);
+		} else {
+			this.before('<div class=" ' + baseClass + '">' + html + '</div>');
+		}
+
+		// Store plugin data
+		data.$checkbox    = ($label.length) ? $label.parents(Classes.base) : this.prev(Classes.base);
+		data.$marker      = data.$checkbox.find(Classes.marker);
+		data.$states      = data.$checkbox.find(Classes.state);
+		data.$label       = $label;
+
+		// Check checked
+		if (this.is(":checked")) {
+			data.$checkbox.addClass(RawClasses.checked);
+		}
+
+		// Check disabled
+		if (this.is(":disabled")) {
+			data.$checkbox.addClass(RawClasses.disabled);
+		}
+
+		// Bind click events
+		this.on(Events.focus, data, onFocus)
+			.on(Events.blur, data, onBlur)
+			.on(Events.change, data, onChange)
+			.on(Events.click, data, onClick)
+			.on(Events.deselect, data, onDeselect);
+
+		data.$checkbox.touch({
+			tap: true
+		}).on(Events.tap, data, onClick);
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		data.$checkbox.off(Events.namespace)
+					  .touch("destroy");
+
+		data.$marker.remove();
+		data.$states.remove();
+		data.$label.unwrap()
+				   .removeClass(RawClasses.label);
+
+		this.off(Events.namespace);
+	}
+
+	/**
+	 * @method
+	 * @name enable
+	 * @description Enables target instance
+	 * @example $(".target").checkbox("enable");
+	 */
+
+	function enable(data) {
+		this.prop("disabled", false);
+		data.$checkbox.removeClass(RawClasses.disabled);
+	}
+
+	/**
+	 * @method
+	 * @name disable
+	 * @description Disables target instance
+	 * @example $(".target").checkbox("disable");
+	 */
+
+	function disable(data) {
+		this.prop("disabled", true);
+		data.$checkbox.addClass(RawClasses.disabled);
+	}
+
+	/**
+	 * @method private
+	 * @name onClick
+	 * @description Handles click
+	 */
+
+	function onClick(e) {
+		e.stopPropagation();
+
+		var data = e.data;
+
+		if (!$(e.target).is(data.$el)) {
+			e.preventDefault();
+
+			data.$el.trigger("click");
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onChange
+	 * @description Handles external changes
+	 * @param e [object] "Event data"
+	 */
+
+	function onChange(e) {
+		var data        = e.data,
+			disabled    = data.$el.is(":disabled"),
+			checked     = data.$el.is(":checked");
+
+		if (!disabled) {
+			if (data.radio) {
+				// radio
+				// if (checked || (isIE8 && !checked)) {
+					onSelect(e);
+				// }
+			} else {
+				// Checkbox change events fire after state has changed
+				if (checked) {
+					onSelect(e);
+				} else {
+					onDeselect(e);
+				}
+			}
+		}
+	}
+
+	/*
+	 * @method private
+	 * @name onSelect
+	 * @description Changes input to "checked"
+	 * @param e [object] "Event data"
+	 */
+	function onSelect(e) {
+		if (e.data.radio) {
+			$('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
+		}
+
+		e.data.$checkbox.addClass(RawClasses.checked);
+	}
+
+	/**
+	 * @method private
+	 * @name onDeselect
+	 * @description Changes input to "checked"
+	 * @param e [object] "Event data"
+	 */
+	function onDeselect(e) {
+		e.data.$checkbox.removeClass(RawClasses.checked);
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		e.data.$checkbox.addClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e) {
+		e.data.$checkbox.removeClass(RawClasses.focus);
+	}
+
+	/**
+	 * @plugin
+	 * @name Checkbox
+	 * @description A jQuery plugin for replacing checkboxes.
+	 * @type widget
+	 * @dependency core.js
+	 * @dependency touch.js
+	 */
+
+	var Plugin = Formstone.Plugin("checkbox", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param toggle [boolean] <false> "Render 'toggle' styles"
+			 * @param labels.on [string] <'ON'> "Label for 'On' position; 'toggle' only"
+			 * @param labels.off [string] <'OFF'> "Label for 'Off' position; 'toggle' only"
+			 */
+
+			defaults: {
+				customClass    : "",
+				toggle         : false,
+				labels : {
+					on         : "ON",
+					off        : "OFF"
+				}
+			},
+
+			classes: [
+				"label",
+				"marker",
+				"flag",
+				"radio",
+				"focus",
+				"checked",
+				"disabled",
+				"toggle",
+				"state",
+				"state_on",
+				"state_off"
+			],
+
+			methods: {
+				_construct    : construct,
+				_destruct     : destruct,
+
+				// Public Methods
+
+				enable        : enable,
+				disable       : disable
+			},
+
+			events: {
+				deselect : "deselect",
+				tap      : "tap"
+			}
+		}),
+
+		// Localize References
+
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions;
+
+})(jQuery, Formstone);

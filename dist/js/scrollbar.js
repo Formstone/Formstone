@@ -1,3 +1,524 @@
 /*! Formstone v0.2.0 [scrollbar.js] 2015-03-23 | MIT License | formstone.it */
 
-!function(a,b){"use strict";function c(){r=b.$body}function d(){w.iterate.call(y,i)}function e(){y=a(t.base)}function f(a){var b="";b+='<div class="'+u.bar+'">',b+='<div class="'+u.track+'">',b+='<span class="'+u.handle+'"></span>',b+="</div></div>",a.paddingRight=parseInt(this.css("padding-right"),10),a.paddingBottom=parseInt(this.css("padding-bottom"),10),this.addClass([u.base,a.customClass,a.horizontal?u.horizontal:""].join(" ")).wrapInner('<div class="'+u.content+'" />').prepend(b),a.$content=this.find(t.content),a.$bar=this.find(t.bar),a.$track=this.find(t.track),a.$handle=this.find(t.handle),a.trackMargin=parseInt(a.trackMargin,10),a.$content.on(v.scroll,a,j),this.on(v.touchMouseDown,t.track,a,l).on(v.touchMouseDown,t.handle,a,m),i(a),e()}function g(a){a.$bar.remove(),a.$content.off(v.namespace).contents().unwrap(),this.removeClass([u.base,u.active,a.customClass].join(" ")).off(v.namespace)}function h(b,c,d){var e=d||b.duration,f={};if("number"!==a.type(c)){var g=a(c);if(g.length>0){var h=g.position();c=b.horizontal?h.left+b.$content.scrollLeft():h.top+b.$content.scrollTop()}else c=b.$content.scrollTop()}f[b.horizontal?"scrollLeft":"scrollTop"]=c,b.$content.stop().animate(f,e)}function i(a){a.$el.addClass(u.isSetup);var b={},c={},d={},e=0,f=!0;if(a.horizontal){a.barHeight=a.$content[0].offsetHeight-a.$content[0].clientHeight,a.frameWidth=a.$content.outerWidth(),a.trackWidth=a.frameWidth-2*a.trackMargin,a.scrollWidth=a.$content[0].scrollWidth,a.ratio=a.trackWidth/a.scrollWidth,a.trackRatio=a.trackWidth/a.scrollWidth,a.handleWidth=a.handleSize>0?a.handleSize:a.trackWidth*a.trackRatio,a.scrollRatio=(a.scrollWidth-a.frameWidth)/(a.trackWidth-a.handleWidth),a.handleBounds={left:0,right:a.trackWidth-a.handleWidth},a.$content.css({paddingBottom:a.barHeight+a.paddingBottom});var g=a.$content.scrollLeft();e=g*a.ratio,f=a.scrollWidth<=a.frameWidth,b={width:a.frameWidth},c={width:a.trackWidth,marginLeft:a.trackMargin,marginRight:a.trackMargin},d={width:a.handleWidth}}else{a.barWidth=a.$content[0].offsetWidth-a.$content[0].clientWidth,a.frameHeight=a.$content.outerHeight(),a.trackHeight=a.frameHeight-2*a.trackMargin,a.scrollHeight=a.$content[0].scrollHeight,a.ratio=a.trackHeight/a.scrollHeight,a.trackRatio=a.trackHeight/a.scrollHeight,a.handleHeight=a.handleSize>0?a.handleSize:a.trackHeight*a.trackRatio,a.scrollRatio=(a.scrollHeight-a.frameHeight)/(a.trackHeight-a.handleHeight),a.handleBounds={top:0,bottom:a.trackHeight-a.handleHeight};var h=a.$content.scrollTop();e=h*a.ratio,f=a.scrollHeight<=a.frameHeight,b={height:a.frameHeight},c={height:a.trackHeight,marginBottom:a.trackMargin,marginTop:a.trackMargin},d={height:a.handleHeight}}f?a.$el.removeClass(u.active):a.$el.addClass(u.active),a.$bar.css(b),a.$track.css(c),a.$handle.css(d),q(a,e),a.$el.removeClass(u.setup)}function j(a){w.killEvent(a);var b=a.data,c={};if(b.horizontal){var d=b.$content.scrollLeft();0>d&&(d=0),b.handleLeft=d/b.scrollRatio,b.handleLeft>b.handleBounds.right&&(b.handleLeft=b.handleBounds.right),c={left:b.handleLeft}}else{var e=b.$content.scrollTop();0>e&&(e=0),b.handleTop=e/b.scrollRatio,b.handleTop>b.handleBounds.bottom&&(b.handleTop=b.handleBounds.bottom),c={top:b.handleTop}}b.$handle.css(c)}function k(b){var c=b.originalEvent,d="undefined"!==a.type(c.targetTouches)?c.targetTouches[0]:null;return{pageX:d?d.pageX:b.clientX,pageY:d?d.pageY:b.clientY}}function l(a){w.killEvent(a);var b=a.data,c=k(a),d=b.$track.offset();b.horizontal?(b.pointerStart=c.pageX,b.handleLeft=c.pageX-d.left+x.scrollLeft()-b.handleWidth/2,q(b,b.handleLeft)):(b.pointerStart=c.pageY,b.handleTop=c.pageY-d.top+x.scrollTop()-b.handleHeight/2,q(b,b.handleTop)),n(b)}function m(a){w.killEvent(a);var b=a.data,c=k(a);b.horizontal?(b.pointerStart=c.pageX,b.handleLeft=parseInt(b.$handle.css("left"),10)):(b.pointerStart=c.pageY,b.handleTop=parseInt(b.$handle.css("top"),10)),n(b)}function n(a){a.$content.off(v.namespace),r.on(v.touchMouseMove,a,o).on(v.touchMouseUp,a,p)}function o(a){w.killEvent(a);var b=a.data,c=k(a),d=0;d=b.horizontal?b.handleLeft-(b.pointerStart-c.pageX):b.handleTop-(b.pointerStart-c.pageY),q(b,d)}function p(a){w.killEvent(a),a.data.$content.on(v.scroll,a.data,j),r.off(v.namespace)}function q(a,b){var c={};a.horizontal?(b<a.handleBounds.left&&(b=a.handleBounds.left),b>a.handleBounds.right&&(b=a.handleBounds.right),c={left:b},a.$content.scrollLeft(Math.round(b*a.scrollRatio))):(b<a.handleBounds.top&&(b=a.handleBounds.top),b>a.handleBounds.bottom&&(b=a.handleBounds.bottom),c={top:b},a.$content.scrollTop(Math.round(b*a.scrollRatio))),a.$handle.css(c)}var r,s=b.Plugin("scrollbar",{widget:!0,defaults:{customClass:"",duration:0,handleSize:0,horizontal:!1,trackMargin:0},classes:["content","bar","track","handle","horizontal","setup","active"],methods:{_setup:c,_construct:f,_destruct:g,_resize:d,scroll:h,resize:i}}),t=s.classes,u=t.raw,v=s.events,w=s.functions,x=b.$window,y=[];v.touchMouseDown=[v.touchStart,v.mouseDown].join(" "),v.touchMouseMove=[v.touchMove,v.mouseMove].join(" "),v.touchMouseUp=[v.touchEnd,v.mouseUp].join(" ")}(jQuery,Formstone);
+;(function ($, Formstone, undefined) {
+
+	"use strict";
+
+	/**
+	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function setup() {
+		$Body = Formstone.$body;
+	}
+
+	/**
+	 * @method private
+	 * @name resize
+	 * @description Handles window resize
+	 */
+
+	function resize(windowWidth) {
+		Functions.iterate.call($Instances, resizeInstance);
+	}
+
+	/**
+	 * @method private
+	 * @name cacheInstances
+	 * @description Caches active instances
+	 */
+
+	function cacheInstances() {
+		$Instances = $(Classes.base);
+	}
+
+	/**
+	 * @method private
+	 * @name construct
+	 * @description Builds instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function construct(data) {
+		var html = '';
+
+		html += '<div class="' + RawClasses.bar + '">';
+		html += '<div class="' + RawClasses.track + '">';
+		html += '<span class="' + RawClasses.handle + '"></span>';
+		html += '</div></div>';
+
+		data.paddingRight     = parseInt(this.css("padding-right"), 10);
+		data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
+
+		this.addClass( [RawClasses.base, data.customClass, (data.horizontal ? RawClasses.horizontal : "")].join(" ") )
+			.wrapInner('<div class="' + RawClasses.content + '" />')
+			.prepend(html);
+
+		data.$content    = this.find(Classes.content);
+		data.$bar        = this.find(Classes.bar);
+		data.$track      = this.find(Classes.track);
+		data.$handle     = this.find(Classes.handle);
+
+		data.trackMargin = parseInt(data.trackMargin, 10);
+
+		data.$content.on(Events.scroll, data, onScroll);
+
+		this.on(Events.touchMouseDown, Classes.track, data, onTrackDown)
+			.on(Events.touchMouseDown, Classes.handle, data, onHandleDown);
+
+		resizeInstance(data);
+
+		cacheInstances();
+	}
+
+	/**
+	 * @method private
+	 * @name destruct
+	 * @description Tears down instance.
+	 * @param data [object] "Instance data"
+	 */
+
+	function destruct(data) {
+		data.$bar.remove();
+		data.$content.off(Events.namespace)
+					 .contents()
+					 .unwrap();
+
+		this.removeClass( [RawClasses.base, RawClasses.active, data.customClass].join(" ") )
+			.off(Events.namespace);
+	}
+
+	/**
+	 * @method
+	 * @name scroll
+	 * @description Scrolls instance of plugin to element or position
+	 * @param position [string || int] <null> "Target element selector or static position"
+	 * @param duration [int] <null> "Optional scroll duration"
+	 * @example $(".target").scrollbar("scroll", position, duration);
+	 */
+
+	function scroll(data, position, dur) {
+		var duration = dur || data.duration,
+			styles = {};
+
+		if ($.type(position) !== "number") {
+			var $target = $(position);
+
+			if ($target.length > 0) {
+				var offset = $target.position();
+
+				if (data.horizontal) {
+					position = offset.left + data.$content.scrollLeft();
+				} else {
+					position = offset.top + data.$content.scrollTop();
+				}
+			} else {
+				position = data.$content.scrollTop();
+			}
+		}
+
+		styles[ (data.horizontal ? "scrollLeft" : "scrollTop") ] = position;
+
+		data.$content.stop()
+					 .animate(styles, duration);
+	}
+
+	/**
+	 * @method
+	 * @name resizeInstance
+	 * @description Resizes layout on instance of plugin
+	 * @example $(".target").scrollbar("resize");
+	 */
+
+	function resizeInstance(data)  {
+		data.$el.addClass(RawClasses.isSetup);
+
+		var barStyles = {},
+			trackStyles = {},
+			handleStyles = {},
+			handlePosition = 0,
+			active = true;
+
+		if (data.horizontal) {
+			// Horizontal
+			data.barHeight       = data.$content[0].offsetHeight - data.$content[0].clientHeight;
+			data.frameWidth      = data.$content.outerWidth();
+			data.trackWidth      = data.frameWidth - (data.trackMargin * 2);
+			data.scrollWidth     = data.$content[0].scrollWidth;
+			data.ratio           = data.trackWidth / data.scrollWidth;
+			data.trackRatio      = data.trackWidth / data.scrollWidth;
+			data.handleWidth     = (data.handleSize > 0) ? data.handleSize : data.trackWidth * data.trackRatio;
+			data.scrollRatio     = (data.scrollWidth - data.frameWidth) / (data.trackWidth - data.handleWidth);
+			data.handleBounds    = {
+				left: 0,
+				right: data.trackWidth - data.handleWidth
+			};
+
+			data.$content.css({
+				paddingBottom: data.barHeight + data.paddingBottom
+			});
+
+			var scrollLeft = data.$content.scrollLeft();
+
+			handlePosition = scrollLeft * data.ratio;
+			active = (data.scrollWidth <= data.frameWidth);
+
+			barStyles = {
+				width: data.frameWidth
+			};
+
+			trackStyles = {
+				width: data.trackWidth,
+				marginLeft: data.trackMargin,
+				marginRight: data.trackMargin
+			};
+
+			handleStyles = {
+				width: data.handleWidth
+			};
+		} else {
+			// Vertical
+			data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
+			data.frameHeight = data.$content.outerHeight();
+			data.trackHeight = data.frameHeight - (data.trackMargin * 2);
+			data.scrollHeight = data.$content[0].scrollHeight;
+			data.ratio = data.trackHeight / data.scrollHeight;
+			data.trackRatio = data.trackHeight / data.scrollHeight;
+			data.handleHeight = (data.handleSize > 0) ? data.handleSize : data.trackHeight * data.trackRatio;
+			data.scrollRatio = (data.scrollHeight - data.frameHeight) / (data.trackHeight - data.handleHeight);
+			data.handleBounds = {
+				top: 0,
+				bottom: data.trackHeight - data.handleHeight
+			};
+
+			var scrollTop = data.$content.scrollTop();
+
+			handlePosition = scrollTop * data.ratio;
+			active = (data.scrollHeight <= data.frameHeight);
+
+			barStyles = {
+				height: data.frameHeight
+			};
+
+			trackStyles = {
+				height: data.trackHeight,
+				marginBottom: data.trackMargin,
+				marginTop: data.trackMargin
+			};
+
+			handleStyles = {
+				height: data.handleHeight
+			};
+		}
+
+		// Updates
+
+		if (active) {
+			data.$el.removeClass(RawClasses.active);
+		} else {
+			data.$el.addClass(RawClasses.active);
+		}
+
+		data.$bar.css(barStyles);
+		data.$track.css(trackStyles);
+		data.$handle.css(handleStyles);
+
+		positionContent(data, handlePosition);
+
+		data.$el.removeClass(RawClasses.setup);
+	}
+
+	/**
+	 * @method private
+	 * @name onScroll
+	 * @description Handles scroll event
+	 * @param e [object] "Event data"
+	 */
+
+	function onScroll(e) {
+		Functions.killEvent(e);
+
+		var data = e.data,
+			handleStyles = {};
+
+		if (data.horizontal) {
+			// Horizontal
+			var scrollLeft = data.$content.scrollLeft();
+
+			if (scrollLeft < 0) {
+				scrollLeft = 0;
+			}
+
+			data.handleLeft = scrollLeft / data.scrollRatio;
+
+			if (data.handleLeft > data.handleBounds.right) {
+				data.handleLeft = data.handleBounds.right;
+			}
+
+			handleStyles = {
+				left: data.handleLeft
+			};
+		} else {
+			// Vertical
+			var scrollTop = data.$content.scrollTop();
+
+			if (scrollTop < 0) {
+				scrollTop = 0;
+			}
+
+			data.handleTop = scrollTop / data.scrollRatio;
+
+			if (data.handleTop > data.handleBounds.bottom) {
+				data.handleTop = data.handleBounds.bottom;
+			}
+
+			handleStyles = {
+				top: data.handleTop
+			};
+		}
+
+		data.$handle.css(handleStyles);
+	}
+
+	/**
+	 * @method private
+	 * @name getPointer
+	 * @description Normalizes touch and mouse events
+	 * @param e [object] "Event data"
+	 * @return [object] "Pointer poisition data"
+	 */
+
+	function getPointer(e) {
+		var oe = e.originalEvent,
+			touch = ($.type(oe.targetTouches) !== "undefined") ? oe.targetTouches[0] : null;
+
+		return {
+			pageX: (touch) ? touch.pageX : e.clientX,
+			pageY: (touch) ? touch.pageY : e.clientY
+		};
+	}
+
+	/**
+	 * @method private
+	 * @name onTrackDown
+	 * @description Handles mousedown/touchstart event on track
+	 * @param e [object] "Event data"
+	 */
+
+	function onTrackDown(e) {
+		Functions.killEvent(e);
+
+		var data       = e.data,
+			pointer    = getPointer(e),
+			offset     = data.$track.offset();
+
+		if (data.horizontal) {
+			// Horizontal
+			data.pointerStart = pointer.pageX;
+			data.handleLeft = pointer.pageX - offset.left + $Window.scrollLeft() - (data.handleWidth / 2);
+
+			positionContent(data, data.handleLeft);
+		} else {
+			// Vertical
+			data.pointerStart = pointer.pageY;
+			data.handleTop = pointer.pageY - offset.top + $Window.scrollTop() - (data.handleHeight / 2);
+
+			positionContent(data, data.handleTop);
+		}
+
+		onPointerStart(data);
+	}
+
+	/**
+	 * @method private
+	 * @name onHandleDown
+	 * @description Handles mousedown/touchstart event on handle
+	 * @param e [object] "Event data"
+	 */
+
+	function onHandleDown(e) {
+		Functions.killEvent(e);
+
+		var data       = e.data,
+			pointer    = getPointer(e);
+
+		if (data.horizontal) {
+			// Horizontal
+			data.pointerStart = pointer.pageX;
+			data.handleLeft = parseInt(data.$handle.css("left"), 10);
+		} else {
+			// Vertical
+			data.pointerStart = pointer.pageY;
+			data.handleTop = parseInt(data.$handle.css("top"), 10);
+		}
+
+		onPointerStart(data);
+	}
+
+	/**
+	 * @method private
+	 * @name onStart
+	 * @description Handles mousedown/touchstart event
+	 * @param data [object] "Instance data"
+	 */
+
+	function onPointerStart(data) {
+		data.$content.off(Events.namespace);
+
+		$Body.on(Events.touchMouseMove, data, onPointerMove)
+			 .on(Events.touchMouseUp, data, onPointerEnd);
+	}
+
+	/**
+	 * @method private
+	 * @name onPointerMove
+	 * @description Handles mousemove/touchmove event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPointerMove(e) {
+		Functions.killEvent(e);
+
+		var data        = e.data,
+			pointer     = getPointer(e),
+			position    = 0;
+
+		if (data.horizontal) {
+			// Horizontal
+			position = data.handleLeft - (data.pointerStart - pointer.pageX);
+		} else {
+			// Vertical
+			position = data.handleTop - (data.pointerStart - pointer.pageY);
+		}
+
+		positionContent(data, position);
+	}
+
+	/**
+	 * @method private
+	 * @name onPointerEnd
+	 * @description Handles mouseup/touchend event
+	 * @param e [object] "Event data"
+	 */
+
+	function onPointerEnd(e) {
+		Functions.killEvent(e);
+
+		e.data.$content.on(Events.scroll, e.data, onScroll);
+		$Body.off(Events.namespace);
+	}
+
+	/**
+	 * @method private
+	 * @name position
+	 * @description Position handle based on scroll
+	 * @param data [object] "Instance data"
+	 * @param position [int] "Scroll position"
+	 */
+
+	function positionContent(data, position) {
+		var handleStyles = {};
+
+		if (data.horizontal) {
+			// Horizontal
+			if (position < data.handleBounds.left) {
+				position = data.handleBounds.left;
+			}
+
+			if (position > data.handleBounds.right) {
+				position = data.handleBounds.right;
+			}
+
+			handleStyles = {
+				left: position
+			};
+
+			data.$content.scrollLeft(Math.round(position * data.scrollRatio));
+		} else {
+			// Vertical
+			if (position < data.handleBounds.top) {
+				position = data.handleBounds.top;
+			}
+
+			if (position > data.handleBounds.bottom) {
+				position = data.handleBounds.bottom;
+			}
+
+			handleStyles = {
+				top: position
+			};
+
+			data.$content.scrollTop(Math.round(position * data.scrollRatio));
+		}
+
+		data.$handle.css(handleStyles);
+	}
+
+	/**
+	 * @plugin
+	 * @name Scrollbar
+	 * @description A jQuery plugin for .
+	 * @type widget
+	 * @dependency core.js
+	 */
+
+	var Plugin = Formstone.Plugin("scrollbar", {
+			widget: true,
+
+			/**
+			 * @options
+			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param duration [int] <0> "Scroll animation length"
+			 * @param handleSize [int] <0> "Handle size; 0 to auto size"
+			 * @param horizontal [boolean] <false> "Scroll horizontally"
+			 * @param trackMargin [int] <0> "Margin between track and handle edge”
+			 */
+
+			defaults: {
+				customClass: "",
+				duration: 0,
+				handleSize: 0,
+				horizontal: false,
+				trackMargin: 0
+			},
+
+			classes: [
+				"content",
+				"bar",
+				"track",
+				"handle",
+				"horizontal",
+				"setup",
+				"active"
+			],
+
+			methods: {
+				_setup        : setup,
+				_construct    : construct,
+				_destruct     : destruct,
+				_resize       : resize,
+
+				// Public Methods
+				scroll        : scroll,
+				resize        : resizeInstance
+			}
+		}),
+
+		// Localize References
+
+		Classes        = Plugin.classes,
+		RawClasses     = Classes.raw,
+		Events         = Plugin.events,
+		Functions      = Plugin.functions,
+
+		$Body,
+		$Window        = Formstone.$window,
+		$Instances     = [];
+
+		Events.touchMouseDown    = [Events.touchStart, Events.mouseDown].join(" ");
+		Events.touchMouseMove    = [Events.touchMove,  Events.mouseMove].join(" ");
+		Events.touchMouseUp      = [Events.touchEnd,   Events.mouseUp].join(" ");
+
+})(jQuery, Formstone);
