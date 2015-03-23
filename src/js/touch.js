@@ -39,7 +39,7 @@
 				data.axisX = data.axis === "x";
 				data.axisY = data.axis === "y";
 
-				touchAction(this, "pan-" + (data.axisY ? "y" : "x"));
+				// touchAction(this, "pan-" + (data.axisY ? "y" : "x"));
 			} else {
 				touchAction(this, "none");
 			}
@@ -229,8 +229,6 @@
 				if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
 					// if has axis and moved in same direction
 					data.passed = true;
-
-					// data.$el.one(Events.click, data, Functions.killEvent);
 				}
 
 				if (data.passed) {
@@ -251,7 +249,6 @@
 						data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
 						data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
 						data.scaleD    = (data.pinch.endD / data.pinch.startD);
-
 						newE.pageX     = data.pinch.endX;
 						newE.pageY     = data.pinch.endY;
 						newE.scale     = data.scaleD;
@@ -269,6 +266,14 @@
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name bindLink
+	 * @description Bind events to internal links
+	 * @param $link [object] "Object to bind"
+	 * @param data [object] "Instance data"
+	 */
+
 	function bindLink($link, data) {
 		$link.on(Events.click, data, onLinkClick);
 
@@ -276,6 +281,13 @@
 		var events = $._data($link[0], "events")["click"];
 		events.unshift(events.pop());
 	}
+
+	/**
+	 * @method private
+	 * @name onLinkClick
+	 * @description Handles clicks to internal links
+	 * @param e [object] "Event data"
+	 */
 
 	function onLinkClick(e) {
 		Functions.killEvent(e, true);

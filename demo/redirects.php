@@ -1,6 +1,10 @@
 <?
 
 	$redirects = array(
+
+		// asap
+		"asap" => "components/asap/",
+
 		// background
 		"background" => "components/background/",
 		"wallpaper" => "components/background/",
@@ -31,6 +35,12 @@
 		"components/selecter/demo" => "components/dropdown/",
 		"components/selecter/demo/index.html" => "components/dropdown/",
 
+		// equalize
+		"equalize" => "components/equalize/",
+		"sizer" => "components/equalize/",
+		"components/sizer/demo" => "components/equalize/",
+		"components/sizer/demo/index.html" => "components/equalize/",
+
 		// grid
 		"grid" => "components/grid/",
 		"gridlock" => "components/grid/",
@@ -60,11 +70,32 @@
 		"components/shifter/demo" => "components/navigation/",
 		"components/shifter/demo/index.html" => "components/navigation/",
 
+		// number
+		"number" => "components/number/",
+		"stepper" => "components/number/",
+		"components/stepper/demo" => "components/number/",
+		"components/stepper/demo/index.html" => "components/number/",
+
+		// pagination
+		"pagination" => "components/pagination/",
+		"pager" => "components/pagination/",
+		"components/pager/demo" => "components/pagination/",
+		"components/pager/demo/index.html" => "components/pagination/",
+
+		// range
+		"range" => "components/range/",
+		"ranger" => "components/range/",
+		"components/ranger/demo" => "components/range/",
+		"components/ranger/demo/index.html" => "components/range/",
+
 		// scrollbar
 		"scrollbar" => "components/scrollbar/",
 		"scroller" => "components/scrollbar/",
 		"components/scroller/demo" => "components/scrollbar/",
 		"components/scroller/demo/index.html" => "components/scrollbar/",
+
+		// swap
+		"swap" => "components/swap/",
 
 		// tabs
 		"tabs" => "components/tabs/",
@@ -77,6 +108,12 @@
 		"tipper" => "components/tooltip/",
 		"components/tipper/demo" => "components/tooltip/",
 		"components/tipper/demo/index.html" => "components/tooltip/",
+
+		// touch
+		"touch" => "components/touch/",
+
+		// transition
+		"transition" => "components/transition/",
 
 		// upload
 		"upload" => "components/upload/",
