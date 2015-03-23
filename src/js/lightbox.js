@@ -786,10 +786,10 @@
 
 			Instance.gallery.index += ($control.hasClass(Classes.raw.control_next)) ? 1 : -1;
 			if (Instance.gallery.index > Instance.gallery.total) {
-				Instance.gallery.index = Instance.gallery.total;
+				Instance.gallery.index = (Instance.infinite) ? 0 : Instance.gallery.total;
 			}
 			if (Instance.gallery.index < 0) {
-				Instance.gallery.index = 0;
+				Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
 			}
 
 			Instance.$lightbox.addClass( [Classes.raw.loading, Classes.raw.animating].join(" "));
@@ -831,11 +831,14 @@
 
 	function updateGalleryControls() {
 		Instance.$controls.removeClass(Classes.raw.control_disabled);
-		if (Instance.gallery.index === 0) {
-			Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
-		}
-		if (Instance.gallery.index === Instance.gallery.total) {
-			Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
+
+		if (!Instance.infinite) {
+			if (Instance.gallery.index === 0) {
+				Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
+			}
+			if (Instance.gallery.index === Instance.gallery.total) {
+				Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
+			}
 		}
 	}
 
@@ -1008,6 +1011,7 @@
 			 * @param extensions [array] <"jpg", "sjpg", "jpeg", "png", "gif"> "Image type extensions"
 			 * @param fixed [boolean] <false> "Flag for fixed positioning"
 			 * @param formatter [function] <$.noop> "Caption format function"
+			 * @param infinite [boolean] <false> "Flag for infinite galleries"
 			 * @param labels.close [string] <'Close'> "Close button text"
 			 * @param labels.count [string] <'of'> "Gallery count separator text"
 			 * @param labels.next [string] <'Next'> "Gallery control text"
@@ -1028,6 +1032,7 @@
 				extensions     : [ "jpg", "sjpg", "jpeg", "png", "gif" ],
 				fixed          : false,
 				formatter      : formatCaption,
+				infinite       : false,
 				labels: {
 					close      : "Close",
 					count      : "of",

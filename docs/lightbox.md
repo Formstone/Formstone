@@ -76,6 +76,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `extensions` | `array` | `"jpg", "sjpg", "jpeg", "png", "gif"` | Image type extensions |
 | `fixed` | `boolean` | `false` | Flag for fixed positioning |
 | `formatter` | `function` | `$.noop` | Caption format function |
+| `infinite` | `boolean` | `false` | Flag for infinite galleries |
 | `labels.close` | `string` | `'Close'` | Close button text |
 | `labels.count` | `string` | `'of'` | Gallery count separator text |
 | `labels.next` | `string` | `'Next'` | Gallery control text |

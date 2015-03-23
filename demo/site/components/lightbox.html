@@ -26,7 +26,9 @@
 
 <script>
 	$(function() {
-		$(".lightbox").not(".lightbox_format").lightbox();
+		$(".lightbox").not(".lightbox_format").lightbox({
+			infinite: true
+		});
 
 		$(".lightbox_format").lightbox({
 			formatter: customFormat
@@ -218,6 +220,12 @@ transition.js</code></pre>
 <td><code>function</code></td>
 <td><code>$.noop</code></td>
 <td>Caption format function</td>
+</tr>
+<tr>
+<td><code>infinite</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Flag for infinite galleries</td>
 </tr>
 <tr>
 <td><code>labels.close</code></td>

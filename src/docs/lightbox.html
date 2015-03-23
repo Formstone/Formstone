@@ -16,7 +16,9 @@
 
 <script>
 	$(function() {
-		$(".lightbox").not(".lightbox_format").lightbox();
+		$(".lightbox").not(".lightbox_format").lightbox({
+			infinite: true
+		});
 
 		$(".lightbox_format").lightbox({
 			formatter: customFormat
