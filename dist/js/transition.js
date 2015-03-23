@@ -22,7 +22,6 @@
 			data.styles      = getStyles(data.$check);
 			data.timer       = null;
 
-
 			var duration = data.$check.css( Formstone.transition + "-duration" ),
 				durationValue = parseFloat(duration);
 
@@ -31,11 +30,17 @@
 
 				this.on(Events.transitionEnd, data, onTranistionEnd);
 			} else {
-				// Otherwise, watch for changes in properties
 
-				data.timer = Functions.startTimer(data.timer, 50, function() {
-					checkStyles(data);
-				}, true);
+//				if (Formstone.document.addEventListener) { // ie8
+					// ie8 needs to resolve
+					resolve(data);
+/*
+				} else {
+					data.timer = Functions.startTimer(data.timer, 50, function() {
+						checkStyles(data);
+					}, true);
+				}
+*/
 			}
 		}
 	}
@@ -150,7 +155,7 @@
 			computed = el.currentStyle;
 
 			for (prop in computed) {
-				if (computed.hasOwnProperty(computed)) {
+				if (computed.hasOwnProperty(prop)) {
 					styles[prop] = computed[prop];
 				}
 			}

@@ -474,8 +474,10 @@
 	 */
 
 	function formatCaption() {
-		var title = this.attr("title");
-		return (title !== undefined && title.trim() !== "") ? '<p class="caption">' + title.trim() + '</p>' : "";
+		var title = this.attr("title"),
+			t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g,'') : false;
+
+		return t ? '<p class="caption">' + t + '</p>' : "";
 	}
 
 	/**

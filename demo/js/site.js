@@ -4063,8 +4063,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	 */
 
 	function formatCaption() {
-		var title = this.attr("title");
-		return (title !== undefined && title.trim() !== "") ? '<p class="caption">' + title.trim() + '</p>' : "";
+		var title = this.attr("title"),
+			t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g,'') : false;
+
+		return t ? '<p class="caption">' + t + '</p>' : "";
 	}
 
 	/**
@@ -8411,7 +8413,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			data.styles      = getStyles(data.$check);
 			data.timer       = null;
 
-
 			var duration = data.$check.css( Formstone.transition + "-duration" ),
 				durationValue = parseFloat(duration);
 
@@ -8420,11 +8421,17 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				this.on(Events.transitionEnd, data, onTranistionEnd);
 			} else {
-				// Otherwise, watch for changes in properties
 
-				data.timer = Functions.startTimer(data.timer, 50, function() {
-					checkStyles(data);
-				}, true);
+//				if (Formstone.document.addEventListener) { // ie8
+					// ie8 needs to resolve
+					resolve(data);
+/*
+				} else {
+					data.timer = Functions.startTimer(data.timer, 50, function() {
+						checkStyles(data);
+					}, true);
+				}
+*/
 			}
 		}
 	}
@@ -8539,7 +8546,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			computed = el.currentStyle;
 
 			for (prop in computed) {
-				if (computed.hasOwnProperty(computed)) {
+				if (computed.hasOwnProperty(prop)) {
 					styles[prop] = computed[prop];
 				}
 			}
