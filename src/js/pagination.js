@@ -142,12 +142,16 @@
 	 */
 
 	function onPageClick(e) {
+		Functions.killEvent(e);
+
 		var data = e.data,
 			index = data.$items.index( $(e.currentTarget) );
 
+		/*
 		if (data.ajax) {
 			Functions.killEvent(e);
 		}
+		*/
 
 		updatePage(data, index);
 	}
