@@ -1,4 +1,4 @@
-/*! Formstone v0.2.0 [tabs.js] 2015-03-23 | MIT License | formstone.it */
+/*! Formstone v0.2.0 [tabs.js] 2015-03-24 | MIT License | formstone.it */
 
 ;(function ($, Formstone, undefined) {
 

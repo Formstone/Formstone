@@ -28,17 +28,9 @@
 
 				this.on(Events.transitionEnd, data, onTranistionEnd);
 			} else {
-
-//				if (Formstone.document.addEventListener) { // ie8
-					// ie8 needs to resolve
-					resolve(data);
-/*
-				} else {
-					data.timer = Functions.startTimer(data.timer, 50, function() {
-						checkStyles(data);
-					}, true);
-				}
-*/
+				data.timer = Functions.startTimer(data.timer, 50, function() {
+					checkStyles(data);
+				}, true);
 			}
 		}
 	}
@@ -153,7 +145,7 @@
 			computed = el.currentStyle;
 
 			for (prop in computed) {
-				if (computed.hasOwnProperty(prop)) {
+				if (computed[prop]) { // ie8...
 					styles[prop] = computed[prop];
 				}
 			}

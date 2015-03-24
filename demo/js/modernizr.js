@@ -1,4 +1,4 @@
-/*! Formstone v0.2.0 [modernizr.js] 2015-03-23 | MIT License | formstone.it */
+/*! Formstone v0.2.0 [modernizr.js] 2015-03-24 | MIT License | formstone.it */
 
 /* Modernizr 2.8.3 (Custom Build) | MIT & BSD
  * Build: http://modernizr.com/download/#-backgroundsize-flexbox-flexboxlegacy-multiplebgs-rgba-cssanimations-csscolumns-generatedcontent-cssgradients-csstransforms-csstransforms3d-csstransitions-history-audio-video-svg-touch-cssclasses-teststyles-testprop-testallprops-prefixes-domprefixes-css_pointerevents-load
