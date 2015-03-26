@@ -8,17 +8,25 @@
 	@base_transition_timing: linear;
 	@base_transition_delay: 0;
 
-	@small:		~"only screen and (min-width: 500px)";
-	@medium:	~"only screen and (min-width: 740px)";
-	@large:		~"only screen and (min-width: 980px)";
-	@max:		~"only screen and (min-width: 1220px)";
+	@min_sm:		~"only screen and (min-width:" (@mq_min_sm * 1px) + ~")";
+	@min_md:		~"only screen and (min-width:" (@mq_min_md * 1px) + ~")";
+	@min_lg:		~"only screen and (min-width:" (@mq_min_lg * 1px) + ~")";
+	@min_xl:		~"only screen and (min-width:" (@mq_min_xl * 1px) + ~")";
 
-	@max_small:		~"only screen and (max-width: 499px)";
-	@max_medium:	~"only screen and (max-width: 739px)";
-	@max_large:		~"only screen and (max-width: 979px)";
-	@max_max:		~"only screen and (max-width: 1219px)";
+	@max_sm:		~"only screen and (max-width:" (@mq_min_sm - 1px) + ~")";
+	@max_md:		~"only screen and (max-width:" (@mq_min_md - 1px) + ~")";
+	@max_lg:		~"only screen and (max-width:" (@mq_min_lg - 1px) + ~")";
+	@max_xl:		~"only screen and (max-width:" (@mq_min_xl - 1px) + ~")";
 
-	// Colors
+	@and_max_sm:	~"and (max-width:" (@mq_min_sm - 1px) + ~")";
+	@and_max_md:	~"and (max-width:" (@mq_min_md - 1px) + ~")";
+	@and_max_lg:	~"and (max-width:" (@mq_min_lg - 1px) + ~")";
+	@and_max_xl:	~"and (max-width:" (@mq_min_xl - 1px) + ~")";
+
+
+/* ==================================================================
+	 Colors
+================================================================== */
 
 	@black: #222;
 	@white: #fff;
@@ -39,7 +47,12 @@
 ================================================================== */
 
 	.sans(@weight:400) {
-		font-family: "Open Sans", Helvetica, sans-serif;
+		font-family: "Merriweather Sans", Helvetica, sans-serif;
+		font-weight: @weight;
+	}
+
+	.serif(@weight:400) {
+		font-family: "Merriweather", Georgia, serif;
 		font-weight: @weight;
 	}
 

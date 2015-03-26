@@ -24,17 +24,18 @@
     "grunt": "~0.4.2",
     "grunt-autoprefixer": "^1.0.1",
     "grunt-banner": "^0.2.3",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-less": "^0.11.4",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-modernizr": "^0.6.0",
     "grunt-newer": "^0.8.0",
     "grunt-npm2bower-sync": "~0.3.0",
     "grunt-stripmq": "0.0.6",
     "grunt-zetzer": "^2.0.0",
-    "load-grunt-tasks": "^1.0.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-copy": "^0.8.0"
+    "load-grunt-tasks": "^1.0.0"
   },
   "site": {
     "css": {
@@ -46,6 +47,7 @@
       "demo/js/site.js": [
 	    "dist/js/lib/utils.js",
         "demo/bower/jquery/dist/jquery.min.js",
+        "demo/bower/prism/prism.js",
         "dist/js/core.js",
         "dist/js/background.js",
         "dist/js/carousel.js",
@@ -75,14 +77,18 @@
       ],
       "demo/js/site-ie9.js": [
         "demo/js/src/ie/matchMedia.ie9.js"
-      ],
-      "demo/js/modernizr.js": [
-        "demo/js/src/lib/modernizr.custom.js"
       ]
     },
     "js_ignores": [
       "demo/js/src/ie/*/",
       "demo/js/src/lib/*/"
-    ]
+    ],
+    "vars": {
+      "mq_min_xs": "320",
+      "mq_min_sm": "500",
+      "mq_min_md": "740",
+      "mq_min_lg": "980",
+      "mq_min_xl": "1220"
+    }
   }
 }

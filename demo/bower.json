@@ -4,6 +4,7 @@
     "normalize-css": "~3.0.2",
     "html5shiv": "~3.7.2",
     "jquery": "~1",
-    "prism": "gh-pages"
+    "prism": "gh-pages",
+    "modernizr": "~2.8.3"
   }
 }

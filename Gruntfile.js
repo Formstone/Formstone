@@ -155,7 +155,8 @@ module.exports = function(grunt) {
 		// LESS
 		less: {
 			options: {
-				cleancss: true
+				cleancss: true,
+				modifyVars: '<%= pkg.site.vars %>'
 			},
 			library: {
 				files: cssFiles
@@ -248,6 +249,26 @@ module.exports = function(grunt) {
 					'demo/css/site-ie8.css': [ 'demo/css/site-ie8.css' ]
 				}
 			}
+		},
+		// Custom Modernizr build
+		modernizr: {
+			target: {
+				devFile: 'demo/bower/modernizr/modernizr.js',
+				outputFile: 'demo/js/modernizr.js',
+				"extra" : {
+					"shiv" : false,
+					"printshiv" : false,
+					"load" : true,
+					"mq" : false,
+					"cssclasses" : true
+				},
+				files: {
+					src: [
+						'demo/js/*.js',
+						'demo/css/*.css'
+					]
+				}
+			}
 		}
 	});
 
@@ -288,14 +309,14 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'js', 'css', 'library', 'demoClean' ]);
 	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
-	// grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
-	grunt.registerTask('js', [ 'jshint:library', 'copy:library' ]);
+	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
+	// grunt.registerTask('js', [ 'jshint:library', 'copy:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	// grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
-	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'concat:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq', 'modernizr' ]);
+	// grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'concat:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

@@ -18,12 +18,14 @@
 			windowWidth = 0,
 			$window,
 			$doc,
+			$html,
 			$body;
 
 		function init() {
 			// Objects
 			$window = $(window);
 			$doc    = $(document);
+			$html   = $("html");
 			$body   = $("body");
 
 			$("[class*=lang-]").each(function() {
@@ -34,7 +36,10 @@
 
 			$("pre").wrap('<div class="pre_wrapper"></div>');
 
-			// Prism.highlightAll();
+			console.log($html.hasClass("canvas"));
+			if ($html.hasClass("canvas")) {
+				Prism.highlightAll();
+			}
 
 			$(".js-navigation").navigation();
 
