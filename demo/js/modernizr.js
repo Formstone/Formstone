@@ -1,9 +1,3 @@
-/*! Formstone v0.2.0 [modernizr.js] 2015-03-26 | MIT License | formstone.it */
-
-/*! Formstone v0.2.0 [modernizr.js] 2015-03-26 | MIT License | formstone.it */
-
-/*! Formstone v0.2.0 [modernizr.js] 2015-03-26 | MIT License | formstone.it */
-
 /* Modernizr (Custom Build) | MIT & BSD
  * Build: http://modernizr.com/download/#-load-cssclasses-opacity-csstransforms-svg-touch-canvas
  */

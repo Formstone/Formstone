@@ -134,13 +134,15 @@
 
 		// !Fluid Grid
 		&-fluid .@{fs-grid-class-row} {
-			width: 98%;
+			width: 96%;
+			width: ~'calc(100% - 40px)';
 		}
 
 		// !Fluid Grid - Small Only
 		@media screen and (max-width: (@fs-grid-width-break-md - 1px)) {
 			&-sm-fluid .@{fs-grid-class-row} {
-				width: 98%;
+				width: 96%;
+				width: ~'calc(100% - 40px)';
 			}
 		}
 	}

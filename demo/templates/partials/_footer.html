@@ -1,28 +1,11 @@
-					</div>
-				</div>
-				<div class="fs-cell fs-lg-2 sidebar">
-					<nav class="main_nav sidebar_content js-navigation" data-navigation-handle="#js-nav_handle" data-navigation-content=".js-nav_move" data-navigation-options='{"type":"overlay","gravity":"right"}'>
-						<a href="{{= it.site_root }}" class="logo sidebar_logo">Formstone</a>
-						{{= it.include("navigation", { site_root: it.site_root, asset_root: it.asset_root, component_root: it.component_root }) }}
-					</nav>
-				</div>
-			</div>
+			{{= it.include("sidebar", { site_root: it.site_root, asset_root: it.asset_root, component_root: it.component_root }) }}
 		</div>
-		<footer class="fs-row footer">
-			<div class="fs-cell fs-lg-10 right">
-				<p>&copy; 2014 Formstone</p>
+		<footer class="footer">
+			<div class="fs-row">
+				<div class="fs-cell-centered fs-lg-10">
+					<p>&copy; 2015 &nbsp;&middot;&nbsp; A Project By <a href="http://benplum.com/" target="_blank">Ben Plum</a></p>
+				</div>
 			</div>
 		</footer>
-		<!-- Gridlock -->
-		<script>
-			/*
-			var GridlockBookmarkletConfig = {
-				useCookies: true,
-				position: "bottom-left"
-			};
-			(function(){if(typeof GridlockBookmarklet=='undefined'){document.body.appendChild(document.createElement('script')).src='http://formstone.it/js/gridlock.bookmarklet.js';}else{GridlockBookmarklet();}})();
-			*/
-		</script>
-
 	</body>
 </html>

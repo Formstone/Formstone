@@ -63,7 +63,26 @@ module.exports = function(grunt) {
 				],
 				tasks: [
 					'newer:less:demo',
-					'newer:autoprefixer'
+					'newer:autoprefixer',
+					'newer:stripmq:target'
+				]
+			},
+			demo: {
+				files: [
+					'demo/pages/**/*.md',
+					'demo/templates/**/*.html'
+				],
+				tasks: [
+					'zetzer'
+				]
+			},
+			images: {
+				files: [
+					'demo/images/src/**/*.{png,jpg,jpeg,gif,svg}'
+				],
+				tasks: [
+					'newer:imagemin:target',
+					'newer:svgmin:target'
 				]
 			},
 			config: {
@@ -156,7 +175,10 @@ module.exports = function(grunt) {
 		less: {
 			options: {
 				cleancss: true,
-				modifyVars: '<%= pkg.site.vars %>'
+				modifyVars: '<%= pkg.site.vars %>',
+				plugins: [
+					new (require('less-plugin-clean-css'))()
+				]
 			},
 			library: {
 				files: cssFiles
@@ -244,7 +266,7 @@ module.exports = function(grunt) {
 				width: 1024,
 				type: 'screen'
 			},
-			all: {
+			target: {
 				files: {
 					'demo/css/site-ie8.css': [ 'demo/css/site-ie8.css' ]
 				}
@@ -268,6 +290,35 @@ module.exports = function(grunt) {
 						'demo/css/*.css'
 					]
 				}
+			}
+		},
+		// Optimize images (png, gif, jpg)
+		imagemin: {
+			target: {
+				files: [
+					{
+						expand: true,
+						cwd: 'demo/images/src',
+						src: '**/*.{png,jpg,jpeg,gif}',
+						dest: 'demo/images'
+					}
+				]
+			}
+		},
+		// Optimize images (svg)
+		svgmin: {
+			options: {
+				plugins: [
+					{ removeViewBox: true }
+				]
+			},
+			target: {
+				files: [{
+					expand: true,
+					cwd: 'demo/images/src',
+					src: '**/*.svg',
+					dest: 'demo/images'
+				}]
 			}
 		}
 	});
@@ -310,13 +361,12 @@ module.exports = function(grunt) {
 	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
 	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
-	// grunt.registerTask('js', [ 'jshint:library', 'copy:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
+	grunt.registerTask('img', [ 'imagemin', 'svgmin' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq', 'modernizr' ]);
-	// grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'concat:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'jshint:demo', 'uglify:demo', 'less:demo', 'autoprefixer:demo', 'usebanner:demo', 'modernizr', 'stripmq', 'img' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

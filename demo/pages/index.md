@@ -1,8 +1,4 @@
-{"template":"content.html","title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
-
-# Thoughtfully Crafted<br>Front-End Components
-
-<p class="intro">Because you know how style an H1.</p>
+{"template":"home.html","title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
 
 <div class="alert">
 	<h2 class="alert_heading">New To Formstone?</h2>
@@ -11,7 +7,6 @@
 	<h2 class="alert_heading">Migrating From An Older Version?</h2>
 	<p>Check out the [Upgrade Guide](../upgrade.html) for information on changes to the project.</p>
 </div>
-
 <div class="fs-row">
 	<div class="fs-cell fs-md-half fs-lg-half feature">
 		<h3 class="heading_2">Responsive</h3>

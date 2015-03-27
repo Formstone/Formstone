@@ -28,17 +28,19 @@
 	 Colors
 ================================================================== */
 
-	@black: #222;
+	@black: #2C3E50;
 	@white: #fff;
 
 	@tan: #D6C591;
-	@orange: #C65032;
-	@blue: #393B3F;
+	@orange: #D35400;
+
+	@blue:       #2C3E50;
+	@blue_light: #34495E;
 
 	@gray_1: #f0f0f0;
-	@gray_2: #ccc;
-	@gray_3: #999;
-	@gray_4: #666;
+	@gray_2: #DADFE1;
+	@gray_3: #95A5A6;
+	@gray_4: #6C7A89;
 	@gray_5: #333;
 
 
@@ -47,12 +49,7 @@
 ================================================================== */
 
 	.sans(@weight:400) {
-		font-family: "Merriweather Sans", Helvetica, sans-serif;
-		font-weight: @weight;
-	}
-
-	.serif(@weight:400) {
-		font-family: "Merriweather", Georgia, serif;
+		font-family: "Lato", Helvetica, sans-serif;
 		font-weight: @weight;
 	}
 
@@ -112,7 +109,10 @@
 
 	.icon_sprite(@left:0, @top:0) {
 		background: url(../images/icons.png) no-repeat @left @top;
-		background-image: url(../images/icons.svg), none;
+
+		.svg & {
+			background-image: url(../images/icons.svg);
+		}
 	}
 
 	.icon_indent() {
