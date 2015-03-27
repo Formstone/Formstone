@@ -13,7 +13,7 @@ function FSGridBookmarklet() {
 			var _this = this,
 				config = $jq.extend({
 					onLoad: false,
-					position: "top-right", // top-right, top-left, bottom-right, bottom-left
+					position: "bottom-left", // top-right, top-left, bottom-right, bottom-left
 					useCookies: false
 				}, window.FSGridBookmarkletConfig);
 
