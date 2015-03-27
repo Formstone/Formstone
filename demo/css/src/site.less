@@ -90,14 +90,14 @@
 		margin: 30px 0 20px;
 	}
 	h1 {
-		.font_size(36);
+		.font_size(42);
 
 		@media @min_md {
 			.font_size(42);
 		}
 	}
 	h2 {
-		.font_size(26);
+		.font_size(32);
 
 		margin-top: 40px;
 
@@ -106,7 +106,7 @@
 		}
 	}
 	h3 {
-		.font_size(20);
+		.font_size(26);
 
 		color: @orange;
 
@@ -128,6 +128,8 @@
 	h6 {  }
 
 	p {
+		.font_size(18);
+
 		margin: 20px 0;
 	}
 
@@ -434,6 +436,7 @@
 
 		.no-touch &:hover {
 			border: none;
+			color: @white;
 		}
 
 		&:before {
@@ -483,14 +486,14 @@
 	}
 
 	.footer {
-		.font_size(12);
-
 		background: @gray_1;
 		color: @blue;
 		padding: 25px 0;
 		text-align: center;
 
 		p {
+			.font_size(14);
+
 			margin: 10px 0;
 		}
 	}
@@ -513,7 +516,7 @@
 		}
 
 		.intro {
-			.font_size(18);
+			.font_size(20);
 		}
 	}
 
@@ -540,18 +543,18 @@
 	.alert {
 		background: @gray_1;
 		border-radius: 2px;
-		margin: 40px 0 20px;
+		margin: 20px 0;
 		overflow-y: auto;
 		padding: 25px;
 
 		h2 {
-			.font_size(20);
+			.font_size(22);
 
 			margin: 0 0 10px;
 		}
 
 		p {
-			.font_size(16);
+			// .font_size(16);
 
 			margin: 10px 0 0;
 		}
@@ -740,15 +743,15 @@
 		color: @white;
 		margin: 0;
 
-		.font_size(40);
+		.font_size(42);
 
 		@media @min_md {
-			.font_size(60);
+			.font_size(62);
 		}
 	}
 
 	.hero_content {
-		.font_size(18);
+		.font_size(20);
 
 		color: @white;
 		color: fade(@white, 80);

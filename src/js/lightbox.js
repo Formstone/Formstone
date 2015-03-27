@@ -794,6 +794,8 @@
 				Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
 			}
 
+			Instance.$lightbox.addClass( [Classes.raw.loading, Classes.raw.animating].join(" "));
+
 			Instance.$container.transition({
 				property: "opacity"
 			},
@@ -819,9 +821,8 @@
 				}
 
 				updateGalleryControls();
-			});
 
-			Instance.$lightbox.addClass( [Classes.raw.loading, Classes.raw.animating].join(" "));
+			});
 		}
 	}
 
