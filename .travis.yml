@@ -6,4 +6,4 @@ before_script:
 install:
 - npm install
 - bower install
-script: grunt build --verbose
+script: grunt

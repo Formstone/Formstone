@@ -150,10 +150,10 @@
 	.fs_cell_xs(@count, @total:0) {
 		@media screen and (@fs-grid-mq-max-sm) {
 			& when (@total = 0) {
-				.fs_build_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
+				.fs_grid_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
 			}
 			& when not (@total = 0) {
-				.fs_build_column(@total, @fs-grid-gutter, @count);
+				.fs_grid_column(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
@@ -162,10 +162,10 @@
 	.fs_cell_sm(@count, @total:0) {
 		@media screen and (~"@{fs-grid-mq-max-md}") {
 			& when (@total = 0) {
-				.fs_build_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
+				.fs_grid_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
 			}
 			& when not (@total = 0) {
-				.fs_build_column(@total, @fs-grid-gutter, @count);
+				.fs_grid_column(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
@@ -174,10 +174,10 @@
 	.fs_cell_md(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
 			& when (@total = 0) {
-				.fs_build_column(@fs-grid-columns-md, @fs-grid-gutter, @count);
+				.fs_grid_column(@fs-grid-columns-md, @fs-grid-gutter, @count);
 			}
 			& when not (@total = 0) {
-				.fs_build_column(@total, @fs-grid-gutter, @count);
+				.fs_grid_column(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
@@ -186,10 +186,10 @@
 	.fs_cell_lg(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-lg) {
 			& when (@total = 0) {
-				.fs_build_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
+				.fs_grid_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
 			}
 			& when not (@total = 0) {
-				.fs_build_column(@total, @fs-grid-gutter, @count);
+				.fs_grid_column(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
@@ -198,10 +198,10 @@
 	.fs_cell_xl(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-xl) {
 			& when (@total = 0) {
-				.fs_build_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
+				.fs_grid_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
 			}
 			& when not (@total = 0) {
-				.fs_build_column(@total, @fs-grid-gutter, @count);
+				.fs_grid_column(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
