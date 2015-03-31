@@ -453,6 +453,16 @@
 <td>Large column count</td>
 </tr>
 <tr>
+<td><strong>Gutters</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>@fs-grid-gutter</code></td>
+<td><code>1.0416666666666667%;</code></td>
+<td>Gutter width</td>
+</tr>
+<tr>
 <td><strong>Widths</strong></td>
 <td></td>
 <td></td>
@@ -513,14 +523,199 @@
 <td>Extra Large break width</td>
 </tr>
 <tr>
-<td><strong>Gutters</strong></td>
+<td><strong>Media Queries - Max</strong></td>
 <td></td>
 <td></td>
 </tr>
 <tr>
-<td><code>@fs-grid-gutter</code></td>
-<td><code>1.0416666666666667%;</code></td>
-<td>Gutter width</td>
+<td><code>@fs-grid-mq-max-sm</code></td>
+<td><code>499px</code></td>
+<td>Small max mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-max-md</code></td>
+<td><code>739px</code></td>
+<td>Medium max mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-max-lg</code></td>
+<td><code>979px</code></td>
+<td>Large max mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-max-xl</code></td>
+<td><code>1219px</code></td>
+<td>Extra Large max mq</td>
+</tr>
+<tr>
+<td><strong>Media Queries - Min</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-min-sm</code></td>
+<td><code>500px</code></td>
+<td>Small min mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-min-md</code></td>
+<td><code>740px</code></td>
+<td>Medium min mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-min-lg</code></td>
+<td><code>980px</code></td>
+<td>Large min mq</td>
+</tr>
+<tr>
+<td><code>@fs-grid-mq-min-xl</code></td>
+<td><code>1220px</code></td>
+<td>Extra Large min mq</td>
+</tr>
+<tr>
+<td><strong>Mixin-Only Grid</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>@fs-grid-mixin-only</code></td>
+<td><code>false</code></td>
+<td>Disables generation of classes based grid</td>
+</tr>
+<tr>
+<td><strong>Extendable Classes</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>.fs_grid_row</code></td>
+<td></td>
+<td>Base row</td>
+</tr>
+<tr>
+<td><code>.fs_grid_row_fluid</code></td>
+<td></td>
+<td>Base fluid row</td>
+</tr>
+<tr>
+<td><code>.fs_grid_row_fluid_sm</code></td>
+<td></td>
+<td>Base fluid row (small only)</td>
+</tr>
+<tr>
+<td><code>.fs_grid_row_row</code></td>
+<td></td>
+<td>Base nested row</td>
+</tr>
+<tr>
+<td><code>.fs_grid_row_row_contained</code></td>
+<td></td>
+<td>Base nested row (parent cell is contained)</td>
+</tr>
+<tr>
+<td><code>.fs_grid_cell</code></td>
+<td></td>
+<td>Base cell</td>
+</tr>
+<tr>
+<td><code>.fs_grid_cell_centered</code></td>
+<td></td>
+<td>Base centered cell</td>
+</tr>
+<tr>
+<td><code>.fs_grid_cell_padded</code></td>
+<td></td>
+<td>Base padded cell</td>
+</tr>
+<tr>
+<td><code>.fs_grid_cell_contained</code></td>
+<td></td>
+<td>Base contained cell</td>
+</tr>
+<tr>
+<td><code>.fs_grid_cell_right</code></td>
+<td></td>
+<td>Base right cell</td>
+</tr>
+<tr>
+<td><strong>Mixins</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>.fs_row();</code></td>
+<td></td>
+<td>Base row</td>
+</tr>
+<tr>
+<td><code>.fs_row_fluid();</code></td>
+<td></td>
+<td>Base row fluid</td>
+</tr>
+<tr>
+<td><code>.fs_row_fluid_sm();</code></td>
+<td></td>
+<td>Base fluid row (small only)</td>
+</tr>
+<tr>
+<td><code>.fs_row_row();</code></td>
+<td></td>
+<td>Base nested row</td>
+</tr>
+<tr>
+<td><code>.fs_row_row_contained();</code></td>
+<td></td>
+<td>Base nested row (parent cell is contained)</td>
+</tr>
+<tr>
+<td><code>.fs_cell();</code></td>
+<td></td>
+<td>Base cell</td>
+</tr>
+<tr>
+<td><code>.fs_cell_centered();</code></td>
+<td></td>
+<td>Base centered cell</td>
+</tr>
+<tr>
+<td><code>.fs_cell_padded();</code></td>
+<td></td>
+<td>Base padded cell</td>
+</tr>
+<tr>
+<td><code>.fs_cell_contained();</code></td>
+<td></td>
+<td>Base contained cell</td>
+</tr>
+<tr>
+<td><code>.fs_cell_right();</code></td>
+<td></td>
+<td>Base right cell</td>
+</tr>
+<tr>
+<td><code>.fs_cell_xs(@count [, @total]);</code></td>
+<td></td>
+<td>Extra Small cell; Pass @total to define fractions</td>
+</tr>
+<tr>
+<td><code>.fs_cell_sm(@count [, @total]);</code></td>
+<td></td>
+<td>Small cell; Pass @total to define fractions</td>
+</tr>
+<tr>
+<td><code>.fs_cell_md(@count [, @total]);</code></td>
+<td></td>
+<td>Medium cell; Pass @total to define fractions</td>
+</tr>
+<tr>
+<td><code>.fs_cell_lg(@count [, @total]);</code></td>
+<td></td>
+<td>Large cell; Pass @total to define fractions</td>
+</tr>
+<tr>
+<td><code>.fs_cell_xl(@count [, @total]);</code></td>
+<td></td>
+<td>Extra Large cell; Pass @total to define fractions</td>
 </tr>
 </tbody>
 </table>

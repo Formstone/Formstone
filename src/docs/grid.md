@@ -141,6 +141,8 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | `@fs-grid-columns-sm` | `3` | Small column count |
 | `@fs-grid-columns-md` | `6` | Medium column count |
 | `@fs-grid-columns-lg` | `12` | Large column count |
+| **Gutters** | | |
+| `@fs-grid-gutter` | `1.0416666666666667%;` | Gutter width |
 | **Widths** | | |
 | `@fs-grid-width-xs` | `300px` | Extra Small row width |
 | `@fs-grid-width-sm` | `480px` | Small row width |
@@ -153,5 +155,42 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | `@fs-grid-width-break-md` | `740px` | Medium break width |
 | `@fs-grid-width-break-lg` | `980px` | Large break width |
 | `@fs-grid-width-break-xl` | `1220px` | Extra Large break width |
-| **Gutters** | | |
-| `@fs-grid-gutter` | `1.0416666666666667%;` | Gutter width |
+| **Media Queries - Max** | | |
+| `@fs-grid-mq-max-sm` | `499px` | Small max mq |
+| `@fs-grid-mq-max-md` | `739px` | Medium max mq |
+| `@fs-grid-mq-max-lg` | `979px` | Large max mq |
+| `@fs-grid-mq-max-xl` | `1219px` | Extra Large max mq |
+| **Media Queries - Min** | | |
+| `@fs-grid-mq-min-sm` | `500px` | Small min mq |
+| `@fs-grid-mq-min-md` | `740px` | Medium min mq |
+| `@fs-grid-mq-min-lg` | `980px` | Large min mq |
+| `@fs-grid-mq-min-xl` | `1220px` | Extra Large min mq |
+| **Mixin-Only Grid** | | |
+| `@fs-grid-mixin-only` | `false` | Disables generation of classes based grid |
+| **Extendable Classes** | | |
+| `.fs_grid_row` | | Base row |
+| `.fs_grid_row_fluid` | | Base fluid row |
+| `.fs_grid_row_fluid_sm` | | Base fluid row (small only) |
+| `.fs_grid_row_row` | | Base nested row |
+| `.fs_grid_row_row_contained` | | Base nested row (parent cell is contained) |
+| `.fs_grid_cell` | | Base cell |
+| `.fs_grid_cell_centered` | | Base centered cell |
+| `.fs_grid_cell_padded` | | Base padded cell |
+| `.fs_grid_cell_contained` | | Base contained cell |
+| `.fs_grid_cell_right` | | Base right cell |
+| **Mixins** | | |
+| `.fs_row();` | | Base row |
+| `.fs_row_fluid();` | | Base row fluid |
+| `.fs_row_fluid_sm();` | | Base fluid row (small only) |
+| `.fs_row_row();` | | Base nested row |
+| `.fs_row_row_contained();` | | Base nested row (parent cell is contained) |
+| `.fs_cell();` | | Base cell |
+| `.fs_cell_centered();` | | Base centered cell |
+| `.fs_cell_padded();` | | Base padded cell |
+| `.fs_cell_contained();` | | Base contained cell |
+| `.fs_cell_right();` | | Base right cell |
+| `.fs_cell_xs(@count [, @total]);` | | Extra Small cell; Pass @total to define fractions |
+| `.fs_cell_sm(@count [, @total]);` | | Small cell; Pass @total to define fractions |
+| `.fs_cell_md(@count [, @total]);` | | Medium cell; Pass @total to define fractions |
+| `.fs_cell_lg(@count [, @total]);` | | Large cell; Pass @total to define fractions |
+| `.fs_cell_xl(@count [, @total]);` | | Extra Large cell; Pass @total to define fractions |

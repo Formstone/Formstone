@@ -1,6 +1,8 @@
 
 	// Variables
 
+	@fs-grid-mixin-only:				false;
+
 	@fs-grid-class-container:     		fs-grid;
 	@fs-grid-class-row:           		fs-row;
 	@fs-grid-class-cell:				fs-cell;
@@ -20,6 +22,8 @@
 	@fs-grid-columns-md:      			6;
 	@fs-grid-columns-lg:     			12;
 
+	@fs-grid-gutter:              		1.0416666666666667%;
+
 	@fs-grid-width-xs:           		300px;
 	@fs-grid-width-sm:        			480px;
 	@fs-grid-width-md:        			720px;
@@ -32,4 +36,12 @@
 	@fs-grid-width-break-lg: 			980px;
 	@fs-grid-width-break-xl:     		1220px;
 
-	@fs-grid-gutter:              		1.0416666666666667%;
+	@fs-grid-mq-max-sm: 				~"max-width: "(@fs-grid-width-break-sm - 1px);
+	@fs-grid-mq-max-md: 				~"max-width: "(@fs-grid-width-break-md - 1px);
+	@fs-grid-mq-max-lg: 				~"max-width: "(@fs-grid-width-break-lg - 1px);
+	@fs-grid-mq-max-xl: 				~"max-width: "(@fs-grid-width-break-xl - 1px);
+
+	@fs-grid-mq-min-sm: 				~"min-width: "(@fs-grid-width-break-sm);
+	@fs-grid-mq-min-md: 				~"min-width: "(@fs-grid-width-break-md);
+	@fs-grid-mq-min-lg: 				~"min-width: "(@fs-grid-width-break-lg);
+	@fs-grid-mq-min-xl: 				~"min-width: "(@fs-grid-width-break-xl);
