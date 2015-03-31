@@ -159,7 +159,7 @@
 	}
 
 	// !Min, 300 (max 500)
-	.fs_cell_sm(@count) {
+	.fs_cell_sm(@count, @total:0) {
 		@media screen and (~"@{fs-grid-mq-max-md}") {
 			& when (@total = 0) {
 				.fs_build_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
@@ -171,7 +171,7 @@
 	}
 
 	// !Medium, 6 column, 720 (min 740)
-	.fs_cell_md(@count) {
+	.fs_cell_md(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
 			& when (@total = 0) {
 				.fs_build_column(@fs-grid-columns-md, @fs-grid-gutter, @count);
@@ -183,7 +183,7 @@
 	}
 
 	// !Large, 12 column, 960 (min 980)
-	.fs_cell_lg(@count) {
+	.fs_cell_lg(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-lg) {
 			& when (@total = 0) {
 				.fs_build_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
@@ -195,7 +195,7 @@
 	}
 
 	// !XLarge, 12 column, 1200 (min 1220)
-	.fs_cell_xl(@count) {
+	.fs_cell_xl(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-xl) {
 			& when (@total = 0) {
 				.fs_build_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
