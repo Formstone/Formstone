@@ -260,7 +260,7 @@
 	 */
 
 	/**
-	 * @method
+	 * @method private
 	 * @name resizeLightbox
 	 * @description Triggers resize of instance.
 	 */
@@ -455,8 +455,8 @@
 		}
 
 		var pos = {
-			left: ($Window.width() - Instance.contentWidth - Instance.paddingHorizontal) / 2,
-			top: (Instance.top <= 0) ? (($Window.height() - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
+			left: (Formstone.windowWidth - Instance.contentWidth - Instance.paddingHorizontal) / 2,
+			top: (Instance.top <= 0) ? ((Formstone.windowHeight - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
 		};
 
 		if (Instance.fixed !== true) {
@@ -535,8 +535,8 @@
 	function sizeImage() {
 		var count = 0;
 
-		Instance.windowHeight = Instance.viewportHeight = $Window.height() - Instance.paddingVertical;
-		Instance.windowWidth  = Instance.viewportWidth  = $Window.width()  - Instance.paddingHorizontal;
+		Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.paddingHorizontal;
 
 		Instance.contentHeight = Infinity;
 		Instance.contentWidth = Infinity;
@@ -692,8 +692,8 @@
 
 	function sizeVideo() {
 		// Set initial vars
-		Instance.windowHeight = Instance.viewportHeight = Instance.contentHeight = $Window.height() - Instance.paddingVertical;
-		Instance.windowWidth  = Instance.viewportWidth  = Instance.contentWidth  = $Window.width()  - Instance.paddingHorizontal;
+		Instance.windowHeight = Instance.viewportHeight = Instance.contentHeight = Formstone.windowHeight - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = Instance.contentWidth  = Formstone.windowWidth  - Instance.paddingHorizontal;
 		Instance.videoMarginTop = 0;
 		Instance.videoMarginLeft = 0;
 
@@ -908,8 +908,8 @@
 	 */
 
 	function sizeContent($object) {
-		Instance.windowHeight	  = $Window.height() - Instance.paddingVertical;
-		Instance.windowWidth	  = $Window.width()  - Instance.paddingHorizontal;
+		Instance.windowHeight	  = Formstone.windowHeight - Instance.paddingVertical;
+		Instance.windowWidth	  = Formstone.windowWidth  - Instance.paddingHorizontal;
 		Instance.objectHeight	  = $object.outerHeight(true);
 		Instance.objectWidth	  = $object.outerWidth(true);
 		Instance.targetHeight	  = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);

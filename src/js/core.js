@@ -26,6 +26,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			this.$body                = null;
 
 			this.windowWidth          = 0;
+			this.windowHeight         = 0;
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
 			this.isFirefox            = /Firefox/i.test(this.userAgent);
 			this.isChrome             = /Chrome/i.test(this.userAgent);
@@ -442,6 +443,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 					priority: settings.priority,
 					callback: settings.methods._resize
 				});
+
+				// Sort handlers on push
+				Formstone.ResizeHandlers.sort(sortPriority);
 			}
 
 			return settings;
@@ -556,7 +560,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		Debounce = 20;
 
 	function onWindowResize() {
-		Formstone.windowWidth = Formstone.$window.width();
+		Formstone.windowWidth  = Formstone.$window.width();
+		Formstone.windowHeight = Formstone.$window.height();
 
 		ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
 	}
@@ -564,7 +569,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	function handleWindowResize() {
 		for (var i in Formstone.ResizeHandlers) {
 			if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
-				Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth);
+				Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth, Formstone.windowHeight);
 			}
 		}
 	}
@@ -582,8 +587,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	$(function() {
 		Formstone.$body = $("body");
-
-		Formstone.ResizeHandlers.sort(sortPriority);
 
 		for (var i in Formstone.Plugins) {
 			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {

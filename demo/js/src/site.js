@@ -36,7 +36,6 @@
 
 			$("pre").wrap('<div class="pre_wrapper"></div>');
 
-			console.log($html.hasClass("canvas"));
 			if ($html.hasClass("canvas")) {
 				Prism.highlightAll();
 			}

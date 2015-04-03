@@ -24,6 +24,8 @@ The Formstone core is a dependency of all javascript based components and will c
 | `isFirefoxMobile` | `boolean` | Browser is FireFox Mobile |
 | `transform` | `string` | Prefixed transform property |
 | `transition` | `string` | Prefixed transition property |
+| `windowWidth` | `int` | Current window width |
+| `windowHeight` | `int` | Current window height |
 
 User agent sniffing isn't always reliable or considered best practice - it should be used sparingly, if at all.
 

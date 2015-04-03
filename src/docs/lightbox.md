@@ -28,7 +28,7 @@ Link multiple images or videos together with the `data-lightbox-gallery` attribu
 </a>
 ```
 
-### Events
+<h3>Events</h3>
 
 React to the lightbox by listening for the `open.lightbox` and `close.lightbox` events on the `window`:
 

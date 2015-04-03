@@ -1,4 +1,4 @@
-/*! Formstone v0.4.2 [site.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [site.css] 2015-04-03 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! Formstone v0.4.2 [grid.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [grid.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! Formstone v0.4.2 [background.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [background.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! Formstone v0.4.2 [carousel.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [carousel.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1820,7 +1820,7 @@ pre[class*="language-"] {
   opacity: 1;
 }
 
-/*! Formstone v0.4.2 [checkbox.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [checkbox.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2109,7 +2109,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! Formstone v0.4.2 [dropdown.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [dropdown.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2461,7 +2461,7 @@ pre[class*="language-"] {
   background: #fafafa;
 }
 
-/*! Formstone v0.4.2 [lightbox.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [lightbox.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3057,7 +3057,7 @@ pre[class*="language-"] {
   overflow: hidden !important;
 }
 
-/*! Formstone v0.4.2 [number.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [number.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3216,7 +3216,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! Formstone v0.4.2 [pagination.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [pagination.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3355,7 +3355,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! Formstone v0.4.2 [range.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [range.css] 2015-04-03 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3488,7 +3488,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! Formstone v0.4.2 [scrollbar.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [scrollbar.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3643,7 +3643,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! Formstone v0.4.2 [tabs.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [tabs.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3754,7 +3754,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! Formstone v0.4.2 [tooltip.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [tooltip.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3906,7 +3906,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! Formstone v0.4.2 [upload.css] 2015-03-31 | MIT License | formstone.it */
+/*! Formstone v0.4.2 [upload.css] 2015-04-03 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4382,8 +4382,8 @@ pre[class*="language-"] {
   top: 0;
   right: 15px;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 5px 0 rgba(255, 255, 255, 0.8), 0 -5px 0 rgba(255, 255, 255, 0.8);
+  background: #cccccc;
+  box-shadow: 0 5px 0 #cccccc, 0 -5px 0 #cccccc;
   content: '';
   display: block;
   margin: auto 0;
@@ -4394,7 +4394,7 @@ pre[class*="language-"] {
   background: transparent;
   border: none;
   box-shadow: none;
-  color: rgba(255, 255, 255, 0.8);
+  color: #cccccc;
   content: "\00d7";
   font-size: 22px;
   font-weight: 700;
@@ -4422,8 +4422,8 @@ html,
   -ms-content-zooming: none;
 }
 body {
-  font-family: "Lato", Helvetica, sans-serif;
-  font-weight: 300;
+  font-family: "Inconsolata", monospace;
+  font-weight: 400;
   font-size: 16px;
   font-size: 1rem;
   width: 100%;
@@ -4453,8 +4453,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Lato", Helvetica, sans-serif;
-  font-weight: 300;
+  font-family: "Inconsolata", monospace;
+  font-weight: 400;
   color: #2c3e50;
   line-height: 1.2;
   margin: 30px 0 20px;
@@ -4492,13 +4492,13 @@ h3 {
   }
 }
 h4 {
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 20px;
+  font-size: 1.25rem;
   text-transform: uppercase;
 }
 h5 {
-  font-size: 10px;
-  font-size: 0.625rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
@@ -4594,10 +4594,10 @@ pre,
 code,
 code[class*=language-],
 pre[class*=language-] {
-  font-family: "PT Mono", monospace;
+  font-family: "Inconsolata", monospace;
   font-weight: 400;
-  font-size: 15px;
-  font-size: 0.9375rem;
+  font-size: 16px;
+  font-size: 1rem;
   color: #333333;
 }
 pre,
@@ -4607,6 +4607,11 @@ pre[class*=language-] {
   margin: 25px 0;
   overflow-y: auto;
   padding: 25px;
+  white-space: pre-line;
+}
+p code {
+  font-size: 18px;
+  font-size: 1.125rem;
 }
 table {
   width: 100%;
@@ -4614,7 +4619,7 @@ table {
   margin: 30px 0;
 }
 table th {
-  font-family: "Lato", Helvetica, sans-serif;
+  font-family: "Inconsolata", monospace;
   font-weight: 400;
   font-size: 12px;
   font-size: 0.75rem;
@@ -4767,16 +4772,28 @@ table td:first-child {
 }
 .header_button,
 .header_button.fs-navigation-enabled {
-  font-size: 12px;
-  font-size: 0.75rem;
+  font-size: 14px;
+  font-size: 0.875rem;
   height: 48px;
   background: transparent;
   color: #ffffff;
   color: rgba(255, 255, 255, 0.8);
   float: right;
+  letter-spacing: 0.05em;
   line-height: 50px;
   padding: 0 40px 0 15px;
   text-transform: uppercase;
+}
+.header_button.fs-navigation-enabled:after {
+  background: #ffffff;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 5px 0 rgba(255, 255, 255, 0.8), 0 -5px 0 rgba(255, 255, 255, 0.8);
+}
+.header_button.fs-navigation-open:after {
+  background: transparent;
+  box-shadow: none;
+  color: #ffffff;
+  color: rgba(255, 255, 255, 0.8);
 }
 .footer {
   background: #f0f0f0;
@@ -4900,12 +4917,6 @@ table td:first-child {
 .no-touch .sidebar ul a:hover {
   border-color: transparent;
 }
-@media only screen and (min-width: 980px ) {
-  .sidebar ul a {
-    font-size: 14px;
-    font-size: 0.875rem;
-  }
-}
 .sidebar h5 {
   margin: 10px 0;
 }
@@ -4920,13 +4931,14 @@ table td:first-child {
   color: rgba(255, 255, 255, 0.5);
 }
 .button {
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 16px;
+  font-size: 1rem;
   background: #34495e;
   border: none;
   border-radius: 2px;
   color: #ffffff;
   display: inline-block;
+  letter-spacing: 0.05em;
   padding: 10px 20px;
   text-transform: uppercase;
 }
@@ -4973,13 +4985,14 @@ table td:first-child {
   padding: 10px 15px;
 }
 .form_button {
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 16px;
+  font-size: 1rem;
   background: #34495e;
   border: none;
   border-radius: 2px;
   color: #ffffff;
   display: inline-block;
+  letter-spacing: 0.05em;
   padding: 10px 20px;
   text-transform: uppercase;
 }
@@ -5036,7 +5049,7 @@ table td:first-child {
   margin: 30px 0 0;
 }
 .hero_button {
-  font-family: "Lato", Helvetica, sans-serif;
+  font-family: "Inconsolata", monospace;
   font-weight: 400;
   background: #ffffff;
   border: 1px solid transparent;

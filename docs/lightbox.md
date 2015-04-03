@@ -54,7 +54,7 @@ Link multiple images or videos together with the `data-lightbox-gallery` attribu
 </a>
 ```
 
-### Events
+<h3>Events</h3>
 
 React to the lightbox by listening for the `open.lightbox` and `close.lightbox` events on the `window`:
 
@@ -148,12 +148,6 @@ $.lightbox("resize");
 | --- | --- | --- | --- |
 | `height` | `int | false` | &nbsp; | Target height or false to auto size |
 | `width` | `int | false` | &nbsp; | Target width or false to auto size |
-
-### resizeLightbox
-
-Triggers resize of instance.
-
-
 
 ## CSS
 
