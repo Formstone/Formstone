@@ -60,7 +60,7 @@ There are two types of plugins that can be defined: Widget or Utility.
 
 #### Widget
 
-Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Picker or Selecter. A simple Widget might look like:
+Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Checkbox or Dropdown. A simple Widget might look like:
 
 ```javascript
 ;(function ($, Formstone, undefined) {
