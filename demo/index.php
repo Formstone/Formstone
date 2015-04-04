@@ -58,13 +58,14 @@
 		$file = "site/" . $route["path"] . ".html";
 	} else {
 		header("HTTP/1.0 404 Not Found");
+		header("Location: " . $www_root . "404/");
 		$file = "site/404.html";
 	}
 
 	// Fix resources
 	$content = file_get_contents($file);
 
-	echo str_ireplace(array("../../", "../", ".html"), array($www_root, $www_root, "/"), $content);
+	echo str_ireplace(array("../../", "../", '.html"'), array($www_root, $www_root, '/"'), $content);
 
 	// Functions
 	function routeRecursive($base = "site/", $route, $level = 0) {

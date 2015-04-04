@@ -239,7 +239,8 @@ module.exports = function(grunt) {
 					templates: 'demo/templates/',
 					partials: 'demo/templates/partials/',
 					env: {
-						title: 'Formstone'
+						title: 'Formstone',
+						version: '<%= pkg.version %>'
 					}
 				},
 				files: [

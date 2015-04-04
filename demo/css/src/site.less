@@ -25,11 +25,7 @@
 	@import (inline) "../../../dist/css/tooltip.css";
 	@import (inline) "../../../dist/css/upload.css";
 
-
-
 	@import "../../../src/less/navigation.less";
-
-	// @fs-navigation-icon-color: fade(@white, 80);
 
 
 /* ==================================================================
@@ -42,7 +38,7 @@
 
 	html,
 	body {
-		background: @white;
+		background: @gray_1;
 	}
 
 	html,
@@ -53,7 +49,7 @@
 	}
 
 	body {
-		.mono();
+		.sans();
 		.font_size(16);
 
 		width: 100%;
@@ -83,7 +79,7 @@
 	h4,
 	h5,
 	h6 {
-		.mono();
+		.sans();
 
 		color: @black;
 		line-height: 1.2;
@@ -115,8 +111,10 @@
 		}
 	}
 	h4 {
-		.font_size(20);
+		.font_size(18);
 
+		color: @gray_6;
+		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
 	h5 {
@@ -128,7 +126,7 @@
 	h6 {  }
 
 	p {
-		.font_size(18);
+		.font_size(16);
 
 		margin: 20px 0;
 	}
@@ -179,7 +177,7 @@
 		display: block;
 		float: left;
 		height: 5px;
-		margin: 10px 0 0 -20px;
+		margin: 13px 0 0 -20px;
 		width: 5px;
 	}
 
@@ -251,7 +249,7 @@
 		.mono();
 		.font_size(16);
 
-		color: @gray_5;
+		color: @gray_6;
 	}
 
 	pre,
@@ -277,7 +275,7 @@
 		margin: 30px 0;
 
 		& th {
-			.mono();
+			.sans();
 			.font_size(12);
 
 			color: @gray_3;
@@ -288,7 +286,13 @@
 		}
 
 		& td {
+			.font_size(14);
+
 			padding: 13px 15px 15px;
+
+			code {
+				.font_size(16);
+			}
 		}
 
 		& th,
@@ -299,10 +303,6 @@
 			&:first-child {
 				padding-left: 0;
 			}
-		}
-
-		& tr:nth-child(odd) td {
-			// background: @gray_1;
 		}
 	}
 
@@ -317,8 +317,6 @@
 			margin: 0;
 		}
 	}
-
-
 
 
 	.fs-navigation-overlay-content:before {
@@ -414,13 +412,12 @@
 	}
 
 
-
 /* ==================================================================
    Media Queries
 ================================================================== */
 
 	.logo {
-		.font_size(18);
+		.font_size(16);
 
 		height: 50px;
 
@@ -471,7 +468,7 @@
 
 	.header_button,
 	.header_button.fs-navigation-enabled {
-		.font_size(14);
+		.font_size(12);
 
 		height: 48px;
 
@@ -507,27 +504,24 @@
 		text-align: center;
 
 		p {
-			.font_size(14);
+			.font_size(12);
 
 			margin: 10px 0;
 		}
 	}
 
+	.page,
 	.page.fs-navigation-enabled {
+		background: @white;
 		box-shadow: none;
-
-		@media @max_lg {
-			background: @white;
-			padding-top: 45px;
-		}
 	}
 
 	.content {
 		background: @white;
-		padding: 30px 0;
+		padding: 30px 0 50px;
 
 		@media @min_xl {
-			padding: 50px 0;
+			padding: 50px 0 75px;
 		}
 
 		.intro {
@@ -563,15 +557,39 @@
 		padding: 25px;
 
 		h2 {
-			.font_size(22);
+			.font_size(20);
 
 			margin: 0 0 10px;
 		}
 
 		p {
-			// .font_size(16);
-
 			margin: 10px 0 0;
+		}
+	}
+
+	.listing {
+		.columns(2, 15px);
+
+		margin: 0 0 25px;
+
+		@media @min_sm {
+			.columns(3, 15px);
+		}
+
+		@media @min_lg {
+			.columns(4, 15px);
+		}
+
+		a {
+			.font_size(18);
+
+			display: block;
+			margin: 0 0 5px;
+
+			.no-canvas & {
+				float: left;
+				width: 33.333%;
+			}
 		}
 	}
 
@@ -599,17 +617,6 @@
 			}
 		}
 
-		&_logo {
-			.font_size(18);
-
-			color: @blue;
-			margin-bottom: 10px;
-
-			@media @max_lg {
-				display: none;
-			}
-		}
-
 		ul {
 			margin: 10px 0 25px;
 			padding: 0;
@@ -620,10 +627,6 @@
 
 				&:before {
 					display: none;
-				}
-
-				@media @min_lg {
-					margin: 5px 0;
 				}
 			}
 
@@ -639,6 +642,8 @@
 		}
 
 		h5 {
+			.font_size(12);
+
 			margin: 10px 0;
 		}
 
@@ -660,7 +665,7 @@
 
 
 	.button {
-		.font_size(16);
+		.font_size(14);
 
 		background: @blue_light;
 		border: none;
@@ -706,7 +711,7 @@
 
 			border: 1px solid @gray_2;
 			border-radius: 2px;
-			color: @gray_5;
+			color: @gray_6;
 			overflow: auto;
 		}
 
@@ -735,11 +740,11 @@
 	.hero {
 		background: @blue_light;
 		color: @white;
-		padding: 50px 0;
+		padding: 50px 0 60px;
 		text-align: center;
 
 		@media @min_md {
-			padding: 100px 0;
+			padding: 100px 0 125px;
 		}
 	}
 
@@ -755,14 +760,14 @@
 	}
 
 	.hero_content {
-		.font_size(20);
+		.font_size(18);
 
 		color: @white;
 		color: fade(@white, 80);
-		margin: 20px;
+		margin: 10px 0 40px;
 
 		@media @min_md {
-			.font_size(22);
+			.font_size(20);
 		}
 	}
 
@@ -771,13 +776,13 @@
 	}
 
 	.hero_button {
-		.mono();
+		.sans();
 
 		background: @white;
 		border: 1px solid transparent;
 		color: @blue;
 		margin: 0 5px 5px;
-		width: 160px;
+		width: 170px;
 
 		.no-touch &:hover {
 			background: transparent;

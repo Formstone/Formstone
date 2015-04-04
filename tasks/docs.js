@@ -546,7 +546,8 @@ module.exports = function(grunt) {
 		}
 
 		function buildNav() {
-			var docshtml = '';
+			var listhtml = '',
+				docshtml = '';
 
 			docshtml += '<h5>About</h5>';
 			docshtml += '<ul>';
@@ -579,6 +580,33 @@ module.exports = function(grunt) {
 			docshtml += '</ul>';
 
 			grunt.file.write("demo/templates/partials/navigation.html", docshtml);
+
+			// List
+
+			listhtml += '<h2>Library</h2>';
+			listhtml += '<div class="listing">';
+			listhtml += '<a href="{{= it.component_root }}core.html">Core</a>';
+			for (var i in allDocs.grid) {
+				var d = allDocs.grid[i];
+				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+			}
+			listhtml += '</div>';
+			listhtml += '<h2>Utility</h2>';
+			listhtml += '<div class="listing">';
+			for (var i in allDocs.utility) {
+				var d = allDocs.utility[i];
+				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+			}
+			listhtml += '</div>';
+			listhtml += '<h2>Widget</h2>';
+			listhtml += '<div class="listing">';
+			for (var i in allDocs.widget) {
+				var d = allDocs.widget[i];
+				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+			}
+			listhtml += '</div>';
+
+			grunt.file.write("demo/templates/partials/component-list.html", listhtml);
 		}
 
 		// WORK

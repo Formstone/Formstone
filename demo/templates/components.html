@@ -2,16 +2,10 @@
 <div class="page js-nav_move">
 	<div class="fs-row page_row">
 		<div class="fs-cell-centered fs-lg-10 fs-xl-8">
-			<article class="content demo">
-				<header class="intro">
-					{{= it.document }}
-				</header>
-				{{? it.document.demo }}
-				<h2 id="demo">Demo</h2>
-				{{= it.document.demo }}
-				{{?}}
-				{{= it.include(it.document.bottom) }}
-			</article>
+			<div class="content">
+				<h1>Components</h1>
+				{{= it.include("component-list", { site_root: it.site_root, asset_root: it.asset_root, component_root: it.component_root }) }}
+			</div>
 		</div>
 	</div>
 </div>

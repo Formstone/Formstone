@@ -1,24 +1,22 @@
 {{= it.include("_header", { local_title: it.document.title, site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root }) }}
-<div class="js-nav_move">
+<div class="page js-nav_move">
 	<header class="hero">
 		<div class="fs-row">
-			<div class="fs-cell-centered fs-md-4 fs-lg-6 fs-xl-5">
+			<div class="fs-cell-centered fs-xs-full fs-sm-2 fs-md-4 fs-lg-6 fs-xl-5">
 				<h1 class="hero_title">Formstone</h1>
 				<p class="hero_content">Not a framework. Just a collection of thoughtfully crafted front-end components.</p>
 				<div class="hero_buttons">
-					<a href="https://github.com/Formstone/Formstone/archive/master.zip" class="button hero_button">Download</a>
+					<a href="components.html" class="button hero_button">Components</a>
 					<a href="https://github.com/Formstone/Formstone" class="button hero_button">GitHub</a>
 				</div>
-				<span class="hero_version">v1.0.0</span>
+				<span class="hero_version">v{{= it.version }}</span>
 			</div>
 		</div>
 	</header>
 	<div class="fs-row page_row">
 		<div class="fs-cell-centered fs-lg-10 fs-xl-8">
-			<div class="page">
-				<div class="content">
-					{{= it.document }}
-				</div>
+			<div class="content">
+				{{= it.document }}
 			</div>
 		</div>
 	</div>
