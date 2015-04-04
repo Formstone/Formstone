@@ -72,12 +72,12 @@ This will effect every element on the page and can have unexpected results. In t
 
 | Class | Description |
 | --- | --- |
-| `xs-X` | only extra small size |
-| `sm-X` | both small and extra small sizes |
-| `md-X` | medium size |
-| `lg-X` | both large and extra large sizes |
-| `xl-X` | only extra large size |
-| `all-X` | all sizes |
+| `fs-xs-[x]` | only extra small size |
+| `fs-sm-[x]` | both small and extra small sizes |
+| `fs-md-[x]` | medium size |
+| `fs-lg-[x]` | both large and extra large sizes |
+| `fs-xl-[x]` | only extra large size |
+| `fs-all-[x]` | all sizes |
 
 Cells will default to filling the available horizontal space but can be defined by the target screen size and column count. For example `fs-sm-2` will produce a cell spanning 2 of the 3 available columns within the 'small' screen size range. Cell classes can be stacked to specify column spans across all screen sizes:
 
@@ -85,13 +85,13 @@ Cells will default to filling the available horizontal space but can be defined 
 <div class="fs-cell fs-sm-3 fs-md-6 fs-lg-12">...</div>
 ```
 
-The `fs-xl-X` and `fs-xs-X` classes adds level of control when targeting large and small screens. For example, a cell may need to span 2 columns at the small size, but span the full width at the extra small size:
+The `fs-xl-[x]` and `fs-xs-[x]` classes adds level of control when targeting large and small screens. For example, a cell may need to span 2 columns at the small size, but span the full width at the extra small size:
 
 ```markup
 <div class="fs-cell fs-xs-3 fs-sm-2 ...">...</div>
 ```
 
-The `fs-all-X` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cell counts):
+The `fs-all-[x]` classes will create a cell that spans the specified width on all screen sizes (only works with fraction cell counts):
 
 ```markup
 <div class="fs-cell fs-all-third">...</div>
@@ -103,11 +103,11 @@ The fraction classes can be used in place of specific column counts:
 
 | Class | Description |
 | --- | --- |
-| `fs-X-full` | entire row width |
-| `fs-X-half` | 1/2 row width |
-| `fs-X-third` | 1/3 row width |
-| `fs-X-fourth` | 1/4 row width |
-| `fs-X-fifth` | 1/5 row width |
+| `fs-[x]-full` | entire row width |
+| `fs-[x]-half` | 1/2 row width |
+| `fs-[x]-third` | 1/3 row width |
+| `fs-[x]-fourth` | 1/4 row width |
+| `fs-[x]-fifth` | 1/5 row width |
 
 ### Hidden Cells
 

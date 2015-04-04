@@ -4665,6 +4665,14 @@ table td:first-child {
 .fs-navigation-overlay-content:before {
   z-index: 2;
 }
+#bsap_1296027 {
+  padding: 20px 0;
+  text-align: center;
+}
+#bsap_1296027 a {
+  display: inline-block;
+  float: none;
+}
 /* ==================================================================
    Helpers
 ================================================================== */
