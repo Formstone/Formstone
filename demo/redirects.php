@@ -2,6 +2,12 @@
 
 	$redirects = array(
 
+		// start
+		"about/getting-started" => "start/",
+
+		// contribute
+		"about/contributing" => "contribute/",
+
 		// asap
 		"asap" => "components/asap/",
 

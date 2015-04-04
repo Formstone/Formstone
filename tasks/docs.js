@@ -611,7 +611,7 @@ module.exports = function(grunt) {
 
 			// Sitemap
 
-			sitemap += '<?xml version="1.0" encoding="UTF-8">\n';
+			sitemap += '<?xml version="1.0" encoding="UTF-8" ?>\n';
 			sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 			sitemap += '<url><loc>http://formstone.it/</loc></url>\n';
 			sitemap += '<url><loc>http://formstone.it/start/</loc></url>\n';
