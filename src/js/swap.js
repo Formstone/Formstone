@@ -27,11 +27,9 @@
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
-		/*
 		if (!data.collapse && data.group) {
 			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
 		}
-		*/
 
 		// Should be activate when enabled
 		data.onEnable = this.data(Namespace + "-active");
@@ -142,8 +140,9 @@
 			this.trigger(Events.enable);
 
 			if (data.onEnable) {
-				data.active = false;
-				activate.call(this, data);
+				data.active = true;
+				data.$swaps.addClass(data.classes.raw.active);
+				// activate.call(this, data);
 			} else {
 				data.active = true;
 				deactivate.call(this, data);

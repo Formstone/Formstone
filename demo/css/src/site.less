@@ -158,7 +158,9 @@
 	ol,
 	ul {}
 
-	li {}
+	li {
+		.font_size(16);
+	}
 
 	ol {}
 
@@ -664,7 +666,9 @@
 	}
 
 
-	.button {
+	.button,
+	a.button {
+		.transition_link();
 		.font_size(14);
 
 		background: @blue_light;
@@ -775,7 +779,8 @@
 		margin: 30px 0 0;
 	}
 
-	.hero_button {
+	.hero_button,
+	a.hero_button {
 		.sans();
 
 		background: @white;
@@ -791,7 +796,8 @@
 		}
 	}
 
-	.hero_button_outline {
+	.hero_button_outline,
+	a.hero_button_outline {
 		background: transparent;
 		border: 1px solid @white;
 		color: @white;
