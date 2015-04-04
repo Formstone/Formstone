@@ -547,7 +547,8 @@ module.exports = function(grunt) {
 
 		function buildNav() {
 			var listhtml = '',
-				docshtml = '';
+				docshtml = '',
+				sitemap  = '';
 
 			docshtml += '<h5>About</h5>';
 			docshtml += '<ul>';
@@ -607,6 +608,31 @@ module.exports = function(grunt) {
 			listhtml += '</div>';
 
 			grunt.file.write("demo/templates/partials/component-list.html", listhtml);
+
+			// Sitemap
+
+			sitemap += '<?xml version="1.0" encoding="UTF-8">\n';
+			sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+			sitemap += '<url><loc>http://formstone.it/</loc></url>\n';
+			sitemap += '<url><loc>http://formstone.it/start/</loc></url>\n';
+			sitemap += '<url><loc>http://formstone.it/upgrade/</loc></url>\n';
+			sitemap += '<url><loc>http://formstone.it/contribute/</loc></url>\n';
+			sitemap += '<url><loc>http://formstone.it/components/</loc></url>\n';
+			for (var i in allDocs.grid) {
+				var d = allDocs.grid[i];
+				sitemap += '<url><loc>http://formstone.it/components/' + d.name.toLowerCase().replace(/ /g, "") + '</loc></url>\n';
+			}
+			for (var i in allDocs.utility) {
+				var d = allDocs.utility[i];
+				sitemap += '<url><loc>http://formstone.it/components/' + d.name.toLowerCase().replace(/ /g, "") + '</loc></url>\n';
+			}
+			for (var i in allDocs.widget) {
+				var d = allDocs.widget[i];
+				sitemap += '<url><loc>http://formstone.it/components/' + d.name.toLowerCase().replace(/ /g, "") + '</loc></url>\n';
+			}
+			sitemap += '</urlset>\n';
+
+			grunt.file.write("demo/sitemap.xml", sitemap);
 		}
 
 		// WORK
