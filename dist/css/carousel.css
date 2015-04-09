@@ -1,4 +1,4 @@
-/*! Formstone v0.4.4 [carousel.css] 2015-04-09 | MIT License | formstone.it */
+/*! Formstone v0.4.5 [carousel.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -143,11 +143,11 @@
   content: '';
   display: table;
 }
-.fs-carousel-enabled .fs-carousel-viewport {
+.fs-carousel-enabled .fs-carousel-wrapper {
   position: relative;
   overflow: hidden;
 }
-.fs-carousel-enabled .fs-carousel-viewport:after {
+.fs-carousel-enabled .fs-carousel-wrapper:after {
   clear: both;
   content: '';
   display: table;
