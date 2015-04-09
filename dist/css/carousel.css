@@ -1,4 +1,4 @@
-/*! Formstone v0.4.3 [carousel.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [carousel.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -22,6 +22,12 @@
   /**
 		 * @class
 		 * @name .fs-carousel-viewport
+		 * @type element
+		 * @description Carousel container
+		 */
+  /**
+		 * @class
+		 * @name .fs-carousel-wrapper
 		 * @type element
 		 * @description Carousel container
 		 */
@@ -137,6 +143,15 @@
   content: '';
   display: table;
 }
+.fs-carousel-enabled .fs-carousel-viewport {
+  position: relative;
+  overflow: hidden;
+}
+.fs-carousel-enabled .fs-carousel-viewport:after {
+  clear: both;
+  content: '';
+  display: table;
+}
 .fs-carousel-enabled .fs-carousel-container {
   position: relative;
   overflow: hidden;
@@ -180,23 +195,23 @@
   display: block;
 }
 .fs-carousel-enabled .fs-carousel-control {
-  width: 40px;
-  height: 40px;
   position: absolute;
   top: 0;
   bottom: 0;
+  cursor: pointer;
+  display: block;
+  visibility: hidden;
+  width: 40px;
+  height: 40px;
   background: #ffffff;
   border-radius: 100%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  display: block;
   margin: auto;
   opacity: 0;
   overflow: hidden;
   text-indent: 200%;
   -webkit-transition: opacity 0.15s ease, visibility 0.15s ease;
           transition: opacity 0.15s ease, visibility 0.15s ease;
-  visibility: hidden;
   white-space: nowrap;
 }
 .fs-carousel-enabled .fs-carousel-control:before {
@@ -214,8 +229,8 @@
   text-indent: -999px;
 }
 .fs-carousel-enabled .fs-carousel-control.fs-carousel-visible {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 .fs-carousel-enabled .fs-carousel-control_previous {
   left: 20px;
@@ -251,12 +266,12 @@
   display: block;
 }
 .fs-carousel-enabled .fs-carousel-page {
+  cursor: pointer;
+  display: inline-block;
   width: 10px;
   height: 10px;
   background: #333333;
   border-radius: 100%;
-  cursor: pointer;
-  display: inline-block;
   margin: 0 3px;
   opacity: 0.5;
   overflow: hidden;

@@ -3,6 +3,8 @@
 
 	// Config
 
+	@fs-carousel-styles:						true;
+
 	@fs-carousel-overflow:						hidden;
 	@fs-carousel-transition-duration:			0.5s;
 	@fs-carousel-transition-timing:				ease;
@@ -103,6 +105,20 @@
 
 		/**
 		 * @class
+		 * @name .fs-carousel-wrapper
+		 * @type element
+		 * @description Carousel container
+		 */
+
+		&-enabled &-viewport {
+			.fs_clearfix();
+
+			position: relative;
+			overflow: @fs-carousel-overflow;
+		}
+
+		/**
+		 * @class
 		 * @name .fs-carousel-container
 		 * @type element
 		 * @description Canister container
@@ -186,52 +202,59 @@
 		 */
 
 		&-enabled &-control {
-			width: @fs-carousel-control-width;
-			height: @fs-carousel-control-height;
-
 			position: absolute;
 			top: 0;
 			bottom: 0;
 
-			background: @fs-carousel-control-background;
-			border-radius: @fs-carousel-control-border-radius;
-			box-shadow: @fs-carousel-control-box-shadow;
 			cursor: pointer;
 			display: block;
-			margin: auto;
-			opacity: @fs-carousel-control-disabled-opacity;
-			overflow: hidden;
-			text-indent: 200%;
-			transition:
-				opacity @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing,
-				visibility @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing;
 			visibility: hidden;
-			white-space: nowrap;
 
-			&:before {
-				width: 0;
-				height: 0;
+			& when (@fs-carousel-styles) {
+				width: @fs-carousel-control-width;
+				height: @fs-carousel-control-height;
 
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
+				background: @fs-carousel-control-background;
+				border-radius: @fs-carousel-control-border-radius;
+				box-shadow: @fs-carousel-control-box-shadow;
 
-				content: '';
 				margin: auto;
-			}
+				opacity: @fs-carousel-control-disabled-opacity;
+				overflow: hidden;
+				text-indent: 200%;
+				transition:
+					opacity @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing,
+					visibility @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing;
+				white-space: nowrap;
 
-			// IE8 - opacity check
+				&:before {
+					width: 0;
+					height: 0;
 
-			.no-opacity & {
-				text-indent: -999px;
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+
+					content: '';
+					margin: auto;
+				}
+
+				// IE8 - opacity check
+
+				.no-opacity & {
+					text-indent: -999px;
+				}
 			}
 		}
 
 		&-enabled &-control&-visible {
-			opacity: 1;
 			visibility: visible;
+
+			& when (@fs-carousel-styles) {
+				opacity: 1;
+			}
 		}
 
 		/**
@@ -244,11 +267,13 @@
 		&-enabled &-control_previous {
 			left: @fs-carousel-control-previous-left;
 
-			&:before {
-				border-top: @fs-carousel-control-caret-size solid transparent;
-				border-bottom: @fs-carousel-control-caret-size solid transparent;
-				border-right: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
-				margin-left: @fs-carousel-control-caret-margin;
+			& when (@fs-carousel-styles) {
+				&:before {
+					border-top: @fs-carousel-control-caret-size solid transparent;
+					border-bottom: @fs-carousel-control-caret-size solid transparent;
+					border-right: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+					margin-left: @fs-carousel-control-caret-margin;
+				}
 			}
 		}
 
@@ -262,11 +287,13 @@
 		&-enabled &-control_next {
 			right: @fs-carousel-control-next-right;
 
-			&:before {
-				border-top: @fs-carousel-control-caret-size solid transparent;
-				border-bottom: @fs-carousel-control-caret-size solid transparent;
-				border-left: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
-				margin-right: @fs-carousel-control-caret-margin;
+			& when (@fs-carousel-styles) {
+				&:before {
+					border-top: @fs-carousel-control-caret-size solid transparent;
+					border-bottom: @fs-carousel-control-caret-size solid transparent;
+					border-left: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+					margin-right: @fs-carousel-control-caret-margin;
+				}
 			}
 		}
 
@@ -278,7 +305,9 @@
 		 */
 
 		&-enabled &-control_disabled {
-			opacity: 0;
+			& when (@fs-carousel-styles) {
+				opacity: 0;
+			}
 		}
 
 		/**
@@ -319,23 +348,26 @@
 		 */
 
 		&-enabled &-page {
-			width: @fs-carousel-page-width;
-			height: @fs-carousel-page-height;
-
-			background: @fs-carousel-page-background;
-			border-radius: @fs-carousel-page-border-radius;
 			cursor: pointer;
 			display: inline-block;
-			margin: @fs-carousel-page-margin;
-			opacity: @fs-carousel-page-opacity;
-			overflow: hidden;
-			text-indent: 200%;
-			white-space: nowrap;
 
-			// IE8 - opacity check
+			& when (@fs-carousel-styles) {
+				width: @fs-carousel-page-width;
+				height: @fs-carousel-page-height;
 
-			.no-opacity & {
-				text-indent: -999px;
+				background: @fs-carousel-page-background;
+				border-radius: @fs-carousel-page-border-radius;
+				margin: @fs-carousel-page-margin;
+				opacity: @fs-carousel-page-opacity;
+				overflow: hidden;
+				text-indent: 200%;
+				white-space: nowrap;
+
+				// IE8 - opacity check
+
+				.no-opacity & {
+					text-indent: -999px;
+				}
 			}
 		}
 
@@ -347,6 +379,8 @@
 		 */
 
 		&-enabled &-page&-active {
-			opacity: 1;
+			& when (@fs-carousel-styles) {
+				opacity: 1;
+			}
 		}
 	}

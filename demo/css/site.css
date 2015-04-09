@@ -1,4 +1,4 @@
-/*! Formstone v0.4.3 [site.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [site.css] 2015-04-09 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! Formstone v0.4.3 [grid.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [grid.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! Formstone v0.4.3 [background.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [background.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! Formstone v0.4.3 [carousel.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [carousel.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1572,6 +1572,12 @@ pre[class*="language-"] {
   /**
 		 * @class
 		 * @name .fs-carousel-viewport
+		 * @type element
+		 * @description Carousel container
+		 */
+  /**
+		 * @class
+		 * @name .fs-carousel-wrapper
 		 * @type element
 		 * @description Carousel container
 		 */
@@ -1687,6 +1693,15 @@ pre[class*="language-"] {
   content: '';
   display: table;
 }
+.fs-carousel-enabled .fs-carousel-viewport {
+  position: relative;
+  overflow: hidden;
+}
+.fs-carousel-enabled .fs-carousel-viewport:after {
+  clear: both;
+  content: '';
+  display: table;
+}
 .fs-carousel-enabled .fs-carousel-container {
   position: relative;
   overflow: hidden;
@@ -1730,23 +1745,23 @@ pre[class*="language-"] {
   display: block;
 }
 .fs-carousel-enabled .fs-carousel-control {
-  width: 40px;
-  height: 40px;
   position: absolute;
   top: 0;
   bottom: 0;
+  cursor: pointer;
+  display: block;
+  visibility: hidden;
+  width: 40px;
+  height: 40px;
   background: #ffffff;
   border-radius: 100%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  display: block;
   margin: auto;
   opacity: 0;
   overflow: hidden;
   text-indent: 200%;
   -webkit-transition: opacity 0.15s ease, visibility 0.15s ease;
           transition: opacity 0.15s ease, visibility 0.15s ease;
-  visibility: hidden;
   white-space: nowrap;
 }
 .fs-carousel-enabled .fs-carousel-control:before {
@@ -1764,8 +1779,8 @@ pre[class*="language-"] {
   text-indent: -999px;
 }
 .fs-carousel-enabled .fs-carousel-control.fs-carousel-visible {
-  opacity: 1;
   visibility: visible;
+  opacity: 1;
 }
 .fs-carousel-enabled .fs-carousel-control_previous {
   left: 20px;
@@ -1801,12 +1816,12 @@ pre[class*="language-"] {
   display: block;
 }
 .fs-carousel-enabled .fs-carousel-page {
+  cursor: pointer;
+  display: inline-block;
   width: 10px;
   height: 10px;
   background: #333333;
   border-radius: 100%;
-  cursor: pointer;
-  display: inline-block;
   margin: 0 3px;
   opacity: 0.5;
   overflow: hidden;
@@ -1820,7 +1835,7 @@ pre[class*="language-"] {
   opacity: 1;
 }
 
-/*! Formstone v0.4.3 [checkbox.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [checkbox.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2109,7 +2124,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! Formstone v0.4.3 [dropdown.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [dropdown.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2461,7 +2476,7 @@ pre[class*="language-"] {
   background: #fafafa;
 }
 
-/*! Formstone v0.4.3 [lightbox.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [lightbox.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3057,7 +3072,7 @@ pre[class*="language-"] {
   overflow: hidden !important;
 }
 
-/*! Formstone v0.4.3 [number.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [number.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3216,7 +3231,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! Formstone v0.4.3 [pagination.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [pagination.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3355,7 +3370,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! Formstone v0.4.3 [range.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [range.css] 2015-04-09 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3488,7 +3503,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! Formstone v0.4.3 [scrollbar.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [scrollbar.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3643,7 +3658,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! Formstone v0.4.3 [tabs.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [tabs.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3754,7 +3769,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! Formstone v0.4.3 [tooltip.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [tooltip.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3906,7 +3921,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! Formstone v0.4.3 [upload.css] 2015-04-04 | MIT License | formstone.it */
+/*! Formstone v0.4.4 [upload.css] 2015-04-09 | MIT License | formstone.it */
 
 /**
 	 * @class
