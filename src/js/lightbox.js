@@ -579,7 +579,7 @@
 			if (Instance.isMobile) {
 				// Get meta height before sizing
 				Instance.$meta.css({
-					width: Instance.windowWidth
+					width: (count === 0) ? Instance.windowWidth : Instance.contentWidth
 				});
 				Instance.metaHeight = Instance.$meta.outerHeight(true);
 

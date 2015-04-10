@@ -1,4 +1,4 @@
-/*! Formstone v0.4.6 [lightbox.css] 2015-04-10 | MIT License | formstone.it */
+/*! Formstone v0.4.7 [lightbox.css] 2015-04-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -561,6 +561,7 @@
   bottom: 0;
   left: 0;
   background-color: #111111;
+  margin: 0 auto;
   padding: 15px 65px;
 }
 .fs-lightbox-mobile .fs-lightbox-position {
