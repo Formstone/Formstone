@@ -82,7 +82,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
 | `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
-| `sized` | `boolean` | `true` | Flag for auto-sizing items |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 ## Events

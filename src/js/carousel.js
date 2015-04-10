@@ -319,7 +319,7 @@
 			}
 
 			if (data.paged) {
-				data.pageCount -=  (data.count % data.visible);
+				data.pageCount -= (data.count % data.visible);
 			}
 
 			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
@@ -748,7 +748,6 @@
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
 			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
-			 * @param sized [boolean] <true> "Flag for auto-sizing items"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
 
@@ -769,7 +768,6 @@
 				paged          : false,
 				pagination     : true,
 				show           : 1,
-				sized          : true,
 				useMargin      : false
 			},
 
