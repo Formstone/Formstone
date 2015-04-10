@@ -206,8 +206,20 @@
 			Instance.$caption          = $(Classes.caption);
 			Instance.$controls         = $(Classes.control);
 
-			Instance.paddingVertical   = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingTop"), 10)  + parseInt(Instance.$lightbox.css("paddingBottom"), 10)) : (Instance.$close.outerHeight() / 2);
-			Instance.paddingHorizontal = (!Instance.isMobile) ? (parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10))  : 0;
+			if (Instance.isMobile) {
+				Instance.paddingVertical   = Instance.$close.outerHeight();
+				Instance.paddingHorizontal = 0;
+
+				Instance.mobilePaddingVertical   = parseInt(Instance.$content.css("paddingTop"), 10)  + parseInt(Instance.$content.css("paddingBottom"), 10);
+				Instance.mobilePaddingHorizontal = parseInt(Instance.$content.css("paddingLeft"), 10) + parseInt(Instance.$content.css("paddingRight"), 10);
+			} else {
+				Instance.paddingVertical   = parseInt(Instance.$lightbox.css("paddingTop"), 10)  + parseInt(Instance.$lightbox.css("paddingBottom"), 10);
+				Instance.paddingHorizontal = parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10);
+
+				Instance.mobilePaddingVertical   = 0;
+				Instance.mobilePaddingHorizontal = 0;
+			}
+
 			Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
 			Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
 			Instance.controlHeight     = Instance.$controls.outerHeight();
@@ -572,8 +584,8 @@
 				Instance.metaHeight = Instance.$meta.outerHeight(true);
 
 				// Content match viewport
-				Instance.contentHeight = Instance.viewportHeight - Instance.paddingVertical;
-				Instance.contentWidth  = Instance.viewportWidth  - Instance.paddingHorizontal;
+				Instance.contentHeight = Instance.viewportHeight - Instance.mobilePaddingVertical;
+				Instance.contentWidth  = Instance.viewportWidth  - Instance.mobilePaddingHorizontal;
 
 				fitImage();
 

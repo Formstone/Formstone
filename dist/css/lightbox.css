@@ -1,4 +1,4 @@
-/*! Formstone v0.4.5 [lightbox.css] 2015-04-10 | MIT License | formstone.it */
+/*! Formstone v0.4.6 [lightbox.css] 2015-04-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -257,6 +257,7 @@
   color: #333333;
   content: "\00d7";
   display: block;
+  font-family: "Helvetica", Arial, sans-serif;
   font-size: 22px;
   font-weight: 700;
   line-height: 30px;
@@ -520,6 +521,7 @@
 }
 .fs-lightbox-mobile .fs-lightbox-content {
   background-color: #111111;
+  padding: 0 15px;
 }
 .fs-lightbox-mobile .fs-lightbox-control {
   width: 50px;

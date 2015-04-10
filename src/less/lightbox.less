@@ -23,6 +23,7 @@
 	// Close Button
 
 	@fs-lightbox-close-background:				#fff;
+	@fs-lightbox-close-font-family:				"Helvetica", Arial, sans-serif;
 	@fs-lightbox-close-font-size:				22px;
 	@fs-lightbox-close-font-weight:				700;
 	@fs-lightbox-close-color:					#333;
@@ -122,6 +123,7 @@
 	// Mobile Content
 
 	@fs-lightbox-mobile-content-background:		#111;
+	@fs-lightbox-mobile-content-padding:		0 15px;
 
 	// Mobile Controls
 
@@ -131,7 +133,6 @@
 	// Control Carets
 
 	@fs-lightbox-mobile-control-caret-color: 	#eee;
-
 	@fs-lightbox-mobile-control-caret-margin: (@fs-lightbox-mobile-control-width - (@fs-lightbox-control-caret-size * 1.5)) / 2;
 
 	// Mobile Meta
@@ -341,6 +342,7 @@
 				color: @fs-lightbox-close-color;
 				content: "\00d7";
 				display: block;
+				font-family: @fs-lightbox-close-font-family;
 				font-size: @fs-lightbox-close-font-size;
 				font-weight: @fs-lightbox-close-font-weight;
 				line-height: @fs-lightbox-close-height;
@@ -768,6 +770,7 @@
 
 		&-mobile &-content {
 			background-color: @fs-lightbox-mobile-content-background;
+			padding: @fs-lightbox-mobile-content-padding;
 		}
 
 		// control
