@@ -763,8 +763,9 @@
 
 	function sizeVideo() {
 		// Set initial vars
-		Instance.windowHeight = Instance.viewportHeight = Instance.contentHeight = Formstone.windowHeight - Instance.paddingVertical;
-		Instance.windowWidth  = Instance.viewportWidth  = Instance.contentWidth  = Formstone.windowWidth  - Instance.paddingHorizontal;
+
+		Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
 		Instance.videoMarginTop = 0;
 		Instance.videoMarginLeft = 0;
 
@@ -989,8 +990,9 @@
 	 */
 
 	function sizeContent($object) {
-		Instance.windowHeight	  = Formstone.windowHeight - Instance.paddingVertical;
-		Instance.windowWidth	  = Formstone.windowWidth  - Instance.paddingHorizontal;
+		Instance.windowHeight	  = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+		Instance.windowWidth	  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+
 		Instance.objectHeight	  = $object.outerHeight(true);
 		Instance.objectWidth	  = $object.outerWidth(true);
 		Instance.targetHeight	  = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
