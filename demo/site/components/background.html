@@ -16,7 +16,11 @@
 
 <script>
 	$(function() {
-		$(".background").background();
+		$(".background").background({
+			youtubeOptions: {
+				controls: 1
+			}
+		});
 	});
 </script>
 
@@ -118,6 +122,12 @@ transition.js</code></pre>
 <td><code>string OR object</code></td>
 <td><code>null</code></td>
 <td>Source image (string or object) or video (object) or YouTube (object)</td>
+</tr>
+<tr>
+<td><code>youtubeOptions</code></td>
+<td><code>object</code></td>
+<td><code>null</code></td>
+<td>Custom YouTube player parameters (to be used cautiously); See <a href="https://developers.google.com/youtube/player_parameters">https://developers.google.com/youtube/player_parameters</a> for more</td>
 </tr>
 </tbody>
 </table>

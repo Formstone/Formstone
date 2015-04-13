@@ -81,6 +81,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.count` | `string` | `'of'` | Gallery count separator text |
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |
+| `labels.captionClosed` | `string` | `'View Caption'` | Mobile caption toggle text, closed state |
+| `labels.captionOpen` | `string` | `'View Caption'` | Mobile caption toggle text, open state |
 | `margin` | `int` | `50` | Margin used when sizing (single side) |
 | `minHeight` | `int` | `100` | Minimum height of modal |
 | `minWidth` | `int` | `100` | Minimum width of modal |
@@ -89,7 +91,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `videoRadio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
-| `videoWidth` | `int` | `600` | Video target width |
+| `videoWidth` | `int` | `800` | Video max width |
 
 ## Events
 
@@ -170,7 +172,9 @@ $.lightbox("resize");
 | `.fs-lightbox-image` | `element` | Image element |
 | `.fs-lightbox-video` | `element` | Video element |
 | `.fs-lightbox-iframe` | `element` | iFrame element |
+| `.fs-lightbox-tools` | `element` | Tools element |
 | `.fs-lightbox-meta` | `element` | Meta info element |
+| `.fs-lightbox-controls` | `element` | Controls container element |
 | `.fs-lightbox-control` | `element` | Control element |
 | `.fs-lightbox-control.fs-lightbox-control_previous` | `modifier` | Indicates previous control |
 | `.fs-lightbox-control.fs-lightbox-control_next` | `modifier` | Indicates next control |

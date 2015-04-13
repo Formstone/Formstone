@@ -1,4 +1,4 @@
-/*! Formstone v0.4.7 [lightbox.css] 2015-04-10 | MIT License | formstone.it */
+/*! Formstone v0.5.0 [lightbox.css] 2015-04-13 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -118,9 +118,21 @@
 		 */
   /**
 		 * @class
+		 * @name .fs-lightbox-tools
+		 * @type element
+		 * @description Tools element
+		 */
+  /**
+		 * @class
 		 * @name .fs-lightbox-meta
 		 * @type element
 		 * @description Meta info element
+		 */
+  /**
+		 * @class
+		 * @name .fs-lightbox-controls
+		 * @type element
+		 * @description Controls container element
 		 */
   /**
 		 * @class
@@ -385,6 +397,7 @@
   height: 40px;
   position: absolute;
   top: 0;
+  z-index: 105;
   background: #ffffff;
   border-radius: 100%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
@@ -465,6 +478,9 @@
   margin: 5px 0;
   padding: 0;
 }
+.fs-lightbox-caption_toggle {
+  display: none;
+}
 .fs-lightbox-error {
   width: 250px;
 }
@@ -523,9 +539,18 @@
   background-color: #111111;
   padding: 0 15px;
 }
+.fs-lightbox-mobile .fs-lightbox-tools {
+  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #111111;
+}
 .fs-lightbox-mobile .fs-lightbox-control {
   width: 50px;
   height: 100%;
+  min-height: 50px;
   background: #111111;
   border-radius: 0;
   box-shadow: none;
@@ -549,19 +574,13 @@
 .no-touch .fs-lightbox-mobile:hover .fs-lightbox-control {
   opacity: 1;
 }
+.fs-lightbox-mobile .fs-lightbox-control_disabled,
 .no-touch .fs-lightbox-mobile .fs-lightbox-control_disabled,
 .no-touch .fs-lightbox-mobile:hover .fs-lightbox-control_disabled {
   opacity: 0;
   cursor: default !important;
 }
 .fs-lightbox-mobile .fs-lightbox-meta {
-  width: 100%;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #111111;
-  margin: 0 auto;
   padding: 15px 65px;
 }
 .fs-lightbox-mobile .fs-lightbox-position {
@@ -595,4 +614,49 @@
 }
 .fs-lightbox-lock {
   overflow: hidden !important;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-tools {
+  width: auto;
+  position: static;
+  background: transparent;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-controls {
+  width: 100%;
+  height: 50px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 105;
+  background-color: #111111;
+  padding: 0 65px;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-caption_toggle {
+  color: #999999;
+  display: block;
+  font-size: 12px;
+  line-height: 50px;
+}
+.fs-lightbox-mobile.fs-lightbox-touch .fs-lightbox-meta {
+  width: 100%;
+  height: 80%;
+  position: fixed;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 104;
+  background: #222222;
+  box-shadow: 0 0 25px #000000;
+  padding: 15px 15px 65px;
+  -webkit-transform: translate(0, 100%);
+      -ms-transform: translate(0, 100%);
+          transform: translate(0, 100%);
+  -webkit-transition: -webkit-transform 0.25s ease;
+          transition: transform 0.25s ease;
+}
+.fs-lightbox-touch.fs-lightbox-caption_open .fs-lightbox-meta {
+  -webkit-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+          transform: translate(0, 0);
 }

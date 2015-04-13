@@ -91,7 +91,6 @@
 
 			// Check YouTube
 			if ($.type(source) === "object" && $.type(source.video) === "string") {
-				// var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
 				var parts = source.video.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i );
 
 				if (parts && parts.length >= 1) {
@@ -304,7 +303,6 @@
 
 		if (!data.posterLoaded) {
 			if (!data.source.poster) {
-				// data.source.poster = "http://img.youtube.com/vi/" + data.videoId + "/maxresdefault.jpg";
 				data.source.poster = "http://img.youtube.com/vi/" + data.videoId + "/0.jpg";
 			}
 
@@ -316,7 +314,6 @@
 
 		if (!Formstone.isMobile) {
 			if (!$("script[src*='youtube.com/iframe_api']").length) {
-				// $("head").append('<script src="' + window.location.protocol + '//www.youtube.com/iframe_api"></script>');
 				$("head").append('<script src="//www.youtube.com/iframe_api"></script>');
 			}
 
@@ -333,18 +330,8 @@
 				html += '<div id="' + guid + '"></div>';
 				html += '</div>';
 
-				var $media = $(html);
-
-				data.$container.append($media);
-
-				if (data.player) {
-					data.oldPlayer = data.player;
-					data.player = null;
-				}
-
-				data.player = new Window.YT.Player(guid, {
-					videoId: data.videoId,
-					playerVars: {
+				var $media    = $(html),
+					ytOptions = $.extend(true, {}, {
 						controls: 0,
 						rel: 0,
 						showinfo: 0,
@@ -355,7 +342,18 @@
 						loop: (data.loop) ? 1 : 0,
 						autoplay: 1,
 						origin: Window.location.protocol + "//" + Window.location.host
-					},
+					}, data.youtubeOptions);
+
+				data.$container.append($media);
+
+				if (data.player) {
+					data.oldPlayer = data.player;
+					data.player = null;
+				}
+
+				data.player = new Window.YT.Player(guid, {
+					videoId: data.videoId,
+					playerVars: ytOptions,
 					events: {
 						onReady: function (e) {
 							/* console.log("onReady", e); */
@@ -648,6 +646,7 @@
 			 * @param loop [boolean] <true> "Loop video"
 			 * @param mute [boolean] <true> "Mute video"
 			 * @param source [string OR object] <null> "Source image (string or object) or video (object) or YouTube (object)"
+			 * @param youtubeOptions [object] <null> "Custom YouTube player parameters (to be used cautiously); See https://developers.google.com/youtube/player_parameters for more"
 			 */
 			defaults: {
 				autoPlay       : true,
@@ -655,7 +654,8 @@
 				embedRatio     : 1.777777,
 				loop           : true,
 				mute           : true,
-				source         : null
+				source         : null,
+				youtubeOptions : {}
 			},
 
 			classes: [

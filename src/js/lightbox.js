@@ -110,6 +110,7 @@
 					active         : false
 				},
 				isMobile           : (Formstone.isMobile || data.mobile),
+				isTouch            : Formstone.support.touch,
 				isAnimating        : true,
 				oldContentHeight   : 0,
 				oldContentWidth    : 0
@@ -157,6 +158,9 @@
 			if (Instance.isMobile) {
 				lightboxClasses.push(Classes.raw.mobile);
 			}
+			if (Instance.isTouch) {
+				lightboxClasses.push(Classes.raw.touch);
+			}
 			if (isUrl) {
 				lightboxClasses.push(Classes.raw.iframed);
 			}
@@ -170,11 +174,20 @@
 			html += '<div class="' + Classes.raw.container + '">';
 			html += '<div class="' + Classes.raw.content + '">';
 			if (isImage || isVideo) {
-				html += '<div class="' + Classes.raw.meta + '">';
+				html += '<div class="' + Classes.raw.tools + '">';
 
+				html += '<div class="' + Classes.raw.controls + '">';
 				if (Instance.gallery.active) {
 					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
 					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+				}
+				if (Instance.isMobile && Instance.isTouch) {
+					html += '<button type="button" class="' + [Classes.raw.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+				}
+				html += '</div>'; // controls
+
+				html += '<div class="' + Classes.raw.meta + '">';
+				if (Instance.gallery.active) {
 					html += '<p class="' + Classes.raw.position + '"';
 					if (Instance.gallery.total < 1) {
 						html += ' style="display: none;"';
@@ -185,10 +198,11 @@
 					html += ' <span class="' + Classes.raw.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
 					html += '</p>';
 				}
-
 				html += '<div class="' + Classes.raw.caption + '">';
 				html += Instance.formatter.call($el, data);
 				html += '</div></div>'; // caption, meta
+
+				html += '</div>'; // tools
 			}
 			html += '</div></div></div>'; //container, content, lightbox
 
@@ -201,9 +215,11 @@
 			Instance.$close            = $(Classes.close);
 			Instance.$container        = $(Classes.container);
 			Instance.$content          = $(Classes.content);
+			Instance.$tools            = $(Classes.tools);
 			Instance.$meta             = $(Classes.meta);
 			Instance.$position         = $(Classes.position);
 			Instance.$caption          = $(Classes.caption);
+			Instance.$controlBox       = $(Classes.controls);
 			Instance.$controls         = $(Classes.control);
 
 			if (Instance.isMobile) {
@@ -239,6 +255,10 @@
 
 			if (Instance.gallery.active) {
 				Instance.$lightbox.on(Events.clickTouchStart, Classes.control, advanceGallery);
+			}
+
+			if (Instance.isMobile && Instance.isTouch) {
+				Instance.$lightbox.on(Events.clickTouchStart, Classes.caption_toggle, toggleCaption);
 			}
 
 			Instance.$lightbox.transition({
@@ -478,6 +498,37 @@
 		return pos;
 	}
 
+
+	/**
+	 * @method private
+	 * @name toggleCaption
+	 * @description Toggle caption.
+	 */
+
+	function toggleCaption(e) {
+		Functions.killEvent(e);
+
+		if (Instance.captionOpen) {
+			closeCaption();
+		} else {
+			Instance.$lightbox.addClass(Classes.raw.caption_open)
+				.find(Classes.caption_toggle).text(Instance.labels.captionOpen);
+			Instance.captionOpen = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name closeCaption
+	 * @description Close caption.
+	 */
+
+	function closeCaption() {
+		Instance.$lightbox.removeClass(Classes.raw.caption_open)
+			.find(Classes.caption_toggle).text(Instance.labels.captionClosed);
+		Instance.captionOpen = false;
+	}
+
 	/**
 	 * @method private
 	 * @name formatCaption
@@ -547,8 +598,8 @@
 	function sizeImage() {
 		var count = 0;
 
-		Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.paddingVertical;
-		Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.paddingHorizontal;
+		Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+		Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
 
 		Instance.contentHeight = Infinity;
 		Instance.contentWidth = Infinity;
@@ -557,9 +608,10 @@
 		Instance.imageMarginLeft = 0;
 
 		while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
-			Instance.imageHeight = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
-			Instance.imageWidth  = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
-			Instance.metaHeight  = (count === 0) ? 0 : Instance.metaHeight;
+			Instance.imageHeight   = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+			Instance.imageWidth    = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
+			Instance.metaHeight    = (count === 0) ? 0 : Instance.metaHeight;
+			Instance.spacerHeight  = (count === 0) ? 0 : Instance.spacerHeight;
 
 			if (count === 0) {
 				Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
@@ -577,19 +629,25 @@
 			}
 
 			if (Instance.isMobile) {
-				// Get meta height before sizing
-				Instance.$meta.css({
-					width: (count === 0) ? Instance.windowWidth : Instance.contentWidth
-				});
-				Instance.metaHeight = Instance.$meta.outerHeight(true);
+				if (Instance.isTouch) {
+					Instance.$controlBox.css({
+						width: Formstone.windowWidth
+					});
+					Instance.spacerHeight = Instance.$controls.outerHeight(true);
+				} else {
+					Instance.$tools.css({
+						width: Formstone.windowWidth
+					});
+					Instance.spacerHeight = Instance.$tools.outerHeight(true);
+				}
 
 				// Content match viewport
-				Instance.contentHeight = Instance.viewportHeight - Instance.mobilePaddingVertical;
-				Instance.contentWidth  = Instance.viewportWidth  - Instance.mobilePaddingHorizontal;
+				Instance.contentHeight = Instance.viewportHeight;
+				Instance.contentWidth  = Instance.viewportWidth;
 
 				fitImage();
 
-				Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.metaHeight) / 2;
+				Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
 				Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
 			} else {
 				// Viewport should match window, less margin, padding and meta
@@ -606,10 +664,11 @@
 			}
 
 			// Modify DOM
-
-			Instance.$meta.css({
-				width: Instance.contentWidth
-			});
+			if (!Instance.isMobile && !Instance.isTouch) {
+				Instance.$meta.css({
+					width: Instance.contentWidth
+				});
+			}
 
 			Instance.$image.css({
 				height: Instance.targetImageHeight,
@@ -634,7 +693,7 @@
 	 */
 
 	function fitImage() {
-		var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.metaHeight,
+		var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.spacerHeight,
 			width  = (!Instance.isMobile) ? Instance.viewportWidth  : Instance.contentWidth;
 
 		if (Instance.isWide) {
@@ -710,11 +769,18 @@
 		Instance.videoMarginLeft = 0;
 
 		if (Instance.isMobile) {
-			Instance.$meta.css({
-				width: Instance.windowWidth
-			});
-			Instance.metaHeight = Instance.$meta.outerHeight(true);
-			Instance.viewportHeight -= Instance.metaHeight;
+			if (Instance.isTouch) {
+				Instance.$controlBox.css({
+					width: Formstone.windowWidth
+				});
+				Instance.spacerHeight = Instance.$controls.outerHeight(true);
+			} else {
+				Instance.$tools.css({
+					width: Formstone.windowWidth
+				});
+				Instance.spacerHeight = Instance.$tools.outerHeight(true);
+			}
+			Instance.viewportHeight -= Instance.spacerHeight;
 
 			Instance.targetVideoWidth  = Instance.viewportWidth;
 			Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
@@ -741,10 +807,11 @@
 		}
 
 		// Update dom
-
-		Instance.$meta.css({
-			width: Instance.contentWidth
-		});
+		if (!Instance.isMobile && !Instance.isTouch) {
+			Instance.$meta.css({
+				width: Instance.contentWidth
+			});
+		}
 
 		Instance.$videoWrapper.css({
 			height: Instance.targetVideoHeight,
@@ -797,6 +864,8 @@
 
 		if (!Instance.isAnimating && !$control.hasClass(Classes.raw.control_disabled)) {
 			Instance.isAnimating = true;
+
+			closeCaption();
 
 			Instance.gallery.index += ($control.hasClass(Classes.raw.control_next)) ? 1 : -1;
 			if (Instance.gallery.index > Instance.gallery.total) {
@@ -960,7 +1029,7 @@
 
 		// Clean up
 		Instance.type = "element";
-		Instance.$meta.remove();
+		Instance.$tools.remove();
 
 		Instance.$image.off(Events.namespace);
 
@@ -975,7 +1044,9 @@
 	 */
 
 	function onSwipe(e) {
-		Instance.$controls.filter((e.directionX === "left") ? Classes.control_next : Classes.control_previous).trigger(Events.click);
+		if (!Instance.captionOpen) {
+			Instance.$controls.filter((e.directionX === "left") ? Classes.control_next : Classes.control_previous).trigger(Events.click);
+		}
 	}
 
 	/**
@@ -1031,6 +1102,8 @@
 			 * @param labels.count [string] <'of'> "Gallery count separator text"
 			 * @param labels.next [string] <'Next'> "Gallery control text"
 			 * @param labels.previous [string] <'Previous'> "Gallery control text"
+			 * @param labels.captionClosed [string] <'View Caption'> "Mobile caption toggle text, closed state"
+			 * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
 			 * @param margin [int] <50> "Margin used when sizing (single side)"
 			 * @param minHeight [int] <100> "Minimum height of modal"
 			 * @param minWidth [int] <100> "Minimum width of modal"
@@ -1039,7 +1112,7 @@
 			 * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
-			 * @param videoWidth [int] <600> "Video target width"
+			 * @param videoWidth [int] <800> "Video max width"
 			 */
 
 			defaults: {
@@ -1049,10 +1122,12 @@
 				formatter      : formatCaption,
 				infinite       : false,
 				labels: {
-					close      : "Close",
-					count      : "of",
-					next       : "Next",
-					previous   : "Previous"
+					close         : "Close",
+					count         : "of",
+					next          : "Next",
+					previous      : "Previous",
+					captionClosed : "View Caption",
+					captionOpen   : "Close Caption"
 				},
 				margin         : 50,
 				minHeight      : 100,
@@ -1062,7 +1137,7 @@
 				requestKey     : "fs-lightbox",
 				top            : 0,
 				videoRatio     : 0.5625,
-				videoWidth     : 600
+				videoWidth     : 800
 			},
 
 			classes: [
@@ -1070,6 +1145,7 @@
 				"animating",
 				"fixed",
 				"mobile",
+				"touch",
 				"inline",
 				"iframed",
 				"open",
@@ -1081,7 +1157,9 @@
 				"image",
 				"video",
 				"video_wrapper",
+				"tools",
 				"meta",
+				"controls",
 				"control",
 				"control_previous",
 				"control_next",
@@ -1089,7 +1167,9 @@
 				"position",
 				"position_current",
 				"position_total",
+				"caption_toggle",
 				"caption",
+				"caption_open",
 				"iframe",
 				"error",
 				"lock"

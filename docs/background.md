@@ -94,6 +94,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `loop` | `boolean` | `true` | Loop video |
 | `mute` | `boolean` | `true` | Mute video |
 | `source` | `string OR object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
+| `youtubeOptions` | `object` | `null` | Custom YouTube player parameters (to be used cautiously); See https://developers.google.com/youtube/player_parameters for more |
 
 ## Events
 
