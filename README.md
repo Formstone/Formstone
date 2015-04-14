@@ -2,7 +2,7 @@
 <a href="http://badge.fury.io/bo/formstone"><img src="https://badge.fury.io/bo/formstone.svg" alt="Bower version"></a> 
 <a href="https://travis-ci.org/Formstone/Formstone"><img src="https://travis-ci.org/Formstone/Formstone.svg?branch=master" alt="Travis CI"></a> 
 
-# Formstone 
+# formstone 
 
 Library of modular front end components. 
 

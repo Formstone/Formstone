@@ -2,7 +2,7 @@
   "name": "formstone",
   "id": "formstone",
   "codename": "formstone",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",

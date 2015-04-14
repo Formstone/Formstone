@@ -181,32 +181,44 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | `@fs-grid-mq-min-xl` | `1220px` | Extra Large min mq |
 | **Mixin-Only Grid** | | |
 | `@fs-grid-mixin-only` | `false` | Disables generation of classes based grid |
-| **Extendable Classes** | | |
-| `.fs_grid_row` | | Base row |
-| `.fs_grid_row_fluid` | | Base fluid row |
-| `.fs_grid_row_fluid_sm` | | Base fluid row (small only) |
-| `.fs_grid_row_row` | | Base nested row |
-| `.fs_grid_row_row_contained` | | Base nested row (parent cell is contained) |
-| `.fs_grid_cell` | | Base cell |
-| `.fs_grid_cell_centered` | | Base centered cell |
-| `.fs_grid_cell_padded` | | Base padded cell |
-| `.fs_grid_cell_contained` | | Base contained cell |
-| `.fs_grid_cell_right` | | Base right cell |
-| **Mixins** | | |
-| `.fs_row();` | | Base row |
-| `.fs_row_fluid();` | | Base row fluid |
-| `.fs_row_fluid_sm();` | | Base fluid row (small only) |
-| `.fs_row_row();` | | Base nested row |
-| `.fs_row_row_contained();` | | Base nested row (parent cell is contained) |
-| `.fs_cell();` | | Base cell |
-| `.fs_cell_centered();` | | Base centered cell |
-| `.fs_cell_padded();` | | Base padded cell |
-| `.fs_cell_contained();` | | Base contained cell |
-| `.fs_cell_right();` | | Base right cell |
-| `.fs_cell_xs(@count [, @total]);` | | Extra Small cell; Pass @total to define fractions |
-| `.fs_cell_sm(@count [, @total]);` | | Small cell; Pass @total to define fractions |
-| `.fs_cell_md(@count [, @total]);` | | Medium cell; Pass @total to define fractions |
-| `.fs_cell_lg(@count [, @total]);` | | Large cell; Pass @total to define fractions |
-| `.fs_cell_xl(@count [, @total]);` | | Extra Large cell; Pass @total to define fractions |
+
+### LESS Extends & Mixins 
+
+Grid can be compiled into CSS directly. This allows for a similar declarative approach, without adding classes to markup. 
+
+| Name | Description |
+| --- | --- |
+| **Extends** | |
+| `.fs_grid_row` | Base row |
+| `.fs_grid_row_fluid` | Base fluid row |
+| `.fs_grid_row_fluid_sm` | Base fluid row (small only) |
+| `.fs_grid_row_row` | Base nested row |
+| `.fs_grid_row_row_contained` | Base nested row (parent cell is contained) |
+| `.fs_grid_cell` | Base cell |
+| `.fs_grid_cell_centered` | Base centered cell |
+| `.fs_grid_cell_padded` | Base padded cell |
+| `.fs_grid_cell_contained` | Base contained cell |
+| `.fs_grid_cell_right` | Base right cell |
+| **Mixins** | |
+| `.fs_row();` | Base row |
+| `.fs_row_fluid();` | Base row fluid |
+| `.fs_row_fluid_sm();` | Base fluid row (small only) |
+| `.fs_row_row();` | Base nested row |
+| `.fs_row_row_contained();` | Base nested row (parent cell is contained) |
+| `.fs_cell();` | Base cell |
+| `.fs_cell_centered();` | Base centered cell |
+| `.fs_cell_padded();` | Base padded cell |
+| `.fs_cell_contained();` | Base contained cell |
+| `.fs_cell_right();` | Base right cell |
+| `.fs_cell_xs(@count [, @total]);` | Extra Small cell; Pass @total to define fractions |
+| `.fs_cell_sm(@count [, @total]);` | Small cell; Pass @total to define fractions |
+| `.fs_cell_md(@count [, @total]);` | Medium cell; Pass @total to define fractions |
+| `.fs_cell_lg(@count [, @total]);` | Large cell; Pass @total to define fractions |
+| `.fs_cell_xl(@count [, @total]);` | Extra Large cell; Pass @total to define fractions |
+| `.fs_push_xs(@count [, @total]);` | Extra Small push; Pass @total to define fractions |
+| `.fs_push_sm(@count [, @total]);` | Small push; Pass @total to define fractions |
+| `.fs_push_md(@count [, @total]);` | Medium push; Pass @total to define fractions |
+| `.fs_push_lg(@count [, @total]);` | Large push; Pass @total to define fractions |
+| `.fs_push_xl(@count [, @total]);` | Extra Large push; Pass @total to define fractions |
 
 

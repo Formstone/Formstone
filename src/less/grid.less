@@ -158,6 +158,18 @@
 		}
 	}
 
+	// Push
+	.fs_push_xs(@count, @total:0) {
+		@media screen and (@fs-grid-mq-max-sm) {
+			& when (@total = 0) {
+				.fs_grid_column_pushed(@fs-grid-columns-sm, @fs-grid-gutter, @count);
+			}
+			& when not (@total = 0) {
+				.fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
+			}
+		}
+	}
+
 	// !Min, 300 (max 500)
 	.fs_cell_sm(@count, @total:0) {
 		@media screen and (~"@{fs-grid-mq-max-md}") {
@@ -166,6 +178,18 @@
 			}
 			& when not (@total = 0) {
 				.fs_grid_column(@total, @fs-grid-gutter, @count);
+			}
+		}
+	}
+
+	// Push
+	.fs_push_sm(@count, @total:0) {
+		@media screen and (~"@{fs-grid-mq-max-md}") {
+			& when (@total = 0) {
+				.fs_grid_column_pushed(@fs-grid-columns-sm, @fs-grid-gutter, @count);
+			}
+			& when not (@total = 0) {
+				.fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}
@@ -182,6 +206,18 @@
 		}
 	}
 
+	// Push
+	.fs_push_md(@count, @total:0) {
+		@media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
+			& when (@total = 0) {
+				.fs_grid_column_pushed(@fs-grid-columns-md, @fs-grid-gutter, @count);
+			}
+			& when not (@total = 0) {
+				.fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
+			}
+		}
+	}
+
 	// !Large, 12 column, 960 (min 980)
 	.fs_cell_lg(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-lg) {
@@ -194,6 +230,18 @@
 		}
 	}
 
+	// Push
+	.fs_push_lg(@count, @total:0) {
+		@media screen and (@fs-grid-mq-min-lg) {
+			& when (@total = 0) {
+				.fs_grid_column_pushed(@fs-grid-columns-lg, @fs-grid-gutter, @count);
+			}
+			& when not (@total = 0) {
+				.fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
+			}
+		}
+	}
+
 	// !XLarge, 12 column, 1200 (min 1220)
 	.fs_cell_xl(@count, @total:0) {
 		@media screen and (@fs-grid-mq-min-xl) {
@@ -202,6 +250,18 @@
 			}
 			& when not (@total = 0) {
 				.fs_grid_column(@total, @fs-grid-gutter, @count);
+			}
+		}
+	}
+
+	// Push
+	.fs_push_xl(@count, @total:0) {
+		@media screen and (@fs-grid-mq-min-xl) {
+			& when (@total = 0) {
+				.fs_grid_column_pushed(@fs-grid-columns-lg, @fs-grid-gutter, @count);
+			}
+			& when not (@total = 0) {
+				.fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
 			}
 		}
 	}

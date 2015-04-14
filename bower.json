@@ -1,6 +1,6 @@
 {
-  "name": "Formstone",
-  "version": "0.5.1",
+  "name": "formstone",
+  "version": "0.5.2",
   "description": "Library of modular front end components.",
   "author": {
     "name": "Ben Plum",
