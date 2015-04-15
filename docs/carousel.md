@@ -125,7 +125,6 @@ $(".target").carousel("jump", 1);
 Move to next item
 
 
-
 #### Parameters
 
 | Name | Type | Default | Description |

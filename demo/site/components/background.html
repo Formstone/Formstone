@@ -17,6 +17,13 @@
 <script>
 	$(function() {
 		$(".background").background();
+
+/*
+		$(".load_background").click(function() {
+			var source = $(this).data("background");
+			$(".loader").background("load", source);
+		});
+*/
 	});
 </script>
 
@@ -24,7 +31,11 @@
 <div class="background" data-background-options='{"source":"http://formstone.it/files/demo/space.jpg"}'></div>
 
 <h4>Responsive</h4>
-<div class="background" data-background-options='{"source":{"0px":"http://formstone.it/files/demo/nasa-bw-1.jpg","980px":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
+<div class="background loader" data-background-options='{"source":{"0px":"http://formstone.it/files/demo/nasa-bw-1.jpg","980px":"http://formstone.it/files/demo/nasa-bw-2.jpg"}}'></div>
+<!--
+<span class="button load_background" data-background='{"0px":"http://formstone.it/files/demo/nasa-bw-1.jpg","980px":"http://formstone.it/files/demo/nasa-bw-2.jpg"}'>Load 1</span>
+<span class="button load_background" data-background='{"0px":"http://formstone.it/files/demo/nasa-bw-2.jpg","980px":"http://formstone.it/files/demo/nasa-bw-3.jpg"}'>Load 2</span>
+-->
 
 <h4>Video</h4>
 <div class="background" data-background-options='{"source":{"webm":"http://formstone.it/files/demo/oranges.webm","mp4":"http://formstone.it/files/demo/oranges.mp4","ogg":"http://formstone.it/files/demo/oranges.ogv","poster":"http://formstone.it/files/demo/oranges.jpg"}}'></div>
@@ -152,6 +163,9 @@ transition.js</code></pre>
 <h3 id="load">load</h3>
 <p>Loads source media</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;load&quot;, &quot;path/to/image.jpg&quot;);</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;load&quot;, { &quot;0px&quot;: &quot;path/to/image-small.jpg&quot;, &quot;980px&quot;: &quot;path/to/image-large.jpg&quot; });</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;load&quot;, { &quot;poster&quot;: &quot;path/to/image.jpg&quot;, &quot;webm&quot;: &quot;path/to/video.webm&quot;, &quot;mp4&quot;: &quot;path/to/video.mp4&quot;, &quot;ogg&quot;: &quot;path/to/video.ogv&quot; });</code></pre>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).background(&quot;load&quot;, { &quot;poster&quot;: &quot;path/to/image.jpg&quot;, &quot;video&quot;: &quot;//www.youtube.com/embed/VIDEO_ID&quot; });</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -167,7 +181,7 @@ transition.js</code></pre>
 <td><code>source</code></td>
 <td><code>string OR object</code></td>
 <td>&nbsp;</td>
-<td>Source image (string) or video (object) or YouTube (object);</td>
+<td>Source image (string or object) or video (object) or YouTube (object);</td>
 </tr>
 </tbody>
 </table>

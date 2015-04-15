@@ -69,8 +69,11 @@
 	 * @method
 	 * @name load
 	 * @description Loads source media
-	 * @param source [string OR object] "Source image (string) or video (object) or YouTube (object);"
+	 * @param source [string OR object] "Source image (string or object) or video (object) or YouTube (object);"
 	 * @example $(".target").background("load", "path/to/image.jpg");
+	 * @example $(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "path/to/image-large.jpg" });
+	 * @example $(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
+	 * @example $(".target").background("load", { "poster": "path/to/image.jpg", "video": "//www.youtube.com/embed/VIDEO_ID" });
 	 */
 
 	/**

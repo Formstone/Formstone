@@ -82,6 +82,11 @@ module.exports = function(grunt) {
 								_return["params"] = [];
 							}
 							_return["params"].push(part);
+						} else if (key === "example") {
+							if (!_return.examples) {
+								_return["examples"] = [];
+							}
+							_return["examples"].push(part);
 						} else if (key === "event") {
 							if (!_return.events) {
 								_return["events"] = [];
@@ -249,7 +254,12 @@ module.exports = function(grunt) {
 						if (doc.type === "widget") {
 							for (var i in widgetMethods) {
 								var m = JSON.parse(JSON.stringify(widgetMethods[i]));
-								m.example = m.example.replace('{ns}', namespace);
+
+								if (m.examples) {
+									for (var j in m.examples) {
+										m.examples[j] = m.examples[j].replace('{ns}', namespace);
+									}
+								}
 
 								doc.methods.push(m);
 							}
@@ -257,7 +267,12 @@ module.exports = function(grunt) {
 
 						for (var i in utilityMethods) {
 							var m = JSON.parse(JSON.stringify(utilityMethods[i]));
-							m.example = m.example.replace('{ns}', namespace);
+
+							if (m.examples) {
+								for (var j in m.examples) {
+									m.examples[j] = m.examples[j].replace('{ns}', namespace);
+								}
+							}
 
 							doc.methods.push(m);
 						}
@@ -428,14 +443,17 @@ module.exports = function(grunt) {
 					md += '\n\n';
 					md += m.description;
 					md += '\n\n';
-					if (m.example) {
-						md += '```javascript';
-						md += '\n';
-						md += m.example;
-						md += '\n';
-						md += '```';
+					if (m.examples && m.examples.length) {
+						for (var j in m.examples) {
+							md += '```javascript';
+							md += '\n';
+							md += m.examples[j];
+							md += '\n';
+							md += '```';
+							md += '\n';
+						}
 					}
-					md += '\n\n';
+					md += '\n';
 					if (m.params && m.params.length) {
 						md += heading + '### Parameters';
 						md += '\n\n';

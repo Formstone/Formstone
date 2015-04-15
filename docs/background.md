@@ -116,12 +116,21 @@ Loads source media
 ```javascript
 $(".target").background("load", "path/to/image.jpg");
 ```
+```javascript
+$(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "path/to/image-large.jpg" });
+```
+```javascript
+$(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
+```
+```javascript
+$(".target").background("load", { "poster": "path/to/image.jpg", "video": "//www.youtube.com/embed/VIDEO_ID" });
+```
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `source` | `string OR object` | &nbsp; | Source image (string) or video (object) or YouTube (object); |
+| `source` | `string OR object` | &nbsp; | Source image (string or object) or video (object) or YouTube (object); |
 
 ### pause
 
