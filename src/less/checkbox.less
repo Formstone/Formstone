@@ -129,17 +129,26 @@
 			user-select: none !important;
 		}
 
+		&-element_wrapper {
+			position: relative;
+
+			border: 0;
+			height: 0;
+			margin: 0;
+			opacity: 0;
+			overflow: hidden;
+			padding: 0;
+			width: 0;
+		}
+
 		&-element {
 			position: absolute;
+			top: 0;
+			left: 0;
 			z-index: -1;
 
-			opacity: 0;
 			pointer-events: none;
 			transition: none;
-
-			.no-touch & {
-				left: -99999px;
-			}
 		}
 
 		/**

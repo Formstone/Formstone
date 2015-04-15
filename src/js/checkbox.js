@@ -59,6 +59,9 @@
 			data.$checkbox.addClass(RawClasses.disabled);
 		}
 
+		// Hide original checkbox
+		this.wrap('<div class="' + RawClasses.element_wrapper + '"></div>');
+
 		// Bind click events
 		this.on(Events.focus, data, onFocus)
 			.on(Events.blur, data, onBlur)
@@ -87,7 +90,8 @@
 		data.$label.unwrap()
 				   .removeClass(RawClasses.label);
 
-		this.off(Events.namespace);
+		this.unwrap()
+			.off(Events.namespace);
 	}
 
 	/**
@@ -237,6 +241,7 @@
 			},
 
 			classes: [
+				"element_wrapper",
 				"label",
 				"marker",
 				"flag",

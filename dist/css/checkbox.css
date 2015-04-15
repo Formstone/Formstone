@@ -1,4 +1,4 @@
-/*! formstone v0.5.2 [checkbox.css] 2015-04-14 | MIT License | formstone.it */
+/*! formstone v0.5.3 [checkbox.css] 2015-04-15 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -91,16 +91,24 @@
       -ms-user-select: none !important;
           user-select: none !important;
 }
+.fs-checkbox-element_wrapper {
+  position: relative;
+  border: 0;
+  height: 0;
+  margin: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 0;
+}
 .fs-checkbox-element {
   position: absolute;
+  top: 0;
+  left: 0;
   z-index: -1;
-  opacity: 0;
   pointer-events: none;
   -webkit-transition: none;
           transition: none;
-}
-.no-touch .fs-checkbox-element {
-  left: -99999px;
 }
 .fs-checkbox-label {
   color: #666666;
