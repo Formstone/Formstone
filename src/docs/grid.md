@@ -50,8 +50,8 @@ This will effect every element on the page and can have unexpected results. In t
 | --- | --- | --- | --- |
 | `xs` | smaller than 500px | 300px | 3 |
 | `sm` | smaller than 740px | 480px | 3 |
-| `md` | 740px to 960px | 720px | 6 |
-| `lg` | 960px to 1220px | 960px | 12 |
+| `md` | 740px to 980px | 720px | 6 |
+| `lg` | 980px to 1220px | 960px | 12 |
 | `xl` | larger than 1220px | 1200px | 12 |
 
 ### Defining Cells
