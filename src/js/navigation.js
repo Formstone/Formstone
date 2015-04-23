@@ -103,7 +103,8 @@
 		data.$content.removeClass(data.contentClasses)
 					 .off(Events.namespace);
 
-		data.$handle.attr("data-swap-target", "")
+		data.$handle.removeAttr("data-swap-target")
+					.removeData("swap-target")
 					.removeClass(data.handleClasses)
 					.off(data.eventGuid)
 					.text(data.originalLabel)
@@ -263,12 +264,12 @@
 			/**
 			 * @options
 			 * @param customClass [string] <''> "Class applied to instance"
-			 * @param gravity [string] <'left'> "Gravity of 'push' and 'overlay' navigation; 'right', 'left'"
+			 * @param gravity [string] <'left'> "Gravity of 'push', 'reveal' and 'overlay' navigation; 'right', 'left'"
 			 * @param label [boolean] <true> "Display handle width label"
 			 * @param labels.closed [string] <'Menu'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
-			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'overlay'"
+			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'reveal', 'overlay'"
 			 */
 
 			defaults: {
@@ -292,6 +293,7 @@
 				"open",
 				"toggle",
 				"push",
+				"reveal",
 				"overlay",
 				"left",
 				"right",

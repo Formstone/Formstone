@@ -198,7 +198,7 @@
 		 * @class
 		 * @name .fs-navigation-push-nav
 		 * @type element
-		 * @description Overlay nav
+		 * @description Push nav
 		 */
 		/**
 		 * @class
@@ -231,7 +231,45 @@
 		 * @description Indicates right hand nav
 		 */
 
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-nav
+		 * @type element
+		 * @description Reveal nav
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animated state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-left-nav
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-right-nav
+		 * @type modifier
+		 * @description Indicates right hand nav
+		 */
+
 		&-push-nav&-enabled,
+		&-reveal-nav&-enabled,
 		&-overlay-nav&-enabled {
 			width: @fs-navigation-slide-width;
 			height: 100%;
@@ -245,6 +283,10 @@
 			visibility: hidden;
 		}
 
+		&-reveal-nav&-animated {
+			transition: visibility 0.001s linear @fs-navigation-slide-transition-speed; // delay when closing
+		}
+
 		&-push-nav&-animated,
 		&-overlay-nav&-animated {
 			transition:
@@ -252,26 +294,60 @@
 				visibility 0.001s linear @fs-navigation-slide-transition-speed; // delay when closing
 		}
 
-		&-push-nav&-enabled {
+		// reveal / push / overlay
+
+		&-push-nav&-enabled,
+		&-reveal-nav&-enabled {
 			z-index: @fs-navigation-push-zindex;
 		}
+
+		&-push-left-nav&-enabled,
+		&-reveal-left-nav&-enabled,
+		&-overlay-left-nav&-enabled {
+			left: 0;
+		}
+
+		&-push-right-nav&-enabled,
+		&-reveal-right-nav&-enabled,
+		&-overlay-right-nav&-enabled {
+			right: 0;
+		}
+
+		// reveal
+
+
+
+		// push / overlay
+
+		&-push-left-nav&-enabled,
+		&-overlay-left-nav&-enabled {
+			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
+		}
+
+		&-push-right-nav&-enabled,
+		&-overlay-right-nav&-enabled {
+			transform: translate3D(@fs-navigation-slide-width, 0, 0);
+		}
+
+		// overlay
 
 		&-overlay-nav&-enabled {
 			z-index: @fs-navigation-overlay-zindex;
 		}
 
 		&-overlay-left-nav&-enabled {
-			left: 0;
-
 			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
-			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}
 
 		&-overlay-right-nav&-enabled {
-			right: 0;
-
 			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
-			transform: translate3D(@fs-navigation-slide-width, 0, 0);
+		}
+
+		// open
+
+		&-reveal-nav&-open {
+			visibility: visible;
+			transition: visibility 0.001s @fs-navigation-slide-transition-timing;
 		}
 
 		&-push-nav&-open,
@@ -402,6 +478,45 @@
 		 * @description Indicates right hand nav
 		 */
 
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-content
+		 * @type element
+		 * @description Target page content
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animted state
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-left-content
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+		/**
+		 * @class
+		 * @name .fs-navigation-reveal-right-content
+		 * @type modifier
+		 * @description Indicates right hand nav
+		 */
+
+		&-reveal-content&-enabled,
 		&-push-content&-enabled {
 			position: relative;
 			z-index: @fs-navigation-push-content-zindex;
@@ -411,25 +526,30 @@
 			transform: translate3D(0, 0, 0);
 		}
 
+		&-reveal-content&-animated,
 		&-push-content&-animated {
 			transition:
 				transform @fs-navigation-slide-transition-speed @fs-navigation-slide-transition-timing;
 		}
 
+		&-reveal-left-content&-enabled,
 		&-push-left-content&-enabled {
 			box-shadow: -(@fs-navigation-slide-content-box-shadow-blur) 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
+		&-reveal-right-content&-enabled,
 		&-push-right-content&-enabled {
 			box-shadow: @fs-navigation-slide-content-box-shadow-blur 0 @fs-navigation-slide-content-box-shadow-blur @fs-navigation-slide-content-box-shadow-color;
 		}
 
 		// open
 
+		&-reveal-left-content&-open,
 		&-push-left-content&-open {
 			transform: translate3D(@fs-navigation-slide-width, 0, 0);
 		}
 
+		&-reveal-right-content&-open,
 		&-push-right-content&-open {
 			transform: translate3D(-(@fs-navigation-slide-width), 0, 0);
 		}

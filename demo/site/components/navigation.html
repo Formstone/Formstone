@@ -15,6 +15,13 @@
 
 	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
 	.navigation.fs-navigation-enabled { padding: 10px; }
+
+	.nav_buttons { margin: 0 0 20px; }
+	.nav_buttons .active,
+	.no-touch .nav_buttons .active:hover { background: #c65032; }
+	@media screen and (min-width: 500px) {
+		.nav_buttons .button { margin: 0 10px 0 0; width: 160px; }
+	}
 </style>
 
 <script>
@@ -25,6 +32,21 @@
 		});
 
 		$(".navigation").navigation();
+
+		$(".nav_switch").on("click", function() {
+			$(".nav_buttons .button").removeClass("active");
+			$(this).addClass("active");
+
+			$(".main_nav")
+				.navigation("destroy")
+				.attr("data-navigation-options", "{}")
+				.removeData("navigation-options")
+				.navigation({
+					type: $(this).data("type"),
+					gravity: $(this).data("gravity"),
+					maxWidth: "10000px"
+				});
+		});
 	});
 </script>
 
@@ -43,6 +65,20 @@
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
+
+<h4>Sidecar</h4>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="overlay" data-gravity="left">Overlay Left</button>
+	<button type="button" class="button nav_switch active" data-type="overlay" data-gravity="right">Overlay Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="left">Reveal Left</button>
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="right">Reveal Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="left">Push Left</button>
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="right">Push Right</button>
+</div>
 
 <!--
 <h4>Overlay</h4>
@@ -119,7 +155,7 @@ touch.js</code></pre>
 <td><code>gravity</code></td>
 <td><code>string</code></td>
 <td><code>&#39;left&#39;</code></td>
-<td>Gravity of &#39;push&#39; and &#39;overlay&#39; navigation; &#39;right&#39;, &#39;left&#39;</td>
+<td>Gravity of &#39;push&#39;, &#39;reveal&#39; and &#39;overlay&#39; navigation; &#39;right&#39;, &#39;left&#39;</td>
 </tr>
 <tr>
 <td><code>label</code></td>
@@ -149,7 +185,7 @@ touch.js</code></pre>
 <td><code>type</code></td>
 <td><code>string</code></td>
 <td><code>&#39;toggle&#39;</code></td>
-<td>Type of navigation; &#39;toggle&#39;, &#39;push&#39;, &#39;overlay&#39;</td>
+<td>Type of navigation; &#39;toggle&#39;, &#39;push&#39;, &#39;reveal&#39;, &#39;overlay&#39;</td>
 </tr>
 </tbody>
 </table>
@@ -295,7 +331,7 @@ touch.js</code></pre>
 <tr>
 <td><code>.fs-navigation-push-nav</code></td>
 <td><code>element</code></td>
-<td>Overlay nav</td>
+<td>Push nav</td>
 </tr>
 <tr>
 <td><code>.fs-navigation-push-nav.fs-navigation-enabled</code></td>
@@ -319,6 +355,36 @@ touch.js</code></pre>
 </tr>
 <tr>
 <td><code>.fs-navigation-push-right-nav</code></td>
+<td><code>modifier</code></td>
+<td>Indicates right hand nav</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-nav</code></td>
+<td><code>element</code></td>
+<td>Reveal nav</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-nav.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-nav.fs-navigation-animated</code></td>
+<td><code>modifier</code></td>
+<td>Indicates animated state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-nav.fs-navigation-open</code></td>
+<td><code>modifier</code></td>
+<td>Indicates open state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-left-nav</code></td>
+<td><code>modifier</code></td>
+<td>Indicates left hand nav</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-right-nav</code></td>
 <td><code>modifier</code></td>
 <td>Indicates right hand nav</td>
 </tr>
@@ -379,6 +445,36 @@ touch.js</code></pre>
 </tr>
 <tr>
 <td><code>.fs-navigation-push-right-content</code></td>
+<td><code>modifier</code></td>
+<td>Indicates right hand nav</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-content</code></td>
+<td><code>element</code></td>
+<td>Target page content</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-content.fs-navigation-enabled</code></td>
+<td><code>modifier</code></td>
+<td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-content.fs-navigation-animated</code></td>
+<td><code>modifier</code></td>
+<td>Indicates animted state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-content.fs-navigation-open</code></td>
+<td><code>modifier</code></td>
+<td>Indicates open state</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-left-content</code></td>
+<td><code>modifier</code></td>
+<td>Indicates left hand nav</td>
+</tr>
+<tr>
+<td><code>.fs-navigation-reveal-right-content</code></td>
 <td><code>modifier</code></td>
 <td>Indicates right hand nav</td>
 </tr>

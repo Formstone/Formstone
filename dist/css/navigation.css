@@ -1,4 +1,4 @@
-/*! formstone v0.5.3 [navigation.css] 2015-04-17 | MIT License | formstone.it */
+/*! formstone v0.5.5 [navigation.css] 2015-04-23 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -89,7 +89,7 @@
 		 * @class
 		 * @name .fs-navigation-push-nav
 		 * @type element
-		 * @description Overlay nav
+		 * @description Push nav
 		 */
   /**
 		 * @class
@@ -118,6 +118,42 @@
   /**
 		 * @class
 		 * @name .fs-navigation-push-right-nav
+		 * @type modifier
+		 * @description Indicates right hand nav
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-nav
+		 * @type element
+		 * @description Reveal nav
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animated state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-nav.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-left-nav
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-right-nav
 		 * @type modifier
 		 * @description Indicates right hand nav
 		 */
@@ -190,6 +226,42 @@
   /**
 		 * @class
 		 * @name .fs-navigation-push-right-content
+		 * @type modifier
+		 * @description Indicates right hand nav
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-content
+		 * @type element
+		 * @description Target page content
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-enabled
+		 * @type modifier
+		 * @description Indicates enabled state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-animated
+		 * @type modifier
+		 * @description Indicates animted state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-content.fs-navigation-open
+		 * @type modifier
+		 * @description Indicates open state
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-left-content
+		 * @type modifier
+		 * @description Indicates left hand nav
+		 */
+  /**
+		 * @class
+		 * @name .fs-navigation-reveal-right-content
 		 * @type modifier
 		 * @description Indicates right hand nav
 		 */
@@ -274,6 +346,7 @@
   border-radius: 3px 3px 0 0;
 }
 .fs-navigation-push-nav.fs-navigation-enabled,
+.fs-navigation-reveal-nav.fs-navigation-enabled,
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: 270px;
   height: 100%;
@@ -284,30 +357,54 @@
   overflow: auto;
   visibility: hidden;
 }
+.fs-navigation-reveal-nav.fs-navigation-animated {
+  -webkit-transition: visibility 0.001s linear 0.2s;
+          transition: visibility 0.001s linear 0.2s;
+}
 .fs-navigation-push-nav.fs-navigation-animated,
 .fs-navigation-overlay-nav.fs-navigation-animated {
   -webkit-transition: -webkit-transform 0.2s ease, visibility 0.001s linear 0.2s;
           transition: transform 0.2s ease, visibility 0.001s linear 0.2s;
 }
-.fs-navigation-push-nav.fs-navigation-enabled {
+.fs-navigation-push-nav.fs-navigation-enabled,
+.fs-navigation-reveal-nav.fs-navigation-enabled {
   z-index: 0;
+}
+.fs-navigation-push-left-nav.fs-navigation-enabled,
+.fs-navigation-reveal-left-nav.fs-navigation-enabled,
+.fs-navigation-overlay-left-nav.fs-navigation-enabled {
+  left: 0;
+}
+.fs-navigation-push-right-nav.fs-navigation-enabled,
+.fs-navigation-reveal-right-nav.fs-navigation-enabled,
+.fs-navigation-overlay-right-nav.fs-navigation-enabled {
+  right: 0;
+}
+.fs-navigation-push-left-nav.fs-navigation-enabled,
+.fs-navigation-overlay-left-nav.fs-navigation-enabled {
+  -webkit-transform: translate3D(-270px, 0, 0);
+      -ms-transform: translate3D(-270px, 0, 0);
+          transform: translate3D(-270px, 0, 0);
+}
+.fs-navigation-push-right-nav.fs-navigation-enabled,
+.fs-navigation-overlay-right-nav.fs-navigation-enabled {
+  -webkit-transform: translate3D(270px, 0, 0);
+      -ms-transform: translate3D(270px, 0, 0);
+          transform: translate3D(270px, 0, 0);
 }
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   z-index: 2;
 }
 .fs-navigation-overlay-left-nav.fs-navigation-enabled {
-  left: 0;
   box-shadow: 2px 0 2px rgba(0, 0, 0, 0.15);
-  -webkit-transform: translate3D(-270px, 0, 0);
-      -ms-transform: translate3D(-270px, 0, 0);
-          transform: translate3D(-270px, 0, 0);
 }
 .fs-navigation-overlay-right-nav.fs-navigation-enabled {
-  right: 0;
   box-shadow: -2px 0 2px rgba(0, 0, 0, 0.15);
-  -webkit-transform: translate3D(270px, 0, 0);
-      -ms-transform: translate3D(270px, 0, 0);
-          transform: translate3D(270px, 0, 0);
+}
+.fs-navigation-reveal-nav.fs-navigation-open {
+  visibility: visible;
+  -webkit-transition: visibility 0.001s ease;
+          transition: visibility 0.001s ease;
 }
 .fs-navigation-push-nav.fs-navigation-open,
 .fs-navigation-overlay-nav.fs-navigation-open {
@@ -356,6 +453,7 @@
   opacity: 1;
   visibility: visible;
 }
+.fs-navigation-reveal-content.fs-navigation-enabled,
 .fs-navigation-push-content.fs-navigation-enabled {
   position: relative;
   z-index: 1;
@@ -365,21 +463,26 @@
       -ms-transform: translate3D(0, 0, 0);
           transform: translate3D(0, 0, 0);
 }
+.fs-navigation-reveal-content.fs-navigation-animated,
 .fs-navigation-push-content.fs-navigation-animated {
   -webkit-transition: -webkit-transform 0.2s ease;
           transition: transform 0.2s ease;
 }
+.fs-navigation-reveal-left-content.fs-navigation-enabled,
 .fs-navigation-push-left-content.fs-navigation-enabled {
   box-shadow: -2px 0 2px rgba(0, 0, 0, 0.15);
 }
+.fs-navigation-reveal-right-content.fs-navigation-enabled,
 .fs-navigation-push-right-content.fs-navigation-enabled {
   box-shadow: 2px 0 2px rgba(0, 0, 0, 0.15);
 }
+.fs-navigation-reveal-left-content.fs-navigation-open,
 .fs-navigation-push-left-content.fs-navigation-open {
   -webkit-transform: translate3D(270px, 0, 0);
       -ms-transform: translate3D(270px, 0, 0);
           transform: translate3D(270px, 0, 0);
 }
+.fs-navigation-reveal-right-content.fs-navigation-open,
 .fs-navigation-push-right-content.fs-navigation-open {
   -webkit-transform: translate3D(-270px, 0, 0);
       -ms-transform: translate3D(-270px, 0, 0);

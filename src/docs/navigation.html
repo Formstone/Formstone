@@ -5,6 +5,13 @@
 
 	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
 	.navigation.fs-navigation-enabled { padding: 10px; }
+
+	.nav_buttons { margin: 0 0 20px; }
+	.nav_buttons .active,
+	.no-touch .nav_buttons .active:hover { background: #c65032; }
+	@media screen and (min-width: 500px) {
+		.nav_buttons .button { margin: 0 10px 0 0; width: 160px; }
+	}
 </style>
 
 <script>
@@ -15,6 +22,21 @@
 		});
 
 		$(".navigation").navigation();
+
+		$(".nav_switch").on("click", function() {
+			$(".nav_buttons .button").removeClass("active");
+			$(this).addClass("active");
+
+			$(".main_nav")
+				.navigation("destroy")
+				.attr("data-navigation-options", "{}")
+				.removeData("navigation-options")
+				.navigation({
+					type: $(this).data("type"),
+					gravity: $(this).data("gravity"),
+					maxWidth: "10000px"
+				});
+		});
 	});
 </script>
 
@@ -33,6 +55,20 @@
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
+
+<h4>Sidecar</h4>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="overlay" data-gravity="left">Overlay Left</button>
+	<button type="button" class="button nav_switch active" data-type="overlay" data-gravity="right">Overlay Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="left">Reveal Left</button>
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="right">Reveal Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="left">Push Left</button>
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="right">Push Right</button>
+</div>
 
 <!--
 <h4>Overlay</h4>

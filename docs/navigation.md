@@ -96,12 +96,12 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `customClass` | `string` | `''` | Class applied to instance |
-| `gravity` | `string` | `'left'` | Gravity of 'push' and 'overlay' navigation; 'right', 'left' |
+| `gravity` | `string` | `'left'` | Gravity of 'push', 'reveal' and 'overlay' navigation; 'right', 'left' |
 | `label` | `boolean` | `true` | Display handle width label |
 | `labels.closed` | `string` | `'Menu'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
-| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'push', 'overlay' |
+| `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'push', 'reveal', 'overlay' |
 
 ## Events
 
@@ -188,12 +188,18 @@ $(".target").navigation("open");
 | `.fs-navigation-overlay-nav.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-overlay-left-nav` | `modifier` | Indicates left hand nav |
 | `.fs-navigation-overlay-right-nav` | `modifier` | Indicates right hand nav |
-| `.fs-navigation-push-nav` | `element` | Overlay nav |
+| `.fs-navigation-push-nav` | `element` | Push nav |
 | `.fs-navigation-push-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-push-nav.fs-navigation-animated` | `modifier` | Indicates animated state |
 | `.fs-navigation-push-nav.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-push-left-nav` | `modifier` | Indicates left hand nav |
 | `.fs-navigation-push-right-nav` | `modifier` | Indicates right hand nav |
+| `.fs-navigation-reveal-nav` | `element` | Reveal nav |
+| `.fs-navigation-reveal-nav.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-reveal-nav.fs-navigation-animated` | `modifier` | Indicates animated state |
+| `.fs-navigation-reveal-nav.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-reveal-left-nav` | `modifier` | Indicates left hand nav |
+| `.fs-navigation-reveal-right-nav` | `modifier` | Indicates right hand nav |
 | `.fs-navigation-overlay-handle` | `element` | Overlay handle |
 | `.fs-navigation-overlay-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
 | `.fs-navigation-push-handle` | `element` | Push handle |
@@ -206,6 +212,12 @@ $(".target").navigation("open");
 | `.fs-navigation-push-content.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-push-left-content` | `modifier` | Indicates left hand nav |
 | `.fs-navigation-push-right-content` | `modifier` | Indicates right hand nav |
+| `.fs-navigation-reveal-content` | `element` | Target page content |
+| `.fs-navigation-reveal-content.fs-navigation-enabled` | `modifier` | Indicates enabled state |
+| `.fs-navigation-reveal-content.fs-navigation-animated` | `modifier` | Indicates animted state |
+| `.fs-navigation-reveal-content.fs-navigation-open` | `modifier` | Indicates open state |
+| `.fs-navigation-reveal-left-content` | `modifier` | Indicates left hand nav |
+| `.fs-navigation-reveal-right-content` | `modifier` | Indicates right hand nav |
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
 | `.fs-navigation-handle.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |

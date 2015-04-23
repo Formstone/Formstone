@@ -88,8 +88,10 @@
 
 		data.$content.removeClass(RawClasses.content);
 
-		this.attr("data-swap-target", "")
-			.attr("data-swap-group", "")
+		this.removeAttr("data-swap-target")
+			.removeData("data-swap-target")
+			.removeAttr("data-swap-group")
+			.removeData("data-swap-group")
 			.removeClass(RawClasses.tab)
 			.off(Events.namespace)
 			.swap("destroy");
