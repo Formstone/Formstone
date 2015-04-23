@@ -119,6 +119,26 @@
 	}
 
 	/**
+	 * @method
+	 * @name update
+	 * @description Updates target instance
+	 * @example $(".target").checkbox("update");
+	 */
+
+	function update(data) {
+		var disabled    = data.$el.is(":disabled"),
+			checked     = data.$el.is(":checked");
+
+		if (!disabled) {
+			if (checked) {
+				onSelect({ data: data });
+			} else {
+				onDeselect({ data: data });
+			}
+		}
+	}
+
+	/**
 	 * @method private
 	 * @name onClick
 	 * @description Handles click
@@ -262,7 +282,8 @@
 				// Public Methods
 
 				enable        : enable,
-				disable       : disable
+				disable       : disable,
+				update        : update
 			},
 
 			events: {

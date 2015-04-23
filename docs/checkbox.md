@@ -83,6 +83,14 @@ Enables target instance
 $(".target").checkbox("enable");
 ```
 
+### update
+
+Updates target instance
+
+```javascript
+$(".target").checkbox("update");
+```
+
 ## CSS
 
 | Class | Type | Description |
