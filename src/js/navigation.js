@@ -45,20 +45,20 @@
 		data.handleClasses = [
 			RawClasses.handle,
 			RawClasses.handle.replace(baseClass, typeClass),
-			RawClasses.handle.replace(baseClass, gravityClass),
+			gravityClass ? RawClasses.handle.replace(baseClass, gravityClass) : "",
 			data.handleGuid,
 			classGroup
 		].join(" ");
 
 		data.navClasses = [
 			RawClasses.nav.replace(baseClass, typeClass),
-			RawClasses.nav.replace(baseClass, gravityClass),
+			gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
 			classGroup
 		].join(" ");
 
 		data.contentClasses = [
 			RawClasses.content.replace(baseClass, typeClass),
-			RawClasses.content.replace(baseClass, gravityClass),
+			gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
 			classGroup
 		].join(" ");
 
