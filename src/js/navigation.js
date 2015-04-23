@@ -26,6 +26,8 @@
 		data.rawGuid      = RawClasses.base + data.guid;
 		data.classGuid    = "." + data.rawGuid;
 
+		data.handleGuid   = RawClasses.handle + data.guid;
+
 		data.isToggle     = (data.type === "toggle");
 
 		if (data.isToggle) {
@@ -44,6 +46,7 @@
 			RawClasses.handle,
 			RawClasses.handle.replace(baseClass, typeClass),
 			RawClasses.handle.replace(baseClass, gravityClass),
+			data.handleGuid,
 			classGroup
 		].join(" ");
 
@@ -73,6 +76,7 @@
 		// toggle
 
 		data.$handle.attr("data-swap-target", data.classGuid)
+					.attr("data-swap-linked", "." + data.handleGuid)
 					.on("activate.swap" + data.eventGuid, data, onOpen)
 					.on("deactivate.swap" + data.eventGuid, data, onClose)
 					.on("enable.swap" + data.eventGuid, data, onEnable)
@@ -105,6 +109,8 @@
 
 		data.$handle.removeAttr("data-swap-target")
 					.removeData("swap-target")
+					.removeAttr("data-swap-linked")
+					.removeData("swap-linked")
 					.removeClass(data.handleClasses)
 					.off(data.eventGuid)
 					.text(data.originalLabel)
