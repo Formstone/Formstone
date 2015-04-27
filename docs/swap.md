@@ -149,8 +149,8 @@ $(".target").swap("enable");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| `.fs-switch-element` | `element` | Target Element |
-| `.fs-switch-target` | `element` | Toggled element |
-| `.fs-switch-enabled` | `modifier` | Indicates enabled state |
-| `.fs-switch-active` | `modifier` | Indicates active state |
+| `.fs-swap-element` | `element` | Target Element |
+| `.fs-swap-target` | `element` | Toggled element |
+| `.fs-swap-enabled` | `modifier` | Indicates enabled state |
+| `.fs-swap-active` | `modifier` | Indicates active state |
 

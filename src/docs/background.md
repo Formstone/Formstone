@@ -14,6 +14,8 @@ $(".target").background({
 </div>
 ```
 
+Note: You will need to push any content above the background elements by setting the z-index.
+
 ### Responsive
 
 Create a responsive-friendly Background by defining key/value pairs containing the `min-width` image URLs:
