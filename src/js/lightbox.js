@@ -86,7 +86,7 @@
 				extension      = sourceParts[0],
 				type           = ($el) ? $el.data(Namespace + "-type") : "",
 				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
-				isVideo	       = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 ),
+				isVideo	       = checkVideo(source),
 				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
 				isElement      = ( (type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#")) ),
 				isObject       = ( (typeof $object !== "undefined") );
@@ -742,10 +742,14 @@
 	 */
 
 	function loadVideo(source) {
+		var youtubeParts = source.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i ), // 1
+			vimeoParts   = source.match( /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/ ), // 3
+			url = (youtubeParts !== null) ? "//www.youtube.com/embed/" + youtubeParts[1] : "//player.vimeo.com/video/" + vimeoParts[3];
+
 		Instance.$videoWrapper = $('<div class="' + Classes.raw.videoWrapper + '"></div>');
 		Instance.$video = $('<iframe class="' + Classes.raw.video + '" seamless="seamless"></iframe>');
 
-		Instance.$video.attr("src", source)
+		Instance.$video.attr("src", url)
 				   .addClass(Classes.raw.video)
 				   .prependTo(Instance.$videoWrapper);
 
@@ -839,13 +843,13 @@
 
 		if (Instance.gallery.index > 0) {
 			source = Instance.gallery.$items.eq(Instance.gallery.index - 1).attr("href");
-			if (source.indexOf("youtube.com/embed") < 0 && source.indexOf("player.vimeo.com/video") < 0) {
+			if (!checkVideo(source)) {
 				$('<img src="' + source + '">');
 			}
 		}
 		if (Instance.gallery.index < Instance.gallery.total) {
 			source = Instance.gallery.$items.eq(Instance.gallery.index + 1).attr("href");
-			if (source.indexOf("youtube.com/embed") < 0 && source.indexOf("player.vimeo.com/video") < 0) {
+			if (!checkVideo(source)) {
 				$('<img src="' + source + '">');
 			}
 		}
@@ -894,7 +898,7 @@
 				Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
 
 				var source = Instance.$el.attr("href"),
-					isVideo = ( source.indexOf("youtube.com/embed") > -1 || source.indexOf("player.vimeo.com/video") > -1 );
+					isVideo = checkVideo(source);
 
 				if (isVideo) {
 					loadVideo(source);
@@ -1079,6 +1083,18 @@
 		}
 
 		return false;
+	}
+
+	/**
+	 * @method private
+	 * @name checkVideo
+	 * @description Determines if url is a YouTube or Vimeo url.
+	 * @param source [string] "Source url"
+	 * @return [boolean] "True if YouTube or Vimeo url"
+	 */
+
+	function checkVideo(source) {
+		return ( source.indexOf("youtube.com") > -1 || source.indexOf("youtu.be") > -1 || source.indexOf("vimeo.com") > -1 );
 	}
 
 	/**
