@@ -86,7 +86,7 @@
 
 			data.$swaps.addClass(data.classes.raw.active);
 
-			if (!fromLinked) {
+			if (data.linked && !fromLinked) {
 				// Linked handles
 				$(data.linked).not(data.$el).swap("activate", true);
 			}
@@ -108,7 +108,7 @@
 		if (data.enabled && data.active) {
 			data.$swaps.removeClass(data.classes.raw.active);
 
-			if (!fromLinked) {
+			if (data.linked && !fromLinked) {
 				// Linked handles
 				$(data.linked).not(data.$el).swap("deactivate", true);
 			}

@@ -172,21 +172,23 @@
 	 */
 
 	function onOpen(e) {
-		var data = e.data;
+		if (!e.originalEvent) { // thanks IE :/
+			var data = e.data;
 
-		data.$el.trigger(Events.open);
+			data.$el.trigger(Events.open);
 
-		data.$content.addClass(RawClasses.open)
-					 .one(Events.clickTouchStart, function() {
-						close(data);
-					 });
+			data.$content.addClass(RawClasses.open)
+						 .one(Events.clickTouchStart, function() {
+							close(data);
+						 });
 
-		if (data.label) {
-			data.$handle.text(data.labels.open);
-		}
+			if (data.label) {
+				data.$handle.text(data.labels.open);
+			}
 
-		if (!data.isToggle) {
-			$Locks.addClass(RawClasses.lock);
+			if (!data.isToggle) {
+				$Locks.addClass(RawClasses.lock);
+			}
 		}
 	}
 
@@ -198,19 +200,21 @@
 	 */
 
 	function onClose(e) {
-		var data = e.data;
+		if (!e.originalEvent) { // thanks IE :/
+			var data = e.data;
 
-		data.$el.trigger(Events.close);
+			data.$el.trigger(Events.close);
 
-		data.$content.removeClass(RawClasses.open)
-					 .off(Events.namespace);
+			data.$content.removeClass(RawClasses.open)
+						 .off(Events.namespace);
 
-		if (data.label) {
-			data.$handle.text(data.labels.closed);
-		}
+			if (data.label) {
+				data.$handle.text(data.labels.closed);
+			}
 
-		if (!data.isToggle) {
-			$Locks.removeClass(RawClasses.lock);
+			if (!data.isToggle) {
+				$Locks.removeClass(RawClasses.lock);
+			}
 		}
 	}
 

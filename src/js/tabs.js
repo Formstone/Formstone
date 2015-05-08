@@ -138,13 +138,15 @@
 	 */
 
 	function onActivate(e) {
-		var data = e.data,
-			index = 0;
+		if (!e.originalEvent) { // thanks IE :/
+			var data = e.data,
+				index = 0;
 
-		data.$el.trigger(Events.update, [ index ]);
+			data.$el.trigger(Events.update, [ index ]);
 
-		data.$mobileTab.addClass(RawClasses.active);
-		data.$content.addClass(RawClasses.active);
+			data.$mobileTab.addClass(RawClasses.active);
+			data.$content.addClass(RawClasses.active);
+		}
 	}
 
 	/**
@@ -155,12 +157,12 @@
 	 */
 
 	function onDeactivate(e) {
-		var data = e.data;
+		if (!e.originalEvent) { // thanks IE :/
+			var data = e.data;
 
-		// data.$el.trigger(Events.close);
-
-		data.$mobileTab.removeClass(RawClasses.active);
-		data.$content.removeClass(RawClasses.active);
+			data.$mobileTab.removeClass(RawClasses.active);
+			data.$content.removeClass(RawClasses.active);
+		}
 	}
 
 	/**

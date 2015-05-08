@@ -20,8 +20,11 @@
 			data.scale = false;
 			data.swipe = false;
 
-			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart)
-				.on(Events.click, data, onClick);
+			if (Formstone.support.touch) {
+				this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart);
+			} else {
+				this.on(Events.click, data, onClick);
+			}
 		} else if (data.pan || data.swipe || data.scale) {
 			// Pan / Swipe / Scale
 
@@ -46,7 +49,7 @@
 
 			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
-			if (data.pan) {
+			if (data.pan && !Formstone.support.touch) {
 				this.on( Events.mouseDown, data, onPointerStart);
 			}
 		}
