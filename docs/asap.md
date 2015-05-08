@@ -1,6 +1,6 @@
 # ASAP
 
-A jQuery plugin for faster page loads.
+A jQuery plugin for asynchronous page loads.
 
 * [Use](#use)
 * [Options](#options)

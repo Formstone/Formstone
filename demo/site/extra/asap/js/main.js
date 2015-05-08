@@ -60,5 +60,5 @@
 
 	function pageLoadError(e, error) {
 		// watch for load errors
-		console.error("Error loading page: ", error);
+		console.warn("Error loading page: ", error);
 	}

@@ -15,28 +15,28 @@
 		<meta content="" name="description">
 
 		<!-- Modernizer -->
-		<script src="http://formstone.it/js/modernizr.js"></script>
+		<script src="http://formstone.dev/js/modernizr.js"></script>
 
 		<!-- Google Fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Oxygen:400,300|Inconsolata:400,700" rel="stylesheet">
 
 		<!-- Compiled CSS -->
-		<!--[if gt IE 8]><!--><link href="http://formstone.it/css/site.css" rel="stylesheet"><!--<![endif]-->
+		<!--[if gt IE 8]><!--><link href="http://formstone.dev/css/site.css" rel="stylesheet"><!--<![endif]-->
 
 		<!--[if IE 8]>
 			<script>var IE8 = true;</script>
-			<script src="http://formstone.it/js/site-ie8.js"></script>
-			<link rel="stylesheet" href="http://formstone.it/css/site-ie8.css">
+			<script src="http://formstone.dev/js/site-ie8.js"></script>
+			<link rel="stylesheet" href="http://formstone.dev/css/site-ie8.css">
 		<![endif]-->
 
 		<!--[if IE 9]>
 			<script>var IE9 = true;</script>
-			<script src="http://formstone.it/js/site-ie9.js"></script>
-			<link rel="stylesheet" href="http://formstone.it/css/site-ie9.css">
+			<script src="http://formstone.dev/js/site-ie9.js"></script>
+			<link rel="stylesheet" href="http://formstone.dev/css/site-ie9.css">
 		<![endif]-->
 
 		<!-- Compiled JS -->
-		<script src="http://formstone.it/js/site.js"></script>
+		<script src="http://formstone.dev/js/site.js"></script>
 
 		<!-- Demo Resources -->
 		<script src="js/main.js"></script>
@@ -50,7 +50,7 @@
 
 	<body class="fs-grid fs-grid-sm-fluid">
 		<header class="header">
-			<a class="logo header_logo no-asap" href="http://formstone.it/">Formstone</a>
+			<a class="logo header_logo no-asap" href="http://formstone.dev/">Formstone</a>
 		</header>
 		<div class="wrapper">
 			<div class="page js-nav_move">
@@ -59,7 +59,7 @@
 						<article class="content demo">
 							<header class="intro">
 								<h1>ASAP DEMO</h1>
-								<p>A jQuery plugin for faster page loads.</p>
+								<p>A jQuery plugin for asynchronous page loads.</p>
 							</header>
 							<nav>
 								<a href="index.php">Home</a>

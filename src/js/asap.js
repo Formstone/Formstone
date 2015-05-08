@@ -245,6 +245,8 @@
 			error: function(jqXHR, status, err) {
 				error = err;
 
+				console.log(err);
+
 				requestDeferred.reject();
 			}
 		});
@@ -252,7 +254,10 @@
 		$.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
 			process(url, hash, response, (Instance.jump ? 0 : false), true);
 		}).fail(function() {
-			$Window.trigger(Events.error, [ error ]);
+
+			console.log(arguments);
+
+			// $Window.trigger(Events.error, [ error ]);
 		});
 	}
 
@@ -447,7 +452,7 @@
 	/**
 	 * @plugin
 	 * @name ASAP
-	 * @description A jQuery plugin for faster page loads.
+	 * @description A jQuery plugin for asynchronous page loads.
 	 * @type utility
 	 * @dependency core.js
 	 */
@@ -471,9 +476,7 @@
 			events: {
 				popState    : "popstate",
 				request     : "request",
-				// load        : "load",
 				render      : "render"
-				// error       : "error"
 			}
 		}),
 

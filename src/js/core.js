@@ -14,6 +14,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// Namespace
 
 	var Core = function() {
+			this.Version = '@version';
 			this.Plugins = {};
 			this.ResizeHandlers = [];
 

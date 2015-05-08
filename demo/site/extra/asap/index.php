@@ -20,10 +20,14 @@
 	if ($isASAP) {
 		// If ASAP request, return json object with page pieces
 		$page_content = ob_get_clean();
-		echo json_encode(array(
+
+		$asap_content = json_encode(array(
 			"title" => $page_title,
 			"#content" => $page_content
 		));
+		header("Content-length: " . strlen($asap_content));
+
+		echo $asap_content;
 	}
 	// END: Always output
 

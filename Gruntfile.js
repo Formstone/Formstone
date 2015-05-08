@@ -171,6 +171,21 @@ module.exports = function(grunt) {
 				files: '<%= pkg.site.js %>'
 			}
 		},
+		// Replace
+		includereplace: {
+			target: {
+				options: {
+					prefix: '@',
+					globals: {
+						version: '<%= pkg.version %>'
+					}
+				},
+				dest: 'dist/js/',
+				src: '*.js',
+				expand: true,
+				cwd: 'dist/js/'
+			}
+		},
 		// LESS
 		less: {
 			options: {
@@ -361,7 +376,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'js', 'css', 'library', 'demoClean' ]);
 	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
-	grunt.registerTask('js', [ 'jshint:library', 'uglify:library' ]);
+	grunt.registerTask('js', [ 'jshint:library', 'uglify:library', 'includereplace' ]);
 	grunt.registerTask('css', [ 'less:library', 'autoprefixer:library' ]);
 	grunt.registerTask('img', [ 'imagemin', 'svgmin' ]);
 
