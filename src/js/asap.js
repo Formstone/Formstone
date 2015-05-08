@@ -245,8 +245,6 @@
 			error: function(jqXHR, status, err) {
 				error = err;
 
-				console.log(err);
-
 				requestDeferred.reject();
 			}
 		});
@@ -254,10 +252,7 @@
 		$.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
 			process(url, hash, response, (Instance.jump ? 0 : false), true);
 		}).fail(function() {
-
-			console.log(arguments);
-
-			// $Window.trigger(Events.error, [ error ]);
+			$Window.trigger(Events.error, [ error ]);
 		});
 	}
 
@@ -475,6 +470,7 @@
 
 			events: {
 				popState    : "popstate",
+				progress    : "progress",
 				request     : "request",
 				render      : "render"
 			}

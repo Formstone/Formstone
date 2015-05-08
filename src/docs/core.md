@@ -10,6 +10,7 @@ The Formstone core is a dependency of all javascript based components and will c
 | `document` | `object` | Reference to original document |
 | `$body` | `object` | Reference to jQuery wrapped body tag |
 | `Plugins` | `object` | Contains all registered plugins |
+| `Version` | `string` | Current version number |
 | `support.file` | `boolean` | File API support |
 | `support.history` | `boolean` | History API support, including push and pop state |
 | `support.matchMedia` | `boolean` | Match Media API support |
