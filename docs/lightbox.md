@@ -21,6 +21,7 @@ lightbox.css
 
 ```markup
 core.js
+touch.js
 transition.js
 ```
 

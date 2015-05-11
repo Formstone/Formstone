@@ -1103,6 +1103,7 @@
 	 * @description A jQuery plugin for simple modals.
 	 * @type widget
 	 * @dependency core.js
+	 * @dependency touch.js
 	 * @dependency transition.js
 	 */
 
