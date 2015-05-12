@@ -2,6 +2,7 @@
 	.tooltips { margin: 20px 0; overflow: hidden; }
 
 	.tooltip { background: #c65032; border-radius: 3px; color: #fff; clear: both; display: block; height: 50px; line-height: 50px; margin: 0 auto 10px; text-align: center; width: 50%; }
+	.long_text .fs-tooltip-content { width: 250px; white-space: normal; }
 </style>
 
 <script>
@@ -40,4 +41,9 @@
 	<div class="tooltip" data-title="Right Tooltip"   data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
 	<div class="tooltip" data-title="Top Tooltip"     data-tooltip-options='{"direction":"top","delay":"500"}'>Top</div>
 	<div class="tooltip" data-title="Bottom Tooltip"  data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
+</div>
+
+<h4>Long Text</h4>
+<div class="tooltips">
+	<div class="tooltip" data-title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. " data-tooltip-options='{"customClass":"long_text","direction":"top"}'>Left</div>
 </div>

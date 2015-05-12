@@ -83,7 +83,7 @@
 		var html = '';
 
 		html += '<div class="';
-		html += [RawClasses.base, RawClasses[data.direction] ].join(" ");
+		html += [RawClasses.base, RawClasses[data.direction], data.customClass].join(" ");
 		html += '">';
 		html += '<div class="' + RawClasses.content + '">';
 		html += data.formatter.call(data.$el, data);
@@ -257,6 +257,7 @@
 
 			/**
 			 * @options
+			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param delay [int] <0> "Hover delay"
 			 * @param direction [string] <'top'> "Tooltip direction"
 			 * @param follow [boolean] <false> "Flag to follow mouse"
@@ -266,12 +267,13 @@
 			 */
 
 			defaults: {
-				delay        : 0,
-				direction    : "top",
-				follow       : false,
-				formatter    : format,
-				margin       : 15,
-				match        : false
+				customClass    : "",
+				delay          : 0,
+				direction      : "top",
+				follow         : false,
+				formatter      : format,
+				margin         : 15,
+				match          : false
 			},
 
 			classes: [

@@ -74,6 +74,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `customClass` | `string` | `''` | Class applied to instance |
 | `delay` | `int` | `0` | Hover delay |
 | `direction` | `string` | `'top'` | Tooltip direction |
 | `follow` | `boolean` | `false` | Flag to follow mouse |
