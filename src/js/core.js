@@ -236,10 +236,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Setup
 
-						if (Formstone.Plugins.hasOwnProperty(namespace) && !Formstone.Plugins[namespace].initialized) {
-							Formstone.Plugins[namespace].methods._setup.call(document);
-							Formstone.Plugins[namespace].initialized = true;
-						}
+						setupPlugin(namespace);
 
 						// Constructor
 
@@ -461,6 +458,15 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		return Formstone.Plugins[namespace];
 	};
 
+	// Setup Plugins
+
+	function setupPlugin(namespace) {
+		if (!Formstone.Plugins[namespace].initialized) {
+			Formstone.Plugins[namespace].methods._setup.call(document);
+			Formstone.Plugins[namespace].initialized = true;
+		}
+	}
+
 	// Namespace Properties
 
 	function namespaceProperties(type, namespace, globalProps, customProps) {
@@ -596,9 +602,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		Formstone.$body = $("body");
 
 		for (var i in Formstone.Plugins) {
-			if (Formstone.Plugins.hasOwnProperty(i) && !Formstone.Plugins[i].initialized) {
-				Formstone.Plugins[i].methods._setup.call(document);
-				Formstone.Plugins[i].initialized = true;
+			if (Formstone.Plugins.hasOwnProperty(i)) {
+				setupPlugin(i);
 			}
 		}
 	});
