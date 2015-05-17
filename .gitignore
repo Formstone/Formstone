@@ -9,3 +9,6 @@ Thumbs.db
 node_cache/*
 node_modules/*
 npm-debug.log
+
+# Editor
+.idea
