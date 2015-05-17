@@ -1,4 +1,3 @@
-
 /**
  * @plugin
  * @name Core
@@ -234,6 +233,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						$element.addClass(settings.classes.raw.element)
 						        .data(namespaceDash, data);
+
+						// Setup
+
+						if (Formstone.Plugins.hasOwnProperty(namespace) && !Formstone.Plugins[namespace].initialized) {
+							Formstone.Plugins[namespace].methods._setup.call(document);
+							Formstone.Plugins[namespace].initialized = true;
+						}
 
 						// Constructor
 
