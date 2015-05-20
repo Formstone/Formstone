@@ -519,3 +519,6 @@
   line-height: 13px;
   text-align: center;
 }
+.fs-navigation-lock {
+  overflow: hidden !important;
+}
