@@ -1,4 +1,4 @@
-/*! formstone v0.5.13 [site.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [site.css] 2015-05-20 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.5.13 [grid.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [grid.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.5.13 [background.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [background.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.5.13 [carousel.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [carousel.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1835,7 +1835,7 @@ pre[class*="language-"] {
   opacity: 1;
 }
 
-/*! formstone v0.5.13 [checkbox.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [checkbox.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2132,7 +2132,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.5.13 [dropdown.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [dropdown.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2484,7 +2484,7 @@ pre[class*="language-"] {
   background: #fafafa;
 }
 
-/*! formstone v0.5.13 [lightbox.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [lightbox.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3147,7 +3147,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.5.13 [number.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [number.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3306,7 +3306,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.5.13 [pagination.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [pagination.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3445,7 +3445,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.5.13 [range.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [range.css] 2015-05-20 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3578,7 +3578,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.5.13 [scrollbar.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [scrollbar.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3733,7 +3733,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.5.13 [tabs.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [tabs.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3844,7 +3844,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.5.13 [tooltip.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [tooltip.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3996,7 +3996,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.5.13 [upload.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [upload.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4427,6 +4427,8 @@ pre[class*="language-"] {
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: 270px;
   height: 100%;
+  height: -webkit-calc(100% + 60px);
+  height: calc(100% + 60px);
   position: fixed;
   top: 0;
   background: #ffffff;
@@ -4593,9 +4595,6 @@ pre[class*="language-"] {
   font-weight: 700;
   line-height: 13px;
   text-align: center;
-}
-.fs-navigation-lock {
-  overflow: hidden !important;
 }
 /* ==================================================================
    Elements
@@ -5137,19 +5136,9 @@ table td:first-child {
   color: #ffffff;
 }
 .sidebar_content.fs-navigation-enabled {
-  padding: 70px 30px 50px;
+  padding: 70px 30px;
   box-shadow: none;
   background: #34495E;
-}
-@media only screen and (min-width: 980px ) {
-  .sidebar_content {
-    padding: 60px 0;
-  }
-}
-@media only screen and (min-width: 1220px ) {
-  .sidebar_content {
-    padding: 70px 0;
-  }
 }
 .sidebar ul {
   margin: 10px 0 25px;

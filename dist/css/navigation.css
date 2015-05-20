@@ -1,4 +1,4 @@
-/*! formstone v0.5.13 [navigation.css] 2015-05-20 | MIT License | formstone.it */
+/*! formstone v0.5.14 [navigation.css] 2015-05-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -350,6 +350,8 @@
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: 270px;
   height: 100%;
+  height: -webkit-calc(100% + 60px);
+  height: calc(100% + 60px);
   position: fixed;
   top: 0;
   background: #ffffff;
@@ -516,7 +518,4 @@
   font-weight: 700;
   line-height: 13px;
   text-align: center;
-}
-.fs-navigation-lock {
-  overflow: hidden !important;
 }
