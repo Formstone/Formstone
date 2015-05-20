@@ -10,6 +10,7 @@
 	 */
 
 	function construct(data) {
+		data.guid       = "__" + (GUID++);
 		data.enabled    = false;
 		data.active     = false;
 
@@ -39,8 +40,7 @@
 		this.touch({
 				tap: true
 			})
-			.on(Events.tap, data, onClick);
-
+			.on(Events.tap + data.guid, data, onClick);
 
 		// Media Query support
 		$.mediaquery("bind", data.mqGuid, data.mq, {

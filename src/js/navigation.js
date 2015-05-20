@@ -77,6 +77,7 @@
 
 		data.$handle.attr("data-swap-target", data.classGuid)
 					.attr("data-swap-linked", "." + data.handleGuid)
+					.attr("data-swap-group", RawClasses.base)
 					.on("activate.swap" + data.eventGuid, data, onOpen)
 					.on("deactivate.swap" + data.eventGuid, data, onClose)
 					.on("enable.swap" + data.eventGuid, data, onEnable)
