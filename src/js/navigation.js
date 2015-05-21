@@ -117,6 +117,8 @@
 					.text(data.originalLabel)
 					.swap("destroy");
 
+		clearLocks(data);
+
 		this.removeClass(data.navClasses)
 			.off(Events.namespace);
 	}
@@ -187,9 +189,7 @@
 				data.$handle.text(data.labels.open);
 			}
 
-			if (!data.isToggle) {
-				$Locks.addClass(RawClasses.lock);
-			}
+			addLocks(data);
 		}
 	}
 
@@ -213,9 +213,7 @@
 				data.$handle.text(data.labels.closed);
 			}
 
-			if (!data.isToggle) {
-				$Locks.removeClass(RawClasses.lock);
-			}
+			clearLocks(data);
 		}
 	}
 
@@ -255,6 +253,34 @@
 
 		if (data.label) {
 			data.$handle.text(data.originalLabel);
+		}
+
+		clearLocks(data);
+	}
+
+	/**
+	 * @method private
+	 * @name addLocks
+	 * @description Locks scrolling
+	 * @param data [object] "Instance data"
+	 */
+
+	function addLocks(data) {
+		if (!data.isToggle) {
+			$Locks.addClass(RawClasses.lock);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name clearLocks
+	 * @description Unlocks scrolling
+	 * @param data [object] "Instance data"
+	 */
+
+	function clearLocks(data) {
+		if (!data.isToggle) {
+			$Locks.removeClass(RawClasses.lock);
 		}
 	}
 
