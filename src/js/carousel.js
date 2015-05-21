@@ -397,7 +397,7 @@
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
-			positionCanister(data, index-1);
+			positionCanister(data, index - 1);
 		}
 	}
 
@@ -419,7 +419,7 @@
 		var index = data.index - 1;
 
 		if (data.infinite && index < 0) {
-			index = data.pageCount;
+			index = data.pageCount - 1;
 		}
 
 		positionCanister(data, index);
