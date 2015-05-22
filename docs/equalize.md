@@ -82,7 +82,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `property` | `string` | `"height"` | Property to size; 'height' or 'width' |
-| `target` | `string` | `null` | Target child selector |
+| `target` | `string OR array` | `null` | Target child selector(s); Defaults to direct descendants |
 
 ## Methods
 
