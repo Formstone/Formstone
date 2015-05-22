@@ -33,6 +33,17 @@
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
 		data.mqGuid   = RawClasses.base + "__" + (GUID++);
+		data.type     = (data.property === "height") ? "outerHeight" : "outerWidth";
+
+		if (data.target) {
+			if (!$.isArray(data.target)) {
+				data.target = [ data.target ];
+			}
+		} else {
+			data.target = [ "> *" ];
+		}
+
+		cacheInstances();
 
 		$.mediaquery("bind", data.mqGuid, data.mq, {
 			enter: function() {
@@ -42,10 +53,6 @@
 				disable.call(data.$el, data);
 			}
 		});
-
-		resizeInstance(data);
-
-		cacheInstances();
 	}
 
 	/**
@@ -56,6 +63,8 @@
 	 */
 
 	function destruct(data) {
+		tearDown(data);
+
 		cacheInstances();
 	}
 
@@ -68,22 +77,27 @@
 
 	function resizeInstance(data) {
 		if (data.enabled) {
-			var $targets = data.target ? data.$el.find(data.target) : data.$el.children(),
-				type     = (data.property === "height") ? "outerHeight" : "outerWidth",
-				value    = 0,
-				check    = 0;
+			var value,
+				check,
+				$target;
 
-			$targets.css(data.property, "");
+			for (var i = 0; i < data.target.length; i++) {
+				value = 0;
+				check = 0;
+				$target = data.$el.find( data.target[i] );
 
-			for (var i = 0; i < $targets.length; i++) {
-				check = $targets.eq(i)[type]();
+				$target.css(data.property, "");
 
-				if (check > value) {
-					value = check;
+				for (var j = 0; j < $target.length; j++) {
+					check = $target.eq(j)[ data.type ]();
+
+					if (check > value) {
+						value = check;
+					}
 				}
-			}
 
-			$targets.css(data.property, value);
+				$target.css(data.property, value);
+			}
 		}
 	}
 
@@ -98,10 +112,7 @@
 		if (data.enabled) {
 			data.enabled = false;
 
-			var $targets = data.target ? data.$el.find(data.target) : data.$el.children(),
-				type     = (data.property === "height") ? "outerHeight" : "outerWidth";
-
-			$targets.css(data.property, "");
+			tearDown(data);
 		}
 	}
 
@@ -117,6 +128,19 @@
 			data.enabled = true;
 
 			resizeInstance(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name tearDown
+	 * @description Removes styling from elements
+	 * @param data [object] "Instance data"
+	 */
+
+	function tearDown(data) {
+		for (var i = 0; i < data.target.length; i++) {
+			data.$el.find( data.target[i] ).css(data.property, "");
 		}
 	}
 
@@ -138,7 +162,7 @@
 			 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param property [string] <"height"> "Property to size; 'height' or 'width'"
-			 * @param target [string] <null> "Target child selector"
+			 * @param target [string OR array] <null> "Target child selector(s); Defaults to direct descendants"
 			 */
 
 			defaults: {

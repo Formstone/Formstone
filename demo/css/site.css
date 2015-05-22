@@ -1,4 +1,4 @@
-/*! formstone v0.5.16 [site.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [site.css] 2015-05-22 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.5.16 [grid.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [grid.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.5.16 [background.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [background.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.5.16 [carousel.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [carousel.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1835,7 +1835,7 @@ pre[class*="language-"] {
   opacity: 1;
 }
 
-/*! formstone v0.5.16 [checkbox.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [checkbox.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2132,7 +2132,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.5.16 [dropdown.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [dropdown.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2484,7 +2484,7 @@ pre[class*="language-"] {
   background: #fafafa;
 }
 
-/*! formstone v0.5.16 [lightbox.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [lightbox.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3147,7 +3147,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.5.16 [number.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [number.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3306,7 +3306,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.5.16 [pagination.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [pagination.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3445,7 +3445,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.5.16 [range.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [range.css] 2015-05-22 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3578,7 +3578,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.5.16 [scrollbar.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [scrollbar.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3733,7 +3733,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.5.16 [tabs.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [tabs.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3844,7 +3844,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.5.16 [tooltip.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [tooltip.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3996,7 +3996,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.5.16 [upload.css] 2015-05-21 | MIT License | formstone.it */
+/*! formstone v0.6.0 [upload.css] 2015-05-22 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4619,7 +4619,7 @@ html,
   -ms-content-zooming: none;
 }
 body {
-  font-family: "Oxygen", monospace;
+  font-family: "Oxygen", sans-serif;
   font-weight: 400;
   font-size: 16px;
   font-size: 1rem;
@@ -4650,7 +4650,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Oxygen", monospace;
+  font-family: "Oxygen", sans-serif;
   font-weight: 400;
   color: #2c3e50;
   line-height: 1.2;
@@ -4822,7 +4822,7 @@ table {
   margin: 30px 0;
 }
 table th {
-  font-family: "Oxygen", monospace;
+  font-family: "Oxygen", sans-serif;
   font-weight: 400;
   font-size: 12px;
   font-size: 0.75rem;
@@ -5326,7 +5326,7 @@ a.button:focus {
 }
 .hero_button,
 a.hero_button {
-  font-family: "Oxygen", monospace;
+  font-family: "Oxygen", sans-serif;
   font-weight: 400;
   background: #ffffff;
   border: 1px solid transparent;
