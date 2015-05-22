@@ -542,8 +542,8 @@
 		// Local
 
 		$Window           = Formstone.$window,
-		TouchThreshold    = 5,
-		TouchTime         = 200;
+		TouchThreshold    = 10,
+		TouchTime         = 50;
 
 		/**
 		 * @events
