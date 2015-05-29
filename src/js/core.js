@@ -427,13 +427,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			if (settings.widget) {
 
 				// Widget Delegation: $(".target").plugin("method", ...);
-				$.fn[namespace] = delegateWidget;
+				$.fn[namespace] = $.fn["fs" + namespace] = delegateWidget;
 			}
 
 			// Utility
 
 				// Utility Delegation: $.plugin("method", ... );
-				$[namespace] = settings.utilities._delegate || delegateUtility;
+				$[namespace] = $["fs" + namespace] = settings.utilities._delegate || delegateUtility;
 
 			// Run Setup
 
