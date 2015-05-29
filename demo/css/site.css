@@ -3019,6 +3019,7 @@ pre[class*="language-"] {
   border-top-color: #999999;
 }
 .fs-lightbox-mobile .fs-lightbox-container {
+  position: static;
   background: #111111;
 }
 .fs-lightbox-mobile .fs-lightbox-content {
