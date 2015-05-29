@@ -194,8 +194,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	Core.prototype.Plugin = function(namespace, settings) {
 		Formstone.Plugins[namespace] = (function(namespace, settings) {
 
-			var namespaceDash = "fs-" + namespace,
-				namespaceDot  = "fs." + namespace;
+			var namespaceDash  = "fs-" + namespace,
+				namespaceDot   = "fs." + namespace,
+				namespaceClean = "fs" + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
 
 			/**
 			 * @method private
@@ -427,17 +428,18 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			if (settings.widget) {
 
 				// Widget Delegation: $(".target").plugin("method", ...);
-				$.fn[namespace] = $.fn["fs" + namespace] = delegateWidget;
+				$.fn[namespace] = $.fn[namespaceClean] = delegateWidget;
 			}
 
 			// Utility
 
 				// Utility Delegation: $.plugin("method", ... );
-				$[namespace] = $["fs" + namespace] = settings.utilities._delegate || delegateUtility;
+				$[namespace] = $[namespaceClean] = settings.utilities._delegate || delegateUtility;
 
 			// Run Setup
 
-			settings.namespace = namespace;
+			settings.namespace      = namespace;
+			settings.namespaceClean = namespaceClean;
 
 			// Resize handler
 
