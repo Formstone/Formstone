@@ -127,7 +127,7 @@
 
 	var Plugin = Formstone.Plugin("cookie", {
 			utilities: {
-				_delegate:     delegate
+				_delegate : delegate
 			}
 		}),
 
@@ -139,10 +139,10 @@
 		 */
 
 		Defaults = {
-			domain:     null,
-			expires:    604800000, // 7 days
-			path:       null,
-			secure:     null
+			domain     : null,
+			expires    : 604800000, // 7 days
+			path       : null,
+			secure     : null
 		},
 
 		// Localize References
