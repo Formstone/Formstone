@@ -1,0 +1,1 @@
+{"main":["analytics.js"],"events":[],"methods":[],"name":"Analytics","type":"utility","description":"A jQuery plugin for Google Analytics Events.","dependencies":["core.js"],"use":"### Basic\n\n","demo":"<a href=\"#\" data-analytics-event=\"button, click, demo buttons, 1\">Click!</a>"}

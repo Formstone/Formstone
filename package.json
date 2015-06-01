@@ -57,6 +57,7 @@
         "demo/bower/jquery/dist/jquery.min.js",
         "demo/bower/prism/prism.js",
         "dist/js/core.js",
+        "dist/js/analytics.js",
         "dist/js/asap.js",
         "dist/js/background.js",
         "dist/js/carousel.js",
