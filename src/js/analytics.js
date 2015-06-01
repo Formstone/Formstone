@@ -36,14 +36,14 @@
 
 	function init(options) {
 		// Attach Scout events
-		if (!Initialized) {
+		if (!Initialized && $Body.length) {
 			Initialized = true;
 
 			Defaults = $.extend(Defaults, options || {});
 
-			// $Body.find("a").not("[" + DataKey + "]").each(buildEvent);
+			// $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
 
-			$Body.on("click.scout", "*[" + DataKey + "]", trackEvent);
+			$Body.on("click.scout", "*[" + DataKeyFull + "]", trackEvent);
 		}
 	}
 
@@ -52,6 +52,8 @@
 	 * @name buildEvent
 	 * @description Build events for email, phone, file types & external links
 	 */
+
+/*
 	function buildEvent() {
 		var $target = $(this),
 			href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
@@ -75,9 +77,10 @@
 		}
 
 		if (eventData) {
-			$target.attr("data-analytics-event", eventData);
+			$target.attr(DataKeyFull, eventData);
 		}
 	}
+*/
 
 	/**
 	 * @method private
@@ -93,7 +96,7 @@
 
 			var $target = $(this),
 				url     = $target.attr("href"),
-				data    = $target.data("analytics-event").split(",");
+				data    = $target.data(DataKey).split(",");
 
 			// Trim that data
 			for (var i in data) {
@@ -112,6 +115,7 @@
 	 * @name pushEvent
 	 * @description Push event to Universal Analytics
 	 */
+
 	function pushEvent(category, action, label, value, noninteraction, $target) {
 		// Universal Analytics
 		if ($.type(Window.ga) === "function") {
@@ -157,9 +161,10 @@
 				}
 			}
 
-			// Window.ga("send", event);
+			Window.ga("send", event);
 
-/*
+			/*
+			// May use when adding tag manager support
 			if (Defaults.tracking.manager) {
 				// Tag Manager
 				var page = {};
@@ -172,13 +177,13 @@
 					'event': Defaults.tracking.event
 				});
 			} else {
-*/
 				Window.ga("send", event);
 
 				// Specific tracker - only needed if using mutiple and/or tag manager
 				//var t = ga.getAll();
 				//ga(t[0].get('name')+'.send', 'pageview', '/mimeo/');
-//			}
+			}
+			*/
 		}
 	}
 
@@ -224,6 +229,7 @@
 		// Internal
 
 		Initialized = false,
-		DataKey     = "data-analytics-event";
+		DataKey     = "analytics-event",
+		DataKeyFull = "data-" + DataKey;
 
 })(jQuery, Formstone);
