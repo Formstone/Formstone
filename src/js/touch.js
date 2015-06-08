@@ -13,6 +13,8 @@
 		data.touches     = [];
 		data.touching    = false;
 
+		this.on( Events.dragStart, Functions.killEvent );
+
 		if (data.tap) {
 			// Tap
 
