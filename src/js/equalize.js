@@ -65,6 +65,8 @@
 	function destruct(data) {
 		tearDown(data);
 
+		$.mediaquery("unbind", data.mqGuid);
+
 		cacheInstances();
 	}
 
@@ -76,6 +78,10 @@
 	 */
 
 	function resizeInstance(data) {
+		if (data.data) {
+			data = data.data; // normalize image resize events
+		}
+
 		if (data.enabled) {
 			var value,
 				check,
@@ -127,6 +133,12 @@
 		if (!data.enabled) {
 			data.enabled = true;
 
+			var $images = data.$el.find("img");
+
+			if ($images.length) {
+				$images.on(Events.load, data, resizeInstance);
+			}
+
 			resizeInstance(data);
 		}
 	}
@@ -142,6 +154,8 @@
 		for (var i = 0; i < data.target.length; i++) {
 			data.$el.find( data.target[i] ).css(data.property, "");
 		}
+
+		data.$el.find("img").off(Events.namespace);
 	}
 
 	/**
@@ -183,6 +197,7 @@
 
 		Classes        = Plugin.classes,
 		RawClasses     = Classes.raw,
+		Events         = Plugin.events,
 		Functions      = Plugin.functions,
 		GUID           = 0,
 

@@ -61,7 +61,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.mqGuid, data.mq);
+		$.mediaquery("unbind", data.mqGuid);
 
 		data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 				   .off(Events.namespace);
