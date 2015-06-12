@@ -4,6 +4,7 @@
 	.equalize_child { background: #ccc; }
 	.equalize_group { padding-bottom: 15px; }
 	.equalize_two { font-size: 12px; font-style: italic; }
+	.equalize img { max-width: 100%; /* position: relative; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); */ }
 </style>
 
 <script>
@@ -64,5 +65,18 @@
 	<div class="fs-cell fs-all-third equalize_target">
 		<p class="equalize_one equalize_group">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.</p>
 		<p class="equalize_two">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+	</div>
+</div>
+
+<h4>Images</h4>
+<div class="fs-row equalize">
+	<div class="fs-cell fs-all-third equalize_target">
+		<img src="http://spacehold.it/300x300/1" alt="">
+	</div>
+	<div class="fs-cell fs-all-third equalize_target">
+		<img src="http://spacehold.it/300x200/2" alt="">
+	</div>
+	<div class="fs-cell fs-all-third equalize_target">
+		<img src="http://spacehold.it/300x400/3" alt="">
 	</div>
 </div>

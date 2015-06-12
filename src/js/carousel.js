@@ -148,7 +148,7 @@
 
 		disable.call(this, data);
 
-		$.mediaquery("unbind", data.mqGuid, data.mq);
+		$.mediaquery("unbind", data.mqGuid);
 
 		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
 				   .unwrap().unwrap();

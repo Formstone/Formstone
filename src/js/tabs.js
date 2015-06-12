@@ -80,7 +80,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.rawGuid, data.mq);
+		$.mediaquery("unbind", data.rawGuid);
 
 		data.$mobileTab.off(Events.namespace)
 					   .touch("destroy")

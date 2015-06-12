@@ -75,7 +75,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.mqGuid, data.mq);
+		$.mediaquery("unbind", data.mqGuid);
 
 		data.$controls.remove();
 		data.$ellipsis.remove();
