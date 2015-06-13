@@ -10,7 +10,6 @@
 	 */
 
 	function construct(data) {
-		data.guid       = "__" + (GUID++);
 		data.enabled    = false;
 		data.active     = false;
 
@@ -22,7 +21,6 @@
 		data.linked     = this.data(Namespace + "-linked");
 
 		data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
-		data.mqGuid     = data.classes.raw.base + "__" + (GUID++);
 
 		// live query for the group to avoid missing new elements
 		var group       = this.data(Namespace + "-group");
@@ -40,10 +38,10 @@
 		this.touch({
 				tap: true
 			})
-			.on(Events.tap + data.guid, data, onClick);
+			.on(Events.tap + data.dotGuid, data, onClick);
 
 		// Media Query support
-		$.mediaquery("bind", data.mqGuid, data.mq, {
+		$.mediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -61,7 +59,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.mqGuid);
+		$.mediaquery("unbind", data.rawGuid);
 
 		data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 				   .off(Events.namespace);
@@ -89,9 +87,9 @@
 			if (data.linked && !fromLinked) {
 				// Linked handles
 				$(data.linked).not(data.$el).swap("activate", true);
-			}
 
-			this.trigger(Events.activate, [index]);
+				this.trigger(Events.activate, [index]);
+			}
 
 			data.active = true;
 		}
@@ -111,9 +109,9 @@
 			if (data.linked && !fromLinked) {
 				// Linked handles
 				$(data.linked).not(data.$el).swap("deactivate", true);
-			}
 
-			this.trigger(Events.deactivate);
+				this.trigger(Events.deactivate);
+			}
 
 			data.active = false;
 		}
@@ -128,14 +126,14 @@
 
 	function enable(data, fromLinked) {
 		if (!data.enabled) {
+			data.enabled = true;
+
 			data.$swaps.addClass(data.classes.raw.enabled);
 
 			if (!fromLinked) {
 				// Linked handles
 				$(data.linked).not(data.$el).swap("enable");
 			}
-
-			data.enabled = true;
 
 			this.trigger(Events.enable);
 
@@ -159,6 +157,8 @@
 
 	function disable(data, fromLinked) {
 		if (data.enabled) {
+			data.enabled = false;
+
 			data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
 
 			if (!fromLinked) {
@@ -167,8 +167,6 @@
 			}
 
 			this.trigger(Events.disable);
-
-			data.enabled = false;
 		}
 	}
 
@@ -255,7 +253,6 @@
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions,
-		GUID          = 0;
+		Functions     = Plugin.functions;
 
 })(jQuery, Formstone);

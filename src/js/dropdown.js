@@ -93,11 +93,7 @@
 		data.$wrapper         = data.$dropdown.find(Classes.options);
 		data.$placeholder     = data.$dropdown.find(Classes.placeholder);
 		data.index            = -1;
-		data.guid             = GUID++;
 		data.closed           = true;
-
-		data.keyDownGUID      = Events.keyDown + data.guid;
-		data.clickGUID        = Events.click + data.guid;
 
 		buildOptions(data);
 
@@ -360,7 +356,7 @@
 			}
 
 			// Bind Events
-			$Body.on(data.clickGUID, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+			$Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
 
 			data.$dropdown.addClass(RawClasses.open);
 			scrollOptions(data);
@@ -386,7 +382,7 @@
 	function closeOptions(data) {
 		// Make sure it's actually open
 		if (data && !data.closed) {
-			$Body.off(data.clickGUID);
+			$Body.off(Events.click + data.dotGuid);
 
 			data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
 
@@ -490,7 +486,7 @@
 
 		if (!data.disabled && !data.multiple) {
 			data.$dropdown.addClass(RawClasses.focus)
-						  .on(data.keyDownGUID, data, onKeypress);
+						  .on(Events.keyDown + data.dotGuid, data, onKeypress);
 		}
 	}
 
@@ -507,7 +503,7 @@
 		var data = e.data;
 
 		data.$dropdown.removeClass(RawClasses.focus)
-					  .off(data.keyDownGUID);
+					  .off(Events.keyDown + data.dotGuid);
 
 		if (!data.multiple) {
 			// Clean up
@@ -792,7 +788,6 @@
 
 		// Local
 
-		GUID          = 0,
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
 		Document      = Formstone.document,

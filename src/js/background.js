@@ -31,11 +31,7 @@
 
 	function construct(data) {
 		// guid
-		data.guid         = "__" + (GUID++);
 		data.youTubeGuid  = 0;
-		data.eventGuid    = Events.namespace + data.guid;
-		data.rawGuid      = RawClasses.base + data.guid;
-		data.classGuid    = "." + data.rawGuid;
 
 		data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
 
@@ -719,7 +715,6 @@
 
 		Window          = Formstone.window,
 		$Instances      = [],
-		GUID            = 0,
 
 		BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
 		YouTubeReady    = false,

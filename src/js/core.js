@@ -225,15 +225,20 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						// Extend w/ Local Options
 
-						var localOptions = $element.data(namespace + "-options"),
-							data = $.extend(true, {
-								$el : $element
-							}, options, ($.type(localOptions) === "object" ? localOptions : {}) );
+						var guid    = "__" + settings.guid++,
+							rawGuid = settings.classes.raw.base + guid,
+							locals  = $element.data(namespace + "-options"),
+							data    = $.extend(true, {
+								$el     : $element,
+								guid    : guid,
+								rawGuid : rawGuid,
+								dotGuid : "." + rawGuid
+							}, options, ($.type(locals) === "object" ? locals : {}) );
 
 						// Cache Instance
 
 						$element.addClass(settings.classes.raw.element)
-						        .data(namespaceDash, data);
+						        .data(namespaceClean, data);
 
 						// Setup
 
@@ -267,7 +272,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				settings.functions.iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
 
 				this.removeClass(settings.classes.raw.element)
-					.removeData(namespaceDash);
+					.removeData(namespaceClean);
 			}
 
 			/**
@@ -279,7 +284,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function getData($element) {
-				return $element.data(namespaceDash);
+				return $element.data(namespaceClean);
 			}
 
 			/**
@@ -440,6 +445,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			settings.namespace      = namespace;
 			settings.namespaceClean = namespaceClean;
+
+			settings.guid = 0;
 
 			// Resize handler
 

@@ -10,13 +10,6 @@
 	 */
 
 	function construct(data) {
-		// guid
-		var guid         = "__" + (GUID++);
-
-		data.eventGuid    = Events.namespace + guid;
-		data.rawGuid      = RawClasses.base + guid;
-		data.classGuid    = "." + data.rawGuid;
-
 		data.mq           = "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")";
 
 		data.content      = this.attr("href");
@@ -38,14 +31,14 @@
 		this.attr("data-swap-target", data.content)
 			.attr("data-swap-group", data.group)
 			.addClass(data.tabClasses)
-			.on("activate.swap" + data.eventGuid, data, onActivate)
-			.on("deactivate.swap" + data.eventGuid, data, onDeactivate)
-			.on("enable.swap" + data.eventGuid, data, onEnable)
-			.on("disable.swap" + data.eventGuid, data, onDisable)
+			.on("activate.swap" + data.dotGuid, data, onActivate)
+			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
+			.on("enable.swap" + data.dotGuid, data, onEnable)
+			.on("disable.swap" + data.dotGuid, data, onDisable)
 			.swap({
 				maxWidth: data.maxWidth,
 				classes: {
-					target  : data.classGuid,
+					target  : data.dotGuid,
 					enabled : Classes.enabled,
 					active  : Classes.active,
 					raw: {
@@ -59,7 +52,7 @@
 
 		data.$mobileTab.touch({
 			tap: true
-		}).on("tap" + data.eventGuid, data, onMobileActivate);
+		}).on("tap" + data.dotGuid, data, onMobileActivate);
 
 		// Media Query support
 		$.mediaquery("bind", data.rawGuid, data.mq, {
@@ -294,7 +287,6 @@
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions,
-		GUID          = 0;
+		Functions     = Plugin.functions;
 
 })(jQuery, Formstone);
