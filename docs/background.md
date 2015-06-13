@@ -136,7 +136,7 @@ $(".target").background("load", { "poster": "path/to/image.jpg", "video": "//www
 | --- | --- | --- | --- |
 | `source` | `string OR object` | &nbsp; | Source image (string or object) or video (object) or YouTube (object); |
 
-### pause
+### pauseVideo
 
 Pauses target video
 
@@ -144,7 +144,7 @@ Pauses target video
 $(".target").background("pause");
 ```
 
-### play
+### playVideo
 
 Plays target video
 
