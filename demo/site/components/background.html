@@ -75,6 +75,7 @@ transition.js</code></pre>
         ogg: &quot;http://example.com/video.ogv&quot;
     }
 });</code></pre>
+<p>Note: Mobile browsers do not allow videos to auto play due to bandwidth concerns. Background will not attempt to load videos on mobile devices, instead the poster image will be displayed.</p>
 <h3 id="youtube-video">YouTube Video</h3>
 <p>Create a YouTube video Background by passing the YouTube embed URL as the source. If you do not define a poster, the YouTube thumbnail will be used:</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).background({
