@@ -10,8 +10,7 @@
 	 */
 
 	function construct(data) {
-		data.mq       = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
-		data.mqGuid   = RawClasses.base + "__" + (GUID++);
+		data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
 
 		var html = "";
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
@@ -55,7 +54,7 @@
 			.on(Events.clickTouchStart, Classes.position, data, onPositionClick)
 			.on(Events.change, Classes.select, onPageSelect);
 
-		$.mediaquery("bind", data.mqGuid, data.mq, {
+		$.mediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				data.$el.addClass(RawClasses.mobile);
 			},
@@ -75,7 +74,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.mqGuid);
+		$.mediaquery("unbind", data.rawGuid);
 
 		data.$controls.remove();
 		data.$ellipsis.remove();
@@ -352,7 +351,6 @@
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
-		Functions     = Plugin.functions,
-		GUID          = 0;
+		Functions     = Plugin.functions;
 
 })(jQuery, Formstone);

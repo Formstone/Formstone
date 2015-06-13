@@ -25,7 +25,7 @@ $("nav").navigation({
 });
 ```
 
-### Slide Out
+### Off Canvas
 
 Navigation can also slide out from the left or right hand side of the screen. The nav can 'push' the main page content by specifying the `data-navigation-content` attribute:
 

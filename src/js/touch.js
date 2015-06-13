@@ -65,7 +65,9 @@
 	 */
 
 	function destruct(data) {
-		touchAction(this.off(Events.namespace), "");
+		this.off(Events.namespace);
+
+		touchAction(this, "");
 	}
 
 	/**

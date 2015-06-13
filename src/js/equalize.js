@@ -32,7 +32,6 @@
 	function construct(data) {
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
-		data.mqGuid   = RawClasses.base + "__" + (GUID++);
 		data.type     = (data.property === "height") ? "outerHeight" : "outerWidth";
 
 		if (data.target) {
@@ -45,7 +44,7 @@
 
 		cacheInstances();
 
-		$.mediaquery("bind", data.mqGuid, data.mq, {
+		$.mediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -65,7 +64,7 @@
 	function destruct(data) {
 		tearDown(data);
 
-		$.mediaquery("unbind", data.mqGuid);
+		$.mediaquery("unbind", data.rawGuid);
 
 		cacheInstances();
 	}
@@ -199,7 +198,6 @@
 		RawClasses     = Classes.raw,
 		Events         = Plugin.events,
 		Functions      = Plugin.functions,
-		GUID           = 0,
 
 		$Instances     = [];
 

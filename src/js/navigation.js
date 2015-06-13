@@ -21,14 +21,10 @@
 
 	function construct(data) {
 		// guid
-		data.guid         = "__" + (GUID++);
-		data.eventGuid    = Events.namespace + data.guid;
-		data.rawGuid      = RawClasses.base + data.guid;
-		data.classGuid    = "." + data.rawGuid;
-
 		data.handleGuid   = RawClasses.handle + data.guid;
 
 		data.isToggle     = (data.type === "toggle");
+		data.open         = false;
 
 		if (data.isToggle) {
 			data.gravity  = "";
@@ -69,23 +65,21 @@
 		data.$content    = $(data.content).addClass(data.contentClasses);
 		data.$animate    = $().add(data.$nav).add(data.$content);
 
-		if (data.label) {
-			data.originalLabel = data.$handle.text();
-		}
+		cacheLabel(data);
 
 		// toggle
 
-		data.$handle.attr("data-swap-target", data.classGuid)
+		data.$handle.attr("data-swap-target", data.dotGuid)
 					.attr("data-swap-linked", "." + data.handleGuid)
 					.attr("data-swap-group", RawClasses.base)
-					.on("activate.swap" + data.eventGuid, data, onOpen)
-					.on("deactivate.swap" + data.eventGuid, data, onClose)
-					.on("enable.swap" + data.eventGuid, data, onEnable)
-					.on("disable.swap" + data.eventGuid, data, onDisable)
+					.on("activate.swap" + data.dotGuid, data, onOpen)
+					.on("deactivate.swap" + data.dotGuid, data, onClose)
+					.on("enable.swap" + data.dotGuid, data, onEnable)
+					.on("disable.swap" + data.dotGuid, data, onDisable)
 					.swap({
 						maxWidth: data.maxWidth,
 						classes: {
-							target  : data.classGuid,
+							target  : data.dotGuid,
 							enabled : Classes.enabled,
 							active  : Classes.open,
 							raw: {
@@ -113,9 +107,11 @@
 					.removeAttr("data-swap-linked")
 					.removeData("swap-linked")
 					.removeClass(data.handleClasses)
-					.off(data.eventGuid)
+					.off(data.dotGuid)
 					.text(data.originalLabel)
 					.swap("destroy");
+
+		restoreLabel(data);
 
 		clearLocks(data);
 
@@ -178,18 +174,22 @@
 		if (!e.originalEvent) { // thanks IE :/
 			var data = e.data;
 
-			data.$el.trigger(Events.open);
+			if (!data.open) {
+				data.$el.trigger(Events.open);
 
-			data.$content.addClass(RawClasses.open)
-						 .one(Events.clickTouchStart, function() {
-							close(data);
-						 });
+				data.$content.addClass(RawClasses.open)
+							 .one(Events.clickTouchStart, function() {
+								close(data);
+							 });
 
-			if (data.label) {
-				data.$handle.text(data.labels.open);
+				if (data.label) {
+					data.$handle.text(data.labels.open);
+				}
+
+				addLocks(data);
+
+				data.open = true;
 			}
-
-			addLocks(data);
 		}
 	}
 
@@ -204,16 +204,20 @@
 		if (!e.originalEvent) { // thanks IE :/
 			var data = e.data;
 
-			data.$el.trigger(Events.close);
+			if (data.open) {
+				data.$el.trigger(Events.close);
 
-			data.$content.removeClass(RawClasses.open)
-						 .off(Events.namespace);
+				data.$content.removeClass(RawClasses.open)
+							 .off(Events.namespace);
 
-			if (data.label) {
-				data.$handle.text(data.labels.closed);
+				if (data.label) {
+					data.$handle.text(data.labels.closed);
+				}
+
+				clearLocks(data);
+
+				data.open = false;
 			}
-
-			clearLocks(data);
 		}
 	}
 
@@ -251,9 +255,7 @@
 		data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
 		data.$animate.removeClass(RawClasses.animated);
 
-		if (data.label) {
-			data.$handle.text(data.originalLabel);
-		}
+		restoreLabel(data);
 
 		clearLocks(data);
 	}
@@ -281,6 +283,46 @@
 	function clearLocks(data) {
 		if (!data.isToggle) {
 			$Locks.removeClass(RawClasses.lock);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name cacheLabel
+	 * @description Sets handle labels
+	 * @param data [object] "Instance data"
+	 */
+
+	function cacheLabel(data) {
+		if (data.label) {
+			if (data.$handle.length > 1) {
+				data.originalLabel = [];
+
+				for (var i = 0, count = data.$handle.length; i < count; i++) {
+					data.originalLabel[i] = data.$handle.eq(i).text();
+				}
+			} else {
+				data.originalLabel = data.$handle.text();
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name restoreLabel
+	 * @description restores handle labels
+	 * @param data [object] "Instance data"
+	 */
+
+	function restoreLabel(data) {
+		if (data.label) {
+			if (data.$handle.length > 1) {
+				for (var i = 0, count = data.$handle.length; i < count; i++) {
+					data.$handle.eq(i).text(data.originalLabel[i]);
+				}
+			} else {
+				data.$handle.text(data.originalLabel);
+			}
 		}
 	}
 
@@ -373,7 +415,6 @@
 
 		// Internal
 
-		GUID          = 0,
 		$Locks        = null;
 
 })(jQuery, Formstone);
