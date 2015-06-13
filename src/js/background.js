@@ -102,9 +102,15 @@
 				}
 			}
 
+			var isVideo = !data.isYouTube && ($.type(source) === "object" &&
+												(source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm") )
+											 );
+
+			data.video      = data.isYouTube || isVideo;
+			data.playing    = false;
+
 			if (data.isYouTube) {
 				// youtube video
-				data.playing = false;
 				data.playerReady = false;
 				data.posterLoaded = false;
 
@@ -282,7 +288,7 @@
 
 				// Events
 				if (data.autoPlay) {
-					this.play();
+					playVideo(data);
 				}
 			});
 
@@ -471,39 +477,47 @@
 
 	/**
 	 * @method
-	 * @name pause
+	 * @name pauseVideo
 	 * @description Pauses target video
 	 * @example $(".target").background("pause");
 	 */
 
-	function pause(data) {
-		if (data.isYouTube && data.playerReady) {
-			data.player.pauseVideo();
-		} else {
-			var $video = data.$container.find("video");
+	function pauseVideo(data) {
+		if (data.video) {
+			if (data.isYouTube && data.playerReady) {
+				data.player.pauseVideo();
+			} else {
+				var $video = data.$container.find("video");
 
-			if ($video.length) {
-				$video[0].pause();
+				if ($video.length) {
+					$video[0].pause();
+				}
 			}
+
+			data.playing = false;
 		}
 	}
 
 	/**
 	 * @method
-	 * @name play
+	 * @name playVideo
 	 * @description Plays target video
 	 * @example $(".target").background("play");
 	 */
 
-	function play(data) {
-		if (data.isYouTube && data.playerReady) {
-			data.player.playVideo();
-		} else {
-			var $video = data.$container.find("video");
+	function playVideo(data) {
+		if (data.video) {
+			if (data.isYouTube && data.playerReady) {
+				data.player.playVideo();
+			} else {
+				var $video = data.$container.find("video");
 
-			if ($video.length) {
-				$video[0].play();
+				if ($video.length) {
+					$video[0].play();
+				}
 			}
+
+			data.playing = true;
 		}
 	}
 
@@ -688,8 +702,8 @@
 				_destruct     : destruct,
 				_resize       : resize,
 
-				play          : play,
-				pause         : pause,
+				play          : playVideo,
+				pause         : pauseVideo,
 				resize        : doResizeInstance,
 				load          : loadMedia,
 				unload        : unloadMedia
