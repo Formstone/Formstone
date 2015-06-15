@@ -15,7 +15,8 @@
 	.carousel_item:nth-child(even) { background: #D35400; }
 	.carousel_item img { width: 100%; }
 
-	.fs-carousel-enabled .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
+	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
+	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
 </style>
 
 <script>
@@ -91,6 +92,15 @@
 	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/3" draggable="false"></a>
 	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/4" draggable="false"></a>
 	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/5" draggable="false"></a>
+</div>
+
+<h4>Right to Left</h4>
+<div class="carousel" data-carousel-options='{"rtl":true,"show":{"500px":2,"960px":3}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
 </div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
 <pre><code class="lang-markup">carousel.js
@@ -217,6 +227,12 @@ touch.js</code></pre>
 <td>Items visible per page; Object for responsive counts</td>
 </tr>
 <tr>
+<td><code>rtl</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Right to Left display</td>
+</tr>
+<tr>
 <td><code>useMargin</code></td>
 <td><code>boolean</code></td>
 <td><code>false</code></td>
@@ -305,6 +321,11 @@ touch.js</code></pre>
 <td><code>.fs-carousel.fs-enabled</code></td>
 <td><code>modifier</code></td>
 <td>Indicates enabled state</td>
+</tr>
+<tr>
+<td><code>.fs-carousel.fs-rtl</code></td>
+<td><code>modifier</code></td>
+<td>Indicates right to left display</td>
 </tr>
 <tr>
 <td><code>.fs-carousel-viewport</code></td>

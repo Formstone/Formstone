@@ -1,4 +1,4 @@
-/*! formstone v0.6.7 [carousel.css] 2015-06-13 | MIT License | formstone.it */
+/*! formstone v0.6.8 [carousel.css] 2015-06-15 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -17,6 +17,12 @@
 	 * @name .fs-carousel.fs-enabled
 	 * @type modifier
 	 * @description Indicates enabled state
+	 */
+/**
+	 * @class
+	 * @name .fs-carousel.fs-rtl
+	 * @type modifier
+	 * @description Indicates right to left display
 	 */
 .fs-carousel {
   /**
@@ -232,19 +238,25 @@
   visibility: visible;
   opacity: 1;
 }
-.fs-carousel-enabled .fs-carousel-control_previous {
+.fs-carousel-enabled.fs-carousel-ltr .fs-carousel-control_previous,
+.fs-carousel-enabled.fs-carousel-rtl .fs-carousel-control_next {
+  right: auto;
   left: 20px;
 }
-.fs-carousel-enabled .fs-carousel-control_previous:before {
+.fs-carousel-enabled.fs-carousel-ltr .fs-carousel-control_previous:before,
+.fs-carousel-enabled.fs-carousel-rtl .fs-carousel-control_next:before {
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-right: 10.5px solid #333333;
   margin-left: 13.7px;
 }
-.fs-carousel-enabled .fs-carousel-control_next {
+.fs-carousel-enabled.fs-carousel-ltr .fs-carousel-control_next,
+.fs-carousel-enabled.fs-carousel-rtl .fs-carousel-control_previous {
   right: 20px;
+  left: auto;
 }
-.fs-carousel-enabled .fs-carousel-control_next:before {
+.fs-carousel-enabled.fs-carousel-ltr .fs-carousel-control_next:before,
+.fs-carousel-enabled.fs-carousel-rtl .fs-carousel-control_previous:before {
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 10.5px solid #333333;
@@ -283,4 +295,10 @@
 }
 .fs-carousel-enabled .fs-carousel-page.fs-carousel-active {
   opacity: 1;
+}
+.fs-carousel-enabled.fs-carousel-rtl {
+  direction: rtl;
+}
+.fs-carousel-enabled.fs-carousel-rtl .fs-carousel-item {
+  float: right;
 }

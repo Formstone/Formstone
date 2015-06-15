@@ -82,6 +82,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
 | `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
+| `rtl` | `boolean` | `false` | Right to Left display |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 ## Events
@@ -162,6 +163,7 @@ $(".target").carousel("resize");
 | `.fs-carousel-element` | `element` | Target elmement |
 | `.fs-carousel` | `element` | Base widget class |
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
+| `.fs-carousel.fs-rtl` | `modifier` | Indicates right to left display |
 | `.fs-carousel-viewport` | `element` | Carousel container |
 | `.fs-carousel-wrapper` | `element` | Carousel container |
 | `.fs-carousel-container` | `element` | Canister container |
