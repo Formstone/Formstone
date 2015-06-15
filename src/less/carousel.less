@@ -21,8 +21,8 @@
 	@fs-carousel-control-box-shadow: 			0 0 5px fade(#000, 25);
 	@fs-carousel-control-border-radius:			100%;
 
-	@fs-carousel-control-previous-left:			20px;
-	@fs-carousel-control-next-right:			20px;
+	@fs-carousel-control-left:					20px;
+	@fs-carousel-control-right:					20px;
 
 	@fs-carousel-control-disabled-opacity:		0;
 
@@ -65,6 +65,13 @@
 	 * @name .fs-carousel.fs-enabled
 	 * @type modifier
 	 * @description Indicates enabled state
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-carousel.fs-rtl
+	 * @type modifier
+	 * @description Indicates right to left display
 	 */
 
  	.fs-carousel {
@@ -264,8 +271,10 @@
 		 * @description Indicates previous control
 		 */
 
-		&-enabled &-control_previous {
-			left: @fs-carousel-control-previous-left;
+		&-enabled&-ltr &-control_previous,
+		&-enabled&-rtl &-control_next {
+			right: auto;
+			left: @fs-carousel-control-left;
 
 			& when (@fs-carousel-styles) {
 				&:before {
@@ -284,8 +293,10 @@
 		 * @description Indicates next control
 		 */
 
-		&-enabled &-control_next {
-			right: @fs-carousel-control-next-right;
+		&-enabled&-ltr &-control_next,
+		&-enabled&-rtl &-control_previous {
+			right: @fs-carousel-control-right;
+			left: auto;
 
 			& when (@fs-carousel-styles) {
 				&:before {
@@ -383,4 +394,15 @@
 				opacity: 1;
 			}
 		}
+
+		// RTL
+
+		&-enabled&-rtl {
+			direction: rtl;
+		}
+
+		&-enabled&-rtl &-item {
+			float: right;
+		}
+
 	}

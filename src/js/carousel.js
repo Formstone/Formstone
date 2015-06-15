@@ -57,7 +57,7 @@
 		}
 
 		// Modify dom
-		this.addClass( [RawClasses.base, data.customClass].join(" ") )
+		this.addClass( [RawClasses.base, data.customClass, (data.rtl ? RawClasses.rtl : RawClasses.ltr)].join(" ") )
 			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
@@ -159,7 +159,7 @@
 			data.$controls.remove();
 		}
 
-		this.removeClass( [RawClasses.base, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
+		this.removeClass( [RawClasses.base, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
 
 		cacheInstances();
 	}
@@ -255,7 +255,8 @@
 				j,
 				$items,
 				$first,
-				height;
+				height,
+				left;
 
 			data.count = data.$items.length;
 
@@ -278,8 +279,9 @@
 			data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
+			data.canisterWidth  = ((data.pageWidth + data.itemMargin) * data.pageCount);
 			data.$canister.css({
-				width: ((data.pageWidth + data.itemMargin) * data.pageCount)
+				width: data.canisterWidth
 			});
 
 			data.$items.css({
@@ -301,11 +303,12 @@
 					}
 				}
 
-				$first = $items.eq(0);
+				$first = data.rtl ? $items.eq( $items.length - 1 ) : $items.eq(0);
 				height = $first.outerHeight();
+				left   = $first.position().left;
 
 				data.pages.push({
-					left      : $first.position().left,
+					left      : data.rtl ? left - (data.canisterWidth - data.pageWidth - data.itemMargin) : left,
 					height    : height,
 					$items    : $items
 				});
@@ -536,12 +539,7 @@
 			data.leftPosition = -data.pages[index].left;
 		}
 
-		if (data.leftPosition < data.maxMove) {
-			data.leftPosition = data.maxMove;
-		}
-		if (data.leftPosition > 0 || isNaN(data.leftPosition)) {
-			data.leftPosition = 0;
-		}
+		data.leftPosition = checkPosition(data, data.leftPosition);
 
 		if (data.useMargin) {
 			data.$canister.css({
@@ -656,14 +654,7 @@
 	function onPan(e) {
 		var data = e.data;
 
-		data.touchLeft = data.leftPosition + e.deltaX;
-
-		if (data.touchLeft > 0) {
-			data.touchLeft = 0;
-		}
-		if (data.touchLeft < data.maxMove) {
-			data.touchLeft = data.maxMove;
-		}
+		data.touchLeft = checkPosition(data, data.leftPosition + e.deltaX);
 
 		if (data.useMargin) {
 			data.$canister.css({
@@ -682,8 +673,9 @@
 	 */
 
 	function onPanEnd(e) {
-		var data = e.data,
-			index = (e.deltaX > -50 && e.deltaX < 50) ? data.index : data.index + ((e.directionX === "left") ? 1 : -1);
+		var data      = e.data,
+			increment = getIncrement(data, e),
+			index     = (e.deltaX > -50 && e.deltaX < 50) ? data.index : data.index + increment;
 
 		endTouch(data, index);
 	}
@@ -696,8 +688,9 @@
 	 */
 
 	function onSwipe(e) {
-		var data = e.data,
-			index = data.index + ((e.directionX === "left") ? 1 : -1);
+		var data      = e.data,
+			increment = getIncrement(data, e),
+			index     = data.index + increment;
 
 		endTouch(data, index);
 	}
@@ -716,6 +709,50 @@
 		positionCanister(data, index);
 
 		data.isTouching = false;
+	}
+
+	/**
+	 * @method private
+	 * @name checkPosition
+	 * @description Checks if left pos is in range
+	 * @param data [object] "Event data"
+	 * @param e [object] "Event data"
+	 * @return [int] "Corrected left position"
+	 */
+
+	function checkPosition(data, pos) {
+		if (isNaN(pos)) {
+			pos = 0;
+		} else if (data.rtl) {
+			if (pos > data.maxMove) {
+				pos = data.maxMove;
+			}
+			if (pos < 0) {
+				pos = 0;
+			}
+		} else {
+			if (pos < data.maxMove) {
+				pos = data.maxMove;
+			}
+			if (pos > 0) {
+				pos = 0;
+			}
+		}
+
+		return pos;
+	}
+
+	/**
+	 * @method private
+	 * @name getIncrement
+	 * @description Returns touch increment
+	 * @param data [object] "Instance data"
+	 * @param e [object] "Event data"
+	 * @return [int] "Target direction"
+	 */
+
+	function getIncrement(data, e) {
+		return data.rtl ? ((e.directionX === "right") ? 1 : -1) : ((e.directionX === "left") ? 1 : -1);
 	}
 
 	/**
@@ -747,6 +784,7 @@
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
 			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
+			 * @param rtl [boolean] <false> "Right to Left display"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
 
@@ -767,10 +805,13 @@
 				paged          : false,
 				pagination     : true,
 				show           : 1,
+				rtl            : false,
 				useMargin      : false
 			},
 
 			classes: [
+				"ltr",
+				"rtl",
 				"viewport",
 				"wrapper",
 				"container",
