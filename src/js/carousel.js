@@ -78,6 +78,7 @@
 		data.leftPosition    = 0;
 		data.totalImages     = data.$images.length;
 		data.autoTimer       = null;
+		data.resizeTimer     = null;
 
 		if ($.type(data.show) === "object") {
 			var show = data.show,
@@ -113,9 +114,7 @@
 		});
 
 		// Watch Images
-		if (data.totalImages > 0) {
-			data.$images.on(Events.load, data, onImageLoad);
-		}
+		data.$images.on(Events.load, data, onImageLoad);
 
 		// Auto timer
 		if (data.autoAdvance) {
@@ -136,10 +135,13 @@
 
 	function destruct(data) {
 		Functions.clearTimer(data.autoTimer);
+		Functions.startTimer(data.resizeTimer);
 
 		disable.call(this, data);
 
 		$.mediaquery("unbind", data.rawGuid);
+
+		data.$images.off(Events.namespace);
 
 		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
 				   .unwrap().unwrap();
