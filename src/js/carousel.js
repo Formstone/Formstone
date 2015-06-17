@@ -114,15 +114,7 @@
 
 		// Watch Images
 		if (data.totalImages > 0) {
-			data.loadedImages = 0;
-			for (i = 0; i < data.totalImages; i++) {
-				var $img = data.$images.eq(i);
-				$img.one(Events.load, data, onImageLoad);
-
-				if ($img[0].complete || $img[0].height) {
-					$img.trigger(Events.load);
-				}
-			}
+			data.$images.on(Events.load, data, onImageLoad);
 		}
 
 		// Auto timer
@@ -461,11 +453,9 @@
 	function onImageLoad(e) {
 		var data = e.data;
 
-		data.loadedImages++;
-
-		if (data.loadedImages === data.totalImages) {
+		data.resizeTimer = Functions.startTimer(data.resizeTimer, 20, function() {
 			resizeInstance.call(data.$el, data);
-		}
+		});
 	}
 
 	/**
