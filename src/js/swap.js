@@ -80,17 +80,16 @@
 			$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
 
 			// index in group
-			var index    = (data.group) ? $(data.group).index(data.$el) : null,
-				doLinked = data.linked && !fromLinked;
+			var index    = (data.group) ? $(data.group).index(data.$el) : null;
 
 			data.$swaps.addClass(data.classes.raw.active);
 
-			if (doLinked) {
-				// Linked handles
-				$(data.linked).not(data.$el).swap("activate", true);
-			}
+			if (!fromLinked) {
+				if (data.linked) {
+					// Linked handles
+					$(data.linked).not(data.$el).swap("activate", true);
+				}
 
-			if (!data.linked || doLinked) {
 				this.trigger(Events.activate, [index]);
 			}
 
@@ -109,14 +108,12 @@
 		if (data.enabled && data.active) {
 			data.$swaps.removeClass(data.classes.raw.active);
 
-			var doLinked = data.linked && !fromLinked;
+			if (!fromLinked) {
+				if (data.linked) {
+					// Linked handles
+					$(data.linked).not(data.$el).swap("deactivate", true);
+				}
 
-			if (doLinked) {
-				// Linked handles
-				$(data.linked).not(data.$el).swap("deactivate", true);
-			}
-
-			if (!data.linked || doLinked) {
 				this.trigger(Events.deactivate);
 			}
 
