@@ -271,7 +271,7 @@
 		 * @description Indicates previous control
 		 */
 
-		&-enabled&-ltr &-control_previous,
+		&-enabled &-control_previous,
 		&-enabled&-rtl &-control_next {
 			right: auto;
 			left: @fs-carousel-control-left;
@@ -281,7 +281,9 @@
 					border-top: @fs-carousel-control-caret-size solid transparent;
 					border-bottom: @fs-carousel-control-caret-size solid transparent;
 					border-right: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+					border-left: none;
 					margin-left: @fs-carousel-control-caret-margin;
+					margin-right: auto;
 				}
 			}
 		}
@@ -293,7 +295,7 @@
 		 * @description Indicates next control
 		 */
 
-		&-enabled&-ltr &-control_next,
+		&-enabled &-control_next,
 		&-enabled&-rtl &-control_previous {
 			right: @fs-carousel-control-right;
 			left: auto;
@@ -303,7 +305,9 @@
 					border-top: @fs-carousel-control-caret-size solid transparent;
 					border-bottom: @fs-carousel-control-caret-size solid transparent;
 					border-left: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
+					border-right: none;
 					margin-right: @fs-carousel-control-caret-margin;
+					margin-left: auto;
 				}
 			}
 		}
