@@ -109,7 +109,7 @@
 		*/
 
 		// Bind events
-		data.$selected.touch({
+		data.$selected.fsTouch({
 			tap: true
 		}).on(Events.tap, data, onClick);
 
@@ -156,7 +156,8 @@
 		data.$options.off(Events.namespace);
 
 		data.$placeholder.remove();
-		data.$selected.remove();
+		data.$selected.fsTouch("destroy")
+			.remove();
 		data.$wrapper.remove();
 
 		data.$el.off(Events.namespace)

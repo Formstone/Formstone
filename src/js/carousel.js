@@ -104,7 +104,7 @@
 		}
 
 		// Media Query support
-		$.mediaquery("bind", data.rawGuid, data.mq, {
+		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -139,12 +139,16 @@
 
 		disable.call(this, data);
 
-		$.mediaquery("unbind", data.rawGuid);
+		$.fsMediaquery("unbind", data.rawGuid);
 
 		data.$images.off(Events.namespace);
+		data.$canister.fsTouch("destroy");
 
 		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
-				   .unwrap().unwrap();
+				.unwrap()
+				.unwrap()
+				.unwrap()
+				.unwrap();
 
 		if (data.pagination) {
 			data.$pagination.remove();
@@ -174,7 +178,7 @@
 			this.removeClass( [RawClasses.enabled, RawClasses.animated].join(" ") )
 				.off(Events.namespace);
 
-			data.$canister.touch("destroy")
+			data.$canister.fsTouch("destroy")
 						  .off(Events.namespace)
 						  .attr("style", "")
 						  .css(TransitionProperty, "none");
@@ -215,7 +219,7 @@
 				.on(Events.clickTouchStart, Classes.control, data, onAdvance)
 				.on(Events.clickTouchStart, Classes.page, data, onSelect);
 
-			data.$canister.touch({
+			data.$canister.fsTouch({
 				axis: "x",
 				pan: true,
 				swipe: true

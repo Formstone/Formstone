@@ -305,6 +305,14 @@ data.$el.on(Events.click, onClick);
 
 ## Methods
 
+### NoConflict
+
+Resolves plugin namespace conflicts
+
+```javascript
+Formstone.NoConflict();
+```
+
 ### Plugin
 
 Builds a plugin and registers it with jQuery.
