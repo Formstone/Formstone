@@ -7,12 +7,14 @@
 </style>
 
 <script>
+/*
 	$(function() {
 		// All
 		$(".demo_form select").dropdown();
 
 		$(".demo_form").on("click", ".toggle", toggleEnabled);
 	});
+*/
 
 	function toggleEnabled(e) {
 		e.preventDefault();
@@ -232,3 +234,9 @@
 		</div>
 	</div>
 </form>
+
+<script>
+	$(".demo_form select").dropdown();
+
+	$(".demo_form").on("click", ".toggle", toggleEnabled);
+</script>
