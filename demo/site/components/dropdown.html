@@ -16,12 +16,14 @@
 </style>
 
 <script>
+/*
 	$(function() {
 		// All
 		$(".demo_form select").dropdown();
 
 		$(".demo_form").on("click", ".toggle", toggleEnabled);
 	});
+*/
 
 	function toggleEnabled(e) {
 		e.preventDefault();
@@ -240,7 +242,13 @@
 			</fieldset>
 		</div>
 	</div>
-</form><h2 id="use">Use</h2>
+</form>
+
+<script>
+	$(".demo_form select").dropdown();
+
+	$(".demo_form").on("click", ".toggle", toggleEnabled);
+</script><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
 <pre><code class="lang-markup">dropdown.js
 dropdown.css</code></pre>

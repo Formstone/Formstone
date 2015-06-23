@@ -133,6 +133,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 		Formstone = new Core(),
 
+		// Deferred ready
+
+		$Ready = $.Deferred(),
+
 		// Classes
 
 		Classes = {
@@ -239,10 +243,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						$element.addClass(settings.classes.raw.element)
 						        .data(namespaceClean, data);
-
-						// Setup
-
-						setupPlugin(namespace);
 
 						// Constructor
 
@@ -464,6 +464,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			return settings;
 		})(namespace, settings);
 
+		// Setup, catches lazy-loaded components, ensures order
+
+		$Ready.then(function() {
+			setupPlugin(namespace);
+		});
+
 		return Formstone.Plugins[namespace];
 	};
 
@@ -610,11 +616,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	$(function() {
 		Formstone.$body = $("body");
 
-		for (var i in Formstone.Plugins) {
-			if (Formstone.Plugins.hasOwnProperty(i)) {
-				setupPlugin(i);
-			}
-		}
+		$Ready.resolve();
 	});
 
 	// Custom Events
