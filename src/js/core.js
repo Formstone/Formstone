@@ -477,7 +477,9 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	function setupPlugin(namespace) {
 		if (!Formstone.Plugins[namespace].initialized) {
-			Formstone.Plugins[namespace].methods._setup.call(document);
+			$(function() {
+				Formstone.Plugins[namespace].methods._setup.call(document);
+			});
 			Formstone.Plugins[namespace].initialized = true;
 		}
 	}
