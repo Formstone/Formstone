@@ -18,8 +18,12 @@
 	 */
 
 	function delegate() {
-		if (arguments.length && $.type(arguments[0]) !== "object") {
-			pushEvent.apply(this, arguments);
+		if (arguments.length) {
+			if (arguments[0] === "destroy") {
+				destroy.apply(this);
+			} else if ($.type(arguments[0]) === "object") {
+				pushEvent.apply(this, arguments);
+			}
 		} else {
 			init.apply(this, arguments);
 		}
@@ -35,7 +39,7 @@
 	 */
 
 	function init(options) {
-		// Attach Scout events
+		// Attach Analytics events
 		if (!Initialized && $Body.length) {
 			Initialized = true;
 
@@ -43,7 +47,16 @@
 
 			// $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
 
-			$Body.on("click.scout", "*[" + DataKeyFull + "]", trackEvent);
+			$Window.on(Events.scroll, trackScroll);
+
+			$Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
+		}
+	}
+
+	function destroy() {
+		if (Initialized && $Body.length) {
+			$Window.off(Events.namespace);
+			$Body.off(Events.namespace);
 		}
 	}
 
@@ -81,6 +94,28 @@
 		}
 	}
 */
+
+	function trackScroll(e) {
+		Functions.startTimer(ScrollTimer, 250, doTrackScroll);
+	}
+
+	function doTrackScroll() {
+		var windowWidth  = Formstone.windowWidth,
+			windowHeight = Formstone.windowHeight,
+			pageHeight   = $Body.outerHeight()/*  - Formstone.windowHeight */,
+			scrollTop    = Formstone.$window.scrollTop() /* + Formstone.windowHeight */,
+			depth        = (Math.round((scrollTop / pageHeight) * 4) / 4) * 100;
+
+			console.log(Math.round((scrollTop / pageHeight) * 4));
+
+			//((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+
+		if (depth > ScrollDepth) {
+			ScrollDepth = depth;
+
+			console.log(ScrollDepth);
+		}
+	}
 
 	/**
 	 * @method private
@@ -224,12 +259,18 @@
 		// Localize References
 
 		Window      = Formstone.window,
+		$Window     = Formstone.$window,
 		$Body       = null,
+
+		Functions   = Plugin.functions,
+		Events      = Plugin.events,
 
 		// Internal
 
 		Initialized = false,
 		DataKey     = "analytics-event",
-		DataKeyFull = "data-" + DataKey;
+		DataKeyFull = "data-" + DataKey,
+		ScrollDepth = 0,
+		ScrollTimer = null;
 
 })(jQuery, Formstone);
