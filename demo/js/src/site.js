@@ -28,6 +28,8 @@
 			$html   = $("html");
 			$body   = $("body");
 
+			$.analytics();
+
 			$("[class*=lang-]").each(function() {
 				$(this).addClass( $(this).attr("class").replace("lang-", "language-") );
 			});
