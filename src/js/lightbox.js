@@ -61,7 +61,7 @@
 
 			// Emulate event
 
-			buildLightbox.apply(Window, [{ data: $.extend({}, {
+			buildLightbox.apply(Window, [{ data: $.extend(true, {}, {
 				$object: $target
 			}, Defaults, options || {}) }]);
 		}
