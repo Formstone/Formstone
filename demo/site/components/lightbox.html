@@ -43,7 +43,9 @@
 	}
 
 	function launchObject() {
-		$.lightbox( $('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>') );
+		$.lightbox( $('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
+			mobile: true
+		} );
 	}
 </script>
 
