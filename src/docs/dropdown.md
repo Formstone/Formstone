@@ -29,3 +29,5 @@ Updated the element's value externally by triggering the standard `change` event
 ```javascript
 $("select").val(1).trigger("change");
 ```
+
+Note: If the select is too close to the bottom edge of the `body` tag, the dropdown options will "flip" and display above the handle.
