@@ -270,6 +270,7 @@ touch.js</code></pre>
 });</code></pre>
 <p>Updated the element&#39;s value externally by triggering the standard <code>change</code> event:</p>
 <pre><code class="lang-javascript">$(&quot;select&quot;).val(1).trigger(&quot;change&quot;);</code></pre>
+<p>Note: If the select is too close to the bottom edge of the <code>body</code> tag, the dropdown options will &quot;flip&quot; and display above the handle.</p>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-dropdown-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
