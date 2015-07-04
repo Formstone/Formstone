@@ -84,7 +84,7 @@
 			.on(Events.blur, data, onBlur)
 			.on(Events.change, data, onChange);
 
-		data.$container.touch({
+		data.$container.fsTouch({
 			pan: true,
 			axis: data.vertical ? "y" : "x"
 		}).on(Events.panStart, data, onPanStart)
@@ -105,7 +105,7 @@
 
 	function destruct(data) {
 		data.$container.off(Events.namespace)
-					   .touch("destroy");
+					   .fsTouch("destroy");
 
 		data.$track.remove();
 		data.$labels.remove();

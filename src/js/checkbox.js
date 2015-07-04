@@ -69,7 +69,7 @@
 			.on(Events.click, data, onClick)
 			.on(Events.deselect, data, onDeselect);
 
-		data.$checkbox.touch({
+		data.$checkbox.fsTouch({
 			tap: true
 		}).on(Events.tap, data, onClick);
 	}
@@ -83,7 +83,7 @@
 
 	function destruct(data) {
 		data.$checkbox.off(Events.namespace)
-					  .touch("destroy");
+					  .fsTouch("destroy");
 
 		data.$marker.remove();
 		data.$states.remove();

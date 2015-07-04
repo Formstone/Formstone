@@ -141,6 +141,9 @@
 <pre><code class="lang-javascript">$(&quot;.target&quot;).plugin({
     option: value
 });</code></pre>
+<h3 id="no-conflict">No Conflict</h3>
+<p>One benefit of Formstone is the module nature of the components, allowing developers to include only what&#39;s required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the <code>Formstone.NoConflict()</code> method to restore all jQuery plugin namespaces to their &#39;original&#39; functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace. </p>
+<pre><code class="lang-javascript">Formstone.NoConflict();</code></pre>
 <h3 id="plugin-types">Plugin Types</h3>
 <p>There are two types of plugins that can be defined: Widget or Utility.</p>
 <h4 id="widget">Widget</h4>
@@ -588,6 +591,9 @@
 </tbody>
 </table>
 <h2 id="methods">Methods</h2>
+<h3 id="noconflict">NoConflict</h3>
+<p>Resolves plugin namespace conflicts</p>
+<pre><code class="lang-javascript">Formstone.NoConflict();</code></pre>
 <h3 id="plugin">Plugin</h3>
 <p>Builds a plugin and registers it with jQuery.</p>
 <pre><code class="lang-javascript">Formstone.Plugin(&quot;namespace&quot;, { ... });</code></pre>
