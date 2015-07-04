@@ -631,8 +631,9 @@
 	 */
 
 	function scrollOptions(data) {
-		var $selected = data.$items.eq(data.index),
-			selectedOffset = (data.index >= 0 && !$selected.hasClass(Classes.item_placeholder)) ? $selected.position() : { left: 0, top: 0 };
+		var $selected      = data.$items.eq(data.index),
+			selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
+			buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
 
 		/*
 		if ($.fn.scroller !== undefined) {
@@ -640,7 +641,7 @@
 							  .scroller("reset");
 		} else {
 		*/
-			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top );
+			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
 		// }
 	}
 
