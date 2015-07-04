@@ -261,7 +261,7 @@
 				Instance.$lightbox.on(Events.clickTouchStart, Classes.caption_toggle, toggleCaption);
 			}
 
-			Instance.$lightbox.transition({
+			Instance.$lightbox.fsTransition({
 				property: "opacity"
 			},
 			function() {
@@ -332,10 +332,10 @@
 		Functions.killEvent(e);
 
 		if (Instance) {
-			Instance.$lightbox.transition("destroy");
-			Instance.$container.transition("destroy");
+			Instance.$lightbox.fsTransition("destroy");
+			Instance.$container.fsTransition("destroy");
 
-			Instance.$lightbox.addClass(Classes.raw.animating).transition({
+			Instance.$lightbox.addClass(Classes.raw.animating).fsTransition({
 				property: "opacity"
 			},
 			function(e) {
@@ -380,17 +380,17 @@
 		}
 
 		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
-			Instance.$content.touch({
+			Instance.$content.fsTouch({
 				axis: "x",
 				swipe: true
 			}).on(Events.swipe, onSwipe);
 		}
 
-		Instance.$lightbox.transition({
+		Instance.$lightbox.fsTransition({
 			property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
 		},
 		function() {
-			Instance.$container.transition({
+			Instance.$container.fsTransition({
 				property: "opacity"
 			},
 			function() {
@@ -423,7 +423,7 @@
 		var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
 
 		if (Instance.isMobile || !contentHasChanged) {
-			Instance.$lightbox.transition("resolve");
+			Instance.$lightbox.fsTransition("resolve");
 		}
 
 		// Track content size changes
@@ -744,7 +744,12 @@
 	function loadVideo(source) {
 		var youtubeParts = source.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i ), // 1
 			vimeoParts   = source.match( /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/ ), // 3
+			queryString  = source.split("?").slice(1)[0],
 			url = (youtubeParts !== null) ? "//www.youtube.com/embed/" + youtubeParts[1] : "//player.vimeo.com/video/" + vimeoParts[3];
+
+		if (queryString.trim()) {
+			url += "?" + queryString;
+		}
 
 		Instance.$videoWrapper = $('<div class="' + Classes.raw.videoWrapper + '"></div>');
 		Instance.$video = $('<iframe class="' + Classes.raw.video + '" seamless="seamless"></iframe>');
@@ -882,7 +887,7 @@
 
 			Instance.$lightbox.addClass(Classes.raw.animating);
 
-			Instance.$container.transition({
+			Instance.$container.fsTransition({
 				property: "opacity"
 			},
 			function() {

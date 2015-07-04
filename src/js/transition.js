@@ -86,7 +86,7 @@
 		if (!data.always) {
 			// Unbind events, clear timers, similiar to .one()
 
-			data.$el[Plugin.namespace]("destroy"); // clean up old data?
+			data.$el[Plugin.namespaceClean]("destroy"); // clean up old data?
 		}
 
 		// fire callback
