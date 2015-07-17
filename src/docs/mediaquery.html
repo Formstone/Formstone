@@ -16,6 +16,8 @@
 				minHeight    : [ 400, 800 ],
 				maxHeight    : [ 800, 400 ]
 			});
+		} else {
+			logChange({}, $.mediaquery("state"));
 		}
 
 		$.mediaquery("bind", "demo", "(min-width: 740px)", {
