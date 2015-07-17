@@ -54,7 +54,7 @@
 			.on(Events.clickTouchStart, Classes.position, data, onPositionClick)
 			.on(Events.change, Classes.select, onPageSelect);
 
-		$.mediaquery("bind", data.rawGuid, data.mq, {
+		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				data.$el.addClass(RawClasses.mobile);
 			},
@@ -74,7 +74,7 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.rawGuid);
+		$.fsMediaquery("unbind", data.rawGuid);
 
 		data.$controls.remove();
 		data.$ellipsis.remove();
@@ -277,6 +277,7 @@
 	 * @name Pagination
 	 * @description A jQuery plugin for simple pagination.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 */

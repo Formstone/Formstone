@@ -35,13 +35,13 @@
 
 		data.$swaps = $().add(this).add(data.$target);
 
-		this.touch({
+		this.fsTouch({
 				tap: true
 			})
 			.on(Events.tap + data.dotGuid, data, onClick);
 
 		// Media Query support
-		$.mediaquery("bind", data.rawGuid, data.mq, {
+		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				enable.call(data.$el, data);
 			},
@@ -59,12 +59,12 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.rawGuid);
+		$.fsMediaquery("unbind", data.rawGuid);
 
 		data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 				   .off(Events.namespace);
 
-		this.touch("destroy");
+		this.fsTouch("destroy");
 	}
 
 	/**
@@ -77,7 +77,7 @@
 	function activate(data, fromLinked) {
 		if (data.enabled && !data.active) {
 			// Deactivates grouped instances
-			$(data.group).not(data.$el)[Plugin.namespace]("deactivate");
+			$(data.group).not(data.$el)[Plugin.namespaceClean]("deactivate");
 
 			// index in group
 			var index    = (data.group) ? $(data.group).index(data.$el) : null;
@@ -198,6 +198,7 @@
 	 * @name Swap
 	 * @description A jQuery plugin for toggling states.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 * @dependency touch.js

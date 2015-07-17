@@ -249,6 +249,7 @@
 	 * @name Tooltip
 	 * @description A jQuery plugin for simple tooltips.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 

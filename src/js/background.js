@@ -197,7 +197,7 @@
 			}
 
 			// YTransition in
-			$media.transition({
+			$media.fsTransition({
 				property: "opacity"
 			},
 			function() {
@@ -271,7 +271,7 @@
 				$video = $media.find("video");
 
 			$video.one(Events.loadedMetaData, function(e) {
-				$media.transition({
+				$media.fsTransition({
 					property: "opacity"
 				},
 				function() {
@@ -385,7 +385,7 @@
 									data.player.pauseVideo();
 								}
 
-								$media.transition({
+								$media.fsTransition({
 									property: "opacity"
 								},
 								function() {
@@ -461,7 +461,7 @@
 		var $media = data.$container.find(Classes.media);
 
 		if ($media.length >= 1) {
-			$media.transition({
+			$media.fsTransition({
 				property: "opacity"
 			},
 			function() {
@@ -644,6 +644,7 @@
 	 * @name Background
 	 * @description A jQuery plugin for full-frame image and video backgrounds.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency transition.js
 	 */

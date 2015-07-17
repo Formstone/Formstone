@@ -35,7 +35,7 @@
 			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
 			.on("enable.swap" + data.dotGuid, data, onEnable)
 			.on("disable.swap" + data.dotGuid, data, onDisable)
-			.swap({
+			.fsSwap({
 				maxWidth: data.maxWidth,
 				classes: {
 					target  : data.dotGuid,
@@ -50,12 +50,12 @@
 				collapse: false
 			});
 
-		data.$mobileTab.touch({
+		data.$mobileTab.fsTouch({
 			tap: true
 		}).on("tap" + data.dotGuid, data, onMobileActivate);
 
 		// Media Query support
-		$.mediaquery("bind", data.rawGuid, data.mq, {
+		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
 				mobileEnable.call(data.$el, data);
 			},
@@ -73,10 +73,10 @@
 	 */
 
 	function destruct(data) {
-		$.mediaquery("unbind", data.rawGuid);
+		$.fsMediaquery("unbind", data.rawGuid);
 
 		data.$mobileTab.off(Events.namespace)
-					   .touch("destroy")
+					   .fsTouch("destroy")
 					   .remove();
 
 		data.$content.removeClass(RawClasses.content);
@@ -87,7 +87,7 @@
 			.removeData("data-swap-group")
 			.removeClass(RawClasses.tab)
 			.off(Events.namespace)
-			.swap("destroy");
+			.fsSwap("destroy");
 	}
 
 	/**
@@ -98,7 +98,7 @@
 	 */
 
 	function activate(data) {
-		this.swap("activate");
+		this.fsSwap("activate");
 	}
 
 	/**
@@ -109,7 +109,7 @@
 	 */
 
 	function enable(data) {
-		this.swap("enable");
+		this.fsSwap("enable");
 	}
 
 	/**
@@ -120,7 +120,7 @@
 	 */
 
 	function disable(data) {
-		this.swap("disable");
+		this.fsSwap("disable");
 	}
 
 	/**
@@ -194,7 +194,7 @@
 	 */
 
 	function onMobileActivate(e) {
-		e.data.$el.swap("activate");
+		e.data.$el.fsSwap("activate");
 	}
 
 	/**
@@ -226,6 +226,7 @@
 	 * @name Tabs
 	 * @description A jQuery plugin for simple tabs.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 * @dependency swap.js

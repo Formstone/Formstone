@@ -15,6 +15,11 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	var Core = function() {
 			this.Version = '@version';
 			this.Plugins = {};
+
+			this.DontConflict   = false;
+			this.Conflicts      = {
+				fn: {}
+			};
 			this.ResizeHandlers = [];
 
 			// Globals
@@ -133,6 +138,10 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 		Formstone = new Core(),
 
+		// Deferred ready
+
+		$Ready = $.Deferred(),
+
 		// Classes
 
 		Classes = {
@@ -180,6 +189,24 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			touchMove            : "touchmove.{ns}",
 			touchStart           : "touchstart.{ns}"
 		};
+
+	/**
+	 * @method
+	 * @name NoConflict
+	 * @description Resolves plugin namespace conflicts
+	 * @example Formstone.NoConflict();
+	 */
+
+	Core.prototype.NoConflict = function() {
+		Formstone.DontConflict = true;
+
+		for (var i in Formstone.Plugins) {
+			if (Formstone.Plugins.hasOwnProperty(i)) {
+				$[i]    = Formstone.Conflicts[i];
+				$.fn[i] = Formstone.Conflicts.fn[i];
+			}
+		}
+	};
 
 	/**
 	 * @method
@@ -239,10 +266,6 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 						$element.addClass(settings.classes.raw.element)
 						        .data(namespaceClean, data);
-
-						// Setup
-
-						setupPlugin(namespace);
 
 						// Constructor
 
@@ -432,14 +455,31 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			if (settings.widget) {
 
-				// Widget Delegation: $(".target").plugin("method", ...);
-				$.fn[namespace] = $.fn[namespaceClean] = delegateWidget;
+				// Store conflicting namesapaces
+				Formstone.Conflicts.fn[namespace] = $.fn[namespace];
+
+				// Widget Delegation: $(".target").fsPlugin("method", ...);
+				$.fn[namespaceClean] = delegateWidget;
+
+				if (!Formstone.DontConflict) {
+
+					// $(".target").plugin("method", ...);
+					$.fn[namespace] = $.fn[namespaceClean];
+				}
 			}
 
 			// Utility
 
-				// Utility Delegation: $.plugin("method", ... );
-				$[namespace] = $[namespaceClean] = settings.utilities._delegate || delegateUtility;
+				Formstone.Conflicts[namespace] = $[namespace];
+
+				// Utility Delegation: $.fsPlugin("method", ... );
+				$[namespaceClean] = settings.utilities._delegate || delegateUtility;
+
+				if (!Formstone.DontConflict) {
+
+					// $.plugin("method", ... );
+					$[namespace] = $[namespaceClean];
+				}
 
 			// Run Setup
 
@@ -463,6 +503,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 			return settings;
 		})(namespace, settings);
+
+		// Setup, catches lazy-loaded components, ensures order
+
+		$Ready.then(function() {
+			setupPlugin(namespace);
+		});
 
 		return Formstone.Plugins[namespace];
 	};
@@ -610,11 +656,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	$(function() {
 		Formstone.$body = $("body");
 
-		for (var i in Formstone.Plugins) {
-			if (Formstone.Plugins.hasOwnProperty(i)) {
-				setupPlugin(i);
-			}
-		}
+		$Ready.resolve();
 	});
 
 	// Custom Events

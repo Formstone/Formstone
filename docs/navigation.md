@@ -20,6 +20,7 @@ navigation.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 mediaquery.js
 swap.js

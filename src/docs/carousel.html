@@ -5,6 +5,9 @@
 	.carousel_item:nth-child(even) { background: #D35400; }
 	.carousel_item img { width: 100%; }
 
+	.carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
+	.carousel_auto_height .carousel_item:nth-child(3) { height: 250px; }
+
 	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
 	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
 </style>
@@ -77,11 +80,11 @@
 
 <h4>Links</h4>
 <div class="carousel" data-carousel-options='{"show":{"500px":2,"960px":3}}'>
-	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/1" draggable="false"></a>
-	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/2" draggable="false"></a>
-	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/3" draggable="false"></a>
-	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/4" draggable="false"></a>
-	<a href="#" class="carousel_item"><img src="http://spacehold.it/450x400/5" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/1" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/2" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/3" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/4" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/5" draggable="false"></a>
 </div>
 
 <h4>Right to Left</h4>
@@ -92,3 +95,23 @@
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
 </div>
+
+<h4>Auto Height</h4>
+<div class="carousel carousel_auto_height" data-carousel-options='{"autoHeight":true,"show":{"500px":2,"960px":3}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+
+<h4>Custom Controls</h4>
+<div class="carousel" data-carousel-options='{"controls":{"next":".custom_next","previous":".custom_previous"}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+<button class="custom_previous">Previous</button>
+<button class="custom_next">Next</button>

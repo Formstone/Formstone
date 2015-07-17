@@ -55,6 +55,14 @@ $(".target").plugin({
 });
 ```
 
+### No Conflict
+
+One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace. 
+
+```javascript
+Formstone.NoConflict();
+```
+
 ### Plugin Types
 
 There are two types of plugins that can be defined: Widget or Utility.
@@ -304,6 +312,14 @@ data.$el.on(Events.click, onClick);
 | `disable` | Custom | `disable.namespace` |
 
 ## Methods
+
+### NoConflict
+
+Resolves plugin namespace conflicts
+
+```javascript
+Formstone.NoConflict();
+```
 
 ### Plugin
 

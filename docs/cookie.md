@@ -17,6 +17,7 @@ cookie.js
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

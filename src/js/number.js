@@ -240,6 +240,7 @@
 	 * @name Number
 	 * @description A jQuery plugin for cross browser number inputs.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 
