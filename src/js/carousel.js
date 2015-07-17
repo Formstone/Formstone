@@ -442,7 +442,7 @@
 
 	function resetInstance(data) {
 		if (data.enabled) {
-			updateItems.call(this, data);
+			updateItems.call(this, data, false);
 		}
 	}
 
@@ -464,7 +464,7 @@
 	function updateItems(data, html) {
 		data.$images.off(Events.namespace);
 
-		if (html) {
+		if (html !== false) {
 			data.$canister.html(html);
 		}
 
