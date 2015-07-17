@@ -28,6 +28,13 @@
 			$html   = $("html");
 			$body   = $("body");
 
+			$.mediaquery({
+				minWidth     : [ 320, 500, 740, 980, 1220 ],
+				maxWidth     : [ 1220, 980, 740, 500, 320 ],
+				minHeight    : [ 400, 800 ],
+				maxHeight    : [ 800, 400 ]
+			});
+
 			$.analytics({
 				scrollDepth: true
 			});

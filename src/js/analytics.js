@@ -134,7 +134,9 @@
 
 				// Push data
 				var state = $.mediaquery('state');
-				pushEvent('ScrollDepth', 'Depth', 'MinWidth:' + state.minWidth + 'px', key);
+				if (state.minWidth) {
+					pushEvent('ScrollDepth', 'Depth', 'MinWidth:' + state.minWidth + 'px', key);
+				}
 			}
 
 			depth += step;
