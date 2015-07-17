@@ -14,14 +14,26 @@
 
 	/**
 	 * @method private
+	 * @name setup
+	 * @description Setup plugin.
+	 */
+
+	function resize() {
+		if (Defaults.scrollDepth) {
+			setScrollDepths();
+		}
+	}
+
+	/**
+	 * @method private
 	 * @name delegate
 	 */
 
 	function delegate() {
-		if (arguments.length) {
+		if (arguments.length && $.type(arguments[0]) !== "object") {
 			if (arguments[0] === "destroy") {
 				destroy.apply(this);
-			} else if ($.type(arguments[0]) === "object") {
+			} else {
 				pushEvent.apply(this, arguments);
 			}
 		} else {
@@ -43,11 +55,17 @@
 		if (!Initialized && $Body.length) {
 			Initialized = true;
 
+			GUA = ($.type(Window.ga) === "function");
+			GTM = ($.type(Window.dataLayer) !== "undefined" && $.type(Window.dataLayer.push) === "function");
+
 			Defaults = $.extend(Defaults, options || {});
 
 			// $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
 
-			$Window.on(Events.scroll, trackScroll);
+			if (Defaults.scrollDepth) {
+				setScrollDepths();
+				$Window.on(Events.scroll, trackScroll);
+			}
 
 			$Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
 		}
@@ -66,7 +84,7 @@
 	 * @description Build events for email, phone, file types & external links
 	 */
 
-/*
+	 /*
 	function buildEvent() {
 		var $target = $(this),
 			href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
@@ -93,27 +111,57 @@
 			$target.attr(DataKeyFull, eventData);
 		}
 	}
-*/
+	*/
 
 	function trackScroll(e) {
 		Functions.startTimer(ScrollTimer, 250, doTrackScroll);
 	}
 
 	function doTrackScroll() {
-		var windowWidth  = Formstone.windowWidth,
-			windowHeight = Formstone.windowHeight,
-			pageHeight   = $Body.outerHeight()/*  - Formstone.windowHeight */,
-			scrollTop    = Formstone.$window.scrollTop() /* + Formstone.windowHeight */,
-			depth        = (Math.round((scrollTop / pageHeight) * 4) / 4) * 100;
+		var scrollTop = Formstone.$window.scrollTop() + Formstone.windowHeight,
+			passed    = 0,
+			step      = (1 / ScrollStops),
+			depth     = step,
+			key;
 
-			console.log(Math.round((scrollTop / pageHeight) * 4));
+		for (var i = 1; i <= ScrollStops; i++) {
+			key = ( Math.round(100 * depth) ).toString();
 
-			//((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+			if (ScrollDepths[ key ].passed) {
+				passed++;
+			} else if (scrollTop > ScrollDepths[ key ].edge) {
+				ScrollDepths[ key ].passed = true;
 
-		if (depth > ScrollDepth) {
-			ScrollDepth = depth;
+				// Push data
+				var state = $.mediaquery('state');
+				pushEvent('ScrollDepth', 'Depth', 'MinWidth:' + state.minWidth + 'px', key);
+			}
 
-			console.log(ScrollDepth);
+			depth += step;
+		}
+
+		if (passed >= ScrollStops) {
+			$Window.off(Events.scroll);
+		}
+	}
+
+	function setScrollDepths() {
+		var bodyHeight = $Body.outerHeight(),
+			step       = (1 / ScrollStops),
+			depth      = step,
+			key;
+
+		ScrollDepths = {};
+
+		for (var i = 1; i <= ScrollStops; i++) {
+			key = ( Math.round(100 * depth) ).toString();
+
+			ScrollDepths[ key ] = {
+				edge       : parseInt(bodyHeight * depth),
+				passsed    : false
+			};
+
+			depth += step;
 		}
 	}
 
@@ -125,8 +173,7 @@
 	 */
 
 	function trackEvent(e) {
-		// Universal Analytics
-		if ($.type(Window.ga) === "function") {
+		if (GUA || GTM) {
 			e.preventDefault();
 
 			var $target = $(this),
@@ -196,7 +243,11 @@
 				}
 			}
 
-			Window.ga("send", event);
+			if (GUA) {
+				Window.ga("send", event);
+			} else if (GTM) {
+				Window.dataLayer.push(event);
+			}
 
 			/*
 			// May use when adding tag manager support
@@ -227,12 +278,15 @@
 	 * @name Analytics
 	 * @description A jQuery plugin for Google Analytics Events.
 	 * @type utility
+	 * @dependency jQuery
 	 * @dependency core.js
+	 * @dependency mediaquery.js
 	 */
 
 	var Plugin = Formstone.Plugin("analytics", {
 			methods: {
-				_setup       : setup
+				_setup       : setup,
+				_resize      : resize
 			},
 			utilities: {
 				_delegate    : delegate
@@ -244,7 +298,8 @@
 		 */
 
 		Defaults = {
-			filetypes: /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i
+			filetypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+			scrollDepth    : false
 			/*
 			// May use when adding tag manager support
 			tracking: {
@@ -258,19 +313,25 @@
 
 		// Localize References
 
-		Window      = Formstone.window,
-		$Window     = Formstone.$window,
-		$Body       = null,
+		Window       = Formstone.window,
+		$Window      = Formstone.$window,
+		$Body        = null,
 
-		Functions   = Plugin.functions,
-		Events      = Plugin.events,
+		Functions    = Plugin.functions,
+		Events       = Plugin.events,
 
 		// Internal
 
-		Initialized = false,
-		DataKey     = "analytics-event",
-		DataKeyFull = "data-" + DataKey,
-		ScrollDepth = 0,
-		ScrollTimer = null;
+		Initialized  = false,
+		DataKey      = "analytics-event",
+		DataKeyFull  = "data-" + DataKey,
+
+		ScrollStops  = 5,
+		ScrollDepths = {},
+		ScrollDepth  = 0,
+		ScrollTimer  = null,
+
+		GUA = false,
+		GTM = false;
 
 })(jQuery, Formstone);

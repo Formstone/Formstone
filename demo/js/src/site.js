@@ -28,7 +28,9 @@
 			$html   = $("html");
 			$body   = $("body");
 
-			$.analytics();
+			$.analytics({
+				scrollDepth: true
+			});
 
 			$("[class*=lang-]").each(function() {
 				$(this).addClass( $(this).attr("class").replace("lang-", "language-") );
