@@ -403,7 +403,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				_setup         : $.noop,    // Document ready
 				_construct     : $.noop,    // Constructor
 				_destruct      : $.noop,    // Destructor
-				_resize        : false,    // Window resize
+				_resize        : false,     // Window resize
 
 				// Public Methods
 

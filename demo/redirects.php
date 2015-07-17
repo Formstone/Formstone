@@ -8,6 +8,9 @@
 		// contribute
 		"about/contributing" => "contribute/",
 
+		// analytics
+		"analytics" => "components/analytics/",
+
 		// asap
 		"asap" => "components/asap/",
 

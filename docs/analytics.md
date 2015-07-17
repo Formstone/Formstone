@@ -15,7 +15,9 @@ analytics.js
 #### Dependencies
 
 ```markup
+jQuery
 core.js
+mediaquery.js
 ```
 
 ### Basic
