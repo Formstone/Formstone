@@ -19,6 +19,7 @@ scrollbar.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

@@ -20,6 +20,7 @@ background.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 transition.js
 ```

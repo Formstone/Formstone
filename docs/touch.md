@@ -20,6 +20,7 @@ touch.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

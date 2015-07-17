@@ -20,6 +20,7 @@ lightbox.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 touch.js
 transition.js

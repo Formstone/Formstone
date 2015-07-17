@@ -181,6 +181,7 @@
 	 * @name Transition
 	 * @description A jQuery plugin for CSS transition events.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 

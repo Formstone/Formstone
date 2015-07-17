@@ -192,6 +192,7 @@
 	 * @name Analytics
 	 * @description A jQuery plugin for Google Analytics Events.
 	 * @type utility
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 
