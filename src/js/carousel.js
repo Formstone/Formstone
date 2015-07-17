@@ -40,6 +40,8 @@
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
 
+		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
+
 		// Legacy browser support
 		if (!Formstone.support.transform) {
 			data.useMargin = true;
@@ -47,12 +49,14 @@
 
 		// Build controls and pagination
 		var controlsHtml = '',
-			paginationHtml = '';
+			paginationHtml = '',
+			controlPrevClasses = [RawClasses.control, RawClasses.control_previous].join(" "),
+			controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
-		if (data.controls) {
+		if (data.controls && !data.customControls) {
 			controlsHtml += '<div class="' + RawClasses.controls + '">';
-			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ")+ '">' + data.labels.previous + '</button>';
-			controlsHtml += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ")+ '">' + data.labels.next + '</button>';
+			controlsHtml += '<button type="button" class="' + controlPrevClasses + '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
@@ -77,15 +81,20 @@
 		data.$canister           = this.find(Classes.canister).eq(0);
 		data.$controls           = this.find(Classes.controls).eq(0);
 		data.$pagination         = this.find(Classes.pagination).eq(0);
-		data.$items              = data.$canister.children().addClass(RawClasses.item);
-		data.$controlItems       = data.$controls.find(Classes.control);
 		data.$paginationItems    = data.$pagination.find(Classes.page);
-		data.$images             = data.$canister.find("img");
+
+		if (data.customControls) {
+			var $p = $(data.controls.previous).addClass(controlPrevClasses),
+				$n = $(data.controls.next).addClass(controlNextClasses);
+
+			data.$controlItems = $p.add($n);
+		} else {
+			data.$controlItems = data.$controls.find(Classes.control);
+		}
 
 		data.index           = 0;
 		data.enabled         = false;
 		data.leftPosition    = 0;
-		data.totalImages     = data.$images.length;
 		data.autoTimer       = null;
 		data.resizeTimer     = null;
 
@@ -112,6 +121,8 @@
 			}
 		}
 
+		cacheValues(data);
+
 		// Media Query support
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
@@ -121,16 +132,6 @@
 				disable.call(data.$el, data);
 			}
 		});
-
-		// Watch Images
-		data.$images.on(Events.load, data, onImageLoad);
-
-		// Auto timer
-		if (data.autoAdvance) {
-			data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function() {
-				autoAdvance(data);
-			}, true);
-		}
 
 		cacheInstances();
 	}
@@ -149,6 +150,9 @@
 		disable.call(this, data);
 
 		$.fsMediaquery("unbind", data.rawGuid);
+
+		data.$controlItems.removeClass( [Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" ") )
+			.off(Events.namespace);
 
 		data.$images.off(Events.namespace);
 		data.$canister.fsTouch("destroy");
@@ -193,13 +197,15 @@
 						  .css(TransitionProperty, "none");
 
 			data.$items.css({
-				width: "",
+				width:  "",
 				height: ""
 			});
 
-			data.$controls.removeClass(RawClasses.visible);
-			data.$pagination.removeClass(RawClasses.visible)
-							.html("");
+			data.$images.off(Events.namespace);
+			data.$controlItems.off(Events.namespace);
+			data.$pagination.html("");
+
+			hideControls(data);
 
 			if (data.useMargin) {
 				data.$canister.css({
@@ -225,8 +231,10 @@
 			data.enabled = true;
 
 			this.addClass(RawClasses.enabled)
-				.on(Events.clickTouchStart, Classes.control, data, onAdvance)
+				// .on(Events.clickTouchStart, Classes.control, data, onAdvance)
 				.on(Events.clickTouchStart, Classes.page, data, onSelect);
+
+			data.$controlItems.on(Events.clickTouchStart, data, onAdvance);
 
 			data.$canister.fsTouch({
 				axis: "x",
@@ -238,8 +246,52 @@
 			  .on(Events.swipe, data, onSwipe)
 			  .css(TransitionProperty, "");
 
+			cacheValues(data);
+
+			// Watch Images
+			data.$images.on(Events.load, data, onImageLoad);
+
+			// Auto timer
+			if (data.autoAdvance) {
+				data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function() {
+					autoAdvance(data);
+				}, true);
+			}
+
 			resizeInstance.call(this, data);
 		}
+	}
+
+	function cacheValues(data) {
+		// Cache vaules
+		data.$items      = data.$canister.children().addClass(RawClasses.item);
+		data.$images     = data.$canister.find("img");
+
+		data.totalImages = data.$images.length;
+	}
+
+	/**
+	 * @method
+	 * @name update
+	 * @description Updates carousel items
+	 * @example $(".target").carousel("update", "...");
+	 */
+
+	/**
+	 * @method private
+	 * @name updateItems
+	 * @description Updates carousel items for each instance
+	 * @param data [object] "Instance data"
+	 * @param html [string] "New carousel contents"
+	 */
+
+	function updateItems(data, html) {
+		data.$images.off(Events.namespace); // ?
+		data.$canister.html(html);
+
+		cacheValues(data);
+
+		resizeInstance.call(this, data);
 	}
 
 	/**
@@ -346,6 +398,10 @@
 
 			if (data.paged) {
 				data.pageCount -= (data.count % data.visible);
+			}
+
+			if (data.pageCount <= 0) {
+				data.pageCount = 1;
 			}
 
 			data.maxMove = -data.pages[ data.pageCount - 1 ].left;
@@ -612,6 +668,7 @@
 
 	function hideControls(data) {
 		data.$controls.removeClass(RawClasses.visible);
+		data.$controlItems.removeClass(RawClasses.visible);
 		data.$pagination.removeClass(RawClasses.visible);
 	}
 
@@ -624,6 +681,7 @@
 
 	function showControls(data) {
 		data.$controls.addClass(RawClasses.visible);
+		data.$controlItems.addClass(RawClasses.visible);
 		data.$pagination.addClass(RawClasses.visible);
 	}
 
@@ -829,7 +887,7 @@
 			 * @param autoAdvance [boolean] <false> "Flag to auto advance items"
 			 * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
 			 * @param autoTime [int] <8000> "Auto advance time"
-			 * @param controls [boolean] <true> "Flag to draw controls"
+			 * @param controls [boolean | object] <true> "Flag to draw controls OR object containing next and previous control selectors"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
 			 * @param infinite [boolean] <false> "Flag for looping items"
@@ -914,7 +972,8 @@
 				previous      : previousItem,
 				next          : nextItem,
 				reset         : resetInstance,
-				resize        : resizeInstance
+				resize        : resizeInstance,
+				update        : updateItems,
 			}
 		}),
 

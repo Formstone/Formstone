@@ -72,7 +72,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoAdvance` | `boolean` | `false` | Flag to auto advance items |
 | `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
-| `controls` | `boolean` | `true` | Flag to draw controls |
+| `controls` | `boolean | object` | `true` | Flag to draw controls OR object containing next and previous control selectors |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
 | `infinite` | `boolean` | `false` | Flag for looping items |
@@ -156,6 +156,14 @@ Resizes instance
 
 ```javascript
 $(".target").carousel("resize");
+```
+
+### update
+
+Updates carousel items
+
+```javascript
+$(".target").carousel("update", "...");
 ```
 
 ## CSS
