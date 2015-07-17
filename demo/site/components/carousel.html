@@ -113,7 +113,18 @@
 	<div class="carousel_item">3</div>
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
-</div><h2 id="use">Use</h2>
+</div>
+
+<h4>Custom Controls</h4>
+<div class="carousel" data-carousel-options='{"controls":{"next":".custom_next","previous":".custom_previous"}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+<button class="custom_previous">Previous</button>
+<button class="custom_next">Next</button><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
 <pre><code class="lang-markup">carousel.js
 carousel.css</code></pre>
@@ -175,9 +186,10 @@ touch.js</code></pre>
 </tr>
 <tr>
 <td><code>controls</code></td>
-<td><code>boolean</code></td>
+<td>`boolean</td>
+<td>object`</td>
 <td><code>true</code></td>
-<td>Flag to draw controls</td>
+<td>Flag to draw controls OR object containing next and previous control selectors</td>
 </tr>
 <tr>
 <td><code>customClass</code></td>
@@ -316,6 +328,9 @@ touch.js</code></pre>
 <h3 id="resize">resize</h3>
 <p>Resizes instance</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;resize&quot;);</code></pre>
+<h3 id="update">update</h3>
+<p>Updates carousel items</p>
+<pre><code class="lang-javascript">$(&quot;.target&quot;).carousel(&quot;update&quot;, &quot;...&quot;);</code></pre>
 <h2 id="css">CSS</h2>
 <table>
 <thead>
