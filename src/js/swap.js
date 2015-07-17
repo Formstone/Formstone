@@ -198,6 +198,7 @@
 	 * @name Swap
 	 * @description A jQuery plugin for toggling states.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 * @dependency touch.js

@@ -459,6 +459,7 @@
 	 * @name Scrollbar
 	 * @description A jQuery plugin for .
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 

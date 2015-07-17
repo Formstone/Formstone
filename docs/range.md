@@ -18,6 +18,7 @@ range.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 touch.js
 ```

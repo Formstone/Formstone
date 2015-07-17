@@ -501,6 +501,7 @@
 	 * @name Touch
 	 * @description A jQuery plugin for multi-touch events.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 

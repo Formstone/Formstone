@@ -15,6 +15,9 @@
 	.carousel_item:nth-child(even) { background: #D35400; }
 	.carousel_item img { width: 100%; }
 
+	.carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
+	.carousel_auto_height .carousel_item:nth-child(3) { height: 250px; }
+
 	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
 	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
 </style>
@@ -101,12 +104,22 @@
 	<div class="carousel_item">3</div>
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
+</div>
+
+<h4>Auto Height</h4>
+<div class="carousel carousel_auto_height" data-carousel-options='{"autoHeight":true,"show":{"500px":2,"960px":3}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
 </div><h2 id="use">Use</h2>
 <h4 id="main">Main</h4>
 <pre><code class="lang-markup">carousel.js
 carousel.css</code></pre>
 <h4 id="dependencies">Dependencies</h4>
-<pre><code class="lang-markup">core.js
+<pre><code class="lang-markup">jQuery
+core.js
 mediaquery.js
 touch.js</code></pre>
 <h3 id="basic">Basic</h3>
@@ -152,7 +165,7 @@ touch.js</code></pre>
 <td><code>autoHeight</code></td>
 <td><code>boolean</code></td>
 <td><code>false</code></td>
-<td>Flag to auto-size items</td>
+<td>Flag to adjust carousel height to visible item(s)</td>
 </tr>
 <tr>
 <td><code>autoTime</code></td>
@@ -195,6 +208,12 @@ touch.js</code></pre>
 <td><code>string</code></td>
 <td><code>&#39;Previous&#39;</code></td>
 <td>Control text</td>
+</tr>
+<tr>
+<td><code>matchHeight</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Flag to match item heights</td>
 </tr>
 <tr>
 <td><code>maxWidth</code></td>
@@ -328,6 +347,11 @@ touch.js</code></pre>
 <td>Indicates right to left display</td>
 </tr>
 <tr>
+<td><code>.fs-carousel.fs-carousel-auto_height</code></td>
+<td><code>modifier</code></td>
+<td>Indicates auto height sizing</td>
+</tr>
+<tr>
 <td><code>.fs-carousel-viewport</code></td>
 <td><code>element</code></td>
 <td>Carousel container</td>
@@ -341,6 +365,11 @@ touch.js</code></pre>
 <td><code>.fs-carousel-container</code></td>
 <td><code>element</code></td>
 <td>Canister container</td>
+</tr>
+<tr>
+<td><code>.fs-carousel-canister</code></td>
+<td><code>element</code></td>
+<td>Item container</td>
 </tr>
 <tr>
 <td><code>.fs-carousel-canister</code></td>

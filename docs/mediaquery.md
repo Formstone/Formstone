@@ -18,6 +18,7 @@ mediaquery.js
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

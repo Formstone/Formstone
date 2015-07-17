@@ -236,6 +236,7 @@
 	 * @name Checkbox
 	 * @description A jQuery plugin for replacing checkboxes.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency touch.js
 	 */

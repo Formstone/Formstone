@@ -716,6 +716,7 @@
 	 * @name Dropdown
 	 * @description A jQuery plugin for custom select elements.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency touch.js
 	 */

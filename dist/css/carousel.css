@@ -1,4 +1,4 @@
-/*! formstone v0.7.0 [carousel.css] 2015-07-04 | MIT License | formstone.it */
+/*! formstone v0.7.1 [carousel.css] 2015-07-16 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -24,6 +24,12 @@
 	 * @type modifier
 	 * @description Indicates right to left display
 	 */
+/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-auto_height
+	 * @type modifier
+	 * @description Indicates auto height sizing
+	 */
 .fs-carousel {
   /**
 		 * @class
@@ -42,6 +48,12 @@
 		 * @name .fs-carousel-container
 		 * @type element
 		 * @description Canister container
+		 */
+  /**
+		 * @class
+		 * @name .fs-carousel-canister
+		 * @type element
+		 * @description Item container
 		 */
   /**
 		 * @class
@@ -178,6 +190,10 @@
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
+.fs-carousel-enabled.fs-carousel-auto_height .fs-carousel-canister {
+  -webkit-transition: height 0.5s ease, -webkit-transform 0.5s ease;
+          transition: height 0.5s ease, transform 0.5s ease;
+}
 .fs-carousel-enabled .fs-carousel-item {
   display: block;
   float: left;
@@ -204,8 +220,10 @@
   position: absolute;
   top: 0;
   bottom: 0;
+  border: 0;
   cursor: pointer;
   display: block;
+  padding: 0;
   visibility: hidden;
   width: 40px;
   height: 40px;
@@ -282,8 +300,10 @@
   display: block;
 }
 .fs-carousel-enabled .fs-carousel-page {
+  border: 0;
   cursor: pointer;
   display: inline-block;
+  padding: 0;
   width: 10px;
   height: 10px;
   background: #333333;

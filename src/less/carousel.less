@@ -74,6 +74,13 @@
 	 * @description Indicates right to left display
 	 */
 
+	/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-auto_height
+	 * @type modifier
+	 * @description Indicates auto height sizing
+	 */
+
  	.fs-carousel {
 	 	&&-enabled {
 	 		.fs_clearfix();
@@ -157,6 +164,19 @@
 
 		/**
 		 * @class
+		 * @name .fs-carousel-canister
+		 * @type element
+		 * @description Item container
+		 */
+
+		&-enabled&-auto_height &-canister {
+			transition:
+				height @fs-carousel-transition-duration @fs-carousel-transition-timing,
+				transform @fs-carousel-transition-duration @fs-carousel-transition-timing;
+		}
+
+		/**
+		 * @class
 		 * @name .fs-carousel-item
 		 * @type element
 		 * @description Individual item
@@ -213,8 +233,10 @@
 			top: 0;
 			bottom: 0;
 
+			border: 0;
 			cursor: pointer;
 			display: block;
+			padding: 0;
 			visibility: hidden;
 
 			& when (@fs-carousel-styles) {
@@ -363,8 +385,10 @@
 		 */
 
 		&-enabled &-page {
+			border: 0;
 			cursor: pointer;
 			display: inline-block;
+			padding: 0;
 
 			& when (@fs-carousel-styles) {
 				width: @fs-carousel-page-width;

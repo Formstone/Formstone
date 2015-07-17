@@ -339,6 +339,7 @@
 	 * @name Range
 	 * @description A jQuery plugin for cross browser range inputs.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency touch.js
 	 */
