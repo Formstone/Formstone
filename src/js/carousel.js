@@ -83,14 +83,17 @@
 		data.$pagination         = this.find(Classes.pagination).eq(0);
 		data.$paginationItems    = data.$pagination.find(Classes.page);
 
-		if (data.customControls) {
-			var $p = $(data.controls.previous).addClass(controlPrevClasses),
-				$n = $(data.controls.next).addClass(controlNextClasses);
+		data.$controlPrevious = data.$controlNext = $('');
 
-			data.$controlItems = $p.add($n);
+		if (data.customControls) {
+			data.$controlPrevious = $(data.controls.previous).addClass(controlPrevClasses);
+			data.$controlNext     = $(data.controls.next).addClass(controlNextClasses);
 		} else {
-			data.$controlItems = data.$controls.find(Classes.control);
+			data.$controlPrevious = data.$controls.find(Classes.control_previous);
+			data.$controlNext     = data.$controls.find(Classes.control_next);
 		}
+
+		data.$controlItems = data.$controlPrevious.add(data.$controlNext);
 
 		data.index           = 0;
 		data.enabled         = false;
@@ -262,38 +265,6 @@
 		}
 	}
 
-	function cacheValues(data) {
-		// Cache vaules
-		data.$items      = data.$canister.children().addClass(RawClasses.item);
-		data.$images     = data.$canister.find("img");
-
-		data.totalImages = data.$images.length;
-	}
-
-	/**
-	 * @method
-	 * @name update
-	 * @description Updates carousel items
-	 * @example $(".target").carousel("update", "...");
-	 */
-
-	/**
-	 * @method private
-	 * @name updateItems
-	 * @description Updates carousel items for each instance
-	 * @param data [object] "Instance data"
-	 * @param html [string] "New carousel contents"
-	 */
-
-	function updateItems(data, html) {
-		data.$images.off(Events.namespace); // ?
-		data.$canister.html(html);
-
-		cacheValues(data);
-
-		resizeInstance.call(this, data);
-	}
-
 	/**
 	 * @method
 	 * @name resize
@@ -441,6 +412,21 @@
 	}
 
 	/**
+	 * @method private
+	 * @name cacheValues
+	 * @description Caches internal values after item change
+	 * @param data [object] "Instance data"
+	 */
+
+	function cacheValues(data) {
+		// Cache vaules
+		data.$items      = data.$canister.children().addClass(RawClasses.item);
+		data.$images     = data.$canister.find("img");
+
+		data.totalImages = data.$images.length;
+	}
+
+	/**
 	 * @method
 	 * @name reset
 	 * @description Resets instance after item change
@@ -456,10 +442,37 @@
 
 	function resetInstance(data) {
 		if (data.enabled) {
-			data.$items = data.$canister.children().addClass(RawClasses.item);
-
-			resizeInstance.call(this, data);
+			updateItems.call(this, data);
 		}
+	}
+
+	/**
+	 * @method
+	 * @name update
+	 * @description Updates carousel items
+	 * @example $(".target").carousel("update", "...");
+	 */
+
+	/**
+	 * @method private
+	 * @name updateItems
+	 * @description Updates carousel items for each instance
+	 * @param data [object] "Instance data"
+	 * @param html [string] "New carousel contents"
+	 */
+
+	function updateItems(data, html) {
+		data.$images.off(Events.namespace);
+
+		if (html) {
+			data.$canister.html(html);
+		}
+
+		data.index = 0;
+
+		cacheValues(data);
+
+		resizeInstance.call(this, data);
 	}
 
 	/**
@@ -615,6 +628,10 @@
 			index = (data.infinite) ? 0 : data.pageCount-1;
 		}
 
+		if (data.count < 1) {
+			return;
+		}
+
 		if (data.pages[index]) {
 			data.leftPosition = -data.pages[index].left;
 		}
@@ -705,9 +722,9 @@
 			data.$controlItems.addClass(RawClasses.visible);
 
 			if (data.index <= 0) {
-				data.$controlItems.filter(Classes.control_previous).removeClass(RawClasses.visible);
+				data.$controlPrevious.removeClass(RawClasses.visible);
 			} else if (data.index >= data.pageCount || data.leftPosition === data.maxMove) {
-				data.$controlItems.filter(Classes.control_next).removeClass(RawClasses.visible);
+				data.$controlNext.removeClass(RawClasses.visible);
 			}
 		}
 	}
