@@ -18,6 +18,7 @@ asap.js
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

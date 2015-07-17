@@ -449,6 +449,7 @@
 	 * @name ASAP
 	 * @description A jQuery plugin for asynchronous page loads.
 	 * @type utility
+	 * @dependency jQuery
 	 * @dependency core.js
 	 */
 

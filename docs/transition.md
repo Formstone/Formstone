@@ -19,6 +19,7 @@ transition.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 ```
 

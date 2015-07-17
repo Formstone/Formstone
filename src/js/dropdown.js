@@ -109,7 +109,7 @@
 		*/
 
 		// Bind events
-		data.$selected.touch({
+		data.$selected.fsTouch({
 			tap: true
 		}).on(Events.tap, data, onClick);
 
@@ -156,7 +156,8 @@
 		data.$options.off(Events.namespace);
 
 		data.$placeholder.remove();
-		data.$selected.remove();
+		data.$selected.fsTouch("destroy")
+			.remove();
 		data.$wrapper.remove();
 
 		data.$el.off(Events.namespace)
@@ -630,8 +631,9 @@
 	 */
 
 	function scrollOptions(data) {
-		var $selected = data.$items.eq(data.index),
-			selectedOffset = (data.index >= 0 && !$selected.hasClass(Classes.item_placeholder)) ? $selected.position() : { left: 0, top: 0 };
+		var $selected      = data.$items.eq(data.index),
+			selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
+			buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
 
 		/*
 		if ($.fn.scroller !== undefined) {
@@ -639,7 +641,7 @@
 							  .scroller("reset");
 		} else {
 		*/
-			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top );
+			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
 		// }
 	}
 
@@ -714,6 +716,7 @@
 	 * @name Dropdown
 	 * @description A jQuery plugin for custom select elements.
 	 * @type widget
+	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency touch.js
 	 */

@@ -20,6 +20,7 @@ carousel.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 mediaquery.js
 touch.js
@@ -69,14 +70,15 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `autoAdvance` | `boolean` | `false` | Flag to auto advance items |
-| `autoHeight` | `boolean` | `false` | Flag to auto-size items |
+| `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
-| `controls` | `boolean` | `true` | Flag to draw controls |
+| `controls` | `boolean | object` | `true` | Flag to draw controls OR object containing next and previous control selectors |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
 | `infinite` | `boolean` | `false` | Flag for looping items |
 | `labels.next` | `string` | `'Next'` | Control text |
 | `labels.previous` | `string` | `'Previous'` | Control text |
+| `matchHeight` | `boolean` | `false` | Flag to match item heights |
 | `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
@@ -156,6 +158,14 @@ Resizes instance
 $(".target").carousel("resize");
 ```
 
+### update
+
+Updates carousel items
+
+```javascript
+$(".target").carousel("update", "...");
+```
+
 ## CSS
 
 | Class | Type | Description |
@@ -164,9 +174,11 @@ $(".target").carousel("resize");
 | `.fs-carousel` | `element` | Base widget class |
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-carousel.fs-rtl` | `modifier` | Indicates right to left display |
+| `.fs-carousel.fs-carousel-auto_height` | `modifier` | Indicates auto height sizing |
 | `.fs-carousel-viewport` | `element` | Carousel container |
 | `.fs-carousel-wrapper` | `element` | Carousel container |
 | `.fs-carousel-container` | `element` | Canister container |
+| `.fs-carousel-canister` | `element` | Item container |
 | `.fs-carousel-canister` | `element` | Item container |
 | `.fs-carousel-item` | `element` | Individual item |
 | `.fs-carousel-controls` | `element` | Controls container |

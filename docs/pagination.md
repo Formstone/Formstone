@@ -20,6 +20,7 @@ pagination.css
 #### Dependencies
 
 ```markup
+jQuery
 core.js
 mediaquery.js
 ```
