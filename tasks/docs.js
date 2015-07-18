@@ -633,6 +633,8 @@ module.exports = function(grunt) {
 
 			grunt.file.write("demo/templates/partials/component-list.html", listhtml);
 
+			grunt.file.write("demo/pages/components/default.md", '{"template":"components.html","title":"Components","site_root":"../","asset_root":"../","component_root":"../components/"}');
+
 			// Sitemap
 
 			sitemap += '<?xml version="1.0" encoding="UTF-8" ?>\n';
