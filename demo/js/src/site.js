@@ -51,11 +51,15 @@
 				Prism.highlightAll();
 			}
 
-			$(".js-navigation").navigation();
+			$(".js-navigation").navigation().on("open.navigation", function() {
+				$.analytics("MainNav", "Open");
+			}).on("close.navigation", function() {
+				$.analytics("MainNav", "Close");
+			});
 
-			$(".intro ul").navigation();
+			// $(".intro ul").navigation();
 
-			$(".js-dropdown").dropdown();
+			// $(".js-dropdown").dropdown();
 		}
 
 		return {
