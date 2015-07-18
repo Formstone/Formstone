@@ -41,7 +41,7 @@ Learn more about <a href="https://developers.google.com/analytics/devguides/coll
 
 ### Scroll Depth
 
-Track scroll depth by enabling the `scrollDepth` option at initialization. Change the target scroll increments by modifying the `scrollStop` option:
+Track scroll depth by enabling the `scrollDepth` option at initialization. Change the target scroll increments by modifying the `scrollStops` option:
 
 ```javascript
 $.analytics({
