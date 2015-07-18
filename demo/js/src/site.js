@@ -57,9 +57,9 @@
 				$.analytics("MainNav", "Close");
 			});
 
-			// $(".intro ul").navigation();
+			$(".intro ul").navigation();
 
-			// $(".js-dropdown").dropdown();
+			$(".js-dropdown").dropdown();
 		}
 
 		return {
