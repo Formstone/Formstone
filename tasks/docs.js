@@ -570,31 +570,34 @@ module.exports = function(grunt) {
 
 			docshtml += '<h5>About</h5>';
 			docshtml += '<ul>';
-			docshtml += '<li><a href="{{= it.site_root }}start.html">Getting Started</a></li>';
-			docshtml += '<li><a href="{{= it.site_root }}upgrade.html">Upgrade Guide</a></li>';
-			docshtml += '<li><a href="{{= it.site_root }}contribute.html">Contributing</a></li>';
+			docshtml += '<li><a href="{{= it.site_root }}start.html" data-analytics-event="MainNav, Click, start">Getting Started</a></li>';
+			docshtml += '<li><a href="{{= it.site_root }}upgrade.html" data-analytics-event="MainNav, Click, upgrade">Upgrade Guide</a></li>';
+			docshtml += '<li><a href="{{= it.site_root }}contribute.html" data-analytics-event="MainNav, Click, contribute">Contributing</a></li>';
 			docshtml += '</ul>';
 
 			docshtml += '<h5>Library</h5>';
 			docshtml += '<ul>';
-			docshtml += '<li><a href="{{= it.component_root }}core.html">Core</a></li>';
+			docshtml += '<li><a href="{{= it.component_root }}core.html" data-analytics-event="MainNav, Click, core">Core</a></li>';
 			for (var i in allDocs.grid) {
 				var d = allDocs.grid[i];
-				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				docshtml += '<li><a href="{{= it.component_root }}' + n + '.html" data-analytics-event="MainNav, Click, ' + n + '">' + d.name + '</a></li>';
 			}
 			docshtml += '</ul>';
 			docshtml += '<h5>Utility</h5>';
 			docshtml += '<ul>';
 			for (var i in allDocs.utility) {
 				var d = allDocs.utility[i];
-				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				docshtml += '<li><a href="{{= it.component_root }}' + n + '.html" data-analytics-event="MainNav, Click, ' + n + '">' + d.name + '</a></li>';
 			}
 			docshtml += '</ul>';
 			docshtml += '<h5>Widget</h5>';
 			docshtml += '<ul>';
 			for (var i in allDocs.widget) {
 				var d = allDocs.widget[i];
-				docshtml += '<li><a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a></li>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				docshtml += '<li><a href="{{= it.component_root }}' + n + '.html" data-analytics-event="MainNav, Click, ' + n + '">' + d.name + '</a></li>';
 			}
 			docshtml += '</ul>';
 
@@ -607,21 +610,24 @@ module.exports = function(grunt) {
 			listhtml += '<a href="{{= it.component_root }}core.html">Core</a>';
 			for (var i in allDocs.grid) {
 				var d = allDocs.grid[i];
-				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				listhtml += '<a href="{{= it.component_root }}' + n + '.html" data-analytics-event="ComponentNav, Click, ' + n + '">' + d.name + '</a>';
 			}
 			listhtml += '</div>';
 			listhtml += '<h2>Utility</h2>';
 			listhtml += '<div class="listing">';
 			for (var i in allDocs.utility) {
 				var d = allDocs.utility[i];
-				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				listhtml += '<a href="{{= it.component_root }}' + n + '.html" data-analytics-event="ComponentNav, Click, ' + n + '">' + d.name + '</a>';
 			}
 			listhtml += '</div>';
 			listhtml += '<h2>Widget</h2>';
 			listhtml += '<div class="listing">';
 			for (var i in allDocs.widget) {
 				var d = allDocs.widget[i];
-				listhtml += '<a href="{{= it.component_root }}' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</a>';
+				var n = d.name.toLowerCase().replace(/ /g, "");
+				listhtml += '<a href="{{= it.component_root }}' + n + '.html" data-analytics-event="ComponentNav, Click, ' + n + '">' + d.name + '</a>';
 			}
 			listhtml += '</div>';
 

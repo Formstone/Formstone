@@ -55,6 +55,7 @@
 		<script src="{{= it.asset_root }}js/site.js"></script>
 
 		<!-- Google Analytics -->
+		<!--
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -63,9 +64,19 @@
 			ga('create', 'UA-46701565-1', 'formstone.it');
 			ga('send', 'pageview');
 		</script>
+		-->
 		<!-- End Google Analytics -->
 	</head>
 	<body class="fs-grid fs-grid-sm-fluid">
+		<!-- Google Tag Manager -->
+		<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-T4HSP3"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-T4HSP3');</script>
+		<!-- End Google Tag Manager -->
 
 		<!-- BuySellAds -->
 		<script type="text/javascript">
@@ -80,7 +91,7 @@
 		<!-- End BuySellAds -->
 
 		<header class="header">
-			<a href="{{= it.site_root }}" class="logo header_logo">Formstone</a>
+			<a href="{{= it.site_root }}" class="logo header_logo" data-analytics-event="Header, Click, logo">Formstone</a>
 			<button class="header_button js-nav_handle">Menu</button>
 		</header>
 		<div class="wrapper">

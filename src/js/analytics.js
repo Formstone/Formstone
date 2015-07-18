@@ -65,6 +65,7 @@
 			if (Defaults.scrollDepth) {
 				setScrollDepths();
 				$Window.on(Events.scroll, trackScroll);
+				$Window.one(Events.load, resize);
 			}
 
 			$Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
@@ -118,13 +119,14 @@
 	}
 
 	function doTrackScroll() {
-		var scrollTop = Formstone.$window.scrollTop() + Formstone.windowHeight,
+		var mqState   = $.mediaquery('state'),
+			scrollTop = Formstone.$window.scrollTop() + Formstone.windowHeight,
 			passed    = 0,
-			step      = (1 / ScrollStops),
+			step      = (1 / Defaults.scrollStops),
 			depth     = step,
 			key;
 
-		for (var i = 1; i <= ScrollStops; i++) {
+		for (var i = 1; i <= Defaults.scrollStops; i++) {
 			key = ( Math.round(100 * depth) ).toString();
 
 			if (ScrollDepths[ key ].passed) {
@@ -132,39 +134,41 @@
 			} else if (scrollTop > ScrollDepths[ key ].edge) {
 				ScrollDepths[ key ].passed = true;
 
-				// Push data
-				var state = $.mediaquery('state');
-				if (state.minWidth) {
-					pushEvent('ScrollDepth', 'Depth', 'MinWidth:' + state.minWidth + 'px', key);
+				if (mqState.minWidth) {
+					// Push data
+					pushEvent('ScrollDepth', 'MinWidth:' + mqState.minWidth + 'px', key);
 				}
 			}
 
 			depth += step;
 		}
 
-		if (passed >= ScrollStops) {
+		if (passed >= Defaults.scrollStops) {
 			$Window.off(Events.scroll);
 		}
 	}
 
 	function setScrollDepths() {
 		var bodyHeight = $Body.outerHeight(),
-			step       = (1 / ScrollStops),
+			newDepths  = {},
+			step       = (1 / Defaults.scrollStops),
 			depth      = step,
+			top        = 0,
 			key;
 
-		ScrollDepths = {};
-
-		for (var i = 1; i <= ScrollStops; i++) {
+		for (var i = 1; i <= Defaults.scrollStops; i++) {
+			top = parseInt(bodyHeight * depth);
 			key = ( Math.round(100 * depth) ).toString();
 
-			ScrollDepths[ key ] = {
-				edge       : parseInt(bodyHeight * depth),
-				passsed    : false
+			newDepths[ key ] = {
+				edge       : ( key === '100' ) ? top - 10 : top,
+				passsed    : ( ScrollDepths[ key ] ) ? ScrollDepths[ key ].passed : false
 			};
 
 			depth += step;
 		}
+
+		ScrollDepths = newDepths;
 	}
 
 	/**
@@ -238,7 +242,7 @@
 					if ($target.attr("target")) {
 						Window.open(url, $target.attr("target"));
 					} else {
-						event["hitCallback"] = function() {
+						event[ (GUA ? "hitCallback" : "eventCallback") ] = function() {
 							document.location = url;
 						};
 					}
@@ -248,6 +252,7 @@
 			if (GUA) {
 				Window.ga("send", event);
 			} else if (GTM) {
+				event["event"] = "gaTriggerEvent";
 				Window.dataLayer.push(event);
 			}
 
@@ -297,11 +302,14 @@
 
 		/**
 		 * @options
+		 * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
+		 * @param scrollStops [int] <5> "Number of scroll increments to track"
 		 */
 
 		Defaults = {
-			filetypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
-			scrollDepth    : false
+			// filetypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+			scrollDepth    : false,
+			scrollStops    : 5,
 			/*
 			// May use when adding tag manager support
 			tracking: {
@@ -328,9 +336,7 @@
 		DataKey      = "analytics-event",
 		DataKeyFull  = "data-" + DataKey,
 
-		ScrollStops  = 5,
 		ScrollDepths = {},
-		ScrollDepth  = 0,
 		ScrollTimer  = null,
 
 		GUA = false,
