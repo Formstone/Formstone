@@ -245,6 +245,7 @@
 
 			// Update gallery
 			if (Instance.gallery.active) {
+				Instance.$lightbox.addClass(RawClasses.has_controls);
 				updateGalleryControls();
 			}
 
@@ -569,8 +570,10 @@
 
 			if (Instance.$caption.html() === "") {
 				Instance.$caption.hide();
+				Instance.$lightbox.removeClass(RawClasses.has_caption);
 			} else {
 				Instance.$caption.show();
+				Instance.$lightbox.addClass(RawClasses.has_caption);
 			}
 
 			// Size content to be sure it fits the viewport
@@ -1197,6 +1200,8 @@
 				"caption_toggle",
 				"caption",
 				"caption_open",
+				"has_controls",
+				"has_caption",
 				"iframe",
 				"error",
 				"lock"

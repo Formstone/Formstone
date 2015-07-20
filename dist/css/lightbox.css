@@ -1,4 +1,4 @@
-/*! formstone v0.7.6 [lightbox.css] 2015-07-18 | MIT License | formstone.it */
+/*! formstone v0.7.7 [lightbox.css] 2015-07-20 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -53,6 +53,18 @@
 	 * @name .fs-lightbox.fs-lightbox-iframed
 	 * @type modifier
 	 * @description Indicates iFrame content
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-has_caption
+	 * @type modifier
+	 * @description Indicates caption is present
+	 */
+/**
+	 * @class
+	 * @name .fs-lightbox.fs-lightbox-has_controls
+	 * @type modifier
+	 * @description Indicates controls are present
 	 */
 .fs-lightbox {
   width: 200px;
