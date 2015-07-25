@@ -94,6 +94,7 @@
 		data.$placeholder     = data.$dropdown.find(Classes.placeholder);
 		data.index            = -1;
 		data.closed           = true;
+		data.focused          = false;
 
 		buildOptions(data);
 
@@ -121,12 +122,12 @@
 
 		// Focus/Blur events
 		if (!Formstone.isMobile) {
-			data.$dropdown.on(Events.focus, data, onFocus)
-						  .on(Events.blur, data, onBlur);
+			data.$dropdown.on(Events.focusIn, data, onFocusIn)
+						  .on(Events.focusOut, data, onFocusOut);
 
 			// Handle clicks to associated labels
-			this.on(Events.focus, data, function(e) {
-				e.data.$dropdown.trigger(Events.raw.focus);
+			this.on(Events.focusIn, data, function(e) {
+				e.data.$dropdown.trigger(Events.raw.focusIn);
 			});
 		}
 	}
@@ -405,6 +406,8 @@
 
 		if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
 			closeOptions(data);
+
+			data.$dropdown.trigger(Events.focusOut);
 		}
 	}
 
@@ -447,6 +450,8 @@
 				}
 			}
 
+			data.$dropdown.trigger(Events.focusIn);
+
 			if (!data.multiple) {
 				// Clean up
 				closeOptions(data);
@@ -475,17 +480,19 @@
 
 	/**
 	 * @method private
-	 * @name onFocus
-	 * @description Handles instance focus.
+	 * @name onFocusIn
+	 * @description Handles instance focusIn.
 	 * @param e [object] "Event data"
 	 */
 
-	function onFocus(e) {
+	function onFocusIn(e) {
 		Functions.killEvent(e);
 
 		var data = e.data;
 
-		if (!data.disabled && !data.multiple) {
+		if (!data.disabled && !data.multiple && !data.focused) {
+			data.focused = true;
+
 			data.$dropdown.addClass(RawClasses.focus)
 						  .on(Events.keyDown + data.dotGuid, data, onKeypress);
 		}
@@ -493,22 +500,29 @@
 
 	/**
 	 * @method private
-	 * @name onBlur
-	 * @description Handles instance blur.
+	 * @name onFocusOut
+	 * @description Handles instance focusOut.
 	 * @param e [object] "Event data"
 	 */
 
-	function onBlur(e, internal) {
+	function onFocusOut(e, internal) {
 		Functions.killEvent(e);
 
-		var data = e.data;
+		var $target = $(e.target),
+			data = e.data;
 
-		data.$dropdown.removeClass(RawClasses.focus)
-					  .off(Events.keyDown + data.dotGuid);
+		if (data.$dropdown.find($target).length > 0) {
+			data.$dropdown.trigger(Events.focusIn);
+		} else if ($target.is(data.$dropdown)) {
+			data.focused = false;
 
-		if (!data.multiple) {
-			// Clean up
-			closeOptions(data);
+			data.$dropdown.removeClass(RawClasses.focus)
+						  .off(Events.keyDown + data.dotGuid);
+
+			if (!data.multiple) {
+				// Clean up
+				closeOptions(data);
+			}
 		}
 	}
 
