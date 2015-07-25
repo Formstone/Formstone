@@ -43,10 +43,10 @@
 		// Media Query support
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {
-				enable.call(data.$el, data);
+				enable.call(data.$el, data, true);
 			},
 			leave: function() {
-				disable.call(data.$el, data);
+				disable.call(data.$el, data, true);
 			}
 		});
 	}
@@ -76,11 +76,13 @@
 
 	function activate(data, fromLinked) {
 		if (data.enabled && !data.active) {
-			// Deactivates grouped instances
-			$(data.group).not(data.$el)[Plugin.namespaceClean]("deactivate");
+			if (data.group && !fromLinked) {
+				// Deactivates grouped instances
+				$(data.group).not(data.$el)[Plugin.namespaceClean]("deactivate");
+			}
 
 			// index in group
-			var index    = (data.group) ? $(data.group).index(data.$el) : null;
+			var index = (data.group) ? $(data.group).index(data.$el) : null;
 
 			data.$swaps.addClass(data.classes.raw.active);
 
