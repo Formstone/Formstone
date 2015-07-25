@@ -747,11 +747,12 @@
 	function loadVideo(source) {
 		var youtubeParts = source.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i ), // 1
 			vimeoParts   = source.match( /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/ ), // 3
-			queryString  = source.split("?").slice(1),
+			queryString  = source.split("?"),
 			url = (youtubeParts !== null) ? "//www.youtube.com/embed/" + youtubeParts[1] : "//player.vimeo.com/video/" + vimeoParts[3];
 
-		if (queryString.length > 0) {
-			url += "?" + queryString[0].trim();
+		// if we have a query string
+		if (queryString.length >= 2) {
+			url += "?" + queryString.slice(1)[0].trim();
 		}
 
 		Instance.$videoWrapper = $('<div class="' + Classes.raw.videoWrapper + '"></div>');
