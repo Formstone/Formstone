@@ -326,6 +326,12 @@
 				}
 			}
 		}
+
+		closeOthers(data);
+	}
+
+	function closeOthers(data) {
+		$(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
 	}
 
 	/**
@@ -345,7 +351,7 @@
 	function openOptions(data) {
 		// Make sure it's not already open
 		if (data.closed) {
-			$(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
+			// $(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
 
 			var offset = data.$dropdown.offset(),
 				bodyHeight = $Body.outerHeight(),
@@ -359,6 +365,8 @@
 
 			// Bind Events
 			$Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+
+			data.$dropdown.trigger(Events.focusIn);
 
 			data.$dropdown.addClass(RawClasses.open);
 			scrollOptions(data);
@@ -423,6 +431,8 @@
 
 		if (data) {
 			closeOptions(data);
+
+			data.$dropdown.trigger(Events.focusOut);
 		}
 	}
 
@@ -450,12 +460,12 @@
 				}
 			}
 
-			data.$dropdown.trigger(Events.focusIn);
-
 			if (!data.multiple) {
 				// Clean up
 				closeOptions(data);
 			}
+
+			data.$dropdown.trigger(Events.focusIn);
 		}
 	}
 
@@ -488,9 +498,12 @@
 	function onFocusIn(e) {
 		Functions.killEvent(e);
 
-		var data = e.data;
+		var $target = $(e.currentTarget),
+			data    = e.data;
 
 		if (!data.disabled && !data.multiple && !data.focused) {
+			closeOthers(data);
+
 			data.focused = true;
 
 			data.$dropdown.addClass(RawClasses.focus)
@@ -508,12 +521,10 @@
 	function onFocusOut(e, internal) {
 		Functions.killEvent(e);
 
-		var $target = $(e.target),
-			data = e.data;
+		var $target = $(e.currentTarget),
+			data    = e.data;
 
-		if (data.$dropdown.find($target).length > 0) {
-			data.$dropdown.trigger(Events.focusIn);
-		} else if ($target.is(data.$dropdown)) {
+		if (data.focused && data.closed) {
 			data.focused = false;
 
 			data.$dropdown.removeClass(RawClasses.focus)
