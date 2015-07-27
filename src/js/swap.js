@@ -78,7 +78,9 @@
 		if (data.enabled && !data.active) {
 			if (data.group && !fromLinked) {
 				// Deactivates grouped instances
-				$(data.group).not(data.$el)[Plugin.namespaceClean]("deactivate");
+				$(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate");
+
+				console.log( $(data.group).not(data.$el).not(data.linked), $(data.group).not(data.$el).not(data.linked).length );
 			}
 
 			// index in group
