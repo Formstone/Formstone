@@ -1,6 +1,6 @@
 # Analytics
 
-A jQuery plugin for Google Analytics Events.
+A jQuery plugin for Google Universal Analytics Events.
 
 * [Use](#use)
 * [Options](#options)
@@ -91,6 +91,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `autoEvents` | `boolean` | `false` | Flag to bind auto-events to mailto, tel, files and external links |
+| `fileTypes` | `regex` | &nbsp; | File types for binding auto-events |
+| `eventTimeout` | `int` | `1000` | Tag failure timeout |
 | `scrollDepth` | `boolean` | `false` | Flag to track scroll depth events |
 | `scrollStops` | `int` | `5` | Number of scroll increments to track |
+| `trackerName` | `string` | `'gaTracker'` | Custom tracker name |
 
