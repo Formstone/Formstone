@@ -93,7 +93,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | --- | --- | --- | --- |
 | `autoEvents` | `boolean` | `false` | Flag to bind auto-events to mailto, tel, files and external links |
 | `fileTypes` | `regex` | &nbsp; | File types for binding auto-events |
-| `eventTimeout` | `int` | `1000` | Tag failure timeout |
+| `eventCallback` | `boolean` | `false` | Flag to use event callbacks when navigating |
+| `eventTimeout` | `int` | `1000` | Event failure timeout |
 | `scrollDepth` | `boolean` | `false` | Flag to track scroll depth events |
 | `scrollStops` | `int` | `5` | Number of scroll increments to track |
 | `trackerName` | `string` | `'gaTracker'` | Custom tracker name |

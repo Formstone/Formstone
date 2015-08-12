@@ -202,11 +202,13 @@
 
 	function trackEvent(e) {
 		if (GUA || GTM) {
-			e.preventDefault();
-
 			var $target = $(this),
 				url     = $target.attr("href"),
 				data    = $target.data(DataKey).split(",");
+
+			if (Defaults.eventCallback) {
+				e.preventDefault();
+			}
 
 			// Trim data
 			for (var i in data) {
@@ -251,7 +253,7 @@
 					// Check Window target
 					if ($target.attr("target")) {
 						Window.open(url, $target.attr("target"));
-					} else {
+					} else if (Defaults.eventCallback) {
 						var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
 
 						event[ callbackType ] = function() {
@@ -315,7 +317,8 @@
 		 * @options
 		 * @param autoEvents [boolean] <false> "Flag to bind auto-events to mailto, tel, files and external links"
 		 * @param fileTypes [regex] <> "File types for binding auto-events"
-		 * @param eventTimeout [int] <1000> "Tag failure timeout"
+		 * @param eventCallback [boolean] <false> "Flag to use event callbacks when navigating"
+		 * @param eventTimeout [int] <1000> "Event failure timeout"
 		 * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
 		 * @param scrollStops [int] <5> "Number of scroll increments to track"
 		 * @param trackerName [string] <'gaTracker'> "Custom tracker name"
@@ -324,6 +327,7 @@
 		Defaults = {
 			autoEvents     : false,
 			filetypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+			eventCallback  : false,
 			eventTimeout   : 1000,
 			scrollDepth    : false,
 			scrollStops    : 5,
