@@ -473,6 +473,25 @@
 
 	/**
 	 * @method
+	 * @name muteVideo
+	 * @description Mutes target video
+	 * @example $(".target").background("mute");
+	 */
+
+	function muteVideo(data) {
+		if (data.video) {
+			if (data.isYouTube && data.playerReady) {
+				data.player.mute();
+			} else {
+				var $video = data.$container.find("video");
+					$video[0].mute();
+			}
+		}
+	}
+
+
+	/**
+	 * @method
 	 * @name pauseVideo
 	 * @description Pauses target video
 	 * @example $(".target").background("pause");
@@ -701,6 +720,7 @@
 
 				play          : playVideo,
 				pause         : pauseVideo,
+				mute          : muteVideo,
 				resize        : doResizeInstance,
 				load          : loadMedia,
 				unload        : unloadMedia
