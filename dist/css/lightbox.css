@@ -1,4 +1,4 @@
-/*! formstone v0.7.12 [lightbox.css] 2015-08-12 | MIT License | formstone.it */
+/*! formstone v0.7.13 [lightbox.css] 2015-08-13 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -621,6 +621,7 @@
 }
 .fs-lightbox-mobile.fs-lightbox-inline .fs-lightbox-content,
 .fs-lightbox-mobile.fs-lightbox-iframe .fs-lightbox-content {
+  height: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
