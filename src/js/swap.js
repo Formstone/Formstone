@@ -18,9 +18,11 @@
 		data.target     = this.data(Namespace + "-target");
 		data.$target    = $(data.target).addClass(data.classes.raw.target);
 
-		data.linked     = this.data(Namespace + "-linked");
-
 		data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
+
+		// live query for linked to avoid missing new elements
+		var linked      = this.data(Namespace + "-linked");
+		data.linked     = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
 
 		// live query for the group to avoid missing new elements
 		var group       = this.data(Namespace + "-group");
@@ -79,8 +81,6 @@
 			if (data.group && !fromLinked) {
 				// Deactivates grouped instances
 				$(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate");
-
-				console.log( $(data.group).not(data.$el).not(data.linked), $(data.group).not(data.$el).not(data.linked).length );
 			}
 
 			// index in group

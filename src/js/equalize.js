@@ -70,6 +70,13 @@
 	}
 
 	/**
+	 * @method
+	 * @name resize
+	 * @description Resizes instance
+	 * @example $(".target").equalize("resize");
+	 */
+
+	/**
 	 * @method private
 	 * @name resizeInstance
 	 * @description Handle window resize event
@@ -189,7 +196,9 @@
 			methods : {
 				_construct    : construct,
 				_destruct     : destruct,
-				_resize       : resize
+				_resize       : resize,
+
+				resize        : resizeInstance
 			}
 		}),
 
