@@ -24,6 +24,19 @@ Swaps can be grouped together for a simple accordions or tabs.
 <div class="toggle_2">Target - 2</div>
 ```
 
+### Linked
+
+Swaps can be linked together for multiple handles.
+
+```markup
+<h4>Grouped</h4>
+<div class="target" data-swap-target=".toggle_1" data-swap-group="linked_1">Handle - 1</div>
+
+<div class="toggle_1">Target - 1</div>
+
+<div class="target" data-swap-target=".toggle_1" data-swap-group="linked_1">Handle - 2</div>
+```
+
 ### Max Width
 
 Swaps will auto-enable and disable themselves if the `maxWidth` property is set.

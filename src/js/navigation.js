@@ -70,7 +70,7 @@
 		// toggle
 
 		data.$handle.attr("data-swap-target", data.dotGuid)
-					.attr("data-swap-linked", "." + data.handleGuid)
+					.attr("data-swap-linked", data.handleGuid)
 					.attr("data-swap-group", RawClasses.base)
 					.on("activate.swap" + data.dotGuid, data, onOpen)
 					.on("deactivate.swap" + data.dotGuid, data, onClose)

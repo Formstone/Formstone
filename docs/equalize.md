@@ -127,6 +127,14 @@ Enables instance of plugin
 $(".target").equalize("enable");
 ```
 
+### resize
+
+Resizes instance
+
+```javascript
+$(".target").equalize("resize");
+```
+
 ## CSS
 
 | Class | Type | Description |
