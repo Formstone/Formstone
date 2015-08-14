@@ -4126,7 +4126,7 @@ pre[class*="language-"] {
 				border 0.15s linear,
 				opacity 0.15s linear;
 }
-.fs-upload.dropping .fs-upload-target,
+.fs-upload-dropping .fs-upload-target,
 .no-touch .fs-upload:hover .fs-upload-target {
   background: #eeeeee;
   border-color: #999999;

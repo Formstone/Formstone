@@ -53,6 +53,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxQueue` | `int` | `2` | Number of files to simultaneously upload |
 | `maxSize` | `int` | `5242880` | Max file size allowed |
+| `multiple` | `true` | `true` | Flag to allow mutiple file uploads |
 | `postData` | `object` | &nbsp; | Extra data to post with upload |
 | `postKey` | `string` | `'file'` | Key to upload file as |
 

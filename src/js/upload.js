@@ -17,8 +17,8 @@
 			html += data.label;
 			html += '</div>';
 			html += '<input class="' + RawClasses.input + '" type="file"';
-			if (data.maxQueue > 1) {
-				html += ' ' + RawClasses.multiple;
+			if (data.multiple) {
+				html += ' multiple';
 			}
 			html += '>';
 
@@ -64,8 +64,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onClick(e) {
-		e.stopPropagation();
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data;
 
@@ -79,8 +78,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onChange(e) {
-		e.stopPropagation();
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data,
 			files = data.$input[0].files;
@@ -97,8 +95,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onDragEnter(e) {
-		e.stopPropagation();
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data;
 
@@ -112,8 +109,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onDragOver(e) {
-		e.stopPropagation();
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data;
 
@@ -127,8 +123,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onDragOut(e) {
-		e.stopPropagation();
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data;
 
@@ -142,7 +137,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onDrop(e) {
-		e.preventDefault();
+		Functions.killEvent(e);
 
 		var data = e.data,
 			files = e.originalEvent.dataTransfer.files;
@@ -326,6 +321,7 @@
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
 			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
 			 * @param maxSize [int] <5242880> "Max file size allowed"
+			 * @param multiple [true] <true> "Flag to allow mutiple file uploads"
 			 * @param postData [object] "Extra data to post with upload"
 			 * @param postKey [string] <'file'> "Key to upload file as"
 			 */
@@ -337,6 +333,7 @@
 				leave          : "You have uploads pending, are you sure you want to leave this page?",
 				maxQueue       : 2,
 				maxSize        : 5242880, // 5 mb
+				multiple       : true,
 				postData       : {},
 				postKey        : "file"
 			},
