@@ -18,6 +18,12 @@
 	 * @type modifier
 	 * @description Indicates dropping state
 	 */
+/**
+	 * @class
+	 * @name .fs-upload.fs-upload-disabled
+	 * @type modifier
+	 * @description Indicates disabled state
+	 */
 .fs-upload {
   overflow: hidden;
   /**
@@ -77,4 +83,12 @@
   background: #eeeeee;
   border-color: #999999;
   color: #333333;
+}
+.fs-upload-disabled .fs-upload-target,
+.no-touch .fs-upload-disabled:hover .fs-upload-target {
+  background: #ffffff;
+  border-color: #cccccc;
+  color: #666666;
+  cursor: default;
+  cursor: not-allowed;
 }

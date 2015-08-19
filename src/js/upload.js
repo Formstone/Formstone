@@ -29,6 +29,7 @@
 			data.queue        = [];
 			data.total        = 0;
 			data.uploading    = false;
+			data.disabled     = true;
 
 			this.on(Events.click, Classes.target, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
@@ -37,6 +38,8 @@
 				.on(Events.drop, Classes.target, data, onDrop);
 
 			data.$input.on(Events.change, data, onChange);
+
+			enableUpload.call(this, data);
 		}
 	}
 
@@ -58,6 +61,38 @@
 	}
 
 	/**
+	 * @method
+	 * @name disable
+	 * @description Disables target instance.
+	 * @example $(".target").upload("disable");
+	 */
+
+	function disableUpload(data) {
+		if (!data.disabled) {
+			this.addClass(RawClasses.disabled);
+			data.$input.prop("disabled", true);
+
+			data.disabled = true;
+		}
+	}
+
+	/**
+	 * @method
+	 * @name enable
+	 * @description Enables target instance.
+	 * @example $(".target").upload("enable");
+	 */
+
+	function enableUpload(data) {
+		if (data.disabled) {
+			this.removeClass(RawClasses.disabled);
+			data.$input.prop("disabled", false);
+
+			data.disabled = false;
+		}
+	}
+
+	/**
 	 * @method private
 	 * @name onClick
 	 * @description Handles click to target.
@@ -68,7 +103,9 @@
 
 		var data = e.data;
 
-		data.$input.trigger(Events.click);
+		if (!data.disabled) {
+			data.$input.trigger(Events.click);
+		}
 	}
 
 	/**
@@ -83,7 +120,7 @@
 		var data = e.data,
 			files = data.$input[0].files;
 
-		if (files.length) {
+		if (!data.disabled && files.length) {
 			handleUpload(data, files);
 		}
 	}
@@ -99,7 +136,9 @@
 
 		var data = e.data;
 
-		data.$el.addClass(RawClasses.dropping);
+		if (!data.disabled) {
+			data.$el.addClass(RawClasses.dropping);
+		}
 	}
 
 	/**
@@ -113,7 +152,9 @@
 
 		var data = e.data;
 
-		data.$el.addClass(RawClasses.dropping);
+		if (!data.disabled) {
+			data.$el.addClass(RawClasses.dropping);
+		}
 	}
 
 	/**
@@ -127,7 +168,9 @@
 
 		var data = e.data;
 
-		data.$el.removeClass(RawClasses.dropping);
+		if (!data.disabled) {
+			data.$el.removeClass(RawClasses.dropping);
+		}
 	}
 
 	/**
@@ -142,9 +185,11 @@
 		var data = e.data,
 			files = e.originalEvent.dataTransfer.files;
 
-		data.$el.removeClass(RawClasses.dropping);
+		if (!data.disabled) {
+			data.$el.removeClass(RawClasses.dropping);
 
-		handleUpload(data, files);
+			handleUpload(data, files);
+		}
 	}
 
 	/**
@@ -342,12 +387,16 @@
 				"input",
 				"target",
 				"multiple",
-				"dropping"
+				"dropping",
+				"disabled"
 			],
 
 			methods: {
 				_construct    : construct,
-				_destruct     : destruct
+				_destruct     : destruct,
+
+				disable       : disableUpload,
+				enable        : enableUpload,
 			}
 		}),
 

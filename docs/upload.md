@@ -96,6 +96,22 @@ Removes plugin instance.
 $(".target").upload("destroy");
 ```
 
+### disable
+
+Disables target instance.
+
+```javascript
+$(".target").upload("disable");
+```
+
+### enable
+
+Enables target instance.
+
+```javascript
+$(".target").upload("enable");
+```
+
 ## CSS
 
 | Class | Type | Description |
@@ -103,6 +119,7 @@ $(".target").upload("destroy");
 | `.fs-upload-element` | `element` | Target elmement |
 | `.fs-upload` | `element` | Base widget class |
 | `.fs-upload.fs-upload-dropping` | `modifier` | Indicates dropping state |
+| `.fs-upload.fs-upload-disabled` | `modifier` | Indicates disabled state |
 | `.fs-upload-input` | `element` | Masked Input |
 | `.fs-upload-target` | `element` | Drop target |
 

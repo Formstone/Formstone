@@ -4,7 +4,9 @@
 	// Config
 
 	@fs-upload-background: 					#fff;
-	@fs-upload-border: 						3px dashed #ccc;
+	@fs-upload-border-width:				3px;
+	@fs-upload-border-style:				dashed;
+	@fs-upload-border-color:				#ccc;
 	@fs-upload-border-radius: 				3px;
 
 	@fs-upload-font-size:					14px;
@@ -38,6 +40,13 @@
 	 * @name .fs-upload.fs-upload-dropping
 	 * @type modifier
 	 * @description Indicates dropping state
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-upload.fs-upload-disabled
+	 * @type modifier
+	 * @description Indicates disabled state
 	 */
 
 	.fs-upload {
@@ -82,7 +91,7 @@
 
 		&-target {
 			background: @fs-upload-background;
-			border: @fs-upload-border;
+			border: @fs-upload-border-width @fs-upload-border-style @fs-upload-border-color;
 			border-radius: @fs-upload-border-radius;
 			color: @fs-upload-text-color;
 			cursor: pointer;
@@ -101,5 +110,16 @@
 			background: @fs-upload-dropping-background;
 			border-color: @fs-upload-dropping-border-color;
 			color: @fs-upload-dropping-text-color;
+		}
+
+		// Disabled
+
+		&-disabled &-target,
+		.no-touch &-disabled:hover &-target {
+			background: @fs-upload-background;
+			border-color: @fs-upload-border-color;
+			color: @fs-upload-text-color;
+			cursor: default;
+			cursor: not-allowed;
 		}
 	}
