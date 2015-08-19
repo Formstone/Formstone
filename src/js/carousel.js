@@ -420,7 +420,7 @@
 
 	function cacheValues(data) {
 		// Cache vaules
-		data.$items      = data.$canister.children().addClass(RawClasses.item);
+		data.$items      = data.$canister.children().not(":hidden").addClass(RawClasses.item);
 		data.$images     = data.$canister.find("img");
 
 		data.totalImages = data.$images.length;
