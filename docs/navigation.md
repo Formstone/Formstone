@@ -71,7 +71,7 @@ $("nav").navigation();
 </nav>
 <div id="content">
 	...
-</div>
+</nav>
 ```
 
 <h3>Events</h3>
