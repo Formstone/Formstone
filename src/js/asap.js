@@ -268,7 +268,7 @@
 
 	function process(url, hash, data, scrollTop, doPush) {
 		// Fire load event
-		$Window.trigger(Events.load, [ data ]);
+		$Window.trigger(Events.loaded, [ data ]);
 
 		// Trigger analytics page view
 		track(url);
@@ -464,12 +464,13 @@
 			 * @events
 			 * @event request.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
 			 * @event progress.asap "As request is loaded; triggered on window"
-			 * @event load.asap "After request is loaded; triggered on window"
+			 * @event loaded.asap "After request is loaded; triggered on window"
 			 * @event render.asap "After state is rendered; triggered on window"
 			 * @event error.asap "After load error; triggered on window"
 			 */
 
 			events: {
+				loaded      : "loaded",
 				popState    : "popstate",
 				progress    : "progress",
 				request     : "request",
