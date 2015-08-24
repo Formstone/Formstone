@@ -5,7 +5,7 @@
 		// Bind ASAP events
 		$(window).on("request.asap", pageRequested)
 				 .on("progress.asap", pageLoadProgress)
-				 .on("load.asap", pageLoaded)
+				 .on("loaded.asap", pageLoaded)
 				 .on("render.asap", pageRendered)
 				 .on("error.asap", pageLoadError);
 
