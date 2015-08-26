@@ -30,11 +30,12 @@
 		}
 
 		// Grab true original index, only if selected attribute exits
-		var $originalOption = this.find(":selected").not(":disabled"),
+		var $trueOriginal   = this.find("[selected]").not(":disabled"),
+			$originalOption = this.find(":selected").not(":disabled"),
 			originalLabel = $originalOption.text(),
 			originalIndex = this.find("option").index($originalOption);
 
-		if (!data.multiple && data.label !== "") {
+		if (!data.multiple && data.label !== "" && !$trueOriginal.length) {
 			$originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
 			originalLabel = data.label;
 			originalIndex = 0;
