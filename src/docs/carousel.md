@@ -1,6 +1,6 @@
 ### Basic
 
-Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.
+Carousel will treat immediate children as items to scroll through. By default, all items will be sized to the width of the carousel.
 
 ```javascript
 $(".target").carousel();
@@ -18,7 +18,7 @@ $(".target").carousel();
 
 ### Show
 
-Set the `show` option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
+Set the `show` option to a value, or object, at initialization to allow more items to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
 
 ```javascript
 $(".target").carousel({
@@ -34,3 +34,5 @@ $(".target").carousel({
 	}
 });
 ```
+
+Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.

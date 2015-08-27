@@ -141,7 +141,7 @@ core.js
 mediaquery.js
 touch.js</code></pre>
 <h3 id="basic">Basic</h3>
-<p>Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.</p>
+<p>Carousel will treat immediate children as items to scroll through. By default, all items will be sized to the width of the carousel.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).carousel();</code></pre>
 <pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;
     &lt;div&gt;1&lt;/div&gt;
@@ -151,7 +151,7 @@ touch.js</code></pre>
     &lt;div&gt;5&lt;/div&gt;
 &lt;/div&gt;</code></pre>
 <h3 id="show">Show</h3>
-<p>Set the <code>show</code> option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
+<p>Set the <code>show</code> option to a value, or object, at initialization to allow more items to be visible at once. If passing an object keys should be valid <code>min-width</code> media query values, including units.</p>
 <pre><code class="lang-javascript">$(&quot;.target&quot;).carousel({
     show: 2
 });</code></pre>
@@ -161,6 +161,7 @@ touch.js</code></pre>
         &quot;960px&quot; : 3
     }
 });</code></pre>
+<p>Note: Carousel items that don&#39;t meet jQuery&#39;s <code>:visible</code> selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.</p>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-carousel-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
