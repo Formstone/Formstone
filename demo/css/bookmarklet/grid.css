@@ -188,16 +188,15 @@
 		left: 0;
 		z-index: 100000;
 
+		display: none;
 		opacity: 0.5;
 		overflow: hidden;
-		pointer-events: none;
 	}
 
 	#fs-grid-overlay .fs-row {
 		height: 100%;
 
 		background: rgba(198, 80, 50, 0.3);
-		display: none;
 		margin: 0 auto !important;
 	}
 
@@ -217,6 +216,6 @@
 		padding-top: 10000px;
 	}
 
-	#fs-grid-overlay.fs-grid-visible .fs-row {
+	#fs-grid-overlay.fs-grid-visible {
 		display: block;
 	}
