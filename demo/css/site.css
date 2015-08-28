@@ -2736,7 +2736,7 @@ pre[class*="language-"] {
 		 */
 }
 .fs-lightbox,
-.fs-lightbox * {
+.fs-lightbox *:not(input):not(textarea) {
   box-sizing: border-box;
   -webkit-user-select: none !important;
      -moz-user-select: none !important;
