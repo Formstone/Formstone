@@ -183,10 +183,10 @@
 
 		var queryIndex = url.indexOf("?"),
 			hashIndex  = url.indexOf("#"),
-			data       = {},
-			hash       = "",
+			data	   = {},
+			hash	   = "",
 			cleanURL   = url,
-			error      = "User error",
+			error	  = "User error",
 			response   = null,
 			requestDeferred = $.Deferred();
 
@@ -442,7 +442,34 @@
 		}
 
 		return params;
-    }
+	}
+
+	/**
+	 * @method private
+	 * @name replaceURL
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	/**
+	 * @method
+	 * @name replace
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	function replaceURL(url) {
+		var currentState = history.state,
+			data = [];
+
+		if (currentState.data) {
+			data = currentState.data;
+		}
+
+		CurrentURL = url;
+
+		saveState(data);
+	}
 
 	/**
 	 * @plugin
@@ -455,9 +482,10 @@
 
 	var Plugin = Formstone.Plugin("asap", {
 			utilities: {
-				_initialize    : initialize,
+				_initialize	: initialize,
 
-				load           : load
+				load        : load,
+				replace     : replaceURL
 			},
 
 			/**
@@ -495,36 +523,36 @@
 		 */
 
 		Defaults = {
-			cache         : true,
-			force         : false,
-			jump          : true,
-			modal         : false,
-			selector      : "a",
-			render        : $.noop,
-			requestKey    : "fs-asap",
+			cache            : true,
+			force            : false,
+			jump             : true,
+			modal            : false,
+			selector         : "a",
+			render           : $.noop,
+			requestKey       : "fs-asap",
 			tracking: {
-				legacy      : false,        // Use legacy ga code
-				manager     : false,        // Use tag manager events
-				variable    : "currentURL", // data layer variable name - macro in tag manager
-				event       : "PageView"    // event name - rule in tag manager
+				legacy       : false,			// Use legacy ga code
+				manager      : false,			// Use tag manager events
+				variable     : "currentURL",	// data layer variable name - macro in tag manager
+				event        : "PageView"		// event name - rule in tag manager
 			},
-			transitionOut   : $.noop
+			transitionOut    : $.noop
 		},
 
 		// Localize References
 
-		$Window       = Formstone.$window,
-		Window        = $Window[0],
+		$Window     = Formstone.$window,
+		Window      = $Window[0],
 		$Body,
 
-		Functions     = Plugin.functions,
-		Events        = Plugin.events,
-		RawClasses    = Plugin.classes.raw,
+		Functions   = Plugin.functions,
+		Events      = Plugin.events,
+		RawClasses  = Plugin.classes.raw,
 
 		// Internal
 
-		CurrentURL    = '',
-		Visited       = 0,
+		CurrentURL  = '',
+		Visited     = 0,
 		Request,
 		Instance;
 

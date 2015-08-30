@@ -74,3 +74,14 @@ $.asap("load", "http://website.com/page/");
 | --- | --- | --- | --- |
 | `opts` | `url` | `''` | URL to load |
 
+### replace
+
+Updates current url in history
+
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `url` | `string` | &nbsp; | New URL |
+
