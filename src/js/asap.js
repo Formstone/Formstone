@@ -446,7 +446,8 @@
 			utilities: {
 				_initialize    : initialize,
 
-				load           : load
+				load           : load,
+				replace        : replaceURL
 			},
 
 			/**
