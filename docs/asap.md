@@ -51,11 +51,11 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `request.asap` | Before request is made; triggered on window. Second parameter 'true' if pop event |
+| `requested.asap` | Before request is made; triggered on window. Second parameter 'true' if pop event |
 | `progress.asap` | As request is loaded; triggered on window |
 | `loaded.asap` | After request is loaded; triggered on window |
-| `render.asap` | After state is rendered; triggered on window |
-| `error.asap` | After load error; triggered on window |
+| `rendered.asap` | After state is rendered; triggered on window |
+| `failed.asap` | After load error; triggered on window |
 
 ## Methods
 

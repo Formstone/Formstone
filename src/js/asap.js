@@ -154,7 +154,7 @@
 						requestURL(data.url);
 					} else {
 						// Fire request event
-						$Window.trigger(Events.request, [ true ]);
+						$Window.trigger(Events.requested, [ true ]);
 
 						process(data.url, data.hash, data.data, data.scroll, false);
 					}
@@ -176,7 +176,7 @@
 		}
 
 		// Fire request event
-		$Window.trigger(Events.request, [ false ]);
+		$Window.trigger(Events.requested, [ false ]);
 
 		// Get transition out deferred
 		Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
@@ -252,7 +252,7 @@
 		$.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
 			process(url, hash, response, (Instance.jump ? 0 : false), true);
 		}).fail(function() {
-			$Window.trigger(Events.error, [ error ]);
+			$Window.trigger(Events.failed, [ error ]);
 		});
 	}
 
@@ -297,7 +297,7 @@
 			saveState(data);
 		}
 
-		$Window.trigger(Events.render, [ data ]);
+		$Window.trigger(Events.rendered, [ data ]);
 
 		if (hash !== "") {
 			var $el = $(hash);
@@ -424,19 +424,20 @@
 
 			/**
 			 * @events
-			 * @event request.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
+			 * @event requested.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
 			 * @event progress.asap "As request is loaded; triggered on window"
 			 * @event loaded.asap "After request is loaded; triggered on window"
-			 * @event render.asap "After state is rendered; triggered on window"
-			 * @event error.asap "After load error; triggered on window"
+			 * @event rendered.asap "After state is rendered; triggered on window"
+			 * @event failed.asap "After load error; triggered on window"
 			 */
 
 			events: {
+				failed      : "failed",
 				loaded      : "loaded",
 				popState    : "popstate",
 				progress    : "progress",
-				request     : "request",
-				render      : "render"
+				requested   : "requested",
+				rendered    : "rendered"
 			}
 		}),
 
