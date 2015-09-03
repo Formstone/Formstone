@@ -20,6 +20,7 @@ asap.js
 ```markup
 jQuery
 core.js
+analytics.js
 ```
 
 ### Basic
@@ -73,15 +74,4 @@ $.asap("load", "http://website.com/page/");
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `opts` | `url` | `''` | URL to load |
-
-### replace
-
-Updates current url in history
-
-
-#### Parameters
-
-| Name | Type | Default | Description |
-| --- | --- | --- | --- |
-| `url` | `string` | &nbsp; | New URL |
 

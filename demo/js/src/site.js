@@ -52,9 +52,15 @@
 			}
 
 			$(".js-navigation").navigation().on("open.navigation", function() {
-				$.analytics("MainNav", "Open");
+				$.analytics("event", {
+					eventCategory: "MainNav",
+					eventAction: "Open"
+				});
 			}).on("close.navigation", function() {
-				$.analytics("MainNav", "Close");
+				$.analytics("event", {
+					eventCategory: "MainNav",
+					eventAction: "Close"
+				});
 			});
 
 			$(".intro ul").navigation();
