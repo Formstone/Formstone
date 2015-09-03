@@ -371,6 +371,33 @@
 
 	/**
 	 * @method private
+	 * @name replaceURL
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	/**
+	 * @method
+	 * @name replace
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	function replaceURL(url) {
+		var currentState = history.state,
+			data = [];
+
+		if (currentState.data) {
+			data = currentState.data;
+		}
+
+		CurrentURL = url;
+
+		saveState(data);
+	}
+
+	/**
+	 * @method private
 	 * @name unescape
 	 * @description Unescapes HTML
 	 * @param text [string] "Text to unescape"
@@ -450,10 +477,6 @@
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
-		 * @param tracking.legacy [boolean] <false> "Flag for legacy Google Analytics tracking"
-		 * @param tracking.manager [boolean] <false> "Flag for Tag Manager tracking"
-		 * @param tracking.variable [string] <'currentURL'> "Tag Manager dataLayer variable name (macro in Tag Manager)"
-		 * @param tracking.event [string] <'PageView'> "Tag Manager event name (rule in Tag Manager)"
 		 * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
 		 */
 
@@ -465,12 +488,6 @@
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",
-			tracking: {
-				legacy      : false,        // Use legacy ga code
-				manager     : false,        // Use tag manager events
-				variable    : "currentURL", // data layer variable name - macro in tag manager
-				event       : "PageView"    // event name - rule in tag manager
-			},
 			transitionOut   : $.noop
 		},
 
