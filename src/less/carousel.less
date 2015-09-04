@@ -5,7 +5,6 @@
 
 	@fs-carousel-styles:						true;
 
-	@fs-carousel-overflow:						hidden;
 	@fs-carousel-transition-duration:			0.5s;
 	@fs-carousel-transition-timing:				ease;
 
@@ -81,6 +80,20 @@
 	 * @description Indicates auto height sizing
 	 */
 
+	/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-contained
+	 * @type modifier
+	 * @description Indicates overflow: hidden
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-single
+	 * @type modifier
+	 * @description Indicates single item display
+	 */
+
  	.fs-carousel {
 	 	&&-enabled {
 	 		.fs_clearfix();
@@ -88,9 +101,16 @@
 	 		width: 100%;
 
 	 		position: relative;
-
-	 		overflow: @fs-carousel-overflow;
 	 	}
+
+	 	&&-contained {
+		 	&,
+		 	&-viewport,
+		 	&-wrapper,
+		 	&-container {
+		 		overflow: hidden;
+		 	}
+		 }
 
  		&,
 		&:after,
@@ -114,7 +134,6 @@
 			.fs_clearfix();
 
 			position: relative;
-			overflow: @fs-carousel-overflow;
 		}
 
 		/**
@@ -128,7 +147,6 @@
 			.fs_clearfix();
 
 			position: relative;
-			overflow: @fs-carousel-overflow;
 		}
 
 		/**
@@ -142,7 +160,6 @@
 			.fs_clearfix();
 
 			position: relative;
-			overflow: @fs-carousel-overflow;
 		}
 
 		/**
@@ -191,6 +208,21 @@
 				user-select: none;
 			}
 		}
+
+
+
+		&-single &-item {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+		}
+
+		&-single &-item&-visible {
+			position: relative;
+			z-index: 2;
+		}
+
 
 		/**
 		 * @class

@@ -387,7 +387,7 @@
 		var currentState = history.state,
 			data = [];
 
-		if (currentState.data) {
+		if (currentState && currentState.data) {
 			data = currentState.data;
 		}
 

@@ -74,6 +74,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoAdvance` | `boolean` | `false` | Flag to auto advance items |
 | `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
+| `contained` | `boolean` | `true` | Flag for 'overflow: visible' |
 | `controls` | `boolean | object` | `true` | Flag to draw controls OR object containing next and previous control selectors |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
@@ -177,6 +178,8 @@ $(".target").carousel("update", "...");
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-carousel.fs-rtl` | `modifier` | Indicates right to left display |
 | `.fs-carousel.fs-carousel-auto_height` | `modifier` | Indicates auto height sizing |
+| `.fs-carousel.fs-carousel-contained` | `modifier` | Indicates overflow: hidden |
+| `.fs-carousel.fs-carousel-single` | `modifier` | Indicates single item display |
 | `.fs-carousel-viewport` | `element` | Carousel container |
 | `.fs-carousel-wrapper` | `element` | Carousel container |
 | `.fs-carousel-container` | `element` | Canister container |

@@ -1,4 +1,4 @@
-/*! formstone v0.8.2 [carousel.css] 2015-09-03 | MIT License | formstone.it */
+/*! formstone v0.8.3 [carousel.css] 2015-09-04 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -29,6 +29,18 @@
 	 * @name .fs-carousel.fs-carousel-auto_height
 	 * @type modifier
 	 * @description Indicates auto height sizing
+	 */
+/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-contained
+	 * @type modifier
+	 * @description Indicates overflow: hidden
+	 */
+/**
+	 * @class
+	 * @name .fs-carousel.fs-carousel-single
+	 * @type modifier
+	 * @description Indicates single item display
 	 */
 .fs-carousel {
   /**
@@ -131,12 +143,17 @@
 .fs-carousel.fs-carousel-enabled {
   width: 100%;
   position: relative;
-  overflow: hidden;
 }
 .fs-carousel.fs-carousel-enabled:after {
   clear: both;
   content: '';
   display: table;
+}
+.fs-carousel.fs-carousel-contained,
+.fs-carousel.fs-carousel-contained-viewport,
+.fs-carousel.fs-carousel-contained-wrapper,
+.fs-carousel.fs-carousel-contained-container {
+  overflow: hidden;
 }
 .fs-carousel,
 .fs-carousel:after,
@@ -154,7 +171,6 @@
 }
 .fs-carousel-enabled .fs-carousel-viewport {
   position: relative;
-  overflow: hidden;
 }
 .fs-carousel-enabled .fs-carousel-viewport:after {
   clear: both;
@@ -163,7 +179,6 @@
 }
 .fs-carousel-enabled .fs-carousel-wrapper {
   position: relative;
-  overflow: hidden;
 }
 .fs-carousel-enabled .fs-carousel-wrapper:after {
   clear: both;
@@ -172,7 +187,6 @@
 }
 .fs-carousel-enabled .fs-carousel-container {
   position: relative;
-  overflow: hidden;
 }
 .fs-carousel-enabled .fs-carousel-container:after {
   clear: both;
@@ -204,6 +218,16 @@
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+}
+.fs-carousel-single .fs-carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.fs-carousel-single .fs-carousel-item.fs-carousel-visible {
+  position: relative;
+  z-index: 2;
 }
 .fs-carousel-controls {
   display: none;

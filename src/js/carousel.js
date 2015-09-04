@@ -69,6 +69,14 @@
 			carouselClasses.push(RawClasses.auto_height);
 		}
 
+		if (data.contained) {
+			carouselClasses.push(RawClasses.contained);
+		}
+
+		if (data.single) {
+			carouselClasses.push(RawClasses.single);
+		}
+
 		// Modify dom
 		this.addClass( carouselClasses.join(" ") )
 			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
@@ -488,13 +496,14 @@
 	 * @description Jump instance of plugin to specific page
 	 * @param data [object] "Instance data"
 	 * @param index [int] "New index"
+	 * @param silent [boolean] ""
 	 */
 
-	function jumpToItem(data, index) {
+	function jumpToItem(data, index, silent) {
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
-			positionCanister(data, index - 1);
+			positionCanister(data, index - 1, true, silent);
 		}
 	}
 
@@ -620,7 +629,7 @@
 	 * @param index [int] "Item index"
 	 */
 
-	function positionCanister(data, index, animate) {
+	function positionCanister(data, index, animate, silent) {
 		if (index < 0) {
 			index = (data.infinite) ? data.pageCount-1 : 0;
 		}
@@ -667,7 +676,7 @@
 			});
 		}
 
-		if (animate !== false && index !== data.index && (data.infinite || (index > -1 && index < data.pageCount)) ) {
+		if (animate !== false && silent !== true && index !== data.index && (data.infinite || (index > -1 && index < data.pageCount)) ) {
 			data.$el.trigger(Events.update, [ index ]);
 		}
 
@@ -721,9 +730,11 @@
 		} else {
 			data.$controlItems.addClass(RawClasses.visible);
 
+			console.log(data.index, data.pageCount);
+
 			if (data.index <= 0) {
 				data.$controlPrevious.removeClass(RawClasses.visible);
-			} else if (data.index >= data.pageCount || data.leftPosition === data.maxMove) {
+			} else if (data.index >= data.pageCount - 1 || (!data.single && data.leftPosition === data.maxMove)) {
 				data.$controlNext.removeClass(RawClasses.visible);
 			}
 		}
@@ -738,7 +749,9 @@
 	 */
 
 	function calculateVisible(data) {
-		if ($.type(data.show) === "object") {
+		if (data.single) {
+			return 1;
+		} else if ($.type(data.show) === "object") {
 			for (var i in data.show) {
 				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
 					return (data.fill && data.count < data.show[i].count) ? data.count : data.show[i].count;
@@ -904,6 +917,7 @@
 			 * @param autoAdvance [boolean] <false> "Flag to auto advance items"
 			 * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
 			 * @param autoTime [int] <8000> "Auto advance time"
+			 * @param contained [boolean] <true> "Flag for 'overflow: visible'"
 			 * @param controls [boolean | object] <true> "Flag to draw controls OR object containing next and previous control selectors"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
@@ -924,6 +938,7 @@
 				autoAdvance    : false,
 				autoHeight     : false,
 				autoTime       : 8000,
+				contained      : true,
 				controls       : true,
 				customClass    : "",
 				fill           : false,
@@ -938,6 +953,7 @@
 				paged          : false,
 				pagination     : true,
 				show           : 1,
+				single         : false,
 				rtl            : false,
 				useMargin      : false
 			},
@@ -960,6 +976,8 @@
 				"visible",
 				"active",
 				"auto_height",
+				"contained",
+				"single",
 
 				"control_previous",
 				"control_next"
