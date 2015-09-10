@@ -21,6 +21,12 @@
 	@fs-upload-dropping-border-color: 		#999;
 	@fs-upload-dropping-text-color: 		#333;
 
+	// Disabled
+
+	@fs-upload-disabled-background:			#FFC7C6;
+	@fs-upload-disabled-border-color:		#f66;
+	@fs-upload-disabled-text-color:			#f00;
+
 	/**
 	 * @class
 	 * @name .fs-upload-element
@@ -102,6 +108,7 @@
 			transition:
 				background 0.15s linear,
 				border 0.15s linear,
+				color 0.15s linear,
 				opacity 0.15s linear;
 		}
 
@@ -121,5 +128,12 @@
 			color: @fs-upload-text-color;
 			cursor: default;
 			cursor: not-allowed;
+		}
+
+		&-disabled&-dropping &-target,
+		.no-touch &-disabled&-dropping:hover &-target {
+			background: @fs-upload-disabled-background;
+			border-color: @fs-upload-disabled-border-color;
+			color: @fs-upload-disabled-text-color;
 		}
 	}

@@ -1,4 +1,4 @@
-/*! formstone v0.7.14 [lightbox.css] 2015-08-14 | MIT License | formstone.it */
+/*! formstone v0.8.5 [lightbox.css] 2015-09-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -208,7 +208,7 @@
 		 */
 }
 .fs-lightbox,
-.fs-lightbox * {
+.fs-lightbox *:not(input):not(textarea) {
   box-sizing: border-box;
   -webkit-user-select: none !important;
      -moz-user-select: none !important;

@@ -22,11 +22,11 @@
 			data.scale = false;
 			data.swipe = false;
 
-			if (Formstone.support.touch) {
+			// if (Formstone.support.touch) {
 				this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart);
-			} else {
+			// } else {
 				this.on(Events.click, data, onClick);
-			}
+			// }
 		} else if (data.pan || data.swipe || data.scale) {
 			// Pan / Swipe / Scale
 
@@ -51,9 +51,9 @@
 
 			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
 
-			if (data.pan && !Formstone.support.touch) {
+			// if (data.pan && !Formstone.support.touch) {
 				this.on( Events.mouseDown, data, onPointerStart);
-			}
+			// }
 		}
 	}
 

@@ -8,13 +8,18 @@ Track click events in Google Analytics by attaching a properly formed data attri
 
 ### Advanced
 
-Fire custom events by passing the event values directly to Analytics:
+Fire custom events by passing the event field values directly to Analytics:
 
 ```javascript
-$.analytics(category, action [, label] [, value]);
+$.analytics("event", {
+	eventCategory: "Category", 
+	eventAction: "Action" 
+	eventLabel: "Label",
+	eventValue: 100
+});
 ```
 
-Learn more about <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/events" target="_blank">Event Tracking with Universal Analytics</a>.
+Note: `eventLabel` and `eventValue` are optional. Learn more about fields and <a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/events" target="_blank">Event Tracking with Universal Analytics</a>.
 
 ### Scroll Depth
 
@@ -27,37 +32,16 @@ $.analytics({
 });
 ```
 
+### Page Views
+
+Fire page view by calling the `pageview` method:
+
+```javascript
+$.analytics("pageview");
+```
+
 ### Tag Manager Support
 
-To track events using Google Tag Manager proper Tags, Triggers and Variables will need to be configured from the Tag Manager dashboard.
-
-First, create a new Trigger with the following properties:
-
-| Name | Event Type | Fire On |
-| -- | -- |
-| Analytics Event Trigger | Custom Event | `gaTriggerEvent` |
-
-Next, crate three new Data Layer Variables with the following properties:
-
-| Name | Variable Name |
-| -- | -- |
-| Analytics Event Category | `eventCategory` |
-| Analytics Event Action | `eventAction` |
-| Analytics Event Label | `eventLabel` |
-| Analytics Event Value | `eventValue` |
-
-Finally, create a new Google Universal Analytics tag named 'Analytics Events' with the following configuration:
-
-| Property | Value |
-| -- | -- |
-| Tracking ID | [Your Analytics ID] |
-| Track Type | Event |
-| Category | {{Analytics Event Category}} |
-| Action | {{Analytics Event Action}} |
-| Label | {{Analytics Event Label}} |
-| Value | {{Analytics Event Value}} |
-| Fire On | Analytics Event Trigger |
-
-Publish the new tag to view Analytics events pushed to the Google Analytics dashboard. 
+Analytics will push to all available trackers, even when loaded using Google Tag Manager.
 
 Note: The [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) extension helps to ensure events are being properly pushed. 

@@ -20,7 +20,8 @@
 		$filelist = $(".filelist.complete");
 
 		$(".upload").upload({
-			maxSize: 1048576
+			maxSize: 1048576,
+			beforeSend: onBefore
 		}).on("start.upload", onStart)
 		  .on("complete.upload", onComplete)
 		  .on("filestart.upload", onFileStart)
@@ -28,6 +29,13 @@
 		  .on("filecomplete.upload", onFileComplete)
 		  .on("fileerror.upload", onFileError);
 	});
+
+	function onBefore(formdata) {
+		// Add data to upload request
+		formdata.append("test_field", "test_value");
+
+		return formdata;
+	}
 
 	function onStart(e, files) {
 		console.log("Start");

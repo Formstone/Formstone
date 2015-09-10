@@ -18,14 +18,14 @@ function FSGridBookmarklet() {
 				}, window.FSGridBookmarkletConfig);
 
 			if ($jq(".fs-grid").length < 1) {
-				alert("Grid Not Found.\nYou'll need to include Grid before using this bookmarklet.\n\nLearn more: http://beta.formstone.it/grid/");
+				alert("Grid Not Found.\nYou'll need to include Grid before using this bookmarklet.\n\nLearn more: http://formstone.it/grid/");
 			} else {
 				var desktopCount = 12,
 					tabletCount = 6,
 					mobileCount = 3;
 
 				if ($jq("#fs-grid-styles").length < 1) {
-					$jq("body").append('<link id="fs-grid-styles" rel="stylesheet" href="http://beta.formstone.it/css/bookmarklet/grid.css" type="text/css" media="all">');
+					$jq("body").append('<link id="fs-grid-styles" rel="stylesheet" href="http://formstone.it/css/bookmarklet/grid.css" type="text/css" media="all">');
 				}
 
 				if ($jq("#fs-grid-overlay").length < 1) {

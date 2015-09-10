@@ -154,7 +154,7 @@
 						requestURL(data.url);
 					} else {
 						// Fire request event
-						$Window.trigger(Events.request, [ true ]);
+						$Window.trigger(Events.requested, [ true ]);
 
 						process(data.url, data.hash, data.data, data.scroll, false);
 					}
@@ -176,7 +176,7 @@
 		}
 
 		// Fire request event
-		$Window.trigger(Events.request, [ false ]);
+		$Window.trigger(Events.requested, [ false ]);
 
 		// Get transition out deferred
 		Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
@@ -252,7 +252,7 @@
 		$.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
 			process(url, hash, response, (Instance.jump ? 0 : false), true);
 		}).fail(function() {
-			$Window.trigger(Events.error, [ error ]);
+			$Window.trigger(Events.failed, [ error ]);
 		});
 	}
 
@@ -268,10 +268,12 @@
 
 	function process(url, hash, data, scrollTop, doPush) {
 		// Fire load event
-		$Window.trigger(Events.load, [ data ]);
+		$Window.trigger(Events.loaded, [ data ]);
 
 		// Trigger analytics page view
-		track(url);
+		if ($.analytics !== undefined) {
+			$.analytics("pageview");
+		}
 
 		// Update current state before rendering new state
 		saveState(data);
@@ -297,7 +299,7 @@
 			saveState(data);
 		}
 
-		$Window.trigger(Events.render, [ data ]);
+		$Window.trigger(Events.rendered, [ data ]);
 
 		if (hash !== "") {
 			var $el = $(hash);
@@ -371,6 +373,33 @@
 
 	/**
 	 * @method private
+	 * @name replaceURL
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	/**
+	 * @method
+	 * @name replace
+	 * @description Updates current url in history
+	 * @param url [string] "New URL"
+	 */
+
+	function replaceURL(url) {
+		var currentState = history.state,
+			data = [];
+
+		if (currentState && currentState.data) {
+			data = currentState.data;
+		}
+
+		CurrentURL = url;
+
+		saveState(data);
+	}
+
+	/**
+	 * @method private
 	 * @name unescape
 	 * @description Unescapes HTML
 	 * @param text [string] "Text to unescape"
@@ -383,45 +412,6 @@
 				   .replace(/&amp;/g, "&")
 				   .replace(/&quot;/g, '"')
 				   .replace(/&#039;/g, "'");
-	}
-
-	/**
-	 * @method private
-	 * @name track
-	 * @description Pushes new page view to the Google Analytics (Legacy or Universal)
-	 * @param url [string] "URL to track"
-	 */
-
-	function track(url) {
-		// Strip domain
-		url = url.replace(window.location.protocol + "//" + window.location.host, "");
-
-		if (Instance.tracking.legacy) {
-			// Legacy Analytics
-			Window._gaq = Window._gaq || [];
-			Window._gaq.push(["_trackPageview", url]);
-		} else {
-			// Universal Analytics
-			if (Instance.tracking.manager) {
-				// Tag Manager
-				var page = {};
-				page[Instance.tracking.variable] = url;
-				Window.dataLayer = window.dataLayer || [];
-
-				// Push new url to varibale then tracking event
-				Window.dataLayer.push(page);
-				Window.dataLayer.push({ "event": Instance.tracking.event });
-			} else {
-				// Basic
-				if ($.type(Window.ga) !== "undefined") {
-					Window.ga("send", "pageview", url);
-				}
-
-				// Specific tracker - only needed if using mutiple and/or tag manager
-				// var t = ga.getAll();
-				// ga(t[0].get('name')+'.send', 'pageview', '/mimeo/');
-			}
-		}
 	}
 
 	/**
@@ -451,29 +441,33 @@
 	 * @type utility
 	 * @dependency jQuery
 	 * @dependency core.js
+	 * @dependency analytics.js
 	 */
 
 	var Plugin = Formstone.Plugin("asap", {
 			utilities: {
 				_initialize    : initialize,
 
-				load           : load
+				load           : load,
+				replace        : replaceURL
 			},
 
 			/**
 			 * @events
-			 * @event request.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
+			 * @event requested.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
 			 * @event progress.asap "As request is loaded; triggered on window"
-			 * @event load.asap "After request is loaded; triggered on window"
-			 * @event render.asap "After state is rendered; triggered on window"
-			 * @event error.asap "After load error; triggered on window"
+			 * @event loaded.asap "After request is loaded; triggered on window"
+			 * @event rendered.asap "After state is rendered; triggered on window"
+			 * @event failed.asap "After load error; triggered on window"
 			 */
 
 			events: {
+				failed      : "failed",
+				loaded      : "loaded",
 				popState    : "popstate",
 				progress    : "progress",
-				request     : "request",
-				render      : "render"
+				requested   : "requested",
+				rendered    : "rendered"
 			}
 		}),
 
@@ -486,10 +480,6 @@
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
-		 * @param tracking.legacy [boolean] <false> "Flag for legacy Google Analytics tracking"
-		 * @param tracking.manager [boolean] <false> "Flag for Tag Manager tracking"
-		 * @param tracking.variable [string] <'currentURL'> "Tag Manager dataLayer variable name (macro in Tag Manager)"
-		 * @param tracking.event [string] <'PageView'> "Tag Manager event name (rule in Tag Manager)"
 		 * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
 		 */
 
@@ -501,12 +491,6 @@
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",
-			tracking: {
-				legacy      : false,        // Use legacy ga code
-				manager     : false,        // Use tag manager events
-				variable    : "currentURL", // data layer variable name - macro in tag manager
-				event       : "PageView"    // event name - rule in tag manager
-			},
 			transitionOut   : $.noop
 		},
 
@@ -526,5 +510,4 @@
 		Visited       = 0,
 		Request,
 		Instance;
-
 })(jQuery, Formstone);

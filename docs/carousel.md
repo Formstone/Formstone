@@ -28,7 +28,7 @@ touch.js
 
 ### Basic
 
-Carousel will treat immediate children as items to scroll through. By default, all pages will be sized to the width of the carousel.
+Carousel will treat immediate children as items to scroll through. By default, all items will be sized to the width of the carousel.
 
 ```javascript
 $(".target").carousel();
@@ -46,7 +46,7 @@ $(".target").carousel();
 
 ### Show
 
-Set the `show` option to a value, or object, at initialization to allow more pages to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
+Set the `show` option to a value, or object, at initialization to allow more items to be visible at once. If passing an object keys should be valid `min-width` media query values, including units.
 
 ```javascript
 $(".target").carousel({
@@ -63,6 +63,8 @@ $(".target").carousel({
 });
 ```
 
+Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.
+
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-carousel-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -72,6 +74,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoAdvance` | `boolean` | `false` | Flag to auto advance items |
 | `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
+| `contained` | `boolean` | `true` | Flag for 'overflow: visible' |
 | `controls` | `boolean | object` | `true` | Flag to draw controls OR object containing next and previous control selectors |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
@@ -175,6 +178,8 @@ $(".target").carousel("update", "...");
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-carousel.fs-rtl` | `modifier` | Indicates right to left display |
 | `.fs-carousel.fs-carousel-auto_height` | `modifier` | Indicates auto height sizing |
+| `.fs-carousel.fs-carousel-contained` | `modifier` | Indicates overflow: hidden |
+| `.fs-carousel.fs-carousel-single` | `modifier` | Indicates single item display |
 | `.fs-carousel-viewport` | `element` | Carousel container |
 | `.fs-carousel-wrapper` | `element` | Carousel container |
 | `.fs-carousel-container` | `element` | Canister container |

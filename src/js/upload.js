@@ -136,9 +136,9 @@
 
 		var data = e.data;
 
-		if (!data.disabled) {
+		// if (!data.disabled) {
 			data.$el.addClass(RawClasses.dropping);
-		}
+		// }
 	}
 
 	/**
@@ -152,9 +152,9 @@
 
 		var data = e.data;
 
-		if (!data.disabled) {
+		// if (!data.disabled) {
 			data.$el.addClass(RawClasses.dropping);
-		}
+		// }
 	}
 
 	/**
@@ -168,9 +168,9 @@
 
 		var data = e.data;
 
-		if (!data.disabled) {
+		// if (!data.disabled) {
 			data.$el.removeClass(RawClasses.dropping);
-		}
+		// }
 	}
 
 	/**
@@ -185,9 +185,9 @@
 		var data = e.data,
 			files = e.originalEvent.dataTransfer.files;
 
-		if (!data.disabled) {
-			data.$el.removeClass(RawClasses.dropping);
+		data.$el.removeClass(RawClasses.dropping);
 
+		if (!data.disabled) {
 			handleUpload(data, files);
 		}
 	}
@@ -219,7 +219,7 @@
 		}
 
 		if (!data.uploading) {
-			$Window.on(Events.beforeUnload, function(){
+			$Window.on(Events.beforeUnload, function() {
 				return data.leave;
 			});
 
@@ -294,6 +294,9 @@
 	 * @param formData [object] "Target form"
 	 */
 	function uploadFile(data, file, formData) {
+		// Modify data before upload
+		formData = data.beforeSend.call(Window, formData);
+
 		if (file.size >= data.maxSize) {
 			file.error = true;
 			data.$el.trigger(Events.fileError, [ file, "Too large" ]);
@@ -328,7 +331,7 @@
 
 					return $xhr;
 				},
-				beforeSend: function(e) {
+				beforeSend: function(jqXHR, settings) {
 					data.$el.trigger(Events.fileStart, [ file ]);
 				},
 				success: function(response, status, jqXHR) {
@@ -362,6 +365,8 @@
 			/**
 			 * @options
 			 * @param action [string] "Where to submit uploads"
+			 * @param beforeSend [function] "Run before request sent, must return modified formdata"
+			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text"
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
 			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
@@ -372,8 +377,9 @@
 			 */
 
 			defaults: {
-				customClass    : "",
 				action         : "",
+				beforeSend     : function(formdata) { return formdata; },
+				customClass    : "",
 				label          : "Drag and drop files or click to select",
 				leave          : "You have uploads pending, are you sure you want to leave this page?",
 				maxQueue       : 2,
@@ -407,6 +413,7 @@
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
 
+		Window        = Formstone.window,
 		$Window       = Formstone.$window;
 
 		/**

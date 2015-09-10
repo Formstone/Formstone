@@ -3,11 +3,11 @@
 
 	$(document).ready(function() {
 		// Bind ASAP events
-		$(window).on("request.asap", pageRequested)
+		$(window).on("requested.asap", pageRequested)
 				 .on("progress.asap", pageLoadProgress)
-				 .on("load.asap", pageLoaded)
-				 .on("render.asap", pageRendered)
-				 .on("error.asap", pageLoadError);
+				 .on("loaded.asap", pageLoaded)
+				 .on("rendered.asap", pageRendered)
+				 .on("failed.asap", pageLoadError);
 
 		$content = $("#content");
 
