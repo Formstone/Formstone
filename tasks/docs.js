@@ -677,7 +677,7 @@ module.exports = function(grunt) {
 					   '<a href="https://travis-ci.org/Formstone/Formstone"><img src="https://travis-ci.org/Formstone/Formstone.svg?branch=master" alt="Travis CI"></a> \n\n' +
 					   '# ' + pkg.realname + ' \n\n' +
 					   pkg.description + ' \n\n' +
-					   '[Documentation](docs/README.md)' +
+					   '[Documentation](docs/README.md) \n' +
 					   '[Changelog](docs/CHANGELOG.md)';
 
 		grunt.file.write(destination, markdown);
