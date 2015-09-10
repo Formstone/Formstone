@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.5
+
+* Added `beforeSend` callback to Upload for adding form data
+* Fixed issue with Upload warning on page leave
+
 ### 0.8.4
 
 * Fixed ASAP Demo
