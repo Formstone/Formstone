@@ -681,5 +681,12 @@ module.exports = function(grunt) {
 
 		grunt.file.write(destination, markdown);
 		grunt.log.writeln('File "' + destination + '" created.');
+
+		var chg = grunt.file.read('CHANGELOG.md'),
+			destination = 'demo/pages/changelog.md',
+			markdown = '{"template":"content.html","title":"Changelog","site_root":"../","asset_root":"../","component_root":"../components/"} \n\n' + chg;
+
+		grunt.file.write(destination, markdown);
+		grunt.log.writeln('File "' + destination + '" created.');
 	});
 }

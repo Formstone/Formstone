@@ -5432,6 +5432,13 @@ a.hero_button_outline {
   color: #ffffff;
   color: rgba(255, 255, 255, 0.5);
 }
+.hero_version a {
+  color: #ffffff;
+  color: rgba(255, 255, 255, 0.5);
+}
+.no-touch .hero_version a:hover {
+  color: #ffffff;
+}
 /* ==================================================================
    Print
 ================================================================== */
