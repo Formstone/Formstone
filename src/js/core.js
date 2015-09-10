@@ -153,6 +153,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 		Events = {
 			namespace            : ".{ns}",
+			beforeUnload         : "beforeunload.{ns}",
 			blur                 : "blur.{ns}",
 			change               : "change.{ns}",
 			click                : "click.{ns}",

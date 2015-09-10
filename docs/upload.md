@@ -49,6 +49,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `action` | `string` | &nbsp; | Where to submit uploads |
+| `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata |
+| `customClass` | `string` | `''` | Class applied to instance |
 | `label` | `string` | `'Drag and drop files or click to select'` | Drop target text |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxQueue` | `int` | `2` | Number of files to simultaneously upload |

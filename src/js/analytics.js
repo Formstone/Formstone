@@ -10,7 +10,6 @@
 
 	function setup() {
 		$Body = Formstone.$body;
-		// Window.dataLayer = Window.dataLayer || [];
 	}
 
 	/**
@@ -75,8 +74,8 @@
 
 			if (Defaults.scrollDepth) {
 				setScrollDepths();
-				$Window.on(Events.scroll, trackScroll);
-				$Window.one(Events.load, resize);
+				$Window.on(Events.scroll, trackScroll)
+					.one(Events.load, resize);
 			}
 
 			$Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
@@ -148,7 +147,7 @@
 	 */
 
 	function doTrackScroll() {
-		var scrollTop = Formstone.$window.scrollTop() + Formstone.windowHeight,
+		var scrollTop = $Window.scrollTop() + Formstone.windowHeight,
 			step      = (1 / Defaults.scrollStops),
 			depth     = step,
 			key;
