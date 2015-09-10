@@ -678,7 +678,7 @@ module.exports = function(grunt) {
 					   '# ' + pkg.realname + ' \n\n' +
 					   pkg.description + ' \n\n' +
 					   '[Documentation](docs/README.md) <br>' +
-					   '[Changelog](docs/CHANGELOG.md)';
+					   '[Changelog](CHANGELOG.md)';
 
 		grunt.file.write(destination, markdown);
 		grunt.log.writeln('File "' + destination + '" created.');

@@ -6,4 +6,4 @@
 
 Library of modular front end components. 
 
-[Documentation](docs/README.md) <br>[Changelog](docs/CHANGELOG.md)
+[Documentation](docs/README.md) <br>[Changelog](CHANGELOG.md)
