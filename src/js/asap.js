@@ -271,7 +271,9 @@
 		$Window.trigger(Events.loaded, [ data ]);
 
 		// Trigger analytics page view
-		$.analytics("pageview");
+		if ($.analytics !== undefined) {
+			$.analytics("pageview");
+		}
 
 		// Update current state before rendering new state
 		saveState(data);
