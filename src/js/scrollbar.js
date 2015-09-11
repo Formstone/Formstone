@@ -113,7 +113,13 @@
 					position = offset.top + data.$content.scrollTop();
 				}
 			} else {
-				position = data.$content.scrollTop();
+				if (position === "top") {
+					position = 0;
+				} else if (position === "bottom") {
+					position = data.horizontal ? data.$content[0].scrollWidth : data.$content[0].scrollHeight;
+				} else {
+					position = data.$content.scrollTop();
+				}
 			}
 		}
 
