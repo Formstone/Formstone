@@ -416,10 +416,11 @@
 	function onClick(e) {
 		Functions.killEvent(e);
 
-		var data = e.data;
-
-		if (!data.clicked) {
-			if (e.type !== "click") {
+		var data = e.data,
+			type = e.type;
+		
+		if (type === "click" || !data.clicked) {
+			if (type !== "click") {
 				data.clicked = true;
 			}
 

@@ -355,8 +355,6 @@
 	function openOptions(data) {
 		// Make sure it's not already open
 		if (data.closed) {
-			// $(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
-
 			var offset = data.$dropdown.offset(),
 				bodyHeight = $Body.outerHeight(),
 				optionsHeight = data.$wrapper.outerHeight(true),

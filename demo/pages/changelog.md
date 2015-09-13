@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.7
+
+* Added HTML option labels to Dropdown 
+* 
+
 ### 0.8.6
 
 * Added `top` and `bottom` keywords to Scrollbar `scroll` method

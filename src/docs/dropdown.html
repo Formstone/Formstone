@@ -4,7 +4,12 @@
 	.custom_select .fs-dropdown-options { border-width: 0 2px 2px; padding: 1%; }
 	.custom_select .fs-dropdown-item { border-radius: 3px !important; border: none; margin: 0 0 1%; }
 	.custom_select .fs-dropdown-item:last-child { margin: 0; }
-
+	
+/*
+	.scroll_area { height: 300px; overflow-y: scroll; }
+	.scroll_area .form_fieldset { margin-top: 300px; margin-bottom: 200px; }
+*/
+	
 /* 	.fs-dropdown-open .fs-dropdown-selected, .fs-dropdown-focus .fs-dropdown-selected { border: 2px solid lightblue !important; } */
 </style>
 
@@ -247,6 +252,25 @@
 				<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
 			</fieldset>
 		</div>
+				
+<!--
+		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+			<h4>Overflow</h4>
+			<div class="scroll_area">
+				<fieldset class="form_fieldset">
+					<label for="demo_custom" class="form_label">Label</label>
+					<select name="demo_custom" id="demo_custom" data-dropdown-options='{"customClass":"custom"}'>
+						<option value="1" data-label="&lt;strong&gt;One  &lt;/strong&gt;">One</option>
+						<option value="2" data-label="&lt;strong&gt;Two  &lt;/strong&gt;">Two</option>
+						<option value="3" data-label="&lt;strong&gt;Three&lt;/strong&gt;">Three</option>
+						<option value="4" data-label="&lt;strong&gt;Four &lt;/strong&gt;">Four</option>
+						<option value="5" data-label="&lt;strong&gt;Five &lt;/strong&gt;">Five</option>
+					</select>
+				</fieldset>
+			</div>
+		</div>
+-->
+		
 	</div>
 </form>
 
