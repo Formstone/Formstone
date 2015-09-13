@@ -5,7 +5,8 @@
 ### 0.8.7
 
 * Added HTML option labels to Dropdown 
-* 
+* Added `bottomEdge` option to Dropdown for custom thresholds
+* Fixing Touch click event error
 
 ### 0.8.6
 

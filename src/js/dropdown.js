@@ -361,7 +361,7 @@
 				selectedOffset = (data.index >= 0) ? data.$items.eq(data.index).position() : { left: 0, top: 0 };
 
 			// Calculate bottom of document
-			if (offset.top + optionsHeight > bodyHeight) {
+			if (offset.top + optionsHeight > bodyHeight - data.bottomEdge) {
 				data.$dropdown.addClass(RawClasses.bottom);
 			}
 
@@ -752,6 +752,7 @@
 
 			/**
 			 * @options
+			 * @param bottomEdge [int] <0> "Threshold for bottom position”
 			 * @param cover [boolean] <false> "Cover handle with option set"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param label [string] <''> "Label displayed before selection"
@@ -761,6 +762,7 @@
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */
 			defaults: {
+				bottomEdge     : 0,
 				cover          : false,
 				customClass    : "",
 				label          : "",
