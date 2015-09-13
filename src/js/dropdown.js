@@ -259,7 +259,8 @@
 
 				html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
 			} else {
-				var opVal = $option.val();
+				var opVal   = $option.val(),
+					opLabel = $option.data("label");
 
 				if (!$option.attr("value")) {
 					$option.attr("value", opVal);
@@ -279,7 +280,13 @@
 
 				html += '<button type="button" class="' + classes.join(" ") + '" ';
 				html += 'data-value="' + opVal + '">';
-				html += $("<span></span>").text( trimText($option.text(), data.trim) ).html();
+				
+				if (opLabel) {
+					html += opLabel;
+				} else {
+					html += $("<span></span>").html( trimText($option.text(), data.trim) ).text();
+				}
+				
 				html += '</button>';
 
 				j++;
