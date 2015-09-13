@@ -1,6 +1,6 @@
 # Scrollbar
 
-A jQuery plugin for .
+A jQuery plugin for custom scrollbars.
 
 * [Use](#use)
 * [Options](#options)
@@ -83,7 +83,7 @@ Removes plugin instance.
 $(".target").scrollbar("destroy");
 ```
 
-### resizeInstance
+### resize
 
 Resizes layout on instance of plugin
 

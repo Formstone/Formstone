@@ -322,10 +322,14 @@
 
 
 	.fs-navigation-overlay-content:before {
-		z-index: 2;
+		z-index: 102;
+	}
+	
+	.fs-navigation-overlay-nav.fs-navigation-enabled {
+		z-index: 103;
 	}
 
-
+	// BSA
 
 	#bsap_1296027 {
 		padding: 20px 0;
@@ -473,7 +477,7 @@
 		width: 100%;
 
 		position: fixed;
-		z-index: 3;
+		z-index: 104;
 
 		background: @blue;
 		box-shadow: none;

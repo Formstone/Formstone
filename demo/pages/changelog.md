@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.6
+
+* Added `top` and `bottom` keywords to Scrollbar `scroll` method
+* Added Dropdown Scrollbar support
+
 ### 0.8.5
 
 * Added `beforeSend` callback to Upload for adding form data

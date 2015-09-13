@@ -103,12 +103,10 @@
 			updateOption(originalIndex, data);
 		}
 
-		/*
-		// Scroller support
-		if ($.fn.scroller !== undefined) {
-			data.$wrapper.scroller();
+		// Scrollbar support
+		if ($.fn.scrollbar !== undefined) {
+			data.$wrapper.scrollbar();
 		}
-		*/
 
 		// Bind events
 		data.$selected.fsTouch({
@@ -146,11 +144,9 @@
 		}
 
 		// Scrollbar support
-		/*
-		if ($.fn.scroller !== undefined) {
-			data.$dropdown.find(".selecter-options").scroller("destroy");
+		if ($.fn.scrollbar !== undefined) {
+			data.$wrapper.scrollbar("destroy");
 		}
-		*/
 
 		data.$el[0].tabIndex = data.tabIndex;
 
@@ -661,14 +657,12 @@
 			selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
 			buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
 
-		/*
-		if ($.fn.scroller !== undefined) {
-			data.$wrapper.scroller("scroll", (data.$wrapper.find(".scroller-content").scrollTop() + selectedOffset.top), 0)
-							  .scroller("reset");
+		if ($.fn.scrollbar !== undefined) {
+			data.$wrapper.scrollbar("resize")
+						 .scrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
 		} else {
-		*/
 			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
-		// }
+		}
 	}
 
 	/**
@@ -744,6 +738,7 @@
 	 * @type widget
 	 * @dependency jQuery
 	 * @dependency core.js
+	 * @dependency scrollbar.js
 	 * @dependency touch.js
 	 */
 

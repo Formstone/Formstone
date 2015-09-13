@@ -131,9 +131,15 @@
 
 	/**
 	 * @method
-	 * @name resizeInstance
+	 * @name resize
 	 * @description Resizes layout on instance of plugin
 	 * @example $(".target").scrollbar("resize");
+	 */
+
+	/**
+	 * @method private
+	 * @name resizeInstance
+	 * @description Resizes layout on instance of plugin
 	 */
 
 	function resizeInstance(data)  {
@@ -463,7 +469,7 @@
 	/**
 	 * @plugin
 	 * @name Scrollbar
-	 * @description A jQuery plugin for .
+	 * @description A jQuery plugin for custom scrollbars.
 	 * @type widget
 	 * @dependency jQuery
 	 * @dependency core.js

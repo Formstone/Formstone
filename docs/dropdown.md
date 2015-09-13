@@ -21,6 +21,7 @@ dropdown.css
 ```markup
 jQuery
 core.js
+scrollbar.js
 touch.js
 ```
 
