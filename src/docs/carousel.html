@@ -10,6 +10,30 @@
 
 	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
 	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
+	
+	.carousel_fade {
+		
+	}
+	
+	.carousel_fade .fs-carousel-item {
+		opacity: 0;
+		visibility: hidden;
+		
+		-webkit-transition: opacity 0s linear, visibility 0s linear;
+				transition: opacity 0s linear, visibility 0s linear;
+		-webkit-transition-delay: 0.25s;
+				transition-delay: 0.25s;
+	}
+	
+	.carousel_fade .fs-carousel-item.fs-carousel-visible {
+		opacity: 1;
+		visibility: visible;
+		
+		-webkit-transition-duration: 0.25s;
+				transition-duration: 0.25s;
+		-webkit-transition-delay: 0s;
+				transition-delay: 0s;
+	}
 </style>
 
 <script>
@@ -17,16 +41,6 @@
 		$(".carousel").carousel();
 	});
 </script>
-
-<h4>Single</h4>
-<div class="carousel" data-carousel-options='{"single":true}'>
-	<div class="carousel_item">1</div>
-	<div class="carousel_item">2</div>
-	<div class="carousel_item">3</div>
-	<div class="carousel_item">4</div>
-	<div class="carousel_item">5</div>
-	<div class="carousel_item" style="display: none;">6</div>
-</div>
 
 <h4>Basic</h4>
 <div class="carousel">
@@ -132,3 +146,23 @@
 </div>
 <button class="custom_previous">Previous</button>
 <button class="custom_next">Next</button>
+
+<h4>Single</h4>
+<div class="carousel" data-carousel-options='{"single":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Single - Fade</h4>
+<div class="carousel carousel_fade" data-carousel-options='{"single":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
