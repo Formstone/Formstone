@@ -110,13 +110,13 @@ core.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>To create a new cookie, or update an existing one, simply pass the <code>key</code> and <code>value</code> as the first and second parameters, respectively:</p>
 <pre><code class="lang-javascript">// Set cookie
-$.macroon(key, value);</code></pre>
+$.cookie(key, value);</code></pre>
 <p>To return a cookie&#39;s value pass the <code>key</code> as the only parameter:</p>
 <pre><code class="lang-javascript">// Get Cookie
-var value = $.macroon(key);</code></pre>
+var value = $.cookie(key);</code></pre>
 <p>To erase an existing cookie, set it to <code>null</code>:</p>
 <pre><code class="lang-javascript">// Erase Cookie
-$.macroon(key, null);</code></pre>
+$.cookie(key, null);</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
 <table>
