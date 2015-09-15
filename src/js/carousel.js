@@ -729,9 +729,7 @@
 			data.$controlItems.removeClass(RawClasses.visible);
 		} else {
 			data.$controlItems.addClass(RawClasses.visible);
-
-			console.log(data.index, data.pageCount);
-
+			
 			if (data.index <= 0) {
 				data.$controlPrevious.removeClass(RawClasses.visible);
 			} else if (data.index >= data.pageCount - 1 || (!data.single && data.leftPosition === data.maxMove)) {
