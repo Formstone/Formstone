@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.8
+
+* Fixed ASAP redirects containing fragment identifiers
+
 ### 0.8.7
 
 * Added HTML option labels to Dropdown 

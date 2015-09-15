@@ -39,9 +39,6 @@
 		// Capture current url & state
 		CurrentURL = window.location.href;
 
-		// Set initial state
-		// saveState();
-
 		// Bind state events
 		$Window.on(Events.popState, onPop);
 
@@ -118,16 +115,13 @@
 
 		// Update state on hash change
 		if (url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#")) {
-			// saveState();
 			return;
 		}
 
 		Functions.killEvent(e);
 		e.stopImmediatePropagation();
 
-		if (url.href === CurrentURL) {
-			// saveState();
-		} else {
+		if (url.href !== CurrentURL) {
 			requestURL(url.href);
 		}
 	}
@@ -181,24 +175,13 @@
 		// Get transition out deferred
 		Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
 
-		var queryIndex = url.indexOf("?"),
-			hashIndex  = url.indexOf("#"),
-			data       = {},
-			hash       = "",
-			cleanURL   = url,
+		var parsed     = parseURL(url),
+			data       = parsed.data,
+			hash       = parsed.hash,
+			cleanURL   = parsed.url,
 			error      = "User error",
 			response   = null,
 			requestDeferred = $.Deferred();
-
-		if (hashIndex > -1) {
-			hash = url.slice(hashIndex);
-			cleanURL = url.slice(0, hashIndex);
-		}
-
-		if (queryIndex > -1) {
-			data = getQueryParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
-			cleanURL = url.slice(0, queryIndex);
-		}
 
 		data[ Instance.requestKey ] = true;
 
@@ -238,6 +221,9 @@
 				// handle redirects - requires passing new location with json response
 				if (resp.location) {
 					url = resp.location;
+					
+					parsed = parseURL(url);
+					hash   = parsed.hash;
 				}
 
 				requestDeferred.resolve();
@@ -255,6 +241,37 @@
 			$Window.trigger(Events.failed, [ error ]);
 		});
 	}
+	
+	/**
+	 * @method private
+	 * @name parseURL
+	 * @description Parse url parts
+	 * @param url [string] "URL to parse"
+	 */
+	
+	function parseURL(url) {
+		var queryIndex = url.indexOf("?"),
+			hashIndex  = url.indexOf("#"),
+			data       = {},
+			hash       = "",
+			cleanURL   = url;
+		
+		if (hashIndex > -1) {
+			hash = url.slice(hashIndex);
+			cleanURL = url.slice(0, hashIndex);
+		}
+
+		if (queryIndex > -1) {
+			data = getQueryParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
+			cleanURL = url.slice(0, queryIndex);
+		}
+		
+		return {
+			hash    : hash,
+			data    : data,
+			url     : url
+		};
+	}
 
 	/**
 	 * @method private
@@ -271,9 +288,7 @@
 		$Window.trigger(Events.loaded, [ data ]);
 
 		// Trigger analytics page view
-		if ($.analytics !== undefined) {
-			$.analytics("pageview");
-		}
+		$.analytics("pageview");
 
 		// Update current state before rendering new state
 		saveState(data);
