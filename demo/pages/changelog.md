@@ -5,7 +5,6 @@
 ### 0.8.8
 
 * Fixed ASAP redirects containing fragment identifiers
-* Fixed ASAP data modification on replaceURL
 * Removed debug code from Carousel
 
 ### 0.8.7

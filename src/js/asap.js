@@ -406,18 +406,6 @@
 
 		if (currentState && currentState.data) {
 			data = currentState.data;
-			
-			var $target;
-
-			for (var key in data) {
-				if (data.hasOwnProperty(key)) {
-					$target = $(key);
-
-					if ($target.length) {
-						data[key] = $target.html();
-					}
-				}
-			}
 		}
 
 		CurrentURL = url;
