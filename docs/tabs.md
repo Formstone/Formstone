@@ -80,7 +80,7 @@ Methods are publicly available to all active instances, unless otherwise stated.
 Activates instance.
 
 ```javascript
-$(".target").tabs("open");
+$(".target").tabs("activate");
 ```
 
 ### defaults

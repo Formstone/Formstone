@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.9
+
+* Fixed overflow on `contained` Carousel
+
 ### 0.8.8
 
 * Fixed ASAP redirects containing fragment identifiers

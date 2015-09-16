@@ -94,7 +94,7 @@
 	 * @method
 	 * @name activate
 	 * @description Activates instance.
-	 * @example $(".target").tabs("open");
+	 * @example $(".target").tabs("activate");
 	 */
 
 	function activate(data) {

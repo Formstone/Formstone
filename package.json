@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "0.8.8",
+  "version": "0.8.9",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-include-replace": "^3.0.0",
-    "grunt-modernizr": "^0.6.0",
+    "grunt-modernizr": "metaloha/grunt-modernizr#d6657bf302bd9288e25a513197fb0e30c64ce677",
     "grunt-newer": "^0.8.0",
     "grunt-npm2bower-sync": "~0.3.0",
     "grunt-stripmq": "0.0.6",

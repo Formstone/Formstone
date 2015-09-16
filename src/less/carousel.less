@@ -94,25 +94,15 @@
 	 * @description Indicates single item display
 	 */
 
- 	.fs-carousel {
-	 	&&-enabled {
-	 		.fs_clearfix();
+	.fs-carousel {
+		&&-enabled {
+			.fs_clearfix();
+			width: 100%;
+			
+			position: relative;
+		}
 
-	 		width: 100%;
-
-	 		position: relative;
-	 	}
-
-	 	&&-contained {
-		 	&,
-		 	&-viewport,
-		 	&-wrapper,
-		 	&-container {
-		 		overflow: hidden;
-		 	}
-		 }
-
- 		&,
+		&,
 		&:after,
 		&:before,
 		*,
@@ -121,6 +111,17 @@
 			box-sizing: border-box;
 			transition: none;
 			user-select: none !important;
+		}
+		
+		// Contained
+		
+		&-enabled &&-contained {
+			&,
+			&-viewport,
+			&-wrapper,
+			&-container {
+				overflow: hidden;
+			}
 		}
 
 		/**

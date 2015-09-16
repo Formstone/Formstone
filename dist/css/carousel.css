@@ -1,4 +1,4 @@
-/*! formstone v0.8.8 [carousel.css] 2015-09-15 | MIT License | formstone.it */
+/*! formstone v0.8.9 [carousel.css] 2015-09-16 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -149,12 +149,6 @@
   content: '';
   display: table;
 }
-.fs-carousel.fs-carousel-contained,
-.fs-carousel.fs-carousel-contained-viewport,
-.fs-carousel.fs-carousel-contained-wrapper,
-.fs-carousel.fs-carousel-contained-container {
-  overflow: hidden;
-}
 .fs-carousel,
 .fs-carousel:after,
 .fs-carousel:before,
@@ -168,6 +162,12 @@
      -moz-user-select: none !important;
       -ms-user-select: none !important;
           user-select: none !important;
+}
+.fs-carousel-enabled .fs-carousel.fs-carousel-contained,
+.fs-carousel-enabled .fs-carousel.fs-carousel-contained-viewport,
+.fs-carousel-enabled .fs-carousel.fs-carousel-contained-wrapper,
+.fs-carousel-enabled .fs-carousel.fs-carousel-contained-container {
+  overflow: hidden;
 }
 .fs-carousel-enabled .fs-carousel-viewport {
   position: relative;
