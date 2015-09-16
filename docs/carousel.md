@@ -58,7 +58,7 @@ $(".target").carousel({
 $(".target").carousel({
 	show: {
 		"740px" : 2,
-		"960px" : 3
+		"980px" : 3
 	}
 });
 ```
