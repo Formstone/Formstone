@@ -119,7 +119,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			sortAsc: function(a, b) {
-				return (parseInt(b) - parseInt(a));
+				return (parseInt(a, 10) - parseInt(b, 10));
 			},
 
 			/**
@@ -132,7 +132,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			sortDesc: function(a, b) {
-				return (parseInt(b) - parseInt(a));
+				return (parseInt(b, 10) - parseInt(a, 10));
 			}
 		},
 

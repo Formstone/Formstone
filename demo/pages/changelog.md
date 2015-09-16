@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.10
+
+* Fixed Carousel window width issue
+
 ### 0.8.9
 
 * Fixed overflow on `contained` Carousel

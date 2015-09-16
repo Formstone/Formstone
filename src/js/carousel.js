@@ -120,14 +120,14 @@
 			}
 
 			keys.sort(Functions.sortAsc);
-			data.show = {};
+			data.show = [];
 
 			for (i in keys) {
 				if (keys.hasOwnProperty(i)) {
-					data.show[ keys[i] ] = {
+					data.show.push({
 						width: parseInt( keys[i] ),
 						count: show[ keys[i] ]
-					};
+					});
 				}
 			}
 		}
@@ -321,7 +321,7 @@
 			data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
-			data.canisterWidth  = ((data.pageWidth + data.itemMargin) * data.pageCount);
+			data.canisterWidth = ((data.pageWidth + data.itemMargin) * data.pageCount);
 			data.$canister.css({
 				width:  data.canisterWidth,
 				height: ""
@@ -729,7 +729,7 @@
 			data.$controlItems.removeClass(RawClasses.visible);
 		} else {
 			data.$controlItems.addClass(RawClasses.visible);
-			
+
 			if (data.index <= 0) {
 				data.$controlPrevious.removeClass(RawClasses.visible);
 			} else if (data.index >= data.pageCount - 1 || (!data.single && data.leftPosition === data.maxMove)) {
@@ -747,18 +747,23 @@
 	 */
 
 	function calculateVisible(data) {
+		var show = 1;
+
 		if (data.single) {
-			return 1;
-		} else if ($.type(data.show) === "object") {
+			return show;
+		} else if ($.type(data.show) === "array") {
 			for (var i in data.show) {
-				if (data.show.hasOwnProperty(i) && Formstone.windowWidth >= data.show[i].width) {
-					return (data.fill && data.count < data.show[i].count) ? data.count : data.show[i].count;
+				if (data.show.hasOwnProperty(i)) {
+					if (window.matchMedia( "(min-width: " + data.show[i].width + "px" ).matches) {
+						show = data.show[i].count;
+					}
 				}
 			}
-			return 1;
+		} else {
+			show = data.show;
 		}
 
-		return (data.fill && data.count < data.show) ? data.count : data.show;
+		return (data.fill && data.count < show) ? data.count : show;
 	}
 
 	/**
