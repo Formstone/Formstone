@@ -119,8 +119,8 @@
 
 				// Responsive image handling
 				if ($.type(source) === "object") {
-					var sources    = {},
-						keys       = [],
+					var cache    = [],
+						keys     = [],
 						i;
 
 					for (i in source) {
@@ -133,15 +133,16 @@
 
 					for (i in keys) {
 						if (keys.hasOwnProperty(i)) {
-							sources[ keys[i] ] = {
+							cache.push({
 								width    : parseInt( keys[i] ),
-								url      : source[ keys[i] ]
-							};
+								url      : source[ keys[i] ],
+								mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px" )
+							});
 						}
 					}
 
 					data.responsive = true;
-					data.sources = sources;
+					data.sources = cache;
 
 					newSource = calculateSource(data);
 				}
@@ -162,15 +163,17 @@
 	 */
 
 	function calculateSource(data) {
+		var source = data.source;
+
 		if (data.responsive) {
 			for (var i in data.sources) {
-				if (data.sources.hasOwnProperty(i) && Formstone.windowWidth >= data.sources[i].width) {
-					return data.sources[i].url;
+				if (data.sources.hasOwnProperty(i) && data.sources[i].mq.matches) {
+					source = data.sources[i].url;
 				}
 			}
 		}
 
-		return data.source;
+		return source;
 	}
 
 	/**

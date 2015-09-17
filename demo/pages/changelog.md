@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.12
+
+* Fixed Background window width issue
+* Optimized Background and Carousel responsive calculations
+
 ### 0.8.11
 
 * Fixed Touch pointer event conflict

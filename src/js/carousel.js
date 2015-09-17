@@ -109,9 +109,11 @@
 		data.autoTimer       = null;
 		data.resizeTimer     = null;
 
+		// Responsive count handling
 		if ($.type(data.show) === "object") {
-			var show = data.show,
-				keys = [];
+			var show     = data.show,
+				cache    = [],
+				keys     = [];
 
 			for (i in show) {
 				if (show.hasOwnProperty(i)) {
@@ -120,16 +122,18 @@
 			}
 
 			keys.sort(Functions.sortAsc);
-			data.show = [];
 
 			for (i in keys) {
 				if (keys.hasOwnProperty(i)) {
-					data.show.push({
-						width: parseInt( keys[i] ),
-						count: show[ keys[i] ]
+					cache.push({
+						width    : parseInt( keys[i] ),
+						count    : show[ keys[i] ],
+						mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px" )
 					});
 				}
 			}
+
+			data.show = cache;
 		}
 
 		cacheValues(data);
@@ -753,10 +757,8 @@
 			return show;
 		} else if ($.type(data.show) === "array") {
 			for (var i in data.show) {
-				if (data.show.hasOwnProperty(i)) {
-					if (window.matchMedia( "(min-width: " + data.show[i].width + "px" ).matches) {
-						show = data.show[i].count;
-					}
+				if (data.show.hasOwnProperty(i) && data.show[i].mq.matches) {
+					show = data.show[i].count;
 				}
 			}
 		} else {
