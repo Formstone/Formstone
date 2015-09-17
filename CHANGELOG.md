@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.11
+
+* Fixed Touch pointer event conflict
+
 ### 0.8.10
 
 * Fixed Carousel window width issue

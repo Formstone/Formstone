@@ -22,11 +22,13 @@
 			data.scale = false;
 			data.swipe = false;
 
-			// if (Formstone.support.touch) {
-				this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onPointerStart);
-			// } else {
-				this.on(Events.click, data, onClick);
-			// }
+			this.on(Events.touchStart, data, onPointerStart)
+				.on(Events.click, data, onClick);
+
+			if (Formstone.support.touch && Formstone.support.pointer) {
+				this.on(Events.pointerDown, data, onPointerStart);
+			}
+
 		} else if (data.pan || data.swipe || data.scale) {
 			// Pan / Swipe / Scale
 
@@ -49,11 +51,12 @@
 				touchAction(this, "none");
 			}
 
-			this.on( [Events.touchStart, Events.pointerDown].join(" "), data, onTouch);
+			this.on(Events.touchStart, data, onTouch)
+				.on(Events.mouseDown, data, onPointerStart);
 
-			// if (data.pan && !Formstone.support.touch) {
-				this.on( Events.mouseDown, data, onPointerStart);
-			// }
+			if (Formstone.support.touch && Formstone.support.pointer) {
+				this.on(Events.pointerDown, data, onTouch);
+			}
 		}
 	}
 
@@ -86,7 +89,7 @@
 		var data    = e.data,
 			oe      = e.originalEvent;
 
-		if (oe.type.match(/(up|end)$/i)) {
+		if (oe.type.match(/(up|end|cancel)$/i)) {
 			onPointerEnd(e);
 			return;
 		}
@@ -418,7 +421,7 @@
 
 		var data = e.data,
 			type = e.type;
-		
+
 		if (type === "click" || !data.clicked) {
 			if (type !== "click") {
 				data.clicked = true;

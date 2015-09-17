@@ -45,6 +45,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				file          : !!(window.File && window.FileList && window.FileReader),
 				history       : !!(window.history && window.history.pushState && window.history.replaceState),
 				matchMedia    : !!(window.matchMedia || window.msMatchMedia),
+				pointer       : !!(window.PointerEvent),
 				raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
 				touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
 				transition    : false,
