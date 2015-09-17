@@ -328,6 +328,7 @@
 	 * @name Analytics
 	 * @description A jQuery plugin for Google Universal Analytics Events.
 	 * @type utility
+	 * @main analytics.js
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

@@ -14,7 +14,6 @@ A jQuery plugin for multi-touch events.
 
 ```markup
 touch.js
-touch.css
 ```
 
 #### Dependencies

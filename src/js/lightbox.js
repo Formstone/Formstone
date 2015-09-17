@@ -1113,6 +1113,8 @@
 	 * @name Lightbox
 	 * @description A jQuery plugin for simple modals.
 	 * @type widget
+	 * @main lightbox.js
+	 * @main lightbox.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency touch.js

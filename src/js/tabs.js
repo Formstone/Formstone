@@ -226,6 +226,8 @@
 	 * @name Tabs
 	 * @description A jQuery plugin for simple tabs.
 	 * @type widget
+	 * @main tabs.js
+	 * @main tabs.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

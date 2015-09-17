@@ -13,7 +13,6 @@ A jQuery plugin for equal dimensions.
 
 ```markup
 equalize.js
-equalize.css
 ```
 
 #### Dependencies

@@ -280,13 +280,13 @@
 
 				html += '<button type="button" class="' + classes.join(" ") + '" ';
 				html += 'data-value="' + opVal + '">';
-				
+
 				if (opLabel) {
 					html += opLabel;
 				} else {
 					html += $("<span></span>").html( trimText($option.text(), data.trim) ).text();
 				}
-				
+
 				html += '</button>';
 
 				j++;
@@ -741,6 +741,8 @@
 	 * @name Dropdown
 	 * @description A jQuery plugin for custom select elements.
 	 * @type widget
+	 * @main dropdown.js
+	 * @main dropdown.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency scrollbar.js

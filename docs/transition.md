@@ -13,7 +13,6 @@ A jQuery plugin for CSS transition events.
 
 ```markup
 transition.js
-transition.css
 ```
 
 #### Dependencies

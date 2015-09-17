@@ -277,6 +277,8 @@
 	 * @name Pagination
 	 * @description A jQuery plugin for simple pagination.
 	 * @type widget
+	 * @main pagination.js
+	 * @main pagination.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

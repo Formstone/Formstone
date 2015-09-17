@@ -906,6 +906,8 @@
 	 * @name Carousel
 	 * @description A jQuery plugin for simple content carousels.
 	 * @type widget
+	 * @main carousel.js
+	 * @main carousel.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

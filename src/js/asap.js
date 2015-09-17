@@ -221,7 +221,7 @@
 				// handle redirects - requires passing new location with json response
 				if (resp.location) {
 					url = resp.location;
-					
+
 					parsed = parseURL(url);
 					hash   = parsed.hash;
 				}
@@ -241,21 +241,21 @@
 			$Window.trigger(Events.failed, [ error ]);
 		});
 	}
-	
+
 	/**
 	 * @method private
 	 * @name parseURL
 	 * @description Parse url parts
 	 * @param url [string] "URL to parse"
 	 */
-	
+
 	function parseURL(url) {
 		var queryIndex = url.indexOf("?"),
 			hashIndex  = url.indexOf("#"),
 			data       = {},
 			hash       = "",
 			cleanURL   = url;
-		
+
 		if (hashIndex > -1) {
 			hash = url.slice(hashIndex);
 			cleanURL = url.slice(0, hashIndex);
@@ -265,7 +265,7 @@
 			data = getQueryParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
 			cleanURL = url.slice(0, queryIndex);
 		}
-		
+
 		return {
 			hash    : hash,
 			data    : data,
@@ -454,6 +454,7 @@
 	 * @name ASAP
 	 * @description A jQuery plugin for asynchronous page loads.
 	 * @type utility
+	 * @main asap.js
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency analytics.js

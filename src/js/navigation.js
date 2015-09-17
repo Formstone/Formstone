@@ -331,6 +331,8 @@
 	 * @name Navigation
 	 * @description A jQuery plugin for simple responsive navigation.
 	 * @type widget
+	 * @main navigation.js
+	 * @main navigation.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

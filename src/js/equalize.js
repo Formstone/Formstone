@@ -169,6 +169,7 @@
 	 * @name Equalize
 	 * @description A jQuery plugin for equal dimensions.
 	 * @type widget
+	 * @main equalize.js
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js

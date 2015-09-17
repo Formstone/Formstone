@@ -23,6 +23,7 @@ module.exports = function(grunt) {
 					"param",
 					"event",
 					"return",
+					"main",
 					"dependency"
 				];
 
@@ -92,6 +93,11 @@ module.exports = function(grunt) {
 								_return["events"] = [];
 							}
 							_return["events"].push(part);
+						} else if (key === "main") {
+							if (!_return.main) {
+								_return["main"] = [];
+							}
+							_return["main"].push(part);
 						} else if (key === "dependency") {
 							if (!_return.dependencies) {
 								_return["dependencies"] = [];
@@ -176,6 +182,7 @@ module.exports = function(grunt) {
 							doc.namespace = plugin.namespace;
 							doc.type = plugin.type;
 							doc.description = plugin.description;
+							doc.main = plugin.main;
 							doc.dependencies = plugin.dependencies;
 						} else if (content.indexOf("@options") > -1) {
 							var params = parseJavascript(content);
@@ -204,13 +211,6 @@ module.exports = function(grunt) {
 						}
 					}
 				}
-
-				var parts = jsf.split("/"),
-					p = parts[parts.length - 1];
-
-				if (doc.main.indexOf(p) < 0) {
-					doc.main.push(p);
-				}
 			}
 
 			if (cssFile) {
@@ -236,13 +236,6 @@ module.exports = function(grunt) {
 							doc.description = grid.description;
 						}
 					}
-				}
-
-				var parts = cssf.split("/"),
-					p = parts[parts.length - 1];
-
-				if (doc.main.indexOf(p) < 0) {
-					doc.main.push(p.replace("less", "css"));
 				}
 			}
 

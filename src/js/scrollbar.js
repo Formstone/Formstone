@@ -471,6 +471,8 @@
 	 * @name Scrollbar
 	 * @description A jQuery plugin for custom scrollbars.
 	 * @type widget
+	 * @main scrollbar.js
+	 * @main scrollbar.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 */

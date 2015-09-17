@@ -644,6 +644,8 @@
 	 * @name Background
 	 * @description A jQuery plugin for full-frame image and video backgrounds.
 	 * @type widget
+	 * @main background.js
+	 * @main background.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency transition.js

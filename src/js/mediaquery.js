@@ -232,6 +232,7 @@
 	 * @name Media Query
 	 * @description A jQuery plugin for responsive media query events.
 	 * @type utility
+	 * @main mediaquery.js
 	 * @dependency jQuery
 	 * @dependency core.js
 	 */

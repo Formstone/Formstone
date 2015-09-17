@@ -355,6 +355,8 @@
 	 * @name Upload
 	 * @description A jQuery plugin for simple drag and drop uploads.
 	 * @type widget
+	 * @main upload.js
+	 * @main upload.css
 	 * @dependency jQuery
 	 * @dependency core.js
 	 */

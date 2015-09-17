@@ -14,7 +14,6 @@ A jQuery plugin for toggling states.
 
 ```markup
 swap.js
-swap.css
 ```
 
 #### Dependencies
