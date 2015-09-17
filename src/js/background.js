@@ -136,7 +136,7 @@
 							cache.push({
 								width    : parseInt( keys[i] ),
 								url      : source[ keys[i] ],
-								mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px" )
+								mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px)" )
 							});
 						}
 					}
@@ -166,6 +166,8 @@
 		var source = data.source;
 
 		if (data.responsive) {
+			source = data.sources[0].url;
+
 			for (var i in data.sources) {
 				if (data.sources.hasOwnProperty(i) && data.sources[i].mq.matches) {
 					source = data.sources[i].url;

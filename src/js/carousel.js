@@ -128,7 +128,7 @@
 					cache.push({
 						width    : parseInt( keys[i] ),
 						count    : show[ keys[i] ],
-						mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px" )
+						mq       : window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px)" )
 					});
 				}
 			}

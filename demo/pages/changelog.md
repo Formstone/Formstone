@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.13
+
+* Fixed typo in Background and Carousel 
+
 ### 0.8.12
 
 * Fixed Background window width issue
