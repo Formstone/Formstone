@@ -2791,6 +2791,11 @@ pre[class*="language-"] {
   -webkit-transition: opacity 0.25s linear 0.25s;
           transition: opacity 0.25s linear 0.25s;
 }
+.fs-lightbox-mobile .fs-lightbox-image_container {
+  -webkit-transform: translate3D(0);
+      -ms-transform: translate3D(0);
+          transform: translate3D(0);
+}
 .fs-lightbox-mobile.fs-lightbox-animating .fs-lightbox-image_container {
   -webkit-transition: height 0.25s ease, width 0.25s ease, top 0.25s ease, left 0.25s ease;
           transition: height 0.25s ease, width 0.25s ease, top 0.25s ease, left 0.25s ease;

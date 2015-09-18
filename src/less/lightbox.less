@@ -290,6 +290,10 @@
 			transition: opacity @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 		}
 
+		&-mobile &-image_container {
+			transform: translate3D(0);
+		}
+
 		&-mobile&-animating &-image_container {
 			transition:
 				height @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
