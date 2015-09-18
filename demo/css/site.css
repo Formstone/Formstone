@@ -2791,6 +2791,10 @@ pre[class*="language-"] {
   -webkit-transition: opacity 0.25s linear 0.25s;
           transition: opacity 0.25s linear 0.25s;
 }
+.fs-lightbox-mobile.fs-lightbox-animating .fs-lightbox-image_container {
+  -webkit-transition: height 0.25s ease, width 0.25s ease, top 0.25s ease, left 0.25s ease;
+          transition: height 0.25s ease, width 0.25s ease, top 0.25s ease, left 0.25s ease;
+}
 .fs-lightbox-overlay {
   width: 100%;
   height: 100%;
@@ -2944,8 +2948,18 @@ pre[class*="language-"] {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
+.fs-lightbox-mobile .fs-lightbox-image_container {
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  position: absolute;
+}
 .fs-lightbox-image {
   float: left;
+}
+.fs-lightbox-mobile .fs-lightbox-image {
+  position: relative;
+  float: none;
 }
 .fs-lightbox-video {
   width: 100%;
@@ -4969,10 +4983,10 @@ table td:first-child {
   margin: 0;
 }
 .fs-navigation-overlay-content:before {
-  z-index: 102;
+  z-index: 82;
 }
 .fs-navigation-overlay-nav.fs-navigation-enabled {
-  z-index: 103;
+  z-index: 83;
 }
 #bsap_1296027 {
   padding: 20px 0;
@@ -5094,7 +5108,7 @@ table td:first-child {
   min-width: 300px;
   width: 100%;
   position: fixed;
-  z-index: 104;
+  z-index: 84;
   background: #2c3e50;
   box-shadow: none;
   height: 50px;

@@ -288,7 +288,7 @@
 		$Window.trigger(Events.loaded, [ data ]);
 
 		// Trigger analytics page view
-		$.analytics("pageview");
+		$.fsAnalytics("pageview");
 
 		// Update current state before rendering new state
 		saveState(data);

@@ -104,8 +104,8 @@
 		}
 
 		// Scrollbar support
-		if ($.fn.scrollbar !== undefined) {
-			data.$wrapper.scrollbar();
+		if ($.fn.fsScrollbar !== undefined) {
+			data.$wrapper.fsScrollbar();
 		}
 
 		// Bind events
@@ -144,8 +144,8 @@
 		}
 
 		// Scrollbar support
-		if ($.fn.scrollbar !== undefined) {
-			data.$wrapper.scrollbar("destroy");
+		if ($.fn.fsScrollbar !== undefined) {
+			data.$wrapper.fsScrollbar("destroy");
 		}
 
 		data.$el[0].tabIndex = data.tabIndex;
@@ -662,9 +662,9 @@
 			selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
 			buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
 
-		if ($.fn.scrollbar !== undefined) {
-			data.$wrapper.scrollbar("resize")
-						 .scrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
+		if ($.fn.fsScrollbar !== undefined) {
+			data.$wrapper.fsScrollbar("resize")
+						 .fsScrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
 		} else {
 			data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
 		}

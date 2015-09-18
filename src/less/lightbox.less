@@ -280,14 +280,22 @@
 
 		&-animating {
 			transition:
-				height @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
-				width @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+				height  @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+				width   @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 				opacity @fs-lightbox-transition-duration linear,
-				top @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+				top     @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
 		}
 
 		&-animating &-container {
 			transition: opacity @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
+		}
+
+		&-mobile&-animating &-image_container {
+			transition:
+				height @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+				width  @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+				top    @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+				left   @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
 		}
 
 		/**
@@ -491,6 +499,14 @@
 			-webkit-overflow-scrolling: touch;
 		}
 
+		&-mobile &-image_container {
+			width: 1px;
+			height: 1px;
+
+			margin: 0;
+			position: absolute;
+		}
+
 		/**
 		 * @class
 		 * @name .fs-lightbox-image
@@ -500,6 +516,12 @@
 
 		&-image {
 			float: left;
+		}
+
+		&-mobile &-image {
+			position: relative;
+
+			float: none;
 		}
 
 		/**

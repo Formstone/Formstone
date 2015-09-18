@@ -116,6 +116,11 @@
 				oldContentWidth    : 0
 			}, data);
 
+			// Touch
+			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
+
+			console.log(data.touch, Instance.isMobile, Instance.isTouch);
+
 			// Double the margin
 			Instance.margin *= 2;
 
@@ -336,6 +341,8 @@
 			Instance.$lightbox.fsTransition("destroy");
 			Instance.$container.fsTransition("destroy");
 
+			clearTouch();
+
 			Instance.$lightbox.addClass(Classes.raw.animating).fsTransition({
 				property: "opacity"
 			},
@@ -380,12 +387,14 @@
 			});
 		}
 
+		/*
 		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
 			Instance.$content.fsTouch({
 				axis: "x",
 				swipe: true
 			}).on(Events.swipe, onSwipe);
 		}
+		*/
 
 		Instance.$lightbox.fsTransition({
 			property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
@@ -553,7 +562,8 @@
 
 	function loadImage(source) {
 		// Cache current image
-		Instance.$image = $("<img>");
+		Instance.$imageContainer = $('<div class="' + Classes.raw.image_container + '"><img></div>');
+		Instance.$image = Instance.$imageContainer.find("img");
 
 		Instance.$image.one(Events.load, function() {
 			var naturalSize = calculateNaturalSize(Instance.$image);
@@ -566,7 +576,7 @@
 				Instance.naturalWidth  /= 2;
 			}
 
-			Instance.$content.prepend(Instance.$image);
+			Instance.$content.prepend(Instance.$imageContainer);
 
 			if (Instance.$caption.html() === "") {
 				Instance.$caption.hide();
@@ -581,6 +591,14 @@
 
 			openLightbox();
 
+			if (Instance.touch) {
+				Instance.$container.fsTouch({
+					pan      : true,
+					scale    : true
+				}).on("scalestart.touch", onScaleStart)
+				  .on("scaleend.touch", onScaleEnd)
+				  .on("scale.touch", onScale);
+			}
 		}).error(loadError)
 		  .attr("src", source)
 		  .addClass(Classes.raw.image);
@@ -589,6 +607,103 @@
 		if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
 			Instance.$image.trigger(Events.load);
 		}
+	}
+
+	function clearTouch() {
+		if (Instance.$image.length) {
+			Instance.$image.fsTouch("destroy");
+		}
+	}
+
+	function cacheScale() {
+		Instance.scalePosition = Instance.$imageContainer.position();
+
+		Instance.scaleY = Instance.scalePosition.top;
+		Instance.scaleX = Instance.scalePosition.left;
+
+		Instance.scaleHeight = Instance.$image.outerHeight();
+		Instance.scaleWidth  = Instance.$image.outerWidth();
+	}
+
+	function onScaleStart(e) {
+		cacheScale();
+
+		Instance.$lightbox.removeClass(Classes.raw.animating);
+	}
+
+	function onScaleEnd(e) {
+		cacheScale();
+
+		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+			conWidth  = Instance.$container.outerWidth();
+
+		Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
+		Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
+		Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
+		Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
+
+		if (Instance.scaleHeight < conHeight) {
+			Instance.scalePosition.top = conHeight / 2;
+		} else {
+			if (Instance.scalePosition.top < Instance.scaleMinY) {
+				Instance.scalePosition.top = Instance.scaleMinY;
+			}
+			if (Instance.scalePosition.top > Instance.scaleMaxY) {
+				Instance.scalePosition.top = Instance.scaleMaxY;
+			}
+		}
+
+		if (Instance.scaleWidth < conWidth) {
+			Instance.scalePosition.left = conWidth / 2;
+		} else {
+			if (Instance.scalePosition.left < Instance.scaleMinX) {
+				Instance.scalePosition.left = Instance.scaleMinX;
+			}
+			if (Instance.scalePosition.left > Instance.scaleMaxX) {
+				Instance.scalePosition.left = Instance.scaleMaxX;
+			}
+		}
+
+		Instance.$lightbox.addClass(Classes.raw.animating);
+
+		Instance.$imageContainer.css({
+			left: Instance.scalePosition.left,
+			top:  Instance.scalePosition.top
+		});
+	}
+
+	function onScale(e) {
+		var width  = Instance.scaleWidth  * e.scale,
+			height = Instance.scaleHeight * e.scale,
+			// pan
+			x = Instance.scaleX + e.deltaX,
+			y = Instance.scaleY + e.deltaY;
+
+		Instance.$imageContainer.css({
+			left: x,
+			top:  y
+		});
+
+		if (width < Instance.scaleMinWidth) {
+			width = Instance.scaleMinWidth;
+		}
+		if (width > Instance.scaleMaxWidth) {
+			width = Instance.scaleMaxWidth;
+		}
+
+		if (height < Instance.scaleMinHeight) {
+			height = Instance.scaleMinHeight;
+		}
+		if (height > Instance.scaleMaxHeight) {
+			height = Instance.scaleMaxHeight;
+		}
+
+		Instance.$image.css({
+			width     : width,
+			height    : height,
+			left      : -(width / 2),
+			top       : -(height / 2)
+		});
 	}
 
 	/**
@@ -675,10 +790,15 @@
 
 			Instance.$image.css({
 				height: Instance.targetImageHeight,
-				width:  Instance.targetImageWidth,
-				marginTop:  Instance.imageMarginTop,
-				marginLeft: Instance.imageMarginLeft
+				width:  Instance.targetImageWidth
 			});
+
+			if (!Instance.touch) {
+				Instance.$image.css({
+					marginTop:  Instance.imageMarginTop,
+					marginLeft: Instance.imageMarginLeft
+				});
+			}
 
 			if (!Instance.isMobile) {
 				Instance.metaHeight = Instance.$meta.outerHeight(true);
@@ -686,6 +806,13 @@
 			}
 
 			count ++;
+		}
+
+		if (Instance.touch) {
+			Instance.scaleMinHeight    = Instance.targetImageHeight;
+			Instance.scaleMinWidth     = Instance.targetImageWidth;
+			Instance.scaleMaxHeight    = Instance.naturalHeight;
+			Instance.scaleMaxWidth     = Instance.naturalWidth;
 		}
 	}
 
@@ -879,6 +1006,7 @@
 		if (!Instance.isAnimating && !$control.hasClass(Classes.raw.control_disabled)) {
 			Instance.isAnimating = true;
 
+			clearTouch();
 			closeCaption();
 
 			Instance.gallery.index += ($control.hasClass(Classes.raw.control_next)) ? 1 : -1;
@@ -1144,6 +1272,7 @@
 			 * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
 			 * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
 			 * @param top [int] <0> "Target top position; over-rides centering"
+			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
 			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
 			 */
@@ -1169,6 +1298,7 @@
 				retina         : false,
 				requestKey     : "fs-lightbox",
 				top            : 0,
+				touch          : true,
 				videoRatio     : 0.5625,
 				videoWidth     : 800
 			},
@@ -1188,6 +1318,7 @@
 				"container",
 				"content",
 				"image",
+				"image_container",
 				"video",
 				"video_wrapper",
 				"tools",
