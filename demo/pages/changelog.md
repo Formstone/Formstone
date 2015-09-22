@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.14
+
+* Fixed ASAP issue with replacing history state
+* Disabled touch in Checkbox due to erratic behavior
+
 ### 0.8.13
 
 * Fixed typo in Background and Carousel 

@@ -21,7 +21,6 @@ checkbox.css
 ```markup
 jQuery
 core.js
-touch.js
 ```
 
 ### Basic
