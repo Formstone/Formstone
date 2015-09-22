@@ -126,16 +126,17 @@ Jump instance of plugin to specific page
 $(".target").carousel("jump", 1);
 ```
 
-### next
-
-Move to next item
-
-
 #### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `data` | `object` | &nbsp; | Instance data |
+| `index` | `int` | &nbsp; | New index |
+| `silent` | `boolean` | &nbsp; | Flag to prevent triggering update event |
+
+### next
+
+Move to next item
+
 
 ### previous
 

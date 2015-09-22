@@ -492,6 +492,8 @@
 	 * @name jump
 	 * @description Jump instance of plugin to specific page
 	 * @example $(".target").carousel("jump", 1);
+	 * @param index [int] "New index"
+	 * @param silent [boolean] "Flag to prevent triggering update event"
 	 */
 
 	/**
@@ -521,7 +523,7 @@
 	/**
 	 * @method private
 	 * @name previousItem
-	 * @description Move to next item
+	 * @description Move to previous item
 	 * @param data [object] "Instance data"
 	 */
 
@@ -539,7 +541,6 @@
 	 * @method
 	 * @name next
 	 * @description Move to next item
-	 * @param data [object] "Instance data"
 	 */
 
 	/**
@@ -547,6 +548,7 @@
 	 * @name nextItem
 	 * @description Move to next item
 	 * @example $(".target").carousel("next");
+	 * @param data [object] "Instance data"
 	 */
 
 	function nextItem(data) {

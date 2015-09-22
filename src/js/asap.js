@@ -291,7 +291,7 @@
 		$.fsAnalytics("pageview");
 
 		// Update current state before rendering new state
-		saveState(data);
+		// saveState(data);
 
 		// Render before updating
 		Instance.render.call(this, data, hash);
@@ -311,7 +311,7 @@
 			Visited++;
 		} else {
 			// Update state with history data
-			saveState(data);
+			// saveState(data);
 		}
 
 		$Window.trigger(Events.rendered, [ data ]);

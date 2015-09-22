@@ -119,8 +119,6 @@
 			// Touch
 			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
 
-			console.log(data.touch, Instance.isMobile, Instance.isTouch);
-
 			// Double the margin
 			Instance.margin *= 2;
 
@@ -561,6 +559,8 @@
 	 */
 
 	function loadImage(source) {
+		Instance.hasScaled = false;
+
 		// Cache current image
 		Instance.$imageContainer = $('<div class="' + Classes.raw.image_container + '"><img></div>');
 		Instance.$image = Instance.$imageContainer.find("img");
@@ -592,6 +592,14 @@
 			openLightbox();
 
 			if (Instance.touch) {
+				cacheScale();
+				onScale({
+					scale: 1,
+					deltaX: 0,
+					deltaY: 0
+				});
+				onScaleEnd();
+
 				Instance.$container.fsTouch({
 					pan      : true,
 					scale    : true
@@ -610,8 +618,8 @@
 	}
 
 	function clearTouch() {
-		if (Instance.$image.length) {
-			Instance.$image.fsTouch("destroy");
+		if (Instance.$image && Instance.$image.length) {
+			Instance.$container.fsTouch("destroy");
 		}
 	}
 
@@ -673,36 +681,38 @@
 	}
 
 	function onScale(e) {
-		var width  = Instance.scaleWidth  * e.scale,
-			height = Instance.scaleHeight * e.scale,
-			// pan
-			x = Instance.scaleX + e.deltaX,
+		var x = Instance.scaleX + e.deltaX,
 			y = Instance.scaleY + e.deltaY;
 
+		Instance.targetImageHeight = Instance.scaleHeight * e.scale;
+		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
+
+		Instance.hasScaled = true;
+
 		Instance.$imageContainer.css({
-			left: x,
-			top:  y
+			top:  y,
+			left: x
 		});
 
-		if (width < Instance.scaleMinWidth) {
-			width = Instance.scaleMinWidth;
+		if (Instance.targetImageHeight < Instance.scaleMinHeight) {
+			Instance.targetImageHeight = Instance.scaleMinHeight;
 		}
-		if (width > Instance.scaleMaxWidth) {
-			width = Instance.scaleMaxWidth;
+		if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
+			Instance.targetImageHeight = Instance.scaleMaxHeight;
 		}
 
-		if (height < Instance.scaleMinHeight) {
-			height = Instance.scaleMinHeight;
+		if (Instance.targetImageWidth < Instance.scaleMinWidth) {
+			Instance.targetImageWidth = Instance.scaleMinWidth;
 		}
-		if (height > Instance.scaleMaxHeight) {
-			height = Instance.scaleMaxHeight;
+		if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
+			Instance.targetImageWidth = Instance.scaleMaxWidth;
 		}
 
 		Instance.$image.css({
-			width     : width,
-			height    : height,
-			left      : -(width / 2),
-			top       : -(height / 2)
+			height    : Instance.targetImageHeight,
+			width     : Instance.targetImageWidth,
+			top       : -(Instance.targetImageHeight / 2),
+			left      : -(Instance.targetImageWidth  / 2)
 		});
 	}
 
@@ -788,16 +798,23 @@
 				});
 			}
 
-			Instance.$image.css({
-				height: Instance.targetImageHeight,
-				width:  Instance.targetImageWidth
-			});
-
-			if (!Instance.touch) {
+			if (!Instance.hasScaled) {
 				Instance.$image.css({
-					marginTop:  Instance.imageMarginTop,
-					marginLeft: Instance.imageMarginLeft
+					height: Instance.targetImageHeight,
+					width:  Instance.targetImageWidth
 				});
+
+				if (Instance.touch) {
+					Instance.$image.css({
+						top     : -(Instance.targetImageHeight / 2),
+						left    : -(Instance.targetImageWidth  / 2)
+					});
+				} else {
+					Instance.$image.css({
+						marginTop     : Instance.imageMarginTop,
+						marginLeft    : Instance.imageMarginLeft
+					});
+				}
 			}
 
 			if (!Instance.isMobile) {
@@ -882,7 +899,7 @@
 			url += "?" + queryString.slice(1)[0].trim();
 		}
 
-		Instance.$videoWrapper = $('<div class="' + Classes.raw.videoWrapper + '"></div>');
+		Instance.$videoWrapper = $('<div class="' + Classes.raw.video_wrapper + '"></div>');
 		Instance.$video = $('<iframe class="' + Classes.raw.video + '" seamless="seamless"></iframe>');
 
 		Instance.$video.attr("src", url)
