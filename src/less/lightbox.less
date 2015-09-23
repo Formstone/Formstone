@@ -287,7 +287,9 @@
 		}
 
 		&-animating &-container {
-			transition: opacity @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
+			transition:
+				opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
+				visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 		}
 
 		&-mobile &-image_container {
@@ -410,7 +412,10 @@
 			display: block;
 			margin: auto;
 			opacity: 0;
-			transition: opacity @fs-lightbox-transition-duration linear;
+			transition:
+				opacity    @fs-lightbox-transition-duration linear,
+				visibility @fs-lightbox-transition-duration linear;
+			visibility: hidden;
 
 			&:before,
 			&:after {
@@ -485,6 +490,7 @@
 			opacity: 1;
 			overflow: hidden;
 			padding: 0;
+			visibility: visible;
 		}
 
 		// inline content
@@ -615,8 +621,11 @@
 			opacity: @fs-lightbox-control-opacity;
 			overflow: hidden;
 			text-indent: 200%;
-			transition: opacity @fs-lightbox-control-transition-duration linear;
+			transition:
+				opacity    @fs-lightbox-control-transition-duration linear,
+				visibility @fs-lightbox-control-transition-duration linear;
 			white-space: nowrap;
+			visibility: visible;
 
 			&:before {
 				width: 0;
@@ -684,22 +693,26 @@
 
 		&-control_disabled {
 			opacity: 0;
+			visibility: hidden;
 		}
 
 		// controls hovers
 
 		.no-touch & &-control {
 			opacity: 0;
+			visibility: hidden;
 		}
 
 		.no-touch &:hover &-control {
 			opacity: @fs-lightbox-control-opacity;
+			visibility: visible;
 		}
 
 		.no-touch & &-control_disabled,
 		.no-touch &:hover &-control_disabled {
 			opacity: 0;
 			cursor: default;
+			visibility: hidden;
 		}
 
 		/**
@@ -776,10 +789,12 @@
 		&-loading &-container {
 			opacity: 0;
 			transition: opacity @fs-lightbox-transition-duration linear;
+			visibility: hidden;
 		}
 
 		&-loading &-loading_icon {
 			opacity: 1;
+			visibility: visible;
 		}
 
 		// mobile
@@ -873,6 +888,7 @@
 			border-radius: 0;
 			box-shadow: none;
 			opacity: 1;
+			visibility: visible;
 		}
 
 		&-mobile &-control_previous {
@@ -898,6 +914,7 @@
 		.no-touch &-mobile &-control,
 		.no-touch &-mobile:hover &-control {
 			opacity: @fs-lightbox-control-opacity;
+			visibility: visible;
 		}
 
 		&-mobile &-control_disabled,
@@ -905,6 +922,7 @@
 		.no-touch &-mobile:hover &-control_disabled {
 			opacity: 0;
 			cursor: default !important;
+			visibility: hidden;
 		}
 
 		// meta

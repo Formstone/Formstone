@@ -900,7 +900,7 @@
 		}
 
 		Instance.$videoWrapper = $('<div class="' + Classes.raw.video_wrapper + '"></div>');
-		Instance.$video = $('<iframe class="' + Classes.raw.video + '" seamless="seamless"></iframe>');
+		Instance.$video = $('<iframe class="' + Classes.raw.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
 
 		Instance.$video.attr("src", url)
 				   .addClass(Classes.raw.video)

@@ -28,7 +28,7 @@
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
-		if (!data.collapse && data.group) {
+		if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
 			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
 		}
 

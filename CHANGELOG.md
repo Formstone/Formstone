@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.8.16
+
+* Fixed issue with grouped Swap active item
+* Fixed issue with Lightbox loading icon visibility
+* Fixed issue with fullscreen YouTube videos in Lightbox 
+* Fixed regression in ASAP Analytics check
+
 ### 0.8.15
 
 * Added basic pinch-and-zoom to Lightbox on touch devices
