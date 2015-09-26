@@ -21,6 +21,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				fn: {}
 			};
 			this.ResizeHandlers = [];
+			this.RAFHandlers    = [];
 
 			// Globals
 
@@ -186,8 +187,12 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			pan                  : "pan.{ns}",
 			panEnd               : "panend.{ns}",
 			resize               : "resize.{ns}",
+			scaleStart           : "scalestart.{ns}",
+			scaleEnd             : "scaleend.{ns}",
+			scale                : "scale.{ns}",
 			scroll               : "scroll.{ns}",
 			select               : "select.{ns}",
+			swipe                : "swipe.{ns}",
 			touchCancel          : "touchcancel.{ns}",
 			touchEnd             : "touchend.{ns}",
 			touchLeave           : "touchleave.{ns}",
@@ -506,6 +511,19 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 				Formstone.ResizeHandlers.sort(sortPriority);
 			}
 
+			// RAF handler
+
+			if (settings.methods._raf) {
+				Formstone.RAFHandlers.push({
+					namespace: namespace,
+					priority: settings.priority,
+					callback: settings.methods._raf
+				});
+
+				// Sort handlers on push
+				Formstone.RAFHandlers.sort(sortPriority);
+			}
+
 			return settings;
 		})(namespace, settings);
 
@@ -649,6 +667,18 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	Formstone.$window.on("resize.fs", onWindowResize);
 	onWindowResize();
+
+	// RAF
+
+	function handleRAF() {
+		for (var i in Formstone.RAFHandlers) {
+			if (Formstone.RAFHandlers.hasOwnProperty(i)) {
+				Formstone.RAFHandlers[i].callback.call(window);
+			}
+		}
+	}
+
+	Formstone.window.requestAnimationFrame(handleRAF);
 
 	// Sort Priority
 

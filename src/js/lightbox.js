@@ -27,6 +27,18 @@
 
 	/**
 	 * @method private
+	 * @name raf
+	 * @description Handles window RAF
+	 */
+
+	function raf() {
+		if (Instance) {
+			renderLightbox();
+		}
+	}
+
+	/**
+	 * @method private
 	 * @name construct
 	 * @description Builds instance.
 	 * @param data [object] "Instance data"
@@ -604,8 +616,8 @@
 					pan      : true,
 					scale    : true,
 					// swipe    : true
-				}).on(Events.scalestart, onScaleStart)
-				  .on(Events.scaleend, onScaleEnd)
+				}).on(Events.scaleStart, onScaleStart)
+				  .on(Events.scaleEnd, onScaleEnd)
 				  .on(Events.scale, onScale);
 			}
 		}).error(loadError)
@@ -642,6 +654,8 @@
 
 	function onScaleEnd(e) {
 		cacheScale();
+
+		Instance.scaling = false;
 
 		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
 			conWidth  = Instance.$container.outerWidth();
@@ -689,6 +703,7 @@
 		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
 
 		Instance.hasScaled = true;
+		Instance.scaling = true;
 
 		Instance.$imageContainer.css({
 			top:  y,
@@ -715,6 +730,17 @@
 			top       : -(Instance.targetImageHeight / 2),
 			left      : -(Instance.targetImageWidth  / 2)
 		});
+	}
+
+	function renderLightbox() {
+		if (Instance.$image && Instance.$image.length && Instance.scaling) {
+			Instance.$image.css({
+				height    : Instance.targetImageHeight,
+				width     : Instance.targetImageWidth,
+				top       : -(Instance.targetImageHeight / 2),
+				left      : -(Instance.targetImageWidth  / 2)
+			});
+		}
 	}
 
 	/**
@@ -1367,12 +1393,7 @@
 
 			events: {
 				open     : "open",
-				close    : "close",
-
-				swipe    : "swipe",
-				scalestart : "scalestart",
-				scaleend   : "scaleend",
-				scale      : "scale",
+				close    : "close"
 			},
 
 			methods: {
@@ -1380,6 +1401,7 @@
 				_construct    : construct,
 				_destruct     : destruct,
 				_resize       : resize,
+				_raf          : raf,
 
 				resize        : resizeLightbox
 			},
