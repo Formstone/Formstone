@@ -671,6 +671,8 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// RAF
 
 	function handleRAF() {
+		Formstone.window.requestAnimationFrame(handleRAF);
+
 		for (var i in Formstone.RAFHandlers) {
 			if (Formstone.RAFHandlers.hasOwnProperty(i)) {
 				Formstone.RAFHandlers[i].callback.call(window);
@@ -678,7 +680,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 		}
 	}
 
-	Formstone.window.requestAnimationFrame(handleRAF);
+	handleRAF();
 
 	// Sort Priority
 

@@ -33,7 +33,7 @@
 
 	function raf() {
 		if (Instance) {
-			renderLightbox();
+			renderLightboxImage();
 		}
 	}
 
@@ -652,10 +652,35 @@
 		Instance.$lightbox.removeClass(Classes.raw.animating);
 	}
 
+	function onScale(e) {
+		Instance.targetContainerY = Instance.scaleY + e.deltaY;
+		Instance.targetContainerX = Instance.scaleX + e.deltaX;
+
+		Instance.targetImageHeight = Instance.scaleHeight * e.scale;
+		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
+
+		if (Instance.targetImageHeight < Instance.scaleMinHeight) {
+			Instance.targetImageHeight = Instance.scaleMinHeight;
+		}
+		if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
+			Instance.targetImageHeight = Instance.scaleMaxHeight;
+		}
+
+		if (Instance.targetImageWidth < Instance.scaleMinWidth) {
+			Instance.targetImageWidth = Instance.scaleMinWidth;
+		}
+		if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
+			Instance.targetImageWidth = Instance.scaleMaxWidth;
+		}
+
+		Instance.hasScaled = true;
+		Instance.isScaling = true;
+	}
+
 	function onScaleEnd(e) {
 		cacheScale();
 
-		Instance.scaling = false;
+		Instance.isScaling = false;
 
 		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
 			conWidth  = Instance.$container.outerWidth();
@@ -695,45 +720,13 @@
 		});
 	}
 
-	function onScale(e) {
-		var x = Instance.scaleX + e.deltaX,
-			y = Instance.scaleY + e.deltaY;
+	function renderLightboxImage() {
+		if (Instance.$image && Instance.$image.length && Instance.isScaling) {
+			Instance.$imageContainer.css({
+				top:  Instance.targetContainerY,
+				left: Instance.targetContainerX
+			});
 
-		Instance.targetImageHeight = Instance.scaleHeight * e.scale;
-		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
-
-		Instance.hasScaled = true;
-		Instance.scaling = true;
-
-		Instance.$imageContainer.css({
-			top:  y,
-			left: x
-		});
-
-		if (Instance.targetImageHeight < Instance.scaleMinHeight) {
-			Instance.targetImageHeight = Instance.scaleMinHeight;
-		}
-		if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
-			Instance.targetImageHeight = Instance.scaleMaxHeight;
-		}
-
-		if (Instance.targetImageWidth < Instance.scaleMinWidth) {
-			Instance.targetImageWidth = Instance.scaleMinWidth;
-		}
-		if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
-			Instance.targetImageWidth = Instance.scaleMaxWidth;
-		}
-
-		Instance.$image.css({
-			height    : Instance.targetImageHeight,
-			width     : Instance.targetImageWidth,
-			top       : -(Instance.targetImageHeight / 2),
-			left      : -(Instance.targetImageWidth  / 2)
-		});
-	}
-
-	function renderLightbox() {
-		if (Instance.$image && Instance.$image.length && Instance.scaling) {
 			Instance.$image.css({
 				height    : Instance.targetImageHeight,
 				width     : Instance.targetImageWidth,
