@@ -49,9 +49,9 @@
 
 		buildMobilePages(data);
 
-		this.on(Events.clickTouchStart, Classes.page, data, onPageClick)
-			.on(Events.clickTouchStart, Classes.control, data, onControlClick)
-			.on(Events.clickTouchStart, Classes.position, data, onPositionClick)
+		this.on(Events.click, Classes.page, data, onPageClick)
+			.on(Events.click, Classes.control, data, onControlClick)
+			.on(Events.click, Classes.position, data, onPositionClick)
 			.on(Events.change, Classes.select, onPageSelect);
 
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {

@@ -63,8 +63,12 @@
 
 		data.$content.on(Events.scroll, data, onScroll);
 
-		this.on(Events.touchMouseDown, Classes.track, data, onTrackDown)
-			.on(Events.touchMouseDown, Classes.handle, data, onHandleDown);
+		data.$track.fsTouch({
+			axis    : (data.horizontal) ? "x" : "y",
+			pan     : true
+		}).on(Events.panStart, data, onPanStart)
+		  .on(Events.pan, data, onPan)
+		  .on(Events.panEnd, data, onPanEnd);
 
 		resizeInstance(data);
 
@@ -79,6 +83,8 @@
 	 */
 
 	function destruct(data) {
+		data.$track.fsTouch("destroy");
+
 		data.$bar.remove();
 		data.$content.off(Events.namespace)
 					 .contents()
@@ -235,7 +241,13 @@
 		data.$track.css(trackStyles);
 		data.$handle.css(handleStyles);
 
+		data.panning = false;
+
 		positionContent(data, handlePosition);
+
+		onScroll({
+			data    : data
+		});
 
 		data.$el.removeClass(RawClasses.setup);
 	}
@@ -253,171 +265,95 @@
 		var data = e.data,
 			handleStyles = {};
 
-		if (data.horizontal) {
-			// Horizontal
-			var scrollLeft = data.$content.scrollLeft();
+		if (!data.panning) {
+			if (data.horizontal) {
+				// Horizontal
+				var scrollLeft = data.$content.scrollLeft();
 
-			if (scrollLeft < 0) {
-				scrollLeft = 0;
+				if (scrollLeft < 0) {
+					scrollLeft = 0;
+				}
+
+				data.handleLeft = scrollLeft / data.scrollRatio;
+
+				if (data.handleLeft > data.handleBounds.right) {
+					data.handleLeft = data.handleBounds.right;
+				}
+
+				handleStyles = {
+					left: data.handleLeft
+				};
+			} else {
+				// Vertical
+				var scrollTop = data.$content.scrollTop();
+
+				if (scrollTop < 0) {
+					scrollTop = 0;
+				}
+
+				data.handleTop = scrollTop / data.scrollRatio;
+
+				if (data.handleTop > data.handleBounds.bottom) {
+					data.handleTop = data.handleBounds.bottom;
+				}
+
+				handleStyles = {
+					top: data.handleTop
+				};
 			}
 
-			data.handleLeft = scrollLeft / data.scrollRatio;
-
-			if (data.handleLeft > data.handleBounds.right) {
-				data.handleLeft = data.handleBounds.right;
-			}
-
-			handleStyles = {
-				left: data.handleLeft
-			};
-		} else {
-			// Vertical
-			var scrollTop = data.$content.scrollTop();
-
-			if (scrollTop < 0) {
-				scrollTop = 0;
-			}
-
-			data.handleTop = scrollTop / data.scrollRatio;
-
-			if (data.handleTop > data.handleBounds.bottom) {
-				data.handleTop = data.handleBounds.bottom;
-			}
-
-			handleStyles = {
-				top: data.handleTop
-			};
+			data.$handle.css(handleStyles);
 		}
-
-		data.$handle.css(handleStyles);
 	}
 
 	/**
 	 * @method private
-	 * @name getPointer
-	 * @description Normalizes touch and mouse events
-	 * @param e [object] "Event data"
-	 * @return [object] "Pointer poisition data"
-	 */
-
-	function getPointer(e) {
-		var oe = e.originalEvent,
-			touch = ($.type(oe.targetTouches) !== "undefined") ? oe.targetTouches[0] : null;
-
-		return {
-			pageX: (touch) ? touch.pageX : e.clientX,
-			pageY: (touch) ? touch.pageY : e.clientY
-		};
-	}
-
-	/**
-	 * @method private
-	 * @name onTrackDown
-	 * @description Handles mousedown/touchstart event on track
+	 * @name onPanStart
+	 * @description Handles pan event on track
 	 * @param e [object] "Event data"
 	 */
 
-	function onTrackDown(e) {
-		Functions.killEvent(e);
+	function onPanStart(e) {
+		var data      = e.data,
+			offset    = data.$track.offset(),
+			handlePosition;
 
-		var data       = e.data,
-			pointer    = getPointer(e),
-			offset     = data.$track.offset();
+		data.panning = true;
 
 		if (data.horizontal) {
-			// Horizontal
-			data.pointerStart = pointer.pageX;
-			data.handleLeft = pointer.pageX - offset.left + $Window.scrollLeft() - (data.handleWidth / 2);
-
-			positionContent(data, data.handleLeft);
+			handlePosition = data.handleLeft = e.pageX - offset.left /* + $Window.scrollLeft() */ - (data.handleWidth / 2);
 		} else {
-			// Vertical
-			data.pointerStart = pointer.pageY;
-			data.handleTop = pointer.pageY - offset.top + $Window.scrollTop() - (data.handleHeight / 2);
-
-			positionContent(data, data.handleTop);
+			handlePosition = data.handleTop = e.pageY - offset.top /* + $Window.scrollTop() */ - (data.handleHeight / 2);
 		}
 
-		onPointerStart(data);
+		positionContent(data, handlePosition);
 	}
 
-	/**
-	 * @method private
-	 * @name onHandleDown
-	 * @description Handles mousedown/touchstart event on handle
-	 * @param e [object] "Event data"
-	 */
-
-	function onHandleDown(e) {
-		Functions.killEvent(e);
-
-		var data       = e.data,
-			pointer    = getPointer(e);
+	function onPan(e) {
+		var data = e.data,
+			handlePosition;
 
 		if (data.horizontal) {
-			// Horizontal
-			data.pointerStart = pointer.pageX;
-			data.handleLeft = parseInt(data.$handle.css("left"), 10);
+			handlePosition = data.handleLeft + e.deltaX;
 		} else {
-			// Vertical
-			data.pointerStart = pointer.pageY;
-			data.handleTop = parseInt(data.$handle.css("top"), 10);
+			handlePosition = data.handleTop + e.deltaY;
 		}
 
-		onPointerStart(data);
+		positionContent(data, handlePosition);
 	}
 
-	/**
-	 * @method private
-	 * @name onStart
-	 * @description Handles mousedown/touchstart event
-	 * @param data [object] "Instance data"
-	 */
+	function onPanEnd(e) {
+		var data = e.data;
 
-	function onPointerStart(data) {
-		data.$content.off(Events.namespace);
-
-		$Body.on(Events.touchMouseMove, data, onPointerMove)
-			 .on(Events.touchMouseUp, data, onPointerEnd);
-	}
-
-	/**
-	 * @method private
-	 * @name onPointerMove
-	 * @description Handles mousemove/touchmove event
-	 * @param e [object] "Event data"
-	 */
-
-	function onPointerMove(e) {
-		Functions.killEvent(e);
-
-		var data        = e.data,
-			pointer     = getPointer(e),
-			position    = 0;
+		data.panning = false;
 
 		if (data.horizontal) {
-			// Horizontal
-			position = data.handleLeft - (data.pointerStart - pointer.pageX);
+			data.handleLeft += e.deltaX;
 		} else {
-			// Vertical
-			position = data.handleTop - (data.pointerStart - pointer.pageY);
+			data.handleTop += e.deltaY;
 		}
 
-		positionContent(data, position);
-	}
-
-	/**
-	 * @method private
-	 * @name onPointerEnd
-	 * @description Handles mouseup/touchend event
-	 * @param e [object] "Event data"
-	 */
-
-	function onPointerEnd(e) {
-		Functions.killEvent(e);
-
-		e.data.$content.on(Events.scroll, e.data, onScroll);
-		$Body.off(Events.namespace);
+		// positionContent(data, handlePosition);
 	}
 
 	/**
@@ -475,6 +411,7 @@
 	 * @main scrollbar.css
 	 * @dependency jQuery
 	 * @dependency core.js
+	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("scrollbar", {
@@ -529,9 +466,5 @@
 		$Body,
 		$Window        = Formstone.$window,
 		$Instances     = [];
-
-		Events.touchMouseDown    = [Events.touchStart, Events.mouseDown].join(" ");
-		Events.touchMouseMove    = [Events.touchMove,  Events.mouseMove].join(" ");
-		Events.touchMouseUp      = [Events.touchEnd,   Events.mouseUp].join(" ");
 
 })(jQuery, Formstone);

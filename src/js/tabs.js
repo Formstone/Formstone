@@ -50,9 +50,7 @@
 				collapse: false
 			});
 
-		data.$mobileTab.fsTouch({
-			tap: true
-		}).on("tap" + data.dotGuid, data, onMobileActivate);
+		data.$mobileTab.on("click" + data.dotGuid, data, onMobileActivate);
 
 		// Media Query support
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
@@ -76,7 +74,6 @@
 		$.fsMediaquery("unbind", data.rawGuid);
 
 		data.$mobileTab.off(Events.namespace)
-					   .fsTouch("destroy")
 					   .remove();
 
 		data.$content.removeClass(RawClasses.content);
@@ -232,7 +229,6 @@
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 * @dependency swap.js
-	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("tabs", {
@@ -268,7 +264,6 @@
 			 */
 
 			events: {
-				tap      : "tap",
 				update   : "update"
 			},
 

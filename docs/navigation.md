@@ -24,7 +24,6 @@ jQuery
 core.js
 mediaquery.js
 swap.js
-touch.js
 ```
 
 ### Basic

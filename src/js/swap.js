@@ -37,10 +37,7 @@
 
 		data.$swaps = $().add(this).add(data.$target);
 
-		this.fsTouch({
-				tap: true
-			})
-			.on(Events.tap + data.dotGuid, data, onClick);
+		this.on(Events.click + data.dotGuid, data, onClick);
 
 		// Media Query support
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
@@ -65,8 +62,6 @@
 
 		data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
 				   .off(Events.namespace);
-
-		this.fsTouch("destroy");
 	}
 
 	/**
@@ -206,7 +201,6 @@
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency mediaquery.js
-	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("swap", {
@@ -238,7 +232,6 @@
 			 */
 
 			events: {
-				tap           : "tap",
 				activate      : "activate",
 				deactivate    : "deactivate",
 				enable        : "enable",

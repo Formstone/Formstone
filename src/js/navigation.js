@@ -178,7 +178,7 @@
 				data.$el.trigger(Events.open);
 
 				data.$content.addClass(RawClasses.open)
-							 .one(Events.clickTouchStart, function() {
+							 .one(Events.click, function() {
 								close(data);
 							 });
 
@@ -337,7 +337,6 @@
 	 * @dependency core.js
 	 * @dependency mediaquery.js
 	 * @dependency swap.js
-	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("navigation", {
@@ -389,7 +388,6 @@
 			 */
 
 			events: {
-				tap      : "tap",
 				open     : "open",
 				close    : "close"
 			},

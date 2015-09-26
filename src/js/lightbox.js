@@ -255,14 +255,14 @@
 			// Bind events
 			$Window.on(Events.keyDown, onKeyDown);
 
-			$Body.on(Events.clickTouchStart, [Classes.overlay, Classes.close].join(", "), closeLightbox);
+			$Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox);
 
 			if (Instance.gallery.active) {
-				Instance.$lightbox.on(Events.clickTouchStart, Classes.control, advanceGallery);
+				Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
 			}
 
 			if (Instance.isMobile && Instance.isTouch) {
-				Instance.$lightbox.on(Events.clickTouchStart, Classes.caption_toggle, toggleCaption);
+				Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption);
 			}
 
 			Instance.$lightbox.fsTransition({
@@ -602,10 +602,11 @@
 
 				Instance.$container.fsTouch({
 					pan      : true,
-					scale    : true
-				}).on("scalestart.touch", onScaleStart)
-				  .on("scaleend.touch", onScaleEnd)
-				  .on("scale.touch", onScale);
+					scale    : true,
+					// swipe    : true
+				}).on(Events.scalestart, onScaleStart)
+				  .on(Events.scaleend, onScaleEnd)
+				  .on(Events.scale, onScale);
 			}
 		}).error(loadError)
 		  .attr("src", source)
@@ -1368,7 +1369,10 @@
 				open     : "open",
 				close    : "close",
 
-				swipe    : "swipe"
+				swipe    : "swipe",
+				scalestart : "scalestart",
+				scaleend   : "scaleend",
+				scale      : "scale",
 			},
 
 			methods: {

@@ -70,12 +70,6 @@
 			.on(Events.deselect, data, onDeselect);
 
 		data.$checkbox.on(Events.click, data, onClick);
-
-		/*
-		data.$checkbox.fsTouch({
-			tap: true
-		}).on(Events.tap, data, onClick);
-		*/
 	}
 
 	/**
@@ -294,8 +288,7 @@
 			},
 
 			events: {
-				deselect : "deselect",
-				tap      : "tap"
+				deselect : "deselect"
 			}
 		}),
 

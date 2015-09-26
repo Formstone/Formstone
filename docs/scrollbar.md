@@ -21,6 +21,7 @@ scrollbar.css
 ```markup
 jQuery
 core.js
+touch.js
 ```
 
 ### Basic

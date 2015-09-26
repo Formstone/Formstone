@@ -46,7 +46,7 @@
 		this.on(Events.keyPress, Classes.element, data, onKeyup);
 
 		// Bind click events
-		data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onMouseDown);
+		data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
 	}
 
 	/**
@@ -117,16 +117,16 @@
 
 	/**
 	 * @method private
-	 * @name onMouseDown
-	 * @description Handles mousedown event on instance arrows
+	 * @name onPointerDown
+	 * @description Handles pointer down event on instance arrows
 	 * @param e [object] "Event data"
 	 */
 
-	function onMouseDown(e) {
+	function onPointerDown(e) {
 		Functions.killEvent(e);
 
 		// Make sure we reset the states
-		onMouseUp(e);
+		onPointerUp(e);
 
 		var data = e.data;
 
@@ -139,18 +139,18 @@
 
 			step(data, change);
 
-			$Body.on( [Events.touchEnd, Events.mouseUp].join(" "), data, onMouseUp);
+			$Body.on( [Events.touchEnd, Events.mouseUp].join(" "), data, onPointerUp);
 		}
 	}
 
 	/**
 	 * @method private
-	 * @name onMouseUp
-	 * @description Handles mouseup event on instance arrows
+	 * @name onPointerUp
+	 * @description Handles pointer up event on instance arrows
 	 * @param e [object] "Event data"
 	 */
 
-	function onMouseUp(e) {
+	function onPointerUp(e) {
 		Functions.killEvent(e);
 
 		var data = e.data;
@@ -283,7 +283,7 @@
 			},
 
 			events: {
-				tap    : "tap"
+				// tap    : "tap"
 			}
 		}),
 

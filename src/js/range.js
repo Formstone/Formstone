@@ -392,12 +392,6 @@
 				enable        : enable,
 				disable       : disable,
 				resize        : resizeInstance
-			},
-
-			events: {
-				panStart    : "panstart",
-				pan         : "pan",
-				panEnd      : "panend"
 			}
 		}),
 

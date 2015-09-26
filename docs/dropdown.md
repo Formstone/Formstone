@@ -22,7 +22,6 @@ dropdown.css
 jQuery
 core.js
 scrollbar.js
-touch.js
 ```
 
 ### Basic

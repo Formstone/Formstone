@@ -246,10 +246,10 @@
 			data.enabled = true;
 
 			this.addClass(RawClasses.enabled)
-				// .on(Events.clickTouchStart, Classes.control, data, onAdvance)
-				.on(Events.clickTouchStart, Classes.page, data, onSelect);
+				// .on(Events.click, Classes.control, data, onAdvance)
+				.on(Events.click, Classes.page, data, onSelect);
 
-			data.$controlItems.on(Events.clickTouchStart, data, onAdvance);
+			data.$controlItems.on(Events.click, data, onAdvance);
 
 			data.$canister.fsTouch({
 				axis: "x",

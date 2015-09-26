@@ -109,9 +109,7 @@
 		}
 
 		// Bind events
-		data.$selected.fsTouch({
-			tap: true
-		}).on(Events.tap, data, onClick);
+		data.$selected.on(Events.click, data, onClick);
 
 		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
 					  .on(Events.close, data, onClose);
@@ -154,8 +152,7 @@
 		data.$options.off(Events.namespace);
 
 		data.$placeholder.remove();
-		data.$selected.fsTouch("destroy")
-			.remove();
+		data.$selected.remove();
 		data.$wrapper.remove();
 
 		data.$el.off(Events.namespace)
@@ -746,7 +743,6 @@
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency scrollbar.js
-	 * @dependency touch.js
 	 */
 
 	var Plugin = Formstone.Plugin("dropdown", {
@@ -807,7 +803,6 @@
 			],
 
 			events: {
-				tap:   "tap",
 				close: "close"
 			}
 		}),
