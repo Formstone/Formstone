@@ -241,7 +241,7 @@
 
 		$Window.trigger(Events.rendered, [ data ]);
 
-		var scrollTop = false;
+		var scrollTop = 0;
 
 		if (parsedURL.hash !== "") {
 			var $el = $(parsedURL.hash);
