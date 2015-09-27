@@ -4,7 +4,7 @@
  * @description Formstone Library core. Required for all plugins.
  */
 
-var Formstone = this.Formstone = (function ($, window, document, undefined) {
+var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	/* global ga */
 
@@ -706,4 +706,4 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	return Formstone;
 
-})(jQuery, this, document);
+})(jQuery, window, document);
