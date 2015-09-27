@@ -11,20 +11,13 @@
 	 */
 
 	function initialize(options) {
-		if (Instance) {
-			return;
-		}
-
-		// Check for push/pop support
-		if (!Formstone.support.history) {
+		if (Instance || !Formstone.support.history) {
 			return;
 		}
 
 		$Body = Formstone.$body;
 
 		Instance = $.extend(Defaults, options);
-
-		Instance.$container = $(Instance.container);
 
 		if (Instance.render === $.noop) {
 			Instance.render = renderState;
@@ -36,8 +29,15 @@
 			};
 		}
 
-		// Capture current url & state
-		CurrentURL = window.location.href;
+		// Initial state
+		if (history.state) {
+			CurrentID  = history.state.id;
+			CurrentURL = history.state.url;
+		} else {
+			CurrentURL = window.location.href;
+
+			replaceState(CurrentID, CurrentURL);
+		}
 
 		// Bind state events
 		$Window.on(Events.popState, onPop);
@@ -74,31 +74,6 @@
 	}
 
 	/**
-	 * @method
-	 * @name load
-	 * @description Loads new page
-	 * @param opts [url] <''> "URL to load"
-	 * @example $.asap("load", "http://website.com/page/");
-	 */
-
-	/**
-	 * @method private
-	 * @name load
-	 * @description Loads new page
-	 * @param opts [url] <''> "URL to load"
-	 */
-
-	function load(url) {
-		if (!Instance || !Formstone.support.history) {
-			window.location.href = url;
-		} else if (url) {
-			requestURL(url);
-		}
-
-		return;
-	}
-
-	/**
 	 * @method private
 	 * @name onClick
 	 * @description Handles click events
@@ -122,7 +97,7 @@
 		e.stopImmediatePropagation();
 
 		if (url.href !== CurrentURL) {
-			requestURL(url.href);
+			requestURL(url.href, true);
 		}
 	}
 
@@ -134,26 +109,17 @@
 	 */
 
 	function onPop(e) {
-		var data = e.originalEvent.state;
+		if (Request) {
+			Request.abort();
+		}
 
-		if (data) {
-			if (Instance.modal && Visited === 0 && data.url && !data.initial) {
-				// If opening content in a 'modal', return to original page on reload->back
-				window.location.href = data.url;
-			} else {
-				// Check if data exists
-				if (data.url !== CurrentURL) {
-					if (Instance.force) {
-						// Force a new request, even if navigating back
-						requestURL(data.url);
-					} else {
-						// Fire request event
-						$Window.trigger(Events.requested, [ true ]);
+		var state = e.originalEvent.state,
+			direction = (state.id > CurrentID) ? "forward" : "back";
 
-						process(data.url, data.hash, data.data, data.scroll, false);
-					}
-				}
-			}
+		CurrentID = state.id;
+
+		if (state.url !== CurrentURL) {
+			requestURL(state.url, false);
 		}
 	}
 
@@ -162,9 +128,10 @@
 	 * @name requestURL
 	 * @description Requests new content via AJAX
 	 * @param url [string] "URL to load"
+	 * @param doPush [boolean] "Flag to push to stack"
 	 */
 
-	function requestURL(url) {
+	function requestURL(url, doPush) {
 		if (Request) {
 			Request.abort();
 		}
@@ -176,19 +143,19 @@
 		Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
 
 		var parsed     = parseURL(url),
-			data       = parsed.data,
+			params     = parsed.params,
 			hash       = parsed.hash,
-			cleanURL   = parsed.url,
+			cleanURL   = parsed.clean,
 			error      = "User error",
 			response   = null,
 			requestDeferred = $.Deferred();
 
-		data[ Instance.requestKey ] = true;
+		params[ Instance.requestKey ] = true;
 
 		// Request new content
 		Request = $.ajax({
 			url: cleanURL,
-			data: data,
+			data: params,
 			dataType: "json",
 			cache: Instance.cache,
 			xhr: function() {
@@ -236,7 +203,7 @@
 		});
 
 		$.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
-			process(url, hash, response, (Instance.jump ? 0 : false), true);
+			processResponse(parsed, response, doPush);
 		}).fail(function() {
 			$Window.trigger(Events.failed, [ error ]);
 		});
@@ -244,46 +211,14 @@
 
 	/**
 	 * @method private
-	 * @name parseURL
-	 * @description Parse url parts
-	 * @param url [string] "URL to parse"
-	 */
-
-	function parseURL(url) {
-		var queryIndex = url.indexOf("?"),
-			hashIndex  = url.indexOf("#"),
-			data       = {},
-			hash       = "",
-			cleanURL   = url;
-
-		if (hashIndex > -1) {
-			hash = url.slice(hashIndex);
-			cleanURL = url.slice(0, hashIndex);
-		}
-
-		if (queryIndex > -1) {
-			data = getQueryParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
-			cleanURL = url.slice(0, queryIndex);
-		}
-
-		return {
-			hash    : hash,
-			data    : data,
-			url     : url
-		};
-	}
-
-	/**
-	 * @method private
-	 * @name process
+	 * @name processResponse
 	 * @description Processes a state
-	 * @param url [string] "State URL"
+	 * @param parsedURL [object] "Parsed URL"
 	 * @param data [object] "State Data"
-	 * @param scrollTop [int] "Current scroll position"
 	 * @param doPush [boolean] "Flag to replace or add state"
 	 */
 
-	function process(url, hash, data, scrollTop, doPush) {
+	function processResponse(parsedURL, data, doPush) {
 		// Fire load event
 		$Window.trigger(Events.loaded, [ data ]);
 
@@ -292,34 +227,24 @@
 			$.fsAnalytics("pageview");
 		}
 
-		// Update current state before rendering new state
-		// saveState(data);
-
 		// Render before updating
-		Instance.render.call(this, data, hash);
+		Instance.render.call(this, data, parsedURL.hash);
 
 		// Update current url
-		CurrentURL = url;
+		CurrentURL = parsedURL.url;
 
 		if (doPush) {
 			// Push new states to the stack
-			history.pushState({
-				url: CurrentURL,
-				data: data,
-				scroll: scrollTop,
-				hash: hash
-			}, "state-" + CurrentURL, CurrentURL);
-
-			Visited++;
-		} else {
-			// Update state with history data
-			// saveState(data);
+			CurrentID++;
+			pushState(CurrentID, CurrentURL);
 		}
 
 		$Window.trigger(Events.rendered, [ data ]);
 
-		if (hash !== "") {
-			var $el = $(hash);
+		var scrollTop = false;
+
+		if (parsedURL.hash !== "") {
+			var $el = $(parsedURL.hash);
 
 			if ($el.length) {
 				scrollTop = $el.offset().top;
@@ -333,7 +258,7 @@
 
 	/**
 	 * @method private
-	 * @name renderState
+	 * @name renderHTML
 	 * @description Renders a new state
 	 * @param data [object] "State Data"
 	 * @param hash [string] "Hash"
@@ -358,34 +283,27 @@
 
 	/**
 	 * @method private
-	 * @name saveState
-	 * @description Saves the current state
-	 * @param data [object] "State Data"
+	 * @name loadURL
+	 * @description Loads new page
+	 * @param opts [url] <''> "URL to load"
 	 */
 
-	function saveState(data) {
-		var cache = [];
+	/**
+	 * @method
+	 * @name load
+	 * @description Loads new page
+	 * @param opts [url] <''> "URL to load"
+	 * @example $.asap("load", "http://example.com/page/");
+	 */
 
-		if ($.type(data) !== "undefined") {
-			var $target;
-
-			for (var key in data) {
-				if (data.hasOwnProperty(key)) {
-					$target = $(key);
-
-					if ($target.length) {
-						cache[key] = $target.html();
-					}
-				}
-			}
+	function loadURL(url) {
+		if (!Instance || !Formstone.support.history) {
+			window.location.href = url;
+		} else if (url) {
+			requestURL(url, true);
 		}
 
-		// Update state
-		history.replaceState({
-			url: CurrentURL,
-			data: cache,
-			scroll: $Window.scrollTop()
-		}, "state-" + CurrentURL, CurrentURL);
+		return;
 	}
 
 	/**
@@ -400,46 +318,73 @@
 	 * @name replace
 	 * @description Updates current url in history
 	 * @param url [string] "New URL"
+	 * @example $.asap("replace", "http://example.com/page/");
 	 */
 
 	function replaceURL(url) {
-		var currentState = history.state,
-			data = [];
-
-		if (currentState && currentState.data) {
-			data = currentState.data;
-		}
+		var state = history.state;
 
 		CurrentURL = url;
 
-		saveState(data);
+		replaceState(state.id, url);
+	}
+
+
+	function replaceState(id, url) {
+		history.replaceState({
+			id: id,
+			url: url
+		}, Namespace + id, url);
+	}
+
+	function pushState(id, url) {
+		history.pushState({
+			id: id,
+			url: url
+		}, Namespace + id, url);
 	}
 
 	/**
 	 * @method private
-	 * @name unescape
-	 * @description Unescapes HTML
-	 * @param text [string] "Text to unescape"
+	 * @name parseURL
+	 * @description Parse url parts
+	 * @param url [string] "URL to parse"
 	 */
 
-	function unescape(text) {
-		return text.replace(/&lt;/g, "<")
-				   .replace(/&gt;/g, ">")
-				   .replace(/&nbsp;/g, " ")
-				   .replace(/&amp;/g, "&")
-				   .replace(/&quot;/g, '"')
-				   .replace(/&#039;/g, "'");
+	function parseURL(url) {
+		var queryIndex = url.indexOf("?"),
+			hashIndex  = url.indexOf("#"),
+			params     = {},
+			hash       = "",
+			cleanURL   = url;
+
+		if (hashIndex > -1) {
+			hash = url.slice(hashIndex);
+			cleanURL = url.slice(0, hashIndex);
+		}
+
+		if (queryIndex > -1) {
+			params = parseParams( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
+			cleanURL = url.slice(0, queryIndex);
+		}
+
+		return {
+			hash     : hash,
+			params   : params,
+			url      : url,
+			clean    : cleanURL
+		};
 	}
 
 	/**
 	 * @method private
-	 * @name getQueryParams
+	 * @name parseParams
 	 * @description Returns keyed object containing all GET query parameters
 	 * @param url [string] "URL to parse"
 	 * @return [object] "Keyed query params"
 	 */
 
-	function getQueryParams(url) {
+	function parseParams(url) {
 		var params = {},
 			parts = url.slice( url.indexOf("?") + 1 ).split("&");
 
@@ -466,7 +411,7 @@
 			utilities: {
 				_initialize    : initialize,
 
-				load           : load,
+				load           : loadURL,
 				replace        : replaceURL
 			},
 
@@ -492,9 +437,6 @@
 		/**
 		 * @options
 		 * @param cache [boolean] <true> "Cache AJAX responses"
-		 * @param force [boolean] <false> "Forces new requests when navigating back/forward"
-		 * @param jump [boolean] <true> "Jump page to top on render"
-		 * @param modal [boolean] <false> "Flag for content loaded into modal"
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
@@ -503,13 +445,10 @@
 
 		Defaults = {
 			cache         : true,
-			force         : false,
-			jump          : true,
-			modal         : false,
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",
-			transitionOut   : $.noop
+			transitionOut : $.noop
 		},
 
 		// Localize References
@@ -524,8 +463,9 @@
 
 		// Internal
 
+		Namespace     = "asap-",
 		CurrentURL    = '',
-		Visited       = 0,
+		CurrentID     = 1,
 		Request,
 		Instance;
 })(jQuery, Formstone);

@@ -245,14 +245,9 @@
 
 	function pushEvent(data, $target) {
 		// https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference
-		// http://www.simoahava.com/analytics/create-a-generic-event-tag/
 		var loc = Window.location,
 			event = $.extend({
-				hitType     : "event",
-				/*
-				location    : loc.protocol + "//" + loc.hostname + loc.pathname + loc.search,
-				title       : Window.document.title
-				*/
+				hitType     : "event"
 			}, data);
 
 		// If active link, launch that ish!
@@ -262,8 +257,9 @@
 
 			if (url !== "") {
 				// Check Window target
-				if ($target.attr("target")) {
-					Window.open(url, $target.attr("target"));
+				var target = $target.attr("target");
+				if (target) {
+					Window.open(url, target);
 				} else if (Defaults.eventCallback) {
 					var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
 

@@ -998,11 +998,7 @@
 			 */
 
 			events: {
-				update      : "update",
-				panStart    : "panstart",
-				pan         : "pan",
-				panEnd      : "panend",
-				swipe       : "swipe"
+				update      : "update"
 			},
 
 			methods: {

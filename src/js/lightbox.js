@@ -33,7 +33,7 @@
 
 	function raf() {
 		if (Instance) {
-			renderLightboxImage();
+			// renderLightboxImage();
 		}
 	}
 
@@ -675,6 +675,8 @@
 
 		Instance.hasScaled = true;
 		Instance.isScaling = true;
+
+		renderLightboxImage();
 	}
 
 	function onScaleEnd(e) {
@@ -721,7 +723,7 @@
 	}
 
 	function renderLightboxImage() {
-		if (Instance.$image && Instance.$image.length && Instance.isScaling) {
+		// if (Instance.$image && Instance.$image.length && Instance.isScaling) {
 			Instance.$imageContainer.css({
 				top:  Instance.targetContainerY,
 				left: Instance.targetContainerX
@@ -733,7 +735,7 @@
 				top       : -(Instance.targetImageHeight / 2),
 				left      : -(Instance.targetImageWidth  / 2)
 			});
-		}
+		// }
 	}
 
 	/**

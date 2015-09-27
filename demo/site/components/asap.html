@@ -16,6 +16,66 @@
 core.js
 analytics.js</code></pre>
 <h3 id="basic">Basic</h3>
+<p>ASAP can progressively enhance a site to request page content via AJAX, reducing overall page load time. The site must be tuned to return a properly formed JSON object containing key-value pairs. Keys should be valid selectors as they will be used to match DOM nodes. The value should contain the new content to render. This allows the developer to only update the parts of the page that change while leaving global elements, such as headers and footers, in place.</p>
+<pre><code class="lang-php">&lt;?
+
+ob_start();
+
+if ($_GET[&quot;fs-asap&quot;]) {
+    define(&quot;IS_ASAP&quot;, true);
+}
+
+if (!IS_ASAP) {
+    // Draw Header
+?&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        ...
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;page_content&quot;&gt;
+&lt;?
+}
+
+// Always Draw Content
+?&gt;
+&lt;h1&gt;Page Title&lt;/h1&gt;
+&lt;?
+
+if (!IS_ASAP) {
+    // Draw footer
+?&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+&lt;?
+}
+
+$content = ob_get_clean();
+
+if (IS_ASAP) {
+    echo json_encode(array(
+        &quot;#page_content&quot; =&gt; $content
+    ));
+    die();
+} else {
+    echo $content;
+}
+
+?&gt;</code></pre>
+<h3 id="events">Events</h3>
+<p>Only updating parts of a page also means static resources, like CSS and Javascript, are only loaded and executed once. Developers can hook into the ASAP events to ensure the page is rendered and destroyed properly:</p>
+<pre><code class="lang-js">$(window).on(&quot;requested.asap&quot;, function(e) {
+    // Before request is made.
+}).on(&quot;progress.asap&quot;, function (e) {
+    // As request is loaded. 
+}).on(&quot;loaded.asap&quot;, function (e) {
+    // After request is loaded. Tear down any existing plugins.
+}).on(&quot;loaded.asap&quot;, function (e) {
+    // After state is rendered. Initialize any new plugins.
+}).on(&quot;failed.asap&quot;, function (e) {
+    // After load error.
+})</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
 <table>
@@ -33,24 +93,6 @@ analytics.js</code></pre>
 <td><code>boolean</code></td>
 <td><code>true</code></td>
 <td>Cache AJAX responses</td>
-</tr>
-<tr>
-<td><code>force</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Forces new requests when navigating back/forward</td>
-</tr>
-<tr>
-<td><code>jump</code></td>
-<td><code>boolean</code></td>
-<td><code>true</code></td>
-<td>Jump page to top on render</td>
-</tr>
-<tr>
-<td><code>modal</code></td>
-<td><code>boolean</code></td>
-<td><code>false</code></td>
-<td>Flag for content loaded into modal</td>
 </tr>
 <tr>
 <td><code>selector</code></td>
@@ -114,7 +156,7 @@ analytics.js</code></pre>
 <p>Methods are publicly available, unless otherwise stated.</p>
 <h3 id="load">load</h3>
 <p>Loads new page</p>
-<pre><code class="lang-javascript">$.asap(&quot;load&quot;, &quot;http://website.com/page/&quot;);</code></pre>
+<pre><code class="lang-javascript">$.asap(&quot;load&quot;, &quot;http://example.com/page/&quot;);</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>
@@ -136,6 +178,7 @@ analytics.js</code></pre>
 </table>
 <h3 id="replace">replace</h3>
 <p>Updates current url in history</p>
+<pre><code class="lang-javascript">$.asap(&quot;replace&quot;, &quot;http://example.com/page/&quot;);</code></pre>
 <h4 id="parameters">Parameters</h4>
 <table>
 <thead>

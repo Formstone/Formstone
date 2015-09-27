@@ -1,5 +1,21 @@
 # Changelog
 
+### 0.8.17
+
+* Added internal events: 
+	- `panStart`
+	- `pan`
+	- `panEnd`
+	- `scaleStart`
+	- `scale`
+	- `scaleEnd`
+	- `swipe`
+* Added internal Request Animation Frame callback system
+* Improved Lightbox pinch-and-zoom performance
+* Updated Scrollbar to use Touch pan events
+* Rebuilt ASAP by removing internal DOM caching for better state handling
+* Removed clickTouchStart events in favor of browsers handling touch
+
 ### 0.8.16
 
 * Fixed issue with grouped Swap active item
