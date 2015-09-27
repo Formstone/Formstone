@@ -671,11 +671,13 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 	// RAF
 
 	function handleRAF() {
-		Formstone.window.requestAnimationFrame(handleRAF);
+		if (Formstone.support.raf) {
+			Formstone.window.requestAnimationFrame(handleRAF);
 
-		for (var i in Formstone.RAFHandlers) {
-			if (Formstone.RAFHandlers.hasOwnProperty(i)) {
-				Formstone.RAFHandlers[i].callback.call(window);
+			for (var i in Formstone.RAFHandlers) {
+				if (Formstone.RAFHandlers.hasOwnProperty(i)) {
+					Formstone.RAFHandlers[i].callback.call(window);
+				}
 			}
 		}
 	}

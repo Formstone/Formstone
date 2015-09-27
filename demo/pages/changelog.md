@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.18
+
+* Added check for Request Animation Frame
+* Switched to passing `window` in Core closure
+
 ### 0.8.17
 
 * Added internal events: 
