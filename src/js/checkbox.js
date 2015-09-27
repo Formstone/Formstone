@@ -12,7 +12,7 @@
 	function construct(data) {
 		var $parent      = this.closest("label"),
 			$label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
-			baseClass    = [RawClasses.base, data.customClass].join(" "),
+			baseClass    = [RawClasses.base, data.theme, data.customClass].join(" "),
 			html         = "";
 
 		data.radio = (this.attr("type") === "radio");
@@ -250,6 +250,7 @@
 			 * @param toggle [boolean] <false> "Render 'toggle' styles"
 			 * @param labels.on [string] <'ON'> "Label for 'On' position; 'toggle' only"
 			 * @param labels.off [string] <'OFF'> "Label for 'Off' position; 'toggle' only"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 */
 
 			defaults: {
@@ -258,7 +259,8 @@
 				labels : {
 					on         : "ON",
 					off        : "OFF"
-				}
+				},
+				theme          : "fs-light"
 			},
 
 			classes: [

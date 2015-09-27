@@ -3,47 +3,12 @@
 
 	// Config
 
-	@fs-carousel-styles:						true;
-
 	@fs-carousel-transition-duration:			0.5s;
 	@fs-carousel-transition-timing:				ease;
 
-	// Controls
+	@fs-carousel-control-left:					0;
+	@fs-carousel-control-right:					0;
 
-	@fs-carousel-control-background:			#fff;
-	@fs-carousel-control-height:				40px;
-	@fs-carousel-control-width:					40px;
-
-	@fs-carousel-control-transition-duration:	0.15s;
-	@fs-carousel-control-transition-timing:		ease;
-
-	@fs-carousel-control-box-shadow: 			0 0 5px fade(#000, 25);
-	@fs-carousel-control-border-radius:			100%;
-
-	@fs-carousel-control-left:					20px;
-	@fs-carousel-control-right:					20px;
-
-	@fs-carousel-control-disabled-opacity:		0;
-
-	// Control Carets
-
-	@fs-carousel-control-caret-color:			#333;
-	@fs-carousel-control-caret-size:			7px;
-
-	@fs-carousel-control-caret-width:   		(@fs-carousel-control-caret-size * 1.5);
-	@fs-carousel-control-caret-margin:  		(@fs-carousel-control-width - (@fs-carousel-control-caret-size * 1.8)) / 2;
-
-	// Carousel pagination
-
-	@fs-carousel-pagination-margin:				10px 0 0;
-	@fs-carousel-pagination-padding:			0;
-
-	@fs-carousel-page-background:				#333;
-	@fs-carousel-page-border-radius:			100%;
-	@fs-carousel-page-margin:					0 3px;
-	@fs-carousel-page-opacity:					0.5;
-	@fs-carousel-page-height:					10px;
-	@fs-carousel-page-width:					10px;
 
 	/**
 	 * @class
@@ -271,52 +236,10 @@
 			display: block;
 			padding: 0;
 			visibility: hidden;
-
-			& when (@fs-carousel-styles) {
-				width: @fs-carousel-control-width;
-				height: @fs-carousel-control-height;
-
-				background: @fs-carousel-control-background;
-				border-radius: @fs-carousel-control-border-radius;
-				box-shadow: @fs-carousel-control-box-shadow;
-
-				margin: auto;
-				opacity: @fs-carousel-control-disabled-opacity;
-				overflow: hidden;
-				text-indent: 200%;
-				transition:
-					opacity @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing,
-					visibility @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing;
-				white-space: nowrap;
-
-				&:before {
-					width: 0;
-					height: 0;
-
-					position: absolute;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					left: 0;
-
-					content: '';
-					margin: auto;
-				}
-
-				// IE8 - opacity check
-
-				.no-opacity & {
-					text-indent: -999px;
-				}
-			}
 		}
 
 		&-enabled &-control&-visible {
 			visibility: visible;
-
-			& when (@fs-carousel-styles) {
-				opacity: 1;
-			}
 		}
 
 		/**
@@ -330,17 +253,6 @@
 		&-enabled&-rtl &-control_next {
 			right: auto;
 			left: @fs-carousel-control-left;
-
-			& when (@fs-carousel-styles) {
-				&:before {
-					border-top: @fs-carousel-control-caret-size solid transparent;
-					border-bottom: @fs-carousel-control-caret-size solid transparent;
-					border-right: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
-					border-left: none;
-					margin-left: @fs-carousel-control-caret-margin;
-					margin-right: auto;
-				}
-			}
 		}
 
 		/**
@@ -354,17 +266,6 @@
 		&-enabled&-rtl &-control_previous {
 			right: @fs-carousel-control-right;
 			left: auto;
-
-			& when (@fs-carousel-styles) {
-				&:before {
-					border-top: @fs-carousel-control-caret-size solid transparent;
-					border-bottom: @fs-carousel-control-caret-size solid transparent;
-					border-left: @fs-carousel-control-caret-width solid @fs-carousel-control-caret-color;
-					border-right: none;
-					margin-right: @fs-carousel-control-caret-margin;
-					margin-left: auto;
-				}
-			}
 		}
 
 		/**
@@ -375,9 +276,7 @@
 		 */
 
 		&-enabled &-control_disabled {
-			& when (@fs-carousel-styles) {
-				opacity: 0;
-			}
+
 		}
 
 		/**
@@ -401,8 +300,6 @@
 		&-enabled &-pagination {
 			width: 100%;
 
-			margin: @fs-carousel-pagination-margin;
-			padding: @fs-carousel-pagination-padding;
 			text-align: center;
 		}
 
@@ -422,25 +319,6 @@
 			cursor: pointer;
 			display: inline-block;
 			padding: 0;
-
-			& when (@fs-carousel-styles) {
-				width: @fs-carousel-page-width;
-				height: @fs-carousel-page-height;
-
-				background: @fs-carousel-page-background;
-				border-radius: @fs-carousel-page-border-radius;
-				margin: @fs-carousel-page-margin;
-				opacity: @fs-carousel-page-opacity;
-				overflow: hidden;
-				text-indent: 200%;
-				white-space: nowrap;
-
-				// IE8 - opacity check
-
-				.no-opacity & {
-					text-indent: -999px;
-				}
-			}
 		}
 
 		/**
@@ -451,9 +329,7 @@
 		 */
 
 		&-enabled &-page&-active {
-			& when (@fs-carousel-styles) {
-				opacity: 1;
-			}
+
 		}
 
 		// RTL

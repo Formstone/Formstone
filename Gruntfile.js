@@ -19,7 +19,9 @@ module.exports = function(grunt) {
 		'dist/css/scrollbar.css'     : [ 'src/less/scrollbar.less' ],
 		'dist/css/tabs.css'          : [ 'src/less/tabs.less' ],
 		'dist/css/tooltip.css'       : [ 'src/less/tooltip.less' ],
-		'dist/css/upload.css'        : [ 'src/less/upload.less' ]
+		'dist/css/upload.css'        : [ 'src/less/upload.less' ],
+
+		'dist/css/themes/light.css'  : [ 'src/less/themes/light.less' ]
 	};
 
 	grunt.initConfig({
@@ -189,10 +191,9 @@ module.exports = function(grunt) {
 		// LESS
 		less: {
 			options: {
-				cleancss: false,
 				modifyVars: '<%= pkg.site.vars %>',
 				plugins: [
-					// new (require('less-plugin-clean-css'))()
+					new (require('less-plugin-clean-css'))()
 				]
 			},
 			library: {

@@ -71,6 +71,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `external` | `boolean` | `false` | Open options as links in new window |
 | `links` | `boolean` | `false` | Open options as links in same window |
 | `mobile` | `boolean` | `false` | Force desktop interaction on mobile |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `trim` | `int` | `0` | &nbsp; |
 
 ## Methods

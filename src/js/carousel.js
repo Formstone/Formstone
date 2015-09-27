@@ -33,6 +33,7 @@
 		var i,
 			carouselClasses = [
 				RawClasses.base,
+				data.theme,
 				data.customClass,
 				(data.rtl ? RawClasses.rtl : RawClasses.ltr)
 			];
@@ -185,7 +186,7 @@
 			data.$controls.remove();
 		}
 
-		this.removeClass( [RawClasses.base, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
+		this.removeClass( [RawClasses.base, data.theme, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
 
 		cacheInstances();
 	}
@@ -938,8 +939,10 @@
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
-			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
 			 * @param rtl [boolean] <false> "Right to Left display"
+			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
+			 * @param single [boolean] <false> "Flag to display single item at a time"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
 
@@ -961,9 +964,10 @@
 				minWidth       : '0px',
 				paged          : false,
 				pagination     : true,
+				rtl            : false,
 				show           : 1,
 				single         : false,
-				rtl            : false,
+				theme          : "fs-light",
 				useMargin      : false
 			},
 
