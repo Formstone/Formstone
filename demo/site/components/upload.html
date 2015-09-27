@@ -118,6 +118,10 @@ core.js</code></pre>
     action: &quot;upload.php&quot;
 });</code></pre>
 <pre><code class="lang-markup">&lt;div class=&quot;target&quot;&gt;&lt;/div&gt;</code></pre>
+<p>Note: IE9 does not support the <a href="http://caniuse.com/#feat=fileapi" target="_blank">File API</a>. The developer will need to provide a proper fallback. Support can be checked in the <code>Formstone.support</code> object:</p>
+<pre><code class="lang-js">if (Formstone.support.file) {
+    ...
+}</code></pre>
 <h3 id="uploads">Uploads</h3>
 <p>Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.</p>
 <h2 id="options">Options</h2>
