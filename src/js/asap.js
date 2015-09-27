@@ -241,7 +241,7 @@
 
 		$Window.trigger(Events.rendered, [ data ]);
 
-		var scrollTop = 0;
+		var scrollTop = (Instance.jump) ? 0 : false;
 
 		if (parsedURL.hash !== "") {
 			var $el = $(parsedURL.hash);
@@ -436,7 +436,8 @@
 
 		/**
 		 * @options
-		 * @param cache [boolean] <true> "Cache AJAX responses"
+		 * @param cache [boolean] <true> "Flag to cache AJAX responses"
+		 * @param jump [boolean] <true> "Flag to scroll to top on load"
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
@@ -445,6 +446,7 @@
 
 		Defaults = {
 			cache         : true,
+			jump          : true,
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",

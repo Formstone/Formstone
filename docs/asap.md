@@ -105,7 +105,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `cache` | `boolean` | `true` | Cache AJAX responses |
+| `cache` | `boolean` | `true` | Flag to cache AJAX responses |
+| `jump` | `boolean` | `true` | Flag to scroll to top on load |
 | `selector` | `string` | `'a'` | Target DOM Selector |
 | `render` | `function` | `$.noop` | Custom render function |
 | `requestKey` | `string` | `'fs-asap'` | GET variable for requests |
