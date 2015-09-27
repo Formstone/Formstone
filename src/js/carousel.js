@@ -30,13 +30,14 @@
 	 */
 
 	function construct(data) {
-		var i,
-			carouselClasses = [
-				RawClasses.base,
-				data.theme,
-				data.customClass,
-				(data.rtl ? RawClasses.rtl : RawClasses.ltr)
-			];
+		var i;
+
+		data.thisClasses = [
+			RawClasses.base,
+			data.theme,
+			data.customClass,
+			(data.rtl ? RawClasses.rtl : RawClasses.ltr)
+		];
 
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
@@ -67,19 +68,21 @@
 		}
 
 		if (data.autoHeight) {
-			carouselClasses.push(RawClasses.auto_height);
+			data.thisClasses.push(RawClasses.auto_height);
 		}
 
 		if (data.contained) {
-			carouselClasses.push(RawClasses.contained);
+			data.thisClasses.push(RawClasses.contained);
 		}
 
 		if (data.single) {
-			carouselClasses.push(RawClasses.single);
+			data.thisClasses.push(RawClasses.single);
 		}
 
+		data.thisClasses = data.thisClasses.join(" ");
+
 		// Modify dom
-		this.addClass( carouselClasses.join(" ") )
+		this.addClass(data.thisClasses)
 			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
@@ -186,7 +189,7 @@
 			data.$controls.remove();
 		}
 
-		this.removeClass( [RawClasses.base, data.theme, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
+		this.removeClass(data.thisClasses);
 
 		cacheInstances();
 	}

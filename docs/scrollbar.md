@@ -56,6 +56,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `duration` | `int` | `0` | Scroll animation length |
 | `handleSize` | `int` | `0` | Handle size; 0 to auto size |
 | `horizontal` | `boolean` | `false` | Scroll horizontally |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `trackMargin` | `int` | `0` | &nbsp; |
 
 ## Methods

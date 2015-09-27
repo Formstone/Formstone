@@ -49,8 +49,9 @@
 
 		data.paddingRight     = parseInt(this.css("padding-right"), 10);
 		data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
+		data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")].join(" ");
 
-		this.addClass( [RawClasses.base, data.customClass, (data.horizontal ? RawClasses.horizontal : "")].join(" ") )
+		this.addClass(data.thisClasses)
 			.wrapInner('<div class="' + RawClasses.content + '" />')
 			.prepend(html);
 
@@ -90,7 +91,7 @@
 					 .contents()
 					 .unwrap();
 
-		this.removeClass( [RawClasses.base, RawClasses.active, data.customClass].join(" ") )
+		this.removeClass(data.thisClasses)
 			.off(Events.namespace);
 	}
 
@@ -423,15 +424,17 @@
 			 * @param duration [int] <0> "Scroll animation length"
 			 * @param handleSize [int] <0> "Handle size; 0 to auto size"
 			 * @param horizontal [boolean] <false> "Scroll horizontally"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param trackMargin [int] <0> "Margin between track and handle edge”
 			 */
 
 			defaults: {
-				customClass: "",
-				duration: 0,
-				handleSize: 0,
-				horizontal: false,
-				trackMargin: 0
+				customClass    : "",
+				duration       : 0,
+				handleSize     : 0,
+				horizontal     : false,
+				theme          : "fs-light",
+				trackMargin    : 0
 			},
 
 			classes: [

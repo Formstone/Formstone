@@ -52,6 +52,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `customClass` | `string` | `''` | Class applied to instance |
 | `labels.up` | `string` | `'Up'` | Up arrow label |
 | `labels.down` | `string` | `'Down'` | Down arrow label |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
 ## Methods
 

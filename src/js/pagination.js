@@ -22,7 +22,9 @@
 		html += '</div>';
 		html += '<select class="' + RawClasses.select + '" tab-index="-1"></select>';
 
-		this.addClass(RawClasses.base)
+		data.thisClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+
+		this.addClass(data.thisClasses)
 			.wrapInner('<div class="' + RawClasses.pages + '"></div>')
 			.prepend(html);
 
@@ -83,7 +85,7 @@
 		data.$items.removeClass( [RawClasses.page, RawClasses.active, RawClasses.visible, RawClasses.first, RawClasses.last].join(" ") )
 				   .unwrap();
 
-		this.removeClass(RawClasses.base)
+		this.removeClass(data.thisClasses)
 			.off(Events.namespace);
 	}
 
@@ -296,6 +298,7 @@
 			 * @param labels.next [string] <'Next'> "Gallery control text"
 			 * @param labels.previous [string] <'Previous'> "Gallery control text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param visible [int] <2> "Visible pages before and after current page"
 			 */
 
@@ -308,6 +311,7 @@
 					previous    : "Previous"
 				},
 				maxWidth        : "740px",
+				theme           : "fs-light",
 				visible         : 2
 			},
 

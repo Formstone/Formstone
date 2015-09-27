@@ -42,6 +42,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `visible` | `int` | `2` | Visible pages before and after current page |
 
 ## Events

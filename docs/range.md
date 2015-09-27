@@ -62,6 +62,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels` | `boolean` | `true` | Draw labels |
 | `labels.max` | `string` | &nbsp; | Max value label; defaults to max value |
 | `labels.min` | `string` | &nbsp; | Min value label; defaults to min value |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `vertical` | `boolean` | `false` | &nbsp; |
 
 ## Methods

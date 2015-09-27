@@ -22,7 +22,9 @@
 			}
 			html += '>';
 
-			this.addClass(RawClasses.base)
+			data.thisClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+
+			this.addClass(data.thisClasses)
 				.append(html);
 
 			data.$input       = this.find(Classes.input);
@@ -376,6 +378,7 @@
 			 * @param multiple [true] <true> "Flag to allow mutiple file uploads"
 			 * @param postData [object] "Extra data to post with upload"
 			 * @param postKey [string] <'file'> "Key to upload file as"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 */
 
 			defaults: {
@@ -388,7 +391,8 @@
 				maxSize        : 5242880, // 5 mb
 				multiple       : true,
 				postData       : {},
-				postKey        : "file"
+				postKey        : "file",
+				theme          : "fs-light"
 			},
 
 			classes: [

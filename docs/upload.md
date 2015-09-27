@@ -58,6 +58,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `multiple` | `true` | `true` | Flag to allow mutiple file uploads |
 | `postData` | `object` | &nbsp; | Extra data to post with upload |
 | `postKey` | `string` | `'file'` | Key to upload file as |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
 ## Events
 
