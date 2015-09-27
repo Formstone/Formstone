@@ -12,14 +12,13 @@
 	.inline_content h2 { margin-top: 20px; }
 
 	.fs-lightbox h3 { font-style: italic; font-size: 16px; margin: 0; padding: 5px 0; }
+
+	.fs-lightbox-mobile .inline_content { color: #fff; }
 </style>
 
 <script>
 	$(function() {
-		$(".lightbox").not(".lightbox_format").lightbox({
-			// infinite: true
-			// mobile: true
-		});
+		$(".lightbox").not(".lightbox_format").lightbox();
 
 		$(".lightbox_format").lightbox({
 			formatter: customFormat
@@ -123,7 +122,7 @@
 <div id="hidden_content" style="display: none;">
 	<div class="inline_content">
 		<h2>Some Content!</h2>
-		<p>This was hidden on the page and loaded into the new Boxer instance.</p>
+		<p>This was hidden on the page and loaded into the new Lightbox instance.</p>
 	</div>
 </div>
 
