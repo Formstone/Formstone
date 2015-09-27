@@ -79,10 +79,10 @@
 			data.thisClasses.push(RawClasses.single);
 		}
 
-		data.thisClasses = data.thisClasses.join(" ");
+		data.thisClasses = data.thisClasses;
 
 		// Modify dom
-		this.addClass(data.thisClasses)
+		this.addClass(data.thisClasses.join(" "))
 			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
@@ -153,6 +153,9 @@
 		});
 
 		cacheInstances();
+
+		data.thisClasses.push(RawClasses.enabled);
+		data.thisClasses.push(RawClasses.animated);
 	}
 
 	/**
@@ -189,7 +192,7 @@
 			data.$controls.remove();
 		}
 
-		this.removeClass(data.thisClasses);
+		this.removeClass(data.thisClasses.join(" "));
 
 		cacheInstances();
 	}

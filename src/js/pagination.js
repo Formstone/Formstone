@@ -22,9 +22,9 @@
 		html += '</div>';
 		html += '<select class="' + RawClasses.select + '" tab-index="-1"></select>';
 
-		data.thisClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+		data.thisClasses = [RawClasses.base, data.theme, data.customClass];
 
-		this.addClass(data.thisClasses)
+		this.addClass(data.thisClasses.join(" "))
 			.wrapInner('<div class="' + RawClasses.pages + '"></div>')
 			.prepend(html);
 
@@ -85,7 +85,7 @@
 		data.$items.removeClass( [RawClasses.page, RawClasses.active, RawClasses.visible, RawClasses.first, RawClasses.last].join(" ") )
 				   .unwrap();
 
-		this.removeClass(data.thisClasses)
+		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
 	}
 

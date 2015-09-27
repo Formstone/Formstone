@@ -50,7 +50,7 @@
 			RawClasses.nav.replace(baseClass, typeClass),
 			gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
 			classGroup
-		].join(" ");
+		];
 
 		data.contentClasses = [
 			RawClasses.content.replace(baseClass, typeClass),
@@ -60,7 +60,7 @@
 
 		// DOM
 
-		data.$nav        = this.addClass(data.thisClasses);
+		data.$nav        = this.addClass(data.thisClasses.join(" "));
 		data.$handle     = $(data.handle).addClass(data.handleClasses);
 		data.$content    = $(data.content).addClass(data.contentClasses);
 		data.$animate    = $().add(data.$nav).add(data.$content);
@@ -115,7 +115,7 @@
 
 		clearLocks(data);
 
-		this.removeClass(data.thisClasses)
+		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
 	}
 

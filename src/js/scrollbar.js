@@ -49,9 +49,9 @@
 
 		data.paddingRight     = parseInt(this.css("padding-right"), 10);
 		data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
-		data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")].join(" ");
+		data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")];
 
-		this.addClass(data.thisClasses)
+		this.addClass(data.thisClasses.join(" "))
 			.wrapInner('<div class="' + RawClasses.content + '" />')
 			.prepend(html);
 
@@ -91,7 +91,7 @@
 					 .contents()
 					 .unwrap();
 
-		this.removeClass(data.thisClasses)
+		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
 	}
 

@@ -15,7 +15,7 @@
 		data.content      = this.attr("href");
 		data.group        = this.data(Namespace + "-group");
 
-		data.thisClasses         = [RawClasses.tab, data.rawGuid, data.theme, data.customClass].join(" ");
+		data.thisClasses         = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
 		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid].join(" ");
 		data.contentClasses      = [RawClasses.content, data.rawGuid].join(" ");
 
@@ -30,7 +30,7 @@
 
 		this.attr("data-swap-target", data.content)
 			.attr("data-swap-group", data.group)
-			.addClass(data.thisClasses)
+			.addClass(data.thisClasses.join(" "))
 			.on("activate.swap" + data.dotGuid, data, onActivate)
 			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
 			.on("enable.swap" + data.dotGuid, data, onEnable)
@@ -82,7 +82,7 @@
 			.removeData("data-swap-target")
 			.removeAttr("data-swap-group")
 			.removeData("data-swap-group")
-			.removeClass(data.thisClasses)
+			.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace)
 			.fsSwap("destroy");
 	}

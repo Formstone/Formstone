@@ -35,9 +35,9 @@
 
 		data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
 
-		data.thisClasses = [RawClasses.base, data.customClass].join(" ");
+		data.thisClasses = [RawClasses.base, data.customClass];
 
-		this.addClass(data.thisClasses);
+		this.addClass(data.thisClasses.join(" "));
 
 		var source = data.source;
 		data.source = null;
@@ -57,7 +57,7 @@
 	function destruct(data) {
 		data.$container.remove();
 
-		this.removeClass(data.thisClasses)
+		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
 
 		cacheInstances();

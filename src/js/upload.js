@@ -22,9 +22,9 @@
 			}
 			html += '>';
 
-			data.thisClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+			data.thisClasses = [RawClasses.base, data.theme, data.customClass];
 
-			this.addClass(data.thisClasses)
+			this.addClass(data.thisClasses.join(" "))
 				.append(html);
 
 			data.$input       = this.find(Classes.input);
@@ -57,7 +57,7 @@
 			data.$input.off(Events.namespace);
 
 			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )
-				.removeClass(RawClasses.base)
+				.removeClass(data.thisClasses.join(" "))
 				.html("");
 		}
 	}
