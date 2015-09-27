@@ -310,14 +310,14 @@
 	 * @method private
 	 * @name replaceURL
 	 * @description Updates current url in history
-	 * @param url [string] "New URL"
+	 * @param url [string] <''> "New URL"
 	 */
 
 	/**
 	 * @method
 	 * @name replace
 	 * @description Updates current url in history
-	 * @param url [string] "New URL"
+	 * @param url [string] <''> "New URL"
 	 * @example $.asap("replace", "http://example.com/page/");
 	 */
 
@@ -417,8 +417,8 @@
 
 			/**
 			 * @events
-			 * @event requested.asap "Before request is made; triggered on window. Second parameter 'true' if pop event"
-			 * @event progress.asap "As request is loaded; triggered on window"
+			 * @event requested.asap "Before request is made; triggered on window; Second parameter 'true' if pop event"
+			 * @event progress.asap "As request is loaded; triggered on window; Second parameter contains percentage complete"
 			 * @event loaded.asap "After request is loaded; triggered on window"
 			 * @event rendered.asap "After state is rendered; triggered on window"
 			 * @event failed.asap "After load error; triggered on window"

@@ -28,9 +28,11 @@ analytics.js
 ASAP can progressively enhance a site to request page content via AJAX, reducing overall page load time. The site must be tuned to return a properly formed JSON object containing key-value pairs. Keys should be valid selectors as they will be used to match DOM nodes. The value should contain the new content to render. This allows the developer to only update the parts of the page that change while leaving global elements, such as headers and footers, in place.
 
 ```php
-<?
+<?php
 
 ob_start();
+
+$page_title = "Page Title";
 
 if ($_GET["fs-asap"]) {
 	define("IS_ASAP", true);
@@ -62,11 +64,12 @@ if (!IS_ASAP) {
 <?
 }
 
-$content = ob_get_clean();
+$page_content = ob_get_clean();
 
 if (IS_ASAP) {
 	echo json_encode(array(
-		"#page_content" => $content
+		"title" => $page_title,
+		"#page_content" => $page_content,
 	));
 	die();
 } else {
@@ -80,7 +83,7 @@ if (IS_ASAP) {
 
 Only updating parts of a page also means static resources, like CSS and Javascript, are only loaded and executed once. Developers can hook into the ASAP events to ensure the page is rendered and destroyed properly:
 
-```js
+```javascript
 $(window).on("requested.asap", function(e) {
 	// Before request is made.
 }).on("progress.asap", function (e) {
@@ -91,7 +94,7 @@ $(window).on("requested.asap", function(e) {
 	// After state is rendered. Initialize any new plugins.
 }).on("failed.asap", function (e) {
 	// After load error.
-})
+});
 ```
 
 
@@ -114,8 +117,8 @@ Events are triggered on the `window`, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `requested.asap` | Before request is made; triggered on window. Second parameter 'true' if pop event |
-| `progress.asap` | As request is loaded; triggered on window |
+| `requested.asap` | Before request is made; triggered on window; Second parameter 'true' if pop event |
+| `progress.asap` | As request is loaded; triggered on window; Second parameter contains percentage complete |
 | `loaded.asap` | After request is loaded; triggered on window |
 | `rendered.asap` | After state is rendered; triggered on window |
 | `failed.asap` | After load error; triggered on window |
@@ -150,5 +153,5 @@ $.asap("replace", "http://example.com/page/");
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `url` | `string` | &nbsp; | New URL |
+| `url` | `string` | `''` | New URL |
 

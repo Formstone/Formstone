@@ -102,6 +102,7 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 				_construct    : construct,
 				_destruct     : destruct,
 				_resize       : resize,
+				_raf          : raf,
 
 				reset         : reset
 			},
@@ -127,6 +128,7 @@ As in the example above, Widgets can override three internal methods by pointing
 | `_construct` | Run at initialization of each instance, scoped to specific instance |
 | `_destruct` | Run at destruction of each instance, scoped to specific instance |
 | `_resize` | Run on window resize, scoped to window |
+| `_raf` | Run on request animation frame, scoped to window |
 
 When an instance is created or destroyed, the factory will automatically add or remove the instance's localized plugin data. This data is available as the first argument in any public method call, or by using the namespace to query for the data:
 
@@ -265,6 +267,7 @@ data.$el.on(Events.click, onClick);
 | Key | Type | Value |
 | --- | --- | --- |
 | `namespace` | Default | `.namespace` |
+| `beforeUnload` | Default | `beforeunload.namespace` |
 | `blur` | Default | `blur.namespace` |
 | `change` | Default | `change.namespace` |
 | `click` | Default | `click.namespace` |
@@ -293,17 +296,22 @@ data.$el.on(Events.click, onClick);
 | `mouseOut` | Default | `mouseout.namespace` |
 | `mouseOver` | Default | `mouseover.namespace` |
 | `mouseUp` | Default | `mouseup.namespace` |
+| `panStart` | Default | `panstart.namespace` |
+| `pan` | Default | `pan.namespace` |
+| `panEnd` | Default | `panend.namespace` |
 | `resize` | Default | `resize.namespace` |
+| `scaleStart` | Default | `scalestart.namespace` |
+| `scale` | Default | `scale.namespace` |
+| `scaleEnd` | Default | `scaleend.namespace` |
 | `scroll` | Default | `scroll.namespace` |
 | `select` | Default | `select.namespace` |
+| `swipe` | Default | `swipe.namespace` |
 | `touchCancel` | Default | `touchcancel.namespace` |
 | `touchEnd` | Default | `touchend.namespace` |
 | `touchLeave` | Default | `touchleave.namespace` |
 | `touchMove` | Default | `touchmove.namespace` |
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
-| `enable` | Custom | `enable.namespace` |
-| `disable` | Custom | `disable.namespace` |
 
 ## Methods
 

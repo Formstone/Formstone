@@ -17,9 +17,11 @@ core.js
 analytics.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>ASAP can progressively enhance a site to request page content via AJAX, reducing overall page load time. The site must be tuned to return a properly formed JSON object containing key-value pairs. Keys should be valid selectors as they will be used to match DOM nodes. The value should contain the new content to render. This allows the developer to only update the parts of the page that change while leaving global elements, such as headers and footers, in place.</p>
-<pre><code class="lang-php">&lt;?
+<pre><code class="lang-php">&lt;?php
 
 ob_start();
+
+$page_title = &quot;Page Title&quot;;
 
 if ($_GET[&quot;fs-asap&quot;]) {
     define(&quot;IS_ASAP&quot;, true);
@@ -51,11 +53,12 @@ if (!IS_ASAP) {
 &lt;?
 }
 
-$content = ob_get_clean();
+$page_content = ob_get_clean();
 
 if (IS_ASAP) {
     echo json_encode(array(
-        &quot;#page_content&quot; =&gt; $content
+        &quot;title&quot; =&gt; $page_title,
+        &quot;#page_content&quot; =&gt; $page_content,
     ));
     die();
 } else {
@@ -65,7 +68,7 @@ if (IS_ASAP) {
 ?&gt;</code></pre>
 <h3 id="events">Events</h3>
 <p>Only updating parts of a page also means static resources, like CSS and Javascript, are only loaded and executed once. Developers can hook into the ASAP events to ensure the page is rendered and destroyed properly:</p>
-<pre><code class="lang-js">$(window).on(&quot;requested.asap&quot;, function(e) {
+<pre><code class="lang-javascript">$(window).on(&quot;requested.asap&quot;, function(e) {
     // Before request is made.
 }).on(&quot;progress.asap&quot;, function (e) {
     // As request is loaded. 
@@ -75,7 +78,7 @@ if (IS_ASAP) {
     // After state is rendered. Initialize any new plugins.
 }).on(&quot;failed.asap&quot;, function (e) {
     // After load error.
-})</code></pre>
+});</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method.</p>
 <table>
@@ -132,11 +135,11 @@ if (IS_ASAP) {
 <tbody>
 <tr>
 <td><code>requested.asap</code></td>
-<td>Before request is made; triggered on window. Second parameter &#39;true&#39; if pop event</td>
+<td>Before request is made; triggered on window; Second parameter &#39;true&#39; if pop event</td>
 </tr>
 <tr>
 <td><code>progress.asap</code></td>
-<td>As request is loaded; triggered on window</td>
+<td>As request is loaded; triggered on window; Second parameter contains percentage complete</td>
 </tr>
 <tr>
 <td><code>loaded.asap</code></td>
@@ -193,7 +196,7 @@ if (IS_ASAP) {
 <tr>
 <td><code>url</code></td>
 <td><code>string</code></td>
-<td>&nbsp;</td>
+<td><code>&#39;&#39;</code></td>
 <td>New URL</td>
 </tr>
 </tbody>

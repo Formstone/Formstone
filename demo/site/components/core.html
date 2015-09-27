@@ -182,6 +182,7 @@
                 _construct    : construct,
                 _destruct     : destruct,
                 _resize       : resize,
+                _raf          : raf,
 
                 reset         : reset
             },
@@ -221,6 +222,10 @@
 <tr>
 <td><code>_resize</code></td>
 <td>Run on window resize, scoped to window</td>
+</tr>
+<tr>
+<td><code>_raf</code></td>
+<td>Run on request animation frame, scoped to window</td>
 </tr>
 </tbody>
 </table>
@@ -392,6 +397,11 @@
 <td><code>.namespace</code></td>
 </tr>
 <tr>
+<td><code>beforeUnload</code></td>
+<td>Default</td>
+<td><code>beforeunload.namespace</code></td>
+</tr>
+<tr>
 <td><code>blur</code></td>
 <td>Default</td>
 <td><code>blur.namespace</code></td>
@@ -532,9 +542,39 @@
 <td><code>mouseup.namespace</code></td>
 </tr>
 <tr>
+<td><code>panStart</code></td>
+<td>Default</td>
+<td><code>panstart.namespace</code></td>
+</tr>
+<tr>
+<td><code>pan</code></td>
+<td>Default</td>
+<td><code>pan.namespace</code></td>
+</tr>
+<tr>
+<td><code>panEnd</code></td>
+<td>Default</td>
+<td><code>panend.namespace</code></td>
+</tr>
+<tr>
 <td><code>resize</code></td>
 <td>Default</td>
 <td><code>resize.namespace</code></td>
+</tr>
+<tr>
+<td><code>scaleStart</code></td>
+<td>Default</td>
+<td><code>scalestart.namespace</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>Default</td>
+<td><code>scale.namespace</code></td>
+</tr>
+<tr>
+<td><code>scaleEnd</code></td>
+<td>Default</td>
+<td><code>scaleend.namespace</code></td>
 </tr>
 <tr>
 <td><code>scroll</code></td>
@@ -545,6 +585,11 @@
 <td><code>select</code></td>
 <td>Default</td>
 <td><code>select.namespace</code></td>
+</tr>
+<tr>
+<td><code>swipe</code></td>
+<td>Default</td>
+<td><code>swipe.namespace</code></td>
 </tr>
 <tr>
 <td><code>touchCancel</code></td>
@@ -575,16 +620,6 @@
 <td><code>transitionEnd</code></td>
 <td>Default</td>
 <td><code>transitionEnd.namespace</code></td>
-</tr>
-<tr>
-<td><code>enable</code></td>
-<td>Custom</td>
-<td><code>enable.namespace</code></td>
-</tr>
-<tr>
-<td><code>disable</code></td>
-<td>Custom</td>
-<td><code>disable.namespace</code></td>
 </tr>
 </tbody>
 </table>

@@ -23,15 +23,13 @@
 
 	.fs-lightbox h3 { font-style: italic; font-size: 16px; margin: 0; padding: 5px 0; }
 
-	.fs-lightbox-mobile .inline_content { color: #fff; }
+	.fs-lightbox-mobile .inline_content,
+	.fs-lightbox-mobile .inline_content h3 { color: #fff; }
 </style>
 
 <script>
 	$(function() {
-		$(".lightbox").not(".lightbox_format").lightbox({
-			// infinite: true
-			// mobile: true
-		});
+		$(".lightbox").not(".lightbox_format").lightbox();
 
 		$(".lightbox_format").lightbox({
 			formatter: customFormat
