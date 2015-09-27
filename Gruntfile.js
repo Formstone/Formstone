@@ -21,7 +21,8 @@ module.exports = function(grunt) {
 		'dist/css/tooltip.css'       : [ 'src/less/tooltip.less' ],
 		'dist/css/upload.css'        : [ 'src/less/upload.less' ],
 
-		'dist/css/themes/light.css'  : [ 'src/less/themes/light.less' ]
+		'dist/css/themes/light.css'  : [ 'src/less/themes/light.less' ],
+		'dist/css/themes/dark.css'  : [ 'src/less/themes/dark.less' ]
 	};
 
 	grunt.initConfig({
@@ -271,6 +272,13 @@ module.exports = function(grunt) {
 						expand: true,
 						src: 'demo/pages/components/*.md',
 						dest: 'demo/site/components/',
+						ext: '.html',
+						flatten: true
+					},
+					{
+						expand: true,
+						src: 'demo/pages/themes/*.md',
+						dest: 'demo/site/themes/',
 						ext: '.html',
 						flatten: true
 					}

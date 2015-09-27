@@ -1,0 +1,55 @@
+{{= it.include("_header", { local_title: it.document.title, site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root, version: it.version }) }}
+<div class="page js-nav_move">
+	<div class="fs-row page_row">
+		<div class="fs-cell-centered fs-lg-10 fs-xl-8">
+			<article class="content demo">
+				<header class="intro">
+					{{= it.document }}
+				</header>
+
+<div class="carousel" data-carousel-options='{"show":{"740px":3}}'>
+	<div>
+		<img src="http://spacehold.it/400x400/1.jpg" alt="" style="width: 100%;">
+	</div>
+	<div>
+		<img src="http://spacehold.it/400x400/1.jpg" alt="" style="width: 100%;">
+	</div>
+	<div>
+		<img src="http://spacehold.it/400x400/1.jpg" alt="" style="width: 100%;">
+	</div>
+	<div>
+		<img src="http://spacehold.it/400x400/1.jpg" alt="" style="width: 100%;">
+	</div>
+	<div>
+		<img src="http://spacehold.it/400x400/1.jpg" alt="" style="width: 100%;">
+	</div>
+</div>
+
+<form action="#" method="GET" class="form demo_form">
+	<fieldset class="form_fieldset">
+		<input type="checkbox" value="1" id="checkbox-1" name="checkbox-1" checked>
+		<label for="checkbox-1">One</label>
+	</fieldset>
+	<fieldset class="form_fieldset">
+		<label for="checkbox-2">
+			<input type="checkbox" value="2" id="checkbox-2" name="checkbox-2"> Two
+		</label>
+	</fieldset>
+	<fieldset class="form_fieldset">
+		<input type="checkbox" value="3" id="checkbox-3" name="checkbox-3" disabled>
+		<label for="checkbox-3">Three</label>
+	</fieldset>
+	<fieldset class="form_fieldset">
+		<label>
+			<span>
+				<input type="checkbox" value="4" id="checkbox-4" name="checkbox-4"> Four
+			</span>
+		</label>
+	</fieldset>
+</form>
+
+			</article>
+		</div>
+	</div>
+</div>
+{{= it.include("_footer", { site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root, version: it.version }) }}
