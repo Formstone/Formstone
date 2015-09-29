@@ -253,7 +253,6 @@
 			data.enabled = true;
 
 			this.addClass(RawClasses.enabled)
-				// .on(Events.click, Classes.control, data, onAdvance)
 				.on(Events.click, Classes.page, data, onSelect);
 
 			data.$controlItems.on(Events.click, data, onAdvance);
