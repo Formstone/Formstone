@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.19
+
+* Added postContruct callback system, run after current stack is built
+* Added ability to set active Tab item
+* Added ability to deep-link Tab item based on page hash
+
 ### 0.8.18
 
 * Added check for Request Animation Frame

@@ -28,16 +28,25 @@
 		var group       = this.data(Namespace + "-group");
 		data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
+		data.$swaps     = $().add(this).add(data.$target);
+
+		this.on(Events.click + data.dotGuid, data, onClick);
+	}
+
+	/**
+	 * @method private
+	 * @name postConstruct
+	 * @description Run post build.
+	 * @param data [object] "Instance data"
+	 */
+
+	function postConstruct(data) {
 		if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
 			$(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
 		}
 
 		// Should be activate when enabled
-		data.onEnable = this.data(Namespace + "-active");
-
-		data.$swaps = $().add(this).add(data.$target);
-
-		this.on(Events.click + data.dotGuid, data, onClick);
+		data.onEnable = this.data(Namespace + "-active") || false;
 
 		// Media Query support
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
@@ -75,7 +84,7 @@
 		if (data.enabled && !data.active) {
 			if (data.group && !fromLinked) {
 				// Deactivates grouped instances
-				$(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate");
+				$(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate", true);
 			}
 
 			// index in group
@@ -86,7 +95,7 @@
 			if (!fromLinked) {
 				if (data.linked) {
 					// Linked handles
-					$(data.linked).not(data.$el).swap("activate", true);
+					$(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
 				}
 
 				this.trigger(Events.activate, [index]);
@@ -110,7 +119,7 @@
 			if (!fromLinked) {
 				if (data.linked) {
 					// Linked handles
-					$(data.linked).not(data.$el).swap("deactivate", true);
+					$(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
 				}
 
 				this.trigger(Events.deactivate);
@@ -135,7 +144,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linked).not(data.$el).swap("enable");
+				$(data.linked).not(data.$el)[Plugin.namespaceClean]("enable");
 			}
 
 			this.trigger(Events.enable);
@@ -166,7 +175,7 @@
 
 			if (!fromLinked) {
 				// Linked handles
-				$(data.linked).not(data.$el).swap("disable");
+				$(data.linked).not(data.$el)[Plugin.namespaceClean]("disable");
 			}
 
 			this.trigger(Events.disable);
@@ -240,6 +249,7 @@
 
 			methods: {
 				_construct    : construct,
+				_postConstruct: postConstruct,
 				_destruct     : destruct,
 
 				// Public Methods

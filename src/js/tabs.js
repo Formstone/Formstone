@@ -26,7 +26,28 @@
 
 		data.$content.before(data.$mobileTab);
 
-		// toggle
+		// Check for hash
+
+		var hash = Formstone.window.location.hash,
+			hashActive = false,
+			hashGroup  = false;
+
+		if (hash.length) {
+			hashActive = (this.filter("[href*=" + hash + "]").length > 0);
+			hashGroup  = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*=" + hash + "]").length > 0);
+		}
+
+		if (hashActive) {
+			// If this matches hash
+			this.attr("data-swap-active", "true");
+		} else if (hashGroup) {
+			// If item in group matches hash
+			this.removeAttr("data-swap-active")
+				.removeData("data-swap-active");
+		} else if (this.attr("data-tabs-active") === "true") {
+			// If this has active attribute
+			this.attr("data-swap-active", "true");
+		}
 
 		this.attr("data-swap-target", data.content)
 			.attr("data-swap-group", data.group)
@@ -34,8 +55,18 @@
 			.on("activate.swap" + data.dotGuid, data, onActivate)
 			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
 			.on("enable.swap" + data.dotGuid, data, onEnable)
-			.on("disable.swap" + data.dotGuid, data, onDisable)
-			.fsSwap({
+			.on("disable.swap" + data.dotGuid, data, onDisable);
+	}
+
+	/**
+	 * @method private
+	 * @name postConstruct
+	 * @description Run post build.
+	 * @param data [object] "Instance data"
+	 */
+
+	function postConstruct(data) {
+		this.fsSwap({
 				maxWidth: data.maxWidth,
 				classes: {
 					target  : data.dotGuid,
@@ -78,7 +109,9 @@
 
 		data.$content.removeClass(RawClasses.content);
 
-		this.removeAttr("data-swap-target")
+		this.removeAttr("data-swap-active")
+			.removeData("data-swap-active")
+			.removeAttr("data-swap-target")
 			.removeData("data-swap-target")
 			.removeAttr("data-swap-group")
 			.removeData("data-swap-group")
@@ -269,6 +302,7 @@
 
 			methods: {
 				_construct    : construct,
+				_postConstruct: postConstruct,
 				_destruct     : destruct,
 
 				// Public Methods
