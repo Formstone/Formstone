@@ -147,15 +147,17 @@
 </div>
 
 <h4>Custom Controls</h4>
-<div class="carousel" data-carousel-options='{"controls":{"next":".custom_next","previous":".custom_previous"}}'>
+<div class="carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
 </div>
-<button class="custom_previous">Previous</button>
-<button class="custom_next">Next</button>
+<div class="custom_container">
+	<button class="custom_previous">Previous</button>
+	<button class="custom_next">Next</button>
+</div>
 
 <h4>Single</h4>
 <div class="carousel" data-carousel-options='{"single":true}'>
@@ -244,10 +246,9 @@ touch.js</code></pre>
 </tr>
 <tr>
 <td><code>controls</code></td>
-<td>`boolean</td>
-<td>object`</td>
+<td><code>boolean or object</code></td>
 <td><code>true</code></td>
-<td>Flag to draw controls OR object containing next and previous control selectors</td>
+<td>Flag to draw controls OR object containing container, next and previous control selectors</td>
 </tr>
 <tr>
 <td><code>customClass</code></td>

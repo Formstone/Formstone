@@ -2,9 +2,11 @@
 
 ### 0.8.19
 
-* Added postContruct callback system, run after current stack is built
+* Added postContruct callback system, run after current set has initialized
 * Added ability to set active Tab item
 * Added ability to deep-link Tab item based on page hash
+* Added ability to set custom Carousel controls container
+* Added ability previous and next states for Carousel items
 
 ### 0.8.18
 

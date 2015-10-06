@@ -87,16 +87,17 @@
 		data.$viewport           = this.find(Classes.viewport).eq(0);
 		data.$container          = this.find(Classes.container).eq(0);
 		data.$canister           = this.find(Classes.canister).eq(0);
-		data.$controls           = this.find(Classes.controls).eq(0);
 		data.$pagination         = this.find(Classes.pagination).eq(0);
 		data.$paginationItems    = data.$pagination.find(Classes.page);
 
 		data.$controlPrevious = data.$controlNext = $('');
 
 		if (data.customControls) {
+			data.$controls        = $(data.controls.container).addClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
 			data.$controlPrevious = $(data.controls.previous).addClass(controlPrevClasses);
 			data.$controlNext     = $(data.controls.next).addClass(controlNextClasses);
 		} else {
+			data.$controls        = this.find(Classes.controls).eq(0);
 			data.$controlPrevious = data.$controls.find(Classes.control_previous);
 			data.$controlNext     = data.$controls.find(Classes.control_next);
 		}
@@ -172,7 +173,7 @@
 		data.$images.off(Events.namespace);
 		data.$canister.fsTouch("destroy");
 
-		data.$items.removeClass( [RawClasses.item, RawClasses.visible].join(" ") )
+		data.$items.removeClass( [RawClasses.item, RawClasses.visible, Classes.item_previous, Classes.item_next].join(" ") )
 				.unwrap()
 				.unwrap()
 				.unwrap()
@@ -181,11 +182,14 @@
 		if (data.pagination) {
 			data.$pagination.remove();
 		}
-		if (data.controls) {
+		if (data.controls && !data.customControls) {
 			data.$controls.remove();
 		}
+		if (data.customControls) {
+			data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom, RawClasses.visible ].join(" ") );
+		}
 
-		this.removeClass( [RawClasses.base, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, data.customClass].join(" ") );
+		this.removeClass( [RawClasses.base, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, RawClasses.contained, RawClasses.single, RawClasses.auto_height, RawClasses.customClass].join(" ") );
 
 		cacheInstances();
 	}
@@ -672,8 +676,17 @@
 		}
 
 		// Update classes
-		data.$items.removeClass(RawClasses.visible);
-		data.pages[index].$items.addClass(RawClasses.visible);
+		data.$items.removeClass( [RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" ") );
+
+
+		for (var i = 0, count = data.pages.length; i < count; i++) {
+			if (i === index) {
+				data.pages[i].$items.addClass(RawClasses.visible);
+			} else {
+				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next );
+			}
+		}
+
 
 		// Auto Height
 		if (data.autoHeight) {
@@ -927,7 +940,7 @@
 			 * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
 			 * @param autoTime [int] <8000> "Auto advance time"
 			 * @param contained [boolean] <true> "Flag for 'overflow: visible'"
-			 * @param controls [boolean | object] <true> "Flag to draw controls OR object containing next and previous control selectors"
+			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selectors"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
 			 * @param infinite [boolean] <false> "Flag for looping items"
@@ -970,13 +983,23 @@
 			classes: [
 				"ltr",
 				"rtl",
+
 				"viewport",
 				"wrapper",
 				"container",
 				"canister",
+
 				"item",
+				"item_previous",
+				"item_next",
+
 				"controls",
+				"controls_custom",
+
 				"control",
+				"control_previous",
+				"control_next",
+
 				"pagination",
 				"page",
 
@@ -986,10 +1009,7 @@
 				"active",
 				"auto_height",
 				"contained",
-				"single",
-
-				"control_previous",
-				"control_next"
+				"single"
 			],
 
 			/**

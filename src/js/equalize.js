@@ -189,7 +189,7 @@
 
 			defaults: {
 				maxWidth    : Infinity,
-				minWidth    : '0px',
+				minWidth    : "0px",
 				property    : "height",
 				target      : null
 			},
