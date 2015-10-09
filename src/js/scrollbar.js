@@ -324,8 +324,6 @@
 			direction;
 
 		if (data.horizontal) {
-
-			console.log(data.horizontal);
 			// Horizontal
 			var scrollLeft   = data.$content[0].scrollLeft,
 				scrollWidth  = data.$content[0].scrollWidth,
