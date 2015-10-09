@@ -102,7 +102,7 @@
 	 * @method
 	 * @name scroll
 	 * @description Scrolls instance of plugin to element or position
-	 * @param position [string || int] <null> "Target element selector or static position"
+	 * @param position [string or int] <null> "Target element selector or static position"
 	 * @param duration [int] <null> "Optional scroll duration"
 	 * @example $(".target").scrollbar("scroll", position, duration);
 	 */

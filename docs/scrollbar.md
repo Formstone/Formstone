@@ -105,7 +105,7 @@ $(".target").scrollbar("scroll", position, duration);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `position` | `string || int` | `null` | Target element selector or static position |
+| `position` | `string or int` | `null` | Target element selector or static position |
 | `duration` | `int` | `null` | Optional scroll duration |
 
 ## CSS
