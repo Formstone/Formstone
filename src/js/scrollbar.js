@@ -63,6 +63,10 @@
 
 		data.$content.on(Events.scroll, data, onScroll);
 
+		if (data.mouseWheel) {
+			data.$content.on("DOMMouseScroll" + Events.namespace + " mousewheel" + Events.namespace, data, onMouseWheel);
+		}
+
 		data.$track.fsTouch({
 			axis    : (data.horizontal) ? "x" : "y",
 			pan     : true
@@ -308,6 +312,69 @@
 
 	/**
 	 * @method private
+	 * @name onMouseWheel
+	 * @description Handles mousewheel event on content
+	 * @param e [object] "Event data"
+	 */
+
+	function onMouseWheel(e) {
+		// http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
+		var data = e.data,
+			delta,
+			direction;
+
+		if (data.horizontal) {
+
+			console.log(data.horizontal);
+			// Horizontal
+			var scrollLeft   = data.$content[0].scrollLeft,
+				scrollWidth  = data.$content[0].scrollWidth,
+				width        = data.$content.outerWidth();
+
+			delta     = (e.type === "DOMMouseScroll") ? (e.originalEvent.detail * -40) : e.originalEvent.wheelDelta;
+			direction = (delta > 0) ? "right" : "left";
+
+			if (direction === "left" && -delta > (scrollWidth - width - scrollLeft)) {
+				data.$content.scrollLeft(scrollWidth);
+				return killEvent(e);
+			} else if (direction === "right" && delta > scrollLeft) {
+				data.$content.scrollLeft(0);
+				return killEvent(e);
+			}
+		} else {
+			// Vertical
+			var scrollTop    = data.$content[0].scrollTop,
+				scrollHeight = data.$content[0].scrollHeight,
+				height       = data.$content.outerHeight();
+
+			delta     = (e.type === "DOMMouseScroll") ? (e.originalEvent.detail * -40) : e.originalEvent.wheelDelta;
+			direction = (delta > 0) ? "up" : "down";
+
+			if (direction === "down" && -delta > (scrollHeight - height - scrollTop)) {
+				data.$content.scrollTop(scrollHeight);
+				return killEvent(e);
+			} else if (direction === "up" && delta > scrollTop) {
+				data.$content.scrollTop(0);
+				return killEvent(e);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name killEvent
+	 * @description Localized version of Formstone.killEvent()
+	 * @param e [object] "Event data"
+	 */
+
+	function killEvent(e) {
+		Functions.killEvent(e);
+		e.returnValue = false;
+		return false;
+	}
+
+	/**
+	 * @method private
 	 * @name onPanStart
 	 * @description Handles pan event on track
 	 * @param e [object] "Event data"
@@ -422,16 +489,18 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param duration [int] <0> "Scroll animation length"
 			 * @param handleSize [int] <0> "Handle size; 0 to auto size"
-			 * @param horizontal [boolean] <false> "Scroll horizontally"
+			 * @param horizontal [boolean] <false> "Flag to scroll horizontally"
+			 * @param mouseWheel [boolean] <true> "Flag to prevent scrolling of parent element"
 			 * @param trackMargin [int] <0> "Margin between track and handle edge”
 			 */
 
 			defaults: {
-				customClass: "",
-				duration: 0,
-				handleSize: 0,
-				horizontal: false,
-				trackMargin: 0
+				customClass    : "",
+				duration       : 0,
+				handleSize     : 0,
+				horizontal     : false,
+				mouseWheel     : true,
+				trackMargin    : 0
 			},
 
 			classes: [

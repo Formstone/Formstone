@@ -316,7 +316,6 @@
 
 			this.removeClass(RawClasses.animated);
 
-			// data.viewportWidth  = data.$viewport.outerWidth(false);
 			data.containerWidth = data.$container.outerWidth(false);
 
 			data.visible   = calculateVisible(data);
