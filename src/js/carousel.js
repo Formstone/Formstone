@@ -218,7 +218,7 @@
 			data.$items.css({
 				width:  "",
 				height: ""
-			});
+			}).removeClass( [RawClasses.visible, Classes.item_previous, Classes.item_next].join(" ") );
 
 			data.$images.off(Events.namespace);
 			data.$controlItems.off(Events.namespace);

@@ -46,6 +46,40 @@ if (Formstone.support.file) {
 }
 ```
 
+### Form Data
+
+Form Data can be modified before the request is made. The request can also be aborted based on file attributes:
+
+```javascript
+$(".target").upload({
+	beforeSend: onBeforeSend
+});
+
+function onBeforeSend(formData, file) {
+	// Cancel request
+	if (file.name.indexOf(".jpg") < 0) {
+		return false;
+	}
+	
+	// Modify and return form data
+	formdata.append("input_name", "input_value");
+	
+	return formData;
+}
+```
+
+### Abort
+
+Active uploads can be aborted one at a time by passing the file's index, or abort the entire queue by excluding the second parameter:
+
+```javascript
+// Abort single file
+$(".target").upload("abort", file.index);
+
+// Abort entire queue
+$(".target").upload("abort");
+```
+
 ### Uploads
 
 Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
@@ -57,8 +91,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `action` | `string` | &nbsp; | Where to submit uploads |
-| `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata |
+| `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |
 | `customClass` | `string` | `''` | Class applied to instance |
+| `dataType` | `string` | `'html'` | Data type of AJAX request |
 | `label` | `string` | `'Drag and drop files or click to select'` | Drop target text |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxQueue` | `int` | `2` | Number of files to simultaneously upload |
@@ -83,6 +118,14 @@ Events are triggered on the target instance's element, unless otherwise stated.
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
+
+### abort
+
+Cancels all active uploads.
+
+```javascript
+$(".target").upload("abort");
+```
 
 ### defaults
 

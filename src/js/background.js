@@ -477,8 +477,15 @@
 	}
 
 	/**
-	 * @method
+	 * @method private
 	 * @name pauseVideo
+	 * @description Pauses target video
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name pause
 	 * @description Pauses target video
 	 * @example $(".target").background("pause");
 	 */
@@ -500,8 +507,15 @@
 	}
 
 	/**
-	 * @method
+	 * @method private
 	 * @name playVideo
+	 * @description Plays target video
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name play
 	 * @description Plays target video
 	 * @example $(".target").background("play");
 	 */
@@ -515,6 +529,66 @@
 
 				if ($video.length) {
 					$video[0].play();
+				}
+			}
+
+			data.playing = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name muteVideo
+	 * @description Mutes target video
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name mute
+	 * @description Mutes target video
+	 * @example $(".target").background("mute");
+	 */
+
+	function muteVideo(data) {
+		if (data.video) {
+			if (data.isYouTube && data.playerReady) {
+				data.player.mute();
+			} else {
+				var $video = data.$container.find("video");
+
+				if ($video.length) {
+					$video[0].muted = true;
+				}
+			}
+
+			data.playing = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name unmuteVideo
+	 * @description Unmutes target video
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name unmute
+	 * @description Unmutes target video
+	 * @example $(".target").background("unmute");
+	 */
+
+	function unmuteVideo(data) {
+		if (data.video) {
+			if (data.isYouTube && data.playerReady) {
+				data.player.unMute();
+			} else {
+				var $video = data.$container.find("video");
+
+				if ($video.length) {
+					$video[0].muted = false;
 				}
 			}
 
@@ -708,6 +782,8 @@
 
 				play          : playVideo,
 				pause         : pauseVideo,
+				mute          : muteVideo,
+				unmute        : unmuteVideo,
 				resize        : doResizeInstance,
 				load          : loadMedia,
 				unload        : unloadMedia

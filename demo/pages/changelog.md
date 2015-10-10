@@ -2,6 +2,13 @@
 
 # Changelog
 
+### 0.8.21
+
+* Added `mute` and `unmute` public methods to Background
+* Added `fill` element to Range
+* Added `abort` public method to Upload
+* Added ability to cancel uploads in `beforeSend` Upload callback
+
 ### 0.8.20
 
 * Added `min-height` to Carousel items, resolves issue with accidientally empty carousels
@@ -9,7 +16,7 @@
 
 ### 0.8.19
 
-* Added postContruct callback system, run after current set has initialized
+* Added `postContruct` callback system, run after current set has initialized
 * Added ability to set active Tab item
 * Added ability to deep-link Tab item based on page hash
 * Added ability to set custom Carousel controls container

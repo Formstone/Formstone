@@ -1,4 +1,4 @@
-/*! formstone v0.8.20 [range.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [range.css] 2015-10-10 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -37,12 +37,24 @@
   float: left;
   margin: 10px 0;
 }
+.fs-range-fill {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #DCDCDC;
+}
 .fs-range-handle {
   width: 1px;
   height: 100%;
-  left: 0;
   position: absolute;
+  left: 0;
   top: 0;
+  z-index: 2;
   display: block;
   overflow: visible;
 }
@@ -99,6 +111,14 @@
   width: 8px;
   height: 75%;
   margin: 0 11px 0;
+}
+.fs-range-vertical .fs-range-fill {
+  width: 100%;
+  height: 1px;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 .fs-range-vertical .fs-range-handle {
   width: 100%;

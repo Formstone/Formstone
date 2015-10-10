@@ -1,4 +1,4 @@
-/*! formstone v0.8.20 [site.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [site.css] 2015-10-10 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.8.20 [grid.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [grid.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.8.20 [background.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [background.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.8.20 [carousel.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [carousel.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1903,7 +1903,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.20 [checkbox.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [checkbox.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2200,7 +2200,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.20 [dropdown.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [dropdown.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2559,7 +2559,7 @@ pre[class*="language-"] {
   border-radius: 0 3px 3px 0;
 }
 
-/*! formstone v0.8.20 [lightbox.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [lightbox.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3267,7 +3267,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.8.20 [number.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [number.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3426,7 +3426,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.8.20 [pagination.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [pagination.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3565,7 +3565,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.8.20 [range.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [range.css] 2015-10-10 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3604,12 +3604,24 @@ pre[class*="language-"] {
   float: left;
   margin: 10px 0;
 }
+.fs-range-fill {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #DCDCDC;
+}
 .fs-range-handle {
   width: 1px;
   height: 100%;
-  left: 0;
   position: absolute;
+  left: 0;
   top: 0;
+  z-index: 2;
   display: block;
   overflow: visible;
 }
@@ -3667,6 +3679,14 @@ pre[class*="language-"] {
   height: 75%;
   margin: 0 11px 0;
 }
+.fs-range-vertical .fs-range-fill {
+  width: 100%;
+  height: 1px;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 .fs-range-vertical .fs-range-handle {
   width: 100%;
   height: 1px;
@@ -3698,7 +3718,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.8.20 [scrollbar.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [scrollbar.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3853,7 +3873,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.20 [tabs.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [tabs.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3964,7 +3984,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.20 [tooltip.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [tooltip.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4116,7 +4136,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.8.20 [upload.css] 2015-10-09 | MIT License | formstone.it */
+/*! formstone v0.8.21 [upload.css] 2015-10-10 | MIT License | formstone.it */
 
 /**
 	 * @class

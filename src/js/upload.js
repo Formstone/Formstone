@@ -30,6 +30,7 @@
 			data.total        = 0;
 			data.uploading    = false;
 			data.disabled     = true;
+			data.aborting     = false;
 
 			this.on(Events.click, Classes.target, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
@@ -57,6 +58,54 @@
 			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )
 				.removeClass(RawClasses.base)
 				.html("");
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name abortUpload
+	 * @description Cancels all active uploads.
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name abort
+	 * @description Cancels all active uploads.
+	 * @example $(".target").upload("abort");
+	 */
+
+	function abortUpload(data, index) {
+		var file;
+
+		data.aborting = true;
+
+		for (var i in data.queue) {
+			if (data.queue.hasOwnProperty(i)) {
+				file = data.queue[i];
+
+				if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
+					// Abort all
+					if (file.started && !file.complete) {
+						file.transfer.abort();
+					} else {
+						abortFile(data, file, "abort");
+					}
+				}
+			}
+		}
+
+		data.aborting = false;
+
+		checkQueue(data);
+	}
+
+	function abortFile(data, file, error) {
+		file.error = true;
+		data.$el.trigger(Events.fileError, [ file, error ]);
+
+		if (!data.aborting) {
+			checkQueue(data);
 		}
 	}
 
@@ -263,7 +312,7 @@
 						}
 					}
 
-					uploadFile(data, data.queue[j], formData);
+					uploadFile(data, formData, data.queue[j]);
 				}
 
 				transfering++;
@@ -293,24 +342,22 @@
 	 * @param file [object] "Target file"
 	 * @param formData [object] "Target form"
 	 */
-	function uploadFile(data, file, formData) {
+	function uploadFile(data, formData, file) {
 		// Modify data before upload
-		formData = data.beforeSend.call(Window, formData);
+		formData = data.beforeSend.call(Window, formData, file);
 
-		if (file.size >= data.maxSize) {
-			file.error = true;
-			data.$el.trigger(Events.fileError, [ file, "Too large" ]);
-
-			checkQueue(data);
+		if (file.size >= data.maxSize || formData === false || file.error === true) {
+			abortFile(data, file, (!formData ? "abort" : "size"));
 		} else {
 			file.started = true;
 			file.transfer = $.ajax({
-				url: data.action,
-				data: formData,
-				type: "POST",
-				contentType:false,
-				processData: false,
-				cache: false,
+				url         : data.action,
+				data        : formData,
+				dataType    : data.dataType,
+				type        : "POST",
+				contentType :false,
+				processData : false,
+				cache       : false,
 				xhr: function() {
 					var $xhr = $.ajaxSettings.xhr();
 
@@ -322,7 +369,7 @@
 								total = e.total;
 
 							if (e.lengthComputable) {
-								percent = Math.ceil(position / total * 100);
+								percent = Math.ceil((position / total) * 100);
 							}
 
 							data.$el.trigger(Events.fileProgress, [ file, percent ]);
@@ -341,10 +388,7 @@
 					checkQueue(data);
 				},
 				error: function(jqXHR, status, error) {
-					file.error = true;
-					data.$el.trigger(Events.fileError, [ file, error ]);
-
-					checkQueue(data);
+					abortFile(data, file, error);
 				}
 			});
 		}
@@ -367,8 +411,9 @@
 			/**
 			 * @options
 			 * @param action [string] "Where to submit uploads"
-			 * @param beforeSend [function] "Run before request sent, must return modified formdata"
+			 * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
 			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param dataType [string] <'html'> "Data type of AJAX request"
 			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text"
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
 			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
@@ -382,6 +427,7 @@
 				action         : "",
 				beforeSend     : function(formdata) { return formdata; },
 				customClass    : "",
+				dataType       : "html",
 				label          : "Drag and drop files or click to select",
 				leave          : "You have uploads pending, are you sure you want to leave this page?",
 				maxQueue       : 2,
@@ -405,6 +451,7 @@
 
 				disable       : disableUpload,
 				enable        : enableUpload,
+				abort         : abortUpload
 			}
 		}),
 

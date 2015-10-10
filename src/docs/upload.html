@@ -1,14 +1,15 @@
 <style>
 	.filelists { margin: 20px 0; }
 	.filelists h5 { margin: 10px 0 0; }
+	.filelists .cancel_all { color: red; cursor: pointer; clear: both; font-size: 10px; margin: 0; text-transform: uppercase; }
 	.filelist { margin: 0; padding: 10px 0; }
 	.filelist li { background: #fff; border-bottom: 1px solid #eee; font-size: 14px; list-style: none; padding: 5px; }
 	.filelist li:before { display: none; }
 	.filelist li .file { color: #333; }
 	.filelist li .progress { color: #666; float: right; font-size: 10px; text-transform: uppercase; }
-	.filelist li .delete { color: red; cursor: pointer; float: right; font-size: 10px; text-transform: uppercase; }
-	.filelist li.complete .progress { color: green; }
+	.filelist li .cancel { color: red; cursor: pointer; float: right; font-size: 10px; margin: 0 0 0 10px; text-transform: uppercase; }
 	.filelist li.error .progress { color: red; }
+	.filelist li.error .cancel { display: none; }
 </style>
 
 <script>
@@ -20,28 +21,42 @@
 		$filelist = $(".filelist.complete");
 
 		$(".upload").upload({
-			maxSize: 1048576,
-			beforeSend: onBefore
+			maxSize: 21474836480,
+			beforeSend: onBeforeSend,
+			maxQueue: 1
 		}).on("start.upload", onStart)
 		  .on("complete.upload", onComplete)
 		  .on("filestart.upload", onFileStart)
 		  .on("fileprogress.upload", onFileProgress)
 		  .on("filecomplete.upload", onFileComplete)
 		  .on("fileerror.upload", onFileError);
+
+		$filequeue.on("click", ".cancel", onCancel);
+		$(".cancel_all").on("click", onCancelAll);
 	});
 
-	function onBefore(formdata) {
-		// Add data to upload request
-		formdata.append("test_field", "test_value");
+	function onCancel(e) {
+		console.log("Cancel");
+		var index = $(this).parents("li").data("index");
+		$(".upload").upload("abort", parseInt(index, 10));
+	}
 
-		return formdata;
+	function onCancelAll(e) {
+		console.log("Cancel All");
+		$(".upload").upload("abort");
+	}
+
+	function onBeforeSend(formData, file) {
+		console.log("Before Send");
+		formData.append("test_field", "test_value");
+		return (file.name.indexOf(".jpg") > -1) ? false : formData;
 	}
 
 	function onStart(e, files) {
 		console.log("Start");
 		var html = '';
 		for (var i = 0; i < files.length; i++) {
-			html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="progress">Queued</span></li>';
+			html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></li>';
 		}
 		$filequeue.append(html);
 	}
@@ -72,6 +87,7 @@
 			var $target = $filequeue.find("li[data-index=" + file.index + "]");
 			$target.find(".file").text(file.name);
 			$target.find(".progress").remove();
+			$target.find(".cancel").remove();
 			$target.appendTo($filelist);
 		}
 	}
@@ -94,5 +110,6 @@
 		<h5>Queued</h5>
 		<ol class="filelist queue">
 		</ol>
+		<span class="cancel_all">Cancel All</span>
 	</div>
 </form>
