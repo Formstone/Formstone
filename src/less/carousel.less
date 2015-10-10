@@ -228,19 +228,13 @@
 		 */
 
 		&-enabled &-control {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-
 			border: 0;
 			cursor: pointer;
-			display: block;
 			padding: 0;
-			visibility: hidden;
 		}
 
 		&-enabled &-control&-visible {
-			visibility: visible;
+
 		}
 
 		/**
@@ -252,8 +246,7 @@
 
 		&-enabled &-control_previous,
 		&-enabled&-rtl &-control_next {
-			right: auto;
-			left: @fs-carousel-control-left;
+
 		}
 
 		/**
@@ -265,8 +258,7 @@
 
 		&-enabled &-control_next,
 		&-enabled&-rtl &-control_previous {
-			right: @fs-carousel-control-right;
-			left: auto;
+
 		}
 
 		/**
@@ -300,8 +292,6 @@
 
 		&-enabled &-pagination {
 			width: 100%;
-
-			text-align: center;
 		}
 
 		&-enabled &-pagination&-visible {

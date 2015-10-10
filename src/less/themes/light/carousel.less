@@ -4,7 +4,7 @@
  * @component Carousel
  */
 
-	&.fs-carousel {
+	.fs-carousel {
 
 		@theme_name: fs-light;
 
@@ -52,7 +52,7 @@
 
 		// Canister
 
-		.@{theme_name}&-enabled &-canister {
+		&.@{theme_name}&-enabled &-canister {
 			position: relative;
 
 			backface-visibility: hidden;
@@ -62,7 +62,7 @@
 			transform: translate3d(0, 0, 0);
 		}
 
-		.@{theme_name}&-enabled&-auto_height &-canister {
+		&.@{theme_name}&-enabled&-auto_height &-canister {
 			transition:
 				height @fs-carousel-transition-duration @fs-carousel-transition-timing,
 				transform @fs-carousel-transition-duration @fs-carousel-transition-timing;
@@ -70,15 +70,18 @@
 
 		// Controls
 
-		.@{theme_name}&-enabled &-control {
-
+		&.@{theme_name}&-enabled &-control {
 			width: @fs-carousel-control-width;
 			height: @fs-carousel-control-height;
+
+			position: absolute;
+			top: 0;
+			bottom: 0;
 
 			background: @fs-carousel-control-background;
 			border-radius: @fs-carousel-control-border-radius;
 			box-shadow: @fs-carousel-control-box-shadow;
-
+			display: block;
 			margin: auto;
 			opacity: @fs-carousel-control-disabled-opacity;
 			overflow: hidden;
@@ -86,6 +89,7 @@
 			transition:
 				opacity @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing,
 				visibility @fs-carousel-control-transition-duration @fs-carousel-control-transition-timing;
+			visibility: hidden;
 			white-space: nowrap;
 
 			&:before {
@@ -109,12 +113,14 @@
 			}
 		}
 
-		.@{theme_name}&-enabled &-control&-visible {
+		&.@{theme_name}&-enabled &-control&-visible {
 			opacity: 1;
+			visibility: visible;
 		}
 
-		.@{theme_name}&-enabled &-control_previous,
-		.@{theme_name}&-enabled&-rtl &-control_next {
+		&.@{theme_name}&-enabled &-control_previous,
+		&.@{theme_name}&-enabled&-rtl &-control_next {
+			right: auto;
 			left: @fs-carousel-control-left;
 
 			&:before {
@@ -127,8 +133,9 @@
 			}
 		}
 
-		.@{theme_name}&-enabled &-control_next,
-		.@{theme_name}&-enabled&-rtl &-control_previous {
+		&.@{theme_name}&-enabled &-control_next,
+		&.@{theme_name}&-enabled&-rtl &-control_previous {
+			left: auto;
 			right: @fs-carousel-control-right;
 
 			&:before {
@@ -141,20 +148,21 @@
 			}
 		}
 
-		.@{theme_name}&-enabled &-control_disabled {
+		&.@{theme_name}&-enabled &-control_disabled {
 			opacity: 0;
 		}
 
 		// Pagination
 
-		.@{theme_name}&-enabled &-pagination {
+		&.@{theme_name}&-enabled &-pagination {
 			width: 100%;
 
 			margin: @fs-carousel-pagination-margin;
 			padding: @fs-carousel-pagination-padding;
+			text-align: center;
 		}
 
-		.@{theme_name}&-enabled &-page {
+		&.@{theme_name}&-enabled &-page {
 			width: @fs-carousel-page-width;
 			height: @fs-carousel-page-height;
 
@@ -172,7 +180,7 @@
 			}
 		}
 
-		.@{theme_name}&-enabled &-page&-active {
+		&.@{theme_name}&-enabled &-page&-active {
 			opacity: 1;
 		}
 
