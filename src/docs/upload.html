@@ -21,9 +21,8 @@
 		$filelist = $(".filelist.complete");
 
 		$(".upload").upload({
-			maxSize: 21474836480,
-			beforeSend: onBeforeSend,
-			maxQueue: 1
+			maxSize: 1073741824,
+			beforeSend: onBeforeSend
 		}).on("start.upload", onStart)
 		  .on("complete.upload", onComplete)
 		  .on("filestart.upload", onFileStart)
@@ -49,7 +48,8 @@
 	function onBeforeSend(formData, file) {
 		console.log("Before Send");
 		formData.append("test_field", "test_value");
-		return (file.name.indexOf(".jpg") > -1) ? false : formData;
+		// return (file.name.indexOf(".jpg") < -1) ? false : formData; // cancel all jpgs
+		return formData;
 	}
 
 	function onStart(e, files) {
