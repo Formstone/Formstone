@@ -54,8 +54,12 @@
 
 		data.contentClasses = [
 			RawClasses.content.replace(baseClass, typeClass),
-			gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
 			classGroup
+		].join(" ");
+
+		data.contentClassesOpen = [
+			gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
+			RawClasses.open
 		].join(" ");
 
 		// DOM
@@ -99,7 +103,7 @@
 	 */
 
 	function destruct(data) {
-		data.$content.removeClass(data.contentClasses)
+		data.$content.removeClass( [data.contentClasses, data.contentClassesOpen].join(" ") )
 					 .off(Events.namespace);
 
 		data.$handle.removeAttr("data-swap-target")
@@ -177,7 +181,7 @@
 			if (!data.open) {
 				data.$el.trigger(Events.open);
 
-				data.$content.addClass(RawClasses.open)
+				data.$content.addClass(data.contentClassesOpen)
 							 .one(Events.click, function() {
 								close(data);
 							 });
@@ -207,7 +211,7 @@
 			if (data.open) {
 				data.$el.trigger(Events.close);
 
-				data.$content.removeClass(RawClasses.open)
+				data.$content.removeClass(data.contentClassesOpen)
 							 .off(Events.namespace);
 
 				if (data.label) {

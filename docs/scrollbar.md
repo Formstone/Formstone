@@ -56,6 +56,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `duration` | `int` | `0` | Scroll animation length |
 | `handleSize` | `int` | `0` | Handle size; 0 to auto size |
 | `horizontal` | `boolean` | `false` | Scroll horizontally |
+| `mouseWheel` | `boolean` | `true` | Flag to prevent scrolling of parent element |
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `trackMargin` | `int` | `0` | &nbsp; |
 
@@ -105,7 +106,7 @@ $(".target").scrollbar("scroll", position, duration);
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `position` | `string || int` | `null` | Target element selector or static position |
+| `position` | `string or int` | `null` | Target element selector or static position |
 | `duration` | `int` | `null` | Optional scroll duration |
 
 ## CSS

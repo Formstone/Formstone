@@ -4,7 +4,7 @@
  * @description Formstone Library core. Required for all plugins.
  */
 
-var Formstone = this.Formstone = (function ($, window, document, undefined) {
+var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	/* global ga */
 
@@ -243,18 +243,23 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 			 */
 
 			function initialize(options) {
-				// Extend Defaults
+				// Maintain Chain
 
-				var hasOptions = $.type(options) === "object";
+				var hasOptions = $.type(options) === "object",
+					$targets = this,
+					$postTargets = $(),
+					$element,
+					i,
+					count;
+
+				// Extend Defaults
 
 				options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
 
-				// Maintain Chain
+				// All targets
 
-				var $targets = this;
-
-				for (var i = 0, count = $targets.length; i < count; i++) {
-					var $element = $targets.eq(i);
+				for (i = 0, count = $targets.length; i < count; i++) {
+					$element = $targets.eq(i);
 
 					// Gaurd Against Exiting Instances
 
@@ -280,8 +285,22 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 						// Constructor
 
 						settings.methods._construct.apply($element, [ data ].concat(Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) )));
+
+						// Post Constructor
+
+						$postTargets = $postTargets.add($element);
 					}
 
+				}
+
+				// Post targets
+
+				for (i = 0, count = $postTargets.length; i < count; i++) {
+					$element = $postTargets.eq(i);
+
+					// Post Constructor
+
+					settings.methods._postConstruct.apply($element, [ getData($element) ]);
 				}
 
 				return $targets;
@@ -435,6 +454,7 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 				_setup         : $.noop,    // Document ready
 				_construct     : $.noop,    // Constructor
+				_postConstruct : $.noop,    // Post Constructor
 				_destruct      : $.noop,    // Destructor
 				_resize        : false,     // Window resize
 
@@ -671,11 +691,13 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 	// RAF
 
 	function handleRAF() {
-		Formstone.window.requestAnimationFrame(handleRAF);
+		if (Formstone.support.raf) {
+			Formstone.window.requestAnimationFrame(handleRAF);
 
-		for (var i in Formstone.RAFHandlers) {
-			if (Formstone.RAFHandlers.hasOwnProperty(i)) {
-				Formstone.RAFHandlers[i].callback.call(window);
+			for (var i in Formstone.RAFHandlers) {
+				if (Formstone.RAFHandlers.hasOwnProperty(i)) {
+					Formstone.RAFHandlers[i].callback.call(window);
+				}
 			}
 		}
 	}
@@ -706,4 +728,4 @@ var Formstone = this.Formstone = (function ($, window, document, undefined) {
 
 	return Formstone;
 
-})(jQuery, this, document);
+})(jQuery, window, document);

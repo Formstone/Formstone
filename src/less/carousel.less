@@ -80,13 +80,11 @@
 
 		// Contained
 
-		&-enabled&-contained {
-			&,
-			&-viewport,
-			&-wrapper,
-			&-container {
-				overflow: hidden;
-			}
+		&-enabled&-contained,
+		&-enabled&-contained &-viewport,
+		&-enabled&-contained &-wrapper,
+		&-enabled&-contained &-container {
+			overflow: hidden;
 		}
 
 		/**
@@ -166,6 +164,8 @@
 		 */
 
 		&-enabled &-item {
+			min-height: 1px;
+
 			display: block;
 			float: left;
 
@@ -215,7 +215,8 @@
 			padding: 0;
 		}
 
-		&-enabled &-controls&-visible {
+		&-enabled &-controls&-visible,
+		&-controls_custom&-visible {
 			display: block;
 		}
 

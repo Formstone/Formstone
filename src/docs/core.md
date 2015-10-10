@@ -89,13 +89,14 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 				"visible"
 			],
 			methods: {
-				_setup        : setup,
-				_construct    : construct,
-				_destruct     : destruct,
-				_resize       : resize,
-				_raf          : raf,
+				_setup         : setup,
+				_construct     : construct,
+				_postConstruct : construct,
+				_destruct      : destruct,
+				_resize        : resize,
+				_raf           : raf,
 
-				reset         : reset
+				reset          : reset
 			},
 			utilities: {
 				close:         close
@@ -117,6 +118,7 @@ As in the example above, Widgets can override three internal methods by pointing
 | --- | --- |
 | `_setup` | Run once when document is ready, scoped to document |
 | `_construct` | Run at initialization of each instance, scoped to specific instance |
+| `_postConstruct` | Run after initialization of current instance set, scoped to specific instance |
 | `_destruct` | Run at destruction of each instance, scoped to specific instance |
 | `_resize` | Run on window resize, scoped to window |
 | `_raf` | Run on request animation frame, scoped to window |

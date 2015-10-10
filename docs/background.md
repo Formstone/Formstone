@@ -137,7 +137,15 @@ $(".target").background("load", { "poster": "path/to/image.jpg", "video": "//www
 | --- | --- | --- | --- |
 | `source` | `string OR object` | &nbsp; | Source image (string or object) or video (object) or YouTube (object); |
 
-### pauseVideo
+### mute
+
+Mutes target video
+
+```javascript
+$(".target").background("mute");
+```
+
+### pause
 
 Pauses target video
 
@@ -145,7 +153,7 @@ Pauses target video
 $(".target").background("pause");
 ```
 
-### playVideo
+### play
 
 Plays target video
 
@@ -159,6 +167,14 @@ Unloads current media
 
 ```javascript
 $(".target").background("unload");
+```
+
+### unmute
+
+Unmutes target video
+
+```javascript
+$(".target").background("unmute");
 ```
 
 ## CSS

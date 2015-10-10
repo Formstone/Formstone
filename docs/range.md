@@ -58,8 +58,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `customClass` | `string` | `''` | Class applied to instance |
+| `fill` | `boolean` | `false` | Flag to draw fill |
 | `formatter` | `function` | `false` | Value format function |
-| `labels` | `boolean` | `true` | Draw labels |
+| `labels` | `boolean` | `true` | Flag to draw labels |
 | `labels.max` | `string` | &nbsp; | Max value label; defaults to max value |
 | `labels.min` | `string` | &nbsp; | Min value label; defaults to min value |
 | `theme` | `string` | `"fs-light"` | Theme class name |

@@ -43,10 +43,13 @@
 		var html = "";
 
 		// Not valid in the spec
-		data.disbaled = this.is(":disabled");
 		data.vertical = this.attr("orient") === "vertical" || data.vertical;
+		data.disabled = this.is(":disabled");
 
 		html += '<div class="' + RawClasses.track + '">';
+		if (data.fill) {
+			html += '<span class="' + RawClasses.fill + '"></span>';
+		}
 		html += '<div class="' + RawClasses.handle + '">';
 		html += '<span class="' + RawClasses.marker + '"></span>';
 		html += '</div>';
@@ -67,6 +70,7 @@
 
 		data.$container = this.parents(Classes.base);
 		data.$track     = data.$container.find(Classes.track);
+		data.$fill      = data.$container.find(Classes.fill);
 		data.$handle    = data.$container.find(Classes.handle);
 		data.$output    = data.$container.find(Classes.output);
 
@@ -197,7 +201,7 @@
 
 		var data = e.data;
 
-		if (!data.disbaled) {
+		if (!data.disabled) {
 			onPan(e);
 
 			data.$container.addClass(RawClasses.focus);
@@ -217,13 +221,15 @@
 		var data = e.data,
 			percent = 0;
 
-		if (data.vertical) {
-			percent = 1 - (e.pageY - data.offset.top) / data.trackHeight;
-		} else {
-			percent = (e.pageX - data.offset.left) / data.trackWidth;
-		}
+		if (!data.disabled) {
+			if (data.vertical) {
+				percent = 1 - (e.pageY - data.offset.top) / data.trackHeight;
+			} else {
+				percent = (e.pageX - data.offset.left) / data.trackWidth;
+			}
 
-		position(data, percent);
+			position(data, percent);
+		}
 	}
 
 	/**
@@ -238,7 +244,9 @@
 
 		var data = e.data;
 
-		data.$container.removeClass(RawClasses.focus);
+		if (!data.disabled) {
+			data.$container.removeClass(RawClasses.focus);
+		}
 	}
 
 	/**
@@ -291,6 +299,7 @@
 		var value = ((data.min - data.max) * perc);
 		value = -parseFloat(value.toFixed(data.digits));
 
+		data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
 		value += data.min;
 
@@ -353,8 +362,9 @@
 			/**
 			 * @options
 			 * @param customClass [string] <''> "Class applied to instance"
+			 * @param fill [boolean] <false> "Flag to draw fill"
 			 * @param formatter [function] <false> "Value format function"
-			 * @param labels [boolean] <true> "Draw labels"
+			 * @param labels [boolean] <true> "Flag to draw labels"
 			 * @param labels.max [string] "Max value label; defaults to max value"
 			 * @param labels.min [string] "Min value label; defaults to min value"
 			 * @param theme [string] <"fs-light"> "Theme class name"
@@ -363,6 +373,7 @@
 
 			defaults: {
 				customClass    : "",
+				fill           : false,
 				formatter      : false,
 				labels: {
 					max        : false,
@@ -375,6 +386,7 @@
 			classes: [
 				"track",
 				"handle",
+				"fill",
 				"marker",
 				"labels",
 				"label",

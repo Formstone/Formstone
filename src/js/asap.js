@@ -113,8 +113,8 @@
 			Request.abort();
 		}
 
-		var state = e.originalEvent.state,
-			direction = (state.id > CurrentID) ? "forward" : "back";
+		var state = e.originalEvent.state;
+			// direction = (state.id > CurrentID) ? "forward" : "back";
 
 		CurrentID = state.id;
 
@@ -241,7 +241,7 @@
 
 		$Window.trigger(Events.rendered, [ data ]);
 
-		var scrollTop = (Instance.jump) ? 0 : false;
+		var scrollTop = false;
 
 		if (parsedURL.hash !== "") {
 			var $el = $(parsedURL.hash);
@@ -329,16 +329,31 @@
 		replaceState(state.id, url);
 	}
 
+	/**
+	 * @method private
+	 * @name pushState
+	 * @description Push state to the history stack
+	 * @param id [int] "State id"
+	 * @param url [string] "State url"
+	 */
 
-	function replaceState(id, url) {
-		history.replaceState({
+	function pushState(id, url) {
+		history.pushState({
 			id: id,
 			url: url
 		}, Namespace + id, url);
 	}
 
-	function pushState(id, url) {
-		history.pushState({
+	/**
+	 * @method private
+	 * @name replaceState
+	 * @description Push state to the history stack
+	 * @param id [int] "State id"
+	 * @param url [string] "State url"
+	 */
+
+	function replaceState(id, url) {
+		history.replaceState({
 			id: id,
 			url: url
 		}, Namespace + id, url);
@@ -437,7 +452,6 @@
 		/**
 		 * @options
 		 * @param cache [boolean] <true> "Flag to cache AJAX responses"
-		 * @param jump [boolean] <true> "Flag to scroll to top on load"
 		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
@@ -446,7 +460,6 @@
 
 		Defaults = {
 			cache         : true,
-			jump          : true,
 			selector      : "a",
 			render        : $.noop,
 			requestKey    : "fs-asap",
