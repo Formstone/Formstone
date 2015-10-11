@@ -7,5 +7,7 @@
 		$(".js-demo_carousel").carousel();
 		$(".js-demo_checkbox").checkbox();
 		$(".js-demo_dropdown").dropdown();
+		
+		$(".js-demo_upload").upload();
 	});
 </script>

@@ -1,328 +1,332 @@
+/**
+ * @component
+ * @name Checkbox
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+// Config
 
-	@fs-checkbox-transition-duration:			0.15s;
-	@fs-checkbox-transition-timing:				ease;
+@fs-checkbox-transition-duration:			0.15s;
+@fs-checkbox-transition-timing:				ease;
 
-	@fs-checkbox-marker-height-width:			20px;
+@fs-checkbox-marker-height-width:			20px;
 
-	@fs-checkbox-flag-background:				#666;
+@fs-checkbox-flag-background:				#666;
+
+// Disabled
+
+@fs-checkbox-disabled-opacity:				0.5;
+
+// Toggle
+@fs-checkbox-toggle-marker-background:		#666;
+
+@fs-checkbox-toggle-marker-height:			40px;
+@fs-checkbox-toggle-marker-width:			100px;
+
+/**
+ * @class
+ * @name .fs-checkbox-element
+ * @type element
+ * @description Target elmement
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox
+ * @type element
+ * @description Base widget class
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-checked
+ * @type modifier
+ * @description Indicates checked state
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-radio
+ * @type modifier
+ * @description Indicates radio interface
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-toggle
+ * @type modifier
+ * @description Indicates toggle interface
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-focus
+ * @type modifier
+ * @description Indicates focused state
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-disabled
+ * @type modifier
+ * @description Indicates disabled state
+ */
+
+.fs-checkbox {
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
+
+	&&-enabled {
+		cursor: pointer;
+		overflow: hidden;
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	&-element_wrapper {
+		position: relative;
+
+		border: 0;
+		height: 0;
+		margin: 0;
+		opacity: 0;
+		overflow: hidden;
+		padding: 0;
+		width: 0;
+	}
+
+	&-element {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+
+		pointer-events: none;
+		transition: none;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-label
+	 * @type element
+	 * @description Label element
+	 */
+
+	&-label {
+		cursor: pointer;
+		display: block;;
+		line-height: @fs-checkbox-marker-height-width;
+		overflow: hidden;
+		user-select: none;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-marker
+	 * @type element
+	 * @description Marker element
+	 */
+
+	&-marker {
+		width: @fs-checkbox-marker-height-width;
+		height: @fs-checkbox-marker-height-width;
+
+		border: 1px solid;
+		cursor: pointer;
+		display: block;
+		float: left;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-flag
+	 * @type element
+	 * @description Flag element
+	 */
+
+	&-flag {
+		width: 100%;
+		height: 100%;
+
+		margin: 0;
+	}
+
+	&-flag:before {
+		width: 5px;
+		height: 10px;
+
+		border: 2px solid;
+		border-top: 0;
+		border-left: 0;
+		content: '';
+		display: block;
+		margin: 3px 0 0 6px;
+		transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+		transform:
+			rotate(45deg)
+			scale(0);
+	}
+
+	&-checked &-flag:before {
+		transform:
+			rotate(45deg)
+			scale(1);
+	}
+
+	// Checked
+
+	// IE8, no transforms
+
+	.no-csstransforms &-flag:before {
+		width: 100%;
+		height: 100%;
+
+		content: "\2713";
+		display: none;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.no-csstransforms &-checked &-flag:before {
+		display: block;
+	}
+
+	// Radio
+
+	&-radio &-marker {
+		border-radius: 100%;
+	}
+
+	&-radio &-flag {
+		width: 70%;
+		height: 70%;
+
+		background: @fs-checkbox-flag-background;
+		border-radius: 100%;
+		margin: 15%;
+		transform: scale(0);
+		transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+
+		&:before {
+			display: none;
+		}
+	}
+
+	&-radio&-checked &-flag {
+		transform: scale(1);
+
+		&:before {
+			display: none;
+		}
+	}
+
+	// IE8  -no transitions
+
+	.no-csstransforms &-radio &-flag:before {
+		display: none;
+	}
+
+	.no-csstransforms &-radio&-checked &-flag:before {
+		display: block;
+	}
 
 	// Disabled
 
-	@fs-checkbox-disabled-opacity:				0.5;
+	&-disabled {
+		cursor: default;
+		opacity: @fs-checkbox-disabled-opacity;
+	}
+
+	&-disabled &-label {
+		cursor: default;
+	}
+
+	&-disabled &-marker {
+		cursor: default;
+	}
 
 	// Toggle
-	@fs-checkbox-toggle-marker-background:		#666;
 
-	@fs-checkbox-toggle-marker-height:			40px;
-	@fs-checkbox-toggle-marker-width:			100px;
+	&-toggle {
+		position: relative;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox-element
-	 * @type element
-	 * @description Target elmement
-	 */
+	&-toggle &-label {
+		line-height: @fs-checkbox-toggle-marker-height;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox
-	 * @type element
-	 * @description Base widget class
-	 */
+	&-toggle &-marker {
+		.fs_clearfix();
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-checked
-	 * @type modifier
-	 * @description Indicates checked state
-	 */
+		width: @fs-checkbox-toggle-marker-width;
+		height: @fs-checkbox-toggle-marker-height;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-radio
-	 * @type modifier
-	 * @description Indicates radio interface
-	 */
+		position: relative;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-toggle
-	 * @type modifier
-	 * @description Indicates toggle interface
-	 */
+	&-toggle &-flag {
+		width: 50%;
+		height: 100%;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-focus
-	 * @type modifier
-	 * @description Indicates focused state
-	 */
+		position: absolute;
+		top: 0;
+		left: 0;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-disabled
-	 * @type modifier
-	 * @description Indicates disabled state
-	 */
+		background: @fs-checkbox-toggle-marker-background;
+		display: block;
+		transition: left @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+	}
 
-	.fs-checkbox {
+	.no-touch &-toggle:hover &-flag:after {
+		opacity: 1;
+	}
 
-		/**
-		 * @class
-		 * @name .fs-checkbox-enabled
-		 * @type modifier
-		 * @description Indicates enabled state
-		 */
+	&-toggle&-checked &-flag {
+		left: 50%;
 
-		&&-enabled {
-			cursor: pointer;
-			overflow: hidden;
-
-			&:focus {
-				box-shadow: none;
-				outline: none;
-			}
+		&:before {
+			display: none;
 		}
+	}
 
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
-		}
+	&-toggle&-disabled &-flag:after {
+		display: none;
+	}
 
-		&-element_wrapper {
-			position: relative;
+	&-toggle &-state {
+		width: 50%;
 
-			border: 0;
-			height: 0;
-			margin: 0;
-			opacity: 0;
-			overflow: hidden;
-			padding: 0;
-			width: 0;
-		}
+		display: block;
+		line-height: @fs-checkbox-toggle-marker-height;
+		margin: 0;
+		text-align: center;
 
-		&-element {
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-
-			pointer-events: none;
-			transition: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-label
-		 * @type element
-		 * @description Label element
-		 */
-
-		&-label {
-			cursor: pointer;
-			display: block;;
-			line-height: @fs-checkbox-marker-height-width;
-			overflow: hidden;
-			user-select: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-marker
-		 * @type element
-		 * @description Marker element
-		 */
-
-		&-marker {
-			width: @fs-checkbox-marker-height-width;
-			height: @fs-checkbox-marker-height-width;
-
-			border: 1px solid;
-			cursor: pointer;
-			display: block;
+		&_on {
 			float: left;
 		}
 
-		/**
-		 * @class
-		 * @name .fs-checkbox-flag
-		 * @type element
-		 * @description Flag element
-		 */
-
-		&-flag {
-			width: 100%;
-			height: 100%;
-
-			margin: 0;
-		}
-
-		&-flag:before {
-			width: 5px;
-			height: 10px;
-
-			border: 2px solid;
-			border-top: 0;
-			border-left: 0;
-			content: '';
-			display: block;
-			margin: 3px 0 0 6px;
-			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-			transform:
-				rotate(45deg)
-				scale(0);
-		}
-
-		&-checked &-flag:before {
-			transform:
-				rotate(45deg)
-				scale(1);
-		}
-
-		// Checked
-
-		// IE8, no transforms
-
-		.no-csstransforms &-flag:before {
-			width: 100%;
-			height: 100%;
-
-			content: "\2713";
-			display: none;
-			line-height: 1;
-			text-align: center;
-		}
-
-		.no-csstransforms &-checked &-flag:before {
-			display: block;
-		}
-
-		// Radio
-
-		&-radio &-marker {
-			border-radius: 100%;
-		}
-
-		&-radio &-flag {
-			width: 70%;
-			height: 70%;
-
-			background: @fs-checkbox-flag-background;
-			border-radius: 100%;
-			margin: 15%;
-			transform: scale(0);
-			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-
-			&:before {
-				display: none;
-			}
-		}
-
-		&-radio&-checked &-flag {
-			transform: scale(1);
-
-			&:before {
-				display: none;
-			}
-		}
-
-		// IE8  -no transitions
-
-		.no-csstransforms &-radio &-flag:before {
-			display: none;
-		}
-
-		.no-csstransforms &-radio&-checked &-flag:before {
-			display: block;
-		}
-
-		// Disabled
-
-		&-disabled {
-			cursor: default;
-			opacity: @fs-checkbox-disabled-opacity;
-		}
-
-		&-disabled &-label {
-			cursor: default;
-		}
-
-		&-disabled &-marker {
-			cursor: default;
-		}
-
-		// Toggle
-
-		&-toggle {
-			position: relative;
-		}
-
-		&-toggle &-label {
-			line-height: @fs-checkbox-toggle-marker-height;
-		}
-
-		&-toggle &-marker {
-			.fs_clearfix();
-
-			width: @fs-checkbox-toggle-marker-width;
-			height: @fs-checkbox-toggle-marker-height;
-
-			position: relative;
-		}
-
-		&-toggle &-flag {
-			width: 50%;
-			height: 100%;
-
-			position: absolute;
-			top: 0;
-			left: 0;
-
-			background: @fs-checkbox-toggle-marker-background;
-			display: block;
-			transition: left @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-		}
-
-		.no-touch &-toggle:hover &-flag:after {
-			opacity: 1;
-		}
-
-		&-toggle&-checked &-flag {
-			left: 50%;
-
-			&:before {
-				display: none;
-			}
-		}
-
-		&-toggle&-disabled &-flag:after {
-			display: none;
-		}
-
-		&-toggle &-state {
-			width: 50%;
-
-			display: block;
-			line-height: @fs-checkbox-toggle-marker-height;
-			margin: 0;
-			text-align: center;
-
-			&_on {
-				float: left;
-			}
-
-			&_off {
-				float: right;
-			}
+		&_off {
+			float: right;
 		}
 	}
+}

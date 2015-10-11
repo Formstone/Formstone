@@ -4,298 +4,298 @@
  * @component Dropdown
  */
 
-	.fs-dropdown {
+.fs-dropdown {
 
-		@theme_name: fs-light;
+	@theme_name: fs-light;
 
-		// Config
+	// Config
 
-		@fs-dropdown-max-height:							260px;
+	@fs-dropdown-max-height:							260px;
 
-		@fs-dropdown-text-color:							#222;
-		@fs-dropdown-font-size:								14px;
+	@fs-dropdown-text-color:							#222;
+	@fs-dropdown-font-size:								14px;
 
-		@fs-dropdown-background-color:						#fff;
+	@fs-dropdown-background-color:						#fff;
 
-		@fs-dropdown-border-width:							1px;
-		@fs-dropdown-border-color:							#ccc;
-		@fs-dropdown-border-radius:							3px;
+	@fs-dropdown-border-width:							1px;
+	@fs-dropdown-border-color:							#ccc;
+	@fs-dropdown-border-radius:							3px;
 
-		// Caret
-		@fs-dropdown-caret-color:							#ccc;
-		@fs-dropdown-caret-size:							5px;
+	// Caret
+	@fs-dropdown-caret-color:							#ccc;
+	@fs-dropdown-caret-size:							5px;
 
-		// Hover
+	// Hover
 
-		@fs-dropdown-hover-text-color:						#222;
-		@fs-dropdown-hover-background-color:				#ddd;
+	@fs-dropdown-hover-text-color:						#222;
+	@fs-dropdown-hover-background-color:				#ddd;
 
-		// Selected
+	// Selected
 
-		@fs-dropdown-selected-height:						40px;
-		@fs-dropdown-selected-padding:						0 40px 0 15px;
+	@fs-dropdown-selected-height:						40px;
+	@fs-dropdown-selected-padding:						0 40px 0 15px;
 
-		// Open
+	// Open
 
-		@fs-dropdown-open-background-color:					#fff;
+	@fs-dropdown-open-background-color:					#fff;
 
-		// Options
+	// Options
 
-		@fs-dropdown-options-background-color:				#fff;
+	@fs-dropdown-options-background-color:				#fff;
 
-		// Group
+	// Group
 
-		@fs-dropdown-group-border-color:					#ccc;
-		@fs-dropdown-group-text-color:						#999;
-		@fs-dropdown-group-font-size:						11px;
-		@fs-dropdown-group-padding:							10px 15px;
-		@fs-dropdown-group-text-transform:					uppercase;
+	@fs-dropdown-group-border-color:					#ccc;
+	@fs-dropdown-group-text-color:						#999;
+	@fs-dropdown-group-font-size:						11px;
+	@fs-dropdown-group-padding:							10px 15px;
+	@fs-dropdown-group-text-transform:					uppercase;
 
-		// Disabled
+	// Disabled
 
-		@fs-dropdown-disabled-opacity:						0.5;
+	@fs-dropdown-disabled-opacity:						0.5;
 
-		// Item
+	// Item
 
-		@fs-dropdown-item-text-color:						#222;
-		@fs-dropdown-item-font-size:						14px;
-		@fs-dropdown-item-background-color:					#fff;
-		@fs-dropdown-item-border-color:						#ccc;
-		@fs-dropdown-item-border-width:						1px;
-		@fs-dropdown-item-height:							40px;
-		@fs-dropdown-item-padding:							0 15px;
+	@fs-dropdown-item-text-color:						#222;
+	@fs-dropdown-item-font-size:						14px;
+	@fs-dropdown-item-background-color:					#fff;
+	@fs-dropdown-item-border-color:						#ccc;
+	@fs-dropdown-item-border-width:						1px;
+	@fs-dropdown-item-height:							40px;
+	@fs-dropdown-item-padding:							0 15px;
 
-		@fs-dropdown-item-hover-text-color:					#222;
-		@fs-dropdown-item-hover-background-color:			#ddd;
+	@fs-dropdown-item-hover-text-color:					#222;
+	@fs-dropdown-item-hover-background-color:			#ddd;
 
-		// Item - Selected
+	// Item - Selected
 
-		@fs-dropdown-item-selected-background-color:	#eee;
+	@fs-dropdown-item-selected-background-color:	#eee;
 
-		&.@{theme_name} {
+	&.@{theme_name} {
+	}
+
+	&.@{theme_name} &-selected {
+		height: @fs-dropdown-selected-height;
+
+		background: @fs-dropdown-background-color;
+		border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
+		border-radius: @fs-dropdown-border-radius;
+		color: @fs-dropdown-text-color;
+		font-size: @fs-dropdown-font-size;
+		line-height: @fs-dropdown-selected-height;
+		margin: 0;
+		padding: @fs-dropdown-selected-padding;
+
+		&:after {
+			height: 0;
+			width: 0;
+
+			position: absolute;
+			top: 0;
+			right: 15px;
+			bottom: 0;
+
+			border-left: @fs-dropdown-caret-size solid transparent;
+			border-right: @fs-dropdown-caret-size solid transparent;
+			border-top: @fs-dropdown-caret-size solid @fs-dropdown-caret-color;
+			content: '';
+			display: block;
+			margin: auto 0;
+		}
+	}
+
+	.no-touch &.@{theme_name} &-selected:hover {
+		color: @fs-dropdown-hover-text-color;
+	}
+
+	.no-touch &.@{theme_name}&-disabled &-selected:hover {
+		color: @fs-dropdown-text-color;
+	}
+
+	// Options
+
+	&.@{theme_name} &-options {
+		max-height: @fs-dropdown-max-height;
+
+		border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
+		border-width: 0 @fs-dropdown-border-width @fs-dropdown-border-width;
+		border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
+		background-color: @fs-dropdown-options-background-color;
+		margin: 0;
+		padding: 0;
+	}
+
+	// Group
+
+	&.@{theme_name} &-group {
+		border-bottom: @fs-dropdown-border-width solid @fs-dropdown-group-border-color;
+		color: @fs-dropdown-group-text-color;
+		font-size: @fs-dropdown-group-font-size;
+		padding: @fs-dropdown-group-padding;
+		text-transform: @fs-dropdown-group-text-transform;
+	}
+
+	// Item
+
+	&.@{theme_name} &-item {
+		background: @fs-dropdown-item-background-color;
+		border-bottom: @fs-dropdown-item-border-width solid @fs-dropdown-item-border-color;
+		color: @fs-dropdown-item-text-color;
+		font-size: @fs-dropdown-item-font-size;
+		margin: 0;
+		height: @fs-dropdown-item-height;
+		line-height: @fs-dropdown-item-height;
+		padding: @fs-dropdown-item-padding;
+		text-align: left;
+
+		&:first-child {
+			border-radius: 0;
 		}
 
-		&.@{theme_name} &-selected {
-			height: @fs-dropdown-selected-height;
-
-			background: @fs-dropdown-background-color;
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-radius: @fs-dropdown-border-radius;
-			color: @fs-dropdown-text-color;
-			font-size: @fs-dropdown-font-size;
-			line-height: @fs-dropdown-selected-height;
-			margin: 0;
-			padding: @fs-dropdown-selected-padding;
-
-			&:after {
-				height: 0;
-				width: 0;
-
-				position: absolute;
-				top: 0;
-				right: 15px;
-				bottom: 0;
-
-				border-left: @fs-dropdown-caret-size solid transparent;
-				border-right: @fs-dropdown-caret-size solid transparent;
-				border-top: @fs-dropdown-caret-size solid @fs-dropdown-caret-color;
-				content: '';
-				display: block;
-				margin: auto 0;
-			}
-		}
-
-		.no-touch &.@{theme_name} &-selected:hover {
-			color: @fs-dropdown-hover-text-color;
-		}
-
-		.no-touch &.@{theme_name}&-disabled &-selected:hover {
-			color: @fs-dropdown-text-color;
-		}
-
-		// Options
-
-		&.@{theme_name} &-options {
-			max-height: @fs-dropdown-max-height;
-
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-width: 0 @fs-dropdown-border-width @fs-dropdown-border-width;
+		&:last-child {
+			border-bottom: 0;
 			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-			background-color: @fs-dropdown-options-background-color;
-			margin: 0;
+		}
+	}
+
+	&.@{theme_name} &-item_selected {
+		background: @fs-dropdown-item-selected-background-color;
+	}
+
+	&.@{theme_name} &-item_disabled {
+		opacity: @fs-dropdown-disabled-opacity;
+	}
+
+	.no-touch &.@{theme_name} &-item:hover,
+	.no-touch &.@{theme_name} &-item_selected:hover {
+		color: @fs-dropdown-item-hover-text-color;
+		background-color: @fs-dropdown-item-hover-background-color;
+		border-color: @fs-dropdown-item-border-color;
+	}
+
+	&.@{theme_name} &-item_disabled,
+	.no-touch &.@{theme_name} &-item_disabled:hover {
+		color: @fs-dropdown-text-color;
+		background-color: @fs-dropdown-background-color;
+		border-color: @fs-dropdown-border-color;
+	}
+
+	// Open
+
+	.@{theme_name}&-open &-options {
+		border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
+	}
+
+	.@{theme_name}&-open &-selected {
+		border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
+	}
+
+	.@{theme_name}&-open &-selected,
+	.@{theme_name}&-focus &-selected {
+		background-color: @fs-dropdown-open-background-color;
+	}
+
+	// Cover
+
+	.@{theme_name}&-cover &-options {
+		border-radius: @fs-dropdown-border-radius;
+		border-width: @fs-dropdown-border-width;
+	}
+
+	.@{theme_name}&-cover &-item:first-child {
+		border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
+	}
+
+	// Bottom
+
+	.@{theme_name}&-bottom &-options {
+		border-width: @fs-dropdown-border-width @fs-dropdown-border-width 0;
+	}
+
+	.@{theme_name}&-bottom &-item:last-child {
+		border: none;
+	}
+
+	.@{theme_name}&-bottom&-open &-selected {
+		border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
+	}
+
+	.@{theme_name}&-bottom&-open &-options {
+		border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
+	}
+
+	// Bottom Cover
+
+	.@{theme_name}&-bottom&-cover&-open &-selected {
+		border-radius: @fs-dropdown-border-radius;
+	}
+
+	.@{theme_name}&-bottom&-cover&-open &-options {
+		border-radius: @fs-dropdown-border-radius;
+	}
+
+	// Multiple
+
+	.@{theme_name}&-multiple {
+		border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
+		border-radius: @fs-dropdown-border-radius;
+	}
+
+	.@{theme_name}&-multiple &-options {
+		border: none;
+		border-radius: @fs-dropdown-border-radius;
+	}
+
+	// Disabled
+
+	.@{theme_name}&-disabled {
+		opacity: @fs-dropdown-disabled-opacity;
+	}
+
+	.@{theme_name}&-disabled &-selected {
+		cursor: default;
+	}
+
+	.@{theme_name}&-disabled &-options {
+		background: @fs-dropdown-background-color;
+		border-color: @fs-dropdown-border-color;
+	}
+
+	.@{theme_name}&-disabled &-group,
+	.@{theme_name}&-disabled &-item {
+		border-color: @fs-dropdown-border-color;
+		color: @fs-dropdown-text-color;
+	}
+
+	.@{theme_name}&-disabled &-item,
+	.no-touch .@{theme_name}&-disabled &-item:hover {
+		color: @fs-dropdown-text-color;
+		background-color: @fs-dropdown-background-color;
+	}
+
+	.@{theme_name}&-disabled &-item_selected,
+	.no-touch .@{theme_name}&-disabled &-item_selected:hover {
+		background: @fs-dropdown-background-color;
+	}
+
+	// Scrollbar
+
+	.@{theme_name}&-options.fs-scrollbar {
+		overflow: hidden;
+
+		.fs-scrollbar-content {
+			max-height: @fs-dropdown-max-height;
+			height: auto;
+		}
+
+		&.fs-scrollbar-active .fs-scrollbar-content {
 			padding: 0;
 		}
 
-		// Group
-
-		&.@{theme_name} &-group {
-			border-bottom: @fs-dropdown-border-width solid @fs-dropdown-group-border-color;
-			color: @fs-dropdown-group-text-color;
-			font-size: @fs-dropdown-group-font-size;
-			padding: @fs-dropdown-group-padding;
-			text-transform: @fs-dropdown-group-text-transform;
-		}
-
-		// Item
-
-		&.@{theme_name} &-item {
-			background: @fs-dropdown-item-background-color;
-			border-bottom: @fs-dropdown-item-border-width solid @fs-dropdown-item-border-color;
-			color: @fs-dropdown-item-text-color;
-			font-size: @fs-dropdown-item-font-size;
-			margin: 0;
-			height: @fs-dropdown-item-height;
-			line-height: @fs-dropdown-item-height;
-			padding: @fs-dropdown-item-padding;
-			text-align: left;
-
-			&:first-child {
-				border-radius: 0;
-			}
-
-			&:last-child {
-				border-bottom: 0;
-				border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-			}
-		}
-
-		&.@{theme_name} &-item_selected {
-			background: @fs-dropdown-item-selected-background-color;
-		}
-
-		&.@{theme_name} &-item_disabled {
-			opacity: @fs-dropdown-disabled-opacity;
-		}
-
-		.no-touch &.@{theme_name} &-item:hover,
-		.no-touch &.@{theme_name} &-item_selected:hover {
-			color: @fs-dropdown-item-hover-text-color;
-			background-color: @fs-dropdown-item-hover-background-color;
-			border-color: @fs-dropdown-item-border-color;
-		}
-
-		&.@{theme_name} &-item_disabled,
-		.no-touch &.@{theme_name} &-item_disabled:hover {
-			color: @fs-dropdown-text-color;
-			background-color: @fs-dropdown-background-color;
-			border-color: @fs-dropdown-border-color;
-		}
-
-		// Open
-
-		.@{theme_name}&-open &-options {
-			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-		}
-
-		.@{theme_name}&-open &-selected {
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-		.@{theme_name}&-open &-selected,
-		.@{theme_name}&-focus &-selected {
-			background-color: @fs-dropdown-open-background-color;
-		}
-
-		// Cover
-
-		.@{theme_name}&-cover &-options {
-			border-radius: @fs-dropdown-border-radius;
-			border-width: @fs-dropdown-border-width;
-		}
-
-		.@{theme_name}&-cover &-item:first-child {
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-		// Bottom
-
-		.@{theme_name}&-bottom &-options {
-			border-width: @fs-dropdown-border-width @fs-dropdown-border-width 0;
-		}
-
-		.@{theme_name}&-bottom &-item:last-child {
-			border: none;
-		}
-
-		.@{theme_name}&-bottom&-open &-selected {
-			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-		}
-
-		.@{theme_name}&-bottom&-open &-options {
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-		// Bottom Cover
-
-		.@{theme_name}&-bottom&-cover&-open &-selected {
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		.@{theme_name}&-bottom&-cover&-open &-options {
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		// Multiple
-
-		.@{theme_name}&-multiple {
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		.@{theme_name}&-multiple &-options {
-			border: none;
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		// Disabled
-
-		.@{theme_name}&-disabled {
-			opacity: @fs-dropdown-disabled-opacity;
-		}
-
-		.@{theme_name}&-disabled &-selected {
-			cursor: default;
-		}
-
-		.@{theme_name}&-disabled &-options {
-			background: @fs-dropdown-background-color;
-			border-color: @fs-dropdown-border-color;
-		}
-
-		.@{theme_name}&-disabled &-group,
-		.@{theme_name}&-disabled &-item {
-			border-color: @fs-dropdown-border-color;
-			color: @fs-dropdown-text-color;
-		}
-
-		.@{theme_name}&-disabled &-item,
-		.no-touch .@{theme_name}&-disabled &-item:hover {
-			color: @fs-dropdown-text-color;
-			background-color: @fs-dropdown-background-color;
-		}
-
-		.@{theme_name}&-disabled &-item_selected,
-		.no-touch .@{theme_name}&-disabled &-item_selected:hover {
-			background: @fs-dropdown-background-color;
-		}
-
-		// Scrollbar
-
-		.@{theme_name}&-options.fs-scrollbar {
-			overflow: hidden;
-
-			.fs-scrollbar-content {
-				max-height: @fs-dropdown-max-height;
-				height: auto;
-			}
-
-			&.fs-scrollbar-active .fs-scrollbar-content {
-				padding: 0;
-			}
-
-			.fs-scrollbar-bar,
-			.fs-scrollbar-track {
-				border-radius: 0 @fs-dropdown-border-radius @fs-dropdown-border-radius 0;
-			}
+		.fs-scrollbar-bar,
+		.fs-scrollbar-track {
+			border-radius: 0 @fs-dropdown-border-radius @fs-dropdown-border-radius 0;
 		}
 	}
+}

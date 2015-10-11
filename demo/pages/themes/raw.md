@@ -6,6 +6,8 @@
 	$(function() {
 		$(".js-demo_carousel").carousel({ theme: "" });
 		$(".js-demo_checkbox").checkbox({ theme: "" });
-		$(".js-demo_dropdown").dropdown({ theme: "", customClass: "blahhhh" });
+		$(".js-demo_dropdown").dropdown({ theme: "" });
+		
+		$(".js-demo_upload").upload({ theme: "" });
 	});
 </script>
