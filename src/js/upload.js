@@ -22,7 +22,7 @@
 			}
 			html += '>';
 
-			data.baseClasses = [RawClasses.base, data.customClass, data.theme].join(" ");
+			data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
 
 			this.addClass(data.baseClasses)
 				.append(html);
