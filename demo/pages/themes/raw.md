@@ -8,6 +8,7 @@
 		$(".js-demo_checkbox").checkbox({ theme: "" });
 		$(".js-demo_dropdown").dropdown({ theme: "" });
 		
+		$(".js-demo_tabs").tabs({ theme: "" });
 		$(".js-demo_tooltip").tooltip({ theme: "" });
 		$(".js-demo_upload").upload({ theme: "" });
 	});

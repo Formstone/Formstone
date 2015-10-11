@@ -16,7 +16,7 @@
 		data.group        = this.data(Namespace + "-group");
 
 		data.thisClasses         = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
-		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid].join(" ");
+		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass].join(" ");
 		data.contentClasses      = [RawClasses.content, data.rawGuid].join(" ");
 
 		// DOM

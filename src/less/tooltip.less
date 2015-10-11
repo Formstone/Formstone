@@ -1,178 +1,164 @@
+/**
+ * @component
+ * @name Tooltip
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+// Config
 
-/*
-	@fs-tooltip-background:				#111;
-	@fs-tooltip-border-radius:			3px;
-	@fs-tooltip-padding: 				10px 15px;
-*/
-	@fs-tooltip-z-index:				10;
-/*
+@fs-tooltip-z-index:				10;
 
-	@fs-tooltip-text-color:				#fff;
-	@fs-tooltip-font-size:				12px;
+@fs-tooltip-transition-duration:	0.15s;
 
-	@fs-tooltip-box-shadow-color: 		rgba(0, 0, 0, 0.35);
-	@fs-tooltip-box-shadow-blur: 		5px;
-	@fs-tooltip-box-shadow-offset: 		1px;
-*/
+/**
+ * @class
+ * @name .fs-tooltip-element
+ * @type element
+ * @description Target elmement
+ */
 
-	@fs-tooltip-transition-duration:	0.15s;
-/*
+/**
+ * @class
+ * @name .fs-tooltip
+ * @type element
+ * @description Base widget class
+ */
 
-	@fs-tooltip-caret-size: 			5px;
-*/
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-visible
+ * @type modifier
+ * @description Inidcates visible state
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-right
+ * @type modifier
+ * @description Inidcates right side display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-left
+ * @type modifier
+ * @description Inidcates left side display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-top
+ * @type modifier
+ * @description Inidcates top display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-bottom
+ * @type modifier
+ * @description Inidcates bottom display
+ */
+
+.fs-tooltip {
+	width: 1px;
+	height: 1px;
+
+	position: absolute;
+	top: -999px;
+	left: -999px;
+	z-index: @fs-tooltip-z-index;
+
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity @fs-tooltip-transition-duration linear;
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	// Visible
+
+	&-visible {
+		opacity: 1;
+	}
 
 	/**
 	 * @class
-	 * @name .fs-tooltip-element
+	 * @name .fs-tooltip-content
 	 * @type element
-	 * @description Target elmement
+	 * @description Tooltip content wrapper
 	 */
+
+	&-content {
+		display: block;
+		float: left;
+		position: relative;
+		white-space: nowrap;
+	}
 
 	/**
 	 * @class
-	 * @name .fs-tooltip
+	 * @name .fs-tooltip-caret
 	 * @type element
-	 * @description Base widget class
+	 * @description Tooltip caret
 	 */
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-visible
-	 * @type modifier
-	 * @description Inidcates visible state
-	 */
+	&-caret {
+		display: none;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-right
-	 * @type modifier
-	 * @description Inidcates right side display
-	 */
+	// .fs-tooltip-right
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-left
-	 * @type modifier
-	 * @description Inidcates left side display
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-top
-	 * @type modifier
-	 * @description Inidcates top display
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-bottom
-	 * @type modifier
-	 * @description Inidcates bottom display
-	 */
-
-	.fs-tooltip {
-		width: 1px;
-		height: 1px;
-
-		position: absolute;
-		top: -999px;
-		left: -999px;
-		z-index: @fs-tooltip-z-index;
-
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity @fs-tooltip-transition-duration linear;
-
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
+	&-right {
+		.fs-tooltip-content {
 		}
 
-		// Visible
-
-		&-visible {
-			opacity: 1;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-tooltip-content
-		 * @type element
-		 * @description Tooltip content wrapper
-		 */
-
-		&-content {
-			display: block;
-			float: left;
-			position: relative;
-			white-space: nowrap;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-tooltip-caret
-		 * @type element
-		 * @description Tooltip caret
-		 */
-
-		&-caret {
-			display: none;
-		}
-
-		// .fs-tooltip-right
-
-		&-right {
-			.fs-tooltip-content {
-			}
-
-			.fs-tooltip-caret {
-			}
-		}
-
-
-		// .fs-tooltip-left
-
-		&-left {
-			.fs-tooltip-content {
-			}
-
-			.fs-tooltip-caret {
-			}
-		}
-
-		&-top,
-		&-bottom {
-			.fs-tooltip-caret {
-			}
-		}
-
-		// .fs-tooltip-top
-
-		&-top {
-			.fs-tooltip-content {
-			}
-
-			.fs-tooltip-caret {
-			}
-		}
-
-		// .fs-tooltip-bottom
-
-		&-bottom {
-			.fs-tooltip-content {
-			}
-
-			.fs-tooltip-caret {
-			}
+		.fs-tooltip-caret {
 		}
 	}
+
+
+	// .fs-tooltip-left
+
+	&-left {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+
+	&-top,
+	&-bottom {
+		.fs-tooltip-caret {
+		}
+	}
+
+	// .fs-tooltip-top
+
+	&-top {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+
+	// .fs-tooltip-bottom
+
+	&-bottom {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+}

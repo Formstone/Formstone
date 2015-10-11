@@ -97,9 +97,9 @@
 					// Linked handles
 					$(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
 				}
-
-				this.trigger(Events.activate, [index]);
 			}
+
+			this.trigger(Events.activate, [index]);
 
 			data.active = true;
 		}
@@ -121,9 +121,9 @@
 					// Linked handles
 					$(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
 				}
-
-				this.trigger(Events.deactivate);
 			}
+
+			this.trigger(Events.deactivate);
 
 			data.active = false;
 		}
@@ -150,9 +150,8 @@
 			this.trigger(Events.enable);
 
 			if (data.onEnable) {
-				data.active = true;
-				data.$swaps.addClass(data.classes.raw.active);
-				// activate.call(this, data);
+				data.active = false;
+				activate.call(this, data);
 			} else {
 				data.active = true;
 				deactivate.call(this, data);

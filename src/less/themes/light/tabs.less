@@ -1,0 +1,76 @@
+/**
+ * @theme
+ * @name Light
+ * @component Tabs
+ */
+
+.fs-tabs {
+
+	@theme_name: fs-light;
+
+	//Config
+
+	@fs-tabs-background-color:			#eee;
+	@fs-tabs-border-radius:				2px;
+	@fs-tabs-font-size:					14px;
+	@fs-tabs-text-color:				#666;
+
+	// Hover
+	@fs-tabs-hover-background-color:	#ccc;
+
+	// Active
+	@fs-tabs-active-background-color:	#666;
+	@fs-tabs-active-text-color:			#fff;
+
+	// Tab
+
+	.@{theme_name}&-tab&-enabled,
+	.@{theme_name}&-tab&-mobile,
+	.@{theme_name}&-tab_mobile {
+		background: @fs-tabs-background-color;
+		border-radius: @fs-tabs-border-radius;
+		color: @fs-tabs-text-color;
+		font-size: @fs-tabs-font-size;
+		margin: 0 10px 0 0;
+		padding: 10px 20px;
+		text-transform: uppercase;
+
+		.no-touch &:hover {
+			background: @fs-tabs-hover-background-color;
+		}
+	}
+
+	.@{theme_name}&-tab&-active,
+	.@{theme_name}&-tab_mobile&-active {
+		&,
+		.no-touch &:hover {
+			background: @fs-tabs-active-background-color;
+			color: @fs-tabs-active-text-color;
+		}
+	}
+
+	// Content
+
+	.@{theme_name}&-content&-enabled {
+
+	}
+
+	.@{theme_name}&-content&-active {
+
+	}
+
+	// Mobile
+
+	.@{theme_name}&-tab&-mobile,
+	.@{theme_name}&-tab_mobile,
+	.@{theme_name}&-tab_mobile&-active {
+		width: 100%;
+
+		margin: 0 0 10px;
+	}
+
+	.@{theme_name}&-tab_mobile&-mobile,
+	.@{theme_name}&-mobile&-active {
+
+	}
+}
