@@ -4,7 +4,8 @@
 
 <script>
 	$(function() {
-		$(".carousel").carousel();
-		$("input[type=checkbox], input[type=radio]").checkbox();
+		$(".js-demo_carousel").carousel();
+		$(".js-demo_checkbox").checkbox();
+		$(".js-demo_dropdown").dropdown();
 	});
 </script>

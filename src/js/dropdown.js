@@ -106,7 +106,9 @@
 
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
-			data.$wrapper.fsScrollbar();
+			data.$wrapper.fsScrollbar({
+				theme: data.theme
+			});
 		}
 
 		// Bind events

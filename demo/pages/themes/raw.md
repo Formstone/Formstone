@@ -4,7 +4,8 @@
 
 <script>
 	$(function() {
-		$(".carousel").carousel({ theme: "" });
-		$("input[type=checkbox], input[type=radio]").checkbox({ theme: "" });
+		$(".js-demo_carousel").carousel({ theme: "" });
+		$(".js-demo_checkbox").checkbox({ theme: "" });
+		$(".js-demo_dropdown").dropdown({ theme: "", customClass: "blahhhh" });
 	});
 </script>
