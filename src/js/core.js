@@ -135,6 +135,22 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			sortDesc: function(a, b) {
 				return (parseInt(b, 10) - parseInt(a, 10));
+			},
+
+			/**
+			 * @method private
+			 * @name decodeEntities
+			 * @description Decodes HTML.
+			 * @param string [string] "String to decode"
+			 * @return Decoded string
+			 */
+
+			decodeEntities: function(string) {
+				// http://stackoverflow.com/a/1395954
+				var el = Formstone.document.createElement("textarea");
+				el.innerHTML = string;
+
+				return el.value;
 			}
 		},
 

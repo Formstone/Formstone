@@ -284,7 +284,7 @@
 				if (opLabel) {
 					html += opLabel;
 				} else {
-					html += $("<span></span>").html( trimText($option.text(), data.trim) ).text();
+					html += Functions.decodeEntities( trimText($option.text(), data.trim) );
 				}
 
 				html += '</button>';
@@ -293,7 +293,7 @@
 			}
 		}
 
-		data.$items = data.$wrapper.html(html)
+		data.$items = data.$wrapper.html( $.parseHTML(html) )
 								   .find(Classes.item);
 	}
 
