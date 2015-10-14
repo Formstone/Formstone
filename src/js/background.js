@@ -361,6 +361,8 @@
 					data.player = null;
 				}
 
+				console.log(ytOptions);
+
 				data.player = new Window.YT.Player(guid, {
 					videoId: data.videoId,
 					playerVars: ytOptions,

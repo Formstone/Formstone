@@ -151,7 +151,27 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 				el.innerHTML = string;
 
 				return el.value;
-			}
+			},
+
+			/**
+			 * @method private
+			 * @name parseGetParams
+			 * @description Returns keyed object containing all GET query parameters
+			 * @param url [string] "URL to parse"
+			 * @return [object] "Keyed query params"
+			 */
+
+			parseQueryString: function(url) {
+				var params = {},
+					parts = url.slice( url.indexOf("?") + 1 ).split("&");
+
+				for (var i = 0; i < parts.length; i++) {
+					var part = parts[i].split("=");
+					params[ part[0] ] = part[1];
+				}
+
+				return params;
+		    }
 		},
 
 		Formstone = new Core(),
