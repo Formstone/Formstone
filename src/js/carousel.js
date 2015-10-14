@@ -357,7 +357,7 @@
 				$first = data.rtl ? $items.eq( $items.length - 1 ) : $items.eq(0);
 				left   = $first.position().left;
 
-				if (data.autoHeight) {
+				// if (data.autoHeight) {
 					for (k = 0; k < $items.length; k++) {
 						h = $items.eq(k).outerHeight();
 
@@ -365,9 +365,9 @@
 							height = h;
 						}
 					}
-				} else {
-					height = $first.outerHeight();
-				}
+				// } else {
+				// 	height = $first.outerHeight();
+				// }
 
 				data.pages.push({
 					left      : data.rtl ? left - (data.canisterWidth - data.pageWidth - data.itemMargin) : left,

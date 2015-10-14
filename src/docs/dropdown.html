@@ -4,12 +4,12 @@
 	.custom_select .fs-dropdown-options { border-width: 0 2px 2px; padding: 1%; }
 	.custom_select .fs-dropdown-item { border-radius: 3px !important; border: none; margin: 0 0 1%; }
 	.custom_select .fs-dropdown-item:last-child { margin: 0; }
-	
+
 /*
 	.scroll_area { height: 300px; overflow-y: scroll; }
 	.scroll_area .form_fieldset { margin-top: 300px; margin-bottom: 200px; }
 */
-	
+
 /* 	.fs-dropdown-open .fs-dropdown-selected, .fs-dropdown-focus .fs-dropdown-selected { border: 2px solid lightblue !important; } */
 </style>
 
@@ -51,6 +51,19 @@
 		}
 	}
 </script>
+
+<!--
+<select>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>"&gt;&lt;script&gt;alert('hello')&lt;/script&gt;</option>
+</select>
+<script>
+ $('select').dropdown();
+</script>
+-->
 
 <form action="#" method="GET" class="form demo_form">
 	<div class="fs-row">
@@ -252,7 +265,7 @@
 				<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
 			</fieldset>
 		</div>
-				
+
 <!--
 		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
 			<h4>Overflow</h4>
@@ -270,7 +283,7 @@
 			</div>
 		</div>
 -->
-		
+
 	</div>
 </form>
 
