@@ -1,0 +1,134 @@
+/**
+ * @theme
+ * @name Light
+ * @component Number
+ */
+
+.fs-number {
+
+	@theme_name: fs-light;
+
+	// Config
+
+	@fs-number-background-color:						#fff;
+
+	@fs-number-border-color:							#ccc;
+	@fs-number-border-radius:							3px;
+
+	@fs-number-font-size:								15px;
+	@fs-number-text-color:								#222;
+
+	@fs-number-margin:									0 0 10px 0;
+	@fs-number-padding:									0 10px;
+
+	@fs-number-arrow-width:								25px;
+	@fs-number-arrow-color:								#666;
+	@fs-number-arrow-size:								5px;
+
+	// disabled
+
+	@fs-number-disabled-border-color:					#ccc;
+	@fs-number-disabled-text-color:						#ccc;
+	@fs-number-disabled-background-color:				#fff;
+	@fs-number-disabled-arrow-color:					#ccc;
+
+	&.@{theme_name} {
+		position: relative;
+
+		border-radius: @fs-number-border-radius;
+		margin: @fs-number-margin;
+	}
+
+	// Element
+
+	&.@{theme_name} &-element {
+		width: 100%;
+
+		background: @fs-number-background-color;
+		border: 1px solid @fs-number-border-color;
+		border-radius: @fs-number-border-radius;
+		color: @fs-number-text-color;
+		font-size: @fs-number-font-size;
+		line-height: 1;
+		padding: @fs-number-padding;
+
+		&:focus {
+			background-color: @fs-number-background-color;
+		}
+	}
+
+	// Disabled
+
+	&.@{theme_name}&-disabled &-element {
+		background: @fs-number-disabled-background-color;
+		border-color: @fs-number-disabled-border-color;
+		color: @fs-number-disabled-text-color;
+	}
+
+	// Arrows
+
+	&.@{theme_name} &-arrow {
+		width: @fs-number-arrow-width;
+		height: 50%;
+
+		position: absolute;
+		right: 0;
+		z-index: 1;
+
+		background: @fs-number-background-color;
+		border: 1px solid @fs-number-border-color;
+		text-indent: 200%;
+		white-space: nowrap;
+
+		.no-opacity & {
+			text-indent: -999999px;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		&:after {
+			width: 0;
+			height: 0;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			border-left:  @fs-number-arrow-size solid transparent;
+			border-right: @fs-number-arrow-size solid transparent;
+			content: '';
+			display: block;
+			margin: auto;
+		}
+	}
+
+	&.@{theme_name} &-arrow&-up {
+		top: 0;
+
+		&:after {
+			border-bottom: @fs-number-arrow-size solid @fs-number-arrow-color;
+		}
+	}
+
+	&.@{theme_name} &-arrow&-down {
+		bottom: 0;
+
+		border-top: none;
+
+		&:after {
+			border-top: @fs-number-arrow-size solid @fs-number-arrow-color;
+		}
+	}
+
+	&.@{theme_name} &-disabled &-arrow {
+
+		&:after {
+			border-top-color: @fs-number-disabled-arrow-color;
+			border-bottom-color: @fs-number-disabled-arrow-color;
+		}
+	}
+}

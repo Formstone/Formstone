@@ -8,6 +8,8 @@
 		$(".js-demo_checkbox").checkbox();
 		$(".js-demo_dropdown").dropdown();
 		
+		$(".js-demo_number").number();
+		
 		$(".js-demo_tabs").tabs();
 		$(".js-demo_tooltip").tooltip();
 		$(".js-demo_upload").upload();
