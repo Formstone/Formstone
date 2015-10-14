@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.22
+
+* Fixed issue with Carousel `matchHeight` option
+* Fixed issue with Tabs mobile classing
+
 ### 0.8.21
 
 * Added `mute` and `unmute` public methods to Background
