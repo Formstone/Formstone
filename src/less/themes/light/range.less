@@ -1,0 +1,192 @@
+
+@import "imports/utils.less";
+
+.fs-range {
+
+	width: 100%;
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	&-element {
+		width: 1px;
+		height: 1px;
+
+		position: absolute;
+		z-index: -1;
+
+		opacity: 0;
+
+		.no-touch & {
+			left: -9999px;
+		}
+	}
+
+	&-track {
+		width: 100%;
+		height: 8px;
+
+		position: relative;
+
+		background: #fbfbfb;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		float: left;
+		margin: 10px 0;
+	}
+
+	&-fill {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		right: auto;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+
+		background: #DCDCDC;
+	}
+
+	&-handle {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
+
+		display: block;
+		overflow: visible;
+	}
+
+	&-marker {
+		width: 14px;
+		height: 14px;
+
+		background: #DCDCDC;
+		border: 1px solid #AFAFAF;
+		border-radius: 100%;
+		cursor: pointer;
+		display: block;
+		margin: -4px 0 0 -6px;
+	}
+
+	.no-touch &:hover &-track {
+		box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+	}
+
+	.no-touch &:hover &-marker {
+		background: #ccc;
+		border-color: #999;
+		box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+	}
+
+	// Focus
+	&-focus &-track {
+		box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
+	}
+
+	&-focus &-marker {
+		background: #ccc;
+		border-color: #999;
+		box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
+	}
+
+	// Labels
+	&-labels &-track {
+		width: 80%;
+	}
+
+	&-label {
+		width: 8%;
+
+		display: block;
+		font-size: 12px;
+		line-height: 28px;
+	}
+
+	&-label_min {
+		float: left;
+		margin: 0 2% 0 0;
+		text-align: right;
+	}
+
+	&-label_max {
+		float: right;
+		margin: 0 0 0 2%;
+		text-align: left;
+	}
+
+	// Vertical
+	&-vertical {
+		height: 300px;
+		width: 30px;
+	}
+
+	&-vertical &-track {
+		width: 8px;
+		height: 75%;
+
+		margin: 0 11px 0;
+	}
+
+	&-vertical &-fill {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-handle {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-marker {
+		margin: -7px 0 0 -4px;
+	}
+
+	&-vertical &-label {
+		clear: both;
+		float: none;
+		height: 10%;
+		text-align: center;
+		width: 100%;
+	}
+
+	&-vertical &-label_min {
+		padding: 5px 0 0;
+	}
+
+	&-vertical &-label_max {
+		padding: 0;
+	}
+
+	// Disabled
+	&-disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	&-disabled &-disc {
+		cursor: default;
+	}
+}
