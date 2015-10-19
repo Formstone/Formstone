@@ -301,7 +301,7 @@
 	 */
 
 	function push(data) {
-		if ($.type(Window.ga) === "function") {
+		if ($.type(Window.ga) === "function" && $.type(Window.ga.getAll) === "function") {
 			var trackers = Window.ga.getAll();
 
 			for (var i = 0, count = trackers.length; i < count; i++) {

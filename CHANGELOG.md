@@ -1,9 +1,15 @@
 # Changelog
 
+### 0.8.23
+
+* Fixed issue with Carousel removing previous and next classes
+* Fixed issue with Analytics and content blockers
+
 ### 0.8.22
 
 * Fixed issue with Carousel `matchHeight` option
 * Fixed issue with Tabs mobile classing
+* Fixed XSS issue in Dropdown
 
 ### 0.8.21
 

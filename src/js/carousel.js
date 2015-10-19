@@ -337,7 +337,7 @@
 			data.$items.css({
 				width:  data.itemWidth,
 				height: ""
-			}).removeClass(RawClasses.visible);
+			}).removeClass( [RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" ") );
 
 			// initial page
 			data.pages = [];
