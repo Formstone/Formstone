@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.8.24
+
+* Adding `support.nativeMatchMedia` and `fallbackWidth` values for graceful degradation
+* Adding matchMedia graceful degradation to Carousel, matches closest `fallbackWidth` value
+
 ### 0.8.23
 
 * Fixed issue with Carousel removing previous and next classes

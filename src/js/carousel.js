@@ -775,8 +775,18 @@
 			return show;
 		} else if ($.type(data.show) === "array") {
 			for (var i in data.show) {
-				if (data.show.hasOwnProperty(i) && data.show[i].mq.matches) {
-					show = data.show[i].count;
+				if (data.show.hasOwnProperty(i)) {
+					if (Formstone.support.nativeMatchMedia) {
+						if (data.show[i].mq.matches) {
+							show = data.show[i].count;
+						}
+					} else {
+						// ie8 fallback, grab the first breakpoint that's large enough
+						if (Formstone.fallbackWidth >= data.show[i].width) {
+							show = data.show[i].count;
+							break;
+						}
+					}
 				}
 			}
 		} else {
