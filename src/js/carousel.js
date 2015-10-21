@@ -322,6 +322,10 @@
 			data.perPage   = data.paged ? 1 : data.visible;
 
 			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
+			if (isNaN(data.itemMargin)) {
+				data.itemMargin = 0; // Catch bad values
+			}
+
 			data.itemWidth  = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
 			data.itemHeight = 0;
 
