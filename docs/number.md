@@ -32,7 +32,7 @@ $("input[type=number]").number();
 ```
 
 ```markup
-<input type="number">
+<input type="number" pattern="[0-9]*">
 ```
 
 ### Limits
@@ -40,7 +40,7 @@ $("input[type=number]").number();
 Number will automatically detect the minimum, maximum and increment values based on the `min`, `max` and `step` attributes:
 
 ```markup
-<input type="number" min="2" max="20" step="2">
+<input type="number" min="2" max="20" step="2" pattern="[0-9]*">
 ```
 
 ## Options

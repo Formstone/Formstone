@@ -14,6 +14,7 @@ The Formstone core is a dependency of all javascript based components and will c
 | `support.file` | `boolean` | File API support |
 | `support.history` | `boolean` | History API support, including push and pop state |
 | `support.matchMedia` | `boolean` | Match Media API support |
+| `support.nativeMatchMedia` | `boolean` | Native Match Media API support (no polyfill, requires feature test classing) |
 | `support.raf` | `boolean` | Request Animation Frame API support |
 | `support.touch` | `boolean` | Touch event support |
 | `support.transition` | `boolean` | CSS3 Transition support |
@@ -27,6 +28,7 @@ The Formstone core is a dependency of all javascript based components and will c
 | `transition` | `string` | Prefixed transition property |
 | `windowWidth` | `int` | Current window width |
 | `windowHeight` | `int` | Current window height |
+| `fallbackWidth` | `int` | Match Media fallback width |
 
 User agent sniffing isn't always reliable or considered best practice - it should be used sparingly, if at all.
 

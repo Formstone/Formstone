@@ -37,10 +37,10 @@ core.js</code></pre>
 <h3 id="basic">Basic</h3>
 <p>Number will convert an input into a customizable step interface:</p>
 <pre><code class="lang-javascript">$(&quot;input[type=number]&quot;).number();</code></pre>
-<pre><code class="lang-markup">&lt;input type=&quot;number&quot;&gt;</code></pre>
+<pre><code class="lang-markup">&lt;input type=&quot;number&quot; pattern=&quot;[0-9]*&quot;&gt;</code></pre>
 <h3 id="limits">Limits</h3>
 <p>Number will automatically detect the minimum, maximum and increment values based on the <code>min</code>, <code>max</code> and <code>step</code> attributes:</p>
-<pre><code class="lang-markup">&lt;input type=&quot;number&quot; min=&quot;2&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;</code></pre>
+<pre><code class="lang-markup">&lt;input type=&quot;number&quot; min=&quot;2&quot; max=&quot;20&quot; step=&quot;2&quot; pattern=&quot;[0-9]*&quot;&gt;</code></pre>
 <h2 id="options">Options</h2>
 <p>Set instance options by passing a valid object at initialization, or to the public <code>defaults</code> method. Custom options for a specific instance can also be set by attaching a <code>data-number-options</code> attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.</p>
 <table>
