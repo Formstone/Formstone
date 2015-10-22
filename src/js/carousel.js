@@ -782,9 +782,8 @@
 						}
 					} else {
 						// ie8 fallback, grab the first breakpoint that's large enough
-						if (Formstone.fallbackWidth >= data.show[i].width) {
+						if (data.show[i].width < Formstone.fallbackWidth) {
 							show = data.show[i].count;
-							break;
 						}
 					}
 				}
