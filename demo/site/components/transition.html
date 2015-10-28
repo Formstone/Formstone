@@ -9,12 +9,15 @@
 </ul>
 </header><h2 id="demo">Demo</h2><style>
 	.transitions { margin: 0 0 20px; }
-	.transition { background: #c65032; border-radius: 3px; height: 30px; margin: 20px 0; width: 10%;
-		-webkit-transition: margin 0.5s ease, background 0.5s linear 0.5s;
-				transition: margin 0.5s ease, background 0.5s linear 0.5s;
+	.transition { background-color: #c65032; border-radius: 3px; height: 30px; margin: 20px 0; width: 10%;
+		-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */;
+				transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */;
 	}
 	.transition.move { margin-left: 90%; }
-	.transition_property.move { background: #393b3f; }
+	.transition_property.move {
+		/* background-color: #393b3f; */
+		height: 50px;
+	}
 
 	.demo_output { margin: 0 0 20px; }
 
@@ -36,7 +39,7 @@
 
 		$(".transition_property").transition({
 			always: true,
-			property: "background-color",
+			property: "height",
 		}, complete);
 
 		$(".trigger").on("click", start);
