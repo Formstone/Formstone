@@ -170,6 +170,7 @@
 			files = data.$input[0].files;
 
 		if (!data.disabled && files.length) {
+			data.$el.trigger(Events.queued, [ files ]);
 			handleUpload(data, files);
 		}
 	}
@@ -237,6 +238,7 @@
 		data.$el.removeClass(RawClasses.dropping);
 
 		if (!data.disabled) {
+			data.$el.trigger(Events.queued, [ files ]);
 			handleUpload(data, files);
 		}
 	}
@@ -481,5 +483,6 @@
 		Events.fileComplete    = "filecomplete";
 		Events.fileError       = "fileerror";
 		Events.start           = "start";
+		Events.queued          = "queued";
 
 })(jQuery, Formstone);
