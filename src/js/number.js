@@ -23,6 +23,8 @@
 		var min = parseFloat(this.attr("min")),
 			max = parseFloat(this.attr("max"));
 
+		// Mask as text
+
 		data.min  = (min || min === 0) ? min : false;
 		data.max  = (max || max === 0) ? max : false;
 		data.step = parseFloat(this.attr("step")) || 1;
