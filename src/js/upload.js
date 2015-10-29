@@ -170,7 +170,6 @@
 			files = data.$input[0].files;
 
 		if (!data.disabled && files.length) {
-			data.$el.trigger(Events.queued, [ files ]);
 			handleUpload(data, files);
 		}
 	}
@@ -238,7 +237,6 @@
 		data.$el.removeClass(RawClasses.dropping);
 
 		if (!data.disabled) {
-			data.$el.trigger(Events.queued, [ files ]);
 			handleUpload(data, files);
 		}
 	}
@@ -251,6 +249,8 @@
 	 * @param files [object] "File list"
 	 */
 	function handleUpload(data, files) {
+		data.$el.trigger(Events.queued, [ files ]);
+
 		var newFiles = [];
 
 		for (var i = 0; i < files.length; i++) {

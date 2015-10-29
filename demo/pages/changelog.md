@@ -7,6 +7,7 @@
 * Fixed false positive on transitionEnd events in Transition
 * Fixed issue with inaccessible Number inputs on iOS
 * Increased initial pointer down delay in Number 
+* Added `queued` event to Upload (Thanks @Bonscho!)
 
 ### 0.8.24
 
