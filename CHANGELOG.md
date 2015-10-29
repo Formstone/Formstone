@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.8.25
+
+* Fixed false positive on transitionEnd events in Transition
+* Increased initial pointer down delay in Number 
+
 ### 0.8.24
 
 * Adding `support.nativeMatchMedia` and `fallbackWidth` values for graceful degradation

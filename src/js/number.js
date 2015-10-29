@@ -133,9 +133,13 @@
 		if (!data.disabled) {
 			var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
 
-			data.timer = Functions.startTimer(data.timer, 110, function() {
-				step(data, change, false);
-			}, true);
+			data.timer = Functions.startTimer(data.timer, 300, function() {
+
+				data.timer = Functions.startTimer(data.timer, 125, function() {
+					step(data, change, false);
+				}, true);
+
+			});
 
 			step(data, change);
 
