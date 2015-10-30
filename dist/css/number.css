@@ -1,4 +1,4 @@
-/*! formstone v0.8.24 [number.css] 2015-10-22 | MIT License | formstone.it */
+/*! formstone v0.8.25 [number.css] 2015-10-29 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -57,10 +57,6 @@
   box-sizing: border-box;
   -webkit-transition: none;
           transition: none;
-  -webkit-user-select: none !important;
-     -moz-user-select: none !important;
-      -ms-user-select: none !important;
-          user-select: none !important;
 }
 .fs-number-element {
   width: 100%;

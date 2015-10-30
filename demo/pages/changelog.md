@@ -2,6 +2,13 @@
 
 # Changelog
 
+### 0.8.25
+
+* Fixed false positive on transitionEnd events in Transition
+* Fixed issue with inaccessible Number inputs on iOS
+* Increased initial pointer down delay in Number 
+* Added `queued` event to Upload (Thanks @Bonscho!)
+
 ### 0.8.24
 
 * Adding `support.nativeMatchMedia` and `fallbackWidth` values for graceful degradation

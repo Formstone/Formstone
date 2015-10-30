@@ -649,10 +649,10 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	function setTransitionInformation() {
 		var transitionEvents = {
-				"transition"          : "transitionend",
+				"WebkitTransition"    : "webkitTransitionEnd",
 				"MozTransition"       : "transitionend",
 				"OTransition"         : "otransitionend",
-				"WebkitTransition"    : "webkitTransitionEnd"
+				"transition"          : "transitionend"
 			},
 			transitionProperties = [
 				"transition",
