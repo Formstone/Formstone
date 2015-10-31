@@ -54,7 +54,7 @@
 		this.on(Events.click, Classes.page, data, onPageClick)
 			.on(Events.click, Classes.control, data, onControlClick)
 			.on(Events.click, Classes.position, data, onPositionClick)
-			.on(Events.change, Classes.select, onPageSelect);
+			.on(Events.change, Classes.select, data, onPageSelect);
 
 		$.fsMediaquery("bind", data.rawGuid, data.mq, {
 			enter: function() {

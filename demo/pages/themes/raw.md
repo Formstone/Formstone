@@ -10,6 +10,8 @@
 		
 		$(".js-demo_number").number({ theme: "" });
 		
+		$(".js-demo_pagination").pagination({ theme: "" });
+		
 		$(".js-demo_tabs").tabs({ theme: "" });
 		$(".js-demo_tooltip").tooltip({ theme: "" });
 		$(".js-demo_upload").upload({ theme: "" });

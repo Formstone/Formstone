@@ -10,6 +10,8 @@
 		
 		$(".js-demo_number").number();
 		
+		$(".js-demo_pagination").pagination();
+		
 		$(".js-demo_tabs").tabs();
 		$(".js-demo_tooltip").tooltip();
 		$(".js-demo_upload").upload();

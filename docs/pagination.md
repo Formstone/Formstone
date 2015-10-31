@@ -106,4 +106,6 @@ $(".target").pagination("jump", 1);
 | `.fs-pagination-control.fs-pagination-control_next` | `modifier` | Indicates next control |
 | `.fs-pagination-position` | `element` | Mobile position indicator |
 | `.fs-pagination-select` | `element` | Mobile page dropdown |
+| `.fs-pagination-current` | `element` | Current page mobile display |
+| `.fs-pagination-total` | `element` | Total pages mobile display |
 
