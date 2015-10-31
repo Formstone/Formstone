@@ -1,6 +1,10 @@
 {"template":"home.html","title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
 
 <aside class="alert">
+	<h2>Themes</h2>
+	<p>Theme support is coming in v0.9.x. Take a look at the current progress at [beta.formstone.it](http://beta.formstone.it/themes).</p>
+</aside>
+<aside class="alert">
 	<h2 class="alert_heading">New To Formstone?</h2>
 	<p>Check out the [Getting Started](../start.html) page to learn more.</p>
 	<br>
