@@ -48,7 +48,7 @@
 			$("pre").wrap('<div class="pre_wrapper"></div>');
 
 			if ($html.hasClass("canvas")) {
-				Prism.highlightAll();
+				// Prism.highlightAll();
 			}
 
 			$(".js-navigation").navigation().on("open.navigation", function() {

@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "0.8.22",
+  "version": "0.8.25",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
@@ -56,7 +56,6 @@
       "demo/js/site.js": [
         "dist/js/lib/utils.js",
         "demo/bower/jquery/dist/jquery.min.js",
-        "demo/bower/prism/prism.js",
         "dist/js/core.js",
         "dist/js/analytics.js",
         "dist/js/asap.js",

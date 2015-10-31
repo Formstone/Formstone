@@ -171,8 +171,17 @@
 			source = data.sources[0].url;
 
 			for (var i in data.sources) {
-				if (data.sources.hasOwnProperty(i) && data.sources[i].mq.matches) {
-					source = data.sources[i].url;
+				if (data.sources.hasOwnProperty(i)) {
+					if (Formstone.support.nativeMatchMedia) {
+						if (data.sources[i].mq.matches) {
+							source = data.sources[i].url;
+						}
+					} else {
+						// ie8 fallback, grab the first breakpoint that's large enough
+						if (data.sources[i].width < Formstone.fallbackWidth) {
+							source = data.sources[i].url;
+						}
+					}
 				}
 			}
 		}
@@ -362,8 +371,6 @@
 					data.oldPlayer = data.player;
 					data.player = null;
 				}
-
-				console.log(ytOptions);
 
 				data.player = new Window.YT.Player(guid, {
 					videoId: data.videoId,

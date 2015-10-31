@@ -1,9 +1,27 @@
 # Changelog
 
+### 0.8.25
+
+* Fixed false positive on transitionEnd events in Transition
+* Fixed issue with inaccessible Number inputs on iOS
+* Increased initial pointer down delay in Number 
+* Added `queued` event to Upload (Thanks @Bonscho!)
+
+### 0.8.24
+
+* Adding `support.nativeMatchMedia` and `fallbackWidth` values for graceful degradation
+* Adding matchMedia graceful degradation to Carousel, matches closest `fallbackWidth` value
+
+### 0.8.23
+
+* Fixed issue with Carousel removing previous and next classes
+* Fixed issue with Analytics and content blockers
+
 ### 0.8.22
 
 * Fixed issue with Carousel `matchHeight` option
 * Fixed issue with Tabs mobile classing
+* Fixed XSS issue in Dropdown
 
 ### 0.8.21
 

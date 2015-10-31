@@ -33,6 +33,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			this.windowWidth          = 0;
 			this.windowHeight         = 0;
+			this.fallbackWidth        = 1024; // <ie8 fallback width
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
 			this.isFirefox            = /Firefox/i.test(this.userAgent);
 			this.isChrome             = /Chrome/i.test(this.userAgent);
@@ -269,7 +270,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			var namespaceDash  = "fs-" + namespace,
 				namespaceDot   = "fs." + namespace,
-				namespaceClean = "fs" + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+				namespaceClean = "fs"  + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
 
 			/**
 			 * @method private
@@ -648,10 +649,10 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	function setTransitionInformation() {
 		var transitionEvents = {
-				"transition"          : "transitionend",
+				"WebkitTransition"    : "webkitTransitionEnd",
 				"MozTransition"       : "transitionend",
 				"OTransition"         : "otransitionend",
-				"WebkitTransition"    : "webkitTransitionEnd"
+				"transition"          : "transitionend"
 			},
 			transitionProperties = [
 				"transition",
@@ -752,6 +753,9 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 		Formstone.$body = $("body");
 
 		$Ready.resolve();
+
+		// ie8 fallback support
+		Formstone.support.nativeMatchMedia = Formstone.support.matchMedia && !$("html").hasClass("no-matchmedia");
 	});
 
 	// Custom Events

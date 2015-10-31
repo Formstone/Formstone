@@ -328,6 +328,10 @@
 			data.perPage   = data.paged ? 1 : data.visible;
 
 			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
+			if (isNaN(data.itemMargin)) {
+				data.itemMargin = 0; // Catch bad values
+			}
+
 			data.itemWidth  = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
 			data.itemHeight = 0;
 
@@ -343,7 +347,7 @@
 			data.$items.css({
 				width:  data.itemWidth,
 				height: ""
-			}).removeClass(RawClasses.visible);
+			}).removeClass( [RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" ") );
 
 			// initial page
 			data.pages = [];
@@ -777,8 +781,17 @@
 			return show;
 		} else if ($.type(data.show) === "array") {
 			for (var i in data.show) {
-				if (data.show.hasOwnProperty(i) && data.show[i].mq.matches) {
-					show = data.show[i].count;
+				if (data.show.hasOwnProperty(i)) {
+					if (Formstone.support.nativeMatchMedia) {
+						if (data.show[i].mq.matches) {
+							show = data.show[i].count;
+						}
+					} else {
+						// ie8 fallback, grab the first breakpoint that's large enough
+						if (data.show[i].width < Formstone.fallbackWidth) {
+							show = data.show[i].count;
+						}
+					}
 				}
 			}
 		} else {

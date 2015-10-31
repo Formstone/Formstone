@@ -251,6 +251,8 @@
 	 * @param files [object] "File list"
 	 */
 	function handleUpload(data, files) {
+		data.$el.trigger(Events.queued, [ files ]);
+
 		var newFiles = [];
 
 		for (var i = 0; i < files.length; i++) {
@@ -485,5 +487,6 @@
 		Events.fileComplete    = "filecomplete";
 		Events.fileError       = "fileerror";
 		Events.start           = "start";
+		Events.queued          = "queued";
 
 })(jQuery, Formstone);
