@@ -1,4 +1,4 @@
-{"template":"themes.html","title":"Components","site_root":"../","asset_root":"../","component_root":"../components/"}
+{"template":"themes.html","title":"Themes","site_root":"../","asset_root":"../","component_root":"../components/"}
 
 # Themes
 
