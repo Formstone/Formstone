@@ -106,9 +106,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `cache` | `boolean` | `true` | Flag to cache AJAX responses |
-| `selector` | `string` | `'a'` | Target DOM Selector |
+| `ignoreTypes` | `regex` | &nbsp; | File types to ignore |
 | `render` | `function` | `$.noop` | Custom render function |
 | `requestKey` | `string` | `'fs-asap'` | GET variable for requests |
+| `selector` | `string` | `'a'` | Target DOM Selector |
 | `transitionOut` | `function` | `$.noop` | Transition timing callback; should return user defined $.Deferred object, which must eventually resolve |
 
 ## Events

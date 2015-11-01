@@ -1,5 +1,10 @@
 # Changelog
 
+### 0.8.26
+
+* Added `ignoreTypes` option to ASAP to avoid loading downloadable files via AJAX
+* Renamed `extensions` to `fileTypes` in Lightbox for consistency
+
 ### 0.8.25
 
 * Fixed false positive on transitionEnd events in Transition

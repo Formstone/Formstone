@@ -83,9 +83,8 @@
 				source         = ($el && $el[0].href) ? $el[0].href || "" : "",
 				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
 				sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
-				extension      = sourceParts[0],
 				type           = ($el) ? $el.data(Namespace + "-type") : "",
-				isImage	       = ( (type === "image") || ($.inArray(extension, data.extensions) > -1 || source.substr(0, 10) === "data:image") ),
+				isImage	       = ( (type === "image") || (source.match(data.fileTypes) || source.substr(0, 10) === "data:image") ),
 				isVideo	       = checkVideo(source),
 				isUrl	       = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
 				isElement      = ( (type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#")) ),
@@ -1276,7 +1275,7 @@
 			/**
 			 * @options
 			 * @param customClass [string] <''> "Class applied to instance"
-			 * @param extensions [array] <"jpg", "sjpg", "jpeg", "png", "gif"> "Image type extensions"
+			 * @param fileTypes [regex] <> "Image file types"
 			 * @param fixed [boolean] <false> "Flag for fixed positioning"
 			 * @param formatter [function] <$.noop> "Caption format function"
 			 * @param infinite [boolean] <false> "Flag for infinite galleries"
@@ -1300,7 +1299,7 @@
 
 			defaults: {
 				customClass    : "",
-				extensions     : [ "jpg", "sjpg", "jpeg", "png", "gif" ],
+				fileTypes      : /\.(jpg|sjpg|jpeg|png|gif)$/i,
 				fixed          : false,
 				formatter      : formatCaption,
 				infinite       : false,
