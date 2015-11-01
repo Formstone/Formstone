@@ -204,7 +204,7 @@
 			matches    = mq.matches,
 			event      = matches ? Events.enter : Events.leave;
 
-		if (binding && ( (binding.active && !matches) || (!binding.active && matches) ) ) {
+		if (binding && (binding.active || (!binding.active && matches) ) ) {
 			for (var i in binding[event]) {
 				if (binding[event].hasOwnProperty(i)) {
 					binding[event][i].apply(binding.mq);
