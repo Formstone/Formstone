@@ -116,7 +116,7 @@
 		} else if (href.match(/^tel\:/i)) {
 			// Action
 			eventData = "Telephone, Click, " + href.replace(/^tel\:/i, "");
-		} else if (href.match(Defaults.filetypes)) {
+		} else if (href.match(Defaults.fileTypes)) {
 			// Files
 			var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
 			eventData = "File, Download:" + extension[0] + ", " + href.replace(/ /g,"-");
@@ -352,7 +352,7 @@
 
 		Defaults = {
 			autoEvents     : false,
-			filetypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+			fileTypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
 			eventCallback  : false,
 			eventTimeout   : 1000,
 			scrollDepth    : false,

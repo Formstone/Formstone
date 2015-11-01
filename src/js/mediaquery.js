@@ -141,17 +141,35 @@
 			if (MQStrings.hasOwnProperty(i)) {
 
 				for (var j in MQMatches[i]) {
-					if (MQMatches[i].hasOwnProperty(j) && MQMatches[i][j].matches) {
+					if (MQMatches[i].hasOwnProperty(j)) {
 
-						var state = (j === "Infinity") ? Infinity : parseInt(j, 10);
+						var state = (j === "Infinity") ? Infinity : parseInt(j, 10),
+							check = (MQStrings[i].indexOf("width") > -1) ? Formstone.fallbackWidth : Formstone.fallbackHeight,
+							isMax = i.indexOf("max") > -1;
 
-						if (i.indexOf("max") > -1) {
-							if (!State[i] || state < State[i]) {
-								State[i] = state;
+						if (Formstone.support.nativeMatchMedia) {
+							// Native
+							if (MQMatches[i][j].matches) {
+								if (isMax) {
+									if (!State[i] || state < State[i]) {
+										State[i] = state;
+									}
+								} else {
+									if (!State[i] || state > State[i]) {
+										State[i] = state;
+									}
+								}
 							}
 						} else {
-							if (!State[i] || state > State[i]) {
-								State[i] = state;
+							// Fallback
+							if (isMax) {
+								if (!State[i] && state > check) {
+									State[i] = state;
+								}
+							} else {
+								if ( (!State[i] && State[i] !== 0) || (state > State[i] && state < check) ) {
+									State[i] = state;
+								}
 							}
 						}
 
@@ -183,9 +201,10 @@
 	function onBindingChange(mq) {
 		var mqkey      = createKey(mq.media),
 			binding    = Bindings[mqkey],
-			event      = mq.matches ? Events.enter : Events.leave;
+			matches    = mq.matches,
+			event      = matches ? Events.enter : Events.leave;
 
-		if (binding && binding.active || (!binding.active && mq.matches)) {
+		if (binding && (binding.active || (!binding.active && matches) ) ) {
 			for (var i in binding[event]) {
 				if (binding[event].hasOwnProperty(i)) {
 					binding[event][i].apply(binding.mq);

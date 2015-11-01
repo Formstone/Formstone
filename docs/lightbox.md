@@ -75,7 +75,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `customClass` | `string` | `''` | Class applied to instance |
-| `extensions` | `array` | `"jpg", "sjpg", "jpeg", "png", "gif"` | Image type extensions |
+| `fileTypes` | `regex` | &nbsp; | Image file types |
 | `fixed` | `boolean` | `false` | Flag for fixed positioning |
 | `formatter` | `function` | `$.noop` | Caption format function |
 | `infinite` | `boolean` | `false` | Flag for infinite galleries |

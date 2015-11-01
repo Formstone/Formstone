@@ -33,7 +33,8 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			this.windowWidth          = 0;
 			this.windowHeight         = 0;
-			this.fallbackWidth        = 1024; // <ie8 fallback width
+			this.fallbackWidth        = 1024;
+			this.fallbackHeight       = 768;
 			this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
 			this.isFirefox            = /Firefox/i.test(this.userAgent);
 			this.isChrome             = /Chrome/i.test(this.userAgent);
