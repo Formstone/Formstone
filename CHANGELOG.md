@@ -2,6 +2,7 @@
 
 ### 0.8.26
 
+* Adding matchMedia graceful degradation to Media Query, matches closest `fallbackWidth` and `fallbackHeight` values
 * Added `ignoreTypes` option to ASAP to avoid loading downloadable files via AJAX
 * Renamed `extensions` to `fileTypes` in Lightbox for consistency
 
