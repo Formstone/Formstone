@@ -55,7 +55,7 @@
 		}
 
 		// Check disabled
-		if (this.is(":disabled")) {
+		if (this.is(":disabled") || this.is("[readonly]")) {
 			data.$checkbox.addClass(RawClasses.disabled);
 		}
 
@@ -124,7 +124,7 @@
 	 */
 
 	function update(data) {
-		var disabled    = data.$el.is(":disabled"),
+		var disabled    = data.$el.is(":disabled") || data.$el.is("[readonly]"),
 			checked     = data.$el.is(":checked");
 
 		if (!disabled) {
@@ -163,7 +163,7 @@
 
 	function onChange(e) {
 		var data        = e.data,
-			disabled    = data.$el.is(":disabled"),
+			disabled    = data.$el.is(":disabled") || data.$el.is("[readonly]"),
 			checked     = data.$el.is(":checked");
 
 		if (!disabled) {

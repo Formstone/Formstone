@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.27
+
+* Adding `readonly` support to Checkbox (Thanks @Bonscho!), Dropdown, Number and Range
+* Updating upload Demo to include `queue` event (Thanks @Bonscho!)
+
 ### 0.8.26
 
 * Adding matchMedia graceful degradation to Media Query, matches closest `fallbackWidth` and `fallbackHeight` values

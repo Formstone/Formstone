@@ -115,6 +115,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `filestart` | Specific upload starting |
 | `fileprogress` | Specific upload progress |
 | `start` | Uploads starting |
+| `queued` | Files are queued for upload |
 
 ## Methods
 

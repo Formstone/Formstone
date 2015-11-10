@@ -44,7 +44,7 @@
 
 		// Not valid in the spec
 		data.vertical = this.attr("orient") === "vertical" || data.vertical;
-		data.disabled = this.is(":disabled");
+		data.disabled = this.is(":disabled") || this.is("[readonly]");
 
 		html += '<div class="' + RawClasses.track + '">';
 		if (data.fill) {
