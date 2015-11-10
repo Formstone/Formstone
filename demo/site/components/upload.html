@@ -38,7 +38,8 @@
 		  .on("filestart.upload", onFileStart)
 		  .on("fileprogress.upload", onFileProgress)
 		  .on("filecomplete.upload", onFileComplete)
-		  .on("fileerror.upload", onFileError);
+		  .on("fileerror.upload", onFileError)
+		  .on("queued.upload", onQueued);
 
 		$filequeue.on("click", ".cancel", onCancel);
 		$(".cancel_all").on("click", onCancelAll);
@@ -62,13 +63,19 @@
 		return formData;
 	}
 
-	function onStart(e, files) {
-		console.log("Start");
+	function onQueued(e, files) {
+		console.log("Queued");
 		var html = '';
 		for (var i = 0; i < files.length; i++) {
 			html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></li>';
 		}
 		$filequeue.append(html);
+	}
+
+	function onStart(e, files) {
+		console.log("Start");
+		$filequeue.find("li")
+				.find(".progress").text("Waiting");
 	}
 
 	function onComplete(e) {
@@ -278,6 +285,10 @@ $(&quot;.target&quot;).upload(&quot;abort&quot;);</code></pre>
 <tr>
 <td><code>start</code></td>
 <td>Uploads starting</td>
+</tr>
+<tr>
+<td><code>queued</code></td>
+<td>Files are queued for upload</td>
 </tr>
 </tbody>
 </table>

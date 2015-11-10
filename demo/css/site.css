@@ -1,4 +1,4 @@
-/*! formstone v0.8.26 [site.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [site.css] 2015-11-10 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.8.26 [grid.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [grid.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -609,14 +609,12 @@ pre[class*="language-"] {
 .fs_grid_row_fluid,
 .fs-grid-fluid .fs-row {
   width: 96%;
-  width: -webkit-calc(100% - 40px);
   width: calc(100% - 40px);
 }
 @media screen and (max-width: 739px) {
   .fs_grid_row_fluid_sm,
   .fs-grid-sm-fluid .fs-row {
     width: 96%;
-    width: -webkit-calc(100% - 40px);
     width: calc(100% - 40px);
   }
 }
@@ -1424,7 +1422,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.8.26 [background.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [background.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1546,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.8.26 [carousel.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [carousel.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1903,7 +1901,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.26 [checkbox.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [checkbox.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2200,7 +2198,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.26 [dropdown.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [dropdown.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2559,7 +2557,7 @@ pre[class*="language-"] {
   border-radius: 0 3px 3px 0;
 }
 
-/*! formstone v0.8.26 [lightbox.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [lightbox.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3267,7 +3265,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.8.26 [number.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [number.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3422,7 +3420,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.8.26 [pagination.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [pagination.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3561,7 +3559,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.8.26 [range.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [range.css] 2015-11-10 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3714,7 +3712,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.8.26 [scrollbar.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [scrollbar.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3869,7 +3867,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.26 [tabs.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [tabs.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3980,7 +3978,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.26 [tooltip.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [tooltip.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4132,7 +4130,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.8.26 [upload.css] 2015-11-01 | MIT License | formstone.it */
+/*! formstone v0.8.26 [upload.css] 2015-11-10 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4585,7 +4583,6 @@ pre[class*="language-"] {
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: 270px;
   height: 100%;
-  height: -webkit-calc(100% + 60px);
   height: calc(100% + 60px);
   position: fixed;
   top: 0;
@@ -4671,7 +4668,6 @@ pre[class*="language-"] {
 .fs-navigation-overlay-content:before {
   width: 100%;
   height: 100%;
-  height: -webkit-calc(100% + 60px);
   height: calc(100% + 60px);
   position: fixed;
   top: 0;
