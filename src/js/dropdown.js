@@ -21,7 +21,7 @@
 
 	function construct(data) {
 		data.multiple = this.prop("multiple");
-		data.disabled = this.is(":disabled");
+		data.disabled = this.is(":disabled") || this.is("[readonly]");
 
 		if (data.multiple) {
 			data.links = false;
