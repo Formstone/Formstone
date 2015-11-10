@@ -68,7 +68,7 @@
 
 	function enable() {
 		if ($Body && !$Body.hasClass(RawClasses.base)) {
-			$Body.on(Events.click, Defaults.selector, onClick)
+			$Body.on(Events.click, Instance.selector, onClick)
 				 .addClass(RawClasses.base);
 		}
 	}
@@ -90,6 +90,11 @@
 
 		// Update state on hash change
 		if ( url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#") ) {
+			return;
+		}
+
+		// Ignore certain file types
+		if ( url.href.match(Instance.ignoreTypes) ) {
 			return;
 		}
 
@@ -432,17 +437,19 @@
 		/**
 		 * @options
 		 * @param cache [boolean] <true> "Flag to cache AJAX responses"
-		 * @param selector [string] <'a'> "Target DOM Selector"
+		 * @param ignoreTypes [regex] <> "File types to ignore"
 		 * @param render [function] <$.noop> "Custom render function"
 		 * @param requestKey [string] <'fs-asap'> "GET variable for requests"
+		 * @param selector [string] <'a'> "Target DOM Selector"
 		 * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
 		 */
 
 		Defaults = {
 			cache         : true,
-			selector      : "a",
+			ignoreTypes   : /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
 			render        : $.noop,
 			requestKey    : "fs-asap",
+			selector      : "a",
 			transitionOut : $.noop
 		},
 
