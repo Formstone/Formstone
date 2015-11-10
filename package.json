@@ -28,7 +28,7 @@
     "grunt-banner": "^0.2.3",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.0",
-    "grunt-contrib-imagemin": "^0.9.4",
+    "grunt-contrib-imagemin": "^1.0.0",
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-less": "~1.0.0",
     "grunt-contrib-uglify": "~0.2.7",
