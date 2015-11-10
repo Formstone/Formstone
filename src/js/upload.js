@@ -475,6 +475,7 @@
 		 * @event filestart "Specific upload starting"
 		 * @event fileprogress "Specific upload progress"
 		 * @event start "Uploads starting"
+		 * @event queued "Files are queued for upload"
 		 */
 
 		Events.complete        = "complete";
