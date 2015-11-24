@@ -215,6 +215,11 @@
 	*/
 
 	function updateDropdown(data) {
+		// Scrollbar support
+        if ($.fn.fsScrollbar !== undefined) {
+            data.$wrapper.fsScrollbar("destroy");
+        }
+
 		var index = data.index;
 
 		data.$allOptions = data.$el.find("option, optgroup");
@@ -228,6 +233,11 @@
 		if (!data.multiple) {
 			updateOption(index, data);
 		}
+
+		// Scrollbar support
+        if ($.fn.fsScrollbar !== undefined) {
+            data.$wrapper.fsScrollbar();
+        }
 	}
 
 	/**

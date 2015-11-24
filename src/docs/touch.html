@@ -1,11 +1,7 @@
 <style>
-	.tap,
 	.box { background: #393b3f; border-radius: 3px; color: #fff; text-align: center; }
 
-	.tap.active,
 	.box.active { background: #c65032; }
-
-	.tap { height: 50px; line-height: 50px; margin: 10px 0; width: 100%; }
 
 	.container { border: 1px solid #ccc; border-radius: 3px; height: 400px; margin: 20px 0; overflow: hidden; position: relative; width: 100%; }
 
@@ -27,14 +23,6 @@
 				};
 
 			$target.data("demo", data);
-		});
-
-		// Tap
-
-		$(".tap").touch({
-			tap: true
-		}).on("tap", function(e) {
-			$(this).toggleClass("active");
 		});
 
 		// Pan
@@ -213,9 +201,6 @@
 		});
 	});
 </script>
-
-<h4>Tap</h4>
-<div class="touch tap">Tap</div>
 
 <h4>Pan</h4>
 <div class="container">

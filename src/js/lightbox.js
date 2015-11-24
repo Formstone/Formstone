@@ -951,11 +951,11 @@
 				Instance.targetVideoWidth  = Instance.targetVideoHeight / Instance.videoRatio;
 			}
 
-			Instance.videoMarginTop = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
-			Instance.videoMarginLeft = (Instance.viewportWidth - Instance.targetVideoWidth) / 2;
+			Instance.videoMarginTop  = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
+			Instance.videoMarginLeft = (Instance.viewportWidth  - Instance.targetVideoWidth)  / 2;
 		} else {
 			Instance.viewportHeight = Instance.windowHeight - Instance.margin;
-			Instance.viewportWidth  = Instance.windowWidth - Instance.margin;
+			Instance.viewportWidth  = Instance.windowWidth  - Instance.margin;
 
 			Instance.targetVideoWidth  = (Instance.videoWidth > Instance.viewportWidth) ? Instance.viewportWidth : Instance.videoWidth;
 			if (Instance.targetVideoWidth < Instance.minWidth) {
@@ -975,9 +975,9 @@
 		}
 
 		Instance.$videoWrapper.css({
-			height: Instance.targetVideoHeight,
-			width: Instance.targetVideoWidth,
-			marginTop: Instance.videoMarginTop,
+			height:     Instance.targetVideoHeight,
+			width:      Instance.targetVideoWidth,
+			marginTop:  Instance.videoMarginTop,
 			marginLeft: Instance.videoMarginLeft
 		});
 
@@ -1043,8 +1043,8 @@
 				property: "opacity"
 			},
 			function() {
-				if (typeof Instance.$image !== 'undefined') {
-					Instance.$image.remove();
+				if (typeof Instance.$imageContainer !== 'undefined') {
+					Instance.$imageContainer.remove();
 				}
 				if (typeof Instance.$videoWrapper !== 'undefined') {
 					Instance.$videoWrapper.remove();
@@ -1058,8 +1058,12 @@
 					isVideo = checkVideo(source);
 
 				if (isVideo) {
+					Instance.type = "video";
+
 					loadVideo(source);
 				} else {
+					Instance.type = "image";
+
 					loadImage(source);
 				}
 
