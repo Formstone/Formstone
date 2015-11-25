@@ -1,6 +1,6 @@
 ### Basic
 
-Touch normalizes mouse and touch events in the context of a few basic gestures: `tap`, `pan`, `swipe` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
+Touch normalizes mouse and touch events in the context of a few basic gestures: `pan`, `swipe` and `scale`. It is up to the developer to utilize the events. Events emitted by Touch will contain the following extra properties:
 
 | Key | Description |
 | --- | --- |
@@ -11,20 +11,6 @@ Touch normalizes mouse and touch events in the context of a few basic gestures: 
 | `scale` | Current scale value |
 | `directionX` | Current X movement |
 | `directionY` | Current Y movement |
-
-### Tap
-
-Tap creates a basic 'fast click' event. This synthesizes the touch and click events allowing fast mobile UIs without interupting the user's scroll:
-
-```javascript
-$(".target").touch({
-	tap: true
-}).on("tap", function(e) {
-	console.log("Tapped");
-});
-```
-
-Note: `tap` can not be used in conjunction with `pan` or `scale`.
 
 ### Pan
 

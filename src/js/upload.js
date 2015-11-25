@@ -34,11 +34,11 @@
 			data.disabled     = true;
 			data.aborting     = false;
 
-			this.on(Events.click, Classes.target, data, onClick)
+			this.on(Events.click, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
 				.on(Events.dragOver, data, onDragOver)
 				.on(Events.dragLeave, data, onDragOut)
-				.on(Events.drop, Classes.target, data, onDrop);
+				.on(Events.drop, data, onDrop);
 
 			data.$input.on(Events.change, data, onChange);
 
@@ -188,7 +188,8 @@
 		var data = e.data;
 
 		// if (!data.disabled) {
-			data.$el.addClass(RawClasses.dropping);
+			data.$el.addClass(RawClasses.dropping)
+					.trigger(Events.fileDragEnter);
 		// }
 	}
 
@@ -204,7 +205,8 @@
 		var data = e.data;
 
 		// if (!data.disabled) {
-			data.$el.addClass(RawClasses.dropping);
+			data.$el.addClass(RawClasses.dropping)
+					.trigger(Events.fileDragOver);
 		// }
 	}
 
@@ -220,7 +222,8 @@
 		var data = e.data;
 
 		// if (!data.disabled) {
-			data.$el.removeClass(RawClasses.dropping);
+			data.$el.removeClass(RawClasses.dropping)
+					.trigger(Events.fileDragLeave);
 		// }
 	}
 
@@ -475,18 +478,24 @@
 		 * @events
 		 * @event complete "All uploads are complete"
 		 * @event filecomplete "Specific upload complete"
+		 * @event filedragenter "File dragged into target"
+		 * @event filedragleave "File dragged from target"
+		 * @event filedragover "File dragged over target"
 		 * @event fileerror "Specific upload error"
-		 * @event filestart "Specific upload starting"
 		 * @event fileprogress "Specific upload progress"
+		 * @event filestart "Specific upload starting"
 		 * @event start "Uploads starting"
 		 * @event queued "Files are queued for upload"
 		 */
 
 		Events.complete        = "complete";
-		Events.fileStart       = "filestart";
-		Events.fileProgress    = "fileprogress";
 		Events.fileComplete    = "filecomplete";
+		Events.fileDragEnter   = "filedragenter";
+		Events.fileDragLeave   = "filedragleave";
+		Events.fileDragOver    = "filedragover";
 		Events.fileError       = "fileerror";
+		Events.fileProgress    = "fileprogress";
+		Events.fileStart       = "filestart";
 		Events.start           = "start";
 		Events.queued          = "queued";
 

@@ -338,7 +338,7 @@
 			data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
 			data.pageCount = Math.ceil(data.count / data.perPage);
 
-			data.canisterWidth = ((data.pageWidth + data.itemMargin) * data.pageCount);
+			data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
 			data.$canister.css({
 				width:  data.canisterWidth,
 				height: ""
@@ -811,16 +811,18 @@
 	function onPanStart(e) {
 		var data = e.data;
 
-		if (data.useMargin) {
-			data.leftPosition = parseInt(data.$canister.css("marginLeft"));
-		} else {
-			var matrix = data.$canister.css(TransformProperty).split(",");
-			data.leftPosition = parseInt(matrix[4]); // ?
+		if (!data.single) {
+			if (data.useMargin) {
+				data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+			} else {
+				var matrix = data.$canister.css(TransformProperty).split(",");
+				data.leftPosition = parseInt(matrix[4]); // ?
+			}
+
+			data.$canister.css(TransitionProperty, "none");
+
+			onPan(e);
 		}
-
-		data.$canister.css(TransitionProperty, "none");
-
-		onPan(e);
 
 		data.isTouching = true;
 	}
@@ -835,14 +837,16 @@
 	function onPan(e) {
 		var data = e.data;
 
-		data.touchLeft = checkPosition(data, data.leftPosition + e.deltaX);
+		if (!data.single) {
+			data.touchLeft = checkPosition(data, data.leftPosition + e.deltaX);
 
-		if (data.useMargin) {
-			data.$canister.css({
-				marginLeft: data.touchLeft
-			});
-		} else {
-			data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+			if (data.useMargin) {
+				data.$canister.css({
+					marginLeft: data.touchLeft
+				});
+			} else {
+				data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+			}
 		}
 	}
 
