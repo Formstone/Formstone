@@ -33,7 +33,7 @@
 		var baseClass     = RawClasses.base,
 			typeClass     = [baseClass, data.type].join("-"),
 			gravityClass  = data.gravity ? [typeClass, data.gravity].join("-") : "",
-			classGroup    = [data.rawGuid, data.customClass].join(" ");
+			classGroup    = [data.rawGuid, data.theme, data.customClass].join(" ");
 
 		data.handle       = this.data(Namespace + "-handle");
 		data.content      = this.data(Namespace + "-content");
@@ -46,15 +46,15 @@
 			classGroup
 		].join(" ");
 
-		data.navClasses = [
+		data.thisClasses = [
 			RawClasses.nav.replace(baseClass, typeClass),
 			gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
 			classGroup
-		].join(" ");
+		];
 
 		data.contentClasses = [
 			RawClasses.content.replace(baseClass, typeClass),
-			classGroup
+			data.rawGuid
 		].join(" ");
 
 		data.contentClassesOpen = [
@@ -64,7 +64,7 @@
 
 		// DOM
 
-		data.$nav        = this.addClass(data.navClasses);
+		data.$nav        = this.addClass(data.thisClasses.join(" "));
 		data.$handle     = $(data.handle).addClass(data.handleClasses);
 		data.$content    = $(data.content).addClass(data.contentClasses);
 		data.$animate    = $().add(data.$nav).add(data.$content);
@@ -119,7 +119,7 @@
 
 		clearLocks(data);
 
-		this.removeClass(data.navClasses)
+		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
 	}
 
@@ -354,6 +354,7 @@
 			 * @param labels.closed [string] <'Menu'> "Closed state text"
 			 * @param labels.open [string] <'Close'> "Open state text"
 			 * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'reveal', 'overlay'"
 			 */
 
@@ -366,6 +367,7 @@
 					open       : "Close"
 				},
 				maxWidth       : "980px",
+				theme          : "fs-light",
 				type           : "toggle"
 			},
 

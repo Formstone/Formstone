@@ -1,139 +1,95 @@
+/**
+ * @component
+ * @name Upload
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+/**
+ * @class
+ * @name .fs-upload-element
+ * @type element
+ * @description Target elmement
+ */
 
-	@fs-upload-background: 					#fff;
-	@fs-upload-border-width:				3px;
-	@fs-upload-border-style:				dashed;
-	@fs-upload-border-color:				#ccc;
-	@fs-upload-border-radius: 				3px;
+/**
+ * @class
+ * @name .fs-upload
+ * @type element
+ * @description Base widget class
+ */
 
-	@fs-upload-font-size:					14px;
-	@fs-upload-text-color: 					#666;
+/**
+ * @class
+ * @name .fs-upload.fs-upload-dropping
+ * @type modifier
+ * @description Indicates dropping state
+ */
 
-	@fs-upload-margin: 						0;
-	@fs-upload-padding: 					25px;
+/**
+ * @class
+ * @name .fs-upload.fs-upload-disabled
+ * @type modifier
+ * @description Indicates disabled state
+ */
 
-	// Dropping
+.fs-upload {
+	overflow: hidden;
 
-	@fs-upload-dropping-background: 		#eee;
-	@fs-upload-dropping-border-color: 		#999;
-	@fs-upload-dropping-text-color: 		#333;
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-upload-input
+	 * @type element
+	 * @description Masked Input
+	 */
+
+	&-input {
+		position: absolute;
+		left: 100%;
+		opacity: 0;
+
+		// IE8 Opacity Check
+
+		.no-opacity & {
+			left: -999px;
+		}
+	}
+
+	/**
+	 * @class
+	 * @name .fs-upload-target
+	 * @type element
+	 * @description Drop target
+	 */
+
+	&-target {
+		cursor: pointer;
+	}
+
+	&-dropping &-target,
+	.no-touch &:hover &-target {
+	}
 
 	// Disabled
 
-	@fs-upload-disabled-background:			#FFC7C6;
-	@fs-upload-disabled-border-color:		#f66;
-	@fs-upload-disabled-text-color:			#f00;
-
-	/**
-	 * @class
-	 * @name .fs-upload-element
-	 * @type element
-	 * @description Target elmement
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-upload
-	 * @type element
-	 * @description Base widget class
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-upload.fs-upload-dropping
-	 * @type modifier
-	 * @description Indicates dropping state
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-upload.fs-upload-disabled
-	 * @type modifier
-	 * @description Indicates disabled state
-	 */
-
-	.fs-upload {
-		overflow: hidden;
-
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-upload-input
-		 * @type element
-		 * @description Masked Input
-		 */
-
-		&-input {
-			position: absolute;
-			left: 100%;
-			opacity: 0;
-
-			// IE8 Opacity Check
-
-			.no-opacity & {
-				left: -999px;
-			}
-		}
-
-		/**
-		 * @class
-		 * @name .fs-upload-target
-		 * @type element
-		 * @description Drop target
-		 */
-
-		&-target {
-			background: @fs-upload-background;
-			border: @fs-upload-border-width @fs-upload-border-style @fs-upload-border-color;
-			border-radius: @fs-upload-border-radius;
-			color: @fs-upload-text-color;
-			cursor: pointer;
-			font-size: @fs-upload-font-size;
-			margin: @fs-upload-margin;
-			padding: @fs-upload-padding;
-			text-align: center;
-			transition:
-				background 0.15s linear,
-				border 0.15s linear,
-				color 0.15s linear,
-				opacity 0.15s linear;
-		}
-
-		&-dropping &-target,
-		.no-touch &:hover &-target {
-			background: @fs-upload-dropping-background;
-			border-color: @fs-upload-dropping-border-color;
-			color: @fs-upload-dropping-text-color;
-		}
-
-		// Disabled
-
-		&-disabled &-target,
-		.no-touch &-disabled:hover &-target {
-			background: @fs-upload-background;
-			border-color: @fs-upload-border-color;
-			color: @fs-upload-text-color;
-			cursor: default;
-			cursor: not-allowed;
-		}
-
-		&-disabled&-dropping &-target,
-		.no-touch &-disabled&-dropping:hover &-target {
-			background: @fs-upload-disabled-background;
-			border-color: @fs-upload-disabled-border-color;
-			color: @fs-upload-disabled-text-color;
-		}
+	&-disabled &-target,
+	.no-touch &-disabled:hover &-target {
+		cursor: default;
+		cursor: not-allowed;
 	}
+
+	&-disabled&-dropping &-target,
+	.no-touch &-disabled&-dropping:hover &-target {
+	}
+}

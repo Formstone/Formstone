@@ -1,150 +1,154 @@
+/**
+ * @component
+ * @name Background
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
+
+/**
+ * @class
+ * @name .fs-background-element
+ * @type element
+ * @description Target elmement
+ */
+
+/**
+ * @class
+ * @name .fs-background
+ * @type element
+ * @description Base widget class
+ */
+
+.fs-background {
+
+	overflow: hidden;
+	position: relative;
+
+	&,
+	&-container,
+	&-media {
+		transition: none;
+	}
 
 	/**
 	 * @class
-	 * @name .fs-background-element
+	 * @name .fs-background-container
 	 * @type element
-	 * @description Target elmement
+	 * @description Container element
 	 */
 
-	/**
-	 * @class
-	 * @name .fs-background
-	 * @type element
-	 * @description Base widget class
-	 */
+	&-container {
+		width: 100%;
+		height: 100%;
 
-	.fs-background {
+		position: absolute;
+		top: 0;
+		z-index: 0;
 
 		overflow: hidden;
-		position: relative;
-
-		&,
-		&-container,
-		&-media {
-			transition: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-background-container
-		 * @type element
-		 * @description Container element
-		 */
-
-		&-container {
-			width: 100%;
-			height: 100%;
-
-			position: absolute;
-			top: 0;
-			z-index: 0;
-
-			overflow: hidden;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-background-media
-		 * @type element
-		 * @description Media element
-		 */
-
-		&-media {
-			position: absolute;
-			top: 0;
-			bottom: 0;
-
-			opacity: 0;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-background-media.fs-background-animated
-		 * @type modifier
-		 * @description Indicates animated state
-		 */
-
-		&-media&-animated {
-			transition: opacity 0.5s linear;
-		}
-
-		&-media img,
-		&-media video,
-		&-media iframe {
-			width: 100%;
-			height: 100%;
-
-			display: block;
-
-			-webkit-user-drag: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-background-media.fs-background-navtive
-		 * @type modifier
-		 * @description Indicates native support
-		 */
-
-		/**
-		 * @class
-		 * @name .fs-background-media.fs-background-fixed
-		 * @type modifier
-		 * @description Indicates fixed positioning
-		 */
-
-		&-media&-native,
-		&-media&-fixed {
-			width: 100%;
-			height: 100%;
-		}
-
-		&-media&-native img,
-		&-media&-fixed img {
-			display: none;
-		}
-
-		&-media&-native {
-			background-position: center;
-			background-size: cover;
-		}
-
-		&-media&-fixed {
-			background-position: center;
-			background-attachment: fixed;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-background-embed
-		 * @type element
-		 * @description Embed/iFrame element
-		 */
-
-		/**
-		 * @class
-		 * @name .fs-background-embed.fs-background-embed-ready
-		 * @type modifier
-		 * @description Indicates ready state
-		 */
-
-		&-embed&-ready:after {
-			width: 100%;
-			height: 100%;
-
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			z-index: 1;
-
-			content: '';
-		}
-
-		&-embed&-ready iframe {
-			z-index: 0;
-		}
 	}
+
+	/**
+	 * @class
+	 * @name .fs-background-media
+	 * @type element
+	 * @description Media element
+	 */
+
+	&-media {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+
+		opacity: 0;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-background-media.fs-background-animated
+	 * @type modifier
+	 * @description Indicates animated state
+	 */
+
+	&-media&-animated {
+		transition: opacity 0.5s linear;
+	}
+
+	&-media img,
+	&-media video,
+	&-media iframe {
+		width: 100%;
+		height: 100%;
+
+		display: block;
+
+		-webkit-user-drag: none;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-background-media.fs-background-navtive
+	 * @type modifier
+	 * @description Indicates native support
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-background-media.fs-background-fixed
+	 * @type modifier
+	 * @description Indicates fixed positioning
+	 */
+
+	&-media&-native,
+	&-media&-fixed {
+		width: 100%;
+		height: 100%;
+	}
+
+	&-media&-native img,
+	&-media&-fixed img {
+		display: none;
+	}
+
+	&-media&-native {
+		background-position: center;
+		background-size: cover;
+	}
+
+	&-media&-fixed {
+		background-position: center;
+		background-attachment: fixed;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-background-embed
+	 * @type element
+	 * @description Embed/iFrame element
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-background-embed.fs-background-embed-ready
+	 * @type modifier
+	 * @description Indicates ready state
+	 */
+
+	&-embed&-ready:after {
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+
+		content: '';
+	}
+
+	&-embed&-ready iframe {
+		z-index: 0;
+	}
+}

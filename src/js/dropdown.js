@@ -55,6 +55,7 @@
 		// Build wrapper
 		var wrapperClasses = [
 			RawClasses.base,
+			data.theme,
 			data.customClass
 		];
 
@@ -106,7 +107,9 @@
 
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
-			data.$wrapper.fsScrollbar();
+			data.$wrapper.fsScrollbar({
+				theme: data.theme
+			});
 		}
 
 		// Bind events
@@ -789,6 +792,7 @@
 			 * @param external [boolean] <false> "Open options as links in new window"
 			 * @param links [boolean] <false> "Open options as links in same window"
 			 * @param mobile [boolean] <false> "Force desktop interaction on mobile"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */
 			defaults: {
@@ -799,6 +803,7 @@
 				external       : false,
 				links          : false,
 				mobile         : false,
+				theme          : "fs-light",
 				trim           : 0
 			},
 

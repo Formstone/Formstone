@@ -30,12 +30,14 @@
 	 */
 
 	function construct(data) {
-		var i,
-			carouselClasses = [
-				RawClasses.base,
-				data.customClass,
-				(data.rtl ? RawClasses.rtl : RawClasses.ltr)
-			];
+		var i;
+
+		data.thisClasses = [
+			RawClasses.base,
+			data.theme,
+			data.customClass,
+			(data.rtl ? RawClasses.rtl : RawClasses.ltr)
+		];
 
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
@@ -66,19 +68,21 @@
 		}
 
 		if (data.autoHeight) {
-			carouselClasses.push(RawClasses.auto_height);
+			data.thisClasses.push(RawClasses.auto_height);
 		}
 
 		if (data.contained) {
-			carouselClasses.push(RawClasses.contained);
+			data.thisClasses.push(RawClasses.contained);
 		}
 
 		if (data.single) {
-			carouselClasses.push(RawClasses.single);
+			data.thisClasses.push(RawClasses.single);
 		}
 
+		data.thisClasses = data.thisClasses;
+
 		// Modify dom
-		this.addClass( carouselClasses.join(" ") )
+		this.addClass(data.thisClasses.join(" "))
 			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
@@ -150,6 +154,9 @@
 		});
 
 		cacheInstances();
+
+		data.thisClasses.push(RawClasses.enabled);
+		data.thisClasses.push(RawClasses.animated);
 	}
 
 	/**
@@ -189,7 +196,7 @@
 			data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom, RawClasses.visible ].join(" ") );
 		}
 
-		this.removeClass( [RawClasses.base, RawClasses.ltr, RawClasses.rtl, RawClasses.enabled, RawClasses.animated, RawClasses.contained, RawClasses.single, RawClasses.auto_height, RawClasses.customClass].join(" ") );
+		this.removeClass(data.thisClasses.join(" "));
 
 		cacheInstances();
 	}
@@ -250,7 +257,6 @@
 			data.enabled = true;
 
 			this.addClass(RawClasses.enabled)
-				// .on(Events.click, Classes.control, data, onAdvance)
 				.on(Events.click, Classes.page, data, onSelect);
 
 			data.$controlItems.on(Events.click, data, onAdvance);
@@ -967,8 +973,10 @@
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param paged [boolean] <false> "Flag for paged items"
 			 * @param pagination [boolean] <true> "Flag to draw pagination"
-			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
 			 * @param rtl [boolean] <false> "Right to Left display"
+			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
+			 * @param single [boolean] <false> "Flag to display single item at a time"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
 			 */
 
@@ -990,9 +998,10 @@
 				minWidth       : '0px',
 				paged          : false,
 				pagination     : true,
+				rtl            : false,
 				show           : 1,
 				single         : false,
-				rtl            : false,
+				theme          : "fs-light",
 				useMargin      : false
 			},
 

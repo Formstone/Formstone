@@ -62,6 +62,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `toggle` | `boolean` | `false` | Render 'toggle' styles |
 | `labels.on` | `string` | `'ON'` | Label for 'On' position; 'toggle' only |
 | `labels.off` | `string` | `'OFF'` | Label for 'Off' position; 'toggle' only |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
 ## Methods
 

@@ -1,0 +1,78 @@
+/**
+ * @theme
+ * @name Light
+ * @component Upload
+ */
+
+.fs-upload {
+
+	@theme_name: fs-light;
+
+	// Config
+
+	@fs-upload-background: 					#fff;
+	@fs-upload-border-width:				3px;
+	@fs-upload-border-style:				dashed;
+	@fs-upload-border-color:				#ccc;
+	@fs-upload-border-radius: 				3px;
+
+	@fs-upload-font-size:					14px;
+	@fs-upload-text-color: 					#666;
+
+	@fs-upload-margin: 						0;
+	@fs-upload-padding: 					25px;
+
+	// Dropping
+
+	@fs-upload-dropping-background: 		#eee;
+	@fs-upload-dropping-border-color: 		#999;
+	@fs-upload-dropping-text-color: 		#333;
+
+	// Disabled
+
+	@fs-upload-disabled-background:			#FFC7C6;
+	@fs-upload-disabled-border-color:		#f66;
+	@fs-upload-disabled-text-color:			#f00;
+
+	// Target
+
+	&.@{theme_name} &-target {
+		background: @fs-upload-background;
+		border: @fs-upload-border-width @fs-upload-border-style @fs-upload-border-color;
+		border-radius: @fs-upload-border-radius;
+		color: @fs-upload-text-color;
+		font-size: @fs-upload-font-size;
+		margin: @fs-upload-margin;
+		padding: @fs-upload-padding;
+		text-align: center;
+		transition:
+			background 0.15s linear,
+			border 0.15s linear,
+			color 0.15s linear,
+			opacity 0.15s linear;
+	}
+
+	.@{theme_name}&-dropping &-target,
+	.no-touch .@{theme_name}:hover &-target {
+		background: @fs-upload-dropping-background;
+		border-color: @fs-upload-dropping-border-color;
+		color: @fs-upload-dropping-text-color;
+	}
+
+	// Disabled
+
+	.@{theme_name}&-disabled &-target,
+	.no-touch .@{theme_name}&-disabled:hover &-target {
+		background: @fs-upload-background;
+		border-color: @fs-upload-border-color;
+		color: @fs-upload-text-color;
+	}
+
+	.@{theme_name}&-disabled&-dropping &-target,
+	.no-touch .@{theme_name}&-disabled&-dropping:hover &-target {
+		background: @fs-upload-disabled-background;
+		border-color: @fs-upload-disabled-border-color;
+		color: @fs-upload-disabled-text-color;
+	}
+
+}

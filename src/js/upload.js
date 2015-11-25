@@ -22,7 +22,9 @@
 			}
 			html += '>';
 
-			this.addClass(RawClasses.base)
+			data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+
+			this.addClass(data.baseClasses)
 				.append(html);
 
 			data.$input       = this.find(Classes.input);
@@ -55,8 +57,8 @@
 		if (Formstone.support.file) {
 			data.$input.off(Events.namespace);
 
-			this.off( [Events.click, Events.dragEnter, Events.dragOver, Events.dragLeave, Events.drop].join(" ") )
-				.removeClass(RawClasses.base)
+			this.off(Events.namespace)
+				.removeClass(data.baseClasses)
 				.html("");
 		}
 	}
@@ -426,6 +428,7 @@
 			 * @param multiple [true] <true> "Flag to allow mutiple file uploads"
 			 * @param postData [object] "Extra data to post with upload"
 			 * @param postKey [string] <'file'> "Key to upload file as"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 */
 
 			defaults: {
@@ -439,7 +442,8 @@
 				maxSize        : 5242880, // 5 mb
 				multiple       : true,
 				postData       : {},
-				postKey        : "file"
+				postKey        : "file",
+				theme          : "fs-light"
 			},
 
 			classes: [

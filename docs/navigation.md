@@ -101,6 +101,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.closed` | `string` | `'Menu'` | Closed state text |
 | `labels.open` | `string` | `'Close'` | Open state text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `type` | `string` | `'toggle'` | Type of navigation; 'toggle', 'push', 'reveal', 'overlay' |
 
 ## Events

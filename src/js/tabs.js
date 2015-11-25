@@ -15,8 +15,8 @@
 		data.content      = this.attr("href");
 		data.group        = this.data(Namespace + "-group");
 
-		data.tabClasses          = [RawClasses.tab, data.rawGuid].join(" ");
-		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid].join(" ");
+		data.thisClasses         = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
+		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass].join(" ");
 		data.contentClasses      = [RawClasses.content, data.rawGuid].join(" ");
 
 		// DOM
@@ -51,7 +51,7 @@
 
 		this.attr("data-swap-target", data.content)
 			.attr("data-swap-group", data.group)
-			.addClass(data.tabClasses)
+			.addClass(data.thisClasses.join(" "))
 			.on("activate.swap" + data.dotGuid, data, onActivate)
 			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
 			.on("enable.swap" + data.dotGuid, data, onEnable)
@@ -115,7 +115,7 @@
 			.removeData("data-swap-target")
 			.removeAttr("data-swap-group")
 			.removeData("data-swap-group")
-			.removeClass(RawClasses.tab)
+			.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace)
 			.fsSwap("destroy");
 	}
@@ -272,6 +272,7 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
 			 * @param mobileMaxWidth [string] <'740px'> "Width at which to auto-disable mobile styles"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param vertical [boolean] <false> "Flag to draw vertical tab set"
 			 */
 
@@ -279,6 +280,7 @@
 				customClass       : "",
 				maxWidth          : Infinity,
 				mobileMaxWidth    : "740px",
+				theme             : "fs-light",
 				vertical          : false
 			},
 

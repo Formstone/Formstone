@@ -82,6 +82,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `formatter` | `function` | `$.noop` | Text format function |
 | `margin` | `int` | `15` | Tooltip margin |
 | `match` | `boolean` | `false` | Flag to match mouse position |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
 ## Methods
 

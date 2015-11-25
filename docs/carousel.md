@@ -86,8 +86,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
-| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `rtl` | `boolean` | `false` | Right to Left display |
+| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
+| `single` | `boolean` | `false` | Flag to display single item at a time |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 ## Events

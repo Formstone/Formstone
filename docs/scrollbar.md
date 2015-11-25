@@ -55,8 +55,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `customClass` | `string` | `''` | Class applied to instance |
 | `duration` | `int` | `0` | Scroll animation length |
 | `handleSize` | `int` | `0` | Handle size; 0 to auto size |
-| `horizontal` | `boolean` | `false` | Flag to scroll horizontally |
+| `horizontal` | `boolean` | `false` | Scroll horizontally |
 | `mouseWheel` | `boolean` | `true` | Flag to prevent scrolling of parent element |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `trackMargin` | `int` | `0` | &nbsp; |
 
 ## Methods

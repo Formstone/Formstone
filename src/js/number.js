@@ -37,7 +37,7 @@
 		html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
 
 		// Modify DOM
-		this.wrap('<div class="' + [RawClasses.base, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+		this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
 			.after(html);
 
 		// Store data
@@ -260,6 +260,7 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param labels.up [string] <'Up'> "Up arrow label"
 			 * @param labels.down [string] <'Down'> "Down arrow label"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 */
 
 			defaults: {
@@ -267,7 +268,8 @@
 				labels : {
 					up         : "Up",
 					down       : "Down"
-				}
+				},
+				theme          : "fs-light"
 			},
 
 			classes: [

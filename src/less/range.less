@@ -1,192 +1,336 @@
+/**
+ * @component
+ * @name Range
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	.fs-range {
+// Config
 
-		width: 100%;
+@fs-range-track-height:						8px;
 
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
-		}
+@fs-range-track-background-color:			#fbfbfb;
+@fs-range-track-border-color:				#ddd;
+@fs-range-track-border-width:				1px;
+@fs-range-track-border-radius:				4px;
 
-		&-element {
-			width: 1px;
-			height: 1px;
+@fs-range-track-margin: 					10px 0;
 
-			position: absolute;
-			z-index: -1;
+@fs-range-track-box-shadow:					inset 0 0 1px rgba(0, 0, 0, 0.1);
 
-			opacity: 0;
+// Fill
 
-			.no-touch & {
-				left: -9999px;
-			}
-		}
+@fs-range-fill-color:						#dcdcdc;
 
-		&-track {
-			width: 100%;
-			height: 8px;
+// Track
 
-			position: relative;
+@fs-range-marker-background-color:			#dcdcdc;
+@fs-range-marker-border-color:				#afafaf;
+@fs-range-marker-border-width:				1px;
+@fs-range-marker-border-radius:				100%;
 
-			background: #fbfbfb;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			float: left;
-			margin: 10px 0;
-		}
+@fs-range-marker-margin: 					10px 0;
 
-		&-fill {
-			width: 1px;
-			height: 100%;
+@fs-range-marker-box-shadow:				0 0 3px rgba(0, 0, 0, 0.25);
 
-			position: absolute;
-			top: 0;
-			right: auto;
-			bottom: 0;
-			left: 0;
-			z-index: 1;
+@fs-range-marker-background-color-focus:	#ccc;
+@fs-range-marker-border-color-focus:		#999;
 
-			background: #DCDCDC;
-		}
+// Labels
 
-		&-handle {
-			width: 1px;
-			height: 100%;
+@fs-range-label-font-size:					14px;
+@fs-range-label-line-height:				28px;
 
-			position: absolute;
-			left: 0;
-			top: 0;
-			z-index: 2;
+// Vertical
 
-			display: block;
-			overflow: visible;
-		}
+@fs-range-vertical-height:					300px;
+@fs-range-vertical-width:					30px;
 
-		&-marker {
-			width: 14px;
-			height: 14px;
+@fs-range-vertical-track-width:				8px;
 
-			background: #DCDCDC;
-			border: 1px solid #AFAFAF;
-			border-radius: 100%;
-			cursor: pointer;
-			display: block;
-			margin: -4px 0 0 -6px;
-		}
+/**
+ * @class
+ * @name .fs-range-element
+ * @type element
+ * @description Target elmement
+ */
 
-		.no-touch &:hover &-track {
-			box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
-		}
+/**
+ * @class
+ * @name .fs-range
+ * @type element
+ * @description Base widget class
+ */
 
-		.no-touch &:hover &-marker {
-			background: #ccc;
-			border-color: #999;
-			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-focus
+ * @type modifier
+ * @description Indicates focused state
+ */
 
-		// Focus
-		&-focus &-track {
-			box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-disabled
+ * @type modifier
+ * @description Indicates disabled state
+ */
 
-		&-focus &-marker {
-			background: #ccc;
-			border-color: #999;
-			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-labels
+ * @type modifier
+ * @description Indicates label display
+ */
 
-		// Labels
-		&-labels &-track {
-			width: 80%;
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-vertical
+ * @type modifier
+ * @description Indicates vertical display
+ */
 
-		&-label {
-			width: 8%;
+.fs-range {
 
-			display: block;
-			font-size: 12px;
-			line-height: 28px;
-		}
+	width: 100%;
 
-		&-label_min {
-			float: left;
-			margin: 0 2% 0 0;
-			text-align: right;
-		}
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
 
-		&-label_max {
-			float: right;
-			margin: 0 0 0 2%;
-			text-align: left;
-		}
+	&-element {
+		width: 1px;
+		height: 1px;
 
-		// Vertical
-		&-vertical {
-			height: 300px;
-			width: 30px;
-		}
+		position: absolute;
+		z-index: -1;
 
-		&-vertical &-track {
-			width: 8px;
-			height: 75%;
+		opacity: 0;
 
-			margin: 0 11px 0;
-		}
-
-		&-vertical &-fill {
-			width: 100%;
-			height: 1px;
-
-			top: auto;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-
-		&-vertical &-handle {
-			width: 100%;
-			height: 1px;
-
-			top: auto;
-			bottom: 0;
-			left: 0;
-		}
-
-		&-vertical &-marker {
-			margin: -7px 0 0 -4px;
-		}
-
-		&-vertical &-label {
-			clear: both;
-			float: none;
-			height: 10%;
-			text-align: center;
-			width: 100%;
-		}
-
-		&-vertical &-label_min {
-			padding: 5px 0 0;
-		}
-
-		&-vertical &-label_max {
-			padding: 0;
-		}
-
-		// Disabled
-		&-disabled {
-			cursor: default;
-			opacity: 0.5;
-		}
-
-		&-disabled &-disc {
-			cursor: default;
+		.no-touch & {
+			left: -9999px;
 		}
 	}
+
+	/**
+	 * @class
+	 * @name .fs-range-track
+	 * @type element
+	 * @description Track elmement
+	 */
+
+	&-track {
+		width: 100%;
+		height: @fs-range-track-height;
+
+		position: relative;
+
+		background: @fs-range-track-background-color;
+		border: @fs-range-track-border-width solid @fs-range-track-border-color;
+		border-radius: @fs-range-track-border-radius;
+		float: left;
+		margin: @fs-range-track-margin;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-fill
+	 * @type element
+	 * @description Fill elmement
+	 */
+
+	&-fill {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		right: auto;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+
+		background: @fs-range-fill-color;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-handle
+	 * @type element
+	 * @description Handle elmement
+	 */
+
+	&-handle {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 2;
+
+		display: block;
+		overflow: visible;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-marker
+	 * @type element
+	 * @description Marker elmement
+	 */
+
+	&-marker {
+		width: 14px;
+		height: 14px;
+
+		background: @fs-range-marker-background-color;
+		border: @fs-range-marker-border-width solid @fs-range-marker-border-color;
+		border-radius: @fs-range-marker-border-radius;
+		cursor: pointer;
+		display: block;
+		margin: -4px 0 0 -6px;
+	}
+
+	// Hover
+
+	.no-touch &:hover &-track {
+		box-shadow: @fs-range-track-box-shadow;
+	}
+
+	.no-touch &:hover &-marker {
+		background: @fs-range-marker-background-color-focus;
+		border-color: @fs-range-marker-border-color-focus;
+		box-shadow: @fs-range-marker-box-shadow;
+	}
+
+	// Focus
+
+	&-focus &-track {
+		box-shadow: @fs-range-track-box-shadow;
+	}
+
+	&-focus &-marker {
+		background: @fs-range-marker-background-color-focus;
+		border-color: @fs-range-marker-border-color-focus;
+		box-shadow: @fs-range-marker-box-shadow;
+	}
+
+	// Labels
+
+	&-labels &-track {
+		width: 80%;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label
+	 * @type element
+	 * @description Label elmement
+	 */
+
+	&-label {
+		width: 8%;
+
+		display: block;
+		font-size: @fs-range-label-font-size;
+		line-height: @fs-range-label-line-height;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label_min
+	 * @type element
+	 * @description Minimum label elmement
+	 */
+
+	&-label_min {
+		float: left;
+		margin: 0 2% 0 0;
+		text-align: right;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label_max
+	 * @type element
+	 * @description Maximum label elmement
+	 */
+
+	&-label_max {
+		float: right;
+		margin: 0 0 0 2%;
+		text-align: left;
+	}
+
+	// Vertical
+
+	&-vertical {
+		height: @fs-range-vertical-height;
+		width: @fs-range-vertical-width;
+	}
+
+	&-vertical &-track {
+		width: @fs-range-vertical-track-width;
+		height: 75%;
+
+		margin: 0 11px 0;
+	}
+
+	&-vertical &-fill {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-handle {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-marker {
+		margin: -7px 0 0 -4px;
+	}
+
+	&-vertical &-label {
+		clear: both;
+		float: none;
+		height: 10%;
+		text-align: center;
+		width: 100%;
+	}
+
+	&-vertical &-label_min {
+		padding: 5px 0 0;
+	}
+
+	&-vertical &-label_max {
+		padding: 0;
+	}
+
+	// Disabled
+
+	&-disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	&-disabled &-disc {
+		cursor: default;
+	}
+}

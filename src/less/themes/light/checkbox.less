@@ -1,0 +1,172 @@
+/**
+ * @theme
+ * @name Light
+ * @component Checkbox
+ */
+
+.fs-checkbox {
+
+	@theme_name: fs-light;
+
+	// Config
+
+	@fs-checkbox-margin:						0 0 10px 0;
+
+	// Label
+
+	@fs-checkbox-label-color:					#666;
+	@fs-checkbox-label-font-size:				14px;
+
+	// Marker
+
+	@fs-checkbox-marker-background:				#fff;
+	@fs-checkbox-marker-border-color:			#ccc;
+	@fs-checkbox-marker-border-radius:			3px;
+	@fs-checkbox-marker-height-width:			20px;
+	@fs-checkbox-marker-margin:					0 10px 0 0;
+
+	@fs-checkbox-flag-background:				#999;
+
+	// Disabled
+
+	@fs-checkbox-disabled-opacity:				0.5;
+
+	// Focus
+
+	@fs-checkbox-focus-label-color:				#333;
+
+	@fs-checkbox-focus-marker-border-color:		#999;
+
+	// Toggle
+
+	@fs-checkbox-toggle-marker-background:		#999;
+	@fs-checkbox-toggle-marker-border-color:	#fff;
+	@fs-checkbox-toggle-marker-border-size:		2px;
+	@fs-checkbox-toggle-marker-height:			40px;
+	@fs-checkbox-toggle-marker-width:			100px;
+
+	@fs-checkbox-toggle-state-color:			#666;
+	@fs-checkbox-toggle-state-font-size:		12px;
+
+	@fs-checkbox-toggle-icon-color:				#fff;
+	@fs-checkbox-toggle-icon-width:				2px;
+	@fs-checkbox-toggle-icon-height:			10px;
+	@fs-checkbox-toggle-icon-gap:				1px;
+
+	&.@{theme_name} {
+		margin: @fs-checkbox-margin;
+	}
+
+
+	&.@{theme_name} &-label {
+		color: @fs-checkbox-label-color;
+		font-size: @fs-checkbox-label-font-size;
+		line-height: @fs-checkbox-marker-height-width;
+	}
+
+	&.@{theme_name} &-marker {
+		width: @fs-checkbox-marker-height-width;
+		height: @fs-checkbox-marker-height-width;
+
+		background: @fs-checkbox-marker-background;
+		border: 1px solid @fs-checkbox-marker-border-color;
+		border-radius: @fs-checkbox-marker-border-radius;
+		margin: @fs-checkbox-marker-margin;
+	}
+
+	&.@{theme_name} &-flag:before {
+		width: 5px;
+		height: 10px;
+
+		border: 2px solid @fs-checkbox-flag-background;
+		border-top: 0;
+		border-left: 0;
+		margin: 3px 0 0 6px;
+	}
+
+	// Radio
+
+	.@{theme_name}&-radio &-marker {
+		border-radius: 100%;
+	}
+
+	.@{theme_name}&-radio &-flag {
+		background: @fs-checkbox-flag-background;
+	}
+
+	// Focus
+
+	.@{theme_name}&-focus &-label {
+		color: @fs-checkbox-focus-label-color;
+	}
+
+	.@{theme_name}&-focus &-marker {
+		border-color: @fs-checkbox-focus-marker-border-color;
+	}
+
+	// Disabled
+
+	.@{theme_name}&-disabled {
+		opacity: @fs-checkbox-disabled-opacity;
+	}
+
+	.@{theme_name}&-disabled &-label {
+		color: @fs-checkbox-label-color;
+	}
+
+	.@{theme_name}&-disabled &-marker {
+		border-color: @fs-checkbox-marker-border-color;
+	}
+
+	.@{theme_name}&-toggle &-label {
+		line-height: @fs-checkbox-toggle-marker-height;
+	}
+
+	// Toggle
+
+	.@{theme_name}&-toggle &-marker {
+		width: @fs-checkbox-toggle-marker-width;
+		height: @fs-checkbox-toggle-marker-height;
+
+		border-radius: @fs-checkbox-marker-border-radius;
+	}
+
+	.@{theme_name}&-toggle &-flag {
+		background: @fs-checkbox-toggle-marker-background;
+		border: @fs-checkbox-toggle-marker-border-size solid @fs-checkbox-toggle-marker-border-color;
+		border-radius: @fs-checkbox-marker-border-radius;
+
+		&:before {
+			display: none;
+		}
+
+		&:after {
+			width: @fs-checkbox-toggle-icon-width;
+			height: @fs-checkbox-toggle-icon-height;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			background: @fs-checkbox-toggle-icon-color;
+			box-shadow:
+				(@fs-checkbox-toggle-icon-width + @fs-checkbox-toggle-icon-gap) 0 0 @fs-checkbox-toggle-icon-color,
+				-(@fs-checkbox-toggle-icon-width + @fs-checkbox-toggle-icon-gap) 0 0 @fs-checkbox-toggle-icon-color;
+			content: '';
+			margin: auto;
+		}
+	}
+
+	.no-touch .@{theme_name}&-toggle:hover &-flag:after {
+		opacity: 1;
+	}
+
+	.@{theme_name}&-toggle &-state {
+		color: @fs-checkbox-toggle-state-color;
+		font-size: @fs-checkbox-toggle-state-font-size;
+		line-height: @fs-checkbox-toggle-marker-height;
+		text-transform: uppercase;
+	}
+}

@@ -42,6 +42,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `visible` | `int` | `2` | Visible pages before and after current page |
 
 ## Events
@@ -105,4 +106,6 @@ $(".target").pagination("jump", 1);
 | `.fs-pagination-control.fs-pagination-control_next` | `modifier` | Indicates next control |
 | `.fs-pagination-position` | `element` | Mobile position indicator |
 | `.fs-pagination-select` | `element` | Mobile page dropdown |
+| `.fs-pagination-current` | `element` | Current page mobile display |
+| `.fs-pagination-total` | `element` | Total pages mobile display |
 

@@ -60,6 +60,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `customClass` | `string` | `''` | Class applied to instance |
 | `maxWidth` | `string` | `Infinity` | Width at which to auto-disable plugin |
 | `mobileMaxWidth` | `string` | `'740px'` | Width at which to auto-disable mobile styles |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `vertical` | `boolean` | `false` | Flag to draw vertical tab set |
 
 ## Events

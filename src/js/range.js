@@ -57,6 +57,7 @@
 
 		var baseClasses = [
 			RawClasses.base,
+			data.theme,
 			data.customClass,
 			(data.vertical) ? RawClasses.vertical : "",
 			(data.labels)   ? RawClasses.labels   : "",
@@ -366,6 +367,7 @@
 			 * @param labels [boolean] <true> "Flag to draw labels"
 			 * @param labels.max [string] "Max value label; defaults to max value"
 			 * @param labels.min [string] "Min value label; defaults to min value"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
 			 */
 
@@ -377,6 +379,7 @@
 					max        : false,
 					min        : false
 				},
+				theme          : "fs-light",
 				vertical       : false
 			},
 

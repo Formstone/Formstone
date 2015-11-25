@@ -1,0 +1,15 @@
+{{= it.include("_header", { local_title: it.document.title, site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root, version: it.version }) }}
+<div class="page js-nav_move">
+	<div class="fs-row page_row">
+		<div class="fs-cell-centered fs-lg-10 fs-xl-8">
+			<article class="content">
+				{{= it.document }}
+			</article>
+		</div>
+	</div>
+</div>
+{{= it.include("_footer", { site_root: it.document.site_root, asset_root: it.document.asset_root, component_root: it.document.component_root, version: it.version }) }}
+
+
+
+
