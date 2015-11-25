@@ -32,7 +32,7 @@
 			data.disabled     = true;
 			data.aborting     = false;
 
-			this.on(Events.click, data, onClick)
+			this.on(Events.click, Classes.target, data, onClick)
 				.on(Events.dragEnter, data, onDragEnter)
 				.on(Events.dragOver, data, onDragOver)
 				.on(Events.dragLeave, data, onDragOut)
