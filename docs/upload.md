@@ -110,9 +110,12 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `complete` | All uploads are complete |
 | `filecomplete` | Specific upload complete |
+| `filedragenter` | File dragged into target |
+| `filedragleave` | File dragged from target |
+| `filedragover` | File dragged over target |
 | `fileerror` | Specific upload error |
-| `filestart` | Specific upload starting |
 | `fileprogress` | Specific upload progress |
+| `filestart` | Specific upload starting |
 | `start` | Uploads starting |
 | `queued` | Files are queued for upload |
 
