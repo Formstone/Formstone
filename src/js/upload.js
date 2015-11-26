@@ -13,7 +13,7 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			if (data.label != "")
+			if (data.label !== "")
 			{
 				html += '<div class="' + RawClasses.target + '">';
 				html += data.label;
