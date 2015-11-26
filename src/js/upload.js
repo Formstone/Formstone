@@ -13,9 +13,12 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			html += '<div class="' + RawClasses.target + '">';
-			html += data.label;
-			html += '</div>';
+			if (data.label != "")
+			{
+				html += '<div class="' + RawClasses.target + '">';
+				html += data.label;
+				html += '</div>';
+			}
 			html += '<input class="' + RawClasses.input + '" type="file"';
 			if (data.multiple) {
 				html += ' multiple';
