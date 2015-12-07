@@ -13,8 +13,7 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			if (data.label !== "")
-			{
+			if (!data.label) {
 				html += '<div class="' + RawClasses.target + '">';
 				html += data.label;
 				html += '</div>';
@@ -422,7 +421,7 @@
 			 * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param dataType [string] <'html'> "Data type of AJAX request"
-			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text"
+			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
 			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
 			 * @param maxSize [int] <5242880> "Max file size allowed"

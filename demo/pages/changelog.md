@@ -2,10 +2,15 @@
 
 # Changelog
 
+### 0.8.30
+
+* Added ability to clear default label in Upload (Thanks @Valamas!)
+* Fixed issue with right clicking Number arrows
+
 ### 0.8.29
 
 * Switched event delegation in Upload to allow extra content
-* Added `filedragenter`, `filedragover`, and `filedragleave` events to Upload (Thanks @Valamas)
+* Added `filedragenter`, `filedragover`, and `filedragleave` events to Upload (Thanks @Valamas!)
 * Added multi-select range and modifier actions to Dropdown
 * Fixed issue with `single` and `rtl` options in Carousel
 
