@@ -1,4 +1,6 @@
 # Changelog
+### 0.8.30
+* Upload Label will not show when Label property set to empty string. Initialized value unaffected.
 
 ### 0.8.29
 
