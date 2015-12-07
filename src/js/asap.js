@@ -121,10 +121,12 @@
 		var state = e.originalEvent.state;
 			// direction = (state.id > CurrentID) ? "forward" : "back";
 
-		CurrentID = state.id;
+		if (state) {
+			CurrentID = state.id;
 
-		if (state.url !== CurrentURL) {
-			requestURL(state.url, false);
+			if (state.url !== CurrentURL) {
+				requestURL(state.url, false);
+			}
 		}
 	}
 
