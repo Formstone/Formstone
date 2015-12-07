@@ -12,6 +12,8 @@
 		
 		$(".js-demo_pagination").pagination();
 		
+		$(".js-demo_range").range();
+		
 		$(".js-demo_tabs").tabs();
 		$(".js-demo_tooltip").tooltip();
 		$(".js-demo_upload").upload();
