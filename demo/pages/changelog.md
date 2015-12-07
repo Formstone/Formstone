@@ -6,6 +6,7 @@
 
 * Added ability to clear default label in Upload (Thanks @Valamas!)
 * Fixed issue with right clicking Number arrows
+* Fixed issue with pop state in ASAP
 
 ### 0.8.29
 
