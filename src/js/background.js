@@ -575,6 +575,8 @@
 
 			data.playing = true;
 		}
+
+		data.mute = true;
 	}
 
 	/**
@@ -605,6 +607,8 @@
 
 			data.playing = true;
 		}
+
+		data.mute = false;
 	}
 
 	/**

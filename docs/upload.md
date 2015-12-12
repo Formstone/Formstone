@@ -94,7 +94,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
-| `label` | `string` | `'Drag and drop files or click to select'` | Drop target text |
+| `label` | `string` | `'Drag and drop files or click to select'` | Drop target text; `false` to disable |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxQueue` | `int` | `2` | Number of files to simultaneously upload |
 | `maxSize` | `int` | `5242880` | Max file size allowed |

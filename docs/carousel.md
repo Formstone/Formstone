@@ -82,6 +82,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.next` | `string` | `'Next'` | Control text |
 | `labels.previous` | `string` | `'Previous'` | Control text |
 | `matchHeight` | `boolean` | `false` | Flag to match item heights |
+| `matchWidth` | `boolean` | `true` | Flag to match item widths; Requires CSS widths if false |
 | `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |

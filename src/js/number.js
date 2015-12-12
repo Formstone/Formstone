@@ -132,7 +132,7 @@
 
 		var data = e.data;
 
-		if (!data.disabled) {
+		if (!data.disabled && e.which <= 1) {
 			var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
 
 			data.timer = Functions.startTimer(data.timer, 300, function() {

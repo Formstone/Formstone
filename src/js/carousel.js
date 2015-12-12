@@ -303,9 +303,10 @@
 
 	function resizeInstance(data) {
 		if (data.enabled) {
-			var h, i, j, k,
+			var h, i, j, k, w,
 				$items,
 				$first,
+				width,
 				height,
 				left;
 
@@ -340,12 +341,12 @@
 
 			data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
 			data.$canister.css({
-				width:  data.canisterWidth,
+				width:  (data.matchWidth) ? data.canisterWidth : 1000000,
 				height: ""
 			});
 
 			data.$items.css({
-				width:  data.itemWidth,
+				width:  (data.matchWidth) ? data.itemWidth : "",
 				height: ""
 			}).removeClass( [RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" ") );
 
@@ -354,6 +355,7 @@
 
 			for (i = 0, j = 0; i < data.count; i += data.perPage) {
 				$items = data.$items.slice(i, i + data.perPage);
+				width = 0;
 				height = 0;
 
 				if ($items.length < data.perPage) {
@@ -369,7 +371,10 @@
 
 				// if (data.autoHeight) {
 					for (k = 0; k < $items.length; k++) {
+						w = $items.eq(k).outerWidth();
 						h = $items.eq(k).outerHeight();
+
+						width += w;
 
 						if (h > height) {
 							height = h;
@@ -380,8 +385,9 @@
 				// }
 
 				data.pages.push({
-					left      : data.rtl ? left - (data.canisterWidth - data.pageWidth - data.itemMargin) : left,
+					left      : data.rtl ? left - (data.canisterWidth - width - (data.itemMargin * 2)) : left,
 					height    : height,
+					width     : width,
 					$items    : $items
 				});
 
@@ -858,9 +864,41 @@
 	 */
 
 	function onPanEnd(e) {
-		var data      = e.data,
-			increment = getIncrement(data, e),
-			index     = (e.deltaX > -50 && e.deltaX < 50) ? data.index : data.index + increment;
+		var data       = e.data,
+			delta      = Math.abs(e.deltaX),
+			increment  = getIncrement(data, e),
+			index      = false;
+
+		if (!data.single) {
+			var i, count,
+				left = Math.abs(data.touchLeft),
+				page = false,
+				dir  = (data.rtl) ? "right" : "left";
+
+			if (e.directionX === dir) {
+				// Left (RTL Right)
+				for (i = 0, count = data.pages.length; i < count; i++) {
+					page = data.pages[i];
+
+					if (left > Math.abs(page.left) + 20) {
+						index = i + 1;
+					}
+				}
+			} else {
+				// Right (RTL Left)
+				for (i = data.pages.length - 1, count = 0; i >= count; i--) {
+					page = data.pages[i];
+
+					if (left < Math.abs(page.left)) {
+						index = i - 1;
+					}
+				}
+			}
+		}
+
+		if (index === false) {
+			index = (delta < 50) ? data.index : data.index + increment;
+		}
 
 		endTouch(data, index);
 	}
@@ -969,6 +1007,7 @@
 			 * @param labels.next [string] <'Next'> "Control text"
 			 * @param labels.previous [string] <'Previous'> "Control text"
 			 * @param matchHeight [boolean] <false> "Flag to match item heights"
+			 * @param matchWidth [boolean] <true> "Flag to match item widths; Requires CSS widths if false"
 			 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param paged [boolean] <false> "Flag for paged items"
@@ -994,6 +1033,7 @@
 					previous   : "Previous"
 				},
 				matchHeight    : false,
+				matchWidth     : true,
 				maxWidth       : Infinity,
 				minWidth       : '0px',
 				paged          : false,

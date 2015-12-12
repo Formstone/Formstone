@@ -698,18 +698,18 @@
 
 		// controls hovers
 
-		.no-touch & &-control {
+		.no-touchevents & &-control {
 			opacity: 0;
 			visibility: hidden;
 		}
 
-		.no-touch &:hover &-control {
+		.no-touchevents &:hover &-control {
 			opacity: @fs-lightbox-control-opacity;
 			visibility: visible;
 		}
 
-		.no-touch & &-control_disabled,
-		.no-touch &:hover &-control_disabled {
+		.no-touchevents & &-control_disabled,
+		.no-touchevents &:hover &-control_disabled {
 			opacity: 0;
 			cursor: default;
 			visibility: hidden;
@@ -911,15 +911,15 @@
 
 		// controls hovers
 
-		.no-touch &-mobile &-control,
-		.no-touch &-mobile:hover &-control {
+		.no-touchevents &-mobile &-control,
+		.no-touchevents &-mobile:hover &-control {
 			opacity: @fs-lightbox-control-opacity;
 			visibility: visible;
 		}
 
 		&-mobile &-control_disabled,
-		.no-touch &-mobile &-control_disabled,
-		.no-touch &-mobile:hover &-control_disabled {
+		.no-touchevents &-mobile &-control_disabled,
+		.no-touchevents &-mobile:hover &-control_disabled {
 			opacity: 0;
 			cursor: default !important;
 			visibility: hidden;

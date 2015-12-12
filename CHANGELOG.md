@@ -1,9 +1,22 @@
 # Changelog
 
+### 0.8.31
+
+* Fixed issue with Modernizr change to `no-touchevents`
+* Modified Carousel touch paging to be more consistent
+* Added `matchWidth` option to Carousel
+* Fixed issue with Background not storing muted state
+
+### 0.8.30
+
+* Added ability to clear default label in Upload (Thanks @Valamas!)
+* Fixed issue with right clicking Number arrows
+* Fixed issue with pop state in ASAP
+
 ### 0.8.29
 
 * Switched event delegation in Upload to allow extra content
-* Added `filedragenter`, `filedragover`, and `filedragleave` events to Upload (Thanks @Valamas)
+* Added `filedragenter`, `filedragover`, and `filedragleave` events to Upload (Thanks @Valamas!)
 * Added multi-select range and modifier actions to Dropdown
 * Fixed issue with `single` and `rtl` options in Carousel
 
@@ -135,7 +148,7 @@
 
 * Added HTML option labels to Dropdown 
 * Added `bottomEdge` option to Dropdown for custom thresholds
-* Fixing Touch click event error
+* Fixed Touch click event error
 
 ### 0.8.6
 

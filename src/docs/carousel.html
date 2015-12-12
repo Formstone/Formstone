@@ -11,6 +11,9 @@
 	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
 	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
 
+	.carousel_item_wide { width: 294px; }
+	.carousel_item_thin { width: 150px; }
+
 	.carousel_fade {
 
 	}
@@ -62,7 +65,7 @@
 	<div class="carousel_item" style="display: none;">6</div>
 </div>
 
-<h4>Uneven</h4>
+<h4>Uneven Counts</h4>
 <div class="carousel" data-carousel-options='{"show":3}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
@@ -92,7 +95,7 @@
 	<div class="carousel_item" style="display: none;">6</div>
 </div>
 
-<h4>Breakpoint</h4>
+<h4>Enable at Breakpoint</h4>
 <div class="carousel" data-carousel-options='{"minWidth":"740px"}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
@@ -134,6 +137,15 @@
 	<div class="carousel_item">3</div>
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
+</div>
+
+<h4>Uneven Widths</h4>
+<div class="carousel" data-carousel-options='{"matchWidth":false}'>
+	<div class="carousel_item carousel_item_wide">1</div>
+	<div class="carousel_item carousel_item_thin">2</div>
+	<div class="carousel_item carousel_item_wide">3</div>
+	<div class="carousel_item carousel_item_thin">4</div>
+	<div class="carousel_item carousel_item_wide">5</div>
 </div>
 
 <h4>Custom Controls</h4>
