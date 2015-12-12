@@ -1,4 +1,4 @@
-/*! formstone v0.8.30 [upload.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [upload.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -81,13 +81,13 @@
 				opacity 0.15s linear;
 }
 .fs-upload-dropping .fs-upload-target,
-.no-touch .fs-upload:hover .fs-upload-target {
+.no-touchevents .fs-upload:hover .fs-upload-target {
   background: #eeeeee;
   border-color: #999999;
   color: #333333;
 }
 .fs-upload-disabled .fs-upload-target,
-.no-touch .fs-upload-disabled:hover .fs-upload-target {
+.no-touchevents .fs-upload-disabled:hover .fs-upload-target {
   background: #ffffff;
   border-color: #cccccc;
   color: #666666;
@@ -95,7 +95,7 @@
   cursor: not-allowed;
 }
 .fs-upload-disabled.fs-upload-dropping .fs-upload-target,
-.no-touch .fs-upload-disabled.fs-upload-dropping:hover .fs-upload-target {
+.no-touchevents .fs-upload-disabled.fs-upload-dropping:hover .fs-upload-target {
   background: #ffc7c6;
   border-color: #ff6666;
   color: #ff0000;

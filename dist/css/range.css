@@ -1,4 +1,4 @@
-/*! formstone v0.8.30 [range.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [range.css] 2015-12-12 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -24,7 +24,7 @@
   z-index: -1;
   opacity: 0;
 }
-.no-touch .fs-range-element {
+.no-touchevents .fs-range-element {
   left: -9999px;
 }
 .fs-range-track {
@@ -68,10 +68,10 @@
   display: block;
   margin: -4px 0 0 -6px;
 }
-.no-touch .fs-range:hover .fs-range-track {
+.no-touchevents .fs-range:hover .fs-range-track {
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
 }
-.no-touch .fs-range:hover .fs-range-marker {
+.no-touchevents .fs-range:hover .fs-range-marker {
   background: #ccc;
   border-color: #999;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);

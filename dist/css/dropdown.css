@@ -1,4 +1,4 @@
-/*! formstone v0.8.30 [dropdown.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [dropdown.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -152,10 +152,10 @@
   display: block;
   margin: auto 0;
 }
-.no-touch .fs-dropdown-selected:hover {
+.no-touchevents .fs-dropdown-selected:hover {
   color: #222222;
 }
-.no-touch .fs-dropdown-disabled .fs-dropdown-selected:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-selected:hover {
   color: #cccccc;
 }
 .fs-dropdown-options {
@@ -242,14 +242,14 @@
   border-bottom: 0;
   border-radius: 0 0 3px 3px;
 }
-.no-touch .fs-dropdown-item:hover,
-.no-touch .fs-dropdown-item_selected:hover {
+.no-touchevents .fs-dropdown-item:hover,
+.no-touchevents .fs-dropdown-item_selected:hover {
   color: #222222;
   background-color: #dddddd;
   border-color: #cccccc;
 }
 .fs-dropdown-item_disabled,
-.no-touch .fs-dropdown-item_disabled:hover {
+.no-touchevents .fs-dropdown-item_disabled:hover {
   color: #cccccc;
   background-color: #ffffff;
   border-color: #cccccc;
@@ -334,12 +334,12 @@
   cursor: default;
 }
 .fs-dropdown-disabled .fs-dropdown-item,
-.no-touch .fs-dropdown-disabled .fs-dropdown-item:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-item:hover {
   color: #cccccc;
   background-color: #ffffff;
 }
 .fs-dropdown-disabled .fs-dropdown-item_selected,
-.no-touch .fs-dropdown-disabled .fs-dropdown-item_selected:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-item_selected:hover {
   background: #fafafa;
 }
 .fs-dropdown-options.fs-scrollbar {

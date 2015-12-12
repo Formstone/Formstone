@@ -1,4 +1,4 @@
-/*! formstone v0.8.30 [site.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [site.css] 2015-12-12 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.8.30 [grid.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [grid.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -1424,7 +1424,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.8.30 [background.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [background.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1548,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.8.30 [carousel.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [carousel.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1903,7 +1903,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.30 [checkbox.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [checkbox.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2171,7 +2171,7 @@ pre[class*="language-"] {
   margin: auto;
   opacity: 0.75;
 }
-.no-touch .fs-checkbox-toggle:hover .fs-checkbox-flag:after {
+.no-touchevents .fs-checkbox-toggle:hover .fs-checkbox-flag:after {
   opacity: 1;
 }
 .fs-checkbox-toggle.fs-checkbox-checked .fs-checkbox-flag {
@@ -2200,7 +2200,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.30 [dropdown.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [dropdown.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2354,10 +2354,10 @@ pre[class*="language-"] {
   display: block;
   margin: auto 0;
 }
-.no-touch .fs-dropdown-selected:hover {
+.no-touchevents .fs-dropdown-selected:hover {
   color: #222222;
 }
-.no-touch .fs-dropdown-disabled .fs-dropdown-selected:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-selected:hover {
   color: #cccccc;
 }
 .fs-dropdown-options {
@@ -2444,14 +2444,14 @@ pre[class*="language-"] {
   border-bottom: 0;
   border-radius: 0 0 3px 3px;
 }
-.no-touch .fs-dropdown-item:hover,
-.no-touch .fs-dropdown-item_selected:hover {
+.no-touchevents .fs-dropdown-item:hover,
+.no-touchevents .fs-dropdown-item_selected:hover {
   color: #222222;
   background-color: #dddddd;
   border-color: #cccccc;
 }
 .fs-dropdown-item_disabled,
-.no-touch .fs-dropdown-item_disabled:hover {
+.no-touchevents .fs-dropdown-item_disabled:hover {
   color: #cccccc;
   background-color: #ffffff;
   border-color: #cccccc;
@@ -2536,12 +2536,12 @@ pre[class*="language-"] {
   cursor: default;
 }
 .fs-dropdown-disabled .fs-dropdown-item,
-.no-touch .fs-dropdown-disabled .fs-dropdown-item:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-item:hover {
   color: #cccccc;
   background-color: #ffffff;
 }
 .fs-dropdown-disabled .fs-dropdown-item_selected,
-.no-touch .fs-dropdown-disabled .fs-dropdown-item_selected:hover {
+.no-touchevents .fs-dropdown-disabled .fs-dropdown-item_selected:hover {
   background: #fafafa;
 }
 .fs-dropdown-options.fs-scrollbar {
@@ -2559,7 +2559,7 @@ pre[class*="language-"] {
   border-radius: 0 3px 3px 0;
 }
 
-/*! formstone v0.8.30 [lightbox.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [lightbox.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3046,16 +3046,16 @@ pre[class*="language-"] {
   opacity: 0;
   visibility: hidden;
 }
-.no-touch .fs-lightbox .fs-lightbox-control {
+.no-touchevents .fs-lightbox .fs-lightbox-control {
   opacity: 0;
   visibility: hidden;
 }
-.no-touch .fs-lightbox:hover .fs-lightbox-control {
+.no-touchevents .fs-lightbox:hover .fs-lightbox-control {
   opacity: 1;
   visibility: visible;
 }
-.no-touch .fs-lightbox .fs-lightbox-control_disabled,
-.no-touch .fs-lightbox:hover .fs-lightbox-control_disabled {
+.no-touchevents .fs-lightbox .fs-lightbox-control_disabled,
+.no-touchevents .fs-lightbox:hover .fs-lightbox-control_disabled {
   opacity: 0;
   cursor: default;
   visibility: hidden;
@@ -3173,14 +3173,14 @@ pre[class*="language-"] {
   border-left-color: #eeeeee;
   margin-right: 19px;
 }
-.no-touch .fs-lightbox-mobile .fs-lightbox-control,
-.no-touch .fs-lightbox-mobile:hover .fs-lightbox-control {
+.no-touchevents .fs-lightbox-mobile .fs-lightbox-control,
+.no-touchevents .fs-lightbox-mobile:hover .fs-lightbox-control {
   opacity: 1;
   visibility: visible;
 }
 .fs-lightbox-mobile .fs-lightbox-control_disabled,
-.no-touch .fs-lightbox-mobile .fs-lightbox-control_disabled,
-.no-touch .fs-lightbox-mobile:hover .fs-lightbox-control_disabled {
+.no-touchevents .fs-lightbox-mobile .fs-lightbox-control_disabled,
+.no-touchevents .fs-lightbox-mobile:hover .fs-lightbox-control_disabled {
   opacity: 0;
   cursor: default !important;
   visibility: hidden;
@@ -3267,7 +3267,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.8.30 [number.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [number.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3422,7 +3422,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.8.30 [pagination.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [pagination.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3561,7 +3561,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.8.30 [range.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [range.css] 2015-12-12 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3587,7 +3587,7 @@ pre[class*="language-"] {
   z-index: -1;
   opacity: 0;
 }
-.no-touch .fs-range-element {
+.no-touchevents .fs-range-element {
   left: -9999px;
 }
 .fs-range-track {
@@ -3631,10 +3631,10 @@ pre[class*="language-"] {
   display: block;
   margin: -4px 0 0 -6px;
 }
-.no-touch .fs-range:hover .fs-range-track {
+.no-touchevents .fs-range:hover .fs-range-track {
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
 }
-.no-touch .fs-range:hover .fs-range-marker {
+.no-touchevents .fs-range:hover .fs-range-marker {
   background: #ccc;
   border-color: #999;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
@@ -3714,7 +3714,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.8.30 [scrollbar.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [scrollbar.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3869,7 +3869,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.30 [tabs.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [tabs.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3980,7 +3980,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.30 [tooltip.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [tooltip.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4132,7 +4132,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.8.30 [upload.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [upload.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4215,13 +4215,13 @@ pre[class*="language-"] {
 				opacity 0.15s linear;
 }
 .fs-upload-dropping .fs-upload-target,
-.no-touch .fs-upload:hover .fs-upload-target {
+.no-touchevents .fs-upload:hover .fs-upload-target {
   background: #eeeeee;
   border-color: #999999;
   color: #333333;
 }
 .fs-upload-disabled .fs-upload-target,
-.no-touch .fs-upload-disabled:hover .fs-upload-target {
+.no-touchevents .fs-upload-disabled:hover .fs-upload-target {
   background: #ffffff;
   border-color: #cccccc;
   color: #666666;
@@ -4229,7 +4229,7 @@ pre[class*="language-"] {
   cursor: not-allowed;
 }
 .fs-upload-disabled.fs-upload-dropping .fs-upload-target,
-.no-touch .fs-upload-disabled.fs-upload-dropping:hover .fs-upload-target {
+.no-touchevents .fs-upload-disabled.fs-upload-dropping:hover .fs-upload-target {
   background: #ffc7c6;
   border-color: #ff6666;
   color: #ff0000;

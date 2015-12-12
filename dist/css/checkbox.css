@@ -1,4 +1,4 @@
-/*! formstone v0.8.30 [checkbox.css] 2015-12-07 | MIT License | formstone.it */
+/*! formstone v0.8.31 [checkbox.css] 2015-12-12 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -266,7 +266,7 @@
   margin: auto;
   opacity: 0.75;
 }
-.no-touch .fs-checkbox-toggle:hover .fs-checkbox-flag:after {
+.no-touchevents .fs-checkbox-toggle:hover .fs-checkbox-flag:after {
   opacity: 1;
 }
 .fs-checkbox-toggle.fs-checkbox-checked .fs-checkbox-flag {
