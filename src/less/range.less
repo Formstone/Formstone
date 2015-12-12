@@ -7,46 +7,19 @@
 
 // Config
 
-@fs-range-track-height:						8px;
+@fs-range-track-background-color:	#ddd;
+@fs-range-track-height:				10px;
 
-@fs-range-track-background-color:			#fbfbfb;
-@fs-range-track-border-color:				#ddd;
-@fs-range-track-border-width:				1px;
-@fs-range-track-border-radius:				4px;
+@fs-range-fill-background-color:	#aaa;
 
-@fs-range-track-margin: 					10px 0;
-
-@fs-range-track-box-shadow:					inset 0 0 1px rgba(0, 0, 0, 0.1);
-
-// Fill
-
-@fs-range-fill-color:						#dcdcdc;
-
-// Track
-
-@fs-range-marker-background-color:			#dcdcdc;
-@fs-range-marker-border-color:				#afafaf;
-@fs-range-marker-border-width:				1px;
-@fs-range-marker-border-radius:				100%;
-
-@fs-range-marker-margin: 					10px 0;
-
-@fs-range-marker-box-shadow:				0 0 3px rgba(0, 0, 0, 0.25);
-
-@fs-range-marker-background-color-focus:	#ccc;
-@fs-range-marker-border-color-focus:		#999;
-
-// Labels
-
-@fs-range-label-font-size:					14px;
-@fs-range-label-line-height:				28px;
+@fs-range-marker-size:				20px;
+@fs-range-marker-background-color:	#666;
 
 // Vertical
 
-@fs-range-vertical-height:					300px;
-@fs-range-vertical-width:					30px;
+@fs-range-vertical-height:			300px;
 
-@fs-range-vertical-track-width:				8px;
+@fs-range-vertical-track-width:		10px;
 
 /**
  * @class
@@ -93,6 +66,7 @@
 .fs-range {
 
 	width: 100%;
+	height: (@fs-range-marker-size * 2);
 
 	&,
 	&:after,
@@ -133,10 +107,8 @@
 		position: relative;
 
 		background: @fs-range-track-background-color;
-		border: @fs-range-track-border-width solid @fs-range-track-border-color;
-		border-radius: @fs-range-track-border-radius;
 		float: left;
-		margin: @fs-range-track-margin;
+		margin: (@fs-range-marker-size / 2) 0;
 	}
 
 	/**
@@ -157,7 +129,7 @@
 		left: 0;
 		z-index: 1;
 
-		background: @fs-range-fill-color;
+		background: @fs-range-fill-background-color;
 	}
 
 	/**
@@ -172,8 +144,9 @@
 		height: 100%;
 
 		position: absolute;
-		left: 0;
 		top: 0;
+		left: 0;
+		bottom: 0;
 		z-index: 2;
 
 		display: block;
@@ -188,39 +161,29 @@
 	 */
 
 	&-marker {
-		width: 14px;
-		height: 14px;
+		width: @fs-range-marker-size;
+		height: @fs-range-marker-size;
 
 		background: @fs-range-marker-background-color;
-		border: @fs-range-marker-border-width solid @fs-range-marker-border-color;
-		border-radius: @fs-range-marker-border-radius;
 		cursor: pointer;
 		display: block;
-		margin: -4px 0 0 -6px;
+		margin: -(@fs-range-marker-size / 4) 0 0 -(@fs-range-marker-size / 2);
 	}
 
 	// Hover
 
 	.no-touch &:hover &-track {
-		box-shadow: @fs-range-track-box-shadow;
 	}
 
 	.no-touch &:hover &-marker {
-		background: @fs-range-marker-background-color-focus;
-		border-color: @fs-range-marker-border-color-focus;
-		box-shadow: @fs-range-marker-box-shadow;
 	}
 
 	// Focus
 
 	&-focus &-track {
-		box-shadow: @fs-range-track-box-shadow;
 	}
 
 	&-focus &-marker {
-		background: @fs-range-marker-background-color-focus;
-		border-color: @fs-range-marker-border-color-focus;
-		box-shadow: @fs-range-marker-box-shadow;
 	}
 
 	// Labels
@@ -240,8 +203,7 @@
 		width: 8%;
 
 		display: block;
-		font-size: @fs-range-label-font-size;
-		line-height: @fs-range-label-line-height;
+		line-height: (@fs-range-track-height + @fs-range-marker-size);
 	}
 
 	/**
@@ -273,15 +235,16 @@
 	// Vertical
 
 	&-vertical {
+		width: (@fs-range-marker-size * 2);
 		height: @fs-range-vertical-height;
-		width: @fs-range-vertical-width;
 	}
 
 	&-vertical &-track {
 		width: @fs-range-vertical-track-width;
 		height: 75%;
 
-		margin: 0 11px 0;
+		float: none;
+		margin: 0 auto;
 	}
 
 	&-vertical &-fill {
@@ -299,20 +262,23 @@
 		height: 1px;
 
 		top: auto;
+		right: 0;
 		bottom: 0;
 		left: 0;
 	}
 
 	&-vertical &-marker {
-		margin: -7px 0 0 -4px;
+		margin: -(@fs-range-marker-size / 2) 0 0 -(@fs-range-marker-size / 4);
 	}
 
 	&-vertical &-label {
+		height: 10%;
+		width: 100%;
+
 		clear: both;
 		float: none;
-		height: 10%;
+		line-height: 100%;
 		text-align: center;
-		width: 100%;
 	}
 
 	&-vertical &-label_min {
@@ -330,7 +296,7 @@
 		opacity: 0.5;
 	}
 
-	&-disabled &-disc {
+	&-disabled &-marker {
 		cursor: default;
 	}
 }
