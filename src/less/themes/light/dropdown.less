@@ -284,6 +284,11 @@
 	.@{theme_name}&-options.fs-scrollbar {
 		overflow: hidden;
 
+		.fs-scrollbar-bar {
+			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
+			border-width: 0 0 0 @fs-dropdown-border-width;
+		}
+
 		.fs-scrollbar-content {
 			max-height: @fs-dropdown-max-height;
 			height: auto;

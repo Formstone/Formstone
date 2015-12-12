@@ -321,11 +321,15 @@
 	.no-touch &-disabled &-item_selected:hover {
 	}
 
-
 	// .fs-dropdown-options.fs-scrollbar
 
 	&-options.fs-scrollbar {
 		overflow: hidden;
+
+		.fs-scrollbar-bar {
+			border: 1px solid;
+			border-width: 0 0 0 1px;
+		}
 
 		.fs-scrollbar-content {
 			max-height: @fs-dropdown-max-height;
