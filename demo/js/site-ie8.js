@@ -1,4 +1,4 @@
-/*! formstone v0.8.31 [site-ie8.js] 2015-12-14 | MIT License | formstone.it */
+/*! formstone v0.8.32 [site-ie8.js] 2015-12-14 | MIT License | formstone.it */
 
 /**
 * @preserve HTML5 Shiv 3.7.3 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
