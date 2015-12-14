@@ -291,15 +291,11 @@ module.exports = function(grunt) {
 		// Custom Modernizr build
 		modernizr: {
 			target: {
-				devFile: 'demo/bower/modernizr/modernizr.js',
-				outputFile: 'demo/js/modernizr.js',
-				"extra" : {
-					"shiv" : false,
-					"printshiv" : false,
-					"load" : true,
-					"mq" : false,
-					"cssclasses" : true
-				},
+				devFile: false,
+				dest: 'demo/js/modernizr.js',
+				options: [
+					"setClasses"
+				],
 				files: {
 					src: [
 						'demo/js/*.js',

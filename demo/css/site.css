@@ -5072,7 +5072,7 @@ table td:first-child {
       -ms-user-select: none;
           user-select: none;
 }
-.hidden {
+.hide {
   display: none !important;
   visibility: hidden;
 }

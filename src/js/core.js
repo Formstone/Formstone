@@ -40,6 +40,7 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 			this.isChrome             = /Chrome/i.test(this.userAgent);
 			this.isSafari             = /Safari/i.test(this.userAgent) && !this.isChrome;
 			this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
+			this.isIEMobile           = /IEMobile/i.test(this.userAgent);
 			this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
 			this.transform            = null;
 			this.transition           = null;

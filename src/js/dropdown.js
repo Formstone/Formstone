@@ -319,7 +319,7 @@
 
 		if (!data.disabled) {
 			// Handle mobile, but not Firefox, unless desktop forced
-			if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile) {
+			if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
 				var el = data.$el[0];
 
 				if (Document.createEvent) { // All
