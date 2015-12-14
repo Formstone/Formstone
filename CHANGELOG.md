@@ -1,5 +1,11 @@
 # Changelog
 
+<!--
+### 0.8.32
+
+* Fixed issue with `overlay` Navigation in Android Browser
+-->
+
 ### 0.8.31
 
 * Fixed issue with Modernizr change to `no-touchevents`
