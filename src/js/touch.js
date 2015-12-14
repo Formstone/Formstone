@@ -26,15 +26,7 @@
 		data.axisX = data.axis === "x";
 		data.axisY = data.axis === "y";
 
-		if (/* Formstone.support.touch &&  */Formstone.support.pointer) {
-			/*
-			if (data.axis) {
-				touchAction(this, "pan-" + (data.axisY ? "y" : "x"));
-			} else {
-				touchAction(this, "none");
-			}
-			*/
-
+		if (Formstone.support.pointer) {
 			touchAction(this, "none");
 
 			this.on(Events.pointerDown, data, onTouch);
