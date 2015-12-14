@@ -1,10 +1,10 @@
 # Changelog
 
-<!--
 ### 0.8.32
 
 * Fixed issue with `overlay` Navigation in Android Browser
--->
+* Fixed issue with Dropdown not opening on Windows touch devices
+* Fixed issue with multi Dropdown on mobile
 
 ### 0.8.31
 

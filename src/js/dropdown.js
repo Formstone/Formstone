@@ -628,35 +628,47 @@
 		// Check for disabled options
 		if (!isDisabled) {
 			if (data.multiple) {
-				if (shiftKey && data.lastIndex !== false) {
-					var start = (data.lastIndex > index)  ? index : data.lastIndex,
-						end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
+				if (Formstone.isMobile) {
+					if (!isDisabled) {
+						if (isSelected) {
+							$option.prop("selected", null);
+							$item.removeClass(RawClasses.item_selected);
+						} else {
+							$option.prop("selected", true);
+							$item.addClass(RawClasses.item_selected);
+						}
+					}
+				} else {
+					if (shiftKey && data.lastIndex !== false) {
+						var start = (data.lastIndex > index)  ? index : data.lastIndex,
+							end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
 
-					data.$options.prop("selected", null);
-					data.$items.filter(Classes.item_selected)
-						.removeClass(RawClasses.item_selected);
+						data.$options.prop("selected", null);
+						data.$items.filter(Classes.item_selected)
+							.removeClass(RawClasses.item_selected);
 
-					data.$options.slice(start, end).not("[disabled]").prop("selected", true);
-					data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
-				} else if (metaKey) {
-					if (isSelected) {
-						$option.prop("selected", null);
-						$item.removeClass(RawClasses.item_selected);
+						data.$options.slice(start, end).not("[disabled]").prop("selected", true);
+						data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
+					} else if (metaKey) {
+						if (isSelected) {
+							$option.prop("selected", null);
+							$item.removeClass(RawClasses.item_selected);
+						} else {
+							$option.prop("selected", true);
+							$item.addClass(RawClasses.item_selected);
+						}
+
+						data.lastIndex = index;
 					} else {
+						data.$options.prop("selected", null);
+						data.$items.filter(Classes.item_selected)
+							.removeClass(RawClasses.item_selected);
+
 						$option.prop("selected", true);
 						$item.addClass(RawClasses.item_selected);
+
+						data.lastIndex = index;
 					}
-
-					data.lastIndex = index;
-				} else {
-					data.$options.prop("selected", null);
-					data.$items.filter(Classes.item_selected)
-						.removeClass(RawClasses.item_selected);
-
-					$option.prop("selected", true);
-					$item.addClass(RawClasses.item_selected);
-
-					data.lastIndex = index;
 				}
 			} else if (index > -1 && index < data.$items.length) {
 				if (index !== data.index) {
