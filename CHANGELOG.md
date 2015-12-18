@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.34
+
+* Fixed issue with Carousel `touch` events not clearing auto advance timers
+* Fixed issue with Dropdown not firing `change` event
+* Fixed issue with Dropdown `focus` handling 
+
 ### 0.8.33
 
 * Added ability to open Lightbox gallery with URL fragment identifier

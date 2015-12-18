@@ -4,25 +4,9 @@
 	.custom_select .fs-dropdown-options { border-width: 0 2px 2px; padding: 1%; }
 	.custom_select .fs-dropdown-item { border-radius: 3px !important; border: none; margin: 0 0 1%; }
 	.custom_select .fs-dropdown-item:last-child { margin: 0; }
-
-/*
-	.scroll_area { height: 300px; overflow-y: scroll; }
-	.scroll_area .form_fieldset { margin-top: 300px; margin-bottom: 200px; }
-*/
-
-/* 	.fs-dropdown-open .fs-dropdown-selected, .fs-dropdown-focus .fs-dropdown-selected { border: 2px solid lightblue !important; } */
 </style>
 
 <script>
-/*
-	$(function() {
-		// All
-		$(".demo_form select").dropdown();
-
-		$(".demo_form").on("click", ".toggle", toggleEnabled);
-	});
-*/
-
 	function toggleEnabled(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -51,21 +35,6 @@
 		}
 	}
 </script>
-
-
-<!--
-<select>
-<option>1</option>
-<option>2 & 3</option>
-<option>3 &amp; 4</option>
-<option>&lt;strong&gt;something&lt;/strong&gt;</option>
-<option>"&gt;&lt;script&gt;alert('hello')&lt;/script&gt;</option>
-</select>
-<script>
- $('select').dropdown();
-</script>
--->
-
 
 <form action="#" method="GET" class="form demo_form">
 	<div class="fs-row">
@@ -291,6 +260,12 @@
 
 <script>
 	$(".demo_form select").dropdown();
+
+/*
+	$(".demo_form select").on("change", function() {
+		console.log($(this).val());
+	});
+*/
 
 	$(".demo_form").on("click", ".toggle", toggleEnabled);
 </script>

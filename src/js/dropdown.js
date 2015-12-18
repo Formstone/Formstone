@@ -20,8 +20,8 @@
 	 */
 
 	function construct(data) {
-		data.multiple = this.prop("multiple");
-		data.disabled = this.is(":disabled") || this.is("[readonly]");
+		data.multiple  = this.prop("multiple");
+		data.disabled  = this.is(":disabled") || this.is("[readonly]");
 		data.lastIndex = false;
 
 		if (data.multiple) {
@@ -46,11 +46,16 @@
 
 		// Build options array
 		var $allOptions = this.find("option, optgroup"),
-			$options = $allOptions.filter("option");
+			$options    = $allOptions.filter("option"),
+			$label      = $("[for=" + this.attr("id") + "]");
 
 		// Swap tab index, no more interacting with the actual select!
 		data.tabIndex = this[0].tabIndex;
-		this[0].tabIndex = -1;
+		this[0].tabIndex   = -1;
+
+		if ($label.length) {
+			$label[0].tabIndex = -1;
+		}
 
 		// Build wrapper
 		var wrapperClasses = [
@@ -76,7 +81,7 @@
 
 		// Build inner
 		if (!data.multiple) {
-			innerHtml += '<button type="button" class="' + RawClasses.selected + '">';
+			innerHtml += '<button type="button" class="' + RawClasses.selected + '" tabindex="-1">';
 			innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
 			innerHtml += '</button>';
 		}
@@ -89,6 +94,7 @@
 
 		// Store plugin data
 		data.$dropdown        = this.parent(Classes.base);
+		data.$label           = $label;
 		data.$allOptions      = $allOptions;
 		data.$options         = $options;
 		data.$selected        = data.$dropdown.find(Classes.selected);
@@ -120,13 +126,15 @@
 
 		// Focus/Blur events
 		if (!Formstone.isMobile) {
-			data.$dropdown.on(Events.focusIn, data, onFocusIn)
-						  .on(Events.focusOut, data, onFocusOut);
 
 			// Handle clicks to associated labels
 			this.on(Events.focusIn, data, function(e) {
-				e.data.$dropdown.trigger(Events.raw.focusIn);
+				e.data.$dropdown.trigger(Events.raw.focus);
 			});
+
+
+			data.$dropdown.on(Events.focusIn, data, onFocusIn)
+						  .on(Events.focusOut, data, onFocusOut);
 		}
 	}
 
@@ -147,7 +155,11 @@
 			data.$wrapper.fsScrollbar("destroy");
 		}
 
-		data.$el[0].tabIndex = data.tabIndex;
+		data.$el[0].tabIndex    = data.tabIndex;
+
+		if (data.$label.length) {
+			data.$label[0].tabIndex = data.tabIndex;
+		}
 
 		data.$dropdown.off(Events.namespace);
 		data.$options.off(Events.namespace);
@@ -287,7 +299,7 @@
 				}
 
 				html += '<button type="button" class="' + classes.join(" ") + '" ';
-				html += 'data-value="' + opVal + '">';
+				html += 'data-value="' + opVal + '" tabindex="-1">';
 
 				if (opLabel) {
 					html += opLabel;
@@ -462,6 +474,8 @@
 		if (!data.disabled) {
 			var index = data.$items.index($target);
 
+			data.focusIndex = index;
+
 			if (data.$wrapper.is(":visible")) {
 				updateOption(index, data, e.shiftKey, e.metaKey || e.ctrlKey);
 				handleChange(data);
@@ -471,7 +485,7 @@
 				closeOptions(data);
 			}
 
-			data.$dropdown.trigger(Events.focusIn);
+			data.$dropdown.trigger(Events.focus);
 		}
 	}
 
@@ -488,6 +502,8 @@
 
 		if (!internal && !data.multiple) {
 			var index = data.$options.index( data.$options.filter("[value='" + escapeText($target.val()) + "']") );
+
+			data.focusIndex = index;
 
 			updateOption(index, data);
 			handleChange(data);
@@ -511,6 +527,7 @@
 			closeOthers(data);
 
 			data.focused = true;
+			data.focusIndex = data.index;
 
 			data.$dropdown.addClass(RawClasses.focus)
 						  .on(Events.keyDown + data.dotGuid, data, onKeypress);
@@ -539,6 +556,12 @@
 			if (!data.multiple) {
 				// Clean up
 				closeOptions(data);
+
+				if (data.index !== data.focusIndex) {
+					handleChange(data);
+
+					data.focusIndex = data.index;
+				}
 			}
 		}
 	}
