@@ -2,6 +2,11 @@
 
 # Changelog
 
+### 0.8.33
+
+* Added ability to open Lightbox gallery with URL fragment identifier
+* Fixed issue with Range `change` events
+
 ### 0.8.32
 
 * Fixed issue with `overlay` Navigation in Android Browser

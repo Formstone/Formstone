@@ -302,9 +302,9 @@
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
 		value += data.min;
 
-		if (value !== data.value && value && isResize !== true) {
+		if (value !== data.value && value !== false && isResize !== true) {
 			data.$el.val(value)
-					.trigger(Events.change, [ true ]);
+					.trigger(Events.raw.change, [ true ]);
 
 			data.value = value;
 		}
