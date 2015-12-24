@@ -817,6 +817,8 @@
 	function onPanStart(e) {
 		var data = e.data;
 
+		Functions.clearTimer(data.autoTimer);
+
 		if (!data.single) {
 			if (data.useMargin) {
 				data.leftPosition = parseInt(data.$canister.css("marginLeft"));

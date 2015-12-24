@@ -4,6 +4,10 @@
 <script>
 	$(function() {
 		$("input[type=range]").range();
+
+		$("input[type=range]").on("change", function() {
+			// console.log($(this).val());
+		});
 	});
 </script>
 

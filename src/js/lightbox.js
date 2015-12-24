@@ -11,6 +11,8 @@
 	function setup() {
 		$Body = Formstone.$body;
 		$Locks = $("html, body");
+
+		OnLoad = Formstone.window.location.hash.replace("#", "");
 	}
 
 	/**
@@ -34,6 +36,14 @@
 
 	function construct(data) {
 		this.on(Events.click, data, buildLightbox);
+
+		var gallery = this.data(Namespace + "-gallery");
+
+		if (!OnLoaded && OnLoad && gallery === OnLoad) {
+			OnLoaded = true;
+
+			this.trigger(Events.click);
+		}
 	}
 
 	/**
@@ -728,112 +738,114 @@
 	 */
 
 	function sizeImage() {
-		var count = 0;
+		if (Instance.$image) {
+			var count = 0;
 
-		Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
-		Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+			Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+			Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
 
-		Instance.contentHeight = Infinity;
-		Instance.contentWidth = Infinity;
+			Instance.contentHeight = Infinity;
+			Instance.contentWidth = Infinity;
 
-		Instance.imageMarginTop  = 0;
-		Instance.imageMarginLeft = 0;
+			Instance.imageMarginTop  = 0;
+			Instance.imageMarginLeft = 0;
 
-		while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
-			Instance.imageHeight   = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
-			Instance.imageWidth    = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
-			Instance.metaHeight    = (count === 0) ? 0 : Instance.metaHeight;
-			Instance.spacerHeight  = (count === 0) ? 0 : Instance.spacerHeight;
+			while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
+				Instance.imageHeight   = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+				Instance.imageWidth    = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
+				Instance.metaHeight    = (count === 0) ? 0 : Instance.metaHeight;
+				Instance.spacerHeight  = (count === 0) ? 0 : Instance.spacerHeight;
 
-			if (count === 0) {
-				Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
-				Instance.ratioVertical   = Instance.imageWidth  / Instance.imageHeight;
-
-				Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
-			}
-
-			// Double check min and max
-			if (Instance.imageHeight < Instance.minHeight) {
-				Instance.minHeight = Instance.imageHeight;
-			}
-			if (Instance.imageWidth < Instance.minWidth) {
-				Instance.minWidth = Instance.imageWidth;
-			}
-
-			if (Instance.isMobile) {
-				if (Instance.isTouch) {
-					Instance.$controlBox.css({
-						width: Formstone.windowWidth
-					});
-					Instance.spacerHeight = Instance.$controls.outerHeight(true);
-				} else {
-					Instance.$tools.css({
-						width: Formstone.windowWidth
-					});
-					Instance.spacerHeight = Instance.$tools.outerHeight(true);
-				}
-
-				// Content match viewport
-				Instance.contentHeight = Instance.viewportHeight;
-				Instance.contentWidth  = Instance.viewportWidth;
-
-				fitImage();
-
-				Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
-				Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
-			} else {
-				// Viewport should match window, less margin, padding and meta
 				if (count === 0) {
-					Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
-					Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
+					Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
+					Instance.ratioVertical   = Instance.imageWidth  / Instance.imageHeight;
+
+					Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
 				}
-				Instance.viewportHeight -= Instance.metaHeight;
 
-				fitImage();
+				// Double check min and max
+				if (Instance.imageHeight < Instance.minHeight) {
+					Instance.minHeight = Instance.imageHeight;
+				}
+				if (Instance.imageWidth < Instance.minWidth) {
+					Instance.minWidth = Instance.imageWidth;
+				}
 
-				Instance.contentHeight = Instance.targetImageHeight;
-				Instance.contentWidth  = Instance.targetImageWidth;
-			}
+				if (Instance.isMobile) {
+					if (Instance.isTouch) {
+						Instance.$controlBox.css({
+							width: Formstone.windowWidth
+						});
+						Instance.spacerHeight = Instance.$controls.outerHeight(true);
+					} else {
+						Instance.$tools.css({
+							width: Formstone.windowWidth
+						});
+						Instance.spacerHeight = Instance.$tools.outerHeight(true);
+					}
 
-			// Modify DOM
-			if (!Instance.isMobile && !Instance.isTouch) {
-				Instance.$meta.css({
-					width: Instance.contentWidth
-				});
-			}
+					// Content match viewport
+					Instance.contentHeight = Instance.viewportHeight;
+					Instance.contentWidth  = Instance.viewportWidth;
 
-			if (!Instance.hasScaled) {
-				Instance.$image.css({
-					height: Instance.targetImageHeight,
-					width:  Instance.targetImageWidth
-				});
+					fitImage();
 
-				if (Instance.touch) {
-					Instance.$image.css({
-						top     : -(Instance.targetImageHeight / 2),
-						left    : -(Instance.targetImageWidth  / 2)
-					});
+					Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
+					Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
 				} else {
-					Instance.$image.css({
-						marginTop     : Instance.imageMarginTop,
-						marginLeft    : Instance.imageMarginLeft
+					// Viewport should match window, less margin, padding and meta
+					if (count === 0) {
+						Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
+						Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
+					}
+					Instance.viewportHeight -= Instance.metaHeight;
+
+					fitImage();
+
+					Instance.contentHeight = Instance.targetImageHeight;
+					Instance.contentWidth  = Instance.targetImageWidth;
+				}
+
+				// Modify DOM
+				if (!Instance.isMobile && !Instance.isTouch) {
+					Instance.$meta.css({
+						width: Instance.contentWidth
 					});
 				}
+
+				if (!Instance.hasScaled) {
+					Instance.$image.css({
+						height: Instance.targetImageHeight,
+						width:  Instance.targetImageWidth
+					});
+
+					if (Instance.touch) {
+						Instance.$image.css({
+							top     : -(Instance.targetImageHeight / 2),
+							left    : -(Instance.targetImageWidth  / 2)
+						});
+					} else {
+						Instance.$image.css({
+							marginTop     : Instance.imageMarginTop,
+							marginLeft    : Instance.imageMarginLeft
+						});
+					}
+				}
+
+				if (!Instance.isMobile) {
+					Instance.metaHeight = Instance.$meta.outerHeight(true);
+					Instance.contentHeight += Instance.metaHeight;
+				}
+
+				count ++;
 			}
 
-			if (!Instance.isMobile) {
-				Instance.metaHeight = Instance.$meta.outerHeight(true);
-				Instance.contentHeight += Instance.metaHeight;
+			if (Instance.touch) {
+				Instance.scaleMinHeight    = Instance.targetImageHeight;
+				Instance.scaleMinWidth     = Instance.targetImageWidth;
+				Instance.scaleMaxHeight    = Instance.naturalHeight;
+				Instance.scaleMaxWidth     = Instance.naturalWidth;
 			}
-
-			count ++;
-		}
-
-		if (Instance.touch) {
-			Instance.scaleMinHeight    = Instance.targetImageHeight;
-			Instance.scaleMinWidth     = Instance.targetImageWidth;
-			Instance.scaleMaxHeight    = Instance.naturalHeight;
-			Instance.scaleMaxWidth     = Instance.naturalWidth;
 		}
 	}
 
@@ -1410,6 +1422,8 @@
 		// Internal
 
 		$Locks        = null,
+		OnLoad        = false,
+		OnLoaded      = false,
 
 		// Singleton
 
