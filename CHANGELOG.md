@@ -3,6 +3,8 @@
 ### 0.8.35
 
 * Fixed issue with Analytics scroll depth interfering with bounce rate
+* Added `autoUpload` option and `start` method to upload
+* Fixed issue with Upload queued files parameter
 
 ### 0.8.34
 

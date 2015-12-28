@@ -91,6 +91,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `action` | `string` | &nbsp; | Where to submit uploads |
+| `autoUpload` | `boolean` | `false` | Beging upload when files are dropped |
 | `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
@@ -167,6 +168,14 @@ Enables target instance.
 
 ```javascript
 $(".target").upload("enable");
+```
+
+### start
+
+Starts queued uploads; Use when autoUpload is set to false.
+
+```javascript
+$(".target").upload("start");
 ```
 
 ## CSS

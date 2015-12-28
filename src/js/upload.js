@@ -13,7 +13,7 @@
 		if (Formstone.support.file) {
 			var html = "";
 
-			if (!data.label) {
+			if (data.label !== false) {
 				html += '<div class="' + RawClasses.target + '">';
 				html += data.label;
 				html += '</div>';
@@ -149,6 +149,7 @@
 	 * @description Handles click to target.
 	 * @param e [object] "Event data"
 	 */
+
 	function onClick(e) {
 		Functions.killEvent(e);
 
@@ -165,6 +166,7 @@
 	 * @description Handles change to hidden input.
 	 * @param e [object] "Event data"
 	 */
+
 	function onChange(e) {
 		Functions.killEvent(e);
 
@@ -182,6 +184,7 @@
 	 * @description Handles dragenter to target.
 	 * @param e [object] "Event data"
 	 */
+
 	function onDragEnter(e) {
 		Functions.killEvent(e);
 
@@ -199,6 +202,7 @@
 	 * @description Handles dragover to target.
 	 * @param e [object] "Event data"
 	 */
+
 	function onDragOver(e) {
 		Functions.killEvent(e);
 
@@ -216,6 +220,7 @@
 	 * @description Handles dragout to target.
 	 * @param e [object] "Event data"
 	 */
+
 	function onDragOut(e) {
 		Functions.killEvent(e);
 
@@ -233,6 +238,7 @@
 	 * @description Handles drop to target.
 	 * @param e [object] "Event data"
 	 */
+
 	function onDrop(e) {
 		Functions.killEvent(e);
 
@@ -253,36 +259,57 @@
 	 * @param data [object] "Instance data"
 	 * @param files [object] "File list"
 	 */
-	function handleUpload(data, files) {
-		data.$el.trigger(Events.queued, [ files ]);
 
+	function handleUpload(data, files) {
 		var newFiles = [];
 
 		for (var i = 0; i < files.length; i++) {
 			var file = {
-				index: data.total++,
-				file: files[i],
-				name: files[i].name,
-				size: files[i].size,
-				started: false,
-				complete: false,
-				error: false,
-				transfer: null
+				index       : data.total++,
+				file        : files[i],
+				name        : files[i].name,
+				size        : files[i].size,
+				started     : false,
+				complete    : false,
+				error       : false,
+				transfer    : null
 			};
 
 			newFiles.push(file);
 			data.queue.push(file);
 		}
 
+		data.$el.trigger(Events.queued, [ newFiles ]);
+
+		if (data.autoUpload) {
+			startUpload(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name startUpload
+	 * @description Start queued uploads.
+	 * @param data [object] "Instance data"
+	 */
+
+	/**
+	 * @method
+	 * @name start
+	 * @description Starts queued uploads; Use when autoUpload is set to false.
+	 * @example $(".target").upload("start");
+	 */
+
+	function startUpload(data) {
 		if (!data.uploading) {
 			$Window.on(Events.beforeUnload, function() {
 				return data.leave;
 			});
 
 			data.uploading = true;
-		}
 
-		data.$el.trigger(Events.start, [ newFiles ]);
+			data.$el.trigger(Events.start, [ data.queue ]);
+		}
 
 		checkQueue(data);
 	}
@@ -293,6 +320,7 @@
 	 * @description Checks and updates file queue.
 	 * @param data [object] "Instance data"
 	 */
+
 	function checkQueue(data) {
 		var transfering = 0,
 			newQueue = [];
@@ -349,6 +377,7 @@
 	 * @param file [object] "Target file"
 	 * @param formData [object] "Target form"
 	 */
+
 	function uploadFile(data, formData, file) {
 		// Modify data before upload
 		formData = data.beforeSend.call(Window, formData, file);
@@ -418,6 +447,7 @@
 			/**
 			 * @options
 			 * @param action [string] "Where to submit uploads"
+			 * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
 			 * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param dataType [string] <'html'> "Data type of AJAX request"
@@ -432,6 +462,7 @@
 
 			defaults: {
 				action         : "",
+				autoUpload     : true,
 				beforeSend     : function(formdata) { return formdata; },
 				customClass    : "",
 				dataType       : "html",
@@ -458,7 +489,8 @@
 
 				disable       : disableUpload,
 				enable        : enableUpload,
-				abort         : abortUpload
+				abort         : abortUpload,
+				start         : startUpload
 			}
 		}),
 
