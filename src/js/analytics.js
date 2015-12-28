@@ -160,9 +160,10 @@
 
 				// Push data
 				pushEvent({
-					eventCategory    : "ScrollDepth",
-					eventAction      : ScrollWidth,
-					eventLabel       : key
+					eventCategory     : "ScrollDepth",
+					eventAction       : ScrollWidth,
+					eventLabel        : key,
+					nonInteraction    : true
 				});
 			}
 

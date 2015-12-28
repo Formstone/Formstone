@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.35
+
+* Fixed issue with Analytics scroll depth interfering with bounce rate
+
 ### 0.8.34
 
 * Fixed issue with Carousel `touch` events not clearing auto advance timers
