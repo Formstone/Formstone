@@ -296,8 +296,9 @@ module.exports = function(grunt) {
 
 		// build markdown
 
-		function buildMarkdown(doc, heading, includeDemo) {
-			var namespace = doc.name.toLowerCase(),
+		function buildMarkdown(doc) {
+			var heading = "#",
+				namespace = doc.name.toLowerCase(),
 				md = "";
 
 			md += heading + ' ' + doc.name;
@@ -305,11 +306,8 @@ module.exports = function(grunt) {
 			md += doc.description;
 			md += '\n\n';
 
-			// if demo
-			if (includeDemo && doc.demo) {
-				md += "* [Demo](#demo)";
-				md += '\n';
-			}
+			md += '<!-- HEADER END -->\n\n';
+			md += '<!-- NAV START -->\n\n';
 
 			md += "* [Use](#use)";
 			md += '\n';
@@ -331,15 +329,15 @@ module.exports = function(grunt) {
 				md += '\n';
 			}
 
-			if (includeDemo) {
-				md += '<br class="split">\n';
-			}
+			md += '\n<!-- NAV END -->\n';
+			md += '\n<!-- DEMO BUTTON -->\n';
 
 			md += '\n';
 			md += heading + '# Use ';
 			md += '\n\n';
 
 			if (doc.main && doc.main.length) {
+				md += '<hr>\n';
 				md += heading + '### Main';
 				md += '\n\n';
 				md += '```markup';
@@ -353,6 +351,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.dependencies && doc.dependencies.length) {
+				md += '<hr>\n';
 				md += heading + '### Dependencies';
 				md += '\n\n';
 				md += '```markup';
@@ -371,6 +370,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.options && doc.options.length) {
+				md += '<hr>\n';
 				md += heading + '# Options';
 				md += '\n\n';
 				if (doc.type === "widget") {
@@ -396,6 +396,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.events && doc.events.length) {
+				md += '<hr>\n';
 				md += heading + '# Events';
 				md += '\n\n';
 				if (doc.type === "widget") {
@@ -420,6 +421,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.methods && doc.methods.length) {
+				md += '<hr>\n';
 				md += heading + '# Methods';
 				md += '\n\n';
 				if (doc.type === "widget") {
@@ -468,6 +470,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.css && doc.css.length) {
+				md += '<hr>\n';
 				md += heading + '# CSS';
 				md += '\n\n';
 				md += '| Class | Type | Description |';
@@ -492,7 +495,7 @@ module.exports = function(grunt) {
 		function buildDocs(file) {
 			var doc = grunt.file.readJSON(file),
 				destination = file.replace('/json', "").replace('.json', ".md"),
-				md = buildMarkdown(doc, "#");
+				md = buildMarkdown(doc);
 
 			grunt.file.write(destination, md, false);
 			grunt.log.writeln('File "' + destination + '" created.');

@@ -1,123 +1,206 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Upload &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="upload-demo">Upload Demo</h1>
-<!-- START: DEMO --><style>
-	.filelists { margin: 20px 0; }
-	.filelists h5 { margin: 10px 0 0; }
-	.filelists .cancel_all { color: red; cursor: pointer; clear: both; font-size: 10px; margin: 0; text-transform: uppercase; }
-	.filelist { margin: 0; padding: 10px 0; }
-	.filelist li { background: #fff; border-bottom: 1px solid #eee; font-size: 14px; list-style: none; padding: 5px; }
-	.filelist li:before { display: none; }
-	.filelist li .file { color: #333; }
-	.filelist li .progress { color: #666; float: right; font-size: 10px; text-transform: uppercase; }
-	.filelist li .cancel { color: red; cursor: pointer; float: right; font-size: 10px; margin: 0 0 0 10px; text-transform: uppercase; }
-	.filelist li.error .progress { color: red; }
-	.filelist li.error .cancel { display: none; }
-</style>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-<script>
-	var $filequeue,
-		$filelist;
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Upload &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-	$(document).ready(function() {
-		$filequeue = $(".filelist.queue");
-		$filelist = $(".filelist.complete");
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="upload-demo">Upload Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.filelists {
+					margin: 20px 0;
+				}
+				
+				.filelists h5 {
+					margin: 10px 0 0;
+				}
+				
+				.filelists .cancel_all {
+					color: red;
+					cursor: pointer;
+					clear: both;
+					font-size: 10px;
+					margin: 0;
+					text-transform: uppercase;
+				}
+				
+				.filelist {
+					margin: 0;
+					padding: 10px 0;
+				}
+				
+				.filelist li {
+					background: #fff;
+					border-bottom: 1px solid #eee;
+					font-size: 14px;
+					list-style: none;
+					padding: 5px;
+				}
+				
+				.filelist li:before {
+					display: none;
+				}
+				
+				.filelist li .file {
+					color: #333;
+				}
+				
+				.filelist li .progress {
+					color: #666;
+					float: right;
+					font-size: 10px;
+					text-transform: uppercase;
+				}
+				
+				.filelist li .cancel {
+					color: red;
+					cursor: pointer;
+					float: right;
+					font-size: 10px;
+					margin: 0 0 0 10px;
+					text-transform: uppercase;
+				}
+				
+				.filelist li.error .progress {
+					color: red;
+				}
+				
+				.filelist li.error .cancel {
+					display: none;
+				}
+				</style>
 
-		$(".upload").upload({
-			maxSize: 1073741824,
-			beforeSend: onBeforeSend
-		}).on("start.upload", onStart)
-		  .on("complete.upload", onComplete)
-		  .on("filestart.upload", onFileStart)
-		  .on("fileprogress.upload", onFileProgress)
-		  .on("filecomplete.upload", onFileComplete)
-		  .on("fileerror.upload", onFileError)
-		  .on("queued.upload", onQueued);
+				<script>
+				var $filequeue,
+					$filelist;
 
-		$filequeue.on("click", ".cancel", onCancel);
-		$(".cancel_all").on("click", onCancelAll);
-	});
+				$(document).ready(function() {
+					$filequeue = $(".filelist.queue");
+					$filelist = $(".filelist.complete");
 
-	function onCancel(e) {
-		console.log("Cancel");
-		var index = $(this).parents("li").data("index");
-		$(".upload").upload("abort", parseInt(index, 10));
-	}
+					$(".upload").upload({
+							maxSize: 1073741824,
+							beforeSend: onBeforeSend
+						}).on("start.upload", onStart)
+						.on("complete.upload", onComplete)
+						.on("filestart.upload", onFileStart)
+						.on("fileprogress.upload", onFileProgress)
+						.on("filecomplete.upload", onFileComplete)
+						.on("fileerror.upload", onFileError)
+						.on("queued.upload", onQueued);
 
-	function onCancelAll(e) {
-		console.log("Cancel All");
-		$(".upload").upload("abort");
-	}
+					$filequeue.on("click", ".cancel", onCancel);
+					$(".cancel_all").on("click", onCancelAll);
+				});
 
-	function onBeforeSend(formData, file) {
-		console.log("Before Send");
-		formData.append("test_field", "test_value");
-		// return (file.name.indexOf(".jpg") < -1) ? false : formData; // cancel all jpgs
-		return formData;
-	}
+				function onCancel(e) {
+					console.log("Cancel");
+					var index = $(this).parents("li").data("index");
+					$(".upload").upload("abort", parseInt(index, 10));
+				}
 
-	function onQueued(e, files) {
-		console.log("Queued");
-		var html = '';
-		for (var i = 0; i < files.length; i++) {
-			html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></li>';
-		}
-		$filequeue.append(html);
-	}
+				function onCancelAll(e) {
+					console.log("Cancel All");
+					$(".upload").upload("abort");
+				}
 
-	function onStart(e, files) {
-		console.log("Start");
-		$filequeue.find("li")
-				.find(".progress").text("Waiting");
-	}
+				function onBeforeSend(formData, file) {
+					console.log("Before Send");
+					formData.append("test_field", "test_value");
+					// return (file.name.indexOf(".jpg") < -1) ? false : formData; // cancel all jpgs
+					return formData;
+				}
 
-	function onComplete(e) {
-		console.log("Complete");
-		// All done!
-	}
+				function onQueued(e, files) {
+					console.log("Queued");
+					var html = '';
+					for (var i = 0; i < files.length; i++) {
+						html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></li>';
+					}
+					$filequeue.append(html);
+				}
 
-	function onFileStart(e, file) {
-		console.log("File Start");
-		$filequeue.find("li[data-index=" + file.index + "]")
-				  .find(".progress").text("0%");
-	}
+				function onStart(e, files) {
+					console.log("Start");
+					$filequeue.find("li")
+						.find(".progress").text("Waiting");
+				}
 
-	function onFileProgress(e, file, percent) {
-		console.log("File Progress");
-		$filequeue.find("li[data-index=" + file.index + "]")
-				  .find(".progress").text(percent + "%");
-	}
+				function onComplete(e) {
+					console.log("Complete");
+					// All done!
+				}
 
-	function onFileComplete(e, file, response) {
-		console.log("File Complete");
-		if (response.trim() === "" || response.toLowerCase().indexOf("error") > -1) {
-			$filequeue.find("li[data-index=" + file.index + "]").addClass("error")
-					  .find(".progress").text(response.trim());
-		} else {
-			var $target = $filequeue.find("li[data-index=" + file.index + "]");
-			$target.find(".file").text(file.name);
-			$target.find(".progress").remove();
-			$target.find(".cancel").remove();
-			$target.appendTo($filelist);
-		}
-	}
+				function onFileStart(e, file) {
+					console.log("File Start");
+					$filequeue.find("li[data-index=" + file.index + "]")
+						.find(".progress").text("0%");
+				}
 
-	function onFileError(e, file, error) {
-		console.log("File Error");
-		$filequeue.find("li[data-index=" + file.index + "]").addClass("error")
-				  .find(".progress").text("Error: " + error);
-	}
-</script>
+				function onFileProgress(e, file, percent) {
+					console.log("File Progress");
+					$filequeue.find("li[data-index=" + file.index + "]")
+						.find(".progress").text(percent + "%");
+				}
 
-<h4>Basic</h4>
-<form action="#" method="GET" class="form demo_form">
-	<div class="upload" data-upload-options='{"action":"../extra/upload-target.php"}'></div>
+				function onFileComplete(e, file, response) {
+					console.log("File Complete");
+					if (response.trim() === "" || response.toLowerCase().indexOf("error") > -1) {
+						$filequeue.find("li[data-index=" + file.index + "]").addClass("error")
+							.find(".progress").text(response.trim());
+					}
+					else {
+						var $target = $filequeue.find("li[data-index=" + file.index + "]");
+						$target.find(".file").text(file.name);
+						$target.find(".progress").remove();
+						$target.find(".cancel").remove();
+						$target.appendTo($filelist);
+					}
+				}
 
-	<div class="filelists">
-		<h5>Complete</h5>
-		<ol class="filelist complete">
-		</ol>
-		<h5>Queued</h5>
-		<ol class="filelist queue">
-		</ol>
-		<span class="cancel_all">Cancel All</span>
-	</div>
-</form><!-- END: DEMO --></div></div></body></html>
+				function onFileError(e, file, error) {
+					console.log("File Error");
+					$filequeue.find("li[data-index=" + file.index + "]").addClass("error")
+						.find(".progress").text("Error: " + error);
+				}
+				</script>
+
+				<h4>Basic</h4>
+				<form action="#" method="GET" class="form demo_form">
+					<div class="upload" data-upload-options='{"action":"../extra/upload-target.php"}'></div>
+
+					<div class="filelists">
+						<h5>Complete</h5>
+						<ol class="filelist complete">
+						</ol>
+						<h5>Queued</h5>
+						<ol class="filelist queue">
+						</ol>
+						<span class="cancel_all">Cancel All</span>
+					</div>
+				</form>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

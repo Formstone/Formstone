@@ -2,14 +2,23 @@
 
 A jQuery plugin for simple tabs.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -17,6 +26,7 @@ tabs.js
 tabs.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -51,6 +61,7 @@ $(".tab").tabs();
 </div>
 ```
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-tabs-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -63,6 +74,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `vertical` | `boolean` | `false` | Flag to draw vertical tab set |
 
+<hr>
 ## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
@@ -71,6 +83,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `update.tabs` | Tab activated |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -121,6 +134,7 @@ Enables instance.
 $(".target").tabs("enable");
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

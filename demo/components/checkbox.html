@@ -1,79 +1,112 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Checkbox &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="checkbox-demo">Checkbox Demo</h1>
-<!-- START: DEMO --><style>
-</style>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-<script>
-	$(function() {
-		$("input[type=checkbox], input[type=radio]").checkbox();
-	});
-</script>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Checkbox &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-<div class="fs-row">
-	<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
-		<h4>Checkbox</h4>
-		<form action="#" method="GET" class="form demo_form">
-			<fieldset class="form_fieldset">
-				<input type="checkbox" value="1" id="checkbox-1" name="checkbox-1" checked>
-				<label for="checkbox-1">One</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<label for="checkbox-2">
-					<input type="checkbox" value="2" id="checkbox-2" name="checkbox-2"> Two
-				</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<input type="checkbox" value="3" id="checkbox-3" name="checkbox-3" disabled>
-				<label for="checkbox-3">Three</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<label>
-					<span>
-						<input type="checkbox" value="4" id="checkbox-4" name="checkbox-4"> Four
-					</span>
-				</label>
-			</fieldset>
-		</form>
-	</div>
-	<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
-		<h4>Radio</h4>
-		<form action="#" method="GET" class="form demo_form">
-			<fieldset class="form_fieldset">
-				<input type="radio" value="1" id="radio-1" name="radio-group" checked>
-				<label for="radio-1">One</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<label for="radio-2">
-					<input type="radio" value="2" id="radio-2" name="radio-group"> Two
-				</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<input type="radio" value="3" id="radio-3" name="radio-group" disabled>
-				<label for="radio-3">Three</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<label>
-					<span>
-						<input type="radio" value="4" id="radio-4" name="radio-group" readonly> Four!
-					</span>
-				</label>
-			</fieldset>
-		</form>
-	</div>
-	<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
-		<h4>Toggle</h4>
-		<form action="#" method="GET" class="form demo_form">
-			<fieldset class="form_fieldset">
-				<input type="checkbox" value="One" id="toggle-1" name="toggle-1" checked data-checkbox-options='{"toggle":true}'>
-				<label for="toggle-1">One</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<input type="checkbox" value="Two" id="toggle-2" name="toggle-2" data-checkbox-options='{"toggle":true}'>
-				<label for="toggle-2">Two</label>
-			</fieldset>
-			<fieldset class="form_fieldset">
-				<input type="checkbox" value="Three" id="toggle-3" name="toggle-3" disabled data-checkbox-options='{"toggle":true}'>
-				<label for="toggle-3">Three</label>
-			</fieldset>
-		</form>
-	</div>
-</div><!-- END: DEMO --></div></div></body></html>
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="checkbox-demo">Checkbox Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+
+				</style>
+
+				<script>
+				$(function() {
+					$("input[type=checkbox], input[type=radio]").checkbox();
+				});
+				</script>
+
+				<div class="fs-row">
+					<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
+						<h4>Checkbox</h4>
+						<form action="#" method="GET" class="form demo_form">
+							<fieldset class="form_fieldset">
+								<input type="checkbox" value="1" id="checkbox-1" name="checkbox-1" checked>
+								<label for="checkbox-1">One</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<label for="checkbox-2">
+									<input type="checkbox" value="2" id="checkbox-2" name="checkbox-2"> Two
+								</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<input type="checkbox" value="3" id="checkbox-3" name="checkbox-3" disabled>
+								<label for="checkbox-3">Three</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<label>
+									<span>
+										<input type="checkbox" value="4" id="checkbox-4" name="checkbox-4"> Four
+									</span>
+								</label>
+							</fieldset>
+						</form>
+					</div>
+					<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
+						<h4>Radio</h4>
+						<form action="#" method="GET" class="form demo_form">
+							<fieldset class="form_fieldset">
+								<input type="radio" value="1" id="radio-1" name="radio-group" checked>
+								<label for="radio-1">One</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<label for="radio-2">
+									<input type="radio" value="2" id="radio-2" name="radio-group"> Two
+								</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<input type="radio" value="3" id="radio-3" name="radio-group" disabled>
+								<label for="radio-3">Three</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<label>
+									<span>
+										<input type="radio" value="4" id="radio-4" name="radio-group" readonly> Four!
+									</span>
+								</label>
+							</fieldset>
+						</form>
+					</div>
+					<div class="fs-cell fs-sm-third fs-md-third fs-lg-third">
+						<h4>Toggle</h4>
+						<form action="#" method="GET" class="form demo_form">
+							<fieldset class="form_fieldset">
+								<input type="checkbox" value="One" id="toggle-1" name="toggle-1" checked data-checkbox-options='{"toggle":true}'>
+								<label for="toggle-1">One</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<input type="checkbox" value="Two" id="toggle-2" name="toggle-2" data-checkbox-options='{"toggle":true}'>
+								<label for="toggle-2">Two</label>
+							</fieldset>
+							<fieldset class="form_fieldset">
+								<input type="checkbox" value="Three" id="toggle-3" name="toggle-3" disabled data-checkbox-options='{"toggle":true}'>
+								<label for="toggle-3">Three</label>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

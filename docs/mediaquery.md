@@ -2,19 +2,29 @@
 
 A jQuery plugin for responsive media query events.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
 mediaquery.js
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -72,6 +82,7 @@ $.mediaquery("unbind", "mq-key");
 
 When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
@@ -84,6 +95,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `maxHeight` | ` Infinity ` | &nbsp; | Array of max-heights |
 | `unit` | `string` | `'px'` | Unit to use when matching widths and heights |
 
+<hr>
 ## Events
 
 Events are triggered on the `window`, unless otherwise stated.
@@ -92,6 +104,7 @@ Events are triggered on the `window`, unless otherwise stated.
 | --- | --- |
 | `mqchange.mediaquery` | Change to a media query match; Triggered on window |
 
+<hr>
 ## Methods
 
 Methods are publicly available, unless otherwise stated.

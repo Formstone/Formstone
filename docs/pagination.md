@@ -2,14 +2,23 @@
 
 A jQuery plugin for simple pagination.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -17,6 +26,7 @@ pagination.js
 pagination.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -29,6 +39,7 @@ mediaquery.js
 
 
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-pagination-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -45,6 +56,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `visible` | `int` | `2` | Visible pages before and after current page |
 
+<hr>
 ## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
@@ -53,6 +65,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `update.pagination` | Page updated |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -87,6 +100,7 @@ Jump instance of plugin to specific page
 $(".target").pagination("jump", 1);
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

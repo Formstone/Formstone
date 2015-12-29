@@ -1,74 +1,130 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Lightbox &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="lightbox-demo">Lightbox Demo</h1>
-<!-- START: DEMO --><style>
-	.gallery { margin: 20px 0; overflow: hidden; }
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-	.lightbox_image { border: 1px solid #ccc; border-radius: 3px; display: block; float: left; margin: 0 2% 10px 0; padding: 5px; width: 31.3333%; max-width: 150px; }
-	.lightbox_image img { border-radius: 3px; width: 100%; }
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Lightbox &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-	.no-touch .lightbox_image:hover {
-		box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-	}
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="lightbox-demo">Lightbox Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.gallery {
+					margin: 20px 0;
+					overflow: hidden;
+				}
+				
+				.lightbox_image {
+					border: 1px solid #ccc;
+					border-radius: 3px;
+					display: block;
+					float: left;
+					margin: 0 2% 10px 0;
+					padding: 5px;
+					width: 31.3333%;
+					max-width: 150px;
+				}
+				
+				.lightbox_image img {
+					border-radius: 3px;
+					width: 100%;
+				}
+				
+				.no-touch .lightbox_image:hover {
+					box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+				}
+				
+				.inline_content {
+					width: 300px;
+					overflow: hidden;
+					padding: 0 20px;
+				}
+				
+				.inline_content h2 {
+					margin-top: 20px;
+				}
+				
+				.fs-lightbox h3 {
+					font-style: italic;
+					font-size: 16px;
+					margin: 0;
+					padding: 5px 0;
+				}
+				
+				.fs-lightbox-mobile .inline_content,
+				.fs-lightbox-mobile .inline_content h3 {
+					color: #fff;
+				}
+				</style>
 
-	.inline_content { width: 300px; overflow: hidden; padding: 0 20px; }
-	.inline_content h2 { margin-top: 20px; }
+				<script>
+				$(function() {
+					$(".lightbox").not(".lightbox_format").lightbox();
 
-	.fs-lightbox h3 { font-style: italic; font-size: 16px; margin: 0; padding: 5px 0; }
+					$(".lightbox_format").lightbox({
+						formatter: customFormat
+					});
 
-	.fs-lightbox-mobile .inline_content,
-	.fs-lightbox-mobile .inline_content h3 { color: #fff; }
-</style>
+					$(".lightbox_object").click(launchObject);
+				});
 
-<script>
-	$(function() {
-		$(".lightbox").not(".lightbox_format").lightbox();
+				function customFormat() {
+					return '<h3>' + this.attr("title") + "</h3>";
+				}
 
-		$(".lightbox_format").lightbox({
-			formatter: customFormat
-		});
+				function launchObject() {
+					$.lightbox($('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
+						mobile: true
+					});
+				}
+				</script>
 
-		$(".lightbox_object").click(launchObject);
-	});
+				<h4>Basic</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+				</div>
 
-	function customFormat() {
-		return '<h3>' + this.attr("title") + "</h3>";
-	}
+				<h4>Gallery</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/2.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/3.jpg" alt="">
+					</a>
+				</div>
 
-	function launchObject() {
-		$.lightbox( $('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
-			mobile: true
-		} );
-	}
-</script>
-
-<h4>Basic</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-		<img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-</div>
-
-<h4>Gallery</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/2.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="image_gallery" title="By NASA on The Commons [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/3.jpg" alt="">
-	</a>
-</div>
-
-<h4>YouTube &amp; Vimeo Videos</h4>
-<div class="gallery">
-	<a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button lightbox" data-lightbox-gallery="video_gallery" title="STS-129 HD Launch">
-		YouTube Video
-	</a>
-    <a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button lightbox" data-lightbox-gallery="video_gallery" title="Homemade Spacecraft">
-		Vimeo Video
-	</a>
-	<!--
+				<h4>YouTube &amp; Vimeo Videos</h4>
+				<div class="gallery">
+					<a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button lightbox" data-lightbox-gallery="video_gallery" title="STS-129 HD Launch">
+						YouTube Video
+					</a>
+					<a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button lightbox" data-lightbox-gallery="video_gallery" title="Homemade Spacecraft">
+						Vimeo Video
+					</a>
+					<!--
 	<a href="https://www.youtube.com/watch?v=zsJpUCWfyPE" class="button lightbox" data-lightbox-gallery="video_gallery" title="STS-129 HD Launch">
 		YouTube Video
 	</a>
@@ -76,87 +132,93 @@
 		Vimeo Video
 	</a>
 	-->
-</div>
+				</div>
 
-<h4>Mobile</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-		<img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/2.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/3.jpg" alt="">
-	</a>
-	<a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="Homemade Spacecraft">
-		Vimeo Video
-	</a>
-</div>
+				<h4>Mobile</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/2.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/3.jpg" alt="">
+					</a>
+					<a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="Homemade Spacecraft">
+						Vimeo Video
+					</a>
+				</div>
 
-<h4>Fixed Positioning</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/2.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/3.jpg" alt="">
-	</a>
-</div>
+				<h4>Fixed Positioning</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/2.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_fixed" data-lightbox-options='{"fixed":true}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/3.jpg" alt="">
+					</a>
+				</div>
 
-<h4>Top Positioning</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-		<img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/2.jpg" alt="">
-	</a>
-	<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/3.jpg" alt="">
-	</a>
-</div>
+				<h4>Top Positioning</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/2.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons (Bumper V-2 Launch) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/2.jpg" alt="">
+					</a>
+					<a href="//spacehold.it/1600x900/3.jpg" class="lightbox lightbox_image" data-lightbox-gallery="gallery_top" data-lightbox-options='{"top":25}' title="By NASA on The Commons [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/3.jpg" alt="">
+					</a>
+				</div>
 
-<h4>In-Line Content</h4>
-<div class="gallery">
-	<a href="#hidden_content" class="button lightbox">Show Hidden Content</a>
-</div>
-<div id="hidden_content" style="display: none;">
-	<div class="inline_content">
-		<h2>Some Content!</h2>
-		<p>This was hidden on the page and loaded into the new Lightbox instance.</p>
-	</div>
-</div>
+				<h4>In-Line Content</h4>
+				<div class="gallery">
+					<a href="#hidden_content" class="button lightbox">Show Hidden Content</a>
+				</div>
+				<div id="hidden_content" style="display: none;">
+					<div class="inline_content">
+						<h2>Some Content!</h2>
+						<p>This was hidden on the page and loaded into the new Lightbox instance.</p>
+					</div>
+				</div>
 
-<h4>jQuery Objects</h4>
-<div class="gallery">
-	<button class="button lightbox lightbox_object">Show jQuery Object</button>
-</div>
+				<h4>jQuery Objects</h4>
+				<div class="gallery">
+					<button class="button lightbox lightbox_object">Show jQuery Object</button>
+				</div>
 
-<h4>iFrame</h4>
-<div class="gallery">
-	<a href="https://www.nasa.gov/" class="button lightbox">View NASA.gov</a>
-	<a href="../extra/lightbox-iframe.html" class="button lightbox">View Local iFrame</a>
-</div>
+				<h4>iFrame</h4>
+				<div class="gallery">
+					<a href="https://www.nasa.gov/" class="button lightbox">View NASA.gov</a>
+					<a href="../extra/lightbox-iframe.html" class="button lightbox">View Local iFrame</a>
+				</div>
 
-<h4>Sizing</h4>
-<div class="gallery">
-	<a href="https://www.nasa.gov/" class="button lightbox" data-lightbox-height="500" data-lightbox-width="500">View NASA.gov</a>
-</div>
+				<h4>Sizing</h4>
+				<div class="gallery">
+					<a href="https://www.nasa.gov/" class="button lightbox" data-lightbox-height="500" data-lightbox-width="500">View NASA.gov</a>
+				</div>
 
-<h4>Caption Formating</h4>
-<div class="gallery">
-	<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image lightbox_format" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
-	    <img src="//spacehold.it/300x300/1.jpg" alt="">
-	</a>
-</div>
+				<h4>Caption Formating</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/1600x900/1.jpg" class="lightbox lightbox_image lightbox_format" title="By NASA on The Commons (Apollo-Soyuz) [Public domain], via Wikimedia Commons">
+						<img src="//spacehold.it/300x300/1.jpg" alt="">
+					</a>
+				</div>
 
-<h4>Retina Support</h4>
-<div class="gallery">
-	<a href="//spacehold.it/3200x1800/4.jpg" class="lightbox lightbox_image" data-lightbox-options='{"retina":true}' title="By Apollo 15 astronaut.Bubba73 at en.wikipedia [Public domain], from Wikimedia Commons">
-		<img src="//spacehold.it/600x600/4.jpg" alt="">
-	</a>
-</div><!-- END: DEMO --></div></div></body></html>
+				<h4>Retina Support</h4>
+				<div class="gallery">
+					<a href="//spacehold.it/3200x1800/4.jpg" class="lightbox lightbox_image" data-lightbox-options='{"retina":true}' title="By Apollo 15 astronaut.Bubba73 at en.wikipedia [Public domain], from Wikimedia Commons">
+						<img src="//spacehold.it/600x600/4.jpg" alt="">
+					</a>
+				</div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

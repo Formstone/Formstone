@@ -2,7 +2,15 @@
 
 A responsive CSS grid.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
+
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
 
 ## Use 
 

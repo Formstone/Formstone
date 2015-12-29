@@ -2,19 +2,29 @@
 
 A jQuery plugin for asynchronous page loads.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
 asap.js
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -99,6 +109,7 @@ $(window).on("requested.asap", function(e) {
 
 
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
@@ -112,6 +123,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `selector` | `string` | `'a'` | Target DOM Selector |
 | `transitionOut` | `function` | `$.noop` | Transition timing callback; should return user defined $.Deferred object, which must eventually resolve |
 
+<hr>
 ## Events
 
 Events are triggered on the `window`, unless otherwise stated.
@@ -124,6 +136,7 @@ Events are triggered on the `window`, unless otherwise stated.
 | `rendered.asap` | After state is rendered; triggered on window |
 | `failed.asap` | After load error; triggered on window |
 
+<hr>
 ## Methods
 
 Methods are publicly available, unless otherwise stated.

@@ -1,22 +1,55 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Number &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="number-demo">Number Demo</h1>
-<!-- START: DEMO --><style>
-</style>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-<script>
-	$(function() {
-		$("input[type=number]").number();
-	});
-</script>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Number &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-<h4>Basic</h4>
-<fieldset class="form_fieldset">
-	<input type="number" class="form_input" pattern="[0-9]*">
-</fieldset>
-<fieldset class="form_fieldset">
-	<input type="number" class="form_input" pattern="[0-9]*" disabled>
-</fieldset>
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="number-demo">Number Demo</h1>
+				<!-- START: DEMO -->
+				<style>
 
-<h4>Range</h4>
-<fieldset class="form_fieldset">
-	<input type="number" min="0" max="20" step="2" class="form_input" pattern="[0-9]*">
-</fieldset><!-- END: DEMO --></div></div></body></html>
+				</style>
+
+				<script>
+				$(function() {
+					$("input[type=number]").number();
+				});
+				</script>
+
+				<h4>Basic</h4>
+				<fieldset class="form_fieldset">
+					<input type="number" class="form_input" pattern="[0-9]*">
+				</fieldset>
+				<fieldset class="form_fieldset">
+					<input type="number" class="form_input" pattern="[0-9]*" disabled>
+				</fieldset>
+
+				<h4>Range</h4>
+				<fieldset class="form_fieldset">
+					<input type="number" min="0" max="20" step="2" class="form_input" pattern="[0-9]*">
+				</fieldset>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

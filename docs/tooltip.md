@@ -2,13 +2,22 @@
 
 A jQuery plugin for simple tooltips.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -16,6 +25,7 @@ tooltip.js
 tooltip.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -69,6 +79,7 @@ $("a").tooltip({
 });
 ```
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-tooltip-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -84,6 +95,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `match` | `boolean` | `false` | Flag to match mouse position |
 | `theme` | `string` | `"fs-light"` | Theme class name |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -110,6 +122,7 @@ Removes plugin instance.
 $(".target").tooltip("destroy");
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

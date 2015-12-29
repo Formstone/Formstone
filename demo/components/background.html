@@ -1,31 +1,74 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Background &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="background-demo">Background Demo</h1>
-<!-- START: DEMO --><style>
-	.background { background: #eee; margin: 0 0 20px; padding-top: 50%; width: 100%; }
-	.background.square { padding-top: 150%; }
-	.background.bar { margin: -25px 0; }
-</style>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-<script>
-	$(function() {
-		$(".background").background();
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Background &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-/*
-		$(".load_background").click(function() {
-			var source = $(this).data("background");
-			$(".loader").background("load", source);
-		});
-*/
-	});
-</script>
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="background-demo">Background Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.background {
+					background: #eee;
+					margin: 0 0 20px;
+					padding-top: 50%;
+					width: 100%;
+				}
+				
+				.background.square {
+					padding-top: 150%;
+				}
+				
+				.background.bar {
+					margin: -25px 0;
+				}
+				</style>
 
-<h4>Basic</h4>
-<div class="background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
+				<script>
+				$(function() {
+					$(".background").background();
 
-<h4>Responsive</h4>
-<div class="background loader" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
+					/*
+							$(".load_background").click(function() {
+								var source = $(this).data("background");
+								$(".loader").background("load", source);
+							});
+					*/
+				});
+				</script>
 
-<h4>Video</h4>
-<div class="background" data-background-options='{"source":{"webm":"//formstone.it/files/demo/oranges.webm","mp4":"//formstone.it/files/demo/oranges.mp4","ogg":"//formstone.it/files/demo/oranges.ogv","poster":"//formstone.it/files/demo/oranges.jpg"}}'></div>
+				<h4>Basic</h4>
+				<div class="background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
 
-<h4>YouTube</h4>
-<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"},"youtubeOptions":{"start":60}}'></div><!-- END: DEMO --></div></div></body></html>
+				<h4>Responsive</h4>
+				<div class="background loader" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
+
+				<h4>Video</h4>
+				<div class="background" data-background-options='{"source":{"webm":"//formstone.it/files/demo/oranges.webm","mp4":"//formstone.it/files/demo/oranges.mp4","ogg":"//formstone.it/files/demo/oranges.ogv","poster":"//formstone.it/files/demo/oranges.jpg"}}'></div>
+
+				<h4>YouTube</h4>
+				<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"},"youtubeOptions":{"start":60}}'></div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

@@ -2,13 +2,22 @@
 
 A jQuery plugin for cross browser range inputs.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -16,6 +25,7 @@ range.js
 range.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -52,6 +62,7 @@ Create a vertical slider with the `orient` attribute:
 <input type="range" orient="vertical">
 ```
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-range-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -67,6 +78,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `vertical` | `boolean` | `false` | &nbsp; |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -117,6 +129,7 @@ Resizes instance
 $(".target").range("resize");
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

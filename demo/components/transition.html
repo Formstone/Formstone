@@ -1,88 +1,139 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Transition &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="transition-demo">Transition Demo</h1>
-<!-- START: DEMO --><style>
-	.transitions { margin: 0 0 20px; }
-	.transition { background-color: #c65032; border-radius: 3px; height: 30px; margin: 20px 0; width: 10%;
-		-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */;
-				transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */;
-	}
-	.transition.move { margin-left: 90%; }
-	.transition_property.move {
-		/* background-color: #393b3f; */
-		height: 50px;
-	}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-	.demo_output { margin: 0 0 20px; }
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Transition &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-	@media screen and (min-width: 500px) {
-		.demo_output { display: inline-block; margin: 0 0 0 10px; }
-	}
-</style>
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="transition-demo">Transition Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.transitions {
+					margin: 0 0 20px;
+				}
+				
+				.transition {
+					background-color: #c65032;
+					border-radius: 3px;
+					height: 30px;
+					margin: 20px 0;
+					width: 10%;
+					-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
+					;
+					transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
+					;
+				}
+				
+				.transition.move {
+					margin-left: 90%;
+				}
+				
+				.transition_property.move {
+					/* background-color: #393b3f; */
+					height: 50px;
+				}
+				
+				.demo_output {
+					margin: 0 0 20px;
+				}
+				
+				@media screen and (min-width: 500px) {
+					.demo_output {
+						display: inline-block;
+						margin: 0 0 0 10px;
+					}
+				}
+				</style>
 
-<script>
-	$(function() {
-		$(".transition_basic").transition({
-			always: true
-		}, complete);
+				<script>
+				$(function() {
+					$(".transition_basic").transition({
+						always: true
+					}, complete);
 
-		$(".transition_parent").transition({
-			always: true,
-			target: ".transition_delegate",
-		}, complete);
+					$(".transition_parent").transition({
+						always: true,
+						target: ".transition_delegate",
+					}, complete);
 
-		$(".transition_property").transition({
-			always: true,
-			property: "height",
-		}, complete);
+					$(".transition_property").transition({
+						always: true,
+						property: "height",
+					}, complete);
 
-		$(".trigger").on("click", start);
-	});
+					$(".trigger").on("click", start);
+				});
 
-	function start() {
-		var $target = $(this).parent(".transitions").find(".transition");
+				function start() {
+					var $target = $(this).parent(".transitions").find(".transition");
 
-		if (!$target.hasClass("animating")) {
-			$target.toggleClass("move")
-				   .addClass("animating");
+					if (!$target.hasClass("animating")) {
+						$target.toggleClass("move")
+							.addClass("animating");
 
-			output($target, " ");
-		}
-	}
+						output($target, " ");
+					}
+				}
 
-	function complete() {
-		var $target = $(this);
+				function complete() {
+					var $target = $(this);
 
-		if (!$target.hasClass("transition")) {
-			$target = $(this).find(".transition");
-		}
+					if (!$target.hasClass("transition")) {
+						$target = $(this).find(".transition");
+					}
 
-		$target.removeClass("animating");
-		output($target, "Complete");
-	}
+					$target.removeClass("animating");
+					output($target, "Complete");
+				}
 
-	function output($target, text) {
-		$target.parents(".transitions").find(".demo_output").text(text);
-	}
-</script>
+				function output($target, text) {
+					$target.parents(".transitions").find(".demo_output").text(text);
+				}
+				</script>
 
-<h4>Basic</h4>
-<div class="transitions">
-	<div class="transition transition_basic"></div>
-	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
-</div>
+				<h4>Basic</h4>
+				<div class="transitions">
+					<div class="transition transition_basic"></div>
+					<button class="button trigger">Start</button>
+					<div class="demo_output">&nbsp;</div>
+				</div>
 
-<h4>Delegation</h4>
-<div class="transitions">
-	<div class="transition_parent">
-		<div class="transition transition_delegate"></div>
-	</div>
-	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
-</div>
+				<h4>Delegation</h4>
+				<div class="transitions">
+					<div class="transition_parent">
+						<div class="transition transition_delegate"></div>
+					</div>
+					<button class="button trigger">Start</button>
+					<div class="demo_output">&nbsp;</div>
+				</div>
 
-<h4>Property</h4>
-<div class="transitions">
-	<div class="transition transition_property"></div>
-	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
-</div><!-- END: DEMO --></div></div></body></html>
+				<h4>Property</h4>
+				<div class="transitions">
+					<div class="transition transition_property"></div>
+					<button class="button trigger">Start</button>
+					<div class="demo_output">&nbsp;</div>
+				</div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

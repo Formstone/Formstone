@@ -2,14 +2,23 @@
 
 A jQuery plugin for simple modals.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -17,6 +26,7 @@ lightbox.js
 lightbox.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -68,6 +78,7 @@ $(window).on("open.lightbox", function() {
 });
 ```
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -97,6 +108,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `videoRadio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |
 
+<hr>
 ## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
@@ -106,6 +118,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `open.lightbox` | Lightbox opened; Triggered on window |
 | `close.lightbox` | Lightbox closed; Triggered on window |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -155,6 +168,7 @@ $.lightbox("resize");
 | `height` | `int | false` | &nbsp; | Target height or false to auto size |
 | `width` | `int | false` | &nbsp; | Target width or false to auto size |
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

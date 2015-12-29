@@ -2,19 +2,29 @@
 
 A jQuery plugin for equal dimensions.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
 equalize.js
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -73,6 +83,7 @@ $(".target").equalize({
 });
 ```
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-equalize-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -84,6 +95,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `property` | `string` | `"height"` | Property to size; 'height' or 'width' |
 | `target` | `string OR array` | `null` | Target child selector(s); Defaults to direct descendants |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -134,6 +146,7 @@ Resizes instance
 $(".target").equalize("resize");
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |

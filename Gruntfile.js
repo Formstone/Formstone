@@ -225,9 +225,9 @@ module.exports = function(grunt) {
 				position: 'top',
 				// banner: '<%= meta.banner %>',
 				process: function(filepath) {
-					var parts = filepath.split("/"),
+					var parts = filepath.split('/'),
 						filename = parts[ parts.length - 1 ];
-					return grunt.config.get("meta").banner.replace("{{ local_name }}", filename);
+					return grunt.config.get('meta').banner.replace('{{ local_name }}', filename);
 				}
 			},
 			library: {
@@ -295,12 +295,17 @@ module.exports = function(grunt) {
 				indent: 1,
 				indent_char: '	',
 				preserve_newlines: true,
+				brace_style: 'end-expand',
 				max_preserve_newlines: 4,
-				unformatted: ["code", "pre"]
+				unformatted: ['code', 'pre']
 			},
 			target: {
 				expand: true,
-				src: 'demo/site/*.html'
+				src: [
+					'demo/index.html',
+					'demo/components/*.html',
+					'demo/themes/*.html'
+				]
 			}
 		},
 		// Strip MQ

@@ -1,225 +1,286 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Touch &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="touch-demo">Touch Demo</h1>
-<!-- START: DEMO --><style>
-	.box { background: #393b3f; border-radius: 3px; color: #fff; text-align: center; }
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-	.box.active { background: #c65032; }
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Touch &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-	.container { border: 1px solid #ccc; border-radius: 3px; height: 400px; margin: 20px 0; overflow: hidden; position: relative; width: 100%; }
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="touch-demo">Touch Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.box {
+					background: #393b3f;
+					border-radius: 3px;
+					color: #fff;
+					text-align: center;
+				}
+				
+				.box.active {
+					background: #c65032;
+				}
+				
+				.container {
+					border: 1px solid #ccc;
+					border-radius: 3px;
+					height: 400px;
+					margin: 20px 0;
+					overflow: hidden;
+					position: relative;
+					width: 100%;
+				}
+				
+				.register {
+					height: 1px;
+					left: 50%;
+					position: absolute;
+					top: 50%;
+					width: 1px;
+				}
+				
+				.box {
+					height: 150px;
+					line-height: 150px;
+					left: -75px;
+					position: absolute;
+					top: -75px;
+					width: 150px;
+				}
+				</style>
 
-	.register { height: 1px; left: 50%; position: absolute; top: 50%; width: 1px; }
-	.box { height: 150px; line-height: 150px; left: -75px; position: absolute; top: -75px; width: 150px; }
-</style>
+				<script>
+				$(function() {
+					var $targets = $(".touch"),
+						_minX = 10,
+						_minY = 10;
 
-<script>
-	$(function() {
-		var $targets = $(".touch"),
-			_minX = 10,
-			_minY = 10;
+					$targets.each(function() {
+						var $target = $(this),
+							data = {
+								$container: $target.parents(".container"),
+								$register: $target.parents(".register")
+							};
 
-		$targets.each(function() {
-			var $target = $(this),
-				data = {
-					$container: $target.parents(".container"),
-					$register:  $target.parents(".register")
-				};
+						$target.data("demo", data);
+					});
 
-			$target.data("demo", data);
-		});
+					// Pan
+					$(".pan").touch({
+							pan: true
+						}).on("panstart", function(e) {
+							var $target = $(this),
+								data = $target.data("demo"),
+								offset = data.$register.position();
 
-		// Pan
-		$(".pan").touch({
-			pan: true
-		}).on("panstart", function(e) {
-			var $target = $(this),
-				data = $target.data("demo"),
-				offset = data.$register.position();
+							data.origX = offset.left;
+							data.origY = offset.top;
 
-			data.origX = offset.left;
-			data.origY = offset.top;
+							data.diffWidth = $target.outerWidth() / 2;
+							data.diffHeight = $target.outerHeight() / 2;
+						})
+						.on("panend", function(e) {
+							// ...
+						});
 
-			data.diffWidth  = $target.outerWidth() / 2;
-			data.diffHeight = $target.outerHeight() / 2;
-		})
-		.on("panend", function(e) {
-			// ...
-		});
+					// Bubbling
 
-		// Bubbling
+					$(document).on("pan", ".pan", function(e) {
+						var $target = $(this),
+							data = $target.data("demo"),
+							x = data.origX + e.deltaX,
+							y = data.origY + e.deltaY,
+							minX = _minX + data.diffWidth,
+							minY = _minY + data.diffHeight,
+							maxX = data.$container.outerWidth() - minX,
+							maxY = data.$container.outerHeight() - minY;
 
-		$(document).on("pan", ".pan", function(e) {
-			var $target = $(this),
-				data = $target.data("demo"),
-				x = data.origX + e.deltaX,
-				y = data.origY + e.deltaY,
-				minX = _minX + data.diffWidth,
-				minY = _minY + data.diffHeight,
-				maxX = data.$container.outerWidth()  - minX,
-				maxY = data.$container.outerHeight() - minY;
+						if (x < minX) {
+							x = minX;
+						}
+						if (x > maxX) {
+							x = maxX;
+						}
+						if (y < minY) {
+							y = minY;
+						}
+						if (y > maxY) {
+							y = maxY;
+						}
 
-			if (x < minX) {
-				x = minX;
-			}
-			if (x > maxX) {
-				x = maxX;
-			}
-			if (y < minY) {
-				y = minY;
-			}
-			if (y > maxY) {
-				y = maxY;
-			}
+						data.$register.css({
+							left: x,
+							top: y
+						});
+					});
 
-			data.$register.css({
-				left: x,
-				top:  y
-			});
-		});
+					// Scale
+					$(".scale").touch({
+							scale: true
+						}).on("scalestart", function(e) {
+							var $target = $(this),
+								data = $target.data("demo"),
+								offset = $target.position();
 
-		// Scale
-		$(".scale").touch({
-			scale: true
-		}).on("scalestart", function(e) {
-			var $target = $(this),
-				data = $target.data("demo"),
-				offset = $target.position();
+							data.origWidth = $target.outerWidth();
+							data.origHeight = $target.outerHeight();
+						})
+						.on("scaleend", function(e) {
+							// ...
+						})
+						.on("scale", function(e) {
+							var $target = $(this),
+								data = $target.data("demo")
+							width = data.origWidth * e.scale,
+								height = data.origHeight * e.scale,
+								minWidth = 150,
+								minHeight = 150,
+								maxH = data.$container.outerHeight() - 20,
+								maxW = data.$container.outerWidth() - 20,
+								maxWidth = (maxH > maxW) ? maxW : maxH,
+								maxHeight = (maxH > maxW) ? maxW : maxH;
 
-			data.origWidth  = $target.outerWidth();
-			data.origHeight = $target.outerHeight();
-		})
-		.on("scaleend", function(e) {
-			// ...
-		})
-		.on("scale", function(e) {
-			var $target = $(this),
-				data = $target.data("demo")
-				width  = data.origWidth  * e.scale,
-				height = data.origHeight * e.scale,
-				minWidth  = 150,
-				minHeight = 150,
-				maxH = data.$container.outerHeight() - 20,
-				maxW = data.$container.outerWidth()  - 20,
-				maxWidth  = (maxH > maxW) ? maxW : maxH,
-				maxHeight = (maxH > maxW) ? maxW : maxH;
+							if (width < minWidth) {
+								width = minWidth;
+							}
+							if (width > maxWidth) {
+								width = maxWidth;
+							}
 
-			if (width < minWidth) {
-				width = minWidth;
-			}
-			if (width > maxWidth) {
-				width = maxWidth;
-			}
+							if (height < minHeight) {
+								height = minHeight;
+							}
+							if (height > maxHeight) {
+								height = maxHeight;
+							}
 
-			if (height < minHeight) {
-				height = minHeight;
-			}
-			if (height > maxHeight) {
-				height = maxHeight;
-			}
+							$target.css({
+								width: width,
+								height: height,
+								lineHeight: height + "px",
+								left: -(width / 2),
+								top: -(height / 2)
+							});
+						});
 
-			$target.css({
-				width:  width,
-				height: height,
-				lineHeight: height + "px",
-				left: -(width / 2),
-				top:  -(height / 2)
-			});
-		});
+					// Manipulate
+					$(".manipulate").touch({
+							pan: true,
+							scale: true
+						}).on("scalestart", function(e) {
+							var $target = $(this),
+								data = $target.data("demo"),
+								offset = data.$register.position();
 
-		// Manipulate
-		$(".manipulate").touch({
-			pan: true,
-			scale: true
-		}).on("scalestart", function(e) {
-			var $target = $(this),
-				data = $target.data("demo"),
-				offset = data.$register.position();
+							data.origX = offset.left;
+							data.origY = offset.top;
 
-			data.origX = offset.left;
-			data.origY = offset.top;
+							data.origWidth = $target.outerWidth();
+							data.origHeight = $target.outerHeight();
+						})
+						.on("scaleend", function(e) {
+							// ...
+						})
+						.on("scale", function(e) {
+							var $target = $(this),
+								data = $target.data("demo")
+							width = data.origWidth * e.scale,
+								height = data.origHeight * e.scale,
+								// pan
+								x = data.origX + e.deltaX,
+								y = data.origY + e.deltaY,
+								minX = _minX,
+								minY = _minY,
+								maxX = data.$container.outerWidth() - minX,
+								maxY = data.$container.outerHeight() - minY,
+								// scale
+								minWidth = 150,
+								minHeight = 150,
+								maxWidth = 600,
+								maxHeight = 600;
 
-			data.origWidth  = $target.outerWidth();
-			data.origHeight = $target.outerHeight();
-		})
-		.on("scaleend", function(e) {
-			// ...
-		})
-		.on("scale", function(e) {
-			var $target = $(this),
-				data = $target.data("demo")
-				width  = data.origWidth  * e.scale,
-				height = data.origHeight * e.scale,
-				// pan
-				x = data.origX + e.deltaX,
-				y = data.origY + e.deltaY,
-				minX = _minX,
-				minY = _minY,
-				maxX = data.$container.outerWidth()  - minX,
-				maxY = data.$container.outerHeight() - minY,
-				// scale
-				minWidth  = 150,
-				minHeight = 150,
-				maxWidth = 600,
-				maxHeight = 600;
+							if (x < minX) {
+								x = minX;
+							}
+							if (x > maxX) {
+								x = maxX;
+							}
+							if (y < minY) {
+								y = minY;
+							}
+							if (y > maxY) {
+								y = maxY;
+							}
 
-			if (x < minX) {
-				x = minX;
-			}
-			if (x > maxX) {
-				x = maxX;
-			}
-			if (y < minY) {
-				y = minY;
-			}
-			if (y > maxY) {
-				y = maxY;
-			}
+							data.$register.css({
+								left: x,
+								top: y
+							});
 
-			data.$register.css({
-				left: x,
-				top:  y
-			});
+							if (width < minWidth) {
+								width = minWidth;
+							}
+							if (width > maxWidth) {
+								width = maxWidth;
+							}
 
-			if (width < minWidth) {
-				width = minWidth;
-			}
-			if (width > maxWidth) {
-				width = maxWidth;
-			}
+							if (height < minHeight) {
+								height = minHeight;
+							}
+							if (height > maxHeight) {
+								height = maxHeight;
+							}
 
-			if (height < minHeight) {
-				height = minHeight;
-			}
-			if (height > maxHeight) {
-				height = maxHeight;
-			}
+							$target.css({
+								width: width,
+								height: height,
+								lineHeight: height + "px",
+								left: -(width / 2),
+								top: -(height / 2)
+							});
+						});
+				});
+				</script>
 
-			$target.css({
-				width:  width,
-				height: height,
-				lineHeight: height + "px",
-				left: -(width / 2),
-				top:  -(height / 2)
-			});
-		});
-	});
-</script>
+				<h4>Pan</h4>
+				<div class="container">
+					<div class="register">
+						<div class="box touch pan">Pan</div>
+					</div>
+				</div>
 
-<h4>Pan</h4>
-<div class="container">
-	<div class="register">
-		<div class="box touch pan">Pan</div>
-	</div>
-</div>
+				<h4>Scale</h4>
+				<div class="container">
+					<div class="register">
+						<div class="box touch scale">Scale</div>
+					</div>
+				</div>
 
-<h4>Scale</h4>
-<div class="container">
-	<div class="register">
-		<div class="box touch scale">Scale</div>
-	</div>
-</div>
+				<h4>Manipulate</h4>
+				<div class="container">
+					<div class="register">
+						<div class="box touch manipulate">Scale &amp; Pan</div>
+					</div>
+				</div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
 
-<h4>Manipulate</h4>
-<div class="container">
-	<div class="register">
-		<div class="box touch manipulate">Scale &amp; Pan</div>
-	</div>
-</div><!-- END: DEMO --></div></div></body></html>
+</html>

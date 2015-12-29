@@ -1,55 +1,112 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Tabs &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="tabs-demo">Tabs Demo</h1>
-<!-- START: DEMO --><style>
-	.tabs { overflow: hidden; }
-	.tab { display: block; float: left; }
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-	.tab,
-	.fs-tabs-tab.fs-tabs-enabled { background: #393b3f; border: none; color: #fff; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
-	.tab:hover,
-	.fs-tabs-tab.fs-tabs-enabled:hover { color: #fff; }
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Tabs &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-	.fs-tabs-tab.fs-tabs-active { background: #c65032; }
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="tabs-demo">Tabs Demo</h1>
+				<!-- START: DEMO -->
+				<style>
+				.tabs {
+					overflow: hidden;
+				}
+				
+				.tab {
+					display: block;
+					float: left;
+				}
+				
+				.tab,
+				.fs-tabs-tab.fs-tabs-enabled {
+					background: #393b3f;
+					border: none;
+					color: #fff;
+					font-size: 16px;
+					line-height: 40px;
+					margin: 0 1px 0 0;
+					padding: 0 20px;
+				}
+				
+				.tab:hover,
+				.fs-tabs-tab.fs-tabs-enabled:hover {
+					color: #fff;
+				}
+				
+				.fs-tabs-tab.fs-tabs-active {
+					background: #c65032;
+				}
+				
+				.fs-tabs-tab_mobile.fs-tabs-enabled {
+					width: 100%;
+				}
+				
+				.tab_content {
+					background: #f2f2f2;
+					border-radius: 3px;
+					padding: 5px 20px;
+				}
+				</style>
 
-	.fs-tabs-tab_mobile.fs-tabs-enabled { width: 100%; }
+				<script>
+				$(function() {
 
-	.tab_content { background: #f2f2f2; border-radius: 3px; padding: 5px 20px; }
-</style>
+					$(".tab").tabs();
+				});
+				</script>
 
-<script>
-	$(function() {
+				<h4>Basic</h4>
+				<nav class="tabs">
+					<a href="#tab-1-1" class="tab" data-tabs-group="tab-1">One</a>
+					<a href="#tab-1-2" class="tab" data-tabs-group="tab-1" data-tabs-active="true">Two</a>
+					<a href="#tab-1-3" class="tab" data-tabs-group="tab-1">Three</a>
+				</nav>
+				<div class="tab_content" id="tab-1-1">
+					<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+				</div>
+				<div class="tab_content" id="tab-1-2">
+					<p>Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+				</div>
+				<div class="tab_content" id="tab-1-3">
+					<p>Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+				</div>
 
-		$(".tab").tabs();
-	});
-</script>
+				<h4>Mobile Max Width</h4>
+				<nav class="tabs">
+					<a href="#tab-3-1" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>One</a>
+					<a href="#tab-3-2" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>Two</a>
+					<a href="#tab-3-3" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>Three</a>
+				</nav>
+				<div class="tab_content" id="tab-3-1">
+					<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+				</div>
+				<div class="tab_content" id="tab-3-2">
+					<p>Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
+				</div>
+				<div class="tab_content" id="tab-3-3">
+					<p>Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+				</div>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
 
-<h4>Basic</h4>
-<nav class="tabs">
-	<a href="#tab-1-1" class="tab" data-tabs-group="tab-1">One</a>
-	<a href="#tab-1-2" class="tab" data-tabs-group="tab-1" data-tabs-active="true">Two</a>
-	<a href="#tab-1-3" class="tab" data-tabs-group="tab-1">Three</a>
-</nav>
-<div class="tab_content" id="tab-1-1">
-	<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-</div>
-<div class="tab_content" id="tab-1-2">
-	<p>Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-</div>
-<div class="tab_content" id="tab-1-3">
-	<p>Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-</div>
-
-<h4>Mobile Max Width</h4>
-<nav class="tabs">
-	<a href="#tab-3-1" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>One</a>
-	<a href="#tab-3-2" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>Two</a>
-	<a href="#tab-3-3" class="tab" data-tabs-group="tab-3" data-tabs-options='{"mobileMaxWidth":"500px"}'>Three</a>
-</nav>
-<div class="tab_content" id="tab-3-1">
-	<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec ullamcorper nulla non metus auctor fringilla. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
-</div>
-<div class="tab_content" id="tab-3-2">
-	<p>Nullam quis risus eget urna mollis ornare vel eu leo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
-</div>
-<div class="tab_content" id="tab-3-3">
-	<p>Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-</div><!-- END: DEMO --></div></div></body></html>
+</html>

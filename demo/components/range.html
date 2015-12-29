@@ -1,46 +1,79 @@
-<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Range &middot; Formstone</title><!-- Modernizer --><script src="../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="range-demo">Range Demo</h1>
-<!-- START: DEMO --><style>
-</style>
+<!DOCTYPE html>
+<html lang="en" class="no-js">
 
-<script>
-	$(function() {
-		$("input[type=range]").range();
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Range &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.35"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.35">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.35"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.35"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.35"></script>
+	</head>
 
-		$("input[type=range]").on("change", function() {
-			// console.log($(this).val());
-		});
-	});
-</script>
+	<body class="fs-grid">
+		<div class="fs-row">
+			<div class="fs-cell">
+				<h1 id="range-demo">Range Demo</h1>
+				<!-- START: DEMO -->
+				<style>
 
-<h4>Basic</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input">
-</fieldset>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" disabled>
-</fieldset>
+				</style>
 
-<h4>Custom Labels</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" data-range-options='{"labels":{"min":"Min","max":"Max"}}'>
-</fieldset>
+				<script>
+				$(function() {
+					$("input[type=range]").range();
 
-<h4>No Labels</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" data-range-options='{"labels":false}'>
-</fieldset>
+					$("input[type=range]").on("change", function() {
+						// console.log($(this).val());
+					});
+				});
+				</script>
 
-<h4>Custom Range</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" min="25" max="75" step="5">
-</fieldset>
+				<h4>Basic</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input">
+				</fieldset>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" disabled>
+				</fieldset>
 
-<h4>Fill</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" data-range-options='{"fill":true}'>
-</fieldset>
+				<h4>Custom Labels</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" data-range-options='{"labels":{"min":"Min","max":"Max"}}'>
+				</fieldset>
 
-<h4>Vertical</h4>
-<fieldset class="form_fieldset">
-	<input type="range" class="form_input" orient="vertical">
-</fieldset><!-- END: DEMO --></div></div></body></html>
+				<h4>No Labels</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" data-range-options='{"labels":false}'>
+				</fieldset>
+
+				<h4>Custom Range</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" min="25" max="75" step="5">
+				</fieldset>
+
+				<h4>Fill</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" data-range-options='{"fill":true}'>
+				</fieldset>
+
+				<h4>Vertical</h4>
+				<fieldset class="form_fieldset">
+					<input type="range" class="form_input" orient="vertical">
+				</fieldset>
+				<!-- END: DEMO -->
+			</div>
+		</div>
+	</body>
+
+</html>

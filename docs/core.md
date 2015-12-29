@@ -2,8 +2,16 @@
 
 Formstone Library core. Required for all plugins.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Methods](#methods)
+
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
 
 ## Use 
 
@@ -317,6 +325,7 @@ data.$el.on(Events.click, onClick);
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
 
+<hr>
 ## Methods
 
 ### NoConflict

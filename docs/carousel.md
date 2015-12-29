@@ -2,14 +2,23 @@
 
 A jQuery plugin for simple content carousels.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
 ## Use 
 
+<hr>
 #### Main
 
 ```markup
@@ -17,6 +26,7 @@ carousel.js
 carousel.css
 ```
 
+<hr>
 #### Dependencies
 
 ```markup
@@ -65,6 +75,7 @@ $(".target").carousel({
 
 Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.
 
+<hr>
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-carousel-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
@@ -93,6 +104,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
+<hr>
 ## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
@@ -101,6 +113,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `update.carousel` | Carousel position updated |
 
+<hr>
 ## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
@@ -173,6 +186,7 @@ Updates carousel items
 $(".target").carousel("update", "...");
 ```
 
+<hr>
 ## CSS
 
 | Class | Type | Description |
