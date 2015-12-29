@@ -2,6 +2,12 @@
 
 # Changelog
 
+### 0.8.35
+
+* Fixed issue with Analytics scroll depth interfering with bounce rate
+* Added `autoUpload` option and `start` method to upload
+* Fixed issue with Upload queued files parameter
+
 ### 0.8.34
 
 * Fixed issue with Carousel `touch` events not clearing auto advance timers
@@ -89,7 +95,7 @@
 
 ### 0.8.20
 
-* Added `min-height` to Carousel items, resolves issue with accidientally empty carousels
+* Added `min-height` to Carousel items, resolves issue with accidentally empty carousels
 * Added ability to target same content element from multiple Navigations
 
 ### 0.8.19
