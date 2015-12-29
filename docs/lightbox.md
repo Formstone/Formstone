@@ -16,7 +16,7 @@ A jQuery plugin for simple modals.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 <hr>
 #### Main
@@ -79,7 +79,7 @@ $(window).on("open.lightbox", function() {
 ```
 
 <hr>
-## Options
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -109,7 +109,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `videoWidth` | `int` | `800` | Video max width |
 
 <hr>
-## Events
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -119,7 +119,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `close.lightbox` | Lightbox closed; Triggered on window |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -169,7 +169,7 @@ $.lightbox("resize");
 | `width` | `int | false` | &nbsp; | Target width or false to auto size |
 
 <hr>
-## CSS
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

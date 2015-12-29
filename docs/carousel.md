@@ -16,7 +16,7 @@ A jQuery plugin for simple content carousels.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 <hr>
 #### Main
@@ -76,7 +76,7 @@ $(".target").carousel({
 Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.
 
 <hr>
-## Options
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-carousel-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -105,7 +105,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 <hr>
-## Events
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -114,7 +114,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `update.carousel` | Carousel position updated |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -187,7 +187,7 @@ $(".target").carousel("update", "...");
 ```
 
 <hr>
-## CSS
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

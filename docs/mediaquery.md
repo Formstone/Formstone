@@ -15,7 +15,7 @@ A jQuery plugin for responsive media query events.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 <hr>
 #### Main
@@ -83,7 +83,7 @@ $.mediaquery("unbind", "mq-key");
 When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
 
 <hr>
-## Options
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
@@ -96,7 +96,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `unit` | `string` | `'px'` | Unit to use when matching widths and heights |
 
 <hr>
-## Events
+## <a name="events"></a> Events
 
 Events are triggered on the `window`, unless otherwise stated.
 
@@ -105,7 +105,7 @@ Events are triggered on the `window`, unless otherwise stated.
 | `mqchange.mediaquery` | Change to a media query match; Triggered on window |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 Methods are publicly available, unless otherwise stated.
 

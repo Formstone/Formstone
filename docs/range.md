@@ -15,7 +15,7 @@ A jQuery plugin for cross browser range inputs.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 <hr>
 #### Main
@@ -63,7 +63,7 @@ Create a vertical slider with the `orient` attribute:
 ```
 
 <hr>
-## Options
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-range-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -79,7 +79,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `vertical` | `boolean` | `false` | &nbsp; |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -130,7 +130,7 @@ $(".target").range("resize");
 ```
 
 <hr>
-## CSS
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

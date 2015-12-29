@@ -285,6 +285,8 @@ module.exports = function(grunt) {
 					doc.demo = demoFile;
 				}
 
+				doc.document = buildMarkdown(doc);
+
 				grunt.file.write(destination, JSON.stringify(doc));
 				grunt.log.writeln('File "' + destination + '" created.');
 
@@ -333,7 +335,7 @@ module.exports = function(grunt) {
 			md += '\n<!-- DEMO BUTTON -->\n';
 
 			md += '\n';
-			md += heading + '# Use ';
+			md += heading + '# <a name="use"></a> Use ';
 			md += '\n\n';
 
 			if (doc.main && doc.main.length) {
@@ -371,7 +373,7 @@ module.exports = function(grunt) {
 
 			if (doc.options && doc.options.length) {
 				md += '<hr>\n';
-				md += heading + '# Options';
+				md += heading + '# <a name="options"></a> Options';
 				md += '\n\n';
 				if (doc.type === "widget") {
 					md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-' + namespace + '-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.';
@@ -397,7 +399,7 @@ module.exports = function(grunt) {
 
 			if (doc.events && doc.events.length) {
 				md += '<hr>\n';
-				md += heading + '# Events';
+				md += heading + '# <a name="events"></a> Events';
 				md += '\n\n';
 				if (doc.type === "widget") {
 					md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
@@ -422,7 +424,7 @@ module.exports = function(grunt) {
 
 			if (doc.methods && doc.methods.length) {
 				md += '<hr>\n';
-				md += heading + '# Methods';
+				md += heading + '# <a name="methods"></a> Methods';
 				md += '\n\n';
 				if (doc.type === "widget") {
 					md += 'Methods are publicly available to all active instances, unless otherwise stated.';
@@ -471,7 +473,7 @@ module.exports = function(grunt) {
 
 			if (doc.css && doc.css.length) {
 				md += '<hr>\n';
-				md += heading + '# CSS';
+				md += heading + '# <a name="css"></a> CSS';
 				md += '\n\n';
 				md += '| Class | Type | Description |';
 				md += '\n';
@@ -493,12 +495,14 @@ module.exports = function(grunt) {
 		// Build Docs
 
 		function buildDocs(file) {
-			var doc = grunt.file.readJSON(file),
-				destination = file.replace('/json', "").replace('.json', ".md"),
-				md = buildMarkdown(doc);
+			if (file != "docs/json/index.json") {
+				var doc = grunt.file.readJSON(file),
+					destination = file.replace('/json', "").replace('.json', ".md"),
+					md = buildMarkdown(doc);
 
-			grunt.file.write(destination, md, false);
-			grunt.log.writeln('File "' + destination + '" created.');
+				grunt.file.write(destination, md, false);
+				grunt.log.writeln('File "' + destination + '" created.');
+			}
 		}
 
 		// Build demo
@@ -522,6 +526,13 @@ module.exports = function(grunt) {
 
 		function buildIndex() {
 			var docsmd = '',
+				docsjson = {
+					"Library": [
+						"Core"
+					],
+					"Utility": [],
+					"Widget": []
+				},
 				demosmd = '';
 
 			// Docs
@@ -533,6 +544,8 @@ module.exports = function(grunt) {
 				var d = allDocs.grid[i];
 				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
 				docsmd += '\n';
+
+				docsjson["Library"].push(d.name);
 			}
 			docsmd += '\n';
 			docsmd += '## Utility';
@@ -541,6 +554,8 @@ module.exports = function(grunt) {
 				var d = allDocs.utility[i];
 				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
 				docsmd += '\n';
+
+				docsjson["Utility"].push(d.name);
 			}
 			docsmd += '\n';
 			docsmd += '## Widget';
@@ -549,9 +564,13 @@ module.exports = function(grunt) {
 				var d = allDocs.widget[i];
 				docsmd += '* [' + d.name + '](' + d.name.toLowerCase().replace(/ /g, "") + '.md)';
 				docsmd += '\n';
+
+				docsjson["Widget"].push(d.name);
 			}
 
 			grunt.file.write("docs/README.md", '# Documentation \n\n' + docsmd);
+
+			grunt.file.write("docs/json/index.json", JSON.stringify(docsjson));
 
 			// Demos
 			demosmd += '## Library';

@@ -16,7 +16,7 @@ A jQuery plugin for simple drag and drop uploads.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 <hr>
 #### Main
@@ -95,7 +95,7 @@ $(".target").upload("abort");
 Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
 
 <hr>
-## Options
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -116,7 +116,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 
 <hr>
-## Events
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -134,7 +134,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `queued` | Files are queued for upload |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -193,7 +193,7 @@ $(".target").upload("start");
 ```
 
 <hr>
-## CSS
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

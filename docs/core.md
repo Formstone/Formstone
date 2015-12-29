@@ -13,7 +13,7 @@ Formstone Library core. Required for all plugins.
 
 <!-- DEMO BUTTON -->
 
-## Use 
+## <a name="use"></a> Use 
 
 ### Formstone Object
 
@@ -326,7 +326,7 @@ data.$el.on(Events.click, onClick);
 | `transitionEnd` | Default | `transitionEnd.namespace` |
 
 <hr>
-## Methods
+## <a name="methods"></a> Methods
 
 ### NoConflict
 
