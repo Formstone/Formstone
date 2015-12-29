@@ -83,9 +83,6 @@
         "demo/js/src/site.js",
 		"demo/js/src/modules/page.js"
       ],
-      "demo/js/site-prism.js": [
-	    "demo/bower/prism/prism.js"
-      ],
       "demo/js/site-ie8.js": [
         "demo/bower/html5shiv/dist/html5shiv.min.js",
         "demo/bower/html5shiv/dist/html5shiv-printshiv.min.js",

@@ -502,15 +502,15 @@ module.exports = function(grunt) {
 
 		function buildDemo(file) {
 			var doc = grunt.file.readJSON(file),
-				destination = file.replace('docs/json', "demo/pages/components").replace('.json', ".md"),
+				destination = file.replace('docs/json', "demo/_src/pages/components").replace('.json', ".md"),
 				template = {
 					template: "component.html",
 					title: doc.name,
 					demo: doc.demo,
-					asset_root: "../../_assets/"
+					asset_root: "../"
 				};
 
-			grunt.file.write(destination, JSON.stringify(template) + '\n\n #' + doc.name);
+			grunt.file.write(destination, JSON.stringify(template) + '\n\n #' + doc.name + ' Demo');
 
 			grunt.log.writeln('File "' + destination + '" created.');
 		}
@@ -588,10 +588,10 @@ module.exports = function(grunt) {
 			var template = {
 					template: "content.html",
 					title: "Demos",
-					asset_root: "_assets/"
+					asset_root: ""
 				};
 
-			grunt.file.write("demo/pages/index.md", JSON.stringify(template) + '\n\n# Demos \n\n' + demosmd);
+			grunt.file.write("demo/_src/pages/index.md", JSON.stringify(template) + '\n\n# Demos \n\n' + demosmd);
 		}
 
 		// WORK
