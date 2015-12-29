@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Carousel &middot; Formstone</title><!-- Modernizer --><script src="../../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="carousel">Carousel</h1>
+<!-- START: DEMO --><style>
+	.carousel { border-radius: 3px; margin: 20px 0; width: 100%; }
+
+	.carousel_item { background: #34495E; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
+	.carousel_item:nth-child(even) { background: #D35400; }
+	.carousel_item img { width: 100%; }
+
+	.carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
+	.carousel_auto_height .carousel_item:nth-child(3) { height: 250px; }
+
+	.fs-carousel-enabled.fs-carousel-ltr .carousel_item.fs-carousel-item { margin: 0 10px 0 0; }
+	.fs-carousel-enabled.fs-carousel-rtl .carousel_item.fs-carousel-item { margin: 0 0 0 10px; }
+
+	.carousel_item_wide { width: 294px; }
+	.carousel_item_thin { width: 150px; }
+
+	.carousel_fade {
+
+	}
+
+	.carousel_fade .fs-carousel-item {
+		opacity: 0;
+		visibility: hidden;
+
+		-webkit-transition: opacity 0s linear, visibility 0s linear;
+				transition: opacity 0s linear, visibility 0s linear;
+		-webkit-transition-delay: 0.25s;
+				transition-delay: 0.25s;
+	}
+
+	.carousel_fade .fs-carousel-item.fs-carousel-visible {
+		opacity: 1;
+		visibility: visible;
+
+		-webkit-transition-duration: 0.25s;
+				transition-duration: 0.25s;
+		-webkit-transition-delay: 0s;
+				transition-delay: 0s;
+	}
+</style>
+
+<script>
+	$(function() {
+		$(".carousel").carousel();
+	});
+</script>
+
+<h4>Basic</h4>
+<div class="carousel">
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Paged</h4>
+<div class="carousel" data-carousel-options='{"paged":true,"show":2}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Uneven Counts</h4>
+<div class="carousel" data-carousel-options='{"show":3}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Infinite</h4>
+<div class="carousel" data-carousel-options='{"infinite":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>No Controls</h4>
+<div class="carousel" data-carousel-options='{"controls":false,"pagination":false}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Enable at Breakpoint</h4>
+<div class="carousel" data-carousel-options='{"minWidth":"740px"}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item" style="display: none;">3</div>
+</div>
+
+<h4>Responsive Counts</h4>
+<div class="carousel" data-carousel-options='{"show":{"740px":2,"980px":3,"1220px":1}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Links</h4>
+<div class="carousel" data-carousel-options='{"show":{"500px":2,"980px":3}}'>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/1" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/2" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/3" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/4" draggable="false"></a>
+	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/5" draggable="false"></a>
+</div>
+
+<h4>Right to Left</h4>
+<div class="carousel" data-carousel-options='{"rtl":true,"show":{"500px":2,"980px":3}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+
+<h4>Auto Height</h4>
+<div class="carousel carousel_auto_height" data-carousel-options='{"autoHeight":true,"show":{"500px":2,"980px":3}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+
+<h4>Uneven Widths</h4>
+<div class="carousel" data-carousel-options='{"matchWidth":false}'>
+	<div class="carousel_item carousel_item_wide">1</div>
+	<div class="carousel_item carousel_item_thin">2</div>
+	<div class="carousel_item carousel_item_wide">3</div>
+	<div class="carousel_item carousel_item_thin">4</div>
+	<div class="carousel_item carousel_item_wide">5</div>
+</div>
+
+<h4>Custom Controls</h4>
+<div class="carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div>
+<div class="custom_container">
+	<button class="custom_previous">Previous</button>
+	<button class="custom_next">Next</button>
+</div>
+
+<h4>Single</h4>
+<div class="carousel" data-carousel-options='{"single":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Single - Fade</h4>
+<div class="carousel carousel_fade" data-carousel-options='{"single":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
+</div>
+
+<h4>Single - Right to Left</h4>
+<div class="carousel" data-carousel-options='{"rtl":true,"single":true}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+</div><!-- END: DEMO --></div></div></body></html>

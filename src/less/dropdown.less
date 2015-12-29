@@ -17,7 +17,7 @@
 
 // Item - Selected
 
-@fs-dropdown-item-selected-background-color:	#eee;
+@fs-dropdown-item-selected-background-color:		#ddd;
 
 /**
  * @class
@@ -128,6 +128,8 @@
 	 */
 
 	&-selected {
+		.fs_button;
+
 		width: 100%;
 
 		position: relative;
@@ -197,8 +199,11 @@
 	 */
 
 	&-item {
+		.fs_button;
+
 		width: 100%;
 
+		background: @fs-dropdown-background-color;
 		cursor: pointer;
 		display: block;
 		overflow: hidden;

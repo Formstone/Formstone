@@ -1,0 +1,3 @@
+{"template":"component.html","title":"Pagination","demo":"<style>\r\n\t.fs-pagination-page.fs-pagination-active { font-weight: 700; }\r\n</style>\r\n\r\n<script>\r\n\t$(function() {\r\n\t\t$(\".pagination\").pagination();\r\n\t});\r\n</script>\r\n\r\n<h4>Basic</h4>\r\n<nav class=\"pagination\">\r\n\t<a href=\"#1\">1</a>\r\n\t<a href=\"#2\">2</a>\r\n\t<a href=\"#3\">3</a>\r\n\t<a href=\"#4\">4</a>\r\n\t<a href=\"#5\">5</a>\r\n\t<a href=\"#6\">6</a>\r\n\t<a href=\"#7\">7</a>\r\n\t<a href=\"#8\">8</a>\r\n\t<a href=\"#9\">9</a>\r\n\t<a href=\"#10\">10</a>\r\n</nav>","asset_root":"../../"}
+
+ #Pagination

@@ -22,9 +22,9 @@
     "jquery": ">=1.11.1"
   },
   "devDependencies": {
+	"autoprefixer": "^6.1.0",
     "bower": "^1.3.12",
     "grunt": "~0.4.2",
-    "grunt-autoprefixer": "^1.0.1",
     "grunt-banner": "^0.2.3",
     "grunt-contrib-concat": "^0.5.1",
     "grunt-contrib-copy": "^0.8.0",
@@ -36,6 +36,8 @@
     "grunt-include-replace": "^3.0.0",
     "grunt-modernizr": "^1.0.1",
     "grunt-newer": "^0.8.0",
+    "grunt-postcss": "^0.7.1",
+    "grunt-prettify": "^0.4.0",
     "grunt-npm2bower-sync": "~0.3.0",
     "grunt-stripmq": "0.0.6",
     "grunt-svgmin": "^2.0.0",
@@ -78,7 +80,11 @@
         "dist/js/touch.js",
         "dist/js/transition.js",
         "dist/js/upload.js",
-        "demo/js/src/site.js"
+        "demo/js/src/site.js",
+		"demo/js/src/modules/page.js"
+      ],
+      "demo/js/site-prism.js": [
+	    "demo/bower/prism/prism.js"
       ],
       "demo/js/site-ie8.js": [
         "demo/bower/html5shiv/dist/html5shiv.min.js",
@@ -94,6 +100,7 @@
       "demo/js/src/lib/*/"
     ],
     "vars": {
+	  "mq_min_ht": "800",
       "mq_min_xs": "320",
       "mq_min_sm": "500",
       "mq_min_md": "740",

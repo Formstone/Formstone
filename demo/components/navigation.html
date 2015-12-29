@@ -1,0 +1,74 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><!-- Page Attributes --><title>Navigation &middot; Formstone</title><!-- Modernizer --><script src="../../js/modernizr.js?v=0.8.35"></script><!-- Compiled CSS --><!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css?v=0.8.35"><!--<![endif]--><!--[if IE 8]><script>var IE8 = true;</script><script src="../../js/site-ie8.js?v=0.8.35"></script><link rel="stylesheet" href="../../css/site-ie8.css?v=0.8.35"><![endif]--><!--[if IE 9]><script>var IE9 = true;</script><script src="../../js/site-ie9.js?v=0.8.35"></script><link rel="stylesheet" href="../../css/site-ie9.css?v=0.8.35"><![endif]--><!-- Compiled JS --><script src="../../js/site.js?v=0.8.35"></script></head><body class="fs-grid"><div class="fs-row"><div class="fs-cell"><h1 id="navigation">Navigation</h1>
+<!-- START: DEMO --><style>
+	.navigation { margin: 0 0 20px; overflow: hidden; }
+	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.navigation a:hover { color: #fff; }
+
+	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+	.navigation.fs-navigation-enabled { padding: 10px; }
+
+	.nav_buttons { margin: 0 0 20px; }
+	.nav_buttons .active,
+	.no-touch .nav_buttons .active:hover { background: #c65032; }
+	@media screen and (min-width: 500px) {
+		.nav_buttons .button { margin: 0 10px 0 0; width: 160px; }
+	}
+</style>
+
+<script>
+	$(function() {
+		$(".navigation a").on("click", function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+		});
+
+		$(".navigation").navigation();
+
+		$(".nav_switch").on("click", function() {
+			$(".nav_buttons .button").removeClass("active");
+			$(this).addClass("active");
+
+			$(".main_nav")
+				.navigation("destroy")
+				.attr("data-navigation-options", "{}")
+				.removeData("navigation-options")
+				.navigation({
+					type: $(this).data("type"),
+					gravity: $(this).data("gravity"),
+					maxWidth: "10000px"
+				});
+		});
+	});
+</script>
+
+<h4>Basic</h4>
+<h5 id="nav_handle_1">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_1">
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+
+<h4>Breakpoint</h4>
+<h5 id="nav_handle_2">Navigation</h5>
+<nav class="navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Contact</a>
+</nav>
+
+<h4>Off Canvas</h4>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="overlay" data-gravity="left">Overlay Left</button>
+	<button type="button" class="button nav_switch active" data-type="overlay" data-gravity="right">Overlay Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="left">Reveal Left</button>
+	<button type="button" class="button nav_switch" data-type="reveal" data-gravity="right">Reveal Right</button>
+</div>
+<div class="nav_buttons">
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="left">Push Left</button>
+	<button type="button" class="button nav_switch" data-type="push" data-gravity="right">Push Right</button>
+</div>
+<br>
+<!-- <button type="button" class="button js-nav_handle">Open Menu</button> --><!-- END: DEMO --></div></div></body></html>
