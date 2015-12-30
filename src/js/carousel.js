@@ -54,14 +54,14 @@
 			controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
 		if (data.controls && !data.customControls) {
-			controlsHtml += '<div class="' + RawClasses.controls + '">';
-			controlsHtml += '<button type="button" class="' + controlPrevClasses + '">' + data.labels.previous + '</button>';
-			controlsHtml += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
+			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="carousel">';
+			controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="previous">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="next">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
 		if (data.pagination) {
-			paginationHtml += '<div class="' + RawClasses.pagination + '">';
+			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="carousel" role="navigation">';
 			paginationHtml += '</div>';
 		}
 
@@ -79,7 +79,7 @@
 
 		// Modify dom
 		this.addClass( carouselClasses.join(" ") )
-			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
+			.wrapInner('<div class="' + RawClasses.wrapper + '" aria-live="polite"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
 			.append(paginationHtml);
@@ -690,9 +690,9 @@
 
 		for (var i = 0, count = data.pages.length; i < count; i++) {
 			if (i === index) {
-				data.pages[i].$items.addClass(RawClasses.visible);
+				data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
 			} else {
-				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next );
+				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next ).attr("aria-hidden", "true");
 			}
 		}
 
