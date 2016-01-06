@@ -7,6 +7,7 @@
 </style>
 
 <script>
+/*
 	function toggleEnabled(e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -34,6 +35,7 @@
 			}
 		}
 	}
+*/
 </script>
 
 <form action="#" method="GET" class="form demo_form">
@@ -42,7 +44,7 @@
 			<h4>Basic</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_basic" class="form_label">Label</label>
-				<select name="demo_basic" id="demo_basic">
+				<select name="demo_basic" id="demo_basic" class="js-dropdown">
 					<option data-label="Option One">One</option>
 					<option data-label="Option Two">Two</option>
 				</select>
@@ -50,7 +52,7 @@
 			<h4>Option Groups</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_groups" class="form_label">Label</label>
-				<select name="demo_groups" id="demo_groups">
+				<select name="demo_groups" id="demo_groups" class="js-dropdown">
 					<optgroup label="Group One">
 						<option value="1">One</option>
 						<option value="2">Two</option>
@@ -72,7 +74,7 @@
 			<h4>Default Label</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_label" class="form_label">Label</label>
-				<select name="demo_label" id="demo_label" data-dropdown-options='{"label":"Select A State"}'>
+				<select name="demo_label" id="demo_label" class="js-dropdown" data-dropdown-options='{"label":"Select A State"}'>
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -131,7 +133,7 @@
 			<h4>Multiple</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_multiple" class="form_label">Label</label>
-				<select name="demo_multiple" id="demo_multiple" multiple>
+				<select name="demo_multiple" id="demo_multiple" class="js-dropdown" multiple>
 					<option value="1">One</option>
 					<option value="2">Two</option>
 					<option value="3" disabled>Three</option>
@@ -151,7 +153,7 @@
 			<h4>Links</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_links" class="form_label">Label</label>
-				<select name="demo_links" id="demo_links" data-dropdown-options='{"label":"Jump Sites","links":true}'>
+				<select name="demo_links" id="demo_links" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","links":true}'>
 					<option value="http://google.com">Google Search</option>
 					<option value="http://boingboing.com">Boing	Boing</option>
 					<option value="http://cnn.com">CNN News</option>
@@ -162,7 +164,7 @@
 			<h4>External Links</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_external" class="form_label">Label</label>
-				<select name="demo_external" id="demo_external" data-dropdown-options='{"label":"Jump Sites","external":"true"}'>
+				<select name="demo_external" id="demo_external" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","external":"true"}'>
 					<option value="http://google.com">Google Search</option>
 					<option value="http://boingboing.com">Boing	Boing</option>
 					<option value="http://cnn.com">CNN News</option>
@@ -173,7 +175,7 @@
 			<h4>Cover</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_cover" class="form_label">Label</label>
-				<select name="demo_cover" id="demo_cover" data-dropdown-options='{"cover":"true"}'>
+				<select name="demo_cover" id="demo_cover" class="js-dropdown" data-dropdown-options='{"cover":"true"}'>
 					<option value="1">One</option>
 					<option value="2">Two</option>
 					<option value="3">Three</option>
@@ -186,7 +188,7 @@
 			<h4>Custom Class</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_custom" class="form_label">Label</label>
-				<select name="demo_custom" id="demo_custom" data-dropdown-options='{"customClass":"custom"}'>
+				<select name="demo_custom" id="demo_custom" class="js-dropdown" data-dropdown-options='{"customClass":"custom"}'>
 					<option value="1">One</option>
 					<option value="2">Two</option>
 					<option value="3">Three</option>
@@ -199,7 +201,7 @@
 			<h4>HTML Options</h4>
 			<fieldset class="form_fieldset">
 				<label for="demo_custom" class="form_label">Label</label>
-				<select name="demo_custom" id="demo_custom" data-dropdown-options='{"customClass":"custom"}'>
+				<select name="demo_custom" id="demo_custom" class="js-dropdown" data-dropdown-options='{"customClass":"custom"}'>
 					<option value="1" data-label="&lt;strong&gt;One  &lt;/strong&gt;">One</option>
 					<option value="2" data-label="&lt;strong&gt;Two  &lt;/strong&gt;">Two</option>
 					<option value="3" data-label="&lt;strong&gt;Three&lt;/strong&gt;">Three</option>
@@ -208,6 +210,8 @@
 				</select>
 			</fieldset>
 		</div>
+
+<!--
 		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
 			<h4>Disable</h4>
 			<fieldset class="form_fieldset">
@@ -236,6 +240,7 @@
 				<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
 			</fieldset>
 		</div>
+-->
 
 <!--
 		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
@@ -259,7 +264,7 @@
 </form>
 
 <script>
-	$(".demo_form select").dropdown();
+	// $(".demo_form select").dropdown();
 
 /*
 	$(".demo_form select").on("change", function() {
@@ -267,5 +272,5 @@
 	});
 */
 
-	$(".demo_form").on("click", ".toggle", toggleEnabled);
+	// $(".demo_form").on("click", ".toggle", toggleEnabled);
 </script>

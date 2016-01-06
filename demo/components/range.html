@@ -21,57 +21,81 @@
 	</head>
 
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
-				<h1 id="range-demo">Range Demo</h1>
-				<!-- START: DEMO -->
-				<style>
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="range-demo">Range Demo</h1>
+					<!-- START: DEMO -->
+					<style>
 
-				</style>
+					</style>
 
-				<script>
-				$(function() {
-					$("input[type=range]").range();
+					<script>
+					$(function() {
+						$("input[type=range]").range();
 
-					$("input[type=range]").on("change", function() {
-						// console.log($(this).val());
+						$("input[type=range]").on("change", function() {
+							// console.log($(this).val());
+						});
 					});
-				});
-				</script>
+					</script>
 
-				<h4>Basic</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input">
-				</fieldset>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" disabled>
-				</fieldset>
+					<h4>Basic</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input">
+					</fieldset>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" disabled>
+					</fieldset>
 
-				<h4>Custom Labels</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" data-range-options='{"labels":{"min":"Min","max":"Max"}}'>
-				</fieldset>
+					<h4>Custom Labels</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" data-range-options='{"labels":{"min":"Min","max":"Max"}}'>
+					</fieldset>
 
-				<h4>No Labels</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" data-range-options='{"labels":false}'>
-				</fieldset>
+					<h4>No Labels</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" data-range-options='{"labels":false}'>
+					</fieldset>
 
-				<h4>Custom Range</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" min="25" max="75" step="5">
-				</fieldset>
+					<h4>Custom Range</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" min="25" max="75" step="5">
+					</fieldset>
 
-				<h4>Fill</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" data-range-options='{"fill":true}'>
-				</fieldset>
+					<h4>Fill</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" data-range-options='{"fill":true}'>
+					</fieldset>
 
-				<h4>Vertical</h4>
-				<fieldset class="form_fieldset">
-					<input type="range" class="form_input" orient="vertical">
-				</fieldset>
-				<!-- END: DEMO -->
+					<h4>Vertical</h4>
+					<fieldset class="form_fieldset">
+						<input type="range" class="form_input" orient="vertical">
+					</fieldset>
+					<!-- END: DEMO -->
+				</div>
 			</div>
 		</div>
 	</body>

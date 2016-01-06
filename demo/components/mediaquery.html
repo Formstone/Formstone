@@ -21,76 +21,100 @@
 	</head>
 
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
-				<h1 id="media-query-demo">Media Query Demo</h1>
-				<!-- START: DEMO -->
-				<style>
-				.demo_output {
-					margin: 20px 0;
-				}
-				
-				.demo_output span {
-					display: inline-block;
-					width: 90px;
-				}
-				
-				.demo_output p {
-					margin: 0 0 20px;
-				}
-				
-				.demo_output p:first-child {
-					font-weight: 600;
-				}
-				</style>
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="media-query-demo">Media Query Demo</h1>
+					<!-- START: DEMO -->
+					<style>
+					.demo_output {
+						margin: 20px 0;
+					}
+					
+					.demo_output span {
+						display: inline-block;
+						width: 90px;
+					}
+					
+					.demo_output p {
+						margin: 0 0 20px;
+					}
+					
+					.demo_output p:first-child {
+						font-weight: 600;
+					}
+					</style>
 
-				<script>
-				$(function() {
-					$(window).on("mqchange.mediaquery", logChange);
+					<script>
+					$(function() {
+						$(window).on("mqchange.mediaquery", logChange);
 
-					if (!$.mediaquery("state")) {
-						$.mediaquery({
-							minWidth: [320, 500, 740, 980, 1220],
-							maxWidth: [1220, 980, 740, 500, 320],
-							minHeight: [400, 800],
-							maxHeight: [800, 400]
+						if (!$.mediaquery("state")) {
+							$.mediaquery({
+								minWidth: [320, 500, 740, 980, 1220],
+								maxWidth: [1220, 980, 740, 500, 320],
+								minHeight: [400, 800],
+								maxHeight: [800, 400]
+							});
+						}
+						else {
+							logChange({}, $.mediaquery("state"));
+						}
+
+						$.mediaquery("bind", "demo", "(min-width: 740px)", {
+							enter: logBind,
+							leave: logBind
 						});
-					}
-					else {
-						logChange({}, $.mediaquery("state"));
-					}
-
-					$.mediaquery("bind", "demo", "(min-width: 740px)", {
-						enter: logBind,
-						leave: logBind
 					});
-				});
 
-				function logChange(e, state) {
-					var html = "";
-					html += "<p><span>Change:</span><span>MinWidth:</span>" + state.minWidth + "<br>";
-					html += "<span></span><span>MaxWidth:</span>" + state.maxWidth + "<br>";
-					html += "<span></span><span>MinHeight:</span>" + state.minHeight + "<br>";
-					html += "<span></span><span>MaxHeight:</span>" + state.maxHeight + "</p>";
+					function logChange(e, state) {
+						var html = "";
+						html += "<p><span>Change:</span><span>MinWidth:</span>" + state.minWidth + "<br>";
+						html += "<span></span><span>MaxWidth:</span>" + state.maxWidth + "<br>";
+						html += "<span></span><span>MinHeight:</span>" + state.minHeight + "<br>";
+						html += "<span></span><span>MaxHeight:</span>" + state.maxHeight + "</p>";
 
-					$(".demo_basic").prepend(html);
-				}
+						$(".demo_basic").prepend(html);
+					}
 
-				function logBind() {
-					var mql = this,
-						type = mql.matches ? "Enter" : "Leave"
-					html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
+					function logBind() {
+						var mql = this,
+							type = mql.matches ? "Enter" : "Leave"
+						html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
 
-					$(".demo_binding").prepend(html);
-				}
-				</script>
+						$(".demo_binding").prepend(html);
+					}
+					</script>
 
-				<h4>Basic</h4>
-				<div class="demo_output demo_basic form_textarea"></div>
+					<h4>Basic</h4>
+					<div class="demo_output demo_basic form_textarea"></div>
 
-				<h4>Binding</h2>
-					<div class="demo_output demo_binding form_textarea"></div>
-					<!-- END: DEMO -->
+					<h4>Binding</h2>
+						<div class="demo_output demo_binding form_textarea"></div>
+						<!-- END: DEMO -->
+				</div>
 			</div>
 		</div>
 	</body>

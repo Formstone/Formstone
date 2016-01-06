@@ -21,52 +21,76 @@
 	</head>
 
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
-				<h1 id="background-demo">Background Demo</h1>
-				<!-- START: DEMO -->
-				<style>
-				.background {
-					background: #eee;
-					margin: 0 0 20px;
-					padding-top: 50%;
-					width: 100%;
-				}
-				
-				.background.square {
-					padding-top: 150%;
-				}
-				
-				.background.bar {
-					margin: -25px 0;
-				}
-				</style>
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="background-demo">Background Demo</h1>
+					<!-- START: DEMO -->
+					<style>
+					.background {
+						background: #eee;
+						margin: 0 0 20px;
+						padding-top: 50%;
+						width: 100%;
+					}
+					
+					.background.square {
+						padding-top: 150%;
+					}
+					
+					.background.bar {
+						margin: -25px 0;
+					}
+					</style>
 
-				<script>
-				$(function() {
-					$(".background").background();
+					<script>
+					$(function() {
+						$(".background").background();
 
-					/*
-							$(".load_background").click(function() {
-								var source = $(this).data("background");
-								$(".loader").background("load", source);
-							});
-					*/
-				});
-				</script>
+						/*
+								$(".load_background").click(function() {
+									var source = $(this).data("background");
+									$(".loader").background("load", source);
+								});
+						*/
+					});
+					</script>
 
-				<h4>Basic</h4>
-				<div class="background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
+					<h4>Basic</h4>
+					<div class="background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
 
-				<h4>Responsive</h4>
-				<div class="background loader" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
+					<h4>Responsive</h4>
+					<div class="background loader" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
 
-				<h4>Video</h4>
-				<div class="background" data-background-options='{"source":{"webm":"//formstone.it/files/demo/oranges.webm","mp4":"//formstone.it/files/demo/oranges.mp4","ogg":"//formstone.it/files/demo/oranges.ogv","poster":"//formstone.it/files/demo/oranges.jpg"}}'></div>
+					<h4>Video</h4>
+					<div class="background" data-background-options='{"source":{"webm":"//formstone.it/files/demo/oranges.webm","mp4":"//formstone.it/files/demo/oranges.mp4","ogg":"//formstone.it/files/demo/oranges.ogv","poster":"//formstone.it/files/demo/oranges.jpg"}}'></div>
 
-				<h4>YouTube</h4>
-				<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"},"youtubeOptions":{"start":60}}'></div>
-				<!-- END: DEMO -->
+					<h4>YouTube</h4>
+					<div class="background" data-background-options='{"source":{"video":"//www.youtube.com/embed/tKONNhMvPtI"},"youtubeOptions":{"start":60}}'></div>
+					<!-- END: DEMO -->
+				</div>
 			</div>
 		</div>
 	</body>

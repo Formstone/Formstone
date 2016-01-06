@@ -194,6 +194,7 @@
 			$('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
 		}
 
+		e.data.$el.trigger(Events.focus);
 		e.data.$checkbox.addClass(RawClasses.checked);
 	}
 
@@ -204,6 +205,7 @@
 	 * @param e [object] "Event data"
 	 */
 	function onDeselect(e) {
+		e.data.$el.trigger(Events.focus);
 		e.data.$checkbox.removeClass(RawClasses.checked);
 	}
 

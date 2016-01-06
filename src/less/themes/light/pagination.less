@@ -58,6 +58,7 @@
 		color: @fs-pagination-text-color;
 		font-size: @fs-pagination-font-size;
 		line-height: @fs-pagination-height;
+		text-decoration: none;
 	}
 
 	&.@{theme_name} &-page,
@@ -82,6 +83,7 @@
 
 		position: relative;
 
+		background: @fs-pagination-background-color;
 		display: block;
 		overflow: hidden;
 		text-indent: 200%;
@@ -103,6 +105,7 @@
 
 		&_previous {
 			border-right: @fs-pagination-border-width solid @fs-pagination-border-color;
+			border-radius: @fs-pagination-border-radius 0 0 @fs-pagination-border-radius;
 			float: left;
 
 			&:before {
@@ -117,6 +120,7 @@
 
 		&_next {
 			border-left: @fs-pagination-border-width solid @fs-pagination-border-color;
+			border-radius: 0 @fs-pagination-border-radius @fs-pagination-border-radius 0;
 			float: right;
 
 			&:before {

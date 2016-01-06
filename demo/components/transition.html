@@ -21,117 +21,141 @@
 	</head>
 
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
-				<h1 id="transition-demo">Transition Demo</h1>
-				<!-- START: DEMO -->
-				<style>
-				.transitions {
-					margin: 0 0 20px;
-				}
-				
-				.transition {
-					background-color: #c65032;
-					border-radius: 3px;
-					height: 30px;
-					margin: 20px 0;
-					width: 10%;
-					-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
-					;
-					transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
-					;
-				}
-				
-				.transition.move {
-					margin-left: 90%;
-				}
-				
-				.transition_property.move {
-					/* background-color: #393b3f; */
-					height: 50px;
-				}
-				
-				.demo_output {
-					margin: 0 0 20px;
-				}
-				
-				@media screen and (min-width: 500px) {
-					.demo_output {
-						display: inline-block;
-						margin: 0 0 0 10px;
-					}
-				}
-				</style>
-
-				<script>
-				$(function() {
-					$(".transition_basic").transition({
-						always: true
-					}, complete);
-
-					$(".transition_parent").transition({
-						always: true,
-						target: ".transition_delegate",
-					}, complete);
-
-					$(".transition_property").transition({
-						always: true,
-						property: "height",
-					}, complete);
-
-					$(".trigger").on("click", start);
-				});
-
-				function start() {
-					var $target = $(this).parent(".transitions").find(".transition");
-
-					if (!$target.hasClass("animating")) {
-						$target.toggleClass("move")
-							.addClass("animating");
-
-						output($target, " ");
-					}
-				}
-
-				function complete() {
-					var $target = $(this);
-
-					if (!$target.hasClass("transition")) {
-						$target = $(this).find(".transition");
-					}
-
-					$target.removeClass("animating");
-					output($target, "Complete");
-				}
-
-				function output($target, text) {
-					$target.parents(".transitions").find(".demo_output").text(text);
-				}
-				</script>
-
-				<h4>Basic</h4>
-				<div class="transitions">
-					<div class="transition transition_basic"></div>
-					<button class="button trigger">Start</button>
-					<div class="demo_output">&nbsp;</div>
-				</div>
-
-				<h4>Delegation</h4>
-				<div class="transitions">
-					<div class="transition_parent">
-						<div class="transition transition_delegate"></div>
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
 					</div>
-					<button class="button trigger">Start</button>
-					<div class="demo_output">&nbsp;</div>
 				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="transition-demo">Transition Demo</h1>
+					<!-- START: DEMO -->
+					<style>
+					.transitions {
+						margin: 0 0 20px;
+					}
+					
+					.transition {
+						background-color: #c65032;
+						border-radius: 3px;
+						height: 30px;
+						margin: 20px 0;
+						width: 10%;
+						-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
+						;
+						transition: margin 0.5s ease, height 0.5s linear 0.5s/* , transform 0.5s ease 0.5s */
+						;
+					}
+					
+					.transition.move {
+						margin-left: 90%;
+					}
+					
+					.transition_property.move {
+						/* background-color: #393b3f; */
+						height: 50px;
+					}
+					
+					.demo_output {
+						margin: 0 0 20px;
+					}
+					
+					@media screen and (min-width: 500px) {
+						.demo_output {
+							display: inline-block;
+							margin: 0 0 0 10px;
+						}
+					}
+					</style>
 
-				<h4>Property</h4>
-				<div class="transitions">
-					<div class="transition transition_property"></div>
-					<button class="button trigger">Start</button>
-					<div class="demo_output">&nbsp;</div>
+					<script>
+					$(function() {
+						$(".transition_basic").transition({
+							always: true
+						}, complete);
+
+						$(".transition_parent").transition({
+							always: true,
+							target: ".transition_delegate",
+						}, complete);
+
+						$(".transition_property").transition({
+							always: true,
+							property: "height",
+						}, complete);
+
+						$(".trigger").on("click", start);
+					});
+
+					function start() {
+						var $target = $(this).parent(".transitions").find(".transition");
+
+						if (!$target.hasClass("animating")) {
+							$target.toggleClass("move")
+								.addClass("animating");
+
+							output($target, " ");
+						}
+					}
+
+					function complete() {
+						var $target = $(this);
+
+						if (!$target.hasClass("transition")) {
+							$target = $(this).find(".transition");
+						}
+
+						$target.removeClass("animating");
+						output($target, "Complete");
+					}
+
+					function output($target, text) {
+						$target.parents(".transitions").find(".demo_output").text(text);
+					}
+					</script>
+
+					<h4>Basic</h4>
+					<div class="transitions">
+						<div class="transition transition_basic"></div>
+						<button class="button trigger">Start</button>
+						<div class="demo_output">&nbsp;</div>
+					</div>
+
+					<h4>Delegation</h4>
+					<div class="transitions">
+						<div class="transition_parent">
+							<div class="transition transition_delegate"></div>
+						</div>
+						<button class="button trigger">Start</button>
+						<div class="demo_output">&nbsp;</div>
+					</div>
+
+					<h4>Property</h4>
+					<div class="transitions">
+						<div class="transition transition_property"></div>
+						<button class="button trigger">Start</button>
+						<div class="demo_output">&nbsp;</div>
+					</div>
+					<!-- END: DEMO -->
 				</div>
-				<!-- END: DEMO -->
 			</div>
 		</div>
 	</body>

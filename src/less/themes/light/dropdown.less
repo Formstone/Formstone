@@ -12,23 +12,23 @@
 
 	@fs-dropdown-max-height:							260px;
 
-	@fs-dropdown-text-color:							#222;
+	@fs-dropdown-text-color:							@fs-light-primary_900;
 	@fs-dropdown-font-size:								14px;
 
-	@fs-dropdown-background-color:						#fff;
+	@fs-dropdown-background-color:						@fs-light-white;
 
 	@fs-dropdown-border-width:							1px;
-	@fs-dropdown-border-color:							#ccc;
+	@fs-dropdown-border-color:							@fs-light-primary_400;
 	@fs-dropdown-border-radius:							3px;
 
 	// Caret
-	@fs-dropdown-caret-color:							#333;
+	@fs-dropdown-caret-color:							@fs-light-primary_400;
 	@fs-dropdown-caret-size:							5px;
 
 	// Hover
 
-	@fs-dropdown-hover-text-color:						#222;
-	@fs-dropdown-hover-background-color:				#ddd;
+	@fs-dropdown-hover-text-color:						@fs-light-primary_900;
+	@fs-dropdown-hover-background-color:				@fs-light-white;
 
 	// Selected
 
@@ -37,16 +37,16 @@
 
 	// Open
 
-	@fs-dropdown-open-background-color:					#fff;
+	@fs-dropdown-open-background-color:					@fs-light-white;
 
 	// Options
 
-	@fs-dropdown-options-background-color:				#fff;
+	@fs-dropdown-options-background-color:				@fs-light-white;
 
 	// Group
 
-	@fs-dropdown-group-border-color:					#ccc;
-	@fs-dropdown-group-text-color:						#999;
+	@fs-dropdown-group-border-color:					@fs-light-primary_400;
+	@fs-dropdown-group-text-color:						@fs-light-primary_600;
 	@fs-dropdown-group-font-size:						11px;
 	@fs-dropdown-group-padding:							10px 15px;
 	@fs-dropdown-group-text-transform:					uppercase;
@@ -57,20 +57,20 @@
 
 	// Item
 
-	@fs-dropdown-item-text-color:						#222;
+	@fs-dropdown-item-text-color:						@fs-light-primary_900;
 	@fs-dropdown-item-font-size:						14px;
-	@fs-dropdown-item-background-color:					#fff;
-	@fs-dropdown-item-border-color:						#ccc;
+	@fs-dropdown-item-background-color:					@fs-light-white;
+	@fs-dropdown-item-border-color:						@fs-light-primary_400;
 	@fs-dropdown-item-border-width:						1px;
 	@fs-dropdown-item-height:							40px;
 	@fs-dropdown-item-padding:							0 15px;
 
-	@fs-dropdown-item-hover-text-color:					#222;
-	@fs-dropdown-item-hover-background-color:			#ddd;
+	@fs-dropdown-item-hover-text-color:					@fs-light-black;
+	@fs-dropdown-item-hover-background-color:			@fs-light-primary_300;
 
 	// Item - Selected
 
-	@fs-dropdown-item-selected-background-color:	#eee;
+	@fs-dropdown-item-selected-background-color:		@fs-light-primary_300;
 
 	&.@{theme_name} {
 	}
@@ -105,11 +105,11 @@
 		}
 	}
 
-	.no-touch &.@{theme_name} &-selected:hover {
+	.no-touchevents &.@{theme_name} &-selected:hover {
 		color: @fs-dropdown-hover-text-color;
 	}
 
-	.no-touch &.@{theme_name}&-disabled &-selected:hover {
+	.no-touchevents &.@{theme_name}&-disabled &-selected:hover {
 		color: @fs-dropdown-text-color;
 	}
 
@@ -167,15 +167,15 @@
 		opacity: @fs-dropdown-disabled-opacity;
 	}
 
-	.no-touch &.@{theme_name} &-item:hover,
-	.no-touch &.@{theme_name} &-item_selected:hover {
+	.no-touchevents &.@{theme_name} &-item:hover,
+	.no-touchevents &.@{theme_name} &-item_selected:hover {
 		color: @fs-dropdown-item-hover-text-color;
 		background-color: @fs-dropdown-item-hover-background-color;
 		border-color: @fs-dropdown-item-border-color;
 	}
 
 	&.@{theme_name} &-item_disabled,
-	.no-touch &.@{theme_name} &-item_disabled:hover {
+	.no-touchevents &.@{theme_name} &-item_disabled:hover {
 		color: @fs-dropdown-text-color;
 		background-color: @fs-dropdown-background-color;
 		border-color: @fs-dropdown-border-color;
@@ -269,13 +269,13 @@
 	}
 
 	.@{theme_name}&-disabled &-item,
-	.no-touch .@{theme_name}&-disabled &-item:hover {
+	.no-touchevents .@{theme_name}&-disabled &-item:hover {
 		color: @fs-dropdown-text-color;
 		background-color: @fs-dropdown-background-color;
 	}
 
 	.@{theme_name}&-disabled &-item_selected,
-	.no-touch .@{theme_name}&-disabled &-item_selected:hover {
+	.no-touchevents .@{theme_name}&-disabled &-item_selected:hover {
 		background: @fs-dropdown-background-color;
 	}
 

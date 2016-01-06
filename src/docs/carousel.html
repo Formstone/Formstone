@@ -1,8 +1,8 @@
 <style>
 	.carousel { border-radius: 3px; margin: 20px 0; width: 100%; }
 
-	.carousel_item { background: #34495E; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
-	.carousel_item:nth-child(even) { background: #D35400; }
+	.carousel_item { background: #039be5; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
+	.carousel_item:nth-child(even) { background: #0277bd; }
 	.carousel_item img { width: 100%; }
 
 	.carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
@@ -40,13 +40,15 @@
 </style>
 
 <script>
+/*
 	$(function() {
 		$(".carousel").carousel();
 	});
+*/
 </script>
 
 <h4>Basic</h4>
-<div class="carousel">
+<div class="carousel js-carousel">
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -56,7 +58,7 @@
 </div>
 
 <h4>Paged</h4>
-<div class="carousel" data-carousel-options='{"paged":true,"show":2}'>
+<div class="carousel js-carousel" data-carousel-options='{"paged":true,"show":2}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -66,7 +68,7 @@
 </div>
 
 <h4>Uneven Counts</h4>
-<div class="carousel" data-carousel-options='{"show":3}'>
+<div class="carousel js-carousel" data-carousel-options='{"show":3}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -76,7 +78,7 @@
 </div>
 
 <h4>Infinite</h4>
-<div class="carousel" data-carousel-options='{"infinite":true}'>
+<div class="carousel js-carousel" data-carousel-options='{"infinite":true}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -86,7 +88,7 @@
 </div>
 
 <h4>No Controls</h4>
-<div class="carousel" data-carousel-options='{"controls":false,"pagination":false}'>
+<div class="carousel js-carousel" data-carousel-options='{"controls":false,"pagination":false}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -96,14 +98,14 @@
 </div>
 
 <h4>Enable at Breakpoint</h4>
-<div class="carousel" data-carousel-options='{"minWidth":"740px"}'>
+<div class="carousel js-carousel" data-carousel-options='{"minWidth":"740px"}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item" style="display: none;">3</div>
 </div>
 
 <h4>Responsive Counts</h4>
-<div class="carousel" data-carousel-options='{"show":{"740px":2,"980px":3,"1220px":1}}'>
+<div class="carousel js-carousel" data-carousel-options='{"show":{"740px":2,"980px":3,"1220px":1}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -113,7 +115,7 @@
 </div>
 
 <h4>Links</h4>
-<div class="carousel" data-carousel-options='{"show":{"500px":2,"980px":3}}'>
+<div class="carousel js-carousel" data-carousel-options='{"show":{"500px":2,"980px":3}}'>
 	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/1" draggable="false"></a>
 	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/2" draggable="false"></a>
 	<a href="#" class="carousel_item"><img src="//spacehold.it/450x400/3" draggable="false"></a>
@@ -122,7 +124,7 @@
 </div>
 
 <h4>Right to Left</h4>
-<div class="carousel" data-carousel-options='{"rtl":true,"show":{"500px":2,"980px":3}}'>
+<div class="carousel js-carousel" data-carousel-options='{"rtl":true,"show":{"500px":2,"980px":3}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -131,7 +133,7 @@
 </div>
 
 <h4>Auto Height</h4>
-<div class="carousel carousel_auto_height" data-carousel-options='{"autoHeight":true,"show":{"500px":2,"980px":3}}'>
+<div class="carousel carousel_auto_height js-carousel" data-carousel-options='{"autoHeight":true,"show":{"500px":2,"980px":3}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -140,7 +142,7 @@
 </div>
 
 <h4>Uneven Widths</h4>
-<div class="carousel" data-carousel-options='{"matchWidth":false}'>
+<div class="carousel js-carousel" data-carousel-options='{"matchWidth":false}'>
 	<div class="carousel_item carousel_item_wide">1</div>
 	<div class="carousel_item carousel_item_thin">2</div>
 	<div class="carousel_item carousel_item_wide">3</div>
@@ -149,7 +151,7 @@
 </div>
 
 <h4>Custom Controls</h4>
-<div class="carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
+<div class="carousel js-carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -162,7 +164,7 @@
 </div>
 
 <h4>Single</h4>
-<div class="carousel" data-carousel-options='{"single":true}'>
+<div class="carousel js-carousel" data-carousel-options='{"single":true}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -172,7 +174,7 @@
 </div>
 
 <h4>Single - Fade</h4>
-<div class="carousel carousel_fade" data-carousel-options='{"single":true}'>
+<div class="carousel carousel_fade js-carousel" data-carousel-options='{"single":true}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -182,7 +184,7 @@
 </div>
 
 <h4>Single - Right to Left</h4>
-<div class="carousel" data-carousel-options='{"rtl":true,"single":true}'>
+<div class="carousel js-carousel" data-carousel-options='{"rtl":true,"single":true}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>

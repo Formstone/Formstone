@@ -21,117 +21,147 @@
 	</head>
 
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
-				<h1 id="navigation-demo">Navigation Demo</h1>
-				<!-- START: DEMO -->
-				<style>
-				.navigation {
-					margin: 0 0 20px;
-					overflow: hidden;
-				}
-				
-				.navigation a {
-					background: #c65032;
-					border: none;
-					color: #fff;
-					display: block;
-					float: left;
-					font-size: 16px;
-					line-height: 40px;
-					margin: 0 1px 0 0;
-					padding: 0 20px;
-				}
-				
-				.navigation a:hover {
-					color: #fff;
-				}
-				
-				.navigation.fs-navigation-enabled a {
-					float: none;
-					margin: 0 0 1px 0;
-					width: 100%;
-				}
-				
-				.navigation.fs-navigation-enabled {
-					padding: 10px;
-				}
-				
-				.nav_buttons {
-					margin: 0 0 20px;
-				}
-				
-				.nav_buttons .active,
-				.no-touch .nav_buttons .active:hover {
-					background: #c65032;
-				}
-				
-				@media screen and (min-width: 500px) {
-					.nav_buttons .button {
-						margin: 0 10px 0 0;
-						width: 160px;
-					}
-				}
-				</style>
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="navigation-demo">Navigation Demo</h1>
+					<!-- START: DEMO -->
+					<style>
+					/*
+	.navigation { margin: 0 0 20px; overflow: hidden; }
+	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
+	.navigation a:hover { color: #fff; }
 
-				<script>
-				$(function() {
-					$(".navigation a").on("click", function(e) {
-						e.preventDefault();
-						e.stopPropagation();
+	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
+	.navigation.fs-navigation-enabled { padding: 10px; }
+
+	.nav_buttons { margin: 0 0 20px; }
+	.nav_buttons .active,
+	.no-touch .nav_buttons .active:hover { background: #c65032; }
+	@media screen and (min-width: 500px) {
+		.nav_buttons .button { margin: 0 10px 0 0; width: 160px; }
+	}
+*/
+					</style>
+
+					<script>
+					$(function() {
+						/*
+								$(".navigation a").on("click", function(e) {
+									e.preventDefault();
+									e.stopPropagation();
+								});
+
+								$(".navigation").navigation();
+
+								$(".nav_switch").on("click", function() {
+									$(".nav_buttons .button").removeClass("active");
+									$(this).addClass("active");
+
+									$(".main_nav")
+										.navigation("destroy")
+										.attr("data-navigation-options", "{}")
+										.removeData("navigation-options")
+										.navigation({
+											type: $(this).data("type"),
+											gravity: $(this).data("gravity"),
+											maxWidth: "10000px"
+										});
+								});
+						*/
 					});
+					</script>
 
-					$(".navigation").navigation();
+					<h4>Basic</h4>
+					<h5 id="nav_handle_1">Navigation</h5>
+					<nav class="js-navigation" data-navigation-handle="#nav_handle_1">
+						<a href="#">Home</a>
+						<a href="#">About</a>
+						<a href="#">Contact</a>
+					</nav>
 
-					$(".nav_switch").on("click", function() {
-						$(".nav_buttons .button").removeClass("active");
-						$(this).addClass("active");
+					<h4>Breakpoint</h4>
+					<h5 id="nav_handle_2">Navigation</h5>
+					<nav class="js-navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
+						<a href="#">Home</a>
+						<a href="#">About</a>
+						<a href="#">Contact</a>
+					</nav>
 
-						$(".main_nav")
-							.navigation("destroy")
-							.attr("data-navigation-options", "{}")
-							.removeData("navigation-options")
-							.navigation({
-								type: $(this).data("type"),
-								gravity: $(this).data("gravity"),
-								maxWidth: "10000px"
-							});
-					});
-				});
-				</script>
+					<h4>Off Canvas</h4>
+					<div class="nav_buttons">
+						<button type="button" class="button" id="nav_handle_overlay_left">Overlay Left</button>
+						<button type="button" class="button" id="nav_handle_overlay_right">Overlay Right</button>
+					</div>
+					<div class="nav_buttons">
+						<button type="button" class="button" id="nav_handle_reveal_left">Reveal Left</button>
+						<button type="button" class="button" id="nav_handle_reveal_right">Reveal Right</button>
+					</div>
+					<div class="nav_buttons">
+						<button type="button" class="button" id="nav_handle_push_left">Push Left</button>
+						<button type="button" class="button" id="nav_handle_push_right">Push Right</button>
+					</div>
 
-				<h4>Basic</h4>
-				<h5 id="nav_handle_1">Navigation</h5>
-				<nav class="navigation" data-navigation-handle="#nav_handle_1">
-					<a href="#">Home</a>
-					<a href="#">About</a>
-					<a href="#">Contact</a>
-				</nav>
 
-				<h4>Breakpoint</h4>
-				<h5 id="nav_handle_2">Navigation</h5>
-				<nav class="navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
-					<a href="#">Home</a>
-					<a href="#">About</a>
-					<a href="#">Contact</a>
-				</nav>
+					<div style="height: 500px"></div>
 
-				<h4>Off Canvas</h4>
-				<div class="nav_buttons">
-					<button type="button" class="button nav_switch" data-type="overlay" data-gravity="left">Overlay Left</button>
-					<button type="button" class="button nav_switch active" data-type="overlay" data-gravity="right">Overlay Right</button>
+
 				</div>
-				<div class="nav_buttons">
-					<button type="button" class="button nav_switch" data-type="reveal" data-gravity="left">Reveal Left</button>
-					<button type="button" class="button nav_switch" data-type="reveal" data-gravity="right">Reveal Right</button>
+			</div>
+		</div>
+
+
+
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_overlay_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"left"}'>
+			Overlay Left
+		</nav>
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_overlay_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"right"}'>
+			Overlay Right
+		</nav>
+
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_reveal_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"left"}'>
+			Reveal Left
+		</nav>
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_reveal_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"right"}'>
+			Reveal Right
+		</nav>
+
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_push_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"left"}'>
+			Push Left
+		</nav>
+		<nav class="js-navigation" data-navigation-handle="#nav_handle_push_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"right"}'>
+			Push Right
+		</nav>
+
+
+
+		<div class="demo_content">
+			<div class="fs-row">
+				<div class="fs-cell">
+					<!-- END: DEMO -->
 				</div>
-				<div class="nav_buttons">
-					<button type="button" class="button nav_switch" data-type="push" data-gravity="left">Push Left</button>
-					<button type="button" class="button nav_switch" data-type="push" data-gravity="right">Push Right</button>
-				</div>
-				<br>
-				<!-- <button type="button" class="button js-nav_handle">Open Menu</button> -->
-				<!-- END: DEMO -->
 			</div>
 		</div>
 	</body>

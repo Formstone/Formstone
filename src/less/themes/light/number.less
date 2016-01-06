@@ -10,6 +10,8 @@
 
 	// Config
 
+	@fs-number-height:									40px;
+
 	@fs-number-background-color:						#fff;
 
 	@fs-number-border-color:							#ccc;
@@ -19,7 +21,7 @@
 	@fs-number-text-color:								#222;
 
 	@fs-number-margin:									0 0 10px 0;
-	@fs-number-padding:									0 10px;
+	@fs-number-padding:									0 40px 0 15px;
 
 	@fs-number-arrow-width:								25px;
 	@fs-number-arrow-color:								#666;
@@ -43,13 +45,15 @@
 
 	&.@{theme_name} &-element {
 		width: 100%;
+		height: @fs-number-height;
 
 		background: @fs-number-background-color;
 		border: 1px solid @fs-number-border-color;
 		border-radius: @fs-number-border-radius;
 		color: @fs-number-text-color;
 		font-size: @fs-number-font-size;
-		line-height: 1;
+		line-height: @fs-number-height;
+		margin: 0;
 		padding: @fs-number-padding;
 
 		&:focus {
@@ -109,6 +113,8 @@
 	&.@{theme_name} &-arrow&-up {
 		top: 0;
 
+		border-radius: 0 @fs-number-border-radius 0 0;
+
 		&:after {
 			border-bottom: @fs-number-arrow-size solid @fs-number-arrow-color;
 		}
@@ -117,6 +123,7 @@
 	&.@{theme_name} &-arrow&-down {
 		bottom: 0;
 
+		border-radius: 0 0 @fs-number-border-radius 0;
 		border-top: none;
 
 		&:after {

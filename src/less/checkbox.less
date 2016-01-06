@@ -214,16 +214,24 @@
 	// Radio
 
 	&-radio &-marker {
+		position: relative;
+
 		border-radius: 100%;
 	}
 
 	&-radio &-flag {
-		width: 70%;
-		height: 70%;
+		width:  (@fs-checkbox-marker-height-width / 2);
+		height: (@fs-checkbox-marker-height-width / 2);
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
 
 		background: @fs-checkbox-flag-background;
 		border-radius: 100%;
-		margin: 15%;
+		margin: auto;
 		transform: scale(0);
 		transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
 

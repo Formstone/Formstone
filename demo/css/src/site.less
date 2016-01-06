@@ -19,3 +19,43 @@
 		border: 1px solid #ddd;
 		margin: 20px 0;
 	}
+
+
+	// Demo Bar
+
+	.demo_bar {
+		background: #222;
+		color: #fff;
+		margin: 0 0 20px;
+		padding: 20px;
+
+		&:after {
+			clear: both;
+			content: '';
+			display: table;
+		}
+
+		.demo_field {
+			float: left;
+			margin: 0 20px 0 0;
+		}
+
+		.demo_label {
+			color: #ccc;
+			float: left;
+			font-size: 12px;
+			line-height: 40px;
+			margin: 0 20px 0 0;
+			text-transform: uppercase;
+		}
+
+		.demo_select {
+			width: 100px;
+
+			float: left;
+		}
+
+		.demo_select_wide {
+			width: 200px;
+		}
+	}

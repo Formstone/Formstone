@@ -1,3 +1,3 @@
-{"template":"component.html","title":"Core","demo":"[No Demo]","asset_root":"../"}
+{"template":"component.html","title":"Core","asset_root":"../"}
 
  #Core Demo

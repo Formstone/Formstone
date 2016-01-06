@@ -1,6 +1,6 @@
 The MIT License (MIT) 
 
-Copyright 2015 Ben Plum 
+Copyright 2016 Ben Plum 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy 
 of this software and associated documentation files (the "Software"), to deal 

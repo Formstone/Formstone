@@ -281,7 +281,8 @@ module.exports = function(grunt) {
 				if (useFile) {
 					doc.use = useFile;
 				}
-				if (demoFile) {
+
+				if (demoFile && demoFile.toUpperCase().indexOf('NO DEMO') < 0) {
 					doc.demo = demoFile;
 				}
 

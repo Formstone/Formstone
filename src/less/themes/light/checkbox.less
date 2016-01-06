@@ -10,48 +10,48 @@
 
 	// Config
 
-	@fs-checkbox-margin:						0 0 10px 0;
+	@fs-checkbox-margin:							0 0 10px 0;
 
 	// Label
 
-	@fs-checkbox-label-color:					#666;
-	@fs-checkbox-label-font-size:				14px;
+	@fs-checkbox-label-color:						@fs-light-primary_900;
+	@fs-checkbox-label-font-size:					14px;
 
 	// Marker
 
-	@fs-checkbox-marker-background:				#fff;
-	@fs-checkbox-marker-border-color:			#ccc;
-	@fs-checkbox-marker-border-radius:			3px;
-	@fs-checkbox-marker-height-width:			20px;
-	@fs-checkbox-marker-margin:					0 10px 0 0;
+	@fs-checkbox-marker-background:					@fs-light-white;
+	@fs-checkbox-marker-border-color:				@fs-light-primary_400;
+	@fs-checkbox-marker-border-radius:				3px;
+	@fs-checkbox-marker-height-width:				20px;
+	@fs-checkbox-marker-margin:						0 10px 0 0;
 
-	@fs-checkbox-flag-background:				#999;
+	@fs-checkbox-flag-background:					@fs-light-primary_600;
 
 	// Disabled
 
-	@fs-checkbox-disabled-opacity:				0.5;
+	@fs-checkbox-disabled-opacity:					0.5;
 
 	// Focus
 
-	@fs-checkbox-focus-label-color:				#333;
+	@fs-checkbox-focus-label-color:					@fs-light-black;
 
-	@fs-checkbox-focus-marker-border-color:		#999;
+	@fs-checkbox-focus-marker-border-color:			@fs-light-primary_500;
 
 	// Toggle
 
-	@fs-checkbox-toggle-marker-background:		#999;
-	@fs-checkbox-toggle-marker-border-color:	#fff;
-	@fs-checkbox-toggle-marker-border-size:		2px;
-	@fs-checkbox-toggle-marker-height:			40px;
-	@fs-checkbox-toggle-marker-width:			100px;
+	@fs-checkbox-toggle-marker-background:			@fs-light-primary_500;
+	@fs-checkbox-toggle-marker-border-color:		@fs-light-white;
+	@fs-checkbox-toggle-marker-border-size:			2px;
+	@fs-checkbox-toggle-marker-height:				40px;
+	@fs-checkbox-toggle-marker-width:				100px;
 
-	@fs-checkbox-toggle-state-color:			#666;
-	@fs-checkbox-toggle-state-font-size:		12px;
+	@fs-checkbox-toggle-state-color:				@fs-light-primary_500;
+	@fs-checkbox-toggle-state-font-size:			12px;
 
-	@fs-checkbox-toggle-icon-color:				#fff;
-	@fs-checkbox-toggle-icon-width:				2px;
-	@fs-checkbox-toggle-icon-height:			10px;
-	@fs-checkbox-toggle-icon-gap:				1px;
+	@fs-checkbox-toggle-icon-color:					@fs-light-white;
+	@fs-checkbox-toggle-icon-width:					2px;
+	@fs-checkbox-toggle-icon-height:				10px;
+	@fs-checkbox-toggle-icon-gap:					1px;
 
 	&.@{theme_name} {
 		margin: @fs-checkbox-margin;
@@ -65,7 +65,7 @@
 	}
 
 	&.@{theme_name} &-marker {
-		width: @fs-checkbox-marker-height-width;
+		width:  @fs-checkbox-marker-height-width;
 		height: @fs-checkbox-marker-height-width;
 
 		background: @fs-checkbox-marker-background;
@@ -91,6 +91,9 @@
 	}
 
 	.@{theme_name}&-radio &-flag {
+		width:  (@fs-checkbox-marker-height-width / 2);
+		height: (@fs-checkbox-marker-height-width / 2);
+
 		background: @fs-checkbox-flag-background;
 	}
 
@@ -159,7 +162,7 @@
 		}
 	}
 
-	.no-touch .@{theme_name}&-toggle:hover &-flag:after {
+	.no-touchevents .@{theme_name}&-toggle:hover &-flag:after {
 		opacity: 1;
 	}
 

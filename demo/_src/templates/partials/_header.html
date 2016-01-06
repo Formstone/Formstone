@@ -30,5 +30,31 @@
 		<script src="{{= it.asset_root }}js/site.js?v={{= it.version }}"></script>
 	</head>
 	<body class="fs-grid">
-		<div class="fs-row">
-			<div class="fs-cell">
+
+		<div class="demo_content">
+
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="fs-row">
+				<div class="fs-cell">

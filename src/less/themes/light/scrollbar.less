@@ -29,6 +29,8 @@
 
 	// Content
 
+	@fs-scrollbar-content-border-color:		#ccc;
+	@fs-scrollbar-content-border-radius:	3px;
 	@fs-scrollbar-content-padding:			20px;
 
 	&.@{theme_name} &-bar {
@@ -54,6 +56,11 @@
 		background: @fs-scrollbar-handle-background;
 		border: @fs-scrollbar-handle-border-size solid @fs-scrollbar-handle-border-color;
 		border-radius: @fs-scrollbar-handle-border-radius;
+	}
+
+	.@{theme_name} &-content {
+		// border: 1px solid @fs-scrollbar-content-border-color;
+		// border-radius: @fs-scrollbar-content-border-radius;
 	}
 
 	// Horizontal
