@@ -1,77 +1,51 @@
 <style>
-/*
-	.navigation { margin: 0 0 20px; overflow: hidden; }
-	.navigation a { background: #c65032; border: none; color: #fff; display: block; float: left; font-size: 16px; line-height: 40px; margin: 0 1px 0 0; padding: 0 20px; }
-	.navigation a:hover { color: #fff; }
-
-	.navigation.fs-navigation-enabled a { float: none; margin: 0 0 1px 0; width: 100%; }
-	.navigation.fs-navigation-enabled { padding: 10px; }
-
-	.nav_buttons { margin: 0 0 20px; }
-	.nav_buttons .active,
-	.no-touch .nav_buttons .active:hover { background: #c65032; }
-	@media screen and (min-width: 500px) {
-		.nav_buttons .button { margin: 0 10px 0 0; width: 160px; }
+	@media screen and (min-width: 980px) {
+		.nav_offscreen,
+		.nav_handle {
+			display: none;
+		}
 	}
-*/
 </style>
 
-<script>
-	$(function() {
-/*
-		$(".navigation a").on("click", function(e) {
-			e.preventDefault();
-			e.stopPropagation();
-		});
-
-		$(".navigation").navigation();
-
-		$(".nav_switch").on("click", function() {
-			$(".nav_buttons .button").removeClass("active");
-			$(this).addClass("active");
-
-			$(".main_nav")
-				.navigation("destroy")
-				.attr("data-navigation-options", "{}")
-				.removeData("navigation-options")
-				.navigation({
-					type: $(this).data("type"),
-					gravity: $(this).data("gravity"),
-					maxWidth: "10000px"
-				});
-		});
-*/
-	});
-</script>
+<p>By default, Navigation will only activate itself on screens smaller than 980px. Resize your screen if the menus are not active.</p>
 
 <h4>Basic</h4>
-<h5 id="nav_handle_1">Navigation</h5>
-<nav class="js-navigation" data-navigation-handle="#nav_handle_1">
-	<a href="#">Home</a>
-	<a href="#">About</a>
-	<a href="#">Contact</a>
-</nav>
-
-<h4>Breakpoint</h4>
-<h5 id="nav_handle_2">Navigation</h5>
-<nav class="js-navigation" data-navigation-handle="#nav_handle_2" data-navigation-options='{"maxWidth":"740px"}'>
+<h5 class="nav_handle nav_handle_toggle">Navigation</h5>
+<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
 	<a href="#">Home</a>
 	<a href="#">About</a>
 	<a href="#">Contact</a>
 </nav>
 
 <h4>Off Canvas</h4>
-<div class="nav_buttons">
-	<button type="button" class="button" id="nav_handle_overlay_left">Overlay Left</button>
-	<button type="button" class="button" id="nav_handle_overlay_right">Overlay Right</button>
+<div>
+	Overlay Left:
+	<button type="button" class="button nav_handle nav_handle_overlay_left">Menu</button>
 </div>
-<div class="nav_buttons">
-	<button type="button" class="button" id="nav_handle_reveal_left">Reveal Left</button>
-	<button type="button" class="button" id="nav_handle_reveal_right">Reveal Right</button>
+<br>
+<div>
+	Overlay Right:
+	<button type="button" class="button nav_handle nav_handle_overlay_right">Menu</button>
 </div>
-<div class="nav_buttons">
-	<button type="button" class="button" id="nav_handle_push_left">Push Left</button>
-	<button type="button" class="button" id="nav_handle_push_right">Push Right</button>
+<br>
+<div>
+	Reveal Left:
+	<button type="button" class="button nav_handle nav_handle_reveal_left">Menu</button>
+</div>
+<br>
+<div>
+	Reveal Right:
+	<button type="button" class="button nav_handle nav_handle_reveal_right">Menu</button>
+</div>
+<br>
+<div>
+	Push Left:
+	<button type="button" class="button nav_handle nav_handle_push_left">Menu</button>
+</div>
+<br>
+<div>
+	Push Right:
+	<button type="button" class="button nav_handle nav_handle_push_right">Menu</button>
 </div>
 
 
@@ -84,24 +58,27 @@
 
 
 
-<nav class="js-navigation" data-navigation-handle="#nav_handle_overlay_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"left"}'>
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_overlay_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"left"}'>
 	Overlay Left
 </nav>
-<nav class="js-navigation" data-navigation-handle="#nav_handle_overlay_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"right"}'>
+
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_overlay_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"right"}'>
 	Overlay Right
 </nav>
 
-<nav class="js-navigation" data-navigation-handle="#nav_handle_reveal_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"left"}'>
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_reveal_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"left"}'>
 	Reveal Left
 </nav>
-<nav class="js-navigation" data-navigation-handle="#nav_handle_reveal_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"right"}'>
+
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_reveal_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"right"}'>
 	Reveal Right
 </nav>
 
-<nav class="js-navigation" data-navigation-handle="#nav_handle_push_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"left"}'>
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_push_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"left"}'>
 	Push Left
 </nav>
-<nav class="js-navigation" data-navigation-handle="#nav_handle_push_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"right"}'>
+
+<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_push_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"right"}'>
 	Push Right
 </nav>
 

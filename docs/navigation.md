@@ -236,6 +236,5 @@ $(".target").navigation("open");
 | `.fs-navigation-handle` | `element` | Click target to toggle navigation |
 | `.fs-navigation-handle.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-handle.fs-navigation-enabled` | `modifier` | Indicates enabled state |
-| `.fs-navigation-handle:after` | `element` | Icon displayed in handle |
 | `.fs-navigation-lock` | `modifier` | Indicates locked state; Applied to body element |
 
