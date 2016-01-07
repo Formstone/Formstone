@@ -15,7 +15,7 @@ A jQuery plugin for replacing checkboxes.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Checkbox
 
 
 #### Main

@@ -13,7 +13,7 @@ A jQuery plugin for Google Universal Analytics Events.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Analytics
 
 
 #### Main

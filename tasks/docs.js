@@ -335,7 +335,7 @@ module.exports = function(grunt) {
 			md += '\n<!-- DEMO BUTTON -->\n';
 
 			md += '\n';
-			md += heading + '# <a name="use"></a> Use ';
+			md += heading + '# <a name="use"></a> Using ' + doc.name;
 			md += '\n\n';
 
 			if (doc.main && doc.main.length) {

@@ -15,7 +15,7 @@ A jQuery plugin for custom scrollbars.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Scrollbar
 
 
 #### Main

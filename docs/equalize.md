@@ -15,7 +15,7 @@ A jQuery plugin for equal dimensions.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Equalize
 
 
 #### Main

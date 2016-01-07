@@ -16,7 +16,7 @@ A jQuery plugin for simple pagination.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Pagination
 
 
 #### Main

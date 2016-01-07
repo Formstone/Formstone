@@ -16,7 +16,7 @@ A jQuery plugin for full-frame image and video backgrounds.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Background
 
 
 #### Main

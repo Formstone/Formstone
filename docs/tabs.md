@@ -16,7 +16,7 @@ A jQuery plugin for simple tabs.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Tabs
 
 
 #### Main

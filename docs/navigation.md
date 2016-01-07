@@ -16,7 +16,7 @@ A jQuery plugin for simple responsive navigation.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Navigation
 
 
 #### Main

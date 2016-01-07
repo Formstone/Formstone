@@ -15,7 +15,7 @@ A jQuery plugin for cross browser number inputs.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Number
 
 
 #### Main

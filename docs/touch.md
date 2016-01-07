@@ -16,7 +16,7 @@ A jQuery plugin for multi-touch events.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Use 
+## <a name="use"></a> Using Touch
 
 
 #### Main
