@@ -18,7 +18,7 @@ A jQuery plugin for simple content carousels.
 
 ## <a name="use"></a> Use 
 
-<hr>
+
 #### Main
 
 ```markup
@@ -26,7 +26,7 @@ carousel.js
 carousel.css
 ```
 
-<hr>
+
 #### Dependencies
 
 ```markup
@@ -75,7 +75,7 @@ $(".target").carousel({
 
 Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.
 
-<hr>
+cd>
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-carousel-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

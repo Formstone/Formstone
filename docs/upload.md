@@ -18,7 +18,7 @@ A jQuery plugin for simple drag and drop uploads.
 
 ## <a name="use"></a> Use 
 
-<hr>
+
 #### Main
 
 ```markup
@@ -26,7 +26,7 @@ upload.js
 upload.css
 ```
 
-<hr>
+
 #### Dependencies
 
 ```markup
@@ -94,7 +94,7 @@ $(".target").upload("abort");
 
 Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
 
-<hr>
+cd>
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

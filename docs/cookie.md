@@ -16,14 +16,14 @@ A jQuery plugin for simple access to browser cookies.
 
 ## <a name="use"></a> Use 
 
-<hr>
+
 #### Main
 
 ```markup
 cookie.js
 ```
 
-<hr>
+
 #### Dependencies
 
 ```markup
@@ -54,7 +54,7 @@ To erase an existing cookie, set it to `null`:
 $.cookie(key, null);
 ```
 
-<hr>
+cd>
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.

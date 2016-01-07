@@ -281,8 +281,7 @@ module.exports = function(grunt) {
 				if (useFile) {
 					doc.use = useFile;
 				}
-
-				if (demoFile && demoFile.toUpperCase().indexOf('NO DEMO') < 0) {
+				if (demoFile) {
 					doc.demo = demoFile;
 				}
 
@@ -340,7 +339,7 @@ module.exports = function(grunt) {
 			md += '\n\n';
 
 			if (doc.main && doc.main.length) {
-				md += '<hr>\n';
+				md += '\n';
 				md += heading + '### Main';
 				md += '\n\n';
 				md += '```markup';
@@ -354,7 +353,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.dependencies && doc.dependencies.length) {
-				md += '<hr>\n';
+				md += '\n';
 				md += heading + '### Dependencies';
 				md += '\n\n';
 				md += '```markup';
@@ -373,7 +372,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.options && doc.options.length) {
-				md += '<hr>\n';
+				md += 'cd>\n';
 				md += heading + '# <a name="options"></a> Options';
 				md += '\n\n';
 				if (doc.type === "widget") {

@@ -18,7 +18,7 @@ A jQuery plugin for simple modals.
 
 ## <a name="use"></a> Use 
 
-<hr>
+
 #### Main
 
 ```markup
@@ -26,7 +26,7 @@ lightbox.js
 lightbox.css
 ```
 
-<hr>
+
 #### Dependencies
 
 ```markup
@@ -78,7 +78,7 @@ $(window).on("open.lightbox", function() {
 });
 ```
 
-<hr>
+cd>
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

@@ -17,7 +17,7 @@ A jQuery plugin for custom scrollbars.
 
 ## <a name="use"></a> Use 
 
-<hr>
+
 #### Main
 
 ```markup
@@ -25,7 +25,7 @@ scrollbar.js
 scrollbar.css
 ```
 
-<hr>
+
 #### Dependencies
 
 ```markup
@@ -56,7 +56,7 @@ $(".target").scrollbar({
 });
 ```
 
-<hr>
+cd>
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-scrollbar-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
