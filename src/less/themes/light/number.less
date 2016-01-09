@@ -10,29 +10,33 @@
 
 	// Config
 
-	@fs-number-height:									40px;
+	@fs-number-height:						40px;
 
-	@fs-number-background-color:						#fff;
+	@fs-number-background-color:			@fs-light-white;
 
-	@fs-number-border-color:							#ccc;
-	@fs-number-border-radius:							3px;
+	@fs-number-border-color:				@fs-light-primary_600;
+	@fs-number-border-radius:				3px;
 
-	@fs-number-font-size:								15px;
-	@fs-number-text-color:								#222;
+	@fs-number-font-size:					15px;
+	@fs-number-text-color:					@fs-light-primary_900;
 
-	@fs-number-margin:									0 0 10px 0;
-	@fs-number-padding:									0 40px 0 15px;
+	@fs-number-margin:						0 0 10px 0;
+	@fs-number-padding:						0 40px 0 15px;
 
-	@fs-number-arrow-width:								25px;
-	@fs-number-arrow-color:								#666;
-	@fs-number-arrow-size:								5px;
+	@fs-number-arrow-width:					25px;
+	@fs-number-arrow-color:					@fs-light-primary_600;
+	@fs-number-arrow-size:					5px;
 
 	// disabled
 
-	@fs-number-disabled-border-color:					#ccc;
-	@fs-number-disabled-text-color:						#ccc;
-	@fs-number-disabled-background-color:				#fff;
-	@fs-number-disabled-arrow-color:					#ccc;
+	@fs-number-disabled-opacity:			0.5;
+
+	// Hover
+
+	@fs-number-hover-border-color:				@fs-light-primary_900;
+
+	@fs-number-hover-arrow-color:				@fs-light-primary_900;
+
 
 	&.@{theme_name} {
 		position: relative;
@@ -43,7 +47,7 @@
 
 	// Element
 
-	&.@{theme_name} &-element {
+	.@{theme_name} &-element {
 		width: 100%;
 		height: @fs-number-height;
 
@@ -57,21 +61,13 @@
 		padding: @fs-number-padding;
 
 		&:focus {
-			background-color: @fs-number-background-color;
+			outline: none;
 		}
-	}
-
-	// Disabled
-
-	&.@{theme_name}&-disabled &-element {
-		background: @fs-number-disabled-background-color;
-		border-color: @fs-number-disabled-border-color;
-		color: @fs-number-disabled-text-color;
 	}
 
 	// Arrows
 
-	&.@{theme_name} &-arrow {
+	.@{theme_name} &-arrow {
 		width: @fs-number-arrow-width;
 		height: 50%;
 
@@ -86,10 +82,6 @@
 
 		.no-opacity & {
 			text-indent: -999999px;
-		}
-
-		&:focus {
-			outline: none;
 		}
 
 		&:after {
@@ -110,7 +102,7 @@
 		}
 	}
 
-	&.@{theme_name} &-arrow&-up {
+	.@{theme_name} &-arrow&-up {
 		top: 0;
 
 		border-radius: 0 @fs-number-border-radius 0 0;
@@ -120,7 +112,7 @@
 		}
 	}
 
-	&.@{theme_name} &-arrow&-down {
+	.@{theme_name} &-arrow&-down {
 		bottom: 0;
 
 		border-radius: 0 0 @fs-number-border-radius 0;
@@ -131,11 +123,64 @@
 		}
 	}
 
-	&.@{theme_name} &-disabled &-arrow {
+	// Hover
+
+	.@{theme_name}&-focus &-element,
+	.no-touchevents .@{theme_name}:hover &-element {
+		border-color: @fs-number-hover-border-color;
+	}
+
+	.@{theme_name}&-focus &-arrow,
+	.no-touchevents .@{theme_name}:hover &-arrow {
+		border-color: @fs-number-hover-border-color;
+	}
+
+	.@{theme_name}&-focus &-arrow&-up,
+	.no-touchevents .@{theme_name}:hover &-arrow&-up {
 
 		&:after {
-			border-top-color: @fs-number-disabled-arrow-color;
-			border-bottom-color: @fs-number-disabled-arrow-color;
+			border-bottom-color: @fs-number-hover-arrow-color;
+		}
+	}
+
+	.@{theme_name}&-focus &-arrow&-down,
+	.no-touchevents .@{theme_name}:hover &-arrow&-down {
+
+		&:after {
+			border-top-color: @fs-number-hover-arrow-color;
+		}
+	}
+
+	// Disabled
+
+	.@{theme_name}&-disabled,
+	.no-touchevents .@{theme_name}&-disabled:hover {
+		opacity: @fs-number-disabled-opacity;
+	}
+
+	.@{theme_name}&-disabled &-element,
+	.no-touchevents .@{theme_name}&-disabled:hover &-element {
+		border-color: @fs-number-border-color;
+	}
+
+	.@{theme_name}&-disabled &-arrow,
+	.no-touchevents .@{theme_name}&-disabled:hover &-arrow {
+		border-color: @fs-number-border-color;
+	}
+
+	.@{theme_name}&-disabled &-arrow&-up,
+	.no-touchevents .@{theme_name}&-disabled:hover &-arrow&-up {
+
+		&:after {
+			border-bottom-color: @fs-number-arrow-color;
+		}
+	}
+
+	.@{theme_name}&-disabled &-arrow&-down,
+	.no-touchevents .@{theme_name}&-disabled:hover &-arrow&-down {
+
+		&:after {
+			border-top-color: @fs-number-arrow-color;
 		}
 	}
 }

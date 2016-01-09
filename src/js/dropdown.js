@@ -49,9 +49,9 @@
 			$options    = $allOptions.filter("option"),
 			$label      = $("[for=" + this.attr("id") + "]");
 
-		// Swap tab index, no more interacting with the actual select!
+		// Swap tab index, no more interacting with the actual input!
 		data.tabIndex = this[0].tabIndex;
-		this[0].tabIndex   = -1;
+		this[0].tabIndex = -1;
 
 		if ($label.length) {
 			$label[0].tabIndex = -1;
@@ -135,7 +135,6 @@
 				e.data.$dropdown.trigger(Events.raw.focus);
 			});
 
-
 			data.$dropdown.on(Events.focusIn, data, onFocusIn)
 						  .on(Events.focusOut, data, onFocusOut);
 		}
@@ -158,7 +157,7 @@
 			data.$wrapper.fsScrollbar("destroy");
 		}
 
-		data.$el[0].tabIndex    = data.tabIndex;
+		data.$el[0].tabIndex = data.tabIndex;
 
 		if (data.$label.length) {
 			data.$label[0].tabIndex = data.tabIndex;

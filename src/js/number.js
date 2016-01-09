@@ -44,10 +44,11 @@
 		data.$container    = this.parent(Classes.base);
 		data.$arrows       = data.$container.find(Classes.arrow);
 
-		// Bind keyboard events
-		this.on(Events.keyPress, Classes.element, data, onKeyup);
+		// Bind events
+		this.on(Events.keyPress, data, onKeyup)
+			.on(Events.focus, data, onFocus)
+			.on(Events.blur, data, onBlur);
 
-		// Bind click events
 		data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
 	}
 
@@ -97,6 +98,28 @@
 
 			data.disabled = true;
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		e.data.$container.addClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e) {
+		e.data.$container.removeClass(RawClasses.focus);
 	}
 
 	/**
@@ -276,7 +299,8 @@
 				"arrow",
 				"up",
 				"down",
-				"disabled"
+				"disabled",
+				"focus"
 			],
 
 			methods: {
@@ -288,10 +312,6 @@
 
 				enable        : enable,
 				disable       : disable
-			},
-
-			events: {
-				// tap    : "tap"
 			}
 		}),
 

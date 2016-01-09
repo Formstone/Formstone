@@ -257,7 +257,7 @@
 	 */
 
 	function onFocus(e) {
-		e.data.$container.addClass("focus");
+		e.data.$container.addClass(RawClasses.focus);
 	}
 
 	/**
@@ -268,7 +268,7 @@
 	 */
 
 	function onBlur(e) {
-		e.data.$container.removeClass("focus");
+		e.data.$container.removeClass(RawClasses.focus);
 	}
 
 	/**
