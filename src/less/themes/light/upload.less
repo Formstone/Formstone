@@ -30,9 +30,7 @@
 
 	// Disabled
 
-	@fs-upload-disabled-background:			@fs-light-primary_100;
-	@fs-upload-disabled-border-color:		@fs-light-primary_200;
-	@fs-upload-disabled-text-color:			@fs-light-primary_400;
+	@fs-upload-disabled-opacity:			0.5;
 
 	// Target
 
@@ -53,7 +51,7 @@
 	}
 
 	.@{theme_name}&-dropping &-target,
-	.no-touch .@{theme_name}:hover &-target {
+	.no-touchevents .@{theme_name}:hover &-target {
 		background: @fs-upload-dropping-background;
 		border-color: @fs-upload-dropping-border-color;
 		color: @fs-upload-dropping-text-color;
@@ -61,18 +59,17 @@
 
 	// Disabled
 
+	.@{theme_name}&-disabled {
+		opacity: @fs-upload-disabled-opacity;
+	}
+
 	.@{theme_name}&-disabled &-target,
-	.no-touch .@{theme_name}&-disabled:hover &-target {
+	.no-touchevents .@{theme_name}&-disabled:hover &-target,
+	.@{theme_name}&-disabled&-dropping &-target,
+	.no-touchevents .@{theme_name}&-disabled&-dropping:hover &-target {
 		background: @fs-upload-background;
 		border-color: @fs-upload-border-color;
 		color: @fs-upload-text-color;
-	}
-
-	.@{theme_name}&-disabled&-dropping &-target,
-	.no-touch .@{theme_name}&-disabled&-dropping:hover &-target {
-		background: @fs-upload-disabled-background;
-		border-color: @fs-upload-disabled-border-color;
-		color: @fs-upload-disabled-text-color;
 	}
 
 }

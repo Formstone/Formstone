@@ -15,7 +15,8 @@
 	@fs-number-background-color:			@fs-light-white;
 
 	@fs-number-border-color:				@fs-light-primary_600;
-	@fs-number-border-radius:				3px;
+	@fs-number-border-width:				1px;
+	@fs-number-border-radius:				2px;
 
 	@fs-number-font-size:					15px;
 	@fs-number-text-color:					@fs-light-primary_900;
@@ -26,6 +27,10 @@
 	@fs-number-arrow-width:					25px;
 	@fs-number-arrow-color:					@fs-light-primary_600;
 	@fs-number-arrow-size:					5px;
+	@fs-number-arrow-border-width:			2px;
+	@fs-number-arrow-border-radius:			4px;
+
+	@fs-number-arrow-hover-background:		@fs-light-primary_300;
 
 	// disabled
 
@@ -52,7 +57,7 @@
 		height: @fs-number-height;
 
 		background: @fs-number-background-color;
-		border: 1px solid @fs-number-border-color;
+		border: @fs-number-border-width solid @fs-number-border-color;
 		border-radius: @fs-number-border-radius;
 		color: @fs-number-text-color;
 		font-size: @fs-number-font-size;
@@ -72,11 +77,12 @@
 		height: 50%;
 
 		position: absolute;
-		right: 0;
+		right: @fs-number-border-width;
 		z-index: 1;
 
 		background: @fs-number-background-color;
-		border: 1px solid @fs-number-border-color;
+		border: @fs-number-arrow-border-width solid @fs-number-background-color;
+		border-radius: @fs-number-arrow-border-radius;
 		text-indent: 200%;
 		white-space: nowrap;
 
@@ -100,12 +106,14 @@
 			display: block;
 			margin: auto;
 		}
+
+		.no-touchevents &:hover {
+			background: @fs-number-arrow-hover-background;
+		}
 	}
 
 	.@{theme_name} &-arrow&-up {
-		top: 0;
-
-		border-radius: 0 @fs-number-border-radius 0 0;
+		top: @fs-number-border-width;
 
 		&:after {
 			border-bottom: @fs-number-arrow-size solid @fs-number-arrow-color;
@@ -113,10 +121,7 @@
 	}
 
 	.@{theme_name} &-arrow&-down {
-		bottom: 0;
-
-		border-radius: 0 0 @fs-number-border-radius 0;
-		border-top: none;
+		bottom: @fs-number-border-width;
 
 		&:after {
 			border-top: @fs-number-arrow-size solid @fs-number-arrow-color;
@@ -127,11 +132,6 @@
 
 	.@{theme_name}&-focus &-element,
 	.no-touchevents .@{theme_name}:hover &-element {
-		border-color: @fs-number-hover-border-color;
-	}
-
-	.@{theme_name}&-focus &-arrow,
-	.no-touchevents .@{theme_name}:hover &-arrow {
 		border-color: @fs-number-hover-border-color;
 	}
 
@@ -165,7 +165,7 @@
 
 	.@{theme_name}&-disabled &-arrow,
 	.no-touchevents .@{theme_name}&-disabled:hover &-arrow {
-		border-color: @fs-number-border-color;
+		background: @fs-number-background-color;
 	}
 
 	.@{theme_name}&-disabled &-arrow&-up,

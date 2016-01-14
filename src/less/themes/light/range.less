@@ -10,45 +10,48 @@
 
 	// Config
 
-	@fs-range-track-height:						10px;
+	@fs-range-track-height:						20px;
 
-	@fs-range-track-background-color:			#fbfbfb;
-	@fs-range-track-border-color:				#ddd;
+	@fs-range-track-background-color:			@fs-light-white;
+	@fs-range-track-border-color:				@fs-light-primary_600;
 	@fs-range-track-border-width:				1px;
-	@fs-range-track-border-radius:				3px;
+	@fs-range-track-border-radius:				2px;
 
 	@fs-range-track-margin: 					10px 0;
 
-	@fs-range-track-box-shadow:					inset 0 0 1px rgba(0, 0, 0, 0.1);
-
 	// Fill
 
-	@fs-range-fill-color:						#dcdcdc;
+	@fs-range-fill-color:						@fs-light-primary_400;
 
 	// Track
 
-	@fs-range-marker-size:						20px;
+	@fs-range-marker-size:						30px;
+	@fs-range-marker-margin:					-6px;
 
-	@fs-range-marker-background-color:			#dcdcdc;
-	@fs-range-marker-border-color:				#afafaf;
-	@fs-range-marker-border-width:				1px;
-	@fs-range-marker-border-radius:				100%;
+	@fs-range-marker-background-color:			@fs-light-primary_600;
+	@fs-range-marker-border-radius:				2px;
 
-	@fs-range-marker-box-shadow:				0 0 3px rgba(0, 0, 0, 0.25);
+	@fs-range-marker-background-color-focus:	@fs-light-primary_900;
 
-	@fs-range-marker-background-color-focus:	#ccc;
-	@fs-range-marker-border-color-focus:		#999;
+	// Icon
+
+	@fs-range-marker-icon-color:				@fs-light-white;
+	@fs-range-marker-icon-width:				2px;
+	@fs-range-marker-icon-height:				10px;
+	@fs-range-marker-icon-gap:					1px;
 
 	// Labels
 
+	@fs-range-label-text-color:					@fs-light-primary_900;
 	@fs-range-label-font-size:					14px;
-	@fs-range-label-line-height:				28px;
+	@fs-range-label-line-height:				38px;
 
 	// Vertical
 
 	@fs-range-vertical-height:					300px;
 
-	@fs-range-vertical-track-width:				10px;
+	@fs-range-vertical-track-width:				20px;
+
 
 	&.@{theme_name}	&-track {
 		height: @fs-range-track-height;
@@ -56,7 +59,7 @@
 		background: @fs-range-track-background-color;
 		border: @fs-range-track-border-width solid @fs-range-track-border-color;
 		border-radius: @fs-range-track-border-radius;
-		margin: (@fs-range-marker-size / 2) 0;
+		margin: @fs-range-track-margin;
 	}
 
 	&.@{theme_name}	&-fill {
@@ -67,34 +70,41 @@
 		width: @fs-range-marker-size;
 		height: @fs-range-marker-size;
 
+		position: relative;
+
 		background: @fs-range-marker-background-color;
-		border: @fs-range-marker-border-width solid @fs-range-marker-border-color;
 		border-radius: @fs-range-marker-border-radius;
-		margin: -((@fs-range-marker-size / 4) + @fs-range-marker-border-width) 0 0 -((@fs-range-marker-size / 2) + @fs-range-marker-border-width);
-	}
+		margin: @fs-range-marker-margin 0 0 -(@fs-range-marker-size / 2);
 
-	// Hover
+		&:after {
+			width: @fs-range-marker-icon-width;
+			height: @fs-range-marker-icon-height;
 
-	.no-touch &.@{theme_name}:hover &-track {
-		box-shadow: @fs-range-track-box-shadow;
-	}
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
 
-	.no-touch &.@{theme_name}:hover &-marker {
-		background: @fs-range-marker-background-color-focus;
-		border-color: @fs-range-marker-border-color-focus;
-		box-shadow: @fs-range-marker-box-shadow;
+			background: @fs-range-marker-icon-color;
+			box-shadow:
+				(@fs-range-marker-icon-width + @fs-range-marker-icon-gap) 0 0 @fs-range-marker-icon-color,
+				-(@fs-range-marker-icon-width + @fs-range-marker-icon-gap) 0 0 @fs-range-marker-icon-color;
+			content: '';
+			margin: auto;
+		}
 	}
 
 	// Focus
 
-	.@{theme_name}&-focus &-track {
-		box-shadow: @fs-range-track-box-shadow;
+	.@{theme_name}&-focus &-track,
+	.no-touchevents .@{theme_name}:hover &-track {
+
 	}
 
-	.@{theme_name}&-focus &-marker {
+	.@{theme_name}&-focus &-marker,
+	.no-touchevents .@{theme_name}:hover &-marker {
 		background: @fs-range-marker-background-color-focus;
-		border-color: @fs-range-marker-border-color-focus;
-		box-shadow: @fs-range-marker-box-shadow;
 	}
 
 	// Labels
@@ -103,6 +113,7 @@
 	}
 
 	&.@{theme_name} &-label {
+		color: @fs-range-label-text-color;
 		font-size: @fs-range-label-font-size;
 		line-height: @fs-range-label-line-height;
 	}
@@ -134,7 +145,7 @@
 	}
 
 	.@{theme_name}&-vertical &-marker {
-		margin: -((@fs-range-marker-size / 2) + @fs-range-marker-border-width) 0 0 -((@fs-range-marker-size / 4) + @fs-range-marker-border-width);
+		margin: -((@fs-range-marker-size / 2) /* + @fs-range-marker-border-width */) 0 0 -((@fs-range-marker-size / 4) /* + @fs-range-marker-border-width */);
 	}
 
 	.@{theme_name}&-vertical &-label {

@@ -21,7 +21,7 @@
 
 	@fs-checkbox-marker-background:					@fs-light-white;
 	@fs-checkbox-marker-border-color:				@fs-light-primary_600;
-	@fs-checkbox-marker-border-radius:				3px;
+	@fs-checkbox-marker-border-radius:				2px;
 	@fs-checkbox-marker-height-width:				20px;
 	@fs-checkbox-marker-margin:						0 10px 0 0;
 
@@ -44,6 +44,8 @@
 	@fs-checkbox-toggle-marker-border-size:			2px;
 	@fs-checkbox-toggle-marker-height:				40px;
 	@fs-checkbox-toggle-marker-width:				100px;
+
+	@fs-checkbox-toggle-flag-border-radius:			4px;
 
 	@fs-checkbox-toggle-state-color:				@fs-light-primary_700;
 	@fs-checkbox-toggle-state-font-size:			12px;
@@ -161,7 +163,7 @@
 	.@{theme_name}&-toggle &-flag {
 		background: @fs-checkbox-toggle-marker-background;
 		border: @fs-checkbox-toggle-marker-border-size solid @fs-checkbox-toggle-marker-border-color;
-		border-radius: @fs-checkbox-marker-border-radius;
+		border-radius: @fs-checkbox-toggle-flag-border-radius;
 
 		&:before {
 			display: none;
