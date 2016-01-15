@@ -2,10 +2,18 @@
 
 # Changelog
 
+### 0.8.36
+
+* Added HTML label support to Navigation (Thanks @collegeman!)
+* Fixed accessibility issues with Background (Thanks @nhall!)
+* Fixed accessibility issues with Carousel (Thanks @nhall!)
+* Fixed accessibility issues with Checkbox
+* Fixed accessibility issues with Dropdown
+
 ### 0.8.35
 
 * Fixed issue with Analytics scroll depth interfering with bounce rate
-* Added `autoUpload` option and `start` method to upload
+* Added `autoUpload` option and `start` method to Upload
 * Fixed issue with Upload queued files parameter
 
 ### 0.8.34

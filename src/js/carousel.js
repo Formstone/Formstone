@@ -42,6 +42,15 @@
 
 		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
 
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaID = data.id;
+		} else {
+			data.ariaID = data.rawGuid;
+			this.attr("id", data.ariaID);
+		}
+
 		// Legacy browser support
 		if (!Formstone.support.transform) {
 			data.useMargin = true;
@@ -54,14 +63,14 @@
 			controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
 		if (data.controls && !data.customControls) {
-			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="carousel">';
-			controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="previous">' + data.labels.previous + '</button>';
-			controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="next">' + data.labels.next + '</button>';
+			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaID + '">';
+			controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
 		if (data.pagination) {
-			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="carousel" role="navigation">';
+			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaID + '" role="navigation">';
 			paginationHtml += '</div>';
 		}
 
@@ -166,6 +175,10 @@
 		disable.call(this, data);
 
 		$.fsMediaquery("unbind", data.rawGuid);
+
+		if (data.id !== data.ariaID) {
+			this.attr("id", "");
+		}
 
 		data.$controlItems.removeClass( [Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" ") )
 			.off(Events.namespace);

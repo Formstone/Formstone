@@ -1,6 +1,6 @@
 {
   "name": "formstone",
-  "version": "0.8.35",
+  "version": "0.8.36",
   "description": "Library of modular front end components.",
   "author": {
     "name": "Ben Plum",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "homepage": "http://formstone.it/",
   "dependencies": {
-    "jquery": "~2.2.0"
+    "jquery": ">=1.11.1"
   },
   "devDependencies": {
     "normalize-css": "~3.0.2",

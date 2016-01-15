@@ -18,7 +18,7 @@
 		data.radio = (this.attr("type") === "radio");
 		data.group = this.attr("name");
 
-		html += '<div class="' + RawClasses.marker + '">';
+		html += '<div class="' + RawClasses.marker + '" aria-hidden="true">';
 		html += '<div class="' + RawClasses.flag + '"></div>';
 
 		if (data.toggle) {

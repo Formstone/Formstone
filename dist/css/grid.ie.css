@@ -1,4 +1,4 @@
-/*! formstone v0.8.35 [grid.ie.css] 2015-12-30 | MIT License | formstone.it */
+/*! formstone v0.8.36 [grid.ie.css] 2016-01-15 | MIT License | formstone.it */
 
 .fs_grid_row {
   width: 300px;
@@ -35,11 +35,13 @@
 }
 .fs_grid_row_fluid {
   width: 96%;
+  width: -webkit-calc(100% - 40px);
   width: calc(100% - 40px);
 }
 @media screen and (max-width: 739px) {
   .fs_grid_row_fluid_sm {
     width: 96%;
+    width: -webkit-calc(100% - 40px);
     width: calc(100% - 40px);
   }
 }

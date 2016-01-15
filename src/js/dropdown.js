@@ -106,6 +106,12 @@
 
 		buildOptions(data);
 
+		if (data.links) {
+			this.attr("aria-hidden", "true");
+		} else {
+			data.$selected.add(data.$wrapper).attr("aria-hidden", "true");
+		}
+
 		if (!data.multiple) {
 			updateOption(originalIndex, data);
 		}
@@ -153,6 +159,10 @@
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
 			data.$wrapper.fsScrollbar("destroy");
+		}
+
+		if (data.links) {
+			this.removeAttr("aria-hidden");
 		}
 
 		data.$el[0].tabIndex    = data.tabIndex;
@@ -262,7 +272,7 @@
 
 	function buildOptions(data) {
 		var html = '',
-			j = 0;
+			j    = 0;
 
 		for (var i = 0, count = data.$allOptions.length; i < count; i++) {
 			var $option = data.$allOptions.eq(i),
@@ -280,7 +290,8 @@
 				html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
 			} else {
 				var opVal   = $option.val(),
-					opLabel = $option.data("label");
+					opLabel = $option.data("label"),
+					opType  = (data.links) ? "a" : 'button type="button"';
 
 				if (!$option.attr("value")) {
 					$option.attr("value", opVal);
@@ -290,6 +301,8 @@
 
 				if ($option.hasClass(RawClasses.item_placeholder)) {
 					classes.push(RawClasses.item_placeholder);
+
+					opType = "span";
 				}
 				if ($option.is(":selected")) {
 					classes.push(RawClasses.item_selected);
@@ -298,8 +311,23 @@
 					classes.push(RawClasses.item_disabled);
 				}
 
-				html += '<button type="button" class="' + classes.join(" ") + '" ';
-				html += 'data-value="' + opVal + '" tabindex="-1">';
+				html += '<' + opType + ' class="' + classes.join(" ") + '"';
+
+				if (data.links) {
+					if (opType === "span") {
+						html += ' aria-hidden="true"';
+					} else {
+						html += ' href="' + opVal + '"';
+
+						if (data.external) {
+							html += ' target="_blank"';
+						}
+					}
+				} else {
+					html += ' data-value="' + opVal + '"';
+				}
+
+				html += ' tabindex="-1">';
 
 				if (opLabel) {
 					html += opLabel;
@@ -307,7 +335,7 @@
 					html += Functions.decodeEntities( trimText($option.text(), data.trim) );
 				}
 
-				html += '</button>';
+				html += '</' + opType + '>';
 
 				j++;
 			}
@@ -466,10 +494,10 @@
 	 */
 
 	function onSelect(e) {
-		Functions.killEvent(e);
-
 		var $target = $(this),
 			data = e.data;
+
+		Functions.killEvent(e);
 
 		if (!data.disabled) {
 			var index = data.$items.index($target);
