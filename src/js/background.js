@@ -199,7 +199,7 @@
 
 	function loadImage(data, source, poster, firstLoad) {
 		var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-			$media = $('<div class="' + imageClasses + '"><img></div>'),
+			$media = $('<div class="' + imageClasses + '"><img alt=""></div>'),
 			$img = $media.find("img"),
 			newSource = source;
 

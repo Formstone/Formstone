@@ -95,7 +95,7 @@
 
 ### 0.8.20
 
-* Added `min-height` to Carousel items, resolves issue with accidientally empty carousels
+* Added `min-height` to Carousel items, resolves issue with accidentally empty carousels
 * Added ability to target same content element from multiple Navigations
 
 ### 0.8.19

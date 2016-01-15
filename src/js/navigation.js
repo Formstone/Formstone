@@ -112,7 +112,7 @@
 					.removeData("swap-linked")
 					.removeClass(data.handleClasses)
 					.off(data.dotGuid)
-					.text(data.originalLabel)
+					.html(data.originalLabel)
 					.fsSwap("destroy");
 
 		restoreLabel(data);
@@ -187,7 +187,7 @@
 							 });
 
 				if (data.label) {
-					data.$handle.text(data.labels.open);
+					data.$handle.html(data.labels.open);
 				}
 
 				addLocks(data);
@@ -215,7 +215,7 @@
 							 .off(Events.namespace);
 
 				if (data.label) {
-					data.$handle.text(data.labels.closed);
+					data.$handle.html(data.labels.closed);
 				}
 
 				clearLocks(data);
@@ -242,7 +242,7 @@
 		}, 0);
 
 		if (data.label) {
-			data.$handle.text(data.labels.closed);
+			data.$handle.html(data.labels.closed);
 		}
 	}
 
@@ -303,10 +303,10 @@
 				data.originalLabel = [];
 
 				for (var i = 0, count = data.$handle.length; i < count; i++) {
-					data.originalLabel[i] = data.$handle.eq(i).text();
+					data.originalLabel[i] = data.$handle.eq(i).html();
 				}
 			} else {
-				data.originalLabel = data.$handle.text();
+				data.originalLabel = data.$handle.html();
 			}
 		}
 	}
@@ -322,10 +322,10 @@
 		if (data.label) {
 			if (data.$handle.length > 1) {
 				for (var i = 0, count = data.$handle.length; i < count; i++) {
-					data.$handle.eq(i).text(data.originalLabel[i]);
+					data.$handle.eq(i).html(data.originalLabel[i]);
 				}
 			} else {
-				data.$handle.text(data.originalLabel);
+				data.$handle.html(data.originalLabel);
 			}
 		}
 	}
