@@ -201,7 +201,7 @@
 
 	function loadImage(data, source, poster, firstLoad) {
 		var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-			$media = $('<div class="' + imageClasses + '"><img></div>'),
+			$media = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
 			$img = $media.find("img"),
 			newSource = source;
 
@@ -261,7 +261,7 @@
 
 		if (!Formstone.isMobile) {
 			var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-				html = '<div class="' + videoClasses + '">';
+				html = '<div class="' + videoClasses + '" aria-hidden="true">';
 
 			html += '<video';
 			if (data.loop) {
@@ -346,7 +346,7 @@
 			} else {
 				var guid = data.guid + "_" + (data.youTubeGuid++),
 					youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-					html = '<div class="' + youTubeClasses + '">';
+					html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
 
 				html += '<div id="' + guid + '"></div>';
 				html += '</div>';

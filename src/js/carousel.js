@@ -32,7 +32,7 @@
 	function construct(data) {
 		var i;
 
-		data.thisClasses = [
+		data.carouselClasses = [
 			RawClasses.base,
 			data.theme,
 			data.customClass,
@@ -43,6 +43,15 @@
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
 
 		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
+
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaID = data.id;
+		} else {
+			data.ariaID = data.rawGuid;
+			this.attr("id", data.ariaID);
+		}
 
 		// Legacy browser support
 		if (!Formstone.support.transform) {
@@ -56,34 +65,32 @@
 			controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
 		if (data.controls && !data.customControls) {
-			controlsHtml += '<div class="' + RawClasses.controls + '">';
-			controlsHtml += '<button type="button" class="' + controlPrevClasses + '">' + data.labels.previous + '</button>';
-			controlsHtml += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
+			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaID + '">';
+			controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
+			controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
 		if (data.pagination) {
-			paginationHtml += '<div class="' + RawClasses.pagination + '">';
+			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaID + '" role="navigation">';
 			paginationHtml += '</div>';
 		}
 
 		if (data.autoHeight) {
-			data.thisClasses.push(RawClasses.auto_height);
+			data.carouselClasses.push(RawClasses.auto_height);
 		}
 
 		if (data.contained) {
-			data.thisClasses.push(RawClasses.contained);
+			data.carouselClasses.push(RawClasses.contained);
 		}
 
 		if (data.single) {
-			data.thisClasses.push(RawClasses.single);
+			data.carouselClasses.push(RawClasses.single);
 		}
 
-		data.thisClasses = data.thisClasses;
-
 		// Modify dom
-		this.addClass(data.thisClasses.join(" "))
-			.wrapInner('<div class="' + RawClasses.wrapper + '"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
+		this.addClass( data.carouselClasses.join(" ") )
+			.wrapInner('<div class="' + RawClasses.wrapper + '" aria-live="polite"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
 			.append(controlsHtml)
 			.wrapInner('<div class="' + RawClasses.viewport + '"></div>')
 			.append(paginationHtml);
@@ -155,8 +162,8 @@
 
 		cacheInstances();
 
-		data.thisClasses.push(RawClasses.enabled);
-		data.thisClasses.push(RawClasses.animated);
+		data.carouselClasses.push(RawClasses.enabled);
+		data.carouselClasses.push(RawClasses.animated);
 	}
 
 	/**
@@ -173,6 +180,10 @@
 		disable.call(this, data);
 
 		$.fsMediaquery("unbind", data.rawGuid);
+
+		if (data.id !== data.ariaID) {
+			this.attr("id", "");
+		}
 
 		data.$controlItems.removeClass( [Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" ") )
 			.off(Events.namespace);
@@ -196,7 +207,7 @@
 			data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom, RawClasses.visible ].join(" ") );
 		}
 
-		this.removeClass(data.thisClasses.join(" "));
+		this.removeClass(data.carouselClasses.join(" "));
 
 		cacheInstances();
 	}
@@ -696,9 +707,9 @@
 
 		for (var i = 0, count = data.pages.length; i < count; i++) {
 			if (i === index) {
-				data.pages[i].$items.addClass(RawClasses.visible);
+				data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
 			} else {
-				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next );
+				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next ).attr("aria-hidden", "true");
 			}
 		}
 
