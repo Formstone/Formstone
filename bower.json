@@ -10,7 +10,7 @@
   "license": "MIT",
   "homepage": "http://formstone.it/",
   "dependencies": {
-    "jquery": ">=1.11.1"
+    "jquery": "~2.2.0"
   },
   "devDependencies": {
     "normalize-css": "~3.0.2",
