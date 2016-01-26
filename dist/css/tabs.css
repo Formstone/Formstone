@@ -1,4 +1,4 @@
-/*! formstone v0.8.36 [tabs.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [tabs.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -83,9 +83,6 @@
   box-sizing: border-box;
   border: none;
   cursor: pointer;
-}
-.fs-tabs-tab.fs-tabs-enabled:focus {
-  outline: none;
 }
 .fs-tabs-content.fs-tabs-enabled {
   box-sizing: border-box;

@@ -1,4 +1,4 @@
-/*! formstone v0.8.36 [checkbox.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [checkbox.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -72,10 +72,6 @@
   cursor: pointer;
   margin: 0 0 10px 0;
   overflow: hidden;
-}
-.fs-checkbox.fs-checkbox-enabled:focus {
-  box-shadow: none;
-  outline: none;
 }
 .fs-checkbox,
 .fs-checkbox:after,
