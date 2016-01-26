@@ -1,4 +1,4 @@
-/*! formstone v0.8.36 [site.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [site.css] 2016-01-26 | MIT License | formstone.it */
 
 /* ==================================================================
    Imports
@@ -560,7 +560,7 @@ pre[class*="language-"] {
 .token.entity {
   cursor: help;
 }
-/*! formstone v0.8.36 [grid.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [grid.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -609,14 +609,12 @@ pre[class*="language-"] {
 .fs_grid_row_fluid,
 .fs-grid-fluid .fs-row {
   width: 96%;
-  width: -webkit-calc(100% - 40px);
   width: calc(100% - 40px);
 }
 @media screen and (max-width: 739px) {
   .fs_grid_row_fluid_sm,
   .fs-grid-sm-fluid .fs-row {
     width: 96%;
-    width: -webkit-calc(100% - 40px);
     width: calc(100% - 40px);
   }
 }
@@ -1424,7 +1422,7 @@ pre[class*="language-"] {
   }
 }
 
-/*! formstone v0.8.36 [background.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [background.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1548,7 +1546,7 @@ pre[class*="language-"] {
   z-index: 0;
 }
 
-/*! formstone v0.8.36 [carousel.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [carousel.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1903,7 +1901,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.36 [checkbox.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [checkbox.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -1977,10 +1975,6 @@ pre[class*="language-"] {
   cursor: pointer;
   margin: 0 0 10px 0;
   overflow: hidden;
-}
-.fs-checkbox.fs-checkbox-enabled:focus {
-  box-shadow: none;
-  outline: none;
 }
 .fs-checkbox,
 .fs-checkbox:after,
@@ -2200,7 +2194,7 @@ pre[class*="language-"] {
   float: right;
 }
 
-/*! formstone v0.8.36 [dropdown.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [dropdown.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2286,10 +2280,6 @@ pre[class*="language-"] {
 		 * @description Option item
 		 */
 }
-.fs-dropdown:focus {
-  box-shadow: none;
-  outline: none;
-}
 .fs-dropdown,
 .fs-dropdown:after,
 .fs-dropdown:before,
@@ -2311,9 +2301,6 @@ pre[class*="language-"] {
   left: 0;
   opacity: 0;
   z-index: -1;
-}
-.fs-dropdown-element,
-.fs-dropdown-element:focus {
   outline: none;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   -webkit-tap-highlight-color: transparent;
@@ -2559,7 +2546,7 @@ pre[class*="language-"] {
   border-radius: 0 3px 3px 0;
 }
 
-/*! formstone v0.8.36 [lightbox.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [lightbox.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -2839,9 +2826,6 @@ pre[class*="language-"] {
   text-indent: 200%;
   white-space: nowrap;
 }
-.fs-lightbox-close:focus {
-  outline: none;
-}
 .fs-lightbox-close:before {
   position: absolute;
   top: 0;
@@ -3006,9 +2990,6 @@ pre[class*="language-"] {
           transition: opacity 0.15s linear, visibility 0.15s linear;
   white-space: nowrap;
   visibility: visible;
-}
-.fs-lightbox-control:focus {
-  outline: none;
 }
 .fs-lightbox-control:before {
   width: 0;
@@ -3267,7 +3248,7 @@ pre[class*="language-"] {
           transform: translate(0, 0);
 }
 
-/*! formstone v0.8.36 [number.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [number.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3372,9 +3353,6 @@ pre[class*="language-"] {
 .no-opacity .fs-number-arrow {
   text-indent: -999999px;
 }
-.fs-number-arrow:focus {
-  outline: none;
-}
 .fs-number-arrow:after {
   width: 0;
   height: 0;
@@ -3422,7 +3400,7 @@ pre[class*="language-"] {
 	.stepper.disabled .stepper-arrow { background: #fff; border-color: #eee; cursor: default; }
 */
 
-/*! formstone v0.8.36 [pagination.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [pagination.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3534,9 +3512,6 @@ pre[class*="language-"] {
   border: none;
   display: block;
 }
-.fs-pagination-control:focus {
-  outline: none;
-}
 .fs-pagination-control_previous {
   float: left;
 }
@@ -3561,7 +3536,7 @@ pre[class*="language-"] {
   opacity: 0;
 }
 
-/*! formstone v0.8.36 [range.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [range.css] 2016-01-26 | MIT License | formstone.it */
 
 .fs-range {
   width: 100%;
@@ -3714,7 +3689,7 @@ pre[class*="language-"] {
   cursor: default;
 }
 
-/*! formstone v0.8.36 [scrollbar.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [scrollbar.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3869,7 +3844,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.36 [tabs.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [tabs.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -3955,9 +3930,6 @@ pre[class*="language-"] {
   border: none;
   cursor: pointer;
 }
-.fs-tabs-tab.fs-tabs-enabled:focus {
-  outline: none;
-}
 .fs-tabs-content.fs-tabs-enabled {
   box-sizing: border-box;
   display: none;
@@ -3980,7 +3952,7 @@ pre[class*="language-"] {
   display: block;
 }
 
-/*! formstone v0.8.36 [tooltip.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [tooltip.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4132,7 +4104,7 @@ pre[class*="language-"] {
   border-bottom: 5px solid #111111;
 }
 
-/*! formstone v0.8.36 [upload.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [upload.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -4585,7 +4557,6 @@ pre[class*="language-"] {
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: 270px;
   height: 100%;
-  height: -webkit-calc(100% + 60px);
   height: calc(100% + 60px);
   position: fixed;
   top: 0;
@@ -4674,7 +4645,6 @@ pre[class*="language-"] {
 .fs-navigation-overlay-content:before {
   width: 100%;
   height: 100%;
-  height: -webkit-calc(100% + 60px);
   height: calc(100% + 60px);
   position: fixed;
   top: 0;

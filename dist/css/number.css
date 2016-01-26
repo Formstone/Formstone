@@ -1,4 +1,4 @@
-/*! formstone v0.8.36 [number.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [number.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -102,9 +102,6 @@
 }
 .no-opacity .fs-number-arrow {
   text-indent: -999999px;
-}
-.fs-number-arrow:focus {
-  outline: none;
 }
 .fs-number-arrow:after {
   width: 0;

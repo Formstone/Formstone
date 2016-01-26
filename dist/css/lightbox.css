@@ -1,4 +1,4 @@
-/*! formstone v0.8.36 [lightbox.css] 2016-01-15 | MIT License | formstone.it */
+/*! formstone v0.8.36 [lightbox.css] 2016-01-26 | MIT License | formstone.it */
 
 /**
 	 * @class
@@ -278,9 +278,6 @@
   text-indent: 200%;
   white-space: nowrap;
 }
-.fs-lightbox-close:focus {
-  outline: none;
-}
 .fs-lightbox-close:before {
   position: absolute;
   top: 0;
@@ -445,9 +442,6 @@
           transition: opacity 0.15s linear, visibility 0.15s linear;
   white-space: nowrap;
   visibility: visible;
-}
-.fs-lightbox-control:focus {
-  outline: none;
 }
 .fs-lightbox-control:before {
   width: 0;
