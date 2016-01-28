@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.37
+
+* Fixed Lightbox event binding issue
+
 ### 0.8.36
 
 * Added HTML label support to Navigation (Thanks @collegeman!)

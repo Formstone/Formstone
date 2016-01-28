@@ -357,7 +357,7 @@
 				// Clean up
 				Instance.$lightbox.off(Events.namespace);
 				Instance.$container.off(Events.namespace);
-				$Window.off(Events.namespace);
+				$Window.off(Events.keyDown);
 				$Body.off(Events.namespace);
 
 				Instance.$overlay.remove();
