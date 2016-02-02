@@ -19,9 +19,13 @@
 
 	@fs-range-track-margin: 					10px 0;
 
+	// Hover
+
+	@fs-range-hover-track-border-color:			@fs-light-primary_900;
+
 	// Fill
 
-	@fs-range-fill-color:						@fs-light-primary_400;
+	@fs-range-fill-color:						@fs-light-primary_300;
 
 	// Track
 
@@ -99,7 +103,7 @@
 
 	.@{theme_name}&-focus &-track,
 	.no-touchevents .@{theme_name}:hover &-track {
-
+		border-color: @fs-range-hover-track-border-color;
 	}
 
 	.@{theme_name}&-focus &-marker,
@@ -145,7 +149,7 @@
 	}
 
 	.@{theme_name}&-vertical &-marker {
-		margin: -((@fs-range-marker-size / 2) /* + @fs-range-marker-border-width */) 0 0 -((@fs-range-marker-size / 4) /* + @fs-range-marker-border-width */);
+		margin: -(@fs-range-marker-size / 2) 0 0 @fs-range-marker-margin;
 	}
 
 	.@{theme_name}&-vertical &-label {

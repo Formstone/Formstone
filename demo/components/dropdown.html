@@ -27,9 +27,27 @@
 					<span class="demo_label">Component</span>
 					<div class="demo_select demo_select_wide">
 						<select class="js-component_select" data-dropdown-options='{"links":true}'>
-							<option value="">Checkbox</option>
-							<option value="">Cookie</option>
-							<option value="">Dropdown</option>
+							<option value="">Select</option>
+							<option value="../components/grid.html">Grid</option>
+							<option value="../components/cookie.html">Cookie</option>
+							<option value="../components/mediaquery.html">Media Query</option>
+							<option value="../components/background.html">Background</option>
+							<option value="../components/carousel.html">Carousel</option>
+							<option value="../components/checkbox.html">Checkbox</option>
+							<option value="../components/dropdown.html">Dropdown</option>
+							<option value="../components/equalize.html">Equalize</option>
+							<option value="../components/lightbox.html">Lightbox</option>
+							<option value="../components/navigation.html">Navigation</option>
+							<option value="../components/number.html">Number</option>
+							<option value="../components/pagination.html">Pagination</option>
+							<option value="../components/range.html">Range</option>
+							<option value="../components/scrollbar.html">Scrollbar</option>
+							<option value="../components/swap.html">Swap</option>
+							<option value="../components/tabs.html">Tabs</option>
+							<option value="../components/tooltip.html">Tooltip</option>
+							<option value="../components/touch.html">Touch</option>
+							<option value="../components/transition.html">Transition</option>
+							<option value="../components/upload.html">Upload</option>
 						</select>
 					</div>
 				</div>
@@ -37,13 +55,14 @@
 					<span class="demo_label">Theme</span>
 					<div class="demo_select">
 						<select class="js-theme_select">
-							<option value="fs-light" selected>Light</option>
+							<option value="fs-light">Light</option>
 							<option value="fs-dark">Dark</option>
-							<option value="">Raw</option>
+							<option value="">No Theme</option>
 						</select>
 					</div>
 				</div>
 			</div>
+			<!--<div class="demo_bar"><div class="demo_field"><span class="demo_label">Component</span><div class="demo_select demo_select_wide"><select class="js-component_select" data-dropdown-options='{"links":true}'><option value="">Checkbox</option><option value="">Cookie</option><option value="">Dropdown</option></select></div></div><div class="demo_field"><span class="demo_label">Theme</span><div class="demo_select"><select class="js-theme_select"><option value="fs-light" selected>Light</option><option value="fs-dark">Dark</option><option value="">Raw</option></select></div></div></div>-->
 			<div class="fs-row">
 				<div class="fs-cell">
 					<h1 id="dropdown-demo">Dropdown Demo</h1>
@@ -73,41 +92,9 @@
 					}
 					</style>
 
-					<script>
-					/*
-						function toggleEnabled(e) {
-							e.preventDefault();
-							e.stopPropagation();
-
-							var $target = $(this),
-								$select = $target.parents(".form_fieldset").find("select");
-
-							if ($target.hasClass("toggle_item")) {
-								// Toggle item
-								if ($select.find("option").eq(0).is(":disabled")) {
-									$select.dropdown("enable", "1");
-									$target.text("Disable Item '1'");
-								} else {
-									$select.dropdown("disable", "1");
-									$target.text("Enable Item '1'");
-								}
-							} else {
-								// Toggle select
-								if ($select.is(":disabled")) {
-									$select.dropdown("enable");
-									$target.text("Disable");
-								} else {
-									$select.dropdown("disable");
-									$target.text("Enable");
-								}
-							}
-						}
-					*/
-					</script>
-
 					<form action="#" method="GET" class="form demo_form">
 						<div class="fs-row">
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>Basic</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_basic" class="form_label">Label</label>
@@ -196,7 +183,7 @@
 									</select>
 								</fieldset>
 							</div>
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>Multiple</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_multiple" class="form_label">Label</label>
@@ -216,7 +203,7 @@
 							</div>
 						</div>
 						<div class="fs-row">
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>Links</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_links" class="form_label">Label</label>
@@ -227,7 +214,7 @@
 									</select>
 								</fieldset>
 							</div>
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>External Links</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_external" class="form_label">Label</label>
@@ -238,7 +225,7 @@
 									</select>
 								</fieldset>
 							</div>
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>Cover</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_cover" class="form_label">Label</label>
@@ -251,7 +238,7 @@
 									</select>
 								</fieldset>
 							</div>
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>Custom Class</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_custom_1" class="form_label">Label</label>
@@ -264,7 +251,7 @@
 									</select>
 								</fieldset>
 							</div>
-							<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
+							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
 								<h4>HTML Options</h4>
 								<fieldset class="form_fieldset">
 									<label for="demo_custom_2" class="form_label">Label</label>
@@ -277,70 +264,8 @@
 									</select>
 								</fieldset>
 							</div>
-
-							<!--
-		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
-			<h4>Disable</h4>
-			<fieldset class="form_fieldset">
-				<label for="demo_disable" class="form_label">Label</label>
-				<select name="demo_disable" id="demo_disable" disabled>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
-					<option value="4">Four</option>
-					<option value="5">Five</option>
-				</select>
-				<button type="button" class="form_button toggle">Enable</button>
-			</fieldset>
-		</div>
-		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
-			<h4>Disable Item</h4>
-			<fieldset class="form_fieldset">
-				<label for="demo_disable_item" class="form_label">Label</label>
-				<select name="demo_disable_item" id="demo_disable_item">
-					<option value="1" disabled>One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
-					<option value="4">Four</option>
-					<option value="5">Five</option>
-				</select>
-				<button type="button" class="form_button toggle toggle_item">Enable Item '1'</button>
-			</fieldset>
-		</div>
--->
-
-							<!--
-		<div class="fs-cell fs-sm-half fs-md-half fs-lg-half">
-			<h4>Overflow</h4>
-			<div class="scroll_area">
-				<fieldset class="form_fieldset">
-					<label for="demo_custom" class="form_label">Label</label>
-					<select name="demo_custom" id="demo_custom" data-dropdown-options='{"customClass":"custom"}'>
-						<option value="1" data-label="&lt;strong&gt;One  &lt;/strong&gt;">One</option>
-						<option value="2" data-label="&lt;strong&gt;Two  &lt;/strong&gt;">Two</option>
-						<option value="3" data-label="&lt;strong&gt;Three&lt;/strong&gt;">Three</option>
-						<option value="4" data-label="&lt;strong&gt;Four &lt;/strong&gt;">Four</option>
-						<option value="5" data-label="&lt;strong&gt;Five &lt;/strong&gt;">Five</option>
-					</select>
-				</fieldset>
-			</div>
-		</div>
--->
-
 						</div>
 					</form>
-
-					<script>
-					// $(".demo_form select").dropdown();
-
-					/*
-						$(".demo_form select").on("change", function() {
-							console.log($(this).val());
-						});
-					*/
-
-					// $(".demo_form").on("click", ".toggle", toggleEnabled);
-					</script>
 					<!-- END: DEMO -->
 				</div>
 			</div>

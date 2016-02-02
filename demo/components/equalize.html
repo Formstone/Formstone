@@ -27,9 +27,27 @@
 					<span class="demo_label">Component</span>
 					<div class="demo_select demo_select_wide">
 						<select class="js-component_select" data-dropdown-options='{"links":true}'>
-							<option value="">Checkbox</option>
-							<option value="">Cookie</option>
-							<option value="">Dropdown</option>
+							<option value="">Select</option>
+							<option value="../components/grid.html">Grid</option>
+							<option value="../components/cookie.html">Cookie</option>
+							<option value="../components/mediaquery.html">Media Query</option>
+							<option value="../components/background.html">Background</option>
+							<option value="../components/carousel.html">Carousel</option>
+							<option value="../components/checkbox.html">Checkbox</option>
+							<option value="../components/dropdown.html">Dropdown</option>
+							<option value="../components/equalize.html">Equalize</option>
+							<option value="../components/lightbox.html">Lightbox</option>
+							<option value="../components/navigation.html">Navigation</option>
+							<option value="../components/number.html">Number</option>
+							<option value="../components/pagination.html">Pagination</option>
+							<option value="../components/range.html">Range</option>
+							<option value="../components/scrollbar.html">Scrollbar</option>
+							<option value="../components/swap.html">Swap</option>
+							<option value="../components/tabs.html">Tabs</option>
+							<option value="../components/tooltip.html">Tooltip</option>
+							<option value="../components/touch.html">Touch</option>
+							<option value="../components/transition.html">Transition</option>
+							<option value="../components/upload.html">Upload</option>
 						</select>
 					</div>
 				</div>
@@ -37,20 +55,21 @@
 					<span class="demo_label">Theme</span>
 					<div class="demo_select">
 						<select class="js-theme_select">
-							<option value="fs-light" selected>Light</option>
+							<option value="fs-light">Light</option>
 							<option value="fs-dark">Dark</option>
-							<option value="">Raw</option>
+							<option value="">No Theme</option>
 						</select>
 					</div>
 				</div>
 			</div>
+			<!--<div class="demo_bar"><div class="demo_field"><span class="demo_label">Component</span><div class="demo_select demo_select_wide"><select class="js-component_select" data-dropdown-options='{"links":true}'><option value="">Checkbox</option><option value="">Cookie</option><option value="">Dropdown</option></select></div></div><div class="demo_field"><span class="demo_label">Theme</span><div class="demo_select"><select class="js-theme_select"><option value="fs-light" selected>Light</option><option value="fs-dark">Dark</option><option value="">Raw</option></select></div></div></div>-->
 			<div class="fs-row">
 				<div class="fs-cell">
 					<h1 id="equalize-demo">Equalize Demo</h1>
 					<!-- START: DEMO -->
 					<style>
 					.equalize_target {
-						background: #eee;
+						background: #eceff1;
 						margin-bottom: 10px;
 						padding: 15px;
 					}
@@ -60,7 +79,7 @@
 					}
 					
 					.equalize_child {
-						background: #ccc;
+						background: #CFD8DC;
 					}
 					
 					.equalize_group {
@@ -74,18 +93,11 @@
 					
 					.equalize img {
 						max-width: 100%;
-						/* position: relative; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); */
 					}
 					</style>
 
-					<script>
-					$(function() {
-						$(".equalize").equalize();
-					});
-					</script>
-
 					<h4>Basic</h4>
-					<div class="fs-row equalize">
+					<div class="fs-row equalize js-equalize">
 						<div class="fs-cell fs-all-third equalize_target">
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur. Donec id elit non mi porta gravida at eget metus.</p>
 						</div>
@@ -98,7 +110,7 @@
 					</div>
 
 					<h4>Min Width</h4>
-					<div class="fs-row equalize" data-equalize-options='{"minWidth":"740px"}'>
+					<div class="fs-row equalize js-equalize" data-equalize-options='{"minWidth":"740px"}'>
 						<div class="fs-cell fs-sm-full fs-md-third fs-lg-third equalize_target">
 							<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
 						</div>
@@ -111,7 +123,7 @@
 					</div>
 
 					<h4>Children</h4>
-					<div class="fs-row equalize" data-equalize-options='{"target":".equalize_child"}'>
+					<div class="fs-row equalize js-equalize" data-equalize-options='{"target":".equalize_child"}'>
 						<div class="fs-cell fs-all-third equalize_target">
 							<p class="equalize_child">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
 						</div>
@@ -124,7 +136,7 @@
 					</div>
 
 					<h4>Groups</h4>
-					<div class="fs-row equalize" data-equalize-options='{"target":[".equalize_one",".equalize_two"]}'>
+					<div class="fs-row equalize js-equalize" data-equalize-options='{"target":[".equalize_one",".equalize_two"]}'>
 						<div class="fs-cell fs-all-third equalize_target">
 							<p class="equalize_one equalize_group">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras mattis consectetur purus sit amet fermentum.</p>
 							<p class="equalize_two">Donec ullamcorper nulla non metus auctor fringilla.</p>
@@ -140,15 +152,15 @@
 					</div>
 
 					<h4>Images</h4>
-					<div class="fs-row equalize">
+					<div class="fs-row equalize js-equalize">
 						<div class="fs-cell fs-all-third equalize_target">
-							<img src="//spacehold.it/300x300/1" alt="">
+							<img src="//spacehold.it/400x300/1.jpg" alt="">
 						</div>
 						<div class="fs-cell fs-all-third equalize_target">
-							<img src="//spacehold.it/300x200/2" alt="">
+							<img src="//spacehold.it/400x200/2.jpg" alt="">
 						</div>
 						<div class="fs-cell fs-all-third equalize_target">
-							<img src="//spacehold.it/300x400/3" alt="">
+							<img src="//spacehold.it/400x400/3.jpg" alt="">
 						</div>
 					</div>
 					<!-- END: DEMO -->

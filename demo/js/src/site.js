@@ -71,7 +71,8 @@
 					$.mediaquery({
 						minWidth: [ this.minXS, this.minSM, this.minMD, this.minLG, this.minXL ],
 						maxWidth: [ this.maxXL, this.maxLG, this.maxMD, this.maxSM, this.maxXS ],
-						minHeight: [ this.minHTsm, this.minHT ]
+						minHeight: [ this.minHTsm, this.minHT ],
+						maxHeight: [ this.maxHT, this.maxHTsm ]
 					});
 				}
 

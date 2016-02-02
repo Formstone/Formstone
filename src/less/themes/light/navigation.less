@@ -26,14 +26,15 @@
 	@fs-navigation-toggle-background:					@fs-light-white;
 	@fs-navigation-toggle-border-color:					@fs-light-primary_500;
 	@fs-navigation-toggle-border-size:					1px;
-	@fs-navigation-toggle-border-radius:				3px;
+	@fs-navigation-toggle-border-radius:				2px;
+	@fs-navigation-toggle-padding:						20px;
 
 	// Handle
 
 	@fs-navigation-handle-background:					@fs-light-white;
 	@fs-navigation-handle-border-color:					@fs-light-primary_500;
 	@fs-navigation-handle-border-size:					1px;
-	@fs-navigation-handle-border-radius:				3px;
+	@fs-navigation-handle-border-radius:				2px;
 	@fs-navigation-handle-text-color:					@fs-light-primary_900;
 	@fs-navigation-handle-font-size:					14px;
 	@fs-navigation-handle-height:						40px;
@@ -44,6 +45,7 @@
 	@fs-navigation-offscreen-background:				@fs-light-white;
 	@fs-navigation-offscreen-width:						270px;
 	@fs-navigation-offscreen-zindex:                    0;
+	@fs-navigation-offscreen-padding:					20px;
 
 	@fs-navigation-offscreen-transition-speed:			0.2s;
 	@fs-navigation-offscreen-transition-timing:			ease;
@@ -51,29 +53,16 @@
 	@fs-navigation-offscreen-content-box-shadow-color: 	rgba(0, 0, 0, 0.15);
 	@fs-navigation-offscreen-content-box-shadow-blur: 	2px;
 
-	@fs-navigation-overlay-zindex:						2;
+	@fs-navigation-overlay-zindex:						3;
 
 	@fs-navigation-overlay-content-background:			@fs-light-white;
 	@fs-navigation-overlay-content-opacity:				75;
-	@fs-navigation-overlay-content-zindex:				1;
+	@fs-navigation-overlay-content-zindex:				2;
 
 	@fs-navigation-push-zindex:							0;
 	@fs-navigation-push-content-zindex:					1;
 
-
-	/**
-	 * @class
-	 * @name .fs-navigation-element
-	 * @type element
-	 * @description Target elmement
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation
-	 * @type element
-	 * @description Base widget class
-	 */
+	// theme
 
 	.@{theme_name}&-enabled {
 		margin: @fs-navigation-margin;
@@ -90,55 +79,21 @@
 		user-select: none !important;
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-nav
-	 * @type element
-	 * @description Toggle navigation
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-nav.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
+	// toggle
 
 	.@{theme_name}&-toggle-nav&-enabled {
 		background: @fs-navigation-toggle-background;
 		border: @fs-navigation-toggle-border-size solid @fs-navigation-toggle-border-color;
 		border-width: 0 @fs-navigation-toggle-border-size @fs-navigation-toggle-border-size;
 		border-radius: 0 0 @fs-navigation-toggle-border-radius @fs-navigation-toggle-border-radius;
+		padding: @fs-navigation-toggle-padding;
 	}
-
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-nav.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
 
 	.@{theme_name}&-toggle-nav&-open {
 
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-handle
-	 * @type element
-	 * @description Toggle handle
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-handle.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-toggle-handle.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
+	// toggle handle
 
 	.@{theme_name}&-toggle-handle&-enabled {
 		width: 100%;
@@ -162,121 +117,13 @@
 		border-radius: @fs-navigation-handle-border-radius @fs-navigation-handle-border-radius 0 0;
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-nav
-	 * @type element
-	 * @description Overlay nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-nav.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-nav.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animated state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-nav.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-left-nav
-	 * @type modifier
-	 * @description Indicates left hand nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-right-nav
-	 * @type modifier
-	 * @description Indicates right hand nav
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-push-nav
-	 * @type element
-	 * @description Push nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-nav.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-nav.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animated state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-nav.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-left-nav
-	 * @type modifier
-	 * @description Indicates left hand nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-right-nav
-	 * @type modifier
-	 * @description Indicates right hand nav
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-nav
-	 * @type element
-	 * @description Reveal nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-nav.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-nav.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animated state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-nav.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-left-nav
-	 * @type modifier
-	 * @description Indicates left hand nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-right-nav
-	 * @type modifier
-	 * @description Indicates right hand nav
-	 */
+	// Navs
 
 	.@{theme_name}&-push-nav&-enabled,
 	.@{theme_name}&-reveal-nav&-enabled,
 	.@{theme_name}&-overlay-nav&-enabled {
 		background: @fs-navigation-offscreen-background;
+		padding: @fs-navigation-offscreen-padding;
 	}
 
 	.@{theme_name}&-push-nav&-enabled,
@@ -314,10 +161,6 @@
 
 	}
 
-	// reveal
-
-
-
 	// push / overlay
 
 	.@{theme_name}&-push-left-nav&-enabled,
@@ -344,12 +187,10 @@
 		z-index: @fs-navigation-overlay-zindex;
 	}
 
-	// .@{theme_name}&-overlay-left-nav&-enabled {
 	.@{theme_name}&-overlay-left-nav&-open {
 		box-shadow: @fs-navigation-offscreen-content-box-shadow-blur 0 @fs-navigation-offscreen-content-box-shadow-blur @fs-navigation-offscreen-content-box-shadow-color;
 	}
 
-	// .@{theme_name}&-overlay-right-nav&-enabled {
 	.@{theme_name}&-overlay-right-nav&-open {
 		box-shadow: -(@fs-navigation-offscreen-content-box-shadow-blur) 0 @fs-navigation-offscreen-content-box-shadow-blur @fs-navigation-offscreen-content-box-shadow-color;
 	}
@@ -374,31 +215,7 @@
 		}
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-handle
-	 * @type element
-	 * @description Overlay handle
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-handle.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-push-handle
-	 * @type element
-	 * @description Push handle
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-handle.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
+	// handles
 
 	.@{theme_name}&-push-handle&-enabled,
 	.@{theme_name}&-reveal-handle&-enabled,
@@ -418,18 +235,7 @@
 		user-select: none;
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-content:before
-	 * @type element
-	 * @description Overlay mask
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-overlay-content.fs-navigation-open:before
-	 * @type modifier
-	 * @description Indicates open state
-	 */
+	// content
 
 	.@{theme_name}&-overlay-content:before {
 		background: @fs-navigation-overlay-content-background;
@@ -446,81 +252,7 @@
 		visibility: visible;
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-push-content
-	 * @type element
-	 * @description Target page content
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-content.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-content.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animted state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-content.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-push-left-content
-	 * @type modifier
-	 * @description Indicates left hand nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-push-right-content
-	 * @type modifier
-	 * @description Indicates right hand nav
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-content
-	 * @type element
-	 * @description Target page content
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-content.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-content.fs-navigation-animated
-	 * @type modifier
-	 * @description Indicates animted state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-content.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-left-content
-	 * @type modifier
-	 * @description Indicates left hand nav
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-reveal-right-content
-	 * @type modifier
-	 * @description Indicates right hand nav
-	 */
+	// Reveal
 
 	.@{theme_name}&-reveal-content&-enabled,
 	.@{theme_name}&-push-content&-enabled {
@@ -553,47 +285,23 @@
 
 	.@{theme_name}&-reveal-left-content&-open,
 	.@{theme_name}&-push-left-content&-open {
-		transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
+		transform: translateX(@fs-navigation-offscreen-width);
 
 		.csstransforms3d & {
-			transform: translateX(@fs-navigation-offscreen-width);
+			transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
 		}
 	}
 
 	.@{theme_name}&-reveal-right-content&-open,
 	.@{theme_name}&-push-right-content&-open {
-		transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
+		transform: translateX(-(@fs-navigation-offscreen-width));
 
 		.csstransforms3d & {
-			transform: translateX(-(@fs-navigation-offscreen-width));
+			transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
 		}
 	}
 
-	/**
-	 * @class
-	 * @name .fs-navigation-handle
-	 * @type element
-	 * @description Click target to toggle navigation
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-handle.fs-navigation-open
-	 * @type modifier
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-navigation-handle.fs-navigation-enabled
-	 * @type modifier
-	 * @description Indicates enabled state
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-navigation-handle:after
-	 * @type element
-	 * @description Icon displayed in handle
-	 */
+	// Handles
 
 	.@{theme_name}&-handle&-enabled {
 		position: relative;

@@ -8,8 +8,6 @@
 
 ## Utility
 
-* [Analytics](components/analytics.html)
-* [ASAP](components/asap.html)
 * [Cookie](components/cookie.html)
 * [Media Query](components/mediaquery.html)
 

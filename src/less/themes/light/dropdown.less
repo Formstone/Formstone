@@ -62,9 +62,7 @@
 	@fs-dropdown-item-text-color:						@fs-light-primary_900;
 	@fs-dropdown-item-font-size:						14px;
 	@fs-dropdown-item-background-color:					@fs-light-white;
-	@fs-dropdown-item-border-radius:					4px;
 	@fs-dropdown-item-line-height:						1.4;
-	@fs-dropdown-item-margin:							2px;
 	@fs-dropdown-item-padding:							10px 15px;
 
 	@fs-dropdown-item-hover-text-color:					@fs-light-black;
@@ -145,10 +143,8 @@
 
 	&.@{theme_name} &-item {
 		background: @fs-dropdown-item-background-color;
-		border-radius: @fs-dropdown-item-border-radius;
 		color: @fs-dropdown-item-text-color;
 		font-size: @fs-dropdown-item-font-size;
-		margin: @fs-dropdown-item-margin;
 		line-height: @fs-dropdown-item-line-height;
 		padding: @fs-dropdown-item-padding;
 		text-align: left;
@@ -297,6 +293,7 @@
 		}
 
 		.fs-scrollbar-content {
+			border: none;
 			max-height: @fs-dropdown-max-height;
 			height: auto;
 		}

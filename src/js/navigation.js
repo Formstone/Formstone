@@ -54,7 +54,7 @@
 
 		data.contentClasses = [
 			RawClasses.content.replace(baseClass, typeClass),
-			data.rawGuid
+			classGroup
 		].join(" ");
 
 		data.contentClassesOpen = [

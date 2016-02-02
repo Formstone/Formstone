@@ -10,26 +10,20 @@
 
 	//Config
 
-	@fs-tabs-tab-background-color:				#ccc;
-	@fs-tabs-tab-border-radius:					2px 2px 0 0;
+	@fs-tabs-tab-background-color:				@fs-light-primary_400;
+	@fs-tabs-tab-border-color:					@fs-light-primary_600;
+	@fs-tabs-tab-border-radius:					2px;
 	@fs-tabs-tab-font-size:						14px;
-	@fs-tabs-tab-text-color:					#fff;
+	@fs-tabs-tab-text-color:					@fs-light-primary_900;
 	@fs-tabs-tab-margin:						0 5px 0 0;
 	@fs-tabs-tab-padding:						10px 20px;
 
 	// Hover
-	@fs-tabs-tab-hover-background-color:		#bbb;
+	@fs-tabs-tab-hover-background-color:		@fs-light-primary_300;
 
 	// Active
-	@fs-tabs-tab-active-background-color:		#999;
-	@fs-tabs-tab-active-text-color:				#fff;
-
-	// Content
-
-	@fs-tabs-content-border-color:				#999;
-	@fs-tabs-content-border-radius:				0 2px 2px 2px;
-	@fs-tabs-content-margin:					0 0 10px 0;
-	@fs-tabs-content-padding:					20px;
+	@fs-tabs-tab-active-background-color:		@fs-light-white;
+	@fs-tabs-tab-active-text-color:				@fs-light-primary_900;
 
 	// Mobile
 
@@ -46,6 +40,7 @@
 	.@{theme_name}&-tab&-enabled,
 	.@{theme_name}&-tab_mobile {
 		background: @fs-tabs-tab-background-color;
+		border: 1px solid @fs-tabs-tab-border-color;
 		border-radius: @fs-tabs-tab-border-radius;
 		color: @fs-tabs-tab-text-color;
 		display: block;
@@ -74,10 +69,7 @@
 	// Content
 
 	.@{theme_name}&-content&-enabled {
-		border: 1px solid @fs-tabs-content-border-color;
-		border-radius: @fs-tabs-content-border-radius;
-		margin: @fs-tabs-content-margin;
-		padding: @fs-tabs-content-padding;
+
 	}
 
 	.@{theme_name}&-content&-active {
@@ -99,8 +91,7 @@
 		margin: @fs-tabs-tab-mobile-margin;
 	}
 
-	.@{theme_name}&-tab_mobile&-mobile
-	/* .@{theme_name}&-tab_mobile&-active */ {
+	.@{theme_name}&-tab_mobile&-mobile {
 		display: block;
 	}
 

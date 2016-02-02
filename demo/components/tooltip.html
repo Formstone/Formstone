@@ -27,9 +27,27 @@
 					<span class="demo_label">Component</span>
 					<div class="demo_select demo_select_wide">
 						<select class="js-component_select" data-dropdown-options='{"links":true}'>
-							<option value="">Checkbox</option>
-							<option value="">Cookie</option>
-							<option value="">Dropdown</option>
+							<option value="">Select</option>
+							<option value="../components/grid.html">Grid</option>
+							<option value="../components/cookie.html">Cookie</option>
+							<option value="../components/mediaquery.html">Media Query</option>
+							<option value="../components/background.html">Background</option>
+							<option value="../components/carousel.html">Carousel</option>
+							<option value="../components/checkbox.html">Checkbox</option>
+							<option value="../components/dropdown.html">Dropdown</option>
+							<option value="../components/equalize.html">Equalize</option>
+							<option value="../components/lightbox.html">Lightbox</option>
+							<option value="../components/navigation.html">Navigation</option>
+							<option value="../components/number.html">Number</option>
+							<option value="../components/pagination.html">Pagination</option>
+							<option value="../components/range.html">Range</option>
+							<option value="../components/scrollbar.html">Scrollbar</option>
+							<option value="../components/swap.html">Swap</option>
+							<option value="../components/tabs.html">Tabs</option>
+							<option value="../components/tooltip.html">Tooltip</option>
+							<option value="../components/touch.html">Touch</option>
+							<option value="../components/transition.html">Transition</option>
+							<option value="../components/upload.html">Upload</option>
 						</select>
 					</div>
 				</div>
@@ -37,13 +55,14 @@
 					<span class="demo_label">Theme</span>
 					<div class="demo_select">
 						<select class="js-theme_select">
-							<option value="fs-light" selected>Light</option>
+							<option value="fs-light">Light</option>
 							<option value="fs-dark">Dark</option>
-							<option value="">Raw</option>
+							<option value="">No Theme</option>
 						</select>
 					</div>
 				</div>
 			</div>
+			<!--<div class="demo_bar"><div class="demo_field"><span class="demo_label">Component</span><div class="demo_select demo_select_wide"><select class="js-component_select" data-dropdown-options='{"links":true}'><option value="">Checkbox</option><option value="">Cookie</option><option value="">Dropdown</option></select></div></div><div class="demo_field"><span class="demo_label">Theme</span><div class="demo_select"><select class="js-theme_select"><option value="fs-light" selected>Light</option><option value="fs-dark">Dark</option><option value="">Raw</option></select></div></div></div>-->
 			<div class="fs-row">
 				<div class="fs-cell">
 					<h1 id="tooltip-demo">Tooltip Demo</h1>
@@ -55,7 +74,7 @@
 					}
 					
 					.tooltip {
-						background: #c65032;
+						background: #039be5;
 						border-radius: 3px;
 						color: #fff;
 						clear: both;
@@ -73,47 +92,41 @@
 					}
 					</style>
 
-					<script>
-					$(function() {
-						$(".tooltip").tooltip();
-					});
-					</script>
-
 					<h4>Basic</h4>
 					<div class="tooltips">
-						<div class="tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left"}'>Left</div>
-						<div class="tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right"}'>Right</div>
-						<div class="tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top"}'>Top</div>
-						<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom"}'>Bottom</div>
+						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left"}'>Left</div>
+						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right"}'>Right</div>
+						<div class="tooltip js-tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top"}'>Top</div>
+						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom"}'>Bottom</div>
 					</div>
 
 					<h4>Follow</h4>
 					<div class="tooltips">
-						<div class="tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","follow":"true"}'>Left</div>
-						<div class="tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","follow":"true"}'>Right</div>
-						<div class="tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","follow":"true"}'>Top</div>
-						<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","follow":"true"}'>Bottom</div>
+						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","follow":"true"}'>Left</div>
+						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","follow":"true"}'>Right</div>
+						<div class="tooltip js-tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","follow":"true"}'>Top</div>
+						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","follow":"true"}'>Bottom</div>
 					</div>
 
 					<h4>Match</h4>
 					<div class="tooltips">
-						<div class="tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","match":"true"}'>Left</div>
-						<div class="tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","match":"true"}'>Right</div>
-						<div class="tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","match":"true"}'>Top</div>
-						<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","match":"true"}'>Bottom</div>
+						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","match":"true"}'>Left</div>
+						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","match":"true"}'>Right</div>
+						<div class="tooltip js-tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","match":"true"}'>Top</div>
+						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","match":"true"}'>Bottom</div>
 					</div>
 
 					<h4>Delay</h4>
 					<div class="tooltips">
-						<div class="tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","delay":"500"}'>Left</div>
-						<div class="tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
-						<div class="tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","delay":"500"}'>Top</div>
-						<div class="tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
+						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","delay":"500"}'>Left</div>
+						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
+						<div class="tooltip js-tooltip" data-title="Top Tooltip" data-tooltip-options='{"direction":"top","delay":"500"}'>Top</div>
+						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
 					</div>
 
 					<h4>Long Text</h4>
 					<div class="tooltips">
-						<div class="tooltip" data-title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. " data-tooltip-options='{"customClass":"long_text","direction":"top"}'>Left</div>
+						<div class="tooltip js-tooltip" data-title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. " data-tooltip-options='{"customClass":"long_text","direction":"top"}'>Left</div>
 					</div>
 					<!-- END: DEMO -->
 				</div>

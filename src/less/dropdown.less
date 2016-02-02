@@ -10,6 +10,7 @@
 @fs-dropdown-max-height:							260px;
 
 @fs-dropdown-background-color:						#fff;
+@fs-dropdown-color:									#000;
 
 // Disabled
 
@@ -137,6 +138,7 @@
 
 		background: @fs-dropdown-background-color;
 		border: 1px solid;
+		color: @fs-dropdown-color;
 		cursor: pointer;
 		display: block;
 		overflow: hidden;
@@ -204,10 +206,13 @@
 		width: 100%;
 
 		background: @fs-dropdown-background-color;
+		border-radius: 0;
+		color: @fs-dropdown-color;
 		cursor: pointer;
 		display: block;
 		overflow: hidden;
 		text-align: left;
+		text-decoration: none;
 		text-overflow: ellipsis;
 
 		/**

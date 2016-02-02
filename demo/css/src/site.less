@@ -6,25 +6,77 @@
 
 	@import "plugins.less";
 
+	// Site
+
+	html,
+	body {
+		min-height: 500px;
+	}
+
+	body {
+		font-size: 16px;
+	}
+
+	body,
+	.demo_content {
+		background: #fafafa;
+	}
+
+	p {
+		margin: 20px 0;
+	}
+
 	fieldset {
 		border: none;
 		padding: 0;
 		margin: 20px 0;
 	}
 
+	label {
+		display: block;
+		margin: 0 0 5px;
+	}
+
 	pre,
 	input,
 	textarea,
 	.form_textarea {
-		border: 1px solid #ddd;
+		background: #fff;
+		border: 1px solid #455A64;
+		border-radius: 2px;
+		color: #455A64;
+		font-size: 16px;
 		margin: 20px 0;
+		padding: 10px;
 	}
 
+	input {
+		margin: 10px 0;
+		padding: 5px 10px;
+	}
+
+	textarea,
+	.form_textarea {
+		max-height: 200px;
+		overflow: auto;
+	}
+
+	button,
+	.button {
+		background: #455A64;
+		border: none;
+		border-radius: 2px;
+		display: inline-block;
+		font-size: 16px;
+		color: #fff;
+		padding: 10px 20px;
+		text-decoration: none;
+	}
 
 	// Demo Bar
 
 	.demo_bar {
-		background: #222;
+		background: #455A64;
 		color: #fff;
 		margin: 0 0 20px;
 		padding: 20px;
@@ -41,7 +93,7 @@
 		}
 
 		.demo_label {
-			color: #ccc;
+			color: #CFD8DC;
 			float: left;
 			font-size: 12px;
 			line-height: 40px;

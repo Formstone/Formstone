@@ -177,7 +177,7 @@ module.exports = function(grunt) {
 		},
 		// Replace
 		includereplace: {
-			target: {
+			library: {
 				options: {
 					prefix: '@',
 					globals: {
@@ -188,6 +188,16 @@ module.exports = function(grunt) {
 				src: '*.js',
 				expand: true,
 				cwd: 'dist/js/'
+			},
+			demo: {
+				options: {
+					prefix: '@',
+					globals: '<%= pkg.site.vars %>'
+				},
+				dest: 'demo/js/',
+				src: '*.js',
+				expand: true,
+				cwd: 'demo/js/'
 			}
 		},
 		// LESS
@@ -404,13 +414,13 @@ module.exports = function(grunt) {
 	grunt.registerTask('default', [ 'js', 'css', 'library', 'demoClean' ]);
 	grunt.registerTask('dev', [ 'js', 'css', 'library' ]);
 
-	grunt.registerTask('js', [ 'jshint:library', 'uglify:library', 'includereplace' ]);
+	grunt.registerTask('js', [ 'jshint:library', 'uglify:library', 'includereplace:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'postcss:library' ]);
 	grunt.registerTask('img', [ 'imagemin', 'svgmin' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'stripmq', 'img' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'includereplace:demo', 'stripmq', 'img' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };

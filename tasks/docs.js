@@ -579,24 +579,33 @@ module.exports = function(grunt) {
 			// demosmd += '\n';
 			for (var i in allDocs.grid) {
 				var d = allDocs.grid[i];
-				demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
-				demosmd += '\n';
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
+					demosmd += '\n';
+				}
 			}
 			demosmd += '\n';
 			demosmd += '## Utility';
 			demosmd += '\n\n';
 			for (var i in allDocs.utility) {
 				var d = allDocs.utility[i];
-				demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
-				demosmd += '\n';
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
+					demosmd += '\n';
+				}
 			}
 			demosmd += '\n';
 			demosmd += '## Widget';
 			demosmd += '\n\n';
 			for (var i in allDocs.widget) {
 				var d = allDocs.widget[i];
-				demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
-				demosmd += '\n';
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
+					demosmd += '\n';
+				}
 			}
 
 			demosmd += '\n';
@@ -614,6 +623,58 @@ module.exports = function(grunt) {
 				};
 
 			grunt.file.write("demo/_src/pages/index.md", JSON.stringify(template) + '\n\n# Demos \n\n' + demosmd);
+
+			// Tool bar
+
+			var toolbar = '';
+
+			toolbar += '<div class="demo_bar">';
+			toolbar += '<div class="demo_field">';
+			toolbar += '<span class="demo_label">Component</span>';
+			toolbar += '<div class="demo_select demo_select_wide">';
+			toolbar += '<select class="js-component_select" data-dropdown-options=\'{"links":true}\'>';
+			toolbar += '<option value="">Select</option>';
+
+			for (var i in allDocs.grid) {
+				var d = allDocs.grid[i];
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					toolbar += '<option value="{{= it.asset_root }}components/' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</option>';
+				}
+			}
+			for (var i in allDocs.utility) {
+				var d = allDocs.utility[i];
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					toolbar += '<option value="{{= it.asset_root }}components/' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</option>';
+				}
+			}
+			for (var i in allDocs.widget) {
+				var d = allDocs.widget[i];
+
+				if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+					toolbar += '<option value="{{= it.asset_root }}components/' + d.name.toLowerCase().replace(/ /g, "") + '.html">' + d.name + '</option>';
+				}
+			}
+
+			toolbar += '</select>';
+			toolbar += '</div>';
+			toolbar += '</div>';
+			toolbar += '<div class="demo_field">';
+			toolbar += '<span class="demo_label">Theme</span>';
+			toolbar += '<div class="demo_select">';
+			toolbar += '<select class="js-theme_select">';
+
+			toolbar += '<option value="fs-light">Light</option>';
+			toolbar += '<option value="fs-dark">Dark</option>';
+			toolbar += '<option value="">No Theme</option>';
+
+			toolbar += '</select>';
+			toolbar += '</div>';
+			toolbar += '</div>';
+			toolbar += '</div>';
+
+			grunt.file.write("demo/_src/templates/partials/_bar.html", toolbar);
 		}
 
 		// WORK
