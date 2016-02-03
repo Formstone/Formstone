@@ -144,7 +144,7 @@
 		}
 
 		// Fire request event
-		$Window.trigger(Events.requested, [ false ]);
+		$Window.trigger(Events.requested, [ doPush ]);
 
 		// Get transition out deferred
 		Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
