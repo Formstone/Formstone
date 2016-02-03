@@ -674,7 +674,8 @@ module.exports = function(grunt) {
 			toolbar += '</div>';
 			toolbar += '</div>';
 
-			grunt.file.write("demo/_src/templates/partials/_bar.html", toolbar);
+			// grunt.file.write("demo/_src/templates/partials/_bar.html", toolbar);
+			grunt.file.write("demo/_src/templates/partials/_bar.html", "");
 		}
 
 		// WORK
