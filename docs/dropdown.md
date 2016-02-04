@@ -68,7 +68,7 @@ $("select").val(1).trigger("change");
 
 Note: If the select is too close to the bottom edge of the `body` tag, the dropdown options will "flip" and display above the handle.
 
-cd>
+
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-dropdown-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
