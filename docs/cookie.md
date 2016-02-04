@@ -54,7 +54,7 @@ To erase an existing cookie, set it to `null`:
 $.cookie(key, null);
 ```
 
-cd>
+
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.

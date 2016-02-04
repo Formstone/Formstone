@@ -94,7 +94,7 @@ $(".target").upload("abort");
 
 Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
 
-cd>
+
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.

@@ -372,7 +372,7 @@ module.exports = function(grunt) {
 			}
 
 			if (doc.options && doc.options.length) {
-				md += 'cd>\n';
+				md += '\n';
 				md += heading + '# <a name="options"></a> Options';
 				md += '\n\n';
 				if (doc.type === "widget") {

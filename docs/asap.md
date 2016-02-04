@@ -109,7 +109,7 @@ $(window).on("requested.asap", function(e) {
 
 
 
-cd>
+
 ## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
