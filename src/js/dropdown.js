@@ -605,9 +605,9 @@
 	function onKeypress(e) {
 		var data = e.data;
 
-		setTimeout(function () {
+		data.keyTimer = Functions.startTimer(data.keyTimer, 1000, function() {
 			data.input = '';
-		}, 1000);
+		});
 
 		if (e.keyCode === 13) {
 			if (!data.closed) {
@@ -635,7 +635,7 @@
 				}
 			} else {
 				var input = String.fromCharCode(e.keyCode).toUpperCase(),
-					letter,
+					check,
 					i;
 
 				// Store more than 1 input letter
@@ -643,8 +643,9 @@
 
 				// Search for input from original index
 				for (i = data.index + 1; i <= total; i++) {
-					letter = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
-					if (letter === data.input) {
+					check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+					if (check === data.input) {
 						index = i;
 						break;
 					}
@@ -653,8 +654,9 @@
 				// If not, start from the beginning
 				if (index < 0 || index === data.index) {
 					for (i = 0; i <= total; i++) {
-						letter = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
-						if (letter === data.input) {
+						check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+						if (check === data.input) {
 							index = i;
 							break;
 						}

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.38
+
+* Added ability to search by more then 1 letter in Dropdown (Thanks @thierrymichel!)
+* Fixed second parameter in ASAP request event (Thanks @adriansuter!)
+* Removed button focus styles (Thanks @nhall!)
+
 ### 0.8.37
 
 * Fixed Lightbox event binding issue
