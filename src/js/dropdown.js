@@ -125,7 +125,7 @@
 		data.$selected.on(Events.click, data, onClick);
 
 		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
-					  .on(Events.close, data, onClose);
+						.on(Events.close, data, onClose);
 
 		// Change events
 		this.on(Events.change, data, onChange);
@@ -140,7 +140,7 @@
 
 
 			data.$dropdown.on(Events.focusIn, data, onFocusIn)
-						  .on(Events.focusOut, data, onFocusOut);
+							.on(Events.focusOut, data, onFocusOut);
 		}
 	}
 
@@ -239,9 +239,9 @@
 
 	function updateDropdown(data) {
 		// Scrollbar support
-        if ($.fn.fsScrollbar !== undefined) {
-            data.$wrapper.fsScrollbar("destroy");
-        }
+				if ($.fn.fsScrollbar !== undefined) {
+						data.$wrapper.fsScrollbar("destroy");
+				}
 
 		var index = data.index;
 
@@ -258,9 +258,9 @@
 		}
 
 		// Scrollbar support
-        if ($.fn.fsScrollbar !== undefined) {
-            data.$wrapper.fsScrollbar();
-        }
+				if ($.fn.fsScrollbar !== undefined) {
+						data.$wrapper.fsScrollbar();
+				}
 	}
 
 	/**
@@ -342,7 +342,7 @@
 		}
 
 		data.$items = data.$wrapper.html( $.parseHTML(html) )
-								   .find(Classes.item);
+									 .find(Classes.item);
 	}
 
 	/**
@@ -556,9 +556,10 @@
 
 			data.focused = true;
 			data.focusIndex = data.index;
+			data.input = '';
 
 			data.$dropdown.addClass(RawClasses.focus)
-						  .on(Events.keyDown + data.dotGuid, data, onKeypress);
+							.on(Events.keyDown + data.dotGuid, data, onKeypress);
 		}
 	}
 
@@ -579,7 +580,7 @@
 			data.focused = false;
 
 			data.$dropdown.removeClass(RawClasses.focus)
-						  .off(Events.keyDown + data.dotGuid);
+							.off(Events.keyDown + data.dotGuid);
 
 			if (!data.multiple) {
 				// Clean up
@@ -603,6 +604,10 @@
 
 	function onKeypress(e) {
 		var data = e.data;
+
+		setTimeout(function () {
+			data.input = '';
+		}, 1000);
 
 		if (e.keyCode === 13) {
 			if (!data.closed) {
@@ -633,10 +638,13 @@
 					letter,
 					i;
 
+				// Store more than 1 input letter
+				data.input += input;
+
 				// Search for input from original index
 				for (i = data.index + 1; i <= total; i++) {
-					letter = data.$options.eq(i).text().charAt(0).toUpperCase();
-					if (letter === input) {
+					letter = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+					if (letter === data.input) {
 						index = i;
 						break;
 					}
@@ -645,8 +653,8 @@
 				// If not, start from the beginning
 				if (index < 0 || index === data.index) {
 					for (i = 0; i <= total; i++) {
-						letter = data.$options.eq(i).text().charAt(0).toUpperCase();
-						if (letter === input) {
+						letter = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+						if (letter === data.input) {
 							index = i;
 							break;
 						}
@@ -726,10 +734,10 @@
 					var label = $option.data("label") || $item.html();
 
 					data.$selected.html(label)
-								  .removeClass(Classes.item_placeholder);
+									.removeClass(Classes.item_placeholder);
 
 					data.$items.filter(Classes.item_selected)
-							   .removeClass(RawClasses.item_selected);
+								 .removeClass(RawClasses.item_selected);
 
 					data.$el[0].selectedIndex = index;
 
