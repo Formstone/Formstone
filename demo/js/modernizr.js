@@ -1,3 +1,5 @@
+/*! formstone v0.8.39 [modernizr.js] 2016-02-24 | MIT License | formstone.it */
+
 /*! formstone v0.8.38 [modernizr.js] 2016-02-04 | MIT License | formstone.it */
 
 /*! modernizr 3.3.1 (Custom Build) | MIT *

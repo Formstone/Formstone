@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.39
+
+* Fixed change event in Checkbox for radios
+
 ### 0.8.38
 
 * Added ability to search by more then 1 letter in Dropdown (Thanks @thierrymichel!)

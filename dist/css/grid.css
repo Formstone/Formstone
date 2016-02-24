@@ -1,4 +1,4 @@
-/*! formstone v0.8.38 [grid.css] 2016-02-04 | MIT License | formstone.it */
+/*! formstone v0.8.39 [grid.css] 2016-02-24 | MIT License | formstone.it */
 
 /**
  * @grid
@@ -68,6 +68,11 @@
   margin-left: 0;
   margin-right: 0;
 }
+.fs_grid_row_destroy {
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+}
 .fs_grid_cell,
 .fs-grid .fs-row [class*="fs-cell"] {
   width: 97.91666667%;
@@ -97,6 +102,12 @@
 .fs_grid_cell_right,
 .fs-grid .fs-row [class*="fs-cell"][class*="-right"] {
   float: right;
+}
+.fs_grid_cell_destroy {
+  width: auto;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 * {
   box-sizing: border-box;
@@ -161,6 +172,12 @@
 }
 .fs-grid .fs-row .fs-all-hide {
   display: none;
+}
+.fs-grid .fs-row .fs-all-destroy {
+  width: auto;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 @media screen and (max-width:  739px) {
   .fs-grid .fs-row .fs-sm-1 {
@@ -250,6 +267,12 @@
   .fs-grid .fs-row .fs-sm-hide {
     display: none;
   }
+  .fs-grid .fs-row .fs-sm-destroy {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 @media screen and (max-width:  499px) {
   .fs-grid .fs-row .fs-xs-1 {
@@ -338,6 +361,12 @@
   }
   .fs-grid .fs-row .fs-xs-hide {
     display: none;
+  }
+  .fs-grid .fs-row .fs-xs-destroy {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 @media screen and (min-width:  740px) and (max-width:  979px) {
@@ -463,6 +492,12 @@
   }
   .fs-grid .fs-row .fs-md-hide {
     display: none;
+  }
+  .fs-grid .fs-row .fs-md-destroy {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 @media screen and (min-width:  980px) {
@@ -661,6 +696,12 @@
   .fs-grid .fs-row .fs-lg-hide {
     display: none;
   }
+  .fs-grid .fs-row .fs-lg-destroy {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 @media screen and (min-width:  1220px) {
   .fs-grid .fs-row .fs-xl-1 {
@@ -857,5 +898,11 @@
   }
   .fs-grid .fs-row .fs-xl-hide {
     display: none;
+  }
+  .fs-grid .fs-row .fs-xl-destroy {
+    width: auto;
+    float: none;
+    margin-left: 0;
+    margin-right: 0;
   }
 }

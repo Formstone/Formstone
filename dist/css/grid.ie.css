@@ -1,4 +1,4 @@
-/*! formstone v0.8.38 [grid.ie.css] 2016-02-04 | MIT License | formstone.it */
+/*! formstone v0.8.39 [grid.ie.css] 2016-02-24 | MIT License | formstone.it */
 
 .fs_grid_row {
   width: 300px;
@@ -53,6 +53,11 @@
   margin-left: 0;
   margin-right: 0;
 }
+.fs_grid_row_destroy {
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+}
 .fs_grid_cell {
   width: 97.91666667%;
   float: left;
@@ -77,6 +82,12 @@
 }
 .fs_grid_cell_right {
   float: right;
+}
+.fs_grid_cell_destroy {
+  width: auto;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 *,
 *:before,
@@ -280,6 +291,12 @@
 }
 .fs-grid .fs-row .fs-lg-hide {
   display: none;
+}
+.fs-grid .fs-row .fs-lg-destroy {
+  width: auto;
+  float: none;
+  margin-left: 0;
+  margin-right: 0;
 }
 .fs-grid .fs-row .fs-cell.-padded {
   behavior: none;
