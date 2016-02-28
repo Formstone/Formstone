@@ -284,6 +284,8 @@
 		if (data.autoUpload) {
 			startUpload(data);
 		}
+
+		data.$input.val("");
 	}
 
 	/**

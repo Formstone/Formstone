@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.40
+
+* Fixed issue with IE events in Touch 
+* Fixed issue with selecting the same file multiple times in Upload
+* Fixed issue with autoPlay option in Background
+
 ### 0.8.39
 
 * Fixed change event in Checkbox for radios
