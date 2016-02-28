@@ -169,9 +169,9 @@
 		if (!disabled) {
 			if (data.radio) {
 				// radio
-				// if (checked || (isIE8 && !checked)) {
+				if (checked) {
 					onSelect(e);
-				// }
+				}
 			} else {
 				// Checkbox change events fire after state has changed
 				if (checked) {
