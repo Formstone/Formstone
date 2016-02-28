@@ -1,6 +1,10 @@
 {"template":"home.html","title":"Thoughtfully Crafted Front-End Components","site_root":"","asset_root":"../","component_root":"components/"}
 
 <aside class="alert">
+	<h2>License Changes</h2>
+	<p>Formstone's license will be changing in v0.9.x. [Learn more here](../license).</p>
+</aside>
+<aside class="alert">
 	<h2>Themes</h2>
 	<p>Theme support is coming in v0.9.x. Take a look at the current progress at [beta.formstone.it](http://beta.formstone.it/themes).</p>
 </aside>
