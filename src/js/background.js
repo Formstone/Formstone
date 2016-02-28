@@ -365,6 +365,9 @@
 						origin: Window.location.protocol + "//" + Window.location.host
 					}, data.youtubeOptions);
 
+				// For youtube auto so events fire, disabled by plugin
+				ytOptions.autoplay = 1;
+
 				data.$container.append($media);
 
 				if (data.player) {

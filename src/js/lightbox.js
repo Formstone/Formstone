@@ -1311,7 +1311,7 @@
 			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
-			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
+			 * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
 			 */
 

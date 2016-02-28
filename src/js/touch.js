@@ -76,15 +76,15 @@
 			for (var i in data.touches) {
 				if (data.touches[i].id === oe.pointerId) {
 					activeTouch = true;
-					data.touches[i].pageX    = oe.clientX;
-					data.touches[i].pageY    = oe.clientY;
+					data.touches[i].pageX    = oe.pageX;
+					data.touches[i].pageY    = oe.pageY;
 				}
 			}
 			if (!activeTouch) {
 				data.touches.push({
 					id       : oe.pointerId,
-					pageX    : oe.clientX,
-					pageY    : oe.clientY
+					pageX    : oe.pageX,
+					pageY    : oe.pageY
 				});
 			}
 		} else {
