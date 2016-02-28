@@ -93,7 +93,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `touch` | `boolean` | `true` | Flag to allow touch zoom on 'mobile' rendering |
-| `videoRadio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
+| `videoRatio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |
 
 ## Events
