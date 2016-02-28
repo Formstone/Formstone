@@ -2,13 +2,22 @@
 
 A jQuery plugin for simple content carousels.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Carousel
+
 
 #### Main
 
@@ -16,6 +25,7 @@ A jQuery plugin for simple content carousels.
 carousel.js
 carousel.css
 ```
+
 
 #### Dependencies
 
@@ -65,7 +75,8 @@ $(".target").carousel({
 
 Note: Carousel items that don't meet jQuery's `:visible` selector requirements will not be counted as active items. This can be useful when filtering or updating a set of items.
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-carousel-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -87,11 +98,14 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
 | `pagination` | `boolean` | `true` | Flag to draw pagination |
-| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `rtl` | `boolean` | `false` | Right to Left display |
+| `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
+| `single` | `boolean` | `false` | Flag to display single item at a time |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -99,7 +113,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `update.carousel` | Carousel position updated |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -171,7 +186,8 @@ Updates carousel items
 $(".target").carousel("update", "...");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Navigation &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=0.8.39"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=0.8.39">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=0.8.39"></script><link rel="stylesheet" href="../css/site-ie8.css?v=0.8.39"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=0.8.39"></script><link rel="stylesheet" href="../css/site-ie9.css?v=0.8.39"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=0.8.39"></script>
+	</head>
+
+	<body class="fs-grid">
+		<div class="demo_content">
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="navigation-demo">Navigation Demo</h1>
+					<!-- START: DEMO -->
+					<style>
+					@media screen and (min-width: 980px) {
+						.nav_offscreen,
+						.nav_handle {
+							display: none;
+						}
+					}
+					</style>
+
+					<p>By default, Navigation will only activate itself on screens smaller than 980px. Resize your screen if the menus are not active.</p>
+
+					<h4>Basic</h4>
+					<h5 class="nav_handle nav_handle_toggle">Navigation</h5>
+					<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
+						<a href="#">Home</a>
+						<a href="#">About</a>
+						<a href="#">Contact</a>
+					</nav>
+
+					<h4>Off Canvas</h4>
+					<div>
+						Overlay Left:
+						<button type="button" class="button nav_handle nav_handle_overlay_left">Menu</button>
+					</div>
+					<br>
+					<div>
+						Overlay Right:
+						<button type="button" class="button nav_handle nav_handle_overlay_right">Menu</button>
+					</div>
+					<br>
+					<div>
+						Reveal Left:
+						<button type="button" class="button nav_handle nav_handle_reveal_left">Menu</button>
+					</div>
+					<br>
+					<div>
+						Reveal Right:
+						<button type="button" class="button nav_handle nav_handle_reveal_right">Menu</button>
+					</div>
+					<br>
+					<div>
+						Push Left:
+						<button type="button" class="button nav_handle nav_handle_push_left">Menu</button>
+					</div>
+					<br>
+					<div>
+						Push Right:
+						<button type="button" class="button nav_handle nav_handle_push_right">Menu</button>
+					</div>
+
+
+					<div style="height: 500px"></div>
+
+
+				</div>
+			</div>
+		</div>
+
+
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_overlay_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"left"}'>
+			Overlay Left
+		</nav>
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_overlay_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"right"}'>
+			Overlay Right
+		</nav>
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_reveal_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"left"}'>
+			Reveal Left
+		</nav>
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_reveal_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"reveal","gravity":"right"}'>
+			Reveal Right
+		</nav>
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_push_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"left"}'>
+			Push Left
+		</nav>
+
+		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_push_right" data-navigation-content=".demo_content" data-navigation-options='{"type":"push","gravity":"right"}'>
+			Push Right
+		</nav>
+
+
+
+		<div class="demo_content">
+			<div class="fs-row">
+				<div class="fs-cell">
+					<!-- END: DEMO -->
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

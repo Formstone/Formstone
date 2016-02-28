@@ -2,9 +2,17 @@
 
 A responsive CSS grid.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Grid
 
 The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
 

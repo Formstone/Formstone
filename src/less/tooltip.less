@@ -1,218 +1,164 @@
+/**
+ * @component
+ * @name Tooltip
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+// Config
 
-	@fs-tooltip-background:				#111;
-	@fs-tooltip-border-radius:			3px;
-	@fs-tooltip-padding: 				10px 15px;
-	@fs-tooltip-z-index:				10;
+@fs-tooltip-z-index:				10;
 
-	@fs-tooltip-text-color:				#fff;
-	@fs-tooltip-font-size:				12px;
+@fs-tooltip-transition-duration:	0.15s;
 
-	@fs-tooltip-box-shadow-color: 		rgba(0, 0, 0, 0.35);
-	@fs-tooltip-box-shadow-blur: 		5px;
-	@fs-tooltip-box-shadow-offset: 		1px;
+/**
+ * @class
+ * @name .fs-tooltip-element
+ * @type element
+ * @description Target elmement
+ */
 
-	@fs-tooltip-transition-duration:	0.15s;
+/**
+ * @class
+ * @name .fs-tooltip
+ * @type element
+ * @description Base widget class
+ */
 
-	@fs-tooltip-caret-size: 			5px;
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-visible
+ * @type modifier
+ * @description Inidcates visible state
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-right
+ * @type modifier
+ * @description Inidcates right side display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-left
+ * @type modifier
+ * @description Inidcates left side display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-top
+ * @type modifier
+ * @description Inidcates top display
+ */
+
+/**
+ * @class
+ * @name .fs-tooltip.fs-tooltip-bottom
+ * @type modifier
+ * @description Inidcates bottom display
+ */
+
+.fs-tooltip {
+	width: 1px;
+	height: 1px;
+
+	position: absolute;
+	top: -999px;
+	left: -999px;
+	z-index: @fs-tooltip-z-index;
+
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity @fs-tooltip-transition-duration linear;
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	// Visible
+
+	&-visible {
+		opacity: 1;
+	}
 
 	/**
 	 * @class
-	 * @name .fs-tooltip-element
+	 * @name .fs-tooltip-content
 	 * @type element
-	 * @description Target elmement
+	 * @description Tooltip content wrapper
 	 */
+
+	&-content {
+		display: block;
+		float: left;
+		position: relative;
+		white-space: nowrap;
+	}
 
 	/**
 	 * @class
-	 * @name .fs-tooltip
+	 * @name .fs-tooltip-caret
 	 * @type element
-	 * @description Base widget class
+	 * @description Tooltip caret
 	 */
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-visible
-	 * @type modifier
-	 * @description Inidcates visible state
-	 */
+	&-caret {
+		display: none;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-right
-	 * @type modifier
-	 * @description Inidcates right side display
-	 */
+	// .fs-tooltip-right
 
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-left
-	 * @type modifier
-	 * @description Inidcates left side display
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-top
-	 * @type modifier
-	 * @description Inidcates top display
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-tooltip.fs-tooltip-bottom
-	 * @type modifier
-	 * @description Inidcates bottom display
-	 */
-
-	.fs-tooltip {
-		width: 1px;
-		height: 1px;
-
-		position: absolute;
-		top: -999px;
-		left: -999px;
-		z-index: @fs-tooltip-z-index;
-
-		opacity: 0;
-		pointer-events: none;
-		transition: opacity @fs-tooltip-transition-duration linear;
-
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
+	&-right {
+		.fs-tooltip-content {
 		}
 
-		// Visible
-
-		&-visible {
-			opacity: 1;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-tooltip-content
-		 * @type element
-		 * @description Tooltip content wrapper
-		 */
-
-		&-content {
-			background: @fs-tooltip-background;
-			border-radius: @fs-tooltip-border-radius;
-			color: @fs-tooltip-text-color;
-			display: block;
-			float: left;
-			font-size: @fs-tooltip-font-size;
-			margin: 0;
-			padding: @fs-tooltip-padding;
-			position: relative;
-			white-space: nowrap;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-tooltip-caret
-		 * @type element
-		 * @description Tooltip caret
-		 */
-
-		@fs-tooltip-caret-width: (@fs-tooltip-caret-size * 1.3);
-		@fs-tooltip-caret-height: (@fs-tooltip-caret-size * 1.3);
-
-		&-caret {
-			width: 0;
-			height: 0;
-
-			content: '';
-			display: block;
-			margin: 0;
-			position: absolute;
-		}
-
-		// .fs-tooltip-right
-
-		&-right {
-			.fs-tooltip-content {
-				box-shadow: @fs-tooltip-box-shadow-offset 0 @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
-			}
-
-			.fs-tooltip-caret {
-				top: 0;
-				left: -@fs-tooltip-caret-size;
-
-				border-top: @fs-tooltip-caret-size solid transparent;
-				border-bottom: @fs-tooltip-caret-size solid transparent;
-				border-right: @fs-tooltip-caret-size solid @fs-tooltip-background;
-			}
-		}
-
-
-		// .fs-tooltip-left
-
-		&-left {
-			.fs-tooltip-content {
-				box-shadow: -@fs-tooltip-box-shadow-offset 0 @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
-			}
-
-			.fs-tooltip-caret {
-				top: 0;
-				right: -@fs-tooltip-caret-size;
-
-				border-top: @fs-tooltip-caret-size solid transparent;
-				border-bottom: @fs-tooltip-caret-size solid transparent;
-				border-left: @fs-tooltip-caret-size solid @fs-tooltip-background;
-			}
-		}
-
-		&-top,
-		&-bottom {
-			.fs-tooltip-caret {
-				display: block;
-				float: none;
-				margin: 0 auto;
-			}
-		}
-
-		// .fs-tooltip-top
-
-		&-top {
-			.fs-tooltip-content {
-				box-shadow: 0 -@fs-tooltip-box-shadow-offset @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
-			}
-
-			.fs-tooltip-caret {
-				bottom: -@fs-tooltip-caret-size;
-				left: 0;
-
-				border-left: @fs-tooltip-caret-size solid transparent;
-				border-right: @fs-tooltip-caret-size solid transparent;
-				border-top: @fs-tooltip-caret-size solid @fs-tooltip-background;
-			}
-		}
-
-		// .fs-tooltip-bottom
-
-		&-bottom {
-			.fs-tooltip-content {
-				box-shadow: 0 @fs-tooltip-box-shadow-offset @fs-tooltip-box-shadow-blur @fs-tooltip-box-shadow-color;
-			}
-
-			.fs-tooltip-caret {
-				top: -@fs-tooltip-caret-size;
-				left: 0;
-
-				border-left: @fs-tooltip-caret-size solid transparent;
-				border-right: @fs-tooltip-caret-size solid transparent;
-				border-bottom: @fs-tooltip-caret-size solid @fs-tooltip-background;
-			}
+		.fs-tooltip-caret {
 		}
 	}
+
+
+	// .fs-tooltip-left
+
+	&-left {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+
+	&-top,
+	&-bottom {
+		.fs-tooltip-caret {
+		}
+	}
+
+	// .fs-tooltip-top
+
+	&-top {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+
+	// .fs-tooltip-bottom
+
+	&-bottom {
+		.fs-tooltip-content {
+		}
+
+		.fs-tooltip-caret {
+		}
+	}
+}

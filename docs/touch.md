@@ -2,19 +2,29 @@
 
 A jQuery plugin for multi-touch events.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Touch
+
 
 #### Main
 
 ```markup
 touch.js
 ```
+
 
 #### Dependencies
 
@@ -83,7 +93,8 @@ $(".target").touch({
 
 Note: `pan`, `swipe` and `scale` can also be used together to create a rich interface.
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-touch-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -94,7 +105,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `scale` | `boolean` | `false` | Scale events |
 | `swipe` | `boolean` | `false` | Swipe events |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -108,7 +120,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `scaleend` | Scaling ended |
 | `swipe` | Swipe |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -134,7 +147,8 @@ Removes plugin instance.
 $(".target").touch("destroy");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

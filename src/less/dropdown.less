@@ -1,537 +1,348 @@
+/**
+ * @component
+ * @name Dropdown
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+// Config
 
-	@fs-dropdown-max-height:							260px;
+@fs-dropdown-max-height:							260px;
 
-	@fs-dropdown-text-color:							#222;
-	@fs-dropdown-font-size:								14px;
+@fs-dropdown-background-color:						#fff;
 
-	@fs-dropdown-background-color:						#fff;
+// Disabled
 
-	@fs-dropdown-border-width:							1px;
-	@fs-dropdown-border-color:							#ccc;
-	@fs-dropdown-border-radius:							3px;
+@fs-dropdown-disabled-opacity:						0.5;
 
-	// Caret
-	@fs-dropdown-caret-color:							#ccc;
-	@fs-dropdown-caret-size:							5px;
+// Item - Selected
 
-	// Hover
+@fs-dropdown-item-selected-background-color:		#ddd;
 
-	@fs-dropdown-hover-text-color:						#222;
-	@fs-dropdown-hover-background-color:				#ddd;
+/**
+ * @class
+ * @name .fs-dropdown-element
+ * @type element
+ * @description Target element
+ */
 
-	// Selected
+/**
+ * @class
+ * @name .fs-dropdown
+ * @type element
+ * @description Base widget class
+ */
 
-	@fs-dropdown-selected-height:						40px;
-	@fs-dropdown-selected-padding:						0 40px 0 15px;
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-multiple
+ * @type modifer
+ * @description Indicates multi-selected element
+ */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-cover
+ * @type modifer
+ * @description Indicates cover positioning
+ */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-bottom
+ * @type modifer
+ * @description Indicates bottom positioning
+ */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-disabled
+ * @type modifer
+ * @description Indicates disabled state
+ */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-open
+ * @type modifer
+ * @description Indicates open state
+ */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-focus
+ * @type modifer
+ * @description Indicates focus state
+ */
 
-	// Open
+.fs-dropdown {
+	position: relative;
+	z-index: 1;
 
-	@fs-dropdown-open-background-color:					#fff;
+	display: block;
 
-	// Options
+	max-width: 100%;
 
-	@fs-dropdown-options-background-color:				#fff;
+	&:focus {
+		box-shadow: none;
+		outline: none;
+	}
 
-	// Group
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
 
-	@fs-dropdown-group-border-color:					#ccc;
-	@fs-dropdown-group-text-color:						#999;
-	@fs-dropdown-group-font-size:						11px;
-	@fs-dropdown-group-padding:							10px 15px;
-	@fs-dropdown-group-text-transform:					uppercase;
+	// .fs-dropdown-element
 
-	// Disabled
+	&-element {
+		width: 100%;
+		height: 100%;
 
-	@fs-dropdown-disabled-border-color:					#ccc;
-	@fs-dropdown-disabled-text-color:					#ccc;
-	@fs-dropdown-disabled-background-color:				#fff;
-	@fs-dropdown-disabled-selected-background-color:	#fafafa;
+		position: absolute;
+		left: 0;
+		z-index: -1;
 
-	// Item
-
-	@fs-dropdown-item-text-color:						#222;
-	@fs-dropdown-item-font-size:						14px;
-	@fs-dropdown-item-background-color:					#fff;
-	@fs-dropdown-item-border-color:						#ccc;
-	@fs-dropdown-item-border-width:						1px;
-	@fs-dropdown-item-height:							40px;
-	@fs-dropdown-item-padding:							0 15px;
-
-	@fs-dropdown-item-hover-text-color:					#222;
-	@fs-dropdown-item-hover-background-color:			#ddd;
-
-		// Item - Selected
-
-		@fs-dropdown-item-selected-background-color:	#eee;
-
-		// Item - Disabled
-
-		@fs-dropdown-item-disabled-text-color:			#999;
-
-	// Shadows
-
-	@fs-dropdown-selected-box-shadow:					0 0 5px rgba(0, 0, 0, 0.1);
-	@fs-dropdown-options-box-shadow:					0 1px 4px rgba(0, 0, 0, 0.15);
-
-
-	/**
-	 * @class
-	 * @name .fs-dropdown-element
-	 * @type element
-	 * @description Target element
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-dropdown
-	 * @type element
-	 * @description Base widget class
-	 */
-
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-multiple
-	 * @type modifer
-	 * @description Indicates multi-selected element
-	 */
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-cover
-	 * @type modifer
-	 * @description Indicates cover positioning
-	 */
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-bottom
-	 * @type modifer
-	 * @description Indicates bottom positioning
-	 */
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-disabled
-	 * @type modifer
-	 * @description Indicates disabled state
-	 */
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-open
-	 * @type modifer
-	 * @description Indicates open state
-	 */
-	/**
-	 * @class
-	 * @name .fs-dropdown.fs-dropdown-focus
-	 * @type modifer
-	 * @description Indicates focus state
-	 */
-
-	.fs-dropdown {
-
-		// &&-enabled {
-			position: relative;
-			z-index: 1;
-
-			display: block;
-			margin: 10px 0;
-
-			max-width: 100%;
-
-			/*
-			@media screen and (min-width: 740px) {
-				max-width: 30%;
-			}
-			*/
-		// }
-
-		&:focus {
-			box-shadow: none;
-			outline: none;
-		}
+		opacity: 0;
 
 		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
+		&:focus {
+			outline: none;
+			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+			-webkit-tap-highlight-color: transparent;
 		}
 
-		// .fs-dropdown-element
+		// IE8 - opacity check
 
-		&-element {
-			width: 100%;
-			height: 100%;
-
-			position: absolute;
-			left: 0;
-
-			opacity: 0;
-			z-index: -1;
-
-			&,
-			&:focus {
-				outline: none;
-				-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-				-webkit-tap-highlight-color: transparent;
-			}
-
-			// IE8 - opacity check
-
-			.no-opacity & {
-				left: -999999px;
-			}
-		}
-
-		/**
-		 * @class
-		 * @name .fs-dropdown-selected
-		 * @type element
-		 * @description Handle item
-		 */
-
-		&-selected {
-			width: 100%;
-
-			position: relative;
-
-			background: @fs-dropdown-background-color;
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-radius: @fs-dropdown-border-radius;
-			color: @fs-dropdown-text-color;
-			cursor: pointer;
-			display: block;
-			font-size: @fs-dropdown-font-size;
-			height: @fs-dropdown-selected-height;
-			line-height: @fs-dropdown-selected-height;
-			margin: 0;
-			overflow: hidden;
-			padding: @fs-dropdown-selected-padding;
-			text-align: left;
-			text-overflow: clip;
-			z-index: 2;
-
-			&:after {
-				height: 0;
-				width: 0;
-
-				position: absolute;
-				top: 0;
-				right: 15px;
-				bottom: 0;
-
-				border-left: @fs-dropdown-caret-size solid transparent;
-				border-right: @fs-dropdown-caret-size solid transparent;
-				border-top: @fs-dropdown-caret-size solid @fs-dropdown-caret-color;
-				content: '';
-				display: block;
-				margin: auto 0;
-			}
-		}
-
-		.no-touchevents &-selected:hover {
-			color: @fs-dropdown-hover-text-color;
-		}
-
-		.no-touchevents &-disabled &-selected:hover {
-			color: @fs-dropdown-disabled-text-color;
-		}
-
-
-		/**
-		 * @class
-		 * @name .fs-dropdown-options
-		 * @type element
-		 * @description Options container
-		 */
-
-		&-options {
-			width: 100%;
-			max-height: @fs-dropdown-max-height;
-
-			position: absolute;
-			top: 100%;
-			left: 0;
-
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-width: 0 @fs-dropdown-border-width @fs-dropdown-border-width;
-			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-			box-shadow: @fs-dropdown-options-box-shadow;
-			background-color: @fs-dropdown-options-background-color;
-			display: none;
-			margin: 0;
-			overflow: auto;
-			overflow-x: hidden;
-			padding: 0;
-			z-index: 50;
-
-			// Scrollbar support
-
-			&.fs-scrollbar {
-				position: absolute;
-			}
-
-			// IE8 - opacity check
-
-			.no-opacity & {
-				width: auto;
-			}
-		}
-
-		/**
-		 * @class
-		 * @name .fs-dropdown-group
-		 * @type element
-		 * @description Option group label
-		 */
-
-		&-group {
-			border-bottom: @fs-dropdown-border-width solid @fs-dropdown-group-border-color;
-			color: @fs-dropdown-group-text-color;
-			display: block;
-			font-size: @fs-dropdown-group-font-size;
-			padding: @fs-dropdown-group-padding;
-			text-transform: @fs-dropdown-group-text-transform;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-dropdown-item
-		 * @type element
-		 * @description Option item
-		 */
-
-		&-item {
-			width: 100%;
-
-			background: @fs-dropdown-item-background-color;
-			border-bottom: @fs-dropdown-item-border-width solid @fs-dropdown-item-border-color;
-			color: @fs-dropdown-item-text-color;
-			cursor: pointer;
-			display: block;
-			font-size: @fs-dropdown-item-font-size;
-			margin: 0;
-			height: @fs-dropdown-item-height;
-			line-height: @fs-dropdown-item-height;
-			overflow: hidden;
-			padding: @fs-dropdown-item-padding;
-			text-align: left;
-			text-decoration: none;
-			text-overflow: ellipsis;
-
-			/**
-			 * @class
-			 * @name .fs-dropdown-item.fs-dropdown-item_placeholder
-			 * @type modifier
-			 * @description Indicates placeholder item
-			 */
-
-			&_placeholder {
-				display: none;
-			}
-
-			/**
-			 * @class
-			 * @name .fs-dropdown-item.fs-dropdown-item_selected
-			 * @type modifier
-			 * @description Indicates selected item
-			 */
-
-			&_selected {
-				background: @fs-dropdown-item-selected-background-color;
-			}
-
-			/**
-			 * @class
-			 * @name .fs-dropdown-item.fs-dropdown-item_disabled
-			 * @type modifier
-			 * @description Indicates disabled item
-			 */
-
-			&_disabled {
-				color: @fs-dropdown-item-disabled-text-color;
-				cursor: default;
-			}
-
-			&:first-child {
-				border-radius: 0;
-			}
-
-			&:last-child {
-				border-bottom: 0;
-				border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-			}
-
-			.no-touchevents &:hover,
-			.no-touchevents &_selected:hover {
-				color: @fs-dropdown-item-hover-text-color;
-				background-color: @fs-dropdown-item-hover-background-color;
-				border-color: @fs-dropdown-item-border-color;
-			}
-
-			&_disabled,
-			.no-touchevents &_disabled:hover {
-				color: @fs-dropdown-disabled-text-color;
-				background-color: @fs-dropdown-disabled-background-color;
-				border-color: @fs-dropdown-disabled-border-color;
-			}
-		}
-
-		// .fs-dropdown.fs-dropdown-open
-
-		&-open {
-			z-index: 3;
-		}
-
-		&-open &-options {
-			display: block;
-
-			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-		}
-
-		&-open &-selected {
-			z-index: 51;
-
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-		&-open &-selected,
-		&-focus &-selected {
-			background-color: @fs-dropdown-open-background-color;
-			box-shadow: @fs-dropdown-selected-box-shadow;
-		}
-
-		// .fs-dropdown.fs-dropdown-cover .fs-dropdown-options
-
-		&-cover&-open &-selected {
-			z-index: 49;
-		}
-
-		&-cover &-options {
-			top: 0;
-
-			border-radius: @fs-dropdown-border-radius;
-			border-width: @fs-dropdown-border-width;
-		}
-
-		&-cover &-item:first-child {
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-
-		// .fs-dropdown.fs-dropdown-bottom
-
-		&-bottom &-options {
-			top: auto;
-			bottom: 100%;
-
-			border-width: @fs-dropdown-border-width @fs-dropdown-border-width 0;
-		}
-
-		&-bottom &-item:last-child {
-			border: none;
-		}
-
-		&-bottom&-open &-selected {
-			border-radius: 0 0 @fs-dropdown-border-radius @fs-dropdown-border-radius;
-		}
-
-		&-bottom&-open &-options {
-			border-radius: @fs-dropdown-border-radius @fs-dropdown-border-radius 0 0;
-		}
-
-
-		// .fs-dropdown.fs-dropdown-bottom.fs-dropdown-cover
-
-		&-bottom&-cover &-options {
-			top: auto;
-			bottom: 0;
-		}
-
-		&-bottom&-cover&-open &-selected {
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		&-bottom&-cover&-open &-options {
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-
-		// .fs-dropdown-multiple .fs-dropdown-options
-
-		&-multiple {
-			border: @fs-dropdown-border-width solid @fs-dropdown-border-color;
-			border-radius: @fs-dropdown-border-radius;
-		}
-
-		&-multiple &-options {
-			width: 100%;
-
-			position: static;
-
-			border: none;
-			border-radius: @fs-dropdown-border-radius;
-			box-shadow: none;
-			display: block;
-		}
-
-
-		// .fs-dropdown.fs-dropdown-disabled
-
-		&-disabled &-selected {
-			background: @fs-dropdown-disabled-background-color;
-			border-color: @fs-dropdown-disabled-border-color;
-			color: @fs-dropdown-disabled-text-color;
-			cursor: default;
-		}
-
-		&-disabled &-options {
-			background: @fs-dropdown-disabled-background-color;
-			border-color: @fs-dropdown-disabled-border-color;
-		}
-
-		&-disabled &-group,
-		&-disabled &-item {
-			border-color: @fs-dropdown-disabled-border-color;
-			color: @fs-dropdown-disabled-text-color;
-			cursor: default;
-		}
-
-		&-disabled &-item,
-		.no-touchevents &-disabled &-item:hover {
-			color: @fs-dropdown-disabled-text-color;
-			background-color: @fs-dropdown-disabled-background-color;
-		}
-
-		&-disabled &-item_selected,
-		.no-touchevents &-disabled &-item_selected:hover {
-			background: @fs-dropdown-disabled-selected-background-color;
-		}
-
-
-		// .fs-dropdown-options.fs-scrollbar
-
-		&-options.fs-scrollbar {
-			overflow: hidden;
-
-			.fs-scrollbar-content {
-				max-height: @fs-dropdown-max-height;
-				height: auto;
-			}
-
-			&.fs-scrollbar-active .fs-scrollbar-content {
-				padding: 0;
-			}
-
-			.fs-scrollbar-bar,
-			.fs-scrollbar-track {
-				border-radius: 0 @fs-dropdown-border-radius @fs-dropdown-border-radius 0;
-			}
+		.no-opacity & {
+			left: -999999px;
 		}
 	}
+
+	/**
+	 * @class
+	 * @name .fs-dropdown-selected
+	 * @type element
+	 * @description Handle item
+	 */
+
+	&-selected {
+		.fs_button;
+
+		width: 100%;
+
+		position: relative;
+		z-index: 2;
+
+		background: @fs-dropdown-background-color;
+		border: 1px solid;
+		cursor: pointer;
+		display: block;
+		overflow: hidden;
+		text-align: left;
+		text-overflow: clip;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-dropdown-options
+	 * @type element
+	 * @description Options container
+	 */
+
+	&-options {
+		width: 100%;
+		max-height: @fs-dropdown-max-height;
+
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 5;
+
+		background: @fs-dropdown-background-color;
+		border: 1px solid;
+		display: none;
+		overflow: auto;
+		overflow-x: hidden;
+
+		// Scrollbar support
+
+		&.fs-scrollbar {
+			position: absolute;
+		}
+
+		// IE8 - opacity check
+
+		.no-opacity & {
+			width: auto;
+		}
+	}
+
+	/**
+	 * @class
+	 * @name .fs-dropdown-group
+	 * @type element
+	 * @description Option group label
+	 */
+
+	&-group {
+		display: block;
+		font-size: 75%;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-dropdown-item
+	 * @type element
+	 * @description Option item
+	 */
+
+	&-item {
+		.fs_button;
+
+		width: 100%;
+
+		background: @fs-dropdown-background-color;
+		cursor: pointer;
+		display: block;
+		overflow: hidden;
+		text-align: left;
+		text-overflow: ellipsis;
+
+		/**
+		 * @class
+		 * @name .fs-dropdown-item.fs-dropdown-item_placeholder
+		 * @type modifier
+		 * @description Indicates placeholder item
+		 */
+
+		&_placeholder {
+			display: none;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-dropdown-item.fs-dropdown-item_selected
+		 * @type modifier
+		 * @description Indicates selected item
+		 */
+
+		&_selected {
+			background: @fs-dropdown-item-selected-background-color;
+		}
+
+		/**
+		 * @class
+		 * @name .fs-dropdown-item.fs-dropdown-item_disabled
+		 * @type modifier
+		 * @description Indicates disabled item
+		 */
+
+		&_disabled {
+			cursor: default;
+			opacity: @fs-dropdown-disabled-opacity;
+		}
+	}
+
+	// .fs-dropdown.fs-dropdown-open
+
+	&-open {
+		z-index: 3;
+	}
+
+	&-open &-options {
+		display: block;
+	}
+
+	&-open &-selected {
+		z-index: 6;
+	}
+
+	&-open &-selected,
+	&-focus &-selected {
+	}
+
+	// .fs-dropdown.fs-dropdown-cover .fs-dropdown-options
+
+	&-cover&-open &-selected {
+		z-index: 4;
+	}
+
+	&-cover &-options {
+		top: 0;
+	}
+
+	// .fs-dropdown.fs-dropdown-bottom
+
+	&-bottom &-options {
+		top: auto;
+		bottom: 100%;
+	}
+
+	// .fs-dropdown.fs-dropdown-bottom.fs-dropdown-cover
+
+	&-bottom&-cover &-options {
+		top: auto;
+		bottom: 0;
+	}
+
+	// .fs-dropdown-multiple .fs-dropdown-options
+
+	&-multiple {
+	}
+
+	&-multiple &-options {
+		width: 100%;
+
+		position: static;
+
+		display: block;
+	}
+
+	// .fs-dropdown.fs-dropdown-disabled
+
+	&-disabled {
+		opacity: @fs-dropdown-disabled-opacity;
+	}
+
+	&-disabled &-selected {
+		cursor: default;
+	}
+
+	&-disabled &-options {
+	}
+
+	&-disabled &-group,
+	&-disabled &-item {
+		cursor: default;
+	}
+
+	&-disabled &-item,
+	.no-touch &-disabled &-item:hover {
+	}
+
+	&-disabled &-item_selected,
+	.no-touch &-disabled &-item_selected:hover {
+	}
+
+	// .fs-dropdown-options.fs-scrollbar
+
+	&-options.fs-scrollbar {
+		overflow: hidden;
+
+		.fs-scrollbar-bar {
+			border: 1px solid;
+			border-width: 0 0 0 1px;
+		}
+
+		.fs-scrollbar-content {
+			max-height: @fs-dropdown-max-height;
+			height: auto;
+		}
+
+		&.fs-scrollbar-active .fs-scrollbar-content {
+			padding: 0;
+		}
+	}
+}

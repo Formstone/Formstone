@@ -2,13 +2,22 @@
 
 A jQuery plugin for simple drag and drop uploads.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Upload
+
 
 #### Main
 
@@ -16,6 +25,7 @@ A jQuery plugin for simple drag and drop uploads.
 upload.js
 upload.css
 ```
+
 
 #### Dependencies
 
@@ -84,7 +94,8 @@ $(".target").upload("abort");
 
 Upload does not store or manipulate uploaded files on the server, it simply facilitates the asynchronous upload process from the front end.
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-upload-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -102,8 +113,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `multiple` | `true` | `true` | Flag to allow mutiple file uploads |
 | `postData` | `object` | &nbsp; | Extra data to post with upload |
 | `postKey` | `string` | `'file'` | Key to upload file as |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -120,7 +133,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `start` | Uploads starting |
 | `queued` | Files are queued for upload |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -178,7 +192,8 @@ Starts queued uploads; Use when autoUpload is set to false.
 $(".target").upload("start");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

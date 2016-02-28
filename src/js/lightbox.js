@@ -155,12 +155,13 @@
 			// Assemble HTML
 			var html = '';
 			if (!Instance.isMobile) {
-				html += '<div class="' + [Classes.raw.overlay, Instance.customClass].join(" ") + '"></div>';
+				html += '<div class="' + [Classes.raw.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
 			}
 			var lightboxClasses = [
 				Classes.raw.base,
 				Classes.raw.loading,
 				Classes.raw.animating,
+				Instance.theme,
 				Instance.customClass
 			];
 
@@ -1307,9 +1308,10 @@
 			 * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
 			 * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
 			 * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
-			 * @param videoRadio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
+			 * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
 			 */
 
@@ -1333,6 +1335,7 @@
 				mobile         : false,
 				retina         : false,
 				requestKey     : "fs-lightbox",
+				theme          : "fs-light",
 				top            : 0,
 				touch          : true,
 				videoRatio     : 0.5625,

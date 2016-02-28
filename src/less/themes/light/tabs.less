@@ -1,0 +1,115 @@
+/**
+ * @theme
+ * @name Light
+ * @component Tabs
+ */
+
+.fs-tabs {
+
+	@theme_name: fs-light;
+
+	//Config
+
+	@fs-tabs-tab-background-color:				#ccc;
+	@fs-tabs-tab-border-radius:					2px 2px 0 0;
+	@fs-tabs-tab-font-size:						14px;
+	@fs-tabs-tab-text-color:					#fff;
+	@fs-tabs-tab-margin:						0 5px 0 0;
+	@fs-tabs-tab-padding:						10px 20px;
+
+	// Hover
+	@fs-tabs-tab-hover-background-color:		#bbb;
+
+	// Active
+	@fs-tabs-tab-active-background-color:		#999;
+	@fs-tabs-tab-active-text-color:				#fff;
+
+	// Content
+
+	@fs-tabs-content-border-color:				#999;
+	@fs-tabs-content-border-radius:				0 2px 2px 2px;
+	@fs-tabs-content-margin:					0 0 10px 0;
+	@fs-tabs-content-padding:					20px;
+
+	// Mobile
+
+	@fs-tabs-tab-mobile-border-radius:			2px;
+	@fs-tabs-tab-mobile-margin:					10px 0;
+
+	@fs-tabs-tab-mobile-active-border-radius:	2px 2px 0 0;
+	@fs-tabs-tab-mobile-active-margin:			10px 0 0;
+
+	@fs-tabs-content-mobile-border-radius:		0 0 2px 2px;
+
+	// Tab
+
+	.@{theme_name}&-tab&-enabled,
+	.@{theme_name}&-tab_mobile {
+		background: @fs-tabs-tab-background-color;
+		border-radius: @fs-tabs-tab-border-radius;
+		color: @fs-tabs-tab-text-color;
+		display: block;
+		float: left;
+		font-size: @fs-tabs-tab-font-size;
+		margin: @fs-tabs-tab-margin;
+		padding: @fs-tabs-tab-padding;
+		text-transform: uppercase;
+		text-decoration: none;
+
+		.no-touchevents &:hover {
+			background: @fs-tabs-tab-hover-background-color;
+		}
+	}
+
+	.@{theme_name}&-tab&-active,
+	.@{theme_name}&-tab_mobile&-active {
+
+		&,
+		.no-touchevents &:hover {
+			background: @fs-tabs-tab-active-background-color;
+			color: @fs-tabs-tab-active-text-color;
+		}
+	}
+
+	// Content
+
+	.@{theme_name}&-content&-enabled {
+		border: 1px solid @fs-tabs-content-border-color;
+		border-radius: @fs-tabs-content-border-radius;
+		margin: @fs-tabs-content-margin;
+		padding: @fs-tabs-content-padding;
+	}
+
+	.@{theme_name}&-content&-active {
+
+	}
+
+	// Mobile
+
+	.@{theme_name}&-tab&-mobile {
+		display: none;
+	}
+
+	.@{theme_name}&-tab&-tab_mobile {
+		width: 100%;
+
+		border-radius: @fs-tabs-tab-mobile-border-radius;
+		display: none;
+		float: none;
+		margin: @fs-tabs-tab-mobile-margin;
+	}
+
+	.@{theme_name}&-tab_mobile&-mobile
+	/* .@{theme_name}&-tab_mobile&-active */ {
+		display: block;
+	}
+
+	.@{theme_name}&-tab_mobile&-active {
+		border-radius: @fs-tabs-tab-mobile-active-border-radius;
+		margin: @fs-tabs-tab-mobile-active-margin;
+	}
+
+	.@{theme_name}&-content&-mobile {
+		border-radius: @fs-tabs-content-mobile-border-radius;
+	}
+}

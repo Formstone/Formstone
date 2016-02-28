@@ -1,192 +1,302 @@
+/**
+ * @component
+ * @name Range
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	.fs-range {
+// Config
 
-		width: 100%;
+@fs-range-track-background-color:	#ddd;
+@fs-range-track-height:				10px;
 
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
-		}
+@fs-range-fill-background-color:	#aaa;
 
-		&-element {
-			width: 1px;
-			height: 1px;
+@fs-range-marker-size:				20px;
+@fs-range-marker-background-color:	#666;
 
-			position: absolute;
-			z-index: -1;
+// Vertical
 
-			opacity: 0;
+@fs-range-vertical-height:			300px;
 
-			.no-touchevents & {
-				left: -9999px;
-			}
-		}
+@fs-range-vertical-track-width:		10px;
 
-		&-track {
-			width: 100%;
-			height: 8px;
+/**
+ * @class
+ * @name .fs-range-element
+ * @type element
+ * @description Target elmement
+ */
 
-			position: relative;
+/**
+ * @class
+ * @name .fs-range
+ * @type element
+ * @description Base widget class
+ */
 
-			background: #fbfbfb;
-			border: 1px solid #ddd;
-			border-radius: 4px;
-			float: left;
-			margin: 10px 0;
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-focus
+ * @type modifier
+ * @description Indicates focused state
+ */
 
-		&-fill {
-			width: 1px;
-			height: 100%;
+/**
+ * @class
+ * @name .fs-range.fs-range-disabled
+ * @type modifier
+ * @description Indicates disabled state
+ */
 
-			position: absolute;
-			top: 0;
-			right: auto;
-			bottom: 0;
-			left: 0;
-			z-index: 1;
+/**
+ * @class
+ * @name .fs-range.fs-range-labels
+ * @type modifier
+ * @description Indicates label display
+ */
 
-			background: #DCDCDC;
-		}
+/**
+ * @class
+ * @name .fs-range.fs-range-vertical
+ * @type modifier
+ * @description Indicates vertical display
+ */
 
-		&-handle {
-			width: 1px;
-			height: 100%;
+.fs-range {
 
-			position: absolute;
-			left: 0;
-			top: 0;
-			z-index: 2;
+	width: 100%;
+	height: (@fs-range-marker-size * 2);
 
-			display: block;
-			overflow: visible;
-		}
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
 
-		&-marker {
-			width: 14px;
-			height: 14px;
+	&-element {
+		width: 1px;
+		height: 1px;
 
-			background: #DCDCDC;
-			border: 1px solid #AFAFAF;
-			border-radius: 100%;
-			cursor: pointer;
-			display: block;
-			margin: -4px 0 0 -6px;
-		}
+		position: absolute;
+		z-index: -1;
 
-		.no-touchevents &:hover &-track {
-			box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
-		}
+		opacity: 0;
 
-		.no-touchevents &:hover &-marker {
-			background: #ccc;
-			border-color: #999;
-			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-		}
-
-		// Focus
-		&-focus &-track {
-			box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.1);
-		}
-
-		&-focus &-marker {
-			background: #ccc;
-			border-color: #999;
-			box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
-		}
-
-		// Labels
-		&-labels &-track {
-			width: 80%;
-		}
-
-		&-label {
-			width: 8%;
-
-			display: block;
-			font-size: 12px;
-			line-height: 28px;
-		}
-
-		&-label_min {
-			float: left;
-			margin: 0 2% 0 0;
-			text-align: right;
-		}
-
-		&-label_max {
-			float: right;
-			margin: 0 0 0 2%;
-			text-align: left;
-		}
-
-		// Vertical
-		&-vertical {
-			height: 300px;
-			width: 30px;
-		}
-
-		&-vertical &-track {
-			width: 8px;
-			height: 75%;
-
-			margin: 0 11px 0;
-		}
-
-		&-vertical &-fill {
-			width: 100%;
-			height: 1px;
-
-			top: auto;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-
-		&-vertical &-handle {
-			width: 100%;
-			height: 1px;
-
-			top: auto;
-			bottom: 0;
-			left: 0;
-		}
-
-		&-vertical &-marker {
-			margin: -7px 0 0 -4px;
-		}
-
-		&-vertical &-label {
-			clear: both;
-			float: none;
-			height: 10%;
-			text-align: center;
-			width: 100%;
-		}
-
-		&-vertical &-label_min {
-			padding: 5px 0 0;
-		}
-
-		&-vertical &-label_max {
-			padding: 0;
-		}
-
-		// Disabled
-		&-disabled {
-			cursor: default;
-			opacity: 0.5;
-		}
-
-		&-disabled &-disc {
-			cursor: default;
+		.no-touch & {
+			left: -9999px;
 		}
 	}
+
+	/**
+	 * @class
+	 * @name .fs-range-track
+	 * @type element
+	 * @description Track elmement
+	 */
+
+	&-track {
+		width: 100%;
+		height: @fs-range-track-height;
+
+		position: relative;
+
+		background: @fs-range-track-background-color;
+		float: left;
+		margin: (@fs-range-marker-size / 2) 0;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-fill
+	 * @type element
+	 * @description Fill elmement
+	 */
+
+	&-fill {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		right: auto;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
+
+		background: @fs-range-fill-background-color;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-handle
+	 * @type element
+	 * @description Handle elmement
+	 */
+
+	&-handle {
+		width: 1px;
+		height: 100%;
+
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		z-index: 2;
+
+		display: block;
+		overflow: visible;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-marker
+	 * @type element
+	 * @description Marker elmement
+	 */
+
+	&-marker {
+		width: @fs-range-marker-size;
+		height: @fs-range-marker-size;
+
+		background: @fs-range-marker-background-color;
+		cursor: pointer;
+		display: block;
+		margin: -(@fs-range-marker-size / 4) 0 0 -(@fs-range-marker-size / 2);
+	}
+
+	// Hover
+
+	.no-touch &:hover &-track {
+	}
+
+	.no-touch &:hover &-marker {
+	}
+
+	// Focus
+
+	&-focus &-track {
+	}
+
+	&-focus &-marker {
+	}
+
+	// Labels
+
+	&-labels &-track {
+		width: 80%;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label
+	 * @type element
+	 * @description Label elmement
+	 */
+
+	&-label {
+		width: 8%;
+
+		display: block;
+		line-height: (@fs-range-track-height + @fs-range-marker-size);
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label_min
+	 * @type element
+	 * @description Minimum label elmement
+	 */
+
+	&-label_min {
+		float: left;
+		margin: 0 2% 0 0;
+		text-align: right;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-range-label_max
+	 * @type element
+	 * @description Maximum label elmement
+	 */
+
+	&-label_max {
+		float: right;
+		margin: 0 0 0 2%;
+		text-align: left;
+	}
+
+	// Vertical
+
+	&-vertical {
+		width: (@fs-range-marker-size * 2);
+		height: @fs-range-vertical-height;
+	}
+
+	&-vertical &-track {
+		width: @fs-range-vertical-track-width;
+		height: 75%;
+
+		float: none;
+		margin: 0 auto;
+	}
+
+	&-vertical &-fill {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-handle {
+		width: 100%;
+		height: 1px;
+
+		top: auto;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&-vertical &-marker {
+		margin: -(@fs-range-marker-size / 2) 0 0 -(@fs-range-marker-size / 4);
+	}
+
+	&-vertical &-label {
+		height: 10%;
+		width: 100%;
+
+		clear: both;
+		float: none;
+		line-height: 100%;
+		text-align: center;
+	}
+
+	&-vertical &-label_min {
+		padding: 5px 0 0;
+	}
+
+	&-vertical &-label_max {
+		padding: 0;
+	}
+
+	// Disabled
+
+	&-disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+
+	&-disabled &-marker {
+		cursor: default;
+	}
+}

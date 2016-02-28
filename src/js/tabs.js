@@ -15,9 +15,9 @@
 		data.content      = this.attr("href");
 		data.group        = this.data(Namespace + "-group");
 
-		data.tabClasses          = [RawClasses.tab, data.rawGuid].join(" ");
-		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid].join(" ");
-		data.contentClasses      = [RawClasses.content, data.rawGuid].join(" ");
+		data.elementClasses      = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
+		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass].join(" ");
+		data.contentClasses      = [RawClasses.content, data.rawGuid, data.theme, data.customClass].join(" ");
 
 		// DOM
 
@@ -51,7 +51,7 @@
 
 		this.attr("data-swap-target", data.content)
 			.attr("data-swap-group", data.group)
-			.addClass(data.tabClasses)
+			.addClass(data.elementClasses.join(" "))
 			.on("activate.swap" + data.dotGuid, data, onActivate)
 			.on("deactivate.swap" + data.dotGuid, data, onDeactivate)
 			.on("enable.swap" + data.dotGuid, data, onEnable)
@@ -107,7 +107,7 @@
 		data.$mobileTab.off(Events.namespace)
 					   .remove();
 
-		data.$content.removeClass(RawClasses.content);
+		data.$content.removeClass(data.contentClasses.push(RawClasses.mobile).join(" "));
 
 		this.removeAttr("data-swap-active")
 			.removeData("data-swap-active")
@@ -115,7 +115,7 @@
 			.removeData("data-swap-target")
 			.removeAttr("data-swap-group")
 			.removeData("data-swap-group")
-			.removeClass(RawClasses.tab)
+			.removeClass(data.elementClasses.push(RawClasses.mobile).join(" "))
 			.off(Events.namespace)
 			.fsSwap("destroy");
 	}
@@ -237,6 +237,7 @@
 	function mobileEnable(data) {
 		data.$el.addClass(RawClasses.mobile);
 		data.$mobileTab.addClass(RawClasses.mobile);
+		data.$content.addClass(RawClasses.mobile);
 	}
 
 	/**
@@ -249,6 +250,7 @@
 	function mobileDisable(data) {
 		data.$el.removeClass(RawClasses.mobile);
 		data.$mobileTab.removeClass(RawClasses.mobile);
+		data.$content.removeClass(RawClasses.mobile);
 	}
 
 	/**
@@ -272,6 +274,7 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
 			 * @param mobileMaxWidth [string] <'740px'> "Width at which to auto-disable mobile styles"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param vertical [boolean] <false> "Flag to draw vertical tab set"
 			 */
 
@@ -279,6 +282,7 @@
 				customClass       : "",
 				maxWidth          : Infinity,
 				mobileMaxWidth    : "740px",
+				theme             : "fs-light",
 				vertical          : false
 			},
 

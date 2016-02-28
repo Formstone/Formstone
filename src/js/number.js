@@ -37,17 +37,18 @@
 		html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '">' + data.labels.down + '</button>';
 
 		// Modify DOM
-		this.wrap('<div class="' + [RawClasses.base, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+		this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
 			.after(html);
 
 		// Store data
 		data.$container    = this.parent(Classes.base);
 		data.$arrows       = data.$container.find(Classes.arrow);
 
-		// Bind keyboard events
-		this.on(Events.keyPress, Classes.element, data, onKeyup);
+		// Bind events
+		this.on(Events.keyPress, data, onKeyup)
+			.on(Events.focus, data, onFocus)
+			.on(Events.blur, data, onBlur);
 
-		// Bind click events
 		data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
 	}
 
@@ -97,6 +98,28 @@
 
 			data.disabled = true;
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		e.data.$container.addClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e) {
+		e.data.$container.removeClass(RawClasses.focus);
 	}
 
 	/**
@@ -260,6 +283,7 @@
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param labels.up [string] <'Up'> "Up arrow label"
 			 * @param labels.down [string] <'Down'> "Down arrow label"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 */
 
 			defaults: {
@@ -267,14 +291,16 @@
 				labels : {
 					up         : "Up",
 					down       : "Down"
-				}
+				},
+				theme          : "fs-light"
 			},
 
 			classes: [
 				"arrow",
 				"up",
 				"down",
-				"disabled"
+				"disabled",
+				"focus"
 			],
 
 			methods: {
@@ -286,10 +312,6 @@
 
 				enable        : enable,
 				disable       : disable
-			},
-
-			events: {
-				// tap    : "tap"
 			}
 		}),
 

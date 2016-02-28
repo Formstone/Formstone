@@ -49,9 +49,9 @@
 			$options    = $allOptions.filter("option"),
 			$label      = $("[for=" + this.attr("id") + "]");
 
-		// Swap tab index, no more interacting with the actual select!
+		// Swap tab index, no more interacting with the actual input!
 		data.tabIndex = this[0].tabIndex;
-		this[0].tabIndex   = -1;
+		this[0].tabIndex = -1;
 
 		if ($label.length) {
 			$label[0].tabIndex = -1;
@@ -60,6 +60,7 @@
 		// Build wrapper
 		var wrapperClasses = [
 			RawClasses.base,
+			data.theme,
 			data.customClass
 		];
 
@@ -118,7 +119,9 @@
 
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
-			data.$wrapper.fsScrollbar();
+			data.$wrapper.fsScrollbar({
+				theme: data.theme
+			});
 		}
 
 		// Bind events
@@ -137,7 +140,6 @@
 			this.on(Events.focusIn, data, function(e) {
 				e.data.$dropdown.trigger(Events.raw.focus);
 			});
-
 
 			data.$dropdown.on(Events.focusIn, data, onFocusIn)
 							.on(Events.focusOut, data, onFocusOut);
@@ -165,7 +167,7 @@
 			this.removeAttr("aria-hidden");
 		}
 
-		data.$el[0].tabIndex    = data.tabIndex;
+		data.$el[0].tabIndex = data.tabIndex;
 
 		if (data.$label.length) {
 			data.$label[0].tabIndex = data.tabIndex;
@@ -862,6 +864,7 @@
 			 * @param external [boolean] <false> "Open options as links in new window"
 			 * @param links [boolean] <false> "Open options as links in same window"
 			 * @param mobile [boolean] <false> "Force desktop interaction on mobile"
+			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */
 			defaults: {
@@ -872,6 +875,7 @@
 				external       : false,
 				links          : false,
 				mobile         : false,
+				theme          : "fs-light",
 				trim           : 0
 			},
 

@@ -1,404 +1,340 @@
+/**
+ * @component
+ * @name Checkbox
+ */
 
-	@import "imports/utils.less";
+@import "imports/utils.less";
 
-	// Config
+// Config
 
-	@fs-checkbox-margin:						0 0 10px 0;
-	@fs-checkbox-transition-duration:			0.15s;
-	@fs-checkbox-transition-timing:				ease;
+@fs-checkbox-transition-duration:			0.15s;
+@fs-checkbox-transition-timing:				ease;
 
-	// Label
+@fs-checkbox-marker-height-width:			20px;
 
-	@fs-checkbox-label-color:					#666;
-	@fs-checkbox-label-font-size:				14px;
+@fs-checkbox-flag-background:				#666;
 
-	// Marker
+// Disabled
 
-	@fs-checkbox-marker-background:				#fff;
-	@fs-checkbox-marker-border-color:			#ccc;
-	@fs-checkbox-marker-border-radius:			3px;
-	@fs-checkbox-marker-height-width:			20px;
-	@fs-checkbox-marker-margin:					0 10px 0 0;
+@fs-checkbox-disabled-opacity:				0.5;
 
-	@fs-checkbox-flag-background:				#999;
+// Toggle
+@fs-checkbox-toggle-marker-background:		#666;
 
-	// Focus
+@fs-checkbox-toggle-marker-height:			40px;
+@fs-checkbox-toggle-marker-width:			100px;
 
-	@fs-checkbox-focus-label-color:				#333;
+/**
+ * @class
+ * @name .fs-checkbox-element
+ * @type element
+ * @description Target elmement
+ */
 
-	@fs-dropdown-focus-marker-box-shadow:		0 0 5px rgba(0, 0, 0, 0.1);
-	@fs-checkbox-focus-marker-border-color:		#999;
+/**
+ * @class
+ * @name .fs-checkbox
+ * @type element
+ * @description Base widget class
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-checked
+ * @type modifier
+ * @description Indicates checked state
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-radio
+ * @type modifier
+ * @description Indicates radio interface
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-toggle
+ * @type modifier
+ * @description Indicates toggle interface
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-focus
+ * @type modifier
+ * @description Indicates focused state
+ */
+
+/**
+ * @class
+ * @name .fs-checkbox.fs-checkbox-disabled
+ * @type modifier
+ * @description Indicates disabled state
+ */
+
+.fs-checkbox {
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-enabled
+	 * @type modifier
+	 * @description Indicates enabled state
+	 */
+
+	&&-enabled {
+		cursor: pointer;
+		overflow: hidden;
+
+		&:focus {
+			box-shadow: none;
+			outline: none;
+		}
+	}
+
+	&,
+	&:after,
+	&:before,
+	*,
+	*:after,
+	*:before {
+		box-sizing: border-box;
+		transition: none;
+		user-select: none !important;
+	}
+
+	&-element_wrapper {
+		position: relative;
+
+		border: 0;
+		height: 0;
+		margin: 0;
+		opacity: 0;
+		overflow: hidden;
+		padding: 0;
+		width: 0;
+	}
+
+	&-element {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+
+		pointer-events: none;
+		transition: none;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-label
+	 * @type element
+	 * @description Label element
+	 */
+
+	&-label {
+		cursor: pointer;
+		display: block;;
+		line-height: @fs-checkbox-marker-height-width;
+		overflow: hidden;
+		user-select: none;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-marker
+	 * @type element
+	 * @description Marker element
+	 */
+
+	&-marker {
+		width: @fs-checkbox-marker-height-width;
+		height: @fs-checkbox-marker-height-width;
+
+		border: 1px solid;
+		cursor: pointer;
+		display: block;
+		float: left;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-checkbox-flag
+	 * @type element
+	 * @description Flag element
+	 */
+
+	&-flag {
+		width: 100%;
+		height: 100%;
+
+		margin: 0;
+	}
+
+	&-flag:before {
+		width: 5px;
+		height: 10px;
+
+		border: 2px solid;
+		border-top: 0;
+		border-left: 0;
+		content: '';
+		display: block;
+		margin: 3px 0 0 6px;
+		transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+		transform:
+			rotate(45deg)
+			scale(0);
+	}
+
+	&-checked &-flag:before {
+		transform:
+			rotate(45deg)
+			scale(1);
+	}
+
+	// Checked
+
+	// IE8, no transforms
+
+	.no-csstransforms &-flag:before {
+		width: 100%;
+		height: 100%;
+
+		content: "\2713";
+		display: none;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.no-csstransforms &-checked &-flag:before {
+		display: block;
+	}
+
+	// Radio
+
+	&-radio &-marker {
+		position: relative;
+
+		border-radius: 100%;
+	}
+
+	&-radio &-flag {
+		width:  (@fs-checkbox-marker-height-width / 2);
+		height: (@fs-checkbox-marker-height-width / 2);
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		background: @fs-checkbox-flag-background;
+		border-radius: 100%;
+		margin: auto;
+		transform: scale(0);
+		transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+
+		&:before {
+			display: none;
+		}
+	}
+
+	&-radio&-checked &-flag {
+		transform: scale(1);
+
+		&:before {
+			display: none;
+		}
+	}
+
+	// IE8  -no transitions
+
+	.no-csstransforms &-radio &-flag:before {
+		display: none;
+	}
+
+	.no-csstransforms &-radio&-checked &-flag:before {
+		display: block;
+	}
 
 	// Disabled
 
-	@fs-checkbox-disabled-opacity:				0.5;
+	&-disabled {
+		cursor: default;
+		opacity: @fs-checkbox-disabled-opacity;
+	}
+
+	&-disabled &-label {
+		cursor: default;
+	}
+
+	&-disabled &-marker {
+		cursor: default;
+	}
 
 	// Toggle
 
-	@fs-checkbox-toggle-marker-background:		#999;
-	@fs-checkbox-toggle-marker-border-color:	#fff;
-	@fs-checkbox-toggle-marker-border-size:		2px;
-	@fs-checkbox-toggle-marker-height:			40px;
-	@fs-checkbox-toggle-marker-width:			100px;
+	&-toggle {
+		position: relative;
+	}
 
-	@fs-checkbox-toggle-state-color:			#666;
-	@fs-checkbox-toggle-state-font-size:		12px;
+	&-toggle &-label {
+		line-height: @fs-checkbox-toggle-marker-height;
+	}
 
-	@fs-checkbox-toggle-icon-color:				#fff;
-	@fs-checkbox-toggle-icon-width:				2px;
-	@fs-checkbox-toggle-icon-height:			10px;
-	@fs-checkbox-toggle-icon-gap:				1px;
+	&-toggle &-marker {
+		.fs_clearfix();
 
-	/**
-	 * @class
-	 * @name .fs-checkbox-element
-	 * @type element
-	 * @description Target elmement
-	 */
+		width: @fs-checkbox-toggle-marker-width;
+		height: @fs-checkbox-toggle-marker-height;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox
-	 * @type element
-	 * @description Base widget class
-	 */
+		position: relative;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-checked
-	 * @type modifier
-	 * @description Indicates checked state
-	 */
+	&-toggle &-flag {
+		width: 50%;
+		height: 100%;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-radio
-	 * @type modifier
-	 * @description Indicates radio interface
-	 */
+		position: absolute;
+		top: 0;
+		left: 0;
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-toggle
-	 * @type modifier
-	 * @description Indicates toggle interface
-	 */
+		background: @fs-checkbox-toggle-marker-background;
+		display: block;
+		transition: left @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-focus
-	 * @type modifier
-	 * @description Indicates focused state
-	 */
+	.no-touch &-toggle:hover &-flag:after {
+		opacity: 1;
+	}
 
-	/**
-	 * @class
-	 * @name .fs-checkbox.fs-checkbox-disabled
-	 * @type modifier
-	 * @description Indicates disabled state
-	 */
+	&-toggle&-checked &-flag {
+		left: 50%;
 
-	.fs-checkbox {
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-enabled
-		 * @type modifier
-		 * @description Indicates enabled state
-		 */
-
-		&&-enabled {
-			cursor: pointer;
-			margin: @fs-checkbox-margin;
-			overflow: hidden;
-
-			&:focus {
-				box-shadow: none;
-				outline: none;
-			}
-		}
-
-		&,
-		&:after,
-		&:before,
-		*,
-		*:after,
-		*:before {
-			box-sizing: border-box;
-			transition: none;
-			user-select: none !important;
-		}
-
-		&-element_wrapper {
-			position: relative;
-
-			border: 0;
-			height: 0;
-			margin: 0;
-			opacity: 0;
-			overflow: hidden;
-			padding: 0;
-			width: 0;
-		}
-
-		&-element {
-			position: absolute;
-			top: 0;
-			left: 0;
-			z-index: -1;
-
-			pointer-events: none;
-			transition: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-label
-		 * @type element
-		 * @description Label element
-		 */
-
-		&-label {
-			color: @fs-checkbox-label-color;
-			cursor: pointer;
-			display: block;
-			font-size: @fs-checkbox-label-font-size;
-			line-height: @fs-checkbox-marker-height-width;
-			overflow: hidden;
-			user-select: none;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-marker
-		 * @type element
-		 * @description Marker element
-		 */
-
-		&-marker {
-			width: @fs-checkbox-marker-height-width;
-			height: @fs-checkbox-marker-height-width;
-
-			background: @fs-checkbox-marker-background;
-			border: 1px solid @fs-checkbox-marker-border-color;
-			border-radius: @fs-checkbox-marker-border-radius;
-			cursor: pointer;
-			display: block;
-			float: left;
-			margin: @fs-checkbox-marker-margin;
-		}
-
-		/**
-		 * @class
-		 * @name .fs-checkbox-flag
-		 * @type element
-		 * @description Flag element
-		 */
-
-		&-flag {
-			width: 100%;
-			height: 100%;
-
-			margin: 0;
-		}
-
-		&-flag:before {
-			width: 5px;
-			height: 10px;
-
-			border: 2px solid @fs-checkbox-flag-background;
-			border-top: 0;
-			border-left: 0;
-			content: '';
-			display: block;
-			margin: 3px 0 0 6px;
-			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-			transform:
-				rotate(45deg)
-				scale(0);
-		}
-
-		&-checked &-flag:before {
-			transform:
-				rotate(45deg)
-				scale(1);
-		}
-
-		// Checked
-
-		// IE8, no transforms
-
-		.no-csstransforms &-flag:before {
-			width: 100%;
-			height: 100%;
-
-			content: "\2713";
+		&:before {
 			display: none;
-			line-height: 1;
-			text-align: center;
-		}
-
-		.no-csstransforms &-checked &-flag:before {
-			display: block;
-		}
-
-		// Radio
-
-		&-radio &-marker {
-			border-radius: 100%;
-		}
-
-		&-radio &-flag {
-			background: @fs-checkbox-flag-background;
-			border: 3px solid @fs-checkbox-marker-background;
-			border-radius: 100%;
-			transform: scale(0);
-			transition: transform @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-
-			&:before {
-				display: none;
-			}
-		}
-
-		&-radio&-checked &-flag {
-			transform: scale(1);
-
-			&:before {
-				display: none;
-			}
-		}
-
-		// IE8  -no transitions
-
-		.no-csstransforms &-radio &-flag:before {
-			display: none;
-		}
-
-		.no-csstransforms &-radio&-checked &-flag:before {
-			display: block;
-		}
-
-		// Focus
-
-		&-focus &-label {
-			color: @fs-checkbox-focus-label-color;
-		}
-
-		&-focus &-marker {
-			border-color: @fs-checkbox-focus-marker-border-color;
-			box-shadow: @fs-dropdown-focus-marker-box-shadow;
-		}
-
-		// Disabled
-
-		&-disabled {
-			cursor: default;
-			opacity: @fs-checkbox-disabled-opacity;
-		}
-
-		&-disabled &-label {
-			color: @fs-checkbox-label-color;
-			cursor: default;
-		}
-
-		&-disabled &-marker {
-			border-color: @fs-checkbox-marker-border-color;
-			cursor: default;
-		}
-
-		// Toggle
-
-		&-toggle {
-			position: relative;
-		}
-
-		&-toggle &-label {
-			line-height: @fs-checkbox-toggle-marker-height;
-		}
-
-		&-toggle &-marker {
-			.fs_clearfix();
-
-			width: @fs-checkbox-toggle-marker-width;
-			height: @fs-checkbox-toggle-marker-height;
-
-			position: relative;
-
-			border-radius: @fs-checkbox-marker-border-radius;
-		}
-
-		&-toggle &-flag {
-			width: 50%;
-			height: 100%;
-
-			position: absolute;
-			top: 0;
-			left: 0;
-
-			background: @fs-checkbox-toggle-marker-background;
-			border: @fs-checkbox-toggle-marker-border-size solid @fs-checkbox-toggle-marker-border-color;
-			border-radius: @fs-checkbox-marker-border-radius;
-			display: block;
-			margin: 0;
-			transition: left @fs-checkbox-transition-duration @fs-checkbox-transition-timing;
-
-			&:before {
-				display: none;
-			}
-
-			&:after {
-				width: @fs-checkbox-toggle-icon-width;
-				height: @fs-checkbox-toggle-icon-height;
-
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-
-				background: @fs-checkbox-toggle-icon-color;
-				box-shadow:
-					(@fs-checkbox-toggle-icon-width + @fs-checkbox-toggle-icon-gap) 0 0 @fs-checkbox-toggle-icon-color,
-					-(@fs-checkbox-toggle-icon-width + @fs-checkbox-toggle-icon-gap) 0 0 @fs-checkbox-toggle-icon-color;
-				content: '';
-				margin: auto;
-				opacity: 0.75;
-			}
-		}
-
-		.no-touchevents &-toggle:hover &-flag:after {
-			opacity: 1;
-		}
-
-		&-toggle&-checked &-flag {
-			left: 50%;
-
-			&:before {
-				display: none;
-			}
-		}
-
-		&-toggle&-disabled &-flag:after {
-			display: none;
-		}
-
-		&-toggle &-state {
-			width: 50%;
-
-			color: @fs-checkbox-toggle-state-color;
-			display: block;
-			font-size: @fs-checkbox-toggle-state-font-size;
-			line-height: @fs-checkbox-toggle-marker-height;
-			margin: 0;
-			text-align: center;
-			text-transform: uppercase;
-
-			&_on {
-				float: left;
-			}
-
-			&_off {
-				float: right;
-			}
 		}
 	}
+
+	&-toggle&-disabled &-flag:after {
+		display: none;
+	}
+
+	&-toggle &-state {
+		width: 50%;
+
+		display: block;
+		line-height: @fs-checkbox-toggle-marker-height;
+		margin: 0;
+		text-align: center;
+
+		&_on {
+			float: left;
+		}
+
+		&_off {
+			float: right;
+		}
+	}
+}

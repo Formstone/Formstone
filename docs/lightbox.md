@@ -2,13 +2,22 @@
 
 A jQuery plugin for simple modals.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Lightbox
+
 
 #### Main
 
@@ -16,6 +25,7 @@ A jQuery plugin for simple modals.
 lightbox.js
 lightbox.css
 ```
+
 
 #### Dependencies
 
@@ -68,7 +78,8 @@ $(window).on("open.lightbox", function() {
 });
 ```
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -91,12 +102,14 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `mobile` | `boolean` | `false` | Flag to force 'mobile' rendering |
 | `retina` | `boolean` | `false` | Flag to use 'retina' sizing (halves natural sizes) |
 | `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `touch` | `boolean` | `true` | Flag to allow touch zoom on 'mobile' rendering |
-| `videoRadio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
+| `videoRatio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -105,7 +118,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `open.lightbox` | Lightbox opened; Triggered on window |
 | `close.lightbox` | Lightbox closed; Triggered on window |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -154,7 +168,8 @@ $.lightbox("resize");
 | `height` | `int | false` | &nbsp; | Target height or false to auto size |
 | `width` | `int | false` | &nbsp; | Target width or false to auto size |
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

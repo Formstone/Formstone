@@ -2,19 +2,29 @@
 
 A jQuery plugin for toggling states.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Swap
+
 
 #### Main
 
 ```markup
 swap.js
 ```
+
 
 #### Dependencies
 
@@ -79,7 +89,8 @@ $(".target").swap({
 ```
 
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-swap-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -88,7 +99,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `collapse` | `boolean` | `true` | Allow swap to collapse it's target |
 | `maxWidth` | `string` | `Infinity` | Width at which to auto-disable plugin |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -99,7 +111,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `enable.swap` | Swap enabled |
 | `disable.swap` | Swap diabled |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -157,7 +170,8 @@ Enables instance.
 $(".target").swap("enable");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

@@ -2,13 +2,22 @@
 
 A jQuery plugin for simple pagination.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Pagination
+
 
 #### Main
 
@@ -16,6 +25,7 @@ A jQuery plugin for simple pagination.
 pagination.js
 pagination.css
 ```
+
 
 #### Dependencies
 
@@ -29,7 +39,8 @@ mediaquery.js
 
 
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-pagination-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -42,9 +53,11 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 | `visible` | `int` | `2` | Visible pages before and after current page |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -52,7 +65,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `update.pagination` | Page updated |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -86,7 +100,8 @@ Jump instance of plugin to specific page
 $(".target").pagination("jump", 1);
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |
@@ -105,4 +120,6 @@ $(".target").pagination("jump", 1);
 | `.fs-pagination-control.fs-pagination-control_next` | `modifier` | Indicates next control |
 | `.fs-pagination-position` | `element` | Mobile position indicator |
 | `.fs-pagination-select` | `element` | Mobile page dropdown |
+| `.fs-pagination-current` | `element` | Current page mobile display |
+| `.fs-pagination-total` | `element` | Total pages mobile display |
 

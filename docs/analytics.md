@@ -2,16 +2,26 @@
 
 A jQuery plugin for Google Universal Analytics Events.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Analytics
+
 
 #### Main
 
 ```markup
 analytics.js
 ```
+
 
 #### Dependencies
 
@@ -69,7 +79,8 @@ Analytics will push to all available trackers, even when loaded using Google Tag
 
 Note: The [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) extension helps to ensure events are being properly pushed. 
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 

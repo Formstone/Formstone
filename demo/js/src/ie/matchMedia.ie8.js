@@ -1,9 +1,3 @@
-// Modernizr style test
-if (!(window.webkitMatchMedia || window.mozMatchMedia || window.oMatchMedia || window.msMatchMedia || window.matchMedia)) {
-	var root = document.getElementsByTagName( 'html' )[0];
-	root.className += ' no-matchmedia';
-}
-
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas. Dual MIT/BSD license - IE8 VERSION! */
 window.matchMedia = window.matchMedia || (function(doc, undefined){
 
@@ -23,10 +17,10 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
     docElem.insertBefore( fakeBody, refNode );
     bool = div.offsetWidth === 42;
     docElem.removeChild( fakeBody );
-
+    
     return { matches: bool, media: mq };
   },
-
+  
   getEmValue = function () {
     var ret,
         body = docElem.body,
@@ -48,16 +42,16 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
     } else {
       body.removeChild( div );
     }
-
+    
     //also update eminpx before returning
     ret = eminpx = parseFloat( div.offsetWidth );
 
     return ret;
   },
-
-  //cached container for 1em value, populated the first time it's needed
+  
+  //cached container for 1em value, populated the first time it's needed 
   eminpx,
-
+  
   // verify that we have support for a simple media query
   mqSupport = mqRun( '(min-width: 0px)' ).matches;
 
@@ -72,12 +66,12 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 	          maxnull = max === null,
 	          currWidth = doc.body.offsetWidth,
 	          em = 'em';
-
+	      
 	      if( !!min ) { min = parseFloat( min ) * ( min.indexOf( em ) > -1 ? ( eminpx || getEmValue() ) : 1 ); }
 	      if( !!max ) { max = parseFloat( max ) * ( max.indexOf( em ) > -1 ? ( eminpx || getEmValue() ) : 1 ); }
-
+	      
 	      bool = ( !minnull || !maxnull ) && ( minnull || currWidth >= min ) && ( maxnull || currWidth <= max );
-
+	
 	      return { matches: bool, media: mq };
 	   } else {
 		   return { matches: false, media: {} };
@@ -92,7 +86,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 	// monkeypatch unsupported addListener/removeListener with polling
 	if(typeof window.matchMedia( "" ) !== "undefined"){
 		var oldMM = window.matchMedia;
-
+		
 		window.matchMedia = function( q ){
 			var ret = oldMM( q ),
 				listeners = [],
@@ -102,7 +96,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 					var list = oldMM( q ),
 						unmatchToMatch = list.matches && !last,
 						matchToUnmatch = !list.matches && last;
-
+                                                
                                         //fire callbacks only if transitioning to or from matched state
 					if( unmatchToMatch || matchToUnmatch ){
 						for( var i =0, il = listeners.length; i< il; i++ ){
@@ -111,7 +105,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 					}
 					last = list.matches;
 				};
-
+			
 			ret.addListener = function( cb ){
 				listeners.push( cb );
 				if( !timer ){
@@ -129,7 +123,7 @@ window.matchMedia = window.matchMedia || (function(doc, undefined){
 					clearInterval( timer );
 				}
 			};
-
+			
 			return ret;
 		};
 	}

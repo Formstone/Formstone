@@ -24,12 +24,12 @@
 		.example .label_medium { display: block; }
 	}
 	@media screen and (min-width: 980px) {
-		.example { margin: 20px -10.33333%; } /* re-align grid rows */
+		/* .example { margin: 20px -10.33333%; } */ /* re-align grid rows */
 
 		.example .label_large { display: block; }
 	}
 	@media screen and (min-width: 1220px) {
-		.example { margin: 20px -25.777%; } /* re-align grid rows */
+		/* .example { margin: 20px -25.777%; } */ /* re-align grid rows */
 	}
 </style>
 
@@ -40,7 +40,7 @@
 				var $target = $(this),
 					type = $target.val();
 
-				$body.removeClass("fs-grid-fluid fs-grid-sm-fluid")
+				$body.removeClass("fs-grid-fluid fs-grid-adaptive")
 					 .addClass(type);
 			});
 	});
@@ -50,12 +50,13 @@
 	<fieldset class="fs-cell fs-lg-third form_fieldset">
 		<label class="form_label" for="grid_select">Select Grid Type</label>
 		<select class="js-dropdown" name="grid_select" id="grid_select">
-			<option value="fs-grid-sm-fluid">Small Fluid Grid</option>
+			<option value="__grid-base">Base Grid</option>
+			<option value="fs-grid-adaptive">Full Adaptive Grid</option>
 			<option value="fs-grid-fluid">Full Fluid Grid</option>
-			<option value="__grid-adpative">Adaptive Grid</option>
 		</select>
 	</fieldset>
 </form>
+
 
 <!-- Bookmarklet -->
 <h4>Bookmarklet</h4>

@@ -2,13 +2,22 @@
 
 A jQuery plugin for full-frame image and video backgrounds.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Background
+
 
 #### Main
 
@@ -16,6 +25,7 @@ A jQuery plugin for full-frame image and video backgrounds.
 background.js
 background.css
 ```
+
 
 #### Dependencies
 
@@ -87,7 +97,8 @@ $(".target").background({
 });
 ```
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-background-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -101,7 +112,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `source` | `string OR object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
 | `youtubeOptions` | `object` | `null` | Custom YouTube player parameters (to be used cautiously); See https://developers.google.com/youtube/player_parameters for more |
 
-## Events
+<hr>
+## <a name="events"></a> Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -110,7 +122,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `loaded.background` | Background media loaded |
 | `ready.background` | Background media ready |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -177,7 +190,8 @@ Unmutes target video
 $(".target").background("unmute");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

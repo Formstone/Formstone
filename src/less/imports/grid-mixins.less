@@ -3,14 +3,14 @@
 
 	.fs_grid_row {
 		// !Row Default
-		width: @fs-grid-width-xs;
+		min-width: @fs-grid-width-xs;
 
 		margin-left: auto;
 		margin-right: auto;
 
-		// !Rows, Thinest to Widest
-		@media screen and (min-width: @fs-grid-width-break-sm) {
-			width: @fs-grid-width-sm;
+		// !Sm fluid
+		@media screen and (max-width: (@fs-grid-width-break-md - 1px)) {
+			.fs_grid_row_fluid;
 		}
 
 		@media screen and (min-width: @fs-grid-width-break-md) {
@@ -41,9 +41,14 @@
 		width: ~'calc(100% - 40px)';
 	}
 
-	.fs_grid_row_fluid_sm {
-		@media screen and (max-width: (@fs-grid-width-break-md - 1px)) {
-			.fs_grid_row_fluid;
+	.fs_grid_row_adaptive {
+
+		@media screen and (max-width: (@fs-grid-width-break-sm - 1px)) {
+			width: @fs-grid-width-xs;
+		}
+
+		@media screen and (min-width: @fs-grid-width-break-sm) and (max-width: (@fs-grid-width-break-md - 1px)) {
+			width: @fs-grid-width-sm;
 		}
 	}
 

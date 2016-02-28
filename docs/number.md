@@ -2,12 +2,21 @@
 
 A jQuery plugin for cross browser number inputs.
 
+<!-- HEADER END -->
+
+<!-- NAV START -->
+
 * [Use](#use)
 * [Options](#options)
 * [Methods](#methods)
 * [CSS](#css)
 
-## Use 
+<!-- NAV END -->
+
+<!-- DEMO BUTTON -->
+
+## <a name="use"></a> Using Number
+
 
 #### Main
 
@@ -15,6 +24,7 @@ A jQuery plugin for cross browser number inputs.
 number.js
 number.css
 ```
+
 
 #### Dependencies
 
@@ -43,7 +53,8 @@ Number will automatically detect the minimum, maximum and increment values based
 <input type="number" min="2" max="20" step="2" pattern="[0-9]*">
 ```
 
-## Options
+cd>
+## <a name="options"></a> Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-number-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -52,8 +63,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `customClass` | `string` | `''` | Class applied to instance |
 | `labels.up` | `string` | `'Up'` | Up arrow label |
 | `labels.down` | `string` | `'Down'` | Down arrow label |
+| `theme` | `string` | `"fs-light"` | Theme class name |
 
-## Methods
+<hr>
+## <a name="methods"></a> Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -95,7 +108,8 @@ Enables target instance
 $(".target").number("enable");
 ```
 
-## CSS
+<hr>
+## <a name="css"></a> CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

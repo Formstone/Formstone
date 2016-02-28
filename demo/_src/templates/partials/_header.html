@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+
+		<!-- Page Attributes -->
+		<title>{{= it.local_title }} &middot; {{= it.title }}</title>
+
+		<!-- Modernizer -->
+		<script src="{{= it.asset_root }}js/modernizr.js?v={{= it.version }}"></script>
+
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!--><link rel="stylesheet" href="{{= it.asset_root }}css/site.css?v={{= it.version }}"><!--<![endif]-->
+
+		<!--[if IE 8]>
+			<script>var IE8 = true;</script>
+			<script src="{{= it.asset_root }}js/site-ie8.js?v={{= it.version }}"></script>
+			<link rel="stylesheet" href="{{= it.asset_root }}css/site-ie8.css?v={{= it.version }}">
+		<![endif]-->
+		<!--[if IE 9]>
+			<script>var IE9 = true;</script>
+			<script src="{{= it.asset_root }}js/site-ie9.js?v={{= it.version }}"></script>
+			<link rel="stylesheet" href="{{= it.asset_root }}css/site-ie9.css?v={{= it.version }}">
+		<![endif]-->
+
+		<!-- Compiled JS -->
+		<script src="{{= it.asset_root }}js/site.js?v={{= it.version }}"></script>
+	</head>
+	<body class="fs-grid">
+
+		<div class="demo_content">
+
+			<div class="demo_bar">
+				<div class="demo_field">
+					<span class="demo_label">Component</span>
+					<div class="demo_select demo_select_wide">
+						<select class="js-component_select" data-dropdown-options='{"links":true}'>
+							<option value="">Checkbox</option>
+							<option value="">Cookie</option>
+							<option value="">Dropdown</option>
+						</select>
+					</div>
+				</div>
+				<div class="demo_field">
+					<span class="demo_label">Theme</span>
+					<div class="demo_select">
+						<select class="js-theme_select">
+							<option value="fs-light" selected>Light</option>
+							<option value="fs-dark">Dark</option>
+							<option value="">Raw</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="fs-row">
+				<div class="fs-cell">
