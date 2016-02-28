@@ -128,7 +128,7 @@
 		data.$selected.on(Events.click, data, onClick);
 
 		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
-					  .on(Events.close, data, onClose);
+						.on(Events.close, data, onClose);
 
 		// Change events
 		this.on(Events.change, data, onChange);
@@ -142,7 +142,7 @@
 			});
 
 			data.$dropdown.on(Events.focusIn, data, onFocusIn)
-						  .on(Events.focusOut, data, onFocusOut);
+							.on(Events.focusOut, data, onFocusOut);
 		}
 	}
 
@@ -241,9 +241,9 @@
 
 	function updateDropdown(data) {
 		// Scrollbar support
-        if ($.fn.fsScrollbar !== undefined) {
-            data.$wrapper.fsScrollbar("destroy");
-        }
+				if ($.fn.fsScrollbar !== undefined) {
+						data.$wrapper.fsScrollbar("destroy");
+				}
 
 		var index = data.index;
 
@@ -260,9 +260,9 @@
 		}
 
 		// Scrollbar support
-        if ($.fn.fsScrollbar !== undefined) {
-            data.$wrapper.fsScrollbar();
-        }
+				if ($.fn.fsScrollbar !== undefined) {
+						data.$wrapper.fsScrollbar();
+				}
 	}
 
 	/**
@@ -344,7 +344,7 @@
 		}
 
 		data.$items = data.$wrapper.html( $.parseHTML(html) )
-								   .find(Classes.item);
+									 .find(Classes.item);
 	}
 
 	/**
@@ -558,9 +558,10 @@
 
 			data.focused = true;
 			data.focusIndex = data.index;
+			data.input = '';
 
 			data.$dropdown.addClass(RawClasses.focus)
-						  .on(Events.keyDown + data.dotGuid, data, onKeypress);
+							.on(Events.keyDown + data.dotGuid, data, onKeypress);
 		}
 	}
 
@@ -581,7 +582,7 @@
 			data.focused = false;
 
 			data.$dropdown.removeClass(RawClasses.focus)
-						  .off(Events.keyDown + data.dotGuid);
+							.off(Events.keyDown + data.dotGuid);
 
 			if (!data.multiple) {
 				// Clean up
@@ -737,10 +738,10 @@
 					var label = $option.data("label") || $item.html();
 
 					data.$selected.html(label)
-								  .removeClass(Classes.item_placeholder);
+									.removeClass(Classes.item_placeholder);
 
 					data.$items.filter(Classes.item_selected)
-							   .removeClass(RawClasses.item_selected);
+								 .removeClass(RawClasses.item_selected);
 
 					data.$el[0].selectedIndex = index;
 
