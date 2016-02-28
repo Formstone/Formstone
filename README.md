@@ -6,4 +6,8 @@
 
 Library of modular front end components. 
 
-[Documentation](docs/README.md) <br>[Changelog](CHANGELOG.md)
+[Documentation](docs/README.md) <br>[Changelog](CHANGELOG.md) 
+
+### License 
+
+Available under the GNU GPL v3 for all open source applications. A commercial license is required for all commercial applications.
