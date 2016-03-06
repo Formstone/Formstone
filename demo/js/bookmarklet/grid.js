@@ -1,7 +1,7 @@
 /*
  * Grid Overlay Bookmarklet <http://formstone.it/grid>
  * @author Ben Plum
- * @version 1.1.0
+ * @version 1.1.1
  *
  * Copyright 2013 Ben Plum <mr@benplum.co>
  */

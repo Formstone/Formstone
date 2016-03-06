@@ -1,7 +1,7 @@
 /*
  * Grid Overlay Bookmarklet <http://formstone.it/grid>
  * @author Ben Plum
- * @version 1.1.0
+ * @version 1.1.1
  *
  * Copyright 2013 Ben Plum <mr@benplum.co>
  */
@@ -193,6 +193,11 @@
 		display: none;
 		opacity: 0.5;
 		overflow: hidden;
+	}
+
+	#fs-grid-overlay,
+	#fs-grid-overlay * {
+		pointer-events: none !important;
 	}
 
 	#fs-grid-overlay .fs-row {
