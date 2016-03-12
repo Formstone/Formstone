@@ -31,7 +31,8 @@ dropdown.css
 ```markup
 jQuery
 core.js
-scrollbar.js
+scrollbar.js (optional)
+touch.js (for scrollbar, optional)
 ```
 
 ### Basic
