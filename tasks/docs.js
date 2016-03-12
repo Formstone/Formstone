@@ -613,8 +613,6 @@ module.exports = function(grunt) {
 			demosmd += '\n\n';
 			demosmd += '* [Light](themes/light.html)';
 			demosmd += '\n';
-			demosmd += '* [Dark](themes/dark.html)';
-			demosmd += '\n';
 
 			var template = {
 					template: "content.html",
@@ -666,7 +664,6 @@ module.exports = function(grunt) {
 			toolbar += '<select class="js-theme_select">';
 
 			toolbar += '<option value="fs-light">Light</option>';
-			toolbar += '<option value="fs-dark">Dark</option>';
 			toolbar += '<option value="">No Theme</option>';
 
 			toolbar += '</select>';

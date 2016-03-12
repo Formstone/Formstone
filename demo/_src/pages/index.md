@@ -34,4 +34,3 @@
 ## Themes
 
 * [Light](themes/light.html)
-* [Dark](themes/dark.html)
