@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.41
+
+* Fixed issue with cloning inline content in Lightbox
+
 ### 0.8.40
 
 * Fixed issue with IE events in Touch 
