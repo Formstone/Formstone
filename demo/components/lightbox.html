@@ -177,8 +177,16 @@
 						<div class="inline_content">
 							<h2>Some Content!</h2>
 							<p>This was hidden on the page and loaded into the new Lightbox instance.</p>
+							<label>
+								<input type="checkbox" class=""> Testing a checkbox
+							</label>
 						</div>
 					</div>
+					<script>
+					$(function() {
+						$("input[type=checkbox], input[type=radio]").checkbox();
+					});
+					</script>
 
 					<h4>jQuery Objects</h4>
 					<div class="gallery">

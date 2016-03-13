@@ -286,7 +286,7 @@
 				} else if (isUrl) {
 					loadURL(source);
 				} else if (isElement) {
-					cloneElement(source);
+					appendContents(source);
 				} else if (isObject) {
 					appendObject(Instance.$object);
 				}
@@ -356,6 +356,10 @@
 			},
 			function(e) {
 				// Clean up
+				if (Instance.$inlineTarget.length) {
+					restoreContents();
+				}
+
 				Instance.$lightbox.off(Events.namespace);
 				Instance.$container.off(Events.namespace);
 				$Window.off(Events.keyDown);
@@ -1126,14 +1130,29 @@
 
 	/**
 	 * @method private
-	 * @name cloneElement
-	 * @description Clones target inline element.
+	 * @name appendContents
+	 * @description Moves target inline element.
 	 * @param id [string] "Target element id"
 	 */
 
-	function cloneElement(id) {
-		var $clone = $(id).find("> :first-child").clone();
-		appendObject($clone);
+	function appendContents(id) {
+		Instance.$inlineTarget   = $(id);
+		Instance.$inlineContents = Instance.$inlineTarget.children().detach();
+
+		appendObject(Instance.$inlineContents);
+	}
+
+	/**
+	 * @method private
+	 * @name restoreContents
+	 * @description Restores inline element.
+	 */
+
+	function restoreContents() {
+		Instance.$inlineTarget.append( Instance.$inlineContents.detach() );
+
+		Instance.$inlineTarget   = null;
+		Instance.$inlineContents = null;
 	}
 
 	/**
