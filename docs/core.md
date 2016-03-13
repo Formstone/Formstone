@@ -327,7 +327,7 @@ data.$el.on(Events.click, onClick);
 
 ### Modernizr Support
 
-Formstone styles depend on a few basic (Modernizr)[https://modernizr.com/] classes:
+Formstone styles depend on a few basic [Modernizr](https://modernizr.com/) classes:
 
 | Test |
 | --- |
