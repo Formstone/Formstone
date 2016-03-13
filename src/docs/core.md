@@ -307,3 +307,14 @@ data.$el.on(Events.click, onClick);
 | `touchMove` | Default | `touchmove.namespace` |
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
+
+### Modernizr Support
+
+Formstone styles depend on a few basic (Modernizr)[https://modernizr.com/] classes:
+
+| Test |
+| --- |
+| csstransforms |
+| csstransforms3d | 
+| opacity |
+| touchevents |
