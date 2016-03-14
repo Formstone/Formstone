@@ -925,6 +925,6 @@
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
 		Document      = Formstone.document,
-		$Body         = null;
+		$Body         = $Body || null;
 
 })(jQuery, Formstone);
