@@ -4,15 +4,24 @@
  * @description Formstone Library core. Required for all plugins.
  */
 
-var Formstone = window.Formstone = (function ($, window, document, undefined) {
+/* global define */
+/* global ga */
 
-	/* global ga */
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([ "jquery" ], factory);
+	} else {
+		factory(jQuery);
+	}
+}(function($) {
 
 	"use strict";
 
 	// Namespace
 
-	var Core = function() {
+	var Win  = typeof window !== "undefined" ? window : this,
+		Doc  = Win.document,
+		Core = function() {
 			this.Version = '@version';
 			this.Plugins = {};
 
@@ -25,10 +34,10 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 			// Globals
 
-			this.window               = window;
-			this.$window              = $(window);
-			this.document             = document;
-			this.$document            = $(document);
+			this.window               = Win;
+			this.$window              = $(Win);
+			this.document             = Doc;
+			this.$document            = $(Doc);
 			this.$body                = null;
 
 			this.windowWidth          = 0;
@@ -768,6 +777,10 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	setTransitionInformation();
 
+	window.Formstone = Formstone;
+
 	return Formstone;
 
-})(jQuery, window, document);
+})
+
+);

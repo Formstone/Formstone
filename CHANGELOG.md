@@ -9,7 +9,7 @@
 
 ### 0.8.42
 
-* Fixed issue with destroy Carousels
+* Fixed issue with destroying Carousels
 
 ### 0.8.41
 

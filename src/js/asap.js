@@ -1,8 +1,20 @@
-;(function ($, Formstone, undefined) {
+/* global define */
+/* global ga */
 
-	/* global ga */
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([
+			"jquery",
+			"./core",
+			"./analytics"
+		], factory);
+	} else {
+		factory(jQuery, Formstone);
+	}
+}(function($, Formstone) {
 
 	"use strict";
+
 	/**
 	 * @method private
 	 * @name initialize
@@ -472,4 +484,7 @@
 		CurrentID     = 1,
 		Request,
 		Instance;
-})(jQuery, Formstone);
+
+})
+
+);
