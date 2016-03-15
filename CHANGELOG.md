@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.42
+
+* Fixed issue with destroying a Carousel
+
 ### 0.8.41
 
 * Fixed issue with cloning inline content in Lightbox

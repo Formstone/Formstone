@@ -170,7 +170,7 @@
 
 	function destruct(data) {
 		Functions.clearTimer(data.autoTimer);
-		Functions.startTimer(data.resizeTimer);
+		Functions.clearTimer(data.resizeTimer);
 
 		disable.call(this, data);
 
