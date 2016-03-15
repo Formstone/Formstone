@@ -86,9 +86,23 @@
 
 	function buildLightbox(e) {
 		if (!Instance) {
+			var data = e.data;
+
+			// Cache internal data
+			Instance = $.extend({}, {
+				visible            : false,
+				gallery: {
+					active         : false
+				},
+				isMobile           : (Formstone.isMobile || data.mobile),
+				isTouch            : Formstone.support.touch,
+				isAnimating        : true,
+				oldContentHeight   : 0,
+				oldContentWidth    : 0
+			}, data);
+
 			// Check target type
-			var data           = e.data,
-				$el            = data.$el,
+			var $el            = data.$el,
 				$object        = data.$object,
 				source         = ($el && $el[0].href) ? $el[0].href || "" : "",
 				hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
@@ -106,24 +120,13 @@
 
 			// Retain default click
 			if ( !(isImage || isVideo || isUrl || isElement || isObject) ) {
+				Instance = null;
+
 				return;
 			}
 
 			// Kill event
 			Functions.killEvent(e);
-
-			// Cache internal data
-			Instance = $.extend({}, {
-				visible            : false,
-				gallery: {
-					active         : false
-				},
-				isMobile           : (Formstone.isMobile || data.mobile),
-				isTouch            : Formstone.support.touch,
-				isAnimating        : true,
-				oldContentHeight   : 0,
-				oldContentWidth    : 0
-			}, data);
 
 			// Touch
 			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
@@ -356,7 +359,7 @@
 			},
 			function(e) {
 				// Clean up
-				if (Instance.$inlineTarget.length) {
+				if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
 					restoreContents();
 				}
 
@@ -908,28 +911,43 @@
 	 * @param source [string] "Source video URL"
 	 */
 
+	function formatYouTube(parts) {
+		return "//www.youtube.com/embed/" + parts[1];
+	}
+
+	function formatVimeo(parts) {
+		return "//player.vimeo.com/video/" + parts[3];
+	}
+
+	function formatViddler(parts) {
+		return '//www.viddler.com/embed/' + parts[7];
+	}
+
 	function loadVideo(source) {
-		var youtubeParts = source.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i ), // 1
-			vimeoParts   = source.match( /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/ ), // 3
-			queryString  = source.split("?"),
-			url = (youtubeParts !== null) ? "//www.youtube.com/embed/" + youtubeParts[1] : "//player.vimeo.com/video/" + vimeoParts[3];
+		var parts,
+			url = checkVideo(source),
+			queryString = source.split("?");
 
-		// if we have a query string
-		if (queryString.length >= 2) {
-			url += "?" + queryString.slice(1)[0].trim();
+		if (url) {
+			// if we have a query string
+			if (queryString.length >= 2) {
+				url += "?" + queryString.slice(1)[0].trim();
+			}
+
+			Instance.$videoWrapper = $('<div class="' + Classes.raw.video_wrapper + '"></div>');
+			Instance.$video = $('<iframe class="' + Classes.raw.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
+
+			Instance.$video.attr("src", url)
+					   .addClass(Classes.raw.video)
+					   .prependTo(Instance.$videoWrapper);
+
+			Instance.$content.prepend(Instance.$videoWrapper);
+
+			sizeVideo();
+			openLightbox();
+		} else {
+			loadError();
 		}
-
-		Instance.$videoWrapper = $('<div class="' + Classes.raw.video_wrapper + '"></div>');
-		Instance.$video = $('<iframe class="' + Classes.raw.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
-
-		Instance.$video.attr("src", url)
-				   .addClass(Classes.raw.video)
-				   .prependTo(Instance.$videoWrapper);
-
-		Instance.$content.prepend(Instance.$videoWrapper);
-
-		sizeVideo();
-		openLightbox();
 	}
 
 	/**
@@ -1150,9 +1168,6 @@
 
 	function restoreContents() {
 		Instance.$inlineTarget.append( Instance.$inlineContents.detach() );
-
-		Instance.$inlineTarget   = null;
-		Instance.$inlineContents = null;
 	}
 
 	/**
@@ -1222,10 +1237,9 @@
 	 * @method private
 	 * @name loadError
 	 * @description Error when resource fails to load.
-	 * @param e [object] "Event data"
 	 */
 
-	function loadError(e) {
+	function loadError() {
 		var $error = $('<div class="' + Classes.raw.error + '"><p>Error Loading Resource</p></div>');
 
 		// Clean up
@@ -1289,7 +1303,19 @@
 	 */
 
 	function checkVideo(source) {
-		return ( source.indexOf("youtube.com") > -1 || source.indexOf("youtu.be") > -1 || source.indexOf("vimeo.com") > -1 );
+		var formats = Instance.videoFormats,
+			parts;
+
+		for (var i = 0, count = formats.length; i < count; i++) {
+			parts = source.match( formats[i].pattern );
+
+			if (parts !== null) {
+				return formats[i].format.call(Instance, parts);
+			}
+
+		}
+
+		return false;
 	}
 
 	/**
@@ -1330,6 +1356,7 @@
 			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
+			 * @param videoFormats [array] <[]> "Video formatter objects"
 			 * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
 			 */
@@ -1357,6 +1384,20 @@
 				theme          : "fs-light",
 				top            : 0,
 				touch          : true,
+				videoFormats   : [
+					{
+						pattern : /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i,
+						format  : formatYouTube
+					},
+					{
+						pattern : /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,
+						format  : formatVimeo
+					},
+					{
+						pattern : /^.*((viddler.com\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
+						format  : formatViddler
+					}
+				],
 				videoRatio     : 0.5625,
 				videoWidth     : 800
 			},

@@ -2,6 +2,15 @@
 
 <!-- -->
 
+### 0.9.0
+
+* Added theme support for all Widget plugins
+* Added fs-light base theme 
+
+### 0.8.42
+
+* Fixed issue with destroy Carousels
+
 ### 0.8.41
 
 * Fixed issue with cloning inline content in Lightbox

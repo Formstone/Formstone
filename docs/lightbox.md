@@ -105,6 +105,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `touch` | `boolean` | `true` | Flag to allow touch zoom on 'mobile' rendering |
+| `videoFormats` | &nbsp; | &nbsp; | Video formatter objects |
 | `videoRatio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |
 
