@@ -6,6 +6,7 @@
 
 * Added theme support for all Widget plugins
 * Added fs-light base theme 
+* Added AMD module wrappers to all components
 
 ### 0.8.42
 
