@@ -7,6 +7,7 @@
 * Added theme support for all Widget plugins
 * Added fs-light base theme 
 * Added AMD module wrappers to all components
+* Added custom video formatters in Lightbox
 
 ### 0.8.43
 

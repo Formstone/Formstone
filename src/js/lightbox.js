@@ -932,10 +932,6 @@
 		return "//player.vimeo.com/video/" + parts[3];
 	}
 
-	function formatViddler(parts) {
-		return '//www.viddler.com/embed/' + parts[7];
-	}
-
 	function loadVideo(source) {
 		var parts,
 			url = checkVideo(source),
@@ -1316,16 +1312,17 @@
 	 */
 
 	function checkVideo(source) {
-		var formats = Instance.videoFormats,
+		var formats = Instance.videoFormatter,
 			parts;
 
-		for (var i = 0, count = formats.length; i < count; i++) {
-			parts = source.match( formats[i].pattern );
+		for (var i in formats) {
+			if (formats.hasOwnProperty(i)) {
+				parts = source.match( formats[i].pattern );
 
-			if (parts !== null) {
-				return formats[i].format.call(Instance, parts);
+				if (parts !== null) {
+					return formats[i].format.call(Instance, parts);
+				}
 			}
-
 		}
 
 		return false;
@@ -1369,7 +1366,7 @@
 			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
-			 * @param videoFormats [array] <[]> "Video formatter objects"
+			 * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
 			 * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
 			 */
@@ -1397,20 +1394,16 @@
 				theme          : "fs-light",
 				top            : 0,
 				touch          : true,
-				videoFormats   : [
-					{
-						pattern : /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i,
+				videoFormatter : {
+					"youtube": {
+						pattern : /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,
 						format  : formatYouTube
 					},
-					{
+					"vimeo": {
 						pattern : /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,
 						format  : formatVimeo
-					},
-					{
-						pattern : /^.*((viddler.com\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,
-						format  : formatViddler
 					}
-				],
+				},
 				videoRatio     : 0.5625,
 				videoWidth     : 800
 			},

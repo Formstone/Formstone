@@ -19,6 +19,17 @@
 
 <script>
 	$(function() {
+		$.lightbox("defaults", {
+			videoFormatter: {
+				"viddler": {
+					pattern : /(?:viddler\.com\/)((v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?\/]*)/,
+					format  : function formatViddler(parts) {
+						return '//www.viddler.com/embed/' + parts[6];
+					}
+				}
+			}
+		});
+
 		$(".lightbox").not(".lightbox_format").lightbox({
 		});
 
@@ -63,16 +74,15 @@
 
 <h4>YouTube &amp; Vimeo Videos</h4>
 <div class="gallery">
-	<a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button js-lightbox" data-lightbox-gallery="video_gallery" title="STS-129 HD Launch">
+	<a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button lightbox" data-lightbox-gallery="video_gallery" title="STS-129 HD Launch">
 		YouTube Video
 	</a>
-    <a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button js-lightbox" data-lightbox-gallery="video_gallery" title="Homemade Spacecraft">
+    <a href="//player.vimeo.com/video/15091562?title=0&byline=0&portrait=0&autoplay=1&badge=0" class="button lightbox" data-lightbox-gallery="video_gallery" title="Homemade Spacecraft">
 		Vimeo Video
 	</a>
-	<a href="//www.viddler.com/embed/7c1804e8/?f=1&player=full&secret=30641456" class="button js-lightbox" data-lightbox-gallery="video_gallery" title="Viddler">
-		Viddler Video
+	<a href="//www.viddler.com/embed/7c1804e8/?f=1&player=full&secret=30641456" class="button lightbox" data-lightbox-gallery="video_gallery" title="Viddler">
+		Viddler Video (Custom Formatter)
 	</a>
-
 </div>
 
 <h4>Mobile</h4>
