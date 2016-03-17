@@ -2,9 +2,13 @@
 
 # Changelog
 
+### 0.8.43
+
+* Fixed issue with touch-action in IE
+
 ### 0.8.42
 
-* Fixed issue with destroy Carousels
+* Fixed issue with destroying a Carousel
 
 ### 0.8.41
 

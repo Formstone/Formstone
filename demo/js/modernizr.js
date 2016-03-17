@@ -1,12 +1,6 @@
-/*! formstone v0.8.41 [modernizr.js] 2016-03-15 | MIT License | formstone.it */
+/*! formstone v0.8.43 [modernizr.js] 2016-03-17 | MIT License | formstone.it */
 
-/*! formstone v0.8.41 [modernizr.js] 2016-03-13 | MIT License | formstone.it */
-
-/*! formstone v0.8.41 [modernizr.js] 2016-03-13 | MIT License | formstone.it */
-
-/*! formstone v0.8.41 [modernizr.js] 2016-03-13 | MIT License | formstone.it */
-
-/*! formstone v0.8.41 [modernizr.js] 2016-03-13 | MIT License | formstone.it */
+/*! formstone v0.8.41 [modernizr.js] 2016-03-17 | MIT License | formstone.it */
 
 /*! modernizr 3.3.1 (Custom Build) | MIT *
  * http://modernizr.com/download/?-canvas-csstransforms-opacity-svg-touchevents-setclasses !*/
