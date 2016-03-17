@@ -28,11 +28,16 @@
 
 		if (Formstone.support.pointer) {
 			var action = "";
-			if (data.axisX) {
-				action += " pan-y";
-			}
-			if (data.axisY) {
-				action += " pan-x";
+
+			if (!data.axis || (data.axisX && data.axisY)) {
+				action = "none";
+			} else {
+				if (data.axisX) {
+					action += " pan-y";
+				}
+				if (data.axisY) {
+					action += " pan-x";
+				}
 			}
 
 			touchAction(this, action);

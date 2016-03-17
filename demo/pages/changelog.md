@@ -4,7 +4,7 @@
 
 ### 0.8.43
 
-* Fixed issue with touch-action in IE
+* Fixed issue with IE touch-action in Touch
 
 ### 0.8.42
 
