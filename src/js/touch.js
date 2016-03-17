@@ -38,7 +38,20 @@
 		data.axisY = data.axis === "y";
 
 		if (Formstone.support.pointer) {
-			touchAction(this, "none");
+			var action = "";
+
+			if (!data.axis || (data.axisX && data.axisY)) {
+				action = "none";
+			} else {
+				if (data.axisX) {
+					action += " pan-y";
+				}
+				if (data.axisY) {
+					action += " pan-x";
+				}
+			}
+
+			touchAction(this, action);
 
 			this.on(Events.pointerDown, data, onTouch);
 		} else {

@@ -8,6 +8,10 @@
 * Added fs-light base theme 
 * Added AMD module wrappers to all components
 
+### 0.8.43
+
+* Fixed issue with IE touch-action in Touch
+
 ### 0.8.42
 
 * Fixed issue with destroying Carousels
