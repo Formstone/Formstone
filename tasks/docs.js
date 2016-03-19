@@ -508,18 +508,26 @@ module.exports = function(grunt) {
 		// Build demo
 
 		function buildDemo(file) {
-			var doc = grunt.file.readJSON(file),
-				destination = file.replace('docs/json', "demo/_src/pages/components").replace('.json', ".md"),
-				template = {
-					template: "component.html",
-					title: doc.name,
-					demo: doc.demo,
-					asset_root: "../"
-				};
+			var doc = grunt.file.readJSON(file);
 
-			grunt.file.write(destination, JSON.stringify(template) + '\n\n #' + doc.name + ' Demo');
+			if (doc.name) {
+				var destination = file.replace('docs/json', "demo/_src/pages/components").replace('.json', ".md"),
+					template = {
+						template: "component.html",
+						title: doc.name,
+						demo: doc.demo,
+						asset_root: "../",
+						year: new Date().getFullYear()
+					},
+					header = '';
 
-			grunt.log.writeln('File "' + destination + '" created.');
+				header += '\n\n #' + doc.name + ' Demo';
+				header += '\n<p class="back_link"><a href="http://beta.formstone.it/components/' + doc.name.toLowerCase().replace(/ /g, "") + '">Back to Documentation</a></p>';
+
+				grunt.file.write(destination, JSON.stringify(template) + header);
+
+				grunt.log.writeln('File "' + destination + '" created.');
+			}
 		}
 
 		// Build Index
@@ -619,7 +627,8 @@ module.exports = function(grunt) {
 			var template = {
 					template: "content.html",
 					title: "Demos",
-					asset_root: ""
+					asset_root: "",
+					year: new Date().getFullYear()
 				};
 
 			grunt.file.write("demo/_src/pages/index.md", JSON.stringify(template) + '\n\n# Demos \n\n' + demosmd);
