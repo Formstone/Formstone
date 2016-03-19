@@ -41,14 +41,14 @@
 
 			<header class="header">
 				<div class="fs-row">
-					<div class="fs-cell fs-xl-10">
+					<div class="fs-cell-centered fs-xl-10">
 						<a href="http://beta.formstone.it/" class="header_logo icon-logo">Formstone</a>
 					</div>
 				</div>
 			</header>
 
 			<div class="fs-row">
-				<div class="fs-cell">
+				<div class="fs-cell-centered fs-xl-10">
 
 
 <style>
@@ -58,15 +58,17 @@
 	}
 </style>
 
-<header class="intro">
-	<h1>ASAP DEMO</h1>
-	<p>A jQuery plugin for asynchronous page loads.</p>
-</header>
+<h1>ASAP DEMO</h1>
+<p class="back_link">
+	<a href="http://beta.formstone.it/components/asap/">View Documentation</a>
+</p>
+<br>
 <nav>
 	<a href="index.php">Home</a>
 	<a href="about.php">About</a>
 	<a href="contact.php">Contact</a>
 </nav>
+<br>
 <div id="content">
 <?php
 	}
