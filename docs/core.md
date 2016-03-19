@@ -225,7 +225,7 @@ A utility can override the default method delegation by pointing the `_delegate`
 $.namespace("reset", 500);
 ```
 
-### AMD Support
+#### AMD Support
 
 Plugins should remain compatible with module loaders like [RequireJS](http://requirejs.org/) or [webpack](https://webpack.github.io/):
 
@@ -242,7 +242,7 @@ Plugins should remain compatible with module loaders like [RequireJS](http://req
 	}
 }(function($, Formstone) {
 	
-	...
+	// Plugin
 	
 })
 
