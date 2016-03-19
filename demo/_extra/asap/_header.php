@@ -1,73 +1,73 @@
-<?
+<?php
 	// Only output on full page loads
 	if (!$isASAP) {
-?>
-<!DOCTYPE html>
-<html class="no-js" lang="en">
+?><!DOCTYPE html>
+<html lang="en" class="no-js">
 	<head>
 		<meta charset="utf-8">
-		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-		<meta content="yes" name="apple-mobile-web-app-capable">
-		<meta content="yes" name="mobile-web-app-capable">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
 
 		<!-- Page Attributes -->
-		<title><?=$page_title?></title>
-		<meta content="" name="description">
+		<title>ASAP Demo &middot; Formstone</title>
 
 		<!-- Modernizer -->
-		<script src="../../../js/modernizr.js"></script>
-
-		<!-- Google Fonts -->
-		<link href="//fonts.googleapis.com/css?family=Oxygen:400,300|Inconsolata:400,700" rel="stylesheet">
+		<script src="../../js/modernizr.js"></script>
 
 		<!-- Compiled CSS -->
-		<!--[if gt IE 8]><!--><link href="../../../css/site.css" rel="stylesheet"><!--<![endif]-->
+		<!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css?v="><!--<![endif]-->
 
 		<!--[if IE 8]>
 			<script>var IE8 = true;</script>
-			<script src="../../../js/site-ie8.js"></script>
-			<link rel="stylesheet" href="../../../css/site-ie8.css">
+			<script src="../../js/site-ie8.js"></script>
+			<link rel="stylesheet" href="../../css/site-ie8.css">
 		<![endif]-->
-
 		<!--[if IE 9]>
 			<script>var IE9 = true;</script>
-			<script src="../../../js/site-ie9.js"></script>
-			<link rel="stylesheet" href="../../../css/site-ie9.css">
+			<script src="../../js/site-ie9.js"></script>
+			<link rel="stylesheet" href="../../css/site-ie9.css">
 		<![endif]-->
 
 		<!-- Compiled JS -->
-		<script src="../../../js/site.js"></script>
+		<script src="../../js/site.js"></script>
 
-		<!-- Demo Resources -->
+		<!-- Demo JS -->
 		<script src="js/main.js"></script>
-		<style>
-			#content {
-				-webkit-transition: none;
-						transition: none;
-			}
-		</style>
 	</head>
+	<body class="fs-grid demo_page">
 
-	<body class="fs-grid fs-grid-sm-fluid">
-		<header class="header">
-			<a class="logo header_logo no-asap" href="../../../">Formstone</a>
-		</header>
-		<div class="wrapper">
-			<div class="page js-nav_move">
-				<div class="fs-row page_row">
-					<div class="fs-cell-centered fs-lg-10 fs-xl-8">
-						<article class="content demo">
-							<header class="intro">
-								<h1>ASAP DEMO</h1>
-								<p>A jQuery plugin for asynchronous page loads.</p>
-							</header>
-							<nav>
-								<a href="index.php">Home</a>
-								<a href="about.php">About</a>
-								<a href="contact.php">Contact</a>
-							</nav>
-							<div id="content">
-<?
+		<div class="demo_content">
+
+			<header class="header">
+				<div class="fs-row">
+					<div class="fs-cell fs-xl-10">
+						<a href="http://beta.formstone.it/" class="header_logo icon-logo">Formstone</a>
+					</div>
+				</div>
+			</header>
+
+			<div class="fs-row">
+				<div class="fs-cell">
+
+
+<style>
+	#content {
+		-webkit-transition: none;
+				transition: none;
+	}
+</style>
+
+<header class="intro">
+	<h1>ASAP DEMO</h1>
+	<p>A jQuery plugin for asynchronous page loads.</p>
+</header>
+<nav>
+	<a href="index.php">Home</a>
+	<a href="about.php">About</a>
+	<a href="contact.php">Contact</a>
+</nav>
+<div id="content">
+<?php
 	}
 	// END: Only output on full page loads
-?>
