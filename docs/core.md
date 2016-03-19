@@ -76,7 +76,21 @@ There are two types of plugins that can be defined: Widget or Utility.
 Widget plugins are implicitly tied to an element to enhance or change the interface. Examples of Widgets include input enhancements like Checkbox or Dropdown. A simple Widget might look like:
 
 ```javascript
-;(function ($, Formstone, undefined) {
+/* global define */
+
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([
+			"jquery",
+			"./core",
+			"./dependency",
+		], factory);
+	} else {
+		factory(jQuery, Formstone);
+	}
+}(function($, Formstone) {
+	
+	"use strict";
 
 	function setUp() {
 		// this = document
@@ -128,7 +142,9 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 		Events       = Plugin.events,
 		Functions    = Plugin.functions;
 
-})(jQuery, Formstone);
+})
+
+);
 ```
 
 As in the example above, Widgets can override three internal methods by pointing a key to the corresponding local function:
@@ -161,7 +177,20 @@ A Widget can also operate as a singleton, like Lightbox or Tooltip. In this case
 Utility plugins may interact with DOM nodes but are not necessarily tied to any specific elements. An example of a Utility is the media query event abstraction provided by Media Query. A simple Utility plugin might look like:
 
 ```javascript
-;(function ($, Formstone, undefined) {
+/* global define */
+
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([
+			"jquery",
+			"./core"
+		], factory);
+	} else {
+		factory(jQuery, Formstone);
+	}
+}(function($, Formstone) {
+	
+	"use strict";
 
 	function delegate() {
 		// Manually handle public methods
@@ -185,13 +214,39 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 
 		Document = Formstone.$document[0];
 
-})(jQuery, Formstone);
+})
+
+);
 ```
 
 A utility can override the default method delegation by pointing the `_delegate` key to a custom function. The delegate function will need to manually handle any arguments passed. Otherwise, Utilities will use the same public method delegation system as Widgets.
 
 ```javascript
 $.namespace("reset", 500);
+```
+
+### AMD Support
+
+Plugins should remain compatible with module loaders like [RequireJS](http://requirejs.org/) or [webpack](https://webpack.github.io/):
+
+```javascript
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([
+			"jquery",
+			"./core",
+			"./dependency",
+		], factory);
+	} else {
+		factory(jQuery, Formstone);
+	}
+}(function($, Formstone) {
+	
+	...
+	
+})
+
+);
 ```
 
 ### Plugin Object
