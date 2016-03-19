@@ -59,12 +59,28 @@ $(".target").plugin({
 });
 ```
 
-### No Conflict
+#### AMD Support
 
-One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace. 
+Plugins should remain compatible with module loaders like [RequireJS](http://requirejs.org/) or [webpack](https://webpack.github.io/):
 
 ```javascript
-Formstone.NoConflict();
+(function(factory) {
+	if (typeof define === "function" && define.amd) {
+		define([
+			"jquery",
+			"./core",
+			"./dependency",
+		], factory);
+	} else {
+		factory(jQuery, Formstone);
+	}
+}(function($, Formstone) {
+	
+	// Plugin
+	
+})
+
+);
 ```
 
 ### Plugin Types
@@ -225,30 +241,6 @@ A utility can override the default method delegation by pointing the `_delegate`
 $.namespace("reset", 500);
 ```
 
-#### AMD Support
-
-Plugins should remain compatible with module loaders like [RequireJS](http://requirejs.org/) or [webpack](https://webpack.github.io/):
-
-```javascript
-(function(factory) {
-	if (typeof define === "function" && define.amd) {
-		define([
-			"jquery",
-			"./core",
-			"./dependency",
-		], factory);
-	} else {
-		factory(jQuery, Formstone);
-	}
-}(function($, Formstone) {
-	
-	// Plugin
-	
-})
-
-);
-```
-
 ### Plugin Object
 
 Defining a plugin using the factory will return an object containing the follow keys:
@@ -379,6 +371,14 @@ data.$el.on(Events.click, onClick);
 | `touchMove` | Default | `touchmove.namespace` |
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
+
+### No Conflict
+
+One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace. 
+
+```javascript
+Formstone.NoConflict();
+```
 
 ### Modernizr Support
 
