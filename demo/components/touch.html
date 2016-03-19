@@ -29,15 +29,14 @@
 					<!-- START: DEMO -->
 					<style>
 					.box {
-						background: #039be5;
-						border-radius: 3px;
+						background: #00bcd4;
 						color: #fff;
 						text-align: center;
 					}
 					
 					.container {
-						border: 1px solid #ccc;
-						border-radius: 3px;
+						background: #fff;
+						border: 1px solid #455a64;
 						height: 400px;
 						margin: 20px 0;
 						overflow: hidden;
@@ -66,8 +65,8 @@
 					<script>
 					$(function() {
 						var $targets = $(".touch"),
-							_minX = 10,
-							_minY = 10;
+							_minX = 0,
+							_minY = 0;
 
 						$targets.each(function() {
 							var $target = $(this),
@@ -106,8 +105,8 @@
 								y = data.origY + e.deltaY,
 								minX = _minX + data.diffWidth,
 								minY = _minY + data.diffHeight,
-								maxX = data.$container.outerWidth() - minX,
-								maxY = data.$container.outerHeight() - minY;
+								maxX = data.$container.outerWidth() - minX - 2,
+								maxY = data.$container.outerHeight() - minY - 2;
 
 							if (x < minX) {
 								x = minX;
@@ -149,8 +148,8 @@
 									height = data.origHeight * e.scale,
 									minWidth = 150,
 									minHeight = 150,
-									maxH = data.$container.outerHeight() - 20,
-									maxW = data.$container.outerWidth() - 20,
+									maxH = data.$container.outerHeight(),
+									maxW = data.$container.outerWidth(),
 									maxWidth = (maxH > maxW) ? maxW : maxH,
 									maxHeight = (maxH > maxW) ? maxW : maxH;
 

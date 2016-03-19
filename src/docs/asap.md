@@ -56,7 +56,7 @@ if (IS_ASAP) {
 
 ### Events
 
-Only updating parts of a page also means static resources, like CSS and Javascript, are only loaded and executed once. Developers can hook into the ASAP events to ensure the page is rendered and destroyed properly:
+Only updating parts of a page also means static resources, like CSS and JavaScript, are only loaded and executed once. Developers can hook into the ASAP events to ensure the page is rendered and destroyed properly:
 
 ```javascript
 $(window).on("requested.asap", function(e) {

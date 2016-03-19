@@ -37,14 +37,14 @@
 					}
 					
 					.example .fs-row {
-						background: #eceff1;
+						background: #CFD8DC;
 						border-radius: 2px;
 						overflow: hidden;
 						padding-top: 1.8%;
 					}
 					
 					.example [class*="fs-cell"] {
-						background: #CFD8DC;
+						background: #455a64;
 						color: #fff;
 						border-radius: 2px;
 						margin-bottom: 1.8%;
@@ -72,7 +72,7 @@
 					.example .label_small,
 					.example .label_medium,
 					.example .label_large {
-						background: #455A64;
+						background: #455a64;
 					}
 					
 					.example .label_small,
@@ -129,11 +129,26 @@
 					<h4>Bookmarklet</h4>
 					<p>Drag the bookmarklet to your bookmarks bar.</p>
 					<a href="javascript:(function(){if(typeof%20FSGridBookmarklet==='undefined'){document.body.appendChild(document.createElement('script')).src='//formstone.it/js/bookmarklet/grid.js';}else{FSGridBookmarklet();}})();" class="button bookmarklet">Formstone Grid</a>
+
 					<br class="clear">
+
 					<p>Or, include it on every page of your development site:</p>
 					<pre class="example"><code class="language-markup">&lt;script&gt;
 (function(){if(typeof FSGridBookmarklet==='undefined'){document.body.appendChild(document.createElement('script')).src='//formstone.it/js/bookmarklet/grid.js';}else{FSGridBookmarklet();}})();
 &lt;/script&gt;</code></pre>
+
+					<script>
+					(function() {
+						if (typeof FSGridBookmarklet === 'undefined') {
+							document.body.appendChild(document.createElement('script')).src = '//formstone.it/js/bookmarklet/grid.js';
+						}
+						else {
+							FSGridBookmarklet();
+						}
+					})();
+					</script>
+
+					<br>
 
 
 					<h4>Asymmetrical</h4>

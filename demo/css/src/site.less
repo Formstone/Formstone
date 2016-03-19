@@ -6,6 +6,9 @@
 
 	@import "plugins.less";
 
+	@white: #fff;
+	@primary: #455a64;
+
 	// Site
 
 	html,
@@ -15,15 +18,30 @@
 
 	body {
 		font-size: 16px;
+		padding: 0 0 50px;
 	}
 
 	body,
 	.demo_content {
-		background: #fafafa;
+		background: #ECEFF1;
+	}
+
+	.demo_output {
+		height: 100px;
+
+		line-height: 1.8;
+
+		@media screen and (min-width: 740px) {
+			height: 200px;
+		}
 	}
 
 	p {
 		margin: 20px 0;
+	}
+
+	a {
+		color: @primary;
 	}
 
 	fieldset {
@@ -41,10 +59,10 @@
 	input,
 	textarea,
 	.form_textarea {
-		background: #fff;
-		border: 1px solid #455A64;
+		background: @white;
+		border: 1px solid @primary;
 		border-radius: 2px;
-		color: #455A64;
+		color: @primary;
 		font-size: 16px;
 		margin: 20px 0;
 		padding: 10px;
@@ -65,16 +83,16 @@
 		overflow: auto;
 	}
 
-	button,
+	// button,
 	.button {
 		width: auto;
 
-		background: #455A64;
+		background: @primary;
 		border: none;
 		border-radius: 2px;
 		display: inline-block;
 		font-size: 16px;
-		color: #fff;
+		color: @white;
 		padding: 10px 20px;
 		text-decoration: none;
 	}
@@ -82,8 +100,8 @@
 	// Demo Bar
 
 	.demo_bar {
-		background: #455A64;
-		color: #fff;
+		background: @primary;
+		color: @white;
 		margin: 0 0 20px;
 		padding: 20px;
 

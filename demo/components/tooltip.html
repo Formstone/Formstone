@@ -28,13 +28,17 @@
 					<h1 id="tooltip-demo">Tooltip Demo</h1>
 					<!-- START: DEMO -->
 					<style>
+					.center {
+						text-align: center;
+					}
+					
 					.tooltips {
 						margin: 20px 0;
 						overflow: hidden;
 					}
 					
 					.tooltip {
-						background: #039be5;
+						background: #00bcd4;
 						border-radius: 3px;
 						color: #fff;
 						clear: both;
@@ -52,7 +56,7 @@
 					}
 					</style>
 
-					<h4>Basic</h4>
+					<h4 class="center">Basic</h4>
 					<div class="tooltips">
 						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left"}'>Left</div>
 						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right"}'>Right</div>
@@ -60,7 +64,7 @@
 						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom"}'>Bottom</div>
 					</div>
 
-					<h4>Follow</h4>
+					<h4 class="center">Follow</h4>
 					<div class="tooltips">
 						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","follow":"true"}'>Left</div>
 						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","follow":"true"}'>Right</div>
@@ -68,7 +72,7 @@
 						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","follow":"true"}'>Bottom</div>
 					</div>
 
-					<h4>Match</h4>
+					<h4 class="center">Match</h4>
 					<div class="tooltips">
 						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","match":"true"}'>Left</div>
 						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","match":"true"}'>Right</div>
@@ -76,7 +80,7 @@
 						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","match":"true"}'>Bottom</div>
 					</div>
 
-					<h4>Delay</h4>
+					<h4 class="center">Delay</h4>
 					<div class="tooltips">
 						<div class="tooltip js-tooltip" data-title="Left Tooltip" data-tooltip-options='{"direction":"left","delay":"500"}'>Left</div>
 						<div class="tooltip js-tooltip" data-title="Right Tooltip" data-tooltip-options='{"direction":"right","delay":"500"}'>Right</div>
@@ -84,9 +88,14 @@
 						<div class="tooltip js-tooltip" data-title="Bottom Tooltip" data-tooltip-options='{"direction":"bottom","delay":"500"}'>Bottom</div>
 					</div>
 
-					<h4>Long Text</h4>
+					<h4 class="center">Long Text</h4>
 					<div class="tooltips">
 						<div class="tooltip js-tooltip" data-title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras mattis consectetur purus sit amet fermentum. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. " data-tooltip-options='{"customClass":"long_text","direction":"top"}'>Left</div>
+					</div>
+
+					<h4 class="center">No Theme</h4>
+					<div class="tooltips">
+						<div class="tooltip js-tooltip" data-title="No Theme" data-tooltip-options='{"theme":"","direction":"bottom"}'>No Theme</div>
 					</div>
 					<!-- END: DEMO -->
 				</div>

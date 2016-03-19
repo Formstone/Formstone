@@ -37,7 +37,7 @@
 			if ($.type(key) !== "undefined") {
 				if ($.type(value) !== "undefined") {
 					if (value === null) {
-						eraseCookie(key);
+						eraseCookie(key, options);
 					} else {
 						createCookie(key, value, options);
 					}
@@ -122,10 +122,12 @@
 	 * @example $.cookie(key, null);
 	 */
 
-	function eraseCookie(key) {
-		createCookie(key, "", {
+	function eraseCookie(key, options) {
+		createCookie(key, "", $.extend({}, options, {
 			expires: -604800000 // -7 days
-		});
+		}));
+
+		console.log(Document.cookie);
 	}
 
 	/**

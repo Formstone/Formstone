@@ -30,7 +30,3 @@
 * [Touch](components/touch.html)
 * [Transition](components/transition.html)
 * [Upload](components/upload.html)
-
-## Themes
-
-* [Light](themes/light.html)

@@ -1,8 +1,9 @@
 <style>
 	.carousel { border-radius: 3px; margin: 20px 0; width: 100%; }
 
-	.carousel_item { background: #039be5; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
-	.carousel_item:nth-child(even) { background: #0277bd; }
+	.carousel_item { background: #00bcd4; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
+
+	.carousel_item:nth-child(even) { background: #0097A7; }
 	.carousel_item img { width: 100%; }
 
 	.carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
@@ -143,7 +144,7 @@
 </div>
 
 <h4>Custom Controls</h4>
-<div class="carousel js-carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
+<div class="carousel js-carousel" data-carousel-options='{"pagination":false,"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
 	<div class="carousel_item">1</div>
 	<div class="carousel_item">2</div>
 	<div class="carousel_item">3</div>
@@ -151,8 +152,8 @@
 	<div class="carousel_item">5</div>
 </div>
 <div class="custom_container">
-	<button class="custom_previous">Previous</button>
-	<button class="custom_next">Next</button>
+	<button class="button custom_previous">Previous</button>
+	<button class="button custom_next">Next</button>
 </div>
 
 <h4>Single</h4>
@@ -182,4 +183,14 @@
 	<div class="carousel_item">3</div>
 	<div class="carousel_item">4</div>
 	<div class="carousel_item">5</div>
+</div>
+
+<h4>No Theme</h4>
+<div class="carousel js-carousel" id="carousel_1" data-carousel-options='{"theme":""}'>
+	<div class="carousel_item">1</div>
+	<div class="carousel_item">2</div>
+	<div class="carousel_item">3</div>
+	<div class="carousel_item">4</div>
+	<div class="carousel_item">5</div>
+	<div class="carousel_item" style="display: none;">6</div>
 </div>

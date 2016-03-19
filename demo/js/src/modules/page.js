@@ -7,10 +7,15 @@
 	Site.modules.Page = (function($, Site) {
 
 		function init() {
-
+/*
 			$(".js-component_select").dropdown();
 			$(".js-theme_select").dropdown().on("change", function() {
 				buildPlugins($(this).val());
+			});
+*/
+
+			$.cookie({
+				path: '/'
 			});
 
 			buildPlugins("fs-light");

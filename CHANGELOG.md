@@ -8,6 +8,7 @@
 * Added fs-light base theme 
 * Added AMD module wrappers to all components
 * Added custom video formatters in Lightbox
+* Fixed issue with removing data in Cookie
 
 ### 0.8.43
 

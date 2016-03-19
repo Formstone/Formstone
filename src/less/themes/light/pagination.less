@@ -23,7 +23,8 @@
 
 	@fs-pagination-margin:						0 0 10px 0;
 
-	@fs-pagination-page-padding: 				0 5px;
+	@fs-pagination-page-padding: 				0 7px;
+	@fs-pagination-page-margin:					5px;
 
 	// Controls
 
@@ -38,14 +39,14 @@
 
 	// Hover
 
-	// @fs-pagination-hover-border-color:			@fs-light-primary_900;
 	@fs-pagination-hover-text-color:			@fs-light-primary_900;
 
-	@fs-pagination-control-hover-background:	@fs-light-primary_300;
+	@fs-pagination-control-hover-background:	@fs-light-primary_100;
 
 	// Active
 
 	@fs-pagination-active-text-color: 			@fs-light-primary_900;
+	@fs-pagination-active-background:			@fs-light-primary_100;
 
 
 	&.@{theme_name} {
@@ -69,17 +70,29 @@
 	&.@{theme_name} &-ellipsis,
 	&.@{theme_name} &-control,
 	&-mobile.@{theme_name} &-position {
-		height: @fs-pagination-height;
-
 		color: @fs-pagination-text-color;
 		font-size: @fs-pagination-font-size;
-		line-height: @fs-pagination-height;
 		text-decoration: none;
 	}
 
 	&.@{theme_name} &-page,
 	&.@{theme_name} &-ellipsis {
+		height: @fs-pagination-height - (@fs-pagination-page-margin * 2);
+
+		line-height: @fs-pagination-height - (@fs-pagination-page-margin * 2);
+		margin: @fs-pagination-page-margin 0;
 		padding: @fs-pagination-page-padding;
+	}
+
+	&.@{theme_name} &-control,
+	&-mobile.@{theme_name} &-position {
+		height: @fs-pagination-height;
+
+		line-height: @fs-pagination-height;
+	}
+
+	&.@{theme_name} &-page {
+		border-radius: @fs-pagination-border-radius;
 	}
 
 	.no-touchevents .@{theme_name} &-page:hover {
@@ -96,6 +109,7 @@
 
 	&.@{theme_name} &-active {
 		color: @fs-pagination-active-text-color;
+		background: @fs-pagination-active-background;
 	}
 
 	&.@{theme_name} &-control {
@@ -164,6 +178,7 @@
 	}
 
 	&-mobile.@{theme_name} &-position {
+		text-align: center;
 	}
 
 	&-mobile.@{theme_name} &-select {

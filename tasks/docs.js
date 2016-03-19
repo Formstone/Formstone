@@ -608,11 +608,13 @@ module.exports = function(grunt) {
 				}
 			}
 
+/*
 			demosmd += '\n';
 			demosmd += '## Themes';
 			demosmd += '\n\n';
 			demosmd += '* [Light](themes/light.html)';
 			demosmd += '\n';
+*/
 
 			var template = {
 					template: "content.html",

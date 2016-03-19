@@ -17,7 +17,7 @@ Formstone Library core. Required for all plugins.
 
 ### Formstone Object
 
-The Formstone core is a dependency of all javascript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:
+The Formstone core is a dependency of all JavaScript based components and will contain a few global values, as well as a simple plugin factory. The global Formstone object has access to the following keys:
 
 | Key | Type | Description |
 | --- | --- | --- |

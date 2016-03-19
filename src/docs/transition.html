@@ -1,6 +1,7 @@
 <style>
 	.transitions { margin: 0 0 20px; }
-	.transition { background-color: #00BCD4; border-radius: 3px; height: 30px; margin: 20px 0; width: 10%;
+	.transition_track { background: #fff; border: 1px solid #455a64; margin: 20px 0; }
+	.transition { background-color: #00bcd4; height: 30px; width: 10%;
 		-webkit-transition: margin 0.5s ease, height 0.5s linear 0.5s;
 				transition: margin 0.5s ease, height 0.5s linear 0.5s;
 	}
@@ -9,11 +10,7 @@
 		height: 50px;
 	}
 
-	.demo_output { margin: 0 0 20px; }
-
-	@media screen and (min-width: 500px) {
-		.demo_output { display: inline-block; margin: 0 0 0 10px; }
-	}
+	.output { display: inline-block; margin: 0 0 0 10px; }
 </style>
 
 <script>
@@ -58,29 +55,33 @@
 	}
 
 	function output($target, text) {
-		$target.parents(".transitions").find(".demo_output").text(text);
+		$target.parents(".transitions").find(".output").text(text);
 	}
 </script>
 
 <h4>Basic</h4>
 <div class="transitions">
-	<div class="transition transition_basic"></div>
+	<div class="transition_track">
+		<div class="transition transition_basic"></div>
+	</div>
 	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
+	<div class="output">&nbsp;</div>
 </div>
-
+<br>
 <h4>Delegation</h4>
 <div class="transitions">
-	<div class="transition_parent">
+	<div class="transition_track transition_parent">
 		<div class="transition transition_delegate"></div>
 	</div>
 	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
+	<div class="output">&nbsp;</div>
 </div>
-
+<br>
 <h4>Property</h4>
 <div class="transitions">
-	<div class="transition transition_property"></div>
+	<div class="transition_track">
+		<div class="transition transition_property"></div>
+	</div>
 	<button class="button trigger">Start</button>
-	<div class="demo_output">&nbsp;</div>
+	<div class="output">&nbsp;</div>
 </div>

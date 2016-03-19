@@ -35,7 +35,7 @@
 					}
 					
 					.carousel_item {
-						background: #039be5;
+						background: #00bcd4;
 						border-radius: 3px;
 						color: #fff;
 						font-size: 75px;
@@ -48,7 +48,7 @@
 					}
 					
 					.carousel_item:nth-child(even) {
-						background: #0277bd;
+						background: #0097A7;
 					}
 					
 					.carousel_item img {
@@ -214,7 +214,7 @@
 					</div>
 
 					<h4>Custom Controls</h4>
-					<div class="carousel js-carousel" data-carousel-options='{"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
+					<div class="carousel js-carousel" data-carousel-options='{"pagination":false,"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
 						<div class="carousel_item">1</div>
 						<div class="carousel_item">2</div>
 						<div class="carousel_item">3</div>
@@ -222,8 +222,8 @@
 						<div class="carousel_item">5</div>
 					</div>
 					<div class="custom_container">
-						<button class="custom_previous">Previous</button>
-						<button class="custom_next">Next</button>
+						<button class="button custom_previous">Previous</button>
+						<button class="button custom_next">Next</button>
 					</div>
 
 					<h4>Single</h4>
@@ -253,6 +253,16 @@
 						<div class="carousel_item">3</div>
 						<div class="carousel_item">4</div>
 						<div class="carousel_item">5</div>
+					</div>
+
+					<h4>No Theme</h4>
+					<div class="carousel js-carousel" id="carousel_1" data-carousel-options='{"theme":""}'>
+						<div class="carousel_item">1</div>
+						<div class="carousel_item">2</div>
+						<div class="carousel_item">3</div>
+						<div class="carousel_item">4</div>
+						<div class="carousel_item">5</div>
+						<div class="carousel_item" style="display: none;">6</div>
 					</div>
 					<!-- END: DEMO -->
 				</div>
