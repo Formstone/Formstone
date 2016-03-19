@@ -60,7 +60,7 @@
 
 <h1>ASAP DEMO</h1>
 <p class="back_link">
-	<a href="http://beta.formstone.it/components/asap/">View Documentation</a>
+	<a href="http://beta.formstone.it/components/asap/" class="no-asap">View Documentation</a>
 </p>
 <br>
 <nav>
