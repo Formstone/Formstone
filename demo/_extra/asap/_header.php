@@ -42,7 +42,7 @@
 			<header class="header">
 				<div class="fs-row">
 					<div class="fs-cell-centered fs-xl-10">
-						<a href="http://beta.formstone.it/" class="header_logo icon-logo">Formstone</a>
+						<a href="https://formstone.it/" class="header_logo icon-logo">Formstone</a>
 					</div>
 				</div>
 			</header>
@@ -60,7 +60,7 @@
 
 <h1>ASAP DEMO</h1>
 <p class="back_link">
-	<a href="http://beta.formstone.it/components/asap/" class="no-asap">View Documentation</a>
+	<a href="https://formstone.it/components/asap/" class="no-asap">View Documentation</a>
 </p>
 <br>
 <nav>

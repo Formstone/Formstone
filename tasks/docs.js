@@ -522,7 +522,7 @@ module.exports = function(grunt) {
 					header = '';
 
 				header += '\n\n #' + doc.name + ' Demo';
-				header += '\n<p class="back_link"><a href="http://beta.formstone.it/components/' + doc.name.toLowerCase().replace(/ /g, "") + '">View Documentation</a></p>';
+				header += '\n<p class="back_link"><a href="https://formstone.it/components/' + doc.name.toLowerCase().replace(/ /g, "") + '">View Documentation</a></p>';
 
 				grunt.file.write(destination, JSON.stringify(template) + header);
 

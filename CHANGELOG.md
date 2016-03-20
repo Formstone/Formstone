@@ -2,7 +2,7 @@
 
 <!-- -->
 
-### 0.9.0
+### 1.0.0
 
 * Added theme support for all Widget plugins
 * Added fs-light base theme 
