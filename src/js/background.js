@@ -387,23 +387,24 @@
 								data.player.mute();
 							}
 
-							if (data.autoPlay) {
+							if (!data.autoPlay) {
 								// make sure the video plays
-								data.player.playVideo();
+								data.player.pauseVideo();
 							}
 						},
 						onStateChange: function (e) {
 							/* console.log("onStateChange", e); */
 
+							// -1 = unstarted
+							//  0 = ended
+							//  1 = playing
+							//  2 = paused
+							//  3 = buffering
+							//  4 =
+							//  5 = cued
+
 							if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
 								data.playing = true;
-
-								if (!data.autoPlay) {
-									data.player.pauseVideo();
-									data.playing = false;
-								} else {
-									data.playing = true;
-								}
 
 								$media.fsTransition({
 									property: "opacity"
@@ -519,9 +520,9 @@
 				if ($video.length) {
 					$video[0].pause();
 				}
-
-				data.playing = false;
 			}
+
+			data.playing = false;
 		}
 	}
 
