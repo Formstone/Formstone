@@ -534,17 +534,21 @@
 
 	function playVideo(data) {
 		if (data.video) {
-			if (data.isYouTube && data.playerReady) {
-				data.player.playVideo();
+			if (data.isYouTube) {
+				if (data.playerReady) {
+					data.player.playVideo();
+				} else {
+					data.autoPlay = true;
+				}
 			} else {
 				var $video = data.$container.find("video");
 
 				if ($video.length) {
 					$video[0].play();
 				}
-			}
 
-			data.playing = true;
+				data.playing = true;
+			}
 		}
 	}
 
@@ -573,8 +577,6 @@
 					$video[0].muted = true;
 				}
 			}
-
-			data.playing = true;
 		}
 
 		data.mute = true;

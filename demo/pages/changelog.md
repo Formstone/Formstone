@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.44
+
+* Fixed issue with `play` method in Background 
+
 ### 0.8.43
 
 * Fixed issue with IE touch-action in Touch
