@@ -418,10 +418,11 @@
 							//  5 = cued
 
 							if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
-								data.playing = true;
-
 								if (!data.autoPlay) {
 									data.player.pauseVideo();
+									data.playing = false;
+								} else {
+									data.playing = true;
 								}
 
 								$media.fsTransition({
@@ -525,18 +526,22 @@
 	 */
 
 	function pauseVideo(data) {
-		if (data.video) {
-			if (data.isYouTube && data.playerReady) {
-				data.player.pauseVideo();
+		if (data.video && data.playing) {
+			if (data.isYouTube) {
+				if (data.playerReady) {
+					data.player.pauseVideo();
+				} else {
+					data.autoPlay = false;
+				}
 			} else {
 				var $video = data.$container.find("video");
 
 				if ($video.length) {
 					$video[0].pause();
 				}
-			}
 
-			data.playing = false;
+				data.playing = false;
+			}
 		}
 	}
 
@@ -555,7 +560,7 @@
 	 */
 
 	function playVideo(data) {
-		if (data.video) {
+		if (data.video && !data.playing) {
 			if (data.isYouTube) {
 				if (data.playerReady) {
 					data.player.playVideo();
