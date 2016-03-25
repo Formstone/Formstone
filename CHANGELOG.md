@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.0.1
+
+* Fixed issue with `play` method in Background 
+
 ### 1.0.0
 
 * Added theme support for all Widget plugins
@@ -9,6 +13,10 @@
 * Added AMD module wrappers to all components
 * Added custom video formatters in Lightbox
 * Fixed issue with removing data in Cookie
+
+### 0.8.44
+
+* Fixed issue with `play` method in Background 
 
 ### 0.8.43
 
