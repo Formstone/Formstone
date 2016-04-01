@@ -32,7 +32,7 @@ dropdown.css
 jQuery
 core.js
 scrollbar.js (optional)
-touch.js (for scrollbar, optional)
+touch.js (optional, for scrollbar)
 ```
 
 ### Basic

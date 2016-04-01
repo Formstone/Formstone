@@ -96,6 +96,7 @@
 	// Caption
 
 	@fs-lightbox-caption-font-size:					14px;
+	@fs-lightbox-caption-line-height:				1.6;
 	@fs-lightbox-caption-text-color:				@fs-light-primary_600;
 
 	@fs-lightbox-caption-margin:					5px 0;
@@ -135,7 +136,7 @@
 	// Mobile Controls
 
 	@fs-lightbox-mobile-control-size:				50px;
-	@fs-lightbox-mobile-control-background:			@fs-light-primary_900;
+	@fs-lightbox-mobile-control-background:			@fs-light-primary_800;
 
 	// Control Carets
 
@@ -144,7 +145,7 @@
 
 	// Mobile Meta
 
-	@fs-lightbox-mobile-meta-background:			@fs-light-primary_900;
+	@fs-lightbox-mobile-meta-background:			@fs-light-primary_800;
 	@fs-lightbox-mobile-meta-padding:				15px;
 
 	// Mobile Position
@@ -152,12 +153,13 @@
 	@fs-lightbox-mobile-position-font-size:			12px;
 	@fs-lightbox-mobile-position-text-color:		@fs-light-primary_300;
 
-	@fs-lightbox-mobile-position-margin:			0;
+	@fs-lightbox-mobile-position-margin:			0 0 5px;
 	@fs-lightbox-mobile-position-padding:			0 15px 0 0;
 
 	// Mobile Caption
 
 	@fs-lightbox-mobile-caption-font-size:			14px;
+	@fs-lightbox-mobile-caption-line-height:		1.6;
 	@fs-lightbox-mobile-caption-text-color:			@fs-light-primary_100;
 
 	@fs-lightbox-mobile-caption-margin:				0;
@@ -419,6 +421,7 @@
 		& p {
 			color: @fs-lightbox-caption-text-color;
 			font-size: @fs-lightbox-caption-font-size;
+			line-height: @fs-lightbox-caption-line-height;
 			margin: @fs-lightbox-caption-margin;
 			padding: @fs-lightbox-caption-padding;
 		}
@@ -551,6 +554,7 @@
 		p {
 			color: @fs-lightbox-mobile-caption-text-color;
 			font-size: @fs-lightbox-mobile-caption-font-size;
+			line-height: @fs-lightbox-mobile-caption-line-height;
 			margin: @fs-lightbox-mobile-caption-margin;
 			padding: @fs-lightbox-mobile-caption-padding;
 		}
@@ -597,6 +601,7 @@
 	}
 
 	.@{theme_name}&-mobile&-touch &-caption_toggle {
+		background: transparent;
 		color: @fs-lightbox-mobile-caption-button-text-color;
 		display: block;
 		font-size: @fs-lightbox-mobile-caption-button-font-size;
@@ -604,26 +609,15 @@
 	}
 
 	.@{theme_name}&-mobile&-touch &-meta {
-		width: 100%;
-		height: 80%;
-
-		position: fixed;
-		top: 20%;
-		right: 0;
-		bottom: 0;
-		left: 0;
 		z-index: (@fs-lightbox-z-index + 4);
 
 		background: @fs-lightbox-mobile-caption-background;
 		box-shadow: @fs-lightbox-box-shadow;
 		padding: @fs-lightbox-mobile-meta-padding @fs-lightbox-mobile-meta-padding (@fs-lightbox-mobile-meta-padding + @fs-lightbox-mobile-control-size);
-		transform: translate(0, 100%);
-		transition: transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
 	}
 
 	// caption open
 
 	.@{theme_name}&-touch&-caption_open &-meta {
-		transform: translate(0, 0);
 	}
 }

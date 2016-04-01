@@ -103,6 +103,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `retina` | `boolean` | `false` | Flag to use 'retina' sizing (halves natural sizes) |
 | `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
 | `theme` | `string` | `"fs-light"` | Theme class name |
+| `thumbnails` | `boolean` | `false` | Flag to display thumbnail strip |
 | `top` | `int` | `0` | Target top position; over-rides centering |
 | `touch` | `boolean` | `true` | Flag to allow touch zoom on 'mobile' rendering |
 | `videoFormatter` | &nbsp; | &nbsp; | Object of video formatter objects containing a 'pattern' regex and 'format' callback |
@@ -205,5 +206,9 @@ $.lightbox("resize");
 | `.fs-lightbox-position_total` | `element` | Total position element |
 | `.fs-lightbox-caption` | `element` | Caption element |
 | `.fs-lightbox-error` | `element` | Error message element |
+| `.fs-lightbox-thumbnails` | `element` | &nbsp; |
+| `.fs-lightbox-thumbnail_container` | `element` | &nbsp; |
+| `.fs-lightbox-thumbnail_canitser` | `element` | &nbsp; |
+| `.fs-lightbox-thumbnail_item` | `element` | &nbsp; |
 | `.fs-lightbox-lock` | `modifier` | Indicates locked state; Applied to body element |
 

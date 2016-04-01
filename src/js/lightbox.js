@@ -168,68 +168,104 @@
 				}
 			}
 
+			// Thumbnails support
+			if ( !(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active) ) {
+				Instance.thumbnails = false;
+			}
+
 			// Assemble HTML
 			var html = '';
 			if (!Instance.isMobile) {
-				html += '<div class="' + [Classes.raw.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
+				html += '<div class="' + [RawClasses.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
 			}
 			var lightboxClasses = [
-				Classes.raw.base,
-				Classes.raw.loading,
-				Classes.raw.animating,
+				RawClasses.base,
+				RawClasses.loading,
+				RawClasses.animating,
 				Instance.theme,
 				Instance.customClass
 			];
 
 			if (Instance.fixed) {
-				lightboxClasses.push(Classes.raw.fixed);
+				lightboxClasses.push(RawClasses.fixed);
 			}
 			if (Instance.isMobile) {
-				lightboxClasses.push(Classes.raw.mobile);
+				lightboxClasses.push(RawClasses.mobile);
 			}
 			if (Instance.isTouch) {
-				lightboxClasses.push(Classes.raw.touch);
+				lightboxClasses.push(RawClasses.touch);
 			}
 			if (isUrl) {
-				lightboxClasses.push(Classes.raw.iframed);
+				lightboxClasses.push(RawClasses.iframed);
 			}
 			if (isElement || isObject) {
-				lightboxClasses.push(Classes.raw.inline);
+				lightboxClasses.push(RawClasses.inline);
+			}
+			if (Instance.thumbnails) {
+				lightboxClasses.push(RawClasses.thumbnailed);
 			}
 
 			html += '<div class="' + lightboxClasses.join(" ") + '">';
-			html += '<button type="button" class="' + Classes.raw.close + '">' + Instance.labels.close + '</button>';
-			html += '<span class="' + Classes.raw.loading_icon + '"></span>';
-			html += '<div class="' + Classes.raw.container + '">';
-			html += '<div class="' + Classes.raw.content + '">';
-			if (isImage || isVideo) {
-				html += '<div class="' + Classes.raw.tools + '">';
+			html += '<button type="button" class="' + RawClasses.close + '">' + Instance.labels.close + '</button>';
+			html += '<span class="' + RawClasses.loading_icon + '"></span>';
+			html += '<div class="' + RawClasses.container + '">';
 
-				html += '<div class="' + Classes.raw.controls + '">';
+			// Thumbnails
+			if (Instance.gallery.active && Instance.thumbnails) {
+				html += '<div class="' + [RawClasses.thumbnails] + '">';
+				html += '<div class="' + [RawClasses.thumbnail_container] + '">';
+				html += '<div class="' + [RawClasses.thumbnail_canister] + '">';
+
+				var $item,
+					thumb;
+
+				for (var i = 0, count = Instance.gallery.$items.length; i < count; i++) {
+					$item = Instance.gallery.$items.eq(i);
+					thumb = $item.data("lightbox-thumbnail");
+
+					if (!thumb) {
+						thumb = $item.find("img").attr("src");
+					}
+
+					html += '<button class="' + [RawClasses.thumbnail_item] + '">';
+					html += '<img src="' + thumb + '" alt="">';
+					html += '</button>';
+				}
+
+				html += '</div></div></div>';
+			}
+
+			html += '<div class="' + RawClasses.content + '">';
+			if (isImage || isVideo) {
+
+				html += '<div class="' + RawClasses.tools + '">';
+
+				html += '<div class="' + RawClasses.controls + '">';
 				if (Instance.gallery.active) {
-					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
-					html += '<button type="button" class="' + [Classes.raw.control, Classes.raw.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+					html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
+					html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
 				}
 				if (Instance.isMobile && Instance.isTouch) {
-					html += '<button type="button" class="' + [Classes.raw.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+					html += '<button type="button" class="' + [RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
 				}
 				html += '</div>'; // controls
 
-				html += '<div class="' + Classes.raw.meta + '">';
+				html += '<div class="' + RawClasses.meta + '">';
+				html += '<div class="' + RawClasses.meta_content + '">';
 				if (Instance.gallery.active) {
-					html += '<p class="' + Classes.raw.position + '"';
+					html += '<p class="' + RawClasses.position + '"';
 					if (Instance.gallery.total < 1) {
 						html += ' style="display: none;"';
 					}
 					html += '>';
-					html += '<span class="' + Classes.raw.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
+					html += '<span class="' + RawClasses.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
 					html += Instance.labels.count;
-					html += ' <span class="' + Classes.raw.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
+					html += ' <span class="' + RawClasses.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
 					html += '</p>';
 				}
-				html += '<div class="' + Classes.raw.caption + '">';
+				html += '<div class="' + RawClasses.caption + '">';
 				html += Instance.formatter.call($el, data);
-				html += '</div></div>'; // caption, meta
+				html += '</div></div></div>'; // caption, meta_content, meta
 
 				html += '</div>'; // tools
 			}
@@ -239,17 +275,21 @@
 			$Body.append(html);
 
 			// Cache jquery objects
-			Instance.$overlay          = $(Classes.overlay);
-			Instance.$lightbox         = $(Classes.base);
-			Instance.$close            = $(Classes.close);
-			Instance.$container        = $(Classes.container);
-			Instance.$content          = $(Classes.content);
-			Instance.$tools            = $(Classes.tools);
-			Instance.$meta             = $(Classes.meta);
-			Instance.$position         = $(Classes.position);
-			Instance.$caption          = $(Classes.caption);
-			Instance.$controlBox       = $(Classes.controls);
-			Instance.$controls         = $(Classes.control);
+			Instance.$overlay               = $(Classes.overlay);
+			Instance.$lightbox              = $(Classes.base);
+			Instance.$close                 = $(Classes.close);
+			Instance.$container             = $(Classes.container);
+			Instance.$content               = $(Classes.content);
+			Instance.$tools                 = $(Classes.tools);
+			Instance.$meta                  = $(Classes.meta);
+			Instance.$metaContent           = $(Classes.meta_content);
+			Instance.$position              = $(Classes.position);
+			Instance.$caption               = $(Classes.caption);
+			Instance.$controlBox            = $(Classes.controls);
+			Instance.$controls              = $(Classes.control);
+			Instance.$thumbnails            = $(Classes.thumbnails);
+			Instance.$thumbnailCanister     = $(Classes.thumbnail_canister);
+			Instance.$thumbnailItems        = $(Classes.thumbnail_item);
 
 			if (Instance.isMobile) {
 				Instance.paddingVertical   = Instance.$close.outerHeight();
@@ -269,6 +309,8 @@
 			Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
 			Instance.controlHeight     = Instance.$controls.outerHeight();
 
+			Instance.thumbnailWidth    = Instance.$thumbnailItems.eq(0).outerWidth(true);
+
 			// Center
 			centerLightbox();
 
@@ -285,6 +327,10 @@
 
 			if (Instance.gallery.active) {
 				Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
+			}
+
+			if (Instance.thumbnails) {
+				Instance.$lightbox.on(Events.click, Classes.thumbnail_item, jumpGallery);
 			}
 
 			if (Instance.isMobile && Instance.isTouch) {
@@ -306,9 +352,9 @@
 				} else if (isObject) {
 					appendObject(Instance.$object);
 				}
-			}).addClass(Classes.raw.open);
+			}).addClass(RawClasses.open);
 
-			Instance.$overlay.addClass(Classes.raw.open);
+			Instance.$overlay.addClass(RawClasses.open);
 		}
 	}
 
@@ -367,7 +413,7 @@
 
 			clearTouch();
 
-			Instance.$lightbox.addClass(Classes.raw.animating).fsTransition({
+			Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
 				property: "opacity"
 			},
 			function(e) {
@@ -390,8 +436,8 @@
 				$Window.trigger(Events.close);
 			});
 
-			Instance.$lightbox.removeClass(Classes.raw.open);
-			Instance.$overlay.removeClass(Classes.raw.open);
+			Instance.$lightbox.removeClass(RawClasses.open);
+			Instance.$overlay.removeClass(RawClasses.open);
 
 			if (Instance.isMobile) {
 				$Locks.removeClass(RawClasses.lock);
@@ -411,7 +457,7 @@
 
 		if (!Instance.isMobile) {
 			Instance.$controls.css({
-				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight) / 2)
+				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
 			});
 		}
 
@@ -432,11 +478,11 @@
 				property: "opacity"
 			},
 			function() {
-				Instance.$lightbox.removeClass(Classes.raw.animating);
+				Instance.$lightbox.removeClass(RawClasses.animating);
 				Instance.isAnimating = false;
 			});
 
-			Instance.$lightbox.removeClass(Classes.raw.loading);
+			Instance.$lightbox.removeClass(RawClasses.loading);
 
 			Instance.visible = true;
 
@@ -470,6 +516,18 @@
 
 		if (Instance.isMobile) {
 			$Locks.addClass(RawClasses.lock);
+		}
+
+		// Thumbnails
+		if (Instance.thumbnails) {
+			Instance.$thumbnailItems.removeClass(RawClasses.active);
+			Instance.$thumbnailItems.eq(Instance.gallery.index).addClass(RawClasses.active);
+
+			console.log(Instance.gallery.index);
+
+			Instance.$thumbnailCanister.css({
+				marginLeft: -(Instance.thumbnailWidth * Instance.gallery.index)
+			});
 		}
 	}
 
@@ -549,8 +607,17 @@
 		if (Instance.captionOpen) {
 			closeCaption();
 		} else {
-			Instance.$lightbox.addClass(Classes.raw.caption_open)
+			var height = parseInt( Instance.$metaContent.outerHeight(true) );
+			height += parseInt( Instance.$meta.css("padding-top") );
+			height += parseInt( Instance.$meta.css("padding-bottom") );
+
+			Instance.$meta.css({
+				height: height
+			});
+
+			Instance.$lightbox.addClass(RawClasses.caption_open)
 				.find(Classes.caption_toggle).text(Instance.labels.captionOpen);
+
 			Instance.captionOpen = true;
 		}
 	}
@@ -562,7 +629,7 @@
 	 */
 
 	function closeCaption() {
-		Instance.$lightbox.removeClass(Classes.raw.caption_open)
+		Instance.$lightbox.removeClass(RawClasses.caption_open)
 			.find(Classes.caption_toggle).text(Instance.labels.captionClosed);
 		Instance.captionOpen = false;
 	}
@@ -592,7 +659,7 @@
 		Instance.hasScaled = false;
 
 		// Cache current image
-		Instance.$imageContainer = $('<div class="' + Classes.raw.image_container + '"><img></div>');
+		Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
 		Instance.$image = Instance.$imageContainer.find("img");
 
 		Instance.$image.one(Events.load, function() {
@@ -640,7 +707,7 @@
 			}
 		}).error(loadError)
 		  .attr("src", source)
-		  .addClass(Classes.raw.image);
+		  .addClass(RawClasses.image);
 
 		// If image has already loaded into cache, trigger load event
 		if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
@@ -667,7 +734,7 @@
 	function onScaleStart(e) {
 		cacheScale();
 
-		Instance.$lightbox.removeClass(Classes.raw.animating);
+		Instance.$lightbox.removeClass(RawClasses.animating);
 	}
 
 	function onScale(e) {
@@ -742,7 +809,7 @@
 			}
 		}
 
-		Instance.$lightbox.addClass(Classes.raw.animating);
+		Instance.$lightbox.addClass(RawClasses.animating);
 
 		Instance.$imageContainer.css({
 			left: Instance.scalePosition.left,
@@ -771,10 +838,11 @@
 			Instance.imageMarginLeft = 0;
 
 			while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
-				Instance.imageHeight   = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
-				Instance.imageWidth    = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
-				Instance.metaHeight    = (count === 0) ? 0 : Instance.metaHeight;
-				Instance.spacerHeight  = (count === 0) ? 0 : Instance.spacerHeight;
+				Instance.imageHeight     = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+				Instance.imageWidth      = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
+				Instance.metaHeight      = (count === 0) ? 0 : Instance.metaHeight;
+				Instance.spacerHeight    = (count === 0) ? 0 : Instance.spacerHeight;
+				Instance.thumbnailHeight = (count === 0) ? 0 : Instance.thumbnailHeight;
 
 				if (count === 0) {
 					Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
@@ -804,6 +872,8 @@
 						Instance.spacerHeight = Instance.$tools.outerHeight(true);
 					}
 
+					Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+
 					// Content match viewport
 					Instance.contentHeight = Instance.viewportHeight;
 					Instance.contentWidth  = Instance.viewportWidth;
@@ -819,6 +889,10 @@
 						Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
 					}
 					Instance.viewportHeight -= Instance.metaHeight;
+
+					if (Instance.thumbnails) {
+						Instance.viewportHeight -= Instance.thumbnailHeight;
+					}
 
 					fitImage();
 
@@ -855,6 +929,11 @@
 				if (!Instance.isMobile) {
 					Instance.metaHeight = Instance.$meta.outerHeight(true);
 					Instance.contentHeight += Instance.metaHeight;
+				}
+
+				if (Instance.thumbnails) {
+					Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+					Instance.contentHeight += Instance.thumbnailHeight;
 				}
 
 				count ++;
@@ -943,11 +1022,11 @@
 				url += "?" + queryString.slice(1)[0].trim();
 			}
 
-			Instance.$videoWrapper = $('<div class="' + Classes.raw.video_wrapper + '"></div>');
-			Instance.$video = $('<iframe class="' + Classes.raw.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
+			Instance.$videoWrapper = $('<div class="' + RawClasses.video_wrapper + '"></div>');
+			Instance.$video = $('<iframe class="' + RawClasses.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
 
 			Instance.$video.attr("src", url)
-					   .addClass(Classes.raw.video)
+					   .addClass(RawClasses.video)
 					   .prependTo(Instance.$videoWrapper);
 
 			Instance.$content.prepend(Instance.$videoWrapper);
@@ -985,6 +1064,8 @@
 				});
 				Instance.spacerHeight = Instance.$tools.outerHeight(true);
 			}
+			Instance.spacerHeight = Instance.$thumbnails.outerHeight(true) + 10;
+
 			Instance.viewportHeight -= Instance.spacerHeight;
 
 			Instance.targetVideoWidth  = Instance.viewportWidth;
@@ -1027,7 +1108,12 @@
 
 		if (!Instance.isMobile) {
 			Instance.metaHeight = Instance.$meta.outerHeight(true);
-			Instance.contentHeight = Instance.targetVideoHeight + Instance.metaHeight;
+			Instance.contentHeight += Instance.metaHeight;
+		}
+
+		if (Instance.thumbnails) {
+			Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+			Instance.contentHeight += Instance.thumbnailHeight;
 		}
 	}
 
@@ -1067,13 +1153,13 @@
 
 		var $control = $(e.currentTarget);
 
-		if (!Instance.isAnimating && !$control.hasClass(Classes.raw.control_disabled)) {
+		if (!Instance.isAnimating && !$control.hasClass(RawClasses.control_disabled)) {
 			Instance.isAnimating = true;
 
 			clearTouch();
 			closeCaption();
 
-			Instance.gallery.index += ($control.hasClass(Classes.raw.control_next)) ? 1 : -1;
+			Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
 			if (Instance.gallery.index > Instance.gallery.total) {
 				Instance.gallery.index = (Instance.infinite) ? 0 : Instance.gallery.total;
 			}
@@ -1081,42 +1167,78 @@
 				Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
 			}
 
-			Instance.$lightbox.addClass(Classes.raw.animating);
+			Instance.$lightbox.addClass(RawClasses.animating);
 
 			Instance.$container.fsTransition({
 				property: "opacity"
-			},
-			function() {
-				if (typeof Instance.$imageContainer !== 'undefined') {
-					Instance.$imageContainer.remove();
-				}
-				if (typeof Instance.$videoWrapper !== 'undefined') {
-					Instance.$videoWrapper.remove();
-				}
-				Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+			}, cleanGallery);
 
-				Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
-				Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
-
-				var source = Instance.$el.attr("href"),
-					isVideo = checkVideo(source);
-
-				if (isVideo) {
-					Instance.type = "video";
-
-					loadVideo(source);
-				} else {
-					Instance.type = "image";
-
-					loadImage(source);
-				}
-
-				updateGalleryControls();
-
-			});
-
-			Instance.$lightbox.addClass(Classes.raw.loading);
+			Instance.$lightbox.addClass(RawClasses.loading);
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name jumpGallery
+	 * @description Jumps gallery base on thumbnail click.
+	 * @param e [object] "Event Data"
+	 */
+
+	function jumpGallery(e) {
+		Functions.killEvent(e);
+
+		var $thumbnail = $(e.currentTarget);
+
+		if (!Instance.isAnimating && !$thumbnail.hasClass(RawClasses.active)) {
+			Instance.isAnimating = true;
+
+			clearTouch();
+			closeCaption();
+
+			Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
+
+			Instance.$lightbox.addClass(RawClasses.animating);
+
+			Instance.$container.fsTransition({
+				property: "opacity"
+			}, cleanGallery);
+
+			Instance.$lightbox.addClass(RawClasses.loading);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name cleanGallery
+	 * @description Cleans gallery.
+	 */
+
+	function cleanGallery() {
+		if (typeof Instance.$imageContainer !== 'undefined') {
+			Instance.$imageContainer.remove();
+		}
+		if (typeof Instance.$videoWrapper !== 'undefined') {
+			Instance.$videoWrapper.remove();
+		}
+		Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+
+		Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+		Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
+
+		var source = Instance.$el.attr("href"),
+			isVideo = checkVideo(source);
+
+		if (isVideo) {
+			Instance.type = "video";
+
+			loadVideo(source);
+		} else {
+			Instance.type = "image";
+
+			loadImage(source);
+		}
+
+		updateGalleryControls();
 	}
 
 	/**
@@ -1126,7 +1248,7 @@
 	 */
 
 	function updateGalleryControls() {
-		Instance.$controls.removeClass(Classes.raw.control_disabled);
+		Instance.$controls.removeClass(RawClasses.control_disabled);
 
 		if (!Instance.infinite) {
 			if (Instance.gallery.index === 0) {
@@ -1188,7 +1310,7 @@
 
 	function loadURL(source) {
 		source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
-		var $iframe = $('<iframe class="' + Classes.raw.iframe + '" src="' + source + '"></iframe>');
+		var $iframe = $('<iframe class="' + RawClasses.iframe + '" src="' + source + '"></iframe>');
 		appendObject($iframe);
 	}
 
@@ -1249,7 +1371,7 @@
 	 */
 
 	function loadError() {
-		var $error = $('<div class="' + Classes.raw.error + '"><p>Error Loading Resource</p></div>');
+		var $error = $('<div class="' + RawClasses.error + '"><p>Error Loading Resource</p></div>');
 
 		// Clean up
 		Instance.type = "element";
@@ -1364,6 +1486,7 @@
 			 * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
 			 * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
 			 * @param theme [string] <"fs-light"> "Theme class name"
+			 * @param thumbnails [boolean] <false> "Flag to display thumbnail strip"
 			 * @param top [int] <0> "Target top position; over-rides centering"
 			 * @param touch [boolean] <true> "Flag to allow touch zoom on 'mobile' rendering"
 			 * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
@@ -1392,6 +1515,7 @@
 				retina         : false,
 				requestKey     : "fs-lightbox",
 				theme          : "fs-light",
+				thumbnails     : false,
 				top            : 0,
 				touch          : true,
 				videoFormatter : {
@@ -1428,6 +1552,7 @@
 				"video_wrapper",
 				"tools",
 				"meta",
+				"meta_content",
 				"controls",
 				"control",
 				"control_previous",
@@ -1439,10 +1564,17 @@
 				"caption_toggle",
 				"caption",
 				"caption_open",
+				"thumbnailed",
+				"thumbnails",
+				"thumbnail_container",
+				"thumbnail_canister",
+				"thumbnail_item",
+				"active",
 				"has_controls",
 				"has_caption",
 				"iframe",
 				"error",
+				"active",
 				"lock"
 			],
 

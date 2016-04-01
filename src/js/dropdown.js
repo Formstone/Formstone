@@ -863,7 +863,7 @@
 	 * @dependency jQuery
 	 * @dependency core.js
 	 * @dependency scrollbar.js (optional)
-	 * @dependency touch.js (for scrollbar, optional)
+	 * @dependency touch.js (optional, for scrollbar)
 	 */
 
 	var Plugin = Formstone.Plugin("dropdown", {
