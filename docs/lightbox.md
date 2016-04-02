@@ -94,8 +94,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.count` | `string` | `'of'` | Gallery count separator text |
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |
-| `labels.captionClosed` | `string` | `'View Caption'` | Mobile caption toggle text, closed state |
+| `labels.captionClosed` | `string` | `'Close Caption'` | Mobile caption toggle text, closed state |
 | `labels.captionOpen` | `string` | `'View Caption'` | Mobile caption toggle text, open state |
+| `labels.thumbnailsClosed` | `string` | `'Close Thumbnails'` | Mobile thumbnails toggle text, closed state |
+| `labels.thumbnailsOpen` | `string` | `'View Thumbnails'` | Mobile thumbnails toggle text, open state |
 | `margin` | `int` | `50` | Margin used when sizing (single side) |
 | `minHeight` | `int` | `100` | Minimum height of modal |
 | `minWidth` | `int` | `100` | Minimum width of modal |
@@ -208,7 +210,6 @@ $.lightbox("resize");
 | `.fs-lightbox-error` | `element` | Error message element |
 | `.fs-lightbox-thumbnails` | `element` | &nbsp; |
 | `.fs-lightbox-thumbnail_container` | `element` | &nbsp; |
-| `.fs-lightbox-thumbnail_canitser` | `element` | &nbsp; |
 | `.fs-lightbox-thumbnail_item` | `element` | &nbsp; |
 | `.fs-lightbox-lock` | `modifier` | Indicates locked state; Applied to body element |
 

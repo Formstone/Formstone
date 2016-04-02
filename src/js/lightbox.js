@@ -111,7 +111,9 @@
 				isTouch            : Formstone.support.touch,
 				isAnimating        : true,
 				oldContentHeight   : 0,
-				oldContentWidth    : 0
+				oldContentWidth    : 0,
+				captionOpen        : false,
+				thumbnailsOpen     : false
 			}, data);
 
 			// Check target type
@@ -214,7 +216,6 @@
 			if (Instance.gallery.active && Instance.thumbnails) {
 				html += '<div class="' + [RawClasses.thumbnails] + '">';
 				html += '<div class="' + [RawClasses.thumbnail_container] + '">';
-				html += '<div class="' + [RawClasses.thumbnail_canister] + '">';
 
 				var $item,
 					thumb;
@@ -232,10 +233,11 @@
 					html += '</button>';
 				}
 
-				html += '</div></div></div>';
+				html += '</div></div>';
 			}
 
-			html += '<div class="' + RawClasses.content + '">';
+			html += '<div class="' + RawClasses.content + '"></div>';
+
 			if (isImage || isVideo) {
 
 				html += '<div class="' + RawClasses.tools + '">';
@@ -246,7 +248,11 @@
 					html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
 				}
 				if (Instance.isMobile && Instance.isTouch) {
-					html += '<button type="button" class="' + [RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+					html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+
+					if (Instance.gallery.active && Instance.thumbnails) {
+						html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.thumbnail_toggle].join(" ") + '">' + Instance.labels.thumbnailsClosed + '</button>';
+					}
 				}
 				html += '</div>'; // controls
 
@@ -269,7 +275,7 @@
 
 				html += '</div>'; // tools
 			}
-			html += '</div></div></div>'; //container, content, lightbox
+			html += '</div></div>'; //container, content, lightbox
 
 			// Modify Dom
 			$Body.append(html);
@@ -288,7 +294,7 @@
 			Instance.$controlBox            = $(Classes.controls);
 			Instance.$controls              = $(Classes.control);
 			Instance.$thumbnails            = $(Classes.thumbnails);
-			Instance.$thumbnailCanister     = $(Classes.thumbnail_canister);
+			Instance.$thumbnailContainer    = $(Classes.thumbnail_container);
 			Instance.$thumbnailItems        = $(Classes.thumbnail_item);
 
 			if (Instance.isMobile) {
@@ -308,8 +314,6 @@
 			Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
 			Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
 			Instance.controlHeight     = Instance.$controls.outerHeight();
-
-			Instance.thumbnailWidth    = Instance.$thumbnailItems.eq(0).outerWidth(true);
 
 			// Center
 			centerLightbox();
@@ -334,7 +338,8 @@
 			}
 
 			if (Instance.isMobile && Instance.isTouch) {
-				Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption);
+				Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
+								  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
 			}
 
 			Instance.$lightbox.fsTransition({
@@ -461,15 +466,6 @@
 			});
 		}
 
-		/*
-		if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
-			Instance.$content.fsTouch({
-				axis: "x",
-				swipe: true
-			}).on(Events.swipe, onSwipe);
-		}
-		*/
-
 		Instance.$lightbox.fsTransition({
 			property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
 		},
@@ -520,14 +516,13 @@
 
 		// Thumbnails
 		if (Instance.thumbnails) {
+			var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index),
+				scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
+
 			Instance.$thumbnailItems.removeClass(RawClasses.active);
-			Instance.$thumbnailItems.eq(Instance.gallery.index).addClass(RawClasses.active);
+			$thumb.addClass(RawClasses.active);
 
-			console.log(Instance.gallery.index);
-
-			Instance.$thumbnailCanister.css({
-				marginLeft: -(Instance.thumbnailWidth * Instance.gallery.index)
-			});
+			Instance.$thumbnailContainer.scrollLeft(scrollLeft);
 		}
 	}
 
@@ -542,7 +537,7 @@
 			var position = calculatePosition();
 
 			Instance.$controls.css({
-				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight) / 2)
+				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
 			});
 
 			Instance.$lightbox.css({
@@ -607,6 +602,8 @@
 		if (Instance.captionOpen) {
 			closeCaption();
 		} else {
+			closeThumbnails();
+
 			var height = parseInt( Instance.$metaContent.outerHeight(true) );
 			height += parseInt( Instance.$meta.css("padding-top") );
 			height += parseInt( Instance.$meta.css("padding-bottom") );
@@ -646,6 +643,39 @@
 			t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g,'') : false;
 
 		return t ? '<p class="caption">' + t + '</p>' : "";
+	}
+
+	/**
+	 * @method private
+	 * @name toggleThumbnails
+	 * @description Toggle thumbnails.
+	 */
+
+	function toggleThumbnails(e) {
+		Functions.killEvent(e);
+
+		if (Instance.thumbnailsOpen) {
+			closeThumbnails();
+		} else {
+			closeCaption();
+
+			Instance.$lightbox.addClass(RawClasses.thumbnails_open)
+				.find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsOpen);
+
+			Instance.thumbnailsOpen = true;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name closeThumbnails
+	 * @description Close thumbnails.
+	 */
+
+	function closeThumbnails() {
+		Instance.$lightbox.removeClass(RawClasses.thumbnails_open)
+			.find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsClosed);
+		Instance.thumbnailsOpen = false;
 	}
 
 	/**
@@ -697,13 +727,22 @@
 				});
 				onScaleEnd();
 
-				Instance.$container.fsTouch({
+				Instance.$content.fsTouch({
 					pan      : true,
 					scale    : true,
 					// swipe    : true
 				}).on(Events.scaleStart, onScaleStart)
 				  .on(Events.scaleEnd, onScaleEnd)
 				  .on(Events.scale, onScale);
+
+/*
+				if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
+					Instance.$content.fsTouch({
+						axis: "x",
+						swipe: true
+					}).on(Events.swipe, onSwipe);
+				}
+*/
 			}
 		}).error(loadError)
 		  .attr("src", source)
@@ -717,7 +756,7 @@
 
 	function clearTouch() {
 		if (Instance.$image && Instance.$image.length) {
-			Instance.$container.fsTouch("destroy");
+			Instance.$content.fsTouch("destroy");
 		}
 	}
 
@@ -1477,8 +1516,10 @@
 			 * @param labels.count [string] <'of'> "Gallery count separator text"
 			 * @param labels.next [string] <'Next'> "Gallery control text"
 			 * @param labels.previous [string] <'Previous'> "Gallery control text"
-			 * @param labels.captionClosed [string] <'View Caption'> "Mobile caption toggle text, closed state"
+			 * @param labels.captionClosed [string] <'Close Caption'> "Mobile caption toggle text, closed state"
 			 * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
+			 * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
+			 * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
 			 * @param margin [int] <50> "Margin used when sizing (single side)"
 			 * @param minHeight [int] <100> "Minimum height of modal"
 			 * @param minWidth [int] <100> "Minimum width of modal"
@@ -1501,12 +1542,14 @@
 				formatter      : formatCaption,
 				infinite       : false,
 				labels: {
-					close         : "Close",
-					count         : "of",
-					next          : "Next",
-					previous      : "Previous",
-					captionClosed : "View Caption",
-					captionOpen   : "Close Caption"
+					close            : "Close",
+					count            : "of",
+					next             : "Next",
+					previous         : "Previous",
+					captionClosed    : "View Caption",
+					captionOpen      : "Close Caption",
+					thumbnailsClosed : "View Thumbnails",
+					thumbnailsOpen   : "Close Thumbnails"
 				},
 				margin         : 50,
 				minHeight      : 100,
@@ -1561,13 +1604,15 @@
 				"position",
 				"position_current",
 				"position_total",
+				"toggle",
 				"caption_toggle",
 				"caption",
 				"caption_open",
 				"thumbnailed",
+				"thumbnails_open",
+				"thumbnail_toggle",
 				"thumbnails",
 				"thumbnail_container",
-				"thumbnail_canister",
 				"thumbnail_item",
 				"active",
 				"has_controls",

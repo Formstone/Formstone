@@ -158,6 +158,7 @@
 
 	// Mobile Caption
 
+	@fs-lightbox-mobile-caption-background:			@fs-light-primary_900;
 	@fs-lightbox-mobile-caption-font-size:			14px;
 	@fs-lightbox-mobile-caption-line-height:		1.6;
 	@fs-lightbox-mobile-caption-text-color:			@fs-light-primary_100;
@@ -169,11 +170,22 @@
 
 	@fs-lightbox-mobile-loading-color:				@fs-light-primary_300;
 
-	// Mobile Caption
+	// Mobile Toggle Button
 
-	@fs-lightbox-mobile-caption-background:			@fs-light-primary_900;
-	@fs-lightbox-mobile-caption-button-font-size:	12px;
-	@fs-lightbox-mobile-caption-button-text-color:	@fs-light-primary_300;
+	@fs-lightbox-mobile-toggle-button-font-size:	12px;
+	@fs-lightbox-mobile-toggle-button-text-color:	@fs-light-primary_300;
+
+	// Mobile Thumbnails
+
+	@fs-lightbox-thumbnail-size:					50px;
+	@fs-lightbox-thumbnail-margin:					0 10px 0 0;
+	@fs-lightbox-thumbnail-opacity:					0.25;
+	@fs-lightbox-thumbnail-padding:					10px;
+	@fs-lightbox-thumbnail-scrollbar-size:			30px;
+
+	@fs-lightbox-mobile-thumbnail-background: 		@fs-light-primary_900;
+	@fs-lightbox-mobile-thumbnail-padding: 			15px;
+
 
 	&.@{theme_name} {
 		z-index: (@fs-lightbox-z-index + 1);
@@ -247,7 +259,7 @@
 			font-family: @fs-lightbox-close-font-family;
 			font-size: @fs-lightbox-close-font-size;
 			font-weight: @fs-lightbox-close-font-weight;
-			line-height: @fs-lightbox-close-height;
+			line-height: @fs-lightbox-close-height - 4px;
 			margin: auto;
 			text-align: center;
 			text-indent: 0;
@@ -440,9 +452,43 @@
 		}
 	}
 
+	// thumbnail
+
+	&-thumbnails {
+		height: @fs-lightbox-thumbnail-size + @fs-lightbox-thumbnail-padding;
+	}
+
+	&-thumbnail_container {
+		height: @fs-lightbox-thumbnail-size + @fs-lightbox-thumbnail-scrollbar-size;
+
+		padding: 0 0 @fs-lightbox-thumbnail-scrollbar-size;
+	}
+
+	&.@{theme_name} &-thumbnail_item {
+		width: @fs-lightbox-thumbnail-size;
+		height: @fs-lightbox-thumbnail-size;
+
+		margin: @fs-lightbox-thumbnail-margin;
+		opacity: @fs-lightbox-thumbnail-opacity;
+		transition: opacity @fs-lightbox-transition-duration linear;
+
+		&:last-child {
+			margin: 0;
+		}
+	}
+
+	&.@{theme_name} &-thumbnail_item&-active,
+	.no-touchevents &.@{theme_name} &-thumbnail_item:hover {
+		opacity: 1;
+	}
+
+	// loading
+
 	.@{theme_name}&-loading &-container {
 		opacity: 0;
-		transition: opacity @fs-lightbox-transition-duration linear;
+		transition:
+			opacity @fs-lightbox-transition-duration linear,
+			visibility @fs-lightbox-transition-duration linear;
 		visibility: hidden;
 	}
 
@@ -572,11 +618,20 @@
 	.@{theme_name}&-mobile&-inline &-content,
 	.@{theme_name}&-mobile&-iframe &-content {
 		height: 100%;
-
-		overflow-x: hidden;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch;
 	}
+
+	.@{theme_name}&-mobile &-thumbnail_item {
+
+		&:first-child {
+			margin-left: @fs-lightbox-mobile-thumbnail-padding;
+		}
+
+		&:last-child {
+			margin-right: @fs-lightbox-mobile-thumbnail-padding;
+		}
+	}
+
+	// Touch
 
 	.@{theme_name}&-mobile&-touch &-tools {
 		width: auto;
@@ -600,11 +655,11 @@
 		padding: 0 (@fs-lightbox-mobile-meta-padding + @fs-lightbox-mobile-control-size);
 	}
 
-	.@{theme_name}&-mobile&-touch &-caption_toggle {
+	.@{theme_name}&-mobile&-touch &-toggle {
 		background: transparent;
-		color: @fs-lightbox-mobile-caption-button-text-color;
-		display: block;
-		font-size: @fs-lightbox-mobile-caption-button-font-size;
+		color: @fs-lightbox-mobile-toggle-button-text-color;
+		display: inline-block;
+		font-size: @fs-lightbox-mobile-toggle-button-font-size;
 		line-height: @fs-lightbox-mobile-control-size;
 	}
 
@@ -619,5 +674,34 @@
 	// caption open
 
 	.@{theme_name}&-touch&-caption_open &-meta {
+	}
+
+	// thumbnails
+
+	.@{theme_name}&-touch &-thumbnails {
+		width: 100%;
+		height: @fs-lightbox-thumbnail-size + (@fs-lightbox-mobile-thumbnail-padding * 2) + @fs-lightbox-mobile-control-size;
+
+		z-index: (@fs-lightbox-z-index + 4);
+
+		background: @fs-lightbox-mobile-thumbnail-background;
+		box-shadow: @fs-lightbox-box-shadow;
+		padding: @fs-lightbox-mobile-thumbnail-padding 0 (@fs-lightbox-mobile-thumbnail-padding + @fs-lightbox-mobile-control-size);
+	}
+
+	.@{theme_name}&-touch &-thumbnail_item {
+
+		&:first-child {
+			margin-left: @fs-lightbox-mobile-thumbnail-padding;
+		}
+
+		&:last-child {
+			margin-right: @fs-lightbox-mobile-thumbnail-padding;
+		}
+	}
+
+	// thumbnails open
+
+	.@{theme_name}&-touch&-thumbnails_open &-thumbnails {
 	}
 }

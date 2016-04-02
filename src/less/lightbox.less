@@ -48,6 +48,7 @@
 // Mobile Meta
 
 @fs-lightbox-mobile-meta-background:			#111;
+@fs-lightbox-mobile-meta-padding:				15px;
 
 // Mobile Position
 
@@ -56,14 +57,18 @@
 // Mobile Caption
 
 @fs-lightbox-mobile-caption-text-color:			#eee;
-
-// Mobile Caption
-
 @fs-lightbox-mobile-caption-background:			#222;
 @fs-lightbox-mobile-caption-button-text-color:	#999;
 
+// Mobile Thumbnails
 
-@fs-lightbox-thumbnail-size:	50px;
+@fs-lightbox-thumbnail-size:					50px;
+@fs-lightbox-thumbnail-margin:					0 10px 0 0;
+@fs-lightbox-thumbnail-opacity:					0.25;
+@fs-lightbox-thumbnail-padding:					10px;
+@fs-lightbox-thumbnail-scrollbar-size:			30px;
+
+@fs-lightbox-mobile-thumbnail-background: 		#111;
 
 
 /**
@@ -510,7 +515,7 @@
 		}
 	}
 
-	&-caption_toggle {
+	&-toggle {
 		.fs_button;
 
 		display: none;
@@ -539,8 +544,11 @@
 	 */
 
 	&-thumbnails {
+		height: @fs-lightbox-thumbnail-size + @fs-lightbox-thumbnail-padding;
+
 		clear: both;
-		padding: 0 0 10px;
+		overflow: hidden;
+		padding: 0;
 	}
 
 	/**
@@ -551,30 +559,15 @@
 	 */
 
 	&-thumbnail_container {
-		width: @fs-lightbox-thumbnail-size;
-		height: @fs-lightbox-thumbnail-size;
+		height: @fs-lightbox-thumbnail-size + @fs-lightbox-thumbnail-scrollbar-size;
 
 		position: relative;
 
-		margin: 0 auto;
-	}
-
-	/**
-	 * @class
-	 * @name .fs-lightbox-thumbnail_canitser
-	 * @type element
-	 * @description
-	 */
-
-	&-thumbnail_canister {
-		width: 100000px;
-		height: @fs-lightbox-thumbnail-size;
-
-		position: absolute;
-		top: 0;
-		left: 0;
-
-		transition: margin @fs-lightbox-transition-duration linear;
+		overflow-x: scroll;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		padding: 0 0 @fs-lightbox-thumbnail-scrollbar-size;
+		white-space: nowrap;
 	}
 
 	/**
@@ -590,11 +583,15 @@
 
 		background: none;
 		border: none;
-		display: block;
-		float: left;
-		margin: 0 10px 0 0;
-		opacity: 0.5;
+		display: inline-block;
+		margin: @fs-lightbox-thumbnail-margin;
+		opacity: @fs-lightbox-thumbnail-opacity;
 		padding: 0;
+		transition: opacity @fs-lightbox-transition-duration linear;
+
+		&:last-child {
+			margin: 0;
+		}
 
 		img {
 			width: 100%;
@@ -613,7 +610,9 @@
 
 	&-loading &-container {
 		opacity: 0;
-		transition: opacity @fs-lightbox-transition-duration linear;
+		transition:
+			opacity @fs-lightbox-transition-duration linear,
+			visibility @fs-lightbox-transition-duration linear;
 		visibility: hidden;
 	}
 
@@ -684,6 +683,7 @@
 	// controls
 
 	&-mobile &-controls {
+		text-align: center;
 	}
 
 	// control
@@ -778,9 +778,9 @@
 		background-color: @fs-lightbox-mobile-meta-background;
 	}
 
-	&-mobile&-touch &-caption_toggle {
-		display: block;
-		margin: 0 auto;
+	&-mobile&-touch &-toggle {
+		display: inline-block;
+		margin: 0 5px;
 	}
 
 	&-mobile&-touch &-meta {
@@ -788,7 +788,6 @@
 		height: 80%;
 
 		position: fixed;
-		// top: 20%;
 		right: 0;
 		bottom: 0;
 		left: 0;
@@ -802,6 +801,33 @@
 	// caption open
 
 	&-touch&-caption_open &-meta {
+		transform: translate(0, 0);
+	}
+
+	// thumbnails
+
+	&-mobile&-touch &-thumbnails {
+		width: 100%;
+		height: @fs-lightbox-thumbnail-size + 20px;
+
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: (@fs-lightbox-z-index + 4);
+
+		background: @fs-lightbox-mobile-thumbnail-background;
+		transform: translate(0, 100%);
+		transition: transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+	}
+
+	&-mobile&-touch &-thumbnail_container {
+		height: (@fs-lightbox-thumbnail-size * 2);
+	}
+
+	// thumbnails open
+
+	&-touch&-thumbnails_open &-thumbnails {
 		transform: translate(0, 0);
 	}
 
