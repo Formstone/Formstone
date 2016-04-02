@@ -4,7 +4,7 @@
 
 ### 1.1.0
 
-* Added thumbnail strip to Lightbox
+* Added thumbnail strip option to Lightbox
 * Added `maxHeight` and `maxWidth` parameters for element modals in Lightbox
 
 ### 1.0.1
