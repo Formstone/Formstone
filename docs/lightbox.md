@@ -99,6 +99,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.thumbnailsClosed` | `string` | `'Close Thumbnails'` | Mobile thumbnails toggle text, closed state |
 | `labels.thumbnailsOpen` | `string` | `'View Thumbnails'` | Mobile thumbnails toggle text, open state |
 | `margin` | `int` | `50` | Margin used when sizing (single side) |
+| `maxHeight` | `int` | `10000` | Maximum height of element modal |
+| `maxWidth` | `int` | `10000` | Maximum width of element modal |
 | `minHeight` | `int` | `100` | Minimum height of modal |
 | `minWidth` | `int` | `100` | Minimum width of modal |
 | `mobile` | `boolean` | `false` | Flag to force 'mobile' rendering |

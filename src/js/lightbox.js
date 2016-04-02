@@ -1401,6 +1401,15 @@
 			Instance.contentHeight = (Instance.contentHeight > Instance.windowHeight) ? Instance.windowHeight : Instance.contentHeight;
 			Instance.contentWidth  = (Instance.contentWidth  > Instance.windowWidth)  ? Instance.windowWidth  : Instance.contentWidth;
 		}
+
+		if (!Instance.isMobile) {
+			if (Instance.contentHeight > Instance.maxHeight) {
+				Instance.contentHeight = Instance.maxHeight;
+			}
+			if (Instance.contentWidth > Instance.maxWidth) {
+				Instance.contentWidth = Instance.maxWidth;
+			}
+		}
 	}
 
 	/**
@@ -1521,6 +1530,8 @@
 			 * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
 			 * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
 			 * @param margin [int] <50> "Margin used when sizing (single side)"
+			 * @param maxHeight [int] <10000> "Maximum height of element modal"
+			 * @param maxWidth [int] <10000> "Maximum width of element modal"
 			 * @param minHeight [int] <100> "Minimum height of modal"
 			 * @param minWidth [int] <100> "Minimum width of modal"
 			 * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
@@ -1552,6 +1563,8 @@
 					thumbnailsOpen   : "Close Thumbnails"
 				},
 				margin         : 50,
+				maxHeight      : 10000,
+				maxWidth       : 10000,
 				minHeight      : 100,
 				minWidth       : 100,
 				mobile         : false,
