@@ -198,12 +198,16 @@
 			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 	}
 
-	&-mobile&-animating &-image_container {
+	&-mobile &-image_container {
 		transition:
 			height @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			width  @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			top    @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			left   @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+	}
+
+	&-mobile&-scaling &-image_container {
+		transition: none !important;
 	}
 
 	/**
@@ -643,11 +647,6 @@
 		visibility: visible;
 	}
 
-	&-ready&-loading&-mobile &-controls {
-		opacity: 1;
-		visibility: visible;
-	}
-
 	// mobile
 
 	&-mobile {
@@ -769,14 +768,8 @@
 	// image
 
 	&-mobile &-image {
-		transition: none !important;
 		transform: translate(0, 0);
-	}
-
-	// animated
-
-	&-mobile&-animated &-image {
-		transition: transform @fs-lightbox-transition-duration ease-out !important;
+		transition: none !important;
 	}
 
 	// inline / iframe content
@@ -827,7 +820,10 @@
 
 		background: @fs-lightbox-mobile-caption-background;
 		transform: translate(0, 100%);
-		transition: transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+		transition:
+			transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
+			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 	}
 
 	// caption open
@@ -850,7 +846,10 @@
 
 		background: @fs-lightbox-mobile-thumbnail-background;
 		transform: translate(0, 100%);
-		transition: transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+		transition:
+			transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
+			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 	}
 
 	&-mobile&-touch &-thumbnail_container {

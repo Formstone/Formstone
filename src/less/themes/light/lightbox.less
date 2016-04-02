@@ -210,7 +210,7 @@
 
 	// .@{theme_name}&-animating &-container {
 	.@{theme_name}&-animating &-content,
-	.@{theme_name}&-animating &-thumbnails
+	.@{theme_name}&-animating &-thumbnails,
 	.@{theme_name}&-animating &-tools,
 	.@{theme_name}&-animating &-meta,
 	.@{theme_name}&-animating &-controls {
@@ -219,12 +219,16 @@
 			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 	}
 
-	.@{theme_name}&-mobile&-animating &-image_container {
+	.@{theme_name}&-mobile &-image_container {
 		transition:
 			height @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			width  @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			top    @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
 			left   @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
+	}
+
+	.@{theme_name}&-mobile&-scaling &-image_container {
+		transition: none !important;
 	}
 
 	.@{theme_name}&-overlay {
@@ -509,11 +513,6 @@
 		visibility: visible;
 	}
 
-	.@{theme_name}&-ready&-loading&-mobile &-controls {
-		opacity: 1;
-		visibility: visible;
-	}
-
 	// Mobile
 
 	.@{theme_name}&-mobile {
@@ -633,10 +632,6 @@
 	.@{theme_name}&-mobile &-image {
 	}
 
-	.@{theme_name}&-mobile&-animated &-image {
-		transition: transform @fs-lightbox-transition-duration ease-out !important;
-	}
-
 	.@{theme_name}&-mobile&-inline &-content,
 	.@{theme_name}&-mobile&-iframe &-content {
 		height: 100%;
@@ -691,6 +686,10 @@
 		background: @fs-lightbox-mobile-caption-background;
 		box-shadow: @fs-lightbox-box-shadow;
 		padding: @fs-lightbox-mobile-meta-padding @fs-lightbox-mobile-meta-padding (@fs-lightbox-mobile-meta-padding + @fs-lightbox-mobile-control-size);
+		transition:
+			transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
+			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
 	}
 
 	// caption open
@@ -709,6 +708,14 @@
 		background: @fs-lightbox-mobile-thumbnail-background;
 		box-shadow: @fs-lightbox-box-shadow;
 		padding: @fs-lightbox-mobile-thumbnail-padding 0 (@fs-lightbox-mobile-thumbnail-padding + @fs-lightbox-mobile-control-size);
+		transition:
+			transform @fs-lightbox-transition-duration @fs-lightbox-transition-timing,
+			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
+			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
+	}
+
+	.@{theme_name}&-mobile&-touch &-thumbnail_container {
+		height: (@fs-lightbox-thumbnail-size * 2);
 	}
 
 	.@{theme_name}&-touch &-thumbnail_item {

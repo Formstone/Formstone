@@ -491,6 +491,8 @@
 			// Start preloading
 			if (Instance.gallery.active) {
 				preloadGallery();
+				updateThumbnails();
+				positionThumbnails();
 			}
 		});
 
@@ -515,19 +517,6 @@
 
 		if (Instance.isMobile) {
 			$Locks.addClass(RawClasses.lock);
-		}
-
-		// Thumbnails
-		if (Instance.thumbnails) {
-			var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index),
-				scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
-
-			Instance.$thumbnailItems.removeClass(RawClasses.active);
-			$thumb.addClass(RawClasses.active);
-
-			Instance.$thumbnailContainer.animate({
-				scrollLeft: scrollLeft
-			}, 200, "linear");
 		}
 	}
 
@@ -781,7 +770,7 @@
 	function onScaleStart(e) {
 		cacheScale();
 
-		Instance.$lightbox.removeClass(RawClasses.animating);
+		Instance.$lightbox.addClass(RawClasses.scaling);
 	}
 
 	function onScale(e) {
@@ -856,7 +845,7 @@
 			}
 		}
 
-		Instance.$lightbox.addClass(RawClasses.animating);
+		Instance.$lightbox.removeClass(RawClasses.scaling);
 
 		Instance.$imageContainer.css({
 			left: Instance.scalePosition.left,
@@ -1214,6 +1203,8 @@
 				Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
 			}
 
+			updateThumbnails();
+
 			Instance.$lightbox.addClass(RawClasses.animating);
 
 			Instance.$content.fsTransition({
@@ -1244,6 +1235,8 @@
 
 			Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
 
+			updateThumbnails();
+
 			Instance.$lightbox.addClass(RawClasses.animating);
 
 			Instance.$content.fsTransition({
@@ -1251,6 +1244,40 @@
 			}, cleanGallery);
 
 			Instance.$lightbox.addClass(RawClasses.loading);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name jumpGallery
+	 * @description
+	 */
+
+	function updateThumbnails() {
+		// Thumbnails
+		if (Instance.thumbnails) {
+			var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index);
+
+			Instance.$thumbnailItems.removeClass(RawClasses.active);
+			$thumb.addClass(RawClasses.active);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name jumpGallery
+	 * @description
+	 */
+
+	function positionThumbnails() {
+		// Thumbnails
+		if (Instance.thumbnails) {
+			var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index),
+				scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
+
+			Instance.$thumbnailContainer.stop().animate({
+				scrollLeft: scrollLeft
+			}, 200, "linear");
 		}
 	}
 
@@ -1599,6 +1626,7 @@
 			classes: [
 				"loading",
 				"animating",
+				"scaling",
 				"fixed",
 				"mobile",
 				"touch",
