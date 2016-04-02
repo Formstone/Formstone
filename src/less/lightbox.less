@@ -187,14 +187,15 @@
 			top     @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
 	}
 
-	&-animating &-container {
+	// &-animating &-container {
+	&-animating &-content,
+	&-animating &-thumbnails,
+	&-animating &-tools,
+	&-animating &-meta,
+	&-animating &-controls {
 		transition:
 			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
 			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
-	}
-
-	&-mobile &-image_container {
-		transform: translate3D(0, 0, 0);
 	}
 
 	&-mobile&-animating &-image_container {
@@ -329,8 +330,10 @@
 		width: 1px;
 		height: 1px;
 
-		margin: 0;
 		position: absolute;
+
+		margin: 0;
+		transform: translate3D(0, 0, 0);
 	}
 
 	/**
@@ -396,7 +399,9 @@
 	 */
 
 	&-meta {
+		opacity: 1;
 		clear: both;
+		visibility: visible;
 	}
 
 	/**
@@ -407,6 +412,8 @@
 	 */
 
 	&-controls {
+		opacity: 1;
+		visibility: visible;
 	}
 
 	/**
@@ -567,6 +574,7 @@
 		overflow-y: hidden;
 		-webkit-overflow-scrolling: touch;
 		padding: 0 0 @fs-lightbox-thumbnail-scrollbar-size;
+		text-align: center;
 		white-space: nowrap;
 	}
 
@@ -581,11 +589,14 @@
 		width: @fs-lightbox-thumbnail-size;
 		height: @fs-lightbox-thumbnail-size;
 
+		position: relative;
+
 		background: none;
 		border: none;
 		display: inline-block;
 		margin: @fs-lightbox-thumbnail-margin;
 		opacity: @fs-lightbox-thumbnail-opacity;
+		overflow: hidden;
 		padding: 0;
 		transition: opacity @fs-lightbox-transition-duration linear;
 
@@ -597,7 +608,11 @@
 			width: 100%;
 			height: auto;
 
+			position: absolute;
+			top: 50%;
+
 			display: block;
+			transform: translateY(-50%);
 		}
 	}
 
@@ -608,7 +623,12 @@
 
 	// loading
 
-	&-loading &-container {
+	// &-loading &-container {
+	&-loading &-content,
+	&-loading &-thumbnails,
+	&-loading &-tools,
+	&-loading &-meta,
+	&-loading &-controls {
 		opacity: 0;
 		transition:
 			opacity @fs-lightbox-transition-duration linear,
@@ -616,7 +636,14 @@
 		visibility: hidden;
 	}
 
-	&-loading &-loading_icon {
+	&-loading &-loading_icon,
+	&-ready&-loading &-thumbnails,
+	&-ready&-loading &-tools {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	&-ready&-loading&-mobile &-controls {
 		opacity: 1;
 		visibility: visible;
 	}
@@ -647,6 +674,9 @@
 
 	// loading
 
+	&-mobile &-loading_icon {
+	}
+
 	&-mobile &-loading_icon:before {
 	}
 
@@ -664,6 +694,8 @@
 	// content
 
 	&-mobile &-content {
+		height: 100%;
+
 		background-color: @fs-lightbox-mobile-content-background;
 	}
 

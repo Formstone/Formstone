@@ -112,6 +112,8 @@
 				isAnimating        : true,
 				oldContentHeight   : 0,
 				oldContentWidth    : 0,
+				metaHeight         : 0,
+				thumbnailHeight    : 0,
 				captionOpen        : false,
 				thumbnailsOpen     : false
 			}, data);
@@ -414,7 +416,7 @@
 
 		if (Instance) {
 			Instance.$lightbox.fsTransition("destroy");
-			Instance.$container.fsTransition("destroy");
+			Instance.$content.fsTransition("destroy");
 
 			clearTouch();
 
@@ -470,7 +472,7 @@
 			property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
 		},
 		function() {
-			Instance.$container.fsTransition({
+			Instance.$content.fsTransition({
 				property: "opacity"
 			},
 			function() {
@@ -478,7 +480,8 @@
 				Instance.isAnimating = false;
 			});
 
-			Instance.$lightbox.removeClass(RawClasses.loading);
+			Instance.$lightbox.removeClass(RawClasses.loading)
+							  .addClass(RawClasses.ready);
 
 			Instance.visible = true;
 
@@ -522,7 +525,9 @@
 			Instance.$thumbnailItems.removeClass(RawClasses.active);
 			$thumb.addClass(RawClasses.active);
 
-			Instance.$thumbnailContainer.scrollLeft(scrollLeft);
+			Instance.$thumbnailContainer.animate({
+				scrollLeft: scrollLeft
+			}, 200, "linear");
 		}
 	}
 
@@ -545,6 +550,9 @@
 				width:  Instance.contentWidth  + Instance.paddingHorizontal,
 				top:    (!Instance.fixed) ? position.top : 0
 			});
+
+			Instance.oldContentHeight = Instance.contentHeight;
+			Instance.oldContentWidth  = Instance.contentWidth;
 		}
 	}
 
@@ -1208,7 +1216,7 @@
 
 			Instance.$lightbox.addClass(RawClasses.animating);
 
-			Instance.$container.fsTransition({
+			Instance.$content.fsTransition({
 				property: "opacity"
 			}, cleanGallery);
 
@@ -1238,7 +1246,7 @@
 
 			Instance.$lightbox.addClass(RawClasses.animating);
 
-			Instance.$container.fsTransition({
+			Instance.$content.fsTransition({
 				property: "opacity"
 			}, cleanGallery);
 
@@ -1597,6 +1605,7 @@
 				"inline",
 				"iframed",
 				"open",
+				"ready",
 				"overlay",
 				"close",
 				"loading_icon",

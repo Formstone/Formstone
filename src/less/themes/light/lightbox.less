@@ -208,7 +208,12 @@
 			top     @fs-lightbox-transition-duration @fs-lightbox-transition-timing;
 	}
 
-	.@{theme_name}&-animating &-container {
+	// .@{theme_name}&-animating &-container {
+	.@{theme_name}&-animating &-content,
+	.@{theme_name}&-animating &-thumbnails
+	.@{theme_name}&-animating &-tools,
+	.@{theme_name}&-animating &-meta,
+	.@{theme_name}&-animating &-controls {
 		transition:
 			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
 			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
@@ -259,7 +264,7 @@
 			font-family: @fs-lightbox-close-font-family;
 			font-size: @fs-lightbox-close-font-size;
 			font-weight: @fs-lightbox-close-font-weight;
-			line-height: @fs-lightbox-close-height - 4px;
+			line-height: @fs-lightbox-close-height;
 			margin: auto;
 			text-align: center;
 			text-indent: 0;
@@ -484,7 +489,12 @@
 
 	// loading
 
-	.@{theme_name}&-loading &-container {
+	// .@{theme_name}&-loading &-container {
+	.@{theme_name}&-loading &-content,
+	.@{theme_name}&-loading &-thumbnails,
+	.@{theme_name}&-loading &-tools,
+	.@{theme_name}&-loading &-meta,
+	.@{theme_name}&-loading &-controls {
 		opacity: 0;
 		transition:
 			opacity @fs-lightbox-transition-duration linear,
@@ -492,15 +502,29 @@
 		visibility: hidden;
 	}
 
-	.@{theme_name}&-loading &-loading_icon {
+	.@{theme_name}&-loading &-loading_icon,
+	.@{theme_name}&-ready&-loading &-thumbnails,
+	.@{theme_name}&-ready&-loading &-tools {
 		opacity: 1;
 		visibility: visible;
 	}
+
+	.@{theme_name}&-ready&-loading&-mobile &-controls {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	// Mobile
 
 	.@{theme_name}&-mobile {
 		background: @fs-lightbox-mobile-background;
 		border-radius: 0;
 		padding: @fs-lightbox-mobile-close-height 0 0;
+	}
+
+	.@{theme_name}&-mobile &-loading_icon {
+		top: (@fs-lightbox-mobile-close-height / 2);
+		bottom: @fs-lightbox-mobile-control-size;
 	}
 
 	.@{theme_name}&-mobile &-close {
@@ -518,7 +542,7 @@
 		color: @fs-lightbox-mobile-close-text-color;
 		font-size: @fs-lightbox-mobile-close-font-size;
 		font-weight: @fs-lightbox-mobile-close-font-weight;
-		line-height: @fs-lightbox-mobile-close-height;
+		line-height: @fs-lightbox-mobile-close-height - 4px;
 	}
 
 	.@{theme_name}&-mobile &-loading_icon:before {
@@ -607,8 +631,6 @@
 	}
 
 	.@{theme_name}&-mobile &-image {
-		transition: none !important;
-		transform: translate(0, 0);
 	}
 
 	.@{theme_name}&-mobile&-animated &-image {
