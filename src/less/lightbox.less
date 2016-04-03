@@ -192,7 +192,7 @@
 	&-animating &-thumbnails,
 	&-animating &-tools,
 	&-animating &-meta,
-	&-animating &-controls {
+	&-animating &-control {
 		transition:
 			opacity    @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration,
 			visibility @fs-lightbox-transition-duration linear @fs-lightbox-transition-duration;
@@ -416,8 +416,6 @@
 	 */
 
 	&-controls {
-		opacity: 1;
-		visibility: visible;
 	}
 
 	/**
@@ -438,6 +436,8 @@
 		display: block;
 		margin-right: auto;
 		margin-left: auto;
+		opacity: 1;
+		visibility: visible;
 		white-space: nowrap;
 	}
 
@@ -632,7 +632,7 @@
 	&-loading &-thumbnails,
 	&-loading &-tools,
 	&-loading &-meta,
-	&-loading &-controls {
+	&-loading &-control {
 		opacity: 0;
 		transition:
 			opacity @fs-lightbox-transition-duration linear,
