@@ -19,6 +19,10 @@
 * Added custom video formatters in Lightbox
 * Fixed issue with removing data in Cookie
 
+### 0.8.45
+
+* Fixed issue with inline content in Lightbox 
+
 ### 0.8.44
 
 * Fixed issue with `play` method in Background 
