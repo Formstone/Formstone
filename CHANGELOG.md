@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.45
+
+* Fixed issue with inline content in Lightbox 
+
 ### 0.8.44
 
 * Fixed issue with `play` method in Background 

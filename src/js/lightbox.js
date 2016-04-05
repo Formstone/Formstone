@@ -355,7 +355,7 @@
 			},
 			function(e) {
 				// Clean up
-				if (Instance.$inlineTarget.length) {
+				if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
 					restoreContents();
 				}
 
