@@ -4,8 +4,11 @@
 
 ### 1.1.0
 
-* Added thumbnail strip option to Lightbox
-* Added `maxHeight` and `maxWidth` parameters for element modals in Lightbox
+* Added `thumbnail` option to Lightbox
+* Added `maxHeight` and `maxWidth` options for element modals in Lightbox
+* Added linked carousel support to Carousel
+* Added controller carousel support to Carousel
+* Fixed `rtl` positioning in Carousel
 
 ### 1.0.1
 

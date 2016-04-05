@@ -134,6 +134,19 @@
 		data.autoTimer       = null;
 		data.resizeTimer     = null;
 
+		// live query for linked to avoid missing new elements
+		var linked      = this.data(Namespace + "-linked");
+		data.linked     = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
+
+		// force paged if linked, keeps counts accurate
+		if (data.linked) {
+			data.paged = true;
+		}
+
+		// live query for controlled to avoid missing new elements
+		var subordinate      = this.data(Namespace + "-controller-for") || '';
+		data.$subordinate    = $(subordinate);
+
 		// Responsive count handling
 		if ($.type(data.show) === "object") {
 			var show     = data.show,
@@ -238,6 +251,8 @@
 
 			data.enabled = false;
 
+			data.$subordinate.off(Events.update);
+
 			this.removeClass( [RawClasses.enabled, RawClasses.animated].join(" ") )
 				.off(Events.namespace);
 
@@ -284,6 +299,9 @@
 				.on(Events.click, Classes.page, data, onSelect);
 
 			data.$controlItems.on(Events.click, data, onAdvance);
+
+			data.$items.on(Events.click, data, onItemClick);
+			data.$subordinate.on(Events.update, data, onSubordinateUpdate);
 
 			data.$canister.fsTouch({
 				axis: "x",
@@ -352,9 +370,13 @@
 			data.visible   = calculateVisible(data);
 			data.perPage   = data.paged ? 1 : data.visible;
 
-			data.itemMargin = parseInt(data.$items.eq(0).css("marginRight")) + parseInt(data.$items.eq(0).css("marginLeft"));
+			data.itemMarginLeft  = parseInt(data.$items.eq(0).css("marginLeft"));
+			data.itemMarginRight = parseInt(data.$items.eq(0).css("marginRight"));
+
+			data.itemMargin = data.itemMarginLeft + data.itemMarginRight;
+
 			if (isNaN(data.itemMargin)) {
-				data.itemMargin = 0; // Catch bad values
+				data.itemMargin = 0;
 			}
 
 			data.itemWidth  = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
@@ -395,7 +417,7 @@
 
 				// if (data.autoHeight) {
 					for (k = 0; k < $items.length; k++) {
-						w = $items.eq(k).outerWidth();
+						w = $items.eq(k).outerWidth(true);
 						h = $items.eq(k).outerHeight();
 
 						width += w;
@@ -409,7 +431,7 @@
 				// }
 
 				data.pages.push({
-					left      : data.rtl ? left - (data.canisterWidth - width - (data.itemMargin * 2)) : left,
+					left      : data.rtl ? left - (data.canisterWidth - width) : left,
 					height    : height,
 					width     : width,
 					$items    : $items
@@ -548,11 +570,11 @@
 	 * @param silent [boolean] ""
 	 */
 
-	function jumpToItem(data, index, silent) {
+	function jumpToItem(data, index, silent, fromLinked) {
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
-			positionCanister(data, index - 1, true, silent);
+			positionCanister(data, index - 1, true, silent, fromLinked);
 		}
 	}
 
@@ -678,7 +700,7 @@
 	 * @param index [int] "Item index"
 	 */
 
-	function positionCanister(data, index, animate, silent) {
+	function positionCanister(data, index, animate, silent, fromLinked) {
 		if (index < 0) {
 			index = (data.infinite) ? data.pageCount-1 : 0;
 		}
@@ -739,6 +761,11 @@
 		}
 
 		data.index = index;
+
+		// Linked
+		if (data.linked && fromLinked !== true) {
+			$(data.linked).not(data.$el)[Plugin.namespaceClean]("jump", data.index + 1, true, true);
+		}
 
 		updateControls(data);
 	}
@@ -960,6 +987,28 @@
 		data.isTouching = false;
 	}
 
+
+
+	function onItemClick(e) {
+		var data    = e.data,
+			$target = $(e.currentTarget),
+			index   = data.$items.index($target);
+
+		data.$items.removeClass(RawClasses.active);
+		$target.addClass(RawClasses.active);
+
+		data.$subordinate[Plugin.namespaceClean]("jump", index + 1, true);
+	}
+
+	function onSubordinateUpdate(e, index) {
+		var data = e.data;
+
+		data.$items.removeClass(RawClasses.active);
+		data.$items.eq(index).addClass(RawClasses.active);
+	}
+
+
+
 	/**
 	 * @method private
 	 * @name checkPosition
@@ -1130,12 +1179,13 @@
 
 		// Localize References
 
-		Classes        = Plugin.classes,
-		RawClasses     = Classes.raw,
-		Events         = Plugin.events,
-		Functions      = Plugin.functions,
+		Namespace     = Plugin.namespace,
+		Classes       = Plugin.classes,
+		RawClasses    = Classes.raw,
+		Events        = Plugin.events,
+		Functions     = Plugin.functions,
 
-		$Instances     = [],
+		$Instances    = [],
 
 		TransformProperty     = Formstone.transform,
 		TransitionProperty    = Formstone.transition;
