@@ -46,8 +46,8 @@
 			hashGroup  = false;
 
 		if (hash.length) {
-			hashActive = (this.filter("[href*=" + hash + "]").length > 0);
-			hashGroup  = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*=" + hash + "]").length > 0);
+		    hashActive = (this.filter("[href*='" + hash + "']").length > 0);
+		    hashGroup  = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*='" + hash + "']").length > 0);
 		}
 
 		if (hashActive) {

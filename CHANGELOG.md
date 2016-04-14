@@ -7,6 +7,10 @@
 * Added thumbnail strip option to Lightbox
 * Added `maxHeight` and `maxWidth` parameters for element modals in Lightbox
 
+### 1.0.2
+
+* Fixed issue with fragment identifier linking in Tabs.
+
 ### 1.0.1
 
 * Fixed issue with `play` method in Background 
