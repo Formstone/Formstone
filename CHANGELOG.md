@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.0.2
+
+* Fixed issue with fragment identifier linking in Tabs.
+
 ### 1.0.1
 
 * Fixed issue with `play` method in Background 
