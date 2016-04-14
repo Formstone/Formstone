@@ -418,13 +418,12 @@
 	function openOptions(data) {
 		// Make sure it's not already open
 		if (data.closed) {
-			var offset = data.$dropdown.offset(),
-				bodyHeight = $Body.outerHeight(),
-				optionsHeight = data.$wrapper.outerHeight(true),
-				selectedOffset = (data.index >= 0) ? data.$items.eq(data.index).position() : { left: 0, top: 0 };
+			var windowHeight   = $Window.height(),
+				optionsHeight  = data.$wrapper.outerHeight(true),
+				boundingRect   = data.$dropdown[0].getBoundingClientRect();
 
 			// Calculate bottom of document
-			if (offset.top + optionsHeight > bodyHeight - data.bottomEdge) {
+			if (boundingRect.bottom + optionsHeight > windowHeight - data.bottomEdge) {
 				data.$dropdown.addClass(RawClasses.bottom);
 			}
 
@@ -871,6 +870,7 @@
 
 			/**
 			 * @options
+			 * @param attached [boolean] <true> "Options are attached to handle; False for overflow parent support”
 			 * @param bottomEdge [int] <0> "Threshold for bottom position”
 			 * @param cover [boolean] <false> "Cover handle with option set"
 			 * @param customClass [string] <''> "Class applied to instance"
@@ -882,6 +882,7 @@
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */
 			defaults: {
+				attached       : true,
 				bottomEdge     : 0,
 				cover          : false,
 				customClass    : "",
