@@ -20,6 +20,7 @@
 * Added fs-light base theme 
 * Added AMD module wrappers to all components
 * Added custom video formatters in Lightbox
+<<<<<<< Updated upstream
 * Fixed issue with removing data in Cookie
 
 ### 0.8.44
@@ -275,3 +276,6 @@
 
 * Rebuilt Analytics for better GA and GTM support
 * Added Analytics as ASAP dependency to reduce redundancies
+=======
+* Fixed issue with removing data in Cookie
+>>>>>>> Stashed changes
