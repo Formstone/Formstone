@@ -1,6 +1,6 @@
 ### Basic
 
-Swap toggles classes on groups of elements based on configuration options and user interaction. It is up to the developer to utilize the classes.
+Swap toggles classes on groups of elements based on configuration options and user interaction. It is up to the developer to utilize the classes. 
 
 ```javascript
 $(".target").swap();
@@ -13,7 +13,7 @@ $(".target").swap();
 
 ### Groups
 
-Swaps can be grouped together for a simple accordions or tabs.
+Swaps can be grouped together for a simple accordions or tabs using the `data-swap-group` attribute.
 
 ```markup
 <h4>Grouped</h4>
@@ -26,15 +26,15 @@ Swaps can be grouped together for a simple accordions or tabs.
 
 ### Linked
 
-Swaps can be linked together for multiple handles.
+Swaps can be linked together for multiple handles using the `data-swap-linked` attribute.
 
 ```markup
 <h4>Grouped</h4>
-<div class="target" data-swap-target=".toggle_1" data-swap-group="linked_1">Handle - 1</div>
+<div class="target" data-swap-target=".toggle_1" data-swap-linked="linked_1">Handle - 1</div>
 
 <div class="toggle_1">Target - 1</div>
 
-<div class="target" data-swap-target=".toggle_1" data-swap-group="linked_1">Handle - 2</div>
+<div class="target" data-swap-target=".toggle_1" data-swap-linked="linked_1">Handle - 2</div>
 ```
 
 ### Max Width

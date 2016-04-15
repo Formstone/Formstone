@@ -764,7 +764,7 @@
 
 		// Linked
 		if (data.linked && fromLinked !== true) {
-			$(data.linked).not(data.$el)[Plugin.namespaceClean]("jump", data.index + 1, true, true);
+			$(data.linked).not(data.$el)[NamespaceClean]("jump", data.index + 1, true, true);
 		}
 
 		updateControls(data);
@@ -865,7 +865,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onPanStart(e) {
+	function onPanStart(e, fromLinked) {
 		var data = e.data;
 
 		Functions.clearTimer(data.autoTimer);
@@ -881,6 +881,17 @@
 			data.$canister.css(TransitionProperty, "none");
 
 			onPan(e);
+
+			// Linked
+			if (data.linked && fromLinked !== true) {
+				var percent = e.deltaX / data.pageWidth;
+
+				if (data.rtl) {
+					percent *= -1;
+				}
+
+				$(data.linked).not(data.$el)[NamespaceClean]("panStart", percent);
+			}
 		}
 
 		data.isTouching = true;
@@ -893,7 +904,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onPan(e) {
+	function onPan(e, fromLinked) {
 		var data = e.data;
 
 		if (!data.single) {
@@ -906,6 +917,17 @@
 			} else {
 				data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
 			}
+
+			// Linked
+			if (data.linked && fromLinked !== true) {
+				var percent = e.deltaX / data.pageWidth;
+
+				if (data.rtl) {
+					percent *= -1;
+				}
+
+				$(data.linked).not(data.$el)[NamespaceClean]("pan", percent);
+			}
 		}
 	}
 
@@ -916,7 +938,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onPanEnd(e) {
+	function onPanEnd(e, fromLinked) {
 		var data       = e.data,
 			delta      = Math.abs(e.deltaX),
 			increment  = getIncrement(data, e),
@@ -953,7 +975,88 @@
 			index = (delta < 50) ? data.index : data.index + increment;
 		}
 
+		// Linked
+		if (data.linked && fromLinked !== true) {
+			$(data.linked).not(data.$el)[NamespaceClean]("panEnd", index);
+		}
+
 		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name linkedPanStart
+	 * @description Handles linked pan start
+	 * @param data [object] "Instance data"
+	 * @param percent [float] "Percentage moved"
+	 */
+
+	function linkedPanStart(data, percent) {
+		Functions.clearTimer(data.autoTimer);
+
+		if (!data.single) {
+			if (data.rtl) {
+				percent *= -1;
+			}
+
+			if (data.useMargin) {
+				data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+			} else {
+				var matrix = data.$canister.css(TransformProperty).split(",");
+				data.leftPosition = parseInt(matrix[4]); // ?
+			}
+
+			data.$canister.css(TransitionProperty, "none");
+
+			var e = {
+				data: data,
+				deltaX: (data.pageWidth * percent)
+			};
+
+			onPan(e, true);
+		}
+
+		data.isTouching = true;
+	}
+
+	/**
+	 * @method private
+	 * @name linkedPan
+	 * @description Handles linked pan
+	 * @param data [object] "Instance data"
+	 * @param percent [float] "Percentage moved"
+	 */
+
+	function linkedPan(data, percent) {
+		if (!data.single) {
+			if (data.rtl) {
+				percent *= -1;
+			}
+
+			var delta = (data.pageWidth * percent);
+
+			data.touchLeft = checkPosition(data, data.leftPosition + delta);
+
+			if (data.useMargin) {
+				data.$canister.css({
+					marginLeft: data.touchLeft
+				});
+			} else {
+				data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name linkedPanEnd
+	 * @description Handles linked pan end
+	 * @param data [object] "Instance data"
+	 * @param index [int] "New Index"
+	 */
+
+	function linkedPanEnd(data, index) {
+		endTouch(data, index, true);
 	}
 
 	/**
@@ -997,7 +1100,7 @@
 		data.$items.removeClass(RawClasses.active);
 		$target.addClass(RawClasses.active);
 
-		data.$subordinate[Plugin.namespaceClean]("jump", index + 1, true);
+		data.$subordinate[NamespaceClean]("jump", index + 1, true);
 	}
 
 	function onSubordinateUpdate(e, index) {
@@ -1174,18 +1277,23 @@
 				reset         : resetInstance,
 				resize        : resizeInstance,
 				update        : updateItems,
+
+				panStart      : linkedPanStart,
+				pan           : linkedPan,
+				panEnd        : linkedPanEnd
 			}
 		}),
 
 		// Localize References
 
-		Namespace     = Plugin.namespace,
-		Classes       = Plugin.classes,
-		RawClasses    = Classes.raw,
-		Events        = Plugin.events,
-		Functions     = Plugin.functions,
+		Namespace         = Plugin.namespace,
+		NamespaceClean    = Plugin.namespaceClean,
+		Classes           = Plugin.classes,
+		RawClasses        = Classes.raw,
+		Events            = Plugin.events,
+		Functions         = Plugin.functions,
 
-		$Instances    = [],
+		$Instances        = [],
 
 		TransformProperty     = Formstone.transform,
 		TransitionProperty    = Formstone.transition;

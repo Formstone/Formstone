@@ -10,6 +10,10 @@
 * Added controller carousel support to Carousel
 * Fixed `rtl` positioning in Carousel
 
+### 1.0.2
+
+* Fixed issue with fragment identifier linking in Tabs.
+
 ### 1.0.1
 
 * Fixed issue with `play` method in Background 
@@ -22,6 +26,10 @@
 * Added custom video formatters in Lightbox
 <<<<<<< Updated upstream
 * Fixed issue with removing data in Cookie
+
+### 0.8.45
+
+* Fixed issue with inline content in Lightbox 
 
 ### 0.8.44
 
