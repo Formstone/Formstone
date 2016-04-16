@@ -950,6 +950,8 @@
 			increment  = getIncrement(data, e),
 			index      = false;
 
+		data.didPan = false;
+
 		if (!data.single) {
 			var i, count,
 				left = Math.abs(data.touchLeft),
@@ -979,6 +981,10 @@
 
 		if (index === false) {
 			index = (delta < 50) ? data.index : data.index + increment;
+		}
+
+		if (index !== data.index) {
+			data.didPan = true;
 		}
 
 		// Linked
@@ -1104,15 +1110,20 @@
 	 */
 
 	function onItemClick(e) {
-		Functions.killEvent(e);
+		var data = e.data;
 
-		var data    = e.data,
-			$target = $(e.currentTarget),
-			index   = data.$items.index($target);
+		if (data.didPan) {
+			Functions.killEvent(e);
+		}
 
-		onSubordinateUpdate(e, index);
+		if (data.controller && !data.didPan) {
+			var $target = $(e.currentTarget),
+				index   = data.$items.index($target);
 
-		data.$subordinate[NamespaceClean]("jump", index + 1, true);
+			onSubordinateUpdate(e, index);
+
+			data.$subordinate[NamespaceClean]("jump", index + 1, true);
+		}
 	}
 
 	/**
