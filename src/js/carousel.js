@@ -1302,8 +1302,8 @@
 			 */
 
 			events: {
-				tap       : "tap",
-				update    : "update"
+				itemClick    : "itemClick",
+				update       : "update"
 			},
 
 			methods: {
