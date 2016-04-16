@@ -147,6 +147,10 @@
 		var subordinate      = this.data(Namespace + "-controller-for") || '';
 		data.$subordinate    = $(subordinate);
 
+		if (data.$subordinate.length) {
+			data.controller = true;
+		}
+
 		// Responsive count handling
 		if ($.type(data.show) === "object") {
 			var show     = data.show,
@@ -302,6 +306,8 @@
 
 			data.$items.on(Events.click, data, onItemClick);
 			data.$subordinate.on(Events.update, data, onSubordinateUpdate);
+
+			onSubordinateUpdate({ data: data }, 0);
 
 			data.$canister.fsTouch({
 				axis: "x",
@@ -1090,27 +1096,50 @@
 		data.isTouching = false;
 	}
 
-
+	/**
+	 * @method private
+	 * @name onItemClick
+	 * @description Handles click to item
+	 * @param e [object] "Event data"
+	 */
 
 	function onItemClick(e) {
+		Functions.killEvent(e);
+
 		var data    = e.data,
 			$target = $(e.currentTarget),
 			index   = data.$items.index($target);
 
-		data.$items.removeClass(RawClasses.active);
-		$target.addClass(RawClasses.active);
+		onSubordinateUpdate(e, index);
 
 		data.$subordinate[NamespaceClean]("jump", index + 1, true);
 	}
 
+	/**
+	 * @method private
+	 * @name onSubordinateUpdate
+	 * @description Handles update from subordinate
+	 * @param e [object] "Event data"
+	 * @param index [int] "Index"
+	 */
+
 	function onSubordinateUpdate(e, index) {
 		var data = e.data;
 
-		data.$items.removeClass(RawClasses.active);
-		data.$items.eq(index).addClass(RawClasses.active);
+		if (data.controller) {
+			var $active = data.$items.eq(index);
+
+			data.$items.removeClass(RawClasses.active);
+			$active.addClass(RawClasses.active);
+
+			for (var i = 0; i < data.pageCount; i++) {
+				if (i !== data.index && data.pages[i].$items.is( $active )) {
+					positionCanister(data, i, true, true);
+					break;
+				}
+			}
+		}
 	}
-
-
 
 	/**
 	 * @method private
