@@ -1149,7 +1149,7 @@
 			$active.addClass(RawClasses.active);
 
 			for (var i = 0; i < data.pageCount; i++) {
-				if (i !== data.index && data.pages[i].$items.is( $active )) {
+				if (data.pages[i].$items.is($active)) {
 					positionCanister(data, i, true, true);
 					break;
 				}
