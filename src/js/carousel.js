@@ -574,13 +574,18 @@
 	 * @param data [object] "Instance data"
 	 * @param index [int] "New index"
 	 * @param silent [boolean] ""
+	 * @param animated [boolean] ""
 	 */
 
-	function jumpToItem(data, index, silent, fromLinked) {
+	function jumpToItem(data, index, silent, fromLinked, animated) {
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
-			positionCanister(data, index - 1, true, silent, fromLinked);
+			if (typeof animated === "undefined") {
+				animated = true;
+			}
+
+			positionCanister(data, index - 1, animated, silent, fromLinked);
 		}
 	}
 
