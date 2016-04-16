@@ -1110,19 +1110,19 @@
 	 */
 
 	function onItemClick(e) {
-		var data = e.data;
+		var data    = e.data,
+			$target = $(e.currentTarget);
 
-		if (data.didPan) {
-			Functions.killEvent(e);
-		}
+		if (!data.didPan) {
+			$target.trigger(Events.itemClick);
 
-		if (data.controller && !data.didPan) {
-			var $target = $(e.currentTarget),
-				index   = data.$items.index($target);
+			if (data.controller) {
+				var index   = data.$items.index($target);
 
-			onSubordinateUpdate(e, index);
+				onSubordinateUpdate(e, index);
 
-			data.$subordinate[NamespaceClean]("jump", index + 1, true);
+				data.$subordinate[NamespaceClean]("jump", index + 1, true);
+			}
 		}
 	}
 
@@ -1297,11 +1297,13 @@
 
 			/**
 			 * @events
+			 * @event itemClick.carousel "Item clicked; Triggered on carousel item"
 			 * @event update.carousel "Carousel position updated"
 			 */
 
 			events: {
-				update      : "update"
+				tap       : "tap",
+				update    : "update"
 			},
 
 			methods: {

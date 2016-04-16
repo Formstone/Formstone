@@ -111,6 +111,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
+| `itemClick.carousel` | Item clicked; Triggered on carousel item |
 | `update.carousel` | Carousel position updated |
 
 <hr>
