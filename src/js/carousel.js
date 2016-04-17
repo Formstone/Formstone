@@ -1083,12 +1083,34 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onSwipe(e) {
+	function onSwipe(e, fromLinked) {
 		var data      = e.data,
 			increment = getIncrement(data, e),
 			index     = data.index + increment;
 
+		// Linked
+		if (data.linked && fromLinked !== true) {
+			$(data.linked).not(data.$el)[NamespaceClean]("swipe", e.directionX);
+		}
+
 		endTouch(data, index);
+	}
+
+	/**
+	 * @method private
+	 * @name linkedSwipe
+	 * @description Handles swipe event
+	 * @param data [object] "Instance data"
+	 * @param direction [string] "Swipe direction"
+	 */
+
+	function linkedSwipe(data, direction) {
+		var e = {
+			data:      data,
+			directionX: direction
+		};
+
+		onSwipe(e, true);
 	}
 
 	/**
@@ -1327,7 +1349,8 @@
 
 				panStart      : linkedPanStart,
 				pan           : linkedPan,
-				panEnd        : linkedPanEnd
+				panEnd        : linkedPanEnd,
+				swipe         : linkedSwipe
 			}
 		}),
 
