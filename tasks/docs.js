@@ -702,9 +702,10 @@ module.exports = function(grunt) {
 					   '# ' + pkg.realname + ' \n\n' +
 					   pkg.description + ' \n\n' +
 					   '[Documentation](docs/README.md) <br>' +
-					   '[Changelog](CHANGELOG.md) \n\n' +
+					   '[Changelog](CHANGELOG.md) <br>' +
+					   '[Licensing](https://formstone.it/license) \n\n' +
 					   '### License \n\n' +
-					   'Available under the GNU GPL v3 for all open source applications. A commercial license is required for all commercial applications.';
+					   'Available under the GNU GPL v3 for all open source applications. <br>A commercial license is required for all commercial applications.';
 
 		grunt.file.write(destination, markdown);
 		grunt.log.writeln('File "' + destination + '" created.');

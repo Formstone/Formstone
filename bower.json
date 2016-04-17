@@ -7,7 +7,7 @@
     "email": "mr@benplum.com",
     "url": "http://www.benplum.com"
   },
-  "license": "MIT",
+  "license": "GPL-3.0",
   "homepage": "http://formstone.it/",
   "dependencies": {
     "jquery": ">=1.11.1"

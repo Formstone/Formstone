@@ -6,8 +6,8 @@
 
 Library of modular front end components. 
 
-[Documentation](docs/README.md) <br>[Changelog](CHANGELOG.md) 
+[Documentation](docs/README.md) <br>[Changelog](CHANGELOG.md) <br>[Licensing](https://formstone.it/license) 
 
 ### License 
 
-Available under the GNU GPL v3 for all open source applications. A commercial license is required for all commercial applications.
+Available under the GNU GPL v3 for all open source applications. <br>A commercial license is required for all commercial applications.
