@@ -2,6 +2,10 @@
 
 # Changelog
 
+### 0.8.47
+
+* Fixed issue with multiple bindings in Media Query
+
 ### 0.8.46
 
 * Fixed issue with fragment identifier linking in Tabs.
