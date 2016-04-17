@@ -698,6 +698,7 @@ module.exports = function(grunt) {
 			destination = 'README.md',
 			markdown = '<a href="http://gruntjs.com" target="_blank"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a> \n' +
 					   '<a href="http://badge.fury.io/bo/formstone"><img src="https://badge.fury.io/bo/formstone.svg" alt="Bower version"></a> \n' +
+					   '<a href="https://badge.fury.io/js/formstone"><img src="https://badge.fury.io/js/formstone.svg" alt="npm version" height="18"></a> \n' +
 					   '<a href="https://travis-ci.org/Formstone/Formstone"><img src="https://travis-ci.org/Formstone/Formstone.svg?branch=master" alt="Travis CI"></a> \n\n' +
 					   '# ' + pkg.realname + ' \n\n' +
 					   pkg.description + ' \n\n' +
