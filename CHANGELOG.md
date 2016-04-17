@@ -2,9 +2,13 @@
 
 <!-- -->
 
+### 1.0.3
+
+* Fixed issue with multiple bindings in Media Query
+
 ### 1.0.2
 
-* Fixed issue with fragment identifier linking in Tabs.
+* Fixed issue with fragment identifier linking in Tabs
 
 ### 1.0.1
 
