@@ -91,7 +91,16 @@
 			}
 		}
 
-		onBindingChange(Bindings[mqKey].mq);
+		var binding    = Bindings[mqKey],
+			matches    = mq.matches;
+
+		if (matches && binding[Events.enter].hasOwnProperty(key)) {
+			binding[Events.enter][key].apply(mq);
+			binding.active = true;
+		} else if (!matches && binding[Events.leave].hasOwnProperty(key)) {
+			binding[Events.leave][key].apply(mq);
+			binding.active = false;
+		}
 	}
 
 	/**
