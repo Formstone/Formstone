@@ -8,7 +8,7 @@
 
 ### 0.8.46
 
-* Fixed issue with fragment identifier linking in Tabs.
+* Fixed issue with fragment identifier linking in Tabs
 
 ### 0.8.45
 

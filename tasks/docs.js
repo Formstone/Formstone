@@ -673,8 +673,8 @@ module.exports = function(grunt) {
 					   '[Documentation](docs/README.md) <br>' +
 					   '[Changelog](CHANGELOG.md)';
 
-		grunt.file.write(destination, markdown);
-		grunt.log.writeln('File "' + destination + '" created.');
+		// grunt.file.write(destination, markdown);
+		// grunt.log.writeln('File "' + destination + '" created.');
 
 		var chg = grunt.file.read('CHANGELOG.md'),
 			destination = 'demo/pages/changelog.md',
