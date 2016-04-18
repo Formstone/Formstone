@@ -1,5 +1,9 @@
 # Changelog
 
+### 0.8.48
+
+* Fixed issue with empty option values in Dropdown
+
 ### 0.8.47
 
 * Fixed issue with multiple bindings in Media Query

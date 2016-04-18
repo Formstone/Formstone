@@ -529,7 +529,7 @@
 			data = e.data;
 
 		if (!internal && !data.multiple) {
-			var index = data.$options.index( data.$options.filter("[value='" + escapeText($target.val()) + "']") );
+			var index = data.$options.index( data.$options.filter(":selected") );
 
 			data.focusIndex = index;
 
