@@ -273,9 +273,9 @@
 		}
 
 		// Scrollbar support
-				if ($.fn.fsScrollbar !== undefined) {
-						data.$wrapper.fsScrollbar();
-				}
+		if ($.fn.fsScrollbar !== undefined) {
+			data.$wrapper.fsScrollbar();
+		}
 	}
 
 	/**
