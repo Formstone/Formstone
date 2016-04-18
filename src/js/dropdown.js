@@ -273,9 +273,9 @@
 		}
 
 		// Scrollbar support
-				if ($.fn.fsScrollbar !== undefined) {
-						data.$wrapper.fsScrollbar();
-				}
+		if ($.fn.fsScrollbar !== undefined) {
+			data.$wrapper.fsScrollbar();
+		}
 	}
 
 	/**
@@ -540,10 +540,10 @@
 
 	function onChange(e, internal) {
 		var $target = $(this),
-			data = e.data;
+			data    = e.data;
 
 		if (!internal && !data.multiple) {
-			var index = data.$options.index( data.$options.filter("[value='" + escapeText($target.val()) + "']") );
+			var index = data.$options.index( data.$options.filter(":selected") );
 
 			data.focusIndex = index;
 
@@ -750,10 +750,10 @@
 					var label = $option.data("label") || $item.html();
 
 					data.$selected.html(label)
-									.removeClass(Classes.item_placeholder);
+								  .removeClass(Classes.item_placeholder);
 
 					data.$items.filter(Classes.item_selected)
-								 .removeClass(RawClasses.item_selected);
+							   .removeClass(RawClasses.item_selected);
 
 					data.$el[0].selectedIndex = index;
 

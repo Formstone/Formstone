@@ -10,6 +10,10 @@
 * Added controller carousel support to Carousel
 * Fixed `rtl` positioning in Carousel
 
+### 1.0.4
+
+* Fixed issue with empty option values in Dropdown
+
 ### 1.0.3
 
 * Fixed issue with multiple bindings in Media Query
