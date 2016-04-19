@@ -69,6 +69,12 @@
 						top: -75px;
 						width: 150px;
 					}
+					
+					.swipe {
+						background: gray;
+						height: 100px;
+						width: 100%;
+					}
 					</style>
 
 					<script>
@@ -76,6 +82,13 @@
 						var $targets = $(".touch"),
 							_minX = 0,
 							_minY = 0;
+
+						$(".swipe").touch({
+							swipe: true,
+							axis: x
+						}).on("swipe", function(e) {
+							$(this).html(e.directionX);
+						})
 
 						$targets.each(function() {
 							var $target = $(this),
@@ -277,6 +290,9 @@
 							<div class="box touch scale">Scale</div>
 						</div>
 					</div>
+
+					<h4>Swipe</h4>
+					<div class="swipe">Nothing</div>
 
 					<h4>Manipulate</h4>
 					<div class="container">
