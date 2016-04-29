@@ -870,7 +870,6 @@
 
 			/**
 			 * @options
-			 * @param attached [boolean] <true> "Options are attached to handle; False for overflow parent support”
 			 * @param bottomEdge [int] <0> "Threshold for bottom position”
 			 * @param cover [boolean] <false> "Cover handle with option set"
 			 * @param customClass [string] <''> "Class applied to instance"
@@ -882,7 +881,6 @@
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */
 			defaults: {
-				attached       : true,
 				bottomEdge     : 0,
 				cover          : false,
 				customClass    : "",

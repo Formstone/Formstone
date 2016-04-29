@@ -76,7 +76,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `attached` | `boolean` | `true` | &nbsp; |
 | `bottomEdge` | `int` | `0` | &nbsp; |
 | `cover` | `boolean` | `false` | Cover handle with option set |
 | `customClass` | `string` | `''` | Class applied to instance |

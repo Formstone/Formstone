@@ -21,6 +21,7 @@
 	</head>
 
 	<body class="fs-grid demo_page">
+		<!-- JSHEADER -->
 		<div class="demo_content">
 			<header class="header">
 				<div class="fs-row">
@@ -88,7 +89,7 @@
 							axis: x
 						}).on("swipe", function(e) {
 							$(this).html(e.directionX);
-						})
+						});
 
 						$targets.each(function() {
 							var $target = $(this),
@@ -301,7 +302,10 @@
 						</div>
 					</div>
 					<!-- END: DEMO -->
-					<div class="copyright">&copy; 2016</div>
+					<div class="copyright">
+						<!-- JSFOOTER -->
+						<div>&copy; 2016</div>
+					</div>
 				</div>
 			</div>
 		</div>

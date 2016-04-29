@@ -9,6 +9,7 @@
 * Added linked carousel support to Carousel
 * Added controller carousel support to Carousel
 * Fixed `rtl` positioning in Carousel
+* Fixed issues with Dropdown option container positioning
 
 ### 1.0.4
 
