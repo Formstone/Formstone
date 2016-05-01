@@ -179,7 +179,12 @@
 		}
 
 		for (var i in a) {
-			if ( !(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i]) ) {
+
+			if (a.hasOwnProperty(i)) {
+				if ( !(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i]) ) {
+					return false;
+				}
+			} else {
 				return false;
 			}
 		}

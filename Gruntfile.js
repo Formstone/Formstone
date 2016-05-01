@@ -78,15 +78,6 @@ module.exports = function(grunt) {
 					'zetzer'
 				]
 			},
-			images: {
-				files: [
-					'demo/images/src/**/*.{png,jpg,jpeg,gif,svg}'
-				],
-				tasks: [
-					'newer:imagemin:target',
-					'newer:svgmin:target'
-				]
-			},
 			config: {
 				files: [
 					'Gruntfile.js'
@@ -125,7 +116,7 @@ module.exports = function(grunt) {
 				forin:     true,
 				freeze:    true,
 				immed:	   true,
-				latedef:   true,
+				latedef:   false,
 				newcap:    true,
 				noarg:     true,
 				nonew:     true,
@@ -344,35 +335,6 @@ module.exports = function(grunt) {
 					]
 				}
 			}
-		},
-		// Optimize images (png, gif, jpg)
-		imagemin: {
-			target: {
-				files: [
-					{
-						expand: true,
-						cwd: 'demo/images/src',
-						src: '**/*.{png,jpg,jpeg,gif}',
-						dest: 'demo/images'
-					}
-				]
-			}
-		},
-		// Optimize images (svg)
-		svgmin: {
-			options: {
-				plugins: [
-					{ removeViewBox: true }
-				]
-			},
-			target: {
-				files: [{
-					expand: true,
-					cwd: 'demo/images/src',
-					src: '**/*.svg',
-					dest: 'demo/images'
-				}]
-			}
 		}
 	});
 
@@ -415,11 +377,10 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('js', [ 'jshint:library', 'uglify:library', 'includereplace:library' ]);
 	grunt.registerTask('css', [ 'less:library', 'postcss:library' ]);
-	grunt.registerTask('img', [ 'imagemin', 'svgmin' ]);
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'includereplace:demo', 'stripmq', 'img' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'includereplace:demo', 'stripmq' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };
