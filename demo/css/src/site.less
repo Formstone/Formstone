@@ -9,6 +9,8 @@
 	@white: #fff;
 	@primary: #455a64;
 
+	@min_md: ~"screen and (min-width: 740px)";
+
 
 	*:focus {
 		outline: none;
@@ -22,21 +24,24 @@
 	}
 
 	body {
+		background: @white;
 		font-size: 16px;
 		padding: 0 0 50px;
 	}
 
+/*
 	body,
 	.demo_content {
 		background: #ECEFF1;
 	}
+*/
 
 	.demo_output {
 		height: 100px;
 
 		line-height: 1.8;
 
-		@media screen and (min-width: 740px) {
+		@media @min_md {
 			height: 200px;
 		}
 	}
@@ -175,8 +180,32 @@
 		margin-top: 0;
 	}
 
+	.footer {
+		margin: 30px 0 20px;
+	}
+
 	.copyright {
 		color: @primary;
 		font-size: 12px;
-		margin: 30px 0 20px;
+		margin: 0 0 20px;
+		text-align: center;
+
+		@media @min_md {
+			float: left;
+			text-align: left;
+		}
+	}
+
+	.footer_links {
+		text-align: center;
+
+		@media @min_md {
+			float: right;
+			text-align: right;
+		}
+
+		a {
+			display: inline-block;
+			float: none;
+		}
 	}
