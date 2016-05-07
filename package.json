@@ -50,7 +50,8 @@
     "css": {
       "demo/css/site.css": "demo/css/src/site.less",
       "demo/css/site-ie8.css": "demo/css/src/ie/ie8.less",
-      "demo/css/site-ie9.css": "demo/css/src/ie/ie9.less"
+      "demo/css/site-ie9.css": "demo/css/src/ie/ie9.less",
+      "demo/css/demo.css": "demo/css/src/demo.less"
     },
     "js": {
       "demo/js/site.js": [
@@ -89,6 +90,9 @@
       ],
       "demo/js/site-ie9.js": [
         "demo/js/src/ie/matchMedia.ie9.js"
+      ],
+      "demo/js/demo.js": [
+        "demo/js/src/modules/demo.js"
       ]
     },
     "js_ignores": [
