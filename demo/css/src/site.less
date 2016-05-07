@@ -5,9 +5,12 @@
 	@import (inline) "../../bower/normalize-css/normalize.css";
 
 	@import "plugins.less";
+	@import "prism.less";
 
 	@white: #fff;
 	@primary: #455a64;
+	@primary_medium: #546E7A;
+	@primary_light: #eceff1;
 
 	@min_md: ~"screen and (min-width: 740px)";
 
@@ -32,7 +35,7 @@
 /*
 	body,
 	.demo_content {
-		background: #ECEFF1;
+		background: @primary_light;
 	}
 */
 
@@ -69,6 +72,12 @@
 		margin: 0 0 5px;
 	}
 
+	code {
+		color: #222;
+		font-size: 14px;
+		padding: 5px;
+	}
+
 	pre,
 	input,
 	textarea,
@@ -79,7 +88,55 @@
 		color: @primary;
 		font-size: 16px;
 		margin: 20px 0;
-		padding: 10px;
+		padding: 20px;
+
+		code {
+			background: none;
+			border-radius: 0;
+			padding: 0;
+		}
+	}
+
+	:not(pre) > code[class*="language-"],
+	pre[class*="language-"] {
+		background: @primary_light;
+		border: none;
+		margin: 20px 0 30px;
+		padding: 20px 25px;
+	}
+
+	pre {
+
+		&[class*="language-"] {
+			position: relative;
+
+			&:after {
+				position: absolute;
+				top: 2px;
+				right: 2px;
+
+				background: @primary_medium;
+				border-radius: 2px;
+				color: @white;
+				font-size: 12px;
+				letter-spacing: 0.05em;
+				line-height: 1;
+				padding: 4px 7px 5px;
+				text-transform: uppercase;
+			}
+		}
+
+		&[class*="language-javascript"]:after {
+			content: 'JS';
+		}
+
+		&[class*="language-css"]:after {
+			content: 'CSS';
+		}
+
+		&[class*="language-markup"]:after {
+			content: 'HTML';
+		}
 	}
 
 	input {
@@ -152,6 +209,32 @@
 		}
 	}
 */
+
+	.demo_tabs {
+		border-bottom: 1px solid @primary_medium;
+
+		&:after {
+			width: 100%;
+
+			clear: both;
+			content: '';
+			display: table;
+		}
+
+		.demo_tab.fs-tabs-tab {
+			border-radius: 3px 3px 0 0;
+			font-size: 12px;
+			margin-bottom: -1px;
+
+			&.fs-tabs-active {
+				border-bottom-color: @white;
+			}
+		}
+	}
+
+	.demo_example {
+		margin: 20px 0 30px;
+	}
 
 	// Header
 
