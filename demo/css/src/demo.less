@@ -1,0 +1,175 @@
+/* ==========================================================================
+	Demo
+============================================================================= */
+
+	@white: #fff;
+	@primary: #455a64;
+	@primary_medium: #546E7A;
+	@primary_light: #B0BEC5;
+	@primary_lighter: #eceff1;
+
+	.demo_content {
+
+		p {
+			margin: 20px 0;
+		}
+
+		a {
+			color: @primary;
+		}
+
+		li {
+			margin: 5px 0;
+		}
+
+		fieldset {
+			border: none;
+			padding: 0;
+			margin: 20px 0;
+		}
+
+		label {
+			display: block;
+			margin: 0 0 5px;
+		}
+
+		code {
+			color: #222;
+			font-size: 14px;
+			padding: 5px;
+		}
+
+		pre,
+		input,
+		textarea,
+		.form_textarea {
+			background: @white;
+			border: 1px solid @primary;
+			border-radius: 2px;
+			color: @primary;
+			font-size: 16px;
+			margin: 20px 0;
+			padding: 20px;
+
+			code {
+				background: none;
+				border-radius: 0;
+				padding: 0;
+			}
+		}
+
+		:not(pre) > code[class*="language-"],
+		pre[class*="language-"] {
+			background: @primary_lighter;
+			border: none;
+			margin: 20px 0 30px;
+			padding: 20px 25px;
+		}
+
+		pre {
+
+			&[class*="language-"] {
+				position: relative;
+
+				&:after {
+					position: absolute;
+					top: 2px;
+					right: 2px;
+
+					background: @primary_medium;
+					border-radius: 2px;
+					color: @white;
+					font-size: 12px;
+					letter-spacing: 0.05em;
+					line-height: 1;
+					padding: 4px 7px 5px;
+					text-transform: uppercase;
+				}
+			}
+
+			&[class*="language-javascript"]:after {
+				content: 'JS';
+			}
+
+			&[class*="language-css"]:after {
+				content: 'CSS';
+			}
+
+			&[class*="language-markup"]:after {
+				content: 'HTML';
+			}
+		}
+
+		input {
+			width: 100%;
+
+			margin: 10px 0;
+			padding: 5px 10px;
+		}
+
+		textarea,
+		.form_textarea {
+			width: 100%;
+			max-height: 200px;
+
+			overflow: auto;
+		}
+
+		// button,
+		.button {
+			width: auto;
+
+			background: @primary;
+			border: none;
+			border-radius: 2px;
+			display: inline-block;
+			font-size: 16px;
+			color: @white;
+			margin: 0 5px 5px 0;
+			padding: 10px 20px;
+			text-decoration: none;
+		}
+
+		// Tabs
+
+		.demo_tabs {
+			border-bottom: 1px solid @primary_light;
+
+			&:after {
+				width: 100%;
+
+				clear: both;
+				content: '';
+				display: table;
+			}
+
+			.demo_tab.fs-tabs-tab {
+				background: @primary_lighter;
+				border-radius: 3px 3px 0 0;
+				border-color: @primary_light;
+				font-size: 12px;
+				margin-bottom: -1px;
+
+				&.fs-tabs-active {
+					background: @white;
+					border-bottom-color: @white;
+				}
+			}
+		}
+
+		.demo_example {
+			margin: 20px 0 30px;
+		}
+
+		// Output
+
+		.demo_output {
+			height: 100px;
+
+			line-height: 1.8;
+
+			@media @min_md {
+				height: 200px;
+			}
+		}
+	}

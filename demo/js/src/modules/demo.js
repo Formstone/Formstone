@@ -1,67 +1,17 @@
 /*-------------------------------------------
-	Page
+	Demo
 -------------------------------------------*/
 
 	/* global picturefill */
 
-/*
-	// https://github.com/angular/angular.js/blob/v1.3.14/src/ngSanitize/sanitize.js#L435
-	function encodeEntities(value) {
-		return value.replace(/&/g, '&amp;')
-					.replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(value) {
-						var hi = value.charCodeAt(0);
-						var low = value.charCodeAt(1);
-						return '&#' + (((hi - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000) + ';';
-					})
-					.replace(/([^\#-~| |!])/g, function(value) {
-						return '&#' + value.charCodeAt(0) + ';';
-					})
-					.replace(/</g, '&lt;')
-					.replace(/>/g, '&gt;');
-	}
-*/
-
-	Site.modules.Page = (function($, Site) {
+	Site.modules.Demo = (function($, Site) {
 
 		function init() {
-/*
-			$(".js-component_select").dropdown();
-			$(".js-theme_select").dropdown().on("change", function() {
-				buildPlugins($(this).val());
-			});
-*/
-
 			$.cookie({
 				path: '/'
 			});
 
-			$(".demo_container").each(function(index) {
-				var html  = "",
-					$demo = $(this),
-					$example = $demo.find(".demo_example"),
-					$code    = $demo.find(".demo_code");
-
-				$example.attr("id", "example-" + index);
-				$code.attr("id", "code-" + index);
-
-				html += '<div class="demo_tabs contain">';
-				html += '<a href="#example-' + index + '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Demo</a>';
-				html += '<a href="#code-' + index +    '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Code</a>';
-				html += '</div>';
-
-				$demo.prepend(html);
-			});
-
-
-/*
-			$(".js-demo").each(function() {
-				var $demo = $(this),
-					content = encodeEntities($demo.html().trim());
-
-				$demo.after('<pre>' + content + '</pre>');
-			});
-*/
-
+			buildDemoTabs();
 			buildPlugins("fs-light");
 
 			Site.onScroll.push(scroll);
@@ -81,6 +31,25 @@
 
 		function respond() {
 			scroll();
+		}
+
+		function buildDemoTabs() {
+			$(".demo_container").each(function(index) {
+				var html  = "",
+					$demo = $(this),
+					$example = $demo.find(".demo_example"),
+					$code    = $demo.find(".demo_code");
+
+				$example.attr("id", "example-" + index);
+				$code.attr("id", "code-" + index);
+
+				html += '<div class="demo_tabs contain">';
+				html += '<a href="#example-' + index + '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Demo</a>';
+				html += '<a href="#code-' + index +    '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Code</a>';
+				html += '</div>';
+
+				$demo.prepend(html);
+			});
 		}
 
 		function buildPlugins(theme) {
@@ -106,8 +75,6 @@
 			Site.$body.find(".js-tooltip").tooltip("destroy");
 			Site.$body.find(".js-upload").upload("destroy");
 
-			Site.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
-
 			// Init
 
 			Site.$body.find(".js-background").background(options);
@@ -125,6 +92,10 @@
 			Site.$body.find(".js-tabs").tabs(options);
 			Site.$body.find(".js-tooltip").tooltip(options);
 			Site.$body.find(".js-upload").upload(options);
+
+			// Demo Tabs
+
+			Site.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
 
 			Site.$body.find(".js-demo_tabs").tabs({
 				mobileMaxWidth: "0px"
