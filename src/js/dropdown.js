@@ -155,7 +155,7 @@
 			});
 
 			data.$dropdown.on(Events.focusIn, data, onFocusIn)
-							.on(Events.focusOut, data, onFocusOut);
+						  .on(Events.focusOut, data, onFocusOut);
 		}
 	}
 
@@ -548,7 +548,7 @@
 			data.focusIndex = index;
 
 			updateOption(index, data);
-			handleChange(data);
+			handleChange(data, true);
 		}
 	}
 
@@ -584,7 +584,7 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onFocusOut(e, internal) {
+	function onFocusOut(e) {
 		Functions.killEvent(e);
 
 		var $target = $(e.currentTarget),
@@ -793,11 +793,13 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	function handleChange(data) {
+	function handleChange(data, external) {
 		if (data.links) {
 			launchLink(data);
 		} else {
-			data.$el.trigger(Events.raw.change, [ true ]);
+			if (!external) {
+				data.$el.trigger(Events.raw.change, [ true ]);
+			}
 		}
 	}
 

@@ -2,6 +2,12 @@
 
 <!-- -->
 
+### 1.1.1
+
+* Fixed issue with iOS `change` events in Dropdown
+* Fixed webkit touch scrolling in Lightbox
+* Fixed webkit touch scrolling in Navigation (Thanks @nhall!)
+
 ### 1.1.0
 
 * Added `thumbnail` option to Lightbox
