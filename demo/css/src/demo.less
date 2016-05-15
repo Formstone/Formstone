@@ -153,7 +153,7 @@
 		// Tabs
 
 		.demo_tabs {
-			border-bottom: 1px solid @primary_light;
+			border-bottom: 1px solid @primary_lighter;
 
 			&:after {
 				width: 100%;
@@ -164,15 +164,17 @@
 			}
 
 			.demo_tab.fs-tabs-tab {
-				background: @primary_lighter;
-				border-radius: 3px 3px 0 0;
-				border-color: @primary_light;
-				font-size: 12px;
-				margin-bottom: -1px;
+				background: @white;
+				border: none;
+				border-radius: 2px 2px 0 0;
+				color: @accent;
+				font-size: 14px;
+				text-transform: none;
 
-				&.fs-tabs-active {
-					background: @white;
-					border-bottom-color: @white;
+				&.fs-tabs-active,
+				.no-touchevents &:hover {
+					color: @primary;
+					background: @primary_lighter;
 				}
 			}
 		}
