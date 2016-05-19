@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.1.2
+
+* Added `accept` option to Upload
+
 ### 1.1.1
 
 * Fixed issue with iOS `change` events in Dropdown

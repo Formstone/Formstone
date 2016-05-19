@@ -1,3 +1,5 @@
+/*! formstone v1.1.2 [modernizr.js] 2016-05-19 | GPL-3.0 License | formstone.it */
+
 /*! formstone v1.1.1 [modernizr.js] 2016-05-07 | GPL-3.0 License | formstone.it */
 
 /*! formstone v1.1.0 [modernizr.js] 2016-05-07 | GPL-3.0 License | formstone.it */
