@@ -101,6 +101,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `accept` | `string` | &nbsp; | Input accept attribute |
 | `action` | `string` | &nbsp; | Where to submit uploads |
 | `autoUpload` | `boolean` | `false` | Beging upload when files are dropped |
 | `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |

@@ -33,6 +33,9 @@
 			if (data.multiple) {
 				html += ' multiple';
 			}
+			if (data.accept) {
+				html += ' accept="' + data.accept + '"';
+			}
 			html += '>';
 
 			data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
@@ -461,6 +464,7 @@
 
 			/**
 			 * @options
+			 * @param accept [string] "Input accept attribute"
 			 * @param action [string] "Where to submit uploads"
 			 * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
 			 * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
@@ -477,6 +481,7 @@
 			 */
 
 			defaults: {
+				accept         : false,
 				action         : "",
 				autoUpload     : true,
 				beforeSend     : function(formdata) { return formdata; },
