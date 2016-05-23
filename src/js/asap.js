@@ -1,4 +1,16 @@
-;(function ($, Formstone, undefined) {
+/* global define */
+
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+        define([
+            "jquery/jquery",
+            "./core",
+            "./mediaquery"
+        ], factory);
+    } else {
+        factory(jQuery, Formstone);
+    }
+}(function($, Formstone) {
 
 	/* global ga */
 
@@ -472,4 +484,6 @@
 		CurrentID     = 1,
 		Request,
 		Instance;
-})(jQuery, Formstone);
+})
+
+);

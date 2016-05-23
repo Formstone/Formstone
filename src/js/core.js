@@ -4,11 +4,19 @@
  * @description Formstone Library core. Required for all plugins.
  */
 
-var Formstone = window.Formstone = (function ($, window, document, undefined) {
+/* global define */
+/* global ga */
 
-	/* global ga */
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+        define([ "jquery/jquery" ], factory);
+    } else {
+        factory(jQuery);
+    }
+}(function($) {
 
-	"use strict";
+
+    "use strict";
 
 	// Namespace
 
@@ -770,4 +778,6 @@ var Formstone = window.Formstone = (function ($, window, document, undefined) {
 
 	return Formstone;
 
-})(jQuery, window, document);
+})
+
+);

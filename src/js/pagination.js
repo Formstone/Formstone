@@ -1,4 +1,16 @@
-;(function ($, Formstone, undefined) {
+/* global define */
+
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+        define([
+            "jquery/jquery",
+            "./core",
+            "./mediaquery"
+        ], factory);
+    } else {
+        factory(jQuery, Formstone);
+    }
+}(function($, Formstone) {
 
 	"use strict";
 
@@ -356,4 +368,6 @@
 		Events        = Plugin.events,
 		Functions     = Plugin.functions;
 
-})(jQuery, Formstone);
+})
+
+);
