@@ -155,18 +155,16 @@
 	 */
 
 	function onPageClick(e) {
-		Functions.killEvent(e);
-
 		var data = e.data,
 			index = data.$items.index( $(e.currentTarget) );
 
-		/*
-		if (data.ajax) {
-			Functions.killEvent(e);
-		}
-		*/
+		Functions.killEvent(e);
 
-		updatePage(data, index);
+		if (data.ajax) {
+			updatePage(data, index);
+		} else {
+			window.location = $(e.currentTarget).attr("href");
+		}
 	}
 
 	/**
