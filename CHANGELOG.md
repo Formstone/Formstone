@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.1.3
+
+* Fixing link actions in Pagination
+* Fixing display bug in Upload
+
 ### 1.1.2
 
 * Added `accept` option to Upload
