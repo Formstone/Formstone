@@ -82,9 +82,21 @@
 		pre[class*="language-"] {
 			background: @primary_lighter;
 			border: none;
-			margin: 20px 0 30px;
+			margin: 20px 0 0;
 			padding: 20px 25px;
+
+			&:last-child {
+				margin-bottom: 30px;
+			}
 		}
+
+		// .demo_code {
+		// 	margin-bottom: 20px;
+		//
+		// 	pre[class*="language-"] {
+		// 		margin-bottom: 0;
+		// 	}
+		// }
 
 		pre {
 
@@ -115,7 +127,7 @@
 				content: 'CSS';
 			}
 
-			&[class*="language-markup"]:after {
+			&[class*="language-html"]:after {
 				content: 'HTML';
 			}
 		}

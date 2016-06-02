@@ -1,4 +1,4 @@
-/*! formstone v1.1.3 [demo.js] 2016-05-24 | GPL-3.0 License | formstone.it */
+/*! formstone v1.1.3 [demo.js] 2016-06-01 | GPL-3.0 License | formstone.it */
 
 /* ==========================================================================
 	Demo
