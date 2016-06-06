@@ -98,7 +98,8 @@
 			Site.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
 
 			Site.$body.find(".js-demo_tabs").tabs({
-				mobileMaxWidth: "0px"
+				mobileMaxWidth: "0px",
+				theme: "fs-demo"
 			}).on("update.tabs", resetPlugins);
 		}
 

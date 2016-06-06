@@ -1,4 +1,4 @@
-/*! formstone v1.1.3 [demo.js] 2016-06-01 | GPL-3.0 License | formstone.it */
+/*! formstone v1.1.3 [demo.js] 2016-06-06 | GPL-3.0 License | formstone.it */
 
 /* ==========================================================================
 	Demo
@@ -10,5 +10,5 @@ b.$body.find(".js-background").background("destroy"),b.$body.find(".js-carousel"
 // Init
 b.$body.find(".js-background").background(c),b.$body.find(".js-carousel").carousel(c),b.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(c),b.$body.find(".js-dropdown").dropdown(c),b.$body.find(".js-equalize").equalize(c),b.$body.find(".js-lightbox").lightbox(c),b.$body.find(".js-navigation").navigation(c),b.$body.find("input[type=number]").number(c),b.$body.find(".js-pagination").pagination(c),b.$body.find("input[type=range]").range(c),b.$body.find(".js-scrollbar").scrollbar(c),b.$body.find(".js-swap").swap(c),b.$body.find(".js-tabs").tabs(c),b.$body.find(".js-tooltip").tooltip(c),b.$body.find(".js-upload").upload(c),
 // Demo Tabs
-b.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy"),b.$body.find(".js-demo_tabs").tabs({mobileMaxWidth:"0px"}).on("update.tabs",i)}function i(){var b=a(this),c=a(b.attr("href"));c.find(".js-background").background("resize"),c.find(".js-carousel").carousel("resize")}/* Hook Into Main init Routine */
+b.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy"),b.$body.find(".js-demo_tabs").tabs({mobileMaxWidth:"0px",theme:"fs-demo"}).on("update.tabs",i)}function i(){var b=a(this),c=a(b.attr("href"));c.find(".js-background").background("resize"),c.find(".js-carousel").carousel("resize")}/* Hook Into Main init Routine */
 return b.onInit.push(c),{}}(jQuery,Site);
