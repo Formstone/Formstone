@@ -29,15 +29,39 @@
 		data.group        = this.data(Namespace + "-group");
 
 		data.elementClasses      = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
-		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass].join(" ");
-		data.contentClasses      = [RawClasses.content, data.rawGuid, data.theme, data.customClass].join(" ");
+		data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass];
+		data.contentClasses      = [RawClasses.content, data.rawGuid, data.theme, data.customClass];
 
 		// DOM
 
-		data.$mobileTab    = $('<button type="button" class="' + data.mobileTabClasses + '">' + this.text() + '</button>');
-		data.$content      = $(data.content).addClass(data.contentClasses);
+		data.$mobileTab    = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.text() + '</button>');
+		data.$content      = $(data.content).addClass( data.contentClasses.join(" ") );
 
-		data.$content.before(data.$mobileTab);
+		data.$content.before(data.$mobileTab)
+					 .attr("role", "tabpanel");
+
+		this.attr("role", "tab");
+
+		// Aria
+
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaId = data.id;
+		} else {
+			data.ariaId = data.rawGuid;
+			this.attr("id", data.ariaId);
+		}
+
+		data.contentId   = data.$content.attr("id");
+		data.contentGuid = data.rawGuid + "_content";
+
+		if (data.contentId) {
+			data.ariacontentId = data.contentId;
+		} else {
+			data.ariaContentId = data.contentGuid;
+			data.$content.attr("id", data.ariaContentId);
+		}
 
 		// Check for hash
 
@@ -120,17 +144,34 @@
 		data.$mobileTab.off(Events.namespace)
 					   .remove();
 
-		data.$content.removeClass(data.contentClasses.push(RawClasses.mobile).join(" "));
+		data.elementClasses.push(RawClasses.mobile);
+		data.contentClasses.push(RawClasses.mobile);
 
-		this.removeAttr("data-swap-active")
+		data.$content.removeAttr("aria-labelledby")
+					 .removeAttr("aria-hidden")
+					 .removeAttr("role")
+					 .removeClass( data.contentClasses.join(" ") );
+
+		if (data.$content.attr("id") === data.contentGuid) {
+			data.$content.removeAttr("id");
+		}
+
+		this.removeAttr("aria-controls")
+			.removeAttr("aria-selected")
+			.removeAttr("data-swap-active")
 			.removeData("data-swap-active")
 			.removeAttr("data-swap-target")
 			.removeData("data-swap-target")
 			.removeAttr("data-swap-group")
 			.removeData("data-swap-group")
-			.removeClass(data.elementClasses.push(RawClasses.mobile).join(" "))
+			.removeAttr("role")
+			.removeClass( data.elementClasses.join(" ") )
 			.off(Events.namespace)
 			.fsSwap("destroy");
+
+		if (this.attr("id") === data.rawGuid) {
+			this.removeAttr("id");
+		}
 	}
 
 	/**
@@ -178,10 +219,11 @@
 			var data = e.data,
 				index = 0;
 
-			data.$el.trigger(Events.update, [ index ]);
-
+			data.$el.attr("aria-selected", true)
+					.trigger(Events.update, [ index ]);
 			data.$mobileTab.addClass(RawClasses.active);
-			data.$content.addClass(RawClasses.active);
+			data.$content.attr("aria-hidden", false)
+						 .addClass(RawClasses.active);
 		}
 	}
 
@@ -196,8 +238,10 @@
 		if (!e.originalEvent) { // thanks IE :/
 			var data = e.data;
 
+			data.$el.attr("aria-selected", false);
 			data.$mobileTab.removeClass(RawClasses.active);
-			data.$content.removeClass(RawClasses.active);
+			data.$content.attr("aria-hidden", true)
+						 .removeClass(RawClasses.active);
 		}
 	}
 
@@ -211,8 +255,10 @@
 	function onEnable(e) {
 		var data = e.data;
 
+		data.$el.attr("aria-controls", data.ariaContentId);
 		data.$mobileTab.addClass(RawClasses.enabled);
-		data.$content.addClass(RawClasses.enabled);
+		data.$content.attr("aria-labelledby", data.ariaId)
+					 .addClass(RawClasses.enabled);
 	}
 
 	/**
@@ -225,8 +271,12 @@
 	function onDisable(e) {
 		var data = e.data;
 
+		data.$el.removeAttr("aria-controls")
+				.removeAttr("aria-selected");
 		data.$mobileTab.removeClass(RawClasses.enabled);
-		data.$content.removeClass(RawClasses.enabled);
+		data.$content.removeAttr("aria-labelledby")
+					 .removeAttr("aria-hidden")
+					 .removeClass(RawClasses.enabled);
 	}
 
 	/**

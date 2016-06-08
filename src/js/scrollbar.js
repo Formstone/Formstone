@@ -54,9 +54,9 @@
 	function construct(data) {
 		var html = '';
 
-		html += '<div class="' + RawClasses.bar + '">';
+		html += '<div class="' + RawClasses.bar + '" role="scrollbar">';
 		html += '<div class="' + RawClasses.track + '">';
-		html += '<span class="' + RawClasses.handle + '"></span>';
+		html += '<button type="button" class="' + RawClasses.handle + '"></button>';
 		html += '</div></div>';
 
 		data.paddingRight     = parseInt(this.css("padding-right"), 10);
@@ -73,6 +73,22 @@
 		data.$handle     = this.find(Classes.handle);
 
 		data.trackMargin = parseInt(data.trackMargin, 10);
+
+		// Aria
+
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaId = data.id;
+		} else {
+			data.ariaId = data.rawGuid;
+			this.attr("id", data.ariaId);
+		}
+
+		data.$bar.attr("aria-controls", data.ariaId)
+				 .attr("aria-orientation", (data.horizontal) ? "horizontal" : "vertical");
+
+		// Events
 
 		data.$content.on(Events.scroll, data, onScroll);
 
@@ -103,12 +119,17 @@
 		data.$track.fsTouch("destroy");
 
 		data.$bar.remove();
+
 		data.$content.off(Events.namespace)
 					 .contents()
 					 .unwrap();
 
 		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
+
+		if (this.attr("id") === data.rawGuid) {
+			this.removeAttr("id");
+		}
 	}
 
 	/**
@@ -211,6 +232,9 @@
 			handleStyles = {
 				width: data.handleWidth
 			};
+
+			data.$bar.attr("aria-valuemin", data.handleBounds.left)
+					 .attr("aria-valuemax", data.handleBounds.right);
 		} else {
 			// Vertical
 			data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
@@ -244,6 +268,9 @@
 			handleStyles = {
 				height: data.handleHeight
 			};
+
+			data.$bar.attr("aria-valuemin", data.handleBounds.top)
+					 .attr("aria-valuemax", data.handleBounds.bottom);
 		}
 
 		// Updates
@@ -263,7 +290,7 @@
 		positionContent(data, handlePosition);
 
 		onScroll({
-			data    : data
+			data : data
 		});
 
 		data.$el.removeClass(RawClasses.setup);
@@ -300,6 +327,8 @@
 				handleStyles = {
 					left: data.handleLeft
 				};
+
+				data.$bar.attr("aria-valuenow", data.handleLeft);
 			} else {
 				// Vertical
 				var scrollTop = data.$content.scrollTop();
@@ -320,6 +349,8 @@
 			}
 
 			data.$handle.css(handleStyles);
+
+			data.$bar.attr("aria-valuenow", data.handleTop);
 		}
 	}
 

@@ -2,10 +2,16 @@
 
 <!-- -->
 
+### 1.1.4
+
+* Fixed accessibility issues in Navigation
+* Fixed accessibility issues in Scrollbar
+* Fixed accessibility issues in Tabs
+
 ### 1.1.3
 
-* Fixing link actions in Pagination
-* Fixing display bug in Upload
+* Fixed link actions in Pagination
+* Fixed display bug in Upload
 
 ### 1.1.2
 

@@ -77,12 +77,23 @@
 
 		// DOM
 
-		data.$nav        = this.addClass(data.thisClasses.join(" "));
+		data.$nav        = this.addClass(data.thisClasses.join(" ")).attr("role", "navigation");
 		data.$handle     = $(data.handle).addClass(data.handleClasses);
 		data.$content    = $(data.content).addClass(data.contentClasses);
 		data.$animate    = $().add(data.$nav).add(data.$content);
 
 		cacheLabel(data);
+
+		// Aria
+
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaId = data.id;
+		} else {
+			data.ariaId = data.rawGuid;
+			this.attr("id", data.ariaId);
+		}
 
 		// toggle
 
@@ -119,9 +130,12 @@
 		data.$content.removeClass( [data.contentClasses, data.contentClassesOpen].join(" ") )
 					 .off(Events.namespace);
 
-		data.$handle.removeAttr("data-swap-target")
+		data.$handle.removeAttr("aria-controls")
+					.removeAttr("aria-expanded")
+					.removeAttr("data-swap-target")
 					.removeData("swap-target")
 					.removeAttr("data-swap-linked")
+					.removeAttr("data-swap-group")
 					.removeData("swap-linked")
 					.removeClass(data.handleClasses)
 					.off(data.dotGuid)
@@ -132,8 +146,13 @@
 
 		clearLocks(data);
 
-		this.removeClass(data.thisClasses.join(" "))
+		this.removeAttr("aria-hidden")
+			.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
+
+		if (this.attr("id") === data.rawGuid) {
+			this.removeAttr("id");
+		}
 	}
 
 	/**
@@ -192,12 +211,15 @@
 			var data = e.data;
 
 			if (!data.open) {
-				data.$el.trigger(Events.open);
+				data.$el.trigger(Events.open)
+						.attr("aria-hidden", false);
 
 				data.$content.addClass(data.contentClassesOpen)
 							 .one(Events.click, function() {
 								close(data);
 							 });
+
+				data.$handle.attr("aria-expanded", true);
 
 				if (data.label) {
 					data.$handle.html(data.labels.open);
@@ -222,10 +244,13 @@
 			var data = e.data;
 
 			if (data.open) {
-				data.$el.trigger(Events.close);
+				data.$el.trigger(Events.close)
+						.attr("aria-hidden", true);
 
 				data.$content.removeClass(data.contentClassesOpen)
 							 .off(Events.namespace);
+
+				data.$handle.attr("aria-expanded", false);
 
 				if (data.label) {
 					data.$handle.html(data.labels.closed);
@@ -248,6 +273,9 @@
 	function onEnable(e) {
 		var data = e.data;
 
+		data.$el.attr("aria-hidden", true);
+		data.$handle.attr("aria-controls", data.ariaId)
+					.attr("aria-expanded", false);
 		data.$content.addClass(RawClasses.enabled);
 
 		setTimeout(function() {
@@ -269,6 +297,9 @@
 	function onDisable(e) {
 		var data = e.data;
 
+		data.$el.removeAttr("aria-hidden");
+		data.$handle.removeAttr("aria-controls")
+					.removeAttr("aria-expanded");
 		data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
 		data.$animate.removeClass(RawClasses.animated);
 
