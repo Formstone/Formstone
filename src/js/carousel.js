@@ -60,10 +60,10 @@
 		data.id = this.attr("id");
 
 		if (data.id) {
-			data.ariaID = data.id;
+			data.ariaId = data.id;
 		} else {
-			data.ariaID = data.rawGuid;
-			this.attr("id", data.ariaID);
+			data.ariaId = data.rawGuid;
+			this.attr("id", data.ariaId);
 		}
 
 		// Legacy browser support
@@ -78,14 +78,14 @@
 			controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
 		if (data.controls && !data.customControls) {
-			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaID + '">';
+			controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaId + '">';
 			controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
 			controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
 			controlsHtml += '</div>';
 		}
 
 		if (data.pagination) {
-			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaID + '" role="navigation">';
+			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaId + '" role="navigation">';
 			paginationHtml += '</div>';
 		}
 
@@ -211,8 +211,8 @@
 
 		$.fsMediaquery("unbind", data.rawGuid);
 
-		if (data.id !== data.ariaID) {
-			this.attr("id", "");
+		if (data.id !== data.ariaId) {
+			this.removeAttr("id");
 		}
 
 		data.$controlItems.removeClass( [Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" ") )
