@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Better styling when focused?
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -58,11 +60,11 @@
 		data.vertical = this.attr("orient") === "vertical" || data.vertical;
 		data.disabled = this.is(":disabled") || this.is("[readonly]");
 
-		html += '<div class="' + RawClasses.track + '">';
+		html += '<div class="' + RawClasses.track + '" aria-hidden="true">';
 		if (data.fill) {
 			html += '<span class="' + RawClasses.fill + '"></span>';
 		}
-		html += '<div class="' + RawClasses.handle + '">';
+		html += '<div class="' + RawClasses.handle + '" role="slider">';
 		html += '<span class="' + RawClasses.marker + '"></span>';
 		html += '</div>';
 		html += '</div>';
@@ -85,6 +87,12 @@
 		data.$fill      = data.$container.find(Classes.fill);
 		data.$handle    = data.$container.find(Classes.handle);
 		data.$output    = data.$container.find(Classes.output);
+
+/*
+		data.$handle.attr("aria-orientation", data.vertical ? "vertical" : "horizontal")
+					.attr("aria-valuemin", data.min)
+					.attr("aria-valuemax", data.max);
+*/
 
 		if (data.labels) {
 			var labelMax = '<span class="' + [RawClasses.label, RawClasses.label_max].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) + '</span>',
@@ -313,6 +321,7 @@
 
 		data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
+/* 					.attr("aria-valuenow", value) */
 		value += data.min;
 
 		if (value !== data.value && value !== false && isResize !== true) {

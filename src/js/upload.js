@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Better styling when focused?
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

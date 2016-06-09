@@ -95,7 +95,7 @@
 
 		// Build inner
 		if (!data.multiple) {
-			innerHtml += '<button type="button" class="' + RawClasses.selected + '" tabindex="-1">';
+			innerHtml += '<button type="button" class="' + RawClasses.selected + '" tabindex="-1" aria-haspopup="true">';
 			innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
 			innerHtml += '</button>';
 		}

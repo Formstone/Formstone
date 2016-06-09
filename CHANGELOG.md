@@ -5,7 +5,9 @@
 ### 1.1.4
 
 * Fixed accessibility issues in Navigation
+* Fixed accessibility issues in Number
 * Fixed accessibility issues in Scrollbar
+* Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
 
 ### 1.1.3

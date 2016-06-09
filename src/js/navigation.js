@@ -1,5 +1,8 @@
 /* global define */
 
+// TODO: Add keyboard controls for non button handles
+// TODO: Focus to menu on open?
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -100,6 +103,7 @@
 		data.$handle.attr("data-swap-target", data.dotGuid)
 					.attr("data-swap-linked", data.handleGuid)
 					.attr("data-swap-group", RawClasses.base)
+					.attr("tabindex", 0)
 					.on("activate.swap" + data.dotGuid, data, onOpen)
 					.on("deactivate.swap" + data.dotGuid, data, onClose)
 					.on("enable.swap" + data.dotGuid, data, onEnable)
@@ -137,6 +141,7 @@
 					.removeAttr("data-swap-linked")
 					.removeAttr("data-swap-group")
 					.removeData("swap-linked")
+					.removeData("tabindex")
 					.removeClass(data.handleClasses)
 					.off(data.dotGuid)
 					.html(data.originalLabel)
