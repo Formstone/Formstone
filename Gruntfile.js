@@ -239,7 +239,9 @@ module.exports = function(grunt) {
 				files: {
 					src: [
 						'demo/css/*',
-						'demo/js/*'
+						'demo/js/site.js',
+						'demo/js/site-ie8.js',
+						'demo/js/site-ie9.js'
 					]
 				}
 			}
