@@ -51,7 +51,8 @@
 	}
 
 	.@{theme_name}&-dropping &-target,
-	.no-touchevents .@{theme_name}:hover &-target {
+	.no-touchevents .@{theme_name}:hover &-target,
+	.@{theme_name}&-focus &-target {
 		background: @fs-upload-dropping-background;
 		border-color: @fs-upload-dropping-border-color;
 		color: @fs-upload-dropping-text-color;
@@ -66,7 +67,8 @@
 	.@{theme_name}&-disabled &-target,
 	.no-touchevents .@{theme_name}&-disabled:hover &-target,
 	.@{theme_name}&-disabled&-dropping &-target,
-	.no-touchevents .@{theme_name}&-disabled&-dropping:hover &-target {
+	.no-touchevents .@{theme_name}&-disabled&-dropping:hover &-target,
+	.@{theme_name}&-disabled&-focus &-target {
 		background: @fs-upload-background;
 		border-color: @fs-upload-border-color;
 		color: @fs-upload-text-color;

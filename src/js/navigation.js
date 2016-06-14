@@ -1,8 +1,5 @@
 /* global define */
 
-// TODO: Add keyboard controls for non button handles
-// TODO: Focus to menu on open?
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -108,6 +105,8 @@
 					.on("deactivate.swap" + data.dotGuid, data, onClose)
 					.on("enable.swap" + data.dotGuid, data, onEnable)
 					.on("disable.swap" + data.dotGuid, data, onDisable)
+					.on(Events.focus + data.dotGuid, data, onFocus)
+					.on(Events.blur + data.dotGuid, data, onBlur)
 					.fsSwap({
 						maxWidth: data.maxWidth,
 						classes: {
@@ -121,6 +120,10 @@
 							}
 						}
 					});
+
+		if (!data.$handle.is("a, button")) {
+			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
+		}
 	}
 
 	/**
@@ -202,6 +205,46 @@
 
 	function disable(data) {
 		data.$handle.fsSwap("disable");
+	}
+
+	/**
+	 * @method private
+	 * @name onFocus
+	 * @description Handles instance focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onFocus(e) {
+		e.data.$handle.addClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onBlur
+	 * @description Handles instance blur
+	 * @param e [object] "Event data"
+	 */
+
+	function onBlur(e) {
+		e.data.$handle.removeClass(RawClasses.focus);
+	}
+
+	/**
+	 * @method private
+	 * @name onKeyup
+	 * @description Handles keypress event on inputs
+	 * @param e [object] "Event data"
+	 */
+
+	function onKeyup(e) {
+		var data = e.data;
+
+		// If arrow keys
+		if (e.keyCode === 13 || e.keyCode === 32) {
+			Functions.killEvent(e);
+
+			data.$handle.trigger(Events.raw.click);
+		}
 	}
 
 	/**
@@ -426,6 +469,7 @@
 				"content",
 				"animated",
 				"enabled",
+				"focus",
 				"open",
 				"toggle",
 				"push",

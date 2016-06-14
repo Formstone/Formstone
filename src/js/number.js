@@ -56,9 +56,9 @@
 		data.$arrows       = data.$container.find(Classes.arrow);
 
 		// Bind events
-		this.on(Events.keyPress, data, onKeyup)
-			.on(Events.focus, data, onFocus)
-			.on(Events.blur, data, onBlur);
+		this.on(Events.focus, data, onFocus)
+			.on(Events.blur, data, onBlur)
+			.on(Events.keyPress, data, onKeyup);
 
 		data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
 	}
@@ -240,7 +240,7 @@
 			value = round(value, data.digits);
 
 			data.$el.val(value)
-					.trigger(Events.raw.change);
+					.trigger(Events.raw.change, [ true ]);
 		}
 	}
 

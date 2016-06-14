@@ -4,11 +4,13 @@
 
 ### 1.1.4
 
+* Fixed accessibility issues in Checkbox
 * Fixed accessibility issues in Navigation
 * Fixed accessibility issues in Number
 * Fixed accessibility issues in Scrollbar
 * Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
+* Fixed accessibility issues in Upload
 
 ### 1.1.3
 
@@ -48,12 +50,12 @@
 
 ### 1.0.1
 
-* Fixed issue with `play` method in Background 
+* Fixed issue with `play` method in Background
 
 ### 1.0.0
 
 * Added theme support for all Widget plugins
-* Added fs-light base theme 
+* Added fs-light base theme
 * Added AMD module wrappers to all components
 * Added custom video formatters in Lightbox
 * Fixed issue with removing data in Cookie

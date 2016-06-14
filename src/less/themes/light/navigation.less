@@ -40,6 +40,8 @@
 	@fs-navigation-handle-height:						40px;
 	@fs-navigation-handle-padding:						0 45px 0 15px;
 
+	@fs-navigation-handle-hover-background: 			@fs-light-primary_100;
+
 	// Slide
 
 	@fs-navigation-offscreen-background:				@fs-light-white;
@@ -111,6 +113,11 @@
 		padding: @fs-navigation-handle-padding;
 		position: relative;
 		user-select: none;
+	}
+
+	.no-touchevents .@{theme_name}&-toggle-handle&-enabled:hover,
+	.@{theme_name}&-toggle-handle&-enabled&-focus {
+		background: @fs-navigation-handle-hover-background;
 	}
 
 	.@{theme_name}&-toggle-handle&-open {
@@ -233,6 +240,15 @@
 		padding: @fs-navigation-handle-padding;
 		position: relative;
 		user-select: none;
+	}
+
+	.no-touchevents .@{theme_name}&-push-handle&-enabled:hover,
+	.no-touchevents .@{theme_name}&-reveal-handle&-enabled:hover,
+	.no-touchevents .@{theme_name}&-overlay-handle&-enabled:hover,
+	.@{theme_name}&-push-handle&-enabled&-focus,
+	.@{theme_name}&-reveal-handle&-enabled&-focus,
+	.@{theme_name}&-overlay-handle&-enabled&-focus {
+		background: @fs-navigation-handle-hover-background;
 	}
 
 	// content
