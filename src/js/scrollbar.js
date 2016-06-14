@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Keyboard controls?
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -56,9 +54,9 @@
 	function construct(data) {
 		var html = '';
 
-		html += '<div class="' + RawClasses.bar + '" role="scrollbar">';
+		html += '<div class="' + RawClasses.bar + '">';
 		html += '<div class="' + RawClasses.track + '">';
-		html += '<button type="button" class="' + RawClasses.handle + '"></button>';
+		html += '<button type="button" class="' + RawClasses.handle + '" aria-hidden="true" tabindex="-1"></button>';
 		html += '</div></div>';
 
 		data.paddingRight     = parseInt(this.css("padding-right"), 10);
@@ -66,7 +64,7 @@
 		data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")];
 
 		this.addClass(data.thisClasses.join(" "))
-			.wrapInner('<div class="' + RawClasses.content + '" />')
+			.wrapInner('<div class="' + RawClasses.content + '" tabindex="0"></div>')
 			.prepend(html);
 
 		data.$content    = this.find(Classes.content);
@@ -75,20 +73,6 @@
 		data.$handle     = this.find(Classes.handle);
 
 		data.trackMargin = parseInt(data.trackMargin, 10);
-
-		// Aria
-
-		data.id = this.attr("id");
-
-		if (data.id) {
-			data.ariaId = data.id;
-		} else {
-			data.ariaId = data.rawGuid;
-			this.attr("id", data.ariaId);
-		}
-
-		data.$bar.attr("aria-controls", data.ariaId)
-				 .attr("aria-orientation", (data.horizontal) ? "horizontal" : "vertical");
 
 		// Events
 
@@ -234,9 +218,6 @@
 			handleStyles = {
 				width: data.handleWidth
 			};
-
-			data.$bar.attr("aria-valuemin", data.handleBounds.left)
-					 .attr("aria-valuemax", data.handleBounds.right);
 		} else {
 			// Vertical
 			data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
@@ -270,9 +251,6 @@
 			handleStyles = {
 				height: data.handleHeight
 			};
-
-			data.$bar.attr("aria-valuemin", data.handleBounds.top)
-					 .attr("aria-valuemax", data.handleBounds.bottom);
 		}
 
 		// Updates
@@ -329,8 +307,6 @@
 				handleStyles = {
 					left: data.handleLeft
 				};
-
-				data.$bar.attr("aria-valuenow", data.handleLeft);
 			} else {
 				// Vertical
 				var scrollTop = data.$content.scrollTop();
@@ -351,8 +327,6 @@
 			}
 
 			data.$handle.css(handleStyles);
-
-			data.$bar.attr("aria-valuenow", data.handleTop);
 		}
 	}
 

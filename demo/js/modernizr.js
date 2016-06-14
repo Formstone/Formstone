@@ -1,3 +1,19 @@
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
+/*! formstone v1.1.4 [modernizr.js] 2016-06-14 | GPL-3.0 License | formstone.it */
+
 /*! formstone v1.1.4 [modernizr.js] 2016-06-08 | GPL-3.0 License | formstone.it */
 
 /*! formstone v1.1.4 [modernizr.js] 2016-06-08 | GPL-3.0 License | formstone.it */
