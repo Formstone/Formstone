@@ -50,12 +50,14 @@
     "css": {
       "demo/css/site.css": "demo/css/src/site.less",
       "demo/css/site-ie8.css": "demo/css/src/ie/ie8.less",
-      "demo/css/site-ie9.css": "demo/css/src/ie/ie9.less"
+      "demo/css/site-ie9.css": "demo/css/src/ie/ie9.less",
+      "demo/css/demo.css": "demo/css/src/demo.less"
     },
     "js": {
       "demo/js/site.js": [
         "dist/js/lib/utils.js",
         "demo/bower/jquery/dist/jquery.min.js",
+        "demo/bower/prism/prism.js",
         "dist/js/core.js",
         "dist/js/analytics.js",
         "dist/js/asap.js",
@@ -79,7 +81,7 @@
         "dist/js/transition.js",
         "dist/js/upload.js",
         "demo/js/src/site.js",
-        "demo/js/src/modules/page.js"
+        "demo/js/src/modules/demo.js"
       ],
       "demo/js/site-ie8.js": [
         "demo/bower/html5shiv/dist/html5shiv.min.js",
@@ -88,6 +90,9 @@
       ],
       "demo/js/site-ie9.js": [
         "demo/js/src/ie/matchMedia.ie9.js"
+      ],
+      "demo/js/demo.js": [
+        "demo/js/src/modules/demo.js"
       ]
     },
     "js_ignores": [

@@ -38,22 +38,76 @@
 					</p>
 					<!-- START: DEMO -->
 					<h4>Basic</h4>
-					<fieldset class="form_fieldset">
-						<input type="number" class="form_input" pattern="[0-9]*">
-					</fieldset>
-					<fieldset class="form_fieldset">
-						<input type="number" class="form_input" pattern="[0-9]*" disabled>
-					</fieldset>
 
-					<h4>Range</h4>
-					<fieldset class="form_fieldset">
-						<input type="number" min="0" max="20" step="2" class="form_input" pattern="[0-9]*">
-					</fieldset>
+					<!-- START: FIRSTDEMO -->
+
+					<style>
+					.fs-number {
+						max-width: 300px;
+					}
+					</style>
+
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<input type="number" class="form_input" pattern="[0-9]*">
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;number&quot; name=&quot;number&quot; pattern=&quot;[0-9]*&quot;&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='number']").number();</code></pre>
+						</div>
+					</div>
+
+					<!-- END: FIRSTDEMO -->
+
+					<!-- <div class="demo_container">
+	<div class="demo_example">
+		<form action="#" method="GET" class="form demo_form">
+			<fieldset class="form_fieldset">
+				<input type="number" class="form_input" pattern="[0-9]*" disabled>
+			</fieldset>
+		</form>
+	</div>
+	<div class="demo_code">
+		<pre><code class="language-html">&lt;input type=&quot;number&quot; name=&quot;number&quot; pattern=&quot;[0-9]*&quot;&gt;</code></pre>
+		<pre><code class="language-javascript">$("input[type='number']").number();</code></pre>
+	</div>
+</div> -->
+
+					<h4>Custom Range</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<input type="number" min="0" max="20" step="2" class="form_input" pattern="[0-9]*">
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;number&quot; name=&quot;number&quot; pattern=&quot;[0-9]*&quot; min=&quot;0&quot; max=&quot;20&quot; step=&quot;2&quot;&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='number']").number();</code></pre>
+						</div>
+					</div>
 
 					<h4>No Theme</h4>
-					<fieldset class="form_fieldset">
-						<input type="number" class="form_input" pattern="[0-9]*" data-number-options='{"theme":""}'>
-					</fieldset>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<input type="number" class="form_input" pattern="[0-9]*" data-number-options='{"theme":""}'>
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;number&quot; name=&quot;number&quot; pattern=&quot;[0-9]*&quot;&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='number']").number({
+	theme: ""
+});</code></pre>
+						</div>
+					</div>
 					<!-- END: DEMO -->
 					<div class="footer">
 						<div class="copyright">

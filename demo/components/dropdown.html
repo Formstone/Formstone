@@ -37,6 +37,41 @@
 						<a href="https://formstone.it/components/dropdown">View Documentation</a>
 					</p>
 					<!-- START: DEMO -->
+					<h4>Basic</h4>
+
+					<!-- START: FIRSTDEMO -->
+
+					<style>
+					.fs-dropdown {
+						max-width: 300px;
+					}
+					</style>
+
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<label for="demo_basic" class="form_label">Label</label>
+									<select name="demo_basic" id="demo_basic" class="js-dropdown">
+										<!-- <option data-label="Option One">One</option>
+					<option data-label="Option Two">Two</option> -->
+										<option value="1">One</option>
+										<option value="2">Two</option>
+									</select>
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown();</code></pre>
+						</div>
+					</div>
+
+					<!-- END: FIRSTDEMO -->
+
 					<style>
 					.custom_select {
 						max-width: 500px;
@@ -62,18 +97,10 @@
 					}
 					</style>
 
-					<form action="#" method="GET" class="form demo_form">
-						<div class="fs-row">
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>Basic</h4>
-								<fieldset class="form_fieldset">
-									<label for="demo_basic" class="form_label">Label</label>
-									<select name="demo_basic" id="demo_basic" class="js-dropdown">
-										<option data-label="Option One">One</option>
-										<option data-label="Option Two">Two</option>
-									</select>
-								</fieldset>
-								<h4>Option Groups</h4>
+					<h4>Option Groups</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
 									<label for="demo_groups" class="form_label">Label</label>
 									<select name="demo_groups" id="demo_groups" class="js-dropdown">
@@ -95,7 +122,84 @@
 										</optgroup>
 									</select>
 								</fieldset>
-								<h4>Default Label</h4>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
+&Tab;&lt;optgroup label=&quot;Group One&quot;&gt;
+&Tab;&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&Tab;&lt;/optgroup&gt;
+&Tab;&lt;optgroup label=&quot;Group Two&quot;&gt;
+&Tab;&Tab;&lt;option value=&quot;3&quot;&gt;Three&lt;/option&gt;
+&Tab;&Tab;&lt;option value=&quot;4&quot;&gt;Fout&lt;/option&gt;
+&Tab;&lt;/optgroup&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown();</code></pre>
+						</div>
+					</div>
+
+					<h4>Multiple</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<label for="demo_multiple" class="form_label">Label</label>
+									<select name="demo_multiple" id="demo_multiple" class="js-dropdown" multiple>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3" disabled>Three</option>
+										<option value="4">Four</option>
+										<option value="5">Five</option>
+										<option value="6">Six</option>
+										<option value="7">Seven</option>
+										<option value="8">Eight</option>
+										<option value="9">Nine</option>
+										<option value="10">Ten</option>
+									</select>
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot; multiple&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown();</code></pre>
+						</div>
+					</div>
+
+					<h4>Cover</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<label for="demo_cover" class="form_label">Label</label>
+									<select name="demo_cover" id="demo_cover" class="js-dropdown" data-dropdown-options='{"cover":"true"}'>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+										<option value="4">Four</option>
+										<option value="5">Five</option>
+									</select>
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	cover: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Default Label</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
 									<label for="demo_label" class="form_label">Label</label>
 									<select name="demo_label" id="demo_label" class="js-dropdown" data-dropdown-options='{"label":"Select A State"}'>
@@ -152,29 +256,77 @@
 										<option value="WY">Wyoming</option>
 									</select>
 								</fieldset>
-							</div>
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>Multiple</h4>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	label: "Select an Item"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Custom Labels</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
-									<label for="demo_multiple" class="form_label">Label</label>
-									<select name="demo_multiple" id="demo_multiple" class="js-dropdown" multiple>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3" disabled>Three</option>
-										<option value="4">Four</option>
-										<option value="5">Five</option>
-										<option value="6">Six</option>
-										<option value="7">Seven</option>
-										<option value="8">Eight</option>
-										<option value="9">Nine</option>
-										<option value="10">Ten</option>
+									<label for="demo_custom_1" class="form_label">Label</label>
+									<select name="demo_custom_1" id="demo_custom_1" class="js-dropdown" data-dropdown-options='{"customClass":"custom"}'>
+										<option value="1" data-label="Option One">One</option>
+										<option value="2" data-label="Option Two">Two</option>
+										<option value="3" data-label="Option Three">Three</option>
+										<option value="4" data-label="Option Four">Four</option>
+										<option value="5" data-label="Option Five">Five</option>
 									</select>
 								</fieldset>
-							</div>
+							</form>
 						</div>
-						<div class="fs-row">
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>Links</h4>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot; data-label=&quot;Option One&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot; data-label=&quot;Option Two&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	cover: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Custom HTML Labels</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
+								<fieldset class="form_fieldset">
+									<label for="demo_custom_2" class="form_label">Label</label>
+									<select name="demo_custom_2" id="demo_custom_2" class="js-dropdown" data-dropdown-options='{"customClass":"custom"}'>
+										<option value="1" data-label="&lt;em&gt;One  &lt;/em&gt;">One</option>
+										<option value="2" data-label="&lt;em&gt;Two  &lt;/em&gt;">Two</option>
+										<option value="3" data-label="&lt;em&gt;Three&lt;/em&gt;">Three</option>
+										<option value="4" data-label="&lt;em&gt;Four &lt;/em&gt;">Four</option>
+										<option value="5" data-label="&lt;em&gt;Five &lt;/em&gt;">Five</option>
+									</select>
+								</fieldset>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot; data-label=&quot; &amp;lt;em&amp;gt;Option One  &amp;lt;/em&amp;gt; &quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot; data-label=&quot; &amp;lt;em&amp;gt;Option Two  &amp;lt;/em&amp;gt; &quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	cover: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Links</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
 									<label for="demo_links" class="form_label">Label</label>
 									<select name="demo_links" id="demo_links" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","links":true}'>
@@ -183,9 +335,23 @@
 										<option value="http://cnn.com">CNN News</option>
 									</select>
 								</fieldset>
-							</div>
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>External Links</h4>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
+&Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link One&lt;/option&gt;
+&Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	links: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>External Links</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
 									<label for="demo_external" class="form_label">Label</label>
 									<select name="demo_external" id="demo_external" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","external":"true"}'>
@@ -194,50 +360,23 @@
 										<option value="http://cnn.com">CNN News</option>
 									</select>
 								</fieldset>
-							</div>
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>Cover</h4>
-								<fieldset class="form_fieldset">
-									<label for="demo_cover" class="form_label">Label</label>
-									<select name="demo_cover" id="demo_cover" class="js-dropdown" data-dropdown-options='{"cover":"true"}'>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
-										<option value="4">Four</option>
-										<option value="5">Five</option>
-									</select>
-								</fieldset>
-							</div>
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>HTML Options</h4>
-								<fieldset class="form_fieldset">
-									<label for="demo_custom_2" class="form_label">Label</label>
-									<select name="demo_custom_2" id="demo_custom_2" class="js-dropdown" data-dropdown-options='{"customClass":"custom"}'>
-										<option value="1" data-label="&lt;strong&gt;One  &lt;/strong&gt;">One</option>
-										<option value="2" data-label="&lt;strong&gt;Two  &lt;/strong&gt;">Two</option>
-										<option value="3" data-label="&lt;strong&gt;Three&lt;/strong&gt;">Three</option>
-										<option value="4" data-label="&lt;strong&gt;Four &lt;/strong&gt;">Four</option>
-										<option value="5" data-label="&lt;strong&gt;Five &lt;/strong&gt;">Five</option>
-									</select>
-								</fieldset>
-							</div>
-							<!--
-		<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-			<h4>Detached Options</h4>
-			<fieldset class="form_fieldset">
-				<label for="demo_detached" class="form_label">Label</label>
-				<select name="demo_detached" id="demo_detached" class="js-dropdown" data-dropdown-options='{"detached":"true"}'>
-					<option value="1">One</option>
-					<option value="2">Two</option>
-					<option value="3">Three</option>
-					<option value="4">Four</option>
-					<option value="5">Five</option>
-				</select>
-			</fieldset>
-		</div>
--->
-							<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
-								<h4>No Theme</h4>
+							</form>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+	&Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link One&lt;/option&gt;
+	&Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	external: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>No Theme</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<form action="#" method="GET" class="form demo_form">
 								<fieldset class="form_fieldset">
 									<label for="demo_basic_2" class="form_label">Label</label>
 									<select name="demo_basic_2" id="demo_basic_2" class="js-dropdown" data-dropdown-options='{"theme":""}'>
@@ -294,9 +433,35 @@
 										<option value="WY">Wyoming</option>
 									</select>
 								</fieldset>
-							</div>
+							</form>
 						</div>
-					</form>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+							<pre><code class="language-javascript">$(".dropdown").dropdown({
+	theme: ""
+});</code></pre>
+						</div>
+					</div>
+
+
+					<!--
+		<div class="fs-cell fs-sm-full fs-md-half fs-lg-half">
+			<h4>Detached Options</h4>
+			<fieldset class="form_fieldset">
+				<label for="demo_detached" class="form_label">Label</label>
+				<select name="demo_detached" id="demo_detached" class="js-dropdown" data-dropdown-options='{"detached":"true"}'>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+					<option value="3">Three</option>
+					<option value="4">Four</option>
+					<option value="5">Five</option>
+				</select>
+			</fieldset>
+		</div>
+-->
 					<!-- END: DEMO -->
 					<div class="footer">
 						<div class="copyright">

@@ -37,6 +37,10 @@
 						<a href="https://formstone.it/components/background">View Documentation</a>
 					</p>
 					<!-- START: DEMO -->
+					<h3>Basic</h3>
+
+					<!-- START: FIRSTDEMO -->
+
 					<style>
 					.background {
 						width: 100%;
@@ -46,20 +50,83 @@
 					}
 					</style>
 
-					<h4>Basic</h4>
-					<div class="background js-background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="background js-background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'></div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class="background"&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".background").background({
+    source: "http://example.com/image.jpg"
+});</code></pre>
+						</div>
+					</div>
 
-					<h4>Responsive</h4>
-					<div class="background js-background" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
+					<!-- END: FIRSTDEMO -->
 
-					<h4>Video</h4>
-					<div class="background js-background" data-background-options='{"source":{"webm":"//spacehold.it/video/video.webm","mp4":"//spacehold.it/video/video.mp4","ogg":"//spacehold.it/video/video.ogv","poster":"//spacehold.it/video/poster.jpg"}}'></div>
+					<h3>Responsive</h3>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="background js-background" data-background-options='{"source":{"0px":"//spacehold.it/800x450/2.jpg","980px":"//spacehold.it/1600x900/2.jpg"}}'></div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class="background"&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".background").background({
+    source: {
+        "0px": "http://example.com/image-small.jpg",
+        "980px": "http://example.com/image-large.jpg"
+    }
+});</code></pre>
+						</div>
+					</div>
 
-					<h4>YouTube</h4>
-					<div class="background js-background" data-background-options='{"source":{"autoPlay":true,"video":"//youtu.be/LlQ8dhdSjWs"},"youtubeOptions":{"start":60}}'></div>
+					<h3>Video</h3>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="background js-background" data-background-options='{"source":{"webm":"//spacehold.it/video/video.webm","mp4":"//spacehold.it/video/video.mp4","ogg":"//spacehold.it/video/video.ogv","poster":"//spacehold.it/video/poster.jpg"}}'></div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class="background"&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".background").background({
+    source: {
+        poster: "http://example.com/poster.jpg",
+        webm: "http://example.com/video.webm",
+        mp4: "http://example.com/video.mp4",
+        ogg: "http://example.com/video.ogv"
+    }
+});</code></pre>
+						</div>
+					</div>
+
+					<h3>YouTube</h3>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="background js-background" data-background-options='{"source":{"autoPlay":true,"video":"//youtu.be/LlQ8dhdSjWs"},"youtubeOptions":{"start":60}}'></div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class="background"&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".background").background({
+    source: {
+        poster: "http://example.com/poster.jpg",
+        video: "//www.youtube.com/embed/VIDEO_ID"
+    }
+});</code></pre>
+						</div>
+					</div>
 
 					<h4>Lazy Load</h4>
-					<div class="background js-background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg","lazy":true}'></div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="background js-background" data-background-options='{"source":"//spacehold.it/1600x900/1.jpg","lazy":true}'></div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class="background"&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".background").background({
+	lazy: true,
+    source: "http://example.com/image.jpg"
+});</code></pre>
+						</div>
+					</div>
 					<!-- END: DEMO -->
 					<div class="footer">
 						<div class="copyright">
