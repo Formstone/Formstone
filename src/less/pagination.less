@@ -54,7 +54,17 @@
 
 	&-page,
 	&-ellipsis {
-		display: none;
+		width: 1px;
+		height: 1px;
+
+		position: absolute;
+
+		border: 0;
+		clip: rect(0 0 0 0);
+		display: inline-block;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
 	}
 
 	/**
@@ -89,7 +99,14 @@
 	&-first,
 	&-last,
 	&-visible {
-		display: inline-block;
+		width: auto;
+		height: auto;
+
+		position: static;
+
+		clip: none;
+		margin: 0;
+		overflow: visible;
 	}
 
 	/**
@@ -157,7 +174,17 @@
 	}
 
 	&-mobile &-pages {
-		display: none;
+		width: 1px;
+		height: 1px;
+
+		position: absolute;
+
+		border: 0;
+		clip: rect(0 0 0 0);
+		display: inline-block;
+		margin: -1px;
+		overflow: hidden;
+		padding: 0;
 	}
 
 	&-mobile &-position {

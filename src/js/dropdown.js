@@ -89,13 +89,34 @@
 			wrapperClasses.push(RawClasses.disabled);
 		}
 
+		// Aria
+
+		data.id = this.attr("id");
+
+		if (data.id) {
+			data.ariaId = data.id;
+		} else {
+			data.ariaId = data.rawGuid;
+		}
+
+		data.ariaId += '-dropdown';
+		data.selectedAriaId = data.ariaId + "-selected";
+
 		// Build html
-		var wrapperHtml = '<div class="' + wrapperClasses.join(" ") + '" tabindex="' + data.tabIndex + '"></div>',
-			innerHtml = "";
+		var wrapperHtml = "",
+			innerHtml   = "";
+
+		wrapperHtml += '<div class="' + wrapperClasses.join(" ") + '"id="' + data.ariaId + '" tabindex="' + data.tabIndex + '" role="listbox"';
+		if (data.multiple) {
+			wrapperHtml += ' aria-label="multi select"';
+		} else {
+			wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
+		}
+		wrapperHtml += '></div>';
 
 		// Build inner
 		if (!data.multiple) {
-			innerHtml += '<button type="button" class="' + RawClasses.selected + '" tabindex="-1" aria-haspopup="true">';
+			innerHtml += '<button type="button" class="' + RawClasses.selected + '" id="' + data.selectedAriaId + '" tabindex="-1">';
 			innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
 			innerHtml += '</button>';
 		}
@@ -120,12 +141,6 @@
 
 		buildOptions(data);
 
-		if (data.links) {
-			this.attr("aria-hidden", "true");
-		} else {
-			data.$selected.add(data.$wrapper).attr("aria-hidden", "true");
-		}
-
 		if (!data.multiple) {
 			updateOption(originalIndex, data);
 		}
@@ -134,10 +149,11 @@
 		if ($.fn.fsScrollbar !== undefined) {
 			data.$wrapper.fsScrollbar({
 				theme: data.theme
-			});
+			}).find(".fs-scrollbar-content").attr("tabindex", null);
 		}
 
 		// Bind events
+		data.$dropdown.on(Events.click, data, onClick);
 		data.$selected.on(Events.click, data, onClick);
 
 		data.$dropdown.on(Events.click, Classes.item, data, onSelect)
@@ -174,10 +190,6 @@
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
 			data.$wrapper.fsScrollbar("destroy");
-		}
-
-		if (data.links) {
-			this.removeAttr("aria-hidden");
 		}
 
 		data.$el[0].tabIndex = data.tabIndex;
@@ -254,9 +266,9 @@
 
 	function updateDropdown(data) {
 		// Scrollbar support
-				if ($.fn.fsScrollbar !== undefined) {
-						data.$wrapper.fsScrollbar("destroy");
-				}
+		if ($.fn.fsScrollbar !== undefined) {
+				data.$wrapper.fsScrollbar("destroy");
+		}
 
 		var index = data.index;
 
@@ -342,7 +354,12 @@
 					html += ' data-value="' + opVal + '"';
 				}
 
-				html += ' tabindex="-1">';
+				//html += ' tabindex="-1">';
+				html += ' role="option"';
+				if ($option.is(":selected")) {
+					html += ' "aria-selected"="true"';
+				}
+				html += '>';
 
 				if (opLabel) {
 					html += opLabel;
@@ -706,10 +723,12 @@
 				if (Formstone.isMobile) {
 					if (!isDisabled) {
 						if (isSelected) {
-							$option.prop("selected", null);
+							$option.prop("selected", null)
+								   .attr("aria-selected", null);
 							$item.removeClass(RawClasses.item_selected);
 						} else {
-							$option.prop("selected", true);
+							$option.prop("selected", true)
+								   .attr("aria-selected", true);
 							$item.addClass(RawClasses.item_selected);
 						}
 					}
@@ -718,7 +737,8 @@
 						var start = (data.lastIndex > index)  ? index : data.lastIndex,
 							end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
 
-						data.$options.prop("selected", null);
+						data.$options.prop("selected", null)
+									 .attr("aria-selected", null);
 						data.$items.filter(Classes.item_selected)
 							.removeClass(RawClasses.item_selected);
 
@@ -726,20 +746,24 @@
 						data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
 					} else if (metaKey) {
 						if (isSelected) {
-							$option.prop("selected", null);
+							$option.prop("selected", null)
+								   .attr("aria-selected", null);
 							$item.removeClass(RawClasses.item_selected);
 						} else {
-							$option.prop("selected", true);
+							$option.prop("selected", true)
+								   .attr("aria-selected", true);
 							$item.addClass(RawClasses.item_selected);
 						}
 
 						data.lastIndex = index;
 					} else {
-						data.$options.prop("selected", null);
+						data.$options.prop("selected", null)
+									 .attr("aria-selected", null);
 						data.$items.filter(Classes.item_selected)
 							.removeClass(RawClasses.item_selected);
 
-						$option.prop("selected", true);
+						$option.prop("selected", true)
+							   .attr("aria-selected", true);
 						$item.addClass(RawClasses.item_selected);
 
 						data.lastIndex = index;

@@ -27,17 +27,17 @@
 		var html = "";
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
-		html += '<div class="' + RawClasses.position + '">';
+		html += '<div class="' + RawClasses.position + '" aria-hidden="true">';
 		html += '<span class="' + RawClasses.current + '">0</span>';
 		html += ' ' + data.labels.count + ' ';
 		html += '<span class="' + RawClasses.total + '">0</span>';
 		html += '</div>';
-		html += '<select class="' + RawClasses.select + '" tab-index="-1"></select>';
+		html += '<select class="' + RawClasses.select + '" tabindex="-1" aria-hidden="true"></select>';
 
 		data.thisClasses = [RawClasses.base, data.theme, data.customClass];
 
 		this.addClass(data.thisClasses.join(" "))
-			.wrapInner('<div class="' + RawClasses.pages + '"></div>')
+			.wrapInner('<div class="' + RawClasses.pages + '" aria-label="pagination"></div>')
 			.prepend(html);
 
 		data.$controls  = this.find(Classes.control);
@@ -158,13 +158,11 @@
 		var data = e.data,
 			index = data.$items.index( $(e.currentTarget) );
 
-		Functions.killEvent(e);
-
 		if (data.ajax) {
-			updatePage(data, index);
-		} else {
-			window.location = $(e.currentTarget).attr("href");
+			Functions.killEvent(e);
 		}
+
+		updatePage(data, index);
 	}
 
 	/**
@@ -222,6 +220,7 @@
 			}
 
 			data.$items.removeClass(RawClasses.visible)
+					   .removeClass(RawClasses.hidden)
 					   .filter(Classes.active)
 					   .removeClass(RawClasses.active)
 					   .end()
@@ -230,6 +229,8 @@
 					   .end()
 					   .slice(start, end)
 					   .addClass(RawClasses.visible);
+
+			data.$items.not(Classes.visible).addClass(RawClasses.hidden);
 
 			data.$position.find(Classes.current)
 						  .text(data.index + 1)
@@ -332,8 +333,9 @@
 				"active",
 				"first",
 				"last",
-				"visible",
 				"ellipsis",
+				"visible",
+				"hidden",
 
 				"control",
 				"control_previous",

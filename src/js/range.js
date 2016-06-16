@@ -86,12 +86,6 @@
 		data.$handle    = data.$container.find(Classes.handle);
 		data.$output    = data.$container.find(Classes.output);
 
-/*
-		data.$handle.attr("aria-orientation", data.vertical ? "vertical" : "horizontal")
-					.attr("aria-valuemin", data.min)
-					.attr("aria-valuemax", data.max);
-*/
-
 		if (data.labels) {
 			var labelMax = '<span class="' + [RawClasses.label, RawClasses.label_max].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) + '</span>',
 				labelMin = '<span class="' + [RawClasses.label, RawClasses.label_min].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) + '</span>';
@@ -172,6 +166,28 @@
 
 			data.disabled = true;
 		}
+	}
+
+	/**
+	* @method
+	* @name update
+	* @description Updates instance.
+	* @example $(".target").range("update");
+	*/
+
+	function updateInstance(data) {
+		data.min       = parseFloat(data.$el.attr("min"))  || 0;
+		data.max       = parseFloat(data.$el.attr("max"))  || 100;
+		data.step      = parseFloat(data.$el.attr("step")) || 1;
+		data.digits    = data.step.toString().length - data.step.toString().indexOf(".");
+		data.value     = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
+
+		if (data.labels) {
+			data.$labels.filter(Classes.label_max).html( data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) );
+			data.$labels.filter(Classes.label_min).html( data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) );
+		}
+
+		resizeInstance.call(this, data);
 	}
 
 	/**
@@ -425,7 +441,8 @@
 
 				enable        : enable,
 				disable       : disable,
-				resize        : resizeInstance
+				resize        : resizeInstance,
+				update        : updateInstance
 			}
 		}),
 

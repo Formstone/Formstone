@@ -192,7 +192,7 @@ $(".target").carousel("update", "...");
 
 | Class | Type | Description |
 | --- | --- | --- |
-| `.fs-carousel-element` | `element` | Target elmement |
+| `.fs-carousel-element` | `element` | Target element |
 | `.fs-carousel` | `element` | Base widget class |
 | `.fs-carousel.fs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-carousel.fs-rtl` | `modifier` | Indicates right to left display |

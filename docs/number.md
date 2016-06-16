@@ -108,6 +108,14 @@ Enables target instance
 $(".target").number("enable");
 ```
 
+### update
+
+Updates instance.
+
+```javascript
+$(".target").number("update");
+```
+
 <hr>
 ## <a name="css"></a> CSS
 

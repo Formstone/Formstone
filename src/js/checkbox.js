@@ -45,6 +45,8 @@
 		html += '</div>';
 
 		// Modify DOM
+		data.$placeholder = $('<span class="' + RawClasses.element_placeholder + '"></span>');
+		this.before(data.$placeholder);
 
 		if ($label.length) {
 			$label.addClass(RawClasses.label)
@@ -66,12 +68,12 @@
 		}
 
 		// Check disabled
-		if (this.is(":disabled") || this.is("[readonly]")) {
+		if (this.is(":disabled") /* || this.is("[readonly]") */ ) {
 			data.$checkbox.addClass(RawClasses.disabled);
 		}
 
-		// Hide original checkbox
-		this.wrap('<div class="' + RawClasses.element_wrapper + '"></div>');
+		// Move original checkbox
+		this.appendTo(data.$marker);
 
 		// Bind click events
 		this.on(Events.focus, data, onFocus)
@@ -99,8 +101,10 @@
 		data.$label.unwrap()
 				   .removeClass(RawClasses.label);
 
-		this.unwrap()
-			.off(Events.namespace);
+		data.$placeholder.before(this);
+		data.$placeholder.remove();
+
+		this.off(Events.namespace);
 	}
 
 	/**
@@ -135,7 +139,7 @@
 	 */
 
 	function update(data) {
-		var disabled    = data.$el.is(":disabled") || data.$el.is("[readonly]"),
+		var disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
 			checked     = data.$el.is(":checked");
 
 		if (!disabled) {
@@ -174,7 +178,7 @@
 
 	function onChange(e) {
 		var data        = e.data,
-			disabled    = data.$el.is(":disabled") || data.$el.is("[readonly]"),
+			disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
 			checked     = data.$el.is(":checked");
 
 		if (!disabled) {
@@ -277,7 +281,7 @@
 			},
 
 			classes: [
-				"element_wrapper",
+				"element_placeholder",
 				"label",
 				"marker",
 				"flag",

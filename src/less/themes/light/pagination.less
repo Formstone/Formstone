@@ -39,14 +39,15 @@
 
 	// Hover
 
+	@fs-pagination-hover-background:			@fs-light-primary_100;
 	@fs-pagination-hover-text-color:			@fs-light-primary_900;
 
 	@fs-pagination-control-hover-background:	@fs-light-primary_100;
 
 	// Active
 
-	@fs-pagination-active-text-color: 			@fs-light-primary_900;
 	@fs-pagination-active-background:			@fs-light-primary_100;
+	@fs-pagination-active-text-color: 			@fs-light-primary_900;
 
 
 	&.@{theme_name} {
@@ -95,10 +96,11 @@
 		border-radius: @fs-pagination-border-radius;
 	}
 
-	.no-touchevents .@{theme_name} &-page:hover {
+	.no-touchevents .@{theme_name} &-page:hover,
+	.no-touchevents .@{theme_name} &-page:focus {
+		background: @fs-pagination-hover-background;
 		color: @fs-pagination-hover-text-color;
 	}
-
 
 	&.@{theme_name} &-active,
 	&.@{theme_name} &-first,
@@ -165,6 +167,7 @@
 			}
 		}
 
+		&:focus,
 		.no-touchevents &:hover {
 			background: @fs-pagination-control-hover-background;
 		}

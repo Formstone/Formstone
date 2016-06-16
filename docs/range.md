@@ -129,6 +129,14 @@ Resizes instance
 $(".target").range("resize");
 ```
 
+### update
+
+Updates instance.
+
+```javascript
+$(".target").range("update");
+```
+
 <hr>
 ## <a name="css"></a> CSS
 

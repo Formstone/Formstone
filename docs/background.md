@@ -107,6 +107,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoPlay` | `boolean` | `true` | Autoplay video |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `embedRatio` | `number` | `1.777777` | Video / embed ratio (16/9) |
+| `lazy` | `boolean` | `false` | Lazy load with scroll |
+| `lazyEdge` | `int` | `100` | Lazy load edge |
 | `loop` | `boolean` | `true` | Loop video |
 | `mute` | `boolean` | `true` | Mute video |
 | `source` | `string OR object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
