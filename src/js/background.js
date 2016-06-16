@@ -31,9 +31,10 @@
 	 * @description Handles window resize
 	 */
 
-	function resize(windowWidth) {
+	function resize() {
 		Functions.iterate.call($Instances, resizeInstance);
 		Functions.iterate.call($LazyInstances, cacheScrollPosition);
+		Functions.iterate.call($LazyInstances, checkScrollPosition);
 	}
 
 	/**
