@@ -7,7 +7,6 @@
 * Added `lazy` and `lazyEdge` options to Background
 * Added `update` method to Number
 * Added `update` method to Range
-* Removed non-standard `readonly` support from Checkbox
 * Fixed accessibility issues in Checkbox
 * Fixed accessibility issues in Dropdown
 * Fixed accessibility issues in Navigation
@@ -17,6 +16,7 @@
 * Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
 * Fixed accessibility issues in Upload
+* Removed non-standard `readonly` support from Checkbox
 
 ### 1.1.3
 

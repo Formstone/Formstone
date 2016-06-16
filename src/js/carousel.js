@@ -750,7 +750,6 @@
 		// Update classes
 		data.$items.removeClass( [RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" ") );
 
-
 		for (var i = 0, count = data.pages.length; i < count; i++) {
 			if (i === index) {
 				data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
@@ -758,7 +757,6 @@
 				data.pages[i].$items.not( data.pages[index].$items ).addClass( (i < index) ? RawClasses.item_previous : RawClasses.item_next ).attr("aria-hidden", "true");
 			}
 		}
-
 
 		// Auto Height
 		if (data.autoHeight) {
