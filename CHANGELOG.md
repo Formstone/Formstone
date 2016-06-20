@@ -17,7 +17,7 @@
 * Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
 * Fixed accessibility issues in Upload
-* Normalized setting active item in Pagination
+* Normalized setting `active` item in Pagination
 * Removed non-standard `readonly` support from Checkbox
 
 ### 1.1.3
