@@ -9,6 +9,7 @@
 * Added `update` method to Range
 * Fixed accessibility issues in Checkbox
 * Fixed accessibility issues in Dropdown
+* Fixed accessibility issues in Lightbox
 * Fixed accessibility issues in Navigation
 * Fixed accessibility issues in Number
 * Fixed accessibility issues in Pagination
@@ -16,6 +17,7 @@
 * Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
 * Fixed accessibility issues in Upload
+* Normalized setting active item in Pagination
 * Removed non-standard `readonly` support from Checkbox
 
 ### 1.1.3

@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Better way of activating specific item
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -51,7 +49,10 @@
 
 		data.total = data.$items.length - 1;
 
-		var index = data.$items.index(data.$items.filter(Classes.active));
+		var index = data.$items.index(data.$items.filter("[data-" + Plugin.namespace + "-active]"));
+		if (!index) {
+			index = data.$items.index(data.$items.filter(Classes.active)); // reverse compat.
+		}
 
 		data.$items.eq(0)
 				   .addClass(RawClasses.first)
