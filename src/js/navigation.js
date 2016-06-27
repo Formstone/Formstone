@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Focus handling
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -22,6 +24,7 @@
 	 */
 
 	function setup() {
+		$Doc   = Formstone.$document;
 		$Locks = $("html, body");
 	}
 
@@ -84,6 +87,11 @@
 
 		cacheLabel(data);
 
+		// Tab index
+
+		data.navTabIndex = data.$nav.attr("tabindex");
+		data.$nav.attr("tabindex", -1);
+
 		// Aria
 
 		data.id = this.attr("id");
@@ -124,6 +132,8 @@
 		if (!data.$handle.is("a, button")) {
 			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
 		}
+
+		$Doc.on(Events.focus + data.dotGuid, data, onDocumentFocus);
 	}
 
 	/**
@@ -149,6 +159,10 @@
 					.off(data.dotGuid)
 					.html(data.originalLabel)
 					.fsSwap("destroy");
+
+		data.$nav.attr("tabindex", data.navTabIndex);
+
+		$Doc.off(data.dotGuid);
 
 		restoreLabel(data);
 
@@ -276,6 +290,8 @@
 				addLocks(data);
 
 				data.open = true;
+
+				data.$nav.focus();
 			}
 		}
 	}
@@ -307,6 +323,8 @@
 				clearLocks(data);
 
 				data.open = false;
+
+				data.$el.focus();
 			}
 		}
 	}
@@ -423,6 +441,24 @@
 	}
 
 	/**
+	 * @method private
+	 * @name onDocumentFocus
+	 * @description Handles document focus
+	 * @param e [object] "Event data"
+	 */
+
+	function onDocumentFocus(e) {
+		var target = e.target,
+			data   = e.data;
+
+		if (data.open && !$.contains(data.$nav, target)) {
+			Formstone.killEvent(e);
+
+			data.$nav.focus();
+		}
+	}
+
+	/**
 	 * @plugin
 	 * @name Navigation
 	 * @description A jQuery plugin for simple responsive navigation.
@@ -512,6 +548,7 @@
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
+		$Doc          = null,
 
 		// Internal
 

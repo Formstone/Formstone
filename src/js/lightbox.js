@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Focus handling
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -22,7 +24,8 @@
 	 */
 
 	function setup() {
-		$Body = Formstone.$body;
+		// $Doc   = Formstone.$document;
+		$Body  = Formstone.$body;
 		$Locks = $("html, body");
 
 		OnLoad = Formstone.window.location.hash.replace("#", "");
@@ -328,7 +331,7 @@
 
 			// Bind events
 			$Window.on(Events.keyDown, onKeyDown);
-			$Doc.on(Events.focus, onFocus);
+			$Body.on(Events.focus, onDocumentFocus);
 			$Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox);
 
 			if (Instance.gallery.active) {
@@ -432,7 +435,7 @@
 				Instance.$lightbox.off(Events.namespace);
 				Instance.$container.off(Events.namespace);
 				$Window.off(Events.keyDown);
-				$Doc.off(Events.namespace);
+				$Body.off(Events.namespace);
 				$Body.off(Events.namespace);
 
 				Instance.$overlay.remove();
@@ -1545,13 +1548,15 @@
 
 	/**
 	 * @method private
-	 * @name onFocus
-	 * @description Hanle focus outside lightbox
+	 * @name onDocumentFocus
+	 * @description Hanle document focus
 	 * @param e [object] "Event data"
 	 */
 
-	function onFocus(e) {
+	function onDocumentFocus(e) {
 		var target = e.target;
+
+		console.log(Instance.$lightbox[0], target, $.contains(Instance.$lightbox[0], target));
 
 		if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$overlay[0]) {
 			Formstone.killEvent(e);
@@ -1737,7 +1742,7 @@
 		Functions     = Plugin.functions,
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
-		$Doc          = Formstone.$document,
+		// $Doc          = null,
 		$Body         = null,
 
 		// Internal
