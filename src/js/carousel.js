@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: allow selector for Carousel pagination container
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

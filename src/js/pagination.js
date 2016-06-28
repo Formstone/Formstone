@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Visible classing
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

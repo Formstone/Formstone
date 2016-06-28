@@ -1,5 +1,6 @@
 /* global define */
 
+// TODO: Demo tabs
 // TODO: Focus handling
 
 (function(factory) {

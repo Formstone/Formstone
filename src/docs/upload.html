@@ -1,3 +1,7 @@
+<h4>Basic</h4>
+
+<!-- START: FIRST DEMO -->
+
 <style>
 	.filelists { margin: 20px 0; }
 	.filelists h5 { margin: 10px 0 0; }
@@ -107,32 +111,52 @@
 	}
 </script>
 
-<h4>Basic</h4>
-<form action="#" method="GET" class="form demo_form">
-	<div class="upload" data-upload-options='{"action":"../_extra/upload-target.php"}'></div>
-	<div class="filelists">
-		<h5>Complete</h5>
-		<ol class="filelist complete">
-		</ol>
-		<h5>Queued</h5>
-		<ol class="filelist queue">
-		</ol>
-		<span class="cancel_all">Cancel All</span>
+<div class="demo_container">
+	<div class="demo_example">
+		<form action="#" method="GET" class="form demo_form">
+			<div class="upload" data-upload-options='{"action":"../_extra/upload-target.php"}'></div>
+			<div class="filelists">
+				<h5>Complete</h5>
+				<ol class="filelist complete">
+				</ol>
+				<h5>Queued</h5>
+				<ol class="filelist queue">
+				</ol>
+				<span class="cancel_all">Cancel All</span>
+			</div>
+		</form>
 	</div>
-</form>
+	<div class="demo_code">
+		<pre><code class="language-html">&lt;div class=&quot;upload&quot;&gt;&lt;/div&gt;</code></pre>
+		<pre><code class="language-javascript">$(".upload").upload({
+	action: "//example.com/handle-upload.php"
+});</code></pre>
+	</div>
+</div>
 
-<br>
+<!-- END: FIRST DEMO -->
 
 <h4>No Theme</h4>
-<form action="#" method="GET" class="form demo_form">
-	<div class="upload" data-upload-options='{"action":"../_extra/upload-target.php","theme":""}'></div>
-	<div class="filelists">
-		<h5>Complete</h5>
-		<ol class="filelist complete">
-		</ol>
-		<h5>Queued</h5>
-		<ol class="filelist queue">
-		</ol>
-		<span class="cancel_all">Cancel All</span>
+<div class="demo_container">
+	<div class="demo_example">
+		<form action="#" method="GET" class="form demo_form">
+			<div class="upload" data-upload-options='{"action":"../_extra/upload-target.php","theme":""}'></div>
+			<div class="filelists">
+				<h5>Complete</h5>
+				<ol class="filelist complete">
+				</ol>
+				<h5>Queued</h5>
+				<ol class="filelist queue">
+				</ol>
+				<span class="cancel_all">Cancel All</span>
+			</div>
+		</form>
 	</div>
-</form>
+	<div class="demo_code">
+		<pre><code class="language-html">&lt;div class=&quot;upload&quot;&gt;&lt;/div&gt;</code></pre>
+		<pre><code class="language-javascript">$(".upload").upload({
+	action: "//example.com/handle-upload.php",
+	theme: ""
+});</code></pre>
+	</div>
+</div>
