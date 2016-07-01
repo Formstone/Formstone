@@ -19,8 +19,6 @@
 
 	@fs-range-track-margin: 					10px 0;
 
-	// Hover
-
 	@fs-range-hover-track-border-color:			@fs-light-primary_900;
 
 	// Fill
@@ -35,7 +33,7 @@
 	@fs-range-marker-background-color:			@fs-light-primary_600;
 	@fs-range-marker-border-radius:				2px;
 
-	@fs-range-marker-background-color-focus:	@fs-light-primary_900;
+	@fs-range-hover-marker-background-color:	@fs-light-primary_900;
 
 	// Icon
 
@@ -55,6 +53,10 @@
 	@fs-range-vertical-height:					300px;
 
 	@fs-range-vertical-track-width:				20px;
+
+	// Disabled
+
+	@fs-range-disabled-opacity:					0.5;
 
 
 	&.@{theme_name}	&-track {
@@ -108,7 +110,7 @@
 
 	.@{theme_name}&-focus &-marker,
 	.no-touchevents .@{theme_name}:hover &-marker {
-		background: @fs-range-marker-background-color-focus;
+		background: @fs-range-hover-marker-background-color;
 	}
 
 	// Labels
@@ -164,9 +166,20 @@
 	// Disabled
 
 	.@{theme_name}&-disabled {
+		opacity: @fs-range-disabled-opacity;
 	}
 
 	.@{theme_name}&-disabled &-marker {
 		cursor: default;
+	}
+
+	.@{theme_name}&-disabled&-focus &-track,
+	.no-touchevents .@{theme_name}&-disabled:hover &-track {
+		border-color: @fs-range-track-border-color;
+	}
+
+	.@{theme_name}&-disabled&-focus &-marker,
+	.no-touchevents .@{theme_name}&-disabled:hover &-marker {
+		background: @fs-range-marker-background-color;
 	}
 }

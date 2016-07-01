@@ -123,8 +123,10 @@
 		border: @fs-pagination-control-border-width solid @fs-pagination-background-color;
 		border-radius: @fs-pagination-control-border-radius;
 		display: block;
+		opacity: 0;
 		overflow: hidden;
 		text-indent: 200%;
+		visibility: hidden;
 		white-space: nowrap;
 
 		&:before {
@@ -171,6 +173,11 @@
 		.no-touchevents &:hover {
 			background: @fs-pagination-control-hover-background;
 		}
+	}
+
+	&.@{theme_name} &-control&-visible {
+		opacity: 1;
+		visibility: visible;;
 	}
 
 	&.@{theme_name} &-position,

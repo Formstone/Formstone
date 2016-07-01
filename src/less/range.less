@@ -21,6 +21,10 @@
 
 @fs-range-vertical-track-width:		10px;
 
+// Disabled
+
+@fs-range-disabled-opacity:					0.5;
+
 /**
  * @class
  * @name .fs-range-element
@@ -293,7 +297,7 @@
 
 	&-disabled {
 		cursor: default;
-		opacity: 0.5;
+		opacity: @fs-range-disabled-opacity;
 	}
 
 	&-disabled &-marker {

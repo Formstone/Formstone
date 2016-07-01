@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Visible classing
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -246,13 +244,13 @@
 			data.$select.val(data.index);
 
 			// controls
-			data.$controls.removeClass(Classes.disabled);
+			data.$controls.removeClass(RawClasses.visible);
 
-			if (index === 0) {
-				data.$controls.filter(Classes.control_previous).addClass(RawClasses.disabled);
+			if (index > 0) {
+				data.$controls.filter(Classes.control_previous).addClass(RawClasses.visible);
 			}
-			if (index === data.total) {
-				data.$controls.filter(Classes.control_next).addClass(RawClasses.disabled);
+			if (index < data.total) {
+				data.$controls.filter(Classes.control_next).addClass(RawClasses.visible);
 			}
 
 			// elipsis

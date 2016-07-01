@@ -7,6 +7,7 @@
 * Added `lazy` and `lazyEdge` options to Background
 * Added `update` method to Number
 * Added `update` method to Range
+* Added example code to demos
 * Fixed accessibility issues in Checkbox
 * Fixed accessibility issues in Dropdown
 * Fixed accessibility issues in Lightbox
@@ -17,6 +18,8 @@
 * Fixed accessibility issues in Range
 * Fixed accessibility issues in Tabs
 * Fixed accessibility issues in Upload
+* Fixed `visible` classing in Pagination
+* Fixed `disabled` hover state in Range
 * Normalized setting `active` item in Pagination
 * Removed non-standard `readonly` support from Checkbox
 

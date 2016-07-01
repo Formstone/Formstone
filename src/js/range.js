@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Disabled hover state?
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
