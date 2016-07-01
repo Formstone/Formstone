@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: allow selector for Carousel pagination container
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -57,7 +55,8 @@
 		data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
 		data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
 
-		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
+		data.customControls   = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
+		data.customPagination = ($.type(data.pagination) === "string");
 
 		data.id = this.attr("id");
 
@@ -86,7 +85,7 @@
 			controlsHtml += '</div>';
 		}
 
-		if (data.pagination) {
+		if (data.pagination && !data.customPagination) {
 			paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaId + '" role="navigation">';
 			paginationHtml += '</div>';
 		}
@@ -114,7 +113,6 @@
 		data.$container          = this.find(Classes.container).eq(0);
 		data.$canister           = this.find(Classes.canister).eq(0);
 		data.$pagination         = this.find(Classes.pagination).eq(0);
-		data.$paginationItems    = data.$pagination.find(Classes.page);
 
 		data.$controlPrevious = data.$controlNext = $('');
 
@@ -129,6 +127,12 @@
 		}
 
 		data.$controlItems = data.$controlPrevious.add(data.$controlNext);
+
+		if (data.customPagination) {
+			data.$pagination = $(data.pagination).addClass( [RawClasses.pagination] );
+		}
+
+		data.$paginationItems = data.$pagination.find(Classes.page);
 
 		data.index           = 0;
 		data.enabled         = false;
@@ -229,14 +233,20 @@
 				.unwrap()
 				.unwrap();
 
-		if (data.pagination) {
-			data.$pagination.remove();
-		}
 		if (data.controls && !data.customControls) {
 			data.$controls.remove();
 		}
+
 		if (data.customControls) {
 			data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom, RawClasses.visible ].join(" ") );
+		}
+
+		if (data.pagination && !data.customPagination) {
+			data.$pagination.remove();
+		}
+
+		if (data.customPagination) {
+			data.$pagination.html("").removeClass( [ RawClasses.pagination, RawClasses.visible ].join(" ") );
 		}
 
 		this.removeClass(data.carouselClasses.join(" "));
@@ -274,7 +284,7 @@
 
 			data.$images.off(Events.namespace);
 			data.$controlItems.off(Events.namespace);
-			data.$pagination.html("");
+			data.$pagination.html("").off(Events.namespace);
 
 			hideControls(data);
 
@@ -301,10 +311,10 @@
 		if (!data.enabled) {
 			data.enabled = true;
 
-			this.addClass(RawClasses.enabled)
-				.on(Events.click, Classes.page, data, onSelect);
+			this.addClass(RawClasses.enabled);
 
 			data.$controlItems.on(Events.click, data, onAdvance);
+			data.$pagination.on(Events.click, Classes.page, data, onSelect);
 
 			data.$items.on(Events.click, data, onItemClick);
 			data.$subordinate.on(Events.update, data, onSubordinateUpdate);
@@ -486,7 +496,7 @@
 			} else {
 				showControls(data);
 			}
-			data.$paginationItems = data.$el.find(Classes.page);
+			data.$paginationItems = data.$pagination.find(Classes.page);
 
 			positionCanister(data, data.index, false);
 
@@ -1245,7 +1255,7 @@
 			 * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
 			 * @param autoTime [int] <8000> "Auto advance time"
 			 * @param contained [boolean] <true> "Flag for 'overflow: visible'"
-			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selectors; Must be fully qualified selectors"
+			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selector (Must be fully qualified selectors)"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
 			 * @param infinite [boolean] <false> "Flag for looping items"
@@ -1256,7 +1266,7 @@
 			 * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
 			 * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
 			 * @param paged [boolean] <false> "Flag for paged items"
-			 * @param pagination [boolean] <true> "Flag to draw pagination"
+			 * @param pagination [boolean or string] <true> "Flag to draw pagination OR string containing pagination target selector (Must be fully qualified selector)"
 			 * @param rtl [boolean] <false> "Right to Left display"
 			 * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
 			 * @param single [boolean] <false> "Flag to display single item at a time"

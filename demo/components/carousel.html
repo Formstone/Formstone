@@ -122,6 +122,42 @@
 						-webkit-transition-delay: 0s;
 						transition-delay: 0s;
 					}
+					
+					.custom_container {
+						overflow: hidden;
+					}
+					
+					.custom_container .custom_previous {
+						float: left;
+						margin: 0;
+					}
+					
+					.custom_container .custom_next {
+						float: right;
+						margin: 0;
+					}
+					
+					.custom_pagination {
+						line-height: 38px;
+						text-align: center;
+					}
+					
+					.custom_pagination button {
+						height: 24px;
+						background: #00bcd4;
+						border: none;
+						border-radius: 2px;
+						color: #fff;
+						display: inline-block;
+						line-height: 20px;
+						margin: 0 2px;
+						padding: 3px 5px;
+						vertical-align: middle;
+					}
+					
+					.custom_pagination button.fs-carousel-active {
+						background: #0097A7;
+					}
 					</style>
 
 					<div class="demo_container">
@@ -421,7 +457,7 @@
 					<h3>Custom Controls</h3>
 					<div class="demo_container">
 						<div class="demo_example">
-							<div class="carousel js-carousel" data-carousel-options='{"pagination":false,"controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
+							<div class="carousel js-carousel" data-carousel-options='{"pagination":".custom_pagination","controls":{"container":".custom_container","next":".custom_next","previous":".custom_previous"}}'>
 								<div class="carousel_item">1</div>
 								<div class="carousel_item">2</div>
 								<div class="carousel_item">3</div>
@@ -429,8 +465,9 @@
 								<div class="carousel_item">5</div>
 							</div>
 							<div class="custom_container">
-								<button class="button custom_previous">Previous</button>
-								<button class="button custom_next">Next</button>
+								<button class="button custom_previous">&#9668;</button>
+								<button class="button custom_next">&#9658;</button>
+								<div class="custom_pagination"></div>
 							</div>
 						</div>
 						<div class="demo_code">
@@ -445,13 +482,16 @@
 &lt;div class=&quot;controls&quot;&gt;
 &Tab;&lt;button class=&quot;previous&quot;&gt;Previous&lt;/button&gt;
 &Tab;&lt;button class=&quot;next&quot;&gt;Next&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+
+&lt;div class=&quot;pagination&quot;&gt;&lt;/div&gt;</code></pre>
 							<pre><code class="language-javascript">$(".carousel").carousel({
 	controls: {
 		"contain": ".controls",
 		"previous": ".previous",
 		"next": ".next"
-	}
+	},
+	pagination: ".pagination"
 });</code></pre>
 						</div>
 					</div>

@@ -8,6 +8,7 @@
 * Added `update` method to Number
 * Added `update` method to Range
 * Added example code to demos
+* Added custom pagination container in Carousel
 * Fixed accessibility issues in Checkbox
 * Fixed accessibility issues in Dropdown
 * Fixed accessibility issues in Lightbox

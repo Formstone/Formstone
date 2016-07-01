@@ -86,7 +86,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
 | `contained` | `boolean` | `true` | Flag for 'overflow: visible' |
-| `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next and previous control selectors; Must be fully qualified selectors |
+| `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next and previous control selector (Must be fully qualified selectors) |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
 | `infinite` | `boolean` | `false` | Flag for looping items |
@@ -97,7 +97,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |
 | `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `paged` | `boolean` | `false` | Flag for paged items |
-| `pagination` | `boolean` | `true` | Flag to draw pagination |
+| `pagination` | `boolean or string` | `true` | Flag to draw pagination OR string containing pagination target selector (Must be fully qualified selector) |
 | `rtl` | `boolean` | `false` | Right to Left display |
 | `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `single` | `boolean` | `false` | Flag to display single item at a time |
