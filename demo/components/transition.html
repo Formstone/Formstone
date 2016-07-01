@@ -37,6 +37,10 @@
 						<a href="https://formstone.it/components/transition">View Documentation</a>
 					</p>
 					<!-- START: DEMO -->
+					<h4>Basic</h4>
+
+					<!-- START: FIRST DEMO -->
+
 					<style>
 					.transitions {
 						margin: 0 0 20px;
@@ -78,12 +82,12 @@
 
 						$(".transition_parent").transition({
 							always: true,
-							target: ".transition_delegate",
+							target: ".transition_delegate"
 						}, complete);
 
 						$(".transition_property").transition({
 							always: true,
-							property: "height",
+							property: "height"
 						}, complete);
 
 						$(".trigger").on("click", start);
@@ -116,31 +120,101 @@
 					}
 					</script>
 
-					<h4>Basic</h4>
-					<div class="transitions">
-						<div class="transition_track">
-							<div class="transition transition_basic"></div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="transitions">
+								<div class="transition_track">
+									<div class="transition transition_basic"></div>
+								</div>
+								<button class="button trigger">Start</button>
+								<div class="output">&nbsp;</div>
+							</div>
 						</div>
-						<button class="button trigger">Start</button>
-						<div class="output">&nbsp;</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;transition_target&quot;&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".transition_target").transition({
+	always: true
+}, function() {
+	// Tranition complete...
+}).addClass("active");</code></pre>
+							<pre><code class="language-css">.transition_target {
+	background: black;
+	transition: background 0.25s;
+}
+
+.transition_target.active {
+	background: blue;
+}</code></pre>
+						</div>
 					</div>
-					<br>
+
+
+					<!-- END: FIRST DEMO -->
+
 					<h4>Delegation</h4>
-					<div class="transitions">
-						<div class="transition_track transition_parent">
-							<div class="transition transition_delegate"></div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="transitions">
+								<div class="transition_track transition_parent">
+									<div class="transition transition_delegate"></div>
+								</div>
+								<button class="button trigger">Start</button>
+								<div class="output">&nbsp;</div>
+							</div>
 						</div>
-						<button class="button trigger">Start</button>
-						<div class="output">&nbsp;</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;transition_target&quot;&gt;
+&Tab;&lt;div class=&quot;transition_child&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".transition_target").transition({
+	always: true,
+	target: ".transition_child"
+}, function() {
+	// Tranition complete...
+}).addClass("active");</code></pre>
+							<pre><code class="language-css">.transition_target .transition_child {
+	background: black;
+	transition: background 0.25s;
+}
+
+.transition_target.active .transition_child {
+	background: blue;
+}</code></pre>
+						</div>
 					</div>
-					<br>
+
 					<h4>Property</h4>
-					<div class="transitions">
-						<div class="transition_track">
-							<div class="transition transition_property"></div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="transitions">
+								<div class="transition_track">
+									<div class="transition transition_property"></div>
+								</div>
+								<button class="button trigger">Start</button>
+								<div class="output">&nbsp;</div>
+							</div>
 						</div>
-						<button class="button trigger">Start</button>
-						<div class="output">&nbsp;</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;transition_target&quot;&gt;&lt;/div&gt;</code></pre>
+							<pre><code class="language-javascript">$(".transition_target").transition({
+	always: true,
+	property: "height"
+}, function() {
+	// Tranition complete...
+}).addClass("active");</code></pre>
+							<pre><code class="language-css">.transition_target {
+	background: black;
+	height: 10px;
+	transition:
+		background 0.25s linear 0s,
+		height 0.25s linear 1s;
+}
+
+.transition_target.active {
+	background: blue;
+	height: 30px;
+}</code></pre>
+						</div>
 					</div>
 					<!-- END: DEMO -->
 					<div class="footer">
