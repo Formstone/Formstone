@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Focus handling
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -24,7 +22,7 @@
 	 */
 
 	function setup() {
-		$Doc   = Formstone.$document;
+		// $Body  = Formstone.$body;
 		$Locks = $("html, body");
 	}
 
@@ -133,7 +131,7 @@
 			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
 		}
 
-		$Doc.on(Events.focus + data.dotGuid, data, onDocumentFocus);
+		// $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
 	}
 
 	/**
@@ -162,7 +160,7 @@
 
 		data.$nav.attr("tabindex", data.navTabIndex);
 
-		$Doc.off(data.dotGuid);
+		// $Body.off(data.dotGuid);
 
 		restoreLabel(data);
 
@@ -447,16 +445,16 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onDocumentFocus(e) {
-		var target = e.target,
-			data   = e.data;
-
-		if (data.open && !$.contains(data.$nav, target)) {
-			Formstone.killEvent(e);
-
-			data.$nav.focus();
-		}
-	}
+	// function onDocumentFocus(e) {
+	// 	var target = e.target,
+	// 		data   = e.data;
+	//
+	// 	if (data.open && !$.contains(data.$nav, target) && target !== data.$nav[0] && target !== data.$handle[0]) {
+	// 		Functions.killEvent(e);
+	//
+	// 		data.$nav.focus();
+	// 	}
+	// }
 
 	/**
 	 * @plugin
@@ -548,7 +546,7 @@
 		RawClasses    = Classes.raw,
 		Events        = Plugin.events,
 		Functions     = Plugin.functions,
-		$Doc          = null,
+		// $Body         = null,
 
 		// Internal
 

@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Focus handling
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -24,7 +22,6 @@
 	 */
 
 	function setup() {
-		// $Doc   = Formstone.$document;
 		$Body  = Formstone.$body;
 		$Locks = $("html, body");
 
@@ -331,8 +328,8 @@
 
 			// Bind events
 			$Window.on(Events.keyDown, onKeyDown);
-			$Body.on(Events.focus, onDocumentFocus);
-			$Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox);
+			$Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox)
+				 .on( [ Events.focus, Events.focusIn ].join(" "), onDocumentFocus);
 
 			if (Instance.gallery.active) {
 				Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
@@ -1556,10 +1553,8 @@
 	function onDocumentFocus(e) {
 		var target = e.target;
 
-		console.log(Instance.$lightbox[0], target, $.contains(Instance.$lightbox[0], target));
-
-		if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$overlay[0]) {
-			Formstone.killEvent(e);
+		if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$lightbox[0] && target !== Instance.$overlay[0]) {
+			Functions.killEvent(e);
 
 			Instance.$lightbox.focus();
 		}
@@ -1742,7 +1737,6 @@
 		Functions     = Plugin.functions,
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
-		// $Doc          = null,
 		$Body         = null,
 
 		// Internal

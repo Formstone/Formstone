@@ -2,7 +2,7 @@
 
 <!-- -->
 
-### 1.1.4
+### 1.2.0
 
 * Added `lazy` and `lazyEdge` options to Background
 * Added `update` method to Number
