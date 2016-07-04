@@ -45,6 +45,8 @@
 	function construct(data) {
 		var i;
 
+		data.didPan = false;
+		
 		data.carouselClasses = [
 			RawClasses.base,
 			data.theme,
@@ -1154,7 +1156,7 @@
 			$target.trigger(Events.itemClick);
 
 			if (data.controller) {
-				var index   = data.$items.index($target);
+				var index = data.$items.index($target);
 
 				onSubordinateUpdate(e, index);
 

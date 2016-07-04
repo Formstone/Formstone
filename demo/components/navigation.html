@@ -59,79 +59,182 @@
 					}
 					</style>
 
-					<h5 class="nav_handle nav_handle_toggle">Navigation</h5>
-					<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
-						<a href="#">Home</a>
-						<a href="#">About</a>
-						<a href="#">Contact</a>
-					</nav>
+					<div class="demo_container">
+						<div class="demo_example">
+							<h5 class="nav_handle nav_handle_toggle">Menu</h5>
+							<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
+								<a href="#">Home</a>
+								<a href="#">About</a>
+								<a href="#">Contact</a>
+							</nav>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;h5 class=&quot;nav_handle&quot;&gt;Menu&lt;/h5&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation();</code></pre>
+						</div>
+					</div>
 
 					<!-- END: FIRSTDEMO -->
 
-					<br>
-
 					<h4>No Theme</h4>
-					<h5 class="nav_handle nav_handle_toggle2">Navigation</h5>
-					<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle2" data-navigation-options='{"theme":""}'>
-						<a href="#">Home</a>
-						<a href="#">About</a>
-						<a href="#">Contact</a>
-					</nav>
-					<br>
-
-					<h4>Off Canvas</h4>
-					<div class="fs-row">
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Overlay Left
-								<button type="button" class="button nav_handle nav_handle_overlay_left">Menu</button>
-							</div>
+					<div class="demo_container">
+						<div class="demo_example">
+							<h5 class="nav_handle nav_handle_toggle2">Menu</h5>
+							<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle2" data-navigation-options='{"theme":""}'>
+								<a href="#">Home</a>
+								<a href="#">About</a>
+								<a href="#">Contact</a>
+							</nav>
 						</div>
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Overlay Right
-								<button type="button" class="button nav_handle nav_handle_overlay_right">Menu</button>
-							</div>
-						</div>
-					</div>
-					<div class="fs-row">
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Reveal Left
-								<button type="button" class="button nav_handle nav_handle_reveal_left">Menu</button>
-							</div>
-						</div>
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Reveal Right
-								<button type="button" class="button nav_handle nav_handle_reveal_right">Menu</button>
-							</div>
-						</div>
-					</div>
-					<div class="fs-row">
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Push Left
-								<button type="button" class="button nav_handle nav_handle_push_left">Menu</button>
-							</div>
-						</div>
-						<div class="fs-cell fs-xs-full fs-sm-half fs-md-2 fs-lg-3 fs-xl-2">
-							<div>
-								Push Right
-								<button type="button" class="button nav_handle nav_handle_push_right">Menu</button>
-							</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;h5 class=&quot;nav_handle&quot;&gt;Menu&lt;/h5&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	theme: ""
+});</code></pre>
 						</div>
 					</div>
 
-					<div style="height: 500px"></div>
+					<h4>Off Canvas - Overlay Left</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_overlay_left">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "overlay",
+	gravity: "left"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Off Canvas - Overlay Right</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_overlay_right">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "overlay",
+	gravity: "right"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Off Canvas - Reveal Left</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_reveal_left">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "reveal",
+	gravity: "left"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Off Canvas - Reveal Right</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_reveal_right">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "reveal",
+	gravity: "right"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Off Canvas - Push Left</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_push_left">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "push",
+	gravity: "left"
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Off Canvas - Push Right</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<button type="button" class="button nav_handle nav_handle_push_right">Menu</button>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;div class=&quot;nav_content&quot;&gt;
+&Tab;&lt;button type=&quot;button&quot; class=&quot;nav_handle&quot;&gt;Menu&lt;/button&gt;
+&lt;/div&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot; data-navigation-content=&quot;.nav_content&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	type: "push",
+	gravity: "right"
+});</code></pre>
+						</div>
+					</div>
 
 
-
+					<!-- Close demo content -->
 				</div>
 			</div>
 		</div>
-
-
 
 		<nav class="nav_offscreen js-navigation" data-navigation-handle=".nav_handle_overlay_left" data-navigation-content=".demo_content" data-navigation-options='{"type":"overlay","gravity":"left","maxWidth":"10000px"}'>
 			Overlay Left
@@ -157,8 +260,7 @@
 			Push Right
 		</nav>
 
-
-
+		<!-- Open demo content -->
 		<div class="demo_content">
 			<div class="fs-row">
 				<div class="fs-cell">
