@@ -1103,14 +1103,14 @@
 				Instance.$controlBox.css({
 					width: Formstone.windowWidth
 				});
-				Instance.spacerHeight = Instance.$controls.outerHeight(true);
+				Instance.spacerHeight = Instance.$controls.outerHeight(true) + 10;
 			} else {
 				Instance.$tools.css({
 					width: Formstone.windowWidth
 				});
 				Instance.spacerHeight = Instance.$tools.outerHeight(true);
+				Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
 			}
-			Instance.spacerHeight = Instance.$thumbnails.outerHeight(true) + 10;
 
 			Instance.viewportHeight -= Instance.spacerHeight;
 
