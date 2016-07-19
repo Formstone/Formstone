@@ -169,5 +169,5 @@
 
 	// !Ready
 	$(document).ready(function() {
-		Site.init("Namespace");
+		Site.init("FormstoneSite");
 	});

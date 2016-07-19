@@ -158,11 +158,14 @@
 	 */
 
 	function onPageClick(e) {
-		var data = e.data,
-			index = data.$items.index( $(e.currentTarget) );
+		var data    = e.data,
+			$target = $(e.currentTarget),
+			index   = data.$items.index($target);
 
 		if (data.ajax) {
 			Functions.killEvent(e);
+		} else {
+			$target[0].click();
 		}
 
 		updatePage(data, index);

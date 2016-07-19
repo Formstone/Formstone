@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.2.1
+
+* Fixed video sizing issue in Lightbox
+* Fixed link actions in Pagination
+
 ### 1.2.0
 
 * Added `lazy` and `lazyEdge` options to Background

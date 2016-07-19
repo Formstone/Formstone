@@ -75,7 +75,7 @@
 
 	function init(options) {
 		// Attach Analytics events
-		if (!Initialized && $Body.length) {
+		if (!Initialized && $Body && $Body.length) {
 			Initialized = true;
 
 			Defaults = $.extend(Defaults, options || {});
@@ -101,7 +101,7 @@
 	 */
 
 	function destroy() {
-		if (Initialized && $Body.length) {
+		if (Initialized && $Body && $Body.length) {
 			$Window.off(Events.namespace);
 			$Body.off(Events.namespace);
 
