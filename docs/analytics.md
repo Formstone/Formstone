@@ -92,4 +92,5 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `eventTimeout` | `int` | `1000` | Event failure timeout |
 | `scrollDepth` | `boolean` | `false` | Flag to track scroll depth events |
 | `scrollStops` | `int` | `5` | Number of scroll increments to track |
+| `scrollFields` | `object` | `{}` | Additional event fields for scroll depth events |
 

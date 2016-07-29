@@ -4,6 +4,8 @@
 
 ### 1.2.1
 
+* Added ability to define custom fields for scroll depth events in Analytics
+* Fixed issue with accessing target element from `beforeSend` callback in Upload
 * Fixed video sizing issue in Lightbox
 * Fixed link actions in Pagination
 

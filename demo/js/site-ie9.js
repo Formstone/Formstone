@@ -1,4 +1,4 @@
-/*! formstone v1.2.0 [site-ie9.js] 2016-07-19 | GPL-3.0 License | formstone.it */
+/*! formstone v1.2.1 [site-ie9.js] 2016-07-29 | GPL-3.0 License | formstone.it */
 
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
 window.matchMedia||(window.matchMedia=function(){"use strict";

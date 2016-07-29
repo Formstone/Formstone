@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: Fix vertical tabs
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

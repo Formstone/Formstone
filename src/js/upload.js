@@ -422,7 +422,7 @@
 
 	function uploadFile(data, formData, file) {
 		// Modify data before upload
-		formData = data.beforeSend.call(Window, formData, file);
+		formData = data.beforeSend.call(data.$el, formData, file);
 
 		if (file.size >= data.maxSize || formData === false || file.error === true) {
 			abortFile(data, file, (!formData ? "abort" : "size"));

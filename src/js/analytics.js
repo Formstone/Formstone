@@ -171,12 +171,14 @@
 				ScrollDepths[ ScrollWidth ][ key ].passed = true;
 
 				// Push data
-				pushEvent({
+				var eventData = $.extend(Defaults.scrollFields, {
 					eventCategory     : "ScrollDepth",
 					eventAction       : ScrollWidth,
 					eventLabel        : key,
 					nonInteraction    : true
 				});
+
+				pushEvent(eventData);
 			}
 
 			depth += step;
@@ -361,6 +363,7 @@
 		 * @param eventTimeout [int] <1000> "Event failure timeout"
 		 * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
 		 * @param scrollStops [int] <5> "Number of scroll increments to track"
+		 * @param scrollFields [object] <{}> "Additional event fields for scroll depth events"
 		 */
 
 		Defaults = {
@@ -369,7 +372,8 @@
 			eventCallback  : false,
 			eventTimeout   : 1000,
 			scrollDepth    : false,
-			scrollStops    : 5
+			scrollStops    : 5,
+			scrollFields   : {}
 		},
 
 		// Localize References
