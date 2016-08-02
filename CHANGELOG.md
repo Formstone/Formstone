@@ -8,6 +8,7 @@
 * Fixed issue with accessing target element from `beforeSend` callback in Upload
 * Fixed video sizing issue in Lightbox
 * Fixed link actions in Pagination
+* Removed erroneous `vertical` option in Tabs
 
 ### 1.2.0
 
