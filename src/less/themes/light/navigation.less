@@ -44,7 +44,7 @@
 
 	// Slide
 
-	@fs-navigation-offscreen-background:				@fs-light-white;
+	@fs-navigation-offscreen-background:				@fs-light-primary_50;
 	@fs-navigation-offscreen-width:						270px;
 	@fs-navigation-offscreen-zindex:                    0;
 	@fs-navigation-offscreen-padding:					20px;
@@ -145,6 +145,7 @@
 	.@{theme_name}&-push-nav&-animated,
 	.@{theme_name}&-overlay-nav&-animated {
 		transition:
+			box-shadow 0.001s linear @fs-navigation-offscreen-transition-speed, // delay when closing
 			transform @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing,
 			visibility 0.001s linear @fs-navigation-offscreen-transition-speed; // delay when closing
 	}
@@ -192,6 +193,7 @@
 
 	.@{theme_name}&-overlay-nav&-enabled {
 		z-index: @fs-navigation-overlay-zindex;
+		box-shadow: 0 0 @fs-navigation-offscreen-content-box-shadow-blur @fs-navigation-offscreen-content-box-shadow-color;
 	}
 
 	.@{theme_name}&-overlay-left-nav&-open {
@@ -213,6 +215,7 @@
 	.@{theme_name}&-overlay-nav&-open {
 		transform: translateX(0);
 		transition:
+			box-shadow 0.001s @fs-navigation-offscreen-transition-timing,
 			transform @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing,
 			visibility 0.001s @fs-navigation-offscreen-transition-timing;
 		visibility: visible;
@@ -274,6 +277,7 @@
 	.@{theme_name}&-push-content&-enabled {
 		z-index: @fs-navigation-push-content-zindex;
 
+		box-shadow: 0 0 @fs-navigation-offscreen-content-box-shadow-blur @fs-navigation-offscreen-content-box-shadow-color;
 		transform: translateX(0);
 
 		.csstransforms3d & {
@@ -284,7 +288,8 @@
 	.@{theme_name}&-reveal-content&-animated,
 	.@{theme_name}&-push-content&-animated {
 		transition:
-			transform @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing;
+			box-shadow @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing,
+			transform  @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing;
 	}
 
 	.@{theme_name}&-reveal-left-content&-enabled,

@@ -6,6 +6,7 @@
 
 * Added file chunking to Upload
 * Fixed protocol agnostic YouTube thumbnail in Background
+* Fixed Navigation styles in fs-light base theme 
 
 ### 1.2.1
 

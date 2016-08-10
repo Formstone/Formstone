@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Fix reveal default theme
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

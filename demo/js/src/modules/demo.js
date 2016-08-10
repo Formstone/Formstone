@@ -57,6 +57,10 @@
 				theme: theme
 			};
 
+			// Move the demo navs out
+			
+			$(".js-navigation_elements").appendTo("body");
+
 			// Destroy
 
 			Site.$body.find(".js-background").background("destroy");
