@@ -392,7 +392,7 @@
 
 		if (!data.posterLoaded) {
 			if (!data.source.poster) {
-				data.source.poster = "http://img.youtube.com/vi/" + data.videoId + "/0.jpg";
+				data.source.poster = "//img.youtube.com/vi/" + data.videoId + "/0.jpg";
 			}
 
 			data.posterLoaded = true;
@@ -866,7 +866,7 @@
 			 * @param loop [boolean] <true> "Loop video"
 			 * @param mute [boolean] <true> "Mute video"
 			 * @param source [string OR object] <null> "Source image (string or object) or video (object) or YouTube (object)"
-			 * @param youtubeOptions [object] <null> "Custom YouTube player parameters (to be used cautiously); See https://developers.google.com/youtube/player_parameters for more"
+			 * @param youtubeOptions [object] <null> "Custom YouTube player parameters (to be used cautiously); See developers.google.com/youtube/player_parameters for more"
 			 */
 			defaults: {
 				autoPlay       : true,
