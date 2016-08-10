@@ -258,34 +258,6 @@
 
 	/**
 	 * @method private
-	 * @name bindLink
-	 * @description Bind events to internal links
-	 * @param $link [object] "Object to bind"
-	 * @param data [object] "Instance data"
-	 */
-
-	function bindLink($link, data) {
-		$link.on(Events.click, data, onLinkClick);
-
-		// http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
-		var events = $._data($link[0], "events")["click"];
-		events.unshift(events.pop());
-	}
-
-	/**
-	 * @method private
-	 * @name onLinkClick
-	 * @description Handles clicks to internal links
-	 * @param e [object] "Event data"
-	 */
-
-	function onLinkClick(e) {
-		Functions.killEvent(e, true);
-		e.data.$links.off(Events.click);
-	}
-
-	/**
-	 * @method private
 	 * @name onPointerEnd
 	 * @description Handles pointer end / cancel.
 	 * @param e [object] "Event data"
@@ -367,6 +339,34 @@
 		}
 
 		data.touching = false;
+	}
+
+	/**
+	 * @method private
+	 * @name bindLink
+	 * @description Bind events to internal links
+	 * @param $link [object] "Object to bind"
+	 * @param data [object] "Instance data"
+	 */
+
+	function bindLink($link, data) {
+		$link.on(Events.click, data, onLinkClick);
+
+		// http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+		var events = $._data($link[0], "events")["click"];
+		events.unshift(events.pop());
+	}
+
+	/**
+	 * @method private
+	 * @name onLinkClick
+	 * @description Handles clicks to internal links
+	 * @param e [object] "Event data"
+	 */
+
+	function onLinkClick(e) {
+		Functions.killEvent(e, true);
+		e.data.$links.off(Events.click);
 	}
 
 	/**
