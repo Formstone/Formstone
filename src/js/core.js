@@ -676,15 +676,9 @@
 				'msTransform'        : '-ms-transform',
 				'webkitTransform'    : '-webkit-transform'
 			},
-			blobSliceMethods = [
-				'mozSlice',
-				'webkitSlice',
-				'slice'
-			],
 			transitionEvent       = "transitionend",
 			transitionProperty    = "",
 			transformProperty     = "",
-			blobSliceMethod       = false,
 			testDiv               = document.createElement("div"),
 			i;
 
@@ -716,19 +710,6 @@
 		}
 
 		Formstone.transform = transformProperty;
-
-		if (Formstone.support.file) {
-			var testFile = new File([""], "test");
-
-			for (i in blobSliceMethods) {
-				if (blobSliceMethods.hasOwnProperty(i) && blobSliceMethods[i] in testFile) {
-					blobSliceMethod = blobSliceMethods[i];
-					break;
-				}
-			}
-		}
-
-		Formstone.blobSliceMethod = blobSliceMethod;
 	}
 
 	// Window resize

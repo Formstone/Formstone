@@ -118,7 +118,8 @@
 				metaHeight         : 0,
 				thumbnailHeight    : 0,
 				captionOpen        : false,
-				thumbnailsOpen     : false
+				thumbnailsOpen     : false,
+				tapTimer           : null
 			}, data);
 
 			// Check target type
@@ -344,7 +345,8 @@
 
 			if (Instance.isMobile && Instance.isTouch) {
 				Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
-								  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
+								  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails)
+								  .on(Events.dblClick, Classes.image_container, onImageZoom);
 			}
 
 			Instance.$lightbox.fsTransition({
@@ -764,11 +766,65 @@
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name clearTouch
+	 * @description Clears current touch action.
+	 */
+
 	function clearTouch() {
 		if (Instance.$image && Instance.$image.length) {
 			Instance.$content.fsTouch("destroy");
 		}
 	}
+
+	/**
+	 * @method private
+	 * @name onImageZoom
+	 * @description Zooms image.
+	 * @param e [object] "Event data"
+	 */
+
+	function onImageZoom() {
+		console.log("image zoom");
+
+		if (Instance.$image && Instance.$image.length) {
+
+			if (Instance.targetImageHeight !== Instance.scaleMinHeight) {
+				// We're zoomed in
+				Instance.targetImageHeight = Instance.scaleMinHeight;
+				Instance.targetImageWidth  = Instance.scaleMinWidth;
+
+				Instance.targetContainerY = Instance.scaleMinY;
+				Instance.targetContainerX = Instance.scaleMinX;
+			} else {
+				// We're zoomed out
+				Instance.targetImageHeight = Instance.scaleMaxHeight;
+				Instance.targetImageWidth  = Instance.scaleMaxWidth;
+
+				Instance.targetContainerY = Instance.scaleMaxY;
+				Instance.targetContainerX = Instance.scaleMaxX;
+			}
+
+			Instance.$imageContainer.css({
+				left: Instance.targetContainerX,
+				top:  Instance.targetContainerY
+			});
+
+			Instance.$image.css({
+				height    : Instance.targetImageHeight,
+				width     : Instance.targetImageWidth,
+				top       : -(Instance.targetImageHeight / 2),
+				left      : -(Instance.targetImageWidth  / 2)
+			});
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name cacheScale
+	 * @description Caches current scale settings.
+	 */
 
 	function cacheScale() {
 		Instance.scalePosition = Instance.$imageContainer.position();
@@ -780,13 +836,51 @@
 		Instance.scaleWidth  = Instance.$image.outerWidth();
 	}
 
+	/**
+	 * @method private
+	 * @name onScaleStart
+	 * @description Handles scale start event.
+	 * @param e [object] "Event data"
+	 */
+
 	function onScaleStart(e) {
 		cacheScale();
+
+		console.log("scalestart");
+		checkDoubleTap();
 
 		Instance.$lightbox.addClass(RawClasses.scaling);
 	}
 
+	function checkDoubleTap() {
+		console.log(Instance.tapTimer);
+		if (Instance.tapTimer === null) {
+			Instance.tapTimer = Functions.startTimer(Instance.tapTimer, 500, function() {
+				clearDoubleTap();
+			});
+		} else {
+			clearDoubleTap();
+			console.log("ZOOM");
+			// onImageZoom();
+		}
+	}
+
+	function clearDoubleTap() {
+		Functions.clearTimer(Instance.tapTimer);
+		Instance.tapTimer = null;
+		console.log("CB: ", Instance.tapTimer);
+	}
+
+	/**
+	 * @method private
+	 * @name onScale
+	 * @description Handles scale event.
+	 * @param e [object] "Event data"
+	 */
+
 	function onScale(e) {
+		console.log(e.scale);
+
 		Instance.targetContainerY = Instance.scaleY + e.deltaY;
 		Instance.targetContainerX = Instance.scaleX + e.deltaX;
 
@@ -822,6 +916,13 @@
 			left      : -(Instance.targetImageWidth  / 2)
 		});
 	}
+
+	/**
+	 * @method private
+	 * @name onScaleEnd
+	 * @description Handles scale end event.
+	 * @param e [object] "Event data"
+	 */
 
 	function onScaleEnd(e) {
 		cacheScale();

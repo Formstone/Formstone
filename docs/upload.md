@@ -105,7 +105,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `action` | `string` | &nbsp; | Where to submit uploads |
 | `autoUpload` | `boolean` | `false` | Beging upload when files are dropped |
 | `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |
-| `chunked` | `boolean` | `false` | Use chunked uploading |
+| `chunked` | `boolean` | `false` | Use chunked uploading, if supported |
 | `chunkSize` | `int` | `100` | Size to chunk, in kB |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
