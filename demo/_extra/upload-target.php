@@ -1,10 +1,12 @@
-<?
+<?php
 
 	// Grab any extra form data!
 
 	foreach ($_POST as $key => $val) {
 		echo $key . ": " . $val . "\n";
 	}
+
+	echo "\n\n";
 
 	// Remember to process the uploads!
 
@@ -18,5 +20,3 @@
 	} else {
 		die("File: " . $file);
 	}
-
-?>

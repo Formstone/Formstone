@@ -1,5 +1,7 @@
 /* global define */
 
+// TODO: add chunked uploads
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -23,6 +25,10 @@
 	function construct(data) {
 		if (Formstone.support.file) {
 			var html = "";
+
+			if (!Formstone.blobSliceMethod) {
+				data.chunked = false;
+			}
 
 			if (data.label !== false) {
 				html += '<div class="' + RawClasses.target + '">';
@@ -86,6 +92,7 @@
 	 * @name abortUpload
 	 * @description Cancels all active uploads.
 	 * @param data [object] "Instance data"
+	 * @param index [int] "File index"
 	 */
 
 	/**
@@ -107,7 +114,11 @@
 				if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
 					// Abort all
 					if (file.started && !file.complete) {
-						file.transfer.abort();
+						if (data.chunked) {
+							file.chunkTransfer.abort();
+						} else {
+							file.transfer.abort();
+						}
 					} else {
 						abortFile(data, file, "abort");
 					}
@@ -120,6 +131,15 @@
 		checkQueue(data);
 	}
 
+	/**
+	 * @method private
+	 * @name abortFile
+	 * @description Aborts file.
+	 * @param data [object] "Instance data"
+	 * @param formData [object] "Target form"
+	 * @param file [object] "Target file"
+	 */
+
 	function abortFile(data, file, error) {
 		file.error = true;
 		data.$el.trigger(Events.fileError, [ file, error ]);
@@ -127,6 +147,21 @@
 		if (!data.aborting) {
 			checkQueue(data);
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name abortChunk
+	 * @description Aborts file chunk.
+	 * @param data [object] "Instance data"
+	 * @param formData [object] "Target form"
+	 * @param file [object] "Target file"
+	 */
+
+	function abortChunk(data, file, error) {
+		data.$el.trigger(Events.chunkError, [ file, error ]);
+
+		abortFile(data, file, error);
 	}
 
 	/**
@@ -381,7 +416,9 @@
 				if (!data.queue[j].started) {
 					var formData = new FormData();
 
-					formData.append(data.postKey, data.queue[j].file);
+					if (!data.chunked) {
+						formData.append(data.postKey, data.queue[j].file);
+					}
 
 					for (var k in data.postData) {
 						if (data.postData.hasOwnProperty(k)) {
@@ -416,8 +453,8 @@
 	 * @name uploadFile
 	 * @description Uploads file.
 	 * @param data [object] "Instance data"
-	 * @param file [object] "Target file"
 	 * @param formData [object] "Target form"
+	 * @param file [object] "Target file"
 	 */
 
 	function uploadFile(data, formData, file) {
@@ -426,14 +463,27 @@
 
 		if (file.size >= data.maxSize || formData === false || file.error === true) {
 			abortFile(data, file, (!formData ? "abort" : "size"));
+		} else if (data.chunked) {
+			// Chunked upload
+			file.started = true;
+
+			file.chunkSize = (1024 * data.chunkSize);
+			file.totalChunks = Math.ceil( file.size / file.chunkSize );
+			file.currentChunk = 0;
+
+			formData.append("chunks", file.totalChunks);
+			data.$el.trigger(Events.fileStart, [ file ]);
+
+			uploadChunk(data, formData, file);
 		} else {
+			// Standard upload
 			file.started = true;
 			file.transfer = $.ajax({
 				url         : data.action,
 				data        : formData,
 				dataType    : data.dataType,
 				type        : "POST",
-				contentType :false,
+				contentType : false,
 				processData : false,
 				cache       : false,
 				xhr: function() {
@@ -473,6 +523,62 @@
 	}
 
 	/**
+	 * @method private
+	 * @name uploadChunk
+	 * @description Uploads file chunk.
+	 * @param data [object] "Instance data"
+	 * @param formData [object] "Target form"
+	 * @param file [object] "Target file"
+	 */
+
+	function uploadChunk(data, formData, file) {
+		var chunkStart = (file.chunkSize * file.currentChunk),
+			chunkEnd   = (chunkStart + file.chunkSize);
+
+		if (chunkEnd > file.size) {
+			chunkEnd = file.size;
+		}
+
+		var chunkData  = file.file[ Formstone.blobSliceMethod ]( chunkStart, chunkEnd );
+
+		formData.set("chunk", file.currentChunk);
+		formData.set(data.postKey, chunkData, file.file.name);
+
+		file.chunkTransfer = $.ajax({
+			url         : data.action,
+			data        : formData,
+			dataType    : data.dataType,
+			type        : "POST",
+			contentType : false,
+			processData : false,
+			cache       : false,
+			beforeSend: function(jqXHR, settings) {
+				data.$el.trigger(Events.chunkStart, [ file ]);
+			},
+			success: function(response, status, jqXHR) {
+				file.currentChunk++;
+
+				data.$el.trigger(Events.chunkComplete, [ file ]);
+
+				var percent = Math.ceil((file.currentChunk / file.totalChunks) * 100);
+				data.$el.trigger(Events.fileProgress, [ file, percent ]);
+
+				if (file.currentChunk < file.totalChunks) {
+					setTimeout(uploadChunk(data, formData, file), 1);
+				} else {
+					file.complete = true;
+					data.$el.trigger(Events.fileComplete, [ file, response ]);
+
+					checkQueue(data);
+				}
+			},
+			error: function(jqXHR, status, error) {
+				abortChunk(data, file, error);
+			}
+		});
+	}
+
+	/**
 	 * @plugin
 	 * @name Upload
 	 * @description A jQuery plugin for simple drag and drop uploads.
@@ -492,6 +598,8 @@
 			 * @param action [string] "Where to submit uploads"
 			 * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
 			 * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
+			 * @param chunked [boolean] <false> "Use chunked uploading"
+			 * @param chunkSize [int] <100> "Size to chunk, in kB"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param dataType [string] <'html'> "Data type of AJAX request"
 			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
@@ -509,6 +617,8 @@
 				action         : "",
 				autoUpload     : true,
 				beforeSend     : function(formdata) { return formdata; },
+				chunked        : false,
+				chunkSize      : 100,
 				customClass    : "",
 				dataType       : "html",
 				label          : "Drag and drop files or click to select",
@@ -553,6 +663,9 @@
 
 		/**
 		 * @events
+		 * @event chunkcomplete "File chunk complete"
+		 * @event chunkstart "File chunk starting"
+		 * @event chunkerror "File chunk error"
 		 * @event complete "All uploads are complete"
 		 * @event filecomplete "Specific upload complete"
 		 * @event filedragenter "File dragged into target"
@@ -565,6 +678,9 @@
 		 * @event queued "Files are queued for upload"
 		 */
 
+		Events.chunkComplete   = "chunkcomplete";
+		Events.chunkError      = "chunkerror";
+		Events.chunkStart      = "chunkstart";
 		Events.complete        = "complete";
 		Events.fileComplete    = "filecomplete";
 		Events.fileDragEnter   = "filedragenter";

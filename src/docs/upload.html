@@ -7,11 +7,16 @@
 	.filelists h5 { margin: 10px 0 0; }
 	.filelists .cancel_all { color: red; cursor: pointer; clear: both; font-size: 10px; margin: 0; text-transform: uppercase; }
 	.filelist { margin: 0; padding: 10px 0; }
-	.filelist li { background: #fff; border-bottom: 1px solid #ECEFF1; font-size: 14px; list-style: none; padding: 5px; }
-	.filelist li:before { display: none; }
-	.filelist li .file { color: #455A64; }
-	.filelist li .progress { color: #B0BEC5; float: right; font-size: 10px; text-transform: uppercase; }
-	.filelist li .cancel { color: red; cursor: pointer; float: right; font-size: 10px; margin: 0 0 0 10px; text-transform: uppercase; }
+	.filelist li { background: #fff; border-bottom: 1px solid #ECEFF1; font-size: 14px; list-style: none; padding: 5px; position: relative; }
+	.filelist li .bar { background: #eceff1; content: ''; height: 100%; left: 0; position: absolute; top: 0; width: 0; z-index: 0;
+		-webkit-transition: width 0.1s linear;
+				transition: width 0.1s linear;
+	}
+	.filelist li .content { display: block; overflow: hidden; position: relative; z-index: 1; }
+	.filelist li .file { color: #455A64; float: left; display: block; overflow: hidden; text-overflow: ellipsis; max-width: 50%; white-space: nowrap; }
+	.filelist li .progress { color: #B0BEC5; display: block; float: right; font-size: 10px; text-transform: uppercase; }
+	.filelist li .cancel { color: red; cursor: pointer; display: block; float: right; font-size: 10px; margin: 0 0 0 10px; text-transform: uppercase; }
+	.filelist li.error .file { color: red; }
 	.filelist li.error .progress { color: red; }
 	.filelist li.error .cancel { display: none; }
 </style>
@@ -27,6 +32,10 @@
 		  .on("fileprogress.upload", onFileProgress)
 		  .on("filecomplete.upload", onFileComplete)
 		  .on("fileerror.upload", onFileError)
+		  .on("chunkstart.upload", onChunkStart)
+		  .on("chunkprogress.upload", onChunkProgress)
+		  .on("chunkcomplete.upload", onChunkComplete)
+		  .on("chunkerror.upload", onChunkError)
 		  .on("queued.upload", onQueued);
 
 		$(".filelist.queue").on("click", ".cancel", onCancel);
@@ -55,7 +64,7 @@
 		console.log("Queued");
 		var html = '';
 		for (var i = 0; i < files.length; i++) {
-			html += '<li data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></li>';
+			html += '<li data-index="' + files[i].index + '"><span class="content"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></span><span class="bar"></span></li>';
 		}
 
 		$(this).parents("form").find(".filelist.queue")
@@ -83,9 +92,10 @@
 
 	function onFileProgress(e, file, percent) {
 		console.log("File Progress");
-		$(this).parents("form").find(".filelist.queue")
-			.find("li[data-index=" + file.index + "]")
-			.find(".progress").text(percent + "%");
+		var $file = $(this).parents("form").find(".filelist.queue").find("li[data-index=" + file.index + "]");
+
+		$file.find(".progress").text(percent + "%")
+		$file.find(".bar").css("width", percent + "%");
 	}
 
 	function onFileComplete(e, file, response) {
@@ -108,6 +118,22 @@
 		$(this).parents("form").find(".filelist.queue")
 			.find("li[data-index=" + file.index + "]").addClass("error")
 			.find(".progress").text("Error: " + error);
+	}
+
+	function onChunkStart(e, file) {
+		console.log("Chunk Start");
+	}
+
+	function onChunkProgress(e, file, percent) {
+		console.log("Chunk Progress");
+	}
+
+	function onChunkComplete(e, file, response) {
+		console.log("Chunk Complete");
+	}
+
+	function onChunkError(e, file, error) {
+		console.log("Chunk Error");
 	}
 </script>
 
@@ -135,6 +161,31 @@
 </div>
 
 <!-- END: FIRSTDEMO -->
+
+<h4>Chunked Uploads</h4>
+<div class="demo_container">
+	<div class="demo_example">
+		<form action="#" method="GET" class="form demo_form">
+			<div class="upload" data-upload-options='{"action":"../_extra/upload-chunked.php","chunked":true}'></div>
+			<div class="filelists">
+				<h5>Complete</h5>
+				<ol class="filelist complete">
+				</ol>
+				<h5>Queued</h5>
+				<ol class="filelist queue">
+				</ol>
+				<span class="cancel_all">Cancel All</span>
+			</div>
+		</form>
+	</div>
+	<div class="demo_code">
+		<pre><code class="language-html">&lt;div class=&quot;upload&quot;&gt;&lt;/div&gt;</code></pre>
+		<pre><code class="language-javascript">$(".upload").upload({
+	action: "//example.com/handle-chunked-upload.php",
+	chunked: true
+});</code></pre>
+	</div>
+</div>
 
 <h4>No Theme</h4>
 <div class="demo_container">

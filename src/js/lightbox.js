@@ -1,5 +1,8 @@
 /* global define */
 
+// TODO: Add double tap to zoom in/out
+// TODO: Add swipe next/previous when zoomed out
+
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([

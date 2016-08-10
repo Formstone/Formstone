@@ -105,6 +105,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `action` | `string` | &nbsp; | Where to submit uploads |
 | `autoUpload` | `boolean` | `false` | Beging upload when files are dropped |
 | `beforeSend` | `function` | &nbsp; | Run before request sent, must return modified formdata or `false` to cancel |
+| `chunked` | `boolean` | `false` | Use chunked uploading |
+| `chunkSize` | `int` | `100` | Size to chunk, in kB |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
 | `label` | `string` | `'Drag and drop files or click to select'` | Drop target text; `false` to disable |
@@ -123,6 +125,9 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
+| `chunkcomplete` | File chunk complete |
+| `chunkstart` | File chunk starting |
+| `chunkerror` | File chunk error |
 | `complete` | All uploads are complete |
 | `filecomplete` | Specific upload complete |
 | `filedragenter` | File dragged into target |

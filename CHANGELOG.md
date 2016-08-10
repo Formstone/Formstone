@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.2.2
+
+* Added file chunking to Upload
+* Fixed protocol agnostic YouTube thumbnail in Background
+
 ### 1.2.1
 
 * Added ability to define custom fields for scroll depth events in Analytics
