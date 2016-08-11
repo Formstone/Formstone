@@ -891,9 +891,12 @@
 			// }
 			// Instance.targetContainerX = Instance.scaleX + e.deltaX;
 
+			Instance.targetContainerY = Instance.scaleY;
+			Instance.targetContainerX = Instance.scaleX;
+
 			if (zoomed) {
-				Instance.targetContainerY = Instance.scaleY + e.deltaY;
-				Instance.targetContainerX = Instance.scaleX + e.deltaX;
+				Instance.targetContainerY += e.deltaY;
+				Instance.targetContainerX += e.deltaX;
 			}
 
 			Instance.targetImageHeight = Instance.scaleHeight * e.scale;
