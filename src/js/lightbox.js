@@ -152,6 +152,9 @@
 			// Touch
 			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
 
+			Instance.$viewportMeta = $('[name="viewport"]');
+			Instance.viewportContent = (Instance.$viewportMeta.length) ? Instance.$viewportMeta.attr("content") : false;
+
 			// Double the margin
 			Instance.margin *= 2;
 
@@ -423,6 +426,7 @@
 			Instance.$content.fsTransition("destroy");
 
 			clearTouch();
+			clearDoubleTap();
 
 			Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
 				property: "opacity"
@@ -455,6 +459,12 @@
 
 			if (Instance.isMobile) {
 				$Locks.removeClass(RawClasses.lock);
+
+				if (Instance.$viewportMeta) {
+					Instance.$viewportMeta.attr("content", Instance.viewportContent);
+				} else {
+					Instance.$viewportMeta.remove();
+				}
 			}
 		}
 	}
@@ -469,7 +479,15 @@
 		var position = calculatePosition(),
 			durration = Instance.isMobile ? 0 : Instance.duration;
 
-		if (!Instance.isMobile) {
+		if (Instance.isMobile) {
+			var viewportContent = 'width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no';
+
+			if (Instance.$viewportMeta) {
+				Instance.$viewportMeta.attr("content", viewportContent);
+			} else {
+				Instance.$viewportMeta = $("head").append('<meta name="viewport" content="' + viewportContent + '">');
+			}
+		} else {
 			Instance.$controls.css({
 				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
 			});
@@ -773,7 +791,10 @@
 
 	function clearTouch() {
 		if (Instance.$image && Instance.$image.length) {
-			Instance.$content.fsTouch("destroy");
+			Instance.$content.fsTouch("destroy")
+							 .off(Events.scaleStart, onScaleStart)
+							 .off(Events.scaleEnd, onScaleEnd)
+							 .off(Events.scale, onScale);
 		}
 	}
 
@@ -1327,6 +1348,7 @@
 			Instance.isAnimating = true;
 
 			clearTouch();
+			clearDoubleTap();
 			closeCaption();
 
 			Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
@@ -1365,6 +1387,7 @@
 			Instance.isAnimating = true;
 
 			clearTouch();
+			clearDoubleTap();
 			closeCaption();
 
 			Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
