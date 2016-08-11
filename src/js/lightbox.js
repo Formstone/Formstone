@@ -346,7 +346,6 @@
 			if (Instance.isMobile && Instance.isTouch) {
 				Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
 								  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
-								  // .on(Events.dblClick, Classes.image_container, onImageZoom);
 			}
 
 			Instance.$lightbox.fsTransition({
@@ -778,47 +777,56 @@
 		}
 	}
 
-	// /**
-	//  * @method private
-	//  * @name onImageZoom
-	//  * @description Zooms image.
-	//  * @param e [object] "Event data"
-	//  */
-	//
-	// function onImageZoom() {
-	// 	console.log("image zoom");
-	//
-	// 	if (Instance.$image && Instance.$image.length) {
-	//
-	// 		if (Instance.targetImageHeight !== Instance.scaleMinHeight) {
-	// 			// We're zoomed in
-	// 			Instance.targetImageHeight = Instance.scaleMinHeight;
-	// 			Instance.targetImageWidth  = Instance.scaleMinWidth;
-	//
-	// 			Instance.targetContainerY = Instance.scaleMinY;
-	// 			Instance.targetContainerX = Instance.scaleMinX;
-	// 		} else {
-	// 			// We're zoomed out
-	// 			Instance.targetImageHeight = Instance.scaleMaxHeight;
-	// 			Instance.targetImageWidth  = Instance.scaleMaxWidth;
-	//
-	// 			Instance.targetContainerY = Instance.scaleMaxY;
-	// 			Instance.targetContainerX = Instance.scaleMaxX;
-	// 		}
-	//
-	// 		Instance.$imageContainer.css({
-	// 			left: Instance.targetContainerX,
-	// 			top:  Instance.targetContainerY
-	// 		});
-	//
-	// 		Instance.$image.css({
-	// 			height    : Instance.targetImageHeight,
-	// 			width     : Instance.targetImageWidth,
-	// 			top       : -(Instance.targetImageHeight / 2),
-	// 			left      : -(Instance.targetImageWidth  / 2)
-	// 		});
-	// 	}
-	// }
+	/**
+	 * @method private
+	 * @name onImageZoom
+	 * @description Zooms image.
+	 * @param e [object] "Event data"
+	 */
+
+	function onImageZoom() {
+		if (Instance.$image && Instance.$image.length) {
+			Instance.isZooming = true;
+
+			Instance.$lightbox.addClass(RawClasses.zooming)
+							  .removeClass(RawClasses.scaling);
+
+			var direction = (Instance.targetImageHeight > Instance.scaleMinHeight + 1) ? "out" : "in";
+
+			if (direction === "out") {
+				// We're zoomed in
+				Instance.targetImageHeight = Instance.scaleMinHeight;
+				Instance.targetImageWidth  = Instance.scaleMinWidth;
+			} else {
+				// We're zoomed out
+				Instance.targetImageHeight = Instance.scaleMaxHeight;
+				Instance.targetImageWidth  = Instance.scaleMaxWidth;
+			}
+
+			var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+				conWidth  = Instance.$container.outerWidth();
+
+			Instance.scalePosition.top  = Instance.targetContainerY = (conHeight / 2);
+			Instance.scalePosition.left = Instance.targetContainerX = (conWidth  / 2);
+
+			Instance.$imageContainer.css({
+				left: Instance.targetContainerX,
+				top:  Instance.targetContainerY
+			});
+
+			Instance.$image.fsTransition({
+				property: "top"
+			}, function() {
+				Instance.isZooming = false;
+				Instance.$lightbox.removeClass(RawClasses.zooming);
+			}).css({
+				height    : Instance.targetImageHeight,
+				width     : Instance.targetImageWidth,
+				top       : -(Instance.targetImageHeight / 2),
+				left      : -(Instance.targetImageWidth  / 2)
+			});
+		}
+	}
 
 	/**
 	 * @method private
@@ -844,32 +852,14 @@
 	 */
 
 	function onScaleStart(e) {
-		cacheScale();
+		if (!Instance.isZooming) {
+			Instance.$lightbox.removeClass(RawClasses.zooming)
+							  .addClass(RawClasses.scaling);
 
-		// console.log("scalestart");
-		// checkDoubleTap();
-
-		Instance.$lightbox.addClass(RawClasses.scaling);
+			cacheScale();
+			checkDoubleTap();
+		}
 	}
-
-	// function checkDoubleTap() {
-	// 	console.log(Instance.tapTimer);
-	// 	if (Instance.tapTimer === null) {
-	// 		Instance.tapTimer = Functions.startTimer(Instance.tapTimer, 500, function() {
-	// 			clearDoubleTap();
-	// 		});
-	// 	} else {
-	// 		clearDoubleTap();
-	// 		console.log("ZOOM");
-	// 		// onImageZoom();
-	// 	}
-	// }
-	//
-	// function clearDoubleTap() {
-	// 	Functions.clearTimer(Instance.tapTimer);
-	// 	Instance.tapTimer = null;
-	// 	console.log("CB: ", Instance.tapTimer);
-	// }
 
 	/**
 	 * @method private
@@ -879,42 +869,42 @@
 	 */
 
 	function onScale(e) {
-		// console.log(e.scale);
+		if (!Instance.isZooming) {
+			Instance.targetContainerY = Instance.scaleY + e.deltaY;
+			Instance.targetContainerX = Instance.scaleX + e.deltaX;
 
-		Instance.targetContainerY = Instance.scaleY + e.deltaY;
-		Instance.targetContainerX = Instance.scaleX + e.deltaX;
+			Instance.targetImageHeight = Instance.scaleHeight * e.scale;
+			Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
 
-		Instance.targetImageHeight = Instance.scaleHeight * e.scale;
-		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
+			if (Instance.targetImageHeight < Instance.scaleMinHeight) {
+				Instance.targetImageHeight = Instance.scaleMinHeight;
+			}
+			if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
+				Instance.targetImageHeight = Instance.scaleMaxHeight;
+			}
 
-		if (Instance.targetImageHeight < Instance.scaleMinHeight) {
-			Instance.targetImageHeight = Instance.scaleMinHeight;
+			if (Instance.targetImageWidth < Instance.scaleMinWidth) {
+				Instance.targetImageWidth = Instance.scaleMinWidth;
+			}
+			if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
+				Instance.targetImageWidth = Instance.scaleMaxWidth;
+			}
+
+			Instance.hasScaled = true;
+			Instance.isScaling = true;
+
+			Instance.$imageContainer.css({
+				top:  Instance.targetContainerY,
+				left: Instance.targetContainerX
+			});
+
+			Instance.$image.css({
+				height    : Instance.targetImageHeight,
+				width     : Instance.targetImageWidth,
+				top       : -(Instance.targetImageHeight / 2),
+				left      : -(Instance.targetImageWidth  / 2)
+			});
 		}
-		if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
-			Instance.targetImageHeight = Instance.scaleMaxHeight;
-		}
-
-		if (Instance.targetImageWidth < Instance.scaleMinWidth) {
-			Instance.targetImageWidth = Instance.scaleMinWidth;
-		}
-		if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
-			Instance.targetImageWidth = Instance.scaleMaxWidth;
-		}
-
-		Instance.hasScaled = true;
-		Instance.isScaling = true;
-
-		Instance.$imageContainer.css({
-			top:  Instance.targetContainerY,
-			left: Instance.targetContainerX
-		});
-
-		Instance.$image.css({
-			height    : Instance.targetImageHeight,
-			width     : Instance.targetImageWidth,
-			top       : -(Instance.targetImageHeight / 2),
-			left      : -(Instance.targetImageWidth  / 2)
-		});
 	}
 
 	/**
@@ -925,48 +915,76 @@
 	 */
 
 	function onScaleEnd(e) {
-		cacheScale();
+		if (!Instance.isZooming) {
+			cacheScale();
 
-		// clearDoubleTap();
+			Instance.isScaling = false;
 
-		Instance.isScaling = false;
+			var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+				conWidth  = Instance.$container.outerWidth();
 
-		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
-			conWidth  = Instance.$container.outerWidth();
+			Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
+			Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
+			Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
+			Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
 
-		Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
-		Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
-		Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
-		Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
-
-		if (Instance.scaleHeight < conHeight) {
-			Instance.scalePosition.top = conHeight / 2;
-		} else {
-			if (Instance.scalePosition.top < Instance.scaleMinY) {
-				Instance.scalePosition.top = Instance.scaleMinY;
+			if (Instance.scaleHeight < conHeight) {
+				Instance.scalePosition.top = conHeight / 2;
+			} else {
+				if (Instance.scalePosition.top < Instance.scaleMinY) {
+					Instance.scalePosition.top = Instance.scaleMinY;
+				}
+				if (Instance.scalePosition.top > Instance.scaleMaxY) {
+					Instance.scalePosition.top = Instance.scaleMaxY;
+				}
 			}
-			if (Instance.scalePosition.top > Instance.scaleMaxY) {
-				Instance.scalePosition.top = Instance.scaleMaxY;
+
+			if (Instance.scaleWidth < conWidth) {
+				Instance.scalePosition.left = conWidth / 2;
+			} else {
+				if (Instance.scalePosition.left < Instance.scaleMinX) {
+					Instance.scalePosition.left = Instance.scaleMinX;
+				}
+				if (Instance.scalePosition.left > Instance.scaleMaxX) {
+					Instance.scalePosition.left = Instance.scaleMaxX;
+				}
 			}
+
+			Instance.$lightbox.removeClass(RawClasses.scaling);
+
+			Instance.$imageContainer.css({
+				left: Instance.scalePosition.left,
+				top:  Instance.scalePosition.top
+			});
 		}
+	}
 
-		if (Instance.scaleWidth < conWidth) {
-			Instance.scalePosition.left = conWidth / 2;
+	/**
+	 * @method private
+	 * @name checkDoubleTap
+	 * @description Check double tap action.
+	 */
+
+	function checkDoubleTap() {
+		if (Instance.tapTimer === null) {
+			Instance.tapTimer = Functions.startTimer(Instance.tapTimer, 500, function() {
+				clearDoubleTap();
+			});
 		} else {
-			if (Instance.scalePosition.left < Instance.scaleMinX) {
-				Instance.scalePosition.left = Instance.scaleMinX;
-			}
-			if (Instance.scalePosition.left > Instance.scaleMaxX) {
-				Instance.scalePosition.left = Instance.scaleMaxX;
-			}
+			clearDoubleTap();
+			onImageZoom();
 		}
+	}
 
-		Instance.$lightbox.removeClass(RawClasses.scaling);
+	/**
+	 * @method private
+	 * @name clearDoubleTap
+	 * @description Clear double tap action.
+	 */
 
-		Instance.$imageContainer.css({
-			left: Instance.scalePosition.left,
-			top:  Instance.scalePosition.top
-		});
+	function clearDoubleTap() {
+		Functions.clearTimer(Instance.tapTimer);
+		Instance.tapTimer = null;
 	}
 
 	/**
@@ -1760,6 +1778,7 @@
 				"loading",
 				"animating",
 				"scaling",
+				"zooming",
 				"fixed",
 				"mobile",
 				"touch",

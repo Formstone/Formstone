@@ -133,7 +133,13 @@
 
 	function onPointerStart(e) {
 		var data     = e.data,
-			touch    = ($.type(data.touches) !== "undefined") ? data.touches[0] : null;
+			touch    = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+
+		console.log(e.type);
+
+		if (touch) {
+			data.$el.off(Events.mouseDown);
+		}
 
 		if (!data.touching) {
 			data.startE      = e.originalEvent;
@@ -171,7 +177,7 @@
 		if (!data.touching) {
 			data.touching = true;
 
-			if (data.pan) {
+			if (data.pan && !touch) {
 				$Window.on(Events.mouseMove, data, onPointerMove)
 					   .on(Events.mouseUp, data, onPointerEnd);
 			}
@@ -203,7 +209,7 @@
 
 	function onPointerMove(e) {
 		var data      = e.data,
-			touch     = ($.type(data.touches) !== "undefined") ? data.touches[0] : null,
+			touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
 			newX      = (touch) ? touch.pageX : e.pageX,
 			newY      = (touch) ? touch.pageY : e.pageY,
 			deltaX    = newX - data.startX,
@@ -266,9 +272,11 @@
 	function onPointerEnd(e) {
 		var data = e.data;
 
+		console.log(e.type);
+
 		// Pan / Swipe / Scale
 
-		var touch     = ($.type(data.touches) !== "undefined") ? data.touches[0] : null,
+		var touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
 			newX      = (touch) ? touch.pageX : e.pageX,
 			newY      = (touch) ? touch.pageY : e.pageY,
 			deltaX    = newX - data.startX,
@@ -336,6 +344,12 @@
 				}));
 			}
 			*/
+		}
+
+		if (touch) {
+			data.touchTimer = Functions.startTimer(data.touchTimer, 5, function() {
+				data.$el.on(Events.mouseDown, data, onPointerStart);
+			});
 		}
 
 		data.touching = false;
