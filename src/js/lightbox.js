@@ -1,6 +1,5 @@
 /* global define */
 
-// TODO: Add double tap to zoom in/out - click and touch behaving strangely together, fireing touch and mouse, causing pointerStart to run twice?
 // TODO: Add swipe next/previous when zoomed out
 
 (function(factory) {
@@ -152,7 +151,7 @@
 			// Touch
 			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
 
-			Instance.$viewportMeta = $('[name="viewport"]');
+			Instance.$viewportMeta = $('meta[name="viewport"]');
 			Instance.viewportContent = (Instance.$viewportMeta.length) ? Instance.$viewportMeta.attr("content") : false;
 
 			// Double the margin
@@ -480,7 +479,7 @@
 			durration = Instance.isMobile ? 0 : Instance.duration;
 
 		if (Instance.isMobile) {
-			var viewportContent = 'width=device-width; initial-scale=1; maximum-scale=1; user-scalable=no';
+			var viewportContent = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
 
 			if (Instance.$viewportMeta) {
 				Instance.$viewportMeta.attr("content", viewportContent);
@@ -749,29 +748,21 @@
 
 			if (Instance.touch) {
 				cacheScale();
-				onScale({
-					scale: 1,
-					deltaX: 0,
-					deltaY: 0
+
+				var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+					conWidth  = Instance.$container.outerWidth();
+
+				Instance.$imageContainer.css({
+					left: (conWidth  / 2),
+					top:  (conHeight / 2)
 				});
-				onScaleEnd();
 
 				Instance.$content.fsTouch({
 					pan      : true,
-					scale    : true,
-					// swipe    : true
+					scale    : true
 				}).on(Events.scaleStart, onScaleStart)
 				  .on(Events.scaleEnd, onScaleEnd)
 				  .on(Events.scale, onScale);
-
-/*
-				if (!Instance.visible && Instance.isMobile && Instance.gallery.active) {
-					Instance.$content.fsTouch({
-						axis: "x",
-						swipe: true
-					}).on(Events.swipe, onSwipe);
-				}
-*/
 			}
 		}).error(loadError)
 		  .attr("src", source)
@@ -891,8 +882,19 @@
 
 	function onScale(e) {
 		if (!Instance.isZooming) {
-			Instance.targetContainerY = Instance.scaleY + e.deltaY;
-			Instance.targetContainerX = Instance.scaleX + e.deltaX;
+			clearDoubleTap();
+
+			var zoomed = (Instance.targetImageHeight > Instance.scaleMinHeight + 1);
+
+			// if (!Instance.gallery || zoomed) {
+			// 	Instance.targetContainerY = Instance.scaleY + e.deltaY;
+			// }
+			// Instance.targetContainerX = Instance.scaleX + e.deltaX;
+
+			if (zoomed) {
+				Instance.targetContainerY = Instance.scaleY + e.deltaY;
+				Instance.targetContainerX = Instance.scaleX + e.deltaX;
+			}
 
 			Instance.targetImageHeight = Instance.scaleHeight * e.scale;
 			Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
@@ -912,19 +914,23 @@
 			}
 
 			Instance.hasScaled = true;
-			Instance.isScaling = true;
 
 			Instance.$imageContainer.css({
 				top:  Instance.targetContainerY,
 				left: Instance.targetContainerX
 			});
 
-			Instance.$image.css({
+			var imageStyles = {
 				height    : Instance.targetImageHeight,
 				width     : Instance.targetImageWidth,
-				top       : -(Instance.targetImageHeight / 2),
 				left      : -(Instance.targetImageWidth  / 2)
-			});
+			};
+
+			// if (!Instance.gallery || zoomed) {
+				imageStyles.top = -(Instance.targetImageHeight / 2);
+			// }
+
+			Instance.$image.css(imageStyles);
 		}
 	}
 
@@ -939,37 +945,59 @@
 		if (!Instance.isZooming) {
 			cacheScale();
 
-			Instance.isScaling = false;
-
 			var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
 				conWidth  = Instance.$container.outerWidth();
+				// zoomed    = (Instance.targetImageHeight > Instance.scaleMinHeight + 1),
+				// recenter  = true,
+				// dirX      = e.directionX;
 
-			Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
-			Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
-			Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
-			Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
+			// if (Instance.gallery && !zoomed) {
+			// 	if ( (dirX === "left" && Instance.gallery.index < Instance.gallery.total) || (dirX === "right" && Instance.gallery.index > 0) ) {
+			// 		recenter = false;
+			// 	}
+			// }
 
-			if (Instance.scaleHeight < conHeight) {
-				Instance.scalePosition.top = conHeight / 2;
-			} else {
-				if (Instance.scalePosition.top < Instance.scaleMinY) {
-					Instance.scalePosition.top = Instance.scaleMinY;
-				}
-				if (Instance.scalePosition.top > Instance.scaleMaxY) {
-					Instance.scalePosition.top = Instance.scaleMaxY;
-				}
-			}
+			// if (recenter) {
+				Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
+				Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
+				Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
+				Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
 
-			if (Instance.scaleWidth < conWidth) {
-				Instance.scalePosition.left = conWidth / 2;
-			} else {
-				if (Instance.scalePosition.left < Instance.scaleMinX) {
-					Instance.scalePosition.left = Instance.scaleMinX;
+				if (Instance.scaleHeight < conHeight) {
+					Instance.scalePosition.top = conHeight / 2;
+				} else {
+					if (Instance.scalePosition.top < Instance.scaleMinY) {
+						Instance.scalePosition.top = Instance.scaleMinY;
+					}
+					if (Instance.scalePosition.top > Instance.scaleMaxY) {
+						Instance.scalePosition.top = Instance.scaleMaxY;
+					}
 				}
-				if (Instance.scalePosition.left > Instance.scaleMaxX) {
-					Instance.scalePosition.left = Instance.scaleMaxX;
+
+				if (Instance.scaleWidth < conWidth) {
+					Instance.scalePosition.left = conWidth / 2;
+				} else {
+					if (Instance.scalePosition.left < Instance.scaleMinX) {
+						Instance.scalePosition.left = Instance.scaleMinX;
+					}
+					if (Instance.scalePosition.left > Instance.scaleMaxX) {
+						Instance.scalePosition.left = Instance.scaleMaxX;
+					}
 				}
-			}
+			// } else {
+			// 	var control;
+			//
+			// 	if (dirX === "left") {
+			// 		control = Classes.control_next;
+			// 		Instance.scalePosition.left = -(Instance.scaleWidth / 2);
+			// 	} else {
+			// 		control = Classes.control_previous;
+			// 		Instance.scalePosition.left = conWidth + (Instance.scaleWidth / 2);
+			// 	}
+			//
+			// 	Instance.$controls.filter(control)
+			// 					  .trigger(Events.click);
+			// }
 
 			Instance.$lightbox.removeClass(RawClasses.scaling);
 
@@ -1620,19 +1648,6 @@
 		Instance.$image.off(Events.namespace);
 
 		appendObject($error);
-	}
-
-	/**
-	 * @method private
-	 * @name onSwipe
-	 * @description Handles swipe event
-	 * @param e [object] "Event data"
-	 */
-
-	function onSwipe(e) {
-		if (!Instance.captionOpen) {
-			Instance.$controls.filter((e.directionX === "left") ? Classes.control_next : Classes.control_previous).trigger(Events.click);
-		}
 	}
 
 	/**

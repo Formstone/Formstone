@@ -135,8 +135,6 @@
 		var data     = e.data,
 			touch    = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
 
-		console.log(e.type);
-
 		if (touch) {
 			data.$el.off(Events.mouseDown);
 		}
@@ -271,8 +269,6 @@
 
 	function onPointerEnd(e) {
 		var data = e.data;
-
-		console.log(e.type);
 
 		// Pan / Swipe / Scale
 
