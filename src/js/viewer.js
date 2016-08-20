@@ -141,9 +141,9 @@
 		cacheInstances();
 
 		// data.$controls.on(Events.click, [Classes.control_previous, Classes.control_next].join(", ") , data, advanceGallery);
-		data.$controlBox.on(Events.mouseDown, Classes.zoom_out, data, onZoomOut)
-						.on(Events.mouseDown, Classes.zoom_in, data, onZoomIn)
-						.on(Events.mouseUp, [Classes.zoom_out, Classes.zoom_in].join(", "), data, onClearZoom);
+		data.$controlBox.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_out, data, onZoomOut)
+						.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_in, data, onZoomIn)
+						.on( [Events.touchEnd, Events.mouseUp].join(" "), [Classes.zoom_out, Classes.zoom_in].join(", "), data, onClearZoom);
 
 		if (data.lazy) {
 			checkScrollPosition(data);
@@ -722,6 +722,8 @@
 	}
 
 	function onZoomIn(e) {
+		Functions.killEvent(e);
+
 		var data = e.data;
 
 		data.keyDownTime = 1;
@@ -729,6 +731,8 @@
 	}
 
 	function onZoomOut(e) {
+		Functions.killEvent(e);
+
 		var data = e.data;
 
 		data.keyDownTime = 1;
