@@ -55,6 +55,9 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.zoom_in` | `string` | `'Zoom In'` | Image zoom text |
 | `labels.zoom_out` | `string` | `'Zoom Out'` | Image zoom text |
 | `theme` | `string` | `"fs-light"` | Theme class name |
+| `zoomDelta` | `int` | `100` | Max zoom change |
+| `zoomEnertia` | `float` | `0.2` | Enertia for zoom |
+| `zoomIncrement` | `float` | `0.01` | Increment for zoom buttons |
 
 <hr>
 ## <a name="events"></a> Events

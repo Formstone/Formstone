@@ -1,7 +1,10 @@
 /* global define */
 
 // TODO: load error
-// TODO: Move image manipulation to code functions? Functionality should be shared with Viewer, possibly reusable as fsTouch option?
+// TODO: gallery loading / unloading
+// TODO: control positioning
+// TODO: external controls light carousel?
+// TODO: theme
 
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
@@ -102,8 +105,6 @@
 		data.zooming     = false;
 
 		data.keyDownTime  = 1;
-		data.keyDownIncrement = 1.2;
-		data.maxIncrement = 100;
 
 		data.$images    = this.find("img").addClass(RawClasses.source);
 		data.index      = 0;
@@ -754,15 +755,13 @@
 
 	function renderRAF(data) {
 		if (data.render) {
-			data.enertia = 0.2;
-
 			if (data.action) {
-				data.keyDownTime *= data.keyDownIncrement;
+				data.keyDownTime += data.zoomIncrement;
 
-				var delta = ((data.action === "zoom_out") ? -1 : 1) * data.keyDownTime; //* Math.round((data.renderImageWidth * data.keyDownTime) - data.renderImageWidth);
+				var delta = ((data.action === "zoom_out") ? -1 : 1) * Math.round((data.imageWidth * data.keyDownTime) - data.imageWidth);
 
-				if (delta > data.maxIncrement) {
-					delta = data.maxIncrement;
+				if (delta > data.zoomDelta) {
+					delta = data.zoomDelta;
 				}
 
 				if (data.isWide) {
@@ -786,14 +785,14 @@
 				checkContainerTopLeft(data);
 			}
 
-			data.renderContainerTop  += Math.round((data.containerTop  - data.renderContainerTop)  * data.enertia);
-			data.renderContainerLeft += Math.round((data.containerLeft - data.renderContainerLeft) * data.enertia);
+			data.renderContainerTop  += Math.round((data.containerTop  - data.renderContainerTop)  * data.zoomEnertia);
+			data.renderContainerLeft += Math.round((data.containerLeft - data.renderContainerLeft) * data.zoomEnertia);
 
-			data.renderImageTop  += Math.round((data.imageTop  - data.renderImageTop)  * data.enertia);
-			data.renderImageLeft += Math.round((data.imageLeft - data.renderImageLeft) * data.enertia);
+			data.renderImageTop  += Math.round((data.imageTop  - data.renderImageTop)  * data.zoomEnertia);
+			data.renderImageLeft += Math.round((data.imageLeft - data.renderImageLeft) * data.zoomEnertia);
 
-			data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.enertia);
-			data.renderImageWidth  += Math.round((data.imageWidth  - data.renderImageWidth)  * data.enertia);
+			data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.zoomEnertia);
+			data.renderImageWidth  += Math.round((data.imageWidth  - data.renderImageWidth)  * data.zoomEnertia);
 
 			// Update dom
 			data.$container.css({
@@ -959,6 +958,9 @@
 			 * @param labels.zoom_in [string] <'Zoom In'> "Image zoom text"
 			 * @param labels.zoom_out [string] <'Zoom Out'> "Image zoom text"
 			 * @param theme [string] <"fs-light"> "Theme class name"
+			 * @param zoomDelta [int] <100> "Max zoom change"
+			 * @param zoomEnertia [float] <0.2> "Enertia for zoom"
+			 * @param zoomIncrement [float] <0.01> "Increment for zoom buttons"
 			 */
 
 			defaults: {
@@ -972,7 +974,10 @@
 					zoom_in    : "Zoom In",
 					zoom_out   : "Zoom Out"
 				},
-				theme          : "fs-light"
+				theme          : "fs-light",
+				zoomDelta      : 100,
+				zoomEnertia    : 0.2,
+				zoomIncrement  : 0.01
 			},
 
 			classes: [
