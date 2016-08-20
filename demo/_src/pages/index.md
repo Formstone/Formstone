@@ -31,3 +31,4 @@
 * [Touch](components/touch.html)
 * [Transition](components/transition.html)
 * [Upload](components/upload.html)
+* [Viewer](components/viewer.html)

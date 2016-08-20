@@ -58,7 +58,7 @@
 			};
 
 			// Move the demo navs out
-			
+
 			$(".js-navigation_elements").appendTo("body");
 
 			// Destroy
@@ -78,6 +78,7 @@
 			Site.$body.find(".js-tabs").tabs("destroy");
 			Site.$body.find(".js-tooltip").tooltip("destroy");
 			Site.$body.find(".js-upload").upload("destroy");
+			Site.$body.find(".js-viewer").viewer("destroy");
 
 			// Init
 
@@ -96,6 +97,7 @@
 			Site.$body.find(".js-tabs").tabs(options);
 			Site.$body.find(".js-tooltip").tooltip(options);
 			Site.$body.find(".js-upload").upload(options);
+			Site.$body.find(".js-viewer").viewer(options);
 
 			// Demo Tabs
 

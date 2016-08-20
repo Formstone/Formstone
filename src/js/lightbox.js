@@ -112,6 +112,7 @@
 				isMobile           : (Formstone.isMobile || data.mobile),
 				isTouch            : Formstone.support.touch,
 				isAnimating        : true,
+				isZooming          : false,
 				oldContentHeight   : 0,
 				oldContentWidth    : 0,
 				metaHeight         : 0,
@@ -149,7 +150,7 @@
 			Functions.killEvent(e);
 
 			// Touch
-			Instance.touch = (data.touch && Instance.isMobile && Instance.isTouch);
+			Instance.doTouch = (data.touch && Instance.isMobile && Instance.isTouch);
 
 			Instance.$viewportMeta = $('meta[name="viewport"]');
 			Instance.viewportContent = (Instance.$viewportMeta.length) ? Instance.$viewportMeta.attr("content") : false;
@@ -746,7 +747,7 @@
 
 			openLightbox();
 
-			if (Instance.touch) {
+			if (Instance.doTouch) {
 				cacheScale();
 
 				var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
@@ -1135,7 +1136,7 @@
 						width:  Instance.targetImageWidth
 					});
 
-					if (Instance.touch) {
+					if (Instance.doTouch) {
 						Instance.$image.css({
 							top     : -(Instance.targetImageHeight / 2),
 							left    : -(Instance.targetImageWidth  / 2)
@@ -1161,7 +1162,7 @@
 				count ++;
 			}
 
-			if (Instance.touch) {
+			if (Instance.doTouch) {
 				Instance.scaleMinHeight    = Instance.targetImageHeight;
 				Instance.scaleMinWidth     = Instance.targetImageWidth;
 				Instance.scaleMaxHeight    = Instance.naturalHeight;

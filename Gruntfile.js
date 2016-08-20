@@ -4,26 +4,6 @@
 
 module.exports = function(grunt) {
 
-	var cssFiles = {
-		'dist/css/grid.css'          : [ 'src/less/grid.less' ],
-		'dist/css/grid.ie.css'       : [ 'src/less/grid.ie.less' ],
-		'dist/css/background.css'    : [ 'src/less/background.less' ],
-		'dist/css/carousel.css'      : [ 'src/less/carousel.less' ],
-		'dist/css/checkbox.css'      : [ 'src/less/checkbox.less' ],
-		'dist/css/dropdown.css'      : [ 'src/less/dropdown.less' ],
-		'dist/css/lightbox.css'      : [ 'src/less/lightbox.less' ],
-		'dist/css/navigation.css'    : [ 'src/less/navigation.less' ],
-		'dist/css/number.css'        : [ 'src/less/number.less' ],
-		'dist/css/pagination.css'    : [ 'src/less/pagination.less' ],
-		'dist/css/range.css'         : [ 'src/less/range.less' ],
-		'dist/css/scrollbar.css'     : [ 'src/less/scrollbar.less' ],
-		'dist/css/tabs.css'          : [ 'src/less/tabs.less' ],
-		'dist/css/tooltip.css'       : [ 'src/less/tooltip.less' ],
-		'dist/css/upload.css'        : [ 'src/less/upload.less' ],
-
-		'dist/css/themes/light.css'  : [ 'src/less/themes/light.less' ]
-	};
-
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 		meta: {
@@ -199,7 +179,7 @@ module.exports = function(grunt) {
 				]
 			},
 			library: {
-				files: cssFiles
+				files: '<%= pkg.src.css %>'
 			},
 			demo: {
 				files: '<%= pkg.site.css %>'

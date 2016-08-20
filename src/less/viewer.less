@@ -1,0 +1,160 @@
+/**
+ * @component
+ * @name Viewer
+ */
+
+/**
+ * @class
+ * @name .fs-viewer-element
+ * @type element
+ * @description Target elmement
+ */
+
+/**
+ * @class
+ * @name .fs-viewer
+ * @type element
+ * @description Base widget class
+ */
+
+.fs-viewer {
+
+	@import "imports/utils.less";
+
+	// Transition
+
+	@fs-viewer-transition-duration:				0.25s;
+	@fs-viewer-transition-timing:				ease;
+
+	// viewer
+
+	// wrapper
+
+	@fs-viewer-wrapper-background:				#eee;
+	// @fs-viewer-z-index:						100;
+
+	// Container
+
+	// Controls
+
+	@fs-viewer-controls-size:					20px;
+	@fs-viewer-controls-background:				#eee;
+
+	&-source {
+		display: none !important;
+	}
+
+	&-wrapper {
+		position: relative;
+
+		background: @fs-viewer-wrapper-background;
+		overflow: hidden;
+		transition: none;
+
+
+		height: 300px;
+	}
+
+	&-viewport {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+		bottom: 25px;
+		left: 25px;
+	}
+
+	&-container {
+		width:  1px;
+		height: 1px;
+
+		position: absolute;
+
+		margin: 0;
+		transform: translate3D(0, 0, 0);
+		transition:
+			opacity @fs-viewer-transition-duration @fs-viewer-transition-timing,
+			top     @fs-viewer-transition-duration @fs-viewer-transition-timing,
+			left    @fs-viewer-transition-duration @fs-viewer-transition-timing;
+	}
+
+	&-image {
+		position: absolute;
+
+		transition:
+			height @fs-viewer-transition-duration @fs-viewer-transition-timing,
+			width  @fs-viewer-transition-duration @fs-viewer-transition-timing,
+			top    @fs-viewer-transition-duration @fs-viewer-transition-timing,
+			left   @fs-viewer-transition-duration @fs-viewer-transition-timing;
+	}
+
+	// Animating
+
+	&-scaling &-container {
+		transition: none !important;
+	}
+
+	&-scaling &-image {
+		transition: none !important;
+	}
+
+	// Controls
+
+	&-controls {
+		// width: (@fs-viewer-controls-size * 2);
+		// height: @fs-viewer-controls-size;
+		//
+		// position: absolute;
+		// right: 0;
+		// top: 10px;
+		// left: 0;
+		//
+		// background: @fs-viewer-controls-background;
+		// margin: 0 auto;
+	}
+
+	&-control_previous,
+	&-control_next {
+		// width: @fs-viewer-controls-size;
+		// height: @fs-viewer-controls-size;
+		//
+		// background: @fs-viewer-controls-background;
+		// float: left;
+	}
+
+	&-control_previous {
+
+		// &:after {
+		// 	content: 'Previous';
+		// }
+	}
+
+	&-control_next {
+
+		// &:after {
+		// 	content: 'Next';
+		// }
+	}
+
+	&-zoom_in,
+	&-zoom_out {
+		// width: @fs-viewer-controls-size;
+		// height: @fs-viewer-controls-size;
+		//
+		// background: @fs-viewer-controls-background;
+		// float: left;
+	}
+
+	&-zoom_out {
+
+		// &:after {
+		// 	content: '-';
+		// }
+	}
+
+	&-zoom_in {
+
+		// &:after {
+		// 	content: '+';
+		// }
+	}
+}
