@@ -13,6 +13,7 @@
   "homepage_short": "formstone.it",
   "demo": "http://formstone.it/demo/",
   "license": "GPL-3.0",
+  "main": "dist/js/core.js",
   "author": {
     "name": "Ben Plum",
     "email": "mr@benplum.com",
