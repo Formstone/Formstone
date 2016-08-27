@@ -34,6 +34,7 @@ jQuery
 core.js
 touch.js
 transition.js
+viewer.js
 ```
 
 ### Basic

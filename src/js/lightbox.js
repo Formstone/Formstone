@@ -150,7 +150,7 @@
 			Functions.killEvent(e);
 
 			// Touch
-			Instance.doTouch = (data.touch && Instance.isMobile && Instance.isTouch);
+			// Instance.doTouch = (data.touch && Instance.isMobile && Instance.isTouch);
 
 			Instance.$viewportMeta = $('meta[name="viewport"]');
 			Instance.viewportContent = (Instance.$viewportMeta.length) ? Instance.$viewportMeta.attr("content") : false;
@@ -425,8 +425,8 @@
 			Instance.$lightbox.fsTransition("destroy");
 			Instance.$content.fsTransition("destroy");
 
-			clearTouch();
-			clearDoubleTap();
+			// clearTouch();
+			// clearDoubleTap();
 
 			Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
 				property: "opacity"
@@ -723,9 +723,9 @@
 	 */
 
 	function loadImage(source) {
-		Instance.hasScaled = false;
+		// Instance.hasScaled = false;
 
-		if (Instance.isMobile) {
+		if (Instance.isMobile && $.fn.fsViewer !== undefined) {
 			Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
 			Instance.$image = Instance.$imageContainer.find("img");
 
@@ -734,9 +734,13 @@
 
 			Instance.$content.prepend(Instance.$imageContainer);
 
+			sizeImage();
+
 			Instance.$imageContainer.one("loaded.viewer", function() {
 				openLightbox();
-			}).fsViewer();
+			}).fsViewer({
+				theme: Instance.theme
+			});
 		} else {
 			// Cache current image
 			Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
@@ -748,10 +752,10 @@
 				Instance.naturalHeight = naturalSize.naturalHeight;
 				Instance.naturalWidth  = naturalSize.naturalWidth;
 
-				if (Instance.retina) {
-					Instance.naturalHeight /= 2;
-					Instance.naturalWidth  /= 2;
-				}
+				// if (Instance.retina) {
+				// 	Instance.naturalHeight /= 2;
+				// 	Instance.naturalWidth  /= 2;
+				// }
 
 				Instance.$content.prepend(Instance.$imageContainer);
 
@@ -795,14 +799,14 @@
 	 * @description Clears current touch action.
 	 */
 
-	function clearTouch() {
-		if (Instance.$image && Instance.$image.length) {
-			Instance.$content.fsTouch("destroy")
-							 .off(Events.scaleStart, onScaleStart)
-							 .off(Events.scaleEnd, onScaleEnd)
-							 .off(Events.scale, onScale);
-		}
-	}
+	// function clearTouch() {
+	// 	if (Instance.$image && Instance.$image.length) {
+	// 		Instance.$content.fsTouch("destroy")
+	// 						 .off(Events.scaleStart, onScaleStart)
+	// 						 .off(Events.scaleEnd, onScaleEnd)
+	// 						 .off(Events.scale, onScale);
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -811,49 +815,49 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onImageZoom() {
-		if (Instance.$image && Instance.$image.length) {
-			Instance.isZooming = true;
-
-			Instance.$lightbox.addClass(RawClasses.zooming)
-							  .removeClass(RawClasses.scaling);
-
-			var direction = (Instance.targetImageHeight > Instance.scaleMinHeight + 1) ? "out" : "in";
-
-			if (direction === "out") {
-				// We're zoomed in
-				Instance.targetImageHeight = Instance.scaleMinHeight;
-				Instance.targetImageWidth  = Instance.scaleMinWidth;
-			} else {
-				// We're zoomed out
-				Instance.targetImageHeight = Instance.scaleMaxHeight;
-				Instance.targetImageWidth  = Instance.scaleMaxWidth;
-			}
-
-			var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
-				conWidth  = Instance.$container.outerWidth();
-
-			Instance.scalePosition.top  = Instance.targetContainerY = (conHeight / 2);
-			Instance.scalePosition.left = Instance.targetContainerX = (conWidth  / 2);
-
-			Instance.$imageContainer.css({
-				left: Instance.targetContainerX,
-				top:  Instance.targetContainerY
-			});
-
-			Instance.$image.fsTransition({
-				property: "top"
-			}, function() {
-				Instance.isZooming = false;
-				Instance.$lightbox.removeClass(RawClasses.zooming);
-			}).css({
-				height    : Instance.targetImageHeight,
-				width     : Instance.targetImageWidth,
-				top       : -(Instance.targetImageHeight / 2),
-				left      : -(Instance.targetImageWidth  / 2)
-			});
-		}
-	}
+	// function onImageZoom() {
+	// 	if (Instance.$image && Instance.$image.length) {
+	// 		Instance.isZooming = true;
+	//
+	// 		Instance.$lightbox.addClass(RawClasses.zooming)
+	// 						  .removeClass(RawClasses.scaling);
+	//
+	// 		var direction = (Instance.targetImageHeight > Instance.scaleMinHeight + 1) ? "out" : "in";
+	//
+	// 		if (direction === "out") {
+	// 			// We're zoomed in
+	// 			Instance.targetImageHeight = Instance.scaleMinHeight;
+	// 			Instance.targetImageWidth  = Instance.scaleMinWidth;
+	// 		} else {
+	// 			// We're zoomed out
+	// 			Instance.targetImageHeight = Instance.scaleMaxHeight;
+	// 			Instance.targetImageWidth  = Instance.scaleMaxWidth;
+	// 		}
+	//
+	// 		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+	// 			conWidth  = Instance.$container.outerWidth();
+	//
+	// 		Instance.scalePosition.top  = Instance.targetContainerY = (conHeight / 2);
+	// 		Instance.scalePosition.left = Instance.targetContainerX = (conWidth  / 2);
+	//
+	// 		Instance.$imageContainer.css({
+	// 			left: Instance.targetContainerX,
+	// 			top:  Instance.targetContainerY
+	// 		});
+	//
+	// 		Instance.$image.fsTransition({
+	// 			property: "top"
+	// 		}, function() {
+	// 			Instance.isZooming = false;
+	// 			Instance.$lightbox.removeClass(RawClasses.zooming);
+	// 		}).css({
+	// 			height    : Instance.targetImageHeight,
+	// 			width     : Instance.targetImageWidth,
+	// 			top       : -(Instance.targetImageHeight / 2),
+	// 			left      : -(Instance.targetImageWidth  / 2)
+	// 		});
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -861,15 +865,15 @@
 	 * @description Caches current scale settings.
 	 */
 
-	function cacheScale() {
-		Instance.scalePosition = Instance.$imageContainer.position();
-
-		Instance.scaleY = Instance.scalePosition.top;
-		Instance.scaleX = Instance.scalePosition.left;
-
-		Instance.scaleHeight = Instance.$image.outerHeight();
-		Instance.scaleWidth  = Instance.$image.outerWidth();
-	}
+	// function cacheScale() {
+	// 	Instance.scalePosition = Instance.$imageContainer.position();
+	//
+	// 	Instance.scaleY = Instance.scalePosition.top;
+	// 	Instance.scaleX = Instance.scalePosition.left;
+	//
+	// 	Instance.scaleHeight = Instance.$image.outerHeight();
+	// 	Instance.scaleWidth  = Instance.$image.outerWidth();
+	// }
 
 	/**
 	 * @method private
@@ -878,15 +882,15 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onScaleStart(e) {
-		if (!Instance.isZooming) {
-			Instance.$lightbox.removeClass(RawClasses.zooming)
-							  .addClass(RawClasses.scaling);
-
-			cacheScale();
-			checkDoubleTap();
-		}
-	}
+	// function onScaleStart(e) {
+	// 	if (!Instance.isZooming) {
+	// 		Instance.$lightbox.removeClass(RawClasses.zooming)
+	// 						  .addClass(RawClasses.scaling);
+	//
+	// 		cacheScale();
+	// 		checkDoubleTap();
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -895,62 +899,62 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onScale(e) {
-		if (!Instance.isZooming) {
-			clearDoubleTap();
-
-			var zoomed = (Instance.targetImageHeight > Instance.scaleMinHeight + 1);
-
-			// if (!Instance.gallery || zoomed) {
-			// 	Instance.targetContainerY = Instance.scaleY + e.deltaY;
-			// }
-			// Instance.targetContainerX = Instance.scaleX + e.deltaX;
-
-			Instance.targetContainerY = Instance.scaleY;
-			Instance.targetContainerX = Instance.scaleX;
-
-			if (zoomed) {
-				Instance.targetContainerY += e.deltaY;
-				Instance.targetContainerX += e.deltaX;
-			}
-
-			Instance.targetImageHeight = Instance.scaleHeight * e.scale;
-			Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
-
-			if (Instance.targetImageHeight < Instance.scaleMinHeight) {
-				Instance.targetImageHeight = Instance.scaleMinHeight;
-			}
-			if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
-				Instance.targetImageHeight = Instance.scaleMaxHeight;
-			}
-
-			if (Instance.targetImageWidth < Instance.scaleMinWidth) {
-				Instance.targetImageWidth = Instance.scaleMinWidth;
-			}
-			if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
-				Instance.targetImageWidth = Instance.scaleMaxWidth;
-			}
-
-			Instance.hasScaled = true;
-
-			Instance.$imageContainer.css({
-				top:  Instance.targetContainerY,
-				left: Instance.targetContainerX
-			});
-
-			var imageStyles = {
-				height    : Instance.targetImageHeight,
-				width     : Instance.targetImageWidth,
-				left      : -(Instance.targetImageWidth  / 2)
-			};
-
-			// if (!Instance.gallery || zoomed) {
-				imageStyles.top = -(Instance.targetImageHeight / 2);
-			// }
-
-			Instance.$image.css(imageStyles);
-		}
-	}
+	// function onScale(e) {
+	// 	if (!Instance.isZooming) {
+	// 		clearDoubleTap();
+	//
+	// 		var zoomed = (Instance.targetImageHeight > Instance.scaleMinHeight + 1);
+	//
+	// 		// if (!Instance.gallery || zoomed) {
+	// 		// 	Instance.targetContainerY = Instance.scaleY + e.deltaY;
+	// 		// }
+	// 		// Instance.targetContainerX = Instance.scaleX + e.deltaX;
+	//
+	// 		Instance.targetContainerY = Instance.scaleY;
+	// 		Instance.targetContainerX = Instance.scaleX;
+	//
+	// 		if (zoomed) {
+	// 			Instance.targetContainerY += e.deltaY;
+	// 			Instance.targetContainerX += e.deltaX;
+	// 		}
+	//
+	// 		Instance.targetImageHeight = Instance.scaleHeight * e.scale;
+	// 		Instance.targetImageWidth  = Instance.scaleWidth  * e.scale;
+	//
+	// 		if (Instance.targetImageHeight < Instance.scaleMinHeight) {
+	// 			Instance.targetImageHeight = Instance.scaleMinHeight;
+	// 		}
+	// 		if (Instance.targetImageHeight > Instance.scaleMaxHeight) {
+	// 			Instance.targetImageHeight = Instance.scaleMaxHeight;
+	// 		}
+	//
+	// 		if (Instance.targetImageWidth < Instance.scaleMinWidth) {
+	// 			Instance.targetImageWidth = Instance.scaleMinWidth;
+	// 		}
+	// 		if (Instance.targetImageWidth > Instance.scaleMaxWidth) {
+	// 			Instance.targetImageWidth = Instance.scaleMaxWidth;
+	// 		}
+	//
+	// 		Instance.hasScaled = true;
+	//
+	// 		Instance.$imageContainer.css({
+	// 			top:  Instance.targetContainerY,
+	// 			left: Instance.targetContainerX
+	// 		});
+	//
+	// 		var imageStyles = {
+	// 			height    : Instance.targetImageHeight,
+	// 			width     : Instance.targetImageWidth,
+	// 			left      : -(Instance.targetImageWidth  / 2)
+	// 		};
+	//
+	// 		// if (!Instance.gallery || zoomed) {
+	// 			imageStyles.top = -(Instance.targetImageHeight / 2);
+	// 		// }
+	//
+	// 		Instance.$image.css(imageStyles);
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -959,72 +963,72 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onScaleEnd(e) {
-		if (!Instance.isZooming) {
-			cacheScale();
-
-			var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
-				conWidth  = Instance.$container.outerWidth();
-				// zoomed    = (Instance.targetImageHeight > Instance.scaleMinHeight + 1),
-				// recenter  = true,
-				// dirX      = e.directionX;
-
-			// if (Instance.gallery && !zoomed) {
-			// 	if ( (dirX === "left" && Instance.gallery.index < Instance.gallery.total) || (dirX === "right" && Instance.gallery.index > 0) ) {
-			// 		recenter = false;
-			// 	}
-			// }
-
-			// if (recenter) {
-				Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
-				Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
-				Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
-				Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
-
-				if (Instance.scaleHeight < conHeight) {
-					Instance.scalePosition.top = conHeight / 2;
-				} else {
-					if (Instance.scalePosition.top < Instance.scaleMinY) {
-						Instance.scalePosition.top = Instance.scaleMinY;
-					}
-					if (Instance.scalePosition.top > Instance.scaleMaxY) {
-						Instance.scalePosition.top = Instance.scaleMaxY;
-					}
-				}
-
-				if (Instance.scaleWidth < conWidth) {
-					Instance.scalePosition.left = conWidth / 2;
-				} else {
-					if (Instance.scalePosition.left < Instance.scaleMinX) {
-						Instance.scalePosition.left = Instance.scaleMinX;
-					}
-					if (Instance.scalePosition.left > Instance.scaleMaxX) {
-						Instance.scalePosition.left = Instance.scaleMaxX;
-					}
-				}
-			// } else {
-			// 	var control;
-			//
-			// 	if (dirX === "left") {
-			// 		control = Classes.control_next;
-			// 		Instance.scalePosition.left = -(Instance.scaleWidth / 2);
-			// 	} else {
-			// 		control = Classes.control_previous;
-			// 		Instance.scalePosition.left = conWidth + (Instance.scaleWidth / 2);
-			// 	}
-			//
-			// 	Instance.$controls.filter(control)
-			// 					  .trigger(Events.click);
-			// }
-
-			Instance.$lightbox.removeClass(RawClasses.scaling);
-
-			Instance.$imageContainer.css({
-				left: Instance.scalePosition.left,
-				top:  Instance.scalePosition.top
-			});
-		}
-	}
+	// function onScaleEnd(e) {
+	// 	if (!Instance.isZooming) {
+	// 		cacheScale();
+	//
+	// 		var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+	// 			conWidth  = Instance.$container.outerWidth();
+	// 			// zoomed    = (Instance.targetImageHeight > Instance.scaleMinHeight + 1),
+	// 			// recenter  = true,
+	// 			// dirX      = e.directionX;
+	//
+	// 		// if (Instance.gallery && !zoomed) {
+	// 		// 	if ( (dirX === "left" && Instance.gallery.index < Instance.gallery.total) || (dirX === "right" && Instance.gallery.index > 0) ) {
+	// 		// 		recenter = false;
+	// 		// 	}
+	// 		// }
+	//
+	// 		// if (recenter) {
+	// 			Instance.scaleMinY    = conHeight - ( Instance.scaleHeight / 2 );
+	// 			Instance.scaleMinX    = conWidth  - ( Instance.scaleWidth  / 2 );
+	// 			Instance.scaleMaxY    = ( Instance.scaleHeight / 2 );
+	// 			Instance.scaleMaxX    = ( Instance.scaleWidth  / 2 );
+	//
+	// 			if (Instance.scaleHeight < conHeight) {
+	// 				Instance.scalePosition.top = conHeight / 2;
+	// 			} else {
+	// 				if (Instance.scalePosition.top < Instance.scaleMinY) {
+	// 					Instance.scalePosition.top = Instance.scaleMinY;
+	// 				}
+	// 				if (Instance.scalePosition.top > Instance.scaleMaxY) {
+	// 					Instance.scalePosition.top = Instance.scaleMaxY;
+	// 				}
+	// 			}
+	//
+	// 			if (Instance.scaleWidth < conWidth) {
+	// 				Instance.scalePosition.left = conWidth / 2;
+	// 			} else {
+	// 				if (Instance.scalePosition.left < Instance.scaleMinX) {
+	// 					Instance.scalePosition.left = Instance.scaleMinX;
+	// 				}
+	// 				if (Instance.scalePosition.left > Instance.scaleMaxX) {
+	// 					Instance.scalePosition.left = Instance.scaleMaxX;
+	// 				}
+	// 			}
+	// 		// } else {
+	// 		// 	var control;
+	// 		//
+	// 		// 	if (dirX === "left") {
+	// 		// 		control = Classes.control_next;
+	// 		// 		Instance.scalePosition.left = -(Instance.scaleWidth / 2);
+	// 		// 	} else {
+	// 		// 		control = Classes.control_previous;
+	// 		// 		Instance.scalePosition.left = conWidth + (Instance.scaleWidth / 2);
+	// 		// 	}
+	// 		//
+	// 		// 	Instance.$controls.filter(control)
+	// 		// 					  .trigger(Events.click);
+	// 		// }
+	//
+	// 		Instance.$lightbox.removeClass(RawClasses.scaling);
+	//
+	// 		Instance.$imageContainer.css({
+	// 			left: Instance.scalePosition.left,
+	// 			top:  Instance.scalePosition.top
+	// 		});
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -1032,16 +1036,16 @@
 	 * @description Check double tap action.
 	 */
 
-	function checkDoubleTap() {
-		if (Instance.tapTimer === null) {
-			Instance.tapTimer = Functions.startTimer(Instance.tapTimer, 500, function() {
-				clearDoubleTap();
-			});
-		} else {
-			clearDoubleTap();
-			onImageZoom();
-		}
-	}
+	// function checkDoubleTap() {
+	// 	if (Instance.tapTimer === null) {
+	// 		Instance.tapTimer = Functions.startTimer(Instance.tapTimer, 500, function() {
+	// 			clearDoubleTap();
+	// 		});
+	// 	} else {
+	// 		clearDoubleTap();
+	// 		onImageZoom();
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -1049,10 +1053,10 @@
 	 * @description Clear double tap action.
 	 */
 
-	function clearDoubleTap() {
-		Functions.clearTimer(Instance.tapTimer);
-		Instance.tapTimer = null;
-	}
+	// function clearDoubleTap() {
+	// 	Functions.clearTimer(Instance.tapTimer);
+	// 	Instance.tapTimer = null;
+	// }
 
 	/**
 	 * @method private
@@ -1109,11 +1113,17 @@
 						Instance.spacerHeight = Instance.$tools.outerHeight(true);
 					}
 
-					Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
-
 					// Content match viewport
 					Instance.contentHeight = Instance.viewportHeight;
 					Instance.contentWidth  = Instance.viewportWidth;
+
+					if (!Instance.isTouch) {
+						Instance.$content.css({
+							height: Instance.contentHeight - Instance.spacerHeight - 10
+						});
+					}
+
+					Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
 
 					fitImage();
 
@@ -1144,24 +1154,24 @@
 					});
 				}
 
-				if (!Instance.hasScaled) {
+				// if (!Instance.hasScaled) {
 					Instance.$image.css({
 						height: Instance.targetImageHeight,
 						width:  Instance.targetImageWidth
 					});
 
-					if (Instance.doTouch) {
-						Instance.$image.css({
-							top     : -(Instance.targetImageHeight / 2),
-							left    : -(Instance.targetImageWidth  / 2)
-						});
-					} else {
+					// if (Instance.doTouch) {
+					// 	Instance.$image.css({
+					// 		top     : -(Instance.targetImageHeight / 2),
+					// 		left    : -(Instance.targetImageWidth  / 2)
+					// 	});
+					// } else {
 						Instance.$image.css({
 							marginTop     : Instance.imageMarginTop,
 							marginLeft    : Instance.imageMarginLeft
 						});
-					}
-				}
+					// }
+				// }
 
 				if (!Instance.isMobile) {
 					Instance.metaHeight = Instance.$meta.outerHeight(true);
@@ -1176,12 +1186,12 @@
 				count ++;
 			}
 
-			if (Instance.doTouch) {
-				Instance.scaleMinHeight    = Instance.targetImageHeight;
-				Instance.scaleMinWidth     = Instance.targetImageWidth;
-				Instance.scaleMaxHeight    = Instance.naturalHeight;
-				Instance.scaleMaxWidth     = Instance.naturalWidth;
-			}
+			// if (Instance.doTouch) {
+			// 	Instance.scaleMinHeight    = Instance.targetImageHeight;
+			// 	Instance.scaleMinWidth     = Instance.targetImageWidth;
+			// 	Instance.scaleMaxHeight    = Instance.naturalHeight;
+			// 	Instance.scaleMaxWidth     = Instance.naturalWidth;
+			// }
 		}
 	}
 
@@ -1393,8 +1403,8 @@
 		if (!Instance.isAnimating && !$control.hasClass(RawClasses.control_disabled)) {
 			Instance.isAnimating = true;
 
-			clearTouch();
-			clearDoubleTap();
+			// clearTouch();
+			// clearDoubleTap();
 			closeCaption();
 
 			Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
@@ -1432,8 +1442,8 @@
 		if (!Instance.isAnimating && !$thumbnail.hasClass(RawClasses.active)) {
 			Instance.isAnimating = true;
 
-			clearTouch();
-			clearDoubleTap();
+			// clearTouch();
+			// clearDoubleTap();
 			closeCaption();
 
 			Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
@@ -1492,7 +1502,7 @@
 
 	function cleanGallery() {
 		if (typeof Instance.$imageContainer !== 'undefined') {
-			if (Instance.isMobile) {
+			if (Instance.isMobile && $.fn.fsViewer !== undefined) {
 				Instance.$imageContainer.fsViewer("destroy");
 			}
 			Instance.$imageContainer.remove();
@@ -1754,6 +1764,7 @@
 	 * @dependency core.js
 	 * @dependency touch.js
 	 * @dependency transition.js
+	 * @dependency viewer.js
 	 */
 
 	var Plugin = Formstone.Plugin("lightbox", {
@@ -1813,7 +1824,7 @@
 				minHeight      : 100,
 				minWidth       : 100,
 				mobile         : false,
-				retina         : false,
+				// retina         : false,
 				requestKey     : "fs-lightbox",
 				theme          : "fs-light",
 				thumbnails     : false,

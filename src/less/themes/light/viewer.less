@@ -6,29 +6,6 @@
 
 .fs-viewer {
 
-}
-
-/**
- * @component
- * @name Viewer
- */
-
-/**
- * @class
- * @name .fs-viewer-element
- * @type element
- * @description Target elmement
- */
-
-/**
- * @class
- * @name .fs-viewer
- * @type element
- * @description Base widget class
- */
-
-.fs-viewer {
-
 	@theme_name: fs-light;
 
 	// Config
@@ -151,7 +128,7 @@
 		padding: @fs-viewer-controls-padding;
 	}
 
-	&-control {
+	&.@{theme_name} &-control {
 		width: @fs-viewer-control-size;
 		height: @fs-viewer-control-size;
 
@@ -192,39 +169,39 @@
 		}
 	}
 
-	&-control_previous,
-	&-control_next {
+	&.@{theme_name} &-control_previous,
+	&.@{theme_name} &-control_next {
 		display: none;
 		font-size: 10px;
 	}
 
-	&-control_previous {
+	&.@{theme_name} &-control_previous {
 
 		&:after {
 			content: '\25C0';
 		}
 	}
 
-	&-control_next {
+	&.@{theme_name} &-control_next {
 
 		&:after {
 			content: '\25b6';
 		}
 	}
 
-	&-zoom_in,
-	&-zoom_out {
+	&.@{theme_name} &-zoom_in,
+	&.@{theme_name} &-zoom_out {
 		font-size: 20px;
 	}
 
-	&-zoom_out {
+	&.@{theme_name} &-zoom_out {
 
 		&:after {
 			content: '-';
 		}
 	}
 
-	&-zoom_in {
+	&.@{theme_name} &-zoom_in {
 
 		&:after {
 			content: '+';

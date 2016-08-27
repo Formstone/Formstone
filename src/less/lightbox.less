@@ -906,4 +906,64 @@
 	&-lock {
 		overflow: hidden !important;
 	}
+
+
+	// Viewer support
+
+
+	&-mobile&-touch &-container,
+	&-mobile&-touch &-content {
+		overflow: visible;
+	}
+
+	&-mobile&-touch &-content {
+		position: relative;
+	}
+
+	.fs-viewer {
+
+		top: 0;
+		bottom: 0;
+
+		&,
+		.fs-viewer-wrapper {
+			height: auto;
+			width: auto;
+
+			position: absolute;
+			right: 0;
+			left: 0;
+
+			background: @fs-lightbox-mobile-background;
+		}
+
+		.fs-viewer-wrapper {
+			top: 0;
+			bottom: 0;
+		}
+
+		.fs-viewer-loading_icon {
+			display: none !important;
+		}
+
+		.fs-viewer-viewport {
+			top:    5px;
+			right:  15px;
+			bottom: 15px;
+			left:   15px;
+		}
+
+		.fs-viewer-controls {
+			position: absolute;
+			top: 0;
+		}
+
+		.fs-viewer-control,
+		.no-touchevents & .fs-viewer-control:hover {
+		}
+
+		.fs-viewer-control {
+
+		}
+	}
 }

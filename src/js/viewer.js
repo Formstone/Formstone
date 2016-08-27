@@ -94,6 +94,8 @@
 			imageData,
 			html = '';
 
+			console.log(data);
+
 		data.thisClasses = [RawClasses.base, RawClasses.loading, data.customClass, data.theme];
 		data.images      = [];
 		data.source      = false;
@@ -126,10 +128,12 @@
 		html += '</div>'; // wrapper
 
 		html += '<div class="' + RawClasses.controls + '">';
+		// if (data.gallery) {
+			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
+		// }
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_out].join(" ") + '">' + data.labels.zoom_out + '</button>';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_in].join(" ") + '">' + data.labels.zoom_in + '</button>';
 		// if (data.gallery) {
-			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
 			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
 		// }
 		html += '</div>'; // controls

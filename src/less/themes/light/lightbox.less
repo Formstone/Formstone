@@ -766,7 +766,12 @@
 
 	// Viewer support
 
-	&.@{theme_name} &-content {
+	&.@{theme_name}&-mobile &-container,
+	&.@{theme_name}&-mobile &-content {
+		overflow: visible;
+	}
+
+	&.@{theme_name}&-mobile &-content {
 		position: relative;
 	}
 
@@ -776,13 +781,19 @@
 		width: auto;
 
 		position: absolute;
-		top: 0;
 		right: 0;
-		bottom: @fs-lightbox-mobile-control-size;
 		left: 0;
+
+		background: @fs-lightbox-mobile-background;
+	}
+
+	&.@{theme_name} .fs-viewer {
+		top: 0;
+		bottom: @fs-lightbox-mobile-control-size;
 	}
 
 	&.@{theme_name} .fs-viewer .fs-viewer-wrapper {
+		top: 0;
 		bottom: 0;
 	}
 
@@ -790,8 +801,50 @@
 		display: none !important;
 	}
 
+	&.@{theme_name} .fs-viewer .fs-viewer-viewport {
+		top:    5px;
+		right:  15px;
+		bottom: 15px;
+		left:   15px;
+	}
+
 	&.@{theme_name} .fs-viewer .fs-viewer-controls {
+		height: 40px;
+		width: 80px;
+
 		top: 0;
 		bottom: auto;
+
+		background: @fs-lightbox-mobile-close-background;
+		border-radius: 0;
+		padding: 0;
+	}
+
+	.@{theme_name}&-touch .fs-viewer .fs-viewer-controls {
+		top: -40px;
+	}
+
+	&.@{theme_name} .fs-viewer .fs-viewer-control,
+	.no-touchevents &.@{theme_name} .fs-viewer .fs-viewer-control:hover {
+		height: 40px;
+		width:  40px;
+
+		background: @fs-lightbox-mobile-close-background;
+		border-radius: 0;
+		color: @fs-lightbox-mobile-close-text-color;
+		padding: 0;
+	}
+
+	&.@{theme_name} .fs-viewer .fs-viewer-control {
+
+		&:after {
+			height: 40px;
+			width:  40px;
+
+			font-family: @fs-lightbox-close-font-family;
+			font-size: 28px;
+			font-weight: @fs-lightbox-close-font-weight;
+			line-height: 34px;
+		}
 	}
 }

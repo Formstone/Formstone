@@ -17,30 +17,30 @@
  * @description Base widget class
  */
 
+ @import "imports/utils.less";
+
+ // Transition
+
+ @fs-viewer-transition-duration:			0.25s;
+ @fs-viewer-transition-timing:				ease;
+
+ // Viewport
+
+ @fs-viewer-viewport-position:				30px;
+
+ // Wrapper
+
+ @fs-viewer-wrapper-background:				#fff;
+ @fs-viewer-z-index:						1;
+
+ // Container
+
+ // Controls
+
+ @fs-viewer-controls-size:					20px;
+ @fs-viewer-controls-background:			#eee;
+
 .fs-viewer {
-
-	@import "imports/utils.less";
-
-	// Transition
-
-	@fs-viewer-transition-duration:				0.25s;
-	@fs-viewer-transition-timing:				ease;
-
-	// Viewport
-
-	@fs-viewer-viewport-position:				30px;
-
-	// Wrapper
-
-	@fs-viewer-wrapper-background:				#eee;
-	@fs-viewer-z-index:							100;
-
-	// Container
-
-	// Controls
-
-	@fs-viewer-controls-size:					20px;
-	@fs-viewer-controls-background:				#222;
 
 	/**
 	 * @class
@@ -152,6 +152,7 @@
 	 */
 
 	&-control {
+		.fs_button;
 	}
 
 	/**
@@ -181,7 +182,7 @@
 
 	&-gallery &-control_previous,
 	&-gallery &-control_next {
-		display: block;
+		display: inline;
 	}
 
 	/**
