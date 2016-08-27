@@ -155,9 +155,9 @@
 									<img src="//spacehold.it/300x300/3.jpg" alt="">
 								</a>
 
-								<a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button lightbox" data-lightbox-gallery="image_gallery" title="Sed posuere consectetur est at lobortis.">
-									YouTube Video
-								</a>
+								<!-- <a href="//www.youtube.com/embed/zsJpUCWfyPE?rel=0&autoplay=1&fs=1" class="button lightbox" data-lightbox-gallery="image_gallery" title="Sed posuere consectetur est at lobortis.">
+				YouTube Video
+			</a> -->
 							</div>
 						</div>
 						<div class="demo_code">
@@ -319,6 +319,32 @@
 &lt;/a&gt;</code></pre>
 							<pre><code class="language-javascript">$(".lightbox").lightbox({
 	mobile: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>Mobile without Viewer</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="gallery">
+								<a href="//spacehold.it/1200x900/1.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="">
+									<img src="//spacehold.it/300x300/1.jpg" alt="">
+								</a>
+								<a href="//spacehold.it/900x1200/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+									<img src="//spacehold.it/300x300/2.jpg" alt="">
+								</a>
+								<a href="//spacehold.it/1200x900/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.">
+									<img src="//spacehold.it/300x300/3.jpg" alt="">
+								</a>
+							</div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;a href=&quot;large_1.jpg&quot; class=&quot;lightbox&quot; title=&quot;Image caption text.&quot;&gt;
+&Tab;&lt;img src=&quot;thumbnail_1.jpg&quot; alt=&quot;&quot;&gt;
+&lt;/a&gt;</code></pre>
+							<pre><code class="language-javascript">$(".lightbox").lightbox({
+	mobile: true,
+	viewer: false
 });</code></pre>
 						</div>
 					</div>

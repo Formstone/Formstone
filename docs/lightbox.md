@@ -114,6 +114,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `videoFormatter` | &nbsp; | &nbsp; | Object of video formatter objects containing a 'pattern' regex and 'format' callback |
 | `videoRatio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |
+| `viewer` | `boolean` | `false` | Flag to force 'Viewer' rendering, if available |
 
 <hr>
 ## <a name="events"></a> Events

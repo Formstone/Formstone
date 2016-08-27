@@ -111,6 +111,7 @@
 				},
 				isMobile           : (Formstone.isMobile || data.mobile),
 				isTouch            : Formstone.support.touch,
+				isViewer           : (data.mobile && data.viewer && typeof $.fn.fsViewer !== undefined),
 				isAnimating        : true,
 				isZooming          : false,
 				oldContentHeight   : 0,
@@ -725,7 +726,7 @@
 	function loadImage(source) {
 		// Instance.hasScaled = false;
 
-		if (Instance.isMobile && $.fn.fsViewer !== undefined) {
+		if (Instance.isViewer) {
 			Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
 			Instance.$image = Instance.$imageContainer.find("img");
 
@@ -1502,7 +1503,7 @@
 
 	function cleanGallery() {
 		if (typeof Instance.$imageContainer !== 'undefined') {
-			if (Instance.isMobile && $.fn.fsViewer !== undefined) {
+			if (Instance.isViewer) {
 				Instance.$imageContainer.fsViewer("destroy");
 			}
 			Instance.$imageContainer.remove();
@@ -1800,6 +1801,7 @@
 			 * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
 			 * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
 			 * @param videoWidth [int] <800> "Video max width"
+			 * @param viewer [boolean] <false> "Flag to force 'Viewer' rendering, if available"
 			 */
 
 			defaults: {
@@ -1841,7 +1843,8 @@
 					}
 				},
 				videoRatio     : 0.5625,
-				videoWidth     : 800
+				videoWidth     : 800,
+				viewer         : true
 			},
 
 			classes: [
