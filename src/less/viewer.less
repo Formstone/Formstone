@@ -26,23 +26,39 @@
 	@fs-viewer-transition-duration:				0.25s;
 	@fs-viewer-transition-timing:				ease;
 
-	// viewer
+	// Viewport
 
-	// wrapper
+	@fs-viewer-viewport-position:				30px;
+
+	// Wrapper
 
 	@fs-viewer-wrapper-background:				#eee;
-	// @fs-viewer-z-index:						100;
+	@fs-viewer-z-index:							100;
 
 	// Container
 
 	// Controls
 
 	@fs-viewer-controls-size:					20px;
-	@fs-viewer-controls-background:				#eee;
+	@fs-viewer-controls-background:				#222;
+
+	/**
+	 * @class
+	 * @name .fs-viewer-source
+	 * @type element
+	 * @description Source image element
+	 */
 
 	&-source {
 		display: none !important;
 	}
+
+	/**
+	 * @class
+	 * @name .fs-viewer-wrapper
+	 * @type element
+	 * @description Viewer wrapper
+	 */
 
 	&-wrapper {
 		position: relative;
@@ -55,13 +71,27 @@
 		height: 300px;
 	}
 
+	/**
+	 * @class
+	 * @name .fs-viewer-viewport
+	 * @type element
+	 * @description Viewer viewport
+	 */
+
 	&-viewport {
 		position: absolute;
-		top: 25px;
-		right: 25px;
-		bottom: 25px;
-		left: 25px;
+		top:    @fs-viewer-viewport-position;
+		right:  @fs-viewer-viewport-position;
+		bottom: @fs-viewer-viewport-position;
+		left:   @fs-viewer-viewport-position;
 	}
+
+	/**
+	 * @class
+	 * @name .fs-viewer-container
+	 * @type element
+	 * @description Image container
+	 */
 
 	&-container {
 		width:  1px;
@@ -70,24 +100,29 @@
 		position: absolute;
 
 		margin: 0;
+		opacity: 1;
 		transform: translate3D(0, 0, 0);
-		// transition:
-		// 	opacity @fs-viewer-transition-duration @fs-viewer-transition-timing,
-		// 	top     @fs-viewer-transition-duration @fs-viewer-transition-timing,
-		// 	left    @fs-viewer-transition-duration @fs-viewer-transition-timing;
+		transition: opacity @fs-viewer-transition-duration @fs-viewer-transition-timing;
 	}
+
+	// Loading
+
+	&-loading &-container {
+		opacity: 0;
+	}
+
+	/**
+	 * @class
+	 * @name .fs-viewer-image
+	 * @type element
+	 * @description Image element
+	 */
 
 	&-image {
 		position: absolute;
-
-		// transition:
-		// 	height @fs-viewer-transition-duration @fs-viewer-transition-timing,
-		// 	width  @fs-viewer-transition-duration @fs-viewer-transition-timing,
-		// 	top    @fs-viewer-transition-duration @fs-viewer-transition-timing,
-		// 	left   @fs-viewer-transition-duration @fs-viewer-transition-timing;
 	}
 
-	// Animating
+	// Scaling
 
 	&-scaling &-container {
 		transition: none !important;
@@ -97,65 +132,73 @@
 		transition: none !important;
 	}
 
-	// Controls
+	/**
+	 * @class
+	 * @name .fs-viewer-controls
+	 * @type element
+	 * @description Controls container
+	 */
 
 	&-controls {
-		// width: (@fs-viewer-controls-size * 2);
-		// height: @fs-viewer-controls-size;
-		
-		position: absolute;
-		right: 0;
-		top: 10px;
-		left: 0;
-		z-index: 10;
-
 		background: @fs-viewer-controls-background;
 		margin: 0 auto;
 	}
 
+	/**
+	 * @class
+	 * @name .fs-viewer-control
+	 * @type element
+	 * @description Control element
+	 */
+
+	&-control {
+	}
+
+	/**
+	 * @class
+	 * @name .fs-viewer-control_previous
+	 * @type element
+	 * @description Previous control
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-viewer-control_next
+	 * @type element
+	 * @description Next control
+	 */
+
 	&-control_previous,
 	&-control_next {
-		// width: @fs-viewer-controls-size;
-		// height: @fs-viewer-controls-size;
-		//
-		// background: @fs-viewer-controls-background;
-		// float: left;
 	}
 
 	&-control_previous {
-
-		// &:after {
-		// 	content: 'Previous';
-		// }
 	}
 
 	&-control_next {
-
-		// &:after {
-		// 	content: 'Next';
-		// }
 	}
+
+	/**
+	 * @class
+	 * @name .fs-viewer-zoom_in
+	 * @type element
+	 * @description Zoom in control
+	 */
+
+	/**
+	 * @class
+	 * @name .fs-viewer-zoom_out
+	 * @type element
+	 * @description Zoom out control
+	 */
 
 	&-zoom_in,
 	&-zoom_out {
-		// width: @fs-viewer-controls-size;
-		// height: @fs-viewer-controls-size;
-		//
-		// background: @fs-viewer-controls-background;
-		// float: left;
 	}
 
 	&-zoom_out {
-
-		// &:after {
-		// 	content: '-';
-		// }
 	}
 
 	&-zoom_in {
-
-		// &:after {
-		// 	content: '+';
-		// }
 	}
 }

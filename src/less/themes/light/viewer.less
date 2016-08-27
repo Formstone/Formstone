@@ -7,3 +7,223 @@
 .fs-viewer {
 
 }
+
+/**
+ * @component
+ * @name Viewer
+ */
+
+/**
+ * @class
+ * @name .fs-viewer-element
+ * @type element
+ * @description Target elmement
+ */
+
+/**
+ * @class
+ * @name .fs-viewer
+ * @type element
+ * @description Base widget class
+ */
+
+.fs-viewer {
+
+	@theme_name: fs-light;
+
+	// Config
+
+	@fs-viewer-transition-duration:				0.25s;
+	@fs-viewer-transition-timing:				ease;
+
+	// Viewport
+
+	@fs-viewer-viewport-position:				30px;
+
+	// Wrapper
+
+	@fs-viewer-wrapper-background:				@fs-light-primary_50;
+	@fs-viewer-z-index:							100;
+
+	// Container
+
+	// Controls
+
+	@fs-viewer-controls-background:				@fs-light-white;
+	@fs-viewer-controls-border-radius:			4px;
+	@fs-viewer-controls-box-shadow: 			0 0 5px fade(@fs-light-black, 25);
+	@fs-viewer-controls-padding:				5px;
+
+	// Control
+
+	@fs-viewer-control-size:					30px;
+	@fs-viewer-control-color:					@fs-light-primary_600;
+	@fs-viewer-control-background:				@fs-light-white;
+	@fs-viewer-control-border-radius:			2px;
+
+	@fs-viewer-control-hover-background:		@fs-light-primary_100;
+	@fs-viewer-control-hover-color:				@fs-light-primary_900;
+
+	// Element
+
+	position: relative;
+
+	&.@{theme_name} &-source {
+		display: none !important;
+	}
+
+	&.@{theme_name} &-wrapper {
+		position: relative;
+
+		background: @fs-viewer-wrapper-background;
+		overflow: hidden;
+		transition: none;
+
+
+		height: 300px;
+	}
+
+	&.@{theme_name} &-viewport {
+		position: absolute;
+		top:    @fs-viewer-viewport-position;
+		right:  @fs-viewer-viewport-position;
+		bottom: @fs-viewer-viewport-position;
+		left:   @fs-viewer-viewport-position;
+	}
+
+	&.@{theme_name} &-container {
+		width:  1px;
+		height: 1px;
+
+		position: absolute;
+
+		margin: 0;
+		opacity: 1;
+		transform: translate3D(0, 0, 0);
+		transition: opacity @fs-viewer-transition-duration @fs-viewer-transition-timing;
+	}
+
+	// Loading
+
+	&.@{theme_name}&-loading &-container {
+		opacity: 0;
+	}
+
+	&.@{theme_name}&-image {
+		position: absolute;
+	}
+
+	// Animating
+
+	&.@{theme_name}&-scaling &-container {
+		transition: none !important;
+	}
+
+	&.@{theme_name}&-scaling &-image {
+		transition: none !important;
+	}
+
+	// Controls
+
+	&.@{theme_name} &-controls {
+		width: (@fs-viewer-control-size * 2) + (@fs-viewer-controls-padding * 2);
+		height: @fs-viewer-control-size + (@fs-viewer-controls-padding * 2);
+
+		position: absolute;
+		right: 0;
+		bottom: 10px;
+		left: 0;
+		z-index: 10;
+
+		background: @fs-viewer-controls-background;
+		border-radius: @fs-viewer-controls-border-radius;
+		box-shadow: @fs-viewer-controls-box-shadow;
+		margin: 0 auto;
+		padding: @fs-viewer-controls-padding;
+	}
+
+	&-control {
+		width: @fs-viewer-control-size;
+		height: @fs-viewer-control-size;
+
+		position: relative;
+
+		background: @fs-viewer-control-background;
+		border: none;
+		border-radius: @fs-viewer-control-border-radius;
+		color: @fs-viewer-control-color;
+		float: left;
+		display: block;
+		overflow: hidden;
+		text-indent: 200%;
+		white-space: nowrap;
+
+		&:after {
+			width: @fs-viewer-control-size;
+			height: @fs-viewer-control-size;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			line-height: @fs-viewer-control-size;
+			text-align: center;
+			text-indent: 0;
+		}
+
+		.no-touchevents &:hover {
+			background: @fs-viewer-control-hover-background;
+			color: @fs-viewer-control-hover-color;
+
+			&:after {
+
+			}
+		}
+	}
+
+	&-control_previous,
+	&-control_next {
+		font-size: 10px;
+	}
+
+	&-control_previous {
+
+		&:after {
+			content: '\25C0';
+		}
+	}
+
+	&-control_next {
+
+		&:after {
+			content: '\25b6';
+		}
+	}
+
+	&-zoom_in,
+	&-zoom_out {
+		font-size: 20px;
+	}
+
+	&-zoom_out {
+
+		&:after {
+			content: '-';
+		}
+	}
+
+	&-zoom_in {
+
+		&:after {
+			content: '+';
+		}
+	}
+
+	// Gallery
+
+	&.@{theme_name}&-gallery &-controls {
+		width: (@fs-viewer-control-size * 4) + (@fs-viewer-controls-padding * 2);
+	}
+}

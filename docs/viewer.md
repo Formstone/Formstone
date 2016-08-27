@@ -128,4 +128,15 @@ $(".target").viewer("unload");
 | --- | --- | --- |
 | `.fs-viewer-element` | `element` | Target elmement |
 | `.fs-viewer` | `element` | Base widget class |
+| `.fs-viewer-source` | `element` | Source image element |
+| `.fs-viewer-wrapper` | `element` | Viewer wrapper |
+| `.fs-viewer-viewport` | `element` | Viewer viewport |
+| `.fs-viewer-container` | `element` | Image container |
+| `.fs-viewer-image` | `element` | Image element |
+| `.fs-viewer-controls` | `element` | Controls container |
+| `.fs-viewer-control` | `element` | Control element |
+| `.fs-viewer-control_previous` | `element` | Previous control |
+| `.fs-viewer-control_next` | `element` | Next control |
+| `.fs-viewer-zoom_in` | `element` | Zoom in control |
+| `.fs-viewer-zoom_out` | `element` | Zoom out control |
 

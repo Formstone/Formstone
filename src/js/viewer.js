@@ -112,6 +112,7 @@
 
 		if (data.$images.length > 1) {
 			data.gallery = true;
+			data.thisClasses.push(RawClasses.gallery);
 		}
 
 		for (var i = 0; i < data.$images.length; i++) {
@@ -121,6 +122,8 @@
 
 		html += '<div class="' + RawClasses.wrapper + '">';
 		html += '<div class="' + RawClasses.viewport + '"></div>';
+		html += '</div>'; // wrapper
+
 		html += '<div class="' + RawClasses.controls + '">';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_out].join(" ") + '">' + data.labels.zoom_out + '</button>';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_in].join(" ") + '">' + data.labels.zoom_in + '</button>';
@@ -129,7 +132,6 @@
 			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
 		}
 		html += '</div>'; // controls
-		html += '</div>'; // wrapper
 
 		this.addClass(data.thisClasses.join(" "))
 			.prepend(html);
@@ -141,15 +143,15 @@
 
 		cacheInstances();
 
-		// data.$controls.on(Events.click, [Classes.control_previous, Classes.control_next].join(", ") , data, advanceGallery);
-		data.$controlBox.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_out, data, onZoomOut)
+		data.$controlBox.on(Events.click, [Classes.control_previous, Classes.control_next].join(", ") , data, advanceGallery)
+						.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_out, data, onZoomOut)
 						.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_in, data, onZoomIn)
 						.on( [Events.touchEnd, Events.mouseUp].join(" "), [Classes.zoom_out, Classes.zoom_in].join(", "), data, onClearZoom);
 
 		if (data.lazy) {
 			checkScrollPosition(data);
 		} else {
-			loadImage(data, data.images[ data.index ]);
+			loadImage(data, data.images[ data.index ], true);
 		}
 	}
 
@@ -189,6 +191,8 @@
 	 */
 
 	function load(data, source) {
+		// TODO swap out source / gallery data
+
 		// Check if the source is new
 		if (source !== data.source && data.visible) {
 			data.source = source;
@@ -216,9 +220,10 @@
 	 * @description Loads source image
 	 * @param data [object] "Instance data"
 	 * @param source [string] "Source image"
+	 * @param initialLoad [boolean] "Is initial load"
 	 */
 
-	function loadImage(data, source) {
+	function loadImage(data, source, initialLoad) {
 		data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
 		data.$image = data.$container.find("img");
 
@@ -231,21 +236,23 @@
 			data.loaded = true;
 
 			// Transition in
-			// data.$container.fsTransition({
-			// 	property: "opacity"
-			// },
-			// function() {
-			// 	// console.log("loaded!");
-			// });
+			data.$container.fsTransition({
+				property: "opacity"
+			},
+			function() {
+				// console.log("loaded!");
+			});
 
-			// if (data.doTouch) {
+			data.$el.removeClass(RawClasses.loading);
+
+			if (initialLoad) {
 				data.$viewport.fsTouch({
 					pan      : true,
 					scale    : true
 				}).on(Events.scaleStart, data, onScaleStart)
 				  .on(Events.scaleEnd, data, onScaleEnd)
 				  .on(Events.scale, data, onScale);
-			// }
+			}
 
 			data.$el.trigger(Events.loaded);
 		}) // .error(loadError)
@@ -304,7 +311,16 @@
 		cacheRenderProps(data);
 
 		// Update dom
-		setSizeAndPosition(data);
+		var props = {
+			containerTop     : data.containerTop,
+			containerLeft    : data.containerLeft,
+			imageHeight      : data.imageHeight,
+			imageWidth       : data.imageWidth,
+			imageTop         : data.imageTop,
+			imageLeft        : data.imageLeft,
+		};
+
+		setSizeAndPosition(data, props);
 
 		data.render = true;
 	}
@@ -584,18 +600,26 @@
 	// on inital load
 	// on image load
 	// on size change
-	function setSizeAndPosition(data) {
-		data.$container.css({
-			top     : data.containerTop,
-			left    : data.containerLeft
-		});
+	function setSizeAndPosition(data, props) {
+		if (Formstone.transform) {
+			var scaleX = props.imageWidth  / data.naturalWidth,
+				scaleY = props.imageHeight / data.naturalHeight;
 
-		data.$image.css({
-			height    : data.imageHeight,
-			width     : data.imageWidth,
-			top       : data.imageTop,
-			left      : data.imageLeft
-		});
+			data.$container.css( Formstone.transform, "translate3d(" + props.containerLeft + "px, " + props.containerTop + "px, 0)" );
+			data.$image.css( Formstone.transform, "translate3d(-50%, -50%, 0) scale(" + scaleX + "," + scaleY + ")" );
+		} else {
+			data.$container.css({
+				top     : props.containerTop,
+				left    : props.containerLeft
+			});
+
+			data.$image.css({
+				height    : props.imageHeight,
+				width     : props.imageWidth,
+				top       : props.imageTop,
+				left      : props.imageLeft
+			});
+		}
 	}
 
 	/**
@@ -656,7 +680,16 @@
 		cacheImageTopLeft(data);
 
 		// Update dom
-		setSizeAndPosition(data);
+		var props = {
+			containerTop     : data.containerTop,
+			containerLeft    : data.containerLeft,
+			imageHeight      : data.imageHeight,
+			imageWidth       : data.imageWidth,
+			imageTop         : data.imageTop,
+			imageLeft        : data.imageLeft,
+		};
+
+		setSizeAndPosition(data, props);
 	}
 
 	/**
@@ -794,18 +827,18 @@
 			data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.zoomEnertia);
 			data.renderImageWidth  += Math.round((data.imageWidth  - data.renderImageWidth)  * data.zoomEnertia);
 
-			// Update dom
-			data.$container.css({
-				top     : data.renderContainerTop,
-				left    : data.renderContainerLeft
-			});
+			// Update DOM
 
-			data.$image.css({
-				height    : data.renderImageHeight,
-				width     : data.renderImageWidth,
-				top       : data.renderImageTop,
-				left      : data.renderImageLeft
-			});
+			var props = {
+				containerTop     : data.renderContainerTop,
+				containerLeft    : data.renderContainerLeft,
+				imageHeight      : data.renderImageHeight,
+				imageWidth       : data.renderImageWidth,
+				imageTop         : data.renderImageTop,
+				imageLeft        : data.renderImageLeft,
+			};
+
+			setSizeAndPosition(data, props);
 		}
 	}
 
@@ -823,18 +856,53 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	function unloadImage(data) {
-		// var $media = data.$container.find(Classes.media);
-		//
-		// if ($media.length >= 1) {
-		// 	$media.fsTransition({
-		// 		property: "opacity"
-		// 	},
-		// 	function() {
-		// 		$media.remove();
-		// 		delete data.source;
-		// 	}).css({ opacity: 0 });
-		// }
+	function unloadImage(data, callback) {
+		clearDoubleTap(data);
+
+		data.render      = false;
+		data.zooming     = false;
+
+		data.$container.fsTransition({
+			property: "opacity"
+		},
+		function() {
+			data.$container.remove();
+
+			if (typeof callback === "function") {
+				callback.call(window, data);
+			}
+		});
+
+		data.$el.addClass(RawClasses.loading);
+	}
+
+	/**
+	 * @method private
+	 * @name advanceGallery
+	 * @description Advances gallery
+	 * @param e [object] "Event data"
+	 */
+
+	function advanceGallery(e) {
+		var $target = $(e.currentTarget),
+			data    = e.data,
+			index   = data.index + (($target.hasClass(RawClasses.control_next)) ? 1 : -1);
+
+		if (index < 0) {
+			index = 0;
+		}
+
+		if (index > data.total) {
+			index = data.total;
+		}
+
+		if (index !== data.index) {
+			data.index = index;
+
+			unloadImage(data, function() {
+				loadImage(data, data.images[ data.index ]);
+			});
+		}
 	}
 
 	/**
@@ -986,8 +1054,10 @@
 				"viewport",
 				"container",
 				"image",
+				"gallery",
 
 				"controls",
+				"control",
 				"control_previous",
 				"control_next",
 				"zoom_in",
