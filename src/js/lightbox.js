@@ -111,7 +111,6 @@
 				},
 				isMobile           : (Formstone.isMobile || data.mobile),
 				isTouch            : Formstone.support.touch,
-				isViewer           : (data.mobile && data.viewer && typeof $.fn.fsViewer !== undefined),
 				isAnimating        : true,
 				isZooming          : false,
 				oldContentHeight   : 0,
@@ -122,6 +121,8 @@
 				thumbnailsOpen     : false,
 				tapTimer           : null
 			}, data);
+
+			Instance.isViewer = (data.isMobile && data.viewer && typeof $.fn.fsViewer !== undefined)
 
 			// Check target type
 			var $el            = data.$el,
