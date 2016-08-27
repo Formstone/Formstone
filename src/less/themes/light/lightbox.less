@@ -762,4 +762,36 @@
 
 	.@{theme_name}&-touch&-thumbnails_open &-thumbnails {
 	}
+
+
+	// Viewer support
+
+	&.@{theme_name} &-content {
+		position: relative;
+	}
+
+	&.@{theme_name} .fs-viewer,
+	&.@{theme_name} .fs-viewer .fs-viewer-wrapper {
+		height: auto;
+		width: auto;
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: @fs-lightbox-mobile-control-size;
+		left: 0;
+	}
+
+	&.@{theme_name} .fs-viewer .fs-viewer-wrapper {
+		bottom: 0;
+	}
+
+	&.@{theme_name} .fs-viewer .fs-viewer-loading_icon {
+		display: none !important;
+	}
+
+	&.@{theme_name} .fs-viewer .fs-viewer-controls {
+		top: 0;
+		bottom: auto;
+	}
 }

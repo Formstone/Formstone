@@ -725,53 +725,67 @@
 	function loadImage(source) {
 		Instance.hasScaled = false;
 
-		// Cache current image
-		Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
-		Instance.$image = Instance.$imageContainer.find("img");
+		if (Instance.isMobile) {
+			Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+			Instance.$image = Instance.$imageContainer.find("img");
 
-		Instance.$image.one(Events.load, function() {
-			var naturalSize = calculateNaturalSize(Instance.$image);
-
-			Instance.naturalHeight = naturalSize.naturalHeight;
-			Instance.naturalWidth  = naturalSize.naturalWidth;
-
-			if (Instance.retina) {
-				Instance.naturalHeight /= 2;
-				Instance.naturalWidth  /= 2;
-			}
+			Instance.$image.attr("src", source)
+						   .addClass(RawClasses.image);
 
 			Instance.$content.prepend(Instance.$imageContainer);
 
-			// Size content to be sure it fits the viewport
-			sizeImage();
+			Instance.$imageContainer.one("loaded.viewer", function() {
+				openLightbox();
+			}).fsViewer();
+		} else {
+			// Cache current image
+			Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+			Instance.$image = Instance.$imageContainer.find("img");
 
-			openLightbox();
+			Instance.$image.one(Events.load, function() {
+				var naturalSize = calculateNaturalSize(Instance.$image);
 
-			if (Instance.doTouch) {
-				cacheScale();
+				Instance.naturalHeight = naturalSize.naturalHeight;
+				Instance.naturalWidth  = naturalSize.naturalWidth;
 
-				var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
-					conWidth  = Instance.$container.outerWidth();
+				if (Instance.retina) {
+					Instance.naturalHeight /= 2;
+					Instance.naturalWidth  /= 2;
+				}
 
-				Instance.$imageContainer.css({
-					left: (conWidth  / 2),
-					top:  (conHeight / 2)
-				});
+				Instance.$content.prepend(Instance.$imageContainer);
 
-				Instance.$content.fsTouch({
-					pan      : true,
-					scale    : true
-				}).on(Events.scaleStart, onScaleStart)
-				  .on(Events.scaleEnd, onScaleEnd)
-				  .on(Events.scale, onScale);
+				// Size content to be sure it fits the viewport
+				sizeImage();
+
+				openLightbox();
+
+				// if (Instance.doTouch) {
+				// 	cacheScale();
+				//
+				// 	var conHeight = Instance.$container.outerHeight() - Instance.metaHeight,
+				// 		conWidth  = Instance.$container.outerWidth();
+				//
+				// 	Instance.$imageContainer.css({
+				// 		left: (conWidth  / 2),
+				// 		top:  (conHeight / 2)
+				// 	});
+				//
+				// 	Instance.$content.fsTouch({
+				// 		pan      : true,
+				// 		scale    : true
+				// 	}).on(Events.scaleStart, onScaleStart)
+				// 	  .on(Events.scaleEnd, onScaleEnd)
+				// 	  .on(Events.scale, onScale);
+				// }
+			}).error(loadError)
+			  .attr("src", source)
+			  .addClass(RawClasses.image);
+
+			// If image has already loaded into cache, trigger load event
+			if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
+				Instance.$image.trigger(Events.load);
 			}
-		}).error(loadError)
-		  .attr("src", source)
-		  .addClass(RawClasses.image);
-
-		// If image has already loaded into cache, trigger load event
-		if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
-			Instance.$image.trigger(Events.load);
 		}
 	}
 
@@ -1478,6 +1492,9 @@
 
 	function cleanGallery() {
 		if (typeof Instance.$imageContainer !== 'undefined') {
+			if (Instance.isMobile) {
+				Instance.$imageContainer.fsViewer("destroy");
+			}
 			Instance.$imageContainer.remove();
 		}
 		if (typeof Instance.$videoWrapper !== 'undefined') {
