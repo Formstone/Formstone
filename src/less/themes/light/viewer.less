@@ -43,7 +43,7 @@
 	// Wrapper
 
 	@fs-viewer-wrapper-background:				@fs-light-primary_50;
-	@fs-viewer-z-index:							100;
+	@fs-viewer-z-index:							1;
 
 	// Container
 
@@ -63,6 +63,14 @@
 
 	@fs-viewer-control-hover-background:		@fs-light-primary_100;
 	@fs-viewer-control-hover-color:				@fs-light-primary_900;
+
+	// Loading Icons
+
+	@fs-viewer-loading-width:					50px;
+	@fs-viewer-loading-height:					50px;
+	@fs-viewer-loading-color:					@fs-light-primary_900;
+	@fs-viewer-loading-size:					5px;
+	@fs-viewer-loading-animation-duration:		0.75s;
 
 	// Element
 
@@ -96,6 +104,7 @@
 		height: 1px;
 
 		position: absolute;
+		z-index: @fs-viewer-z-index;
 
 		margin: 0;
 		opacity: 1;
@@ -133,7 +142,7 @@
 		right: 0;
 		bottom: 10px;
 		left: 0;
-		z-index: 10;
+		z-index: (@fs-viewer-z-index + 3);
 
 		background: @fs-viewer-controls-background;
 		border-radius: @fs-viewer-controls-border-radius;
@@ -185,6 +194,7 @@
 
 	&-control_previous,
 	&-control_next {
+		display: none;
 		font-size: 10px;
 	}
 
@@ -225,5 +235,74 @@
 
 	&.@{theme_name}&-gallery &-controls {
 		width: (@fs-viewer-control-size * 4) + (@fs-viewer-controls-padding * 2);
+	}
+
+	&.@{theme_name}&-gallery &-control_previous,
+	&.@{theme_name}&-gallery &-control_next {
+		display: block;
+	}
+
+	// Loading icon
+
+	&.@{theme_name} &-loading_icon {
+		width: @fs-viewer-loading-width;
+		height: @fs-viewer-loading-height;
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: (@fs-viewer-z-index + 5);
+
+		display: block;
+		margin: auto;
+		opacity: 0;
+		transition:
+			opacity    @fs-viewer-transition-duration linear,
+			visibility @fs-viewer-transition-duration linear;
+		visibility: hidden;
+
+		&:before,
+		&:after {
+			width: 100%;
+			height: 100%;
+
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			border-radius: 110%;
+			content: '';
+			display: block;
+		}
+
+		&:before {
+			border: @fs-viewer-loading-size solid fade(@fs-viewer-loading-color, 25);
+		}
+
+		&:after {
+			animation: fs-lightbox-loading-spin @fs-viewer-loading-animation-duration linear infinite;
+			border: @fs-viewer-loading-size solid transparent;
+			border-top-color: @fs-viewer-loading-color;
+		}
+	}
+
+	@keyframes fs-lightbox-loading-spin {
+
+		from {
+			transform: rotate(0deg);
+		}
+
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.@{theme_name}&-loading &-loading_icon {
+		opacity: 1;
+		visibility: visible;
 	}
 }

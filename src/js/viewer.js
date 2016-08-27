@@ -121,16 +121,17 @@
 		}
 
 		html += '<div class="' + RawClasses.wrapper + '">';
+		html += '<div class="' + RawClasses.loading_icon + '"></div>';
 		html += '<div class="' + RawClasses.viewport + '"></div>';
 		html += '</div>'; // wrapper
 
 		html += '<div class="' + RawClasses.controls + '">';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_out].join(" ") + '">' + data.labels.zoom_out + '</button>';
 		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_in].join(" ") + '">' + data.labels.zoom_in + '</button>';
-		if (data.gallery) {
+		// if (data.gallery) {
 			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
 			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
-		}
+		// }
 		html += '</div>'; // controls
 
 		this.addClass(data.thisClasses.join(" "))
@@ -182,25 +183,41 @@
 	 * @example $(".target").viewer("load", ["path/to/image-1.jpg","path/to/image-2.jpg"]);
 	 */
 
-	/**
-	 * @method private
-	 * @name load
-	 * @description Loads an image
-	 * @param data [object] "Instance data"
-	 * @param source [string OR object] "Source image (string) or video (object)"
-	 */
-
 	function load(data, source) {
 		// TODO swap out source / gallery data
 
-		// Check if the source is new
-		if (source !== data.source && data.visible) {
-			data.source = source;
+		data.index = 0;
 
-			loadImage(data, source);
+		if (typeof source === "string") {
+			data.total      = 0;
+			data.images     = [ source ];
+			data.gallery    = false;
+
+			data.$el.removeClass(RawClasses.gallery);
 		} else {
-			data.$el.trigger(Events.loaded);
+			data.total      = source.length - 1;
+			data.images     = source;
+
+			if (source.length > 1) {
+				data.gallery = true;
+				data.$el.addClass(RawClasses.gallery);
+			}
+
+			source = data.images[ data.index ];
 		}
+
+		unloadImage(data, function() {
+			loadImage(data, source);
+		});
+
+		// // Check if the source is new
+		// if (source !== data.source && data.visible) {
+		// 	data.source = source;
+		//
+		// 	loadImage(data, source);
+		// } else {
+		// 	data.$el.trigger(Events.loaded);
+		// }
 	}
 
 	/**
@@ -245,14 +262,14 @@
 
 			data.$el.removeClass(RawClasses.loading);
 
-			if (initialLoad) {
-				data.$viewport.fsTouch({
+			// if (initialLoad) {
+				data.$container.fsTouch({
 					pan      : true,
 					scale    : true
 				}).on(Events.scaleStart, data, onScaleStart)
 				  .on(Events.scaleEnd, data, onScaleEnd)
 				  .on(Events.scale, data, onScale);
-			}
+			// }
 
 			data.$el.trigger(Events.loaded);
 		}) // .error(loadError)
@@ -849,6 +866,10 @@
 	 * @example $(".target").viewer("unload");
 	 */
 
+ 	function unload(data) {
+		unloadImage(data);
+	}
+
 	/**
 	 * @method private
 	 * @name unloadImage
@@ -861,6 +882,8 @@
 
 		data.render      = false;
 		data.zooming     = false;
+
+		clearTouch(data);
 
 		data.$container.fsTransition({
 			property: "opacity"
@@ -927,6 +950,12 @@
 		cacheImageMinMax(data);
 
 		cacheImageTopLeft(data);
+
+		cacheContainerMinMax(data);
+
+		checkContainerTopLeft(data);
+
+		checkImageMinMax(data);
 	}
 
 	/**
@@ -936,12 +965,12 @@
 	 */
 
 	function clearTouch(data) {
-		// if (data.$image && data.$image.length) {
-		// 	data.$viewport.fsTouch("destroy")
-		// 				  .off(Events.scaleStart, onScaleStart)
-		// 				  .off(Events.scaleEnd, onScaleEnd)
-		// 				  .off(Events.scale, onScale);
-		// }
+		if (data.$container && data.$container.length) {
+			data.$container.fsTouch("destroy")
+						   .off(Events.scaleStart, onScaleStart)
+						   .off(Events.scaleEnd, onScaleEnd)
+						   .off(Events.scale, onScale);
+		}
 	}
 
 	/**
@@ -1055,6 +1084,7 @@
 				"container",
 				"image",
 				"gallery",
+				"loading_icon",
 
 				"controls",
 				"control",
@@ -1085,8 +1115,8 @@
 				_raf          : raf,
 
 				resize        : resizeInstance,
-				load          : loadImage,
-				unload        : unloadImage
+				load          : load,
+				unload        : unload
 			}
 		}),
 
