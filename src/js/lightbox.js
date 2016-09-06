@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: Add swipe next/previous when zoomed out
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -1681,6 +1679,8 @@
 		Instance.$image.off(Events.namespace);
 
 		appendObject($error);
+
+		$Window.trigger(Events.error);
 	}
 
 	/**
@@ -1903,6 +1903,7 @@
 			 * @events
 			 * @event open.lightbox "Lightbox opened; Triggered on window"
 			 * @event close.lightbox "Lightbox closed; Triggered on window"
+			 * @event error.lightbox "Lightbox error; Triggered on window"
 			 */
 
 			events: {

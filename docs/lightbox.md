@@ -125,6 +125,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `open.lightbox` | Lightbox opened; Triggered on window |
 | `close.lightbox` | Lightbox closed; Triggered on window |
+| `error.lightbox` | Lightbox error; Triggered on window |
 
 <hr>
 ## <a name="methods"></a> Methods

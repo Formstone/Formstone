@@ -1,10 +1,7 @@
 /* global define */
 
-// TODO: load error
-// TODO: gallery loading / unloading
-// TODO: control positioning
-// TODO: external controls light carousel?
-// TODO: theme
+// TODO: external controls like carousel?
+// TODO: Add swipe next/previous when zoomed out?
 
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
@@ -188,8 +185,6 @@
 	 */
 
 	function load(data, source) {
-		// TODO swap out source / gallery data
-
 		data.index = 0;
 
 		if (typeof source === "string") {
@@ -276,7 +271,7 @@
 			// }
 
 			data.$el.trigger(Events.loaded);
-		}) // .error(loadError)
+		}).one(Events.error, data, loadError)
 		  .attr("src", source)
 		  .addClass(RawClasses.image);
 
@@ -288,6 +283,17 @@
 		data.source = source;
 	}
 
+	/**
+	 * @method private
+	 * @name loadError
+	 * @description Error when resource fails to load.
+	 */
+
+	function loadError(e) {
+		var data = e.data;
+
+		data.$el.trigger(Events.error);
+	}
 
 	/**
 	 * @method private

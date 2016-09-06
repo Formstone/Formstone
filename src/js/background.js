@@ -1,7 +1,5 @@
 /* global define */
 
-// TODO: load error
-
 (function(factory) {
 	if (typeof define === "function" && define.amd) {
 		define([
@@ -297,7 +295,8 @@
 			if (!poster || firstLoad) {
 				data.$el.trigger(Events.loaded);
 			}
-		}).attr("src", newSource);
+		}).one(Events.error, data, loadError)
+		  .attr("src", newSource);
 
 		if (data.responsive) {
 			$media.addClass(RawClasses.responsive);
@@ -507,6 +506,7 @@
 						},
 						onError: function(e) {
 							/* console.log("onError", e); */
+							loadError({ data: data });
 						},
 						onApiChange: function(e) {
 							/* console.log("onApiChange", e); */
@@ -534,6 +534,18 @@
 			$media.not(":last").remove();
 			data.oldPlayer = null;
 		}
+	}
+
+	/**
+	 * @method private
+	 * @name loadError
+	 * @description Error when resource fails to load.
+	 */
+
+	function loadError(e) {
+		var data = e.data;
+
+		data.$el.trigger(Events.error);
 	}
 
 	/**
@@ -897,6 +909,7 @@
 			 * @events
 			 * @event loaded.background "Background media loaded"
 			 * @event ready.background "Background media ready"
+			 * @event error.background "Background media error"
 			 */
 
 			events: {

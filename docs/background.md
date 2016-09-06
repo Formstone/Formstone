@@ -123,6 +123,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `loaded.background` | Background media loaded |
 | `ready.background` | Background media ready |
+| `error.background` | Background media error |
 
 <hr>
 ## <a name="methods"></a> Methods
