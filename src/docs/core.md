@@ -58,9 +58,9 @@ Plugins should remain compatible with module loaders like [RequireJS](http://req
 		factory(jQuery, Formstone);
 	}
 }(function($, Formstone) {
-	
+
 	// Plugin
-	
+
 })
 
 );
@@ -88,7 +88,7 @@ Widget plugins are implicitly tied to an element to enhance or change the interf
 		factory(jQuery, Formstone);
 	}
 }(function($, Formstone) {
-	
+
 	"use strict";
 
 	function setUp() {
@@ -163,7 +163,7 @@ When an instance is created or destroyed, the factory will automatically add or 
 this.data("namespace");
 ```
 
-Custom public methods can also be defined, provided their keys are not prefixed with an underscore (`_`). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it's plugin data as the first argument followed by any addition arguments:
+Custom public methods can also be defined, provided their keys are not prefixed with an underscore (`_`). The underscore signifies a core method and should be avoided when defining public methods. The factory will scope any public method call to the target instance, as well as provide it's plugin data as the first argument followed by any additional arguments:
 
 ```javascript
 $(".target").namespace("reset", 500);
@@ -188,7 +188,7 @@ Utility plugins may interact with DOM nodes but are not necessarily tied to any 
 		factory(jQuery, Formstone);
 	}
 }(function($, Formstone) {
-	
+
 	"use strict";
 
 	function delegate() {
@@ -357,7 +357,7 @@ data.$el.on(Events.click, onClick);
 
 ### No Conflict
 
-One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace. 
+One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace.
 
 ```javascript
 Formstone.NoConflict();
@@ -370,6 +370,6 @@ Formstone styles depend on a few basic [Modernizr](https://modernizr.com/) class
 | Test |
 | --- |
 | csstransforms |
-| csstransforms3d | 
+| csstransforms3d |
 | opacity |
 | touchevents |

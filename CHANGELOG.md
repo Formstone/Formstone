@@ -2,11 +2,13 @@
 
 <!-- -->
 
-### 1.2.2
+### 1.3.0
 
+* Added Viewer component
 * Added file chunking to Upload
+* Added load error event to Background
 * Fixed protocol agnostic YouTube thumbnail in Background
-* Fixed Navigation styles in fs-light base theme 
+* Fixed Navigation styles in fs-light base theme
 
 ### 1.2.1
 
