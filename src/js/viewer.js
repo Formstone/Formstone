@@ -89,9 +89,11 @@
 	function construct(data) {
 		var $image,
 			imageData,
-			html = '';
-
-			console.log(data);
+			html = '',
+			controlPrevClasses    = [RawClasses.control, RawClasses.control_previous].join(" "),
+			controlNextClasses    = [RawClasses.control, RawClasses.control_next].join(" "),
+			controlZoomInClasses  = [RawClasses.control, RawClasses.control_zoom_in].join(" "),
+			controlZoomOutClasses = [RawClasses.control, RawClasses.control_zoom_out].join(" ");
 
 		data.thisClasses = [RawClasses.base, RawClasses.loading, data.customClass, data.theme];
 		data.images      = [];
@@ -109,6 +111,8 @@
 		data.index      = 0;
 		data.total      = data.$images.length - 1;
 
+		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next && data.controls.zoom_in && data.controls.zoom_out);
+
 		if (data.$images.length > 1) {
 			data.gallery = true;
 			data.thisClasses.push(RawClasses.gallery);
@@ -124,31 +128,44 @@
 		html += '<div class="' + RawClasses.viewport + '"></div>';
 		html += '</div>'; // wrapper
 
-		html += '<div class="' + RawClasses.controls + '">';
-		// if (data.gallery) {
-			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
-		// }
-		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_out].join(" ") + '">' + data.labels.zoom_out + '</button>';
-		html += '<button type="button" class="' + [RawClasses.control, RawClasses.zoom_in].join(" ") + '">' + data.labels.zoom_in + '</button>';
-		// if (data.gallery) {
-			html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
-		// }
-		html += '</div>'; // controls
+		if (data.controls && !data.customControls) {
+			html += '<div class="' + RawClasses.controls + '">';
+			html += '<button type="button" class="' + controlPrevClasses+ '">' + data.labels.previous + '</button>';
+			html += '<button type="button" class="' + controlZoomOutClasses + '">' + data.labels.zoom_out + '</button>';
+			html += '<button type="button" class="' + controlZoomInClasses + '">' + data.labels.zoom_in + '</button>';
+			html += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
+			html += '</div>'; // controls
+		}
 
 		this.addClass(data.thisClasses.join(" "))
 			.prepend(html);
 
 		data.$wrapper      = this.find(Classes.wrapper);
 		data.$viewport     = this.find(Classes.viewport);
-		data.$controlBox   = this.find(Classes.controls);
-		data.$controls     = this.find(Classes.control);
+
+		if (data.customControls) {
+			data.$controls           = $(data.controls.container).addClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
+			data.$controlPrevious    = $(data.controls.container).addClass(controlPrevClasses);
+			data.$controlNext        = $(data.controls.container).addClass(controlNextClasses);
+			data.$controlZoomIn      = $(data.controls.container).addClass(controlZoomInClasses);
+			data.$controlZoomOut     = $(data.controls.container).addClass(controlZoomOutClasses);
+		} else {
+			data.$controls           = this.find(Classes.controls);
+			data.$controlPrevious    = this.find(Classes.control_previous);
+			data.$controlNext        = this.find(Classes.control_next);
+			data.$controlZoomIn      = this.find(Classes.control_zoom_in);
+			data.$controlZoomOut     = this.find(Classes.control_zoom_out);
+		}
+
+		data.$controlItems = data.$controlPrevious.add(data.$controlNext);
+		data.$controlZooms = data.$controlZoomIn.add(data.$controlZoomOut);
 
 		cacheInstances();
 
-		data.$controlBox.on(Events.click, [Classes.control_previous, Classes.control_next].join(", ") , data, advanceGallery)
-						.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_out, data, onZoomOut)
-						.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.zoom_in, data, onZoomIn)
-						.on( [Events.touchEnd, Events.mouseUp].join(" "), [Classes.zoom_out, Classes.zoom_in].join(", "), data, onClearZoom);
+		data.$controlItems.on(Events.click, data, advanceGallery);
+		data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomOut)
+						  .on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
+						  .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
 
 		if (data.lazy) {
 			checkScrollPosition(data);
@@ -168,6 +185,17 @@
 		data.$wrapper.remove();
 
 		data.$image.removeClass(RawClasses.source);
+
+		if (data.controls && !data.customControls) {
+			data.$controls.remove();
+		}
+
+		if (data.customControls) {
+			data.$controlItems.off(Events.click, data, advanceGallery).removeClass( [RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" ") );
+			data.$controlZooms.off( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomOut)
+							  .off( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
+							  .off( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
+		}
 
 		this.removeClass(data.thisClasses.join(" "))
 			.off(Events.namespace);
@@ -1056,6 +1084,7 @@
 
 			/**
 			 * @options
+			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param lazy [boolean] <false> "Lazy load with scroll"
 			 * @param lazyEdge [int] <100> "Lazy load edge"
@@ -1071,6 +1100,7 @@
 			 */
 
 			defaults: {
+				controls       : true,
 				customClass    : "",
 				lazy           : false,
 				lazyEdge       : 100,
@@ -1097,11 +1127,12 @@
 				"loading_icon",
 
 				"controls",
+				"controls_custom",
 				"control",
 				"control_previous",
 				"control_next",
-				"zoom_in",
-				"zoom_out",
+				"control_zoom_in",
+				"control_zoom_out",
 				// "lazy"
 				"loading"
 			],

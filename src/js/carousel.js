@@ -46,7 +46,7 @@
 		var i;
 
 		data.didPan = false;
-		
+
 		data.carouselClasses = [
 			RawClasses.base,
 			data.theme,
@@ -1257,7 +1257,7 @@
 			 * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
 			 * @param autoTime [int] <8000> "Auto advance time"
 			 * @param contained [boolean] <true> "Flag for 'overflow: visible'"
-			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selector (Must be fully qualified selectors)"
+			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selectors (Must be fully qualified selectors)"
 			 * @param customClass [string] <''> "Class applied to instance"
 			 * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
 			 * @param infinite [boolean] <false> "Flag for looping items"
