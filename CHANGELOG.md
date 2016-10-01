@@ -2,7 +2,7 @@
 
 <!-- -->
 
-### 1.2.1
+### 1.2.2
 
 * Fixed issue with Dropdown options in WebKit/Blink on mobile
 
