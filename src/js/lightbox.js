@@ -1119,7 +1119,7 @@
 
 					if (!Instance.isTouch) {
 						Instance.$content.css({
-							height: Instance.contentHeight - Instance.spacerHeight - 10
+							height: Instance.contentHeight - Instance.spacerHeight // - 10
 						});
 					}
 
