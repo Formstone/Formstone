@@ -77,7 +77,7 @@
 			data.customClass
 		];
 
-		if (data.mobile || Formstone.isMobile) {
+		if (data.mobile /* || Formstone.isMobile */) {
 			wrapperClasses.push(RawClasses.mobile);
 		} else if (data.cover) {
 			wrapperClasses.push(RawClasses.cover);
@@ -163,7 +163,7 @@
 		this.on(Events.change, data, onChange);
 
 		// Focus/Blur events
-		if (!Formstone.isMobile) {
+		if (!data.mobile /*!Formstone.isMobile*/) {
 
 			// Handle clicks to associated labels
 			this.on(Events.focusIn, data, function(e) {
@@ -267,7 +267,7 @@
 	function updateDropdown(data) {
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
-				data.$wrapper.fsScrollbar("destroy");
+			data.$wrapper.fsScrollbar("destroy");
 		}
 
 		var index = data.index;
@@ -286,7 +286,9 @@
 
 		// Scrollbar support
 		if ($.fn.fsScrollbar !== undefined) {
-			data.$wrapper.fsScrollbar();
+			data.$wrapper.fsScrollbar({
+				theme: data.theme
+			}).find(".fs-scrollbar-content").attr("tabindex", null);
 		}
 	}
 
@@ -390,18 +392,20 @@
 		var data = e.data;
 
 		if (!data.disabled) {
-			// Handle mobile, but not Firefox, unless desktop forced
-			if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
-				var el = data.$el[0];
+			// // Handle mobile, but not Firefox, unless desktop forced
+			// if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
+			// 	var el = data.$el[0];
+			//
+			// 	if (Document.createEvent) { // All
+			// 		var evt = Document.createEvent("MouseEvents");
+			// 		evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			// 		el.dispatchEvent(evt);
+			// 	} else if (el.fireEvent) { // IE
+			// 		el.fireEvent("onmousedown");
+			// 	}
+			// } else {
 
-				if (Document.createEvent) { // All
-					var evt = Document.createEvent("MouseEvents");
-					evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-					el.dispatchEvent(evt);
-				} else if (el.fireEvent) { // IE
-					el.fireEvent("onmousedown");
-				}
-			} else {
+			if (!data.mobile) {
 				// Delegate intent
 				if (data.closed) {
 					openOptions(data);
@@ -720,17 +724,15 @@
 		// Check for disabled options
 		if (!isDisabled) {
 			if (data.multiple) {
-				if (Formstone.isMobile) {
-					if (!isDisabled) {
-						if (isSelected) {
-							$option.prop("selected", null)
-								   .attr("aria-selected", null);
-							$item.removeClass(RawClasses.item_selected);
-						} else {
-							$option.prop("selected", true)
-								   .attr("aria-selected", true);
-							$item.addClass(RawClasses.item_selected);
-						}
+				if (data.mobile /* Formstone.isMobile*/) {
+					if (isSelected) {
+						$option.prop("selected", null)
+							   .attr("aria-selected", null);
+						$item.removeClass(RawClasses.item_selected);
+					} else {
+						$option.prop("selected", true)
+							   .attr("aria-selected", true);
+						$item.addClass(RawClasses.item_selected);
 					}
 				} else {
 					if (shiftKey && data.lastIndex !== false) {
@@ -902,7 +904,7 @@
 			 * @param label [string] <''> "Label displayed before selection"
 			 * @param external [boolean] <false> "Open options as links in new window"
 			 * @param links [boolean] <false> "Open options as links in same window"
-			 * @param mobile [boolean] <false> "Force desktop interaction on mobile"
+			 * @param mobile [boolean] <false> "Use native browser UI on mobile"
 			 * @param theme [string] <"fs-light"> "Theme class name"
 			 * @param trim [int] <0> "Trim options to specified length; 0 to disable”
 			 */

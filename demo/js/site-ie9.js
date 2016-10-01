@@ -1,4 +1,4 @@
-/*! formstone v1.2.1 [site-ie9.js] 2016-08-02 | GPL-3.0 License | formstone.it */
+/*! formstone v1.2.1 [site-ie9.js] 2016-09-30 | GPL-3.0 License | formstone.it */
 
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
 window.matchMedia||(window.matchMedia=function(){"use strict";
@@ -17,14 +17,14 @@ if(window.matchMedia&&window.matchMedia("all").addListener)return!1;var a=window
 e=[],// Contains each 'mql' and associated 'listeners' if 'addListener' is used
 f=function(b){
 // Debounce
-clearTimeout(d),d=setTimeout(function(){for(var b=0,c=e.length;c>b;b++){var d=e[b].mql,f=e[b].listeners||[],g=a(d.media).matches;
+clearTimeout(d),d=setTimeout(function(){for(var b=0,c=e.length;b<c;b++){var d=e[b].mql,f=e[b].listeners||[],g=a(d.media).matches;
 // Update mql.matches value and call listeners
 // Fire listeners only if transitioning to or from matched state
-if(g!==d.matches){d.matches=g;for(var h=0,i=f.length;i>h;h++)f[h].call(window,d)}}},30)};window.matchMedia=function(d){var g=a(d),h=[],i=0;return g.addListener=function(a){
+if(g!==d.matches){d.matches=g;for(var h=0,i=f.length;h<i;h++)f[h].call(window,d)}}},30)};window.matchMedia=function(d){var g=a(d),h=[],i=0;return g.addListener=function(a){
 // Changes would not occur to css media type so return now (Affects IE <= 8)
 b&&(
 // Set up 'resize' listener for browsers that support CSS3 media queries (Not for IE <= 8)
 // There should only ever be 1 resize listener running for performance
 c||(c=!0,window.addEventListener("resize",f,!0)),
 // Push object only if it has not been pushed already
-0===i&&(i=e.push({mql:g,listeners:h})),h.push(a))},g.removeListener=function(a){for(var b=0,c=h.length;c>b;b++)h[b]===a&&h.splice(b,1)},g}}();
+0===i&&(i=e.push({mql:g,listeners:h})),h.push(a))},g.removeListener=function(a){for(var b=0,c=h.length;b<c;b++)h[b]===a&&h.splice(b,1)},g}}();

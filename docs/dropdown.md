@@ -82,7 +82,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `label` | `string` | `''` | Label displayed before selection |
 | `external` | `boolean` | `false` | Open options as links in new window |
 | `links` | `boolean` | `false` | Open options as links in same window |
-| `mobile` | `boolean` | `false` | Force desktop interaction on mobile |
+| `mobile` | `boolean` | `false` | Use native browser UI on mobile |
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `trim` | `int` | `0` | &nbsp; |
 
@@ -178,6 +178,7 @@ $(".target").dropdown("update");
 | `.fs-dropdown.fs-dropdown-disabled` | `modifer` | Indicates disabled state |
 | `.fs-dropdown.fs-dropdown-open` | `modifer` | Indicates open state |
 | `.fs-dropdown.fs-dropdown-focus` | `modifer` | Indicates focus state |
+| `.fs-dropdown.fs-dropdown-mobile` | `modifer` | Indicates mobile option |
 | `.fs-dropdown-selected` | `element` | Handle item |
 | `.fs-dropdown-options` | `element` | Options container |
 | `.fs-dropdown-group` | `element` | Option group label |
