@@ -36,8 +36,8 @@
 
 	function resize() {
 		Functions.iterate.call($Instances, resizeInstance);
-		Functions.iterate.call($LazyInstances, cacheScrollPosition);
-		Functions.iterate.call($LazyInstances, checkScrollPosition);
+		// Functions.iterate.call($LazyInstances, cacheScrollPosition);
+		// Functions.iterate.call($LazyInstances, checkScrollPosition);
 	}
 
 	/**
@@ -53,7 +53,7 @@
 			ScrollTop = 0;
 		}
 
-		Functions.iterate.call($LazyInstances, checkScrollPosition);
+		// Functions.iterate.call($LazyInstances, checkScrollPosition);
 	}
 
 	/**
@@ -74,9 +74,9 @@
 
 	function cacheInstances() {
 		$Instances     = $(Classes.base);
-		$LazyInstances = $(Classes.lazy);
+		// $LazyInstances = $(Classes.lazy);
 
-		Functions.iterate.call($LazyInstances, cacheScrollPosition);
+		// Functions.iterate.call($LazyInstances, cacheScrollPosition);
 	}
 
 	/**
@@ -172,11 +172,11 @@
 		data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
 						  .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
 
-		if (data.lazy) {
-			checkScrollPosition(data);
-		} else {
+		// if (data.lazy) {
+		//	checkScrollPosition(data);
+		// } else {
 			loadImage(data, data.images[ data.index ], true);
-		}
+		// }
 	}
 
 	/**
@@ -1027,19 +1027,19 @@
 		data.scrollTop = data.$el.offset().top;
 	}
 
-	/**
-	 * @method private
-	 * @name checkScrollPosition
-	 * @description Check target scroll position against window
-	 * @param data [object] "Instance data"
-	 */
-
-	function checkScrollPosition(data) {
-		if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
-			data.visible = true;
-			loadInitialImage(data);
-		}
-	}
+	// /**
+	//  * @method private
+	//  * @name checkScrollPosition
+	//  * @description Check target scroll position against window
+	//  * @param data [object] "Instance data"
+	//  */
+	//
+	// function checkScrollPosition(data) {
+	// 	if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
+	// 		data.visible = true;
+	// 		loadInitialImage(data);
+	// 	}
+	// }
 
 	/**
 	 * @method private
@@ -1091,8 +1091,8 @@
 			 * @options
 			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
 			 * @param customClass [string] <''> "Class applied to instance"
-			 * @param lazy [boolean] <false> "Lazy load with scroll"
-			 * @param lazyEdge [int] <100> "Lazy load edge"
+			 // * @param lazy [boolean] <false> "Lazy load with scroll"
+			 // * @param lazyEdge [int] <100> "Lazy load edge"
 			 * @param labels.count [string] <'of'> "Gallery count separator text"
 			 * @param labels.next [string] <'Next'> "Gallery control text"
 			 * @param labels.previous [string] <'Previous'> "Gallery control text"
@@ -1107,8 +1107,8 @@
 			defaults: {
 				controls       : true,
 				customClass    : "",
-				lazy           : false,
-				lazyEdge       : 100,
+				// lazy           : false,
+				// lazyEdge       : 100,
 				labels: {
 					count      : "of",
 					next       : "Next",
@@ -1176,8 +1176,8 @@
 		Window          = Formstone.window,
 		$Window         = Formstone.$window,
 		ScrollTop       = 0,
-		$Instances      = [],
-		$LazyInstances  = [];
+		$Instances      = [];
+		// $LazyInstances  = [];
 
 })
 
