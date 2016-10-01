@@ -86,7 +86,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `autoHeight` | `boolean` | `false` | Flag to adjust carousel height to visible item(s) |
 | `autoTime` | `int` | `8000` | Auto advance time |
 | `contained` | `boolean` | `true` | Flag for 'overflow: visible' |
-| `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next and previous control selector (Must be fully qualified selectors) |
+| `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next and previous control selectors (Must be fully qualified selectors) |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `fill` | `boolean` | `false` | Flag to fill viewport if item count is less then show count |
 | `infinite` | `boolean` | `false` | Flag for looping items |

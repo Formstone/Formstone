@@ -10,6 +10,10 @@
 * Fixed protocol agnostic YouTube thumbnail in Background
 * Fixed Navigation styles in fs-light base theme
 
+### 1.2.2
+
+* Fixed issue with Dropdown options in WebKit/Blink on mobile
+
 ### 1.2.1
 
 * Added ability to define custom fields for scroll depth events in Analytics

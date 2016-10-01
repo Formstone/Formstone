@@ -70,6 +70,12 @@
  * @type modifer
  * @description Indicates focus state
  */
+/**
+ * @class
+ * @name .fs-dropdown.fs-dropdown-mobile
+ * @type modifer
+ * @description Indicates mobile option
+ */
 
 .fs-dropdown {
 	position: relative;
@@ -107,6 +113,16 @@
 			-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 			-webkit-tap-highlight-color: transparent;
 		}
+	}
+
+	// Mobile
+
+	&-mobile &-element {
+		z-index: 7;
+	}
+
+	&-mobile&-multiple &-element {
+		z-index: -1;
 	}
 
 	/**

@@ -46,6 +46,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors) |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `lazy` | `boolean` | `false` | Lazy load with scroll |
 | `lazyEdge` | `int` | `100` | Lazy load edge |
@@ -137,6 +138,6 @@ $(".target").viewer("unload");
 | `.fs-viewer-control` | `element` | Control element |
 | `.fs-viewer-control_previous` | `element` | Previous control |
 | `.fs-viewer-control_next` | `element` | Next control |
-| `.fs-viewer-zoom_in` | `element` | Zoom in control |
-| `.fs-viewer-zoom_out` | `element` | Zoom out control |
+| `.fs-viewer-control_zoom_in` | `element` | Zoom in control |
+| `.fs-viewer-control_zoom_out` | `element` | Zoom out control |
 
