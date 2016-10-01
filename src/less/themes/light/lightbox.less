@@ -792,7 +792,12 @@
 		bottom: 0;
 	}
 
-	&.@{theme_name}&-touch .fs-viewer {
+	&.@{theme_name}&-thumbnailed .fs-viewer {
+		bottom: @fs-lightbox-thumbnail-size + @fs-lightbox-thumbnail-padding;
+	}
+
+	&.@{theme_name}&-touch .fs-viewer,
+	&.@{theme_name}&-touch&-thumbnailed .fs-viewer {
 		bottom: @fs-lightbox-mobile-control-size;
 	}
 
@@ -816,16 +821,16 @@
 		height: 40px;
 		width: 80px;
 
-		top: 0;
-		bottom: auto;
+		// top: 0;
+		// bottom: auto;
 
 		background: @fs-lightbox-mobile-close-background;
-		border-radius: 0;
+		// border-radius: 0;
 		padding: 0;
 	}
 
-	.@{theme_name}&-touch .fs-viewer .fs-viewer-controls {
-		top: -40px;
+	&.@{theme_name}&-touch .fs-viewer .fs-viewer-controls {
+		// top: -40px;
 	}
 
 	&.@{theme_name} .fs-viewer .fs-viewer-control,

@@ -34,7 +34,7 @@ jQuery
 core.js
 touch.js
 transition.js
-viewer.js
+viewer.js (optional)
 ```
 
 ### Basic
@@ -110,7 +110,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `thumbnails` | `boolean` | `false` | Flag to display thumbnail strip |
 | `top` | `int` | `0` | Target top position; over-rides centering |
-| `touch` | `boolean` | `true` | Flag to allow touch zoom on 'mobile' rendering |
 | `videoFormatter` | &nbsp; | &nbsp; | Object of video formatter objects containing a 'pattern' regex and 'format' callback |
 | `videoRatio` | `number` | `0.5625` | Video height / width ratio (9 / 16 = 0.5625) |
 | `videoWidth` | `int` | `800` | Video max width |

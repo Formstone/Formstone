@@ -101,9 +101,9 @@
 		data.gallery     = false;
 		data.tapTimer    = null;
 		data.action      = false;
-		data.loaded      = false;
-		data.render      = false;
-		data.zooming     = false;
+		data.isRendering = false;
+		data.isZooming   = false;
+		data.isAnimating = false;
 
 		data.keyDownTime  = 1;
 
@@ -170,7 +170,6 @@
 
 		data.$controlItems.on(Events.click, data, advanceGallery);
 		data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
-						  // .on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
 						  .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
 
 		if (data.lazy) {
@@ -244,15 +243,6 @@
 		unloadImage(data, function() {
 			loadImage(data, source);
 		});
-
-		// // Check if the source is new
-		// if (source !== data.source && data.visible) {
-		// 	data.source = source;
-		//
-		// 	loadImage(data, source);
-		// } else {
-		// 	data.$el.trigger(Events.loaded);
-		// }
 	}
 
 	/**
@@ -276,47 +266,49 @@
 	 */
 
 	function loadImage(data, source, initialLoad) {
-		data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
-		data.$image = data.$container.find("img");
+		if (!data.isAnimating) {
+			data.isAnimating = true;
 
-		data.$viewport.append(data.$container);
+			data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
+			data.$image = data.$container.find("img");
 
-		// Load image
-		data.$image.one(Events.load, function() {
-			onImageReady(data);
+			data.$viewport.append(data.$container);
 
-			data.loaded = true;
+			// Load image
+			data.$image.one(Events.load, function() {
+				onImageReady(data);
 
-			// Transition in
-			data.$container.fsTransition({
-				property: "opacity"
-			},
-			function() {
-				// console.log("loaded!");
-			});
+				data.isAnimating = false;
 
-			data.$el.removeClass(RawClasses.loading);
+				// Transition in
+				data.$container.fsTransition({
+					property: "opacity"
+				},
+				function() {
+					// console.log("loaded!");
+				});
 
-			// if (initialLoad) {
+				data.$el.removeClass(RawClasses.loading);
+
 				data.$container.fsTouch({
 					pan      : true,
 					scale    : true
 				}).on(Events.scaleStart, data, onScaleStart)
 				  .on(Events.scaleEnd, data, onScaleEnd)
 				  .on(Events.scale, data, onScale);
-			// }
 
-			data.$el.trigger(Events.loaded);
-		}).one(Events.error, data, loadError)
-		  .attr("src", source)
-		  .addClass(RawClasses.image);
+				data.$el.trigger(Events.loaded);
+			}).one(Events.error, data, loadError)
+			  .attr("src", source)
+			  .addClass(RawClasses.image);
 
-		// Check if image is cached
-		if (data.$image[0].complete || data.$image[0].readyState === 4) {
-			data.$image.trigger(Events.load);
+			// Check if image is cached
+			if (data.$image[0].complete || data.$image[0].readyState === 4) {
+				data.$image.trigger(Events.load);
+			}
+
+			data.source = source;
 		}
-
-		data.source = source;
 	}
 
 	/**
@@ -385,7 +377,7 @@
 
 		setSizeAndPosition(data, props);
 
-		data.render = true;
+		data.isRendering = true;
 	}
 
 	/**
@@ -395,9 +387,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on initial load
-	// on image load
-	// before viewport and container
 	function cacheImageProps(data) {
 		var naturalSize = calculateNaturalSize(data.$image);
 
@@ -417,9 +406,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on inital load
-	// on resize
-	// before container
 	function cacheViewportProps(data) {
 		data.viewportHeight = data.$viewport.outerHeight();
 		data.viewportWidth  = data.$viewport.outerWidth();
@@ -432,10 +418,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on initial load
-	// on image load
-	// on resize
-	// on scale
 	function cacheContainerMinMax(data) {
 		if (data.imageHeight <= data.viewportHeight) {
 			data.containerMinTop = ( data.viewportHeight / 2 );
@@ -461,9 +443,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on inital load
-	// on image load
-	// on resize
 	function cacheImageMinMax(data) {
 		// Set min
 		if (data.isWide) {
@@ -504,10 +483,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on inital load
-	// on image load
-	// on size change
-	// on resize
 	function cacheImageTopLeft(data) {
 		data.imageTop  = -(data.imageHeight / 2);
 		data.imageLeft = -(data.imageWidth / 2);
@@ -520,11 +495,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on initial load
-	// on image load
-	// on scale start
-	// on scale end
-	// on zoom
 	function cacheLastProps(data) {
 		data.lastContainerTop  = data.containerTop;
 		data.lastContainerLeft = data.containerLeft;
@@ -543,10 +513,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on initial load
-	// on image load
-	// on scale end
-	// on zoom
 	function cacheRenderProps(data) {
 		data.renderContainerTop  = data.lastContainerTop;
 		data.renderContainerLeft = data.lastContainerLeft;
@@ -565,8 +531,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on inital load
-	// on image load
 	function fitToViewport(data) {
 		data.imageHeight = data.imageMinHeight;
 		data.imageWidth  = data.imageMinWidth;
@@ -603,7 +567,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on scale
 	function checkContainerTopLeft(data) {
 		if (data.containerTop < data.containerMinTop) {
 			data.containerTop = data.containerMinTop;
@@ -627,7 +590,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on scale start
 	function checkDoubleTap(data) {
 		if (data.tapTimer === null) {
 			data.tapTimer = Functions.startTimer(data.tapTimer, 500, function() {
@@ -646,8 +608,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on timer end
-	// on scale
 	function clearDoubleTap(data) {
 		Functions.clearTimer(data.tapTimer);
 		data.tapTimer = null;
@@ -660,9 +620,6 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on inital load
-	// on image load
-	// on size change
 	function setSizeAndPosition(data, props) {
 		if (Formstone.transform) {
 			var scaleX = props.imageWidth  / data.naturalWidth,
@@ -692,7 +649,6 @@
 	 * @param e [object] "Event data"
 	 */
 
-	// on scale start
 	function onScaleStart(e) {
 		var data = e.data;
 
@@ -705,20 +661,19 @@
 
 	/**
 	 * @method private
-	 * @name onScaleStart
+	 * @name onScale
 	 * @description Handles scale event
 	 * @param e [object] "Event data"
 	 */
 
-	// on scale
 	function onScale(e) {
 		var data = e.data;
 
 		// Clear double tap
 		clearDoubleTap(data);
 
-		data.render  = false;
-		data.zooming = false;
+		data.isRendering = false;
+		data.isZooming   = false;
 
 		var zoomed = (data.imageHeight > data.imageMinHeight + 1);
 
@@ -762,18 +717,17 @@
 	 * @param e [object] "Event data"
 	 */
 
-	// on scale end
 	function onScaleEnd(e) {
 		var data = e.data;
 
-		if (!data.zooming) {
+		if (!data.isZooming) {
 			// Cache last properties
 			cacheLastProps(data);
 
 			// Cache rander properties
 			cacheRenderProps(data);
 
-			data.render = true;
+			data.isRendering = true;
 		}
 	}
 
@@ -784,11 +738,10 @@
 	 * @param data [object] "Instance data"
 	 */
 
-	// on image zoom
 	function onImageZoom(data) {
 		var zoomed = (data.imageHeight > data.imageMinHeight + 1);
 
-		data.zooming = true;
+		data.isZooming = true;
 
 		// Cache last properties
 		cacheLastProps(data);
@@ -815,8 +768,15 @@
 		// Cache image top left
 		cacheImageTopLeft(data);
 
-		data.render = true;
+		data.isRendering = true;
 	}
+
+	/**
+	 * @method private
+	 * @name onZoomStart
+	 * @description Handle zoom start
+	 * @param e [object] "Event data"
+	 */
 
 	function onZoomStart(e) {
 		Functions.killEvent(e);
@@ -832,15 +792,36 @@
 		}
 	}
 
+	/**
+	 * @method private
+	 * @name onZoomIn
+	 * @description Handle zoom in
+	 * @param data [object] "Instance data"
+	 */
+
 	function onZoomIn(data) {
 		data.keyDownTime = 1;
 		data.action = 'zoom_in';
 	}
 
+	/**
+	 * @method private
+	 * @name onZoomOut
+	 * @description Handle zoom out
+	 * @param data [object] "Instance data"
+	 */
+
 	function onZoomOut(data) {
 		data.keyDownTime = 1;
 		data.action = 'zoom_out';
 	}
+
+	/**
+	 * @method private
+	 * @name onClearZoom
+	 * @description Handle clear zoom
+	 * @param e [object] "Event data"
+	 */
 
 	function onClearZoom(e) {
 		var data = e.data;
@@ -856,7 +837,7 @@
 	 */
 
 	function renderRAF(data) {
-		if (data.render) {
+		if (data.isRendering) {
 			if (data.action) {
 				data.keyDownTime += data.zoomIncrement;
 
@@ -927,28 +908,34 @@
 	 * @name unloadImage
 	 * @description Unloads current image
 	 * @param data [object] "Instance data"
+	 * @param callback [function] "Callback function"
 	 */
 
 	function unloadImage(data, callback) {
-		clearDoubleTap(data);
+		if (!data.isAnimating) {
+			clearDoubleTap(data);
 
-		data.render      = false;
-		data.zooming     = false;
+			data.isAnimating = true;
+			data.isRendering = false;
+			data.isZooming   = false;
 
-		clearTouch(data);
+			clearTouch(data);
 
-		data.$container.fsTransition({
-			property: "opacity"
-		},
-		function() {
-			data.$container.remove();
+			data.$container.fsTransition({
+				property: "opacity"
+			},
+			function() {
+				data.isAnimating = false;
 
-			if (typeof callback === "function") {
-				callback.call(window, data);
-			}
-		});
+				data.$container.remove();
 
-		data.$el.addClass(RawClasses.loading);
+				if (typeof callback === "function") {
+					callback.call(window, data);
+				}
+			});
+
+			data.$el.addClass(RawClasses.loading);
+		}
 	}
 
 	/**
@@ -965,20 +952,22 @@
 			data    = e.data,
 			index   = data.index + (( $target.hasClass(RawClasses.control_next) ) ? 1 : -1);
 
-		if (index < 0) {
-			index = 0;
-		}
+		if (!data.isAnimating) {
+			if (index < 0) {
+				index = 0;
+			}
 
-		if (index > data.total) {
-			index = data.total;
-		}
+			if (index > data.total) {
+				index = data.total;
+			}
 
-		if (index !== data.index) {
-			data.index = index;
+			if (index !== data.index) {
+				data.index = index;
 
-			unloadImage(data, function() {
-				loadImage(data, data.images[ data.index ]);
-			});
+				unloadImage(data, function() {
+					loadImage(data, data.images[ data.index ]);
+				});
+			}
 		}
 	}
 
