@@ -111,11 +111,17 @@
 		data.index      = 0;
 		data.total      = data.$images.length - 1;
 
-		data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next && data.controls.zoom_in && data.controls.zoom_out);
+		// Check custom controls
+		data.customControls = ($.type(data.controls) === "object" && data.controls.zoom_in && data.controls.zoom_out);
 
 		if (data.$images.length > 1) {
 			data.gallery = true;
 			data.thisClasses.push(RawClasses.gallery);
+
+			// Requie zoom for gallery custom controls
+			if (data.customControls && (!data.controls.previous || !data.controls.next) ) {
+				data.customControls = false;
+			}
 		}
 
 		for (var i = 0; i < data.$images.length; i++) {
@@ -163,8 +169,8 @@
 		cacheInstances();
 
 		data.$controlItems.on(Events.click, data, advanceGallery);
-		data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomOut)
-						  .on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
+		data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
+						  // .on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
 						  .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
 
 		if (data.lazy) {
@@ -191,10 +197,12 @@
 		}
 
 		if (data.customControls) {
-			data.$controlItems.off(Events.click, data, advanceGallery).removeClass( [RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" ") );
-			data.$controlZooms.off( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomOut)
-							  .off( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomIn)
-							  .off( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
+			data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
+			data.$controlItems.off(Events.click).removeClass( [RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" ") );
+			data.$controlZooms.off( [Events.touchStart, Events.mouseDown].join(" ") )
+							  .off( [Events.touchStart, Events.mouseDown].join(" ") )
+							  .off( [Events.touchEnd, Events.mouseUp].join(" ") )
+							  .removeClass( [RawClasses.control, RawClasses.control_zoom_in, RawClasses.control_zoom_out].join(" ") );
 		}
 
 		this.removeClass(data.thisClasses.join(" "))
@@ -810,20 +818,26 @@
 		data.render = true;
 	}
 
-	function onZoomIn(e) {
+	function onZoomStart(e) {
 		Functions.killEvent(e);
 
-		var data = e.data;
+		var $target   = $(e.currentTarget),
+			data      = e.data,
+			direction = ($target.hasClass(RawClasses.control_zoom_out)) ? 'out' : 'in';
 
+		if (direction === 'out') {
+			onZoomOut(data);
+		} else {
+			onZoomIn(data);
+		}
+	}
+
+	function onZoomIn(data) {
 		data.keyDownTime = 1;
 		data.action = 'zoom_in';
 	}
 
-	function onZoomOut(e) {
-		Functions.killEvent(e);
-
-		var data = e.data;
-
+	function onZoomOut(data) {
 		data.keyDownTime = 1;
 		data.action = 'zoom_out';
 	}
@@ -945,9 +959,11 @@
 	 */
 
 	function advanceGallery(e) {
+		Functions.killEvent(e);
+
 		var $target = $(e.currentTarget),
 			data    = e.data,
-			index   = data.index + (($target.hasClass(RawClasses.control_next)) ? 1 : -1);
+			index   = data.index + (( $target.hasClass(RawClasses.control_next) ) ? 1 : -1);
 
 		if (index < 0) {
 			index = 0;
