@@ -41,6 +41,17 @@
 	@fs-viewer-control-hover-background:		@fs-light-primary_100;
 	@fs-viewer-control-hover-color:				@fs-light-primary_900;
 
+	// Caret
+
+	@fs-viewer-control-caret-size:				6px;
+	@fs-viewer-control-caret-width:				(@fs-viewer-control-caret-size * 1.4);
+	@fs-viewer-control-caret-margin:			(@fs-viewer-control-size - (@fs-viewer-control-caret-size * 1.7)) / 2;
+
+	// Zoom
+
+	@fs-viewer-control-zoom-width:				11px;
+	@fs-viewer-control-zoom-height:				3px;
+
 	// Loading Icons
 
 	@fs-viewer-loading-width:					50px;
@@ -137,16 +148,17 @@
 		background: @fs-viewer-control-background;
 		border: none;
 		border-radius: @fs-viewer-control-border-radius;
-		color: @fs-viewer-control-color;
+		color: ;
 		float: left;
 		display: block;
 		overflow: hidden;
 		text-indent: 200%;
 		white-space: nowrap;
 
+		&:before,
 		&:after {
-			width: @fs-viewer-control-size;
-			height: @fs-viewer-control-size;
+			width: 0;
+			height: 0;
 
 			position: absolute;
 			top: 0;
@@ -154,9 +166,8 @@
 			bottom: 0;
 			left: 0;
 
-			line-height: @fs-viewer-control-size;
-			text-align: center;
-			text-indent: 0;
+			content: '';
+			margin: auto;
 		}
 
 		.no-touchevents &:hover {
@@ -173,38 +184,62 @@
 	&.@{theme_name} &-control_next {
 		display: none;
 		font-size: 10px;
+
+		&:after {
+			display: none;
+		}
 	}
 
 	&.@{theme_name} &-control_previous {
 
-		&:after {
-			content: '\25C0';
+		&:before {
+			border-top: @fs-viewer-control-caret-size solid transparent;
+			border-bottom: @fs-viewer-control-caret-size solid transparent;
+			border-right: @fs-viewer-control-caret-width solid @fs-viewer-control-color;
+			margin-left: @fs-viewer-control-caret-margin;
 		}
 	}
 
 	&.@{theme_name} &-control_next {
 
-		&:after {
-			content: '\25b6';
+		&:before {
+			border-top: @fs-viewer-control-caret-size solid transparent;
+			border-bottom: @fs-viewer-control-caret-size solid transparent;
+			border-left: @fs-viewer-control-caret-width solid @fs-viewer-control-color;
+			margin-right: @fs-viewer-control-caret-margin;
 		}
 	}
 
 	&.@{theme_name} &-control_zoom_in,
 	&.@{theme_name} &-control_zoom_out {
 		font-size: 20px;
+
+		&:before,
+		&:after {
+			background: @fs-viewer-control-color;
+		}
+
+		&:before {
+			width: @fs-viewer-control-zoom-width;
+			height: @fs-viewer-control-zoom-height;
+		}
 	}
 
 	&.@{theme_name} &-control_zoom_out {
 
 		&:after {
-			content: '-';
+			display: none;
 		}
 	}
 
 	&.@{theme_name} &-control_zoom_in {
 
+		// Vertical
 		&:after {
-			content: '+';
+			width: @fs-viewer-control-zoom-height;
+			height: @fs-viewer-control-zoom-width;
+
+			background: @fs-viewer-control-color;
 		}
 	}
 
