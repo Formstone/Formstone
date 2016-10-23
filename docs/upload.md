@@ -72,7 +72,7 @@ function onBeforeSend(formData, file) {
 	}
 	
 	// Modify and return form data
-	formData.append("input_name", "input_value");
+	formdata.append("input_name", "input_value");
 	
 	return formData;
 }

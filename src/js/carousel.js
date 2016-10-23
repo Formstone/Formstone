@@ -331,6 +331,7 @@
 			  .on(Events.pan, data, onPan)
 			  .on(Events.panEnd, data, onPanEnd)
 			  .on(Events.swipe, data, onSwipe)
+			  .on(Events.focusIn, data, onItemFocus)
 			  .css(TransitionProperty, "");
 
 			cacheValues(data);
@@ -1220,6 +1221,39 @@
 				onSubordinateUpdate(e, index);
 
 				data.$subordinate[NamespaceClean]("jumpPage", index + 1, true);
+			}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onItemFocus
+	 * @description Handles focus to item/element in item
+	 * @param e [object] "Event data"
+	 */
+
+	function onItemFocus(e) {
+		var data = e.data;
+
+		if (data.enabled) {
+			Functions.clearTimer(data.autoTimer);
+
+			data.$container.scrollLeft(0);
+
+			var $target = $(e.target),
+				$active;
+
+			if ( $target.hasClass(RawClasses.item) ) {
+				$active = $target;
+			} else if ($target.parents(Classes.item).length) {
+				$active = $target.parents(Classes.item).eq(0);
+			}
+
+			for (var i = 0; i < data.pageCount; i++) {
+				if (data.pages[i].$items.is($active)) {
+					positionCanister(data, i);
+					break;
+				}
 			}
 		}
 	}
