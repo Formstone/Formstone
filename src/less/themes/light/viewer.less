@@ -180,6 +180,13 @@
 		}
 	}
 
+	.no-touchevents &.@{theme_name} &-control_disabled,
+	.no-touchevents &.@{theme_name}:hover &-control_disabled {
+		opacity: 0;
+		cursor: default;
+		visibility: hidden;
+	}
+
 	&.@{theme_name} &-control_previous,
 	&.@{theme_name} &-control_next {
 		display: none;

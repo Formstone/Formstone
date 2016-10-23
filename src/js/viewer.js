@@ -151,10 +151,10 @@
 
 		if (data.customControls) {
 			data.$controls           = $(data.controls.container).addClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
-			data.$controlPrevious    = $(data.controls.container).addClass(controlPrevClasses);
-			data.$controlNext        = $(data.controls.container).addClass(controlNextClasses);
-			data.$controlZoomIn      = $(data.controls.container).addClass(controlZoomInClasses);
-			data.$controlZoomOut     = $(data.controls.container).addClass(controlZoomOutClasses);
+			data.$controlPrevious    = $(data.controls.previous).addClass(controlPrevClasses);
+			data.$controlNext        = $(data.controls.next).addClass(controlNextClasses);
+			data.$controlZoomIn      = $(data.controls.zoom_in).addClass(controlZoomInClasses);
+			data.$controlZoomOut     = $(data.controls.zoom_out).addClass(controlZoomOutClasses);
 		} else {
 			data.$controls           = this.find(Classes.controls);
 			data.$controlPrevious    = this.find(Classes.control_previous);
@@ -177,6 +177,8 @@
 		// } else {
 			loadImage(data, data.images[ data.index ], true);
 		// }
+
+		updateControls(data);
 	}
 
 	/**
@@ -968,6 +970,26 @@
 					loadImage(data, data.images[ data.index ]);
 				});
 			}
+
+			updateControls(data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name updateControls
+	 * @description Update control states
+	 * @param data [object] Instance data
+	 */
+
+	function updateControls(data) {
+		data.$controlItems.removeClass(RawClasses.control_disabled);
+
+		if (data.index === 0) {
+			data.$controlPrevious.addClass(RawClasses.control_disabled);
+		}
+		if (data.index === data.images.length - 1) {
+			data.$controlNext.addClass(RawClasses.control_disabled);
 		}
 	}
 
@@ -1138,6 +1160,7 @@
 				"control_next",
 				"control_zoom_in",
 				"control_zoom_out",
+				"control_disabled",
 				// "lazy"
 				"loading"
 			],
