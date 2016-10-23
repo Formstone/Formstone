@@ -76,8 +76,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | --- | --- | --- | --- |
 | `controls` | `boolean or object` | `true` | Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors) |
 | `customClass` | `string` | `''` | Class applied to instance |
-| `lazy` | `boolean` | `false` | Lazy load with scroll |
-| `lazyEdge` | `int` | `100` | Lazy load edge |
 | `labels.count` | `string` | `'of'` | Gallery count separator text |
 | `labels.next` | `string` | `'Next'` | Gallery control text |
 | `labels.previous` | `string` | `'Previous'` | Gallery control text |

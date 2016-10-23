@@ -137,7 +137,7 @@ $(".target").carousel("enable");
 
 ### jump
 
-Jump instance of plugin to specific page
+Jump instance of plugin to specific page; Alias of `jumpPage`
 
 ```javascript
 $(".target").carousel("jump", 1);
@@ -150,17 +150,66 @@ $(".target").carousel("jump", 1);
 | `index` | `int` | &nbsp; | New index |
 | `silent` | `boolean` | &nbsp; | Flag to prevent triggering update event |
 
+### jumpItem
+
+Jump instance of plugin to specific item
+
+```javascript
+$(".target").carousel("jumpItem", 1);
+```
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `index` | `int` | &nbsp; | New item index |
+| `silent` | `boolean` | &nbsp; | Flag to prevent triggering update event |
+
+### jumpPage
+
+Jump instance of plugin to specific page
+
+```javascript
+$(".target").carousel("jumpPage", 1);
+```
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `index` | `int` | &nbsp; | New index |
+| `silent` | `boolean` | &nbsp; | Flag to prevent triggering update event |
+
 ### next
 
-Move to next item
+Move to next page; Alias of `nextPage`
 
+```javascript
+$(".target").carousel("next");
+```
+
+### nextPage
+
+Move to next page
+
+```javascript
+$(".target").carousel("nextPage");
+```
 
 ### previous
 
-Move to the previous item
+Move to the previous page; Alias of `previousPage`
 
 ```javascript
 $(".target").carousel("previous");
+```
+
+### previousPage
+
+Move to the previous page
+
+```javascript
+$(".target").carousel("previousPage");
 ```
 
 ### reset

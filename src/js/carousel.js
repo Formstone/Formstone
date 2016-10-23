@@ -574,8 +574,16 @@
 
 	/**
 	 * @method
-	 * @name jump
+	 * @name jumpPage
 	 * @description Jump instance of plugin to specific page
+	 * @example $(".target").carousel("jumpPage", 1);
+	 * @param index [int] "New index"
+	 * @param silent [boolean] "Flag to prevent triggering update event"
+	 */
+	/**
+	 * @method
+	 * @name jump
+	 * @description Jump instance of plugin to specific page; Alias of `jumpPage`
 	 * @example $(".target").carousel("jump", 1);
 	 * @param index [int] "New index"
 	 * @param silent [boolean] "Flag to prevent triggering update event"
@@ -583,7 +591,7 @@
 
 	/**
 	 * @method private
-	 * @name jumpToItem
+	 * @name jumpPage
 	 * @description Jump instance of plugin to specific page
 	 * @param data [object] "Instance data"
 	 * @param index [int] "New index"
@@ -591,7 +599,7 @@
 	 * @param animated [boolean] ""
 	 */
 
-	function jumpToItem(data, index, silent, fromLinked, animated) {
+	function jumpPage(data, index, silent, fromLinked, animated) {
 		if (data.enabled) {
 			Functions.clearTimer(data.autoTimer);
 
@@ -605,19 +613,25 @@
 
 	/**
 	 * @method
+	 * @name previousPage
+	 * @description Move to the previous page
+	 * @example $(".target").carousel("previousPage");
+	 */
+	/**
+	 * @method
 	 * @name previous
-	 * @description Move to the previous item
+	 * @description Move to the previous page; Alias of `previousPage`
 	 * @example $(".target").carousel("previous");
 	 */
 
 	/**
 	 * @method private
-	 * @name previousItem
-	 * @description Move to previous item
+	 * @name previousPage
+	 * @description Move to previous page
 	 * @param data [object] "Instance data"
 	 */
 
-	function previousItem(data) {
+	function previousPage(data) {
 		var index = data.index - 1;
 
 		if (data.infinite && index < 0) {
@@ -629,19 +643,25 @@
 
 	/**
 	 * @method
+	 * @name nextPage
+	 * @description Move to next page
+	 * @example $(".target").carousel("nextPage");
+	 */
+	/**
+	 * @method
 	 * @name next
-	 * @description Move to next item
+	 * @description Move to next page; Alias of `nextPage`
+	 * @example $(".target").carousel("next");
 	 */
 
 	/**
 	 * @method private
-	 * @name nextItem
-	 * @description Move to next item
-	 * @example $(".target").carousel("next");
+	 * @name nextPage
+	 * @description Move to next page
 	 * @param data [object] "Instance data"
 	 */
 
-	function nextItem(data) {
+	function nextPage(data) {
 		var index = data.index + 1;
 
 		if (data.infinite && index >= data.pageCount) {
@@ -649,6 +669,45 @@
 		}
 
 		positionCanister(data, index);
+	}
+
+
+	/**
+	 * @method
+	 * @name jumpItem
+	 * @description Jump instance of plugin to specific item
+	 * @example $(".target").carousel("jumpItem", 1);
+	 * @param index [int] "New item index"
+	 * @param silent [boolean] "Flag to prevent triggering update event"
+	 */
+
+	/**
+	 * @method private
+	 * @name jumpItem
+	 * @description Jump instance of plugin to specific page
+	 * @param data [object] "Instance data"
+	 * @param index [int] "New index"
+	 * @param silent [boolean] ""
+	 * @param animated [boolean] ""
+	 */
+
+	function jumpItem(data, index, silent, fromLinked, animated) {
+		if (data.enabled) {
+			Functions.clearTimer(data.autoTimer);
+
+			var $active = data.$items.eq(index - 1);
+
+			if (typeof animated === "undefined") {
+				animated = true;
+			}
+
+			for (var i = 0; i < data.pageCount; i++) {
+				if (data.pages[i].$items.is($active)) {
+					positionCanister(data, i, animated, silent, fromLinked);
+					break;
+				}
+			}
+		}
 	}
 
 	/**
@@ -787,7 +846,7 @@
 
 		// Linked
 		if (data.linked && fromLinked !== true) {
-			$(data.linked).not(data.$el)[NamespaceClean]("jump", data.index + 1, true, true);
+			$(data.linked).not(data.$el)[NamespaceClean]("jumpPage", data.index + 1, true, true);
 		}
 
 		updateControls(data);
@@ -1160,7 +1219,7 @@
 
 				onSubordinateUpdate(e, index);
 
-				data.$subordinate[NamespaceClean]("jump", index + 1, true);
+				data.$subordinate[NamespaceClean]("jumpPage", index + 1, true);
 			}
 		}
 	}
@@ -1352,9 +1411,18 @@
 
 				disable       : disable,
 				enable        : enable,
-				jump          : jumpToItem,
-				previous      : previousItem,
-				next          : nextItem,
+
+				// Backwards compat?
+				jump          : jumpPage,
+				previous      : previousPage,
+				next          : nextPage,
+				// Pages
+				jumpPage      : jumpPage,
+				previousPage  : previousPage,
+				nextPage      : nextPage,
+				// Items
+				jumpItem      : jumpItem,
+
 				reset         : resetInstance,
 				resize        : resizeInstance,
 				update        : updateItems,

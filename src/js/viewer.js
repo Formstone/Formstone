@@ -1091,8 +1091,8 @@
 			 * @options
 			 * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
 			 * @param customClass [string] <''> "Class applied to instance"
-			 // * @param lazy [boolean] <false> "Lazy load with scroll"
-			 // * @param lazyEdge [int] <100> "Lazy load edge"
+			 // param lazy [boolean] <false> "Lazy load with scroll"
+			 // param lazyEdge [int] <100> "Lazy load edge"
 			 * @param labels.count [string] <'of'> "Gallery count separator text"
 			 * @param labels.next [string] <'Next'> "Gallery control text"
 			 * @param labels.previous [string] <'Previous'> "Gallery control text"
