@@ -7,8 +7,11 @@
 * Added Viewer component
 * Added file chunking to Upload
 * Added load error event to Background
+* Added `jumpItem` method to Carousel
+* Aliased `jump`, `previous`, and `next` methods to `jumpPage`, `previousPage`, and `nextPage` in Carousel
 * Fixed protocol agnostic YouTube thumbnail in Background
 * Fixed Navigation styles in fs-light base theme
+* Fixed issue with mobile dropdown options in Pagination
 
 ### 1.2.2
 
