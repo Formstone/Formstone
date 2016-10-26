@@ -456,14 +456,34 @@
 			if (Instance.isMobile) {
 				$Locks.removeClass(RawClasses.lock);
 
-				if (Instance.$viewportMeta) {
+				if (Instance.viewportContent) {
 					Instance.$viewportMeta.attr("content", Instance.viewportContent);
 				} else {
 					Instance.$viewportMeta.remove();
 				}
+
+				removeGestureLock();
 			}
 		}
 	}
+
+
+	function addGestureLock() {
+		$Body.on(Events.gestureChange, killGesture)
+			 .on(Events.gestureStart, killGesture)
+			 .on(Events.gestureEnd, killGesture);
+	}
+
+	function removeGestureLock() {
+		$Body.off(Events.gestureChange)
+			 .off(Events.gestureStart)
+			 .off(Events.gestureEnd);
+	}
+
+	function killGesture(e) {
+		e.preventDefault();
+	}
+
 
 	/**
 	 * @method private
@@ -478,11 +498,13 @@
 		if (Instance.isMobile) {
 			var viewportContent = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
 
-			if (Instance.$viewportMeta) {
+			if (Instance.$viewportMeta.length) {
 				Instance.$viewportMeta.attr("content", viewportContent);
 			} else {
 				Instance.$viewportMeta = $("head").append('<meta name="viewport" content="' + viewportContent + '">');
 			}
+
+			addGestureLock();
 		} else {
 			Instance.$controls.css({
 				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)

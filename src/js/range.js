@@ -335,7 +335,7 @@
 
 		data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
 		data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
-/* 					.attr("aria-valuenow", value) */
+		/* .attr("aria-valuenow", value) */
 		value += data.min;
 
 		if (value !== data.value && value !== false && isResize !== true) {
