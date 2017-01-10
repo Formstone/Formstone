@@ -1,4 +1,4 @@
-{"template":"content.html","title":"Demos","asset_root":"","year":2016}
+{"template":"content.html","title":"Demos","asset_root":"","year":2017}
 
 # Demos 
 

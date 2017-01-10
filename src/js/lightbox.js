@@ -779,7 +779,7 @@
 				sizeImage();
 
 				openLightbox();
-			}).error(loadError)
+			}).on(Events.error, loadError)
 			  .attr("src", source)
 			  .addClass(RawClasses.image);
 
