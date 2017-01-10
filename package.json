@@ -45,7 +45,7 @@
     "load-grunt-tasks": "^3.5.0"
   },
   "scripts": {
-    "postinstall": "node ./node_modules/bower/bin/bower install"
+    "postinstall": "node ./tasks/postinstall.js"
   },
   "src": {
     "css": {
