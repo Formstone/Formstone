@@ -66,6 +66,11 @@
 				data.chunked = false;
 			}
 
+			// Backwards compat
+			if (data.maxQueue) {
+				data.maxConcurrent = data.maxQueue;
+			}
+
 			if (data.label !== false) {
 				html += '<div class="' + RawClasses.target + '">';
 				html += data.label;
@@ -88,6 +93,7 @@
 			data.$input       = this.find(Classes.input);
 			data.queue        = [];
 			data.total        = 0;
+			data.uploaded     = 0;
 			data.uploading    = false;
 			data.disabled     = true;
 			data.aborting     = false;
@@ -372,28 +378,39 @@
 	 */
 
 	function handleUpload(data, files) {
-		var newFiles = [];
+		var newFiles = [],
+			numFiles = files.length;
 
-		for (var i = 0; i < files.length; i++) {
-			var file = {
-				index       : data.total++,
-				file        : files[i],
-				name        : files[i].name,
-				size        : files[i].size,
-				started     : false,
-				complete    : false,
-				error       : false,
-				transfer    : null
-			};
+		if (data.maxFiles) {
+			var filesRemaining = data.maxFiles - data.uploaded;
 
-			newFiles.push(file);
-			data.queue.push(file);
+			if (filesRemaining >= 0 && files.length > filesRemaining) {
+				numFiles = filesRemaining;
+			}
 		}
 
-		data.$el.trigger(Events.queued, [ newFiles ]);
+		if (numFiles > 0) {
+			for (var i = 0; i < numFiles; i++) {
+				var file = {
+					index       : data.total++,
+					file        : files[i],
+					name        : files[i].name,
+					size        : files[i].size,
+					started     : false,
+					complete    : false,
+					error       : false,
+					transfer    : null
+				};
 
-		if (data.autoUpload) {
-			startUpload(data);
+				newFiles.push(file);
+				data.queue.push(file);
+			}
+
+			data.$el.trigger(Events.queued, [ newFiles ]);
+
+			if (data.autoUpload) {
+				startUpload(data);
+			}
 		}
 
 		data.$input.val("");
@@ -455,7 +472,7 @@
 
 				transfering++;
 
-				if (transfering >= data.maxQueue) {
+				if (transfering >= data.maxConcurrent) {
 					return;
 				} else {
 					i++;
@@ -538,6 +555,8 @@
 					},
 					success: function(response, status, jqXHR) {
 						file.complete = true;
+
+						data.uploaded++;
 						data.$el.trigger(Events.fileComplete, [ file, response ]);
 
 						checkQueue(data);
@@ -653,7 +672,8 @@
 			 * @param dataType [string] <'html'> "Data type of AJAX request"
 			 * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
 			 * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
-			 * @param maxQueue [int] <2> "Number of files to simultaneously upload"
+			 * @param maxConcurrent [int] <2> "Number of files to simultaneously upload"
+			 * @param maxFiles [int OR boolean] <false> "Total number of files that can be uploaded; `false` to disable"
 			 * @param maxSize [int] <5242880> "Max file size allowed"
 			 * @param multiple [true] <true> "Flag to allow mutiple file uploads"
 			 * @param postData [object] "Extra data to post with upload"
@@ -672,7 +692,9 @@
 				dataType       : "html",
 				label          : "Drag and drop files or click to select",
 				leave          : "You have uploads pending, are you sure you want to leave this page?",
-				maxQueue       : 2,
+				maxConcurrent  : 2,
+				// maxQueue       : 2,
+				maxFiles       : false,
 				maxSize        : 5242880, // 5 mb
 				multiple       : true,
 				postData       : {},

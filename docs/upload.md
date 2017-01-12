@@ -111,7 +111,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
 | `label` | `string` | `'Drag and drop files or click to select'` | Drop target text; `false` to disable |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
-| `maxQueue` | `int` | `2` | Number of files to simultaneously upload |
+| `maxConcurrent` | `int` | `2` | Number of files to simultaneously upload |
+| `maxFiles` | `int OR boolean` | `false` | Total number of files that can be uploaded; `false` to disable |
 | `maxSize` | `int` | `5242880` | Max file size allowed |
 | `multiple` | `true` | `true` | Flag to allow mutiple file uploads |
 | `postData` | `object` | &nbsp; | Extra data to post with upload |
