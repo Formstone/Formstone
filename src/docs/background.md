@@ -47,7 +47,7 @@ $(".target").background({
 
 Note: Mobile browsers do not allow videos to auto play due to bandwidth concerns. Background will not attempt to load videos on mobile devices, instead the poster image will be displayed.
 
-### YouTube Video
+<!-- ### YouTube Video
 
 Create a YouTube video Background by passing the YouTube embed URL as the source. If you do not define a poster, the YouTube thumbnail will be used:
 
@@ -58,4 +58,4 @@ $(".target").background({
 		video: "//www.youtube.com/embed/VIDEO_ID"
 	}
 });
-```
+``` -->
