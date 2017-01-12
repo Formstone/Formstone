@@ -111,8 +111,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `lazyEdge` | `int` | `100` | Lazy load edge |
 | `loop` | `boolean` | `true` | Loop video |
 | `mute` | `boolean` | `true` | Mute video |
-| `source` | `string OR object` | `null` | Source image (string or object) or video (object) or YouTube (object) |
-| `youtubeOptions` | `object` | `null` | Custom YouTube player parameters (to be used cautiously); See developers.google.com/youtube/player_parameters for more |
+| `source` | `string OR object` | `null` | Source image (string or object) or video (object) |
 
 <hr>
 ## <a name="events"></a> Events
@@ -143,15 +142,12 @@ $(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "pa
 ```javascript
 $(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
 ```
-```javascript
-$(".target").background("load", { "poster": "path/to/image.jpg", "video": "//www.youtube.com/embed/VIDEO_ID" });
-```
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `source` | `string OR object` | &nbsp; | Source image (string or object) or video (object) or YouTube (object); |
+| `source` | `string OR object` | &nbsp; | Source image (string or object) or video (object) |
 
 ### mute
 
