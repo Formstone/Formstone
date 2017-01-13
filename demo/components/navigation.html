@@ -40,6 +40,28 @@
 					<h4>Basic</h4>
 					<p>By default, Navigation will only activate itself on screens smaller than 980px. Resize your screen if the menu is not active.</p>
 
+					<div class="demo_container">
+						<div class="demo_example">
+							<h5 class="nav_handle nav_handle_toggle">Menu</h5>
+							<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
+								<a href="#">Home</a>
+								<a href="#">About</a>
+								<a href="#">Contact</a>
+							</nav>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;h5 class=&quot;nav_handle&quot;&gt;Menu&lt;/h5&gt;
+&lt;nav class=&quot;navigation&quot; data-navigation-handle=&quot;.nav_handle&quot;&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;One&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
+&Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation();</code></pre>
+						</div>
+					</div>
+
+					<h4>No Max</h4>
+
 					<!-- START: FIRSTDEMO -->
 
 					<style>
@@ -61,8 +83,8 @@
 
 					<div class="demo_container">
 						<div class="demo_example">
-							<h5 class="nav_handle nav_handle_toggle">Menu</h5>
-							<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle" data-navigation-options='{}'>
+							<h5 class="nav_handle nav_handle_toggle_2">Menu</h5>
+							<nav class="js-navigation" data-navigation-handle=".nav_handle_toggle_2" data-navigation-options='{"maxWidth":"10000px"}'>
 								<a href="#">Home</a>
 								<a href="#">About</a>
 								<a href="#">Contact</a>
@@ -75,7 +97,9 @@
 &Tab;&lt;a href=&quot;#&quot;&gt;Two&lt;/a&gt;
 &Tab;&lt;a href=&quot;#&quot;&gt;Three&lt;/a&gt;
 &lt;/nav&gt;</code></pre>
-							<pre><code class="language-javascript">$(".navigation").navigation();</code></pre>
+							<pre><code class="language-javascript">$(".navigation").navigation({
+	maxWidth: "10000px"
+});</code></pre>
 						</div>
 					</div>
 
@@ -120,7 +144,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "overlay",
-	gravity: "left"
+	gravity: "left",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
@@ -141,7 +166,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "overlay",
-	gravity: "right"
+	gravity: "right",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
@@ -162,7 +188,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "reveal",
-	gravity: "left"
+	gravity: "left",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
@@ -183,7 +210,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "reveal",
-	gravity: "right"
+	gravity: "right",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
@@ -204,7 +232,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "push",
-	gravity: "left"
+	gravity: "left",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
@@ -225,7 +254,8 @@
 &lt;/nav&gt;</code></pre>
 							<pre><code class="language-javascript">$(".navigation").navigation({
 	type: "push",
-	gravity: "right"
+	gravity: "right",
+	maxWidth: "10000px"
 });</code></pre>
 						</div>
 					</div>
