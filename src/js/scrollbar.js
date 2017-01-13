@@ -79,7 +79,7 @@
 		data.$content.on(Events.scroll, data, onScroll);
 
 		if (data.mouseWheel) {
-			data.$content.on("DOMMouseScroll" + Events.namespace + " mousewheel" + Events.namespace, data, onMouseWheel);
+			data.$content.on("mousewheel" + Events.namespace, data, onMouseWheel);
 		}
 
 		data.$track.fsTouch({
@@ -349,7 +349,7 @@
 				scrollWidth  = data.$content[0].scrollWidth,
 				width        = data.$content.outerWidth();
 
-			delta     = (e.type === "DOMMouseScroll") ? (e.originalEvent.detail * -40) : e.originalEvent.wheelDelta;
+			delta     = e.originalEvent.wheelDelta;
 			direction = (delta > 0) ? "right" : "left";
 
 			if (direction === "left" && -delta > (scrollWidth - width - scrollLeft)) {
@@ -365,7 +365,7 @@
 				scrollHeight = data.$content[0].scrollHeight,
 				height       = data.$content.outerHeight();
 
-			delta     = (e.type === "DOMMouseScroll") ? (e.originalEvent.detail * -40) : e.originalEvent.wheelDelta;
+			delta     = e.originalEvent.wheelDelta;
 			direction = (delta > 0) ? "up" : "down";
 
 			if (direction === "down" && -delta > (scrollHeight - height - scrollTop)) {
