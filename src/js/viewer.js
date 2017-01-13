@@ -80,53 +80,10 @@
 		// Functions.iterate.call($LazyInstances, cacheScrollPosition);
 
 		if ($Instances.length) {
-			if (!ViewportSetup) {
-				$ViewportMeta = $('meta[name="viewport"]');
-				ViewportContent = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
-
-				var newContent = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
-
-				if ($ViewportMeta.length) {
-					$ViewportMeta.attr("content", newContent);
-				} else {
-					$ViewportMeta = $("head").append('<meta name="viewport" content="' + newContent + '">');
-				}
-
-				addGestureLock();
-
-				ViewportSetup = true;
-			}
+			Functions.lockViewport(Namespace);
 		} else {
-			if (ViewportSetup) {
-				if (ViewportContent) {
-					$ViewportMeta.attr("content", ViewportContent);
-				} else {
-					$ViewportMeta.remove();
-				}
-
-				removeGestureLock();
-
-				$ViewportMeta = [];
-				ViewportContent = null;
-				ViewportSetup = false;
-			}
+			Functions.unlockViewport(Namespace);
 		}
-	}
-
-	function addGestureLock() {
-		$Body.on(Events.gestureChange, killGesture)
-			 .on(Events.gestureStart, killGesture)
-			 .on(Events.gestureEnd, killGesture);
-	}
-
-	function removeGestureLock() {
-		$Body.off(Events.gestureChange)
-			 .off(Events.gestureStart)
-			 .off(Events.gestureEnd);
-	}
-
-	function killGesture(e) {
-		e.preventDefault();
 	}
 
 	/**
@@ -1249,6 +1206,7 @@
 
 		// Localize References
 
+		Namespace       = Plugin.namespace,
 		Classes         = Plugin.classes,
 		RawClasses      = Classes.raw,
 		Events          = Plugin.events,
@@ -1259,9 +1217,7 @@
 		$Body,
 		ScrollTop       = 0,
 		$Instances      = [],
-		$ViewportMeta   = [],
-		ViewportSetup   = false,
-		ViewportContent = null;
+		ViewportSetup   = false;
 		// $LazyInstances  = [];
 
 })

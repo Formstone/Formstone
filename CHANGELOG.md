@@ -2,6 +2,17 @@
 
 <!-- -->
 
+### 1.3.1
+
+* Added viewport and gesture locking for touch based components
+* Added `maxFile` option in Upload
+* Renamed `maxQueue` option to `maxConcurrent` in Upload for clarity
+* Fixed error handling in Lightbox
+* Fixed issue with Scrollbar jumping in Firefox
+* Fixed Viewer styling issue in Lightbox theme
+* Fixed issue when installing via NPM
+* Deprecated YouTube options in Background for TOS compliance
+
 ### 1.3.0
 
 * Added Viewer component

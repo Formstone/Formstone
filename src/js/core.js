@@ -90,6 +90,73 @@
 
 			/**
 			 * @method private
+			 * @name killGesture
+			 * @description Stops gesture event action.
+			 * @param e [object] "Event data"
+			 */
+
+			killGesture: function(e) {
+				try {
+					e.preventDefault();
+				}  catch(error) {
+					//
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name lockViewport
+			 * @description Unlocks the viewport, preventing getsures.
+			 */
+
+			lockViewport: function(plugin_namespace) {
+				ViewportLocks[plugin_namespace] = true;
+
+				if (!$.isEmptyObject(ViewportLocks) && !ViewportLocked) {
+					if ($ViewportMeta.length) {
+						$ViewportMeta.attr("content", ViewportMetaLocked);
+					} else {
+						$ViewportMeta = $("head").append('<meta name="viewport" content="' + ViewportMetaLocked + '">');
+					}
+
+					Formstone.$body.on(Events.gestureChange, Functions.killGesture)
+								   .on(Events.gestureStart, Functions.killGesture)
+								   .on(Events.gestureEnd, Functions.killGesture);
+
+					ViewportLocked = true;
+				}
+			},
+
+			/**
+			 * @method private
+			 * @name unlockViewport
+			 * @description Unlocks the viewport, allowing getsures.
+			 */
+
+			unlockViewport: function(plugin_namespace) {
+				if ($.type( ViewportLocks[plugin_namespace] ) !== 'undefined') {
+					delete ViewportLocks[plugin_namespace];
+				}
+
+				if ($.isEmptyObject(ViewportLocks) && ViewportLocked) {
+					if ($ViewportMeta.length) {
+						if (ViewportMetaOriginal) {
+							$ViewportMeta.attr("content", ViewportMetaOriginal);
+						} else {
+							$ViewportMeta.remove();
+						}
+					}
+
+					Formstone.$body.off(Events.gestureChange)
+								   .off(Events.gestureStart)
+								   .off(Events.gestureEnd);
+
+					ViewportLocked = false;
+				}
+			},
+
+			/**
+			 * @method private
 			 * @name startTimer
 			 * @description Starts an internal timer.
 			 * @param timer [int] "Timer ID"
@@ -249,7 +316,16 @@
 			touchLeave           : "touchleave.{ns}",
 			touchMove            : "touchmove.{ns}",
 			touchStart           : "touchstart.{ns}"
-		};
+		},
+
+		ResizeTimer    = null,
+		Debounce       = 20,
+
+		$ViewportMeta,
+		ViewportMetaOriginal,
+		ViewportMetaLocked,
+		ViewportLocks     = [],
+		ViewportLocked    = false;
 
 	/**
 	 * @method
@@ -717,9 +793,6 @@
 
 	// Window resize
 
-	var ResizeTimer = null,
-		Debounce = 20;
-
 	function onWindowResize() {
 		Formstone.windowWidth  = Formstone.$window.width();
 		Formstone.windowHeight = Formstone.$window.height();
@@ -764,6 +837,11 @@
 
 	$(function() {
 		Formstone.$body = $("body");
+
+		// Viewport
+		$ViewportMeta = $('meta[name="viewport"]');
+		ViewportMetaOriginal = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
+		ViewportMetaLocked   = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
 
 		$Ready.resolve();
 

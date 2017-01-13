@@ -150,10 +150,6 @@
 			// Kill event
 			Functions.killEvent(e);
 
-			// Viewport
-			Instance.$viewportMeta = $('meta[name="viewport"]');
-			Instance.viewportContent = (Instance.$viewportMeta.length) ? Instance.$viewportMeta.attr("content") : false;
-
 			// Double the margin
 			Instance.margin *= 2;
 
@@ -433,6 +429,10 @@
 					restoreContents();
 				}
 
+				if (Instance.isViewer && Instance.$imageContainer.length) {
+					Instance.$imageContainer.fsViewer("destroy");
+				}
+
 				Instance.$lightbox.off(Events.namespace);
 				Instance.$container.off(Events.namespace);
 				$Window.off(Events.keyDown);
@@ -456,34 +456,10 @@
 			if (Instance.isMobile) {
 				$Locks.removeClass(RawClasses.lock);
 
-				if (Instance.viewportContent) {
-					Instance.$viewportMeta.attr("content", Instance.viewportContent);
-				} else {
-					Instance.$viewportMeta.remove();
-				}
-
-				removeGestureLock();
+				Functions.unlockViewport(Namespace);
 			}
 		}
 	}
-
-
-	function addGestureLock() {
-		$Body.on(Events.gestureChange, killGesture)
-			 .on(Events.gestureStart, killGesture)
-			 .on(Events.gestureEnd, killGesture);
-	}
-
-	function removeGestureLock() {
-		$Body.off(Events.gestureChange)
-			 .off(Events.gestureStart)
-			 .off(Events.gestureEnd);
-	}
-
-	function killGesture(e) {
-		e.preventDefault();
-	}
-
 
 	/**
 	 * @method private
@@ -496,15 +472,7 @@
 			durration = Instance.isMobile ? 0 : Instance.duration;
 
 		if (Instance.isMobile) {
-			var viewportContent = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
-
-			if (Instance.$viewportMeta.length) {
-				Instance.$viewportMeta.attr("content", viewportContent);
-			} else {
-				Instance.$viewportMeta = $("head").append('<meta name="viewport" content="' + viewportContent + '">');
-			}
-
-			addGestureLock();
+			Functions.lockViewport(Namespace);
 		} else {
 			Instance.$controls.css({
 				marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
