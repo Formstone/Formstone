@@ -79,7 +79,7 @@
 		data.$content.on(Events.scroll, data, onScroll);
 
 		if (data.mouseWheel) {
-			data.$content.on("mousewheel" + Events.namespace, data, onMouseWheel);
+			data.$content.on("wheel" + Events.namespace, data, onMouseWheel);
 		}
 
 		data.$track.fsTouch({
@@ -89,7 +89,7 @@
 		  .on(Events.pan, data, onPan)
 		  .on(Events.panEnd, data, onPanEnd)
 		  .on(Events.click, Functions.killEvent)
-		  .on("mousewheel" + Events.namespace, data, onTrackMouseWheel);
+		  .on("wheel" + Events.namespace, data, onTrackMouseWheel);
 
 		resizeInstance(data);
 
@@ -345,8 +345,8 @@
 
 	function onMouseWheel(e, fromTrack) {
 		// http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
-		var data  = e.data,
-			delta = e.originalEvent.wheelDelta * ( (fromTrack === true) ? -1 : 1 ),
+		var data = e.data,
+			delta,
 			direction;
 
 		if (data.horizontal) {
@@ -355,17 +355,19 @@
 				scrollWidth  = data.$content[0].scrollWidth,
 				width        = data.$content.outerWidth();
 
-			direction = (delta > 0) ? "right" : "left";
+			delta = e.originalEvent.deltaX * ( (fromTrack === true) ? -1 : 1 );
 
 			if (fromTrack === true) {
-				data.$content.scrollLeft(scrollLeft + (delta / 2));
+				data.$content.scrollLeft(scrollLeft - delta);
 				return killEvent(e);
 			}
 
-			if (direction === "left" && -delta > (scrollWidth - width - scrollLeft)) {
+			direction = (delta < 0) ? "right" : "left";
+
+			if (direction === "left" && delta > (scrollWidth - width - scrollLeft)) {
 				data.$content.scrollLeft(scrollWidth);
 				return killEvent(e);
-			} else if (direction === "right" && delta > scrollLeft) {
+			} else if (direction === "right" && -delta > scrollLeft) {
 				data.$content.scrollLeft(0);
 				return killEvent(e);
 			}
@@ -375,17 +377,19 @@
 				scrollHeight = data.$content[0].scrollHeight,
 				height       = data.$content.outerHeight();
 
-			direction = (delta > 0) ? "up" : "down";
+			delta = e.originalEvent.deltaY * ( (fromTrack === true) ? -1 : 1 );
 
 			if (fromTrack === true) {
-				data.$content.scrollTop(scrollTop + (delta / 2));
+				data.$content.scrollTop(scrollTop - delta);
 				return killEvent(e);
 			}
 
-			if (direction === "down" && -delta > (scrollHeight - height - scrollTop)) {
+			direction = (delta < 0) ? "up" : "down";
+
+			if (direction === "down" && delta > (scrollHeight - height - scrollTop)) {
 				data.$content.scrollTop(scrollHeight);
 				return killEvent(e);
-			} else if (direction === "up" && delta > scrollTop) {
+			} else if (direction === "up" && -delta > scrollTop) {
 				data.$content.scrollTop(0);
 				return killEvent(e);
 			}
