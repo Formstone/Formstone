@@ -87,7 +87,9 @@
 			pan     : true
 		}).on(Events.panStart, data, onPanStart)
 		  .on(Events.pan, data, onPan)
-		  .on(Events.panEnd, data, onPanEnd);
+		  .on(Events.panEnd, data, onPanEnd)
+		  .on(Events.click, Functions.killEvent)
+		  .on("mousewheel" + Events.namespace, data, onTrackMouseWheel);
 
 		resizeInstance(data);
 
@@ -330,6 +332,10 @@
 		}
 	}
 
+	function onTrackMouseWheel(e) {
+		onMouseWheel(e, true);
+	}
+
 	/**
 	 * @method private
 	 * @name onMouseWheel
@@ -337,10 +343,10 @@
 	 * @param e [object] "Event data"
 	 */
 
-	function onMouseWheel(e) {
+	function onMouseWheel(e, fromTrack) {
 		// http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
-		var data = e.data,
-			delta,
+		var data  = e.data,
+			delta = e.originalEvent.wheelDelta * ( (fromTrack === true) ? -1 : 1 ),
 			direction;
 
 		if (data.horizontal) {
@@ -349,8 +355,12 @@
 				scrollWidth  = data.$content[0].scrollWidth,
 				width        = data.$content.outerWidth();
 
-			delta     = e.originalEvent.wheelDelta;
 			direction = (delta > 0) ? "right" : "left";
+
+			if (fromTrack === true) {
+				data.$content.scrollLeft(scrollLeft + (delta / 2));
+				return killEvent(e);
+			}
 
 			if (direction === "left" && -delta > (scrollWidth - width - scrollLeft)) {
 				data.$content.scrollLeft(scrollWidth);
@@ -365,8 +375,12 @@
 				scrollHeight = data.$content[0].scrollHeight,
 				height       = data.$content.outerHeight();
 
-			delta     = e.originalEvent.wheelDelta;
 			direction = (delta > 0) ? "up" : "down";
+
+			if (fromTrack === true) {
+				data.$content.scrollTop(scrollTop + (delta / 2));
+				return killEvent(e);
+			}
 
 			if (direction === "down" && -delta > (scrollHeight - height - scrollTop)) {
 				data.$content.scrollTop(scrollHeight);
