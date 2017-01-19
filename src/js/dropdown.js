@@ -34,7 +34,7 @@
 
 	function construct(data) {
 		data.multiple  = this.prop("multiple");
-		data.disabled  = this.is(":disabled") || this.is("[readonly]");
+		data.disabled  = this.prop("disabled") || this.is("[readonly]");
 		data.lastIndex = false;
 
 		if (data.multiple) {
@@ -312,7 +312,7 @@
 				classes.push(RawClasses.group);
 
 				// Disabled groups
-				if ($option.is(":disabled")) {
+				if ($option.prop("disabled")) {
 					classes.push(RawClasses.disabled);
 				}
 
@@ -333,10 +333,10 @@
 
 					opType = "span";
 				}
-				if ($option.is(":selected")) {
+				if ($option.prop("selected")) {
 					classes.push(RawClasses.item_selected);
 				}
-				if ($option.is(":disabled")) {
+				if ($option.prop("disabled")) {
 					classes.push(RawClasses.item_disabled);
 				}
 
@@ -358,7 +358,7 @@
 
 				//html += ' tabindex="-1">';
 				html += ' role="option"';
-				if ($option.is(":selected")) {
+				if ($option.prop("selected")) {
 					html += ' "aria-selected"="true"';
 				}
 				html += '>';

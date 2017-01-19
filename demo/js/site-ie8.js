@@ -1,4 +1,4 @@
-/*! formstone v1.3.0 [site-ie8.js] 2017-01-13 | GPL-3.0 License | formstone.it */
+/*! formstone v1.3.0 [site-ie8.js] 2017-01-19 | GPL-3.0 License | formstone.it */
 
 /**
 * @preserve HTML5 Shiv 3.7.3 | @afarkas @jdalton @jon_neal @rem | MIT/GPL2 Licensed
