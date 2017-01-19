@@ -9,6 +9,8 @@
 * Renamed `maxQueue` option to `maxConcurrent` in Upload for clarity
 * Fixed error handling in Lightbox
 * Fixed issue with Scrollbar jumping in Firefox
+* Fixed issue with Scrollbar handle closing Dropdown
+* Fixed issue with `wheel` event on Scrollbar track
 * Fixed Viewer styling issue in Lightbox theme
 * Fixed issue when installing via NPM
 * Deprecated YouTube options in Background for TOS compliance
