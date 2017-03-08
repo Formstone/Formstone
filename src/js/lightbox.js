@@ -121,7 +121,7 @@
 				tapTimer           : null
 			}, data);
 
-			Instance.isViewer = (Instance.isMobile && data.viewer && typeof $.fn.fsViewer !== undefined);
+			Instance.isViewer = (Instance.isMobile && data.viewer && typeof $.fn.fsViewer !== "undefined");
 
 			// Check target type
 			var $el            = data.$el,
