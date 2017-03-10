@@ -6,6 +6,7 @@
 
 * Fixed issue with Viewer in Lightbox (Thanks @mackensen!)
 * Fixed issue with inline content in Lightbox
+* Fixed issue with focus in Lightbox
 
 ### 1.3.1
 

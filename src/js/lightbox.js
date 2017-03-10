@@ -442,7 +442,9 @@
 				Instance.$overlay.remove();
 				Instance.$lightbox.remove();
 
-				Instance.$el.focus();
+				if (typeof Instance.$el !== "undefined" && Instance.$el && Instance.$el.length) {
+					Instance.$el.focus();
+				}
 
 				// Reset Instance
 				Instance = null;
