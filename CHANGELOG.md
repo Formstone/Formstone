@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.3.2
+
+* Fixed issue with Viewer in Lightbox (Thanks @mackensen!)
+* Fixed issue with inline content in Lightbox
+
 ### 1.3.1
 
 * Added viewport and gesture locking for touch based components

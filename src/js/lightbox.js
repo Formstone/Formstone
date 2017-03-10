@@ -429,7 +429,7 @@
 					restoreContents();
 				}
 
-				if (Instance.isViewer && Instance.$imageContainer.length) {
+				if (Instance.isViewer && Instance.$imageContainer && Instance.$imageContainer.length) {
 					Instance.$imageContainer.fsViewer("destroy");
 				}
 
