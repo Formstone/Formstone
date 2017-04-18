@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
@@ -97,9 +97,45 @@
       "dist/css/viewer.css": [
         "src/less/viewer.less"
       ],
-      "dist/css/themes/light.css": [
-        "src/less/themes/light.less"
-      ]
+        "dist/css/themes/light.css": [
+          "src/less/themes/light.less"
+		],
+		"dist/css/themes/light/carousel.css": [
+		  "src/less/themes/light/carousel.less"
+		],
+		"dist/css/themes/light/checkbox.css": [
+		  "src/less/themes/light/checkbox.less"
+		],
+		"dist/css/themes/light/dropdown.css": [
+		  "src/less/themes/light/dropdown.less"
+		],
+		"dist/css/themes/light/lightbox.css": [
+		  "src/less/themes/light/lightbox.less"
+		],
+		"dist/css/themes/light/navigation.css": [
+		  "src/less/themes/light/navigation.less"
+		],
+		"dist/css/themes/light/pagination.css": [
+		  "src/less/themes/light/pagination.less"
+		],
+		"dist/css/themes/light/range.css": [
+		  "src/less/themes/light/range.less"
+		],
+		"dist/css/themes/light/scrollbar.css": [
+		  "src/less/themes/light/scrollbar.less"
+		],
+		"dist/css/themes/light/tabs.css": [
+		  "src/less/themes/light/tabs.less"
+		],
+		"dist/css/themes/light/tooltip.css": [
+		  "src/less/themes/light/tooltip.less"
+		],
+		"dist/css/themes/light/upload.css": [
+		  "src/less/themes/light/upload.less"
+		],
+		"dist/css/themes/light/viewer.css": [
+		  "src/less/themes/light/viewer.less"
+		]
     }
   },
   "site": {

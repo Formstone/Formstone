@@ -1235,7 +1235,7 @@
 	function onItemFocus(e) {
 		var data = e.data;
 
-		if (data.enabled) {
+		if (data.enabled && !data.isTouching) {
 			Functions.clearTimer(data.autoTimer);
 
 			data.$container.scrollLeft(0);
