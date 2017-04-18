@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.3.3
+
+* Added compiled theme files for each component
+* Fixed issue with un-contained Carousel item focus
+
 ### 1.3.2
 
 * Fixed issue with Viewer in Lightbox (Thanks @mackensen!)
