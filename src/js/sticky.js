@@ -16,18 +16,6 @@
 
 	/**
 	 * @method private
-	 * @name setup
-	 * @description Setup plugin.
-	 */
-
-	function setup() {
-		scroll();
-		$Window.on("scroll", scroll);
-		$Body = Formstone.$body;
-	}
-
-	/**
-	 * @method private
 	 * @name resize
 	 * @description Handles window resize
 	 */
@@ -38,29 +26,19 @@
 
 	/**
 	 * @method private
-	 * @name scroll
-	 * @description Handles window scroll
-	 */
-
-	function scroll() {
-		ScrollTop = $Window.scrollTop(); // + Formstone.windowHeight;
-
-		if (ScrollTop < 0) {
-			ScrollTop = 0;
-		}
-
-		// Functions.iterate.call($Instances, checkInstance);
-	}
-
-	/**
-	 * @method private
 	 * @name raf
 	 * @description Handles request animation frame
 	 */
 
 	function raf() {
+        ScrollTop = $Window.scrollTop();
+
+		if (ScrollTop < 0) {
+			ScrollTop = 0;
+		}
+
 		if (ScrollTop !== OldScrollTop) {
-			Functions.iterate.call($Instances, renderRAF);
+			renderRAF();
 
 			OldScrollTop = ScrollTop;
 		}
@@ -74,6 +52,8 @@
 
 	function cacheInstances() {
 		$Instances = $(Classes.base);
+
+        resize();
 	}
 
 	/**
@@ -100,10 +80,6 @@
 		data.$stickys = $().add(data.$el).add(data.$clone);
 
 		data.$el.after(data.$clone);
-
-		cacheInstances();
-
-		console.log(data);
 	}
 
 	/**
@@ -114,15 +90,8 @@
 	 */
 
 	function postConstruct(data) {
-		// // Media Query support
-		// $.fsMediaquery("bind", data.rawGuid, data.mq, {
-		// 	enter: function() {
-		// 		mobileEnable.call(data.$el, data);
-		// 	},
-		// 	leave: function() {
-		// 		mobileDisable.call(data.$el, data);
-		// 	}
-		// });
+        cacheInstances();
+        resize();
 	}
 
 	/**
@@ -133,8 +102,6 @@
 	 */
 
 	function destruct(data) {
-		// $.fsMediaquery("unbind", data.rawGuid);
-
 		cacheInstances();
 	}
 
@@ -142,12 +109,11 @@
 	 * @method private
 	 * @name renderRAF
 	 * @description Updates DOM based on animation values
-	 * @param data [object] "Instance data"
 	 */
 
-	function renderRAF(data) {
-		Functions.iterate.call($Instances, checkInstance);
-	}
+	function renderRAF() {
+        Functions.iterate.call($Instances, checkInstance);
+    }
 
 	/**
 	 * @method private
@@ -165,7 +131,11 @@
 			data.position  = containerPos;
 			data.props.max = containerPos.top + data.$container.outerHeight() - data.props.height;
 		} else {
-			data.position  = data.$el.position();
+            if (data.stuck) {
+                data.position = data.$clone.position();
+            } else {
+                data.position = data.$el.position();
+            }
 			data.props.max = false;
 		}
 
@@ -177,6 +147,8 @@
 				bottom: ''
 			});
 		}
+
+        checkInstance(data);
 	}
 
 	function cacheProps(data) {
@@ -277,7 +249,6 @@
 			},
 
 			methods: {
-				_setup        : setup,
 				_construct    : construct,
 				_postConstruct: postConstruct,
 				_destruct     : destruct,
@@ -310,117 +281,3 @@
 })
 
 );
-
-
-
-
-
-
-// // Scroll Spy
-//
-// (function($) {
-//
-// 	var $Instances,
-// 		  $SpyItems,
-// 		  $SpyBlocks;
-//
-//   $(document).ready(function() {
-//     init();
-//   });
-//
-// 	function init() {
-// 		$Instances = $(".js-scroll_lock").each(createInstance);
-//
-// 		$SpyItems  = $(".js-scroll_spy");
-// 		$SpyBlocks = $SpyItems.map(function(){
-// 			var id    = $(this)[0].hash,
-// 				  $item = $(id);
-//
-// 			if (!$item.length) {
-// 				$item = $("[name=" + id.replace("#", "") + "]");
-// 			}
-//
-// 			if ($item.length) {
-// 				return $item;
-// 			}
-// 		});
-//
-// 		$(window).on("scroll", scroll).on("resize", resize);
-//
-// 		scroll();
-// 	}
-//
-// 	function scroll() {
-// 		$Instances.each(checkInstance);
-//
-// 		// Spy
-//
-// 		var $current = [],
-//         viewTop  = $(window).scrollTop() + ($(window).height() * 0.333);
-//
-// 		$SpyBlocks.each(function() {
-// 			var $block = $(this);
-//
-// 			if (viewTop >= $block.offset().top) {
-// 				$current = $block;
-// 			}
-// 		});
-//
-// 		$SpyItems.removeClass("js-active");
-//
-// 		if ($current.length) {
-// 			$SpyItems.filter("[href*='#" + $current.attr("id") + "']").addClass("js-active");
-// 		}
-// 	}
-//
-// 	function resize() {
-// 		$Instances.each(cacheInstance);
-//
-// 		scroll();
-// 	}
-//
-// 	function createInstance() {
-// 		var $target  = $(this),
-// 			  $clone   = $target.clone(),
-// 			  offset   = parseInt($target.data("scroll-offset"), 10),
-// 			  position = $target.position();
-//
-// 		$target.addClass("js-scroll_ready");
-// 		$clone.addClass("js-scroll_clone");
-//
-// 		$target.data("scroll", {
-// 			$el:    $target,
-// 			$clone: $clone,
-// 			$locks: $().add($target).add($clone),
-// 			locked: false,
-// 			offset: offset,
-// 			top:    position.top
-// 		}).after($clone);
-// 	}
-//
-// 	function cacheInstance() {
-// 		var data = $(this).data("scroll"),
-// 			position;
-//
-// 		if (data.locked) {
-// 			position = data.$clone.position();
-// 		} else {
-// 			position = data.$el.position();
-// 		}
-//
-// 		data.top = position.top;
-// 	}
-//
-// 	function checkInstance() {
-// 		var data = $(this).data("scroll");
-//
-// 		if (($(window).scrollTop() - data.top) > data.offset) {
-// 			data.locked = true;
-// 			data.$locks.addClass("js-scroll_locked");
-// 		} else {
-// 			data.locked = false;
-// 			data.$locks.removeClass("js-scroll_locked");
-// 		}
-// 	}
-//
-// })(jQuery);
