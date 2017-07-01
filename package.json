@@ -85,6 +85,9 @@
       "dist/css/scrollbar.css": [
         "src/less/scrollbar.less"
       ],
+      "dist/css/sticky.css": [
+        "src/less/sticky.less"
+      ],
       "dist/css/tabs.css": [
         "src/less/tabs.less"
       ],
@@ -166,6 +169,7 @@
         "dist/js/number.js",
         "dist/js/range.js",
         "dist/js/scrollbar.js",
+        "dist/js/sticky.js",
         "dist/js/swap.js",
         "dist/js/tabs.js",
         "dist/js/tooltip.js",

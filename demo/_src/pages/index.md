@@ -25,6 +25,7 @@
 * [Pagination](components/pagination.html)
 * [Range](components/range.html)
 * [Scrollbar](components/scrollbar.html)
+* [Sticky](components/sticky.html)
 * [Swap](components/swap.html)
 * [Tabs](components/tabs.html)
 * [Tooltip](components/tooltip.html)

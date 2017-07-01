@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Sticky &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=1.3.3"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=1.3.3">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie8.css?v=1.3.3"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie9.css?v=1.3.3"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=1.3.3"></script>
+	</head>
+
+	<body class="fs-grid demo_page">
+		<!-- JSHEADER -->
+		<div class="demo_content">
+			<header class="header">
+				<div class="fs-row">
+					<div class="fs-cell">
+						<a href="https://formstone.it/" class="header_logo icon-logo">Formstone</a>
+					</div>
+				</div>
+			</header>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="sticky-demo">Sticky Demo</h1>
+					<p class="back_link">
+						<a href="https://formstone.it/components/sticky">View Documentation</a>
+					</p>
+					<!-- START: DEMO -->
+					<h4>Basic</h4>
+
+					<!-- START: FIRSTDEMO -->
+
+					<style>
+					.sticky_container {
+						border: 1px solid #999;
+						height: 500px;
+					}
+					
+					.sticky_element {
+						color: white;
+						font-size: 12px;
+						height: 25px;
+						line-height: 25px;
+						overflow: hidden;
+						padding: 0;
+						text-align: center;
+						width: 100%;
+					}
+					
+					.sticky_element.green {
+						background: green;
+						z-index: 10;
+					}
+					
+					.sticky_element.blue {
+						background: blue;
+					}
+					
+					.sticky_element.red {
+						background: red;
+					}
+					</style>
+
+					<!-- <div class="sticky_container sticky_1"> -->
+					<div class="sticky_element green js-sticky" data-sticky-options='{"offset":50}'>Sticky</div>
+					<br>
+					<br>
+					<br>
+					<!-- </div> -->
+
+					<div class="sticky_container sticky_2">
+						<div class="sticky_element blue js-sticky" data-sticky-options='{"offset":75}' data-sticky-container=".sticky_2">Sticky</div>
+					</div>
+
+					<div class="sticky_container sticky_3">
+						<div class="sticky_element red js-sticky" data-sticky-options='{"offset":75}' data-sticky-container=".sticky_3">Sticky</div>
+					</div>
+
+					<div class="sticky_container sticky_4">
+						<div class="sticky_element blue js-sticky" data-sticky-options='{"offset":75}' data-sticky-container=".sticky_4">Sticky</div>
+					</div>
+
+					<div class="sticky_container sticky_5">
+						<div class="sticky_element red js-sticky" data-sticky-options='{"offset":75}' data-sticky-container=".sticky_5">Sticky</div>
+					</div>
+
+					<!-- <div class="demo_container">
+	<div class="demo_example">
+		<div class="button toggle js-swap" data-swap-target=".toggle_target_0">Handle</div>
+		<div class="toggle_target toggle_target_0">Content</div>
+	</div>
+	<div class="demo_code">
+		<pre><code class="language-html">&lt;h2 class=&quot;swap&quot; data-swap-target=&quot;.swap_target&quot;&gt;Handle&lt;/h2&gt;
+&lt;div class=&quot;swap_target&quot;&gt;Content&lt;/div&gt;</code></pre>
+		<pre><code class="language-javascript">$(".swap").swap();</code></pre>
+	</div>
+</div> -->
+
+					<!-- END: FIRSTDEMO -->
+					<!-- END: DEMO -->
+					<div class="footer">
+						<div class="copyright">
+							<div>&copy; 2017
+								<a href="https://formstone.it/">Formstone</a>
+							</div>
+						</div>
+						<div class="footer_links">
+							<!-- JSFOOTER -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

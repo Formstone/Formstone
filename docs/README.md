@@ -25,6 +25,7 @@
 * [Pagination](pagination.md)
 * [Range](range.md)
 * [Scrollbar](scrollbar.md)
+* [Sticky](sticky.md)
 * [Swap](swap.md)
 * [Tabs](tabs.md)
 * [Tooltip](tooltip.md)

@@ -74,6 +74,7 @@
 			Site.$body.find(".js-pagination").pagination("destroy");
 			Site.$body.find("input[type=range]").range("destroy");
 			Site.$body.find(".js-scrollbar").scrollbar("destroy");
+			Site.$body.find(".js-sticky").sticky("destroy");
 			Site.$body.find(".js-swap").swap("destroy");
 			Site.$body.find(".js-tabs").tabs("destroy");
 			Site.$body.find(".js-tooltip").tooltip("destroy");
@@ -93,6 +94,7 @@
 			Site.$body.find(".js-pagination").pagination(options);
 			Site.$body.find("input[type=range]").range(options);
 			Site.$body.find(".js-scrollbar").scrollbar(options);
+			Site.$body.find(".js-sticky").sticky(options);
 			Site.$body.find(".js-swap").swap(options);
 			Site.$body.find(".js-tabs").tabs(options);
 			Site.$body.find(".js-tooltip").tooltip(options);
