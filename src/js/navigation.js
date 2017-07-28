@@ -127,10 +127,12 @@
 						}
 					});
 
-		if (!data.$handle.is("a, button")) {
-			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
-		}
+  if (!data.$handle.is("a, button")) {
+			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeypress);
+  }
 
+  data.$nav.on(Events.keyUp + data.dotGuid, data, onKeyup);
+		
 		// $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
 	}
 
@@ -243,12 +245,12 @@
 
 	/**
 	 * @method private
-	 * @name onKeyup
+	 * @name onKeypress
 	 * @description Handles keypress event on inputs
 	 * @param e [object] "Event data"
 	 */
 
-	function onKeyup(e) {
+	function onKeypress(e) {
 		var data = e.data;
 
 		// If arrow keys
@@ -256,6 +258,25 @@
 			Functions.killEvent(e);
 
 			data.$handle.trigger(Events.raw.click);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onKeyup
+	 * @description Handles keyup event on navigation
+	 * @param e [object] "Event data"
+	 */
+
+	function onKeyup(e) {
+		var data = e.data;
+
+		if (e.keyCode === 27) {
+			Functions.killEvent(e);
+
+      // Close and return focus to the control that opened it
+			data.$handle.trigger(Events.raw.click);
+			data.$handle.focus();
 		}
 	}
 
@@ -289,7 +310,7 @@
 
 				data.open = true;
 
-				data.$nav.focus();
+				data.$nav.find(':focusable').eq(0).focus();
 			}
 		}
 	}
@@ -321,8 +342,6 @@
 				clearLocks(data);
 
 				data.open = false;
-
-				data.$el.focus();
 			}
 		}
 	}
