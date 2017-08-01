@@ -1,0 +1,6 @@
+before_install:
+  # Node
+  - npm cache clean -g
+language: node_js
+node_js:
+  - "0.10"

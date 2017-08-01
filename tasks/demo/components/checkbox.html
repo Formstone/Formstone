@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Checkbox &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=1.3.3"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=1.3.3">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie8.css?v=1.3.3"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie9.css?v=1.3.3"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=1.3.3"></script>
+	</head>
+
+	<body class="fs-grid demo_page">
+		<!-- JSHEADER -->
+		<div class="demo_content">
+			<header class="header">
+				<div class="fs-row">
+					<div class="fs-cell">
+						<a href="https://formstone.it/" class="header_logo icon-logo">Formstone</a>
+					</div>
+				</div>
+			</header>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="checkbox-demo">Checkbox Demo</h1>
+					<p class="back_link">
+						<a href="https://formstone.it/components/checkbox">View Documentation</a>
+					</p>
+					<!-- START: DEMO -->
+					<h4>Basic</h4>
+
+					<!-- START: FIRSTDEMO -->
+
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="fs-row">
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="1" id="checkbox-1" name="checkbox-1" checked>
+											<label for="checkbox-1">One</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label for="checkbox-2">
+												<input type="checkbox" value="2" id="checkbox-2" name="checkbox-2"> Two
+											</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="3" id="checkbox-3" name="checkbox-3" disabled>
+											<label for="checkbox-3">Three</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label>
+												<span>
+													<input type="checkbox" value="4" id="checkbox-4" name="checkbox-4"> Four
+												</span>
+											</label>
+										</fieldset>
+									</form>
+								</div>
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="radio" value="1" id="radio-1" name="radio-group" checked>
+											<label for="radio-1">One</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label for="radio-2">
+												<input type="radio" value="2" id="radio-2" name="radio-group"> Two
+											</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<input type="radio" value="3" id="radio-3" name="radio-group" disabled>
+											<label for="radio-3">Three</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label>
+												<span>
+													<input type="radio" value="4" id="radio-4" name="radio-group"> Four!
+												</span>
+											</label>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; value=&quot;1&quot; id=&quot;checkbox&quot; name=&quot;checkbox&quot;&gt;
+&lt;label for=&quot;checkbox&quot;&gt;Checkbox&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; value=&quot;1&quot; id=&quot;radio&quot; name=&quot;radio&quot;&gt;
+&lt;label for=&quot;radio&quot;&gt;Radio&lt;/label&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='checkbox'], input[type='radio']").checkbox();</code></pre>
+						</div>
+					</div>
+
+					<!-- END: FIRSTDEMO -->
+
+					<h4>Toggle</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="fs-row">
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="One" id="toggle-1" name="toggle-1" checked data-checkbox-options='{"toggle":true}'>
+											<label for="toggle-1">One</label>
+										</fieldset>
+									</form>
+								</div>
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="Two" id="toggle-2" name="toggle-2" disabled data-checkbox-options='{"toggle":true}'>
+											<label for="toggle-2">Two</label>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; value=&quot;1&quot; id=&quot;checkbox&quot; name=&quot;checkbox&quot;&gt;
+&lt;label for=&quot;checkbox&quot;&gt;Checkbox&lt;/label&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='checkbox']").checkbox({
+	toggle: true
+});</code></pre>
+						</div>
+					</div>
+
+					<h4>No Theme</h4>
+					<div class="demo_container">
+						<div class="demo_example">
+							<div class="fs-row">
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="1" id="checkbox-plain-1" name="checkbox-plain-1" checked data-checkbox-options='{"theme":""}'>
+											<label for="checkbox-plain-1">One</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label for="checkbox-plain-2">
+												<input type="checkbox" value="2" id="checkbox-plain-2" name="checkbox-plain-2" data-checkbox-options='{"theme":""}'> Two
+											</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<input type="checkbox" value="3" id="checkbox-plain-3" name="checkbox-plain-3" disabled data-checkbox-options='{"theme":""}'>
+											<label for="checkbox-plain-3">Three</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label>
+												<span>
+													<input type="checkbox" value="4" id="checkbox-plain-4" name="checkbox-plain-4" data-checkbox-options='{"theme":""}'> Four
+												</span>
+											</label>
+										</fieldset>
+									</form>
+								</div>
+								<div class="fs-cell fs-sm-half fs-md-half fs-lg-third">
+									<form action="#" method="GET" class="form demo_form">
+										<fieldset class="form_fieldset">
+											<input type="radio" value="1" id="radio-plain-1" name="radio-plain-group" checked data-checkbox-options='{"theme":""}'>
+											<label for="radio-plain-1">One</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label for="radio-plain-2">
+												<input type="radio" value="2" id="radio-plain-2" name="radio-plain-group" data-checkbox-options='{"theme":""}'> Two
+											</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<input type="radio" value="3" id="radio-plain-3" name="radio-plain-group" disabled data-checkbox-options='{"theme":""}'>
+											<label for="radio-plain-3">Three</label>
+										</fieldset>
+										<fieldset class="form_fieldset">
+											<label>
+												<span>
+													<input type="radio" value="4" id="radio-plain-4" name="radio-plain-group" data-checkbox-options='{"theme":""}'> Four!
+												</span>
+											</label>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="demo_code">
+							<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; value=&quot;1&quot; id=&quot;checkbox&quot; name=&quot;checkbox&quot;&gt;
+&lt;label for=&quot;checkbox&quot;&gt;Checkbox&lt;/label&gt;
+
+&lt;input type=&quot;radio&quot; value=&quot;1&quot; id=&quot;radio&quot; name=&quot;radio&quot;&gt;
+&lt;label for=&quot;radio&quot;&gt;Radio&lt;/label&gt;</code></pre>
+							<pre><code class="language-javascript">$("input[type='checkbox'], input[type='radio']").checkbox({
+	theme: ""
+});</code></pre>
+						</div>
+					</div>
+					<!-- END: DEMO -->
+					<div class="footer">
+						<div class="copyright">
+							<div>&copy; 2017
+								<a href="https://formstone.it/">Formstone</a>
+							</div>
+						</div>
+						<div class="footer_links">
+							<!-- JSFOOTER -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

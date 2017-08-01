@@ -127,11 +127,8 @@
 						}
 					});
 
-  if (!data.$handle.is("a, button")) {
-			data.$handle.on(Events.keyPress + data.dotGuid, data, onKeypress);
-  }
-
-  data.$nav.on(Events.keyUp + data.dotGuid, data, onKeyup);
+	data.$handle.on(Events.keyUp + data.dotGuid, data, onKeyup);
+  data.$nav.on(Events.keyUp + data.dotGuid, data, onEscape);
 		
 		// $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
 	}
@@ -245,36 +242,40 @@
 
 	/**
 	 * @method private
-	 * @name onKeypress
-	 * @description Handles keypress event on inputs
-	 * @param e [object] "Event data"
-	 */
-
-	function onKeypress(e) {
-		var data = e.data;
-
-		// If arrow keys
-		if (e.keyCode === 13 || e.keyCode === 32) {
-			Functions.killEvent(e);
-
-			data.$handle.trigger(Events.raw.click);
-		}
-	}
-
-	/**
-	 * @method private
 	 * @name onKeyup
-	 * @description Handles keyup event on navigation
+	 * @description Handles keyup event on inputs
 	 * @param e [object] "Event data"
 	 */
 
 	function onKeyup(e) {
 		var data = e.data;
 
+    // If space or enter
+		if (e.keyCode === 13 || e.keyCode === 32) {
+      if (!data.$handle.is("a, button")) {
+  			data.$handle.trigger(Events.raw.click);
+			}
+
+			// Send focus to first focusable child.
+			// Note that the open event fires before keyUp with enter.
+			if ((e.keyCode === 13 && data.open === true) || (e.keyCode == 32 && data.open === false)) {
+  		  data.$nav.find(':focusable').eq(0).focus();
+  		}
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name onEscape
+	 * @description Handles escape keyup event on navigation
+	 * @param e [object] "Event data"
+	 */
+
+	function onEscape(e) {
+		var data = e.data;
+
 		if (e.keyCode === 27) {
 			Functions.killEvent(e);
-
-      // Close and return focus to the control that opened it
 			data.$handle.trigger(Events.raw.click);
 			data.$handle.focus();
 		}
@@ -309,8 +310,6 @@
 				addLocks(data);
 
 				data.open = true;
-
-				data.$nav.find(':focusable').eq(0).focus();
 			}
 		}
 	}

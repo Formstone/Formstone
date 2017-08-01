@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+"use strict";
+
+var fs = require("fs"),
+	pkg = require("../package.json"),
+	nopt = require("nopt"),
+	path = require("path"),
+	customizr = require("../src");
+
+var opts = nopt({
+	help: Boolean,
+	version: Boolean,
+	config: path,
+	force: Boolean
+}, {
+	h: "--help",
+	v: "--version",
+	c: "--config",
+	f: "--force"
+});
+
+function help() {
+	var out = [
+		"Usage: customizr [options]",
+		"",
+		"General options:",
+		"  -h, --help           # Print options and usage",
+		"  -v, --version        # Print the version number",
+		"  -c, --config         # Path to your Modernizr config JSON file",
+		"  -f, --force          # Ignore cached versions and force build Modernizr",
+		""
+	];
+
+	return out.join("\n");
+}
+
+if (opts.help) {
+	process.stdout.write(help());
+	return process.exit();
+} else if (opts.version) {
+	process.stdout.write(pkg.version + "\n");
+	return process.exit();
+} else {
+	var config = {};
+
+	if (opts.config) {
+		if (fs.existsSync(opts.config)) {
+			config = JSON.parse(fs.readFileSync(opts.config));
+		} else {
+			process.stderr.write("Path does not exist.");
+			return process.exit();
+		}
+	}
+
+	return customizr(config, process.exit);
+}

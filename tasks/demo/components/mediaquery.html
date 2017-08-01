@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<!-- Page Attributes -->
+		<title>Media Query &middot; Formstone</title>
+		<!-- Modernizer -->
+		<script src="../js/modernizr.js?v=1.3.3"></script>
+		<!-- Compiled CSS -->
+		<!--[if gt IE 8]><!-->
+		<link rel="stylesheet" href="../css/site.css?v=1.3.3">
+		<!--<![endif]-->
+		<!--[if IE 8]><script>var IE8 = true;</script><script src="../js/site-ie8.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie8.css?v=1.3.3"><![endif]-->
+		<!--[if IE 9]><script>var IE9 = true;</script><script src="../js/site-ie9.js?v=1.3.3"></script><link rel="stylesheet" href="../css/site-ie9.css?v=1.3.3"><![endif]-->
+		<!-- Compiled JS -->
+		<script src="../js/site.js?v=1.3.3"></script>
+	</head>
+
+	<body class="fs-grid demo_page">
+		<!-- JSHEADER -->
+		<div class="demo_content">
+			<header class="header">
+				<div class="fs-row">
+					<div class="fs-cell">
+						<a href="https://formstone.it/" class="header_logo icon-logo">Formstone</a>
+					</div>
+				</div>
+			</header>
+			<div class="fs-row">
+				<div class="fs-cell">
+					<h1 id="media-query-demo">Media Query Demo</h1>
+					<p class="back_link">
+						<a href="https://formstone.it/components/mediaquery">View Documentation</a>
+					</p>
+					<!-- START: DEMO -->
+					<h4>Basic</h4>
+
+					<!-- START: FIRSTDEMO -->
+
+					<style>
+					.demo_output {
+						margin: 20px 0;
+					}
+					
+					.demo_output span {
+						display: inline-block;
+						width: 90px;
+					}
+					
+					.demo_output p {
+						margin: 0 0 20px;
+					}
+					
+					.demo_output p:first-child {
+						font-weight: 600;
+					}
+					</style>
+
+					<script>
+					$(document).ready(function() {
+						$(window).on("mqchange.mediaquery", logChange);
+
+						if (!$.mediaquery("state")) {
+							$.mediaquery({
+								minWidth: [320, 500, 740, 980, 1220],
+								maxWidth: [1220, 980, 740, 500, 320],
+								minHeight: [400, 800],
+								maxHeight: [800, 400]
+							});
+						}
+						else {
+							logChange({}, $.mediaquery("state"));
+						}
+
+						$.mediaquery("bind", "demo", "(min-width: 740px)", {
+							enter: logBind,
+							leave: logBind
+						});
+
+					});
+
+					function logChange(e, state) {
+						var html = "";
+						html += "<p><span>Change:</span><span>MinWidth:</span>" + state.minWidth + "<br>";
+						html += "<span></span><span>MaxWidth:</span>" + state.maxWidth + "<br>";
+						html += "<span></span><span>MinHeight:</span>" + state.minHeight + "<br>";
+						html += "<span></span><span>MaxHeight:</span>" + state.maxHeight + "</p>";
+
+						$(".demo_basic").prepend(html);
+					}
+
+					function logBind() {
+						var mql = this,
+							type = mql.matches ? "Enter" : "Leave"
+						html = "<p><span>" + type + ":</span>" + mql.media + "<br>";
+
+						$(".demo_binding").prepend(html);
+					}
+					</script>
+
+					<div class="demo_output demo_basic form_textarea"></div>
+
+					<!-- END: FIRSTDEMO -->
+
+					<h4>Binding</h2>
+						<div class="demo_output demo_binding form_textarea"></div>
+						<!-- END: DEMO -->
+						<div class="footer">
+							<div class="copyright">
+								<div>&copy; 2017
+									<a href="https://formstone.it/">Formstone</a>
+								</div>
+							</div>
+							<div class="footer_links">
+								<!-- JSFOOTER -->
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

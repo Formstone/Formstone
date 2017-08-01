@@ -1,0 +1,7 @@
+before_install:
+  # Node
+  - npm install grunt-cli -g
+  - npm cache clean -g
+language: node_js
+node_js:
+  - "0.10"

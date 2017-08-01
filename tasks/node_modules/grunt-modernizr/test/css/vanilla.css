@@ -1,0 +1,78 @@
+.battery,
+.canvastext,
+.csstransforms3d,
+.flexbox,
+.cssgradients,
+.opacity,
+.indexedDB,
+.backgroundsize,
+.borderimage,
+.no-borderradius,
+.boxshadow,
+.cssanimations,
+.csscolumns,
+.cssreflections,
+.csstransitions,
+.testallprops,
+.flexboxlegacy,
+.prefixed,
+.csstransforms,
+.no-mq,
+.hashchange,
+.draganddrop,
+.generatedcontent,
+.svg,
+.inlinesvg,
+.smil,
+.svgclippaths,
+.input,
+.inputtypes,
+.touch,
+.fontface,
+.testbundle,
+.respond,
+.websockets,
+.applicationcache,
+.no-audio,
+.canvas,
+.geolocation,
+.history,
+.hsla,
+.indexeddb,
+.input,
+.inputtypes,
+.localstorage,
+.multiplebgs,
+.postmessage,
+.scriptdefer,
+.sessionstorage,
+.no-textshadow,
+.rgba,
+.video,
+.webgl,
+.websqldatabase,
+.webworkers {
+	background: red;
+}
+
+.contextmenu,
+.emoji,
+.no-json,
+.filereader {
+	background: blue;
+}
+
+.notification-bar {
+	background: green;
+}
+
+.placeholder {
+	background: yellow;
+}
+
+.prefixed-cors,
+.prefixed-input,
+.prefixed-no-smil
+.prefixed-filereader {
+	background: blue;
+}
