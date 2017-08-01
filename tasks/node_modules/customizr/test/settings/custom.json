@@ -1,0 +1,8 @@
+{
+	"dest": "build/modernizr-custom.js",
+    "files": {
+        "src": [
+            "test/{js,css}/*"
+        ]
+    }
+}

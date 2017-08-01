@@ -1,0 +1,30 @@
+{
+  "name": "formstone",
+  "version": "1.3.3",
+  "description": "Library of modular front end components.",
+  "license": "GPL-3.0",
+  "homepage": "http://formstone.it/",
+  "dependencies": {
+    "jquery": ">=1.11.1"
+  },
+  "devDependencies": {
+    "normalize-css": "~3.0.2",
+    "html5shiv": "~3.7.2",
+    "prism": "gh-pages",
+    "modernizr": "~2.8.3"
+  },
+  "main": [
+    "dist/**/*"
+  ],
+  "ignore": [
+    "demo/",
+    "docs/"
+  ],
+  "authors": [
+    {
+      "name": "Ben Plum",
+      "email": "mr@benplum.com",
+      "url": "http://www.benplum.com"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{{= it.include("_header", { local_title: it.document.title, asset_root: it.document.asset_root, version: it.version }) }}
+
+{{= it.document }}
+
+{{= it.include("_footer", { asset_root: it.document.asset_root, year: it.document.year }) }}

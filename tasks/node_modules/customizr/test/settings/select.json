@@ -1,0 +1,15 @@
+{
+	"dest": "build/modernizr-select.js",
+	"tests": [
+		"webintents",
+		"siblinggeneral",
+		"svg"
+	],
+    "files": {
+        "src": [
+            "test/{js,css}/*"
+        ]
+    },
+	"crawl": false,
+	"uglify": false
+}

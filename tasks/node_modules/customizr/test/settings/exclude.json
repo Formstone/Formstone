@@ -1,0 +1,14 @@
+{
+	"dest": "build/modernizr-exclude.js",
+	"excludeTests": [
+		"applicationcache",
+		"emoji",
+		"notification"
+	],
+    "files": {
+        "src": [
+            "test/{js,css}/*"
+        ]
+    },
+	"uglify": false
+}
