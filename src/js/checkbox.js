@@ -24,6 +24,7 @@
 		var $parent      = this.closest("label"),
 			$label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
 			baseClass    = [RawClasses.base, data.theme, data.customClass].join(" "),
+			labelClass   = [RawClasses.label, data.theme, data.customClass].join(" "),
 			html         = "";
 
 		data.radio = (this.attr("type") === "radio");
@@ -33,13 +34,15 @@
 		html += '<div class="' + RawClasses.flag + '"></div>';
 
 		if (data.toggle) {
-			baseClass += " " + RawClasses.toggle;
+			baseClass  += " " + RawClasses.toggle;
+			labelClass += " " + RawClasses.toggle;
 			html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">'  + data.labels.on  + '</span>';
 			html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
 		}
 
 		if (data.radio) {
-			baseClass += " " + RawClasses.radio;
+			baseClass  += " " + RawClasses.radio;
+			labelClass += " " + RawClasses.radio;
 		}
 
 		html += '</div>';
@@ -48,28 +51,33 @@
 		data.$placeholder = $('<span class="' + RawClasses.element_placeholder + '"></span>');
 		this.before(data.$placeholder);
 
-		if ($label.length) {
-			$label.addClass(RawClasses.label)
-				  .wrap('<div class="' + baseClass + '"></div>')
+        data.labelParent = ($label.find(this).length);
+		data.labelClass  = labelClass;
+
+		$label.addClass( labelClass );
+
+        if (data.labelParent) {
+		    $label.wrap('<div class="' + baseClass + '"></div>')
 				  .before(html);
 		} else {
 			this.before('<div class=" ' + baseClass + '">' + html + '</div>');
 		}
 
 		// Store plugin data
-		data.$checkbox    = ($label.length) ? $label.parents(Classes.base) : this.prev(Classes.base);
-		data.$marker      = data.$checkbox.find(Classes.marker);
-		data.$states      = data.$checkbox.find(Classes.state);
-		data.$label       = $label;
+		data.$checkbox     = (data.labelParent) ? $label.parents(Classes.base) : this.prev(Classes.base);
+		data.$marker       = data.$checkbox.find(Classes.marker);
+		data.$states       = data.$checkbox.find(Classes.state);
+		data.$label        = $label;
+        data.$classable    = $().add(data.$checkbox).add(data.$label);
 
 		// Check checked
 		if (this.is(":checked")) {
-			data.$checkbox.addClass(RawClasses.checked);
+			data.$classable.addClass(RawClasses.checked);
 		}
 
 		// Check disabled
 		if (this.is(":disabled") /* || this.is("[readonly]") */ ) {
-			data.$checkbox.addClass(RawClasses.disabled);
+			data.$classable.addClass(RawClasses.disabled);
 		}
 
 		// Move original checkbox
@@ -98,8 +106,14 @@
 
 		data.$marker.remove();
 		data.$states.remove();
-		data.$label.unwrap()
-				   .removeClass(RawClasses.label);
+
+        data.$label.removeClass( data.labelClass );
+
+        if (data.labelParent) {
+		    data.$label.unwrap();
+        } else {
+            this.unwrap();
+        }
 
 		data.$placeholder.before(this);
 		data.$placeholder.remove();
@@ -116,7 +130,7 @@
 
 	function enable(data) {
 		this.prop("disabled", false);
-		data.$checkbox.removeClass(RawClasses.disabled);
+		data.$classable.removeClass(RawClasses.disabled);
 	}
 
 	/**
@@ -128,7 +142,7 @@
 
 	function disable(data) {
 		this.prop("disabled", true);
-		data.$checkbox.addClass(RawClasses.disabled);
+		data.$classable.addClass(RawClasses.disabled);
 	}
 
 	/**
@@ -210,7 +224,7 @@
 		}
 
 		e.data.$el.trigger(Events.focus);
-		e.data.$checkbox.addClass(RawClasses.checked);
+		e.data.$classable.addClass(RawClasses.checked);
 	}
 
 	/**
@@ -221,7 +235,7 @@
 	 */
 	function onDeselect(e) {
 		e.data.$el.trigger(Events.focus);
-		e.data.$checkbox.removeClass(RawClasses.checked);
+		e.data.$classable.removeClass(RawClasses.checked);
 	}
 
 	/**
@@ -232,7 +246,7 @@
 	 */
 
 	function onFocus(e) {
-		e.data.$checkbox.addClass(RawClasses.focus);
+		e.data.$classable.addClass(RawClasses.focus);
 	}
 
 	/**
@@ -243,7 +257,7 @@
 	 */
 
 	function onBlur(e) {
-		e.data.$checkbox.removeClass(RawClasses.focus);
+		e.data.$classable.removeClass(RawClasses.focus);
 	}
 
 	/**

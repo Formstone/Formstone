@@ -12,7 +12,7 @@
 
 	// Config
 
-	@fs-checkbox-margin:							0 0 10px 0;
+	// @fs-checkbox-margin:							0 0 10px 0;
 
 	// Label
 
@@ -59,11 +59,12 @@
 	@fs-checkbox-toggle-icon-gap:					1px;
 
 	&.@{theme_name} {
-		margin: @fs-checkbox-margin;
+		// margin: @fs-checkbox-margin;
 	}
 
 
-	&.@{theme_name} &-label {
+	// &.@{theme_name} &-label {
+    &-label.@{theme_name} {
 		color: @fs-checkbox-label-color;
 		font-size: @fs-checkbox-label-font-size;
 		line-height: @fs-checkbox-marker-height-width;
@@ -104,8 +105,10 @@
 
 	// Focus
 
-	.@{theme_name}&-focus &-label,
-	.no-touchevents .@{theme_name}:hover &-label {
+	// .@{theme_name}&-focus &-label,
+	// .no-touchevents .@{theme_name}:hover &-label {
+	&-label.@{theme_name}&-focus,
+	.no-touchevents &-label.@{theme_name}:hover {
 		color: @fs-checkbox-hover-label-color;
 	}
 
@@ -131,8 +134,10 @@
 		opacity: @fs-checkbox-disabled-opacity;
 	}
 
-	.@{theme_name}&-disabled &-label,
-	.no-touchevents .@{theme_name}&-disabled:hover &-label {
+	// .@{theme_name}&-disabled &-label,
+	// .no-touchevents .@{theme_name}&-disabled:hover &-label {
+	&-label.@{theme_name}&-disabled,
+	.no-touchevents &-label.@{theme_name}&-disabled:hover {
 		color: @fs-checkbox-label-color;
 	}
 
@@ -154,7 +159,8 @@
 
 	// Toggle
 
-	.@{theme_name}&-toggle &-label {
+	// .@{theme_name}&-toggle &-label {
+	&-label.@{theme_name}&-toggle {
 		line-height: @fs-checkbox-toggle-marker-height;
 	}
 
