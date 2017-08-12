@@ -139,14 +139,14 @@
 			data.props.max = false;
 		}
 
-		if (data.stuck) {
-			data.$el.css({
-				height: '',
-				width:  '',
-				top:    '',
-				bottom: ''
-			});
-		}
+		// if (data.stuck) {
+		// 	data.$el.css({
+		// 		height: '',
+		// 		width:  '',
+		// 		top:    '',
+		// 		bottom: ''
+		// 	});
+		// }
 
         checkInstance(data);
 	}
@@ -166,14 +166,14 @@
 	function checkInstance(data) {
 		var check = (ScrollTop + data.offset);
 
-		if ( check > data.position.top ) {
-			cacheProps(data);
+		if ( check >= data.position.top ) {
+            data.stuck = true;
+			data.$stickys.addClass(RawClasses.stuck);
+
+            cacheProps(data);
 
 			var top = data.offset;
 			var bottom = '';
-
-			data.stuck = true;
-			data.$stickys.addClass(RawClasses.stuck);
 
 			if (data.props.max && check > data.props.max) {
 				data.$stickys.addClass(RawClasses.passed);
@@ -184,21 +184,22 @@
 				data.$stickys.removeClass(RawClasses.passed);
 			}
 
-			data.$el.css({
-				height: data.props.height,
+            data.$el.css({
+                height: data.props.height,
 				width:  data.props.width,
 				top:    top,
 				bottom: bottom
 			});
 		} else {
 			data.stuck = false;
+            data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+
 			data.$el.css({
 				height: '',
 				width:  '',
 				top:    '',
 				bottom: ''
 			});
-			data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
 		}
 	}
 

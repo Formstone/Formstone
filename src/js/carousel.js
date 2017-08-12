@@ -961,7 +961,8 @@
 				data.leftPosition = parseInt(matrix[4]); // ?
 			}
 
-			data.$canister.css(TransitionProperty, "none");
+			data.$canister.css(TransitionProperty, "none")
+                          .css("will-change", "transform");
 
 			onPan(e);
 
@@ -1194,7 +1195,8 @@
 	 */
 
 	function endTouch(data, index) {
-		data.$canister.css(TransitionProperty, "");
+		data.$canister.css(TransitionProperty, "")
+                      .css("will-change", "");
 
 		positionCanister(data, index);
 
