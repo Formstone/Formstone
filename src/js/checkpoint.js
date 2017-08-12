@@ -20,6 +20,8 @@
 	 */
 
 	function resize() {
+		WindowHeight = $Window.height();
+
 		Functions.iterate.call($Instances, resizeInstance);
 	}
 
@@ -63,22 +65,10 @@
 	 */
 
 	function construct(data) {
-		data.stuck    = false;
-		data.props    = {};
+		data.visible  = false;
 		data.position = data.$el.position();
-		data.$clone   = data.$el.clone();
-
-		data.container  = data.$el.data("sticky-container");
-		data.$container = $(data.container);
 
 		data.$el.addClass(RawClasses.base);
-		data.$clone.removeClass(RawClasses.element)
-				   .addClass(RawClasses.clone);
-		data.$container.addClass(RawClasses.container);
-
-		data.$stickys = $().add(data.$el).add(data.$clone);
-
-		data.$el.after(data.$clone);
 	}
 
 	/**
@@ -122,37 +112,15 @@
 	 */
 
 	function resizeInstance(data) {
-		cacheProps(data);
-
-		if (data.$container.length) {
-			var containerPos = data.$container.position();
-
-			data.position  = containerPos;
-			data.props.max = containerPos.top + data.$container.outerHeight() - data.props.height;
-		} else {
-            if (data.stuck) {
-                data.position = data.$clone.position();
-            } else {
-                data.position = data.$el.position();
-            }
-			data.props.max = false;
+		if (data.anchor === "top") {
+			data.check = 0 - data.offset;
+		} else if (data.anchor === "middle") {
+			data.check = (WindowHeight / 2) - data.offset;
+		} else { // bottom
+			data.check = WindowHeight - data.offset;
 		}
 
-		// if (data.stuck) {
-		// 	data.$el.css({
-		// 		height: '',
-		// 		width:  '',
-		// 		top:    '',
-		// 		bottom: ''
-		// 	});
-		// }
-
         checkInstance(data);
-	}
-
-	function cacheProps(data) {
-		data.props.height = data.$clone.outerHeight();
-		data.props.width  = data.$clone.outerWidth();
 	}
 
 	/**
@@ -163,42 +131,16 @@
 	 */
 
 	function checkInstance(data) {
-		var check = (ScrollTop + data.offset);
+		var check = (ScrollTop + data.check);
 
 		if ( check >= data.position.top ) {
-            data.stuck = true;
-			data.$stickys.addClass(RawClasses.stuck);
-
-            cacheProps(data);
-
-			var top = data.offset;
-			var bottom = '';
-
-			if (data.props.max && check > data.props.max) {
-				data.$stickys.addClass(RawClasses.passed);
-
-				top = '';
-				bottom = 0;
-			} else {
-				data.$stickys.removeClass(RawClasses.passed);
-			}
-
-            data.$el.css({
-                height: data.props.height,
-				width:  data.props.width,
-				top:    top,
-				bottom: bottom
-			});
+            data.active = true;
+			data.$el.addClass(RawClasses.active);
 		} else {
-			data.stuck = false;
-            data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
-
-			data.$el.css({
-				height: '',
-				width:  '',
-				top:    '',
-				bottom: ''
-			});
+			if (data.reverse) {
+				data.active = false;
+				data.$el.removeClass(RawClasses.active);
+			}
 		}
 	}
 
@@ -213,25 +155,34 @@
 	 * @dependency mediaquery.js
 	 */
 
-	var Plugin = Formstone.Plugin("sticky", {
+	var Plugin = Formstone.Plugin("checkpoint", {
 			widget: true,
 
 			/**
 			 * @options
-			 * @param offset [int] <0> "Element offset for activating sticky position"
+			 * @param anchor [string] <'bottom'> "Position of offset anchor; 'top', 'middle', 'bottom'"
+			 * @param offset [int] <0> "Element offset for activating animation"
+			 * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
 			 */
 
 			defaults: {
-				offset    : 0,
+				anchor     : 'bottom',
+				offset     : 0,
+				reverse    : false,
 			},
 
 			classes: [
-				"sticky",
-				"stuck",
-				"clone",
-				"container",
-				"passed"
+				"active"
 			],
+
+			// /**
+			//  * @events
+			//  * @event update.sticky "Sticky activated"
+			//  */
+			//
+			// events: {
+			// 	update    : "update"
+			// },
 
 			methods: {
 				_construct    : construct,
@@ -247,11 +198,13 @@
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
+		// Events        = Plugin.events,
 		Functions     = Plugin.functions,
 
 		Window        = Formstone.window,
 		$Window       = Formstone.$window,
 		$Body,
+		WindowHeight  = 0,
 		ScrollTop     = 0,
 		OldScrollTop  = 0,
 		$Instances    = [];

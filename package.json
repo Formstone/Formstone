@@ -159,6 +159,7 @@
         "dist/js/background.js",
         "dist/js/carousel.js",
         "dist/js/checkbox.js",
+        "dist/js/checkpoint.js",
         "dist/js/cookie.js",
         "dist/js/dropdown.js",
         "dist/js/equalize.js",

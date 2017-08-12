@@ -1,0 +1,32 @@
+<h4>Basic</h4>
+
+<!-- START: FIRSTDEMO -->
+
+<style>
+	.checkpoint { background: green; padding: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: opacity 0.25s linear, transform 0.25s ease; }
+	.checkpoint.fs-checkpoint-active { opacity: 1; transform: translateY(0); }
+</style>
+
+<!-- <div class="demo_container">
+	<div class="demo_example"> -->
+	<div style="margin: 1000px 0">
+		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":-200,"reverse":true,"anchor":"top"}'>Target</div>
+	</div>
+
+	<div style="margin: 1000px 0">
+		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":0,"reverse":true,"anchor":"middle"}'>Target</div>
+	</div>
+
+	<div style="margin: 1000px 0">
+		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":200,"reverse":true,"anchor":"bottom"}'>Target</div>
+	</div>
+	<!-- </div>
+	<div class="demo_code"> -->
+		<pre><code class="language-html">&lt;div class=&quot;checkpoint&quot;&gt;Target&lt;/div&gt;</code></pre>
+		<pre><code class="language-javascript">$(".checkpoint").checkpoint({
+	offset: 50
+});</code></pre>
+	<!-- </div>
+</div> -->
+
+<!-- END: FIRSTDEMO -->

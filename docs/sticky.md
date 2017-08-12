@@ -8,7 +8,6 @@ A jQuery plugin for sticky elements.
 
 * [Use](#use)
 * [Options](#options)
-* [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
@@ -46,19 +45,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `customClass` | `string` | `''` | Class applied to instance |
-| `maxWidth` | `string` | `Infinity` | Width at which to auto-disable plugin |
-| `mobileMaxWidth` | `string` | `'740px'` | Width at which to auto-disable mobile styles |
-| `theme` | `string` | `"fs-light"` | Theme class name |
-
-<hr>
-## <a name="events"></a> Events
-
-Events are triggered on the target instance's element, unless otherwise stated.
-
-| Event | Description |
-| --- | --- |
-| `update.sticky` | Sticky activated |
+| `offset` | `int` | `0` | Element offset for activating sticky position |
 
 <hr>
 ## <a name="methods"></a> Methods

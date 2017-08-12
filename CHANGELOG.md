@@ -4,6 +4,7 @@
 
 ### 1.4.0
 
+* Added Checkpoint plugin for CSS animations scroll
 * Added Sticky plugin for sticky elements on scroll
 * Exposed additional AJAX parameters in Upload events
 * Fixed issue with moving input elements in Checkbox

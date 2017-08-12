@@ -66,6 +66,7 @@
 			Site.$body.find(".js-background").background("destroy");
 			Site.$body.find(".js-carousel").carousel("destroy");
 			Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
+            Site.$body.find(".js-checkpoint").checkpoint("destroy");
 			Site.$body.find(".js-dropdown").dropdown("destroy");
 			Site.$body.find(".js-equalize").equalize("destroy");
 			Site.$body.find(".js-lightbox").lightbox("destroy");
@@ -86,6 +87,7 @@
 			Site.$body.find(".js-background").background(options);
 			Site.$body.find(".js-carousel").carousel(options);
 			Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
+            Site.$body.find(".js-checkpoint").checkpoint();
 			Site.$body.find(".js-dropdown").dropdown(options);
 			Site.$body.find(".js-equalize").equalize(options);
 			Site.$body.find(".js-lightbox").lightbox(options);

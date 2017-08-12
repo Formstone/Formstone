@@ -17,6 +17,7 @@
 * [Background](components/background.html)
 * [Carousel](components/carousel.html)
 * [Checkbox](components/checkbox.html)
+* [Sticky](components/sticky.html)
 * [Dropdown](components/dropdown.html)
 * [Equalize](components/equalize.html)
 * [Lightbox](components/lightbox.html)
