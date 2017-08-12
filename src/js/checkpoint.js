@@ -66,7 +66,7 @@
 
 	function construct(data) {
 		data.visible  = false;
-		data.position = data.$el.position();
+		data.position = data.$el.offset();
 
 		data.$el.addClass(RawClasses.base);
 	}
@@ -119,6 +119,8 @@
 		} else { // bottom
 			data.check = WindowHeight - data.offset;
 		}
+
+        // console.log(data.$el[0].getBoundingClientRect(), data.$el.offset());
 
         checkInstance(data);
 	}

@@ -3,9 +3,23 @@
 <!-- START: FIRSTDEMO -->
 
 <style>
-	.checkpoint { background: green; padding: 20px; text-align: center; opacity: 0; transform: translateY(20px); transition: opacity 0.25s linear, transform 0.25s ease; }
-	.checkpoint.fs-checkpoint-active { opacity: 1; transform: translateY(0); }
+	.spacer { margin: 300px 0; border: 1px solid #eee; border-radius: 3px; height: 202px; margin: 300px auto; width: 302px; }
+	.checkpoint { background: #00bcd4; border-radius: 3px; color: #fff; height: 200px; line-height: 200px; margin: 0 auto; text-align: center; width: 300px; }
+
+	.marker {
+		position: fixed;
+		top: 50%;
+		left: 0;
+
+		width: 100%;
+		height: 1px;
+
+		background: red;
+		opacity: 0.2;
+	}
 </style>
+
+<div class="marker"></div>
 
 <script>
 $(document).ready(function() {
@@ -14,22 +28,93 @@ $(document).ready(function() {
 	}).on("deactivate.checkpoint", function() {
 		console.log("deactivate", this);
 	});
+
+	$(".demo-checkpoint").checkpoint({
+		// offset: -50,
+		reverse: true,
+		anchor: 'middle'
+	});
 });
 </script>
 
 <!-- <div class="demo_container">
 	<div class="demo_example"> -->
-	<div style="margin: 1000px 0">
-		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":-200,"reverse":true,"anchor":"top"}'>Target</div>
+	<div style="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":-200,"anchor":"top"}' data-checkpoint-animation="fade-up">Target</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":0,"anchor":"middle"}' data-checkpoint-animation="fade-up">Target</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":200,"anchor":"bottom"}' data-checkpoint-animation="fade-up">Target</div>
 	</div>
 
-	<div style="margin: 1000px 0">
-		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":0,"reverse":true,"anchor":"middle"}'>Target</div>
+	<!-- FADE -->
+
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up">Fade Up</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-down">Fade Down</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-left">Fade Left</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-right">Fade Right</div>
 	</div>
 
-	<div style="margin: 1000px 0">
-		<div class="checkpoint js-checkpoint" data-checkpoint-options='{"offset":200,"reverse":true,"anchor":"bottom"}'>Target</div>
+	<!-- ZOOM IN -->
+
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-in">Zoom In</div>
 	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-in-up">Zoom In Up</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-in-down">Zoom In Down</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-in-left">Zoom In Left</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-in-right">Zoom In Right</div>
+	</div>
+
+	<!-- ZOOM OUT -->
+
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-out">Zoom Out</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-out-up">Zoom Out Up</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-out-down">Zoom Out Down</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-out-left">Zoom Out Left</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="zoom-out-right">Zoom Out Right</div>
+	</div>
+
+	<!-- FLIP -->
+
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="flip-up">Flip Up</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="flip-down">Flip Down</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="flip-left">Flip Left</div>
+	</div>
+	<div class="spacer">
+		<div class="checkpoint demo-checkpoint" data-checkpoint-animation="flip-right">Flip Right</div>
+	</div>
+
 	<!-- </div>
 	<div class="demo_code"> -->
 		<pre><code class="language-html">&lt;div class=&quot;checkpoint&quot;&gt;Target&lt;/div&gt;</code></pre>

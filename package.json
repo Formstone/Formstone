@@ -64,6 +64,9 @@
       "dist/css/checkbox.css": [
         "src/less/checkbox.less"
       ],
+      "dist/css/checkpoint.css": [
+        "src/less/checkpoint.less"
+      ],
       "dist/css/dropdown.css": [
         "src/less/dropdown.less"
       ],
