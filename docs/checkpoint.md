@@ -1,6 +1,6 @@
-# Sticky
+# Checkpoint
 
-A jQuery plugin for sticky elements.
+A jQuery plugin for animating visible elements.
 
 <!-- HEADER END -->
 
@@ -14,13 +14,13 @@ A jQuery plugin for sticky elements.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Using Sticky
+## <a name="use"></a> Using Checkpoint
 
 
 #### Main
 
 ```markup
-sticky.js
+checkpoint.js
 ```
 
 
@@ -29,7 +29,6 @@ sticky.js
 ```markup
 jQuery
 core.js
-mediaquery.js
 ```
 
 ### Basic
@@ -40,7 +39,7 @@ Checkpoint stuff.
 
 ## <a name="options"></a> Options
 
-Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-sticky-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
+Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-checkpoint-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -55,5 +54,6 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Event | Description |
 | --- | --- |
-| `update.sticky` | Sticky activated |
+| `activate.checkpoint` | Checkpoint activated |
+| `deactivate.checkpoint` | Checkpoint deactivated |
 

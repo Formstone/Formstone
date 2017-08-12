@@ -64,6 +64,7 @@
 
 	function construct(data) {
 		data.stuck    = false;
+		data.passed   = true;
 		data.props    = {};
 		data.position = data.$el.position();
 		data.$clone   = data.$el.clone();
@@ -138,15 +139,6 @@
 			data.props.max = false;
 		}
 
-		// if (data.stuck) {
-		// 	data.$el.css({
-		// 		height: '',
-		// 		width:  '',
-		// 		top:    '',
-		// 		bottom: ''
-		// 	});
-		// }
-
         checkInstance(data);
 	}
 
@@ -166,6 +158,10 @@
 		var check = (ScrollTop + data.offset);
 
 		if ( check >= data.position.top ) {
+			if (!data.stuck) {
+				data.$el.trigger(Events.stuck);
+			}
+
             data.stuck = true;
 			data.$stickys.addClass(RawClasses.stuck);
 
@@ -175,11 +171,17 @@
 			var bottom = '';
 
 			if (data.props.max && check > data.props.max) {
+				if (!data.passed) {
+					data.$el.trigger(Events.passed);
+				}
+
+				data.passed = true;
 				data.$stickys.addClass(RawClasses.passed);
 
 				top = '';
 				bottom = 0;
 			} else {
+				data.passed = false;
 				data.$stickys.removeClass(RawClasses.passed);
 			}
 
@@ -190,6 +192,10 @@
 				bottom: bottom
 			});
 		} else {
+			if (data.stuck) {
+				data.$el.trigger(Events.unstuck);
+			}
+
 			data.stuck = false;
             data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
 
@@ -210,7 +216,6 @@
 	 * @main sticky.js
 	 * @dependency jQuery
 	 * @dependency core.js
-	 * @dependency mediaquery.js
 	 */
 
 	var Plugin = Formstone.Plugin("sticky", {
@@ -233,6 +238,19 @@
 				"passed"
 			],
 
+			/**
+			 * @events
+			 * @event passed.sticky "Element passed"
+			 * @event stuck.sticky "Element stuck"
+			 * @event unstuck.sticky "Element unstuck"
+			 */
+
+			events: {
+				passed     : "passed",
+				stuck      : "stuck",
+				unstuck    : "unstuck"
+			},
+
 			methods: {
 				_construct    : construct,
 				_postConstruct: postConstruct,
@@ -247,6 +265,7 @@
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
+        Events        = Plugin.events,
 		Functions     = Plugin.functions,
 
 		Window        = Formstone.window,

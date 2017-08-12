@@ -10,6 +10,18 @@
 	.sticky_element.s3   { background: #0097A7; }
 </style>
 
+<script>
+$(document).ready(function() {
+	$(".sticky_element").on("stuck.sticky", function() {
+		console.log("stuck", this);
+	}).on("unstuck.sticky", function() {
+		console.log("unstuck", this);
+	}).on("passed.sticky", function() {
+		console.log("passed", this);
+	});
+});
+</script>
+
 <!-- <div class="demo_container">
 	<div class="demo_example"> -->
 		<div class="sticky_element s1 js-sticky" data-sticky-options='{"offset":50}'>Sticky Element</div>

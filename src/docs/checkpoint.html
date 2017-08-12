@@ -7,6 +7,16 @@
 	.checkpoint.fs-checkpoint-active { opacity: 1; transform: translateY(0); }
 </style>
 
+<script>
+$(document).ready(function() {
+	$(".checkpoint").on("activate.checkpoint", function() {
+		console.log("activate", this);
+	}).on("deactivate.checkpoint", function() {
+		console.log("deactivate", this);
+	});
+});
+</script>
+
 <!-- <div class="demo_container">
 	<div class="demo_example"> -->
 	<div style="margin: 1000px 0">

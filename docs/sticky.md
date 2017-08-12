@@ -8,6 +8,7 @@ A jQuery plugin for sticky elements.
 
 * [Use](#use)
 * [Options](#options)
+* [Events](#events)
 * [Methods](#methods)
 * [CSS](#css)
 
@@ -30,7 +31,6 @@ sticky.js
 ```markup
 jQuery
 core.js
-mediaquery.js
 ```
 
 ### Basic
@@ -46,6 +46,17 @@ Set instance options by passing a valid object at initialization, or to the publ
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
 | `offset` | `int` | `0` | Element offset for activating sticky position |
+
+<hr>
+## <a name="events"></a> Events
+
+Events are triggered on the target instance's element, unless otherwise stated.
+
+| Event | Description |
+| --- | --- |
+| `passed.sticky` | Element passed |
+| `stuck.sticky` | Element stuck |
+| `unstuck.sticky` | Element unstuck |
 
 <hr>
 ## <a name="methods"></a> Methods

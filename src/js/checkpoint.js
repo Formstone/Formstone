@@ -134,10 +134,18 @@
 		var check = (ScrollTop + data.check);
 
 		if ( check >= data.position.top ) {
+            if (!data.active) {
+                data.$el.trigger(Events.activate);
+            }
+
             data.active = true;
 			data.$el.addClass(RawClasses.active);
 		} else {
 			if (data.reverse) {
+				if (data.active) {
+					data.$el.trigger(Events.deactivate);
+				}
+
 				data.active = false;
 				data.$el.removeClass(RawClasses.active);
 			}
@@ -146,13 +154,12 @@
 
 	/**
 	 * @plugin
-	 * @name Sticky
-	 * @description A jQuery plugin for sticky elements.
+	 * @name Checkpoint
+	 * @description A jQuery plugin for animating visible elements.
 	 * @type widget
-	 * @main sticky.js
+	 * @main checkpoint.js
 	 * @dependency jQuery
 	 * @dependency core.js
-	 * @dependency mediaquery.js
 	 */
 
 	var Plugin = Formstone.Plugin("checkpoint", {
@@ -175,14 +182,16 @@
 				"active"
 			],
 
-			// /**
-			//  * @events
-			//  * @event update.sticky "Sticky activated"
-			//  */
-			//
-			// events: {
-			// 	update    : "update"
-			// },
+			/**
+			 * @events
+			 * @event activate.checkpoint "Checkpoint activated"
+			 * @event deactivate.checkpoint "Checkpoint deactivated"
+			 */
+
+			events: {
+				activate      : "activate",
+				deactivate    : "deactivate"
+			},
 
 			methods: {
 				_construct    : construct,
@@ -198,7 +207,7 @@
 		Namespace     = Plugin.namespace,
 		Classes       = Plugin.classes,
 		RawClasses    = Classes.raw,
-		// Events        = Plugin.events,
+		Events        = Plugin.events,
 		Functions     = Plugin.functions,
 
 		Window        = Formstone.window,
