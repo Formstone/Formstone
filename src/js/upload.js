@@ -551,18 +551,18 @@
 						return $xhr;
 					},
 					beforeSend: function(jqXHR, settings) {
-						data.$el.trigger(Events.fileStart, [ file ]);
+						data.$el.trigger(Events.fileStart, [ file, settings, jqXHR ]);
 					},
 					success: function(response, status, jqXHR) {
 						file.complete = true;
 
 						data.uploaded++;
-						data.$el.trigger(Events.fileComplete, [ file, response ]);
+						data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
 
 						checkQueue(data);
 					},
 					error: function(jqXHR, status, error) {
-						abortFile(data, file, error);
+						abortFile(data, file, error, jqXHR);
 					}
 				});
 			}
@@ -607,7 +607,7 @@
 				processData : false,
 				cache       : false,
 				beforeSend: function(jqXHR, settings) {
-					data.$el.trigger(Events.chunkStart, [ file ]);
+					data.$el.trigger(Events.chunkStart, [ file, settings, jqXHR ]);
 				},
 				success: function(response, status, jqXHR) {
 					file.currentChunk++;
@@ -615,19 +615,19 @@
 					data.$el.trigger(Events.chunkComplete, [ file ]);
 
 					var percent = Math.ceil((file.currentChunk / file.totalChunks) * 100);
-					data.$el.trigger(Events.fileProgress, [ file, percent ]);
+					data.$el.trigger(Events.fileProgress, [ file, percent, status, jqXHR ]);
 
 					if (file.currentChunk < file.totalChunks) {
 						uploadChunk(data, file);
 					} else {
 						file.complete = true;
-						data.$el.trigger(Events.fileComplete, [ file, response ]);
+						data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
 
 						checkQueue(data);
 					}
 				},
 				error: function(jqXHR, status, error) {
-					abortChunk(data, file, error);
+					abortChunk(data, file, error, jqXHR);
 				}
 			});
 		}

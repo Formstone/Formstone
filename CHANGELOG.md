@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.0
+
+* Added Sticky plugin for sticky elements on scroll
+* Exposed additional AJAX parameters in Upload events
+
 ### 1.3.3
 
 * Added compiled theme files for each component
