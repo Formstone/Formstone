@@ -43,7 +43,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `anchor` | `string` | `'bottom'` | Position of offset anchor; 'top', 'middle', 'bottom' |
+| `intersect` | `string` | `'bottom-top'` | Position of intersection |
 | `offset` | `int` | `0` | Element offset for activating animation |
 | `reverse` | `boolean` | `false` | Deactivate animation when scrolling back |
 

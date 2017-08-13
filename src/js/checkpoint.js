@@ -65,8 +65,15 @@
 	 */
 
 	function construct(data) {
-		data.visible  = false;
-		data.position = data.$el.offset();
+		var intersectParts = data.intersect.split("-");
+
+		data.windowIntersect = intersectParts[0];
+		data.elIntersect     = intersectParts[1];
+		data.visible         = false;
+
+		var $container = $( data.$el.data("checkpoint-container") );
+
+		data.$target = ($container.length) ? $container : data.$el;
 
 		data.$el.addClass(RawClasses.base);
 	}
@@ -112,15 +119,33 @@
 	 */
 
 	function resizeInstance(data) {
-		if (data.anchor === "top") {
-			data.check = 0 - data.offset;
-		} else if (data.anchor === "middle") {
-			data.check = (WindowHeight / 2) - data.offset;
-		} else { // bottom
-			data.check = WindowHeight - data.offset;
-		}
+        switch (data.windowIntersect) {
+            case "top":
+                data.windowCheck = 0 - data.offset;
+                break;
+            case "middle":
+                data.windowCheck = (WindowHeight / 2) - data.offset;
+                break;
+            case "bottom":
+                data.windowCheck = WindowHeight - data.offset;
+                break;
+            default:
+                break;
+        }
 
-        // console.log(data.$el[0].getBoundingClientRect(), data.$el.offset());
+		switch (data.elIntersect) {
+            case "top":
+                data.elCheck = data.$target[0].offsetTop;
+                break;
+            case "middle":
+                data.elCheck = data.$target[0].offsetTop + (data.$target.outerHeight() / 2);
+                break;
+            case "bottom":
+                data.elCheck = data.$target[0].offsetTop + data.$target.outerHeight();
+                break;
+            default:
+                break;
+        }
 
         checkInstance(data);
 	}
@@ -133,9 +158,9 @@
 	 */
 
 	function checkInstance(data) {
-		var check = (ScrollTop + data.check);
+		var check = (ScrollTop + data.windowCheck);
 
-		if ( check >= data.position.top ) {
+		if ( check >= data.elCheck ) {
             if (!data.active) {
                 data.$el.trigger(Events.activate);
             }
@@ -169,15 +194,15 @@
 
 			/**
 			 * @options
-			 * @param anchor [string] <'bottom'> "Position of offset anchor; 'top', 'middle', 'bottom'"
+			 * @param intersect [string] <'bottom-top'> "Position of intersection"
 			 * @param offset [int] <0> "Element offset for activating animation"
 			 * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
 			 */
 
 			defaults: {
-				anchor     : 'bottom',
-				offset     : 0,
-				reverse    : false,
+				intersect    : 'bottom-top',
+				offset       : 0,
+				reverse      : false,
 			},
 
 			classes: [

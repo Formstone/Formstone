@@ -42,6 +42,11 @@
 					<!-- START: FIRSTDEMO -->
 
 					<style>
+					.check_container {
+						background: #f9f9f9;
+						overflow: hidden;
+					}
+					
 					.spacer {
 						margin: 300px 0;
 						border: 1px solid #eee;
@@ -64,7 +69,8 @@
 					
 					.marker {
 						position: fixed;
-						top: 50%;
+						/*top: 50%;*/
+						right: 0;
 						left: 0;
 						width: 100%;
 						height: 1px;
@@ -73,34 +79,41 @@
 					}
 					</style>
 
-					<div class="marker"></div>
+					<div class="marker" style="top: 100px;"></div>
+					<div class="marker" style="top: 50%;"></div>
+					<div class="marker" style="bottom: 100px;"></div>
 
 					<script>
 					$(document).ready(function() {
-						$(".checkpoint").on("activate.checkpoint", function() {
-							console.log("activate", this);
-						}).on("deactivate.checkpoint", function() {
-							console.log("deactivate", this);
-						});
+						// $(".checkpoint").on("activate.checkpoint", function() {
+						// 	console.log("activate", this);
+						// }).on("deactivate.checkpoint", function() {
+						// 	console.log("deactivate", this);
+						// });
 
 						$(".demo-checkpoint").checkpoint({
 							// offset: -50,
-							reverse: true,
-							anchor: 'middle'
+							intersect: 'middle-top',
+							reverse: true
 						});
 					});
 					</script>
 
 					<!-- <div class="demo_container">
 	<div class="demo_example"> -->
-					<div style="spacer">
-						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":-200,"anchor":"top"}' data-checkpoint-animation="fade-up">Target</div>
+					<div class="spacer">
+						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":-100,"intersect":"top-top"}' data-checkpoint-animation="fade-up">Target</div>
 					</div>
 					<div class="spacer">
-						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":0,"anchor":"middle"}' data-checkpoint-animation="fade-up">Target</div>
+						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":0,"intersect":"middle-middle"}' data-checkpoint-animation="fade-up">Target</div>
 					</div>
 					<div class="spacer">
-						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":200,"anchor":"bottom"}' data-checkpoint-animation="fade-up">Target</div>
+						<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":100,"intersect":"bottom-bottom"}' data-checkpoint-animation="fade-up">Target</div>
+					</div>
+					<div class="check_container">
+						<div class="spacer">
+							<div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":100,"intersect":"bottom-bottom"}' data-checkpoint-animation="fade-up" data-checkpoint-container=".check_container">Target</div>
+						</div>
 					</div>
 
 					<!-- FADE -->
