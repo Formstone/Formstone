@@ -65,8 +65,6 @@
 	function construct(data) {
 		data.stuck    = false;
 		data.passed   = true;
-		data.props    = {};
-		data.position = data.$el.position();
 		data.$clone   = data.$el.clone();
 
 		data.container  = data.$el.data("sticky-container");
@@ -102,6 +100,17 @@
 	 */
 
 	function destruct(data) {
+		data.$clone.remove();
+		data.$container.removeClass(RawClasses.container);
+
+		data.$el.css({
+			height: '',
+			width:  '',
+			top:    '',
+			bottom: '',
+			marginBottom: ''
+		}).removeClass(RawClasses.base);
+
 		cacheInstances();
 	}
 
@@ -128,23 +137,45 @@
 		if (data.$container.length) {
 			var containerPos = data.$container.position();
 
-			data.position  = containerPos;
-			data.props.max = containerPos.top + data.$container.outerHeight() - data.props.height;
+            data.min = containerPos.top + data.containerMargin - data.margin;
+			data.max = data.min + data.$container.outerHeight(false) - data.height;
 		} else {
+            var $el;
+
             if (data.stuck) {
-                data.position = data.$clone.position();
+                $el = data.$clone;
             } else {
-                data.position = data.$el.position();
+                $el = data.$el;
             }
-			data.props.max = false;
+
+            var elPos = $el.position();
+
+            data.min = elPos.top;
+			data.max = false;
 		}
 
         checkInstance(data);
 	}
 
 	function cacheProps(data) {
-		data.props.height = data.$clone.outerHeight();
-		data.props.width  = data.$clone.outerWidth();
+        var $el;
+
+        if (data.stuck) {
+            $el = data.$clone;
+        } else {
+            $el = data.$el;
+        }
+
+		data.margin = parseInt( $el.css("margin-top"), 10);
+
+		if (data.$container.length) {
+		 	data.containerMargin = parseInt( data.$container.css("margin-top"), 10);
+		} else {
+			data.containerMargin = 0;
+		}
+
+		data.height = $el.outerHeight();
+		data.width  = $el.outerWidth();
 	}
 
 	/**
@@ -157,20 +188,20 @@
 	function checkInstance(data) {
 		var check = (ScrollTop + data.offset);
 
-		if ( check >= data.position.top ) {
-			if (!data.stuck) {
-				data.$el.trigger(Events.stuck);
-			}
-
+		if ( check >= data.min ) {
             data.stuck = true;
 			data.$stickys.addClass(RawClasses.stuck);
 
-            cacheProps(data);
+			if (!data.stuck) {
+				data.$el.trigger(Events.stuck);
+
+				cacheProps(data);
+			}
 
 			var top = data.offset;
 			var bottom = '';
 
-			if (data.props.max && check > data.props.max) {
+			if (data.max && check > data.max) {
 				if (!data.passed) {
 					data.$el.trigger(Events.passed);
 				}
@@ -186,24 +217,28 @@
 			}
 
             data.$el.css({
-                height: data.props.height,
-				width:  data.props.width,
+                height: data.height,
+				width:  data.width,
 				top:    top,
-				bottom: bottom
+				bottom: bottom,
+				marginBottom: 0
 			});
 		} else {
-			if (data.stuck) {
-				data.$el.trigger(Events.unstuck);
-			}
-
 			data.stuck = false;
             data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+
+			if (data.stuck) {
+				data.$el.trigger(Events.unstuck);
+
+				// cacheProps(data);
+			}
 
 			data.$el.css({
 				height: '',
 				width:  '',
 				top:    '',
-				bottom: ''
+				bottom: '',
+				marginBottom: ''
 			});
 		}
 	}
