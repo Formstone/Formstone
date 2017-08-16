@@ -95,9 +95,6 @@ $("nav").on("open.navigation", function() {
 });
 ```
 
-### IE Support
-
-When supporting IE, a [HTML5 enabler](https://gist.github.com/benplum/8045366) and matchMedia polyfill ([IE 8](https://gist.github.com/benplum/8045336), [IE 9](https://gist.github.com/benplum/8045327)) are required.
 
 
 ## <a name="options"></a> Options

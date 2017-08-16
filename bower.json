@@ -5,13 +5,13 @@
   "license": "GPL-3.0",
   "homepage": "http://formstone.it/",
   "dependencies": {
-    "jquery": ">=3.2.1"
+    "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "normalize-css": ">=7.0.0",
-    "html5shiv": ">=3.7.3",
+    "normalize-css": "^7.0.0",
+    "html5shiv": "^3.7.3",
     "prism": "gh-pages",
-    "modernizr": ">=3.5.0"
+    "modernizr": "^3.5.0"
   },
   "main": [
     "dist/"

@@ -244,7 +244,7 @@
 							source = data.sources[i].url;
 						}
 					} else {
-						// ie8 fallback, grab the first breakpoint that's large enough
+						// Fallback, grab the first breakpoint that's large enough
 						if (data.sources[i].width < Formstone.fallbackWidth) {
 							source = data.sources[i].url;
 						}

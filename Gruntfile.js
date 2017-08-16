@@ -45,8 +45,7 @@ module.exports = function(grunt) {
 				],
 				tasks: [
 					'newer:less:demo',
-					'newer:postcss',
-					'newer:stripmq:target'
+					'newer:postcss'
 				]
 			},
 			demo: {
@@ -189,7 +188,7 @@ module.exports = function(grunt) {
 		postcss: {
 			options: {
 				processors: [
-					require('autoprefixer')({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 8']})
+					require('autoprefixer')({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']})
 				]
 			},
 			library: {
@@ -219,9 +218,7 @@ module.exports = function(grunt) {
 				files: {
 					src: [
 						'demo/css/*',
-						'demo/js/site.js',
-						'demo/js/site-ie8.js',
-						'demo/js/site-ie9.js'
+						'demo/js/site.js'
 					]
 				}
 			}
@@ -290,18 +287,6 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		// Strip MQ
-		stripmq: {
-			options: {
-				width: 1024,
-				type: 'screen'
-			},
-			target: {
-				files: {
-					'demo/css/site-ie8.css': 'demo/css/site-ie8.css'
-				}
-			}
-		},
 		// Custom Modernizr build
 		modernizr: {
 			target: {
@@ -362,7 +347,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('library', [ 'usebanner:library', 'sync', 'buildLicense', 'buildDocs' ]);
 
-	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'includereplace:demo', 'stripmq' ]);
+	grunt.registerTask('demoClean', [ 'zetzer', 'prettify', 'jshint:demo', 'uglify:demo', 'less:demo', 'postcss:demo', 'usebanner:demo', 'modernizr', 'includereplace:demo' ]);
 	grunt.registerTask('demo', [ 'buildDocs', 'demoClean' ]);
 
 };
