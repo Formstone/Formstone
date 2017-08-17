@@ -6,6 +6,7 @@
 //=require ../../../dist/js/background.js
 //=require ../../../dist/js/carousel.js
 //=require ../../../dist/js/checkbox.js
+//=require ../../../dist/js/checkpoint.js
 //=require ../../../dist/js/cookie.js
 //=require ../../../dist/js/dropdown.js
 //=require ../../../dist/js/equalize.js
@@ -16,6 +17,7 @@
 //=require ../../../dist/js/number.js
 //=require ../../../dist/js/range.js
 //=require ../../../dist/js/scrollbar.js
+//=require ../../../dist/js/sticky.js
 //=require ../../../dist/js/swap.js
 //=require ../../../dist/js/tabs.js
 //=require ../../../dist/js/tooltip.js

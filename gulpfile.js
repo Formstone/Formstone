@@ -1,23 +1,24 @@
-var fs           = require('fs');
-var moment       = require('moment');
-var gulp         = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
-var clean        = require('gulp-clean');
-var cleanCSS     = require('gulp-clean-css');
-var clip         = require('gulp-clip-empty-files');
-var header       = require('gulp-header');
-var htmlbeautify = require('gulp-html-beautify');
-var include      = require('gulp-include');
-var jshint       = require('gulp-jshint');
-var less         = require('gulp-less');
-var modernizr    = require('gulp-modernizr');
-var rename       = require('gulp-rename');
-var sequence     = require('gulp-sequence');
-var syncBower    = require('gulp-sync-bower');
-var uglify       = require('gulp-uglify');
-var watch        = require('gulp-watch');
-var zetzer       = require('gulp-zetzer');
-var buildDocs    = require('./tasks/docs.js');
+var fs             = require('fs');
+var moment         = require('moment');
+var gulp           = require('gulp');
+var autoprefixer   = require('gulp-autoprefixer');
+var clean          = require('gulp-clean');
+var cleanCSS       = require('gulp-clean-css');
+var clip           = require('gulp-clip-empty-files');
+var header         = require('gulp-header');
+var htmlbeautify   = require('gulp-html-beautify');
+var include        = require('gulp-include');
+var jshint         = require('gulp-jshint');
+var less           = require('gulp-less');
+var modernizr      = require('gulp-modernizr');
+var rename         = require('gulp-rename');
+var replaceInclude = require('gulp-replace-include');
+var sequence       = require('gulp-sequence');
+var syncBower      = require('gulp-sync-bower');
+var uglify         = require('gulp-uglify');
+var watch          = require('gulp-watch');
+var zetzer         = require('gulp-zetzer');
+var buildDocs      = require('./tasks/docs.js');
 
 // Vars
 var pkg = require('./package.json');
@@ -91,8 +92,12 @@ gulp.task('demoStyles', function() {
 gulp.task('demoScripts', function() {
   return gulp.src('./demo/js/src/*.js')
     .pipe(include())
+    .pipe(replaceInclude({
+      prefix: '@',
+      global: pkg.src.vars
+    }))
     .pipe(jshint())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
 });
 
@@ -124,7 +129,7 @@ gulp.task('zetzer', function(){
       templates: './demo/_src/templates/',
       env: {
         title: 'Formstone',
-        version: '<%= pkg.version %>'
+        version: pkg.version
       }
     }))
     .pipe(rename(function(path) {
@@ -172,31 +177,6 @@ gulp.task('license', function() {
     fs.writeFile('license.txt', content, function() {});
   });
 });
-
-// Replace
-
-// library: {
-//   options: {
-//     prefix: '@',
-//     globals: {
-//       version: '<%= pkg.version %>'
-//     }
-//   },
-//   dest: 'dist/js/',
-//   src: '*.js',
-//   expand: true,
-//   cwd: 'dist/js/'
-// },
-// demo: {
-//   options: {
-//     prefix: '@',
-//     globals: '<%= pkg.site.vars %>'
-//   },
-//   dest: 'demo/js/',
-//   src: '*.js',
-//   expand: true,
-//   cwd: 'demo/js/'
-// }
 
 // Tasks
 
