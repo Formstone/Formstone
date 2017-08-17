@@ -184,6 +184,7 @@
 
 	function open(data) {
 		data.$handle.fsSwap("activate");
+		return false;
 	}
 
 	/**
