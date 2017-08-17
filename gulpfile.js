@@ -10,6 +10,7 @@ var include      = require('gulp-include');
 var jshint       = require('gulp-jshint');
 var less         = require('gulp-less');
 var modernizr    = require('gulp-modernizr');
+var syncBower    = require('gulp-sync-bower');
 var uglify       = require('gulp-uglify');
 var watch        = require('gulp-watch')
 
@@ -88,7 +89,36 @@ gulp.task('modernizr', function () {
   //   .pipe(gulp.dest("public/js/"))
 });
 
-gulp.task('default', ['clean', 'styles', 'scripts', 'modernizr']);
+// Clean
+
+gulp.task('bower', function () {
+  var p = {
+    name:         pkg.name,
+    version:      pkg.version,
+    description:  pkg.description,
+    license:      pkg.license,
+    homepage:     pkg.homepage,
+    dependencies: pkg.dependencies,
+    main:         [ pkg.main ],
+    ignore:       [
+      "demo/",
+      "docs/"
+    ],
+    authors:      [ pkg.author ]
+  };
+
+  return gulp.src('bower.json')
+    .pipe(syncBower({
+      pkg: p
+    }))
+    .pipe(gulp.dest('.'))
+});
+
+// Tasks
+
+gulp.task('default', ['clean'], function() {
+  gulp.start(['styles', 'scripts', 'modernizr', 'bower']);
+});
 
 gulp.task('dev', ['styles', 'scripts'], function() {
   gulp.watch('./src/less/**/*.less', ['styles']);
