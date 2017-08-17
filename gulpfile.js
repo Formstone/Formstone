@@ -12,7 +12,14 @@ var less         = require('gulp-less');
 var modernizr    = require('gulp-modernizr');
 var syncBower    = require('gulp-sync-bower');
 var uglify       = require('gulp-uglify');
-var watch        = require('gulp-watch')
+var watch        = require('gulp-watch');
+var zetzer       = require('gulp-zetzer');
+
+var buildDocs    = require('./tasks/docs.js');
+
+gulp.task('buildDocs', function () {
+  return buildDocs();
+});
 
 // Vars
 var pkg = require('./package.json');
@@ -89,7 +96,7 @@ gulp.task('modernizr', function () {
   //   .pipe(gulp.dest("public/js/"))
 });
 
-// Clean
+// Bower
 
 gulp.task('bower', function () {
   var p = {
@@ -114,10 +121,28 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('.'))
 });
 
+// HTML
+
+gulp.task('zetzer', function(){
+   gulp.src('./demo/_src/pages/**/*.md')
+    .pipe(zetzer({
+      partials: './demo/_src/templates/partials/',
+      templates: './demo/_src/templates/',
+      dot_template_settings: {
+      //  strip: false
+      },
+      env: {
+        title: 'Formstone',
+        version: '<%= pkg.version %>'
+      }
+    }))
+    .pipe(gulp.dest('./demo'));
+});
+
 // Tasks
 
 gulp.task('default', ['clean'], function() {
-  gulp.start(['styles', 'scripts', 'modernizr', 'bower']);
+  gulp.start(['styles', 'scripts', 'modernizr', 'bower', 'zetzer']);
 });
 
 gulp.task('dev', ['styles', 'scripts'], function() {
