@@ -6,20 +6,17 @@ var clean        = require('gulp-clean');
 var cleanCSS     = require('gulp-clean-css');
 var clip         = require('gulp-clip-empty-files');
 var header       = require('gulp-header');
+var htmlbeautify = require('gulp-html-beautify');
 var include      = require('gulp-include');
 var jshint       = require('gulp-jshint');
 var less         = require('gulp-less');
 var modernizr    = require('gulp-modernizr');
+var rename       = require('gulp-rename');
 var syncBower    = require('gulp-sync-bower');
 var uglify       = require('gulp-uglify');
 var watch        = require('gulp-watch');
 var zetzer       = require('gulp-zetzer');
-
 var buildDocs    = require('./tasks/docs.js');
-
-gulp.task('buildDocs', function () {
-  return buildDocs();
-});
 
 // Vars
 var pkg = require('./package.json');
@@ -96,6 +93,31 @@ gulp.task('modernizr', function () {
   //   .pipe(gulp.dest("public/js/"))
 });
 
+// Docs
+
+gulp.task('buildDocs', function () {
+  return buildDocs();
+});
+
+// HTML
+
+gulp.task('zetzer', function(){
+   gulp.src('./demo/_src/pages/**/*.md')
+    .pipe(zetzer({
+      partials: './demo/_src/templates/partials/',
+      templates: './demo/_src/templates/',
+      env: {
+        title: 'Formstone',
+        version: '<%= pkg.version %>'
+      }
+    }))
+    .pipe(rename(function(path) {
+      path.extname = '.html'
+    }))
+    .pipe(htmlbeautify())
+    .pipe(gulp.dest('./demo'));
+});
+
 // Bower
 
 gulp.task('bower', function () {
@@ -121,31 +143,14 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('.'))
 });
 
-// HTML
-
-gulp.task('zetzer', function(){
-   gulp.src('./demo/_src/pages/**/*.md')
-    .pipe(zetzer({
-      partials: './demo/_src/templates/partials/',
-      templates: './demo/_src/templates/',
-      dot_template_settings: {
-      //  strip: false
-      },
-      env: {
-        title: 'Formstone',
-        version: '<%= pkg.version %>'
-      }
-    }))
-    .pipe(gulp.dest('./demo'));
-});
-
 // Tasks
 
 gulp.task('default', ['clean'], function() {
-  gulp.start(['styles', 'scripts', 'modernizr', 'bower', 'zetzer']);
+  gulp.start(['styles', 'scripts', 'modernizr', 'buildDocs', 'zetzer', 'bower']);
 });
 
-gulp.task('dev', ['styles', 'scripts'], function() {
+gulp.task('dev', ['styles', 'scripts', 'buildDocs', 'zetzer'], function() {
   gulp.watch('./src/less/**/*.less', ['styles']);
   gulp.watch('./src/js/**/*.js', ['scripts']);
+  gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
 });
