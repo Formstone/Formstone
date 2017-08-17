@@ -8,6 +8,7 @@ var modernizr    = require('gulp-modernizr');
 var uglify       = require('gulp-uglify');
 var include      = require('gulp-include');
 var moment       = require('moment');
+var fs           = require('fs');
 
 var pkg = require('./package.json');
 var date = moment().format('YYYY-MM-DD');
@@ -45,24 +46,35 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('./dist/js'));
 });
 
+// License
+gulp.task('license', function() {
+	fs.readFile('tasks/license.txt', function(err, data) {
+		var content = 'Formstone \n\n' +
+					  'Copyright ' + moment().format('YYYY') + ' ' + pkg.author.name + ' \n\n' +
+					  data;
+
+		fs.writeFile('license.txt', content, function() {});
+	});
+});
+
 // Modernizr
 gulp.task('modernizr', function () {
-  return gulp.src(['public/js/*.js', 'public/css/*.css'])
-    .pipe(modernizr({
-      'tests': [
-        'js',
-        'touchevents'
-      ],
-      'options': [
-        'setClasses',
-        'addTest',
-        'html5printshiv',
-        'testProp',
-        'fnBind'
-      ]
-    }))
-    .pipe(uglify())
-    .pipe(gulp.dest("public/js/"))
+  // return gulp.src(['dist/js/*.js', 'dist/css/*.css'])
+  //   .pipe(modernizr({
+  //     'tests': [
+  //       'js',
+  //       'touchevents'
+  //     ],
+  //     'options': [
+  //       'setClasses',
+  //       'addTest',
+  //       'html5printshiv',
+  //       'testProp',
+  //       'fnBind'
+  //     ]
+  //   }))
+  //   .pipe(uglify())
+  //   .pipe(gulp.dest("public/js/"))
 });
 
 gulp.task('default', ['styles', 'scripts', 'modernizr']);
