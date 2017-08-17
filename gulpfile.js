@@ -12,6 +12,7 @@ var jshint       = require('gulp-jshint');
 var less         = require('gulp-less');
 var modernizr    = require('gulp-modernizr');
 var rename       = require('gulp-rename');
+var sequence     = require('gulp-sequence');
 var syncBower    = require('gulp-sync-bower');
 var uglify       = require('gulp-uglify');
 var watch        = require('gulp-watch');
@@ -34,7 +35,9 @@ gulp.task('clean', function () {
 // Less
 gulp.task('styles', function() {
   return gulp.src(['./src/less/**/*.less', '!./src/less/imports/*'])
-    .pipe(less())
+    .pipe(less({
+      globalVars: pkg.src.vars
+    }))
     .pipe(autoprefixer({
       browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
     }))
@@ -51,7 +54,7 @@ gulp.task('styles', function() {
 
 // JS
 gulp.task('scripts', function() {
-  gulp.src('./src/js/*.js')
+  return gulp.src('./src/js/*.js')
     .pipe(include())
     .pipe(jshint())
     .pipe(uglify())
@@ -62,47 +65,60 @@ gulp.task('scripts', function() {
     .pipe(gulp.dest('./dist/js'));
 });
 
-// License
-gulp.task('license', function() {
-  fs.readFile('tasks/gpl.txt', function(err, data) {
-    var content = 'Formstone \n\n' +
-      'Copyright ' + moment().format('YYYY') + ' ' + pkg.author.name + ' \n\n' +
-      data;
-
-    fs.writeFile('license.txt', content, function() {});
-  });
-});
-
-// Modernizr
-gulp.task('modernizr', function () {
-  // return gulp.src(['dist/js/*.js', 'dist/css/*.css'])
-  //   .pipe(modernizr({
-  //     'tests': [
-  //       'js',
-  //       'touchevents'
-  //     ],
-  //     'options': [
-  //       'setClasses',
-  //       'addTest',
-  //       'html5printshiv',
-  //       'testProp',
-  //       'fnBind'
-  //     ]
-  //   }))
-  //   .pipe(uglify())
-  //   .pipe(gulp.dest("public/js/"))
-});
-
 // Docs
 
 gulp.task('buildDocs', function () {
   return buildDocs();
 });
 
-// HTML
+// Demo - Less
+gulp.task('demoStyles', function() {
+  return gulp.src(['./demo/css/src/*.less'])
+    .pipe(less({
+      globalVars: pkg.src.vars
+    }))
+    .pipe(autoprefixer({
+      browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
+    }))
+    .pipe(cleanCSS({
+      compatibility: 'ie10'
+    }))
+    .pipe(clip())
+    .pipe(gulp.dest('./demo/css'));
+});
 
+// Demo - JS
+gulp.task('demoScripts', function() {
+  return gulp.src('./demo/js/src/*.js')
+    .pipe(include())
+    .pipe(jshint())
+    .pipe(uglify())
+    .pipe(gulp.dest('./demo/js'));
+});
+
+// Demo - Modernizr
+gulp.task('demoModernizr', function () {
+  return gulp.src(['demo/js/*.js', 'demo/css/*.css'])
+    .pipe(modernizr({
+      'tests': [
+        'js',
+        'touchevents'
+      ],
+      'options': [
+        'setClasses',
+        'addTest',
+        'html5printshiv',
+        'testProp',
+        'fnBind'
+      ]
+    }))
+    .pipe(uglify())
+    .pipe(gulp.dest("demo/js/"))
+});
+
+// Demo - HTML
 gulp.task('zetzer', function(){
-   gulp.src('./demo/_src/pages/**/*.md')
+   return gulp.src('./demo/_src/pages/**/*.md')
     .pipe(zetzer({
       partials: './demo/_src/templates/partials/',
       templates: './demo/_src/templates/',
@@ -119,7 +135,6 @@ gulp.task('zetzer', function(){
 });
 
 // Bower
-
 gulp.task('bower', function () {
   var p = {
     name:         pkg.name,
@@ -128,6 +143,10 @@ gulp.task('bower', function () {
     license:      pkg.license,
     homepage:     pkg.homepage,
     dependencies: pkg.dependencies,
+    devDependencies: {
+      "normalize-css": "^7.0.0",
+      "prism": "#gh-pages"
+    },
     main:         [ pkg.main ],
     ignore:       [
       "demo/",
@@ -143,11 +162,52 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('.'))
 });
 
+// License
+gulp.task('license', function() {
+  return fs.readFile('tasks/gpl.txt', function(err, data) {
+    var content = 'Formstone \n\n' +
+      'Copyright ' + moment().format('YYYY') + ' ' + pkg.author.name + ' \n\n' +
+      data;
+
+    fs.writeFile('license.txt', content, function() {});
+  });
+});
+
+// Replace
+
+// library: {
+//   options: {
+//     prefix: '@',
+//     globals: {
+//       version: '<%= pkg.version %>'
+//     }
+//   },
+//   dest: 'dist/js/',
+//   src: '*.js',
+//   expand: true,
+//   cwd: 'dist/js/'
+// },
+// demo: {
+//   options: {
+//     prefix: '@',
+//     globals: '<%= pkg.site.vars %>'
+//   },
+//   dest: 'demo/js/',
+//   src: '*.js',
+//   expand: true,
+//   cwd: 'demo/js/'
+// }
+
 // Tasks
 
-gulp.task('default', ['clean'], function() {
-  gulp.start(['styles', 'scripts', 'modernizr', 'buildDocs', 'zetzer', 'bower']);
-});
+gulp.task('default', sequence(
+  'clean',
+  ['styles', 'scripts'],
+  'buildDocs',
+  ['demoStyles', 'demoScripts'],
+  'demoModernizr',
+  ['zetzer', 'bower', 'license']
+));
 
 gulp.task('dev', ['styles', 'scripts', 'buildDocs', 'zetzer'], function() {
   gulp.watch('./src/less/**/*.less', ['styles']);

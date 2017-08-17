@@ -51,5 +51,9 @@
   ],
   "bugs": {
     "url": "https://github.com/Formstone/formstone/issues"
+  },
+  "devDependencies": {
+    "normalize-css": "^7.0.0",
+    "prism": "#gh-pages"
   }
 }
