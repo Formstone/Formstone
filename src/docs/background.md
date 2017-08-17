@@ -4,13 +4,13 @@ Create a new Background by passing the source image URL at initialization:
 
 ```javascript
 $(".target").background({
-	source: "http://example.com/image.jpg"
+  source: "http://example.com/image.jpg"
 });
 ```
 
 ```markup
 <div class="target">
-	...
+  ...
 </div>
 ```
 
@@ -23,10 +23,10 @@ Create a responsive-friendly Background by defining key/value pairs containing t
 
 ```javascript
 $(".target").background({
-	source: {
-		"0px": "http://example.com/image-small.jpg",
-		"980px": "http://example.com/image-large.jpg"
-	}
+  source: {
+    "0px": "http://example.com/image-small.jpg",
+    "980px": "http://example.com/image-large.jpg"
+  }
 });
 ```
 
@@ -36,12 +36,12 @@ Create a video Background by defining proper browser-specific source video URLs,
 
 ```javascript
 $(".target").background({
-	source: {
-		poster: "http://example.com/poster.jpg",
-		webm: "http://example.com/video.webm",
-		mp4: "http://example.com/video.mp4",
-		ogg: "http://example.com/video.ogv"
-	}
+  source: {
+    poster: "http://example.com/poster.jpg",
+    webm: "http://example.com/video.webm",
+    mp4: "http://example.com/video.mp4",
+    ogg: "http://example.com/video.ogv"
+  }
 });
 ```
 
@@ -53,9 +53,9 @@ Create a YouTube video Background by passing the YouTube embed URL as the source
 
 ```javascript
 $(".target").background({
-	source: {
-		poster: "http://example.com/poster.jpg",
-		video: "//www.youtube.com/embed/VIDEO_ID"
-	}
+  source: {
+    poster: "http://example.com/poster.jpg",
+    video: "//www.youtube.com/embed/VIDEO_ID"
+  }
 });
 ``` -->

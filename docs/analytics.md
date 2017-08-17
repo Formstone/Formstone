@@ -45,10 +45,10 @@ Fire custom events by passing the event field values directly to Analytics:
 
 ```javascript
 $.analytics("event", {
-	eventCategory: "Category", 
-	eventAction: "Action" 
-	eventLabel: "Label",
-	eventValue: 100
+  eventCategory: "Category", 
+  eventAction: "Action" 
+  eventLabel: "Label",
+  eventValue: 100
 });
 ```
 
@@ -60,8 +60,8 @@ Track scroll depth by enabling the `scrollDepth` option at initialization. Chang
 
 ```javascript
 $.analytics({
-	scrollDepth: true,
-	scrollStops: 10
+  scrollDepth: true,
+  scrollStops: 10
 });
 ```
 

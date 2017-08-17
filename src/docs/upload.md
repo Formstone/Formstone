@@ -4,7 +4,7 @@ Upload will create a simple 'drop zone' for file uploads:
 
 ```javascript
 $(".target").upload({
-	action: "upload.php"
+  action: "upload.php"
 });
 ```
 
@@ -16,7 +16,7 @@ Note: IE9 does not support the <a href="http://caniuse.com/#feat=fileapi" target
 
 ```js
 if (Formstone.support.file) {
-	...
+  ...
 }
 ```
 
@@ -26,19 +26,19 @@ Form Data can be modified before the request is made. The request can also be ab
 
 ```javascript
 $(".target").upload({
-	beforeSend: onBeforeSend
+  beforeSend: onBeforeSend
 });
 
 function onBeforeSend(formData, file) {
-	// Cancel request
-	if (file.name.indexOf(".jpg") < 0) {
-		return false;
-	}
-	
-	// Modify and return form data
-	formdata.append("input_name", "input_value");
-	
-	return formData;
+  // Cancel request
+  if (file.name.indexOf(".jpg") < 0) {
+    return false;
+  }
+  
+  // Modify and return form data
+  formdata.append("input_name", "input_value");
+  
+  return formData;
 }
 ```
 

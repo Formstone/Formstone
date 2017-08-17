@@ -47,7 +47,7 @@ $("a").lightbox();
 
 ```markup
 <a href="one.jpg" title="Image Caption">
-	<img src="one_thumb.jpg" alt="">
+  <img src="one_thumb.jpg" alt="">
 </a>
 ```
 
@@ -57,13 +57,13 @@ Link multiple images or videos together with the `data-lightbox-gallery` attribu
 
 ```markup
 <a href="one.jpg" title="Image Caption One" data-lightbox-gallery="photo_gallery">
-	<img src="one_thumb.jpg" alt="">
+  <img src="one_thumb.jpg" alt="">
 </a>
 <a href="two.jpg" title="Image Caption Two" data-lightbox-gallery="photo_gallery">
-	<img src="two_thumb.jpg" alt="">
+  <img src="two_thumb.jpg" alt="">
 </a>
 <a href="three.jpg" title="Image Caption Three" data-lightbox-gallery="photo_gallery">
-	<img src="three_thumb.jpg" alt="">
+  <img src="three_thumb.jpg" alt="">
 </a>
 ```
 
@@ -73,9 +73,9 @@ React to the lightbox by listening for the `open.lightbox` and `close.lightbox` 
 
 ```javascript
 $(window).on("open.lightbox", function() {
-	// ...
+  // ...
 }).on("close.lightbox", function() {
-	// ...
+  // ...
 });
 ```
 

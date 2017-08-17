@@ -34,64 +34,64 @@
  */
 
 .fs-upload {
-	position: relative;
+  position: relative;
 
-	overflow: hidden;
+  overflow: hidden;
 
-	&,
-	&:after,
-	&:before,
-	*,
-	*:after,
-	*:before {
-		box-sizing: border-box;
-		transition: none;
-		user-select: none !important;
-	}
+  &,
+  &:after,
+  &:before,
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+    transition: none;
+    user-select: none !important;
+  }
 
-	/**
-	 * @class
-	 * @name .fs-upload-input
-	 * @type element
-	 * @description Masked Input
-	 */
+  /**
+   * @class
+   * @name .fs-upload-input
+   * @type element
+   * @description Masked Input
+   */
 
-	&-input {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		z-index: -1px;
+  &-input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1px;
 
-		opacity: 0;
-		pointer-events: none;
-	}
+    opacity: 0;
+    pointer-events: none;
+  }
 
-	/**
-	 * @class
-	 * @name .fs-upload-target
-	 * @type element
-	 * @description Drop target
-	 */
+  /**
+   * @class
+   * @name .fs-upload-target
+   * @type element
+   * @description Drop target
+   */
 
-	&-target {
-		cursor: pointer;
-	}
+  &-target {
+    cursor: pointer;
+  }
 
-	&-dropping &-target,
-	.no-touch &:hover &-target {
-	}
+  &-dropping &-target,
+  .no-touch &:hover &-target {
+  }
 
-	// Disabled
+  // Disabled
 
-	&-disabled &-target,
-	.no-touch &-disabled:hover &-target {
-		cursor: default;
-		cursor: not-allowed;
-	}
+  &-disabled &-target,
+  .no-touch &-disabled:hover &-target {
+    cursor: default;
+    cursor: not-allowed;
+  }
 
-	&-disabled&-dropping &-target,
-	.no-touch &-disabled&-dropping:hover &-target {
-	}
+  &-disabled&-dropping &-target,
+  .no-touch &-disabled&-dropping:hover &-target {
+  }
 }

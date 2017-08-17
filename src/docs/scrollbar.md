@@ -8,7 +8,7 @@ $(".target").scrollbar();
 
 ```markup
 <div class="target">
-	<p>...</p>
+  <p>...</p>
 </div>
 ```
 
@@ -16,6 +16,6 @@ $(".target").scrollbar();
 
 ```javascript
 $(".target").scrollbar({
-	horizontal: true
+  horizontal: true
 });
 ```

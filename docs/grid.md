@@ -22,11 +22,11 @@ A basic example may look something like:
 
 ```markup
 <body class="fs-grid">
-	<div class="fs-row">
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-		<div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
-	</div>
+  <div class="fs-row">
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+    <div class="fs-cell fs-sm-3 fs-md-2 fs-lg-4">...</div>
+  </div>
 </body>
 ```
 
@@ -54,7 +54,7 @@ Grid relies on border-box and includes a global box-sizing reset:
 *,
 *:before,
 *:after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 ```
 

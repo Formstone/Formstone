@@ -4,10 +4,10 @@ Media Query can track global changes to screen size based on an existing grid sy
 
 ```javascript
 $.mediaquery({
-	minWidth     : [ 320, 500, 740, 980, 1220 ],
-	maxWidth     : [ 1220, 980, 740, 500, 320 ],
-	minHeight    : [ 400, 800 ],
-	maxHeight    : [ 800, 400 ]
+  minWidth     : [ 320, 500, 740, 980, 1220 ],
+  maxWidth     : [ 1220, 980, 740, 500, 320 ],
+  minHeight    : [ 400, 800 ],
+  maxHeight    : [ 800, 400 ]
 });
 ```
 
@@ -17,7 +17,7 @@ After initializing, simply listen for the `mqchange.mediaquery` event:
 
 ```javascript
 $(window).on("mqchange.mediaquery", function(e, state) {
-	console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
+  console.log(state.minWidth, state.maxWidth, state.minHeight, state.maxHeight);
 });
 ```
 
@@ -29,12 +29,12 @@ Media Query can also bind events to specific media query changes for more fine g
 
 ```javascript
 $.mediaquery("bind", "mq-key", "(min-width: 740px)", {
-	enter: function() {
-		...
-	},
-	leave: function() {
-		...
-	}
+  enter: function() {
+    ...
+  },
+  leave: function() {
+    ...
+  }
 });
 ```
 

@@ -8,12 +8,12 @@ $("input[type=checkbox], input[type=radio]").checkbox();
 
 ```markup
 <fieldset>
-	<label for="check_1">Checkbox</label>
-	<input type="checkbox" name="check_1" id="check_1" value="on">
+  <label for="check_1">Checkbox</label>
+  <input type="checkbox" name="check_1" id="check_1" value="on">
 </fieldset>
 <fieldset>
-	<label for="radio_1">Radio</label>
-	<input type="radio" name="radio_1" id="radio_1" value="on">
+  <label for="radio_1">Radio</label>
+  <input type="radio" name="radio_1" id="radio_1" value="on">
 </fieldset>
 ```
 
@@ -23,6 +23,6 @@ Checkbox can also render a 'toggle' style checkbox.
 
 ```javascript
 $("input[type=checkbox]").checkbox({
-	toggle: true
+  toggle: true
 });
 ```

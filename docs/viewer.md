@@ -46,7 +46,7 @@ $(".target").viewer();
 
 ```markup
 <div class="target">
-	<img src="one.jpg" alt="">
+  <img src="one.jpg" alt="">
 </div>
 ```
 
@@ -60,9 +60,9 @@ $(".target").viewer();
 
 ```markup
 <div class="target">
-	<img src="one.jpg" alt="">
-	<img src="two.jpg" alt="">
-	<img src="three.jpg" alt="">
+  <img src="one.jpg" alt="">
+  <img src="two.jpg" alt="">
+  <img src="three.jpg" alt="">
 </div>
 ```
 

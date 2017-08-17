@@ -4,7 +4,7 @@ Tooltip will generate a tooltip based on the target element's `data-title` attri
 
 ```javascript
 $("a").tooltip({
-	direction: "top"
+  direction: "top"
 });
 ```
 
@@ -19,7 +19,7 @@ Tooltip can be configured to follow the user's mouse:
 
 ```javascript
 $("a").tooltip({
-	follow: true
+  follow: true
 });
 ```
 
@@ -29,7 +29,7 @@ Tooltip can be configured to match the user's mouse position, relative to the ta
 
 ```javascript
 $("a").tooltip({
-	match: true
+  match: true
 });
 ```
 -->
@@ -40,6 +40,6 @@ A delay can be set to avoid accidental tooltips:
 
 ```javascript
 $("a").tooltip({
-	delay: 500
+  delay: 500
 });
 ```

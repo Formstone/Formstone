@@ -7,9 +7,9 @@
 
 // Config
 
-@fs-tooltip-z-index:				10;
+@fs-tooltip-z-index:        10;
 
-@fs-tooltip-transition-duration:	0.15s;
+@fs-tooltip-transition-duration:  0.15s;
 
 /**
  * @class
@@ -61,104 +61,104 @@
  */
 
 .fs-tooltip {
-	width: 1px;
-	height: 1px;
+  width: 1px;
+  height: 1px;
 
-	position: absolute;
-	top: -999px;
-	left: -999px;
-	z-index: @fs-tooltip-z-index;
+  position: absolute;
+  top: -999px;
+  left: -999px;
+  z-index: @fs-tooltip-z-index;
 
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity @fs-tooltip-transition-duration linear;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity @fs-tooltip-transition-duration linear;
 
-	&,
-	&:after,
-	&:before,
-	*,
-	*:after,
-	*:before {
-		box-sizing: border-box;
-		transition: none;
-		user-select: none !important;
-	}
+  &,
+  &:after,
+  &:before,
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+    transition: none;
+    user-select: none !important;
+  }
 
-	// Visible
+  // Visible
 
-	&-visible {
-		opacity: 1;
-	}
+  &-visible {
+    opacity: 1;
+  }
 
-	/**
-	 * @class
-	 * @name .fs-tooltip-content
-	 * @type element
-	 * @description Tooltip content wrapper
-	 */
+  /**
+   * @class
+   * @name .fs-tooltip-content
+   * @type element
+   * @description Tooltip content wrapper
+   */
 
-	&-content {
-		display: block;
-		float: left;
-		position: relative;
-		white-space: nowrap;
-	}
+  &-content {
+    display: block;
+    float: left;
+    position: relative;
+    white-space: nowrap;
+  }
 
-	/**
-	 * @class
-	 * @name .fs-tooltip-caret
-	 * @type element
-	 * @description Tooltip caret
-	 */
+  /**
+   * @class
+   * @name .fs-tooltip-caret
+   * @type element
+   * @description Tooltip caret
+   */
 
-	&-caret {
-		display: none;
-	}
+  &-caret {
+    display: none;
+  }
 
-	// .fs-tooltip-right
+  // .fs-tooltip-right
 
-	&-right {
-		.fs-tooltip-content {
-		}
+  &-right {
+    .fs-tooltip-content {
+    }
 
-		.fs-tooltip-caret {
-		}
-	}
+    .fs-tooltip-caret {
+    }
+  }
 
 
-	// .fs-tooltip-left
+  // .fs-tooltip-left
 
-	&-left {
-		.fs-tooltip-content {
-		}
+  &-left {
+    .fs-tooltip-content {
+    }
 
-		.fs-tooltip-caret {
-		}
-	}
+    .fs-tooltip-caret {
+    }
+  }
 
-	&-top,
-	&-bottom {
-		.fs-tooltip-caret {
-		}
-	}
+  &-top,
+  &-bottom {
+    .fs-tooltip-caret {
+    }
+  }
 
-	// .fs-tooltip-top
+  // .fs-tooltip-top
 
-	&-top {
-		.fs-tooltip-content {
-		}
+  &-top {
+    .fs-tooltip-content {
+    }
 
-		.fs-tooltip-caret {
-		}
-	}
+    .fs-tooltip-caret {
+    }
+  }
 
-	// .fs-tooltip-bottom
+  // .fs-tooltip-bottom
 
-	&-bottom {
-		.fs-tooltip-content {
-		}
+  &-bottom {
+    .fs-tooltip-content {
+    }
 
-		.fs-tooltip-caret {
-		}
-	}
+    .fs-tooltip-caret {
+    }
+  }
 }

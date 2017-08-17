@@ -8,11 +8,11 @@ $(".target").carousel();
 
 ```markup
 <div class="target">
-	<div>1</div>
-	<div>2</div>
-	<div>3</div>
-	<div>4</div>
-	<div>5</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
 </div>
 ```
 
@@ -22,16 +22,16 @@ Set the `show` option to a value, or object, at initialization to allow more ite
 
 ```javascript
 $(".target").carousel({
-	show: 2
+  show: 2
 });
 ```
 
 ```javascript
 $(".target").carousel({
-	show: {
-		"740px" : 2,
-		"980px" : 3
-	}
+  show: {
+    "740px" : 2,
+    "980px" : 3
+  }
 });
 ```
 

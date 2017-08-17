@@ -1,17 +1,17 @@
 <?php
-	// Only output on full page loads
-	if (!$isASAP) {
+  // Only output on full page loads
+  if (!$isASAP) {
 ?>
-					</div>
+          </div>
 
-					<div class="copyright">&copy; <?=date('Y')?></div>
+          <div class="copyright">&copy; <?=date('Y')?></div>
 
-				</div>
-			</div>
-		</div>
+        </div>
+      </div>
+    </div>
 
-	</body>
+  </body>
 </html>
 <?php
-	}
-	// END: Only output on full page loads
+  }
+  // END: Only output on full page loads

@@ -18,13 +18,13 @@ Pan can be used for building touch-friendly draggable interfaces:
 
 ```javascript
 $(".target").touch({
-	pan: true
+  pan: true
 }).on("panstart", function(e) {
-	console.log("Started panning");
+  console.log("Started panning");
 }).on("pan", function(e) {
-	console.log("Panning");
+  console.log("Panning");
 }).on("panend", function(e) {
-	console.log("Stopped panning");
+  console.log("Stopped panning");
 });
 ```
 
@@ -34,9 +34,9 @@ Swipe can be used for building touch-friendly swipable interfaces:
 
 ```javascript
 $(".target").touch({
-	swipe: true
+  swipe: true
 }).on("swipe", function(e) {
-	console.log("Swiped");
+  console.log("Swiped");
 });
 ```
 
@@ -46,13 +46,13 @@ Scale can be used for building touch-friendly scalable interfaces:
 
 ```javascript
 $(".target").touch({
-	scale: true
+  scale: true
 }).on("scalestart", function(e) {
-	console.log("Started scaling");
+  console.log("Started scaling");
 }).on("scale", function(e) {
-	console.log("Scaling");
+  console.log("Scaling");
 }).on("scaleend", function(e) {
-	console.log("Stopped scaling");
+  console.log("Stopped scaling");
 });
 ```
 

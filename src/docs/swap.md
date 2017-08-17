@@ -43,7 +43,7 @@ Swaps will auto-enable and disable themselves if the `maxWidth` property is set.
 
 ```javascript
 $(".target").swap({
-	maxWidth: "740px"
+  maxWidth: "740px"
 });
 ```
 

@@ -8,9 +8,9 @@ $(".target").equalize();
 
 ```markup
 <div class="target">
-	<div>...</div>
-	<div>...</div>
-	<div>...</div>
+  <div>...</div>
+  <div>...</div>
+  <div>...</div>
 </div>
 ```
 
@@ -20,21 +20,21 @@ Specify a valid `target` selector to equalize specific child elements:
 
 ```javascript
 $(".target").equalize({
-	target: ".child"
+  target: ".child"
 });
 ```
 
 ```markup
 <div class="target">
-	<div>
-		<p class="child">...</p>
-	</div>
-	<div>
-		<p class="child">...</p>
-	</div>
-	<div>
-		<p class="child">...</p>
-	</div>
+  <div>
+    <p class="child">...</p>
+  </div>
+  <div>
+    <p class="child">...</p>
+  </div>
+  <div>
+    <p class="child">...</p>
+  </div>
 </div>
 ```
 
@@ -44,6 +44,6 @@ Set the `protperty` to width to Equalize the widths of elements, rather than hei
 
 ```javascript
 $(".target").equalize({
-	property: "width"
+  property: "width"
 });
 ```

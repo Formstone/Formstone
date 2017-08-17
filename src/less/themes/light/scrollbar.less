@@ -6,101 +6,101 @@
 
 .fs-scrollbar {
 
-	@import "_config.less";
+  @import "_config.less";
 
-	@theme_name: fs-light;
+  @theme_name: fs-light;
 
-	// Bar
+  // Bar
 
-	@fs-scrollbar-bar-size:					20px;
-	@fs-scrollbar-bar-background:			@fs-light-white;
-	@fs-scrollbar-bar-border-color:			@fs-light-primary_600;
-	@fs-scrollbar-bar-border-size:			1px;
+  @fs-scrollbar-bar-size:          20px;
+  @fs-scrollbar-bar-background:      @fs-light-white;
+  @fs-scrollbar-bar-border-color:      @fs-light-primary_600;
+  @fs-scrollbar-bar-border-size:      1px;
 
-	// Track
+  // Track
 
-	@fs-scrollbar-track-background:			@fs-light-white;
+  @fs-scrollbar-track-background:      @fs-light-white;
 
-	// Handle
+  // Handle
 
-	@fs-scrollbar-handle-size:				12px;
-	@fs-scrollbar-handle-background:		@fs-light-primary_600;
-	@fs-scrollbar-handle-border-color:		@fs-light-white;
-	@fs-scrollbar-handle-border-radius:		(@fs-scrollbar-bar-size / 2);
-	@fs-scrollbar-handle-border-size:		1px;
+  @fs-scrollbar-handle-size:        12px;
+  @fs-scrollbar-handle-background:    @fs-light-primary_600;
+  @fs-scrollbar-handle-border-color:    @fs-light-white;
+  @fs-scrollbar-handle-border-radius:    (@fs-scrollbar-bar-size / 2);
+  @fs-scrollbar-handle-border-size:    1px;
 
-	// Content
+  // Content
 
-	@fs-scrollbar-content-background:		@fs-light-white;
-	@fs-scrollbar-content-border-color:		@fs-light-primary_600;
-	@fs-scrollbar-content-border-radius:	2px;
-	@fs-scrollbar-content-padding:			20px;
+  @fs-scrollbar-content-background:    @fs-light-white;
+  @fs-scrollbar-content-border-color:    @fs-light-primary_600;
+  @fs-scrollbar-content-border-radius:  2px;
+  @fs-scrollbar-content-padding:      20px;
 
-	&.@{theme_name} {
-		background: @fs-scrollbar-content-background;
-		border: 1px solid @fs-scrollbar-content-border-color;
-		border-radius: @fs-scrollbar-content-border-radius;
-	}
+  &.@{theme_name} {
+    background: @fs-scrollbar-content-background;
+    border: 1px solid @fs-scrollbar-content-border-color;
+    border-radius: @fs-scrollbar-content-border-radius;
+  }
 
-	&.@{theme_name} &-bar {
-		width: @fs-scrollbar-bar-size;
+  &.@{theme_name} &-bar {
+    width: @fs-scrollbar-bar-size;
 
-		background: @fs-scrollbar-bar-background;
-		border: @fs-scrollbar-bar-border-size solid @fs-scrollbar-bar-border-color;
-		border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
-		border-width: 0 0 0 @fs-scrollbar-bar-border-size;
-	}
+    background: @fs-scrollbar-bar-background;
+    border: @fs-scrollbar-bar-border-size solid @fs-scrollbar-bar-border-color;
+    border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
+    border-width: 0 0 0 @fs-scrollbar-bar-border-size;
+  }
 
-	&.@{theme_name} &-track {
-		background: @fs-scrollbar-track-background;
-		border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
-	}
+  &.@{theme_name} &-track {
+    background: @fs-scrollbar-track-background;
+    border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
+  }
 
-	@fs-scrollbar-handle-position: ((@fs-scrollbar-bar-size - @fs-scrollbar-handle-size) / 2);
+  @fs-scrollbar-handle-position: ((@fs-scrollbar-bar-size - @fs-scrollbar-handle-size) / 2);
 
-	&.@{theme_name} &-handle {
-		width: @fs-scrollbar-handle-size;
-		height: (@fs-scrollbar-handle-size * 2);
+  &.@{theme_name} &-handle {
+    width: @fs-scrollbar-handle-size;
+    height: (@fs-scrollbar-handle-size * 2);
 
-		right: @fs-scrollbar-handle-position;
+    right: @fs-scrollbar-handle-position;
 
-		background: @fs-scrollbar-handle-background;
-		border: @fs-scrollbar-handle-border-size solid @fs-scrollbar-handle-border-color;
-		border-radius: @fs-scrollbar-handle-border-radius;
-	}
+    background: @fs-scrollbar-handle-background;
+    border: @fs-scrollbar-handle-border-size solid @fs-scrollbar-handle-border-color;
+    border-radius: @fs-scrollbar-handle-border-radius;
+  }
 
-	.no-touchevents &.@{theme_name} &-track:hover &-handle {
+  .no-touchevents &.@{theme_name} &-track:hover &-handle {
 
-	}
+  }
 
-	.@{theme_name} &-content {
+  .@{theme_name} &-content {
 
-	}
+  }
 
-	// Horizontal
+  // Horizontal
 
-	.@{theme_name}&-horizontal &-content {
-		padding: 0 0 @fs-scrollbar-bar-size 0;
-	}
+  .@{theme_name}&-horizontal &-content {
+    padding: 0 0 @fs-scrollbar-bar-size 0;
+  }
 
-	.@{theme_name}&-horizontal &-bar {
-		width: 100%;
-		height: @fs-scrollbar-bar-size;
+  .@{theme_name}&-horizontal &-bar {
+    width: 100%;
+    height: @fs-scrollbar-bar-size;
 
-		border-width: @fs-scrollbar-bar-border-size 0 0 0;
-	}
+    border-width: @fs-scrollbar-bar-border-size 0 0 0;
+  }
 
-	.@{theme_name}&-horizontal &-handle {
-		width: (@fs-scrollbar-handle-size * 2);
-		height: @fs-scrollbar-handle-size;
+  .@{theme_name}&-horizontal &-handle {
+    width: (@fs-scrollbar-handle-size * 2);
+    height: @fs-scrollbar-handle-size;
 
-		bottom: @fs-scrollbar-handle-position;
-	}
+    bottom: @fs-scrollbar-handle-position;
+  }
 
-	// Active / Setup
+  // Active / Setup
 
-	.@{theme_name}&-setup &-content,
-	.@{theme_name}&-active &-content {
-		padding: @fs-scrollbar-content-padding;
-	}
+  .@{theme_name}&-setup &-content,
+  .@{theme_name}&-active &-content {
+    padding: @fs-scrollbar-content-padding;
+  }
 }

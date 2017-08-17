@@ -27,82 +27,82 @@
  */
 
 .fs-number {
-	position: relative;
+  position: relative;
 
-	overflow: hidden;
+  overflow: hidden;
 
-	&,
-	&:after,
-	&:before,
-	*,
-	*:after,
-	*:before {
-		box-sizing: border-box;
-		transition: none;
-		// user-select: none !important;
-	}
+  &,
+  &:after,
+  &:before,
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+    transition: none;
+    // user-select: none !important;
+  }
 
-	&-element {
-		width: 100%;
+  &-element {
+    width: 100%;
 
-		overflow: hidden;
+    overflow: hidden;
 
-		-moz-appearance: textfield;
+    -moz-appearance: textfield;
 
-		&::-webkit-inner-spin-button,
-		&::-webkit-outer-spin-button {
-			margin: 0;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      margin: 0;
 
-			-webkit-appearance: none;
-		}
+      -webkit-appearance: none;
+    }
 
-		&::-ms-clear {
-			display: none;
-		}
-	}
+    &::-ms-clear {
+      display: none;
+    }
+  }
 
-	&-disabled &-element {
-	}
+  &-disabled &-element {
+  }
 
-	/**
-	 * @class
-	 * @name .fs-number-arrow
-	 * @type element
-	 * @description Arrow elmement
-	 */
+  /**
+   * @class
+   * @name .fs-number-arrow
+   * @type element
+   * @description Arrow elmement
+   */
 
-	/**
-	 * @class
-	 * @name .fs-number-arrow:after
-	 * @type element
-	 * @description Arrow icon
-	 */
+  /**
+   * @class
+   * @name .fs-number-arrow:after
+   * @type element
+   * @description Arrow icon
+   */
 
-	&-arrow {
-		.fs_button;
-	}
+  &-arrow {
+    .fs_button;
+  }
 
-	/**
-	 * @class
-	 * @name .fs-number-arrow.fs-number-up
-	 * @type modifier
-	 * @description Indicates up state
-	 */
+  /**
+   * @class
+   * @name .fs-number-arrow.fs-number-up
+   * @type modifier
+   * @description Indicates up state
+   */
 
-	&-arrow&-up {
-	}
+  &-arrow&-up {
+  }
 
-	/**
-	 * @class
-	 * @name .fs-number-arrow.fs-number-down
-	 * @type modifier
-	 * @description Indicates up state
-	 */
+  /**
+   * @class
+   * @name .fs-number-arrow.fs-number-down
+   * @type modifier
+   * @description Indicates up state
+   */
 
-	&-arrow&-down {
-	}
+  &-arrow&-down {
+  }
 
-	&-disabled &-arrow {
-		cursor: default;
-	}
+  &-disabled &-arrow {
+    cursor: default;
+  }
 }
