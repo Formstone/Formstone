@@ -48,5 +48,8 @@
   ],
   "keywords": [
     "formstone"
-  ]
+  ],
+  "bugs": {
+    "url": "https://github.com/Formstone/formstone/issues"
+  }
 }

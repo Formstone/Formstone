@@ -1,4 +1,4 @@
-<a href="http://gruntjs.com" target="_blank"><img src="https://cdn.gruntjs.com/builtwith.png" alt="Built with Grunt"></a> 
+<a href="https://gulpjs.com/" target="_blank"><img src="https://img.shields.io/badge/gulp-built_project-eb4a4b.svg?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAYAAAAOCAMAAAA7QZ0XAAAABlBMVEUAAAD%2F%2F%2F%2Bl2Z%2FdAAAAAXRSTlMAQObYZgAAABdJREFUeAFjAAFGRjSSEQzwUgwQkjAFAAtaAD0Ls2nMAAAAAElFTkSuQmCC" alt="Built with Gulp"></a> 
 <a href="http://badge.fury.io/bo/formstone"><img src="https://badge.fury.io/bo/formstone.svg" alt="Bower version" height="18"></a> 
 <a href="https://badge.fury.io/js/formstone"><img src="https://badge.fury.io/js/formstone.svg" alt="npm version" height="18"></a> 
 <a href="https://travis-ci.org/Formstone/Formstone"><img src="https://travis-ci.org/Formstone/Formstone.svg?branch=master" alt="Travis CI" height="18"></a> 
