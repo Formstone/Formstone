@@ -2,43 +2,58 @@
   Demo
 ============================================================================= */
 
-  /* global picturefill */
+  (function($, Formstone) {
+    var $window,
+        $body,
+        opts = {};
 
-  Site.modules.Demo = (function($, Site) {
+    opts.minXS = "@mq_min_xs";
+    opts.minSM = "@mq_min_sm";
+    opts.minMD = "@mq_min_md";
+    opts.minLG = "@mq_min_lg";
+    opts.minXL = "@mq_min_xl";
+
+    opts.maxXS = opts.minXS - 1;
+    opts.maxSM = opts.minSM - 1;
+    opts.maxMD = opts.minMD - 1;
+    opts.maxLG = opts.minLG - 1;
+    opts.maxXL = opts.minXL - 1;
+
+    opts.minHTsm = parseInt("@mq_min_ht_sm", 10);
+    opts.minHT   = parseInt("@mq_min_ht", 10);
+
+    opts.maxHTsm = opts.minHTsm - 1;
+    opts.maxHT   = opts.minHT - 1;
 
     function init() {
-      $.cookie({
-        path: '/'
-      });
+      $window = $(window);
+      $body   = $("body");
+
+      if ($.mediaquery) {
+        $.mediaquery({
+          minWidth: [ opts.minXS, opts.minSM, opts.minMD, opts.minLG, opts.minXL ],
+          maxWidth: [ opts.maxXL, opts.maxLG, opts.maxMD, opts.maxSM, opts.maxXS ],
+          minHeight: [ opts.minHTsm, opts.minHT ],
+          maxHeight: [ opts.maxHT, opts.maxHTsm ]
+        });
+      }
+
+      if ($.cookie) {
+        $.cookie({
+          path: "/"
+        });
+      }
 
       buildDemoTabs();
       buildPlugins("fs-light");
-
-      Site.onScroll.push(scroll);
-      Site.onResize.push(resize);
-      Site.onRespond.push(respond);
-
-      Site.scroll();
-    }
-
-    function scroll() {
-
-    }
-
-    function resize() {
-      scroll();
-    }
-
-    function respond() {
-      scroll();
     }
 
     function buildDemoTabs() {
       $(".demo_container").each(function(index) {
-        var html  = "",
-          $demo = $(this),
-          $example = $demo.find(".demo_example"),
-          $code    = $demo.find(".demo_code");
+        var html     = "",
+            $demo    = $(this),
+            $example = $demo.find(".demo_example"),
+            $code    = $demo.find(".demo_code");
 
         $example.attr("id", "example-" + index);
         $code.attr("id", "code-" + index);
@@ -63,59 +78,59 @@
 
       // Destroy
 
-      Site.$body.find(".js-background").background("destroy");
-      Site.$body.find(".js-carousel").carousel("destroy");
-      Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
-            Site.$body.find(".js-checkpoint").checkpoint("destroy");
-      Site.$body.find(".js-dropdown").dropdown("destroy");
-      Site.$body.find(".js-equalize").equalize("destroy");
-      Site.$body.find(".js-lightbox").lightbox("destroy");
-      Site.$body.find(".js-navigation").navigation("destroy");
-      Site.$body.find("input[type=number]").number("destroy");
-      Site.$body.find(".js-pagination").pagination("destroy");
-      Site.$body.find("input[type=range]").range("destroy");
-      Site.$body.find(".js-scrollbar").scrollbar("destroy");
-      Site.$body.find(".js-sticky").sticky("destroy");
-      Site.$body.find(".js-swap").swap("destroy");
-      Site.$body.find(".js-tabs").tabs("destroy");
-      Site.$body.find(".js-tooltip").tooltip("destroy");
-      Site.$body.find(".js-upload").upload("destroy");
-      Site.$body.find(".js-viewer").viewer("destroy");
+      $body.find(".js-background").background("destroy");
+      $body.find(".js-carousel").carousel("destroy");
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
+      $body.find(".js-checkpoint").checkpoint("destroy");
+      $body.find(".js-dropdown").dropdown("destroy");
+      $body.find(".js-equalize").equalize("destroy");
+      $body.find(".js-lightbox").lightbox("destroy");
+      $body.find(".js-navigation").navigation("destroy");
+      $body.find("input[type=number]").number("destroy");
+      $body.find(".js-pagination").pagination("destroy");
+      $body.find("input[type=range]").range("destroy");
+      $body.find(".js-scrollbar").scrollbar("destroy");
+      $body.find(".js-sticky").sticky("destroy");
+      $body.find(".js-swap").swap("destroy");
+      $body.find(".js-tabs").tabs("destroy");
+      $body.find(".js-tooltip").tooltip("destroy");
+      $body.find(".js-upload").upload("destroy");
+      $body.find(".js-viewer").viewer("destroy");
 
       // Init
 
-      Site.$body.find(".js-background").background(options);
-      Site.$body.find(".js-carousel").carousel(options);
-      Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
-            Site.$body.find(".js-checkpoint").checkpoint();
-      Site.$body.find(".js-dropdown").dropdown(options);
-      Site.$body.find(".js-equalize").equalize(options);
-      Site.$body.find(".js-lightbox").lightbox(options);
-      Site.$body.find(".js-navigation").navigation(options);
-      Site.$body.find("input[type=number]").number(options);
-      Site.$body.find(".js-pagination").pagination(options);
-      Site.$body.find("input[type=range]").range(options);
-      Site.$body.find(".js-scrollbar").scrollbar(options);
-      Site.$body.find(".js-sticky").sticky(options);
-      Site.$body.find(".js-swap").swap(options);
-      Site.$body.find(".js-tabs").tabs(options);
-      Site.$body.find(".js-tooltip").tooltip(options);
-      Site.$body.find(".js-upload").upload(options);
-      Site.$body.find(".js-viewer").viewer(options);
+      $body.find(".js-background").background(options);
+      $body.find(".js-carousel").carousel(options);
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
+      $body.find(".js-checkpoint").checkpoint();
+      $body.find(".js-dropdown").dropdown(options);
+      $body.find(".js-equalize").equalize(options);
+      $body.find(".js-lightbox").lightbox(options);
+      $body.find(".js-navigation").navigation(options);
+      $body.find("input[type=number]").number(options);
+      $body.find(".js-pagination").pagination(options);
+      $body.find("input[type=range]").range(options);
+      $body.find(".js-scrollbar").scrollbar(options);
+      $body.find(".js-sticky").sticky(options);
+      $body.find(".js-swap").swap(options);
+      $body.find(".js-tabs").tabs(options);
+      $body.find(".js-tooltip").tooltip(options);
+      $body.find(".js-upload").upload(options);
+      $body.find(".js-viewer").viewer(options);
 
       // Demo Tabs
 
-      Site.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
+      $body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
 
-      Site.$body.find(".js-demo_tabs").tabs({
+      $body.find(".js-demo_tabs").tabs({
         mobileMaxWidth: "0px",
         theme: "fs-demo"
       }).on("update.tabs", resetPlugins);
     }
 
     function resetPlugins() {
-      var $tab = $(this),
-        $content = $( $tab.attr("href") );
+      var $tab     = $(this),
+          $content = $( $tab.attr("href") );
 
       $content.find(".js-background").background("resize");
       $content.find(".js-carousel").carousel("resize");
@@ -124,11 +139,8 @@
       $content.find(".js-scrollbar").scrollbar("resize");
     }
 
-    /* Hook Into Main init Routine */
+    // Ready
 
-    Site.onInit.push(init);
+    Formstone.Ready(init);
 
-    return {
-
-    };
-  })(jQuery, Site);
+  })(jQuery, Formstone);

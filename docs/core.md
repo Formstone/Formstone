@@ -418,3 +418,14 @@ Formstone.Plugin("namespace", { ... });
 | `namespace` | `string` | &nbsp; | Plugin namespace |
 | `settings` | `object` | &nbsp; | Plugin settings |
 
+### ready
+
+Replacement for jQuery ready
+
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `e` | `object` | &nbsp; | Event data |
+

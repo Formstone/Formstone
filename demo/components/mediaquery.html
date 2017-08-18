@@ -54,7 +54,7 @@
                 </style>
 
                 <script>
-                    $(function() {
+                    Formstone.Ready(function() {
                         $(window).on("mqchange.mediaquery", logChange);
 
                         if (!$.mediaquery("state")) {

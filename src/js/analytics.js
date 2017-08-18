@@ -116,11 +116,11 @@
    */
 
   function buildEvent() {
-    var $target = $(this),
-      href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
-      domain = document.domain.split(".").reverse(),
-      internal = href.match(domain[1] + "." + domain[0]) !== null,
-      eventData;
+    var $target  = $(this),
+        href     = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+        domain   = document.domain.split(".").reverse(),
+        internal = href.match(domain[1] + "." + domain[0]) !== null,
+        eventData;
 
     if (href.match(/^mailto\:/i)) {
       // Email
@@ -160,9 +160,9 @@
 
   function doTrackScroll() {
     var scrollTop = $Window.scrollTop() + Formstone.windowHeight,
-      step      = (1 / Defaults.scrollStops),
-      depth     = step,
-      key;
+        step      = (1 / Defaults.scrollStops),
+        depth     = step,
+        key;
 
     for (var i = 1; i <= Defaults.scrollStops; i++) {
       key = ( Math.round(100 * depth) ).toString();
@@ -172,11 +172,11 @@
 
         // Push data
         var eventData = $.extend(Defaults.scrollFields, {
-          eventCategory     : "ScrollDepth",
-          eventAction       : ScrollWidth,
-          eventLabel        : key,
-          nonInteraction    : true
-        });
+            eventCategory  : "ScrollDepth",
+            eventAction    : ScrollWidth,
+            eventLabel     : key,
+            nonInteraction : true
+          });
 
         pushEvent(eventData);
       }
@@ -193,12 +193,12 @@
 
   function setScrollDepths() {
     var mqState    = $.mediaquery("state"),
-      bodyHeight = $Body.outerHeight(),
-      newDepths  = {},
-      step       = (1 / Defaults.scrollStops),
-      depth      = step,
-      top        = 0,
-      key;
+        bodyHeight = $Body.outerHeight(),
+        newDepths  = {},
+        step       = (1 / Defaults.scrollStops),
+        depth      = step,
+        top        = 0,
+        key;
 
     if (mqState.minWidth) {
       ScrollWidth = "MinWidth:" + mqState.minWidth + "px";
@@ -209,8 +209,8 @@
       key = ( Math.round(100 * depth) ).toString();
 
       newDepths[ key ] = {
-        edge       : ( key === "100" ) ? top - 10 : top,
-        passsed    : ( ScrollDepths[ ScrollWidth ] && ScrollDepths[ ScrollWidth ][ key ] ) ? ScrollDepths[ ScrollWidth ][ key ].passed : false
+        edge    : ( key === "100" ) ? top - 10 : top,
+        passsed : ( ScrollDepths[ ScrollWidth ] && ScrollDepths[ ScrollWidth ][ key ] ) ? ScrollDepths[ ScrollWidth ][ key ].passed : false
       };
 
       depth += step;
@@ -228,8 +228,8 @@
 
   function trackEvent(e) {
     var $target = $(this),
-      url     = $target.attr("href"),
-      data    = $target.data(DataKey).split(",");
+        url     = $target.attr("href"),
+        data    = $target.data(DataKey).split(",");
 
     if (Defaults.eventCallback) {
       e.preventDefault();
@@ -244,11 +244,11 @@
 
     // Push data
     pushEvent({
-      eventCategory     : data[0],
-      eventAction       : data[1],
-      eventLabel        : (data[2] || url),
-      eventValue        : data[3],
-      nonInteraction    : data[4],
+      eventCategory  : data[0],
+      eventAction    : data[1],
+      eventLabel     : (data[2] || url),
+      eventValue     : data[3],
+      nonInteraction : data[4],
     }, $target);
   }
 
@@ -261,9 +261,9 @@
   function pushEvent(data, $target) {
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference
     var loc = Window.location,
-      event = $.extend({
-        hitType     : "event"
-      }, data);
+        evt = $.extend({
+          hitType : "event"
+        }, data);
 
     // If active link, launch that ish!
     if ($.type($target) !== "undefined" && !$target.attr("data-analytics-stop")) {
@@ -278,7 +278,7 @@
         } else if (Defaults.eventCallback) {
           var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
 
-          event[ callbackType ] = function() {
+          evt[ callbackType ] = function() {
             if (LinkTimer) {
               Functions.clearTimer(LinkTimer);
 
@@ -287,12 +287,12 @@
           };
 
           // Event timeout
-          LinkTimer = Functions.startTimer(LinkTimer, Defaults.eventTimeout, event[ callbackType ]);
+          LinkTimer = Functions.startTimer(LinkTimer, Defaults.eventTimeout, evt[ callbackType ]);
         }
       }
     }
 
-    push(event);
+    push(evt);
   }
 
   /**
@@ -303,8 +303,8 @@
 
   function pushPageView(data) {
     var pageView = $.extend({
-        hitType : "pageview"
-      }, data);
+          hitType : "pageview"
+        }, data);
 
     push(pageView);
   }
@@ -346,55 +346,55 @@
    */
 
   var Plugin = Formstone.Plugin("analytics", {
-      methods: {
-        _setup       : setup,
-        _resize      : resize
+        methods: {
+          _setup    : setup,
+          _resize   : resize
+        },
+        utilities: {
+          _delegate : delegate
+        }
+      }),
+
+      /**
+       * @options
+       * @param autoEvents [boolean] <false> "Flag to bind auto-events to mailto, tel, files and external links"
+       * @param fileTypes [regex] <> "File types for binding auto-events"
+       * @param eventCallback [boolean] <false> "Flag to use event callbacks when navigating"
+       * @param eventTimeout [int] <1000> "Event failure timeout"
+       * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
+       * @param scrollStops [int] <5> "Number of scroll increments to track"
+       * @param scrollFields [object] <{}> "Additional event fields for scroll depth events"
+       */
+
+      Defaults = {
+        autoEvents    : false,
+        fileTypes     : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        eventCallback : false,
+        eventTimeout  : 1000,
+        scrollDepth   : false,
+        scrollStops   : 5,
+        scrollFields  : {}
       },
-      utilities: {
-        _delegate    : delegate
-      }
-    }),
 
-    /**
-     * @options
-     * @param autoEvents [boolean] <false> "Flag to bind auto-events to mailto, tel, files and external links"
-     * @param fileTypes [regex] <> "File types for binding auto-events"
-     * @param eventCallback [boolean] <false> "Flag to use event callbacks when navigating"
-     * @param eventTimeout [int] <1000> "Event failure timeout"
-     * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
-     * @param scrollStops [int] <5> "Number of scroll increments to track"
-     * @param scrollFields [object] <{}> "Additional event fields for scroll depth events"
-     */
+      // Localize References
 
-    Defaults = {
-      autoEvents     : false,
-      fileTypes      : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
-      eventCallback  : false,
-      eventTimeout   : 1000,
-      scrollDepth    : false,
-      scrollStops    : 5,
-      scrollFields   : {}
-    },
+      Window       = Formstone.window,
+      $Window      = Formstone.$window,
+      $Body        = null,
 
-    // Localize References
+      Functions    = Plugin.functions,
+      Events       = Plugin.events,
 
-    Window       = Formstone.window,
-    $Window      = Formstone.$window,
-    $Body        = null,
+      // Internal
 
-    Functions    = Plugin.functions,
-    Events       = Plugin.events,
+      Initialized  = false,
+      DataKey      = "analytics-event",
+      DataKeyFull  = "data-" + DataKey,
 
-    // Internal
-
-    Initialized  = false,
-    DataKey      = "analytics-event",
-    DataKeyFull  = "data-" + DataKey,
-
-    ScrollDepths = {},
-    ScrollTimer  = null,
-    ScrollWidth  = "Site", // default value, non-responsive
-    LinkTimer    = null;
+      ScrollDepths = {},
+      ScrollTimer  = null,
+      ScrollWidth  = "Site", // default value, non-responsive
+      LinkTimer    = null;
 
 })
 

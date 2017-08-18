@@ -2,6 +2,7 @@ var fs             = require('fs');
 var moment         = require('moment');
 var gulp           = require('gulp');
 var autoprefixer   = require('gulp-autoprefixer');
+var jsbeautify     = require('gulp-beautify');
 var clean          = require('gulp-clean');
 var cleanCSS       = require('gulp-clean-css');
 var clip           = require('gulp-clip-empty-files');
@@ -57,7 +58,7 @@ gulp.task('scripts', function() {
   return gulp.src('./src/js/*.js')
     .pipe(include())
     .pipe(jshint())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(header(comment, {
       pkg:  pkg,
       date: date
@@ -117,7 +118,7 @@ gulp.task('demoModernizr', function () {
       ]
     }))
     .pipe(uglify())
-    .pipe(gulp.dest("demo/js/"))
+    .pipe(gulp.dest('demo/js/'));
 });
 
 // Demo - HTML
@@ -177,6 +178,16 @@ gulp.task('license', function() {
   });
 });
 
+// Beautify
+
+gulp.task('beautify', function() {
+  gulp.src('./src/js/*.js')
+    .pipe(beautify({
+      indent_size: 2
+    }))
+    .pipe(gulp.dest('./src/js/'));
+});
+
 // Tasks
 
 gulp.task('default', sequence(
@@ -188,8 +199,13 @@ gulp.task('default', sequence(
   ['zetzer', 'license']
 ));
 
-gulp.task('dev', ['styles', 'scripts', 'buildDocs', 'zetzer'], function() {
-  gulp.watch('./src/less/**/*.less', ['styles']);
-  gulp.watch('./src/js/**/*.js', ['scripts']);
+gulp.task('demo', sequence(
+  ['styles', 'scripts'],
+  ['demoStyles', 'demoScripts']
+));
+
+gulp.task('dev', ['default'], function() {
+  gulp.watch('./src/less/**/*.less', ['demo']);
+  gulp.watch('./src/js/**/*.js', ['demo']);
   gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
 });

@@ -1,2 +1,977 @@
-/*! formstone v1.3.3 [dropdown.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./scrollbar","./touch"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function l(t){for(var l="",i=0,o=t.$allOptions.length;i<o;i++){var s=t.$allOptions.eq(i),d=[];if("OPTGROUP"===s[0].tagName)d.push(g.group),s.prop("disabled")&&d.push(g.disabled),l+='<span class="'+d.join(" ")+'">'+s.attr("label")+"</span>";else{var a=s.val(),n=s.data("label"),r=t.links?"a":'button type="button"';s.attr("value")||s.attr("value",a),d.push(g.item),s.hasClass(g.item_placeholder)&&(d.push(g.item_placeholder),r="span"),s.prop("selected")&&d.push(g.item_selected),s.prop("disabled")&&d.push(g.item_disabled),l+="<"+r+' class="'+d.join(" ")+'"',t.links?"span"===r?l+=' aria-hidden="true"':(l+=' href="'+a+'"',t.external&&(l+=' target="_blank"')):l+=' data-value="'+a+'"',l+=' role="option"',s.prop("selected")&&(l+=' "aria-selected"="true"'),l+=">",l+=n||I.decodeEntities(v(s.text(),t.trim)),l+="</"+r+">",0}}t.$items=t.$wrapper.html(e.parseHTML(l)).find(w.item)}function i(e){I.killEvent(e);var t=e.data;t.disabled||t.mobile||(t.closed?s(t):d(t)),o(t)}function o(t){e(w.base).not(t.$dropdown).trigger(C.close,[t])}function s(e){if(e.closed){var t=_.height(),l=e.$wrapper.outerHeight(!0);e.$dropdown[0].getBoundingClientRect().bottom+l>t-e.bottomEdge&&e.$dropdown.addClass(g.bottom),y.on(C.click+e.dotGuid,":not("+w.options+")",e,a),e.$dropdown.trigger(C.focusIn),e.$dropdown.addClass(g.open),b(e),e.closed=!1}}function d(e){e&&!e.closed&&(y.off(C.click+e.dotGuid),e.$dropdown.removeClass([g.open,g.bottom].join(" ")),e.closed=!0)}function a(t){I.killEvent(t);var l=t.data;l&&0===e(t.currentTarget).parents(w.base).length&&(d(l),l.$dropdown.trigger(C.focusOut))}function n(e){var t=e.data;t&&(d(t),t.$dropdown.trigger(C.focusOut))}function r(t){var l=e(this),i=t.data;if(I.killEvent(t),!i.disabled){var o=i.$items.index(l);i.focusIndex=o,i.$wrapper.is(":visible")&&(m(o,i,t.shiftKey,t.metaKey||t.ctrlKey),$(i)),i.multiple||d(i),i.$dropdown.trigger(C.focus)}}function p(t,l){e(this);var i=t.data;if(!l&&!i.multiple){var o=i.$options.index(i.$options.filter(":selected"));i.focusIndex=o,m(o,i),$(i,!0)}}function c(t){I.killEvent(t);e(t.currentTarget);var l=t.data;l.disabled||l.multiple||l.focused||(o(l),l.focused=!0,l.focusIndex=l.index,l.input="",l.$dropdown.addClass(g.focus).on(C.keyDown+l.dotGuid,l,f))}function u(t){I.killEvent(t);e(t.currentTarget);var l=t.data;l.focused&&l.closed&&(l.focused=!1,l.$dropdown.removeClass(g.focus).off(C.keyDown+l.dotGuid),l.multiple||(d(l),l.index!==l.focusIndex&&($(l),l.focusIndex=l.index)))}function f(l){var i=l.data;if(i.keyTimer=I.startTimer(i.keyTimer,1e3,function(){i.input=""}),13===l.keyCode)i.closed||(d(i),m(i.index,i)),$(i);else if(!(9===l.keyCode||l.metaKey||l.altKey||l.ctrlKey||l.shiftKey)){I.killEvent(l);var o=i.$items.length-1,s=i.index<0?0:i.index;if(e.inArray(l.keyCode,t.isFirefox?[38,40,37,39]:[38,40])>-1)(s+=38===l.keyCode||t.isFirefox&&37===l.keyCode?-1:1)<0&&(s=0),s>o&&(s=o);else{var a,n=String.fromCharCode(l.keyCode).toUpperCase();for(i.input+=n,a=i.index+1;a<=o;a++)if(i.$options.eq(a).text().substr(0,i.input.length).toUpperCase()===i.input){s=a;break}if(s<0||s===i.index)for(a=0;a<=o;a++)if(i.$options.eq(a).text().substr(0,i.input.length).toUpperCase()===i.input){s=a;break}}s>=0&&(m(s,i),b(i))}}function m(e,t,l,i){var o=t.$items.eq(e),s=t.$options.eq(e),d=o.hasClass(g.item_selected);if(!o.hasClass(g.item_disabled))if(t.multiple)if(t.mobile)d?(s.prop("selected",null).attr("aria-selected",null),o.removeClass(g.item_selected)):(s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected));else if(l&&!1!==t.lastIndex){var a=t.lastIndex>e?e:t.lastIndex,n=(t.lastIndex>e?t.lastIndex:e)+1;t.$options.prop("selected",null).attr("aria-selected",null),t.$items.filter(w.item_selected).removeClass(g.item_selected),t.$options.slice(a,n).not("[disabled]").prop("selected",!0),t.$items.slice(a,n).not(w.item_disabled).addClass(g.item_selected)}else i?(d?(s.prop("selected",null).attr("aria-selected",null),o.removeClass(g.item_selected)):(s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected)),t.lastIndex=e):(t.$options.prop("selected",null).attr("aria-selected",null),t.$items.filter(w.item_selected).removeClass(g.item_selected),s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected),t.lastIndex=e);else if(e>-1&&e<t.$items.length){if(e!==t.index){var r=s.data("label")||o.html();t.$selected.html(r).removeClass(w.item_placeholder),t.$items.filter(w.item_selected).removeClass(g.item_selected),t.$el[0].selectedIndex=e,o.addClass(g.item_selected),t.index=e}}else""!==t.label&&t.$selected.html(t.label)}function b(t){var l=t.$items.eq(t.index),i=t.index>=0&&!l.hasClass(g.item_placeholder)?l.position():{left:0,top:0},o=(t.$wrapper.outerHeight()-l.outerHeight())/2;void 0!==e.fn.fsScrollbar?t.$wrapper.fsScrollbar("resize").fsScrollbar("scroll",t.$wrapper.find(".fs-scrollbar-content").scrollTop()+i.top):t.$wrapper.scrollTop(t.$wrapper.scrollTop()+i.top-o)}function $(e,t){e.links?h(e):t||e.$el.trigger(C.raw.change,[!0])}function h(e){var t=e.$el.val();e.external?k.open(t):k.location.href=t}function v(e,t){return 0===t?e:e.length>t?e.substring(0,t)+"...":e}var x=t.Plugin("dropdown",{widget:!0,defaults:{bottomEdge:0,cover:!1,customClass:"",label:"",external:!1,links:!1,mobile:!1,theme:"fs-light",trim:0},methods:{_setup:function(){y=t.$body},_construct:function(t){t.multiple=this.prop("multiple"),t.disabled=this.prop("disabled")||this.is("[readonly]"),t.lastIndex=!1,t.multiple?t.links=!1:t.external&&(t.links=!0);var o=this.find("[selected]").not(":disabled"),s=this.find(":selected").not(":disabled"),d=s.text(),a=this.find("option").index(s);t.multiple||""===t.label||o.length?t.label="":(s=this.prepend('<option value="" class="'+g.item_placeholder+'" selected>'+t.label+"</option>"),d=t.label,a=0);var f=this.find("option, optgroup"),b=f.filter("option"),$=e("[for="+this.attr("id")+"]");t.tabIndex=this[0].tabIndex,this[0].tabIndex=-1,$.length&&($[0].tabIndex=-1);var h=[g.base,t.theme,t.customClass];t.mobile?h.push(g.mobile):t.cover&&h.push(g.cover),t.multiple&&h.push(g.multiple),t.disabled&&h.push(g.disabled),t.id=this.attr("id"),t.id?t.ariaId=t.id:t.ariaId=t.rawGuid,t.ariaId+="-dropdown",t.selectedAriaId=t.ariaId+"-selected";var x="",I="";x+='<div class="'+h.join(" ")+'"id="'+t.ariaId+'" tabindex="'+t.tabIndex+'" role="listbox"',t.multiple?x+=' aria-label="multi select"':x+=' aria-haspopup="true" aria-live="polite" aria-labeledby="'+t.selectedAriaId+'"',x+="></div>",t.multiple||(I+='<button type="button" class="'+g.selected+'" id="'+t.selectedAriaId+'" tabindex="-1">',I+=e("<span></span>").text(v(d,t.trim)).html(),I+="</button>"),I+='<div class="'+g.options+'">',I+="</div>",this.wrap(x).after(I),t.$dropdown=this.parent(w.base),t.$label=$,t.$allOptions=f,t.$options=b,t.$selected=t.$dropdown.find(w.selected),t.$wrapper=t.$dropdown.find(w.options),t.$placeholder=t.$dropdown.find(w.placeholder),t.index=-1,t.closed=!0,t.focused=!1,l(t),t.multiple||m(a,t),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar({theme:t.theme}).find(".fs-scrollbar-content").attr("tabindex",null),t.$dropdown.on(C.click,t,i),t.$selected.on(C.click,t,i),t.$dropdown.on(C.click,w.item,t,r).on(C.close,t,n),this.on(C.change,t,p),t.mobile||(this.on(C.focusIn,t,function(e){e.data.$dropdown.trigger(C.raw.focus)}),t.$dropdown.on(C.focusIn,t,c).on(C.focusOut,t,u))},_destruct:function(t){t.$dropdown.hasClass(g.open)&&t.$selected.trigger(C.click),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar("destroy"),t.$el[0].tabIndex=t.tabIndex,t.$label.length&&(t.$label[0].tabIndex=t.tabIndex),t.$dropdown.off(C.namespace),t.$options.off(C.namespace),t.$placeholder.remove(),t.$selected.remove(),t.$wrapper.remove(),t.$el.off(C.namespace).show().unwrap()},disable:function(e,t){if(void 0!==t){var l=e.$items.index(e.$items.filter("[data-value="+t+"]"));e.$items.eq(l).addClass(g.item_disabled),e.$options.eq(l).prop("disabled",!0)}else e.$dropdown.hasClass(g.open)&&e.$selected.trigger(C.click),e.$dropdown.addClass(g.disabled),e.$el.prop("disabled",!0),e.disabled=!0},enable:function(e,t){if(void 0!==t){var l=e.$items.index(e.$items.filter("[data-value="+t+"]"));e.$items.eq(l).removeClass(g.item_disabled),e.$options.eq(l).prop("disabled",!1)}else e.$dropdown.removeClass(g.disabled),e.$el.prop("disabled",!1),e.disabled=!1},update:function(t){void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar("destroy");var i=t.index;t.$allOptions=t.$el.find("option, optgroup"),t.$options=t.$allOptions.filter("option"),t.index=-1,i=t.$options.index(t.$options.filter(":selected")),l(t),t.multiple||m(i,t),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar({theme:t.theme}).find(".fs-scrollbar-content").attr("tabindex",null)},open:s,close:d},classes:["cover","bottom","multiple","mobile","open","disabled","focus","selected","options","group","item","item_disabled","item_selected","item_placeholder"],events:{close:"close"}}),w=x.classes,g=w.raw,C=x.events,I=x.functions,k=t.window,_=t.$window,y=(t.document,null)});
+/*! formstone v1.3.3 [dropdown.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./scrollbar",
+      "./touch"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.multiple  = this.prop("multiple");
+    data.disabled  = this.prop("disabled") || this.is("[readonly]");
+    data.lastIndex = false;
+
+    if (data.multiple) {
+      data.links = false;
+    } else if (data.external) {
+      data.links = true;
+    }
+
+    // Grab true original index, only if selected attribute exits
+    var $trueOriginal   = this.find("[selected]").not(":disabled"),
+      $originalOption = this.find(":selected").not(":disabled"),
+      originalLabel = $originalOption.text(),
+      originalIndex = this.find("option").index($originalOption);
+
+    if (!data.multiple && data.label !== "" && !$trueOriginal.length) {
+      $originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
+      originalLabel = data.label;
+      originalIndex = 0;
+    } else {
+      data.label = "";
+    }
+
+    // Build options array
+    var $allOptions = this.find("option, optgroup"),
+      $options    = $allOptions.filter("option"),
+      $label      = $("[for=" + this.attr("id") + "]");
+
+    // Swap tab index, no more interacting with the actual input!
+    data.tabIndex = this[0].tabIndex;
+    this[0].tabIndex = -1;
+
+    if ($label.length) {
+      $label[0].tabIndex = -1;
+    }
+
+    // Build wrapper
+    var wrapperClasses = [
+      RawClasses.base,
+      data.theme,
+      data.customClass
+    ];
+
+    if (data.mobile /* || Formstone.isMobile */) {
+      wrapperClasses.push(RawClasses.mobile);
+    } else if (data.cover) {
+      wrapperClasses.push(RawClasses.cover);
+    }
+    if (data.multiple) {
+      wrapperClasses.push(RawClasses.multiple);
+    }
+    if (data.disabled) {
+      wrapperClasses.push(RawClasses.disabled);
+    }
+
+    // Aria
+
+    data.id = this.attr("id");
+
+    if (data.id) {
+      data.ariaId = data.id;
+    } else {
+      data.ariaId = data.rawGuid;
+    }
+
+    data.ariaId += '-dropdown';
+    data.selectedAriaId = data.ariaId + "-selected";
+
+    // Build html
+    var wrapperHtml = "",
+      innerHtml   = "";
+
+    wrapperHtml += '<div class="' + wrapperClasses.join(" ") + '"id="' + data.ariaId + '" tabindex="' + data.tabIndex + '" role="listbox"';
+    if (data.multiple) {
+      wrapperHtml += ' aria-label="multi select"';
+    } else {
+      wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
+    }
+    wrapperHtml += '></div>';
+
+    // Build inner
+    if (!data.multiple) {
+      innerHtml += '<button type="button" class="' + RawClasses.selected + '" id="' + data.selectedAriaId + '" tabindex="-1">';
+      innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
+      innerHtml += '</button>';
+    }
+    innerHtml += '<div class="' + RawClasses.options + '">';
+    innerHtml += '</div>';
+
+    // Modify DOM
+    this.wrap(wrapperHtml)
+      .after(innerHtml);
+
+    // Store plugin data
+    data.$dropdown        = this.parent(Classes.base);
+    data.$label           = $label;
+    data.$allOptions      = $allOptions;
+    data.$options         = $options;
+    data.$selected        = data.$dropdown.find(Classes.selected);
+    data.$wrapper         = data.$dropdown.find(Classes.options);
+    data.$placeholder     = data.$dropdown.find(Classes.placeholder);
+    data.index            = -1;
+    data.closed           = true;
+    data.focused          = false;
+
+    buildOptions(data);
+
+    if (!data.multiple) {
+      updateOption(originalIndex, data);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar({
+        theme: data.theme
+      }).find(".fs-scrollbar-content").attr("tabindex", null);
+    }
+
+    // Bind events
+    data.$dropdown.on(Events.click, data, onClick);
+    data.$selected.on(Events.click, data, onClick);
+
+    data.$dropdown.on(Events.click, Classes.item, data, onSelect)
+            .on(Events.close, data, onClose);
+
+    // Change events
+    this.on(Events.change, data, onChange);
+
+    // Focus/Blur events
+    if (!data.mobile /*!Formstone.isMobile*/) {
+
+      // Handle clicks to associated labels
+      this.on(Events.focusIn, data, function(e) {
+        e.data.$dropdown.trigger(Events.raw.focus);
+      });
+
+      data.$dropdown.on(Events.focusIn, data, onFocusIn)
+              .on(Events.focusOut, data, onFocusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    if (data.$dropdown.hasClass(RawClasses.open)) {
+      data.$selected.trigger(Events.click);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("destroy");
+    }
+
+    data.$el[0].tabIndex = data.tabIndex;
+
+    if (data.$label.length) {
+      data.$label[0].tabIndex = data.tabIndex;
+    }
+
+    data.$dropdown.off(Events.namespace);
+    data.$options.off(Events.namespace);
+
+    data.$placeholder.remove();
+    data.$selected.remove();
+    data.$wrapper.remove();
+
+    data.$el.off(Events.namespace)
+        .show()
+        .unwrap();
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance or option.
+   * @param option [string] <null> "Target option value"
+   * @example $(".target").dropdown("disable", "1");
+   */
+
+  function disableDropdown(data, option) {
+    if (typeof option !== "undefined") {
+      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+
+      data.$items.eq(index).addClass(RawClasses.item_disabled);
+      data.$options.eq(index).prop("disabled", true);
+    } else {
+      if (data.$dropdown.hasClass(RawClasses.open)) {
+        data.$selected.trigger(Events.click);
+      }
+
+      data.$dropdown.addClass(RawClasses.disabled);
+      data.$el.prop("disabled", true);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance or option.
+   * @param option [string] <null> "Target option value"
+   * @example $(".target").dropdown("enable", "1");
+   */
+
+  function enableDropdown(data, option) {
+    if (typeof option !== "undefined") {
+      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+      data.$items.eq(index).removeClass(RawClasses.item_disabled);
+      data.$options.eq(index).prop("disabled", false);
+    } else {
+      data.$dropdown.removeClass(RawClasses.disabled);
+      data.$el.prop("disabled", false);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+  * @method
+  * @name update
+  * @description Updates instance.
+  * @example $(".target").dropdown("update");
+  */
+
+  function updateDropdown(data) {
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("destroy");
+    }
+
+    var index = data.index;
+
+    data.$allOptions = data.$el.find("option, optgroup");
+    data.$options = data.$allOptions.filter("option");
+    data.index = -1;
+
+    index = data.$options.index(data.$options.filter(":selected"));
+
+    buildOptions(data);
+
+    if (!data.multiple) {
+      updateOption(index, data);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar({
+        theme: data.theme
+      }).find(".fs-scrollbar-content").attr("tabindex", null);
+    }
+  }
+
+  /**
+   * @method private
+   * @name buildOptions
+   * @description Builds instance's option set.
+   * @param data [object] "Instance data"
+   */
+
+  function buildOptions(data) {
+    var html = '',
+      j    = 0;
+
+    for (var i = 0, count = data.$allOptions.length; i < count; i++) {
+      var $option = data.$allOptions.eq(i),
+        classes = [];
+
+      // Option group
+      if ($option[0].tagName === "OPTGROUP") {
+        classes.push(RawClasses.group);
+
+        // Disabled groups
+        if ($option.prop("disabled")) {
+          classes.push(RawClasses.disabled);
+        }
+
+        html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
+      } else {
+        var opVal   = $option.val(),
+          opLabel = $option.data("label"),
+          opType  = (data.links) ? "a" : 'button type="button"';
+
+        if (!$option.attr("value")) {
+          $option.attr("value", opVal);
+        }
+
+        classes.push(RawClasses.item);
+
+        if ($option.hasClass(RawClasses.item_placeholder)) {
+          classes.push(RawClasses.item_placeholder);
+
+          opType = "span";
+        }
+        if ($option.prop("selected")) {
+          classes.push(RawClasses.item_selected);
+        }
+        if ($option.prop("disabled")) {
+          classes.push(RawClasses.item_disabled);
+        }
+
+        html += '<' + opType + ' class="' + classes.join(" ") + '"';
+
+        if (data.links) {
+          if (opType === "span") {
+            html += ' aria-hidden="true"';
+          } else {
+            html += ' href="' + opVal + '"';
+
+            if (data.external) {
+              html += ' target="_blank"';
+            }
+          }
+        } else {
+          html += ' data-value="' + opVal + '"';
+        }
+
+        //html += ' tabindex="-1">';
+        html += ' role="option"';
+        if ($option.prop("selected")) {
+          html += ' "aria-selected"="true"';
+        }
+        html += '>';
+
+        if (opLabel) {
+          html += opLabel;
+        } else {
+          html += Functions.decodeEntities( trimText($option.text(), data.trim) );
+        }
+
+        html += '</' + opType + '>';
+
+        j++;
+      }
+    }
+
+    data.$items = data.$wrapper.html( $.parseHTML(html) )
+                   .find(Classes.item);
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click to selected item.
+   * @param e [object] "Event data"
+   */
+
+  function onClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (!data.disabled) {
+      // // Handle mobile, but not Firefox, unless desktop forced
+      // if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
+      //   var el = data.$el[0];
+      //
+      //   if (Document.createEvent) { // All
+      //     var evt = Document.createEvent("MouseEvents");
+      //     evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      //     el.dispatchEvent(evt);
+      //   } else if (el.fireEvent) { // IE
+      //     el.fireEvent("onmousedown");
+      //   }
+      // } else {
+
+      if (!data.mobile) {
+        // Delegate intent
+        if (data.closed) {
+          openOptions(data);
+        } else {
+          closeOptions(data);
+        }
+      }
+    }
+
+    closeOthers(data);
+  }
+
+  function closeOthers(data) {
+    $(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
+  }
+
+  /**
+   * @method private
+   * @name openOptions
+   * @description Opens option set.
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name open
+   * @description Opens target instance.
+   * @example $(".target").dropdown("open");
+   */
+
+  function openOptions(data) {
+    // Make sure it's not already open
+    if (data.closed) {
+      var windowHeight   = $Window.height(),
+        optionsHeight  = data.$wrapper.outerHeight(true),
+        boundingRect   = data.$dropdown[0].getBoundingClientRect();
+
+      // Calculate bottom of document
+      if (boundingRect.bottom + optionsHeight > windowHeight - data.bottomEdge) {
+        data.$dropdown.addClass(RawClasses.bottom);
+      }
+
+      // Bind Events
+      $Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+
+      data.$dropdown.trigger(Events.focusIn);
+
+      data.$dropdown.addClass(RawClasses.open);
+      scrollOptions(data);
+
+      data.closed = false;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeOptions
+   * @description Closes option set.
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name close
+   * @description Closes target instance.
+   * @example $(".target").dropdown("close");
+   */
+
+  function closeOptions(data) {
+    // Make sure it's actually open
+    if (data && !data.closed) {
+      $Body.off(Events.click + data.dotGuid);
+
+      data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
+
+      data.closed = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeOptionsHelper
+   * @description Determines if event target is outside instance before closing
+   * @param e [object] "Event data"
+   */
+
+  function closeOptionsHelper(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
+      closeOptions(data);
+
+      data.$dropdown.trigger(Events.focusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClose
+   * @description Handles close event.
+   * @param e [object] "Event data"
+   */
+
+  function onClose(e) {
+    var data = e.data;
+
+    if (data) {
+      closeOptions(data);
+
+      data.$dropdown.trigger(Events.focusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onSelect
+   * @description Handles option select.
+   * @param e [object] "Event data"
+   */
+
+  function onSelect(e) {
+    var $target = $(this),
+      data = e.data;
+
+    Functions.killEvent(e);
+
+    if (!data.disabled) {
+      var index = data.$items.index($target);
+
+      data.focusIndex = index;
+
+      if (data.$wrapper.is(":visible")) {
+        updateOption(index, data, e.shiftKey, e.metaKey || e.ctrlKey);
+        handleChange(data);
+      }
+
+      if (!data.multiple) {
+        closeOptions(data);
+      }
+
+      data.$dropdown.trigger(Events.focus);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onChange
+   * @description Handles external changes.
+   * @param e [object] "Event data"
+   */
+
+  function onChange(e, internal) {
+    var $target = $(this),
+      data    = e.data;
+
+    if (!internal && !data.multiple) {
+      var index = data.$options.index( data.$options.filter(":selected") );
+
+      data.focusIndex = index;
+
+      updateOption(index, data);
+      handleChange(data, true);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocusIn
+   * @description Handles instance focusIn.
+   * @param e [object] "Event data"
+   */
+
+  function onFocusIn(e) {
+    Functions.killEvent(e);
+
+    var $target = $(e.currentTarget),
+      data    = e.data;
+
+    if (!data.disabled && !data.multiple && !data.focused) {
+      closeOthers(data);
+
+      data.focused = true;
+      data.focusIndex = data.index;
+      data.input = '';
+
+      data.$dropdown.addClass(RawClasses.focus)
+              .on(Events.keyDown + data.dotGuid, data, onKeypress);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocusOut
+   * @description Handles instance focusOut.
+   * @param e [object] "Event data"
+   */
+
+  function onFocusOut(e) {
+    Functions.killEvent(e);
+
+    var $target = $(e.currentTarget),
+      data    = e.data;
+
+    if (data.focused && data.closed) {
+      data.focused = false;
+
+      data.$dropdown.removeClass(RawClasses.focus)
+              .off(Events.keyDown + data.dotGuid);
+
+      if (!data.multiple) {
+        // Clean up
+        closeOptions(data);
+
+        if (data.index !== data.focusIndex) {
+          handleChange(data);
+
+          data.focusIndex = data.index;
+        }
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onKeypress
+   * @description Handles instance keypress, once focused.
+   * @param e [object] "Event data"
+   */
+
+  function onKeypress(e) {
+    var data = e.data;
+
+    data.keyTimer = Functions.startTimer(data.keyTimer, 1000, function() {
+      data.input = '';
+    });
+
+    if (e.keyCode === 13) {
+      if (!data.closed) {
+        closeOptions(data);
+        updateOption(data.index, data);
+      }
+      handleChange(data);
+    } else if (e.keyCode !== 9 && (!e.metaKey && !e.altKey && !e.ctrlKey && !e.shiftKey)) {
+      // Ignore modifiers & tabs
+      Functions.killEvent(e);
+
+      var total = data.$items.length - 1,
+        index = (data.index < 0) ? 0 : data.index;
+
+      // Firefox left/right support thanks to Kylemade
+      if ($.inArray(e.keyCode, (Formstone.isFirefox) ? [38, 40, 37, 39] : [38, 40]) > -1) {
+        // Increment / decrement using the arrow keys
+        index = index + ((e.keyCode === 38 || (Formstone.isFirefox && e.keyCode === 37)) ? -1 : 1);
+
+        if (index < 0) {
+          index = 0;
+        }
+        if (index > total) {
+          index = total;
+        }
+      } else {
+        var input = String.fromCharCode(e.keyCode).toUpperCase(),
+          check,
+          i;
+
+        // Store more than 1 input letter
+        data.input += input;
+
+        // Search for input from original index
+        for (i = data.index + 1; i <= total; i++) {
+          check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+          if (check === data.input) {
+            index = i;
+            break;
+          }
+        }
+
+        // If not, start from the beginning
+        if (index < 0 || index === data.index) {
+          for (i = 0; i <= total; i++) {
+            check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+            if (check === data.input) {
+              index = i;
+              break;
+            }
+          }
+        }
+      }
+
+      // Update
+      if (index >= 0) {
+        updateOption(index, data);
+        scrollOptions(data);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name updateOption
+   * @description Updates instance based on new target index.
+   * @param index [int] "Selected option index"
+   * @param data [object] "instance data"
+   */
+
+  function updateOption(index, data, shiftKey, metaKey) {
+    var $item      = data.$items.eq(index),
+      $option    = data.$options.eq(index),
+      isSelected = $item.hasClass(RawClasses.item_selected),
+      isDisabled = $item.hasClass(RawClasses.item_disabled);
+
+    // Check for disabled options
+    if (!isDisabled) {
+      if (data.multiple) {
+        if (data.mobile /* Formstone.isMobile*/) {
+          if (isSelected) {
+            $option.prop("selected", null)
+                 .attr("aria-selected", null);
+            $item.removeClass(RawClasses.item_selected);
+          } else {
+            $option.prop("selected", true)
+                 .attr("aria-selected", true);
+            $item.addClass(RawClasses.item_selected);
+          }
+        } else {
+          if (shiftKey && data.lastIndex !== false) {
+            var start = (data.lastIndex > index)  ? index : data.lastIndex,
+              end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
+
+            data.$options.prop("selected", null)
+                   .attr("aria-selected", null);
+            data.$items.filter(Classes.item_selected)
+              .removeClass(RawClasses.item_selected);
+
+            data.$options.slice(start, end).not("[disabled]").prop("selected", true);
+            data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
+          } else if (metaKey) {
+            if (isSelected) {
+              $option.prop("selected", null)
+                   .attr("aria-selected", null);
+              $item.removeClass(RawClasses.item_selected);
+            } else {
+              $option.prop("selected", true)
+                   .attr("aria-selected", true);
+              $item.addClass(RawClasses.item_selected);
+            }
+
+            data.lastIndex = index;
+          } else {
+            data.$options.prop("selected", null)
+                   .attr("aria-selected", null);
+            data.$items.filter(Classes.item_selected)
+              .removeClass(RawClasses.item_selected);
+
+            $option.prop("selected", true)
+                 .attr("aria-selected", true);
+            $item.addClass(RawClasses.item_selected);
+
+            data.lastIndex = index;
+          }
+        }
+      } else if (index > -1 && index < data.$items.length) {
+        if (index !== data.index) {
+          var label = $option.data("label") || $item.html();
+
+          data.$selected.html(label)
+                  .removeClass(Classes.item_placeholder);
+
+          data.$items.filter(Classes.item_selected)
+                 .removeClass(RawClasses.item_selected);
+
+          data.$el[0].selectedIndex = index;
+
+          $item.addClass(RawClasses.item_selected);
+          data.index = index;
+        }
+      } else if (data.label !== "") {
+        data.$selected.html(data.label);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name scrollOptions
+   * @description Scrolls options wrapper to specific option.
+   * @param data [object] "Instance data"
+   */
+
+  function scrollOptions(data) {
+    var $selected      = data.$items.eq(data.index),
+      selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
+      buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
+
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("resize")
+             .fsScrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
+    } else {
+      data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
+    }
+  }
+
+  /**
+   * @method private
+   * @name handleChange
+   * @description Handles change events.
+   * @param data [object] "Instance data"
+   */
+
+  function handleChange(data, external) {
+    if (data.links) {
+      launchLink(data);
+    } else {
+      if (!external) {
+        data.$el.trigger(Events.raw.change, [ true ]);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name launchLink
+   * @description Launches link.
+   * @param data [object] "Instance data"
+   */
+
+  function launchLink(data) {
+    var url = data.$el.val();
+
+    if (data.external) {
+      // Open link in a new tab/window
+      Window.open(url);
+    } else {
+      // Open link in same tab/window
+      Window.location.href = url;
+    }
+  }
+
+  /**
+   * @method private
+   * @name trimText
+   * @description Trims text, if specified length is greater then 0.
+   * @param length [int] "Length to trim at"
+   * @param text [string] "Text to trim"
+   * @return [string] "Trimmed string"
+   */
+
+  function trimText(text, length) {
+    if (length === 0) {
+      return text;
+    } else {
+      if (text.length > length) {
+        return text.substring(0, length) + "...";
+      } else {
+        return text;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name escapeText
+   * @description Escapes text.
+   * @param text [string] "Text to escape"
+   */
+
+  function escapeText(text) {
+    return (typeof text === "string") ? text.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') : text;
+  }
+
+  /**
+   * @plugin
+   * @name Dropdown
+   * @description A jQuery plugin for custom select elements.
+   * @type widget
+   * @main dropdown.js
+   * @main dropdown.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency scrollbar.js (optional)
+   * @dependency touch.js (optional, for scrollbar)
+   */
+
+  var Plugin = Formstone.Plugin("dropdown", {
+      widget: true,
+
+      /**
+       * @options
+       * @param bottomEdge [int] <0> "Threshold for bottom position”
+       * @param cover [boolean] <false> "Cover handle with option set"
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param label [string] <''> "Label displayed before selection"
+       * @param external [boolean] <false> "Open options as links in new window"
+       * @param links [boolean] <false> "Open options as links in same window"
+       * @param mobile [boolean] <false> "Use native browser UI on mobile"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param trim [int] <0> "Trim options to specified length; 0 to disable”
+       */
+      defaults: {
+        bottomEdge     : 0,
+        cover          : false,
+        customClass    : "",
+        label          : "",
+        external       : false,
+        links          : false,
+        mobile         : false,
+        theme          : "fs-light",
+        trim           : 0
+      },
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        disable       : disableDropdown,
+        enable        : enableDropdown,
+        update        : updateDropdown,
+        open          : openOptions,
+        close         : closeOptions
+      },
+
+      classes: [
+        "cover",
+        "bottom",
+        "multiple",
+        "mobile",
+
+        "open",
+        "disabled",
+        "focus",
+
+        "selected",
+        "options",
+        "group",
+        "item",
+
+        "item_disabled",
+        "item_selected",
+        "item_placeholder"
+      ],
+
+      events: {
+        close: "close"
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    // Local
+
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+    Document      = Formstone.document,
+    $Body         = null;
+
+})
+
+);

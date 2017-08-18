@@ -168,8 +168,8 @@
       }
 
       var isVideo = !data.isYouTube && ($.type(source) === "object" &&
-                        (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm") )
-                       );
+                      (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm") )
+                    );
 
       data.video      = data.isYouTube || isVideo;
       data.playing    = false;
@@ -188,9 +188,9 @@
 
         // Responsive image handling
         if ($.type(source) === "object") {
-          var cache    = [],
-            keys     = [],
-            i;
+          var cache = [],
+              keys  = [],
+              i;
 
           for (i in source) {
             if (source.hasOwnProperty(i)) {
@@ -268,9 +268,9 @@
 
   function loadImage(data, source, poster, firstLoad) {
     var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-      $media = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
-      $img = $media.find("img"),
-      newSource = source;
+        $media       = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
+        $img         = $media.find("img"),
+        newSource    = source;
 
     // Load image
     $img.one(Events.load, function() {
@@ -329,7 +329,7 @@
 
     if (!Formstone.isMobile) {
       var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-        html = '<div class="' + videoClasses + '" aria-hidden="true">';
+          html = '<div class="' + videoClasses + '" aria-hidden="true">';
 
       html += '<video';
       if (data.loop) {
@@ -352,7 +352,7 @@
       html += '</div>';
 
       var $media = $(html),
-        $video = $media.find("video");
+          $video = $media.find("video");
 
       $video.one(Events.loadedMetaData, function(e) {
         $media.fsTransition({
@@ -413,25 +413,25 @@
         });
       } else {
         var guid = data.guid + "_" + (data.youTubeGuid++),
-          youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-          html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
+            youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+            html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
 
         html += '<div id="' + guid + '"></div>';
         html += '</div>';
 
-        var $media    = $(html),
-          ytOptions = $.extend(true, {}, {
-            controls: 0,
-            rel: 0,
-            showinfo: 0,
-            wmode: "transparent",
-            enablejsapi: 1,
-            version: 3,
-            playerapiid: guid,
-            loop: (data.loop) ? 1 : 0,
-            autoplay: 1,
-            origin: Window.location.protocol + "//" + Window.location.host
-          }, data.youtubeOptions);
+        var $media = $(html),
+            ytOptions = $.extend(true, {}, {
+              controls: 0,
+              rel: 0,
+              showinfo: 0,
+              wmode: "transparent",
+              enablejsapi: 1,
+              version: 3,
+              playerapiid: guid,
+              loop: (data.loop) ? 1 : 0,
+              autoplay: 1,
+              origin: Window.location.protocol + "//" + Window.location.host
+            }, data.youtubeOptions);
 
         // For youtube auto so events fire, disabled by plugin
         ytOptions.autoplay = 1;
@@ -444,9 +444,9 @@
         }
 
         data.player = new Window.YT.Player(guid, {
-          videoId: data.videoId,
-          playerVars: ytOptions,
-          events: {
+          videoId    : data.videoId,
+          playerVars : ytOptions,
+          events : {
             onReady: function (e) {
               /* console.log("onReady", e); */
 
@@ -747,43 +747,43 @@
     var $all = data.$container.find(Classes.media);
 
     for (var i = 0, count = $all.length; i < count; i++) {
-      var $m = $all.eq(i),
-        type = (data.isYouTube) ? "iframe" : ($m.find("video").length ? "video" : "img"),
-        $media = $m.find(type);
+      var $m     = $all.eq(i),
+          type   = (data.isYouTube) ? "iframe" : ($m.find("video").length ? "video" : "img"),
+          $media = $m.find(type);
 
       // If media found and scaling is not natively support
       if ($media.length && !(type === "img" && BGSupport)) {
-        var frameWidth     = data.$el.outerWidth(),
-          frameHeight    = data.$el.outerHeight(),
-          frameRatio     = frameWidth / frameHeight,
-          nSize          = naturalSize(data, $media);
+        var frameWidth  = data.$el.outerWidth(),
+            frameHeight = data.$el.outerHeight(),
+            frameRatio  = frameWidth / frameHeight,
+            nSize       = naturalSize(data, $media);
 
-        data.width     = nSize.width;
-        data.height    = nSize.height;
-        data.left      = 0;
-        data.top       = 0;
+        data.width  = nSize.width;
+        data.height = nSize.height;
+        data.left   = 0;
+        data.top    = 0;
 
         var mediaRatio = (data.isYouTube) ? data.embedRatio : (data.width / data.height);
 
         // First check the height
         data.height = frameHeight;
-        data.width = data.height * mediaRatio;
+        data.width  = data.height * mediaRatio;
 
         // Next check the width
         if (data.width < frameWidth) {
-          data.width     = frameWidth;
-          data.height    = data.width / mediaRatio;
+          data.width  = frameWidth;
+          data.height = data.width / mediaRatio;
         }
 
         // Position the media
-        data.left    = -(data.width - frameWidth) / 2;
-        data.top     = -(data.height - frameHeight) / 2;
+        data.left = -(data.width - frameWidth) / 2;
+        data.top  = -(data.height - frameHeight) / 2;
 
         $m.css({
-          height    : data.height,
-          width     : data.width,
-          left      : data.left,
-          top       : data.top
+          height : data.height,
+          width  : data.width,
+          left   : data.left,
+          top    : data.top
         });
       }
     }
@@ -834,21 +834,21 @@
 
       if ($.type(node.naturalHeight) !== "undefined") {
         return {
-          height: node.naturalHeight,
-          width:  node.naturalWidth
+          height : node.naturalHeight,
+          width  :  node.naturalWidth
         };
       } else {
         var img = new Image();
         img.src = node.src;
         return {
-          height: img.height,
-          width:  img.width
+          height : img.height,
+          width  :  img.width
         };
       }
     } else {
       return {
-        height: $media[0].videoHeight,
-        width:  $media[0].videoWidth
+        height : $media[0].videoHeight,
+        width  :  $media[0].videoWidth
       };
     }
     return false;
@@ -867,87 +867,87 @@
    */
 
   var Plugin = Formstone.Plugin("background", {
-      widget: true,
+        widget: true,
 
-      /**
-       * @options
-       * @param autoPlay [boolean] <true> "Autoplay video"
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param embedRatio [number] <1.777777> "Video / embed ratio (16/9)"
-       * @param lazy [boolean] <false> "Lazy load with scroll"
-       * @param lazyEdge [int] <100> "Lazy load edge"
-       * @param loop [boolean] <true> "Loop video"
-       * @param mute [boolean] <true> "Mute video"
-       * @param source [string OR object] <null> "Source image (string or object) or video (object)"
-       */
-      defaults: {
-        autoPlay       : true,
-        customClass    : "",
-        embedRatio     : 1.777777,
-        lazy           : false,
-        lazyEdge       : 100,
-        loop           : true,
-        mute           : true,
-        source         : null,
-        youtubeOptions : {}
-      },
+        /**
+         * @options
+         * @param autoPlay [boolean] <true> "Autoplay video"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param embedRatio [number] <1.777777> "Video / embed ratio (16/9)"
+         * @param lazy [boolean] <false> "Lazy load with scroll"
+         * @param lazyEdge [int] <100> "Lazy load edge"
+         * @param loop [boolean] <true> "Loop video"
+         * @param mute [boolean] <true> "Mute video"
+         * @param source [string OR object] <null> "Source image (string or object) or video (object)"
+         */
+        defaults: {
+          autoPlay       : true,
+          customClass    : "",
+          embedRatio     : 1.777777,
+          lazy           : false,
+          lazyEdge       : 100,
+          loop           : true,
+          mute           : true,
+          source         : null,
+          youtubeOptions : {}
+        },
 
-      classes: [
-        "container",
-        "media",
-        "animated",
-        "responsive",
-        "native",
-        "fixed",
-        "ready",
-        "lazy"
-      ],
+        classes: [
+          "container",
+          "media",
+          "animated",
+          "responsive",
+          "native",
+          "fixed",
+          "ready",
+          "lazy"
+        ],
 
-      /**
-       * @events
-       * @event loaded.background "Background media loaded"
-       * @event ready.background "Background media ready"
-       * @event error.background "Background media error"
-       */
+        /**
+         * @events
+         * @event loaded.background "Background media loaded"
+         * @event ready.background "Background media ready"
+         * @event error.background "Background media error"
+         */
 
-      events: {
-        loaded    : "loaded",
-        ready     : "ready",
-        loadedMetaData : "loadedmetadata"
-      },
+        events: {
+          loaded : "loaded",
+          ready  : "ready",
+          loadedMetaData : "loadedmetadata"
+        },
 
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
+        methods: {
+          _setup     : setup,
+          _construct : construct,
+          _destruct  : destruct,
+          _resize    : resize,
 
-        play          : playVideo,
-        pause         : pauseVideo,
-        mute          : muteVideo,
-        unmute        : unmuteVideo,
-        resize        : doResizeInstance,
-        load          : loadMedia,
-        unload        : unloadMedia
-      }
-    }),
+          play       : playVideo,
+          pause      : pauseVideo,
+          mute       : muteVideo,
+          unmute     : unmuteVideo,
+          resize     : doResizeInstance,
+          load       : loadMedia,
+          unload     : unloadMedia
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Classes         = Plugin.classes,
-    RawClasses      = Classes.raw,
-    Events          = Plugin.events,
-    Functions       = Plugin.functions,
+      Classes         = Plugin.classes,
+      RawClasses      = Classes.raw,
+      Events          = Plugin.events,
+      Functions       = Plugin.functions,
 
-    Window          = Formstone.window,
-    $Window         = Formstone.$window,
-    ScrollTop       = 0,
-    $Instances      = [],
-    $LazyInstances  = [],
+      Window          = Formstone.window,
+      $Window         = Formstone.$window,
+      ScrollTop       = 0,
+      $Instances      = [],
+      $LazyInstances  = [],
 
-    BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
-    YouTubeReady    = false,
-    YouTubeQueue    = [];
+      BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
+      YouTubeReady    = false,
+      YouTubeQueue    = [];
 
   /**
    * @method private global

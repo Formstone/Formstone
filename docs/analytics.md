@@ -45,8 +45,8 @@ Fire custom events by passing the event field values directly to Analytics:
 
 ```javascript
 $.analytics("event", {
-  eventCategory: "Category", 
-  eventAction: "Action" 
+  eventCategory: "Category",
+  eventAction: "Action"
   eventLabel: "Label",
   eventValue: 100
 });
@@ -77,7 +77,8 @@ $.analytics("pageview");
 
 Analytics will push to all available trackers, even when loaded using Google Tag Manager.
 
-Note: The [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) extension helps to ensure events are being properly pushed. 
+Note: The [Google Analytics Debugger](https://chrome.google.com/webstore/detail/google-analytics-debugger/jnkmfdileelhofjcijamephohjechhna) extension helps to ensure events are being properly pushed.
+
 
 
 ## <a name="options"></a> Options

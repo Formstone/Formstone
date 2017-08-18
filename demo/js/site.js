@@ -826,272 +826,14696 @@ Prism.languages.js = Prism.languages.javascript;
 
 })();
 
-/*! formstone v1.3.3 [core.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery"],e):e(jQuery)}(function(e){"use strict";function t(e){h.Plugins[e].initialized||(h.Plugins[e].methods._setup.call(document),h.Plugins[e].initialized=!0)}function n(e,t,n,s){var i,r={raw:{}};s=s||{};for(i in s)s.hasOwnProperty(i)&&("classes"===e?(r.raw[s[i]]=t+"-"+s[i],r[s[i]]="."+t+"-"+s[i]):(r.raw[i]=s[i],r[i]=s[i]+"."+t));for(i in n)n.hasOwnProperty(i)&&("classes"===e?(r.raw[i]=n[i].replace(/{ns}/g,t),r[i]=n[i].replace(/{ns}/g,"."+t)):(r.raw[i]=n[i].replace(/.{ns}/g,""),r[i]=n[i].replace(/{ns}/g,t)));return r}function s(){h.windowWidth=h.$window.width(),h.windowHeight=h.$window.height(),y=p.startTimer(y,v,i)}function i(){for(var e in h.ResizeHandlers)h.ResizeHandlers.hasOwnProperty(e)&&h.ResizeHandlers[e].callback.call(window,h.windowWidth,h.windowHeight)}function r(){if(h.support.raf){h.window.requestAnimationFrame(r);for(var e in h.RAFHandlers)h.RAFHandlers.hasOwnProperty(e)&&h.RAFHandlers[e].callback.call(window)}}function o(e,t){return parseInt(e.priority)-parseInt(t.priority)}var a,l,c,u="undefined"!=typeof window?window:this,d=u.document,f=function(){this.Version="@version",this.Plugins={},this.DontConflict=!1,this.Conflicts={fn:{}},this.ResizeHandlers=[],this.RAFHandlers=[],this.window=u,this.$window=e(u),this.document=d,this.$document=e(d),this.$body=null,this.windowWidth=0,this.windowHeight=0,this.fallbackWidth=1024,this.fallbackHeight=768,this.userAgent=window.navigator.userAgent||window.navigator.vendor||window.opera,this.isFirefox=/Firefox/i.test(this.userAgent),this.isChrome=/Chrome/i.test(this.userAgent),this.isSafari=/Safari/i.test(this.userAgent)&&!this.isChrome,this.isMobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(this.userAgent),this.isIEMobile=/IEMobile/i.test(this.userAgent),this.isFirefoxMobile=this.isFirefox&&this.isMobile,this.transform=null,this.transition=null,this.support={file:!!(window.File&&window.FileList&&window.FileReader),history:!!(window.history&&window.history.pushState&&window.history.replaceState),matchMedia:!(!window.matchMedia&&!window.msMatchMedia),pointer:!!window.PointerEvent,raf:!(!window.requestAnimationFrame||!window.cancelAnimationFrame),touch:!!("ontouchstart"in window||window.DocumentTouch&&document instanceof window.DocumentTouch),transition:!1,transform:!1}},p={killEvent:function(e,t){try{e.preventDefault(),e.stopPropagation(),t&&e.stopImmediatePropagation()}catch(e){}},killGesture:function(e){try{e.preventDefault()}catch(e){}},lockViewport:function(t){b[t]=!0,e.isEmptyObject(b)||k||(a.length?a.attr("content",c):a=e("head").append('<meta name="viewport" content="'+c+'">'),h.$body.on(g.gestureChange,p.killGesture).on(g.gestureStart,p.killGesture).on(g.gestureEnd,p.killGesture),k=!0)},unlockViewport:function(t){"undefined"!==e.type(b[t])&&delete b[t],e.isEmptyObject(b)&&k&&(a.length&&(l?a.attr("content",l):a.remove()),h.$body.off(g.gestureChange).off(g.gestureStart).off(g.gestureEnd),k=!1)},startTimer:function(e,t,n,s){return p.clearTimer(e),s?setInterval(n,t):setTimeout(n,t)},clearTimer:function(e,t){e&&(t?clearInterval(e):clearTimeout(e),e=null)},sortAsc:function(e,t){return parseInt(e,10)-parseInt(t,10)},sortDesc:function(e,t){return parseInt(t,10)-parseInt(e,10)},decodeEntities:function(e){var t=h.document.createElement("textarea");return t.innerHTML=e,t.value},parseQueryString:function(e){for(var t={},n=e.slice(e.indexOf("?")+1).split("&"),s=0;s<n.length;s++){var i=n[s].split("=");t[i[0]]=i[1]}return t}},h=new f,w=e.Deferred(),m={base:"{ns}",element:"{ns}-element"},g={namespace:".{ns}",beforeUnload:"beforeunload.{ns}",blur:"blur.{ns}",change:"change.{ns}",click:"click.{ns}",dblClick:"dblclick.{ns}",drag:"drag.{ns}",dragEnd:"dragend.{ns}",dragEnter:"dragenter.{ns}",dragLeave:"dragleave.{ns}",dragOver:"dragover.{ns}",dragStart:"dragstart.{ns}",drop:"drop.{ns}",error:"error.{ns}",focus:"focus.{ns}",focusIn:"focusin.{ns}",focusOut:"focusout.{ns}",gestureChange:"gesturechange.{ns}",gestureStart:"gesturestart.{ns}",gestureEnd:"gestureend.{ns}",input:"input.{ns}",keyDown:"keydown.{ns}",keyPress:"keypress.{ns}",keyUp:"keyup.{ns}",load:"load.{ns}",mouseDown:"mousedown.{ns}",mouseEnter:"mouseenter.{ns}",mouseLeave:"mouseleave.{ns}",mouseMove:"mousemove.{ns}",mouseOut:"mouseout.{ns}",mouseOver:"mouseover.{ns}",mouseUp:"mouseup.{ns}",panStart:"panstart.{ns}",pan:"pan.{ns}",panEnd:"panend.{ns}",resize:"resize.{ns}",scaleStart:"scalestart.{ns}",scaleEnd:"scaleend.{ns}",scale:"scale.{ns}",scroll:"scroll.{ns}",select:"select.{ns}",swipe:"swipe.{ns}",touchCancel:"touchcancel.{ns}",touchEnd:"touchend.{ns}",touchLeave:"touchleave.{ns}",touchMove:"touchmove.{ns}",touchStart:"touchstart.{ns}"},y=null,v=20,b=[],k=!1;return f.prototype.NoConflict=function(){h.DontConflict=!0;for(var t in h.Plugins)h.Plugins.hasOwnProperty(t)&&(e[t]=h.Conflicts[t],e.fn[t]=h.Conflicts.fn[t])},f.prototype.Plugin=function(s,i){return h.Plugins[s]=function(t,s){function i(n){var i,o,a,c="object"===e.type(n),u=this,d=e();for(n=e.extend(!0,{},s.defaults||{},c?n:{}),o=0,a=u.length;o<a;o++)if(i=u.eq(o),!r(i)){var f="__"+s.guid++,p=s.classes.raw.base+f,h=i.data(t+"-options"),w=e.extend(!0,{$el:i,guid:f,rawGuid:p,dotGuid:"."+p},n,"object"===e.type(h)?h:{});i.addClass(s.classes.raw.element).data(l,w),s.methods._construct.apply(i,[w].concat(Array.prototype.slice.call(arguments,c?1:0))),d=d.add(i)}for(o=0,a=d.length;o<a;o++)i=d.eq(o),s.methods._postConstruct.apply(i,[r(i)]);return u}function r(e){return e.data(l)}var a="fs-"+t,l="fs"+t.replace(/(^|\s)([a-z])/g,function(e,t,n){return t+n.toUpperCase()});return s.initialized=!1,s.priority=s.priority||10,s.classes=n("classes",a,m,s.classes),s.events=n("events",t,g,s.events),s.functions=e.extend({getData:r,iterate:function(t){for(var n=this,s=0,i=n.length;s<i;s++){var o=n.eq(s),a=r(o)||{};"undefined"!==e.type(a.$el)&&t.apply(o,[a].concat(Array.prototype.slice.call(arguments,1)))}return n}},p,s.functions),s.methods=e.extend(!0,{_setup:e.noop,_construct:e.noop,_postConstruct:e.noop,_destruct:e.noop,_resize:!1,destroy:function(e){s.functions.iterate.apply(this,[s.methods._destruct].concat(Array.prototype.slice.call(arguments,1))),this.removeClass(s.classes.raw.element).removeData(l)}},s.methods),s.utilities=e.extend(!0,{_initialize:!1,_delegate:!1,defaults:function(t){s.defaults=e.extend(!0,s.defaults,t||{})}},s.utilities),s.widget&&(h.Conflicts.fn[t]=e.fn[t],e.fn[l]=function(t){if(this instanceof e){var n=s.methods[t];return"object"!==e.type(t)&&t?n&&0!==t.indexOf("_")?s.functions.iterate.apply(this,[n].concat(Array.prototype.slice.call(arguments,1))):this:i.apply(this,arguments)}},h.DontConflict||(e.fn[t]=e.fn[l])),h.Conflicts[t]=e[t],e[l]=s.utilities._delegate||function(t){var n=s.utilities[t]||s.utilities._initialize||!1;if(n)return n.apply(window,Array.prototype.slice.call(arguments,"object"===e.type(t)?0:1))},h.DontConflict||(e[t]=e[l]),s.namespace=t,s.namespaceClean=l,s.guid=0,s.methods._resize&&(h.ResizeHandlers.push({namespace:t,priority:s.priority,callback:s.methods._resize}),h.ResizeHandlers.sort(o)),s.methods._raf&&(h.RAFHandlers.push({namespace:t,priority:s.priority,callback:s.methods._raf}),h.RAFHandlers.sort(o)),s}(s,i),w.then(function(){t(s)}),h.Plugins[s]},h.$window.on("resize.fs",s),s(),r(),e(function(){h.$body=e("body"),a=e('meta[name="viewport"]'),l=!!a.length&&a.attr("content"),c="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",w.resolve(),h.support.nativeMatchMedia=h.support.matchMedia&&!e("html").hasClass("no-matchmedia")}),g.clickTouchStart=g.click+" "+g.touchStart,function(){var e,t={WebkitTransition:"webkitTransitionEnd",MozTransition:"transitionend",OTransition:"otransitionend",transition:"transitionend"},n=["transition","-webkit-transition"],s={transform:"transform",MozTransform:"-moz-transform",OTransform:"-o-transform",msTransform:"-ms-transform",webkitTransform:"-webkit-transform"},i="transitionend",r="",o="",a=document.createElement("div");for(e in t)if(t.hasOwnProperty(e)&&e in a.style){i=t[e],h.support.transition=!0;break}g.transitionEnd=i+".{ns}";for(e in n)if(n.hasOwnProperty(e)&&n[e]in a.style){r=n[e];break}h.transition=r;for(e in s)if(s.hasOwnProperty(e)&&s[e]in a.style){h.support.transform=!0,o=s[e];break}h.transform=o}(),window.Formstone=h,h});
-/*! formstone v1.3.3 [analytics.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function n(){v.scrollDepth&&c()}function i(t){!k&&g&&g.length&&(k=!0,(v=e.extend(v,t||{})).autoEvents&&g.find("a").not("["+b+"]").each(o),v.scrollDepth&&(c(),y.on(x.scroll,l).one(x.load,n)),g.on(x.click,"*["+b+"]",s))}function a(){k&&g&&g.length&&(y.off(x.namespace),g.off(x.namespace),k=!1)}function o(){var t,n=e(this),i="undefined"!==e.type(n[0].href)?n[0].href:"",a=document.domain.split(".").reverse(),o=null!==i.match(a[1]+"."+a[0]);i.match(/^mailto\:/i)?t="Email, Click, "+i.replace(/^mailto\:/i,""):i.match(/^tel\:/i)?t="Telephone, Click, "+i.replace(/^tel\:/i,""):i.match(v.fileTypes)?t="File, Download:"+(/[.]/.exec(i)?/[^.]+$/.exec(i):void 0)[0]+", "+i.replace(/ /g,"-"):o||(t="ExternalLink, Click, "+i),t&&n.attr(b,t)}function l(e){w.startTimer(S,250,r)}function r(){for(var n,i=y.scrollTop()+t.windowHeight,a=1/v.scrollStops,o=a,l=1;l<=v.scrollStops;l++)n=Math.round(100*o).toString(),!C[D][n].passed&&i>C[D][n].edge&&(C[D][n].passed=!0,p(e.extend(v.scrollFields,{eventCategory:"ScrollDepth",eventAction:D,eventLabel:n,nonInteraction:!0}))),o+=a}function c(){var t,n=e.mediaquery("state"),i=g.outerHeight(),a={},o=1/v.scrollStops,l=o,r=0;n.minWidth&&(D="MinWidth:"+n.minWidth+"px");for(var c=1;c<=v.scrollStops;c++)r=parseInt(i*l),a[t=Math.round(100*l).toString()]={edge:"100"===t?r-10:r,passsed:!(!C[D]||!C[D][t])&&C[D][t].passed},l+=o;C[D]=a}function s(t){var n=e(this),i=n.attr("href"),a=n.data(T).split(",");v.eventCallback&&t.preventDefault();for(var o in a)a.hasOwnProperty(o)&&(a[o]=e.trim(a[o]));p({eventCategory:a[0],eventAction:a[1],eventLabel:a[2]||i,eventValue:a[3],nonInteraction:a[4]},n)}function p(t,n){m.location;var i=e.extend({hitType:"event"},t);if("undefined"!==e.type(n)&&!n.attr("data-analytics-stop")){var a="undefined"!==e.type(n[0].href)?n[0].href:"",o=!a.match(/^mailto\:/i)&&!a.match(/^tel\:/i)&&a.indexOf(":")<0?m.location.protocol+"//"+m.location.hostname+"/"+a:a;if(""!==o){var l=n.attr("target");if(l)m.open(o,l);else if(v.eventCallback){i.hitCallback=function(){A&&(w.clearTimer(A),u(o))},A=w.startTimer(A,v.eventTimeout,i.hitCallback)}}}d(i)}function f(t){d(e.extend({hitType:"pageview"},t))}function d(t){if("function"===e.type(m.ga)&&"function"===e.type(m.ga.getAll))for(var n=m.ga.getAll(),i=0,a=n.length;i<a;i++)m.ga(n[i].get("name")+".send",t)}function u(e){document.location=e}var h=t.Plugin("analytics",{methods:{_setup:function(){g=t.$body},_resize:n},utilities:{_delegate:function(){if(arguments.length&&"object"!==e.type(arguments[0]))if("destroy"===arguments[0])a.apply(this);else{var t=Array.prototype.slice.call(arguments,1);switch(arguments[0]){case"pageview":f.apply(this,t);break;case"event":p.apply(this,t)}}else i.apply(this,arguments);return null}}}),v={autoEvents:!1,fileTypes:/\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,eventCallback:!1,eventTimeout:1e3,scrollDepth:!1,scrollStops:5,scrollFields:{}},m=t.window,y=t.$window,g=null,w=h.functions,x=h.events,k=!1,T="analytics-event",b="data-"+T,C={},S=null,D="Site",A=null});
-/*! formstone v1.3.3 [asap.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./analytics"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function r(){f&&!f.hasClass(O.base)&&f.on(m.click,p.selector,n).addClass(O.base)}function n(e){var t=e.currentTarget;e.which>1||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||window.location.protocol!==t.protocol||window.location.host!==t.host||"_blank"===t.target||(!t.hash||t.href.replace(t.hash,"")!==window.location.href.replace(location.hash,"")&&t.href!==window.location.href+"#")&&(t.href.match(p.ignoreTypes)||(w.killEvent(e),e.stopImmediatePropagation(),t.href!==x&&a(t.href,!0)))}function o(e){u&&u.abort();var t=e.originalEvent.state;t&&(b=t.id,t.url!==x&&a(t.url,!1))}function a(t,r){u&&u.abort(),y.trigger(m.requested,[r]),p.transitionOutDeferred=p.transitionOut.apply(v,[!1]);var n=d(t),o=n.params,a=n.hash,s=n.clean,l="User error",c=null,f=e.Deferred();o[p.requestKey]=!0,u=e.ajax({url:s,data:o,dataType:"json",cache:p.cache,xhr:function(){var e=new v.XMLHttpRequest;return e.addEventListener("progress",function(e){if(e.lengthComputable){var t=e.loaded/e.total;y.trigger(m.progress,[t])}},!1),e},success:function(r,o,i){c="string"===e.type(r)?e.parseJSON(r):r,r.location&&(t=r.location,n=d(t),a=n.hash),f.resolve()},error:function(e,t,r){l=r,f.reject()}}),e.when(f,p.transitionOutDeferred).done(function(){i(n,c,r)}).fail(function(){y.trigger(m.failed,[l])})}function i(t,r,n){y.trigger(m.loaded,[r]),void 0!==e.fsAnalytics&&e.fsAnalytics("pageview"),p.render.call(this,r,t.hash),x=t.url,n&&l(++b,x),y.trigger(m.rendered,[r]);var o=!1;if(""!==t.hash){var a=e(t.hash);a.length&&(o=a.offset().top)}!1!==o&&y.scrollTop(o)}function s(t,r){if("undefined"!==e.type(t)){var n;for(var o in t)t.hasOwnProperty(o)&&(n=e(o)).length&&n.html(t[o])}}function l(e,t){history.pushState({id:e,url:t},j+e,t)}function c(e,t){history.replaceState({id:e,url:t},j+e,t)}function d(e){var t=e.indexOf("?"),r=e.indexOf("#"),n={},o="",a=e;return r>-1&&(o=e.slice(r),a=e.slice(0,r)),t>-1&&(n=w.parseQueryString(e.slice(t+1,r>-1?r:e.length)),a=e.slice(0,t)),{hash:o,params:n,url:e,clean:a}}var f,u,p,h=t.Plugin("asap",{utilities:{_initialize:function(n){!p&&t.support.history&&(f=t.$body,(p=e.extend(g,n)).render===e.noop&&(p.render=s),p.transitionOut===e.noop&&(p.transitionOut=function(){return e.Deferred().resolve()}),history.state?(b=history.state.id,x=history.state.url):(x=window.location.href,c(b,x)),y.on(m.popState,o),r())},load:function(e){p&&t.support.history?e&&a(e,!0):window.location.href=e},replace:function(e){var t=history.state;x=e,c(t.id,e)}},events:{failed:"failed",loaded:"loaded",popState:"popstate",progress:"progress",requested:"requested",rendered:"rendered"}}),g={cache:!0,ignoreTypes:/\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,render:e.noop,requestKey:"fs-asap",selector:"a",transitionOut:e.noop},y=t.$window,v=y[0],w=h.functions,m=h.events,O=h.classes.raw,j="asap-",x="",b=1});
-/*! formstone v1.3.3 [background.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./transition"],e):e(jQuery,Formstone)}(function(e,i){"use strict";function o(){(C=Y.scrollTop()+i.windowHeight)<0&&(C=0),P.iterate.call(I,v)}function t(){j=e(b.base),I=e(b.lazy),P.iterate.call(I,h)}function a(e){if(e.visible){var i=e.source;e.source=null,n(e,i,!0)}}function n(i,o,t){if(o!==i.source&&i.visible){if(i.source=o,i.responsive=!1,i.isYouTube=!1,"object"===e.type(o)&&"string"===e.type(o.video)){var a=o.video.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);a&&a.length>=1&&(i.isYouTube=!0,i.videoId=a[1])}var n=!i.isYouTube&&"object"===e.type(o)&&(o.hasOwnProperty("mp4")||o.hasOwnProperty("ogg")||o.hasOwnProperty("webm"));if(i.video=i.isYouTube||n,i.playing=!1,i.isYouTube)i.playerReady=!1,i.posterLoaded=!1,u(i,o,t);else if("object"===e.type(o)&&o.hasOwnProperty("poster"))d(i,o,t);else{var l=o;if("object"===e.type(o)){var c,p=[],y=[];for(c in o)o.hasOwnProperty(c)&&y.push(c);y.sort(P.sortAsc);for(c in y)y.hasOwnProperty(c)&&p.push({width:parseInt(y[c]),url:o[y[c]],mq:$.matchMedia("(min-width: "+parseInt(y[c])+"px)")});i.responsive=!0,i.sources=p,l=r(i)}s(i,l,!1,t)}}else i.$el.trigger(T.loaded)}function r(e){var o=e.source;if(e.responsive){o=e.sources[0].url;for(var t in e.sources)e.sources.hasOwnProperty(t)&&(i.support.nativeMatchMedia?e.sources[t].mq.matches&&(o=e.sources[t].url):e.sources[t].width<i.fallbackWidth&&(o=e.sources[t].url))}return o}function s(i,o,t,a){var n=[w.media,w.image,!0!==a?w.animated:""].join(" "),r=e('<div class="'+n+'" aria-hidden="true"><img alt=""></div>'),s=r.find("img"),d=o;s.one(T.load,function(){R&&r.addClass(w.native).css({backgroundImage:"url('"+d+"')"}),r.fsTransition({property:"opacity"},function(){t||l(i)}).css({opacity:1}),f(i),t&&!a||i.$el.trigger(T.loaded)}).one(T.error,i,c).attr("src",d),i.responsive&&r.addClass(w.responsive),i.$container.append(r),(s[0].complete||4===s[0].readyState)&&s.trigger(T.load),i.currentSource=d}function d(o,t,a){if(o.source&&o.source.poster&&(s(o,o.source.poster,!0,!0),a=!1),!i.isMobile){var n='<div class="'+[w.media,w.video,!0!==a?w.animated:""].join(" ")+'" aria-hidden="true">';n+="<video",o.loop&&(n+=" loop"),o.mute&&(n+=" muted"),n+=">",o.source.webm&&(n+='<source src="'+o.source.webm+'" type="video/webm" />'),o.source.mp4&&(n+='<source src="'+o.source.mp4+'" type="video/mp4" />'),o.source.ogg&&(n+='<source src="'+o.source.ogg+'" type="video/ogg" />'),n+="</video>";var r=e(n+="</div>");r.find("video").one(T.loadedMetaData,function(e){r.fsTransition({property:"opacity"},function(){l(o)}).css({opacity:1}),f(o),o.$el.trigger(T.loaded),o.autoPlay&&p(o)}),o.$container.append(r)}}function u(o,t,a){if(!o.videoId){var n=t.match(/^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/);o.videoId=n[1]}if(o.posterLoaded||(o.source.poster||(o.source.poster="//img.youtube.com/vi/"+o.videoId+"/0.jpg"),o.posterLoaded=!0,s(o,o.source.poster,!0,a),a=!1),!i.isMobile)if(e("script[src*='youtube.com/iframe_api']").length||e("head").append('<script src="//www.youtube.com/iframe_api"><\/script>'),z){var r=o.guid+"_"+o.youTubeGuid++,d='<div class="'+[w.media,w.embed,!0!==a?w.animated:""].join(" ")+'" aria-hidden="true">';d+='<div id="'+r+'"></div>';var u=e(d+="</div>"),p=e.extend(!0,{},{controls:0,rel:0,showinfo:0,wmode:"transparent",enablejsapi:1,version:3,playerapiid:r,loop:o.loop?1:0,autoplay:1,origin:$.location.protocol+"//"+$.location.host},o.youtubeOptions);p.autoplay=1,o.$container.append(u),o.player&&(o.oldPlayer=o.player,o.player=null),o.player=new $.YT.Player(r,{videoId:o.videoId,playerVars:p,events:{onReady:function(e){o.playerReady=!0,o.mute&&o.player.mute(),o.autoPlay||o.player.pauseVideo()},onStateChange:function(e){o.playing||e.data!==$.YT.PlayerState.PLAYING?o.loop&&o.playing&&e.data===$.YT.PlayerState.ENDED&&o.player.playVideo():(o.playing=!0,u.fsTransition({property:"opacity"},function(){l(o)}).css({opacity:1}),f(o),o.$el.trigger(T.loaded)),o.$el.find(b.embed).addClass(w.ready)},onPlaybackQualityChange:function(e){},onPlaybackRateChange:function(e){},onError:function(e){c({data:o})},onApiChange:function(e){}}}),f(o)}else O.push({data:o,source:t})}function l(e){var i=e.$container.find(b.media);i.length>=1&&(i.not(":last").remove(),e.oldPlayer=null)}function c(e){e.data.$el.trigger(T.error)}function p(e){if(e.video&&!e.playing)if(e.isYouTube)e.playerReady?e.player.playVideo():e.autoPlay=!0;else{var i=e.$container.find("video");i.length&&i[0].play(),e.playing=!0}}function y(e){if(e.visible)if(e.responsive){var i=r(e);i!==e.currentSource?s(e,i,!1,!0):f(e)}else f(e)}function f(e){for(var i=e.$container.find(b.media),o=0,t=i.length;o<t;o++){var a=i.eq(o),n=e.isYouTube?"iframe":a.find("video").length?"video":"img",r=a.find(n);if(r.length&&("img"!==n||!R)){var s=e.$el.outerWidth(),d=e.$el.outerHeight(),u=g(e,r);e.width=u.width,e.height=u.height,e.left=0,e.top=0;var l=e.isYouTube?e.embedRatio:e.width/e.height;e.height=d,e.width=e.height*l,e.width<s&&(e.width=s,e.height=e.width/l),e.left=-(e.width-s)/2,e.top=-(e.height-d)/2,a.css({height:e.height,width:e.width,left:e.left,top:e.top})}}}function h(e){e.scrollTop=e.$el.offset().top}function v(e){!e.visible&&e.scrollTop<C+e.lazyEdge&&(e.visible=!0,a(e))}function g(i,o){if(i.isYouTube)return{height:500,width:500/i.embedRatio};if(o.is("img")){var t=o[0];if("undefined"!==e.type(t.naturalHeight))return{height:t.naturalHeight,width:t.naturalWidth};var a=new Image;return a.src=t.src,{height:a.height,width:a.width}}return{height:o[0].videoHeight,width:o[0].videoWidth}}var m=i.Plugin("background",{widget:!0,defaults:{autoPlay:!0,customClass:"",embedRatio:1.777777,lazy:!1,lazyEdge:100,loop:!0,mute:!0,source:null,youtubeOptions:{}},classes:["container","media","animated","responsive","native","fixed","ready","lazy"],events:{loaded:"loaded",ready:"ready",loadedMetaData:"loadedmetadata"},methods:{_setup:function(){o(),Y.on("scroll",o)},_construct:function(i){i.youTubeGuid=0,i.$container=e('<div class="'+w.container+'"></div>').appendTo(this),i.thisClasses=[w.base,i.customClass],i.visible=!0,i.lazy&&(i.visible=!1,i.thisClasses.push(w.lazy)),this.addClass(i.thisClasses.join(" ")),t(),i.lazy?(h(i),v(i)):a(i)},_destruct:function(e){e.$container.remove(),this.removeClass(e.thisClasses.join(" ")).off(T.namespace),t()},_resize:function(){P.iterate.call(j,y),P.iterate.call(I,h),P.iterate.call(I,v)},play:p,pause:function(e){if(e.video&&e.playing){if(e.isYouTube)e.playerReady?e.player.pauseVideo():e.autoPlay=!1;else{var i=e.$container.find("video");i.length&&i[0].pause()}e.playing=!1}},mute:function(e){if(e.video)if(e.isYouTube&&e.playerReady)e.player.mute();else{var i=e.$container.find("video");i.length&&(i[0].muted=!0)}e.mute=!0},unmute:function(e){if(e.video){if(e.isYouTube&&e.playerReady)e.player.unMute();else{var i=e.$container.find("video");i.length&&(i[0].muted=!1)}e.playing=!0}e.mute=!1},resize:f,load:n,unload:function(e){var i=e.$container.find(b.media);i.length>=1&&i.fsTransition({property:"opacity"},function(){i.remove(),delete e.source}).css({opacity:0})}}}),b=m.classes,w=b.raw,T=m.events,P=m.functions,$=i.window,Y=i.$window,C=0,j=[],I=[],R="backgroundSize"in i.document.documentElement.style,z=!1,O=[];$.onYouTubeIframeAPIReady=function(){z=!0;for(var e in O)O.hasOwnProperty(e)&&u(O[e].data,O[e].source);O=[]}});
-/*! formstone v1.3.3 [carousel.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery","./touch"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function i(){z=e(L.base)}function n(e){e.enabled&&(N.clearTimer(e.autoTimer),e.enabled=!1,e.$subordinate.off(H.update),this.removeClass([X.enabled,X.animated].join(" ")).off(H.namespace),e.$canister.fsTouch("destroy").off(H.namespace).attr("style","").css(A,"none"),e.$items.css({width:"",height:""}).removeClass([X.visible,L.item_previous,L.item_next].join(" ")),e.$images.off(H.namespace),e.$controlItems.off(H.namespace),e.$pagination.html("").off(H.namespace),h(e),e.useMargin?e.$canister.css({marginLeft:""}):e.$canister.css(E,""),e.index=0)}function a(e){e.enabled||(e.enabled=!0,this.addClass(X.enabled),e.$controlItems.on(H.click,e,p),e.$pagination.on(H.click,L.page,e,g),e.$items.on(H.click,e,M),e.$subordinate.on(H.update,e,W),W({data:e},0),e.$canister.fsTouch({axis:"x",pan:!0,swipe:!0}).on(H.panStart,e,C).on(H.pan,e,x).on(H.panEnd,e,w).on(H.swipe,e,P).on(H.focusIn,e,I).css(A,""),o(e),e.$images.on(H.load,e,u),e.autoAdvance&&(e.autoTimer=N.startTimer(e.autoTimer,e.autoTime,function(){m(e)},!0)),s.call(this,e))}function s(e){if(e.enabled){var t,i,n,a,s,o,r;if(e.count=e.$items.length,e.count<1)return h(e),void e.$canister.css({height:""});for(this.removeClass(X.animated),e.containerWidth=e.$container.outerWidth(!1),e.visible=b(e),e.perPage=e.paged?1:e.visible,e.itemMarginLeft=parseInt(e.$items.eq(0).css("marginLeft")),e.itemMarginRight=parseInt(e.$items.eq(0).css("marginRight")),e.itemMargin=e.itemMarginLeft+e.itemMarginRight,isNaN(e.itemMargin)&&(e.itemMargin=0),e.itemWidth=(e.containerWidth-e.itemMargin*(e.visible-1))/e.visible,e.itemHeight=0,e.pageWidth=e.paged?e.itemWidth:e.containerWidth,e.pageCount=Math.ceil(e.count/e.perPage),e.canisterWidth=e.single?e.containerWidth:(e.pageWidth+e.itemMargin)*e.pageCount,e.$canister.css({width:e.matchWidth?e.canisterWidth:1e6,height:""}),e.$items.css({width:e.matchWidth?e.itemWidth:"",height:""}).removeClass([X.visible,X.item_previous,X.item_next].join(" ")),e.pages=[],i=0,0;i<e.count;i+=e.perPage){for(s=0,o=0,(a=e.$items.slice(i,i+e.perPage)).length<e.perPage&&(a=0===i?e.$items:e.$items.slice(e.$items.length-e.perPage)),r=(e.rtl?a.eq(a.length-1):a.eq(0)).position().left,n=0;n<a.length;n++)s+=a.eq(n).outerWidth(!0),(t=a.eq(n).outerHeight())>o&&(o=t);e.pages.push({left:e.rtl?r-(e.canisterWidth-s):r,height:o,width:s,$items:a}),o>e.itemHeight&&(e.itemHeight=o),0}e.paged&&(e.pageCount-=e.count%e.visible),e.pageCount<=0&&(e.pageCount=1),e.maxMove=-e.pages[e.pageCount-1].left,e.autoHeight?e.$canister.css({height:e.pages[0].height}):e.matchHeight&&e.$items.css({height:e.itemHeight});var l="";for(i=0;i<e.pageCount;i++)l+='<button type="button" class="'+X.page+'">'+(i+1)+"</button>";e.$pagination.html(l),e.pageCount<=1?h(e):v(e),e.$paginationItems=e.$pagination.find(L.page),f(e,e.index,!1),setTimeout(function(){e.$el.addClass(X.animated)},5)}}function o(e){e.$items=e.$canister.children().not(":hidden").addClass(X.item),e.$images=e.$canister.find("img"),e.totalImages=e.$images.length}function r(e,t){e.$images.off(H.namespace),!1!==t&&e.$canister.html(t),e.index=0,o(e),s.call(this,e)}function l(e,t,i,n,a){e.enabled&&(N.clearTimer(e.autoTimer),void 0===a&&(a=!0),f(e,t-1,a,i,n))}function c(e){var t=e.index-1;e.infinite&&t<0&&(t=e.pageCount-1),f(e,t)}function d(e){var t=e.index+1;e.infinite&&t>=e.pageCount&&(t=0),f(e,t)}function u(e){var t=e.data;t.resizeTimer=N.startTimer(t.resizeTimer,20,function(){s.call(t.$el,t)})}function m(e){var t=e.index+1;t>=e.pageCount&&(t=0),f(e,t)}function p(t){N.killEvent(t);var i=t.data,n=i.index+(e(t.currentTarget).hasClass(X.control_next)?1:-1);N.clearTimer(i.autoTimer),f(i,n)}function g(t){N.killEvent(t);var i=t.data,n=i.$paginationItems.index(e(t.currentTarget));N.clearTimer(i.autoTimer),f(i,n)}function f(t,i,n,a,s){if(i<0&&(i=t.infinite?t.pageCount-1:0),i>=t.pageCount&&(i=t.infinite?0:t.pageCount-1),!(t.count<1)){t.pages[i]&&(t.leftPosition=-t.pages[i].left),t.leftPosition=_(t,t.leftPosition),t.useMargin?t.$canister.css({marginLeft:t.leftPosition}):!1===n?(t.$canister.css(A,"none").css(E,"translateX("+t.leftPosition+"px)"),setTimeout(function(){t.$canister.css(A,"")},5)):t.$canister.css(E,"translateX("+t.leftPosition+"px)"),t.$items.removeClass([X.visible,X.item_previous,X.item_next].join(" "));for(var o=0,r=t.pages.length;o<r;o++)o===i?t.pages[o].$items.addClass(X.visible).attr("aria-hidden","false"):t.pages[o].$items.not(t.pages[i].$items).addClass(o<i?X.item_previous:X.item_next).attr("aria-hidden","true");t.autoHeight&&t.$canister.css({height:t.pages[i].height}),!1!==n&&!0!==a&&i!==t.index&&(t.infinite||i>-1&&i<t.pageCount)&&t.$el.trigger(H.update,[i]),t.index=i,t.linked&&!0!==s&&e(t.linked).not(t.$el)[y]("jumpPage",t.index+1,!0,!0),$(t)}}function h(e){e.$controls.removeClass(X.visible),e.$controlItems.removeClass(X.visible),e.$pagination.removeClass(X.visible)}function v(e){e.$controls.addClass(X.visible),e.$controlItems.addClass(X.visible),e.$pagination.addClass(X.visible)}function $(e){e.$paginationItems.removeClass(X.active).eq(e.index).addClass(X.active),e.infinite?e.$controlItems.addClass(X.visible):e.pageCount<1?e.$controlItems.removeClass(X.visible):(e.$controlItems.addClass(X.visible),e.index<=0?e.$controlPrevious.removeClass(X.visible):(e.index>=e.pageCount-1||!e.single&&e.leftPosition===e.maxMove)&&e.$controlNext.removeClass(X.visible))}function b(i){var n=1;if(i.single)return n;if("array"===e.type(i.show))for(var a in i.show)i.show.hasOwnProperty(a)&&(t.support.nativeMatchMedia?i.show[a].mq.matches&&(n=i.show[a].count):i.show[a].width<t.fallbackWidth&&(n=i.show[a].count));else n=i.show;return i.fill&&i.count<n?i.count:n}function C(t,i){var n=t.data;if(N.clearTimer(n.autoTimer),!n.single){if(n.useMargin)n.leftPosition=parseInt(n.$canister.css("marginLeft"));else{var a=n.$canister.css(E).split(",");n.leftPosition=parseInt(a[4])}if(n.$canister.css(A,"none").css("will-change","transform"),x(t),n.linked&&!0!==i){var s=t.deltaX/n.pageWidth;n.rtl&&(s*=-1),e(n.linked).not(n.$el)[y]("panStart",s)}}n.isTouching=!0}function x(t,i){var n=t.data;if(!n.single&&(n.touchLeft=_(n,n.leftPosition+t.deltaX),n.useMargin?n.$canister.css({marginLeft:n.touchLeft}):n.$canister.css(E,"translateX("+n.touchLeft+"px)"),n.linked&&!0!==i)){var a=t.deltaX/n.pageWidth;n.rtl&&(a*=-1),e(n.linked).not(n.$el)[y]("pan",a)}}function w(t,i){var n=t.data,a=Math.abs(t.deltaX),s=k(n,t),o=!1;if(n.didPan=!1,!n.single){var r,l,c=Math.abs(n.touchLeft),d=!1,u=n.rtl?"right":"left";if(t.directionX===u)for(r=0,l=n.pages.length;r<l;r++)d=n.pages[r],c>Math.abs(d.left)+20&&(o=r+1);else for(r=n.pages.length-1,l=0;r>=l;r--)d=n.pages[r],c<Math.abs(d.left)&&(o=r-1)}!1===o&&(o=a<50?n.index:n.index+s),o!==n.index&&(n.didPan=!0),n.linked&&!0!==i&&e(n.linked).not(n.$el)[y]("panEnd",o),T(n,o)}function P(t,i){var n=t.data,a=k(n,t),s=n.index+a;n.linked&&!0!==i&&e(n.linked).not(n.$el)[y]("swipe",t.directionX),T(n,s)}function T(e,t){e.$canister.css(A,"").css("will-change",""),f(e,t),e.isTouching=!1}function M(t){var i=t.data,n=e(t.currentTarget);if(!i.didPan&&(n.trigger(H.itemClick),i.controller)){var a=i.$items.index(n);W(t,a),i.$subordinate[y]("jumpPage",a+1,!0)}}function I(t){var i=t.data;if(i.enabled&&!i.isTouching){N.clearTimer(i.autoTimer),i.$container.scrollLeft(0);var n,a=e(t.target);a.hasClass(X.item)?n=a:a.parents(L.item).length&&(n=a.parents(L.item).eq(0));for(var s=0;s<i.pageCount;s++)if(i.pages[s].$items.is(n)){f(i,s);break}}}function W(e,t){var i=e.data;if(i.controller){var n=i.$items.eq(t);i.$items.removeClass(X.active),n.addClass(X.active);for(var a=0;a<i.pageCount;a++)if(i.pages[a].$items.is(n)){f(i,a,!0,!0);break}}}function _(e,t){return isNaN(t)?t=0:e.rtl?(t>e.maxMove&&(t=e.maxMove),t<0&&(t=0)):(t<e.maxMove&&(t=e.maxMove),t>0&&(t=0)),t}function k(e,t){return e.rtl?"right"===t.directionX?1:-1:"left"===t.directionX?1:-1}var q=t.Plugin("carousel",{widget:!0,defaults:{autoAdvance:!1,autoHeight:!1,autoTime:8e3,contained:!0,controls:!0,customClass:"",fill:!1,infinite:!1,labels:{next:"Next",previous:"Previous"},matchHeight:!1,matchWidth:!0,maxWidth:1/0,minWidth:"0px",paged:!1,pagination:!0,rtl:!1,show:1,single:!1,theme:"fs-light",useMargin:!1},classes:["ltr","rtl","viewport","wrapper","container","canister","item","item_previous","item_next","controls","controls_custom","control","control_previous","control_next","pagination","page","animated","enabled","visible","active","auto_height","contained","single"],events:{itemClick:"itemClick",update:"update"},methods:{_construct:function(s){var r;s.didPan=!1,s.carouselClasses=[X.base,s.theme,s.customClass,s.rtl?X.rtl:X.ltr],s.maxWidth=s.maxWidth===1/0?"100000px":s.maxWidth,s.mq="(min-width:"+s.minWidth+") and (max-width:"+s.maxWidth+")",s.customControls="object"===e.type(s.controls)&&s.controls.previous&&s.controls.next,s.customPagination="string"===e.type(s.pagination),s.id=this.attr("id"),s.id?s.ariaId=s.id:(s.ariaId=s.rawGuid,this.attr("id",s.ariaId)),t.support.transform||(s.useMargin=!0);var l="",c="",d=[X.control,X.control_previous].join(" "),u=[X.control,X.control_next].join(" ");s.controls&&!s.customControls&&(l+='<div class="'+X.controls+'" aria-label="carousel controls" aria-controls="'+s.ariaId+'">',l+='<button type="button" class="'+d+'" aria-label="'+s.labels.previous+'">'+s.labels.previous+"</button>",l+='<button type="button" class="'+u+'" aria-label="'+s.labels.next+'">'+s.labels.next+"</button>",l+="</div>"),s.pagination&&!s.customPagination&&(c+='<div class="'+X.pagination+'" aria-label="carousel pagination" aria-controls="'+s.ariaId+'" role="navigation">',c+="</div>"),s.autoHeight&&s.carouselClasses.push(X.auto_height),s.contained&&s.carouselClasses.push(X.contained),s.single&&s.carouselClasses.push(X.single),this.addClass(s.carouselClasses.join(" ")).wrapInner('<div class="'+X.wrapper+'" aria-live="polite"><div class="'+X.container+'"><div class="'+X.canister+'"></div></div></div>').append(l).wrapInner('<div class="'+X.viewport+'"></div>').append(c),s.$viewport=this.find(L.viewport).eq(0),s.$container=this.find(L.container).eq(0),s.$canister=this.find(L.canister).eq(0),s.$pagination=this.find(L.pagination).eq(0),s.$controlPrevious=s.$controlNext=e(""),s.customControls?(s.$controls=e(s.controls.container).addClass([X.controls,X.controls_custom].join(" ")),s.$controlPrevious=e(s.controls.previous).addClass(d),s.$controlNext=e(s.controls.next).addClass(u)):(s.$controls=this.find(L.controls).eq(0),s.$controlPrevious=s.$controls.find(L.control_previous),s.$controlNext=s.$controls.find(L.control_next)),s.$controlItems=s.$controlPrevious.add(s.$controlNext),s.customPagination&&(s.$pagination=e(s.pagination).addClass([X.pagination])),s.$paginationItems=s.$pagination.find(L.page),s.index=0,s.enabled=!1,s.leftPosition=0,s.autoTimer=null,s.resizeTimer=null;var m=this.data(j+"-linked");s.linked=!!m&&"[data-"+j+'-linked="'+m+'"]',s.linked&&(s.paged=!0);var p=this.data(j+"-controller-for")||"";if(s.$subordinate=e(p),s.$subordinate.length&&(s.controller=!0),"object"===e.type(s.show)){var g=s.show,f=[],h=[];for(r in g)g.hasOwnProperty(r)&&h.push(r);h.sort(N.sortAsc);for(r in h)h.hasOwnProperty(r)&&f.push({width:parseInt(h[r]),count:g[h[r]],mq:window.matchMedia("(min-width: "+parseInt(h[r])+"px)")});s.show=f}o(s),e.fsMediaquery("bind",s.rawGuid,s.mq,{enter:function(){a.call(s.$el,s)},leave:function(){n.call(s.$el,s)}}),i(),s.carouselClasses.push(X.enabled),s.carouselClasses.push(X.animated)},_destruct:function(t){N.clearTimer(t.autoTimer),N.clearTimer(t.resizeTimer),n.call(this,t),e.fsMediaquery("unbind",t.rawGuid),t.id!==t.ariaId&&this.removeAttr("id"),t.$controlItems.removeClass([L.control,X.control_previous,L.control_next,L.visible].join(" ")).off(H.namespace),t.$images.off(H.namespace),t.$canister.fsTouch("destroy"),t.$items.removeClass([X.item,X.visible,L.item_previous,L.item_next].join(" ")).unwrap().unwrap().unwrap().unwrap(),t.controls&&!t.customControls&&t.$controls.remove(),t.customControls&&t.$controls.removeClass([X.controls,X.controls_custom,X.visible].join(" ")),t.pagination&&!t.customPagination&&t.$pagination.remove(),t.customPagination&&t.$pagination.html("").removeClass([X.pagination,X.visible].join(" ")),this.removeClass(t.carouselClasses.join(" ")),i()},_resize:function(e){N.iterate.call(z,s)},disable:n,enable:a,jump:l,previous:c,next:d,jumpPage:l,previousPage:c,nextPage:d,jumpItem:function(e,t,i,n,a){if(e.enabled){N.clearTimer(e.autoTimer);var s=e.$items.eq(t-1);void 0===a&&(a=!0);for(var o=0;o<e.pageCount;o++)if(e.pages[o].$items.is(s)){f(e,o,a,i,n);break}}},reset:function(e){e.enabled&&r.call(this,e,!1)},resize:s,update:r,panStart:function(e,t){if(N.clearTimer(e.autoTimer),!e.single){if(e.rtl&&(t*=-1),e.useMargin)e.leftPosition=parseInt(e.$canister.css("marginLeft"));else{var i=e.$canister.css(E).split(",");e.leftPosition=parseInt(i[4])}e.$canister.css(A,"none"),x({data:e,deltaX:e.pageWidth*t},!0)}e.isTouching=!0},pan:function(e,t){if(!e.single){e.rtl&&(t*=-1);var i=e.pageWidth*t;e.touchLeft=_(e,e.leftPosition+i),e.useMargin?e.$canister.css({marginLeft:e.touchLeft}):e.$canister.css(E,"translateX("+e.touchLeft+"px)")}},panEnd:function(e,t){T(e,t)},swipe:function(e,t){P({data:e,directionX:t},!0)}}}),j=q.namespace,y=q.namespaceClean,L=q.classes,X=L.raw,H=q.events,N=q.functions,z=[],E=t.transform,A=t.transition});
-/*! formstone v1.3.3 [checkbox.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,a){"use strict";function s(a){a.stopPropagation();var s=a.data;e(a.target).is(s.$el)||(a.preventDefault(),s.$el.trigger("click"))}function l(e){var a=e.data,s=a.$el.is(":disabled"),l=a.$el.is(":checked");s||(a.radio?l&&t(e):l?t(e):o(e))}function t(a){a.data.radio&&e('input[name="'+a.data.group+'"]').not(a.data.$el).trigger("deselect"),a.data.$el.trigger(b.focus),a.data.$classable.addClass(r.checked)}function o(e){e.data.$el.trigger(b.focus),e.data.$classable.removeClass(r.checked)}function d(e){e.data.$classable.addClass(r.focus)}function c(e){e.data.$classable.removeClass(r.focus)}var i=a.Plugin("checkbox",{widget:!0,defaults:{customClass:"",toggle:!1,labels:{on:"ON",off:"OFF"},theme:"fs-light"},classes:["element_placeholder","label","marker","flag","radio","focus","checked","disabled","toggle","state","state_on","state_off"],methods:{_construct:function(a){var t=this.closest("label"),i=t.length?t.eq(0):e("label[for="+this.attr("id")+"]"),f=[r.base,a.theme,a.customClass].join(" "),h=[r.label,a.theme,a.customClass].join(" "),u="";a.radio="radio"===this.attr("type"),a.group=this.attr("name"),u+='<div class="'+r.marker+'" aria-hidden="true">',u+='<div class="'+r.flag+'"></div>',a.toggle&&(f+=" "+r.toggle,h+=" "+r.toggle,u+='<span class="'+[r.state,r.state_on].join(" ")+'">'+a.labels.on+"</span>",u+='<span class="'+[r.state,r.state_off].join(" ")+'">'+a.labels.off+"</span>"),a.radio&&(f+=" "+r.radio,h+=" "+r.radio),u+="</div>",a.$placeholder=e('<span class="'+r.element_placeholder+'"></span>'),this.before(a.$placeholder),a.labelParent=i.find(this).length,a.labelClass=h,i.addClass(h),a.labelParent?i.wrap('<div class="'+f+'"></div>').before(u):this.before('<div class=" '+f+'">'+u+"</div>"),a.$checkbox=a.labelParent?i.parents(n.base):this.prev(n.base),a.$marker=a.$checkbox.find(n.marker),a.$states=a.$checkbox.find(n.state),a.$label=i,a.$classable=e().add(a.$checkbox).add(a.$label),this.is(":checked")&&a.$classable.addClass(r.checked),this.is(":disabled")&&a.$classable.addClass(r.disabled),this.appendTo(a.$marker),this.on(b.focus,a,d).on(b.blur,a,c).on(b.change,a,l).on(b.click,a,s).on(b.deselect,a,o),a.$checkbox.on(b.click,a,s)},_destruct:function(e){e.$checkbox.off(b.namespace),e.$marker.remove(),e.$states.remove(),e.$label.removeClass(e.labelClass),e.labelParent?e.$label.unwrap():this.unwrap(),e.$placeholder.before(this),e.$placeholder.remove(),this.off(b.namespace)},enable:function(e){this.prop("disabled",!1),e.$classable.removeClass(r.disabled)},disable:function(e){this.prop("disabled",!0),e.$classable.addClass(r.disabled)},update:function(e){var a=e.$el.is(":disabled"),s=e.$el.is(":checked");a||(s?t({data:e}):o({data:e}))}},events:{deselect:"deselect"}}),n=i.classes,r=n.raw,b=i.events;i.functions});
-/*! formstone v1.3.3 [checkpoint.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function c(){v=u.height(),d.iterate.call(g,o)}function a(){g=e(r.base),c()}function i(){d.iterate.call(g,n)}function o(e){switch(e.windowIntersect){case"top":e.windowCheck=0-e.offset;break;case"middle":e.windowCheck=v/2-e.offset;break;case"bottom":e.windowCheck=v-e.offset}switch(e.elIntersect){case"top":e.elCheck=e.$target[0].offsetTop;break;case"middle":e.elCheck=e.$target[0].offsetTop+e.$target.outerHeight()/2;break;case"bottom":e.elCheck=e.$target[0].offsetTop+e.$target.outerHeight()}n(e)}function n(e){w+e.windowCheck>=e.elCheck?(e.active||e.$el.trigger(l.activate),e.active=!0,e.$el.addClass(f.active)):e.reverse&&(e.active&&e.$el.trigger(l.deactivate),e.active=!1,e.$el.removeClass(f.active))}var s=t.Plugin("checkpoint",{widget:!0,defaults:{intersect:"bottom-top",offset:0,reverse:!1},classes:["active"],events:{activate:"activate",deactivate:"deactivate"},methods:{_construct:function(t){var c=t.intersect.split("-");t.windowIntersect=c[0],t.elIntersect=c[1],t.visible=!1;var a=e(t.$el.data("checkpoint-container"));t.$target=a.length?a:t.$el,t.$el.addClass(f.base)},_postConstruct:function(e){a(),c()},_destruct:function(e){a()},_resize:c,_raf:function(){(w=u.scrollTop())<0&&(w=0),w!==h&&(i(),h=w)}}}),r=(s.namespace,s.classes),f=r.raw,l=s.events,d=s.functions,u=(t.window,t.$window),v=0,w=0,h=0,g=[]});
-/*! formstone v1.3.3 [cookie.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,n){"use strict";function t(n,t,i){var r=!1,o=new Date;i.expires&&"number"===e.type(i.expires)&&(o.setTime(o.getTime()+i.expires),r=o.toGMTString());var l=i.domain?"; domain="+i.domain:"",s=r?"; expires="+r:"",c=r?"; max-age="+i.expires/1e3:"",f=i.path?"; path="+i.path:"",a=i.secure?"; secure":"";u.cookie=n+"="+t+s+c+l+f+a}function i(e){for(var n=e+"=",t=u.cookie.split(";"),i=0;i<t.length;i++){for(var r=t[i];" "===r.charAt(0);)r=r.substring(1,r.length);if(0===r.indexOf(n))return r.substring(n.length,r.length)}return null}function r(n,i){t(n,"",e.extend({},i,{expires:-6048e5})),console.log(u.cookie)}n.Plugin("cookie",{utilities:{_delegate:function(n,u,l){if("object"===e.type(n))o=e.extend(o,n);else if(l=e.extend({},o,l||{}),"undefined"!==e.type(n)){if("undefined"===e.type(u))return i(n);null===u?r(n,l):t(n,u,l)}return null}}});var o={domain:null,expires:6048e5,path:null,secure:null},u=n.document});
-/*! formstone v1.3.3 [dropdown.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./scrollbar","./touch"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function l(t){for(var l="",i=0,o=t.$allOptions.length;i<o;i++){var s=t.$allOptions.eq(i),d=[];if("OPTGROUP"===s[0].tagName)d.push(g.group),s.prop("disabled")&&d.push(g.disabled),l+='<span class="'+d.join(" ")+'">'+s.attr("label")+"</span>";else{var a=s.val(),n=s.data("label"),r=t.links?"a":'button type="button"';s.attr("value")||s.attr("value",a),d.push(g.item),s.hasClass(g.item_placeholder)&&(d.push(g.item_placeholder),r="span"),s.prop("selected")&&d.push(g.item_selected),s.prop("disabled")&&d.push(g.item_disabled),l+="<"+r+' class="'+d.join(" ")+'"',t.links?"span"===r?l+=' aria-hidden="true"':(l+=' href="'+a+'"',t.external&&(l+=' target="_blank"')):l+=' data-value="'+a+'"',l+=' role="option"',s.prop("selected")&&(l+=' "aria-selected"="true"'),l+=">",l+=n||I.decodeEntities(v(s.text(),t.trim)),l+="</"+r+">",0}}t.$items=t.$wrapper.html(e.parseHTML(l)).find(w.item)}function i(e){I.killEvent(e);var t=e.data;t.disabled||t.mobile||(t.closed?s(t):d(t)),o(t)}function o(t){e(w.base).not(t.$dropdown).trigger(C.close,[t])}function s(e){if(e.closed){var t=_.height(),l=e.$wrapper.outerHeight(!0);e.$dropdown[0].getBoundingClientRect().bottom+l>t-e.bottomEdge&&e.$dropdown.addClass(g.bottom),y.on(C.click+e.dotGuid,":not("+w.options+")",e,a),e.$dropdown.trigger(C.focusIn),e.$dropdown.addClass(g.open),b(e),e.closed=!1}}function d(e){e&&!e.closed&&(y.off(C.click+e.dotGuid),e.$dropdown.removeClass([g.open,g.bottom].join(" ")),e.closed=!0)}function a(t){I.killEvent(t);var l=t.data;l&&0===e(t.currentTarget).parents(w.base).length&&(d(l),l.$dropdown.trigger(C.focusOut))}function n(e){var t=e.data;t&&(d(t),t.$dropdown.trigger(C.focusOut))}function r(t){var l=e(this),i=t.data;if(I.killEvent(t),!i.disabled){var o=i.$items.index(l);i.focusIndex=o,i.$wrapper.is(":visible")&&(m(o,i,t.shiftKey,t.metaKey||t.ctrlKey),$(i)),i.multiple||d(i),i.$dropdown.trigger(C.focus)}}function p(t,l){e(this);var i=t.data;if(!l&&!i.multiple){var o=i.$options.index(i.$options.filter(":selected"));i.focusIndex=o,m(o,i),$(i,!0)}}function c(t){I.killEvent(t);e(t.currentTarget);var l=t.data;l.disabled||l.multiple||l.focused||(o(l),l.focused=!0,l.focusIndex=l.index,l.input="",l.$dropdown.addClass(g.focus).on(C.keyDown+l.dotGuid,l,f))}function u(t){I.killEvent(t);e(t.currentTarget);var l=t.data;l.focused&&l.closed&&(l.focused=!1,l.$dropdown.removeClass(g.focus).off(C.keyDown+l.dotGuid),l.multiple||(d(l),l.index!==l.focusIndex&&($(l),l.focusIndex=l.index)))}function f(l){var i=l.data;if(i.keyTimer=I.startTimer(i.keyTimer,1e3,function(){i.input=""}),13===l.keyCode)i.closed||(d(i),m(i.index,i)),$(i);else if(!(9===l.keyCode||l.metaKey||l.altKey||l.ctrlKey||l.shiftKey)){I.killEvent(l);var o=i.$items.length-1,s=i.index<0?0:i.index;if(e.inArray(l.keyCode,t.isFirefox?[38,40,37,39]:[38,40])>-1)(s+=38===l.keyCode||t.isFirefox&&37===l.keyCode?-1:1)<0&&(s=0),s>o&&(s=o);else{var a,n=String.fromCharCode(l.keyCode).toUpperCase();for(i.input+=n,a=i.index+1;a<=o;a++)if(i.$options.eq(a).text().substr(0,i.input.length).toUpperCase()===i.input){s=a;break}if(s<0||s===i.index)for(a=0;a<=o;a++)if(i.$options.eq(a).text().substr(0,i.input.length).toUpperCase()===i.input){s=a;break}}s>=0&&(m(s,i),b(i))}}function m(e,t,l,i){var o=t.$items.eq(e),s=t.$options.eq(e),d=o.hasClass(g.item_selected);if(!o.hasClass(g.item_disabled))if(t.multiple)if(t.mobile)d?(s.prop("selected",null).attr("aria-selected",null),o.removeClass(g.item_selected)):(s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected));else if(l&&!1!==t.lastIndex){var a=t.lastIndex>e?e:t.lastIndex,n=(t.lastIndex>e?t.lastIndex:e)+1;t.$options.prop("selected",null).attr("aria-selected",null),t.$items.filter(w.item_selected).removeClass(g.item_selected),t.$options.slice(a,n).not("[disabled]").prop("selected",!0),t.$items.slice(a,n).not(w.item_disabled).addClass(g.item_selected)}else i?(d?(s.prop("selected",null).attr("aria-selected",null),o.removeClass(g.item_selected)):(s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected)),t.lastIndex=e):(t.$options.prop("selected",null).attr("aria-selected",null),t.$items.filter(w.item_selected).removeClass(g.item_selected),s.prop("selected",!0).attr("aria-selected",!0),o.addClass(g.item_selected),t.lastIndex=e);else if(e>-1&&e<t.$items.length){if(e!==t.index){var r=s.data("label")||o.html();t.$selected.html(r).removeClass(w.item_placeholder),t.$items.filter(w.item_selected).removeClass(g.item_selected),t.$el[0].selectedIndex=e,o.addClass(g.item_selected),t.index=e}}else""!==t.label&&t.$selected.html(t.label)}function b(t){var l=t.$items.eq(t.index),i=t.index>=0&&!l.hasClass(g.item_placeholder)?l.position():{left:0,top:0},o=(t.$wrapper.outerHeight()-l.outerHeight())/2;void 0!==e.fn.fsScrollbar?t.$wrapper.fsScrollbar("resize").fsScrollbar("scroll",t.$wrapper.find(".fs-scrollbar-content").scrollTop()+i.top):t.$wrapper.scrollTop(t.$wrapper.scrollTop()+i.top-o)}function $(e,t){e.links?h(e):t||e.$el.trigger(C.raw.change,[!0])}function h(e){var t=e.$el.val();e.external?k.open(t):k.location.href=t}function v(e,t){return 0===t?e:e.length>t?e.substring(0,t)+"...":e}var x=t.Plugin("dropdown",{widget:!0,defaults:{bottomEdge:0,cover:!1,customClass:"",label:"",external:!1,links:!1,mobile:!1,theme:"fs-light",trim:0},methods:{_setup:function(){y=t.$body},_construct:function(t){t.multiple=this.prop("multiple"),t.disabled=this.prop("disabled")||this.is("[readonly]"),t.lastIndex=!1,t.multiple?t.links=!1:t.external&&(t.links=!0);var o=this.find("[selected]").not(":disabled"),s=this.find(":selected").not(":disabled"),d=s.text(),a=this.find("option").index(s);t.multiple||""===t.label||o.length?t.label="":(s=this.prepend('<option value="" class="'+g.item_placeholder+'" selected>'+t.label+"</option>"),d=t.label,a=0);var f=this.find("option, optgroup"),b=f.filter("option"),$=e("[for="+this.attr("id")+"]");t.tabIndex=this[0].tabIndex,this[0].tabIndex=-1,$.length&&($[0].tabIndex=-1);var h=[g.base,t.theme,t.customClass];t.mobile?h.push(g.mobile):t.cover&&h.push(g.cover),t.multiple&&h.push(g.multiple),t.disabled&&h.push(g.disabled),t.id=this.attr("id"),t.id?t.ariaId=t.id:t.ariaId=t.rawGuid,t.ariaId+="-dropdown",t.selectedAriaId=t.ariaId+"-selected";var x="",I="";x+='<div class="'+h.join(" ")+'"id="'+t.ariaId+'" tabindex="'+t.tabIndex+'" role="listbox"',t.multiple?x+=' aria-label="multi select"':x+=' aria-haspopup="true" aria-live="polite" aria-labeledby="'+t.selectedAriaId+'"',x+="></div>",t.multiple||(I+='<button type="button" class="'+g.selected+'" id="'+t.selectedAriaId+'" tabindex="-1">',I+=e("<span></span>").text(v(d,t.trim)).html(),I+="</button>"),I+='<div class="'+g.options+'">',I+="</div>",this.wrap(x).after(I),t.$dropdown=this.parent(w.base),t.$label=$,t.$allOptions=f,t.$options=b,t.$selected=t.$dropdown.find(w.selected),t.$wrapper=t.$dropdown.find(w.options),t.$placeholder=t.$dropdown.find(w.placeholder),t.index=-1,t.closed=!0,t.focused=!1,l(t),t.multiple||m(a,t),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar({theme:t.theme}).find(".fs-scrollbar-content").attr("tabindex",null),t.$dropdown.on(C.click,t,i),t.$selected.on(C.click,t,i),t.$dropdown.on(C.click,w.item,t,r).on(C.close,t,n),this.on(C.change,t,p),t.mobile||(this.on(C.focusIn,t,function(e){e.data.$dropdown.trigger(C.raw.focus)}),t.$dropdown.on(C.focusIn,t,c).on(C.focusOut,t,u))},_destruct:function(t){t.$dropdown.hasClass(g.open)&&t.$selected.trigger(C.click),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar("destroy"),t.$el[0].tabIndex=t.tabIndex,t.$label.length&&(t.$label[0].tabIndex=t.tabIndex),t.$dropdown.off(C.namespace),t.$options.off(C.namespace),t.$placeholder.remove(),t.$selected.remove(),t.$wrapper.remove(),t.$el.off(C.namespace).show().unwrap()},disable:function(e,t){if(void 0!==t){var l=e.$items.index(e.$items.filter("[data-value="+t+"]"));e.$items.eq(l).addClass(g.item_disabled),e.$options.eq(l).prop("disabled",!0)}else e.$dropdown.hasClass(g.open)&&e.$selected.trigger(C.click),e.$dropdown.addClass(g.disabled),e.$el.prop("disabled",!0),e.disabled=!0},enable:function(e,t){if(void 0!==t){var l=e.$items.index(e.$items.filter("[data-value="+t+"]"));e.$items.eq(l).removeClass(g.item_disabled),e.$options.eq(l).prop("disabled",!1)}else e.$dropdown.removeClass(g.disabled),e.$el.prop("disabled",!1),e.disabled=!1},update:function(t){void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar("destroy");var i=t.index;t.$allOptions=t.$el.find("option, optgroup"),t.$options=t.$allOptions.filter("option"),t.index=-1,i=t.$options.index(t.$options.filter(":selected")),l(t),t.multiple||m(i,t),void 0!==e.fn.fsScrollbar&&t.$wrapper.fsScrollbar({theme:t.theme}).find(".fs-scrollbar-content").attr("tabindex",null)},open:s,close:d},classes:["cover","bottom","multiple","mobile","open","disabled","focus","selected","options","group","item","item_disabled","item_selected","item_placeholder"],events:{close:"close"}}),w=x.classes,g=w.raw,C=x.events,I=x.functions,k=t.window,_=t.$window,y=(t.document,null)});
-/*! formstone v1.3.3 [equalize.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function n(){c=e(f.element)}function i(e){if(e.data&&(e=e.data),e.enabled)for(var t,n,i,r=0;r<e.target.length;r++){t=0,n=0,(i=e.$el.find(e.target[r])).css(e.property,"");for(var a=0;a<i.length;a++)(n=i.eq(a)[e.type]())>t&&(t=n);i.css(e.property,t)}}function r(e){e.enabled&&(e.enabled=!1,d(e))}function a(e){if(!e.enabled){e.enabled=!0;var t=e.$el.find("img");t.length&&t.on(u.load,e,i),i(e)}}function d(e){for(var t=0;t<e.target.length;t++)e.$el.find(e.target[t]).css(e.property,"");e.$el.find("img").off(u.namespace)}var o=t.Plugin("equalize",{widget:!0,priority:5,defaults:{maxWidth:1/0,minWidth:"0px",property:"height",target:null},methods:{_construct:function(t){t.maxWidth=t.maxWidth===1/0?"100000px":t.maxWidth,t.mq="(min-width:"+t.minWidth+") and (max-width:"+t.maxWidth+")",t.type="height"===t.property?"outerHeight":"outerWidth",t.target?e.isArray(t.target)||(t.target=[t.target]):t.target=["> *"],n(),e.fsMediaquery("bind",t.rawGuid,t.mq,{enter:function(){a.call(t.$el,t)},leave:function(){r.call(t.$el,t)}})},_destruct:function(t){d(t),e.fsMediaquery("unbind",t.rawGuid),n()},_resize:function(e){l.iterate.call(c,i)},resize:i}}),f=o.classes,u=(f.raw,o.events),l=o.functions,c=[]});
-/*! formstone v1.3.3 [lightbox.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core","./touch","./transition","./viewer"],t):t(jQuery,Formstone)}(function(t,i){"use strict";function e(e){if(!Z){var n=e.data;(Z=t.extend({},{visible:!1,gallery:{active:!1},isMobile:i.isMobile||n.mobile,isTouch:i.support.touch,isAnimating:!0,isZooming:!1,oldContentHeight:0,oldContentWidth:0,metaHeight:0,thumbnailHeight:0,captionOpen:!1,thumbnailsOpen:!1,tapTimer:null},n)).isViewer=Z.isMobile&&n.viewer&&void 0!==t.fn.fsViewer;var a=n.$el,l=n.$object,g=a&&a[0].href?a[0].href||"":"",d=a&&a[0].hash?a[0].hash||"":"",c=(g.toLowerCase().split(".").pop().split(/\#|\?/),a?a.data(P+"-type"):""),p="image"===c||g.match(n.fileTypes)||"data:image"===g.substr(0,10),u=z(g),v="url"===c||!p&&!u&&"http"===g.substr(0,4)&&!d,H="element"===c||!p&&!u&&!v&&"#"===d.substr(0,1),w=void 0!==l;if(H&&(g=d),!(p||u||v||H||w))return void(Z=null);if(B.killEvent(e),Z.margin*=2,Z.type=p?"image":u?"video":"element",p||u){var W=a.data(P+"-gallery");W&&(Z.gallery.active=!0,Z.gallery.id=W,Z.gallery.$items=t("a[data-lightbox-gallery= "+Z.gallery.id+"], a[rel= "+Z.gallery.id+"]"),Z.gallery.index=Z.gallery.$items.index(Z.$el),Z.gallery.total=Z.gallery.$items.length-1)}Z.thumbnails&&(p||u)&&Z.gallery.active||(Z.thumbnails=!1);var y="";Z.isMobile||(y+='<div class="'+[R.overlay,Z.theme,Z.customClass].join(" ")+'"></div>');var I=[R.base,R.loading,R.animating,Z.theme,Z.customClass];if(Z.fixed&&I.push(R.fixed),Z.isMobile&&I.push(R.mobile),Z.isTouch&&I.push(R.touch),v&&I.push(R.iframed),(H||w)&&I.push(R.inline),Z.thumbnails&&I.push(R.thumbnailed),y+='<div class="'+I.join(" ")+'" role="dialog" aria-label="lightbox" tabindex="-1">',y+='<button type="button" class="'+R.close+'">'+Z.labels.close+"</button>",y+='<span class="'+R.loading_icon+'"></span>',y+='<div class="'+R.container+'">',Z.gallery.active&&Z.thumbnails){y+='<div class="'+[R.thumbnails]+'">',y+='<div class="'+[R.thumbnail_container]+'">';for(var M,k,j=0,L=Z.gallery.$items.length;j<L;j++)(k=(M=Z.gallery.$items.eq(j)).data("lightbox-thumbnail"))||(k=M.find("img").attr("src")),y+='<button class="'+[R.thumbnail_item]+'">',y+='<img src="'+k+'" alt="">',y+="</button>";y+="</div></div>"}y+='<div class="'+R.content+'"></div>',(p||u)&&(y+='<div class="'+R.tools+'">',y+='<div class="'+R.controls+'">',Z.gallery.active&&(y+='<button type="button" class="'+[R.control,R.control_previous].join(" ")+'">'+Z.labels.previous+"</button>",y+='<button type="button" class="'+[R.control,R.control_next].join(" ")+'">'+Z.labels.next+"</button>"),Z.isMobile&&Z.isTouch&&(y+='<button type="button" class="'+[R.toggle,R.caption_toggle].join(" ")+'">'+Z.labels.captionClosed+"</button>",Z.gallery.active&&Z.thumbnails&&(y+='<button type="button" class="'+[R.toggle,R.thumbnail_toggle].join(" ")+'">'+Z.labels.thumbnailsClosed+"</button>")),y+="</div>",y+='<div class="'+R.meta+'">',y+='<div class="'+R.meta_content+'">',Z.gallery.active&&(y+='<p class="'+R.position+'"',Z.gallery.total<1&&(y+=' style="display: none;"'),y+=">",y+='<span class="'+R.position_current+'">'+(Z.gallery.index+1)+"</span> ",y+=Z.labels.count,y+=' <span class="'+R.position_total+'">'+(Z.gallery.total+1)+"</span>",y+="</p>"),y+='<div class="'+R.caption+'">',y+=Z.formatter.call(a,n),y+="</div></div></div>",y+="</div>"),y+="</div></div>",D.append(y),Z.$overlay=t(E.overlay),Z.$lightbox=t(E.base),Z.$close=t(E.close),Z.$container=t(E.container),Z.$content=t(E.content),Z.$tools=t(E.tools),Z.$meta=t(E.meta),Z.$metaContent=t(E.meta_content),Z.$position=t(E.position),Z.$caption=t(E.caption),Z.$controlBox=t(E.controls),Z.$controls=t(E.control),Z.$thumbnails=t(E.thumbnails),Z.$thumbnailContainer=t(E.thumbnail_container),Z.$thumbnailItems=t(E.thumbnail_item),Z.isMobile?(Z.paddingVertical=Z.$close.outerHeight(),Z.paddingHorizontal=0,Z.mobilePaddingVertical=parseInt(Z.$content.css("paddingTop"),10)+parseInt(Z.$content.css("paddingBottom"),10),Z.mobilePaddingHorizontal=parseInt(Z.$content.css("paddingLeft"),10)+parseInt(Z.$content.css("paddingRight"),10)):(Z.paddingVertical=parseInt(Z.$lightbox.css("paddingTop"),10)+parseInt(Z.$lightbox.css("paddingBottom"),10),Z.paddingHorizontal=parseInt(Z.$lightbox.css("paddingLeft"),10)+parseInt(Z.$lightbox.css("paddingRight"),10),Z.mobilePaddingVertical=0,Z.mobilePaddingHorizontal=0),Z.contentHeight=Z.$lightbox.outerHeight()-Z.paddingVertical,Z.contentWidth=Z.$lightbox.outerWidth()-Z.paddingHorizontal,Z.controlHeight=Z.$controls.outerHeight(),r(),Z.gallery.active&&(Z.$lightbox.addClass(R.has_controls),x()),K.on(A.keyDown,C),D.on(A.click,[E.overlay,E.close].join(", "),o).on([A.focus,A.focusIn].join(" "),O),Z.gallery.active&&Z.$lightbox.on(A.click,E.control,$),Z.thumbnails&&Z.$lightbox.on(A.click,E.thumbnail_item,f),Z.isMobile&&Z.isTouch&&Z.$lightbox.on(A.click,E.caption_toggle,s).on(A.click,E.thumbnail_toggle,h),Z.$lightbox.fsTransition({property:"opacity"},function(){p?m(g):u?b(g):v?V(g):H?_(g):w&&T(Z.$object)}).addClass(R.open),Z.$overlay.addClass(R.open)}}function n(t){"object"!=typeof t&&(Z.targetHeight=arguments[0],Z.targetWidth=arguments[1]),"element"===Z.type?M(Z.$content.find("> :first-child")):"image"===Z.type?p():"video"===Z.type&&v(),l()}function o(t){B.killEvent(t),Z&&(Z.$lightbox.fsTransition("destroy"),Z.$content.fsTransition("destroy"),Z.$lightbox.addClass(R.animating).fsTransition({property:"opacity"},function(t){void 0!==Z.$inlineTarget&&Z.$inlineTarget.length&&I(),Z.isViewer&&Z.$imageContainer&&Z.$imageContainer.length&&Z.$imageContainer.fsViewer("destroy"),Z.$lightbox.off(A.namespace),Z.$container.off(A.namespace),K.off(A.keyDown),D.off(A.namespace),D.off(A.namespace),Z.$overlay.remove(),Z.$lightbox.remove(),void 0!==Z.$el&&Z.$el&&Z.$el.length&&Z.$el.focus(),Z=null,K.trigger(A.close)}),Z.$lightbox.removeClass(R.open),Z.$overlay.removeClass(R.open),Z.isMobile&&(N.removeClass(R.lock),B.unlockViewport(P)))}function a(){var t=g();Z.isMobile||Z.duration;Z.isMobile?B.lockViewport(P):Z.$controls.css({marginTop:(Z.contentHeight-Z.controlHeight-Z.metaHeight+Z.thumbnailHeight)/2}),""===Z.$caption.html()?(Z.$caption.hide(),Z.$lightbox.removeClass(R.has_caption),Z.gallery.active||Z.$tools.hide()):(Z.$caption.show(),Z.$lightbox.addClass(R.has_caption)),Z.$lightbox.fsTransition({property:Z.contentHeight!==Z.oldContentHeight?"height":"width"},function(){Z.$content.fsTransition({property:"opacity"},function(){Z.$lightbox.removeClass(R.animating),Z.isAnimating=!1}),Z.$lightbox.removeClass(R.loading).addClass(R.ready),Z.visible=!0,K.trigger(A.open),Z.gallery.active&&(H(),w(),W()),Z.$lightbox.focus()}),Z.isMobile||Z.$lightbox.css({height:Z.contentHeight+Z.paddingVertical,width:Z.contentWidth+Z.paddingHorizontal,top:Z.fixed?0:t.top});var i=Z.oldContentHeight!==Z.contentHeight||Z.oldContentWidth!==Z.contentWidth;!Z.isMobile&&i||Z.$lightbox.fsTransition("resolve"),Z.oldContentHeight=Z.contentHeight,Z.oldContentWidth=Z.contentWidth,Z.isMobile&&N.addClass(R.lock)}function l(){if(Z.visible&&!Z.isMobile){var t=g();Z.$controls.css({marginTop:(Z.contentHeight-Z.controlHeight-Z.metaHeight+Z.thumbnailHeight)/2}),Z.$lightbox.css({height:Z.contentHeight+Z.paddingVertical,width:Z.contentWidth+Z.paddingHorizontal,top:Z.fixed?0:t.top}),Z.oldContentHeight=Z.contentHeight,Z.oldContentWidth=Z.contentWidth}}function r(){var t=g();Z.$lightbox.css({top:Z.fixed?0:t.top})}function g(){if(Z.isMobile)return{left:0,top:0};var t={left:(i.windowWidth-Z.contentWidth-Z.paddingHorizontal)/2,top:Z.top<=0?(i.windowHeight-Z.contentHeight-Z.paddingVertical)/2:Z.top};return!0!==Z.fixed&&(t.top+=K.scrollTop()),t}function s(t){if(B.killEvent(t),Z.captionOpen)d();else{c();var i=parseInt(Z.$metaContent.outerHeight(!0));i+=parseInt(Z.$meta.css("padding-top")),i+=parseInt(Z.$meta.css("padding-bottom")),Z.$meta.css({height:i}),Z.$lightbox.addClass(R.caption_open).find(E.caption_toggle).text(Z.labels.captionOpen),Z.captionOpen=!0}}function d(){Z.$lightbox.removeClass(R.caption_open).find(E.caption_toggle).text(Z.labels.captionClosed),Z.captionOpen=!1}function h(t){B.killEvent(t),Z.thumbnailsOpen?c():(d(),Z.$lightbox.addClass(R.thumbnails_open).find(E.thumbnail_toggle).text(Z.labels.thumbnailsOpen),Z.thumbnailsOpen=!0)}function c(){Z.$lightbox.removeClass(R.thumbnails_open).find(E.thumbnail_toggle).text(Z.labels.thumbnailsClosed),Z.thumbnailsOpen=!1}function m(i){Z.isViewer?(Z.$imageContainer=t('<div class="'+R.image_container+'"><img></div>'),Z.$image=Z.$imageContainer.find("img"),Z.$image.attr("src",i).addClass(R.image),Z.$content.prepend(Z.$imageContainer),p(),Z.$imageContainer.one("loaded.viewer",function(){a()}).fsViewer({theme:Z.theme})):(Z.$imageContainer=t('<div class="'+R.image_container+'"><img></div>'),Z.$image=Z.$imageContainer.find("img"),Z.$image.one(A.load,function(){var t=j(Z.$image);Z.naturalHeight=t.naturalHeight,Z.naturalWidth=t.naturalWidth,Z.retina&&(Z.naturalHeight/=2,Z.naturalWidth/=2),Z.$content.prepend(Z.$imageContainer),p(),a()}).on(A.error,k).attr("src",i).addClass(R.image),(Z.$image[0].complete||4===Z.$image[0].readyState)&&Z.$image.trigger(A.load))}function p(){if(Z.$image){var t=0;for(Z.windowHeight=Z.viewportHeight=i.windowHeight-Z.mobilePaddingVertical-Z.paddingVertical,Z.windowWidth=Z.viewportWidth=i.windowWidth-Z.mobilePaddingHorizontal-Z.paddingHorizontal,Z.contentHeight=1/0,Z.contentWidth=1/0,Z.imageMarginTop=0,Z.imageMarginLeft=0;Z.contentHeight>Z.viewportHeight&&t<2;)Z.imageHeight=0===t?Z.naturalHeight:Z.$image.outerHeight(),Z.imageWidth=0===t?Z.naturalWidth:Z.$image.outerWidth(),Z.metaHeight=0===t?0:Z.metaHeight,Z.spacerHeight=0===t?0:Z.spacerHeight,Z.thumbnailHeight=0===t?0:Z.thumbnailHeight,0===t&&(Z.ratioHorizontal=Z.imageHeight/Z.imageWidth,Z.ratioVertical=Z.imageWidth/Z.imageHeight,Z.isWide=Z.imageWidth>Z.imageHeight),Z.imageHeight<Z.minHeight&&(Z.minHeight=Z.imageHeight),Z.imageWidth<Z.minWidth&&(Z.minWidth=Z.imageWidth),Z.isMobile?(Z.isTouch?(Z.$controlBox.css({width:i.windowWidth}),Z.spacerHeight=Z.$controls.outerHeight(!0)):(Z.$tools.css({width:i.windowWidth}),Z.spacerHeight=Z.$tools.outerHeight(!0)),Z.contentHeight=Z.viewportHeight,Z.contentWidth=Z.viewportWidth,Z.isTouch||Z.$content.css({height:Z.contentHeight-Z.spacerHeight}),Z.spacerHeight+=Z.$thumbnails.outerHeight(!0)+10,u(),Z.imageMarginTop=(Z.contentHeight-Z.targetImageHeight-Z.spacerHeight)/2,Z.imageMarginLeft=(Z.contentWidth-Z.targetImageWidth)/2):(0===t&&(Z.viewportHeight-=Z.margin+Z.paddingVertical,Z.viewportWidth-=Z.margin+Z.paddingHorizontal),Z.viewportHeight-=Z.metaHeight,Z.thumbnails&&(Z.viewportHeight-=Z.thumbnailHeight),u(),Z.contentHeight=Z.targetImageHeight,Z.contentWidth=Z.targetImageWidth),Z.isMobile||Z.isTouch||Z.$meta.css({width:Z.contentWidth}),Z.$image.css({height:Z.targetImageHeight,width:Z.targetImageWidth,marginTop:Z.imageMarginTop,marginLeft:Z.imageMarginLeft}),Z.isMobile||(Z.metaHeight=Z.$meta.outerHeight(!0),Z.contentHeight+=Z.metaHeight),Z.thumbnails&&(Z.thumbnailHeight=Z.$thumbnails.outerHeight(!0),Z.contentHeight+=Z.thumbnailHeight),t++}}function u(){var t=Z.isMobile?Z.contentHeight-Z.spacerHeight:Z.viewportHeight,i=Z.isMobile?Z.contentWidth:Z.viewportWidth;Z.isWide?(Z.targetImageWidth=i,Z.targetImageHeight=Z.targetImageWidth*Z.ratioHorizontal,Z.targetImageHeight>t&&(Z.targetImageHeight=t,Z.targetImageWidth=Z.targetImageHeight*Z.ratioVertical)):(Z.targetImageHeight=t,Z.targetImageWidth=Z.targetImageHeight*Z.ratioVertical,Z.targetImageWidth>i&&(Z.targetImageWidth=i,Z.targetImageHeight=Z.targetImageWidth*Z.ratioHorizontal)),(Z.targetImageWidth>Z.imageWidth||Z.targetImageHeight>Z.imageHeight)&&(Z.targetImageHeight=Z.imageHeight,Z.targetImageWidth=Z.imageWidth),(Z.targetImageWidth<Z.minWidth||Z.targetImageHeight<Z.minHeight)&&(Z.targetImageWidth<Z.minWidth?(Z.targetImageWidth=Z.minWidth,Z.targetImageHeight=Z.targetImageWidth*Z.ratioHorizontal):(Z.targetImageHeight=Z.minHeight,Z.targetImageWidth=Z.targetImageHeight*Z.ratioVertical))}function b(i){var e=z(i),n=i.split("?");e?(n.length>=2&&(e+="?"+n.slice(1)[0].trim()),Z.$videoWrapper=t('<div class="'+R.video_wrapper+'"></div>'),Z.$video=t('<iframe class="'+R.video+'" frameborder="0" seamless="seamless" allowfullscreen></iframe>'),Z.$video.attr("src",e).addClass(R.video).prependTo(Z.$videoWrapper),Z.$content.prepend(Z.$videoWrapper),v(),a()):k()}function v(){Z.windowHeight=Z.viewportHeight=i.windowHeight-Z.mobilePaddingVertical-Z.paddingVertical,Z.windowWidth=Z.viewportWidth=i.windowWidth-Z.mobilePaddingHorizontal-Z.paddingHorizontal,Z.videoMarginTop=0,Z.videoMarginLeft=0,Z.isMobile?(Z.isTouch?(Z.$controlBox.css({width:i.windowWidth}),Z.spacerHeight=Z.$controls.outerHeight(!0)+10):(Z.$tools.css({width:i.windowWidth}),Z.spacerHeight=Z.$tools.outerHeight(!0),Z.spacerHeight+=Z.$thumbnails.outerHeight(!0)+10),Z.viewportHeight-=Z.spacerHeight,Z.targetVideoWidth=Z.viewportWidth,Z.targetVideoHeight=Z.targetVideoWidth*Z.videoRatio,Z.targetVideoHeight>Z.viewportHeight&&(Z.targetVideoHeight=Z.viewportHeight,Z.targetVideoWidth=Z.targetVideoHeight/Z.videoRatio),Z.videoMarginTop=(Z.viewportHeight-Z.targetVideoHeight)/2,Z.videoMarginLeft=(Z.viewportWidth-Z.targetVideoWidth)/2):(Z.viewportHeight=Z.windowHeight-Z.margin,Z.viewportWidth=Z.windowWidth-Z.margin,Z.targetVideoWidth=Z.videoWidth>Z.viewportWidth?Z.viewportWidth:Z.videoWidth,Z.targetVideoWidth<Z.minWidth&&(Z.targetVideoWidth=Z.minWidth),Z.targetVideoHeight=Z.targetVideoWidth*Z.videoRatio,Z.contentHeight=Z.targetVideoHeight,Z.contentWidth=Z.targetVideoWidth),Z.isMobile||Z.isTouch||Z.$meta.css({width:Z.contentWidth}),Z.$videoWrapper.css({height:Z.targetVideoHeight,width:Z.targetVideoWidth,marginTop:Z.videoMarginTop,marginLeft:Z.videoMarginLeft}),Z.isMobile||(Z.metaHeight=Z.$meta.outerHeight(!0),Z.contentHeight+=Z.metaHeight),Z.thumbnails&&(Z.thumbnailHeight=Z.$thumbnails.outerHeight(!0),Z.contentHeight+=Z.thumbnailHeight)}function H(i){var e="";Z.gallery.index>0&&(z(e=Z.gallery.$items.eq(Z.gallery.index-1).attr("href"))||t('<img src="'+e+'">')),Z.gallery.index<Z.gallery.total&&(z(e=Z.gallery.$items.eq(Z.gallery.index+1).attr("href"))||t('<img src="'+e+'">'))}function $(i){B.killEvent(i);var e=t(i.currentTarget);Z.isAnimating||e.hasClass(R.control_disabled)||(Z.isAnimating=!0,d(),Z.gallery.index+=e.hasClass(R.control_next)?1:-1,Z.gallery.index>Z.gallery.total&&(Z.gallery.index=Z.infinite?0:Z.gallery.total),Z.gallery.index<0&&(Z.gallery.index=Z.infinite?Z.gallery.total:0),w(),Z.$lightbox.addClass(R.animating),Z.$content.fsTransition({property:"opacity"},y),Z.$lightbox.addClass(R.loading))}function f(i){B.killEvent(i);var e=t(i.currentTarget);Z.isAnimating||e.hasClass(R.active)||(Z.isAnimating=!0,d(),Z.gallery.index=Z.$thumbnailItems.index(e),w(),Z.$lightbox.addClass(R.animating),Z.$content.fsTransition({property:"opacity"},y),Z.$lightbox.addClass(R.loading))}function w(){if(Z.thumbnails){var t=Z.$thumbnailItems.eq(Z.gallery.index);Z.$thumbnailItems.removeClass(R.active),t.addClass(R.active)}}function W(){if(Z.thumbnails){var t=Z.$thumbnailItems.eq(Z.gallery.index),i=t.position().left+t.outerWidth(!1)/2-Z.$thumbnailContainer.outerWidth(!0)/2;Z.$thumbnailContainer.stop().animate({scrollLeft:i},200,"linear")}}function y(){void 0!==Z.$imageContainer&&(Z.isViewer&&Z.$imageContainer.fsViewer("destroy"),Z.$imageContainer.remove()),void 0!==Z.$videoWrapper&&Z.$videoWrapper.remove(),Z.$el=Z.gallery.$items.eq(Z.gallery.index),Z.$caption.html(Z.formatter.call(Z.$el,Z)),Z.$position.find(E.position_current).html(Z.gallery.index+1);var t=Z.$el.attr("href");z(t)?(Z.type="video",b(t)):(Z.type="image",m(t)),x()}function x(){Z.$controls.removeClass(R.control_disabled),Z.infinite||(0===Z.gallery.index&&Z.$controls.filter(E.control_previous).addClass(R.control_disabled),Z.gallery.index===Z.gallery.total&&Z.$controls.filter(E.control_next).addClass(R.control_disabled))}function C(t){!Z.gallery.active||37!==t.keyCode&&39!==t.keyCode?27===t.keyCode&&Z.$close.trigger(A.click):(B.killEvent(t),Z.$controls.filter(37===t.keyCode?E.control_previous:E.control_next).trigger(A.click))}function _(i){Z.$inlineTarget=t(i),Z.$inlineContents=Z.$inlineTarget.children().detach(),T(Z.$inlineContents)}function I(){Z.$inlineTarget.append(Z.$inlineContents.detach())}function V(i){i+=i.indexOf("?")>-1?"&"+Z.requestKey+"=true":"?"+Z.requestKey+"=true",T(t('<iframe class="'+R.iframe+'" src="'+i+'"></iframe>'))}function T(t){Z.$content.append(t),M(t),a()}function M(t){Z.windowHeight=i.windowHeight-Z.mobilePaddingVertical-Z.paddingVertical,Z.windowWidth=i.windowWidth-Z.mobilePaddingHorizontal-Z.paddingHorizontal,Z.objectHeight=t.outerHeight(!0),Z.objectWidth=t.outerWidth(!0),Z.targetHeight=Z.targetHeight||(Z.$el?Z.$el.data(P+"-height"):null),Z.targetWidth=Z.targetWidth||(Z.$el?Z.$el.data(P+"-width"):null),Z.maxHeight=Z.windowHeight<0?Z.minHeight:Z.windowHeight,Z.isIframe=t.is("iframe"),Z.objectMarginTop=0,Z.objectMarginLeft=0,Z.isMobile||(Z.windowHeight-=Z.margin,Z.windowWidth-=Z.margin),Z.contentHeight=Z.targetHeight?Z.targetHeight:Z.isIframe||Z.isMobile?Z.windowHeight:Z.objectHeight,Z.contentWidth=Z.targetWidth?Z.targetWidth:Z.isIframe||Z.isMobile?Z.windowWidth:Z.objectWidth,(Z.isIframe||Z.isObject)&&Z.isMobile?(Z.contentHeight=Z.windowHeight,Z.contentWidth=Z.windowWidth):Z.isObject&&(Z.contentHeight=Z.contentHeight>Z.windowHeight?Z.windowHeight:Z.contentHeight,Z.contentWidth=Z.contentWidth>Z.windowWidth?Z.windowWidth:Z.contentWidth),Z.isMobile||(Z.contentHeight>Z.maxHeight&&(Z.contentHeight=Z.maxHeight),Z.contentWidth>Z.maxWidth&&(Z.contentWidth=Z.maxWidth))}function k(){var i=t('<div class="'+R.error+'"><p>Error Loading Resource</p></div>');Z.type="element",Z.$tools.remove(),Z.$image.off(A.namespace),T(i),K.trigger(A.error)}function j(t){var i=t[0],e=new Image;return void 0!==i.naturalHeight?{naturalHeight:i.naturalHeight,naturalWidth:i.naturalWidth}:"img"===i.tagName.toLowerCase()&&(e.src=i.src,{naturalHeight:e.height,naturalWidth:e.width})}function z(t){var i,e=Z.videoFormatter;for(var n in e)if(e.hasOwnProperty(n)&&null!==(i=t.match(e[n].pattern)))return e[n].format.call(Z,i);return!1}function O(i){var e=i.target;t.contains(Z.$lightbox[0],e)||e===Z.$lightbox[0]||e===Z.$overlay[0]||(B.killEvent(i),Z.$lightbox.focus())}var L=i.Plugin("lightbox",{widget:!0,defaults:{customClass:"",fileTypes:/\.(jpg|sjpg|jpeg|png|gif)$/i,fixed:!1,formatter:function(){var t=this.attr("title"),i=!(void 0===t||!t)&&t.replace(/^\s+|\s+$/g,"");return i?'<p class="caption">'+i+"</p>":""},infinite:!1,labels:{close:"Close",count:"of",next:"Next",previous:"Previous",captionClosed:"View Caption",captionOpen:"Close Caption",thumbnailsClosed:"View Thumbnails",thumbnailsOpen:"Close Thumbnails"},margin:50,maxHeight:1e4,maxWidth:1e4,minHeight:100,minWidth:100,mobile:!1,retina:!1,requestKey:"fs-lightbox",theme:"fs-light",thumbnails:!1,top:0,videoFormatter:{youtube:{pattern:/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,format:function(t){return"//www.youtube.com/embed/"+t[1]}},vimeo:{pattern:/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,format:function(t){return"//player.vimeo.com/video/"+t[3]}}},videoRatio:.5625,videoWidth:800,viewer:!0},classes:["loading","animating","scaling","zooming","fixed","mobile","touch","inline","iframed","open","ready","overlay","close","loading_icon","container","content","image","image_container","video","video_wrapper","tools","meta","meta_content","controls","control","control_previous","control_next","control_disabled","position","position_current","position_total","toggle","caption_toggle","caption","caption_open","thumbnailed","thumbnails_open","thumbnail_toggle","thumbnails","thumbnail_container","thumbnail_item","active","has_controls","has_caption","iframe","error","active","lock"],events:{open:"open",close:"close"},methods:{_setup:function(){D=i.$body,N=t("html, body"),Q=i.window.location.hash.replace("#","")},_construct:function(t){this.on(A.click,t,e);var i=this.data(P+"-gallery");!S&&Q&&i===Q&&(S=!0,this.trigger(A.click))},_destruct:function(t){o(),this.off(A.namespace)},_resize:function(){Z&&n()},resize:n},utilities:{_initialize:function(i,n){i instanceof t&&e.apply(F,[{data:t.extend(!0,{},{$object:i},q,n||{})}])},close:o}}),P=L.namespace,q=L.defaults,E=L.classes,R=E.raw,A=L.events,B=L.functions,F=i.window,K=i.$window,D=null,N=null,Q=!1,S=!1,Z=null});
-/*! formstone v1.3.3 [mediaquery.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function i(){m={unit:s.unit};for(var e in u)if(u.hasOwnProperty(e))for(var i in l[e])if(l[e].hasOwnProperty(i)){var n="Infinity"===i?1/0:parseInt(i,10),a=u[e].indexOf("width")>-1?t.fallbackWidth:t.fallbackHeight,r=e.indexOf("max")>-1;t.support.nativeMatchMedia?l[e][i].matches&&(r?(!m[e]||n<m[e])&&(m[e]=n):(!m[e]||n>m[e])&&(m[e]=n)):r?!m[e]&&n>a&&(m[e]=n):(!m[e]&&0!==m[e]||n>m[e]&&n<a)&&(m[e]=n)}}function n(){i(),c.trigger(h.mqChange,[m])}function a(e){var t=r(e.media),i=v[t],n=e.matches,a=n?h.enter:h.leave;if(i&&(i.active||!i.active&&n)){for(var o in i[a])i[a].hasOwnProperty(o)&&i[a][o].apply(i.mq);i.active=!0}}function r(e){return e.replace(/[^a-z0-9\s]/gi,"").replace(/[_\s]/g,"").replace(/^\s+|\s+$/g,"")}var o=t.Plugin("mediaquery",{utilities:{_initialize:function(t){t=t||{};for(var i in u)u.hasOwnProperty(i)&&(s[i]=t[i]?e.merge(t[i],s[i]):s[i]);(s=e.extend(s,t)).minWidth.sort(f.sortDesc),s.maxWidth.sort(f.sortAsc),s.minHeight.sort(f.sortDesc),s.maxHeight.sort(f.sortAsc);for(var a in u)if(u.hasOwnProperty(a)){l[a]={};for(var r in s[a])if(s[a].hasOwnProperty(r)){var o=window.matchMedia("("+u[a]+": "+(s[a][r]===1/0?1e5:s[a][r])+s.unit+")");o.addListener(n),l[a][s[a][r]]=o}}n()},state:function(){return m},bind:function(e,t,i){var n=d.matchMedia(t),o=r(n.media);v[o]||(v[o]={mq:n,active:!0,enter:{},leave:{}},v[o].mq.addListener(a));for(var s in i)i.hasOwnProperty(s)&&v[o].hasOwnProperty(s)&&(v[o][s][e]=i[s]);var c=v[o],f=n.matches;f&&c[h.enter].hasOwnProperty(e)?(c[h.enter][e].apply(n),c.active=!0):!f&&c[h.leave].hasOwnProperty(e)&&(c[h.leave][e].apply(n),c.active=!1)},unbind:function(e,t){if(e)if(t){var i=r(t);v[i]&&(v[i].enter[e]&&delete v[i].enter[e],v[i].leave[e]&&delete v[i].leave[e])}else for(var n in v)v.hasOwnProperty(n)&&(v[n].enter[e]&&delete v[n].enter[e],v[n].leave[e]&&delete v[n].leave[e])}},events:{mqChange:"mqchange"}}),s={minWidth:[0],maxWidth:[1/0],minHeight:[0],maxHeight:[1/0],unit:"px"},h=e.extend(o.events,{enter:"enter",leave:"leave"}),c=t.$window,d=c[0],f=o.functions,m=null,v=[],l={},u={minWidth:"min-width",maxWidth:"max-width",minHeight:"min-height",maxHeight:"max-height"}});
-/*! formstone v1.3.3 [pagination.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery"],e):e(jQuery,Formstone)}(function(e,s){"use strict";function i(s){v.killEvent(s);var i=s.data,t=i.index+(e(s.currentTarget).hasClass(d.control_previous)?-1:1);t>=0&&i.$items.eq(t).trigger(c.raw.click)}function t(s){v.killEvent(s);var i=s.data,t=e(s.currentTarget),l=parseInt(t.val(),10);i.$items.eq(l).trigger(c.raw.click)}function l(s){var i=s.data,t=e(s.currentTarget),l=i.$items.index(t);i.ajax?v.killEvent(s):t[0].click(),a(i,l)}function a(e,s){if(s<0&&(s=0),s>e.total&&(s=e.total),s!==e.index){e.index=s;var i=e.index-e.visible,t=e.index+(e.visible+1);i<0&&(i=0),t>e.total&&(t=e.total),e.$items.removeClass(d.visible).removeClass(d.hidden).filter(r.active).removeClass(d.active).end().eq(e.index).addClass(d.active).end().slice(i,t).addClass(d.visible),e.$items.not(r.visible).addClass(d.hidden),e.$position.find(r.current).text(e.index+1).end().find(r.total).text(e.total+1),e.$select.val(e.index),e.$controls.removeClass(d.visible),s>0&&e.$controls.filter(r.control_previous).addClass(d.visible),s<e.total&&e.$controls.filter(r.control_next).addClass(d.visible),e.$ellipsis.removeClass(d.visible),s>e.visible+1&&e.$ellipsis.eq(0).addClass(d.visible),s<e.total-e.visible-1&&e.$ellipsis.eq(1).addClass(d.visible),e.$el.trigger(c.update,[e.index])}}function n(e){for(var s="",i=0;i<=e.total;i++)s+='<option value="'+i+'"',i===e.index&&(s+='selected="selected"'),s+=">Page "+(i+1)+"</option>";e.$select.html(s)}var o=s.Plugin("pagination",{widget:!0,defaults:{ajax:!1,customClass:"",labels:{count:"of",next:"Next",previous:"Previous"},maxWidth:"740px",theme:"fs-light",visible:2},classes:["pages","page","active","first","last","ellipsis","visible","hidden","control","control_previous","control_next","position","select","mobile","current","total"],events:{update:"update"},methods:{_construct:function(s){s.mq="(max-width:"+(s.maxWidth===1/0?"100000px":s.maxWidth)+")";var v="";v+='<button type="button" class="'+[d.control,d.control_previous].join(" ")+'">'+s.labels.previous+"</button>",v+='<button type="button" class="'+[d.control,d.control_next].join(" ")+'">'+s.labels.next+"</button>",v+='<div class="'+d.position+'" aria-hidden="true">',v+='<span class="'+d.current+'">0</span>',v+=" "+s.labels.count+" ",v+='<span class="'+d.total+'">0</span>',v+='<select class="'+d.select+'" tabindex="-1" aria-hidden="true"></select>',v+="</div>",s.thisClasses=[d.base,s.theme,s.customClass],this.addClass(s.thisClasses.join(" ")).wrapInner('<div class="'+d.pages+'" aria-label="pagination"></div>').prepend(v),s.$controls=this.find(r.control),s.$pages=this.find(r.pages),s.$items=s.$pages.children().addClass(d.page),s.$position=this.find(r.position),s.$select=this.find(r.select),s.index=-1,s.total=s.$items.length-1;var p=s.$items.index(s.$items.filter("[data-"+o.namespace+"-active]"));p||(p=s.$items.index(s.$items.filter(r.active))),s.$items.eq(0).addClass(d.first).after('<span class="'+d.ellipsis+'">&hellip;</span>').end().eq(s.total).addClass(d.last).before('<span class="'+d.ellipsis+'">&hellip;</span>'),s.$ellipsis=s.$pages.find(r.ellipsis),n(s),this.on(c.click,r.page,s,l).on(c.click,r.control,s,i).on(c.change,r.select,s,t),e.fsMediaquery("bind",s.rawGuid,s.mq,{enter:function(){s.$el.addClass(d.mobile)},leave:function(){s.$el.removeClass(d.mobile)}}),a(s,p)},_destruct:function(s){e.fsMediaquery("unbind",s.rawGuid),s.$controls.remove(),s.$ellipsis.remove(),s.$select.remove(),s.$position.remove(),s.$items.removeClass([d.page,d.active,d.visible,d.first,d.last].join(" ")).unwrap(),this.removeClass(s.thisClasses.join(" ")).off(c.namespace)}}}),r=o.classes,d=r.raw,c=o.events,v=o.functions});
-/*! formstone v1.3.3 [navigation.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(a){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery","./swap"],a):a(jQuery,Formstone)}(function(a,e){"use strict";function t(a){a.$handle.fsSwap("deactivate")}function n(a){a.data.$handle.addClass(g.focus)}function l(a){a.data.$handle.removeClass(g.focus)}function d(a){var e=a.data;13!==a.keyCode&&32!==a.keyCode||(b.killEvent(a),e.$handle.trigger($.raw.click))}function o(a){if(!a.originalEvent){var e=a.data;e.open||(e.$el.trigger($.open).attr("aria-hidden",!1),e.$content.addClass(e.contentClassesOpen).one($.click,function(){t(e)}),e.$handle.attr("aria-expanded",!0),e.label&&e.$handle.html(e.labels.open),c(e),e.open=!0,e.$nav.focus())}}function s(a){if(!a.originalEvent){var e=a.data;e.open&&(e.$el.trigger($.close).attr("aria-hidden",!0),e.$content.removeClass(e.contentClassesOpen).off($.namespace),e.$handle.attr("aria-expanded",!1),e.label&&e.$handle.html(e.labels.closed),h(e),e.open=!1,e.$el.focus())}}function i(a){var e=a.data;e.$el.attr("aria-hidden",!0),e.$handle.attr("aria-controls",e.ariaId).attr("aria-expanded",!1),e.$content.addClass(g.enabled),setTimeout(function(){e.$animate.addClass(g.animated)},0),e.label&&e.$handle.html(e.labels.closed)}function r(a){var e=a.data;e.$el.removeAttr("aria-hidden"),e.$handle.removeAttr("aria-controls").removeAttr("aria-expanded"),e.$content.removeClass(g.enabled,g.animated),e.$animate.removeClass(g.animated),p(e),h(e)}function c(a){a.isToggle||C.addClass(g.lock)}function h(a){a.isToggle||C.removeClass(g.lock)}function u(a){if(a.label)if(a.$handle.length>1){a.originalLabel=[];for(var e=0,t=a.$handle.length;e<t;e++)a.originalLabel[e]=a.$handle.eq(e).html()}else a.originalLabel=a.$handle.html()}function p(a){if(a.label)if(a.$handle.length>1)for(var e=0,t=a.$handle.length;e<t;e++)a.$handle.eq(e).html(a.originalLabel[e]);else a.$handle.html(a.originalLabel)}var f=e.Plugin("navigation",{widget:!0,defaults:{customClass:"",gravity:"left",label:!0,labels:{closed:"Menu",open:"Close"},maxWidth:"980px",theme:"fs-light",type:"toggle"},classes:["handle","nav","content","animated","enabled","focus","open","toggle","push","reveal","overlay","left","right","lock"],events:{open:"open",close:"close"},methods:{_setup:function(){C=a("html, body")},_construct:function(e){e.handleGuid=g.handle+e.guid,e.isToggle="toggle"===e.type,e.open=!1,e.isToggle&&(e.gravity="");var t=g.base,c=[t,e.type].join("-"),h=e.gravity?[c,e.gravity].join("-"):"",p=[e.rawGuid,e.theme,e.customClass].join(" ");e.handle=this.data(v+"-handle"),e.content=this.data(v+"-content"),e.handleClasses=[g.handle,g.handle.replace(t,c),h?g.handle.replace(t,h):"",e.handleGuid,p].join(" "),e.thisClasses=[g.nav.replace(t,c),h?g.nav.replace(t,h):"",p],e.contentClasses=[g.content.replace(t,c),p].join(" "),e.contentClassesOpen=[h?g.content.replace(t,h):"",g.open].join(" "),e.$nav=this.addClass(e.thisClasses.join(" ")).attr("role","navigation"),e.$handle=a(e.handle).addClass(e.handleClasses),e.$content=a(e.content).addClass(e.contentClasses),e.$animate=a().add(e.$nav).add(e.$content),u(e),e.navTabIndex=e.$nav.attr("tabindex"),e.$nav.attr("tabindex",-1),e.id=this.attr("id"),e.id?e.ariaId=e.id:(e.ariaId=e.rawGuid,this.attr("id",e.ariaId)),e.$handle.attr("data-swap-target",e.dotGuid).attr("data-swap-linked",e.handleGuid).attr("data-swap-group",g.base).attr("tabindex",0).on("activate.swap"+e.dotGuid,e,o).on("deactivate.swap"+e.dotGuid,e,s).on("enable.swap"+e.dotGuid,e,i).on("disable.swap"+e.dotGuid,e,r).on($.focus+e.dotGuid,e,n).on($.blur+e.dotGuid,e,l).fsSwap({maxWidth:e.maxWidth,classes:{target:e.dotGuid,enabled:m.enabled,active:m.open,raw:{target:e.rawGuid,enabled:g.enabled,active:g.open}}}),e.$handle.is("a, button")||e.$handle.on($.keyPress+e.dotGuid,e,d)},_destruct:function(a){a.$content.removeClass([a.contentClasses,a.contentClassesOpen].join(" ")).off($.namespace),a.$handle.removeAttr("aria-controls").removeAttr("aria-expanded").removeAttr("data-swap-target").removeData("swap-target").removeAttr("data-swap-linked").removeAttr("data-swap-group").removeData("swap-linked").removeData("tabindex").removeClass(a.handleClasses).off(a.dotGuid).html(a.originalLabel).fsSwap("destroy"),a.$nav.attr("tabindex",a.navTabIndex),p(a),h(a),this.removeAttr("aria-hidden").removeClass(a.thisClasses.join(" ")).off($.namespace),this.attr("id")===a.rawGuid&&this.removeAttr("id")},open:function(a){a.$handle.fsSwap("activate")},close:t,enable:function(a){a.$handle.fsSwap("enable")},disable:function(a){a.$handle.fsSwap("disable")}}}),v=f.namespace,m=f.classes,g=m.raw,$=f.events,b=f.functions,C=null});
-/*! formstone v1.3.3 [number.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function a(t){t.data.$container.addClass(m.focus)}function n(t){o(t.data,0),t.data.$container.removeClass(m.focus)}function i(t){var e=t.data;38!==t.keyCode&&40!==t.keyCode||(t.preventDefault(),o(e,38===t.keyCode?e.step:-e.step))}function s(e){f.killEvent(e),r(e);var a=e.data;if(!a.disabled&&e.which<=1){var n=t(e.target).hasClass(m.up)?a.step:-a.step;a.timer=f.startTimer(a.timer,300,function(){a.timer=f.startTimer(a.timer,125,function(){o(a,n)},!0)}),o(a,n),b.on([p.touchEnd,p.mouseUp].join(" "),a,r)}}function r(t){f.killEvent(t);var e=t.data;f.clearTimer(e.timer,!0),b.off(p.namespace)}function o(e,a){var n=parseFloat(e.$el.val()),i=a;"undefined"===t.type(n)||isNaN(n)?i=!1!==e.min?e.min:0:!1!==e.min&&n<e.min?i=e.min:i+=n;var s=(i-e.min)%e.step;0!==s&&(i-=s),!1!==e.min&&i<e.min&&(i=e.min),!1!==e.max&&i>e.max&&(i=e.max),i!==n&&(i=l(i,e.digits),e.$el.val(i).trigger(p.raw.change,[!0]))}function d(t){var e=String(t);return e.indexOf(".")>-1?e.length-e.indexOf(".")-1:0}function l(t,e){var a=Math.pow(10,e);return Math.round(t*a)/a}var u=e.Plugin("number",{widget:!0,defaults:{customClass:"",labels:{up:"Up",down:"Down"},theme:"fs-light"},classes:["arrow","up","down","disabled","focus"],methods:{_setup:function(){b=e.$body},_construct:function(t){var e=parseFloat(this.attr("min")),r=parseFloat(this.attr("max"));t.min=!(!e&&0!==e)&&e,t.max=!(!r&&0!==r)&&r,t.step=parseFloat(this.attr("step"))||1,t.timer=null,t.digits=d(t.step),t.disabled=this.is(":disabled")||this.is("[readonly]");var l="";l+='<button type="button" class="'+[m.arrow,m.up].join(" ")+'" aria-hidden="true" tabindex="-1">'+t.labels.up+"</button>",l+='<button type="button" class="'+[m.arrow,m.down].join(" ")+'" aria-hidden="true" tabindex="-1">'+t.labels.down+"</button>",this.wrap('<div class="'+[m.base,t.theme,t.customClass,t.disabled?m.disabled:""].join(" ")+'"></div>').after(l),t.$container=this.parent(c.base),t.$arrows=t.$container.find(c.arrow),this.on(p.focus,t,a).on(p.blur,t,n).on(p.keyPress,t,i),t.$container.on([p.touchStart,p.mouseDown].join(" "),c.arrow,t,s),o(t,0)},_destruct:function(t){t.$arrows.remove(),this.unwrap().off(p.namespace)},enable:function(t){t.disabled&&(this.prop("disabled",!1),t.$container.removeClass(m.disabled),t.disabled=!1)},disable:function(t){t.disabled||(this.prop("disabled",!0),t.$container.addClass(m.disabled),t.disabled=!0)},update:function(t){var e=parseFloat(t.$el.attr("min")),a=parseFloat(t.$el.attr("max"));t.min=!(!e&&0!==e)&&e,t.max=!(!a&&0!==a)&&a,t.step=parseFloat(t.$el.attr("step"))||1,t.timer=null,t.digits=d(t.step),t.disabled=t.$el.is(":disabled")||t.$el.is("[readonly]"),o(t,0)}}}),c=u.classes,m=c.raw,p=u.events,f=u.functions,b=null});
-/*! formstone v1.3.3 [range.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(a){"function"==typeof define&&define.amd?define(["jquery","./core","./touch"],a):a(jQuery,Formstone)}(function(a,e){"use strict";function t(){v=a(h.element)}function l(a){a.stepCount=(a.max-a.min)/a.step,a.offset=a.$track.offset(),a.vertical?(a.trackHeight=a.$track.outerHeight(),a.handleHeight=a.$handle.outerHeight(),a.increment=a.trackHeight/a.stepCount):(a.trackWidth=a.$track.outerWidth(),a.handleWidth=a.$handle.outerWidth(),a.increment=a.trackWidth/a.stepCount),c(a,(a.$el.val()-a.min)/(a.max-a.min),!0)}function i(a){b.killEvent(a);var e=a.data;e.disabled||(n(a),e.$container.addClass(u.focus))}function n(a){b.killEvent();var e=a.data;e.disabled||c(e,e.vertical?1-(a.pageY-e.offset.top)/e.trackHeight:(a.pageX-e.offset.left)/e.trackWidth)}function s(a){b.killEvent(a);var e=a.data;e.disabled||e.$container.removeClass(u.focus)}function r(a){a.data.$container.addClass(u.focus)}function o(a){a.data.$container.removeClass(u.focus)}function c(a,e,t){a.increment>1&&(e=a.vertical?Math.round(e*a.stepCount)*a.increment/a.trackHeight:Math.round(e*a.stepCount)*a.increment/a.trackWidth),e<0&&(e=0),e>1&&(e=1);var l=(a.min-a.max)*e;l=-parseFloat(l.toFixed(a.digits)),a.$fill.css(a.vertical?"height":"width",100*e+"%"),a.$handle.css(a.vertical?"bottom":"left",100*e+"%"),(l+=a.min)!==a.value&&!1!==l&&!0!==t&&(a.$el.val(l).trigger(p.raw.change,[!0]),a.value=l)}function d(a,e){var t=a.data;e||t.disabled||c(t,(t.$el.val()-t.min)/(t.max-t.min))}function m(a){var e=a.toString().split(".");return e[0]=e[0].replace(/\B(?=(\d{3})+(?!\d))/g,","),e.join(".")}var f=e.Plugin("range",{widget:!0,defaults:{customClass:"",fill:!1,formatter:!1,labels:{max:!1,min:!1},theme:"fs-light",vertical:!1},classes:["track","handle","fill","marker","labels","label","label_min","label_max","vertical","focus","disabled"],methods:{_construct:function(a){a.formatter||(a.formatter=m),a.min=parseFloat(this.attr("min"))||0,a.max=parseFloat(this.attr("max"))||100,a.step=parseFloat(this.attr("step"))||1,a.digits=a.step.toString().length-a.step.toString().indexOf("."),a.value=parseFloat(this.val())||a.min+(a.max-a.min)/2;var e="";a.vertical="vertical"===this.attr("orient")||a.vertical,a.disabled=this.is(":disabled")||this.is("[readonly]"),e+='<div class="'+u.track+'" aria-hidden="true">',a.fill&&(e+='<span class="'+u.fill+'"></span>'),e+='<div class="'+u.handle+'" role="slider">',e+='<span class="'+u.marker+'"></span>',e+="</div>",e+="</div>";var c=[u.base,a.theme,a.customClass,a.vertical?u.vertical:"",a.labels?u.labels:"",a.disabled?u.disabled:""];if(this.addClass(u.element).wrap('<div class="'+c.join(" ")+'"></div>').after(e),a.$container=this.parents(h.base),a.$track=a.$container.find(h.track),a.$fill=a.$container.find(h.fill),a.$handle=a.$container.find(h.handle),a.$output=a.$container.find(h.output),a.labels){var f='<span class="'+[u.label,u.label_max].join(" ")+'">'+a.formatter.call(this,a.labels.max?a.labels.max:a.max)+"</span>",b='<span class="'+[u.label,u.label_min].join(" ")+'">'+a.formatter.call(this,a.labels.max?a.labels.min:a.min)+"</span>";a.$container.prepend(a.vertical?f:b).append(a.vertical?b:f)}a.$labels=a.$container.find(h.label),this.on(p.focus,a,r).on(p.blur,a,o).on(p.change,a,d),a.$container.fsTouch({pan:!0,axis:a.vertical?"y":"x"}).on(p.panStart,a,i).on(p.pan,a,n).on(p.panEnd,a,s),t(),l.call(this,a)},_destruct:function(a){a.$container.off(p.namespace).fsTouch("destroy"),a.$track.remove(),a.$labels.remove(),this.unwrap().removeClass(u.element).off(p.namespace),t()},_resize:function(a){b.iterate.call(v,l)},enable:function(a){a.disabled&&(this.prop("disabled",!1),a.$container.removeClass(u.disabled),a.disabled=!1)},disable:function(a){a.disabled||(this.prop("disabled",!0),a.$container.addClass(u.disabled),a.disabled=!0)},resize:l,update:function(a){a.min=parseFloat(a.$el.attr("min"))||0,a.max=parseFloat(a.$el.attr("max"))||100,a.step=parseFloat(a.$el.attr("step"))||1,a.digits=a.step.toString().length-a.step.toString().indexOf("."),a.value=parseFloat(this.val())||a.min+(a.max-a.min)/2,a.labels&&(a.$labels.filter(h.label_max).html(a.formatter.call(this,a.labels.max?a.labels.max:a.max)),a.$labels.filter(h.label_min).html(a.formatter.call(this,a.labels.max?a.labels.min:a.min))),l.call(this,a)}}}),h=f.classes,u=h.raw,p=f.events,b=f.functions,v=[]});
-/*! formstone v1.3.3 [scrollbar.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core","./touch"],t):t(jQuery,Formstone)}(function(t,n){"use strict";function e(){k=t(g.base)}function o(t){t.$el.addClass(p.isSetup);var n={},e={},o={},i=0,l=!0;t.horizontal?(t.barHeight=t.$content[0].offsetHeight-t.$content[0].clientHeight,t.frameWidth=t.$content.outerWidth(),t.trackWidth=t.frameWidth-2*t.trackMargin,t.scrollWidth=t.$content[0].scrollWidth,t.ratio=t.trackWidth/t.scrollWidth,t.trackRatio=t.trackWidth/t.scrollWidth,t.handleWidth=t.handleSize>0?t.handleSize:t.trackWidth*t.trackRatio,t.scrollRatio=(t.scrollWidth-t.frameWidth)/(t.trackWidth-t.handleWidth),t.handleBounds={left:0,right:t.trackWidth-t.handleWidth},t.$content.css({paddingBottom:t.barHeight+t.paddingBottom}),i=t.$content.scrollLeft()*t.ratio,l=t.scrollWidth<=t.frameWidth,n={width:t.frameWidth},e={width:t.trackWidth,marginLeft:t.trackMargin,marginRight:t.trackMargin},o={width:t.handleWidth}):(t.barWidth=t.$content[0].offsetWidth-t.$content[0].clientWidth,t.frameHeight=t.$content.outerHeight(),t.trackHeight=t.frameHeight-2*t.trackMargin,t.scrollHeight=t.$content[0].scrollHeight,t.ratio=t.trackHeight/t.scrollHeight,t.trackRatio=t.trackHeight/t.scrollHeight,t.handleHeight=t.handleSize>0?t.handleSize:t.trackHeight*t.trackRatio,t.scrollRatio=(t.scrollHeight-t.frameHeight)/(t.trackHeight-t.handleHeight),t.handleBounds={top:0,bottom:t.trackHeight-t.handleHeight},i=t.$content.scrollTop()*t.ratio,l=t.scrollHeight<=t.frameHeight,n={height:t.frameHeight},e={height:t.trackHeight,marginBottom:t.trackMargin,marginTop:t.trackMargin},o={height:t.handleHeight}),l?t.$el.removeClass(p.active):t.$el.addClass(p.active),t.$bar.css(n),t.$track.css(e),t.$handle.css(o),t.panning=!1,d(t,i),a({data:t}),t.$el.removeClass(p.setup)}function a(t){m.killEvent(t);var n=t.data,e={};if(!n.panning){if(n.horizontal){var o=n.$content.scrollLeft();o<0&&(o=0),n.handleLeft=o/n.scrollRatio,n.handleLeft>n.handleBounds.right&&(n.handleLeft=n.handleBounds.right),e={left:n.handleLeft}}else{var a=n.$content.scrollTop();a<0&&(a=0),n.handleTop=a/n.scrollRatio,n.handleTop>n.handleBounds.bottom&&(n.handleTop=n.handleBounds.bottom),e={top:n.handleTop}}n.$handle.css(e)}}function i(t){l(t,!0)}function l(t,n){var e,o,a=t.data;if(a.horizontal){var i=a.$content[0].scrollLeft,l=a.$content[0].scrollWidth,c=a.$content.outerWidth();if(e=t.originalEvent.deltaX*(!0===n?-1:1),!0===n)return a.$content.scrollLeft(i-e),r(t);if("left"===(o=e<0?"right":"left")&&e>l-c-i)return a.$content.scrollLeft(l),r(t);if("right"===o&&-e>i)return a.$content.scrollLeft(0),r(t)}else{var h=a.$content[0].scrollTop,s=a.$content[0].scrollHeight,d=a.$content.outerHeight();if(e=t.originalEvent.deltaY*(!0===n?-1:1),!0===n)return a.$content.scrollTop(h-e),r(t);if("down"===(o=e<0?"up":"down")&&e>s-d-h)return a.$content.scrollTop(s),r(t);if("up"===o&&-e>h)return a.$content.scrollTop(0),r(t)}}function r(t){return m.killEvent(t),t.returnValue=!1,!1}function c(t){var n,e=t.data,o=e.$track.offset();e.panning=!0,n=e.horizontal?e.handleLeft=t.pageX-o.left-e.handleWidth/2:e.handleTop=t.pageY-o.top-e.handleHeight/2,d(e,n)}function h(t){var n=t.data;d(n,n.horizontal?n.handleLeft+t.deltaX:n.handleTop+t.deltaY)}function s(t){var n=t.data;n.panning=!1,n.horizontal?n.handleLeft+=t.deltaX:n.handleTop+=t.deltaY}function d(t,n){var e={};t.horizontal?(n<t.handleBounds.left&&(n=t.handleBounds.left),n>t.handleBounds.right&&(n=t.handleBounds.right),e={left:n},t.$content.scrollLeft(Math.round(n*t.scrollRatio))):(n<t.handleBounds.top&&(n=t.handleBounds.top),n>t.handleBounds.bottom&&(n=t.handleBounds.bottom),e={top:n},t.$content.scrollTop(Math.round(n*t.scrollRatio))),t.$handle.css(e)}var f,u=n.Plugin("scrollbar",{widget:!0,defaults:{customClass:"",duration:0,handleSize:0,horizontal:!1,mouseWheel:!0,theme:"fs-light",trackMargin:0},classes:["content","bar","track","handle","horizontal","setup","active"],methods:{_setup:function(){f=n.$body},_construct:function(t){var n="";n+='<div class="'+p.bar+'">',n+='<div class="'+p.track+'">',n+='<button type="button" class="'+p.handle+'" aria-hidden="true" tabindex="-1"></button>',n+="</div></div>",t.paddingRight=parseInt(this.css("padding-right"),10),t.paddingBottom=parseInt(this.css("padding-bottom"),10),t.thisClasses=[p.base,t.theme,t.customClass,t.horizontal?p.horizontal:""],this.addClass(t.thisClasses.join(" ")).wrapInner('<div class="'+p.content+'" tabindex="0"></div>').prepend(n),t.$content=this.find(g.content),t.$bar=this.find(g.bar),t.$track=this.find(g.track),t.$handle=this.find(g.handle),t.trackMargin=parseInt(t.trackMargin,10),t.$content.on($.scroll,t,a),t.mouseWheel&&t.$content.on("wheel"+$.namespace,t,l),t.$track.fsTouch({axis:t.horizontal?"x":"y",pan:!0}).on($.panStart,t,c).on($.pan,t,h).on($.panEnd,t,s).on($.click,m.killEvent).on("wheel"+$.namespace,t,i),o(t),e()},_destruct:function(t){t.$track.fsTouch("destroy"),t.$bar.remove(),t.$content.off($.namespace).contents().unwrap(),this.removeClass(t.thisClasses.join(" ")).off($.namespace),this.attr("id")===t.rawGuid&&this.removeAttr("id")},_resize:function(t){m.iterate.call(k,o)},scroll:function(n,e,o){var a=o||n.duration,i={};if("number"!==t.type(e)){var l=t(e);if(l.length>0){var r=l.position();e=n.horizontal?r.left+n.$content.scrollLeft():r.top+n.$content.scrollTop()}else e="top"===e?0:"bottom"===e?n.horizontal?n.$content[0].scrollWidth:n.$content[0].scrollHeight:n.$content.scrollTop()}i[n.horizontal?"scrollLeft":"scrollTop"]=e,n.$content.stop().animate(i,a)},resize:o}}),g=u.classes,p=g.raw,$=u.events,m=u.functions,k=(n.$window,[])});
-/*! formstone v1.3.3 [sticky.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function s(){$.iterate.call(p,i)}function n(){p=e(l.base),s()}function o(){$.iterate.call(p,c)}function i(e){if(a(e),e.$container.length){var t=e.$container.position();e.min=t.top+e.containerMargin-e.margin,e.max=e.min+e.$container.outerHeight(!1)-e.height}else{var s,n=(s=e.stuck?e.$clone:e.$el).position();e.min=n.top,e.max=!1}c(e)}function a(e){var t;t=e.stuck?e.$clone:e.$el,e.margin=parseInt(t.css("margin-top"),10),e.$container.length?e.containerMargin=parseInt(e.$container.css("margin-top"),10):e.containerMargin=0,e.height=t.outerHeight(),e.width=t.outerWidth()}function c(e){var t=f+e.offset;if(t>=e.min){e.stuck=!0,e.$stickys.addClass(u.stuck),e.stuck||(e.$el.trigger(d.stuck),a(e));var s=e.offset,n="";e.max&&t>e.max?(e.passed||e.$el.trigger(d.passed),e.passed=!0,e.$stickys.addClass(u.passed),s="",n=0):(e.passed=!1,e.$stickys.removeClass(u.passed)),e.$el.css({height:e.height,width:e.width,top:s,bottom:n,marginBottom:0})}else e.stuck=!1,e.$stickys.removeClass(u.stuck).removeClass(u.passed),e.stuck&&e.$el.trigger(d.unstuck),e.$el.css({height:"",width:"",top:"",bottom:"",marginBottom:""})}var r=t.Plugin("sticky",{widget:!0,defaults:{offset:0},classes:["sticky","stuck","clone","container","passed"],events:{passed:"passed",stuck:"stuck",unstuck:"unstuck"},methods:{_construct:function(t){t.stuck=!1,t.passed=!0,t.$clone=t.$el.clone(),t.container=t.$el.data("sticky-container"),t.$container=e(t.container),t.$el.addClass(u.base),t.$clone.removeClass(u.element).addClass(u.clone),t.$container.addClass(u.container),t.$stickys=e().add(t.$el).add(t.$clone),t.$el.after(t.$clone)},_postConstruct:function(e){n(),s()},_destruct:function(e){e.$clone.remove(),e.$container.removeClass(u.container),e.$el.css({height:"",width:"",top:"",bottom:"",marginBottom:""}).removeClass(u.base),n()},_resize:s,_raf:function(){(f=m.scrollTop())<0&&(f=0),f!==g&&(o(),g=f)}}}),l=(r.namespace,r.classes),u=l.raw,d=r.events,$=r.functions,m=(t.window,t.$window),f=0,g=0,p=[]});
-/*! formstone v1.3.3 [swap.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery"],e):e(jQuery,Formstone)}(function(e,a){"use strict";function t(a,t){if(a.enabled&&!a.active){a.group&&!t&&e(a.group).not(a.$el).not(a.linked)[c.namespaceClean]("deactivate",!0);var s=a.group?e(a.group).index(a.$el):null;a.$swaps.addClass(a.classes.raw.active),t||a.linked&&e(a.linked).not(a.$el)[c.namespaceClean]("activate",!0),this.trigger(o.activate,[s]),a.active=!0}}function s(a,t){a.enabled&&a.active&&(a.$swaps.removeClass(a.classes.raw.active),t||a.linked&&e(a.linked).not(a.$el)[c.namespaceClean]("deactivate",!0),this.trigger(o.deactivate),a.active=!1)}function i(a,i){a.enabled||(a.enabled=!0,a.$swaps.addClass(a.classes.raw.enabled),i||e(a.linked).not(a.$el)[c.namespaceClean]("enable"),this.trigger(o.enable),a.onEnable?(a.active=!1,t.call(this,a)):(a.active=!0,s.call(this,a)))}function n(a,t){a.enabled&&(a.enabled=!1,a.$swaps.removeClass([a.classes.raw.enabled,a.classes.raw.active].join(" ")),t||e(a.linked).not(a.$el)[c.namespaceClean]("disable"),this.trigger(o.disable))}function l(e){u.killEvent(e);var a=e.data;a.active&&a.collapse?s.call(a.$el,a):t.call(a.$el,a)}var c=a.Plugin("swap",{widget:!0,defaults:{collapse:!0,maxWidth:1/0},classes:["target","enabled","active"],events:{activate:"activate",deactivate:"deactivate",enable:"enable",disable:"disable"},methods:{_construct:function(a){a.enabled=!1,a.active=!1,a.classes=e.extend(!0,{},r,a.classes),a.target=this.data(d+"-target"),a.$target=e(a.target).addClass(a.classes.raw.target),a.mq="(max-width:"+(a.maxWidth===1/0?"100000px":a.maxWidth)+")";var t=this.data(d+"-linked");a.linked=!!t&&"[data-"+d+'-linked="'+t+'"]';var s=this.data(d+"-group");a.group=!!s&&"[data-"+d+'-group="'+s+'"]',a.$swaps=e().add(this).add(a.$target),this.on(o.click+a.dotGuid,a,l)},_postConstruct:function(a){a.collapse||!a.group||e(a.group).filter("[data-"+d+"-active]").length||e(a.group).eq(0).attr("data-"+d+"-active","true"),a.onEnable=this.data(d+"-active")||!1,e.fsMediaquery("bind",a.rawGuid,a.mq,{enter:function(){i.call(a.$el,a,!0)},leave:function(){n.call(a.$el,a,!0)}})},_destruct:function(a){e.fsMediaquery("unbind",a.rawGuid),a.$swaps.removeClass([a.classes.raw.enabled,a.classes.raw.active].join(" ")).off(o.namespace)},activate:t,deactivate:s,enable:i,disable:n}}),d=c.namespace,r=c.classes,o=c.events,u=c.functions});
-/*! formstone v1.3.3 [tabs.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core","./mediaquery","./swap"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function a(t){if(!t.originalEvent){var e=t.data;e.$el.attr("aria-selected",!0).trigger(u.update,[0]),e.$mobileTab.addClass(b.active),e.$content.attr("aria-hidden",!1).addClass(b.active)}}function i(t){if(!t.originalEvent){var e=t.data;e.$el.attr("aria-selected",!1),e.$mobileTab.removeClass(b.active),e.$content.attr("aria-hidden",!0).removeClass(b.active)}}function o(t){var e=t.data;e.$el.attr("aria-controls",e.ariaContentId),e.$mobileTab.addClass(b.enabled),e.$content.attr("aria-labelledby",e.ariaId).addClass(b.enabled)}function n(t){var e=t.data;e.$el.removeAttr("aria-controls").removeAttr("aria-selected"),e.$mobileTab.removeClass(b.enabled),e.$content.removeAttr("aria-labelledby").removeAttr("aria-hidden").removeClass(b.enabled)}function s(t){t.data.$el.fsSwap("activate")}function r(t){t.$el.addClass(b.mobile),t.$mobileTab.addClass(b.mobile),t.$content.addClass(b.mobile)}function d(t){t.$el.removeClass(b.mobile),t.$mobileTab.removeClass(b.mobile),t.$content.removeClass(b.mobile)}var l=e.Plugin("tabs",{widget:!0,defaults:{customClass:"",maxWidth:1/0,mobileMaxWidth:"740px",theme:"fs-light"},classes:["tab","tab_mobile","mobile","content","enabled","active"],events:{update:"update"},methods:{_construct:function(s){s.mq="(max-width:"+(s.mobileMaxWidth===1/0?"100000px":s.mobileMaxWidth)+")",s.content=this.attr("href"),s.group=this.data(c+"-group"),s.elementClasses=[b.tab,s.rawGuid,s.theme,s.customClass],s.mobileTabClasses=[b.tab,b.tab_mobile,s.rawGuid,s.theme,s.customClass],s.contentClasses=[b.content,s.rawGuid,s.theme,s.customClass],s.$mobileTab=t('<button type="button" class="'+s.mobileTabClasses.join(" ")+'" aria-hidden="true">'+this.text()+"</button>"),s.$content=t(s.content).addClass(s.contentClasses.join(" ")),s.$content.before(s.$mobileTab).attr("role","tabpanel"),this.attr("role","tab"),s.id=this.attr("id"),s.id?s.ariaId=s.id:(s.ariaId=s.rawGuid,this.attr("id",s.ariaId)),s.contentId=s.$content.attr("id"),s.contentGuid=s.rawGuid+"_content",s.contentId?s.ariacontentId=s.contentId:(s.ariaContentId=s.contentGuid,s.$content.attr("id",s.ariaContentId));var r=e.window.location.hash,d=!1,l=!1;r.length&&(d=this.filter("[href*='"+r+"']").length>0,l=s.group&&t("[data-"+c+'-group="'+s.group+'"]').filter("[href*='"+r+"']").length>0),d?this.attr("data-swap-active","true"):l?this.removeAttr("data-swap-active").removeData("data-swap-active"):"true"===this.attr("data-tabs-active")&&this.attr("data-swap-active","true"),this.attr("data-swap-target",s.content).attr("data-swap-group",s.group).addClass(s.elementClasses.join(" ")).on("activate.swap"+s.dotGuid,s,a).on("deactivate.swap"+s.dotGuid,s,i).on("enable.swap"+s.dotGuid,s,o).on("disable.swap"+s.dotGuid,s,n)},_postConstruct:function(e){this.fsSwap({maxWidth:e.maxWidth,classes:{target:e.dotGuid,enabled:m.enabled,active:m.active,raw:{target:e.rawGuid,enabled:b.enabled,active:b.active}},collapse:!1}),e.$mobileTab.on("click"+e.dotGuid,e,s),t.fsMediaquery("bind",e.rawGuid,e.mq,{enter:function(){r.call(e.$el,e)},leave:function(){d.call(e.$el,e)}})},_destruct:function(e){t.fsMediaquery("unbind",e.rawGuid),e.$mobileTab.off(u.namespace).remove(),e.elementClasses.push(b.mobile),e.contentClasses.push(b.mobile),e.$content.removeAttr("aria-labelledby").removeAttr("aria-hidden").removeAttr("role").removeClass(e.contentClasses.join(" ")),e.$content.attr("id")===e.contentGuid&&e.$content.removeAttr("id"),this.removeAttr("aria-controls").removeAttr("aria-selected").removeAttr("data-swap-active").removeData("data-swap-active").removeAttr("data-swap-target").removeData("data-swap-target").removeAttr("data-swap-group").removeData("data-swap-group").removeAttr("role").removeClass(e.elementClasses.join(" ")).off(u.namespace).fsSwap("destroy"),this.attr("id")===e.rawGuid&&this.removeAttr("id")},activate:function(t){this.fsSwap("activate")},enable:function(t){this.fsSwap("enable")},disable:function(t){this.fsSwap("disable")}}}),c=l.namespace,m=l.classes,b=m.raw,u=l.events;l.functions});
-/*! formstone v1.3.3 [tooltip.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function o(t){c();var e=t.data;e.left=t.pageX,e.top=t.pageY,r(e)}function i(t){var e=t.data;u.clearTimer(e.timer),c()}function n(t){l(t.pageX,t.pageY)}function r(o){c();var r="";r+='<div class="',r+=[f.base,f[o.direction],o.theme,o.customClass].join(" "),r+='">',r+='<div class="'+f.content+'">',r+=o.formatter.call(o.$el,o),r+='<span class="'+f.caret+'"></span>',r+="</div>",p={$tooltip:t(r+="</div>"),$el:o.$el},e.$body.append(p.$tooltip);var a=p.$tooltip.find(s.content),m=p.$tooltip.find(s.caret),g=o.$el.offset(),h=o.$el.outerHeight(),v=o.$el.outerWidth(),$=0,b=0,y=0,j=0,w=!1,C=!1,H=m.outerHeight(!0),W=m.outerWidth(!0),L=a.outerHeight(!0),M=a.outerWidth(!0);"right"===o.direction||"left"===o.direction?(C=(L-H)/2,j=-L/2,"right"===o.direction?y=o.margin:"left"===o.direction&&(y=-(M+o.margin))):(w=(M-W)/2,y=-M/2,"bottom"===o.direction?j=o.margin:"top"===o.direction&&(j=-(L+o.margin))),a.css({top:j,left:y}),m.css({top:C,left:w}),o.follow?o.$el.on(d.mouseMove,o,n):(o.match?"right"===o.direction||"left"===o.direction?(b=o.top,"right"===o.direction?$=g.left+v:"left"===o.direction&&($=g.left)):($=o.left,"bottom"===o.direction?b=g.top+h:"top"===o.direction&&(b=g.top)):"right"===o.direction||"left"===o.direction?(b=g.top+h/2,"right"===o.direction?$=g.left+v:"left"===o.direction&&($=g.left)):($=g.left+v/2,"bottom"===o.direction?b=g.top+h:"top"===o.direction&&(b=g.top)),l($,b)),o.timer=u.startTimer(o.timer,o.delay,function(){p.$tooltip.addClass(f.visible)}),o.$el.one(d.mouseLeave,o,i)}function l(t,e){p&&p.$tooltip.css({left:t,top:e})}function c(){p&&(p.$el.off([d.mouseMove,d.mouseLeave].join(" ")),p.$tooltip.remove(),p=null)}var a=e.Plugin("tooltip",{widget:!0,defaults:{customClass:"",delay:0,direction:"top",follow:!1,formatter:function(t){return this.data("title")},margin:15,match:!1,theme:"fs-light"},classes:["content","caret","visible","top","bottom","right","left"],methods:{_construct:function(t){this.on(d.mouseEnter,t,o)},_destruct:function(t){c(),this.off(d.namespace)}}}),s=a.classes,f=s.raw,d=a.events,u=a.functions,p=null});
-/*! formstone v1.3.3 [touch.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function a(e){e.preventManipulation&&e.preventManipulation();var t=e.data,a=e.originalEvent;if(a.type.match(/(up|end|cancel)$/i))s(e);else{if(a.pointerId){var o=!1;for(var p in t.touches)t.touches[p].id===a.pointerId&&(o=!0,t.touches[p].pageX=a.pageX,t.touches[p].pageY=a.pageY);o||t.touches.push({id:a.pointerId,pageX:a.pageX,pageY:a.pageY})}else t.touches=a.touches;a.type.match(/(down|start)$/i)?n(e):a.type.match(/move$/i)&&i(e)}}function n(n){var o=n.data,p="undefined"!==e.type(o.touches)&&o.touches.length?o.touches[0]:null;p&&o.$el.off(d.mouseDown),o.touching||(o.startE=n.originalEvent,o.startX=p?p.pageX:n.pageX,o.startY=p?p.pageY:n.pageY,o.startT=(new Date).getTime(),o.scaleD=1,o.passed=!1),o.$links&&o.$links.off(d.click);var l=c(o.scale?d.scaleStart:d.panStart,n,o.startX,o.startY,o.scaleD,0,0,"","");if(o.scale&&o.touches&&o.touches.length>=2){var h=o.touches;o.pinch={startX:r(h[0].pageX,h[1].pageX),startY:r(h[0].pageY,h[1].pageY),startD:u(h[1].pageX-h[0].pageX,h[1].pageY-h[0].pageY)},l.pageX=o.startX=o.pinch.startX,l.pageY=o.startY=o.pinch.startY}o.touching||(o.touching=!0,o.pan&&!p&&X.on(d.mouseMove,o,i).on(d.mouseUp,o,s),t.support.pointer?X.on([d.pointerMove,d.pointerUp,d.pointerCancel].join(" "),o,a):X.on([d.touchMove,d.touchEnd,d.touchCancel].join(" "),o,a),o.$el.trigger(l))}function i(t){var a=t.data,n="undefined"!==e.type(a.touches)&&a.touches.length?a.touches[0]:null,i=n?n.pageX:t.pageX,o=n?n.pageY:t.pageY,p=i-a.startX,l=o-a.startY,h=p>0?"right":"left",g=l>0?"down":"up",X=Math.abs(p)>Y,v=Math.abs(l)>Y;if(!a.passed&&a.axis&&(a.axisX&&v||a.axisY&&X))s(t);else{!a.passed&&(!a.axis||a.axis&&a.axisX&&X||a.axisY&&v)&&(a.passed=!0),a.passed&&(f.killEvent(t),f.killEvent(a.startE));var w=!0,x=c(a.scale?d.scale:d.pan,t,i,o,a.scaleD,p,l,h,g);if(a.scale)if(a.touches&&a.touches.length>=2){var m=a.touches;a.pinch.endX=r(m[0].pageX,m[1].pageX),a.pinch.endY=r(m[0].pageY,m[1].pageY),a.pinch.endD=u(m[1].pageX-m[0].pageX,m[1].pageY-m[0].pageY),a.scaleD=a.pinch.endD/a.pinch.startD,x.pageX=a.pinch.endX,x.pageY=a.pinch.endY,x.scale=a.scaleD,x.deltaX=a.pinch.endX-a.pinch.startX,x.deltaY=a.pinch.endY-a.pinch.startY}else a.pan||(w=!1);w&&a.$el.trigger(x)}}function s(t){var a=t.data,i="undefined"!==e.type(a.touches)&&a.touches.length?a.touches[0]:null,s=i?i.pageX:t.pageX,p=i?i.pageY:t.pageY,r=s-a.startX,u=p-a.startY,l=(new Date).getTime(),h=a.scale?d.scaleEnd:d.panEnd,g=r>0?"right":"left",w=u>0?"down":"up",x=Math.abs(r)>1,m=Math.abs(u)>1;if(a.swipe&&Math.abs(r)>Y&&l-a.startT<v&&(h=d.swipe),a.axis&&(a.axisX&&m||a.axisY&&x)||x||m){a.$links=a.$el.find("a");for(var M=0,D=a.$links.length;M<D;M++)o(a.$links.eq(M),a)}var E=c(h,t,s,p,a.scaleD,r,u,g,w);X.off([d.touchMove,d.touchEnd,d.touchCancel,d.mouseMove,d.mouseUp,d.pointerMove,d.pointerUp,d.pointerCancel].join(" ")),a.$el.trigger(E),a.touches=[],a.scale,i&&(a.touchTimer=f.startTimer(a.touchTimer,5,function(){a.$el.on(d.mouseDown,a,n)})),a.touching=!1}function o(t,a){t.on(d.click,a,p);var n=e._data(t[0],"events").click;n.unshift(n.pop())}function p(e){f.killEvent(e,!0),e.data.$links.off(d.click)}function c(t,a,n,i,s,o,p,c,r){return e.Event(t,{originalEvent:a,bubbles:!0,pageX:n,pageY:i,scale:s,deltaX:o,deltaY:p,directionX:c,directionY:r})}function r(e,t){return(e+t)/2}function u(e,t){return Math.sqrt(e*e+t*t)}function l(e,t){e.css({"-ms-touch-action":t,"touch-action":t})}var h=!t.window.PointerEvent,g=t.Plugin("touch",{widget:!0,defaults:{axis:!1,pan:!1,scale:!1,swipe:!1},methods:{_construct:function(e){if(e.touches=[],e.touching=!1,this.on(d.dragStart,f.killEvent),e.swipe&&(e.pan=!0),e.scale&&(e.axis=!1),e.axisX="x"===e.axis,e.axisY="y"===e.axis,t.support.pointer){var i="";!e.axis||e.axisX&&e.axisY?i="none":(e.axisX&&(i+=" pan-y"),e.axisY&&(i+=" pan-x")),l(this,i),this.on(d.pointerDown,e,a)}else this.on(d.touchStart,e,a).on(d.mouseDown,e,n)},_destruct:function(e){this.off(d.namespace),l(this,"")}},events:{pointerDown:h?"MSPointerDown":"pointerdown",pointerUp:h?"MSPointerUp":"pointerup",pointerMove:h?"MSPointerMove":"pointermove",pointerCancel:h?"MSPointerCancel":"pointercancel"}}),d=g.events,f=g.functions,X=t.$window,Y=10,v=50;d.pan="pan",d.panStart="panstart",d.panEnd="panend",d.scale="scale",d.scaleStart="scalestart",d.scaleEnd="scaleend",d.swipe="swipe"});
-/*! formstone v1.3.3 [transition.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function r(e){e.stopPropagation(),e.preventDefault();var r=e.data,a=e.originalEvent,i=r.target?r.$target:r.$el;r.property&&a.propertyName!==r.property||!t(a.target).is(i)||n(r)}function n(t){t.always||t.$el[s.namespaceClean]("destroy"),t.callback.apply(t.$el)}function a(t){var e=i(t.$check);o(t.styles,e)||n(t),t.styles=e}function i(e){var r,n,a,i={};if(e instanceof t&&(e=e[0]),u.getComputedStyle)for(var o=0,s=(r=u.getComputedStyle(e,null)).length;o<s;o++)n=r[o],a=r.getPropertyValue(n),i[n]=a;else if(e.currentStyle){r=e.currentStyle;for(n in r)r[n]&&(i[n]=r[n])}return i}function o(e,r){if(t.type(e)!==t.type(r))return!1;for(var n in e){if(!e.hasOwnProperty(n))return!1;if(!e.hasOwnProperty(n)||!r.hasOwnProperty(n)||e[n]!==r[n])return!1}return!0}var s=e.Plugin("transition",{widget:!0,defaults:{always:!1,property:null,target:null},methods:{_construct:function(t,n){if(n){t.$target=this.find(t.target),t.$check=t.target?t.$target:this,t.callback=n,t.styles=i(t.$check),t.timer=null;var o=t.$check.css(e.transition+"-duration"),s=parseFloat(o);e.support.transition&&o&&s?this.on(c.transitionEnd,t,r):t.timer=l.startTimer(t.timer,50,function(){a(t)},!0)}},_destruct:function(t){l.clearTimer(t.timer,!0),this.off(c.namespace)},resolve:n}}),c=s.events,l=s.functions,u=e.window});
-/*! formstone v1.3.3 [upload.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(e,t){"use strict";function a(e,t,a){t.error=!0,e.$el.trigger(y.fileError,[t,a]),e.aborting||h(e)}function r(e,t,r){e.$el.trigger(y.chunkError,[t,r]),a(e,t,r)}function n(e){e.disabled&&(this.removeClass($.disabled),e.$input.prop("disabled",!1),e.disabled=!1)}function i(e){S.killEvent(e);var t=e.data;t.disabled||t.$input.trigger(y.click)}function l(e){e.data.$el.addClass($.focus)}function o(e){e.data.$el.removeClass($.focus)}function u(e){S.killEvent(e);var t=e.data,a=t.$input[0].files;!t.disabled&&a.length&&p(t,a)}function s(e){S.killEvent(e),e.data.$el.addClass($.dropping).trigger(y.fileDragEnter)}function c(e){S.killEvent(e),e.data.$el.addClass($.dropping).trigger(y.fileDragOver)}function d(e){S.killEvent(e),e.data.$el.removeClass($.dropping).trigger(y.fileDragLeave)}function f(e){S.killEvent(e);var t=e.data,a=e.originalEvent.dataTransfer.files;t.$el.removeClass($.dropping),t.disabled||p(t,a)}function p(e,t){var a=[],r=t.length;if(e.maxFiles){var n=e.maxFiles-e.uploaded;n>=0&&t.length>n&&(r=n)}if(r>0){for(var i=0;i<r;i++){var l={index:e.total++,file:t[i],name:t[i].name,size:t[i].size,started:!1,complete:!1,error:!1,transfer:null};a.push(l),e.queue.push(l)}e.$el.trigger(y.queued,[a]),e.autoUpload&&g(e)}e.$input.val("")}function g(e){e.uploading||(q.on(y.beforeUnload,function(){return e.leave}),e.uploading=!0,e.$el.trigger(y.start,[e.queue])),h(e)}function h(e){var t=0,a=[];for(var r in e.queue)!e.queue.hasOwnProperty(r)||e.queue[r].complete||e.queue[r].error||a.push(e.queue[r]);e.queue=a;for(var n in e.queue)if(e.queue.hasOwnProperty(n)){if(e.queue[n].started||v(e,e.queue[n]),++t>=e.maxConcurrent)return;r++}0===t&&(q.off(y.beforeUnload),e.uploading=!1,e.$el.trigger(y.complete))}function v(t,r){if(r.size>=t.maxSize||!0===r.error)a(t,r,"size");else if(t.chunked)r.started=!0,r.chunkSize=1024*t.chunkSize,r.totalChunks=Math.ceil(r.size/r.chunkSize),r.currentChunk=0,t.$el.trigger(y.fileStart,[r]),m(t,r);else{var n=new FormData;n.append(t.postKey,r.file),!1===(n=k(t,n,r))?a(t,r,"abort"):(r.started=!0,r.transfer=e.ajax({url:t.action,data:n,dataType:t.dataType,type:"POST",contentType:!1,processData:!1,cache:!1,xhr:function(){var a=e.ajaxSettings.xhr();return a.upload&&a.upload.addEventListener("progress",function(e){var a=0,n=e.loaded||e.position,i=e.total;e.lengthComputable&&(a=Math.ceil(n/i*100)),t.$el.trigger(y.fileProgress,[r,a])},!1),a},beforeSend:function(e,a){t.$el.trigger(y.fileStart,[r,a,e])},success:function(e,a,n){r.complete=!0,t.uploaded++,t.$el.trigger(y.fileComplete,[r,e,a,n]),h(t)},error:function(e,n,i){a(t,r,i,e)}}))}}function m(t,n){var i=n.chunkSize*n.currentChunk,l=i+n.chunkSize;l>n.size&&(l=n.size);var o=n.file[w](i,l),u=new FormData;u.append(t.postKey,o,n.file.name),u.append("chunks",n.totalChunks),u.append("chunk",n.currentChunk),!1===(u=k(t,u,n))?a(t,n,"abort"):n.chunkTransfer=e.ajax({url:t.action,data:u,dataType:t.dataType,type:"POST",contentType:!1,processData:!1,cache:!1,beforeSend:function(e,a){t.$el.trigger(y.chunkStart,[n,a,e])},success:function(e,a,r){n.currentChunk++,t.$el.trigger(y.chunkComplete,[n]);var i=Math.ceil(n.currentChunk/n.totalChunks*100);t.$el.trigger(y.fileProgress,[n,i,a,r]),n.currentChunk<n.totalChunks?m(t,n):(n.complete=!0,t.$el.trigger(y.fileComplete,[n,e,a,r]),h(t))},error:function(e,a,i){r(t,n,i,e)}})}function k(e,t,a){for(var r in e.postData)e.postData.hasOwnProperty(r)&&t.append(r,e.postData[r]);return t=e.beforeSend.call(e.$el,t,a)}var b=t.Plugin("upload",{widget:!0,defaults:{accept:!1,action:"",autoUpload:!0,beforeSend:function(e){return e},chunked:!1,chunkSize:100,customClass:"",dataType:"html",label:"Drag and drop files or click to select",leave:"You have uploads pending, are you sure you want to leave this page?",maxConcurrent:2,maxFiles:!1,maxSize:5242880,multiple:!0,postData:{},postKey:"file",theme:"fs-light"},classes:["input","target","multiple","dropping","disabled","focus"],methods:{_setup:function(){var e=["mozSlice","webkitSlice","slice"];if(t.support.file){var a=!1;try{a=new File([""],"f")}catch(e){}if(!a)try{a=new Blob([""],{})}catch(e){}if(a)for(var r in e)if(e.hasOwnProperty(r)&&e[r]in a){w=e[r];break}}},_construct:function(e){if(t.support.file){var a="";w||(e.chunked=!1),e.maxQueue&&(e.maxConcurrent=e.maxQueue),!1!==e.label&&(a+='<div class="'+$.target+'">',a+=e.label,a+="</div>"),a+='<input class="'+$.input+'" type="file"',e.multiple&&(a+=" multiple"),e.accept&&(a+=' accept="'+e.accept+'"'),a+=">",e.baseClasses=[$.base,e.theme,e.customClass].join(" "),this.addClass(e.baseClasses).append(a),e.$input=this.find(C.input),e.queue=[],e.total=0,e.uploaded=0,e.uploading=!1,e.disabled=!0,e.aborting=!1,this.on(y.click,C.target,e,i).on(y.dragEnter,e,s).on(y.dragOver,e,c).on(y.dragLeave,e,d).on(y.drop,e,f),e.$input.on(y.focus,e,l).on(y.blur,e,o).on(y.change,e,u),n.call(this,e)}},_destruct:function(e){t.support.file&&(e.$input.off(y.namespace),this.off(y.namespace).removeClass(e.baseClasses).html(""))},disable:function(e){e.disabled||(this.addClass($.disabled),e.$input.prop("disabled",!0),e.disabled=!0)},enable:n,abort:function(t,r){var n;t.aborting=!0;for(var i in t.queue)t.queue.hasOwnProperty(i)&&(n=t.queue[i],("undefined"===e.type(r)||r>=0&&n.index===r)&&(n.started&&!n.complete?t.chunked?n.chunkTransfer.abort():n.transfer.abort():a(t,n,"abort")));t.aborting=!1,h(t)},start:g}}),C=b.classes,$=C.raw,y=b.events,S=b.functions,q=(t.window,t.$window),w=!1;y.chunkComplete="chunkcomplete",y.chunkError="chunkerror",y.chunkStart="chunkstart",y.complete="complete",y.fileComplete="filecomplete",y.fileDragEnter="filedragenter",y.fileDragLeave="filedragleave",y.fileDragOver="filedragover",y.fileError="fileerror",y.fileProgress="fileprogress",y.fileStart="filestart",y.start="start",y.queued="queued"});
-/*! formstone v1.3.3 [viewer.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core","./transition"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function i(){(O=V.scrollTop()+e.windowHeight)<0&&(O=0)}function o(){(q=t(R.base)).length?S.lockViewport(A):S.unlockViewport(A)}function n(e,i,o){e.isAnimating||(e.isAnimating=!0,e.$container=t('<div class="'+N.container+'"><img></div>'),e.$image=e.$container.find("img"),e.$viewport.append(e.$container),e.$image.one(P.load,function(){r(e),e.isAnimating=!1,e.$container.fsTransition({property:"opacity"},function(){}),e.$el.removeClass(N.loading),e.$container.fsTouch({pan:!0,scale:!0}).on(P.scaleStart,e,T).on(P.scaleEnd,e,M).on(P.scale,e,$),e.$el.trigger(P.loaded)}).one(P.error,e,a).attr("src",i).addClass(N.image),(e.$image[0].complete||4===e.$image[0].readyState)&&e.$image.trigger(P.load),e.source=i)}function a(t){t.data.$el.trigger(P.error)}function r(t){g(t),s(t),t.containerTop=t.viewportHeight/2,t.containerLeft=t.viewportWidth/2,c(t),t.imageHeight=t.naturalHeight,t.imageWidth=t.naturalWidth,u(t),l(t),m(t),d(t),h(t),W(t,{containerTop:t.containerTop,containerLeft:t.containerLeft,imageHeight:t.imageHeight,imageWidth:t.imageWidth,imageTop:t.imageTop,imageLeft:t.imageLeft}),t.isRendering=!0}function g(t){var e=E(t.$image);t.naturalHeight=e.naturalHeight,t.naturalWidth=e.naturalWidth,t.ratioHorizontal=t.naturalHeight/t.naturalWidth,t.ratioVertical=t.naturalWidth/t.naturalHeight,t.isWide=t.naturalWidth>t.naturalHeight}function s(t){t.viewportHeight=t.$viewport.outerHeight(),t.viewportWidth=t.$viewport.outerWidth()}function l(t){t.imageHeight<=t.viewportHeight?(t.containerMinTop=t.viewportHeight/2,t.containerMaxTop=t.viewportHeight/2):(t.containerMinTop=t.viewportHeight-t.imageHeight/2,t.containerMaxTop=t.imageHeight/2),t.imageWidth<=t.viewportWidth?(t.containerMinLeft=t.viewportWidth/2,t.containerMaxLeft=t.viewportWidth/2):(t.containerMinLeft=t.viewportWidth-t.imageWidth/2,t.containerMaxLeft=t.imageWidth/2)}function c(t){t.isWide?(t.imageMinWidth=t.viewportWidth,t.imageMinHeight=t.imageMinWidth*t.ratioHorizontal,t.imageMinHeight>t.viewportHeight&&(t.imageMinHeight=t.viewportHeight,t.imageMinWidth=t.imageMinHeight*t.ratioVertical)):(t.imageMinHeight=t.viewportHeight,t.imageMinWidth=t.imageMinHeight*t.ratioVertical,t.imageMinWidth>t.viewportWidth&&(t.imageMinWidth=t.viewportWidth,t.imageMinHeight=t.imageMinWidth*t.ratioHorizontal)),(t.imageMinWidth>t.naturalWidth||t.imageMinHeight>t.naturalHeight)&&(t.imageMinHeight=t.naturalHeight,t.imageMinWidth=t.naturalWidth),t.imageMaxHeight=t.naturalHeight,t.imageMaxWidth=t.naturalWidth}function m(t){t.imageTop=-t.imageHeight/2,t.imageLeft=-t.imageWidth/2}function d(t){t.lastContainerTop=t.containerTop,t.lastContainerLeft=t.containerLeft,t.lastImageHeight=t.imageHeight,t.lastImageWidth=t.imageWidth,t.lastImageTop=t.imageTop,t.lastImageLeft=t.imageLeft}function h(t){t.renderContainerTop=t.lastContainerTop,t.renderContainerLeft=t.lastContainerLeft,t.renderImageTop=t.lastImageTop,t.renderImageLeft=t.lastImageLeft,t.renderImageHeight=t.lastImageHeight,t.renderImageWidth=t.lastImageWidth}function u(t){t.imageHeight=t.imageMinHeight,t.imageWidth=t.imageMinWidth}function f(t){t.imageHeight<t.imageMinHeight&&(t.imageHeight=t.imageMinHeight),t.imageHeight>t.imageMaxHeight&&(t.imageHeight=t.imageMaxHeight),t.imageWidth<t.imageMinWidth&&(t.imageWidth=t.imageMinWidth),t.imageWidth>t.imageMaxWidth&&(t.imageWidth=t.imageMaxWidth)}function p(t){t.containerTop<t.containerMinTop&&(t.containerTop=t.containerMinTop),t.containerTop>t.containerMaxTop&&(t.containerTop=t.containerMaxTop),t.containerLeft<t.containerMinLeft&&(t.containerLeft=t.containerMinLeft),t.containerLeft>t.containerMaxLeft&&(t.containerLeft=t.containerMaxLeft)}function H(t){null===t.tapTimer?t.tapTimer=S.startTimer(t.tapTimer,500,function(){v(t)}):(v(t),w(t))}function v(t){S.clearTimer(t.tapTimer),t.tapTimer=null}function W(t,i){if(e.transform){var o=i.imageWidth/t.naturalWidth,n=i.imageHeight/t.naturalHeight;t.$container.css(e.transform,"translate3d("+i.containerLeft+"px, "+i.containerTop+"px, 0)"),t.$image.css(e.transform,"translate3d(-50%, -50%, 0) scale("+o+","+n+")")}else t.$container.css({top:i.containerTop,left:i.containerLeft}),t.$image.css({height:i.imageHeight,width:i.imageWidth,top:i.imageTop,left:i.imageLeft})}function T(t){var e=t.data;H(e),d(e)}function $(t){var e=t.data;v(e),e.isRendering=!1,e.isZooming=!1;e.imageHeight,e.imageMinHeight;e.containerTop=e.lastContainerTop+t.deltaY,e.containerLeft=e.lastContainerLeft+t.deltaX,e.imageHeight=e.lastImageHeight*t.scale,e.imageWidth=e.lastImageWidth*t.scale,l(e),p(e),f(e),m(e),W(e,{containerTop:e.containerTop,containerLeft:e.containerLeft,imageHeight:e.imageHeight,imageWidth:e.imageWidth,imageTop:e.imageTop,imageLeft:e.imageLeft})}function M(t){var e=t.data;e.isZooming||(d(e),h(e),e.isRendering=!0)}function w(t){var e=t.imageHeight>t.imageMinHeight+1;t.isZooming=!0,d(t),h(t),e?(t.imageHeight=t.imageMinHeight,t.imageWidth=t.imageMinWidth):(t.imageHeight=t.imageMaxHeight,t.imageWidth=t.imageMaxWidth),l(t),p(t),m(t),t.isRendering=!0}function _(e){S.killEvent(e);var i=t(e.currentTarget),o=e.data;"out"===(i.hasClass(N.control_zoom_out)?"out":"in")?L(o):C(o)}function C(t){t.keyDownTime=1,t.action="zoom_in"}function L(t){t.keyDownTime=1,t.action="zoom_out"}function x(t){t.data.action=!1}function z(t){if(t.isRendering){if(t.action){t.keyDownTime+=t.zoomIncrement;var e=("zoom_out"===t.action?-1:1)*Math.round(t.imageWidth*t.keyDownTime-t.imageWidth);e>t.zoomDelta&&(e=t.zoomDelta),t.isWide?(t.imageWidth+=e,t.imageHeight=Math.round(t.imageWidth/t.ratioVertical)):(t.imageHeight+=e,t.imageWidth=Math.round(t.imageHeight/t.ratioHorizontal)),f(t),m(t),l(t),p(t)}t.renderContainerTop+=Math.round((t.containerTop-t.renderContainerTop)*t.zoomEnertia),t.renderContainerLeft+=Math.round((t.containerLeft-t.renderContainerLeft)*t.zoomEnertia),t.renderImageTop+=Math.round((t.imageTop-t.renderImageTop)*t.zoomEnertia),t.renderImageLeft+=Math.round((t.imageLeft-t.renderImageLeft)*t.zoomEnertia),t.renderImageHeight+=Math.round((t.imageHeight-t.renderImageHeight)*t.zoomEnertia),t.renderImageWidth+=Math.round((t.imageWidth-t.renderImageWidth)*t.zoomEnertia),W(t,{containerTop:t.renderContainerTop,containerLeft:t.renderContainerLeft,imageHeight:t.renderImageHeight,imageWidth:t.renderImageWidth,imageTop:t.renderImageTop,imageLeft:t.renderImageLeft})}}function I(t,e){t.isAnimating||(v(t),t.isAnimating=!0,t.isRendering=!1,t.isZooming=!1,Z(t),t.$container.fsTransition({property:"opacity"},function(){t.isAnimating=!1,t.$container.remove(),"function"==typeof e&&e.call(window,t)}),t.$el.addClass(N.loading))}function y(e){S.killEvent(e);var i=t(e.currentTarget),o=e.data,a=o.index+(i.hasClass(N.control_next)?1:-1);o.isAnimating||(a<0&&(a=0),a>o.total&&(a=o.total),a!==o.index&&(o.index=a,I(o,function(){n(o,o.images[o.index])})),b(o))}function b(t){t.$controlItems.removeClass(N.control_disabled),0===t.index&&t.$controlPrevious.addClass(N.control_disabled),t.index===t.images.length-1&&t.$controlNext.addClass(N.control_disabled)}function j(t){s(t),l(t),c(t),m(t),l(t),p(t),f(t)}function Z(t){t.$container&&t.$container.length&&t.$container.fsTouch("destroy").off(P.scaleStart,T).off(P.scaleEnd,M).off(P.scale,$)}function E(t){var e=t[0],i=new Image;return void 0!==e.naturalHeight?{naturalHeight:e.naturalHeight,naturalWidth:e.naturalWidth}:"img"===e.tagName.toLowerCase()&&(i.src=e.src,{naturalHeight:i.height,naturalWidth:i.width})}var k,D=e.Plugin("viewer",{widget:!0,defaults:{controls:!0,customClass:"",labels:{count:"of",next:"Next",previous:"Previous",zoom_in:"Zoom In",zoom_out:"Zoom Out"},theme:"fs-light",zoomDelta:100,zoomEnertia:.2,zoomIncrement:.01},classes:["source","wrapper","viewport","container","image","gallery","loading_icon","controls","controls_custom","control","control_previous","control_next","control_zoom_in","control_zoom_out","control_disabled","loading"],events:{loaded:"loaded",ready:"ready"},methods:{_setup:function(){i(),V.on("scroll",i),k=e.$body},_construct:function(e){var i,a="",r=[N.control,N.control_previous].join(" "),g=[N.control,N.control_next].join(" "),s=[N.control,N.control_zoom_in].join(" "),l=[N.control,N.control_zoom_out].join(" ");e.thisClasses=[N.base,N.loading,e.customClass,e.theme],e.images=[],e.source=!1,e.gallery=!1,e.tapTimer=null,e.action=!1,e.isRendering=!1,e.isZooming=!1,e.isAnimating=!1,e.keyDownTime=1,e.$images=this.find("img").addClass(N.source),e.index=0,e.total=e.$images.length-1,e.customControls="object"===t.type(e.controls)&&e.controls.zoom_in&&e.controls.zoom_out,e.$images.length>1&&(e.gallery=!0,e.thisClasses.push(N.gallery),!e.customControls||e.controls.previous&&e.controls.next||(e.customControls=!1));for(var c=0;c<e.$images.length;c++)i=e.$images.eq(c),e.images.push(i.attr("src"));a+='<div class="'+N.wrapper+'">',a+='<div class="'+N.loading_icon+'"></div>',a+='<div class="'+N.viewport+'"></div>',a+="</div>",e.controls&&!e.customControls&&(a+='<div class="'+N.controls+'">',a+='<button type="button" class="'+r+'">'+e.labels.previous+"</button>",a+='<button type="button" class="'+l+'">'+e.labels.zoom_out+"</button>",a+='<button type="button" class="'+s+'">'+e.labels.zoom_in+"</button>",a+='<button type="button" class="'+g+'">'+e.labels.next+"</button>",a+="</div>"),this.addClass(e.thisClasses.join(" ")).prepend(a),e.$wrapper=this.find(R.wrapper),e.$viewport=this.find(R.viewport),e.customControls?(e.$controls=t(e.controls.container).addClass([N.controls,N.controls_custom].join(" ")),e.$controlPrevious=t(e.controls.previous).addClass(r),e.$controlNext=t(e.controls.next).addClass(g),e.$controlZoomIn=t(e.controls.zoom_in).addClass(s),e.$controlZoomOut=t(e.controls.zoom_out).addClass(l)):(e.$controls=this.find(R.controls),e.$controlPrevious=this.find(R.control_previous),e.$controlNext=this.find(R.control_next),e.$controlZoomIn=this.find(R.control_zoom_in),e.$controlZoomOut=this.find(R.control_zoom_out)),e.$controlItems=e.$controlPrevious.add(e.$controlNext),e.$controlZooms=e.$controlZoomIn.add(e.$controlZoomOut),o(),e.$controlItems.on(P.click,e,y),e.$controlZooms.on([P.touchStart,P.mouseDown].join(" "),e,_).on([P.touchEnd,P.mouseUp].join(" "),e,x),n(e,e.images[e.index],!0),b(e)},_destruct:function(t){t.$wrapper.remove(),t.$image.removeClass(N.source),t.controls&&!t.customControls&&t.$controls.remove(),t.customControls&&(t.$controls.removeClass([N.controls,N.controls_custom].join(" ")),t.$controlItems.off(P.click).removeClass([N.control,N.control_previous,N.control_next].join(" ")),t.$controlZooms.off([P.touchStart,P.mouseDown].join(" ")).off([P.touchStart,P.mouseDown].join(" ")).off([P.touchEnd,P.mouseUp].join(" ")).removeClass([N.control,N.control_zoom_in,N.control_zoom_out].join(" "))),this.removeClass(t.thisClasses.join(" ")).off(P.namespace),o()},_resize:function(){S.iterate.call(q,j)},_raf:function(){S.iterate.call(q,z)},resize:j,load:function(t,e){t.index=0,"string"==typeof e?(t.total=0,t.images=[e],t.gallery=!1,t.$el.removeClass(N.gallery)):(t.total=e.length-1,t.images=e,e.length>1&&(t.gallery=!0,t.$el.addClass(N.gallery)),e=t.images[t.index]),I(t,function(){n(t,e)})},unload:function(t){I(t)}}}),A=D.namespace,R=D.classes,N=R.raw,P=D.events,S=D.functions,V=(e.window,e.$window),O=0,q=[]});
+/*! formstone v1.3.3 [core.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/**
+ * @plugin
+ * @name Core
+ * @description Formstone Library core. Required for all plugins.
+ */
 
-/* ==========================================================================
-  Site
-============================================================================= */
+/* global define */
+/* global ga */
 
-  // !IE
-  var IE8 = IE8 || false,
-      IE9 = IE9 || false;
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([ "jquery" ], factory);
+  } else {
+    factory(jQuery);
+  }
+}(function($) {
 
-  // !Site
-  var Site = (function($, window) {
+  "use strict";
 
-    // !BaseController
-    var BaseController = function() {
-      this.namespace    = "";
+  // Namespace
 
-      this.minWidth     = 320;
-      this.maxWidth     = Infinity;
-      this.scrollTop    = 0;
-      this.windowHeight = 0;
-      this.windowWidth  = 0;
+  var Win  = typeof window !== "undefined" ? window : this,
+      Doc  = Win.document,
+      Core = function() {
+        this.Version = '@version';
+        this.Plugins = {};
 
-      this.window       = null;
-      this.doc          = null;
+        this.DontConflict   = false;
+        this.Conflicts      = {
+          fn: {}
+        };
+        this.ResizeHandlers = [];
+        this.RAFHandlers    = [];
 
-      this.$window      = null;
-      this.$doc         = null;
-      this.$body        = null;
+        // Globals
 
-      // Public modules
-      this.modules      = [];
+        this.window               = Win;
+        this.$window              = $(Win);
+        this.document             = Doc;
+        this.$document            = $(Doc);
+        this.$body                = null;
 
-      this.onInit       = [];
-      this.onRespond    = [];
-      this.onResize     = [];
-      this.onScroll     = [];
+        this.windowWidth          = 0;
+        this.windowHeight         = 0;
+        this.fallbackWidth        = 1024;
+        this.fallbackHeight       = 768;
+        this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
+        this.isFirefox            = /Firefox/i.test(this.userAgent);
+        this.isChrome             = /Chrome/i.test(this.userAgent);
+        this.isSafari             = /Safari/i.test(this.userAgent) && !this.isChrome;
+        this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
+        this.isIEMobile           = /IEMobile/i.test(this.userAgent);
+        this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
+        this.transform            = null;
+        this.transition           = null;
 
-      this.minXS = "320";
-      this.minSM = "500";
-      this.minMD = "740";
-      this.minLG = "980";
-      this.minXL = "1220";
-
-      this.maxXS = this.minXS - 1;
-      this.maxSM = this.minSM - 1;
-      this.maxMD = this.minMD - 1;
-      this.maxLG = this.minLG - 1;
-      this.maxXL = this.minXL - 1;
-
-      this.minHTsm = parseInt("800_sm", 10);
-      this.minHT   = parseInt("800", 10);
-
-      this.maxHTsm = this.minHTsm - 1;
-      this.maxHT   = this.minHT - 1;
-
-      this.touch = false;
-    };
-
-    $.extend(BaseController.prototype, {
-      // Init
-      init: function(namespace) {
-        // Objects
-        this.namespace = namespace;
-        this.window    = window;
-        this.doc       = document;
-        this.$window   = $(window);
-        this.$doc      = $(document);
-        this.$body     = $("body");
-        this.touch     = $("html").hasClass("touch");
-
-        if ($.mediaquery) {
-          $.mediaquery({
-            minWidth: [ this.minXS, this.minSM, this.minMD, this.minLG, this.minXL ],
-            maxWidth: [ this.maxXL, this.maxLG, this.maxMD, this.maxSM, this.maxXS ],
-            minHeight: [ this.minHTsm, this.minHT ],
-            maxHeight: [ this.maxHT, this.maxHTsm ]
-          });
-        }
-
-        if ($.cookie) {
-          $.cookie({
-            path: "/"
-          });
-        }
-
-        // Init modules before scroll/resize/respond
-        iterate(this.onInit);
-
-        this.$window.on("mqchange.mediaquery", onRespond)
-              .on(Controller.ns("resize"), onResize)
-              .on(Controller.ns("scroll"), onScroll);
-
-        this.resize();
+        this.support = {
+          file          : !!(window.File && window.FileList && window.FileReader),
+          history       : !!(window.history && window.history.pushState && window.history.replaceState),
+          matchMedia    : !!(window.matchMedia || window.msMatchMedia),
+          pointer       : !!(window.PointerEvent),
+          raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
+          touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
+          transition    : false,
+          transform     : false
+        };
       },
-      // Namespace Text
-      ns: function(text) {
-        return text + "." + this.namespace;
-      },
-      // Resize Trigger
-      resize: function() {
-        this.$window.trigger(Controller.ns("resize"));
-      },
-      // Scroll Trigger
-      scroll: function() {
-        this.$window.trigger(Controller.ns("scroll"));
-      },
-      // Kill event
-      killEvent: function(e) {
-        if (e && e.preventDefault) {
-          e.preventDefault();
-          e.stopPropagation();
-        }
-      },
-      // Start timer
-      startTimer: function(timer, time, callback, interval) {
-        this.clearTimer(timer);
-        return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
-      },
-      // Clear timer
-      clearTimer: function(timer, interval) {
-        if (timer) {
-          if (interval) {
-            clearInterval(timer);
-          } else {
-            clearTimeout(timer);
+
+      Functions = {
+
+        /**
+         * @method private
+         * @name killEvent
+         * @description Stops event action and bubble.
+         * @param e [object] "Event data"
+         */
+
+        killEvent: function(e, immediate) {
+          try {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (immediate) {
+              e.stopImmediatePropagation();
+            }
+          } catch(error) {
+            //
+          }
+        },
+
+        /**
+         * @method private
+         * @name killGesture
+         * @description Stops gesture event action.
+         * @param e [object] "Event data"
+         */
+
+        killGesture: function(e) {
+          try {
+            e.preventDefault();
+          }  catch(error) {
+            //
+          }
+        },
+
+        /**
+         * @method private
+         * @name lockViewport
+         * @description Unlocks the viewport, preventing getsures.
+         */
+
+        lockViewport: function(plugin_namespace) {
+          ViewportLocks[plugin_namespace] = true;
+
+          if (!$.isEmptyObject(ViewportLocks) && !ViewportLocked) {
+            if ($ViewportMeta.length) {
+              $ViewportMeta.attr("content", ViewportMetaLocked);
+            } else {
+              $ViewportMeta = $("head").append('<meta name="viewport" content="' + ViewportMetaLocked + '">');
+            }
+
+            Formstone.$body.on(Events.gestureChange, Functions.killGesture)
+                     .on(Events.gestureStart, Functions.killGesture)
+                     .on(Events.gestureEnd, Functions.killGesture);
+
+            ViewportLocked = true;
+          }
+        },
+
+        /**
+         * @method private
+         * @name unlockViewport
+         * @description Unlocks the viewport, allowing getsures.
+         */
+
+        unlockViewport: function(plugin_namespace) {
+          if ($.type( ViewportLocks[plugin_namespace] ) !== 'undefined') {
+            delete ViewportLocks[plugin_namespace];
           }
 
-          timer = null;
+          if ($.isEmptyObject(ViewportLocks) && ViewportLocked) {
+            if ($ViewportMeta.length) {
+              if (ViewportMetaOriginal) {
+                $ViewportMeta.attr("content", ViewportMetaOriginal);
+              } else {
+                $ViewportMeta.remove();
+              }
+            }
+
+            Formstone.$body.off(Events.gestureChange)
+                     .off(Events.gestureStart)
+                     .off(Events.gestureEnd);
+
+            ViewportLocked = false;
+          }
+        },
+
+        /**
+         * @method private
+         * @name startTimer
+         * @description Starts an internal timer.
+         * @param timer [int] "Timer ID"
+         * @param time [int] "Time until execution"
+         * @param callback [function] "Function to execute"
+         * @return [int] "Timer ID"
+         */
+
+        startTimer: function(timer, time, callback, interval) {
+          Functions.clearTimer(timer);
+
+          return (interval) ? setInterval(callback, time) : setTimeout(callback, time);
+        },
+
+        /**
+         * @method private
+         * @name clearTimer
+         * @description Clears an internal timer.
+         * @param timer [int] "Timer ID"
+         */
+
+        clearTimer: function(timer, interval) {
+          if (timer) {
+            if (interval) {
+              clearInterval(timer);
+            } else {
+              clearTimeout(timer);
+            }
+
+            timer = null;
+          }
+        },
+
+        /**
+         * @method private
+         * @name sortAsc
+         * @description Sorts an array (ascending).
+         * @param a [mixed] "First value"
+         * @param b [mixed] "Second value"
+         * @return Difference between second and first values
+         */
+
+        sortAsc: function(a, b) {
+          return (parseInt(a, 10) - parseInt(b, 10));
+        },
+
+        /**
+         * @method private
+         * @name sortDesc
+         * @description Sorts an array (descending).
+         * @param a [mixed] "First value"
+         * @param b [mixed] "Second value"
+         * @return Difference between second and first values
+         */
+
+        sortDesc: function(a, b) {
+          return (parseInt(b, 10) - parseInt(a, 10));
+        },
+
+        /**
+         * @method private
+         * @name decodeEntities
+         * @description Decodes HTML.
+         * @param string [string] "String to decode"
+         * @return Decoded string
+         */
+
+        decodeEntities: function(string) {
+          // http://stackoverflow.com/a/1395954
+          var el = Formstone.document.createElement("textarea");
+          el.innerHTML = string;
+
+          return el.value;
+        },
+
+        /**
+         * @method private
+         * @name parseGetParams
+         * @description Returns keyed object containing all GET query parameters
+         * @param url [string] "URL to parse"
+         * @return [object] "Keyed query params"
+         */
+
+        parseQueryString: function(url) {
+          var params = {},
+              parts = url.slice( url.indexOf("?") + 1 ).split("&");
+
+          for (var i = 0; i < parts.length; i++) {
+            var part = parts[i].split("=");
+            params[ part[0] ] = part[1];
+          }
+
+          return params;
+          }
+      },
+
+      Formstone = new Core(),
+
+      // Deferred ready
+
+      $Ready = $.Deferred(),
+
+      // Classes
+
+      Classes = {
+        base                 : "{ns}",
+        element              : "{ns}-element"
+      },
+
+      // Events
+
+      Events = {
+        namespace            : ".{ns}",
+        beforeUnload         : "beforeunload.{ns}",
+        blur                 : "blur.{ns}",
+        change               : "change.{ns}",
+        click                : "click.{ns}",
+        dblClick             : "dblclick.{ns}",
+        drag                 : "drag.{ns}",
+        dragEnd              : "dragend.{ns}",
+        dragEnter            : "dragenter.{ns}",
+        dragLeave            : "dragleave.{ns}",
+        dragOver             : "dragover.{ns}",
+        dragStart            : "dragstart.{ns}",
+        drop                 : "drop.{ns}",
+        error                : "error.{ns}",
+        focus                : "focus.{ns}",
+        focusIn              : "focusin.{ns}",
+        focusOut             : "focusout.{ns}",
+        gestureChange        : "gesturechange.{ns}",
+        gestureStart         : "gesturestart.{ns}",
+        gestureEnd           : "gestureend.{ns}",
+        input                : "input.{ns}",
+        keyDown              : "keydown.{ns}",
+        keyPress             : "keypress.{ns}",
+        keyUp                : "keyup.{ns}",
+        load                 : "load.{ns}",
+        mouseDown            : "mousedown.{ns}",
+        mouseEnter           : "mouseenter.{ns}",
+        mouseLeave           : "mouseleave.{ns}",
+        mouseMove            : "mousemove.{ns}",
+        mouseOut             : "mouseout.{ns}",
+        mouseOver            : "mouseover.{ns}",
+        mouseUp              : "mouseup.{ns}",
+        panStart             : "panstart.{ns}",
+        pan                  : "pan.{ns}",
+        panEnd               : "panend.{ns}",
+        resize               : "resize.{ns}",
+        scaleStart           : "scalestart.{ns}",
+        scaleEnd             : "scaleend.{ns}",
+        scale                : "scale.{ns}",
+        scroll               : "scroll.{ns}",
+        select               : "select.{ns}",
+        swipe                : "swipe.{ns}",
+        touchCancel          : "touchcancel.{ns}",
+        touchEnd             : "touchend.{ns}",
+        touchLeave           : "touchleave.{ns}",
+        touchMove            : "touchmove.{ns}",
+        touchStart           : "touchstart.{ns}"
+      },
+
+      ResizeTimer    = null,
+      Debounce       = 20,
+
+      $ViewportMeta,
+      ViewportMetaOriginal,
+      ViewportMetaLocked,
+      ViewportLocks     = [],
+      ViewportLocked    = false;
+
+  /**
+   * @method
+   * @name NoConflict
+   * @description Resolves plugin namespace conflicts
+   * @example Formstone.NoConflict();
+   */
+
+  Core.prototype.NoConflict = function() {
+    Formstone.DontConflict = true;
+
+    for (var i in Formstone.Plugins) {
+      if (Formstone.Plugins.hasOwnProperty(i)) {
+        $[i]    = Formstone.Conflicts[i];
+        $.fn[i] = Formstone.Conflicts.fn[i];
+      }
+    }
+  };
+
+  /**
+   * @method
+   * @name ready
+   * @description Replacement for jQuery ready
+   * @param e [object] "Event data"
+   */
+
+  Core.prototype.Ready = function(fn) {
+    if (
+      Formstone.document.readyState === "complete" ||
+      (Formstone.document.readyState !== "loading" && !Formstone.document.documentElement.doScroll)
+    ) {
+      fn();
+    } else {
+      Formstone.document.addEventListener("DOMContentLoaded", fn);
+    }
+  };
+
+  /**
+   * @method
+   * @name Plugin
+   * @description Builds a plugin and registers it with jQuery.
+   * @param namespace [string] "Plugin namespace"
+   * @param settings [object] "Plugin settings"
+   * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions`, `methods` and `utilities` keys"
+   * @example Formstone.Plugin("namespace", { ... });
+   */
+
+  Core.prototype.Plugin = function(namespace, settings) {
+    Formstone.Plugins[namespace] = (function(namespace, settings) {
+
+      var namespaceDash  = "fs-" + namespace,
+          namespaceDot   = "fs." + namespace,
+          namespaceClean = "fs"  + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+
+      /**
+       * @method private
+       * @name initialize
+       * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call.
+       * @param options [object] <{}> "Instance options"
+       */
+
+      function initialize(options) {
+        // Maintain Chain
+
+        var hasOptions = $.type(options) === "object",
+            args = Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) ),
+            $targets = this,
+            $postTargets = $(),
+            $element,
+            i,
+            count;
+
+        // Extend Defaults
+
+        options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
+
+        // All targets
+
+        for (i = 0, count = $targets.length; i < count; i++) {
+          $element = $targets.eq(i);
+
+          // Gaurd Against Exiting Instances
+
+          if (!getData($element)) {
+
+            // Extend w/ Local Options
+
+            var guid    = "__" + settings.guid++,
+                rawGuid = settings.classes.raw.base + guid,
+                locals  = $element.data(namespace + "-options"),
+                data    = $.extend(true, {
+                  $el     : $element,
+                  guid    : guid,
+                  rawGuid : rawGuid,
+                  dotGuid : "." + rawGuid
+                }, options, ($.type(locals) === "object" ? locals : {}) );
+
+            // Cache Instance
+
+            $element.addClass(settings.classes.raw.element)
+                    .data(namespaceClean, data);
+
+            // Constructor
+
+            settings.methods._construct.apply($element, [ data ].concat(args));
+
+            // Post Constructor
+
+            $postTargets = $postTargets.add($element);
+          }
+
         }
+
+        // Post targets
+
+        for (i = 0, count = $postTargets.length; i < count; i++) {
+          $element = $postTargets.eq(i);
+
+          // Post Constructor
+
+          settings.methods._postConstruct.apply($element, [ getData($element) ]);
+        }
+
+        return $targets;
+      }
+
+      /**
+       * @method private
+       * @name destroy
+       * @description Removes plugin instance by scoping a _destruct call, and removing the base classname and data.
+       * @param data [object] <{}> "Instance data"
+       */
+
+      /**
+       * @method widget
+       * @name destroy
+       * @description Removes plugin instance.
+       * @example $(".target").{ns}("destroy");
+       */
+
+      function destroy(data) {
+        settings.functions.iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+
+        this.removeClass(settings.classes.raw.element)
+          .removeData(namespaceClean);
+      }
+
+      /**
+       * @method private
+       * @name getData
+       * @description Creates class selector from text.
+       * @param $element [jQuery] "Target jQuery object"
+       * @return [object] "Instance data"
+       */
+
+      function getData($element) {
+        return $element.data(namespaceClean);
+      }
+
+      /**
+       * @method private
+       * @name delegateWidget
+       * @description Delegates public methods.
+       * @param method [string] "Method to execute"
+       * @return [jQuery] "jQuery object"
+       */
+
+      function delegateWidget(method) {
+
+        // If jQuery object
+
+        if (this instanceof $) {
+
+          var _method = settings.methods[method];
+
+          // Public method OR false
+
+          if ($.type(method) === "object" || !method) {
+
+            // Initialize
+
+            return initialize.apply(this, arguments);
+          } else if (_method && method.indexOf("_") !== 0) {
+
+            // Wrap Public Methods
+
+            return settings.functions.iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
+          }
+
+          return this;
+        }
+      }
+
+      /**
+       * @method private
+       * @name delegateUtility
+       * @description Delegates utility methods.
+       * @param method [string] "Method to execute"
+       */
+
+      function delegateUtility(method) {
+
+        // public utility OR utility init OR false
+
+        var _method = settings.utilities[method] || settings.utilities._initialize || false;
+
+        if (_method) {
+
+          // Wrap Utility Methods
+
+          return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
+        }
+      }
+
+      /**
+       * @method utility
+       * @name defaults
+       * @description Extends plugin default settings; effects instances created hereafter.
+       * @param options [object] <{}> "New plugin defaults"
+       * @example $.{ns}("defaults", { ... });
+       */
+
+      function defaults(options) {
+        settings.defaults = $.extend(true, settings.defaults, options || {});
+      }
+
+      /**
+       * @method private
+       * @name iterate
+       * @description Loops scoped function calls over jQuery object with instance data as first parameter.
+       * @param func [function] "Function to execute"
+       * @return [jQuery] "jQuery object"
+       */
+
+      function iterate(fn) {
+        var $targets = this,
+            args     = Array.prototype.slice.call(arguments, 1);
+
+        for (var i = 0, count = $targets.length; i < count; i++) {
+          var $element = $targets.eq(i),
+              data = getData($element) || {};
+
+          if ($.type(data.$el) !== "undefined") {
+            fn.apply($element, [ data ].concat(args));
+          }
+        }
+
+        return $targets;
+      }
+
+      // Locals
+
+      settings.initialized = false;
+      settings.priority    = settings.priority || 10;
+
+      // Namespace Classes & Events
+
+      settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
+      settings.events    = namespaceProperties("events",  namespace,     Events,  settings.events);
+
+      // Extend Functions
+
+      settings.functions = $.extend({
+        getData    : getData,
+        iterate    : iterate
+      }, Functions, settings.functions);
+
+      // Extend Methods
+
+      settings.methods = $.extend(true, {
+
+        // Private Methods
+
+        _setup         : $.noop,    // Document ready
+        _construct     : $.noop,    // Constructor
+        _postConstruct : $.noop,    // Post Constructor
+        _destruct      : $.noop,    // Destructor
+        _resize        : false,     // Window resize
+
+        // Public Methods
+
+        destroy        : destroy
+
+      }, settings.methods);
+
+      // Extend Utilities
+
+      settings.utilities = $.extend(true, {
+
+        // Private Utilities
+
+        _initialize    : false,    // First Run
+        _delegate      : false,    // Custom Delegation
+
+        // Public Utilities
+
+        defaults       : defaults
+
+      }, settings.utilities);
+
+      // Register Plugin
+
+      // Widget
+
+      if (settings.widget) {
+
+        // Store conflicting namesapaces
+        Formstone.Conflicts.fn[namespace] = $.fn[namespace];
+
+        // Widget Delegation: $(".target").fsPlugin("method", ...);
+        $.fn[namespaceClean] = delegateWidget;
+
+        if (!Formstone.DontConflict) {
+
+          // $(".target").plugin("method", ...);
+          $.fn[namespace] = $.fn[namespaceClean];
+        }
+      }
+
+      // Utility
+
+        Formstone.Conflicts[namespace] = $[namespace];
+
+        // Utility Delegation: $.fsPlugin("method", ... );
+        $[namespaceClean] = settings.utilities._delegate || delegateUtility;
+
+        if (!Formstone.DontConflict) {
+
+          // $.plugin("method", ... );
+          $[namespace] = $[namespaceClean];
+        }
+
+      // Run Setup
+
+      settings.namespace      = namespace;
+      settings.namespaceClean = namespaceClean;
+
+      settings.guid = 0;
+
+      // Resize handler
+
+      if (settings.methods._resize) {
+        Formstone.ResizeHandlers.push({
+          namespace: namespace,
+          priority: settings.priority,
+          callback: settings.methods._resize
+        });
+
+        // Sort handlers on push
+        Formstone.ResizeHandlers.sort(sortPriority);
+      }
+
+      // RAF handler
+
+      if (settings.methods._raf) {
+        Formstone.RAFHandlers.push({
+          namespace: namespace,
+          priority: settings.priority,
+          callback: settings.methods._raf
+        });
+
+        // Sort handlers on push
+        Formstone.RAFHandlers.sort(sortPriority);
+      }
+
+      return settings;
+    })(namespace, settings);
+
+    // Setup, catches lazy-loaded components, ensures order
+
+    $Ready.then(function() {
+      setupPlugin(namespace);
+    });
+
+    return Formstone.Plugins[namespace];
+  };
+
+  // Setup Plugins
+
+  function setupPlugin(namespace) {
+    if (!Formstone.Plugins[namespace].initialized) {
+      Formstone.Plugins[namespace].methods._setup.call(document);
+      Formstone.Plugins[namespace].initialized = true;
+    }
+  }
+
+  // Namespace Properties
+
+  function namespaceProperties(type, namespace, globalProps, customProps) {
+    var _props = {
+          raw: {}
+        },
+        i;
+
+    customProps = customProps || {};
+
+    for (i in customProps) {
+      if (customProps.hasOwnProperty(i)) {
+        if (type === "classes") {
+
+          // Custom classes
+          _props.raw[ customProps[i] ] = namespace + "-" + customProps[i];
+          _props[ customProps[i] ]     = "." + namespace + "-" + customProps[i];
+        } else {
+          // Custom events
+          _props.raw[ i ] = customProps[i];
+          _props[ i ]     = customProps[i] + "." + namespace;
+        }
+      }
+    }
+
+    for (i in globalProps) {
+      if (globalProps.hasOwnProperty(i)) {
+        if (type === "classes") {
+
+          // Global classes
+          _props.raw[ i ] = globalProps[i].replace(/{ns}/g, namespace);
+          _props[ i ]     = globalProps[i].replace(/{ns}/g, "." + namespace);
+        } else {
+          // Global events
+          _props.raw[ i ] = globalProps[i].replace(/.{ns}/g, "");
+          _props[ i ]     = globalProps[i].replace(/{ns}/g, namespace);
+        }
+      }
+    }
+
+    return _props;
+  }
+
+  // Set Browser Prefixes
+
+  function setBrowserPrefixes() {
+    var transitionEvents = {
+          "WebkitTransition"    : "webkitTransitionEnd",
+          "MozTransition"       : "transitionend",
+          "OTransition"         : "otransitionend",
+          "transition"          : "transitionend"
+        },
+        transitionProperties = [
+          "transition",
+          "-webkit-transition"
+        ],
+        transformProperties = {
+          'transform'          : 'transform',
+          'MozTransform'       : '-moz-transform',
+          'OTransform'         : '-o-transform',
+          'msTransform'        : '-ms-transform',
+          'webkitTransform'    : '-webkit-transform'
+        },
+        transitionEvent       = "transitionend",
+        transitionProperty    = "",
+        transformProperty     = "",
+        testDiv               = document.createElement("div"),
+        i;
+
+    for (i in transitionEvents) {
+      if (transitionEvents.hasOwnProperty(i) && i in testDiv.style) {
+        transitionEvent = transitionEvents[i];
+        Formstone.support.transition = true;
+        break;
+      }
+    }
+
+    Events.transitionEnd = transitionEvent + ".{ns}";
+
+    for (i in transitionProperties) {
+      if (transitionProperties.hasOwnProperty(i) && transitionProperties[i] in testDiv.style) {
+        transitionProperty = transitionProperties[i];
+        break;
+      }
+    }
+
+    Formstone.transition = transitionProperty;
+
+    for (i in transformProperties) {
+      if (transformProperties.hasOwnProperty(i) && transformProperties[i] in testDiv.style) {
+        Formstone.support.transform = true;
+        transformProperty = transformProperties[i];
+        break;
+      }
+    }
+
+    Formstone.transform = transformProperty;
+  }
+
+  // Window resize
+
+  function onWindowResize() {
+    Formstone.windowWidth  = Formstone.$window.width();
+    Formstone.windowHeight = Formstone.$window.height();
+
+    ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
+  }
+
+  function handleWindowResize() {
+    for (var i in Formstone.ResizeHandlers) {
+      if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
+        Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth, Formstone.windowHeight);
+      }
+    }
+  }
+
+  Formstone.$window.on("resize.fs", onWindowResize);
+  onWindowResize();
+
+  // RAF
+
+  function handleRAF() {
+    if (Formstone.support.raf) {
+      Formstone.window.requestAnimationFrame(handleRAF);
+
+      for (var i in Formstone.RAFHandlers) {
+        if (Formstone.RAFHandlers.hasOwnProperty(i)) {
+          Formstone.RAFHandlers[i].callback.call(window);
+        }
+      }
+    }
+  }
+
+  handleRAF();
+
+  // Sort Priority
+
+  function sortPriority(a, b) {
+    return (parseInt(a.priority) - parseInt(b.priority));
+  }
+
+  // Document Ready
+
+  Formstone.Ready(function() {
+    Formstone.$body = $("body");
+
+    // Viewport
+    $ViewportMeta = $('meta[name="viewport"]');
+    ViewportMetaOriginal = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
+    ViewportMetaLocked   = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+
+    $Ready.resolve();
+
+    // ie8 fallback support
+    Formstone.support.nativeMatchMedia = Formstone.support.matchMedia && !$("html").hasClass("no-matchmedia");
+  });
+
+  // Custom Events
+
+  Events.clickTouchStart = Events.click + " " + Events.touchStart;
+
+  // Browser Prefixes
+
+  setBrowserPrefixes();
+
+  window.Formstone = Formstone;
+
+  return Formstone;
+
+})
+
+);
+
+/*! formstone v1.3.3 [analytics.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function resize() {
+    if (Defaults.scrollDepth) {
+      setScrollDepths();
+    }
+  }
+
+  /**
+   * @method private
+   * @name delegate
+   */
+
+  function delegate() {
+    if (arguments.length && $.type(arguments[0]) !== "object") {
+      if (arguments[0] === "destroy") {
+        destroy.apply(this);
+      } else {
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        switch (arguments[0]) {
+          case "pageview":
+            pushPageView.apply(this, args);
+            break;
+          case "event":
+            pushEvent.apply(this, args);
+            break;
+          default:
+            break;
+        }
+      }
+    } else {
+      init.apply(this, arguments);
+    }
+
+    return null;
+  }
+
+  /**
+   * @method private
+   * @name init
+   * @description Initializes plugin
+   * @param opts [object] "Initialization options"
+   */
+
+  function init(options) {
+    // Attach Analytics events
+    if (!Initialized && $Body && $Body.length) {
+      Initialized = true;
+
+      Defaults = $.extend(Defaults, options || {});
+
+      if (Defaults.autoEvents) {
+        $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
+      }
+
+      if (Defaults.scrollDepth) {
+        setScrollDepths();
+        $Window.on(Events.scroll, trackScroll)
+          .one(Events.load, resize);
+      }
+
+      $Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destroy
+   * @description Destroys plugin
+   */
+
+  function destroy() {
+    if (Initialized && $Body && $Body.length) {
+      $Window.off(Events.namespace);
+      $Body.off(Events.namespace);
+
+      Initialized = false;
+    }
+  }
+
+  /**
+   * @method private
+   * @name buildEvent
+   * @description Build events for email, phone, file types & external links
+   */
+
+  function buildEvent() {
+    var $target  = $(this),
+        href     = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+        domain   = document.domain.split(".").reverse(),
+        internal = href.match(domain[1] + "." + domain[0]) !== null,
+        eventData;
+
+    if (href.match(/^mailto\:/i)) {
+      // Email
+      eventData = "Email, Click, " + href.replace(/^mailto\:/i, "");
+    } else if (href.match(/^tel\:/i)) {
+      // Action
+      eventData = "Telephone, Click, " + href.replace(/^tel\:/i, "");
+    } else if (href.match(Defaults.fileTypes)) {
+      // Files
+      var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+      eventData = "File, Download:" + extension[0] + ", " + href.replace(/ /g,"-");
+    } else if (!internal) {
+      // External Link
+      eventData = "ExternalLink, Click, " + href;
+    }
+
+    if (eventData) {
+      $target.attr(DataKeyFull, eventData);
+    }
+  }
+
+  /**
+   * @method private
+   * @name trackScroll
+   * @description Debounces scroll tracking
+   */
+
+  function trackScroll(e) {
+    Functions.startTimer(ScrollTimer, 250, doTrackScroll);
+  }
+
+  /**
+   * @method private
+   * @name doTrackScroll
+   * @description Handle scroll tracking
+   */
+
+  function doTrackScroll() {
+    var scrollTop = $Window.scrollTop() + Formstone.windowHeight,
+        step      = (1 / Defaults.scrollStops),
+        depth     = step,
+        key;
+
+    for (var i = 1; i <= Defaults.scrollStops; i++) {
+      key = ( Math.round(100 * depth) ).toString();
+
+      if (!ScrollDepths[ ScrollWidth ][ key ].passed && scrollTop > ScrollDepths[ ScrollWidth ][ key ].edge) {
+        ScrollDepths[ ScrollWidth ][ key ].passed = true;
+
+        // Push data
+        var eventData = $.extend(Defaults.scrollFields, {
+            eventCategory  : "ScrollDepth",
+            eventAction    : ScrollWidth,
+            eventLabel     : key,
+            nonInteraction : true
+          });
+
+        pushEvent(eventData);
+      }
+
+      depth += step;
+    }
+  }
+
+  /**
+   * @method private
+   * @name setScrollDepths
+   * @description Sets scroll depths at specific widths
+   */
+
+  function setScrollDepths() {
+    var mqState    = $.mediaquery("state"),
+        bodyHeight = $Body.outerHeight(),
+        newDepths  = {},
+        step       = (1 / Defaults.scrollStops),
+        depth      = step,
+        top        = 0,
+        key;
+
+    if (mqState.minWidth) {
+      ScrollWidth = "MinWidth:" + mqState.minWidth + "px";
+    }
+
+    for (var i = 1; i <= Defaults.scrollStops; i++) {
+      top = parseInt(bodyHeight * depth);
+      key = ( Math.round(100 * depth) ).toString();
+
+      newDepths[ key ] = {
+        edge    : ( key === "100" ) ? top - 10 : top,
+        passsed : ( ScrollDepths[ ScrollWidth ] && ScrollDepths[ ScrollWidth ][ key ] ) ? ScrollDepths[ ScrollWidth ][ key ].passed : false
+      };
+
+      depth += step;
+    }
+
+    ScrollDepths[ ScrollWidth ] = newDepths;
+  }
+
+  /**
+   * @method private
+   * @name trackEvent
+   * @description Tracks event
+   * @param e [object] "Event data"
+   */
+
+  function trackEvent(e) {
+    var $target = $(this),
+        url     = $target.attr("href"),
+        data    = $target.data(DataKey).split(",");
+
+    if (Defaults.eventCallback) {
+      e.preventDefault();
+    }
+
+    // Trim data
+    for (var i in data) {
+      if (data.hasOwnProperty(i)) {
+        data[i] = $.trim(data[i]);
+      }
+    }
+
+    // Push data
+    pushEvent({
+      eventCategory  : data[0],
+      eventAction    : data[1],
+      eventLabel     : (data[2] || url),
+      eventValue     : data[3],
+      nonInteraction : data[4],
+    }, $target);
+  }
+
+  /**
+   * @method private
+   * @name pushEvent
+   * @description Push event to Universal Analytics
+   */
+
+  function pushEvent(data, $target) {
+    // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference
+    var loc = Window.location,
+        evt = $.extend({
+          hitType : "event"
+        }, data);
+
+    // If active link, launch that ish!
+    if ($.type($target) !== "undefined" && !$target.attr("data-analytics-stop")) {
+      var href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+        url  = (!href.match(/^mailto\:/i) && !href.match(/^tel\:/i) && href.indexOf(":") < 0) ? Window.location.protocol + "//" + Window.location.hostname + "/" + href : href;
+
+      if (url !== "") {
+        // Check Window target
+        var target = $target.attr("target");
+        if (target) {
+          Window.open(url, target);
+        } else if (Defaults.eventCallback) {
+          var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
+
+          evt[ callbackType ] = function() {
+            if (LinkTimer) {
+              Functions.clearTimer(LinkTimer);
+
+              openURL( url );
+            }
+          };
+
+          // Event timeout
+          LinkTimer = Functions.startTimer(LinkTimer, Defaults.eventTimeout, evt[ callbackType ]);
+        }
+      }
+    }
+
+    push(evt);
+  }
+
+  /**
+   * @method private
+   * @name pushPageView
+   * @description Push page view to Universal Analytics
+   */
+
+  function pushPageView(data) {
+    var pageView = $.extend({
+          hitType : "pageview"
+        }, data);
+
+    push(pageView);
+  }
+
+  /**
+   * @method private
+   * @name push
+   * @description Push data to Universal Analytics
+   */
+
+  function push(data) {
+    if ($.type(Window.ga) === "function" && $.type(Window.ga.getAll) === "function") {
+      var trackers = Window.ga.getAll();
+
+      for (var i = 0, count = trackers.length; i < count; i++) {
+        Window.ga( trackers[i].get("name") + ".send", data);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name openURL
+   * @description Launch a url
+   */
+  function openURL(url) {
+    document.location = url;
+  }
+
+  /**
+   * @plugin
+   * @name Analytics
+   * @description A jQuery plugin for Google Universal Analytics Events.
+   * @type utility
+   * @main analytics.js
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   */
+
+  var Plugin = Formstone.Plugin("analytics", {
+        methods: {
+          _setup    : setup,
+          _resize   : resize
+        },
+        utilities: {
+          _delegate : delegate
+        }
+      }),
+
+      /**
+       * @options
+       * @param autoEvents [boolean] <false> "Flag to bind auto-events to mailto, tel, files and external links"
+       * @param fileTypes [regex] <> "File types for binding auto-events"
+       * @param eventCallback [boolean] <false> "Flag to use event callbacks when navigating"
+       * @param eventTimeout [int] <1000> "Event failure timeout"
+       * @param scrollDepth [boolean] <false> "Flag to track scroll depth events"
+       * @param scrollStops [int] <5> "Number of scroll increments to track"
+       * @param scrollFields [object] <{}> "Additional event fields for scroll depth events"
+       */
+
+      Defaults = {
+        autoEvents    : false,
+        fileTypes     : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        eventCallback : false,
+        eventTimeout  : 1000,
+        scrollDepth   : false,
+        scrollStops   : 5,
+        scrollFields  : {}
+      },
+
+      // Localize References
+
+      Window       = Formstone.window,
+      $Window      = Formstone.$window,
+      $Body        = null,
+
+      Functions    = Plugin.functions,
+      Events       = Plugin.events,
+
+      // Internal
+
+      Initialized  = false,
+      DataKey      = "analytics-event",
+      DataKeyFull  = "data-" + DataKey,
+
+      ScrollDepths = {},
+      ScrollTimer  = null,
+      ScrollWidth  = "Site", // default value, non-responsive
+      LinkTimer    = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [asap.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+/* global ga */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./analytics"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name initialize
+   * @description Initializes plugin.
+   * @param opts [object] "Plugin options"
+   */
+
+  function initialize(options) {
+    if (Instance || !Formstone.support.history) {
+      return;
+    }
+
+    $Body = Formstone.$body;
+
+    Instance = $.extend(Defaults, options);
+
+    if (Instance.render === $.noop) {
+      Instance.render = renderState;
+    }
+
+    if (Instance.transitionOut === $.noop) {
+      Instance.transitionOut = function() {
+        return $.Deferred().resolve();
+      };
+    }
+
+    // Initial state
+    if (history.state) {
+      CurrentID  = history.state.id;
+      CurrentURL = history.state.url;
+    } else {
+      CurrentURL = window.location.href;
+
+      replaceState(CurrentID, CurrentURL);
+    }
+
+    // Bind state events
+    $Window.on(Events.popState, onPop);
+
+    enable();
+  }
+
+  /**
+   * @method private
+   * @name disable
+   * @description Disable ASAP
+   * @example $.asap("enable");
+   */
+
+  function disable() {
+    if ($Body && $Body.hasClass(RawClasses.base)) {
+      $Body.off(Events.click)
+         .removeClass(RawClasses.base);
+    }
+  }
+
+  /**
+   * @method private
+   * @name enable
+   * @description Enables ASAP
+   * @example $.asap("enable");
+   */
+
+  function enable() {
+    if ($Body && !$Body.hasClass(RawClasses.base)) {
+      $Body.on(Events.click, Instance.selector, onClick)
+         .addClass(RawClasses.base);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click events
+   * @param e [object] "Event data"
+   */
+
+  function onClick(e) {
+    var url = e.currentTarget;
+
+    // Ignore everything but normal click
+    if (
+      (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) ||
+      (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank"
+    ) {
+      return;
+    }
+
+    // Update state on hash change
+    if ( url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#") ) {
+      return;
+    }
+
+    // Ignore certain file types
+    if ( url.href.match(Instance.ignoreTypes) ) {
+      return;
+    }
+
+    Functions.killEvent(e);
+    e.stopImmediatePropagation();
+
+    if (url.href !== CurrentURL) {
+      requestURL(url.href, true);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPop
+   * @description Handles history navigation events
+   * @param e [object] "Event data"
+   */
+
+  function onPop(e) {
+    if (Request) {
+      Request.abort();
+    }
+
+    var state = e.originalEvent.state;
+      // direction = (state.id > CurrentID) ? "forward" : "back";
+
+    if (state) {
+      CurrentID = state.id;
+
+      if (state.url !== CurrentURL) {
+        requestURL(state.url, false);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name requestURL
+   * @description Requests new content via AJAX
+   * @param url [string] "URL to load"
+   * @param doPush [boolean] "Flag to push to stack"
+   */
+
+  function requestURL(url, doPush) {
+    if (Request) {
+      Request.abort();
+    }
+
+    // Fire request event
+    $Window.trigger(Events.requested, [ doPush ]);
+
+    // Get transition out deferred
+    Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
+
+    var parsed   = parseURL(url),
+        params   = parsed.params,
+        hash     = parsed.hash,
+        cleanURL = parsed.clean,
+        error    = "User error",
+        response = null,
+        requestDeferred = $.Deferred();
+
+    params[ Instance.requestKey ] = true;
+
+    // Request new content
+    Request = $.ajax({
+      url: cleanURL,
+      data: params,
+      dataType: "json",
+      cache: Instance.cache,
+      xhr: function() {
+        // custom xhr
+        var xhr = new Window.XMLHttpRequest();
+
+        /*
+        //Upload progress ?
+        xhr.upload.addEventListener("progress", function(e) {
+          if (e.lengthComputable) {
+            var percent = (e.loaded / e.total) / 2;
+            $window.trigger(Events.progress, [ percent ]);
+          }
+        }, false);
+        */
+
+        //Download progress
+        xhr.addEventListener("progress", function(e) {
+          if (e.lengthComputable) {
+            var percent = e.loaded / e.total;
+            $Window.trigger(Events.progress, [ percent ]);
+          }
+        }, false);
+
+        return xhr;
+      },
+      success: function(resp, status, jqXHR) {
+        response  = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
+
+        // handle redirects - requires passing new location with json response
+        if (resp.location) {
+          url = resp.location;
+
+          parsed = parseURL(url);
+          hash   = parsed.hash;
+        }
+
+        requestDeferred.resolve();
+      },
+      error: function(jqXHR, status, err) {
+        error = err;
+
+        requestDeferred.reject();
       }
     });
 
-    // Internal Instance
-    var Controller = new BaseController();
+    $.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
+      processResponse(parsed, response, doPush);
+    }).fail(function() {
+      $Window.trigger(Events.failed, [ error ]);
+    });
+  }
 
-    // Loop through callbacks
-    function iterate(items) {
-      for (var i in items) {
-        if (items.hasOwnProperty(i)) {
-          items[i].apply(Controller, Array.prototype.slice.call(arguments, 1));
+  /**
+   * @method private
+   * @name processResponse
+   * @description Processes a state
+   * @param parsedURL [object] "Parsed URL"
+   * @param data [object] "State Data"
+   * @param doPush [boolean] "Flag to replace or add state"
+   */
+
+  function processResponse(parsedURL, data, doPush) {
+    // Fire load event
+    $Window.trigger(Events.loaded, [ data ]);
+
+    // Trigger analytics page view
+    if ($.fsAnalytics !== undefined) {
+      $.fsAnalytics("pageview");
+    }
+
+    // Render before updating
+    Instance.render.call(this, data, parsedURL.hash);
+
+    // Update current url
+    CurrentURL = parsedURL.url;
+
+    if (doPush) {
+      // Push new states to the stack
+      CurrentID++;
+      pushState(CurrentID, CurrentURL);
+    }
+
+    $Window.trigger(Events.rendered, [ data ]);
+
+    var scrollTop = false;
+
+    if (parsedURL.hash !== "") {
+      var $el = $(parsedURL.hash);
+
+      if ($el.length) {
+        scrollTop = $el.offset().top;
+      }
+    }
+
+    if (scrollTop !== false) {
+      $Window.scrollTop(scrollTop);
+    }
+  }
+
+  /**
+   * @method private
+   * @name renderHTML
+   * @description Renders a new state
+   * @param data [object] "State Data"
+   * @param hash [string] "Hash"
+   */
+
+  function renderState(data, hash) {
+    // Update DOM
+    if ($.type(data) !== "undefined") {
+      var $target;
+
+      for (var key in data) {
+        if (data.hasOwnProperty(key)) {
+          $target = $(key);
+
+          if ($target.length) {
+            $target.html(data[key]);
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadURL
+   * @description Loads new page
+   * @param opts [url] <''> "URL to load"
+   */
+
+  /**
+   * @method
+   * @name load
+   * @description Loads new page
+   * @param opts [url] <''> "URL to load"
+   * @example $.asap("load", "http://example.com/page/");
+   */
+
+  function loadURL(url) {
+    if (!Instance || !Formstone.support.history) {
+      window.location.href = url;
+    } else if (url) {
+      requestURL(url, true);
+    }
+
+    return;
+  }
+
+  /**
+   * @method private
+   * @name replaceURL
+   * @description Updates current url in history
+   * @param url [string] <''> "New URL"
+   */
+
+  /**
+   * @method
+   * @name replace
+   * @description Updates current url in history
+   * @param url [string] <''> "New URL"
+   * @example $.asap("replace", "http://example.com/page/");
+   */
+
+  function replaceURL(url) {
+    var state = history.state;
+
+    CurrentURL = url;
+
+    replaceState(state.id, url);
+  }
+
+  /**
+   * @method private
+   * @name pushState
+   * @description Push state to the history stack
+   * @param id [int] "State id"
+   * @param url [string] "State url"
+   */
+
+  function pushState(id, url) {
+    history.pushState({
+      id  : id,
+      url : url
+    }, Namespace + id, url);
+  }
+
+  /**
+   * @method private
+   * @name replaceState
+   * @description Push state to the history stack
+   * @param id [int] "State id"
+   * @param url [string] "State url"
+   */
+
+  function replaceState(id, url) {
+    history.replaceState({
+      id: id,
+      url: url
+    }, Namespace + id, url);
+  }
+
+  /**
+   * @method private
+   * @name parseURL
+   * @description Parse url parts
+   * @param url [string] "URL to parse"
+   */
+
+  function parseURL(url) {
+    var queryIndex = url.indexOf("?"),
+        hashIndex  = url.indexOf("#"),
+        params     = {},
+        hash       = "",
+        cleanURL   = url;
+
+    if (hashIndex > -1) {
+      hash = url.slice(hashIndex);
+      cleanURL = url.slice(0, hashIndex);
+    }
+
+    if (queryIndex > -1) {
+      params = Functions.parseQueryString( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
+      cleanURL = url.slice(0, queryIndex);
+    }
+
+    return {
+      hash   : hash,
+      params : params,
+      url    : url,
+      clean  : cleanURL
+    };
+  }
+
+  /**
+   * @plugin
+   * @name ASAP
+   * @description A jQuery plugin for asynchronous page loads.
+   * @type utility
+   * @main asap.js
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency analytics.js
+   */
+
+  var Plugin = Formstone.Plugin("asap", {
+        utilities: {
+          _initialize : initialize,
+
+          load        : loadURL,
+          replace     : replaceURL
+        },
+
+        /**
+         * @events
+         * @event requested.asap "Before request is made; triggered on window; Second parameter 'true' if pop event"
+         * @event progress.asap "As request is loaded; triggered on window; Second parameter contains percentage complete"
+         * @event loaded.asap "After request is loaded; triggered on window"
+         * @event rendered.asap "After state is rendered; triggered on window"
+         * @event failed.asap "After load error; triggered on window"
+         */
+
+        events: {
+          failed    : "failed",
+          loaded    : "loaded",
+          popState  : "popstate",
+          progress  : "progress",
+          requested : "requested",
+          rendered  : "rendered"
+        }
+      }),
+
+      /**
+       * @options
+       * @param cache [boolean] <true> "Flag to cache AJAX responses"
+       * @param ignoreTypes [regex] <> "File types to ignore"
+       * @param render [function] <$.noop> "Custom render function"
+       * @param requestKey [string] <'fs-asap'> "GET variable for requests"
+       * @param selector [string] <'a'> "Target DOM Selector"
+       * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
+       */
+
+      Defaults = {
+        cache         : true,
+        ignoreTypes   : /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        render        : $.noop,
+        requestKey    : "fs-asap",
+        selector      : "a",
+        transitionOut : $.noop
+      },
+
+      // Localize References
+
+      $Window    = Formstone.$window,
+      Window     = $Window[0],
+      $Body,
+
+      Functions  = Plugin.functions,
+      Events     = Plugin.events,
+      RawClasses = Plugin.classes.raw,
+
+      // Internal
+
+      Namespace  = "asap-",
+      CurrentURL = '',
+      CurrentID  = 1,
+      Request,
+      Instance;
+
+})
+
+);
+
+/*! formstone v1.3.3 [background.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./transition"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    scroll();
+    $Window.on("scroll", scroll);
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize() {
+    Functions.iterate.call($Instances, resizeInstance);
+    Functions.iterate.call($LazyInstances, cacheScrollPosition);
+    Functions.iterate.call($LazyInstances, checkScrollPosition);
+  }
+
+  /**
+   * @method private
+   * @name scroll
+   * @description Handles window scroll
+   */
+
+  function scroll() {
+    ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
+
+    if (ScrollTop < 0) {
+      ScrollTop = 0;
+    }
+
+    Functions.iterate.call($LazyInstances, checkScrollPosition);
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances     = $(Classes.base);
+    $LazyInstances = $(Classes.lazy);
+
+    Functions.iterate.call($LazyInstances, cacheScrollPosition);
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    // guid
+    data.youTubeGuid  = 0;
+
+    data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
+
+    data.thisClasses = [RawClasses.base, data.customClass];
+    data.visible = true;
+
+    if (data.lazy) {
+      data.visible = false;
+      data.thisClasses.push(RawClasses.lazy);
+    }
+
+    this.addClass(data.thisClasses.join(" "));
+
+    cacheInstances();
+
+    if (data.lazy) {
+      cacheScrollPosition(data);
+      checkScrollPosition(data);
+    } else {
+      loadInitialSource(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$container.remove();
+
+    this.removeClass(data.thisClasses.join(" "))
+      .off(Events.namespace);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method private
+   * @name loadInitialSource
+   * @description Loads initial source.
+   * @param data [object] "Instance data"
+   */
+
+  function loadInitialSource(data) {
+    if (data.visible) {
+      var source = data.source;
+      data.source = null;
+
+      loadMedia(data, source, true);
+    }
+  }
+
+  /**
+   * @method
+   * @name load
+   * @description Loads source media
+   * @param source [string OR object] "Source image (string or object) or video (object)"
+   * @example $(".target").background("load", "path/to/image.jpg");
+   * @example $(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "path/to/image-large.jpg" });
+   * @example $(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
+   */
+
+  /**
+   * @method private
+   * @name loadMedia
+   * @description Determines how to handle source media
+   * @param data [object] "Instance data"
+   * @param source [string OR object] "Source image (string) or video (object)"
+   * @param firstLoad [boolean] "Flag for first load"
+   */
+
+  function loadMedia(data, source, firstLoad) {
+    // Check if the source is new
+    if (source !== data.source && data.visible) {
+      data.source        = source;
+      data.responsive    = false;
+      data.isYouTube     = false;
+
+      // Check YouTube
+      if ($.type(source) === "object" && $.type(source.video) === "string") {
+        var parts = source.video.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i );
+
+        if (parts && parts.length >= 1) {
+          data.isYouTube = true;
+          data.videoId = parts[1];
+        }
+      }
+
+      var isVideo = !data.isYouTube && ($.type(source) === "object" &&
+                      (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm") )
+                    );
+
+      data.video      = data.isYouTube || isVideo;
+      data.playing    = false;
+
+      if (data.isYouTube) {
+        // youtube video
+        data.playerReady = false;
+        data.posterLoaded = false;
+
+        loadYouTube(data, source, firstLoad);
+      } else if ($.type(source) === "object" && source.hasOwnProperty("poster")) {
+        // html5 video
+        loadVideo(data, source, firstLoad);
+      } else {
+        var newSource = source;
+
+        // Responsive image handling
+        if ($.type(source) === "object") {
+          var cache = [],
+              keys  = [],
+              i;
+
+          for (i in source) {
+            if (source.hasOwnProperty(i)) {
+              keys.push(i);
+            }
+          }
+
+          keys.sort(Functions.sortAsc);
+
+          for (i in keys) {
+            if (keys.hasOwnProperty(i)) {
+              cache.push({
+                width    : parseInt( keys[i] ),
+                url      : source[ keys[i] ],
+                mq       : Window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px)" )
+              });
+            }
+          }
+
+          data.responsive = true;
+          data.sources = cache;
+
+          newSource = calculateSource(data);
+        }
+
+        loadImage(data, newSource, false, firstLoad);
+      }
+    } else {
+      data.$el.trigger(Events.loaded);
+    }
+  }
+
+  /**
+   * @method private
+   * @name calculateSource
+   * @description Determines responsive source
+   * @param data [object] "Instance data"
+   * @return [string] "New source url"
+   */
+
+  function calculateSource(data) {
+    var source = data.source;
+
+    if (data.responsive) {
+      source = data.sources[0].url;
+
+      for (var i in data.sources) {
+        if (data.sources.hasOwnProperty(i)) {
+          if (Formstone.support.nativeMatchMedia) {
+            if (data.sources[i].mq.matches) {
+              source = data.sources[i].url;
+            }
+          } else {
+            // Fallback, grab the first breakpoint that's large enough
+            if (data.sources[i].width < Formstone.fallbackWidth) {
+              source = data.sources[i].url;
+            }
+          }
         }
       }
     }
 
-    // Media Query Change Handler
-    function onRespond(e, state) {
-      Controller.minWidth = state.minWidth;
+    return source;
+  }
 
-      iterate(Controller.onRespond, state);
+  /**
+   * @method private
+   * @name loadImage
+   * @description Loads source image
+   * @param data [object] "Instance data",
+   * @param source [string] "Source image"
+   * @param poster [boolean] "Flag for video poster"
+   * @param firstLoad [boolean] "Flag for first load"
+   */
+
+  function loadImage(data, source, poster, firstLoad) {
+    var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+        $media       = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
+        $img         = $media.find("img"),
+        newSource    = source;
+
+    // Load image
+    $img.one(Events.load, function() {
+      if (BGSupport) {
+        $media.addClass(RawClasses.native)
+            .css({ backgroundImage: "url('" + newSource + "')" });
+      }
+
+      // YTransition in
+      $media.fsTransition({
+        property: "opacity"
+      },
+      function() {
+        if (!poster) {
+          cleanMedia(data);
+        }
+      }).css({ opacity: 1 });
+
+      doResizeInstance(data);
+
+      if (!poster || firstLoad) {
+        data.$el.trigger(Events.loaded);
+      }
+    }).one(Events.error, data, loadError)
+      .attr("src", newSource);
+
+    if (data.responsive) {
+      $media.addClass(RawClasses.responsive);
     }
 
-    // Resize Handler
-    function onResize() {
-      Controller.windowWidth  = Controller.$window.width();
-      Controller.windowHeight = Controller.$window.height();
+    data.$container.append($media);
 
-      iterate(Controller.onResize);
+    // Check if image is cached
+    if ($img[0].complete || $img[0].readyState === 4) {
+      $img.trigger(Events.load);
     }
 
-    // Scroll Handler
-    function onScroll() {
-      Controller.scrollTop = Controller.$window.scrollTop();
+    data.currentSource = newSource;
+  }
 
-      iterate(Controller.onScroll);
+  /**
+   * @method private
+   * @name loadVideo
+   * @description Loads source video
+   * @param data [object] "Instance data"
+   * @param source [object] "Source video"
+   * @param firstLoad [boolean] "Flag for first load"
+   */
+
+  function loadVideo(data, source, firstLoad) {
+    if (data.source && data.source.poster) {
+      loadImage(data, data.source.poster, true, true);
+
+      firstLoad = false;
     }
 
-    // Return Internal Instance
-    return Controller;
-  })(jQuery, window);
+    if (!Formstone.isMobile) {
+      var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+          html = '<div class="' + videoClasses + '" aria-hidden="true">';
 
-  // !Ready
-  $(function() {
-    Site.init("FormstoneSite");
-  });
+      html += '<video';
+      if (data.loop) {
+        html += ' loop';
+      }
+      if (data.mute) {
+        html += ' muted';
+      }
+      html += '>';
+      if (data.source.webm) {
+        html += '<source src="' + data.source.webm + '" type="video/webm" />';
+      }
+      if (data.source.mp4) {
+        html += '<source src="' + data.source.mp4 + '" type="video/mp4" />';
+      }
+      if (data.source.ogg) {
+        html += '<source src="' + data.source.ogg + '" type="video/ogg" />';
+      }
+      html += '</video>';
+      html += '</div>';
+
+      var $media = $(html),
+          $video = $media.find("video");
+
+      $video.one(Events.loadedMetaData, function(e) {
+        $media.fsTransition({
+          property: "opacity"
+        },
+        function() {
+          cleanMedia(data);
+        }).css({ opacity: 1 });
+
+        doResizeInstance(data);
+
+        data.$el.trigger(Events.loaded);
+
+        // Events
+        if (data.autoPlay) {
+          playVideo(data);
+        }
+      });
+
+      data.$container.append($media);
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadYouTube
+   * @description Loads YouTube video
+   * @param data [object] "Instance data"
+   * @param source [string] "YouTube URL"
+   */
+
+  function loadYouTube(data, source, firstLoad) {
+    if (!data.videoId) {
+      var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
+      data.videoId = parts[1];
+    }
+
+    if (!data.posterLoaded) {
+      if (!data.source.poster) {
+        data.source.poster = "//img.youtube.com/vi/" + data.videoId + "/0.jpg";
+      }
+
+      data.posterLoaded = true;
+      loadImage(data, data.source.poster, true, firstLoad);
+
+      firstLoad = false;
+    }
+
+    if (!Formstone.isMobile) {
+      if (!$("script[src*='youtube.com/iframe_api']").length) {
+        $("head").append('<script src="//www.youtube.com/iframe_api"></script>');
+      }
+
+      if (!YouTubeReady) {
+        YouTubeQueue.push({
+          data: data,
+          source: source
+        });
+      } else {
+        var guid = data.guid + "_" + (data.youTubeGuid++),
+            youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+            html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
+
+        html += '<div id="' + guid + '"></div>';
+        html += '</div>';
+
+        var $media = $(html),
+            ytOptions = $.extend(true, {}, {
+              controls: 0,
+              rel: 0,
+              showinfo: 0,
+              wmode: "transparent",
+              enablejsapi: 1,
+              version: 3,
+              playerapiid: guid,
+              loop: (data.loop) ? 1 : 0,
+              autoplay: 1,
+              origin: Window.location.protocol + "//" + Window.location.host
+            }, data.youtubeOptions);
+
+        // For youtube auto so events fire, disabled by plugin
+        ytOptions.autoplay = 1;
+
+        data.$container.append($media);
+
+        if (data.player) {
+          data.oldPlayer = data.player;
+          data.player = null;
+        }
+
+        data.player = new Window.YT.Player(guid, {
+          videoId    : data.videoId,
+          playerVars : ytOptions,
+          events : {
+            onReady: function (e) {
+              /* console.log("onReady", e); */
+
+              data.playerReady = true;
+              /* data.player.setPlaybackQuality("highres"); */
+
+              if (data.mute) {
+                data.player.mute();
+              }
+
+              if (!data.autoPlay) {
+                // make sure the video plays
+                data.player.pauseVideo();
+              }
+            },
+            onStateChange: function (e) {
+              /* console.log("onStateChange", e); */
+
+              // -1 = unstarted
+              //  0 = ended
+              //  1 = playing
+              //  2 = paused
+              //  3 = buffering
+              //  4 =
+              //  5 = cued
+
+              if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
+                data.playing = true;
+
+                $media.fsTransition({
+                  property: "opacity"
+                },
+                function() {
+                  cleanMedia(data);
+                }).css({ opacity: 1 });
+
+                doResizeInstance(data);
+
+                data.$el.trigger(Events.loaded);
+              } else if (data.loop && data.playing && e.data === Window.YT.PlayerState.ENDED) {
+                // fix looping option
+                data.player.playVideo();
+              }
+
+              /* if (!isSafari) { */
+                // Fix for Safari's overly secure security settings...
+                data.$el.find(Classes.embed)
+                    .addClass(RawClasses.ready);
+              /* } */
+            },
+            onPlaybackQualityChange: function(e) {
+              /* console.log("onPlaybackQualityChange", e); */
+            },
+            onPlaybackRateChange: function(e) {
+              /* console.log("onPlaybackRateChange", e); */
+            },
+            onError: function(e) {
+              /* console.log("onError", e); */
+              loadError({ data: data });
+            },
+            onApiChange: function(e) {
+              /* console.log("onApiChange", e); */
+            }
+          }
+            });
+
+        // Resize
+        doResizeInstance(data);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name cleanMedia
+   * @description Cleans up old media
+   * @param data [object] "Instance data"
+   */
+
+  function cleanMedia(data) {
+    var $media = data.$container.find(Classes.media);
+
+    if ($media.length >= 1) {
+      $media.not(":last").remove();
+      data.oldPlayer = null;
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadError
+   * @description Error when resource fails to load.
+   */
+
+  function loadError(e) {
+    var data = e.data;
+
+    data.$el.trigger(Events.error);
+  }
+
+  /**
+   * @method
+   * @name unload
+   * @description Unloads current media
+   * @example $(".target").background("unload");
+   */
+
+  /**
+   * @method private
+   * @name uploadMedia
+   * @description Unloads current media
+   * @param data [object] "Instance data"
+   */
+
+  function unloadMedia(data) {
+    var $media = data.$container.find(Classes.media);
+
+    if ($media.length >= 1) {
+      $media.fsTransition({
+        property: "opacity"
+      },
+      function() {
+        $media.remove();
+        delete data.source;
+      }).css({ opacity: 0 });
+    }
+  }
+
+  /**
+   * @method private
+   * @name pauseVideo
+   * @description Pauses target video
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name pause
+   * @description Pauses target video
+   * @example $(".target").background("pause");
+   */
+
+  function pauseVideo(data) {
+    if (data.video && data.playing) {
+      if (data.isYouTube) {
+        if (data.playerReady) {
+          data.player.pauseVideo();
+        } else {
+          data.autoPlay = false;
+        }
+      } else {
+        var $video = data.$container.find("video");
+
+        if ($video.length) {
+          $video[0].pause();
+        }
+      }
+
+      data.playing = false;
+    }
+  }
+
+  /**
+   * @method private
+   * @name playVideo
+   * @description Plays target video
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name play
+   * @description Plays target video
+   * @example $(".target").background("play");
+   */
+
+  function playVideo(data) {
+    if (data.video && !data.playing) {
+      if (data.isYouTube) {
+        if (data.playerReady) {
+          data.player.playVideo();
+        } else {
+          data.autoPlay = true;
+        }
+      } else {
+        var $video = data.$container.find("video");
+
+        if ($video.length) {
+          $video[0].play();
+        }
+
+        data.playing = true;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name muteVideo
+   * @description Mutes target video
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name mute
+   * @description Mutes target video
+   * @example $(".target").background("mute");
+   */
+
+  function muteVideo(data) {
+    if (data.video) {
+      if (data.isYouTube && data.playerReady) {
+        data.player.mute();
+      } else {
+        var $video = data.$container.find("video");
+
+        if ($video.length) {
+          $video[0].muted = true;
+        }
+      }
+    }
+
+    data.mute = true;
+  }
+
+  /**
+   * @method private
+   * @name unmuteVideo
+   * @description Unmutes target video
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name unmute
+   * @description Unmutes target video
+   * @example $(".target").background("unmute");
+   */
+
+  function unmuteVideo(data) {
+    if (data.video) {
+      if (data.isYouTube && data.playerReady) {
+        data.player.unMute();
+      } else {
+        var $video = data.$container.find("video");
+
+        if ($video.length) {
+          $video[0].muted = false;
+        }
+      }
+
+      data.playing = true;
+    }
+
+    data.mute = false;
+  }
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Handle window resize event
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+    if (data.visible) {
+      if (data.responsive) {
+        var newSource = calculateSource(data);
+
+        if (newSource !== data.currentSource) {
+          loadImage(data, newSource, false, true);
+        } else {
+          doResizeInstance(data);
+        }
+      } else {
+        doResizeInstance(data);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Resize target instance
+   * @example $(".target").background("resize");
+   */
+
+  /**
+   * @method private
+   * @name doResizeInstance
+   * @description Resize target instance
+   * @param data [object] "Instance data"
+   */
+
+  function doResizeInstance(data) {
+    // Target all media
+    var $all = data.$container.find(Classes.media);
+
+    for (var i = 0, count = $all.length; i < count; i++) {
+      var $m     = $all.eq(i),
+          type   = (data.isYouTube) ? "iframe" : ($m.find("video").length ? "video" : "img"),
+          $media = $m.find(type);
+
+      // If media found and scaling is not natively support
+      if ($media.length && !(type === "img" && BGSupport)) {
+        var frameWidth  = data.$el.outerWidth(),
+            frameHeight = data.$el.outerHeight(),
+            frameRatio  = frameWidth / frameHeight,
+            nSize       = naturalSize(data, $media);
+
+        data.width  = nSize.width;
+        data.height = nSize.height;
+        data.left   = 0;
+        data.top    = 0;
+
+        var mediaRatio = (data.isYouTube) ? data.embedRatio : (data.width / data.height);
+
+        // First check the height
+        data.height = frameHeight;
+        data.width  = data.height * mediaRatio;
+
+        // Next check the width
+        if (data.width < frameWidth) {
+          data.width  = frameWidth;
+          data.height = data.width / mediaRatio;
+        }
+
+        // Position the media
+        data.left = -(data.width - frameWidth) / 2;
+        data.top  = -(data.height - frameHeight) / 2;
+
+        $m.css({
+          height : data.height,
+          width  : data.width,
+          left   : data.left,
+          top    : data.top
+        });
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheScrollPosition
+   * @description Cahce target scroll position
+   * @param data [object] "Instance data"
+   */
+
+  function cacheScrollPosition(data) {
+    data.scrollTop = data.$el.offset().top;
+  }
+
+  /**
+   * @method private
+   * @name checkScrollPosition
+   * @description Check target scroll position against window
+   * @param data [object] "Instance data"
+   */
+
+  function checkScrollPosition(data) {
+    if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
+      data.visible = true;
+      loadInitialSource(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name naturalSize
+   * @description Determines natural size of target media
+   * @param data [object] "Instance data"
+   * @param $media [jQuery object] "Source media object"
+   * @return [object OR boolean] "Object containing natural height and width values or false"
+   */
+
+  function naturalSize(data, $media) {
+    if (data.isYouTube) {
+      return {
+        height: 500,
+        width:  500 / data.embedRatio
+      };
+    } else if ($media.is("img")) {
+      var node = $media[0];
+
+      if ($.type(node.naturalHeight) !== "undefined") {
+        return {
+          height : node.naturalHeight,
+          width  :  node.naturalWidth
+        };
+      } else {
+        var img = new Image();
+        img.src = node.src;
+        return {
+          height : img.height,
+          width  :  img.width
+        };
+      }
+    } else {
+      return {
+        height : $media[0].videoHeight,
+        width  :  $media[0].videoWidth
+      };
+    }
+    return false;
+  }
+
+  /**
+   * @plugin
+   * @name Background
+   * @description A jQuery plugin for full-frame image and video backgrounds.
+   * @type widget
+   * @main background.js
+   * @main background.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency transition.js
+   */
+
+  var Plugin = Formstone.Plugin("background", {
+        widget: true,
+
+        /**
+         * @options
+         * @param autoPlay [boolean] <true> "Autoplay video"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param embedRatio [number] <1.777777> "Video / embed ratio (16/9)"
+         * @param lazy [boolean] <false> "Lazy load with scroll"
+         * @param lazyEdge [int] <100> "Lazy load edge"
+         * @param loop [boolean] <true> "Loop video"
+         * @param mute [boolean] <true> "Mute video"
+         * @param source [string OR object] <null> "Source image (string or object) or video (object)"
+         */
+        defaults: {
+          autoPlay       : true,
+          customClass    : "",
+          embedRatio     : 1.777777,
+          lazy           : false,
+          lazyEdge       : 100,
+          loop           : true,
+          mute           : true,
+          source         : null,
+          youtubeOptions : {}
+        },
+
+        classes: [
+          "container",
+          "media",
+          "animated",
+          "responsive",
+          "native",
+          "fixed",
+          "ready",
+          "lazy"
+        ],
+
+        /**
+         * @events
+         * @event loaded.background "Background media loaded"
+         * @event ready.background "Background media ready"
+         * @event error.background "Background media error"
+         */
+
+        events: {
+          loaded : "loaded",
+          ready  : "ready",
+          loadedMetaData : "loadedmetadata"
+        },
+
+        methods: {
+          _setup     : setup,
+          _construct : construct,
+          _destruct  : destruct,
+          _resize    : resize,
+
+          play       : playVideo,
+          pause      : pauseVideo,
+          mute       : muteVideo,
+          unmute     : unmuteVideo,
+          resize     : doResizeInstance,
+          load       : loadMedia,
+          unload     : unloadMedia
+        }
+      }),
+
+      // Localize References
+
+      Classes         = Plugin.classes,
+      RawClasses      = Classes.raw,
+      Events          = Plugin.events,
+      Functions       = Plugin.functions,
+
+      Window          = Formstone.window,
+      $Window         = Formstone.$window,
+      ScrollTop       = 0,
+      $Instances      = [],
+      $LazyInstances  = [],
+
+      BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
+      YouTubeReady    = false,
+      YouTubeQueue    = [];
+
+  /**
+   * @method private global
+   * @name window.onYouTubeIframeAPIReady
+   * @description Attaches YouTube players to active instances
+   */
+  Window.onYouTubeIframeAPIReady = function() {
+    YouTubeReady = true;
+
+    for (var i in YouTubeQueue) {
+      if (YouTubeQueue.hasOwnProperty(i)) {
+        loadYouTube(YouTubeQueue[i].data, YouTubeQueue[i].source);
+      }
+    }
+
+    YouTubeQueue = [];
+  };
+
+})
+
+);
+
+/*! formstone v1.3.3 [carousel.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery",
+        "./touch"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
+
+    function resize(windowWidth) {
+      Functions.iterate.call($Instances, resizeInstance);
+    }
+
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
+
+    function cacheInstances() {
+      $Instances = $(Classes.base);
+    }
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
+
+    function construct(data) {
+      var i;
+
+      data.didPan = false;
+
+      data.carouselClasses = [
+        RawClasses.base,
+        data.theme,
+        data.customClass,
+        (data.rtl ? RawClasses.rtl : RawClasses.ltr)
+      ];
+
+      data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+      data.mq = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+
+      data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
+      data.customPagination = ($.type(data.pagination) === "string");
+
+      data.id = this.attr("id");
+
+      if (data.id) {
+        data.ariaId = data.id;
+      } else {
+        data.ariaId = data.rawGuid;
+        this.attr("id", data.ariaId);
+      }
+
+      // Legacy browser support
+      if (!Formstone.support.transform) {
+        data.useMargin = true;
+      }
+
+      // Build controls and pagination
+      var controlsHtml = '',
+        paginationHtml = '',
+        controlPrevClasses = [RawClasses.control, RawClasses.control_previous].join(" "),
+        controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
+
+      if (data.controls && !data.customControls) {
+        controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaId + '">';
+        controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
+        controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
+        controlsHtml += '</div>';
+      }
+
+      if (data.pagination && !data.customPagination) {
+        paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaId + '" role="navigation">';
+        paginationHtml += '</div>';
+      }
+
+      if (data.autoHeight) {
+        data.carouselClasses.push(RawClasses.auto_height);
+      }
+
+      if (data.contained) {
+        data.carouselClasses.push(RawClasses.contained);
+      }
+
+      if (data.single) {
+        data.carouselClasses.push(RawClasses.single);
+      }
+
+      // Modify dom
+      this.addClass(data.carouselClasses.join(" "))
+        .wrapInner('<div class="' + RawClasses.wrapper + '" aria-live="polite"><div class="' + RawClasses.container + '"><div class="' + RawClasses.canister + '"></div></div></div>')
+        .append(controlsHtml)
+        .wrapInner('<div class="' + RawClasses.viewport + '"></div>')
+        .append(paginationHtml);
+
+      data.$viewport = this.find(Classes.viewport).eq(0);
+      data.$container = this.find(Classes.container).eq(0);
+      data.$canister = this.find(Classes.canister).eq(0);
+      data.$pagination = this.find(Classes.pagination).eq(0);
+
+      data.$controlPrevious = data.$controlNext = $('');
+
+      if (data.customControls) {
+        data.$controls = $(data.controls.container).addClass([RawClasses.controls, RawClasses.controls_custom].join(" "));
+        data.$controlPrevious = $(data.controls.previous).addClass(controlPrevClasses);
+        data.$controlNext = $(data.controls.next).addClass(controlNextClasses);
+      } else {
+        data.$controls = this.find(Classes.controls).eq(0);
+        data.$controlPrevious = data.$controls.find(Classes.control_previous);
+        data.$controlNext = data.$controls.find(Classes.control_next);
+      }
+
+      data.$controlItems = data.$controlPrevious.add(data.$controlNext);
+
+      if (data.customPagination) {
+        data.$pagination = $(data.pagination).addClass([RawClasses.pagination]);
+      }
+
+      data.$paginationItems = data.$pagination.find(Classes.page);
+
+      data.index = 0;
+      data.enabled = false;
+      data.leftPosition = 0;
+      data.autoTimer = null;
+      data.resizeTimer = null;
+
+      // live query for linked to avoid missing new elements
+      var linked = this.data(Namespace + "-linked");
+      data.linked = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
+
+      // force paged if linked, keeps counts accurate
+      if (data.linked) {
+        data.paged = true;
+      }
+
+      // live query for controlled to avoid missing new elements
+      var subordinate = this.data(Namespace + "-controller-for") || '';
+      data.$subordinate = $(subordinate);
+
+      if (data.$subordinate.length) {
+        data.controller = true;
+      }
+
+      // Responsive count handling
+      if ($.type(data.show) === "object") {
+        var show = data.show,
+          cache = [],
+          keys = [];
+
+        for (i in show) {
+          if (show.hasOwnProperty(i)) {
+            keys.push(i);
+          }
+        }
+
+        keys.sort(Functions.sortAsc);
+
+        for (i in keys) {
+          if (keys.hasOwnProperty(i)) {
+            cache.push({
+              width: parseInt(keys[i]),
+              count: show[keys[i]],
+              mq: window.matchMedia("(min-width: " + parseInt(keys[i]) + "px)")
+            });
+          }
+        }
+
+        data.show = cache;
+      }
+
+      cacheValues(data);
+
+      // Media Query support
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          enable.call(data.$el, data);
+        },
+        leave: function() {
+          disable.call(data.$el, data);
+        }
+      });
+
+      cacheInstances();
+
+      data.carouselClasses.push(RawClasses.enabled);
+      data.carouselClasses.push(RawClasses.animated);
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      Functions.clearTimer(data.autoTimer);
+      Functions.clearTimer(data.resizeTimer);
+
+      disable.call(this, data);
+
+      $.fsMediaquery("unbind", data.rawGuid);
+
+      if (data.id !== data.ariaId) {
+        this.removeAttr("id");
+      }
+
+      data.$controlItems.removeClass([Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" "))
+        .off(Events.namespace);
+
+      data.$images.off(Events.namespace);
+      data.$canister.fsTouch("destroy");
+
+      data.$items.removeClass([RawClasses.item, RawClasses.visible, Classes.item_previous, Classes.item_next].join(" "))
+        .unwrap()
+        .unwrap()
+        .unwrap()
+        .unwrap();
+
+      if (data.controls && !data.customControls) {
+        data.$controls.remove();
+      }
+
+      if (data.customControls) {
+        data.$controls.removeClass([RawClasses.controls, RawClasses.controls_custom, RawClasses.visible].join(" "));
+      }
+
+      if (data.pagination && !data.customPagination) {
+        data.$pagination.remove();
+      }
+
+      if (data.customPagination) {
+        data.$pagination.html("").removeClass([RawClasses.pagination, RawClasses.visible].join(" "));
+      }
+
+      this.removeClass(data.carouselClasses.join(" "));
+
+      cacheInstances();
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance of plugin
+     * @example $(".target").carousel("disable");
+     */
+
+    function disable(data) {
+      if (data.enabled) {
+        Functions.clearTimer(data.autoTimer);
+
+        data.enabled = false;
+
+        data.$subordinate.off(Events.update);
+
+        this.removeClass([RawClasses.enabled, RawClasses.animated].join(" "))
+          .off(Events.namespace);
+
+        data.$canister.fsTouch("destroy")
+          .off(Events.namespace)
+          .attr("style", "")
+          .css(TransitionProperty, "none");
+
+        data.$items.css({
+          width: "",
+          height: ""
+        }).removeClass([RawClasses.visible, Classes.item_previous, Classes.item_next].join(" "));
+
+        data.$images.off(Events.namespace);
+        data.$controlItems.off(Events.namespace);
+        data.$pagination.html("").off(Events.namespace);
+
+        hideControls(data);
+
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: ""
+          });
+        } else {
+          data.$canister.css(TransformProperty, "");
+        }
+
+        data.index = 0;
+      }
+    }
+
+    /**
+     * @method
+     * @name enable
+     * @description Enables instance of plugin
+     * @example $(".target").carousel("enable");
+     */
+
+    function enable(data) {
+      if (!data.enabled) {
+        data.enabled = true;
+
+        this.addClass(RawClasses.enabled);
+
+        data.$controlItems.on(Events.click, data, onAdvance);
+        data.$pagination.on(Events.click, Classes.page, data, onSelect);
+
+        data.$items.on(Events.click, data, onItemClick);
+        data.$subordinate.on(Events.update, data, onSubordinateUpdate);
+
+        onSubordinateUpdate({
+          data: data
+        }, 0);
+
+        data.$canister.fsTouch({
+            axis: "x",
+            pan: true,
+            swipe: true
+          }).on(Events.panStart, data, onPanStart)
+          .on(Events.pan, data, onPan)
+          .on(Events.panEnd, data, onPanEnd)
+          .on(Events.swipe, data, onSwipe)
+          .on(Events.focusIn, data, onItemFocus)
+          .css(TransitionProperty, "");
+
+        cacheValues(data);
+
+        // Watch Images
+        data.$images.on(Events.load, data, onImageLoad);
+
+        // Auto timer
+        if (data.autoAdvance) {
+          data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function() {
+            autoAdvance(data);
+          }, true);
+        }
+
+        resizeInstance.call(this, data);
+      }
+    }
+
+    /**
+     * @method
+     * @name resize
+     * @description Resizes instance
+     * @example $(".target").carousel("resize");
+     */
+
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Resizes each instance
+     * @param data [object] "Instance data"
+     */
+
+    function resizeInstance(data) {
+      if (data.enabled) {
+        var h, i, j, k, w,
+          $items,
+          $first,
+          width,
+          height,
+          left;
+
+        data.count = data.$items.length;
+
+        if (data.count < 1) { // avoid empty carousels
+          hideControls(data);
+          data.$canister.css({
+            height: ""
+          });
+
+          return;
+        }
+
+        this.removeClass(RawClasses.animated);
+
+        data.containerWidth = data.$container.outerWidth(false);
+
+        data.visible = calculateVisible(data);
+        data.perPage = data.paged ? 1 : data.visible;
+
+        data.itemMarginLeft = parseInt(data.$items.eq(0).css("marginLeft"));
+        data.itemMarginRight = parseInt(data.$items.eq(0).css("marginRight"));
+
+        data.itemMargin = data.itemMarginLeft + data.itemMarginRight;
+
+        if (isNaN(data.itemMargin)) {
+          data.itemMargin = 0;
+        }
+
+        data.itemWidth = (data.containerWidth - (data.itemMargin * (data.visible - 1))) / data.visible;
+        data.itemHeight = 0;
+
+        data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
+        data.pageCount = Math.ceil(data.count / data.perPage);
+
+        data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
+        data.$canister.css({
+          width: (data.matchWidth) ? data.canisterWidth : 1000000,
+          height: ""
+        });
+
+        data.$items.css({
+          width: (data.matchWidth) ? data.itemWidth : "",
+          height: ""
+        }).removeClass([RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" "));
+
+        // initial page
+        data.pages = [];
+
+        for (i = 0, j = 0; i < data.count; i += data.perPage) {
+          $items = data.$items.slice(i, i + data.perPage);
+          width = 0;
+          height = 0;
+
+          if ($items.length < data.perPage) {
+            if (i === 0) {
+              $items = data.$items;
+            } else {
+              $items = data.$items.slice(data.$items.length - data.perPage);
+            }
+          }
+
+          $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+          left = $first.position().left;
+
+          // if (data.autoHeight) {
+          for (k = 0; k < $items.length; k++) {
+            w = $items.eq(k).outerWidth(true);
+            h = $items.eq(k).outerHeight();
+
+            width += w;
+
+            if (h > height) {
+              height = h;
+            }
+          }
+          // } else {
+          //   height = $first.outerHeight();
+          // }
+
+          data.pages.push({
+            left: data.rtl ? left - (data.canisterWidth - width) : left,
+            height: height,
+            width: width,
+            $items: $items
+          });
+
+          if (height > data.itemHeight) {
+            data.itemHeight = height;
+          }
+
+          j++;
+        }
+
+        if (data.paged) {
+          data.pageCount -= (data.count % data.visible);
+        }
+
+        if (data.pageCount <= 0) {
+          data.pageCount = 1;
+        }
+
+        data.maxMove = -data.pages[data.pageCount - 1].left;
+
+        // auto / match height
+        if (data.autoHeight) {
+          data.$canister.css({
+            height: data.pages[0].height
+          });
+        } else if (data.matchHeight) {
+          data.$items.css({
+            height: data.itemHeight
+          });
+        }
+
+        // Reset Page Count
+        var html = '';
+        for (i = 0; i < data.pageCount; i++) {
+          html += '<button type="button" class="' + RawClasses.page + '">' + (i + 1) + '</button>';
+        }
+        data.$pagination.html(html);
+
+        // update pagination
+        if (data.pageCount <= 1) {
+          hideControls(data);
+        } else {
+          showControls(data);
+        }
+        data.$paginationItems = data.$pagination.find(Classes.page);
+
+        positionCanister(data, data.index, false);
+
+        setTimeout(function() {
+          data.$el.addClass(RawClasses.animated);
+        }, 5);
+      }
+    }
+
+    /**
+     * @method private
+     * @name cacheValues
+     * @description Caches internal values after item change
+     * @param data [object] "Instance data"
+     */
+
+    function cacheValues(data) {
+      // Cache vaules
+      data.$items = data.$canister.children().not(":hidden").addClass(RawClasses.item);
+      data.$images = data.$canister.find("img");
+
+      data.totalImages = data.$images.length;
+    }
+
+    /**
+     * @method
+     * @name reset
+     * @description Resets instance after item change
+     * @example $(".target").carousel("reset");
+     */
+
+    /**
+     * @method private
+     * @name resetInstance
+     * @description Resets instance after item change
+     * @param data [object] "Instance data"
+     */
+
+    function resetInstance(data) {
+      if (data.enabled) {
+        updateItems.call(this, data, false);
+      }
+    }
+
+    /**
+     * @method
+     * @name update
+     * @description Updates carousel items
+     * @example $(".target").carousel("update", "...");
+     */
+
+    /**
+     * @method private
+     * @name updateItems
+     * @description Updates carousel items for each instance
+     * @param data [object] "Instance data"
+     * @param html [string] "New carousel contents"
+     */
+
+    function updateItems(data, html) {
+      data.$images.off(Events.namespace);
+
+      if (html !== false) {
+        data.$canister.html(html);
+      }
+
+      data.index = 0;
+
+      cacheValues(data);
+
+      resizeInstance.call(this, data);
+    }
+
+    /**
+     * @method
+     * @name jumpPage
+     * @description Jump instance of plugin to specific page
+     * @example $(".target").carousel("jumpPage", 1);
+     * @param index [int] "New index"
+     * @param silent [boolean] "Flag to prevent triggering update event"
+     */
+    /**
+     * @method
+     * @name jump
+     * @description Jump instance of plugin to specific page; Alias of `jumpPage`
+     * @example $(".target").carousel("jump", 1);
+     * @param index [int] "New index"
+     * @param silent [boolean] "Flag to prevent triggering update event"
+     */
+
+    /**
+     * @method private
+     * @name jumpPage
+     * @description Jump instance of plugin to specific page
+     * @param data [object] "Instance data"
+     * @param index [int] "New index"
+     * @param silent [boolean] ""
+     * @param animated [boolean] ""
+     */
+
+    function jumpPage(data, index, silent, fromLinked, animated) {
+      if (data.enabled) {
+        Functions.clearTimer(data.autoTimer);
+
+        if (typeof animated === "undefined") {
+          animated = true;
+        }
+
+        positionCanister(data, index - 1, animated, silent, fromLinked);
+      }
+    }
+
+    /**
+     * @method
+     * @name previousPage
+     * @description Move to the previous page
+     * @example $(".target").carousel("previousPage");
+     */
+    /**
+     * @method
+     * @name previous
+     * @description Move to the previous page; Alias of `previousPage`
+     * @example $(".target").carousel("previous");
+     */
+
+    /**
+     * @method private
+     * @name previousPage
+     * @description Move to previous page
+     * @param data [object] "Instance data"
+     */
+
+    function previousPage(data) {
+      var index = data.index - 1;
+
+      if (data.infinite && index < 0) {
+        index = data.pageCount - 1;
+      }
+
+      positionCanister(data, index);
+    }
+
+    /**
+     * @method
+     * @name nextPage
+     * @description Move to next page
+     * @example $(".target").carousel("nextPage");
+     */
+    /**
+     * @method
+     * @name next
+     * @description Move to next page; Alias of `nextPage`
+     * @example $(".target").carousel("next");
+     */
+
+    /**
+     * @method private
+     * @name nextPage
+     * @description Move to next page
+     * @param data [object] "Instance data"
+     */
+
+    function nextPage(data) {
+      var index = data.index + 1;
+
+      if (data.infinite && index >= data.pageCount) {
+        index = 0;
+      }
+
+      positionCanister(data, index);
+    }
+
+
+    /**
+     * @method
+     * @name jumpItem
+     * @description Jump instance of plugin to specific item
+     * @example $(".target").carousel("jumpItem", 1);
+     * @param index [int] "New item index"
+     * @param silent [boolean] "Flag to prevent triggering update event"
+     */
+
+    /**
+     * @method private
+     * @name jumpItem
+     * @description Jump instance of plugin to specific page
+     * @param data [object] "Instance data"
+     * @param index [int] "New index"
+     * @param silent [boolean] ""
+     * @param animated [boolean] ""
+     */
+
+    function jumpItem(data, index, silent, fromLinked, animated) {
+      if (data.enabled) {
+        Functions.clearTimer(data.autoTimer);
+
+        var $active = data.$items.eq(index - 1);
+
+        if (typeof animated === "undefined") {
+          animated = true;
+        }
+
+        for (var i = 0; i < data.pageCount; i++) {
+          if (data.pages[i].$items.is($active)) {
+            positionCanister(data, i, animated, silent, fromLinked);
+            break;
+          }
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onImageLoad
+     * @description Handles child image load
+     * @param e [object] "Event data"
+     */
+
+    function onImageLoad(e) {
+      var data = e.data;
+
+      data.resizeTimer = Functions.startTimer(data.resizeTimer, 1, function() {
+        resizeInstance.call(data.$el, data);
+      });
+    }
+
+    /**
+     * @method private
+     * @name autoAdvance
+     * @description Handles auto advancement
+     * @param data [object] "Instance data"
+     */
+
+    function autoAdvance(data) {
+      var index = data.index + 1;
+
+      if (index >= data.pageCount) {
+        index = 0;
+      }
+
+      positionCanister(data, index);
+    }
+
+    /**
+     * @method private
+     * @name onAdvance
+     * @description Handles item advancement
+     * @param e [object] "Event data"
+     */
+
+    function onAdvance(e) {
+      Functions.killEvent(e);
+
+      var data = e.data,
+        index = data.index + ($(e.currentTarget).hasClass(RawClasses.control_next) ? 1 : -1);
+
+      Functions.clearTimer(data.autoTimer);
+      positionCanister(data, index);
+    }
+
+    /**
+     * @method private
+     * @name onSelect
+     * @description Handles item select
+     * @param e [object] "Event data"
+     */
+
+    function onSelect(e) {
+      Functions.killEvent(e);
+
+      var data = e.data,
+        index = data.$paginationItems.index($(e.currentTarget));
+
+      Functions.clearTimer(data.autoTimer);
+      positionCanister(data, index);
+    }
+
+    /**
+     * @method private
+     * @name position
+     * @description Handles updating instance position
+     * @param data [object] "Instance data"
+     * @param index [int] "Item index"
+     */
+
+    function positionCanister(data, index, animate, silent, fromLinked) {
+      if (index < 0) {
+        index = (data.infinite) ? data.pageCount - 1 : 0;
+      }
+      if (index >= data.pageCount) {
+        index = (data.infinite) ? 0 : data.pageCount - 1;
+      }
+
+      if (data.count < 1) {
+        return;
+      }
+
+      if (data.pages[index]) {
+        data.leftPosition = -data.pages[index].left;
+      }
+
+      data.leftPosition = checkPosition(data, data.leftPosition);
+
+      if (data.useMargin) {
+        data.$canister.css({
+          marginLeft: data.leftPosition
+        });
+      } else {
+        if (animate === false) {
+          data.$canister.css(TransitionProperty, "none")
+            .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
+
+          // Slight delay before adding transitions back
+          setTimeout(function() {
+            data.$canister.css(TransitionProperty, "");
+          }, 5);
+        } else {
+          data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
+        }
+      }
+
+      // Update classes
+      data.$items.removeClass([RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" "));
+
+      for (var i = 0, count = data.pages.length; i < count; i++) {
+        if (i === index) {
+          data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
+        } else {
+          data.pages[i].$items.not(data.pages[index].$items).addClass((i < index) ? RawClasses.item_previous : RawClasses.item_next).attr("aria-hidden", "true");
+        }
+      }
+
+      // Auto Height
+      if (data.autoHeight) {
+        data.$canister.css({
+          height: data.pages[index].height
+        });
+      }
+
+      if (animate !== false && silent !== true && index !== data.index && (data.infinite || (index > -1 && index < data.pageCount))) {
+        data.$el.trigger(Events.update, [index]);
+      }
+
+      data.index = index;
+
+      // Linked
+      if (data.linked && fromLinked !== true) {
+        $(data.linked).not(data.$el)[NamespaceClean]("jumpPage", data.index + 1, true, true);
+      }
+
+      updateControls(data);
+    }
+
+    /**
+     * @method private
+     * @name hideControls
+     * @description Hides instance controls
+     * @param data [object] "Instance data"
+     */
+
+    function hideControls(data) {
+      data.$controls.removeClass(RawClasses.visible);
+      data.$controlItems.removeClass(RawClasses.visible);
+      data.$pagination.removeClass(RawClasses.visible);
+    }
+
+    /**
+     * @method private
+     * @name showControls
+     * @description Shows instance controls
+     * @param data [object] "Instance data"
+     */
+
+    function showControls(data) {
+      data.$controls.addClass(RawClasses.visible);
+      data.$controlItems.addClass(RawClasses.visible);
+      data.$pagination.addClass(RawClasses.visible);
+    }
+
+    /**
+     * @method private
+     * @name updateControls
+     * @description Handles updating instance controls
+     * @param data [object] "Instance data"
+     */
+
+    function updateControls(data) {
+      data.$paginationItems.removeClass(RawClasses.active)
+        .eq(data.index)
+        .addClass(RawClasses.active);
+
+      if (data.infinite) {
+        data.$controlItems.addClass(RawClasses.visible);
+      } else if (data.pageCount < 1) {
+        data.$controlItems.removeClass(RawClasses.visible);
+      } else {
+        data.$controlItems.addClass(RawClasses.visible);
+
+        if (data.index <= 0) {
+          data.$controlPrevious.removeClass(RawClasses.visible);
+        } else if (data.index >= data.pageCount - 1 || (!data.single && data.leftPosition === data.maxMove)) {
+          data.$controlNext.removeClass(RawClasses.visible);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name calculateVisible
+     * @description Determines how many items should show at screen width
+     * @param data [object] "Instance data"
+     * @return [int] "New visible count"
+     */
+
+    function calculateVisible(data) {
+      var show = 1;
+
+      if (data.single) {
+        return show;
+      } else if ($.type(data.show) === "array") {
+        for (var i in data.show) {
+          if (data.show.hasOwnProperty(i)) {
+            if (Formstone.support.nativeMatchMedia) {
+              if (data.show[i].mq.matches) {
+                show = data.show[i].count;
+              }
+            } else {
+              // Fallback, grab the first breakpoint that's large enough
+              if (data.show[i].width < Formstone.fallbackWidth) {
+                show = data.show[i].count;
+              }
+            }
+          }
+        }
+      } else {
+        show = data.show;
+      }
+
+      return (data.fill && data.count < show) ? data.count : show;
+    }
+
+    /**
+     * @method private
+     * @name onPanStart
+     * @description Handles pan start event
+     * @param e [object] "Event data"
+     */
+
+    function onPanStart(e, fromLinked) {
+      var data = e.data;
+
+      Functions.clearTimer(data.autoTimer);
+
+      if (!data.single) {
+        if (data.useMargin) {
+          data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+        } else {
+          var matrix = data.$canister.css(TransformProperty).split(",");
+          data.leftPosition = parseInt(matrix[4]); // ?
+        }
+
+        data.$canister.css(TransitionProperty, "none")
+          .css("will-change", "transform");
+
+        onPan(e);
+
+        // Linked
+        if (data.linked && fromLinked !== true) {
+          var percent = e.deltaX / data.pageWidth;
+
+          if (data.rtl) {
+            percent *= -1;
+          }
+
+          $(data.linked).not(data.$el)[NamespaceClean]("panStart", percent);
+        }
+      }
+
+      data.isTouching = true;
+    }
+
+    /**
+     * @method private
+     * @name onPan
+     * @description Handles pan event
+     * @param e [object] "Event data"
+     */
+
+    function onPan(e, fromLinked) {
+      var data = e.data;
+
+      if (!data.single) {
+        data.touchLeft = checkPosition(data, data.leftPosition + e.deltaX);
+
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: data.touchLeft
+          });
+        } else {
+          data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+        }
+
+        // Linked
+        if (data.linked && fromLinked !== true) {
+          var percent = e.deltaX / data.pageWidth;
+
+          if (data.rtl) {
+            percent *= -1;
+          }
+
+          $(data.linked).not(data.$el)[NamespaceClean]("pan", percent);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPanEnd
+     * @description Handles pan end event
+     * @param e [object] "Event data"
+     */
+
+    function onPanEnd(e, fromLinked) {
+      var data = e.data,
+        delta = Math.abs(e.deltaX),
+        increment = getIncrement(data, e),
+        index = false;
+
+      data.didPan = false;
+
+      if (!data.single) {
+        var i, count,
+          left = Math.abs(data.touchLeft),
+          page = false,
+          dir = (data.rtl) ? "right" : "left";
+
+        if (e.directionX === dir) {
+          // Left (RTL Right)
+          for (i = 0, count = data.pages.length; i < count; i++) {
+            page = data.pages[i];
+
+            if (left > Math.abs(page.left) + 20) {
+              index = i + 1;
+            }
+          }
+        } else {
+          // Right (RTL Left)
+          for (i = data.pages.length - 1, count = 0; i >= count; i--) {
+            page = data.pages[i];
+
+            if (left < Math.abs(page.left)) {
+              index = i - 1;
+            }
+          }
+        }
+      }
+
+      if (index === false) {
+        index = (delta < 50) ? data.index : data.index + increment;
+      }
+
+      if (index !== data.index) {
+        data.didPan = true;
+      }
+
+      // Linked
+      if (data.linked && fromLinked !== true) {
+        $(data.linked).not(data.$el)[NamespaceClean]("panEnd", index);
+      }
+
+      endTouch(data, index);
+    }
+
+    /**
+     * @method private
+     * @name linkedPanStart
+     * @description Handles linked pan start
+     * @param data [object] "Instance data"
+     * @param percent [float] "Percentage moved"
+     */
+
+    function linkedPanStart(data, percent) {
+      Functions.clearTimer(data.autoTimer);
+
+      if (!data.single) {
+        if (data.rtl) {
+          percent *= -1;
+        }
+
+        if (data.useMargin) {
+          data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+        } else {
+          var matrix = data.$canister.css(TransformProperty).split(",");
+          data.leftPosition = parseInt(matrix[4]); // ?
+        }
+
+        data.$canister.css(TransitionProperty, "none");
+
+        var e = {
+          data: data,
+          deltaX: (data.pageWidth * percent)
+        };
+
+        onPan(e, true);
+      }
+
+      data.isTouching = true;
+    }
+
+    /**
+     * @method private
+     * @name linkedPan
+     * @description Handles linked pan
+     * @param data [object] "Instance data"
+     * @param percent [float] "Percentage moved"
+     */
+
+    function linkedPan(data, percent) {
+      if (!data.single) {
+        if (data.rtl) {
+          percent *= -1;
+        }
+
+        var delta = (data.pageWidth * percent);
+
+        data.touchLeft = checkPosition(data, data.leftPosition + delta);
+
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: data.touchLeft
+          });
+        } else {
+          data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name linkedPanEnd
+     * @description Handles linked pan end
+     * @param data [object] "Instance data"
+     * @param index [int] "New Index"
+     */
+
+    function linkedPanEnd(data, index) {
+      endTouch(data, index, true);
+    }
+
+    /**
+     * @method private
+     * @name onSwipe
+     * @description Handles swipe event
+     * @param e [object] "Event data"
+     */
+
+    function onSwipe(e, fromLinked) {
+      var data = e.data,
+        increment = getIncrement(data, e),
+        index = data.index + increment;
+
+      // Linked
+      if (data.linked && fromLinked !== true) {
+        $(data.linked).not(data.$el)[NamespaceClean]("swipe", e.directionX);
+      }
+
+      endTouch(data, index);
+    }
+
+    /**
+     * @method private
+     * @name linkedSwipe
+     * @description Handles swipe event
+     * @param data [object] "Instance data"
+     * @param direction [string] "Swipe direction"
+     */
+
+    function linkedSwipe(data, direction) {
+      var e = {
+        data: data,
+        directionX: direction
+      };
+
+      onSwipe(e, true);
+    }
+
+    /**
+     * @method private
+     * @name endTouch
+     * @description Cleans up touch interactions
+     * @param data [object] "Instance data"
+     * @param index [object] "New index"
+     */
+
+    function endTouch(data, index) {
+      data.$canister.css(TransitionProperty, "")
+        .css("will-change", "");
+
+      positionCanister(data, index);
+
+      data.isTouching = false;
+    }
+
+    /**
+     * @method private
+     * @name onItemClick
+     * @description Handles click to item
+     * @param e [object] "Event data"
+     */
+
+    function onItemClick(e) {
+      var data = e.data,
+        $target = $(e.currentTarget);
+
+      if (!data.didPan) {
+        $target.trigger(Events.itemClick);
+
+        if (data.controller) {
+          var index = data.$items.index($target);
+
+          onSubordinateUpdate(e, index);
+
+          data.$subordinate[NamespaceClean]("jumpPage", index + 1, true);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onItemFocus
+     * @description Handles focus to item/element in item
+     * @param e [object] "Event data"
+     */
+
+    function onItemFocus(e) {
+      var data = e.data;
+
+      if (data.enabled && !data.isTouching) {
+        Functions.clearTimer(data.autoTimer);
+
+        data.$container.scrollLeft(0);
+
+        var $target = $(e.target),
+          $active;
+
+        if ($target.hasClass(RawClasses.item)) {
+          $active = $target;
+        } else if ($target.parents(Classes.item).length) {
+          $active = $target.parents(Classes.item).eq(0);
+        }
+
+        for (var i = 0; i < data.pageCount; i++) {
+          if (data.pages[i].$items.is($active)) {
+            positionCanister(data, i);
+            break;
+          }
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onSubordinateUpdate
+     * @description Handles update from subordinate
+     * @param e [object] "Event data"
+     * @param index [int] "Index"
+     */
+
+    function onSubordinateUpdate(e, index) {
+      var data = e.data;
+
+      if (data.controller) {
+        var $active = data.$items.eq(index);
+
+        data.$items.removeClass(RawClasses.active);
+        $active.addClass(RawClasses.active);
+
+        for (var i = 0; i < data.pageCount; i++) {
+          if (data.pages[i].$items.is($active)) {
+            positionCanister(data, i, true, true);
+            break;
+          }
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name checkPosition
+     * @description Checks if left pos is in range
+     * @param data [object] "Event data"
+     * @param e [object] "Event data"
+     * @return [int] "Corrected left position"
+     */
+
+    function checkPosition(data, pos) {
+      if (isNaN(pos)) {
+        pos = 0;
+      } else if (data.rtl) {
+        if (pos > data.maxMove) {
+          pos = data.maxMove;
+        }
+        if (pos < 0) {
+          pos = 0;
+        }
+      } else {
+        if (pos < data.maxMove) {
+          pos = data.maxMove;
+        }
+        if (pos > 0) {
+          pos = 0;
+        }
+      }
+
+      return pos;
+    }
+
+    /**
+     * @method private
+     * @name getIncrement
+     * @description Returns touch increment
+     * @param data [object] "Instance data"
+     * @param e [object] "Event data"
+     * @return [int] "Target direction"
+     */
+
+    function getIncrement(data, e) {
+      return data.rtl ? ((e.directionX === "right") ? 1 : -1) : ((e.directionX === "left") ? 1 : -1);
+    }
+
+    /**
+     * @plugin
+     * @name Carousel
+     * @description A jQuery plugin for simple content carousels.
+     * @type widget
+     * @main carousel.js
+     * @main carousel.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     * @dependency touch.js
+     */
+
+    var Plugin = Formstone.Plugin("carousel", {
+        widget: true,
+
+        /**
+         * @options
+         * @param autoAdvance [boolean] <false> "Flag to auto advance items"
+         * @param autoHeight [boolean] <false> "Flag to adjust carousel height to visible item(s)"
+         * @param autoTime [int] <8000> "Auto advance time"
+         * @param contained [boolean] <true> "Flag for 'overflow: visible'"
+         * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next and previous control selectors (Must be fully qualified selectors)"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
+         * @param infinite [boolean] <false> "Flag for looping items"
+         * @param labels.next [string] <'Next'> "Control text"
+         * @param labels.previous [string] <'Previous'> "Control text"
+         * @param matchHeight [boolean] <false> "Flag to match item heights"
+         * @param matchWidth [boolean] <true> "Flag to match item widths; Requires CSS widths if false"
+         * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+         * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
+         * @param paged [boolean] <false> "Flag for paged items"
+         * @param pagination [boolean or string] <true> "Flag to draw pagination OR string containing pagination target selector (Must be fully qualified selector)"
+         * @param rtl [boolean] <false> "Right to Left display"
+         * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
+         * @param single [boolean] <false> "Flag to display single item at a time"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
+         */
+
+        defaults: {
+          autoAdvance: false,
+          autoHeight: false,
+          autoTime: 8000,
+          contained: true,
+          controls: true,
+          customClass: "",
+          fill: false,
+          infinite: false,
+          labels: {
+            next: "Next",
+            previous: "Previous"
+          },
+          matchHeight: false,
+          matchWidth: true,
+          maxWidth: Infinity,
+          minWidth: '0px',
+          paged: false,
+          pagination: true,
+          rtl: false,
+          show: 1,
+          single: false,
+          theme: "fs-light",
+          useMargin: false
+        },
+
+        classes: [
+          "ltr",
+          "rtl",
+
+          "viewport",
+          "wrapper",
+          "container",
+          "canister",
+
+          "item",
+          "item_previous",
+          "item_next",
+
+          "controls",
+          "controls_custom",
+
+          "control",
+          "control_previous",
+          "control_next",
+
+          "pagination",
+          "page",
+
+          "animated",
+          "enabled",
+          "visible",
+          "active",
+          "auto_height",
+          "contained",
+          "single"
+        ],
+
+        /**
+         * @events
+         * @event itemClick.carousel "Item clicked; Triggered on carousel item"
+         * @event update.carousel "Carousel position updated"
+         */
+
+        events: {
+          itemClick: "itemClick",
+          update: "update"
+        },
+
+        methods: {
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
+
+          disable: disable,
+          enable: enable,
+
+          // Backwards compat?
+          jump: jumpPage,
+          previous: previousPage,
+          next: nextPage,
+          // Pages
+          jumpPage: jumpPage,
+          previousPage: previousPage,
+          nextPage: nextPage,
+          // Items
+          jumpItem: jumpItem,
+
+          reset: resetInstance,
+          resize: resizeInstance,
+          update: updateItems,
+
+          panStart: linkedPanStart,
+          pan: linkedPan,
+          panEnd: linkedPanEnd,
+          swipe: linkedSwipe
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      NamespaceClean = Plugin.namespaceClean,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      $Instances = [],
+
+      TransformProperty = Formstone.transform,
+      TransitionProperty = Formstone.transition;
+
+  })
+
+);
+
+/*! formstone v1.3.3 [checkbox.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var $parent      = this.closest("label"),
+      $label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
+      baseClass    = [RawClasses.base, data.theme, data.customClass].join(" "),
+      labelClass   = [RawClasses.label, data.theme, data.customClass].join(" "),
+      html         = "";
+
+    data.radio = (this.attr("type") === "radio");
+    data.group = this.attr("name");
+
+    html += '<div class="' + RawClasses.marker + '" aria-hidden="true">';
+    html += '<div class="' + RawClasses.flag + '"></div>';
+
+    if (data.toggle) {
+      baseClass  += " " + RawClasses.toggle;
+      labelClass += " " + RawClasses.toggle;
+      html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">'  + data.labels.on  + '</span>';
+      html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
+    }
+
+    if (data.radio) {
+      baseClass  += " " + RawClasses.radio;
+      labelClass += " " + RawClasses.radio;
+    }
+
+    html += '</div>';
+
+    // Modify DOM
+    data.$placeholder = $('<span class="' + RawClasses.element_placeholder + '"></span>');
+    this.before(data.$placeholder);
+
+        data.labelParent = ($label.find(this).length);
+    data.labelClass  = labelClass;
+
+    $label.addClass( labelClass );
+
+        if (data.labelParent) {
+        $label.wrap('<div class="' + baseClass + '"></div>')
+          .before(html);
+    } else {
+      this.before('<div class=" ' + baseClass + '">' + html + '</div>');
+    }
+
+    // Store plugin data
+    data.$checkbox     = (data.labelParent) ? $label.parents(Classes.base) : this.prev(Classes.base);
+    data.$marker       = data.$checkbox.find(Classes.marker);
+    data.$states       = data.$checkbox.find(Classes.state);
+    data.$label        = $label;
+        data.$classable    = $().add(data.$checkbox).add(data.$label);
+
+    // Check checked
+    if (this.is(":checked")) {
+      data.$classable.addClass(RawClasses.checked);
+    }
+
+    // Check disabled
+    if (this.is(":disabled") /* || this.is("[readonly]") */ ) {
+      data.$classable.addClass(RawClasses.disabled);
+    }
+
+    // Move original checkbox
+    this.appendTo(data.$marker);
+
+    // Bind click events
+    this.on(Events.focus, data, onFocus)
+      .on(Events.blur, data, onBlur)
+      .on(Events.change, data, onChange)
+      .on(Events.click, data, onClick)
+      .on(Events.deselect, data, onDeselect);
+
+    data.$checkbox.on(Events.click, data, onClick);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$checkbox.off(Events.namespace);
+            // .fsTouch("destroy");
+
+    data.$marker.remove();
+    data.$states.remove();
+
+        data.$label.removeClass( data.labelClass );
+
+        if (data.labelParent) {
+        data.$label.unwrap();
+        } else {
+            this.unwrap();
+        }
+
+    data.$placeholder.before(this);
+    data.$placeholder.remove();
+
+    this.off(Events.namespace);
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance
+   * @example $(".target").checkbox("enable");
+   */
+
+  function enable(data) {
+    this.prop("disabled", false);
+    data.$classable.removeClass(RawClasses.disabled);
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance
+   * @example $(".target").checkbox("disable");
+   */
+
+  function disable(data) {
+    this.prop("disabled", true);
+    data.$classable.addClass(RawClasses.disabled);
+  }
+
+  /**
+   * @method
+   * @name update
+   * @description Updates target instance
+   * @example $(".target").checkbox("update");
+   */
+
+  function update(data) {
+    var disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
+      checked     = data.$el.is(":checked");
+
+    if (!disabled) {
+      if (checked) {
+        onSelect({ data: data });
+      } else {
+        onDeselect({ data: data });
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click
+   */
+
+  function onClick(e) {
+    e.stopPropagation();
+
+    var data = e.data;
+
+    if (!$(e.target).is(data.$el)) {
+      e.preventDefault();
+
+      data.$el.trigger("click");
+    }
+  }
+
+  /**
+   * @method private
+   * @name onChange
+   * @description Handles external changes
+   * @param e [object] "Event data"
+   */
+
+  function onChange(e) {
+    var data        = e.data,
+      disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
+      checked     = data.$el.is(":checked");
+
+    if (!disabled) {
+      if (data.radio) {
+        // radio
+        if (checked) {
+          onSelect(e);
+        }
+      } else {
+        // Checkbox change events fire after state has changed
+        if (checked) {
+          onSelect(e);
+        } else {
+          onDeselect(e);
+        }
+      }
+    }
+  }
+
+  /*
+   * @method private
+   * @name onSelect
+   * @description Changes input to "checked"
+   * @param e [object] "Event data"
+   */
+  function onSelect(e) {
+    if (e.data.radio) {
+      $('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
+    }
+
+    e.data.$el.trigger(Events.focus);
+    e.data.$classable.addClass(RawClasses.checked);
+  }
+
+  /**
+   * @method private
+   * @name onDeselect
+   * @description Changes input to "checked"
+   * @param e [object] "Event data"
+   */
+  function onDeselect(e) {
+    e.data.$el.trigger(Events.focus);
+    e.data.$classable.removeClass(RawClasses.checked);
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$classable.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    e.data.$classable.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @plugin
+   * @name Checkbox
+   * @description A jQuery plugin for replacing checkboxes.
+   * @type widget
+   * @main checkbox.js
+   * @main checkbox.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @__dependency touch.js
+   */
+
+  var Plugin = Formstone.Plugin("checkbox", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param toggle [boolean] <false> "Render 'toggle' styles"
+       * @param labels.on [string] <'ON'> "Label for 'On' position; 'toggle' only"
+       * @param labels.off [string] <'OFF'> "Label for 'Off' position; 'toggle' only"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        customClass    : "",
+        toggle         : false,
+        labels : {
+          on         : "ON",
+          off        : "OFF"
+        },
+        theme          : "fs-light"
+      },
+
+      classes: [
+        "element_placeholder",
+        "label",
+        "marker",
+        "flag",
+        "radio",
+        "focus",
+        "checked",
+        "disabled",
+        "toggle",
+        "state",
+        "state_on",
+        "state_off"
+      ],
+
+      methods: {
+        _construct    : construct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        enable        : enable,
+        disable       : disable,
+        update        : update
+      },
+
+      events: {
+        deselect : "deselect"
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions;
+
+})
+
+);
+
+/*! formstone v1.3.3 [checkpoint.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize() {
+    WindowHeight = $Window.height();
+
+    Functions.iterate.call($Instances, resizeInstance);
+  }
+
+  /**
+   * @method private
+   * @name raf
+   * @description Handles request animation frame
+   */
+
+  function raf() {
+        ScrollTop = $Window.scrollTop();
+
+    if (ScrollTop < 0) {
+      ScrollTop = 0;
+    }
+
+    if (ScrollTop !== OldScrollTop) {
+      renderRAF();
+
+      OldScrollTop = ScrollTop;
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances = $(Classes.base);
+
+        resize();
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var intersectParts = data.intersect.split("-");
+
+    data.windowIntersect = intersectParts[0];
+    data.elIntersect     = intersectParts[1];
+    data.visible         = false;
+
+    var $container = $( data.$el.data("checkpoint-container") );
+
+    data.$target = ($container.length) ? $container : data.$el;
+
+    data.$el.addClass(RawClasses.base);
+  }
+
+  /**
+   * @method private
+   * @name postConstruct
+   * @description Run post build.
+   * @param data [object] "Instance data"
+   */
+
+  function postConstruct(data) {
+        cacheInstances();
+        resize();
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    cacheInstances();
+  }
+
+  /**
+   * @method private
+   * @name renderRAF
+   * @description Updates DOM based on animation values
+   */
+
+  function renderRAF() {
+        Functions.iterate.call($Instances, checkInstance);
+    }
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Handle window resize event
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+        switch (data.windowIntersect) {
+            case "top":
+                data.windowCheck = 0 - data.offset;
+                break;
+            case "middle":
+                data.windowCheck = (WindowHeight / 2) - data.offset;
+                break;
+            case "bottom":
+                data.windowCheck = WindowHeight - data.offset;
+                break;
+            default:
+                break;
+        }
+
+    switch (data.elIntersect) {
+            case "top":
+                data.elCheck = data.$target[0].offsetTop;
+                break;
+            case "middle":
+                data.elCheck = data.$target[0].offsetTop + (data.$target.outerHeight() / 2);
+                break;
+            case "bottom":
+                data.elCheck = data.$target[0].offsetTop + data.$target.outerHeight();
+                break;
+            default:
+                break;
+        }
+
+        checkInstance(data);
+  }
+
+  /**
+   * @method private
+   * @name checkInstance
+   * @description Handle window scroll event
+   * @param data [object] "Instance data"
+   */
+
+  function checkInstance(data) {
+    var check = (ScrollTop + data.windowCheck);
+
+    if ( check >= data.elCheck ) {
+            if (!data.active) {
+                data.$el.trigger(Events.activate);
+            }
+
+            data.active = true;
+      data.$el.addClass(RawClasses.active);
+    } else {
+      if (data.reverse) {
+        if (data.active) {
+          data.$el.trigger(Events.deactivate);
+        }
+
+        data.active = false;
+        data.$el.removeClass(RawClasses.active);
+      }
+    }
+  }
+
+  /**
+   * @plugin
+   * @name Checkpoint
+   * @description A jQuery plugin for animating visible elements.
+   * @type widget
+   * @main checkpoint.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("checkpoint", {
+      widget: true,
+
+      /**
+       * @options
+       * @param intersect [string] <'bottom-top'> "Position of intersection"
+       * @param offset [int] <0> "Element offset for activating animation"
+       * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
+       */
+
+      defaults: {
+        intersect    : 'bottom-top',
+        offset       : 0,
+        reverse      : false,
+      },
+
+      classes: [
+        "active"
+      ],
+
+      /**
+       * @events
+       * @event activate.checkpoint "Checkpoint activated"
+       * @event deactivate.checkpoint "Checkpoint deactivated"
+       */
+
+      events: {
+        activate      : "activate",
+        deactivate    : "deactivate"
+      },
+
+      methods: {
+        _construct    : construct,
+        _postConstruct: postConstruct,
+        _destruct     : destruct,
+        _resize       : resize,
+        _raf          : raf
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+    $Body,
+    WindowHeight  = 0,
+    ScrollTop     = 0,
+    OldScrollTop  = 0,
+    $Instances    = [];
+
+})
+
+);
+
+/*! formstone v1.3.3 [cookie.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name delegate
+   * @param key [string] "Cookie key"
+   * @param value [string] "Cookie value"
+   * @param options [object] "Options object"
+   * @return [null || string] "Cookie value, if 'read'"
+   */
+
+  function delegate(key, value, options) {
+    if ($.type(key) === "object") {
+
+      // Set defaults
+
+      Defaults = $.extend(Defaults, key);
+    } else {
+
+      // Delegate intent
+
+      options = $.extend({}, Defaults, options || {});
+
+      if ($.type(key) !== "undefined") {
+        if ($.type(value) !== "undefined") {
+          if (value === null) {
+            eraseCookie(key, options);
+          } else {
+            createCookie(key, value, options);
+          }
+        } else {
+          return readCookie(key);
+        }
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @method
+   * @name create
+   * @description Creates a cookie.
+   * @param key [string] "Cookie key"
+   * @param value [string] "Cookie value"
+   * @param options [object] "Options object"
+   * @example $.cookie(key, value, options);
+   */
+
+  function createCookie(key, value, options) {
+    var expiration = false,
+      date = new Date();
+
+    // Check Expiration Date
+
+    if (options.expires && $.type(options.expires) === "number") {
+      date.setTime( date.getTime() + options.expires );
+      expiration = date.toGMTString();
+    }
+
+    var domain     = (options.domain)    ? "; domain=" + options.domain : "",
+      expires    = (expiration)        ? "; expires=" + expiration : "",
+      maxAge     = (expiration)        ? "; max-age=" + (options.expires / 1000) : "", // to seconds
+      path       = (options.path)      ? "; path=" + options.path : "",
+      secure     = (options.secure)    ? "; secure" : "";
+
+    // Set Cookie
+
+    Document.cookie = key + "=" + value + expires + maxAge + domain + path + secure;
+  }
+
+  /**
+   * @method
+   * @name read
+   * @description Returns a cookie's value, or null.
+   * @param key [string] "Cookie key"
+   * @return [string | null] "Cookie's value, or null"
+   * @example var value = $.cookie(key);
+   */
+
+  function readCookie(key) {
+    var keyString    = key + "=",
+      cookies      = Document.cookie.split(';');
+
+    // Loop Cookies
+
+    for(var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1, cookie.length);
+      }
+
+      // Return Match
+
+      if (cookie.indexOf(keyString) === 0) {
+        return cookie.substring(keyString.length, cookie.length);
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * @method
+   * @name erase
+   * @description Deletes a cookie.
+   * @param key [string] "Cookie key"
+   * @example $.cookie(key, null);
+   */
+
+  function eraseCookie(key, options) {
+    createCookie(key, "", $.extend({}, options, {
+      expires: -604800000 // -7 days
+    }));
+
+    console.log(Document.cookie);
+  }
+
+  /**
+   * @plugin
+   * @name Cookie
+   * @description A jQuery plugin for simple access to browser cookies.
+   * @type utility
+   * @main cookie.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("cookie", {
+      utilities: {
+        _delegate : delegate
+      }
+    }),
+
+    /**
+     * @options
+     * @param domain [string] "Cookie domain"
+     * @param expires [int] <604800000> "Time until cookie expires"
+     * @param path [string] "Cookie path"
+     */
+
+    Defaults = {
+      domain     : null,
+      expires    : 604800000, // 7 days
+      path       : null,
+      secure     : null
+    },
+
+    // Localize References
+
+    Document = Formstone.document;
+
+})
+
+);
+/*! formstone v1.3.3 [dropdown.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./scrollbar",
+      "./touch"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.multiple  = this.prop("multiple");
+    data.disabled  = this.prop("disabled") || this.is("[readonly]");
+    data.lastIndex = false;
+
+    if (data.multiple) {
+      data.links = false;
+    } else if (data.external) {
+      data.links = true;
+    }
+
+    // Grab true original index, only if selected attribute exits
+    var $trueOriginal   = this.find("[selected]").not(":disabled"),
+      $originalOption = this.find(":selected").not(":disabled"),
+      originalLabel = $originalOption.text(),
+      originalIndex = this.find("option").index($originalOption);
+
+    if (!data.multiple && data.label !== "" && !$trueOriginal.length) {
+      $originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
+      originalLabel = data.label;
+      originalIndex = 0;
+    } else {
+      data.label = "";
+    }
+
+    // Build options array
+    var $allOptions = this.find("option, optgroup"),
+      $options    = $allOptions.filter("option"),
+      $label      = $("[for=" + this.attr("id") + "]");
+
+    // Swap tab index, no more interacting with the actual input!
+    data.tabIndex = this[0].tabIndex;
+    this[0].tabIndex = -1;
+
+    if ($label.length) {
+      $label[0].tabIndex = -1;
+    }
+
+    // Build wrapper
+    var wrapperClasses = [
+      RawClasses.base,
+      data.theme,
+      data.customClass
+    ];
+
+    if (data.mobile /* || Formstone.isMobile */) {
+      wrapperClasses.push(RawClasses.mobile);
+    } else if (data.cover) {
+      wrapperClasses.push(RawClasses.cover);
+    }
+    if (data.multiple) {
+      wrapperClasses.push(RawClasses.multiple);
+    }
+    if (data.disabled) {
+      wrapperClasses.push(RawClasses.disabled);
+    }
+
+    // Aria
+
+    data.id = this.attr("id");
+
+    if (data.id) {
+      data.ariaId = data.id;
+    } else {
+      data.ariaId = data.rawGuid;
+    }
+
+    data.ariaId += '-dropdown';
+    data.selectedAriaId = data.ariaId + "-selected";
+
+    // Build html
+    var wrapperHtml = "",
+      innerHtml   = "";
+
+    wrapperHtml += '<div class="' + wrapperClasses.join(" ") + '"id="' + data.ariaId + '" tabindex="' + data.tabIndex + '" role="listbox"';
+    if (data.multiple) {
+      wrapperHtml += ' aria-label="multi select"';
+    } else {
+      wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
+    }
+    wrapperHtml += '></div>';
+
+    // Build inner
+    if (!data.multiple) {
+      innerHtml += '<button type="button" class="' + RawClasses.selected + '" id="' + data.selectedAriaId + '" tabindex="-1">';
+      innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
+      innerHtml += '</button>';
+    }
+    innerHtml += '<div class="' + RawClasses.options + '">';
+    innerHtml += '</div>';
+
+    // Modify DOM
+    this.wrap(wrapperHtml)
+      .after(innerHtml);
+
+    // Store plugin data
+    data.$dropdown        = this.parent(Classes.base);
+    data.$label           = $label;
+    data.$allOptions      = $allOptions;
+    data.$options         = $options;
+    data.$selected        = data.$dropdown.find(Classes.selected);
+    data.$wrapper         = data.$dropdown.find(Classes.options);
+    data.$placeholder     = data.$dropdown.find(Classes.placeholder);
+    data.index            = -1;
+    data.closed           = true;
+    data.focused          = false;
+
+    buildOptions(data);
+
+    if (!data.multiple) {
+      updateOption(originalIndex, data);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar({
+        theme: data.theme
+      }).find(".fs-scrollbar-content").attr("tabindex", null);
+    }
+
+    // Bind events
+    data.$dropdown.on(Events.click, data, onClick);
+    data.$selected.on(Events.click, data, onClick);
+
+    data.$dropdown.on(Events.click, Classes.item, data, onSelect)
+            .on(Events.close, data, onClose);
+
+    // Change events
+    this.on(Events.change, data, onChange);
+
+    // Focus/Blur events
+    if (!data.mobile /*!Formstone.isMobile*/) {
+
+      // Handle clicks to associated labels
+      this.on(Events.focusIn, data, function(e) {
+        e.data.$dropdown.trigger(Events.raw.focus);
+      });
+
+      data.$dropdown.on(Events.focusIn, data, onFocusIn)
+              .on(Events.focusOut, data, onFocusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    if (data.$dropdown.hasClass(RawClasses.open)) {
+      data.$selected.trigger(Events.click);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("destroy");
+    }
+
+    data.$el[0].tabIndex = data.tabIndex;
+
+    if (data.$label.length) {
+      data.$label[0].tabIndex = data.tabIndex;
+    }
+
+    data.$dropdown.off(Events.namespace);
+    data.$options.off(Events.namespace);
+
+    data.$placeholder.remove();
+    data.$selected.remove();
+    data.$wrapper.remove();
+
+    data.$el.off(Events.namespace)
+        .show()
+        .unwrap();
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance or option.
+   * @param option [string] <null> "Target option value"
+   * @example $(".target").dropdown("disable", "1");
+   */
+
+  function disableDropdown(data, option) {
+    if (typeof option !== "undefined") {
+      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+
+      data.$items.eq(index).addClass(RawClasses.item_disabled);
+      data.$options.eq(index).prop("disabled", true);
+    } else {
+      if (data.$dropdown.hasClass(RawClasses.open)) {
+        data.$selected.trigger(Events.click);
+      }
+
+      data.$dropdown.addClass(RawClasses.disabled);
+      data.$el.prop("disabled", true);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance or option.
+   * @param option [string] <null> "Target option value"
+   * @example $(".target").dropdown("enable", "1");
+   */
+
+  function enableDropdown(data, option) {
+    if (typeof option !== "undefined") {
+      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
+      data.$items.eq(index).removeClass(RawClasses.item_disabled);
+      data.$options.eq(index).prop("disabled", false);
+    } else {
+      data.$dropdown.removeClass(RawClasses.disabled);
+      data.$el.prop("disabled", false);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+  * @method
+  * @name update
+  * @description Updates instance.
+  * @example $(".target").dropdown("update");
+  */
+
+  function updateDropdown(data) {
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("destroy");
+    }
+
+    var index = data.index;
+
+    data.$allOptions = data.$el.find("option, optgroup");
+    data.$options = data.$allOptions.filter("option");
+    data.index = -1;
+
+    index = data.$options.index(data.$options.filter(":selected"));
+
+    buildOptions(data);
+
+    if (!data.multiple) {
+      updateOption(index, data);
+    }
+
+    // Scrollbar support
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar({
+        theme: data.theme
+      }).find(".fs-scrollbar-content").attr("tabindex", null);
+    }
+  }
+
+  /**
+   * @method private
+   * @name buildOptions
+   * @description Builds instance's option set.
+   * @param data [object] "Instance data"
+   */
+
+  function buildOptions(data) {
+    var html = '',
+      j    = 0;
+
+    for (var i = 0, count = data.$allOptions.length; i < count; i++) {
+      var $option = data.$allOptions.eq(i),
+        classes = [];
+
+      // Option group
+      if ($option[0].tagName === "OPTGROUP") {
+        classes.push(RawClasses.group);
+
+        // Disabled groups
+        if ($option.prop("disabled")) {
+          classes.push(RawClasses.disabled);
+        }
+
+        html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
+      } else {
+        var opVal   = $option.val(),
+          opLabel = $option.data("label"),
+          opType  = (data.links) ? "a" : 'button type="button"';
+
+        if (!$option.attr("value")) {
+          $option.attr("value", opVal);
+        }
+
+        classes.push(RawClasses.item);
+
+        if ($option.hasClass(RawClasses.item_placeholder)) {
+          classes.push(RawClasses.item_placeholder);
+
+          opType = "span";
+        }
+        if ($option.prop("selected")) {
+          classes.push(RawClasses.item_selected);
+        }
+        if ($option.prop("disabled")) {
+          classes.push(RawClasses.item_disabled);
+        }
+
+        html += '<' + opType + ' class="' + classes.join(" ") + '"';
+
+        if (data.links) {
+          if (opType === "span") {
+            html += ' aria-hidden="true"';
+          } else {
+            html += ' href="' + opVal + '"';
+
+            if (data.external) {
+              html += ' target="_blank"';
+            }
+          }
+        } else {
+          html += ' data-value="' + opVal + '"';
+        }
+
+        //html += ' tabindex="-1">';
+        html += ' role="option"';
+        if ($option.prop("selected")) {
+          html += ' "aria-selected"="true"';
+        }
+        html += '>';
+
+        if (opLabel) {
+          html += opLabel;
+        } else {
+          html += Functions.decodeEntities( trimText($option.text(), data.trim) );
+        }
+
+        html += '</' + opType + '>';
+
+        j++;
+      }
+    }
+
+    data.$items = data.$wrapper.html( $.parseHTML(html) )
+                   .find(Classes.item);
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click to selected item.
+   * @param e [object] "Event data"
+   */
+
+  function onClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (!data.disabled) {
+      // // Handle mobile, but not Firefox, unless desktop forced
+      // if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
+      //   var el = data.$el[0];
+      //
+      //   if (Document.createEvent) { // All
+      //     var evt = Document.createEvent("MouseEvents");
+      //     evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+      //     el.dispatchEvent(evt);
+      //   } else if (el.fireEvent) { // IE
+      //     el.fireEvent("onmousedown");
+      //   }
+      // } else {
+
+      if (!data.mobile) {
+        // Delegate intent
+        if (data.closed) {
+          openOptions(data);
+        } else {
+          closeOptions(data);
+        }
+      }
+    }
+
+    closeOthers(data);
+  }
+
+  function closeOthers(data) {
+    $(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
+  }
+
+  /**
+   * @method private
+   * @name openOptions
+   * @description Opens option set.
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name open
+   * @description Opens target instance.
+   * @example $(".target").dropdown("open");
+   */
+
+  function openOptions(data) {
+    // Make sure it's not already open
+    if (data.closed) {
+      var windowHeight   = $Window.height(),
+        optionsHeight  = data.$wrapper.outerHeight(true),
+        boundingRect   = data.$dropdown[0].getBoundingClientRect();
+
+      // Calculate bottom of document
+      if (boundingRect.bottom + optionsHeight > windowHeight - data.bottomEdge) {
+        data.$dropdown.addClass(RawClasses.bottom);
+      }
+
+      // Bind Events
+      $Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+
+      data.$dropdown.trigger(Events.focusIn);
+
+      data.$dropdown.addClass(RawClasses.open);
+      scrollOptions(data);
+
+      data.closed = false;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeOptions
+   * @description Closes option set.
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name close
+   * @description Closes target instance.
+   * @example $(".target").dropdown("close");
+   */
+
+  function closeOptions(data) {
+    // Make sure it's actually open
+    if (data && !data.closed) {
+      $Body.off(Events.click + data.dotGuid);
+
+      data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
+
+      data.closed = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeOptionsHelper
+   * @description Determines if event target is outside instance before closing
+   * @param e [object] "Event data"
+   */
+
+  function closeOptionsHelper(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
+      closeOptions(data);
+
+      data.$dropdown.trigger(Events.focusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClose
+   * @description Handles close event.
+   * @param e [object] "Event data"
+   */
+
+  function onClose(e) {
+    var data = e.data;
+
+    if (data) {
+      closeOptions(data);
+
+      data.$dropdown.trigger(Events.focusOut);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onSelect
+   * @description Handles option select.
+   * @param e [object] "Event data"
+   */
+
+  function onSelect(e) {
+    var $target = $(this),
+      data = e.data;
+
+    Functions.killEvent(e);
+
+    if (!data.disabled) {
+      var index = data.$items.index($target);
+
+      data.focusIndex = index;
+
+      if (data.$wrapper.is(":visible")) {
+        updateOption(index, data, e.shiftKey, e.metaKey || e.ctrlKey);
+        handleChange(data);
+      }
+
+      if (!data.multiple) {
+        closeOptions(data);
+      }
+
+      data.$dropdown.trigger(Events.focus);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onChange
+   * @description Handles external changes.
+   * @param e [object] "Event data"
+   */
+
+  function onChange(e, internal) {
+    var $target = $(this),
+      data    = e.data;
+
+    if (!internal && !data.multiple) {
+      var index = data.$options.index( data.$options.filter(":selected") );
+
+      data.focusIndex = index;
+
+      updateOption(index, data);
+      handleChange(data, true);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocusIn
+   * @description Handles instance focusIn.
+   * @param e [object] "Event data"
+   */
+
+  function onFocusIn(e) {
+    Functions.killEvent(e);
+
+    var $target = $(e.currentTarget),
+      data    = e.data;
+
+    if (!data.disabled && !data.multiple && !data.focused) {
+      closeOthers(data);
+
+      data.focused = true;
+      data.focusIndex = data.index;
+      data.input = '';
+
+      data.$dropdown.addClass(RawClasses.focus)
+              .on(Events.keyDown + data.dotGuid, data, onKeypress);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocusOut
+   * @description Handles instance focusOut.
+   * @param e [object] "Event data"
+   */
+
+  function onFocusOut(e) {
+    Functions.killEvent(e);
+
+    var $target = $(e.currentTarget),
+      data    = e.data;
+
+    if (data.focused && data.closed) {
+      data.focused = false;
+
+      data.$dropdown.removeClass(RawClasses.focus)
+              .off(Events.keyDown + data.dotGuid);
+
+      if (!data.multiple) {
+        // Clean up
+        closeOptions(data);
+
+        if (data.index !== data.focusIndex) {
+          handleChange(data);
+
+          data.focusIndex = data.index;
+        }
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onKeypress
+   * @description Handles instance keypress, once focused.
+   * @param e [object] "Event data"
+   */
+
+  function onKeypress(e) {
+    var data = e.data;
+
+    data.keyTimer = Functions.startTimer(data.keyTimer, 1000, function() {
+      data.input = '';
+    });
+
+    if (e.keyCode === 13) {
+      if (!data.closed) {
+        closeOptions(data);
+        updateOption(data.index, data);
+      }
+      handleChange(data);
+    } else if (e.keyCode !== 9 && (!e.metaKey && !e.altKey && !e.ctrlKey && !e.shiftKey)) {
+      // Ignore modifiers & tabs
+      Functions.killEvent(e);
+
+      var total = data.$items.length - 1,
+        index = (data.index < 0) ? 0 : data.index;
+
+      // Firefox left/right support thanks to Kylemade
+      if ($.inArray(e.keyCode, (Formstone.isFirefox) ? [38, 40, 37, 39] : [38, 40]) > -1) {
+        // Increment / decrement using the arrow keys
+        index = index + ((e.keyCode === 38 || (Formstone.isFirefox && e.keyCode === 37)) ? -1 : 1);
+
+        if (index < 0) {
+          index = 0;
+        }
+        if (index > total) {
+          index = total;
+        }
+      } else {
+        var input = String.fromCharCode(e.keyCode).toUpperCase(),
+          check,
+          i;
+
+        // Store more than 1 input letter
+        data.input += input;
+
+        // Search for input from original index
+        for (i = data.index + 1; i <= total; i++) {
+          check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+          if (check === data.input) {
+            index = i;
+            break;
+          }
+        }
+
+        // If not, start from the beginning
+        if (index < 0 || index === data.index) {
+          for (i = 0; i <= total; i++) {
+            check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+            if (check === data.input) {
+              index = i;
+              break;
+            }
+          }
+        }
+      }
+
+      // Update
+      if (index >= 0) {
+        updateOption(index, data);
+        scrollOptions(data);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name updateOption
+   * @description Updates instance based on new target index.
+   * @param index [int] "Selected option index"
+   * @param data [object] "instance data"
+   */
+
+  function updateOption(index, data, shiftKey, metaKey) {
+    var $item      = data.$items.eq(index),
+      $option    = data.$options.eq(index),
+      isSelected = $item.hasClass(RawClasses.item_selected),
+      isDisabled = $item.hasClass(RawClasses.item_disabled);
+
+    // Check for disabled options
+    if (!isDisabled) {
+      if (data.multiple) {
+        if (data.mobile /* Formstone.isMobile*/) {
+          if (isSelected) {
+            $option.prop("selected", null)
+                 .attr("aria-selected", null);
+            $item.removeClass(RawClasses.item_selected);
+          } else {
+            $option.prop("selected", true)
+                 .attr("aria-selected", true);
+            $item.addClass(RawClasses.item_selected);
+          }
+        } else {
+          if (shiftKey && data.lastIndex !== false) {
+            var start = (data.lastIndex > index)  ? index : data.lastIndex,
+              end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
+
+            data.$options.prop("selected", null)
+                   .attr("aria-selected", null);
+            data.$items.filter(Classes.item_selected)
+              .removeClass(RawClasses.item_selected);
+
+            data.$options.slice(start, end).not("[disabled]").prop("selected", true);
+            data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
+          } else if (metaKey) {
+            if (isSelected) {
+              $option.prop("selected", null)
+                   .attr("aria-selected", null);
+              $item.removeClass(RawClasses.item_selected);
+            } else {
+              $option.prop("selected", true)
+                   .attr("aria-selected", true);
+              $item.addClass(RawClasses.item_selected);
+            }
+
+            data.lastIndex = index;
+          } else {
+            data.$options.prop("selected", null)
+                   .attr("aria-selected", null);
+            data.$items.filter(Classes.item_selected)
+              .removeClass(RawClasses.item_selected);
+
+            $option.prop("selected", true)
+                 .attr("aria-selected", true);
+            $item.addClass(RawClasses.item_selected);
+
+            data.lastIndex = index;
+          }
+        }
+      } else if (index > -1 && index < data.$items.length) {
+        if (index !== data.index) {
+          var label = $option.data("label") || $item.html();
+
+          data.$selected.html(label)
+                  .removeClass(Classes.item_placeholder);
+
+          data.$items.filter(Classes.item_selected)
+                 .removeClass(RawClasses.item_selected);
+
+          data.$el[0].selectedIndex = index;
+
+          $item.addClass(RawClasses.item_selected);
+          data.index = index;
+        }
+      } else if (data.label !== "") {
+        data.$selected.html(data.label);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name scrollOptions
+   * @description Scrolls options wrapper to specific option.
+   * @param data [object] "Instance data"
+   */
+
+  function scrollOptions(data) {
+    var $selected      = data.$items.eq(data.index),
+      selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
+      buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
+
+    if ($.fn.fsScrollbar !== undefined) {
+      data.$wrapper.fsScrollbar("resize")
+             .fsScrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
+    } else {
+      data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
+    }
+  }
+
+  /**
+   * @method private
+   * @name handleChange
+   * @description Handles change events.
+   * @param data [object] "Instance data"
+   */
+
+  function handleChange(data, external) {
+    if (data.links) {
+      launchLink(data);
+    } else {
+      if (!external) {
+        data.$el.trigger(Events.raw.change, [ true ]);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name launchLink
+   * @description Launches link.
+   * @param data [object] "Instance data"
+   */
+
+  function launchLink(data) {
+    var url = data.$el.val();
+
+    if (data.external) {
+      // Open link in a new tab/window
+      Window.open(url);
+    } else {
+      // Open link in same tab/window
+      Window.location.href = url;
+    }
+  }
+
+  /**
+   * @method private
+   * @name trimText
+   * @description Trims text, if specified length is greater then 0.
+   * @param length [int] "Length to trim at"
+   * @param text [string] "Text to trim"
+   * @return [string] "Trimmed string"
+   */
+
+  function trimText(text, length) {
+    if (length === 0) {
+      return text;
+    } else {
+      if (text.length > length) {
+        return text.substring(0, length) + "...";
+      } else {
+        return text;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name escapeText
+   * @description Escapes text.
+   * @param text [string] "Text to escape"
+   */
+
+  function escapeText(text) {
+    return (typeof text === "string") ? text.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') : text;
+  }
+
+  /**
+   * @plugin
+   * @name Dropdown
+   * @description A jQuery plugin for custom select elements.
+   * @type widget
+   * @main dropdown.js
+   * @main dropdown.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency scrollbar.js (optional)
+   * @dependency touch.js (optional, for scrollbar)
+   */
+
+  var Plugin = Formstone.Plugin("dropdown", {
+      widget: true,
+
+      /**
+       * @options
+       * @param bottomEdge [int] <0> "Threshold for bottom position”
+       * @param cover [boolean] <false> "Cover handle with option set"
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param label [string] <''> "Label displayed before selection"
+       * @param external [boolean] <false> "Open options as links in new window"
+       * @param links [boolean] <false> "Open options as links in same window"
+       * @param mobile [boolean] <false> "Use native browser UI on mobile"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param trim [int] <0> "Trim options to specified length; 0 to disable”
+       */
+      defaults: {
+        bottomEdge     : 0,
+        cover          : false,
+        customClass    : "",
+        label          : "",
+        external       : false,
+        links          : false,
+        mobile         : false,
+        theme          : "fs-light",
+        trim           : 0
+      },
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        disable       : disableDropdown,
+        enable        : enableDropdown,
+        update        : updateDropdown,
+        open          : openOptions,
+        close         : closeOptions
+      },
+
+      classes: [
+        "cover",
+        "bottom",
+        "multiple",
+        "mobile",
+
+        "open",
+        "disabled",
+        "focus",
+
+        "selected",
+        "options",
+        "group",
+        "item",
+
+        "item_disabled",
+        "item_selected",
+        "item_placeholder"
+      ],
+
+      events: {
+        close: "close"
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    // Local
+
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+    Document      = Formstone.document,
+    $Body         = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [equalize.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize(windowWidth) {
+    Functions.iterate.call($Instances, resizeInstance);
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances = $(Classes.element);
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance Data"
+   */
+
+  function construct(data) {
+    data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+    data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+    data.type     = (data.property === "height") ? "outerHeight" : "outerWidth";
+
+    if (data.target) {
+      if (!$.isArray(data.target)) {
+        data.target = [ data.target ];
+      }
+    } else {
+      data.target = [ "> *" ];
+    }
+
+    cacheInstances();
+
+    $.fsMediaquery("bind", data.rawGuid, data.mq, {
+      enter: function() {
+        enable.call(data.$el, data);
+      },
+      leave: function() {
+        disable.call(data.$el, data);
+      }
+    });
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    tearDown(data);
+
+    $.fsMediaquery("unbind", data.rawGuid);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method
+   * @name resize
+   * @description Resizes instance
+   * @example $(".target").equalize("resize");
+   */
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Handle window resize event
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+    if (data.data) {
+      data = data.data; // normalize image resize events
+    }
+
+    if (data.enabled) {
+      var value,
+        check,
+        $target;
+
+      for (var i = 0; i < data.target.length; i++) {
+        value = 0;
+        check = 0;
+        $target = data.$el.find( data.target[i] );
+
+        $target.css(data.property, "");
+
+        for (var j = 0; j < $target.length; j++) {
+          check = $target.eq(j)[ data.type ]();
+
+          if (check > value) {
+            value = check;
+          }
+        }
+
+        $target.css(data.property, value);
+      }
+    }
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables instance of plugin
+   * @example $(".target").equalize("disable");
+   */
+
+  function disable(data) {
+    if (data.enabled) {
+      data.enabled = false;
+
+      tearDown(data);
+    }
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables instance of plugin
+   * @example $(".target").equalize("enable");
+   */
+
+  function enable(data) {
+    if (!data.enabled) {
+      data.enabled = true;
+
+      var $images = data.$el.find("img");
+
+      if ($images.length) {
+        $images.on(Events.load, data, resizeInstance);
+      }
+
+      resizeInstance(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name tearDown
+   * @description Removes styling from elements
+   * @param data [object] "Instance data"
+   */
+
+  function tearDown(data) {
+    for (var i = 0; i < data.target.length; i++) {
+      data.$el.find( data.target[i] ).css(data.property, "");
+    }
+
+    data.$el.find("img").off(Events.namespace);
+  }
+
+  /**
+   * @plugin
+   * @name Equalize
+   * @description A jQuery plugin for equal dimensions.
+   * @type widget
+   * @main equalize.js
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   */
+
+  var Plugin = Formstone.Plugin("equalize", {
+      widget: true,
+      priority: 5,
+
+      /**
+       * @options
+       * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+       * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
+       * @param property [string] <"height"> "Property to size; 'height' or 'width'"
+       * @param target [string OR array] <null> "Target child selector(s); Defaults to direct descendants"
+       */
+
+      defaults: {
+        maxWidth    : Infinity,
+        minWidth    : "0px",
+        property    : "height",
+        target      : null
+      },
+
+      methods : {
+        _construct    : construct,
+        _destruct     : destruct,
+        _resize       : resize,
+
+        resize        : resizeInstance
+      }
+    }),
+
+    // Localize References
+
+    Classes        = Plugin.classes,
+    RawClasses     = Classes.raw,
+    Events         = Plugin.events,
+    Functions      = Plugin.functions,
+
+    $Instances     = [];
+
+})
+
+);
+/*! formstone v1.3.3 [lightbox.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./touch",
+      "./transition",
+      "./viewer"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body  = Formstone.$body;
+    $Locks = $("html, body");
+
+    OnLoad = Formstone.window.location.hash.replace("#", "");
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize() {
+    if (Instance) {
+      resizeLightbox();
+    }
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    this.on(Events.click, data, buildLightbox);
+
+    var gallery = this.data(Namespace + "-gallery");
+
+    if (!OnLoaded && OnLoad && gallery === OnLoad) {
+      OnLoaded = true;
+
+      this.trigger(Events.click);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    closeLightbox();
+
+    this.off(Events.namespace);
+  }
+
+  /**
+   * @method private
+   * @name initialize
+   * @description Builds instance from $target.
+   * @param $target [jQuery] "Target jQuery object"
+   */
+
+  function initialize($target, options) {
+    if ($target instanceof $) {
+
+      // Emulate event
+
+      buildLightbox.apply(Window, [{ data: $.extend(true, {}, {
+        $object: $target
+      }, Defaults, options || {}) }]);
+    }
+  }
+
+  /**
+   * @method private
+   * @name buildLightbox
+   * @description Builds new lightbox.
+   * @param e [object] "Event data"
+   */
+
+  function buildLightbox(e) {
+    if (!Instance) {
+      var data = e.data;
+
+      // Cache internal data
+      Instance = $.extend({}, {
+        visible            : false,
+        gallery: {
+          active         : false
+        },
+        isMobile           : (Formstone.isMobile || data.mobile),
+        isTouch            : Formstone.support.touch,
+        isAnimating        : true,
+        isZooming          : false,
+        oldContentHeight   : 0,
+        oldContentWidth    : 0,
+        metaHeight         : 0,
+        thumbnailHeight    : 0,
+        captionOpen        : false,
+        thumbnailsOpen     : false,
+        tapTimer           : null
+      }, data);
+
+      Instance.isViewer = (Instance.isMobile && data.viewer && typeof $.fn.fsViewer !== "undefined");
+
+      // Check target type
+      var $el            = data.$el,
+        $object        = data.$object,
+        source         = ($el && $el[0].href) ? $el[0].href || "" : "",
+        hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
+        sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
+        type           = ($el) ? $el.data(Namespace + "-type") : "",
+        isImage         = ( (type === "image") || (source.match(data.fileTypes) || source.substr(0, 10) === "data:image") ),
+        isVideo         = checkVideo(source),
+        isUrl         = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
+        isElement      = ( (type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#")) ),
+        isObject       = ( (typeof $object !== "undefined") );
+
+      if (isElement) {
+        source = hash;
+      }
+
+      // Retain default click
+      if ( !(isImage || isVideo || isUrl || isElement || isObject) ) {
+        Instance = null;
+
+        return;
+      }
+
+      // Kill event
+      Functions.killEvent(e);
+
+      // Double the margin
+      Instance.margin *= 2;
+
+      if (isImage) {
+        Instance.type = "image";
+      } else if (isVideo) {
+        Instance.type = "video";
+      } else {
+        Instance.type = "element";
+      }
+
+      if (isImage || isVideo) {
+        // Check for gallery
+        var id = $el.data(Namespace + "-gallery");
+
+        if (id) {
+          Instance.gallery.active    = true;
+          Instance.gallery.id        = id;
+          Instance.gallery.$items    = $("a[data-lightbox-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
+          Instance.gallery.index     = Instance.gallery.$items.index(Instance.$el);
+          Instance.gallery.total     = Instance.gallery.$items.length - 1;
+        }
+      }
+
+      // Thumbnails support
+      if ( !(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active) ) {
+        Instance.thumbnails = false;
+      }
+
+      // Assemble HTML
+      var html = '';
+      if (!Instance.isMobile) {
+        html += '<div class="' + [RawClasses.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
+      }
+      var lightboxClasses = [
+        RawClasses.base,
+        RawClasses.loading,
+        RawClasses.animating,
+        Instance.theme,
+        Instance.customClass
+      ];
+
+      if (Instance.fixed) {
+        lightboxClasses.push(RawClasses.fixed);
+      }
+      if (Instance.isMobile) {
+        lightboxClasses.push(RawClasses.mobile);
+      }
+      if (Instance.isTouch) {
+        lightboxClasses.push(RawClasses.touch);
+      }
+      if (isUrl) {
+        lightboxClasses.push(RawClasses.iframed);
+      }
+      if (isElement || isObject) {
+        lightboxClasses.push(RawClasses.inline);
+      }
+      if (Instance.thumbnails) {
+        lightboxClasses.push(RawClasses.thumbnailed);
+      }
+
+      html += '<div class="' + lightboxClasses.join(" ") + '" role="dialog" aria-label="lightbox" tabindex="-1">';
+      html += '<button type="button" class="' + RawClasses.close + '">' + Instance.labels.close + '</button>';
+      html += '<span class="' + RawClasses.loading_icon + '"></span>';
+      html += '<div class="' + RawClasses.container + '">';
+
+      // Thumbnails
+      if (Instance.gallery.active && Instance.thumbnails) {
+        html += '<div class="' + [RawClasses.thumbnails] + '">';
+        html += '<div class="' + [RawClasses.thumbnail_container] + '">';
+
+        var $item,
+          thumb;
+
+        for (var i = 0, count = Instance.gallery.$items.length; i < count; i++) {
+          $item = Instance.gallery.$items.eq(i);
+          thumb = $item.data("lightbox-thumbnail");
+
+          if (!thumb) {
+            thumb = $item.find("img").attr("src");
+          }
+
+          html += '<button class="' + [RawClasses.thumbnail_item] + '">';
+          html += '<img src="' + thumb + '" alt="">';
+          html += '</button>';
+        }
+
+        html += '</div></div>';
+      }
+
+      html += '<div class="' + RawClasses.content + '"></div>';
+
+      if (isImage || isVideo) {
+
+        html += '<div class="' + RawClasses.tools + '">';
+
+        html += '<div class="' + RawClasses.controls + '">';
+        if (Instance.gallery.active) {
+          html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
+          html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+        }
+        if (Instance.isMobile && Instance.isTouch) {
+          html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+
+          if (Instance.gallery.active && Instance.thumbnails) {
+            html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.thumbnail_toggle].join(" ") + '">' + Instance.labels.thumbnailsClosed + '</button>';
+          }
+        }
+        html += '</div>'; // controls
+
+        html += '<div class="' + RawClasses.meta + '">';
+        html += '<div class="' + RawClasses.meta_content + '">';
+        if (Instance.gallery.active) {
+          html += '<p class="' + RawClasses.position + '"';
+          if (Instance.gallery.total < 1) {
+            html += ' style="display: none;"';
+          }
+          html += '>';
+          html += '<span class="' + RawClasses.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
+          html += Instance.labels.count;
+          html += ' <span class="' + RawClasses.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
+          html += '</p>';
+        }
+        html += '<div class="' + RawClasses.caption + '">';
+        html += Instance.formatter.call($el, data);
+        html += '</div></div></div>'; // caption, meta_content, meta
+
+        html += '</div>'; // tools
+      }
+      html += '</div></div>'; //container, content, lightbox
+
+      // Modify Dom
+      $Body.append(html);
+
+      // Cache jquery objects
+      Instance.$overlay               = $(Classes.overlay);
+      Instance.$lightbox              = $(Classes.base);
+      Instance.$close                 = $(Classes.close);
+      Instance.$container             = $(Classes.container);
+      Instance.$content               = $(Classes.content);
+      Instance.$tools                 = $(Classes.tools);
+      Instance.$meta                  = $(Classes.meta);
+      Instance.$metaContent           = $(Classes.meta_content);
+      Instance.$position              = $(Classes.position);
+      Instance.$caption               = $(Classes.caption);
+      Instance.$controlBox            = $(Classes.controls);
+      Instance.$controls              = $(Classes.control);
+      Instance.$thumbnails            = $(Classes.thumbnails);
+      Instance.$thumbnailContainer    = $(Classes.thumbnail_container);
+      Instance.$thumbnailItems        = $(Classes.thumbnail_item);
+
+      if (Instance.isMobile) {
+        Instance.paddingVertical   = Instance.$close.outerHeight();
+        Instance.paddingHorizontal = 0;
+
+        Instance.mobilePaddingVertical   = parseInt(Instance.$content.css("paddingTop"), 10)  + parseInt(Instance.$content.css("paddingBottom"), 10);
+        Instance.mobilePaddingHorizontal = parseInt(Instance.$content.css("paddingLeft"), 10) + parseInt(Instance.$content.css("paddingRight"), 10);
+      } else {
+        Instance.paddingVertical   = parseInt(Instance.$lightbox.css("paddingTop"), 10)  + parseInt(Instance.$lightbox.css("paddingBottom"), 10);
+        Instance.paddingHorizontal = parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10);
+
+        Instance.mobilePaddingVertical   = 0;
+        Instance.mobilePaddingHorizontal = 0;
+      }
+
+      Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
+      Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
+      Instance.controlHeight     = Instance.$controls.outerHeight();
+
+      // Center
+      centerLightbox();
+
+      // Update gallery
+      if (Instance.gallery.active) {
+        Instance.$lightbox.addClass(RawClasses.has_controls);
+        updateGalleryControls();
+      }
+
+      // Bind events
+      $Window.on(Events.keyDown, onKeyDown);
+      $Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox)
+         .on( [ Events.focus, Events.focusIn ].join(" "), onDocumentFocus);
+
+      if (Instance.gallery.active) {
+        Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
+      }
+
+      if (Instance.thumbnails) {
+        Instance.$lightbox.on(Events.click, Classes.thumbnail_item, jumpGallery);
+      }
+
+      if (Instance.isMobile && Instance.isTouch) {
+        Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
+                  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
+      }
+
+      Instance.$lightbox.fsTransition({
+        property: "opacity"
+      },
+      function() {
+        if (isImage) {
+          loadImage(source);
+        } else if (isVideo) {
+          loadVideo(source);
+        } else if (isUrl) {
+          loadURL(source);
+        } else if (isElement) {
+          appendContents(source);
+        } else if (isObject) {
+          appendObject(Instance.$object);
+        }
+      }).addClass(RawClasses.open);
+
+      Instance.$overlay.addClass(RawClasses.open);
+    }
+  }
+
+  /**
+   * @method
+   * @name resize
+   * @description Resizes lightbox.
+   * @example $.lightbox("resize");
+   * @param height [int | false] "Target height or false to auto size"
+   * @param width [int | false] "Target width or false to auto size"
+   */
+
+  /**
+   * @method private
+   * @name resizeLightbox
+   * @description Triggers resize of instance.
+   */
+
+  function resizeLightbox(e) {
+    if (typeof e !== "object") {
+      Instance.targetHeight = arguments[0];
+      Instance.targetWidth  = arguments[1];
+    }
+
+    if (Instance.type === "element") {
+      sizeContent(Instance.$content.find("> :first-child"));
+    } else if (Instance.type === "image") {
+      sizeImage();
+    } else if (Instance.type === "video") {
+      sizeVideo();
+    }
+
+    sizeLightbox();
+  }
+
+  /**
+   * @method
+   * @name close
+   * @description Closes active instance.
+   * @example $.lightbox("close");
+   */
+
+  /**
+   * @method private
+   * @name closeLightbox
+   * @description Closes active instance.
+   * @param e [object] "Event data"
+   */
+
+  function closeLightbox(e) {
+    Functions.killEvent(e);
+
+    if (Instance) {
+      Instance.$lightbox.fsTransition("destroy");
+      Instance.$content.fsTransition("destroy");
+
+      Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
+        property: "opacity"
+      },
+      function(e) {
+        // Clean up
+        if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
+          restoreContents();
+        }
+
+        if (Instance.isViewer && Instance.$imageContainer && Instance.$imageContainer.length) {
+          Instance.$imageContainer.fsViewer("destroy");
+        }
+
+        Instance.$lightbox.off(Events.namespace);
+        Instance.$container.off(Events.namespace);
+        $Window.off(Events.keyDown);
+        $Body.off(Events.namespace);
+        $Body.off(Events.namespace);
+
+        Instance.$overlay.remove();
+        Instance.$lightbox.remove();
+
+        if (typeof Instance.$el !== "undefined" && Instance.$el && Instance.$el.length) {
+          Instance.$el.focus();
+        }
+
+        // Reset Instance
+        Instance = null;
+
+        $Window.trigger(Events.close);
+      });
+
+      Instance.$lightbox.removeClass(RawClasses.open);
+      Instance.$overlay.removeClass(RawClasses.open);
+
+      if (Instance.isMobile) {
+        $Locks.removeClass(RawClasses.lock);
+
+        Functions.unlockViewport(Namespace);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name openLightbox
+   * @description Opens active instance.
+   */
+
+  function openLightbox() {
+    var position = calculatePosition(),
+      durration = Instance.isMobile ? 0 : Instance.duration;
+
+    if (Instance.isMobile) {
+      Functions.lockViewport(Namespace);
+    } else {
+      Instance.$controls.css({
+        marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
+      });
+    }
+
+    if (Instance.$caption.html() === "") {
+      Instance.$caption.hide();
+      Instance.$lightbox.removeClass(RawClasses.has_caption);
+
+      if (!Instance.gallery.active) {
+        Instance.$tools.hide();
+      }
+    } else {
+      Instance.$caption.show();
+      Instance.$lightbox.addClass(RawClasses.has_caption);
+    }
+
+    Instance.$lightbox.fsTransition({
+      property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
+    },
+    function() {
+      Instance.$content.fsTransition({
+        property: "opacity"
+      },
+      function() {
+        Instance.$lightbox.removeClass(RawClasses.animating);
+        Instance.isAnimating = false;
+      });
+
+      Instance.$lightbox.removeClass(RawClasses.loading)
+                .addClass(RawClasses.ready);
+
+      Instance.visible = true;
+
+      // Fire open event
+      $Window.trigger(Events.open);
+
+      // Start preloading
+      if (Instance.gallery.active) {
+        preloadGallery();
+        updateThumbnails();
+        positionThumbnails();
+      }
+
+      // Focus
+      Instance.$lightbox.focus();
+    });
+
+    if (!Instance.isMobile) {
+      Instance.$lightbox.css({
+        height: Instance.contentHeight + Instance.paddingVertical,
+        width:  Instance.contentWidth  + Instance.paddingHorizontal,
+        top:    (!Instance.fixed) ? position.top : 0
+      });
+    }
+
+    // Trigger event in case the content size hasn't changed
+    var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
+
+    if (Instance.isMobile || !contentHasChanged) {
+      Instance.$lightbox.fsTransition("resolve");
+    }
+
+    // Track content size changes
+    Instance.oldContentHeight = Instance.contentHeight;
+    Instance.oldContentWidth  = Instance.contentWidth;
+
+    if (Instance.isMobile) {
+      $Locks.addClass(RawClasses.lock);
+    }
+  }
+
+  /**
+   * @method private
+   * @name sizeLightbox
+   * @description Sizes active instance.
+   */
+
+  function sizeLightbox() {
+    if (Instance.visible && !Instance.isMobile) {
+      var position = calculatePosition();
+
+      Instance.$controls.css({
+        marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
+      });
+
+      Instance.$lightbox.css({
+        height: Instance.contentHeight + Instance.paddingVertical,
+        width:  Instance.contentWidth  + Instance.paddingHorizontal,
+        top:    (!Instance.fixed) ? position.top : 0
+      });
+
+      Instance.oldContentHeight = Instance.contentHeight;
+      Instance.oldContentWidth  = Instance.contentWidth;
+    }
+  }
+
+  /**
+   * @method private
+   * @name centerLightbox
+   * @description Centers instance.
+   */
+
+  function centerLightbox() {
+    var position = calculatePosition();
+
+    Instance.$lightbox.css({
+      top: (!Instance.fixed) ? position.top : 0
+    });
+  }
+
+  /**
+   * @method private
+   * @name calculatePosition
+   * @description Calculates positions.
+   * @return [object] "Object containing top and left positions"
+   */
+
+  function calculatePosition() {
+    if (Instance.isMobile) {
+      return {
+        left: 0,
+        top: 0
+      };
+    }
+
+    var pos = {
+      left: (Formstone.windowWidth - Instance.contentWidth - Instance.paddingHorizontal) / 2,
+      top: (Instance.top <= 0) ? ((Formstone.windowHeight - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
+    };
+
+    if (Instance.fixed !== true) {
+      pos.top += $Window.scrollTop();
+    }
+
+    return pos;
+  }
+
+
+  /**
+   * @method private
+   * @name toggleCaption
+   * @description Toggle caption.
+   */
+
+  function toggleCaption(e) {
+    Functions.killEvent(e);
+
+    if (Instance.captionOpen) {
+      closeCaption();
+    } else {
+      closeThumbnails();
+
+      var height = parseInt( Instance.$metaContent.outerHeight(true) );
+      height += parseInt( Instance.$meta.css("padding-top") );
+      height += parseInt( Instance.$meta.css("padding-bottom") );
+
+      Instance.$meta.css({
+        height: height
+      });
+
+      Instance.$lightbox.addClass(RawClasses.caption_open)
+        .find(Classes.caption_toggle).text(Instance.labels.captionOpen);
+
+      Instance.captionOpen = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeCaption
+   * @description Close caption.
+   */
+
+  function closeCaption() {
+    Instance.$lightbox.removeClass(RawClasses.caption_open)
+      .find(Classes.caption_toggle).text(Instance.labels.captionClosed);
+    Instance.captionOpen = false;
+  }
+
+  /**
+   * @method private
+   * @name formatCaption
+   * @description Formats caption.
+   * @param $target [jQuery object] "Target element"
+   */
+
+  function formatCaption() {
+    var title = this.attr("title"),
+      t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g,'') : false;
+
+    return t ? '<p class="caption">' + t + '</p>' : "";
+  }
+
+  /**
+   * @method private
+   * @name toggleThumbnails
+   * @description Toggle thumbnails.
+   */
+
+  function toggleThumbnails(e) {
+    Functions.killEvent(e);
+
+    if (Instance.thumbnailsOpen) {
+      closeThumbnails();
+    } else {
+      closeCaption();
+
+      Instance.$lightbox.addClass(RawClasses.thumbnails_open)
+        .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsOpen);
+
+      Instance.thumbnailsOpen = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name closeThumbnails
+   * @description Close thumbnails.
+   */
+
+  function closeThumbnails() {
+    Instance.$lightbox.removeClass(RawClasses.thumbnails_open)
+      .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsClosed);
+    Instance.thumbnailsOpen = false;
+  }
+
+  /**
+   * @method private
+   * @name loadImage
+   * @description Loads source image.
+   * @param source [string] "Source image URL"
+   */
+
+  function loadImage(source) {
+    if (Instance.isViewer) {
+      Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+      Instance.$image = Instance.$imageContainer.find("img");
+
+      Instance.$image.attr("src", source)
+               .addClass(RawClasses.image);
+
+      Instance.$content.prepend(Instance.$imageContainer);
+
+      sizeImage();
+
+      Instance.$imageContainer.one("loaded.viewer", function() {
+        openLightbox();
+      }).fsViewer({
+        theme: Instance.theme
+      });
+    } else {
+      // Cache current image
+      Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+      Instance.$image = Instance.$imageContainer.find("img");
+
+      Instance.$image.one(Events.load, function() {
+        var naturalSize = calculateNaturalSize(Instance.$image);
+
+        Instance.naturalHeight = naturalSize.naturalHeight;
+        Instance.naturalWidth  = naturalSize.naturalWidth;
+
+        if (Instance.retina) {
+          Instance.naturalHeight /= 2;
+          Instance.naturalWidth  /= 2;
+        }
+
+        Instance.$content.prepend(Instance.$imageContainer);
+
+        // Size content to be sure it fits the viewport
+        sizeImage();
+
+        openLightbox();
+      }).on(Events.error, loadError)
+        .attr("src", source)
+        .addClass(RawClasses.image);
+
+      // If image has already loaded into cache, trigger load event
+      if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
+        Instance.$image.trigger(Events.load);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name sizeImage
+   * @description Sizes image to fit in viewport.
+   * @param count [int] "Number of resize attempts"
+   */
+
+  function sizeImage() {
+    if (Instance.$image) {
+      var count = 0;
+
+      Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+      Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+
+      Instance.contentHeight = Infinity;
+      Instance.contentWidth = Infinity;
+
+      Instance.imageMarginTop  = 0;
+      Instance.imageMarginLeft = 0;
+
+      while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
+        Instance.imageHeight     = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+        Instance.imageWidth      = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
+        Instance.metaHeight      = (count === 0) ? 0 : Instance.metaHeight;
+        Instance.spacerHeight    = (count === 0) ? 0 : Instance.spacerHeight;
+        Instance.thumbnailHeight = (count === 0) ? 0 : Instance.thumbnailHeight;
+
+        if (count === 0) {
+          Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
+          Instance.ratioVertical   = Instance.imageWidth  / Instance.imageHeight;
+
+          Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
+        }
+
+        // Double check min and max
+        if (Instance.imageHeight < Instance.minHeight) {
+          Instance.minHeight = Instance.imageHeight;
+        }
+        if (Instance.imageWidth < Instance.minWidth) {
+          Instance.minWidth = Instance.imageWidth;
+        }
+
+        if (Instance.isMobile) {
+          if (Instance.isTouch) {
+            Instance.$controlBox.css({
+              width: Formstone.windowWidth
+            });
+            Instance.spacerHeight = Instance.$controls.outerHeight(true);
+          } else {
+            Instance.$tools.css({
+              width: Formstone.windowWidth
+            });
+            Instance.spacerHeight = Instance.$tools.outerHeight(true);
+          }
+
+          // Content match viewport
+          Instance.contentHeight = Instance.viewportHeight;
+          Instance.contentWidth  = Instance.viewportWidth;
+
+          if (!Instance.isTouch) {
+            Instance.$content.css({
+              height: Instance.contentHeight - Instance.spacerHeight // - 10
+            });
+          }
+
+          Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+
+          fitImage();
+
+          Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
+          Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
+        } else {
+          // Viewport should match window, less margin, padding and meta
+          if (count === 0) {
+            Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
+            Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
+          }
+          Instance.viewportHeight -= Instance.metaHeight;
+
+          if (Instance.thumbnails) {
+            Instance.viewportHeight -= Instance.thumbnailHeight;
+          }
+
+          fitImage();
+
+          Instance.contentHeight = Instance.targetImageHeight;
+          Instance.contentWidth  = Instance.targetImageWidth;
+        }
+
+        // Modify DOM
+        if (!Instance.isMobile && !Instance.isTouch) {
+          Instance.$meta.css({
+            width: Instance.contentWidth
+          });
+        }
+
+        Instance.$image.css({
+          height        : Instance.targetImageHeight,
+          width         : Instance.targetImageWidth,
+          marginTop     : Instance.imageMarginTop,
+          marginLeft    : Instance.imageMarginLeft
+        });
+
+        if (!Instance.isMobile) {
+          Instance.metaHeight = Instance.$meta.outerHeight(true);
+          Instance.contentHeight += Instance.metaHeight;
+        }
+
+        if (Instance.thumbnails) {
+          Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+          Instance.contentHeight += Instance.thumbnailHeight;
+        }
+
+        count ++;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name fitImage
+   * @description Calculates target image size.
+   */
+
+  function fitImage() {
+    var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.spacerHeight,
+      width  = (!Instance.isMobile) ? Instance.viewportWidth  : Instance.contentWidth;
+
+    if (Instance.isWide) {
+      //WIDE
+      Instance.targetImageWidth  = width;
+      Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+
+      if (Instance.targetImageHeight > height) {
+        Instance.targetImageHeight = height;
+        Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+      }
+    } else {
+      //TALL
+      Instance.targetImageHeight = height;
+      Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+
+      if (Instance.targetImageWidth > width) {
+        Instance.targetImageWidth  = width;
+        Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+      }
+    }
+
+    // MAX
+    if (Instance.targetImageWidth > Instance.imageWidth || Instance.targetImageHeight > Instance.imageHeight) {
+      Instance.targetImageHeight = Instance.imageHeight;
+      Instance.targetImageWidth  = Instance.imageWidth;
+    }
+
+    // MIN
+    if (Instance.targetImageWidth < Instance.minWidth || Instance.targetImageHeight < Instance.minHeight) {
+      if (Instance.targetImageWidth < Instance.minWidth) {
+        Instance.targetImageWidth  = Instance.minWidth;
+        Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+      } else {
+        Instance.targetImageHeight = Instance.minHeight;
+        Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadVideo
+   * @description Loads source video.
+   * @param source [string] "Source video URL"
+   */
+
+  function formatYouTube(parts) {
+    return "//www.youtube.com/embed/" + parts[1];
+  }
+
+  function formatVimeo(parts) {
+    return "//player.vimeo.com/video/" + parts[3];
+  }
+
+  function loadVideo(source) {
+    var parts,
+      url = checkVideo(source),
+      queryString = source.split("?");
+
+    if (url) {
+      // if we have a query string
+      if (queryString.length >= 2) {
+        url += "?" + queryString.slice(1)[0].trim();
+      }
+
+      Instance.$videoWrapper = $('<div class="' + RawClasses.video_wrapper + '"></div>');
+      Instance.$video = $('<iframe class="' + RawClasses.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
+
+      Instance.$video.attr("src", url)
+             .addClass(RawClasses.video)
+             .prependTo(Instance.$videoWrapper);
+
+      Instance.$content.prepend(Instance.$videoWrapper);
+
+      sizeVideo();
+      openLightbox();
+    } else {
+      loadError();
+    }
+  }
+
+  /**
+   * @method private
+   * @name sizeVideo
+   * @description Sizes video to fit in viewport.
+   */
+
+  function sizeVideo() {
+    // Set initial vars
+    Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+    Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+    Instance.videoMarginTop = 0;
+    Instance.videoMarginLeft = 0;
+
+    if (Instance.isMobile) {
+      if (Instance.isTouch) {
+        Instance.$controlBox.css({
+          width: Formstone.windowWidth
+        });
+        Instance.spacerHeight = Instance.$controls.outerHeight(true) + 10;
+      } else {
+        Instance.$tools.css({
+          width: Formstone.windowWidth
+        });
+        Instance.spacerHeight = Instance.$tools.outerHeight(true);
+        Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+      }
+
+      Instance.viewportHeight -= Instance.spacerHeight;
+
+      Instance.targetVideoWidth  = Instance.viewportWidth;
+      Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+      if (Instance.targetVideoHeight > Instance.viewportHeight) {
+        Instance.targetVideoHeight = Instance.viewportHeight;
+        Instance.targetVideoWidth  = Instance.targetVideoHeight / Instance.videoRatio;
+      }
+
+      Instance.videoMarginTop  = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
+      Instance.videoMarginLeft = (Instance.viewportWidth  - Instance.targetVideoWidth)  / 2;
+    } else {
+      Instance.viewportHeight = Instance.windowHeight - Instance.margin;
+      Instance.viewportWidth  = Instance.windowWidth  - Instance.margin;
+
+      Instance.targetVideoWidth  = (Instance.videoWidth > Instance.viewportWidth) ? Instance.viewportWidth : Instance.videoWidth;
+      if (Instance.targetVideoWidth < Instance.minWidth) {
+        Instance.targetVideoWidth = Instance.minWidth;
+      }
+      Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+      Instance.contentHeight = Instance.targetVideoHeight;
+      Instance.contentWidth  = Instance.targetVideoWidth;
+    }
+
+    // Update dom
+    if (!Instance.isMobile && !Instance.isTouch) {
+      Instance.$meta.css({
+        width: Instance.contentWidth
+      });
+    }
+
+    Instance.$videoWrapper.css({
+      height:     Instance.targetVideoHeight,
+      width:      Instance.targetVideoWidth,
+      marginTop:  Instance.videoMarginTop,
+      marginLeft: Instance.videoMarginLeft
+    });
+
+    if (!Instance.isMobile) {
+      Instance.metaHeight = Instance.$meta.outerHeight(true);
+      Instance.contentHeight += Instance.metaHeight;
+    }
+
+    if (Instance.thumbnails) {
+      Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+      Instance.contentHeight += Instance.thumbnailHeight;
+    }
+  }
+
+  /**
+   * @method private
+   * @name preloadGallery
+   * @description Preloads previous and next images in gallery for faster rendering.
+   * @param e [object] "Event Data"
+   */
+
+  function preloadGallery(e) {
+    var source = '';
+
+    if (Instance.gallery.index > 0) {
+      source = Instance.gallery.$items.eq(Instance.gallery.index - 1).attr("href");
+      if (!checkVideo(source)) {
+        $('<img src="' + source + '">');
+      }
+    }
+    if (Instance.gallery.index < Instance.gallery.total) {
+      source = Instance.gallery.$items.eq(Instance.gallery.index + 1).attr("href");
+      if (!checkVideo(source)) {
+        $('<img src="' + source + '">');
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name advanceGallery
+   * @description Advances gallery base on direction.
+   * @param e [object] "Event Data"
+   */
+
+  function advanceGallery(e) {
+    Functions.killEvent(e);
+
+    var $control = $(e.currentTarget);
+
+    if (!Instance.isAnimating && !$control.hasClass(RawClasses.control_disabled)) {
+      Instance.isAnimating = true;
+
+      closeCaption();
+
+      Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
+      if (Instance.gallery.index > Instance.gallery.total) {
+        Instance.gallery.index = (Instance.infinite) ? 0 : Instance.gallery.total;
+      }
+      if (Instance.gallery.index < 0) {
+        Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
+      }
+
+      updateThumbnails();
+
+      Instance.$lightbox.addClass(RawClasses.animating);
+
+      Instance.$content.fsTransition({
+        property: "opacity"
+      }, cleanGallery);
+
+      Instance.$lightbox.addClass(RawClasses.loading);
+    }
+  }
+
+  /**
+   * @method private
+   * @name jumpGallery
+   * @description Jumps gallery base on thumbnail click.
+   * @param e [object] "Event Data"
+   */
+
+  function jumpGallery(e) {
+    Functions.killEvent(e);
+
+    var $thumbnail = $(e.currentTarget);
+
+    if (!Instance.isAnimating && !$thumbnail.hasClass(RawClasses.active)) {
+      Instance.isAnimating = true;
+
+      closeCaption();
+
+      Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
+
+      updateThumbnails();
+
+      Instance.$lightbox.addClass(RawClasses.animating);
+
+      Instance.$content.fsTransition({
+        property: "opacity"
+      }, cleanGallery);
+
+      Instance.$lightbox.addClass(RawClasses.loading);
+    }
+  }
+
+  /**
+   * @method private
+   * @name jumpGallery
+   * @description
+   */
+
+  function updateThumbnails() {
+    // Thumbnails
+    if (Instance.thumbnails) {
+      var $thumb = Instance.$thumbnailItems.eq(Instance.gallery.index);
+
+      Instance.$thumbnailItems.removeClass(RawClasses.active);
+      $thumb.addClass(RawClasses.active);
+    }
+  }
+
+  /**
+   * @method private
+   * @name jumpGallery
+   * @description
+   */
+
+  function positionThumbnails() {
+    // Thumbnails
+    if (Instance.thumbnails) {
+      var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index),
+        scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
+
+      Instance.$thumbnailContainer.stop().animate({
+        scrollLeft: scrollLeft
+      }, 200, "linear");
+    }
+  }
+
+  /**
+   * @method private
+   * @name cleanGallery
+   * @description Cleans gallery.
+   */
+
+  function cleanGallery() {
+    if (typeof Instance.$imageContainer !== 'undefined') {
+      if (Instance.isViewer) {
+        Instance.$imageContainer.fsViewer("destroy");
+      }
+      Instance.$imageContainer.remove();
+    }
+    if (typeof Instance.$videoWrapper !== 'undefined') {
+      Instance.$videoWrapper.remove();
+    }
+    Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+
+    Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+    Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
+
+    var source = Instance.$el.attr("href"),
+      isVideo = checkVideo(source);
+
+    if (isVideo) {
+      Instance.type = "video";
+
+      loadVideo(source);
+    } else {
+      Instance.type = "image";
+
+      loadImage(source);
+    }
+
+    updateGalleryControls();
+  }
+
+  /**
+   * @method private
+   * @name updateGalleryControls
+   * @description Updates gallery control states.
+   */
+
+  function updateGalleryControls() {
+    Instance.$controls.removeClass(RawClasses.control_disabled);
+
+    if (!Instance.infinite) {
+      if (Instance.gallery.index === 0) {
+        Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
+      }
+      if (Instance.gallery.index === Instance.gallery.total) {
+        Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onKeyDown
+   * @description Handles keypress in gallery.
+   * @param e [object] "Event data"
+   */
+
+  function onKeyDown(e) {
+    if (Instance.gallery.active && (e.keyCode === 37 || e.keyCode === 39)) {
+      Functions.killEvent(e);
+
+      Instance.$controls.filter((e.keyCode === 37) ? Classes.control_previous : Classes.control_next).trigger(Events.click);
+    } else if (e.keyCode === 27) {
+      Instance.$close.trigger(Events.click);
+    }
+  }
+
+  /**
+   * @method private
+   * @name appendContents
+   * @description Moves target inline element.
+   * @param id [string] "Target element id"
+   */
+
+  function appendContents(id) {
+    Instance.$inlineTarget   = $(id);
+    Instance.$inlineContents = Instance.$inlineTarget.children().detach();
+
+    appendObject(Instance.$inlineContents);
+  }
+
+  /**
+   * @method private
+   * @name restoreContents
+   * @description Restores inline element.
+   */
+
+  function restoreContents() {
+    Instance.$inlineTarget.append( Instance.$inlineContents.detach() );
+  }
+
+  /**
+   * @method private
+   * @name loadURL
+   * @description Load URL into iframe.
+   * @param source [string] "Target URL"
+   */
+
+  function loadURL(source) {
+    source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
+    var $iframe = $('<iframe class="' + RawClasses.iframe + '" src="' + source + '"></iframe>');
+    appendObject($iframe);
+  }
+
+  /**
+   * @method private
+   * @name appendObject
+   * @description Appends and sizes object.
+   * @param $object [jQuery Object] "Object to append"
+   */
+
+  function appendObject($object) {
+    Instance.$content.append($object);
+    sizeContent($object);
+    openLightbox();
+  }
+
+  /**
+   * @method private
+   * @name sizeContent
+   * @description Sizes jQuery object to fir in viewport.
+   * @param $object [jQuery Object] "Object to size"
+   */
+
+  function sizeContent($object) {
+    Instance.windowHeight    = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
+    Instance.windowWidth    = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+
+    Instance.objectHeight    = $object.outerHeight(true);
+    Instance.objectWidth    = $object.outerWidth(true);
+    Instance.targetHeight    = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
+    Instance.targetWidth    = Instance.targetWidth  || (Instance.$el ? Instance.$el.data(Namespace + "-width")  : null);
+    Instance.maxHeight      = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
+    Instance.isIframe      = $object.is("iframe");
+    Instance.objectMarginTop  = 0;
+    Instance.objectMarginLeft = 0;
+
+    if (!Instance.isMobile) {
+      Instance.windowHeight -= Instance.margin;
+      Instance.windowWidth  -= Instance.margin;
+    }
+
+    Instance.contentHeight = (Instance.targetHeight) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
+    Instance.contentWidth  = (Instance.targetWidth)  ? Instance.targetWidth  : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth  : Instance.objectWidth;
+
+    if ((Instance.isIframe || Instance.isObject) && Instance.isMobile) {
+      Instance.contentHeight = Instance.windowHeight;
+      Instance.contentWidth  = Instance.windowWidth;
+    } else if (Instance.isObject) {
+      Instance.contentHeight = (Instance.contentHeight > Instance.windowHeight) ? Instance.windowHeight : Instance.contentHeight;
+      Instance.contentWidth  = (Instance.contentWidth  > Instance.windowWidth)  ? Instance.windowWidth  : Instance.contentWidth;
+    }
+
+    if (!Instance.isMobile) {
+      if (Instance.contentHeight > Instance.maxHeight) {
+        Instance.contentHeight = Instance.maxHeight;
+      }
+      if (Instance.contentWidth > Instance.maxWidth) {
+        Instance.contentWidth = Instance.maxWidth;
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadError
+   * @description Error when resource fails to load.
+   */
+
+  function loadError() {
+    var $error = $('<div class="' + RawClasses.error + '"><p>Error Loading Resource</p></div>');
+
+    // Clean up
+    Instance.type = "element";
+    Instance.$tools.remove();
+
+    Instance.$image.off(Events.namespace);
+
+    appendObject($error);
+
+    $Window.trigger(Events.error);
+  }
+
+  /**
+   * @method private
+   * @name calculateNaturalSize
+   * @description Determines natural size of target image.
+   * @param $img [jQuery object] "Source image object"
+   * @return [object | boolean] "Object containing natural height and width values or false"
+   */
+
+  function calculateNaturalSize($img) {
+    var node = $img[0],
+      img = new Image();
+
+    if (typeof node.naturalHeight !== "undefined") {
+      return {
+        naturalHeight: node.naturalHeight,
+        naturalWidth:  node.naturalWidth
+      };
+    } else {
+      if (node.tagName.toLowerCase() === 'img') {
+        img.src = node.src;
+        return {
+          naturalHeight: img.height,
+          naturalWidth:  img.width
+        };
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * @method private
+   * @name checkVideo
+   * @description Determines if url is a YouTube or Vimeo url.
+   * @param source [string] "Source url"
+   * @return [boolean] "True if YouTube or Vimeo url"
+   */
+
+  function checkVideo(source) {
+    var formats = Instance.videoFormatter,
+      parts;
+
+    for (var i in formats) {
+      if (formats.hasOwnProperty(i)) {
+        parts = source.match( formats[i].pattern );
+
+        if (parts !== null) {
+          return formats[i].format.call(Instance, parts);
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * @method private
+   * @name onDocumentFocus
+   * @description Hanle document focus
+   * @param e [object] "Event data"
+   */
+
+  function onDocumentFocus(e) {
+    var target = e.target;
+
+    if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$lightbox[0] && target !== Instance.$overlay[0]) {
+      Functions.killEvent(e);
+
+      Instance.$lightbox.focus();
+    }
+  }
+
+  /**
+   * @plugin
+   * @name Lightbox
+   * @description A jQuery plugin for simple modals.
+   * @type widget
+   * @main lightbox.js
+   * @main lightbox.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency touch.js
+   * @dependency transition.js
+   * @dependency viewer.js (optional)
+   */
+
+  var Plugin = Formstone.Plugin("lightbox", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param fileTypes [regex] <> "Image file types"
+       * @param fixed [boolean] <false> "Flag for fixed positioning"
+       * @param formatter [function] <$.noop> "Caption format function"
+       * @param infinite [boolean] <false> "Flag for infinite galleries"
+       * @param labels.close [string] <'Close'> "Close button text"
+       * @param labels.count [string] <'of'> "Gallery count separator text"
+       * @param labels.next [string] <'Next'> "Gallery control text"
+       * @param labels.previous [string] <'Previous'> "Gallery control text"
+       * @param labels.captionClosed [string] <'Close Caption'> "Mobile caption toggle text, closed state"
+       * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
+       * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
+       * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
+       * @param margin [int] <50> "Margin used when sizing (single side)"
+       * @param maxHeight [int] <10000> "Maximum height of element modal"
+       * @param maxWidth [int] <10000> "Maximum width of element modal"
+       * @param minHeight [int] <100> "Minimum height of modal"
+       * @param minWidth [int] <100> "Minimum width of modal"
+       * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
+       * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
+       * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param thumbnails [boolean] <false> "Flag to display thumbnail strip"
+       * @param top [int] <0> "Target top position; over-rides centering"
+       * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
+       * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
+       * @param videoWidth [int] <800> "Video max width"
+       * @param viewer [boolean] <false> "Flag to force 'Viewer' rendering, if available"
+       */
+
+      defaults: {
+        customClass    : "",
+        fileTypes      : /\.(jpg|sjpg|jpeg|png|gif)$/i,
+        fixed          : false,
+        formatter      : formatCaption,
+        infinite       : false,
+        labels: {
+          close            : "Close",
+          count            : "of",
+          next             : "Next",
+          previous         : "Previous",
+          captionClosed    : "View Caption",
+          captionOpen      : "Close Caption",
+          thumbnailsClosed : "View Thumbnails",
+          thumbnailsOpen   : "Close Thumbnails"
+        },
+        margin         : 50,
+        maxHeight      : 10000,
+        maxWidth       : 10000,
+        minHeight      : 100,
+        minWidth       : 100,
+        mobile         : false,
+        retina         : false,
+        requestKey     : "fs-lightbox",
+        theme          : "fs-light",
+        thumbnails     : false,
+        top            : 0,
+        videoFormatter : {
+          "youtube": {
+            pattern : /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,
+            format  : formatYouTube
+          },
+          "vimeo": {
+            pattern : /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,
+            format  : formatVimeo
+          }
+        },
+        videoRatio     : 0.5625,
+        videoWidth     : 800,
+        viewer         : true
+      },
+
+      classes: [
+        "loading",
+        "animating",
+        "scaling",
+        "zooming",
+        "fixed",
+        "mobile",
+        "touch",
+        "inline",
+        "iframed",
+        "open",
+        "ready",
+        "overlay",
+        "close",
+        "loading_icon",
+        "container",
+        "content",
+        "image",
+        "image_container",
+        "video",
+        "video_wrapper",
+        "tools",
+        "meta",
+        "meta_content",
+        "controls",
+        "control",
+        "control_previous",
+        "control_next",
+        "control_disabled",
+        "position",
+        "position_current",
+        "position_total",
+        "toggle",
+        "caption_toggle",
+        "caption",
+        "caption_open",
+        "thumbnailed",
+        "thumbnails_open",
+        "thumbnail_toggle",
+        "thumbnails",
+        "thumbnail_container",
+        "thumbnail_item",
+        "active",
+        "has_controls",
+        "has_caption",
+        "iframe",
+        "error",
+        "active",
+        "lock"
+      ],
+
+      /**
+       * @events
+       * @event open.lightbox "Lightbox opened; Triggered on window"
+       * @event close.lightbox "Lightbox closed; Triggered on window"
+       * @event error.lightbox "Lightbox error; Triggered on window"
+       */
+
+      events: {
+        open     : "open",
+        close    : "close"
+      },
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+        _resize       : resize,
+
+        resize        : resizeLightbox
+      },
+
+      utilities: {
+        _initialize    : initialize,
+
+        close          : closeLightbox
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Defaults      = Plugin.defaults,
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+    $Body         = null,
+
+    // Internal
+
+    $Locks        = null,
+    OnLoad        = false,
+    OnLoaded      = false,
+
+    // Singleton
+
+    Instance      = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [mediaquery.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name initialize
+   * @description Initializes plugin.
+   * @param opts [object] "Plugin options"
+   */
+
+  function initialize(options) {
+    options = options || {};
+
+    // Build Media Queries
+
+    for (var i in MQStrings) {
+      if (MQStrings.hasOwnProperty(i)) {
+        Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
+      }
+    }
+
+    Defaults = $.extend(Defaults, options);
+
+    // Sort
+
+    Defaults.minWidth.sort(Functions.sortDesc);
+    Defaults.maxWidth.sort(Functions.sortAsc);
+    Defaults.minHeight.sort(Functions.sortDesc);
+    Defaults.maxHeight.sort(Functions.sortAsc);
+
+    // Bind Media Query Matches
+
+    for (var j in MQStrings) {
+      if (MQStrings.hasOwnProperty(j)) {
+        MQMatches[j] = {};
+        for (var k in Defaults[j]) {
+          if (Defaults[j].hasOwnProperty(k)) {
+            var mq = window.matchMedia( "(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")" );
+            mq.addListener( onStateChange );
+            MQMatches[j][ Defaults[j][k] ] = mq;
+          }
+        }
+      }
+    }
+
+    // Initial Trigger
+
+    onStateChange();
+  }
+
+  /**
+   * @method
+   * @name bind
+   * @description Binds callbacks to media query matching.
+   * @param key [string] "Instance key"
+   * @param media [string] "Media query to match"
+   * @param data [object] "Object containing 'enter' and 'leave' callbacks"
+   * @example $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
+   */
+
+  function bind(key, media, data) {
+    var mq = Window.matchMedia(media),
+      mqKey = createKey(mq.media);
+
+    if (!Bindings[mqKey]) {
+      Bindings[mqKey] = {
+        mq        : mq,
+        active    : true,
+        enter     : {},
+        leave     : {}
+      };
+
+      Bindings[mqKey].mq.addListener(onBindingChange);
+    }
+
+    for (var i in data) {
+      if (data.hasOwnProperty(i) && Bindings[mqKey].hasOwnProperty(i)) {
+        Bindings[mqKey][i][key] = data[i];
+      }
+    }
+
+    var binding    = Bindings[mqKey],
+      matches    = mq.matches;
+
+    if (matches && binding[Events.enter].hasOwnProperty(key)) {
+      binding[Events.enter][key].apply(mq);
+      binding.active = true;
+    } else if (!matches && binding[Events.leave].hasOwnProperty(key)) {
+      binding[Events.leave][key].apply(mq);
+      binding.active = false;
+    }
+  }
+
+  /**
+   * @method
+   * @name unbind
+   * @description Unbinds all callbacks from media query.
+   * @param key [string] "Instance key"
+   * @param media [string] "Media query to unbind; defaults to all"
+   * @example $.mediaquery("unbind", "key");
+   */
+
+  function unbind(key, media) {
+    if (!key) {
+      return;
+    }
+
+    if (media) {
+      // unbind specific query
+      var mqKey = createKey(media);
+
+      if (Bindings[mqKey]) {
+        if (Bindings[mqKey].enter[key]) {
+          delete Bindings[mqKey].enter[key];
+        }
+
+        if (Bindings[mqKey].leave[key]) {
+          delete Bindings[mqKey].leave[key];
+        }
+      }
+    } else {
+      // unbind all
+      for (var i in Bindings) {
+        if (Bindings.hasOwnProperty(i)) {
+          if (Bindings[i].enter[key]) {
+            delete Bindings[i].enter[key];
+          }
+
+          if (Bindings[i].leave[key]) {
+            delete Bindings[i].leave[key];
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name setState
+   * @description Sets current media query match state.
+   */
+
+  function setState() {
+    State = {
+      unit: Defaults.unit
+    };
+
+    for (var i in MQStrings) {
+      if (MQStrings.hasOwnProperty(i)) {
+
+        for (var j in MQMatches[i]) {
+          if (MQMatches[i].hasOwnProperty(j)) {
+
+            var state = (j === "Infinity") ? Infinity : parseInt(j, 10),
+              check = (MQStrings[i].indexOf("width") > -1) ? Formstone.fallbackWidth : Formstone.fallbackHeight,
+              isMax = i.indexOf("max") > -1;
+
+            if (Formstone.support.nativeMatchMedia) {
+              // Native
+              if (MQMatches[i][j].matches) {
+                if (isMax) {
+                  if (!State[i] || state < State[i]) {
+                    State[i] = state;
+                  }
+                } else {
+                  if (!State[i] || state > State[i]) {
+                    State[i] = state;
+                  }
+                }
+              }
+            } else {
+              // Fallback
+              if (isMax) {
+                if (!State[i] && state > check) {
+                  State[i] = state;
+                }
+              } else {
+                if ( (!State[i] && State[i] !== 0) || (state > State[i] && state < check) ) {
+                  State[i] = state;
+                }
+              }
+            }
+
+          }
+        }
+
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onStateChange
+   * @description Handles media query changes.
+   */
+
+  function onStateChange() {
+    setState();
+
+    $Window.trigger(Events.mqChange, [ State ]);
+  }
+
+  /**
+   * @method private
+   * @name onBindingChange
+   * @description Handles a binding's media query change.
+   */
+
+  function onBindingChange(mq) {
+    var mqkey      = createKey(mq.media),
+      binding    = Bindings[mqkey],
+      matches    = mq.matches,
+      event      = matches ? Events.enter : Events.leave;
+
+    if (binding && (binding.active || (!binding.active && matches) ) ) {
+      for (var i in binding[event]) {
+        if (binding[event].hasOwnProperty(i)) {
+          binding[event][i].apply(binding.mq);
+        }
+      }
+
+      binding.active = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name createKey
+   * @description Creates valid object key from string.
+   * @param text [String] "String to create key from"
+   * @return [string] Valid object key
+   */
+
+  function createKey(text) {
+    return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g,'');
+  }
+
+  /**
+   * @method
+   * @name state
+   * @description Returns the current state.
+   * @return [object] "Current state object"
+   * @example var state = $.mediaquery("state");
+   */
+
+  /**
+   * @method private
+   * @name getState
+   * @description Returns the current state.
+   * @return [object] "Current state object"
+   */
+
+  function getState() {
+    return State;
+  }
+
+  /**
+   * @plugin
+   * @name Media Query
+   * @description A jQuery plugin for responsive media query events.
+   * @type utility
+   * @main mediaquery.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("mediaquery", {
+      utilities: {
+        _initialize    : initialize,
+        state          : getState,
+        bind           : bind,
+        unbind         : unbind
+      },
+
+      /**
+       * @events
+       * @event mqchange.mediaquery "Change to a media query match; Triggered on window"
+       */
+
+      events: {
+        mqChange    : "mqchange"
+      }
+    }),
+
+    /**
+     * @options
+     * @param minWidth [array] <[ 0 ]> "Array of min-widths"
+     * @param maxWidth [array] <[ Infinity ]> "Array of max-widths"
+     * @param minHeight [array] <[ 0 ]> "Array of min-heights"
+     * @param maxHeight [array] <[ Infinity ]> "Array of max-heights"
+     * @param unit [string] <'px'> "Unit to use when matching widths and heights"
+     */
+
+    Defaults = {
+      minWidth     : [ 0 ],
+      maxWidth     : [ Infinity ],
+      minHeight    : [ 0 ],
+      maxHeight    : [ Infinity ],
+      unit         : "px"
+    },
+
+    // Raw events for switch
+    Events = $.extend(Plugin.events, {
+      enter       : "enter",
+      leave       : "leave"
+    }),
+
+    // Localize References
+
+    $Window        = Formstone.$window,
+    Window         = $Window[0],
+
+    Functions      = Plugin.functions,
+
+    // Internal
+
+    State          = null,
+    Bindings       = [],
+    MQMatches      = {},
+    MQStrings      = {
+      minWidth:     "min-width",
+      maxWidth:     "max-width",
+      minHeight:    "min-height",
+      maxHeight:    "max-height"
+    };
+
+})
+
+);
+/*! formstone v1.3.3 [pagination.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
+
+    var html = "";
+    html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
+    html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
+    html += '<div class="' + RawClasses.position + '" aria-hidden="true">';
+    html += '<span class="' + RawClasses.current + '">0</span>';
+    html += ' ' + data.labels.count + ' ';
+    html += '<span class="' + RawClasses.total + '">0</span>';
+    html += '<select class="' + RawClasses.select + '" tabindex="-1" aria-hidden="true"></select>';
+    html += '</div>';
+
+    data.thisClasses = [RawClasses.base, data.theme, data.customClass];
+
+    this.addClass(data.thisClasses.join(" "))
+      .wrapInner('<div class="' + RawClasses.pages + '" aria-label="pagination"></div>')
+      .prepend(html);
+
+    data.$controls  = this.find(Classes.control);
+    data.$pages     = this.find(Classes.pages);
+    data.$items     = data.$pages.children().addClass(RawClasses.page);
+    data.$position  = this.find(Classes.position);
+    data.$select    = this.find(Classes.select);
+    data.index      = -1;
+
+    data.total = data.$items.length - 1;
+
+    var index = data.$items.index(data.$items.filter("[data-" + Plugin.namespace + "-active]"));
+    if (!index) {
+      index = data.$items.index(data.$items.filter(Classes.active)); // reverse compat.
+    }
+
+    data.$items.eq(0)
+           .addClass(RawClasses.first)
+           .after('<span class="' + RawClasses.ellipsis + '">&hellip;</span>')
+           .end()
+           .eq(data.total)
+           .addClass(RawClasses.last)
+           .before('<span class="' + RawClasses.ellipsis + '">&hellip;</span>');
+
+    data.$ellipsis = data.$pages.find(Classes.ellipsis);
+
+    buildMobilePages(data);
+
+    this.on(Events.click, Classes.page, data, onPageClick)
+      .on(Events.click, Classes.control, data, onControlClick)
+      // .on(Events.click, Classes.position, data, onPositionClick)
+      .on(Events.change, Classes.select, data, onPageSelect);
+
+    $.fsMediaquery("bind", data.rawGuid, data.mq, {
+      enter: function() {
+        data.$el.addClass(RawClasses.mobile);
+      },
+      leave: function() {
+        data.$el.removeClass(RawClasses.mobile);
+      }
+    });
+
+    updatePage(data, index);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    $.fsMediaquery("unbind", data.rawGuid);
+
+    data.$controls.remove();
+    data.$ellipsis.remove();
+    data.$select.remove();
+    data.$position.remove();
+    data.$items.removeClass( [RawClasses.page, RawClasses.active, RawClasses.visible, RawClasses.first, RawClasses.last].join(" ") )
+           .unwrap();
+
+    this.removeClass(data.thisClasses.join(" "))
+      .off(Events.namespace);
+  }
+
+  /**
+   * @method
+   * @name jump
+   * @description Jump instance of plugin to specific page
+   * @example $(".target").pagination("jump", 1);
+   */
+
+  function jump(data, index) {
+    data.$items.eq(index).trigger(Events.raw.click);
+  }
+
+  /**
+   * @method private
+   * @name onControlClick
+   * @description Traverses pages
+   * @param e [object] "Event data"
+   */
+
+  function onControlClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data,
+      index = data.index + ( $(e.currentTarget).hasClass(RawClasses.control_previous) ? -1 : 1 );
+
+    if (index >= 0) {
+      data.$items.eq(index).trigger(Events.raw.click);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPageSelect
+   * @description Jumps to a page
+   * @param e [object] "Event data"
+   */
+
+  function onPageSelect(e) {
+    Functions.killEvent(e);
+
+    var data = e.data,
+      $target = $(e.currentTarget),
+      index = parseInt($target.val(), 10);
+
+    data.$items.eq(index).trigger(Events.raw.click);
+  }
+
+  /**
+   * @method private
+   * @name onPageClick
+   * @description Jumps to a page
+   * @param e [object] "Event data"
+   */
+
+  function onPageClick(e) {
+    var data    = e.data,
+      $target = $(e.currentTarget),
+      index   = data.$items.index($target);
+
+    if (data.ajax) {
+      Functions.killEvent(e);
+    } else {
+      $target[0].click();
+    }
+
+    updatePage(data, index);
+  }
+
+  /**
+   * @method private
+   * @name onPositionClick
+   * @description Opens mobile select
+   * @param e [object] "Event data"
+   */
+
+  function onPositionClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (Formstone.isMobile && !Formstone.isFirefoxMobile) {
+      // Only open select on non-firefox mobile
+      var el = data.$select[0];
+      if (window.document.createEvent) { // All
+        var evt = window.document.createEvent("MouseEvents");
+        evt.initMouseEvent("mousedown", false, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        el.dispatchEvent(evt);
+      } else if (el.fireEvent) { // IE
+        el.fireEvent("onmousedown");
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name updatePage
+   * @description Updates pagination state
+   * @param data [object] "Instance data"
+   * @param index [int] "New page index"
+   */
+
+  function updatePage(data, index) {
+    if (index < 0) {
+      index = 0;
+    }
+    if (index > data.total) {
+      index = data.total;
+    }
+
+    if (index !== data.index) {
+      data.index = index;
+
+      var start = data.index - data.visible,
+        end = data.index + (data.visible + 1);
+
+      if (start < 0) {
+        start = 0;
+      }
+      if (end > data.total) {
+        end = data.total;
+      }
+
+      data.$items.removeClass(RawClasses.visible)
+             .removeClass(RawClasses.hidden)
+             .filter(Classes.active)
+             .removeClass(RawClasses.active)
+             .end()
+             .eq(data.index)
+             .addClass(RawClasses.active)
+             .end()
+             .slice(start, end)
+             .addClass(RawClasses.visible);
+
+      data.$items.not(Classes.visible).addClass(RawClasses.hidden);
+
+      data.$position.find(Classes.current)
+              .text(data.index + 1)
+              .end()
+              .find(Classes.total)
+              .text(data.total + 1);
+
+      data.$select.val(data.index);
+
+      // controls
+      data.$controls.removeClass(RawClasses.visible);
+
+      if (index > 0) {
+        data.$controls.filter(Classes.control_previous).addClass(RawClasses.visible);
+      }
+      if (index < data.total) {
+        data.$controls.filter(Classes.control_next).addClass(RawClasses.visible);
+      }
+
+      // elipsis
+      data.$ellipsis.removeClass(RawClasses.visible);
+      if (index > data.visible + 1) {
+        data.$ellipsis.eq(0).addClass(RawClasses.visible);
+      }
+      if (index < data.total - data.visible - 1) {
+        data.$ellipsis.eq(1).addClass(RawClasses.visible);
+      }
+
+      // Update
+      data.$el.trigger(Events.update, [ data.index ]);
+    }
+  }
+
+  /**
+   * @method private
+   * @name buildMobilePages
+   * @description Builds options for mobile select
+   * @param data [object] "Instance data"
+   */
+
+  function buildMobilePages(data) {
+    var html = '';
+
+    for (var i = 0; i <= data.total; i++) {
+      html += '<option value="' + i + '"';
+      if (i === data.index) {
+        html += 'selected="selected"';
+      }
+      html += '>Page ' + (i+1) + '</option>';
+    }
+
+    data.$select.html(html);
+  }
+
+  /**
+   * @plugin
+   * @name Pagination
+   * @description A jQuery plugin for simple pagination.
+   * @type widget
+   * @main pagination.js
+   * @main pagination.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   */
+
+  var Plugin = Formstone.Plugin("pagination", {
+      widget: true,
+
+      /**
+       * @options
+       * @param ajax [boolean] <false> "Flag to disable default click actions"
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param labels.close [string] <'Close'> "Close button text"
+       * @param labels.count [string] <'of'> "Gallery count separator text"
+       * @param labels.next [string] <'Next'> "Gallery control text"
+       * @param labels.previous [string] <'Previous'> "Gallery control text"
+       * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param visible [int] <2> "Visible pages before and after current page"
+       */
+
+      defaults: {
+        ajax            : false,
+        customClass     : "",
+        labels: {
+          count       : "of",
+          next        : "Next",
+          previous    : "Previous"
+        },
+        maxWidth        : "740px",
+        theme           : "fs-light",
+        visible         : 2
+      },
+
+      classes: [
+        "pages",
+        "page",
+
+        "active",
+        "first",
+        "last",
+        "ellipsis",
+        "visible",
+        "hidden",
+
+        "control",
+        "control_previous",
+        "control_next",
+
+        "position",
+        "select",
+
+        "mobile",
+
+        "current",
+        "total"
+      ],
+
+      /**
+       * @events
+       * @event update.pagination "Page updated"
+       */
+
+      events: {
+        update    : "update"
+      },
+
+      methods: {
+        _construct    : construct,
+        _destruct     : destruct
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions;
+
+})
+
+);
+
+/*! formstone v1.3.3 [navigation.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery",
+      "./swap"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    // $Body  = Formstone.$body;
+    $Locks = $("html, body");
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    // guid
+    data.handleGuid   = RawClasses.handle + data.guid;
+
+    data.isToggle     = (data.type === "toggle");
+    data.open         = false;
+
+    if (data.isToggle) {
+      data.gravity  = "";
+    }
+
+    var baseClass     = RawClasses.base,
+      typeClass     = [baseClass, data.type].join("-"),
+      gravityClass  = data.gravity ? [typeClass, data.gravity].join("-") : "",
+      classGroup    = [data.rawGuid, data.theme, data.customClass].join(" ");
+
+    data.handle       = this.data(Namespace + "-handle");
+    data.content      = this.data(Namespace + "-content");
+
+    data.handleClasses = [
+      RawClasses.handle,
+      RawClasses.handle.replace(baseClass, typeClass),
+      gravityClass ? RawClasses.handle.replace(baseClass, gravityClass) : "",
+      data.handleGuid,
+      classGroup
+    ].join(" ");
+
+    data.thisClasses = [
+      RawClasses.nav.replace(baseClass, typeClass),
+      gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
+      classGroup
+    ];
+
+    data.contentClasses = [
+      RawClasses.content.replace(baseClass, typeClass),
+      classGroup
+    ].join(" ");
+
+    data.contentClassesOpen = [
+      gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
+      RawClasses.open
+    ].join(" ");
+
+    // DOM
+
+    data.$nav        = this.addClass(data.thisClasses.join(" ")).attr("role", "navigation");
+    data.$handle     = $(data.handle).addClass(data.handleClasses);
+    data.$content    = $(data.content).addClass(data.contentClasses);
+    data.$animate    = $().add(data.$nav).add(data.$content);
+
+    cacheLabel(data);
+
+    // Tab index
+
+    data.navTabIndex = data.$nav.attr("tabindex");
+    data.$nav.attr("tabindex", -1);
+
+    // Aria
+
+    data.id = this.attr("id");
+
+    if (data.id) {
+      data.ariaId = data.id;
+    } else {
+      data.ariaId = data.rawGuid;
+      this.attr("id", data.ariaId);
+    }
+
+    // toggle
+
+    data.$handle.attr("data-swap-target", data.dotGuid)
+          .attr("data-swap-linked", data.handleGuid)
+          .attr("data-swap-group", RawClasses.base)
+          .attr("tabindex", 0)
+          .on("activate.swap" + data.dotGuid, data, onOpen)
+          .on("deactivate.swap" + data.dotGuid, data, onClose)
+          .on("enable.swap" + data.dotGuid, data, onEnable)
+          .on("disable.swap" + data.dotGuid, data, onDisable)
+          .on(Events.focus + data.dotGuid, data, onFocus)
+          .on(Events.blur + data.dotGuid, data, onBlur)
+          .fsSwap({
+            maxWidth: data.maxWidth,
+            classes: {
+              target  : data.dotGuid,
+              enabled : Classes.enabled,
+              active  : Classes.open,
+              raw: {
+                target  : data.rawGuid,
+                enabled : RawClasses.enabled,
+                active  : RawClasses.open
+              }
+            }
+          });
+
+    if (!data.$handle.is("a, button")) {
+      data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
+    }
+
+    // $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$content.removeClass( [data.contentClasses, data.contentClassesOpen].join(" ") )
+           .off(Events.namespace);
+
+    data.$handle.removeAttr("aria-controls")
+          .removeAttr("aria-expanded")
+          .removeAttr("data-swap-target")
+          .removeData("swap-target")
+          .removeAttr("data-swap-linked")
+          .removeAttr("data-swap-group")
+          .removeData("swap-linked")
+          .removeData("tabindex")
+          .removeClass(data.handleClasses)
+          .off(data.dotGuid)
+          .html(data.originalLabel)
+          .fsSwap("destroy");
+
+    data.$nav.attr("tabindex", data.navTabIndex);
+
+    // $Body.off(data.dotGuid);
+
+    restoreLabel(data);
+
+    clearLocks(data);
+
+    this.removeAttr("aria-hidden")
+      .removeClass(data.thisClasses.join(" "))
+      .off(Events.namespace);
+
+    if (this.attr("id") === data.rawGuid) {
+      this.removeAttr("id");
+    }
+  }
+
+  /**
+   * @method
+   * @name open
+   * @description Opens instance.
+   * @example $(".target").navigation("open");
+   */
+
+  function open(data) {
+    data.$handle.fsSwap("activate");
+  }
+
+  /**
+   * @method
+   * @name close
+   * @description Closes instance.
+   * @example $(".target").navigation("close");
+   */
+
+  function close(data) {
+    data.$handle.fsSwap("deactivate");
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables instance.
+   * @example $(".target").navigation("enable");
+   */
+
+  function enable(data) {
+    data.$handle.fsSwap("enable");
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables instance.
+   * @example $(".target").navigation("disable");
+   */
+
+  function disable(data) {
+    data.$handle.fsSwap("disable");
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$handle.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    e.data.$handle.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onKeyup
+   * @description Handles keypress event on inputs
+   * @param e [object] "Event data"
+   */
+
+  function onKeyup(e) {
+    var data = e.data;
+
+    // If arrow keys
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      Functions.killEvent(e);
+
+      data.$handle.trigger(Events.raw.click);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onOpen
+   * @description Handles nav open event.
+   * @param e [object] "Event data"
+   */
+
+  function onOpen(e) {
+    if (!e.originalEvent) { // thanks IE :/
+      var data = e.data;
+
+      if (!data.open) {
+        data.$el.trigger(Events.open)
+            .attr("aria-hidden", false);
+
+        data.$content.addClass(data.contentClassesOpen)
+               .one(Events.click, function() {
+                close(data);
+               });
+
+        data.$handle.attr("aria-expanded", true);
+
+        if (data.label) {
+          data.$handle.html(data.labels.open);
+        }
+
+        addLocks(data);
+
+        data.open = true;
+
+        data.$nav.focus();
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClose
+   * @description Handles nav close event.
+   * @param e [object] "Event data"
+   */
+
+  function onClose(e) {
+    if (!e.originalEvent) { // thanks IE :/
+      var data = e.data;
+
+      if (data.open) {
+        data.$el.trigger(Events.close)
+            .attr("aria-hidden", true);
+
+        data.$content.removeClass(data.contentClassesOpen)
+               .off(Events.namespace);
+
+        data.$handle.attr("aria-expanded", false);
+
+        if (data.label) {
+          data.$handle.html(data.labels.closed);
+        }
+
+        clearLocks(data);
+
+        data.open = false;
+
+        data.$el.focus();
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onEnable
+   * @description Handles nav enable event.
+   * @param e [object] "Event data"
+   */
+
+  function onEnable(e) {
+    var data = e.data;
+
+    data.$el.attr("aria-hidden", true);
+    data.$handle.attr("aria-controls", data.ariaId)
+          .attr("aria-expanded", false);
+    data.$content.addClass(RawClasses.enabled);
+
+    setTimeout(function() {
+      data.$animate.addClass(RawClasses.animated);
+    }, 0);
+
+    if (data.label) {
+      data.$handle.html(data.labels.closed);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onDisable
+   * @description Handles nav disable event.
+   * @param e [object] "Event data"
+   */
+
+  function onDisable(e) {
+    var data = e.data;
+
+    data.$el.removeAttr("aria-hidden");
+    data.$handle.removeAttr("aria-controls")
+          .removeAttr("aria-expanded");
+    data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
+    data.$animate.removeClass(RawClasses.animated);
+
+    restoreLabel(data);
+
+    clearLocks(data);
+  }
+
+  /**
+   * @method private
+   * @name addLocks
+   * @description Locks scrolling
+   * @param data [object] "Instance data"
+   */
+
+  function addLocks(data) {
+    if (!data.isToggle) {
+      $Locks.addClass(RawClasses.lock);
+    }
+  }
+
+  /**
+   * @method private
+   * @name clearLocks
+   * @description Unlocks scrolling
+   * @param data [object] "Instance data"
+   */
+
+  function clearLocks(data) {
+    if (!data.isToggle) {
+      $Locks.removeClass(RawClasses.lock);
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheLabel
+   * @description Sets handle labels
+   * @param data [object] "Instance data"
+   */
+
+  function cacheLabel(data) {
+    if (data.label) {
+      if (data.$handle.length > 1) {
+        data.originalLabel = [];
+
+        for (var i = 0, count = data.$handle.length; i < count; i++) {
+          data.originalLabel[i] = data.$handle.eq(i).html();
+        }
+      } else {
+        data.originalLabel = data.$handle.html();
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name restoreLabel
+   * @description restores handle labels
+   * @param data [object] "Instance data"
+   */
+
+  function restoreLabel(data) {
+    if (data.label) {
+      if (data.$handle.length > 1) {
+        for (var i = 0, count = data.$handle.length; i < count; i++) {
+          data.$handle.eq(i).html(data.originalLabel[i]);
+        }
+      } else {
+        data.$handle.html(data.originalLabel);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onDocumentFocus
+   * @description Handles document focus
+   * @param e [object] "Event data"
+   */
+
+  // function onDocumentFocus(e) {
+  //   var target = e.target,
+  //     data   = e.data;
+  //
+  //   if (data.open && !$.contains(data.$nav, target) && target !== data.$nav[0] && target !== data.$handle[0]) {
+  //     Functions.killEvent(e);
+  //
+  //     data.$nav.focus();
+  //   }
+  // }
+
+  /**
+   * @plugin
+   * @name Navigation
+   * @description A jQuery plugin for simple responsive navigation.
+   * @type widget
+   * @main navigation.js
+   * @main navigation.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   * @dependency swap.js
+   */
+
+  var Plugin = Formstone.Plugin("navigation", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param gravity [string] <'left'> "Gravity of 'push', 'reveal' and 'overlay' navigation; 'right', 'left'"
+       * @param label [boolean] <true> "Display handle width label"
+       * @param labels.closed [string] <'Menu'> "Closed state text"
+       * @param labels.open [string] <'Close'> "Open state text"
+       * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'reveal', 'overlay'"
+       */
+
+      defaults: {
+        customClass    : "",
+        gravity        : "left",
+        label          : true,
+        labels: {
+          closed     : "Menu",
+          open       : "Close"
+        },
+        maxWidth       : "980px",
+        theme          : "fs-light",
+        type           : "toggle"
+      },
+
+      classes: [
+        "handle",
+        "nav",
+        "content",
+        "animated",
+        "enabled",
+        "focus",
+        "open",
+        "toggle",
+        "push",
+        "reveal",
+        "overlay",
+        "left",
+        "right",
+        "lock"
+      ],
+
+      /**
+       * @events
+       * @event open.navigation "Navigation opened"
+       * @event close.navigation "Navigation closed"
+       */
+
+      events: {
+        open     : "open",
+        close    : "close"
+      },
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        open          : open,
+        close         : close,
+        enable        : enable,
+        disable       : disable
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+    // $Body         = null,
+
+    // Internal
+
+    $Locks        = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [number.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var min = parseFloat(this.attr("min")),
+      max = parseFloat(this.attr("max"));
+
+    // Mask as text
+
+    data.min  = (min || min === 0) ? min : false;
+    data.max  = (max || max === 0) ? max : false;
+    data.step = parseFloat(this.attr("step")) || 1;
+    data.timer        = null;
+    data.digits       = significantDigits(data.step);
+    data.disabled     = this.is(":disabled") || this.is("[readonly]");
+
+    var html = "";
+    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '" aria-hidden="true" tabindex="-1">'   + data.labels.up + '</button>';
+    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '" aria-hidden="true" tabindex="-1">' + data.labels.down + '</button>';
+
+    // Modify DOM
+    this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+      .after(html);
+
+    // Store data
+    data.$container    = this.parent(Classes.base);
+    data.$arrows       = data.$container.find(Classes.arrow);
+
+    // Bind events
+    this.on(Events.focus, data, onFocus)
+      .on(Events.blur, data, onBlur)
+      .on(Events.keyPress, data, onKeyup);
+
+    data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
+
+    step(data, 0);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$arrows.remove();
+
+    this.unwrap()
+      .off(Events.namespace);
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance
+   * @example $(".target").number("enable");
+   */
+
+  function enable(data) {
+    if (data.disabled) {
+      this.prop("disabled", false);
+
+      data.$container.removeClass(RawClasses.disabled);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance
+   * @example $(".target").number("disable");
+   */
+
+  function disable(data) {
+    if (!data.disabled) {
+      this.prop("disabled", true);
+
+      data.$container.addClass(RawClasses.disabled);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+  * @method
+  * @name update
+  * @description Updates instance.
+  * @example $(".target").number("update");
+  */
+
+  function updateInstance(data) {
+    var min = parseFloat(data.$el.attr("min")),
+      max = parseFloat(data.$el.attr("max"));
+
+    data.min  = (min || min === 0) ? min : false;
+    data.max  = (max || max === 0) ? max : false;
+    data.step = parseFloat(data.$el.attr("step")) || 1;
+    data.timer        = null;
+    data.digits       = significantDigits(data.step);
+    data.disabled     = data.$el.is(":disabled") || data.$el.is("[readonly]");
+
+    step(data, 0);
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$container.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    step(e.data, 0);
+
+    e.data.$container.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onKeyup
+   * @description Handles keypress event on inputs
+   * @param e [object] "Event data"
+   */
+
+  function onKeyup(e) {
+    var data = e.data;
+
+    // If arrow keys
+    if (e.keyCode === 38 || e.keyCode === 40) {
+      e.preventDefault();
+
+      step(data, (e.keyCode === 38) ? data.step : -data.step);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerDown
+   * @description Handles pointer down event on instance arrows
+   * @param e [object] "Event data"
+   */
+
+  function onPointerDown(e) {
+    Functions.killEvent(e);
+
+    // Make sure we reset the states
+    onPointerUp(e);
+
+    var data = e.data;
+
+    if (!data.disabled && e.which <= 1) {
+      var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
+
+      data.timer = Functions.startTimer(data.timer, 300, function() {
+
+        data.timer = Functions.startTimer(data.timer, 125, function() {
+          step(data, change, false);
+        }, true);
+
+      });
+
+      step(data, change);
+
+      $Body.on( [Events.touchEnd, Events.mouseUp].join(" "), data, onPointerUp);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerUp
+   * @description Handles pointer up event on instance arrows
+   * @param e [object] "Event data"
+   */
+
+  function onPointerUp(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    Functions.clearTimer(data.timer, true);
+
+    $Body.off(Events.namespace);
+  }
+
+  /**
+   * @method private
+   * @name step
+   * @description Steps through values
+   * @param e [object] "Event data"
+   * @param change [string] "Change value"
+   */
+
+  function step(data, change) {
+    var oValue = parseFloat(data.$el.val()),
+      value = change;
+
+    if ($.type(oValue) === "undefined" || isNaN(oValue)) {
+      if (data.min !== false) {
+        value = data.min;
+      } else {
+        value = 0;
+      }
+    } else if (data.min !== false && oValue < data.min) {
+      value = data.min;
+    } else {
+      value += oValue;
+    }
+
+    var diff = (value - data.min) % data.step;
+    if (diff !== 0) {
+      value -= diff;
+    }
+
+    if (data.min !== false && value < data.min) {
+      value = data.min;
+    }
+    if (data.max !== false && value > data.max) {
+      value = data.max;
+    }
+
+    if (value !== oValue) {
+      value = round(value, data.digits);
+
+      data.$el.val(value)
+          .trigger(Events.raw.change, [ true ]);
+    }
+  }
+
+  /**
+   * @method private
+   * @name significantDigits
+   * @description Analyzes and returns significant digit count
+   * @param value [float] "Value to analyze"
+   * @return [int] "Number of significant digits"
+   */
+  function significantDigits(value) {
+    var test = String(value);
+
+    if (test.indexOf(".") > -1) {
+      return test.length - test.indexOf(".") - 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /**
+   * @method private
+   * @name round
+   * @description Rounds a number to a sepcific significant digit count
+   * @param value [float] "Value to round"
+   * @param digits [float] "Digits to round to"
+   * @return [number] "Rounded number"
+   */
+
+  function round(value, digits) {
+    var exp = Math.pow(10, digits);
+    return Math.round(value * exp) / exp;
+  }
+
+  /**
+   * @plugin
+   * @name Number
+   * @description A jQuery plugin for cross browser number inputs.
+   * @type widget
+   * @main number.js
+   * @main number.css
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("number", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param labels.up [string] <'Up'> "Up arrow label"
+       * @param labels.down [string] <'Down'> "Down arrow label"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        customClass    : "",
+        labels : {
+          up         : "Up",
+          down       : "Down"
+        },
+        theme          : "fs-light"
+      },
+
+      classes: [
+        "arrow",
+        "up",
+        "down",
+        "disabled",
+        "focus"
+      ],
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        enable        : enable,
+        disable       : disable,
+        update        : updateInstance
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    $Body    = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [range.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./touch"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize(windowWidth) {
+    Functions.iterate.call($Instances, resizeInstance);
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances = $(Classes.element);
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    if (!data.formatter) {
+      data.formatter = formatNumber;
+    }
+
+    data.min       = parseFloat(this.attr("min"))  || 0;
+    data.max       = parseFloat(this.attr("max"))  || 100;
+    data.step      = parseFloat(this.attr("step")) || 1;
+    data.digits    = data.step.toString().length - data.step.toString().indexOf(".");
+    data.value     = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
+
+    var html = "";
+
+    // Not valid in the spec
+    data.vertical = this.attr("orient") === "vertical" || data.vertical;
+    data.disabled = this.is(":disabled") || this.is("[readonly]");
+
+    html += '<div class="' + RawClasses.track + '" aria-hidden="true">';
+    if (data.fill) {
+      html += '<span class="' + RawClasses.fill + '"></span>';
+    }
+    html += '<div class="' + RawClasses.handle + '" role="slider">';
+    html += '<span class="' + RawClasses.marker + '"></span>';
+    html += '</div>';
+    html += '</div>';
+
+    var baseClasses = [
+      RawClasses.base,
+      data.theme,
+      data.customClass,
+      (data.vertical) ? RawClasses.vertical : "",
+      (data.labels)   ? RawClasses.labels   : "",
+      (data.disabled) ? RawClasses.disabled : ""
+    ];
+
+    this.addClass(RawClasses.element)
+      .wrap('<div class="' + baseClasses.join(" ") + '"></div>')
+      .after(html);
+
+    data.$container = this.parents(Classes.base);
+    data.$track     = data.$container.find(Classes.track);
+    data.$fill      = data.$container.find(Classes.fill);
+    data.$handle    = data.$container.find(Classes.handle);
+    data.$output    = data.$container.find(Classes.output);
+
+    if (data.labels) {
+      var labelMax = '<span class="' + [RawClasses.label, RawClasses.label_max].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) + '</span>',
+        labelMin = '<span class="' + [RawClasses.label, RawClasses.label_min].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) + '</span>';
+
+      data.$container.prepend((data.vertical) ? labelMax : labelMin)
+               .append( (data.vertical) ? labelMin : labelMax);
+    }
+
+    data.$labels = data.$container.find(Classes.label);
+
+    // Bind click events
+    this.on(Events.focus, data, onFocus)
+      .on(Events.blur, data, onBlur)
+      .on(Events.change, data, onChange);
+
+    data.$container.fsTouch({
+      pan: true,
+      axis: data.vertical ? "y" : "x"
+    }).on(Events.panStart, data, onPanStart)
+      .on(Events.pan, data, onPan)
+      .on(Events.panEnd, data, onPanEnd);
+
+    cacheInstances();
+
+    resizeInstance.call(this, data);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$container.off(Events.namespace)
+             .fsTouch("destroy");
+
+    data.$track.remove();
+    data.$labels.remove();
+
+    this.unwrap()
+      .removeClass(RawClasses.element)
+      .off(Events.namespace);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance
+   * @example $(".target").range("enable");
+   */
+
+  function enable(data) {
+    if (data.disabled) {
+      this.prop("disabled", false);
+
+      data.$container.removeClass(RawClasses.disabled);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance
+   * @example $(".target").range("disable");
+   */
+
+  function disable(data) {
+    if (!data.disabled) {
+      this.prop("disabled", true);
+
+      data.$container.addClass(RawClasses.disabled);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+  * @method
+  * @name update
+  * @description Updates instance.
+  * @example $(".target").range("update");
+  */
+
+  function updateInstance(data) {
+    data.min       = parseFloat(data.$el.attr("min"))  || 0;
+    data.max       = parseFloat(data.$el.attr("max"))  || 100;
+    data.step      = parseFloat(data.$el.attr("step")) || 1;
+    data.digits    = data.step.toString().length - data.step.toString().indexOf(".");
+    data.value     = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
+
+    if (data.labels) {
+      data.$labels.filter(Classes.label_max).html( data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) );
+      data.$labels.filter(Classes.label_min).html( data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) );
+    }
+
+    resizeInstance.call(this, data);
+  }
+
+  /**
+   * @method
+   * @name resize
+   * @description Resizes instance
+   * @example $(".target").range("resize");
+   */
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Resizes each instance
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+    data.stepCount = (data.max - data.min) / data.step;
+    data.offset = data.$track.offset();
+
+    if (data.vertical) {
+      data.trackHeight  = data.$track.outerHeight();
+      data.handleHeight = data.$handle.outerHeight();
+      data.increment    = data.trackHeight / data.stepCount;
+    } else {
+      data.trackWidth  = data.$track.outerWidth();
+      data.handleWidth = data.$handle.outerWidth();
+      data.increment   = data.trackWidth / data.stepCount;
+    }
+
+    var percent = (data.$el.val() - data.min) / (data.max - data.min);
+
+    position(data, percent, true); // isResize
+  }
+
+  /**
+   * @method private
+   * @name onTrackDown
+   * @description Handles panstart event to track
+   * @param e [object] "Event data"
+   */
+
+  function onPanStart(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (!data.disabled) {
+      onPan(e);
+
+      data.$container.addClass(RawClasses.focus);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPan
+   * @description Handles pan event
+   * @param e [object] "Event data"
+   */
+
+  function onPan(e) {
+    Functions.killEvent();
+
+    var data = e.data,
+      percent = 0;
+
+    if (!data.disabled) {
+      if (data.vertical) {
+        percent = 1 - (e.pageY - data.offset.top) / data.trackHeight;
+      } else {
+        percent = (e.pageX - data.offset.left) / data.trackWidth;
+      }
+
+      position(data, percent);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPanEnd
+   * @description Handles panend event
+   * @param e [object] "Event data"
+   */
+
+  function onPanEnd(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (!data.disabled) {
+      data.$container.removeClass(RawClasses.focus);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$container.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    e.data.$container.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name position
+   * @description Positions handle
+   * @param data [object] "Instance Data"
+   * @param perc [number] "Position precentage"
+   * @param isResize [boolean] "Called from resize"
+   */
+
+  function position(data, perc, isResize) {
+    if (data.increment > 1) {
+      if (data.vertical) {
+        perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackHeight;
+      } else {
+        perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackWidth;
+      }
+    }
+
+    if (perc < 0) {
+      perc = 0;
+    }
+    if (perc > 1) {
+      perc = 1;
+    }
+
+    var value = ((data.min - data.max) * perc);
+    value = -parseFloat(value.toFixed(data.digits));
+
+    data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
+    data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
+    /* .attr("aria-valuenow", value) */
+    value += data.min;
+
+    if (value !== data.value && value !== false && isResize !== true) {
+      data.$el.val(value)
+          .trigger(Events.raw.change, [ true ]);
+
+      data.value = value;
+    }
+  }
+
+  /**
+   * @method private
+   * @name onChange
+   * @description Handles change events
+   * @param e [object] "Event data"
+   * @param internal [boolean] "Flag for internal change"
+   */
+
+  function onChange(e, internal) {
+    var data = e.data;
+
+    if (!internal && !data.disabled) {
+      var percent = (data.$el.val() - data.min) / (data.max - data.min);
+
+      position(data, percent);
+    }
+  }
+
+  /**
+   * @method private
+   * @name formatNumber
+   * @description Formats provided number
+   * @param number [number] "Number to format"
+   */
+
+  function formatNumber(number) {
+    var parts = number.toString().split(".");
+
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return parts.join(".");
+  }
+
+  /**
+   * @plugin
+   * @name Range
+   * @description A jQuery plugin for cross browser range inputs.
+   * @type widget
+   * @main range.js
+   * @main range.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency touch.js
+   */
+
+  var Plugin = Formstone.Plugin("range", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param fill [boolean] <false> "Flag to draw fill"
+       * @param formatter [function] <false> "Value format function"
+       * @param labels [boolean] <true> "Flag to draw labels"
+       * @param labels.max [string] "Max value label; defaults to max value"
+       * @param labels.min [string] "Min value label; defaults to min value"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
+       */
+
+      defaults: {
+        customClass    : "",
+        fill           : false,
+        formatter      : false,
+        labels: {
+          max        : false,
+          min        : false
+        },
+        theme          : "fs-light",
+        vertical       : false
+      },
+
+      classes: [
+        "track",
+        "handle",
+        "fill",
+        "marker",
+        "labels",
+        "label",
+        "label_min",
+        "label_max",
+        "vertical",
+        "focus",
+        "disabled"
+      ],
+
+      methods: {
+        _construct    : construct,
+        _destruct     : destruct,
+        _resize       : resize,
+
+        // Public Methods
+
+        enable        : enable,
+        disable       : disable,
+        resize        : resizeInstance,
+        update        : updateInstance
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    $Instances    = [];
+
+})
+
+);
+
+/*! formstone v1.3.3 [scrollbar.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./touch"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize(windowWidth) {
+    Functions.iterate.call($Instances, resizeInstance);
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances = $(Classes.base);
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var html = '';
+
+    html += '<div class="' + RawClasses.bar + '">';
+    html += '<div class="' + RawClasses.track + '">';
+    html += '<button type="button" class="' + RawClasses.handle + '" aria-hidden="true" tabindex="-1"></button>';
+    html += '</div></div>';
+
+    data.paddingRight     = parseInt(this.css("padding-right"), 10);
+    data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
+    data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")];
+
+    this.addClass(data.thisClasses.join(" "))
+      .wrapInner('<div class="' + RawClasses.content + '" tabindex="0"></div>')
+      .prepend(html);
+
+    data.$content    = this.find(Classes.content);
+    data.$bar        = this.find(Classes.bar);
+    data.$track      = this.find(Classes.track);
+    data.$handle     = this.find(Classes.handle);
+
+    data.trackMargin = parseInt(data.trackMargin, 10);
+
+    // Events
+
+    data.$content.on(Events.scroll, data, onScroll);
+
+    if (data.mouseWheel) {
+      data.$content.on("wheel" + Events.namespace, data, onMouseWheel);
+    }
+
+    data.$track.fsTouch({
+      axis    : (data.horizontal) ? "x" : "y",
+      pan     : true
+    }).on(Events.panStart, data, onPanStart)
+      .on(Events.pan, data, onPan)
+      .on(Events.panEnd, data, onPanEnd)
+      .on(Events.click, Functions.killEvent)
+      .on("wheel" + Events.namespace, data, onTrackMouseWheel);
+
+    resizeInstance(data);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$track.fsTouch("destroy");
+
+    data.$bar.remove();
+
+    data.$content.off(Events.namespace)
+           .contents()
+           .unwrap();
+
+    this.removeClass(data.thisClasses.join(" "))
+      .off(Events.namespace);
+
+    if (this.attr("id") === data.rawGuid) {
+      this.removeAttr("id");
+    }
+  }
+
+  /**
+   * @method
+   * @name scroll
+   * @description Scrolls instance of plugin to element or position
+   * @param position [string or int] <null> "Target element selector or static position"
+   * @param duration [int] <null> "Optional scroll duration"
+   * @example $(".target").scrollbar("scroll", position, duration);
+   */
+
+  function scroll(data, position, dur) {
+    var duration = dur || data.duration,
+      styles = {};
+
+    if ($.type(position) !== "number") {
+      var $target = $(position);
+
+      if ($target.length > 0) {
+        var offset = $target.position();
+
+        if (data.horizontal) {
+          position = offset.left + data.$content.scrollLeft();
+        } else {
+          position = offset.top + data.$content.scrollTop();
+        }
+      } else {
+        if (position === "top") {
+          position = 0;
+        } else if (position === "bottom") {
+          position = data.horizontal ? data.$content[0].scrollWidth : data.$content[0].scrollHeight;
+        } else {
+          position = data.$content.scrollTop();
+        }
+      }
+    }
+
+    styles[ (data.horizontal ? "scrollLeft" : "scrollTop") ] = position;
+
+    data.$content.stop()
+           .animate(styles, duration);
+  }
+
+  /**
+   * @method
+   * @name resize
+   * @description Resizes layout on instance of plugin
+   * @example $(".target").scrollbar("resize");
+   */
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Resizes layout on instance of plugin
+   */
+
+  function resizeInstance(data)  {
+    data.$el.addClass(RawClasses.isSetup);
+
+    var barStyles = {},
+      trackStyles = {},
+      handleStyles = {},
+      handlePosition = 0,
+      active = true;
+
+    if (data.horizontal) {
+      // Horizontal
+      data.barHeight       = data.$content[0].offsetHeight - data.$content[0].clientHeight;
+      data.frameWidth      = data.$content.outerWidth();
+      data.trackWidth      = data.frameWidth - (data.trackMargin * 2);
+      data.scrollWidth     = data.$content[0].scrollWidth;
+      data.ratio           = data.trackWidth / data.scrollWidth;
+      data.trackRatio      = data.trackWidth / data.scrollWidth;
+      data.handleWidth     = (data.handleSize > 0) ? data.handleSize : data.trackWidth * data.trackRatio;
+      data.scrollRatio     = (data.scrollWidth - data.frameWidth) / (data.trackWidth - data.handleWidth);
+      data.handleBounds    = {
+        left: 0,
+        right: data.trackWidth - data.handleWidth
+      };
+
+      data.$content.css({
+        paddingBottom: data.barHeight + data.paddingBottom
+      });
+
+      var scrollLeft = data.$content.scrollLeft();
+
+      handlePosition = scrollLeft * data.ratio;
+      active = (data.scrollWidth <= data.frameWidth);
+
+      barStyles = {
+        width: data.frameWidth
+      };
+
+      trackStyles = {
+        width: data.trackWidth,
+        marginLeft: data.trackMargin,
+        marginRight: data.trackMargin
+      };
+
+      handleStyles = {
+        width: data.handleWidth
+      };
+    } else {
+      // Vertical
+      data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
+      data.frameHeight = data.$content.outerHeight();
+      data.trackHeight = data.frameHeight - (data.trackMargin * 2);
+      data.scrollHeight = data.$content[0].scrollHeight;
+      data.ratio = data.trackHeight / data.scrollHeight;
+      data.trackRatio = data.trackHeight / data.scrollHeight;
+      data.handleHeight = (data.handleSize > 0) ? data.handleSize : data.trackHeight * data.trackRatio;
+      data.scrollRatio = (data.scrollHeight - data.frameHeight) / (data.trackHeight - data.handleHeight);
+      data.handleBounds = {
+        top: 0,
+        bottom: data.trackHeight - data.handleHeight
+      };
+
+      var scrollTop = data.$content.scrollTop();
+
+      handlePosition = scrollTop * data.ratio;
+      active = (data.scrollHeight <= data.frameHeight);
+
+      barStyles = {
+        height: data.frameHeight
+      };
+
+      trackStyles = {
+        height: data.trackHeight,
+        marginBottom: data.trackMargin,
+        marginTop: data.trackMargin
+      };
+
+      handleStyles = {
+        height: data.handleHeight
+      };
+    }
+
+    // Updates
+
+    if (active) {
+      data.$el.removeClass(RawClasses.active);
+    } else {
+      data.$el.addClass(RawClasses.active);
+    }
+
+    data.$bar.css(barStyles);
+    data.$track.css(trackStyles);
+    data.$handle.css(handleStyles);
+
+    data.panning = false;
+
+    positionContent(data, handlePosition);
+
+    onScroll({
+      data : data
+    });
+
+    data.$el.removeClass(RawClasses.setup);
+  }
+
+  /**
+   * @method private
+   * @name onScroll
+   * @description Handles scroll event
+   * @param e [object] "Event data"
+   */
+
+  function onScroll(e) {
+    Functions.killEvent(e);
+
+    var data = e.data,
+      handleStyles = {};
+
+    if (!data.panning) {
+      if (data.horizontal) {
+        // Horizontal
+        var scrollLeft = data.$content.scrollLeft();
+
+        if (scrollLeft < 0) {
+          scrollLeft = 0;
+        }
+
+        data.handleLeft = scrollLeft / data.scrollRatio;
+
+        if (data.handleLeft > data.handleBounds.right) {
+          data.handleLeft = data.handleBounds.right;
+        }
+
+        handleStyles = {
+          left: data.handleLeft
+        };
+      } else {
+        // Vertical
+        var scrollTop = data.$content.scrollTop();
+
+        if (scrollTop < 0) {
+          scrollTop = 0;
+        }
+
+        data.handleTop = scrollTop / data.scrollRatio;
+
+        if (data.handleTop > data.handleBounds.bottom) {
+          data.handleTop = data.handleBounds.bottom;
+        }
+
+        handleStyles = {
+          top: data.handleTop
+        };
+      }
+
+      data.$handle.css(handleStyles);
+    }
+  }
+
+  function onTrackMouseWheel(e) {
+    onMouseWheel(e, true);
+  }
+
+  /**
+   * @method private
+   * @name onMouseWheel
+   * @description Handles mousewheel event on content
+   * @param e [object] "Event data"
+   */
+
+  function onMouseWheel(e, fromTrack) {
+    // http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
+    var data = e.data,
+      delta,
+      direction;
+
+    if (data.horizontal) {
+      // Horizontal
+      var scrollLeft   = data.$content[0].scrollLeft,
+        scrollWidth  = data.$content[0].scrollWidth,
+        width        = data.$content.outerWidth();
+
+      delta = e.originalEvent.deltaX * ( (fromTrack === true) ? -1 : 1 );
+
+      if (fromTrack === true) {
+        data.$content.scrollLeft(scrollLeft - delta);
+        return killEvent(e);
+      }
+
+      direction = (delta < 0) ? "right" : "left";
+
+      if (direction === "left" && delta > (scrollWidth - width - scrollLeft)) {
+        data.$content.scrollLeft(scrollWidth);
+        return killEvent(e);
+      } else if (direction === "right" && -delta > scrollLeft) {
+        data.$content.scrollLeft(0);
+        return killEvent(e);
+      }
+    } else {
+      // Vertical
+      var scrollTop    = data.$content[0].scrollTop,
+        scrollHeight = data.$content[0].scrollHeight,
+        height       = data.$content.outerHeight();
+
+      delta = e.originalEvent.deltaY * ( (fromTrack === true) ? -1 : 1 );
+
+      if (fromTrack === true) {
+        data.$content.scrollTop(scrollTop - delta);
+        return killEvent(e);
+      }
+
+      direction = (delta < 0) ? "up" : "down";
+
+      if (direction === "down" && delta > (scrollHeight - height - scrollTop)) {
+        data.$content.scrollTop(scrollHeight);
+        return killEvent(e);
+      } else if (direction === "up" && -delta > scrollTop) {
+        data.$content.scrollTop(0);
+        return killEvent(e);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name killEvent
+   * @description Localized version of Formstone.killEvent()
+   * @param e [object] "Event data"
+   */
+
+  function killEvent(e) {
+    Functions.killEvent(e);
+    e.returnValue = false;
+    return false;
+  }
+
+  /**
+   * @method private
+   * @name onPanStart
+   * @description Handles pan event on track
+   * @param e [object] "Event data"
+   */
+
+  function onPanStart(e) {
+    var data      = e.data,
+      offset    = data.$track.offset(),
+      handlePosition;
+
+    data.panning = true;
+
+    if (data.horizontal) {
+      handlePosition = data.handleLeft = e.pageX - offset.left /* + $Window.scrollLeft() */ - (data.handleWidth / 2);
+    } else {
+      handlePosition = data.handleTop = e.pageY - offset.top /* + $Window.scrollTop() */ - (data.handleHeight / 2);
+    }
+
+    positionContent(data, handlePosition);
+  }
+
+  function onPan(e) {
+    var data = e.data,
+      handlePosition;
+
+    if (data.horizontal) {
+      handlePosition = data.handleLeft + e.deltaX;
+    } else {
+      handlePosition = data.handleTop + e.deltaY;
+    }
+
+    positionContent(data, handlePosition);
+  }
+
+  function onPanEnd(e) {
+    var data = e.data;
+
+    data.panning = false;
+
+    if (data.horizontal) {
+      data.handleLeft += e.deltaX;
+    } else {
+      data.handleTop += e.deltaY;
+    }
+
+    // positionContent(data, handlePosition);
+  }
+
+  /**
+   * @method private
+   * @name position
+   * @description Position handle based on scroll
+   * @param data [object] "Instance data"
+   * @param position [int] "Scroll position"
+   */
+
+  function positionContent(data, position) {
+    var handleStyles = {};
+
+    if (data.horizontal) {
+      // Horizontal
+      if (position < data.handleBounds.left) {
+        position = data.handleBounds.left;
+      }
+
+      if (position > data.handleBounds.right) {
+        position = data.handleBounds.right;
+      }
+
+      handleStyles = {
+        left: position
+      };
+
+      data.$content.scrollLeft(Math.round(position * data.scrollRatio));
+    } else {
+      // Vertical
+      if (position < data.handleBounds.top) {
+        position = data.handleBounds.top;
+      }
+
+      if (position > data.handleBounds.bottom) {
+        position = data.handleBounds.bottom;
+      }
+
+      handleStyles = {
+        top: position
+      };
+
+      data.$content.scrollTop(Math.round(position * data.scrollRatio));
+    }
+
+    data.$handle.css(handleStyles);
+  }
+
+  /**
+   * @plugin
+   * @name Scrollbar
+   * @description A jQuery plugin for custom scrollbars.
+   * @type widget
+   * @main scrollbar.js
+   * @main scrollbar.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency touch.js
+   */
+
+  var Plugin = Formstone.Plugin("scrollbar", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param duration [int] <0> "Scroll animation length"
+       * @param handleSize [int] <0> "Handle size; 0 to auto size"
+       * @param horizontal [boolean] <false> "Scroll horizontally"
+       * @param mouseWheel [boolean] <true> "Flag to prevent scrolling of parent element"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param trackMargin [int] <0> "Margin between track and handle edge”
+       */
+
+      defaults: {
+        customClass    : "",
+        duration       : 0,
+        handleSize     : 0,
+        horizontal     : false,
+        mouseWheel     : true,
+        theme          : "fs-light",
+        trackMargin    : 0
+      },
+
+      classes: [
+        "content",
+        "bar",
+        "track",
+        "handle",
+        "horizontal",
+        "setup",
+        "active"
+      ],
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+        _resize       : resize,
+
+        // Public Methods
+        scroll        : scroll,
+        resize        : resizeInstance
+      }
+    }),
+
+    // Localize References
+
+    Classes        = Plugin.classes,
+    RawClasses     = Classes.raw,
+    Events         = Plugin.events,
+    Functions      = Plugin.functions,
+
+    $Body,
+    $Window        = Formstone.$window,
+    $Instances     = [];
+
+})
+
+);
+
+/*! formstone v1.3.3 [sticky.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize() {
+    Functions.iterate.call($Instances, resizeInstance);
+  }
+
+  /**
+   * @method private
+   * @name raf
+   * @description Handles request animation frame
+   */
+
+  function raf() {
+        ScrollTop = $Window.scrollTop();
+
+    if (ScrollTop < 0) {
+      ScrollTop = 0;
+    }
+
+    if (ScrollTop !== OldScrollTop) {
+      renderRAF();
+
+      OldScrollTop = ScrollTop;
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances = $(Classes.base);
+
+        resize();
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.stuck    = false;
+    data.passed   = true;
+    data.$clone   = data.$el.clone();
+
+    data.container  = data.$el.data("sticky-container");
+    data.$container = $(data.container);
+
+    data.$el.addClass(RawClasses.base);
+    data.$clone.removeClass(RawClasses.element)
+           .addClass(RawClasses.clone);
+    data.$container.addClass(RawClasses.container);
+
+    data.$stickys = $().add(data.$el).add(data.$clone);
+
+    data.$el.after(data.$clone);
+  }
+
+  /**
+   * @method private
+   * @name postConstruct
+   * @description Run post build.
+   * @param data [object] "Instance data"
+   */
+
+  function postConstruct(data) {
+        cacheInstances();
+        resize();
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$clone.remove();
+    data.$container.removeClass(RawClasses.container);
+
+    data.$el.css({
+      height: '',
+      width:  '',
+      top:    '',
+      bottom: '',
+      marginBottom: ''
+    }).removeClass(RawClasses.base);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method private
+   * @name renderRAF
+   * @description Updates DOM based on animation values
+   */
+
+  function renderRAF() {
+        Functions.iterate.call($Instances, checkInstance);
+    }
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Handle window resize event
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+    cacheProps(data);
+
+    if (data.$container.length) {
+      var containerPos = data.$container.position();
+
+            data.min = containerPos.top + data.containerMargin - data.margin;
+      data.max = data.min + data.$container.outerHeight(false) - data.height;
+    } else {
+            var $el;
+
+            if (data.stuck) {
+                $el = data.$clone;
+            } else {
+                $el = data.$el;
+            }
+
+            var elPos = $el.position();
+
+            data.min = elPos.top;
+      data.max = false;
+    }
+
+        checkInstance(data);
+  }
+
+  function cacheProps(data) {
+        var $el;
+
+        if (data.stuck) {
+            $el = data.$clone;
+        } else {
+            $el = data.$el;
+        }
+
+    data.margin = parseInt( $el.css("margin-top"), 10);
+
+    if (data.$container.length) {
+       data.containerMargin = parseInt( data.$container.css("margin-top"), 10);
+    } else {
+      data.containerMargin = 0;
+    }
+
+    data.height = $el.outerHeight();
+    data.width  = $el.outerWidth();
+  }
+
+  /**
+   * @method private
+   * @name checkInstance
+   * @description Handle window scroll event
+   * @param data [object] "Instance data"
+   */
+
+  function checkInstance(data) {
+    var check = (ScrollTop + data.offset);
+
+    if ( check >= data.min ) {
+            data.stuck = true;
+      data.$stickys.addClass(RawClasses.stuck);
+
+      if (!data.stuck) {
+        data.$el.trigger(Events.stuck);
+
+        cacheProps(data);
+      }
+
+      var top = data.offset;
+      var bottom = '';
+
+      if (data.max && check > data.max) {
+        if (!data.passed) {
+          data.$el.trigger(Events.passed);
+        }
+
+        data.passed = true;
+        data.$stickys.addClass(RawClasses.passed);
+
+        top = '';
+        bottom = 0;
+      } else {
+        data.passed = false;
+        data.$stickys.removeClass(RawClasses.passed);
+      }
+
+            data.$el.css({
+                height: data.height,
+        width:  data.width,
+        top:    top,
+        bottom: bottom,
+        marginBottom: 0
+      });
+    } else {
+      data.stuck = false;
+            data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+
+      if (data.stuck) {
+        data.$el.trigger(Events.unstuck);
+
+        // cacheProps(data);
+      }
+
+      data.$el.css({
+        height: '',
+        width:  '',
+        top:    '',
+        bottom: '',
+        marginBottom: ''
+      });
+    }
+  }
+
+  /**
+   * @plugin
+   * @name Sticky
+   * @description A jQuery plugin for sticky elements.
+   * @type widget
+   * @main sticky.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("sticky", {
+      widget: true,
+
+      /**
+       * @options
+       * @param offset [int] <0> "Element offset for activating sticky position"
+       */
+
+      defaults: {
+        offset    : 0,
+      },
+
+      classes: [
+        "sticky",
+        "stuck",
+        "clone",
+        "container",
+        "passed"
+      ],
+
+      /**
+       * @events
+       * @event passed.sticky "Element passed"
+       * @event stuck.sticky "Element stuck"
+       * @event unstuck.sticky "Element unstuck"
+       */
+
+      events: {
+        passed     : "passed",
+        stuck      : "stuck",
+        unstuck    : "unstuck"
+      },
+
+      methods: {
+        _construct    : construct,
+        _postConstruct: postConstruct,
+        _destruct     : destruct,
+        _resize       : resize,
+        _raf          : raf
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+        Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+    $Body,
+    ScrollTop     = 0,
+    OldScrollTop  = 0,
+    $Instances    = [];
+
+})
+
+);
+
+/*! formstone v1.3.3 [swap.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.enabled    = false;
+    data.active     = false;
+
+    data.classes    = $.extend(true, {}, Classes, data.classes);
+
+    data.target     = this.data(Namespace + "-target");
+    data.$target    = $(data.target).addClass(data.classes.raw.target);
+
+    data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
+
+    // live query for linked to avoid missing new elements
+    var linked      = this.data(Namespace + "-linked");
+    data.linked     = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
+
+    // live query for the group to avoid missing new elements
+    var group       = this.data(Namespace + "-group");
+    data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
+
+    data.$swaps     = $().add(this).add(data.$target);
+
+    this.on(Events.click + data.dotGuid, data, onClick);
+  }
+
+  /**
+   * @method private
+   * @name postConstruct
+   * @description Run post build.
+   * @param data [object] "Instance data"
+   */
+
+  function postConstruct(data) {
+    if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
+      $(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
+    }
+
+    // Should be activate when enabled
+    data.onEnable = this.data(Namespace + "-active") || false;
+
+    // Media Query support
+    $.fsMediaquery("bind", data.rawGuid, data.mq, {
+      enter: function() {
+        enable.call(data.$el, data, true);
+      },
+      leave: function() {
+        disable.call(data.$el, data, true);
+      }
+    });
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    $.fsMediaquery("unbind", data.rawGuid);
+
+    data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
+           .off(Events.namespace);
+  }
+
+  /**
+   * @method
+   * @name activate
+   * @description Activate instance.
+   * @example $(".target").swap("activate");
+   */
+
+  function activate(data, fromLinked) {
+    if (data.enabled && !data.active) {
+      if (data.group && !fromLinked) {
+        // Deactivates grouped instances
+        $(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate", true);
+      }
+
+      // index in group
+      var index = (data.group) ? $(data.group).index(data.$el) : null;
+
+      data.$swaps.addClass(data.classes.raw.active);
+
+      if (!fromLinked) {
+        if (data.linked) {
+          // Linked handles
+          $(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
+        }
+      }
+
+      this.trigger(Events.activate, [index]);
+
+      data.active = true;
+    }
+  }
+
+  /**
+   * @method
+   * @name deactivate
+   * @description Deactivates instance.
+   * @example $(".target").swap("deactivate");
+   */
+
+  function deactivate(data, fromLinked) {
+    if (data.enabled && data.active) {
+      data.$swaps.removeClass(data.classes.raw.active);
+
+      if (!fromLinked) {
+        if (data.linked) {
+          // Linked handles
+          $(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
+        }
+      }
+
+      this.trigger(Events.deactivate);
+
+      data.active = false;
+    }
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables instance.
+   * @example $(".target").swap("enable");
+   */
+
+  function enable(data, fromLinked) {
+    if (!data.enabled) {
+      data.enabled = true;
+
+      data.$swaps.addClass(data.classes.raw.enabled);
+
+      if (!fromLinked) {
+        // Linked handles
+        $(data.linked).not(data.$el)[Plugin.namespaceClean]("enable");
+      }
+
+      this.trigger(Events.enable);
+
+      if (data.onEnable) {
+        data.active = false;
+        activate.call(this, data);
+      } else {
+        data.active = true;
+        deactivate.call(this, data);
+      }
+    }
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables instance.
+   * @example $(".target").swap("disable");
+   */
+
+  function disable(data, fromLinked) {
+    if (data.enabled) {
+      data.enabled = false;
+
+      data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
+
+      if (!fromLinked) {
+        // Linked handles
+        $(data.linked).not(data.$el)[Plugin.namespaceClean]("disable");
+      }
+
+      this.trigger(Events.disable);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click nav click.
+   * @param e [object] "Event data"
+   */
+
+  function onClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (data.active && data.collapse) {
+      deactivate.call(data.$el, data);
+    } else {
+      activate.call(data.$el, data);
+    }
+  }
+
+  /**
+   * @plugin
+   * @name Swap
+   * @description A jQuery plugin for toggling states.
+   * @type widget
+   * @main swap.js
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   */
+
+  var Plugin = Formstone.Plugin("swap", {
+      widget: true,
+
+      /**
+       * @options
+       * @param collapse [boolean] <true> "Allow swap to collapse it's target"
+       * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
+       */
+
+      defaults: {
+        collapse       : true,
+        maxWidth       : Infinity
+      },
+
+      classes: [
+        "target",
+        "enabled",
+        "active"
+      ],
+
+      /**
+       * @events
+       * @event activate.swap "Swap activated"
+       * @event deactivate.swap "Swap deactivated"
+       * @event enable.swap "Swap enabled"
+       * @event disable.swap "Swap diabled"
+       */
+
+      events: {
+        activate      : "activate",
+        deactivate    : "deactivate",
+        enable        : "enable",
+        disable       : "disable"
+      },
+
+      methods: {
+        _construct    : construct,
+        _postConstruct: postConstruct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        activate      : activate,
+        deactivate    : deactivate,
+        enable        : enable,
+        disable       : disable
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Classes       = Plugin.classes,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions;
+
+})
+
+);
+
+/*! formstone v1.3.3 [tabs.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./mediaquery",
+      "./swap"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.mq           = "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")";
+
+    data.content      = this.attr("href");
+    data.group        = this.data(Namespace + "-group");
+
+    data.elementClasses      = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
+    data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass];
+    data.contentClasses      = [RawClasses.content, data.rawGuid, data.theme, data.customClass];
+
+    // DOM
+
+    data.$mobileTab    = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.text() + '</button>');
+    data.$content      = $(data.content).addClass( data.contentClasses.join(" ") );
+
+    data.$content.before(data.$mobileTab)
+           .attr("role", "tabpanel");
+
+    this.attr("role", "tab");
+
+    // Aria
+
+    data.id = this.attr("id");
+
+    if (data.id) {
+      data.ariaId = data.id;
+    } else {
+      data.ariaId = data.rawGuid;
+      this.attr("id", data.ariaId);
+    }
+
+    data.contentId   = data.$content.attr("id");
+    data.contentGuid = data.rawGuid + "_content";
+
+    if (data.contentId) {
+      data.ariacontentId = data.contentId;
+    } else {
+      data.ariaContentId = data.contentGuid;
+      data.$content.attr("id", data.ariaContentId);
+    }
+
+    // Check for hash
+
+    var hash = Formstone.window.location.hash,
+      hashActive = false,
+      hashGroup  = false;
+
+    if (hash.length) {
+        hashActive = (this.filter("[href*='" + hash + "']").length > 0);
+        hashGroup  = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*='" + hash + "']").length > 0);
+    }
+
+    if (hashActive) {
+      // If this matches hash
+      this.attr("data-swap-active", "true");
+    } else if (hashGroup) {
+      // If item in group matches hash
+      this.removeAttr("data-swap-active")
+        .removeData("data-swap-active");
+    } else if (this.attr("data-tabs-active") === "true") {
+      // If this has active attribute
+      this.attr("data-swap-active", "true");
+    }
+
+    this.attr("data-swap-target", data.content)
+      .attr("data-swap-group", data.group)
+      .addClass(data.elementClasses.join(" "))
+      .on("activate.swap" + data.dotGuid, data, onActivate)
+      .on("deactivate.swap" + data.dotGuid, data, onDeactivate)
+      .on("enable.swap" + data.dotGuid, data, onEnable)
+      .on("disable.swap" + data.dotGuid, data, onDisable);
+  }
+
+  /**
+   * @method private
+   * @name postConstruct
+   * @description Run post build.
+   * @param data [object] "Instance data"
+   */
+
+  function postConstruct(data) {
+    this.fsSwap({
+        maxWidth: data.maxWidth,
+        classes: {
+          target  : data.dotGuid,
+          enabled : Classes.enabled,
+          active  : Classes.active,
+          raw: {
+            target  : data.rawGuid,
+            enabled : RawClasses.enabled,
+            active  : RawClasses.active
+          }
+        },
+        collapse: false
+      });
+
+    data.$mobileTab.on("click" + data.dotGuid, data, onMobileActivate);
+
+    // Media Query support
+    $.fsMediaquery("bind", data.rawGuid, data.mq, {
+      enter: function() {
+        mobileEnable.call(data.$el, data);
+      },
+      leave: function() {
+        mobileDisable.call(data.$el, data);
+      }
+    });
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    $.fsMediaquery("unbind", data.rawGuid);
+
+    data.$mobileTab.off(Events.namespace)
+             .remove();
+
+    data.elementClasses.push(RawClasses.mobile);
+    data.contentClasses.push(RawClasses.mobile);
+
+    data.$content.removeAttr("aria-labelledby")
+           .removeAttr("aria-hidden")
+           .removeAttr("role")
+           .removeClass( data.contentClasses.join(" ") );
+
+    if (data.$content.attr("id") === data.contentGuid) {
+      data.$content.removeAttr("id");
+    }
+
+    this.removeAttr("aria-controls")
+      .removeAttr("aria-selected")
+      .removeAttr("data-swap-active")
+      .removeData("data-swap-active")
+      .removeAttr("data-swap-target")
+      .removeData("data-swap-target")
+      .removeAttr("data-swap-group")
+      .removeData("data-swap-group")
+      .removeAttr("role")
+      .removeClass( data.elementClasses.join(" ") )
+      .off(Events.namespace)
+      .fsSwap("destroy");
+
+    if (this.attr("id") === data.rawGuid) {
+      this.removeAttr("id");
+    }
+  }
+
+  /**
+   * @method
+   * @name activate
+   * @description Activates instance.
+   * @example $(".target").tabs("activate");
+   */
+
+  function activate(data) {
+    this.fsSwap("activate");
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables instance.
+   * @example $(".target").tabs("enable");
+   */
+
+  function enable(data) {
+    this.fsSwap("enable");
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables instance.
+   * @example $(".target").tabs("disable");
+   */
+
+  function disable(data) {
+    this.fsSwap("disable");
+  }
+
+  /**
+   * @method private
+   * @name onActivate
+   * @description Handles tab open event.
+   * @param e [object] "Event data"
+   */
+
+  function onActivate(e) {
+    if (!e.originalEvent) { // thanks IE :/
+      var data = e.data,
+        index = 0;
+
+      data.$el.attr("aria-selected", true)
+          .trigger(Events.update, [ index ]);
+      data.$mobileTab.addClass(RawClasses.active);
+      data.$content.attr("aria-hidden", false)
+             .addClass(RawClasses.active);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onDeactivate
+   * @description Handles tab close event.
+   * @param e [object] "Event data"
+   */
+
+  function onDeactivate(e) {
+    if (!e.originalEvent) { // thanks IE :/
+      var data = e.data;
+
+      data.$el.attr("aria-selected", false);
+      data.$mobileTab.removeClass(RawClasses.active);
+      data.$content.attr("aria-hidden", true)
+             .removeClass(RawClasses.active);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onEnable
+   * @description Handles tab enable event.
+   * @param e [object] "Event data"
+   */
+
+  function onEnable(e) {
+    var data = e.data;
+
+    data.$el.attr("aria-controls", data.ariaContentId);
+    data.$mobileTab.addClass(RawClasses.enabled);
+    data.$content.attr("aria-labelledby", data.ariaId)
+           .addClass(RawClasses.enabled);
+  }
+
+  /**
+   * @method private
+   * @name onDisable
+   * @description Handles tab disable event.
+   * @param e [object] "Event data"
+   */
+
+  function onDisable(e) {
+    var data = e.data;
+
+    data.$el.removeAttr("aria-controls")
+        .removeAttr("aria-selected");
+    data.$mobileTab.removeClass(RawClasses.enabled);
+    data.$content.removeAttr("aria-labelledby")
+           .removeAttr("aria-hidden")
+           .removeClass(RawClasses.enabled);
+  }
+
+  /**
+   * @method private
+   * @name onMobileActivate
+   * @description Activates instance.
+   * @param e [object] "Event data"
+   */
+
+  function onMobileActivate(e) {
+    e.data.$el.fsSwap("activate");
+  }
+
+  /**
+   * @method private
+   * @name mobileEnable
+   * @description Handles mobile enable event.
+   * @param data [object] "Instance data"
+   */
+
+  function mobileEnable(data) {
+    data.$el.addClass(RawClasses.mobile);
+    data.$mobileTab.addClass(RawClasses.mobile);
+    data.$content.addClass(RawClasses.mobile);
+  }
+
+  /**
+   * @method private
+   * @name mobileDisable
+   * @description Handles mobile disable event.
+   * @param data [object] "Instance data"
+   */
+
+  function mobileDisable(data) {
+    data.$el.removeClass(RawClasses.mobile);
+    data.$mobileTab.removeClass(RawClasses.mobile);
+    data.$content.removeClass(RawClasses.mobile);
+  }
+
+  /**
+   * @plugin
+   * @name Tabs
+   * @description A jQuery plugin for simple tabs.
+   * @type widget
+   * @main tabs.js
+   * @main tabs.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency mediaquery.js
+   * @dependency swap.js
+   */
+
+  var Plugin = Formstone.Plugin("tabs", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
+       * @param mobileMaxWidth [string] <'740px'> "Width at which to auto-disable mobile styles"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        customClass       : "",
+        maxWidth          : Infinity,
+        mobileMaxWidth    : "740px",
+        theme             : "fs-light"
+      },
+
+      classes: [
+        "tab",
+        "tab_mobile",
+        "mobile",
+        "content",
+        "enabled",
+        "active"
+      ],
+
+      /**
+       * @events
+       * @event update.tabs "Tab activated"
+       */
+
+      events: {
+        update   : "update"
+      },
+
+      methods: {
+        _construct    : construct,
+        _postConstruct: postConstruct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        activate      : activate,
+        enable        : enable,
+        disable       : disable
+      }
+    }),
+
+    // Localize References
+
+    Namespace     = Plugin.namespace,
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions;
+
+})
+
+);
+
+/*! formstone v1.3.3 [tooltip.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    this.on(Events.mouseEnter, data, onMouseEnter);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    removeTooltip();
+
+    this.off(Events.namespace);
+  }
+
+  /**
+   * @method private
+   * @name onMouseEnter
+   * @description Handles mouse enter event.
+   * @param e [object] "Event data"
+   */
+
+  function onMouseEnter(e) {
+    removeTooltip();
+
+    var data = e.data;
+
+    data.left = e.pageX;
+    data.top  = e.pageY;
+
+    buildTooltip(data);
+  }
+
+  /**
+   * @method private
+   * @name onMouseLeave
+   * @description Handles mouse leave event.
+   * @param e [object] "Event data"
+   */
+
+  function onMouseLeave(e) {
+    var data = e.data;
+
+    Functions.clearTimer(data.timer);
+
+    removeTooltip();
+  }
+
+  /**
+   * @method private
+   * @name onMouseLeave
+   * @description Handles mouse move event.
+   * @param e [object] "Event data"
+   */
+
+  function onMouseMove(e) {
+    positionTooltip(e.pageX, e.pageY);
+  }
+
+  /**
+   * @method private
+   * @name buildTooltip
+   * @description Builds new tooltip instance.
+   * @param data [object] "Instance data"
+   */
+
+  function buildTooltip(data) {
+    removeTooltip();
+
+    var html = '';
+
+    html += '<div class="';
+    html += [RawClasses.base, RawClasses[data.direction], data.theme, data.customClass].join(" ");
+    html += '">';
+    html += '<div class="' + RawClasses.content + '">';
+    html += data.formatter.call(data.$el, data);
+    html += '<span class="' + RawClasses.caret + '"></span>';
+    html += '</div>';
+    html += '</div>';
+
+    Instance = {
+      $tooltip    : $(html),
+      $el         : data.$el
+    };
+
+    Formstone.$body.append(Instance.$tooltip);
+
+    var $content = Instance.$tooltip.find(Classes.content),
+      $caret   = Instance.$tooltip.find(Classes.caret),
+
+      offset = data.$el.offset(),
+      height = data.$el.outerHeight(),
+      width  = data.$el.outerWidth(),
+
+      tooltipLeft     = 0,
+      tooltipTop      = 0,
+      contentLeft     = 0,
+      contentTop      = 0,
+      caretLeft       = false,
+      caretTop        = false,
+
+      caretHeight     = $caret.outerHeight(true),
+      caretWidth      = $caret.outerWidth(true),
+      contentHeight   = $content.outerHeight(true),
+      contentWidth    = $content.outerWidth(true);
+
+    // position content
+    if (data.direction === "right" || data.direction === "left") {
+      caretTop   = (contentHeight - caretHeight) / 2;
+      contentTop = -contentHeight / 2;
+
+      if (data.direction === "right") {
+        contentLeft = data.margin;
+      } else if (data.direction === "left") {
+        contentLeft = -(contentWidth + data.margin);
+      }
+    } else {
+      caretLeft = (contentWidth - caretWidth) / 2;
+      contentLeft = -contentWidth / 2;
+
+      if (data.direction === "bottom") {
+        contentTop = data.margin;
+      } else if (data.direction === "top") {
+        contentTop = -(contentHeight + data.margin);
+      }
+    }
+
+    // Modify Dom
+    $content.css({
+      top:  contentTop,
+      left: contentLeft
+    });
+
+    $caret.css({
+      top:  caretTop,
+      left: caretLeft
+    });
+
+    // Position tooltip
+    if (data.follow) {
+      data.$el.on(Events.mouseMove, data, onMouseMove);
+    } else {
+      if (data.match) {
+        if (data.direction === "right" || data.direction === "left") {
+          tooltipTop = data.top; // mouse pos
+
+          if (data.direction === "right") {
+            tooltipLeft = offset.left + width;
+          } else if (data.direction === "left") {
+            tooltipLeft = offset.left;
+          }
+        } else {
+          tooltipLeft = data.left; // mouse pos
+
+          if (data.direction === "bottom") {
+            tooltipTop = offset.top + height;
+          } else if (data.direction === "top") {
+            tooltipTop = offset.top;
+          }
+        }
+      } else {
+        if (data.direction === "right" || data.direction === "left") {
+          tooltipTop = offset.top + (height / 2);
+
+          if (data.direction === "right") {
+            tooltipLeft = offset.left + width;
+          } else if (data.direction === "left") {
+            tooltipLeft = offset.left;
+          }
+        } else {
+          tooltipLeft = offset.left + (width / 2);
+
+          if (data.direction === "bottom") {
+            tooltipTop = offset.top + height;
+          } else if (data.direction === "top") {
+            tooltipTop = offset.top;
+          }
+        }
+      }
+
+      positionTooltip(tooltipLeft, tooltipTop);
+    }
+
+    data.timer = Functions.startTimer(data.timer, data.delay, function() {
+      Instance.$tooltip.addClass(RawClasses.visible);
+    });
+
+    data.$el.one(Events.mouseLeave, data, onMouseLeave);
+  }
+
+  /**
+   * @method private
+   * @name positionTooltip
+   * @description Positions active tooltip instance.
+   * @param left [int] "Left position"
+   * @param top [int] "Top position"
+   */
+
+  function positionTooltip(left, top) {
+    if (Instance) {
+      Instance.$tooltip.css({
+        left : left,
+        top  : top
+      });
+    }
+  }
+
+  /**
+   * @method private
+   * @name removeTooltip
+   * @description Removes active tooltip instance.
+   */
+
+  function removeTooltip() {
+    if (Instance) {
+      Instance.$el.off( [Events.mouseMove, Events.mouseLeave].join(" ") );
+
+      Instance.$tooltip.remove();
+      Instance = null;
+    }
+  }
+
+  /**
+   * @method private
+   * @name format
+   * @description Formats tooltip text.
+   * @return [string] "Tooltip text"
+   */
+
+  function format(data) {
+    return this.data("title");
+  }
+
+  /**
+   * @plugin
+   * @name Tooltip
+   * @description A jQuery plugin for simple tooltips.
+   * @type widget
+   * @main tooltip.js
+   * @main tooltip.css
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("tooltip", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param delay [int] <0> "Hover delay"
+       * @param direction [string] <'top'> "Tooltip direction"
+       * @param follow [boolean] <false> "Flag to follow mouse"
+       * @param formatter [function] <$.noop> "Text format function"
+       * @param margin [int] <15> "Tooltip margin"
+       * @param match [boolean] <false> "Flag to match mouse position"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        customClass    : "",
+        delay          : 0,
+        direction      : "top",
+        follow         : false,
+        formatter      : format,
+        margin         : 15,
+        match          : false,
+        theme          : "fs-light"
+      },
+
+      classes: [
+        "content",
+        "caret",
+        "visible",
+        "top",
+        "bottom",
+        "right",
+        "left"
+      ],
+
+      methods: {
+        _construct    : construct,
+        _destruct     : destruct
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    // Singleton
+
+    Instance     = null;
+
+})
+
+);
+
+/*! formstone v1.3.3 [touch.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    data.touches     = [];
+    data.touching    = false;
+
+    this.on( Events.dragStart, Functions.killEvent );
+
+    if (data.swipe) {
+      data.pan = true;
+    }
+
+    if (data.scale) {
+      data.axis = false;
+    }
+
+    data.axisX = data.axis === "x";
+    data.axisY = data.axis === "y";
+
+    if (Formstone.support.pointer) {
+      var action = "";
+
+      if (!data.axis || (data.axisX && data.axisY)) {
+        action = "none";
+      } else {
+        if (data.axisX) {
+          action += " pan-y";
+        }
+        if (data.axisY) {
+          action += " pan-x";
+        }
+      }
+
+      touchAction(this, action);
+
+      this.on(Events.pointerDown, data, onTouch);
+    } else {
+      this.on(Events.touchStart, data, onTouch)
+        .on(Events.mouseDown, data, onPointerStart);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    this.off(Events.namespace);
+
+    touchAction(this, "");
+  }
+
+  /**
+   * @method private
+   * @name onTouch
+   * @description Delegates touch events.
+   * @param e [object] "Event data"
+   */
+
+  function onTouch(e) {
+    // Stop panning and zooming
+    if (e.preventManipulation) {
+      e.preventManipulation();
+    }
+
+    var data    = e.data,
+      oe      = e.originalEvent;
+
+    if (oe.type.match(/(up|end|cancel)$/i)) {
+      onPointerEnd(e);
+      return;
+    }
+
+    if (oe.pointerId) {
+      // Normalize MS pointer events back to standard touches
+      var activeTouch = false;
+      for (var i in data.touches) {
+        if (data.touches[i].id === oe.pointerId) {
+          activeTouch = true;
+          data.touches[i].pageX    = oe.pageX;
+          data.touches[i].pageY    = oe.pageY;
+        }
+      }
+      if (!activeTouch) {
+        data.touches.push({
+          id       : oe.pointerId,
+          pageX    : oe.pageX,
+          pageY    : oe.pageY
+        });
+      }
+    } else {
+      // Alias normal touches
+      data.touches = oe.touches;
+    }
+
+    // Delegate touch actions
+    if (oe.type.match(/(down|start)$/i)) {
+      onPointerStart(e);
+    } else if (oe.type.match(/move$/i)) {
+      onPointerMove(e);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerStart
+   * @description Handles pointer start.
+   * @param e [object] "Event data"
+   */
+
+  function onPointerStart(e) {
+    var data     = e.data,
+      touch    = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+
+    if (touch) {
+      data.$el.off(Events.mouseDown);
+    }
+
+    if (!data.touching) {
+      data.startE      = e.originalEvent;
+      data.startX      = (touch) ? touch.pageX : e.pageX;
+      data.startY      = (touch) ? touch.pageY : e.pageY;
+      data.startT      = new Date().getTime();
+      data.scaleD      = 1;
+      data.passed      = false;
+    }
+
+    // Clear old click events
+
+    if (data.$links) {
+      data.$links.off(Events.click);
+    }
+
+    // Pan / Scale
+
+    var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
+
+    if (data.scale && data.touches && data.touches.length >= 2) {
+      var t = data.touches;
+
+      data.pinch = {
+        startX     : midpoint(t[0].pageX, t[1].pageX),
+        startY     : midpoint(t[0].pageY, t[1].pageY),
+        startD     : pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY))
+      };
+
+      newE.pageX    = data.startX   = data.pinch.startX;
+      newE.pageY    = data.startY   = data.pinch.startY;
+    }
+
+    // Only bind at first touch
+    if (!data.touching) {
+      data.touching = true;
+
+      if (data.pan && !touch) {
+        $Window.on(Events.mouseMove, data, onPointerMove)
+             .on(Events.mouseUp, data, onPointerEnd);
+      }
+
+      if (Formstone.support.pointer) {
+        $Window.on( [
+          Events.pointerMove,
+          Events.pointerUp,
+          Events.pointerCancel
+        ].join(" ") , data, onTouch);
+      } else {
+        $Window.on( [
+          Events.touchMove,
+          Events.touchEnd,
+          Events.touchCancel
+        ].join(" ") , data, onTouch);
+      }
+
+      data.$el.trigger(newE);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerMove
+   * @description Handles pointer move.
+   * @param e [object] "Event data"
+   */
+
+  function onPointerMove(e) {
+    var data      = e.data,
+      touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+      newX      = (touch) ? touch.pageX : e.pageX,
+      newY      = (touch) ? touch.pageY : e.pageY,
+      deltaX    = newX - data.startX,
+      deltaY    = newY - data.startY,
+      dirX      = (deltaX > 0) ? "right" : "left",
+      dirY      = (deltaY > 0) ? "down"  : "up",
+      movedX    = Math.abs(deltaX) > TouchThreshold,
+      movedY    = Math.abs(deltaY) > TouchThreshold;
+
+    if (!data.passed && data.axis && ((data.axisX && movedY) || (data.axisY && movedX)) ) {
+      // if axis and moved in opposite direction
+      onPointerEnd(e);
+    } else {
+      if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
+        // if has axis and moved in same direction
+        data.passed = true;
+      }
+
+      if (data.passed) {
+        Functions.killEvent(e);
+        Functions.killEvent(data.startE);
+      }
+
+      // Pan / Scale
+
+      var fire    = true,
+        newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+      if (data.scale) {
+        if (data.touches && data.touches.length >= 2) {
+          var t = data.touches;
+
+          data.pinch.endX     = midpoint(t[0].pageX, t[1].pageX);
+          data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
+          data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
+          data.scaleD    = (data.pinch.endD / data.pinch.startD);
+          newE.pageX     = data.pinch.endX;
+          newE.pageY     = data.pinch.endY;
+          newE.scale     = data.scaleD;
+          newE.deltaX    = data.pinch.endX - data.pinch.startX;
+          newE.deltaY    = data.pinch.endY - data.pinch.startY;
+        } else if (!data.pan) {
+          fire = false;
+        }
+      }
+
+      if (fire) {
+        data.$el.trigger( newE );
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerEnd
+   * @description Handles pointer end / cancel.
+   * @param e [object] "Event data"
+   */
+
+  function onPointerEnd(e) {
+    var data = e.data;
+
+    // Pan / Swipe / Scale
+
+    var touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+      newX      = (touch) ? touch.pageX : e.pageX,
+      newY      = (touch) ? touch.pageY : e.pageY,
+      deltaX    = newX - data.startX,
+      deltaY    = newY - data.startY,
+      endT      = new Date().getTime(),
+      eType     = data.scale ? Events.scaleEnd : Events.panEnd,
+      dirX      = (deltaX > 0) ? "right" : "left",
+      dirY      = (deltaY > 0) ? "down"  : "up",
+      movedX    = Math.abs(deltaX) > 1,
+      movedY    = Math.abs(deltaY) > 1;
+
+    // Swipe
+
+    if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
+      eType = Events.swipe;
+    }
+
+    // Kill clicks to internal links
+
+    if ( (data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) || (movedX || movedY) ) {
+      data.$links = data.$el.find("a");
+
+      for (var i = 0, count = data.$links.length; i < count; i++) {
+        bindLink(data.$links.eq(i), data);
+      }
+    }
+
+    var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+    $Window.off( [
+      Events.touchMove,
+      Events.touchEnd,
+      Events.touchCancel,
+      Events.mouseMove,
+      Events.mouseUp,
+      Events.pointerMove,
+      Events.pointerUp,
+      Events.pointerCancel
+    ].join(" ") );
+
+    data.$el.trigger(newE);
+
+    data.touches = [];
+
+    if (data.scale) {
+      /*
+      if (e.originalEvent.pointerId) {
+        for (var i in data.touches) {
+          if (data.touches[i].id === e.originalEvent.pointerId) {
+            data.touches.splice(i, 1);
+          }
+        }
+      } else {
+        data.touches = e.originalEvent.touches;
+      }
+      */
+
+      /*
+      if (data.touches.length) {
+        onPointerStart($.extend(e, {
+          data: data,
+          originalEvent: {
+            touches: data.touches
+          }
+        }));
+      }
+      */
+    }
+
+    if (touch) {
+      data.touchTimer = Functions.startTimer(data.touchTimer, 5, function() {
+        data.$el.on(Events.mouseDown, data, onPointerStart);
+      });
+    }
+
+    data.touching = false;
+  }
+
+  /**
+   * @method private
+   * @name bindLink
+   * @description Bind events to internal links
+   * @param $link [object] "Object to bind"
+   * @param data [object] "Instance data"
+   */
+
+  function bindLink($link, data) {
+    $link.on(Events.click, data, onLinkClick);
+
+    // http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+    var events = $._data($link[0], "events")["click"];
+    events.unshift(events.pop());
+  }
+
+  /**
+   * @method private
+   * @name onLinkClick
+   * @description Handles clicks to internal links
+   * @param e [object] "Event data"
+   */
+
+  function onLinkClick(e) {
+    Functions.killEvent(e, true);
+    e.data.$links.off(Events.click);
+  }
+
+  /**
+   * @method private
+   * @name buildEvents
+   * @description Builds new event.
+   * @param type [type] "Event type"
+   * @param oe [object] "Original event"
+   * @param x [int] "X value"
+   * @param y [int] "Y value"
+   * @param scale [float] "Scale value"
+   * @param dx [float] "Delta X value"
+   * @param dy [float] "Delta Y value"
+   */
+
+  function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
+    return $.Event(type, {
+      originalEvent : oe,
+      bubbles       : true,
+      pageX         : px,
+      pageY         : py,
+      scale         : s,
+      deltaX        : dx,
+      deltaY        : dy,
+      directionX    : dirx,
+      directionY    : diry
+    });
+  }
+
+  /**
+   * @method private
+   * @name midpoint
+   * @description Calculates midpoint.
+   * @param a [float] "Value 1"
+   * @param b [float] "Value 2"
+   */
+
+  function midpoint(a, b) {
+    return (a + b) / 2.0;
+  }
+
+  /**
+   * @method private
+   * @name pythagorus
+   * @description Pythagorean theorem.
+   * @param a [float] "Value 1"
+   * @param b [float] "Value 2"
+   */
+
+  function pythagorus(a, b) {
+    return Math.sqrt((a * a) + (b * b));
+  }
+
+  /**
+   * @method private
+   * @name touchAction
+   * @description Set ms touch action on target.
+   * @param action [string] "Touch action value"
+   */
+
+  function touchAction($target, action) {
+    $target.css({
+      "-ms-touch-action": action,
+          "touch-action": action
+    });
+  }
+
+  /**
+   * @plugin
+   * @name Touch
+   * @description A jQuery plugin for multi-touch events.
+   * @type widget
+   * @main touch.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var legacyPointer = !(Formstone.window.PointerEvent),
+    Plugin = Formstone.Plugin("touch", {
+      widget: true,
+
+      /**
+       * @options
+       * @param axis [string] <null> "Limit axis for pan and swipe; 'x' or 'y'"
+       * @param pan [boolean] <false> "Pan events"
+       * @param scale [boolean] <false> "Scale events"
+       * @param swipe [boolean] <false> "Swipe events"
+       */
+
+      defaults : {
+        axis     : false,
+        pan      : false,
+        scale    : false,
+        swipe    : false
+      },
+
+      methods : {
+        _construct    : construct,
+        _destruct     : destruct
+      },
+
+      events: {
+        pointerDown    : legacyPointer ? "MSPointerDown"   : "pointerdown",
+        pointerUp      : legacyPointer ? "MSPointerUp"     : "pointerup",
+        pointerMove    : legacyPointer ? "MSPointerMove"   : "pointermove",
+        pointerCancel  : legacyPointer ? "MSPointerCancel" : "pointercancel"
+      }
+    }),
+
+    // Localize References
+
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    // Local
+
+    $Window           = Formstone.$window,
+    TouchThreshold    = 10,
+    TouchTime         = 50;
+
+    /**
+     * @events
+     * @event panstart "Panning started"
+     * @event pan "Panning"
+     * @event panend "Panning ended"
+     * @event scalestart "Scaling started"
+     * @event scale "Scaling"
+     * @event scaleend "Scaling ended"
+     * @event swipe "Swipe"
+     */
+
+    Events.pan           = "pan";
+    Events.panStart      = "panstart";
+    Events.panEnd        = "panend";
+    Events.scale         = "scale";
+    Events.scaleStart    = "scalestart";
+    Events.scaleEnd      = "scaleend";
+    Events.swipe         = "swipe";
+
+})
+
+);
+
+/*! formstone v1.3.3 [transition.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance Data"
+   * @param callback [object] "Function to call"
+   */
+
+  function construct(data, callback) {
+    if (callback) {
+      // Target child element, for event delegation
+
+      data.$target     = this.find(data.target);
+      data.$check      = data.target ? data.$target : this;
+      data.callback    = callback;
+      data.styles      = getStyles(data.$check);
+      data.timer       = null;
+
+      var duration = data.$check.css( Formstone.transition + "-duration" ),
+        durationValue = parseFloat(duration);
+
+      if (Formstone.support.transition && duration && durationValue) {
+        // If transitions supported and active
+
+        this.on(Events.transitionEnd, data, onTranistionEnd);
+      } else {
+        data.timer = Functions.startTimer(data.timer, 50, function() {
+          checkStyles(data);
+        }, true);
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    Functions.clearTimer(data.timer, true);
+
+    this.off(Events.namespace);
+  }
+
+  /**
+   * @method private
+   * @name onTransitionEnd
+   * @description Handles transition end events.
+   * @param e [object] "Event data"
+   */
+
+  function onTranistionEnd(e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var data           = e.data,
+      oe             = e.originalEvent,
+      $target        = data.target ? data.$target : data.$el;
+
+    // Check property and target
+    if ( (!data.property || oe.propertyName === data.property) && $(oe.target).is($target) ) {
+      resolve(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name resolve
+   * @description Resolves transition end events.
+   * @param e [object] "Event data"
+   */
+  /**
+   * @method
+   * @name resolve
+   * @description Resolves current transition end events.
+   * @example $(".target").transition("resolve");
+   */
+
+  function resolve(data) {
+    if (!data.always) {
+      // Unbind events, clear timers, similiar to .one()
+
+      data.$el[Plugin.namespaceClean]("destroy"); // clean up old data?
+    }
+
+    // fire callback
+
+    data.callback.apply(data.$el);
+  }
+
+  /**
+   * @method private
+   * @name checkStyles
+   * @description Compares current CSS to previous styles.
+   * @param data [object] "Instance data"
+   */
+
+  function checkStyles(data) {
+    var styles = getStyles(data.$check);
+
+    if (!isEqual(data.styles, styles)) {
+      resolve(data);
+    }
+
+    data.styles = styles;
+  }
+
+  /**
+   * @method private
+   * @name getStyles
+   * @description Returns element's styles.
+   * @param el [DOM] "Element to check"
+   */
+
+  function getStyles(el) {
+    var computed,
+      styles = {},
+      prop,
+      val;
+
+    if (el instanceof $) {
+      el = el[0];
+    }
+
+    if (Window.getComputedStyle) {
+      // FireFox, Chrome, Safari
+
+      computed = Window.getComputedStyle(el, null);
+
+      for (var i = 0, count = computed.length; i < count; i++) {
+        prop = computed[i];
+        val = computed.getPropertyValue(prop);
+
+        styles[prop] = val;
+      }
+    } else if (el.currentStyle) {
+      // IE, Opera
+
+      computed = el.currentStyle;
+
+      for (prop in computed) {
+        if (computed[prop]) { // ie8...
+          styles[prop] = computed[prop];
+        }
+      }
+    }
+
+    return styles;
+  }
+
+  /**
+   * @method private
+   * @name isEqual
+   * @description Compares two obejcts.
+   * @param a [object] "Object to compare"
+   * @param b [object] "Object to compare"
+   */
+
+  function isEqual(a, b) {
+    if ($.type(a) !== $.type(b)) {
+      return false;
+    }
+
+    for (var i in a) {
+
+      if (a.hasOwnProperty(i)) {
+        if ( !(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i]) ) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   * @plugin
+   * @name Transition
+   * @description A jQuery plugin for CSS transition events.
+   * @type widget
+   * @main transition.js
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("transition", {
+      widget: true,
+
+      /**
+       * @options
+       * @param always [boolean] <False> "Flag to always react to transition end (.on vs .one)"
+       * @param property [string] <null> "Property to react to"
+       * @param target [string] <null> "Target child selector"
+       */
+
+      defaults: {
+        always      : false,
+        property    : null,
+        target      : null
+      },
+
+      methods : {
+        _construct    : construct,
+        _destruct     : destruct,
+        resolve       : resolve
+      }
+    }),
+
+    // Localize References
+
+    Events       = Plugin.events,
+    Functions    = Plugin.functions,
+
+    Window       = Formstone.window;
+
+})
+
+);
+
+/*! formstone v1.3.3 [upload.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    var blobSliceMethods = [
+        'mozSlice',
+        'webkitSlice',
+        'slice'
+      ];
+
+    if (Formstone.support.file) {
+      var testFile = false;
+
+      try {
+        testFile = new File([""], "f");
+      } catch (e) {}
+
+      if (!testFile) {
+        // Safari & IE/Edge :/
+        try {
+          testFile = new Blob([""], {});
+        } catch (e) {}
+      }
+
+      if (testFile) {
+        for (var i in blobSliceMethods) {
+          if (blobSliceMethods.hasOwnProperty(i) && blobSliceMethods[i] in testFile) {
+            BlobSliceMethod = blobSliceMethods[i];
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    if (Formstone.support.file) {
+      var html = "";
+
+      if (!BlobSliceMethod) {
+        data.chunked = false;
+      }
+
+      // Backwards compat
+      if (data.maxQueue) {
+        data.maxConcurrent = data.maxQueue;
+      }
+
+      if (data.label !== false) {
+        html += '<div class="' + RawClasses.target + '">';
+        html += data.label;
+        html += '</div>';
+      }
+      html += '<input class="' + RawClasses.input + '" type="file"';
+      if (data.multiple) {
+        html += ' multiple';
+      }
+      if (data.accept) {
+        html += ' accept="' + data.accept + '"';
+      }
+      html += '>';
+
+      data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+
+      this.addClass(data.baseClasses)
+        .append(html);
+
+      data.$input       = this.find(Classes.input);
+      data.queue        = [];
+      data.total        = 0;
+      data.uploaded     = 0;
+      data.uploading    = false;
+      data.disabled     = true;
+      data.aborting     = false;
+
+      this.on(Events.click, Classes.target, data, onClick)
+        .on(Events.dragEnter, data, onDragEnter)
+        .on(Events.dragOver, data, onDragOver)
+        .on(Events.dragLeave, data, onDragOut)
+        .on(Events.drop, data, onDrop);
+
+      data.$input.on(Events.focus, data, onFocus)
+             .on(Events.blur, data, onBlur)
+             .on(Events.change, data, onChange);
+
+      enableUpload.call(this, data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    if (Formstone.support.file) {
+      data.$input.off(Events.namespace);
+
+      this.off(Events.namespace)
+        .removeClass(data.baseClasses)
+        .html("");
+    }
+  }
+
+  /**
+   * @method private
+   * @name abortUpload
+   * @description Cancels all active uploads.
+   * @param data [object] "Instance data"
+   * @param index [int] "File index"
+   */
+
+  /**
+   * @method
+   * @name abort
+   * @description Cancels all active uploads.
+   * @example $(".target").upload("abort");
+   */
+
+  function abortUpload(data, index) {
+    var file;
+
+    data.aborting = true;
+
+    for (var i in data.queue) {
+      if (data.queue.hasOwnProperty(i)) {
+        file = data.queue[i];
+
+        if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
+          // Abort all
+          if (file.started && !file.complete) {
+            if (data.chunked) {
+              file.chunkTransfer.abort();
+            } else {
+              file.transfer.abort();
+            }
+          } else {
+            abortFile(data, file, "abort");
+          }
+        }
+      }
+    }
+
+    data.aborting = false;
+
+    checkQueue(data);
+  }
+
+  /**
+   * @method private
+   * @name abortFile
+   * @description Aborts file.
+   * @param data [object] "Instance data"
+   * @param formData [object] "Target form"
+   * @param file [object] "Target file"
+   */
+
+  function abortFile(data, file, error) {
+    file.error = true;
+    data.$el.trigger(Events.fileError, [ file, error ]);
+
+    if (!data.aborting) {
+      checkQueue(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name abortChunk
+   * @description Aborts file chunk.
+   * @param data [object] "Instance data"
+   * @param formData [object] "Target form"
+   * @param file [object] "Target file"
+   */
+
+  function abortChunk(data, file, error) {
+    data.$el.trigger(Events.chunkError, [ file, error ]);
+
+    abortFile(data, file, error);
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance.
+   * @example $(".target").upload("disable");
+   */
+
+  function disableUpload(data) {
+    if (!data.disabled) {
+      this.addClass(RawClasses.disabled);
+      data.$input.prop("disabled", true);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance.
+   * @example $(".target").upload("enable");
+   */
+
+  function enableUpload(data) {
+    if (data.disabled) {
+      this.removeClass(RawClasses.disabled);
+      data.$input.prop("disabled", false);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+   * @method private
+   * @name onClick
+   * @description Handles click to target.
+   * @param e [object] "Event data"
+   */
+
+  function onClick(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    if (!data.disabled) {
+      data.$input.trigger(Events.click);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$el.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    e.data.$el.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onChange
+   * @description Handles change to hidden input.
+   * @param e [object] "Event data"
+   */
+
+  function onChange(e) {
+    Functions.killEvent(e);
+
+    var data = e.data,
+      files = data.$input[0].files;
+
+    if (!data.disabled && files.length) {
+      handleUpload(data, files);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onDragEnter
+   * @description Handles dragenter to target.
+   * @param e [object] "Event data"
+   */
+
+  function onDragEnter(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    // if (!data.disabled) {
+      data.$el.addClass(RawClasses.dropping)
+          .trigger(Events.fileDragEnter);
+    // }
+  }
+
+  /**
+   * @method private
+   * @name onDragOver
+   * @description Handles dragover to target.
+   * @param e [object] "Event data"
+   */
+
+  function onDragOver(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    // if (!data.disabled) {
+      data.$el.addClass(RawClasses.dropping)
+          .trigger(Events.fileDragOver);
+    // }
+  }
+
+  /**
+   * @method private
+   * @name onDragOut
+   * @description Handles dragout to target.
+   * @param e [object] "Event data"
+   */
+
+  function onDragOut(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    // if (!data.disabled) {
+      data.$el.removeClass(RawClasses.dropping)
+          .trigger(Events.fileDragLeave);
+    // }
+  }
+
+  /**
+   * @method private
+   * @name onDrop
+   * @description Handles drop to target.
+   * @param e [object] "Event data"
+   */
+
+  function onDrop(e) {
+    Functions.killEvent(e);
+
+    var data = e.data,
+      files = e.originalEvent.dataTransfer.files;
+
+    data.$el.removeClass(RawClasses.dropping);
+
+    if (!data.disabled) {
+      handleUpload(data, files);
+    }
+  }
+
+  /**
+   * @method private
+   * @name handleUpload
+   * @description Handles new files.
+   * @param data [object] "Instance data"
+   * @param files [object] "File list"
+   */
+
+  function handleUpload(data, files) {
+    var newFiles = [],
+      numFiles = files.length;
+
+    if (data.maxFiles) {
+      var filesRemaining = data.maxFiles - data.uploaded;
+
+      if (filesRemaining >= 0 && files.length > filesRemaining) {
+        numFiles = filesRemaining;
+      }
+    }
+
+    if (numFiles > 0) {
+      for (var i = 0; i < numFiles; i++) {
+        var file = {
+          index       : data.total++,
+          file        : files[i],
+          name        : files[i].name,
+          size        : files[i].size,
+          started     : false,
+          complete    : false,
+          error       : false,
+          transfer    : null
+        };
+
+        newFiles.push(file);
+        data.queue.push(file);
+      }
+
+      data.$el.trigger(Events.queued, [ newFiles ]);
+
+      if (data.autoUpload) {
+        startUpload(data);
+      }
+    }
+
+    data.$input.val("");
+  }
+
+  /**
+   * @method private
+   * @name startUpload
+   * @description Start queued uploads.
+   * @param data [object] "Instance data"
+   */
+
+  /**
+   * @method
+   * @name start
+   * @description Starts queued uploads; Use when autoUpload is set to false.
+   * @example $(".target").upload("start");
+   */
+
+  function startUpload(data) {
+    if (!data.uploading) {
+      $Window.on(Events.beforeUnload, function() {
+        return data.leave;
+      });
+
+      data.uploading = true;
+
+      data.$el.trigger(Events.start, [ data.queue ]);
+    }
+
+    checkQueue(data);
+  }
+
+  /**
+   * @method private
+   * @name checkQueue
+   * @description Checks and updates file queue.
+   * @param data [object] "Instance data"
+   */
+
+  function checkQueue(data) {
+    var transfering = 0,
+      newQueue = [];
+
+    // remove lingering items from queue
+    for (var i in data.queue) {
+      if (data.queue.hasOwnProperty(i) && !data.queue[i].complete && !data.queue[i].error) {
+        newQueue.push(data.queue[i]);
+      }
+    }
+
+    data.queue = newQueue;
+
+    for (var j in data.queue) {
+      if (data.queue.hasOwnProperty(j)) {
+        if (!data.queue[j].started) {
+          uploadFile(data, data.queue[j]);
+        }
+
+        transfering++;
+
+        if (transfering >= data.maxConcurrent) {
+          return;
+        } else {
+          i++;
+        }
+      }
+    }
+
+    if (transfering === 0) {
+      $Window.off(Events.beforeUnload);
+
+      data.uploading = false;
+
+      data.$el.trigger(Events.complete);
+    }
+  }
+
+  /**
+   * @method private
+   * @name uploadFile
+   * @description Uploads file.
+   * @param data [object] "Instance data"
+   * @param file [object] "Target file"
+   */
+
+  function uploadFile(data, file) {
+    if (file.size >= data.maxSize || file.error === true) {
+      abortFile(data, file, "size");
+    } else if (data.chunked) {
+      // Chunked upload
+      file.started = true;
+
+      file.chunkSize = (1024 * data.chunkSize);
+      file.totalChunks = Math.ceil( file.size / file.chunkSize );
+      file.currentChunk = 0;
+
+      data.$el.trigger(Events.fileStart, [ file ]);
+
+      uploadChunk(data, file);
+    } else {
+      var formData = new FormData();
+
+      formData.append(data.postKey, file.file);
+      formData = setFormData(data, formData, file);
+
+      if (formData === false) {
+        abortFile(data, file, "abort");
+      } else {
+        // Standard upload
+        file.started = true;
+        file.transfer = $.ajax({
+          url         : data.action,
+          data        : formData,
+          dataType    : data.dataType,
+          type        : "POST",
+          contentType : false,
+          processData : false,
+          cache       : false,
+          xhr: function() {
+            var $xhr = $.ajaxSettings.xhr();
+
+            if ($xhr.upload) {
+              // Clean progress event
+              $xhr.upload.addEventListener("progress", function(e) {
+                var percent = 0,
+                  position = e.loaded || e.position,
+                  total = e.total;
+
+                if (e.lengthComputable) {
+                  percent = Math.ceil((position / total) * 100);
+                }
+
+                data.$el.trigger(Events.fileProgress, [ file, percent ]);
+              }, false);
+            }
+
+            return $xhr;
+          },
+          beforeSend: function(jqXHR, settings) {
+            data.$el.trigger(Events.fileStart, [ file, settings, jqXHR ]);
+          },
+          success: function(response, status, jqXHR) {
+            file.complete = true;
+
+            data.uploaded++;
+            data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
+
+            checkQueue(data);
+          },
+          error: function(jqXHR, status, error) {
+            abortFile(data, file, error, jqXHR);
+          }
+        });
+      }
+    }
+  }
+
+  /**
+   * @method private
+   * @name uploadChunk
+   * @description Uploads file chunk.
+   * @param data [object] "Instance data"
+   * @param formData [object] "Target form"
+   * @param file [object] "Target file"
+   */
+
+  function uploadChunk(data, file) {
+    var chunkStart = (file.chunkSize * file.currentChunk),
+      chunkEnd   = (chunkStart + file.chunkSize);
+
+    if (chunkEnd > file.size) {
+      chunkEnd = file.size;
+    }
+
+    var newChunk = file.file[ BlobSliceMethod ]( chunkStart, chunkEnd ),
+      formData = new FormData();
+
+    formData.append(data.postKey, newChunk, file.file.name);
+    formData.append("chunks", file.totalChunks);
+    formData.append("chunk", file.currentChunk);
+
+    formData = setFormData(data, formData, file);
+
+    if (formData === false) {
+      abortFile(data, file, "abort");
+    } else {
+      file.chunkTransfer = $.ajax({
+        url         : data.action,
+        data        : formData,
+        dataType    : data.dataType,
+        type        : "POST",
+        contentType : false,
+        processData : false,
+        cache       : false,
+        beforeSend: function(jqXHR, settings) {
+          data.$el.trigger(Events.chunkStart, [ file, settings, jqXHR ]);
+        },
+        success: function(response, status, jqXHR) {
+          file.currentChunk++;
+
+          data.$el.trigger(Events.chunkComplete, [ file ]);
+
+          var percent = Math.ceil((file.currentChunk / file.totalChunks) * 100);
+          data.$el.trigger(Events.fileProgress, [ file, percent, status, jqXHR ]);
+
+          if (file.currentChunk < file.totalChunks) {
+            uploadChunk(data, file);
+          } else {
+            file.complete = true;
+            data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
+
+            checkQueue(data);
+          }
+        },
+        error: function(jqXHR, status, error) {
+          abortChunk(data, file, error, jqXHR);
+        }
+      });
+    }
+  }
+
+  function setFormData(data, formData, file) {
+    for (var i in data.postData) {
+      if (data.postData.hasOwnProperty(i)) {
+        formData.append(i, data.postData[i]);
+      }
+    }
+
+    // Modify data before upload
+    formData = data.beforeSend.call(data.$el, formData, file);
+
+    return formData;
+  }
+
+  /**
+   * @plugin
+   * @name Upload
+   * @description A jQuery plugin for simple drag and drop uploads.
+   * @type widget
+   * @main upload.js
+   * @main upload.css
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("upload", {
+      widget: true,
+
+      /**
+       * @options
+       * @param accept [string] "Input accept attribute"
+       * @param action [string] "Where to submit uploads"
+       * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
+       * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
+       * @param chunked [boolean] <false> "Use chunked uploading, if supported"
+       * @param chunkSize [int] <100> "Size to chunk, in kB"
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param dataType [string] <'html'> "Data type of AJAX request"
+       * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
+       * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
+       * @param maxConcurrent [int] <2> "Number of files to simultaneously upload"
+       * @param maxFiles [int OR boolean] <false> "Total number of files that can be uploaded; `false` to disable"
+       * @param maxSize [int] <5242880> "Max file size allowed"
+       * @param multiple [true] <true> "Flag to allow mutiple file uploads"
+       * @param postData [object] "Extra data to post with upload"
+       * @param postKey [string] <'file'> "Key to upload file as"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        accept         : false,
+        action         : "",
+        autoUpload     : true,
+        beforeSend     : function(formdata) { return formdata; },
+        chunked        : false,
+        chunkSize      : 100,
+        customClass    : "",
+        dataType       : "html",
+        label          : "Drag and drop files or click to select",
+        leave          : "You have uploads pending, are you sure you want to leave this page?",
+        maxConcurrent  : 2,
+        // maxQueue       : 2,
+        maxFiles       : false,
+        maxSize        : 5242880, // 5 mb
+        multiple       : true,
+        postData       : {},
+        postKey        : "file",
+        theme          : "fs-light"
+      },
+
+      classes: [
+        "input",
+        "target",
+        "multiple",
+        "dropping",
+        "disabled",
+        "focus"
+      ],
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        disable       : disableUpload,
+        enable        : enableUpload,
+        abort         : abortUpload,
+        start         : startUpload
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    Window        = Formstone.window,
+    $Window       = Formstone.$window,
+
+    // Internal
+    BlobSliceMethod = false;
+
+    /**
+     * @events
+     * @event chunkcomplete "File chunk complete"
+     * @event chunkstart "File chunk starting"
+     * @event chunkerror "File chunk error"
+     * @event complete "All uploads are complete"
+     * @event filecomplete "Specific upload complete"
+     * @event filedragenter "File dragged into target"
+     * @event filedragleave "File dragged from target"
+     * @event filedragover "File dragged over target"
+     * @event fileerror "Specific upload error"
+     * @event fileprogress "Specific upload progress"
+     * @event filestart "Specific upload starting"
+     * @event start "Uploads starting"
+     * @event queued "Files are queued for upload"
+     */
+
+    Events.chunkComplete   = "chunkcomplete";
+    Events.chunkError      = "chunkerror";
+    Events.chunkStart      = "chunkstart";
+    Events.complete        = "complete";
+    Events.fileComplete    = "filecomplete";
+    Events.fileDragEnter   = "filedragenter";
+    Events.fileDragLeave   = "filedragleave";
+    Events.fileDragOver    = "filedragover";
+    Events.fileError       = "fileerror";
+    Events.fileProgress    = "fileprogress";
+    Events.fileStart       = "filestart";
+    Events.start           = "start";
+    Events.queued          = "queued";
+
+})
+
+);
+
+/*! formstone v1.3.3 [viewer.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+// TODO: external controls like carousel?
+// TODO: Add swipe next/previous when zoomed out?
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core",
+      "./transition"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    scroll();
+    $Window.on("scroll", scroll);
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Handles window resize
+   */
+
+  function resize() {
+    Functions.iterate.call($Instances, resizeInstance);
+    // Functions.iterate.call($LazyInstances, cacheScrollPosition);
+    // Functions.iterate.call($LazyInstances, checkScrollPosition);
+  }
+
+  /**
+   * @method private
+   * @name scroll
+   * @description Handles window scroll
+   */
+
+  function scroll() {
+    ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
+
+    if (ScrollTop < 0) {
+      ScrollTop = 0;
+    }
+
+    // Functions.iterate.call($LazyInstances, checkScrollPosition);
+  }
+
+  /**
+   * @method private
+   * @name raf
+   * @description Handles request animation frame
+   */
+
+  function raf() {
+    Functions.iterate.call($Instances, renderRAF);
+  }
+
+  /**
+   * @method private
+   * @name cacheInstances
+   * @description Caches active instances
+   */
+
+  function cacheInstances() {
+    $Instances     = $(Classes.base);
+    // $LazyInstances = $(Classes.lazy);
+
+    // Functions.iterate.call($LazyInstances, cacheScrollPosition);
+
+    if ($Instances.length) {
+      Functions.lockViewport(Namespace);
+    } else {
+      Functions.unlockViewport(Namespace);
+    }
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var $image,
+      imageData,
+      html = '',
+      controlPrevClasses    = [RawClasses.control, RawClasses.control_previous].join(" "),
+      controlNextClasses    = [RawClasses.control, RawClasses.control_next].join(" "),
+      controlZoomInClasses  = [RawClasses.control, RawClasses.control_zoom_in].join(" "),
+      controlZoomOutClasses = [RawClasses.control, RawClasses.control_zoom_out].join(" ");
+
+    data.thisClasses = [RawClasses.base, RawClasses.loading, data.customClass, data.theme];
+    data.images      = [];
+    data.source      = false;
+    data.gallery     = false;
+    data.tapTimer    = null;
+    data.action      = false;
+    data.isRendering = false;
+    data.isZooming   = false;
+    data.isAnimating = false;
+
+    data.keyDownTime  = 1;
+
+    data.$images    = this.find("img").addClass(RawClasses.source);
+    data.index      = 0;
+    data.total      = data.$images.length - 1;
+
+    // Check custom controls
+    data.customControls = ($.type(data.controls) === "object" && data.controls.zoom_in && data.controls.zoom_out);
+
+    if (data.$images.length > 1) {
+      data.gallery = true;
+      data.thisClasses.push(RawClasses.gallery);
+
+      // Requie zoom for gallery custom controls
+      if (data.customControls && (!data.controls.previous || !data.controls.next) ) {
+        data.customControls = false;
+      }
+    }
+
+    for (var i = 0; i < data.$images.length; i++) {
+      $image = data.$images.eq(i);
+      data.images.push($image.attr("src"));
+    }
+
+    html += '<div class="' + RawClasses.wrapper + '">';
+    html += '<div class="' + RawClasses.loading_icon + '"></div>';
+    html += '<div class="' + RawClasses.viewport + '"></div>';
+    html += '</div>'; // wrapper
+
+    if (data.controls && !data.customControls) {
+      html += '<div class="' + RawClasses.controls + '">';
+      html += '<button type="button" class="' + controlPrevClasses+ '">' + data.labels.previous + '</button>';
+      html += '<button type="button" class="' + controlZoomOutClasses + '">' + data.labels.zoom_out + '</button>';
+      html += '<button type="button" class="' + controlZoomInClasses + '">' + data.labels.zoom_in + '</button>';
+      html += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
+      html += '</div>'; // controls
+    }
+
+    this.addClass(data.thisClasses.join(" "))
+      .prepend(html);
+
+    data.$wrapper      = this.find(Classes.wrapper);
+    data.$viewport     = this.find(Classes.viewport);
+
+    if (data.customControls) {
+      data.$controls           = $(data.controls.container).addClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
+      data.$controlPrevious    = $(data.controls.previous).addClass(controlPrevClasses);
+      data.$controlNext        = $(data.controls.next).addClass(controlNextClasses);
+      data.$controlZoomIn      = $(data.controls.zoom_in).addClass(controlZoomInClasses);
+      data.$controlZoomOut     = $(data.controls.zoom_out).addClass(controlZoomOutClasses);
+    } else {
+      data.$controls           = this.find(Classes.controls);
+      data.$controlPrevious    = this.find(Classes.control_previous);
+      data.$controlNext        = this.find(Classes.control_next);
+      data.$controlZoomIn      = this.find(Classes.control_zoom_in);
+      data.$controlZoomOut     = this.find(Classes.control_zoom_out);
+    }
+
+    data.$controlItems = data.$controlPrevious.add(data.$controlNext);
+    data.$controlZooms = data.$controlZoomIn.add(data.$controlZoomOut);
+
+    cacheInstances();
+
+    data.$controlItems.on(Events.click, data, advanceGallery);
+    data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
+              .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
+
+    // if (data.lazy) {
+    //  checkScrollPosition(data);
+    // } else {
+      loadImage(data, data.images[ data.index ], true);
+    // }
+
+    updateControls(data);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$wrapper.remove();
+
+    data.$image.removeClass(RawClasses.source);
+
+    if (data.controls && !data.customControls) {
+      data.$controls.remove();
+    }
+
+    if (data.customControls) {
+      data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
+      data.$controlItems.off(Events.click).removeClass( [RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" ") );
+      data.$controlZooms.off( [Events.touchStart, Events.mouseDown].join(" ") )
+                .off( [Events.touchStart, Events.mouseDown].join(" ") )
+                .off( [Events.touchEnd, Events.mouseUp].join(" ") )
+                .removeClass( [RawClasses.control, RawClasses.control_zoom_in, RawClasses.control_zoom_out].join(" ") );
+    }
+
+    this.removeClass(data.thisClasses.join(" "))
+      .off(Events.namespace);
+
+    cacheInstances();
+  }
+
+  /**
+   * @method
+   * @name load
+   * @description Loads source image
+   * @param source [string OR array] "Source image (string) or array of images (array)"
+   * @example $(".target").viewer("load", "path/to/image.jpg");
+   * @example $(".target").viewer("load", ["path/to/image-1.jpg","path/to/image-2.jpg"]);
+   */
+
+  function load(data, source) {
+    data.index = 0;
+
+    if (typeof source === "string") {
+      data.total      = 0;
+      data.images     = [ source ];
+      data.gallery    = false;
+
+      data.$el.removeClass(RawClasses.gallery);
+    } else {
+      data.total      = source.length - 1;
+      data.images     = source;
+
+      if (source.length > 1) {
+        data.gallery = true;
+        data.$el.addClass(RawClasses.gallery);
+      }
+
+      source = data.images[ data.index ];
+    }
+
+    unloadImage(data, function() {
+      loadImage(data, source);
+    });
+  }
+
+  /**
+   * @method private
+   * @name loadInitialImage
+   * @description Loads first source image
+   * @param data [object] "Instance data"
+   */
+
+  function loadInitialImage(data) {
+    loadImage(data, data.images[ data.index ]);
+  }
+
+  /**
+   * @method private
+   * @name loadImage
+   * @description Loads source image
+   * @param data [object] "Instance data"
+   * @param source [string] "Source image"
+   * @param initialLoad [boolean] "Is initial load"
+   */
+
+  function loadImage(data, source, initialLoad) {
+    if (!data.isAnimating) {
+      data.isAnimating = true;
+
+      data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
+      data.$image = data.$container.find("img");
+
+      data.$viewport.append(data.$container);
+
+      // Load image
+      data.$image.one(Events.load, function() {
+        onImageReady(data);
+
+        data.isAnimating = false;
+
+        // Transition in
+        data.$container.fsTransition({
+          property: "opacity"
+        },
+        function() {
+          // console.log("loaded!");
+        });
+
+        data.$el.removeClass(RawClasses.loading);
+
+        data.$container.fsTouch({
+          pan      : true,
+          scale    : true
+        }).on(Events.scaleStart, data, onScaleStart)
+          .on(Events.scaleEnd, data, onScaleEnd)
+          .on(Events.scale, data, onScale);
+
+        data.$el.trigger(Events.loaded);
+      }).one(Events.error, data, loadError)
+        .attr("src", source)
+        .addClass(RawClasses.image);
+
+      // Check if image is cached
+      if (data.$image[0].complete || data.$image[0].readyState === 4) {
+        data.$image.trigger(Events.load);
+      }
+
+      data.source = source;
+    }
+  }
+
+  /**
+   * @method private
+   * @name loadError
+   * @description Error when resource fails to load.
+   */
+
+  function loadError(e) {
+    var data = e.data;
+
+    data.$el.trigger(Events.error);
+  }
+
+  /**
+   * @method private
+   * @name onImageReady
+   * @description Sets up image data
+   * @param data [object] "Instance data"
+   */
+
+  // on initial load
+  function onImageReady(data) {
+    // Cache image properties
+    // First for container
+    cacheImageProps(data);
+
+    // Cache viewport properties
+    cacheViewportProps(data);
+
+    // Set initial container position
+    data.containerTop  = (data.viewportHeight / 2);
+    data.containerLeft = (data.viewportWidth  / 2);
+
+    // Cache image min max
+    cacheImageMinMax(data);
+
+    // Set initial image size
+    data.imageHeight = data.naturalHeight;
+    data.imageWidth  = data.naturalWidth;
+
+    // Size the image to fit into the viewport
+    fitToViewport(data);
+
+    // Cache container min max
+    cacheContainerMinMax(data);
+
+    // Cache image top left
+    cacheImageTopLeft(data);
+
+    // Cache last props
+    cacheLastProps(data);
+
+    // Cache render props
+    cacheRenderProps(data);
+
+    // Update dom
+    var props = {
+      containerTop     : data.containerTop,
+      containerLeft    : data.containerLeft,
+      imageHeight      : data.imageHeight,
+      imageWidth       : data.imageWidth,
+      imageTop         : data.imageTop,
+      imageLeft        : data.imageLeft,
+    };
+
+    setSizeAndPosition(data, props);
+
+    data.isRendering = true;
+  }
+
+  /**
+   * @method private
+   * @name cacheImageProps
+   * @description Caches image properties
+   * @param data [object] "Instance data"
+   */
+
+  function cacheImageProps(data) {
+    var naturalSize = calculateNaturalSize(data.$image);
+
+    data.naturalHeight = naturalSize.naturalHeight;
+    data.naturalWidth  = naturalSize.naturalWidth;
+
+    data.ratioHorizontal = data.naturalHeight / data.naturalWidth;
+    data.ratioVertical   = data.naturalWidth  / data.naturalHeight;
+
+    data.isWide  = (data.naturalWidth > data.naturalHeight);
+  }
+
+  /**
+   * @method private
+   * @name cacheViewportProps
+   * @description Caches viewport properties
+   * @param data [object] "Instance data"
+   */
+
+  function cacheViewportProps(data) {
+    data.viewportHeight = data.$viewport.outerHeight();
+    data.viewportWidth  = data.$viewport.outerWidth();
+  }
+
+  /**
+   * @method private
+   * @name cacheContainerProps
+   * @description Caches container properties
+   * @param data [object] "Instance data"
+   */
+
+  function cacheContainerMinMax(data) {
+    if (data.imageHeight <= data.viewportHeight) {
+      data.containerMinTop = ( data.viewportHeight / 2 );
+      data.containerMaxTop = ( data.viewportHeight / 2 );
+    } else {
+      data.containerMinTop = data.viewportHeight - ( data.imageHeight / 2 );
+      data.containerMaxTop = ( data.imageHeight / 2 );
+    }
+
+    if (data.imageWidth <= data.viewportWidth) {
+      data.containerMinLeft = ( data.viewportWidth / 2 );
+      data.containerMaxLeft = ( data.viewportWidth / 2 );
+    } else {
+      data.containerMinLeft = data.viewportWidth  - ( data.imageWidth  / 2 );
+      data.containerMaxLeft = ( data.imageWidth  / 2 );
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheImageMinMax
+   * @description Caches image min and max based on viewport and size
+   * @param data [object] "Instance data"
+   */
+
+  function cacheImageMinMax(data) {
+    // Set min
+    if (data.isWide) {
+      //WIDE
+      data.imageMinWidth  = data.viewportWidth;
+      data.imageMinHeight = data.imageMinWidth * data.ratioHorizontal;
+
+      if (data.imageMinHeight > data.viewportHeight) {
+        data.imageMinHeight = data.viewportHeight;
+        data.imageMinWidth  = data.imageMinHeight * data.ratioVertical;
+      }
+    } else {
+      //TALL
+      data.imageMinHeight = data.viewportHeight;
+      data.imageMinWidth  = data.imageMinHeight * data.ratioVertical;
+
+      if (data.imageMinWidth > data.viewportWidth) {
+        data.imageMinWidth  = data.viewportWidth;
+        data.imageMinHeight = data.imageMinWidth * data.ratioHorizontal;
+      }
+    }
+
+    // Check natural max against new min
+    if (data.imageMinWidth > data.naturalWidth || data.imageMinHeight > data.naturalHeight) {
+      data.imageMinHeight = data.naturalHeight;
+      data.imageMinWidth  = data.naturalWidth;
+    }
+
+    // Set max
+    data.imageMaxHeight = data.naturalHeight;
+    data.imageMaxWidth  = data.naturalWidth;
+  }
+
+  /**
+   * @method private
+   * @name cacheImageTopLeft
+   * @description Caches image top and left based on viewport and size
+   * @param data [object] "Instance data"
+   */
+
+  function cacheImageTopLeft(data) {
+    data.imageTop  = -(data.imageHeight / 2);
+    data.imageLeft = -(data.imageWidth / 2);
+  }
+
+  /**
+   * @method private
+   * @name cacheLastProps
+   * @description Caches last container and image properties
+   * @param data [object] "Instance data"
+   */
+
+  function cacheLastProps(data) {
+    data.lastContainerTop  = data.containerTop;
+    data.lastContainerLeft = data.containerLeft;
+
+    data.lastImageHeight = data.imageHeight;
+    data.lastImageWidth  = data.imageWidth;
+
+    data.lastImageTop  = data.imageTop;
+    data.lastImageLeft = data.imageLeft;
+  }
+
+  /**
+   * @method private
+   * @name cacheRenderProps
+   * @description Caches container and image render properties
+   * @param data [object] "Instance data"
+   */
+
+  function cacheRenderProps(data) {
+    data.renderContainerTop  = data.lastContainerTop;
+    data.renderContainerLeft = data.lastContainerLeft;
+
+    data.renderImageTop  = data.lastImageTop;
+    data.renderImageLeft = data.lastImageLeft;
+
+    data.renderImageHeight = data.lastImageHeight;
+    data.renderImageWidth  = data.lastImageWidth;
+  }
+
+  /**
+   * @method private
+   * @name fitToViewport
+   * @description Fits image to viewport size
+   * @param data [object] "Instance data"
+   */
+
+  function fitToViewport(data) {
+    data.imageHeight = data.imageMinHeight;
+    data.imageWidth  = data.imageMinWidth;
+  }
+
+  /**
+   * @method private
+   * @name checkImageMinMax
+   * @description Checks image properties against min and max
+   * @param data [object] "Instance data"
+   */
+
+  // on scale
+  function checkImageMinMax(data) {
+    if (data.imageHeight < data.imageMinHeight) {
+      data.imageHeight = data.imageMinHeight;
+    }
+    if (data.imageHeight > data.imageMaxHeight) {
+      data.imageHeight = data.imageMaxHeight;
+    }
+
+    if (data.imageWidth < data.imageMinWidth) {
+      data.imageWidth = data.imageMinWidth;
+    }
+    if (data.imageWidth > data.imageMaxWidth) {
+      data.imageWidth = data.imageMaxWidth;
+    }
+  }
+
+  /**
+   * @method private
+   * @name checkContainerTopLeft
+   * @description Checks container properties against top and left
+   * @param data [object] "Instance data"
+   */
+
+  function checkContainerTopLeft(data) {
+    if (data.containerTop < data.containerMinTop) {
+      data.containerTop = data.containerMinTop;
+    }
+    if (data.containerTop > data.containerMaxTop) {
+      data.containerTop = data.containerMaxTop;
+    }
+
+    if (data.containerLeft < data.containerMinLeft) {
+      data.containerLeft = data.containerMinLeft;
+    }
+    if (data.containerLeft > data.containerMaxLeft) {
+      data.containerLeft = data.containerMaxLeft;
+    }
+  }
+
+  /**
+   * @method private
+   * @name checkDoubleTap
+   * @description Checks is double tapping
+   * @param data [object] "Instance data"
+   */
+
+  function checkDoubleTap(data) {
+    if (data.tapTimer === null) {
+      data.tapTimer = Functions.startTimer(data.tapTimer, 500, function() {
+        clearDoubleTap(data);
+      });
+    } else {
+      clearDoubleTap(data);
+      onImageZoom(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name clearDoubleTap
+   * @description Clears double tap timer
+   * @param data [object] "Instance data"
+   */
+
+  function clearDoubleTap(data) {
+    Functions.clearTimer(data.tapTimer);
+    data.tapTimer = null;
+  }
+
+  /**
+   * @method private
+   * @name setSizeAndPosition
+   * @description Updates image and container DOM
+   * @param data [object] "Instance data"
+   */
+
+  function setSizeAndPosition(data, props) {
+    if (Formstone.transform) {
+      var scaleX = props.imageWidth  / data.naturalWidth,
+        scaleY = props.imageHeight / data.naturalHeight;
+
+      data.$container.css( Formstone.transform, "translate3d(" + props.containerLeft + "px, " + props.containerTop + "px, 0)" );
+      data.$image.css( Formstone.transform, "translate3d(-50%, -50%, 0) scale(" + scaleX + "," + scaleY + ")" );
+    } else {
+      data.$container.css({
+        top     : props.containerTop,
+        left    : props.containerLeft
+      });
+
+      data.$image.css({
+        height    : props.imageHeight,
+        width     : props.imageWidth,
+        top       : props.imageTop,
+        left      : props.imageLeft
+      });
+    }
+  }
+
+  /**
+   * @method private
+   * @name onScaleStart
+   * @description Handles scale start event
+   * @param e [object] "Event data"
+   */
+
+  function onScaleStart(e) {
+    var data = e.data;
+
+    // Check double tap
+    checkDoubleTap(data);
+
+    // Cache previous values
+    cacheLastProps(data);
+  }
+
+  /**
+   * @method private
+   * @name onScale
+   * @description Handles scale event
+   * @param e [object] "Event data"
+   */
+
+  function onScale(e) {
+    var data = e.data;
+
+    // Clear double tap
+    clearDoubleTap(data);
+
+    data.isRendering = false;
+    data.isZooming   = false;
+
+    var zoomed = (data.imageHeight > data.imageMinHeight + 1);
+
+    // Change container position
+    data.containerTop  = data.lastContainerTop  + e.deltaY;
+    data.containerLeft = data.lastContainerLeft + e.deltaX;
+
+/*
+    var diffX  = data.lastContainerLeft - data.containerLeft,
+      diffY  = data.lastContainerTop - data.containerTop;
+
+    data.containerLeft -= diffX;
+    data.containerTop  -= diffY;
+*/
+
+    // Change image size
+    data.imageHeight = data.lastImageHeight * e.scale;
+    data.imageWidth  = data.lastImageWidth  * e.scale;
+
+    // Cache container min max
+    cacheContainerMinMax(data);
+
+    // Check container top left
+    checkContainerTopLeft(data);
+
+    // Check image min max
+    checkImageMinMax(data);
+
+    // Cache image top left
+    cacheImageTopLeft(data);
+
+    // Update dom
+    var props = {
+      containerTop     : data.containerTop,
+      containerLeft    : data.containerLeft,
+      imageHeight      : data.imageHeight,
+      imageWidth       : data.imageWidth,
+      imageTop         : data.imageTop,
+      imageLeft        : data.imageLeft,
+    };
+
+    setSizeAndPosition(data, props);
+  }
+
+  /**
+   * @method private
+   * @name onScaleEnd
+   * @description Handles scale end event
+   * @param e [object] "Event data"
+   */
+
+  function onScaleEnd(e) {
+    var data = e.data;
+
+    if (!data.isZooming) {
+      // Cache last properties
+      cacheLastProps(data);
+
+      // Cache rander properties
+      cacheRenderProps(data);
+
+      data.isRendering = true;
+    }
+  }
+
+  /**
+   * @method private
+   * @name onImageZoom
+   * @description Zooms image in or out depending on current size
+   * @param data [object] "Instance data"
+   */
+
+  function onImageZoom(data) {
+    var zoomed = (data.imageHeight > data.imageMinHeight + 1);
+
+    data.isZooming = true;
+
+    // Cache last properties
+    cacheLastProps(data);
+
+    // Cache rander properties
+    cacheRenderProps(data);
+
+    if (zoomed) {
+      // zoomed in (go to min)
+      data.imageHeight = data.imageMinHeight;
+      data.imageWidth  = data.imageMinWidth;
+    } else {
+      // zoomed out (go to max)
+      data.imageHeight = data.imageMaxHeight;
+      data.imageWidth  = data.imageMaxWidth;
+    }
+
+    // Cache container min max
+    cacheContainerMinMax(data);
+
+    // Check container top left
+    checkContainerTopLeft(data);
+
+    // Cache image top left
+    cacheImageTopLeft(data);
+
+    data.isRendering = true;
+  }
+
+  /**
+   * @method private
+   * @name onZoomStart
+   * @description Handle zoom start
+   * @param e [object] "Event data"
+   */
+
+  function onZoomStart(e) {
+    Functions.killEvent(e);
+
+    var $target   = $(e.currentTarget),
+      data      = e.data,
+      direction = ($target.hasClass(RawClasses.control_zoom_out)) ? 'out' : 'in';
+
+    if (direction === 'out') {
+      onZoomOut(data);
+    } else {
+      onZoomIn(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onZoomIn
+   * @description Handle zoom in
+   * @param data [object] "Instance data"
+   */
+
+  function onZoomIn(data) {
+    data.keyDownTime = 1;
+    data.action = 'zoom_in';
+  }
+
+  /**
+   * @method private
+   * @name onZoomOut
+   * @description Handle zoom out
+   * @param data [object] "Instance data"
+   */
+
+  function onZoomOut(data) {
+    data.keyDownTime = 1;
+    data.action = 'zoom_out';
+  }
+
+  /**
+   * @method private
+   * @name onClearZoom
+   * @description Handle clear zoom
+   * @param e [object] "Event data"
+   */
+
+  function onClearZoom(e) {
+    var data = e.data;
+
+    data.action = false;
+  }
+
+  /**
+   * @method private
+   * @name renderRAF
+   * @description Updates DOM based on animation values
+   * @param data [object] "Instance data"
+   */
+
+  function renderRAF(data) {
+    if (data.isRendering) {
+      if (data.action) {
+        data.keyDownTime += data.zoomIncrement;
+
+        var delta = ((data.action === "zoom_out") ? -1 : 1) * Math.round((data.imageWidth * data.keyDownTime) - data.imageWidth);
+
+        if (delta > data.zoomDelta) {
+          delta = data.zoomDelta;
+        }
+
+        if (data.isWide) {
+          data.imageWidth += delta;
+          data.imageHeight = Math.round(data.imageWidth / data.ratioVertical);
+        } else {
+          data.imageHeight += delta;
+          data.imageWidth = Math.round(data.imageHeight / data.ratioHorizontal);
+        }
+
+        // Check image min max
+        checkImageMinMax(data);
+
+        // Cache image top left
+        cacheImageTopLeft(data);
+
+        // Cache container min max
+        cacheContainerMinMax(data);
+
+        // Check container top left
+        checkContainerTopLeft(data);
+      }
+
+      data.renderContainerTop  += Math.round((data.containerTop  - data.renderContainerTop)  * data.zoomEnertia);
+      data.renderContainerLeft += Math.round((data.containerLeft - data.renderContainerLeft) * data.zoomEnertia);
+
+      data.renderImageTop  += Math.round((data.imageTop  - data.renderImageTop)  * data.zoomEnertia);
+      data.renderImageLeft += Math.round((data.imageLeft - data.renderImageLeft) * data.zoomEnertia);
+
+      data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.zoomEnertia);
+      data.renderImageWidth  += Math.round((data.imageWidth  - data.renderImageWidth)  * data.zoomEnertia);
+
+      // Update DOM
+
+      var props = {
+        containerTop     : data.renderContainerTop,
+        containerLeft    : data.renderContainerLeft,
+        imageHeight      : data.renderImageHeight,
+        imageWidth       : data.renderImageWidth,
+        imageTop         : data.renderImageTop,
+        imageLeft        : data.renderImageLeft,
+      };
+
+      setSizeAndPosition(data, props);
+    }
+  }
+
+  /**
+   * @method
+   * @name unload
+   * @description Unloads current image
+   * @example $(".target").viewer("unload");
+   */
+
+   function unload(data) {
+    unloadImage(data);
+  }
+
+  /**
+   * @method private
+   * @name unloadImage
+   * @description Unloads current image
+   * @param data [object] "Instance data"
+   * @param callback [function] "Callback function"
+   */
+
+  function unloadImage(data, callback) {
+    if (!data.isAnimating) {
+      clearDoubleTap(data);
+
+      data.isAnimating = true;
+      data.isRendering = false;
+      data.isZooming   = false;
+
+      clearTouch(data);
+
+      data.$container.fsTransition({
+        property: "opacity"
+      },
+      function() {
+        data.isAnimating = false;
+
+        data.$container.remove();
+
+        if (typeof callback === "function") {
+          callback.call(window, data);
+        }
+      });
+
+      data.$el.addClass(RawClasses.loading);
+    }
+  }
+
+  /**
+   * @method private
+   * @name advanceGallery
+   * @description Advances gallery
+   * @param e [object] "Event data"
+   */
+
+  function advanceGallery(e) {
+    Functions.killEvent(e);
+
+    var $target = $(e.currentTarget),
+      data    = e.data,
+      index   = data.index + (( $target.hasClass(RawClasses.control_next) ) ? 1 : -1);
+
+    if (!data.isAnimating) {
+      if (index < 0) {
+        index = 0;
+      }
+
+      if (index > data.total) {
+        index = data.total;
+      }
+
+      if (index !== data.index) {
+        data.index = index;
+
+        unloadImage(data, function() {
+          loadImage(data, data.images[ data.index ]);
+        });
+      }
+
+      updateControls(data);
+    }
+  }
+
+  /**
+   * @method private
+   * @name updateControls
+   * @description Update control states
+   * @param data [object] Instance data
+   */
+
+  function updateControls(data) {
+    data.$controlItems.removeClass(RawClasses.control_disabled);
+
+    if (data.index === 0) {
+      data.$controlPrevious.addClass(RawClasses.control_disabled);
+    }
+    if (data.index === data.images.length - 1) {
+      data.$controlNext.addClass(RawClasses.control_disabled);
+    }
+  }
+
+  /**
+   * @method private
+   * @name resize
+   * @description Resize target instance
+   * @example $(".target").viewer("resize");
+   */
+
+  /**
+   * @method private
+   * @name resizeInstance
+   * @description Handle window resize event
+   * @param data [object] "Instance data"
+   */
+
+  function resizeInstance(data) {
+    cacheViewportProps(data);
+
+    cacheContainerMinMax(data);
+
+    cacheImageMinMax(data);
+
+    cacheImageTopLeft(data);
+
+    cacheContainerMinMax(data);
+
+    checkContainerTopLeft(data);
+
+    checkImageMinMax(data);
+  }
+
+  /**
+   * @method private
+   * @name clearTouch
+   * @description Clears current touch action.
+   */
+
+  function clearTouch(data) {
+    if (data.$container && data.$container.length) {
+      data.$container.fsTouch("destroy")
+               .off(Events.scaleStart, onScaleStart)
+               .off(Events.scaleEnd, onScaleEnd)
+               .off(Events.scale, onScale);
+    }
+  }
+
+  /**
+   * @method private
+   * @name cacheScrollPosition
+   * @description Cahce target scroll position
+   * @param data [object] "Instance data"
+   */
+
+  function cacheScrollPosition(data) {
+    data.scrollTop = data.$el.offset().top;
+  }
+
+  // /**
+  //  * @method private
+  //  * @name checkScrollPosition
+  //  * @description Check target scroll position against window
+  //  * @param data [object] "Instance data"
+  //  */
+  //
+  // function checkScrollPosition(data) {
+  //   if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
+  //     data.visible = true;
+  //     loadInitialImage(data);
+  //   }
+  // }
+
+  /**
+   * @method private
+   * @name calculateNaturalSize
+   * @description Determines natural size of target image.
+   * @param $img [jQuery object] "Source image object"
+   * @return [object | boolean] "Object containing natural height and width values or false"
+   */
+
+  function calculateNaturalSize($img) {
+    var node = $img[0],
+      img = new Image();
+
+    if (typeof node.naturalHeight !== "undefined") {
+      return {
+        naturalHeight: node.naturalHeight,
+        naturalWidth:  node.naturalWidth
+      };
+    } else {
+      if (node.tagName.toLowerCase() === 'img') {
+        img.src = node.src;
+        return {
+          naturalHeight: img.height,
+          naturalWidth:  img.width
+        };
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * @plugin
+   * @name Viewer
+   * @description A jQuery plugin for image exploration.
+   * @type widget
+   * @main viewer.js
+   * @main viewer.css
+   * @dependency jQuery
+   * @dependency core.js
+   * @dependency touch.js
+   * @dependency transition.js
+   */
+
+  var Plugin = Formstone.Plugin("viewer", {
+      widget: true,
+
+      /**
+       * @options
+       * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
+       * @param customClass [string] <''> "Class applied to instance"
+       // param lazy [boolean] <false> "Lazy load with scroll"
+       // param lazyEdge [int] <100> "Lazy load edge"
+       * @param labels.count [string] <'of'> "Gallery count separator text"
+       * @param labels.next [string] <'Next'> "Gallery control text"
+       * @param labels.previous [string] <'Previous'> "Gallery control text"
+       * @param labels.zoom_in [string] <'Zoom In'> "Image zoom text"
+       * @param labels.zoom_out [string] <'Zoom Out'> "Image zoom text"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       * @param zoomDelta [int] <100> "Max zoom change"
+       * @param zoomEnertia [float] <0.2> "Enertia for zoom"
+       * @param zoomIncrement [float] <0.01> "Increment for zoom buttons"
+       */
+
+      defaults: {
+        controls       : true,
+        customClass    : "",
+        // lazy           : false,
+        // lazyEdge       : 100,
+        labels: {
+          count      : "of",
+          next       : "Next",
+          previous   : "Previous",
+          zoom_in    : "Zoom In",
+          zoom_out   : "Zoom Out"
+        },
+        theme          : "fs-light",
+        zoomDelta      : 100,
+        zoomEnertia    : 0.2,
+        zoomIncrement  : 0.01
+      },
+
+      classes: [
+        "source",
+        "wrapper",
+        "viewport",
+        "container",
+        "image",
+        "gallery",
+        "loading_icon",
+
+        "controls",
+        "controls_custom",
+        "control",
+        "control_previous",
+        "control_next",
+        "control_zoom_in",
+        "control_zoom_out",
+        "control_disabled",
+        // "lazy"
+        "loading"
+      ],
+
+      /**
+       * @events
+       * @event loaded.viewer "Image loaded"
+       * @event ready.viewer "Image ready"
+       */
+
+      events: {
+        loaded    : "loaded",
+        ready     : "ready"
+      },
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+        _resize       : resize,
+        _raf          : raf,
+
+        resize        : resizeInstance,
+        load          : load,
+        unload        : unload
+      }
+    }),
+
+    // Localize References
+
+    Namespace       = Plugin.namespace,
+    Classes         = Plugin.classes,
+    RawClasses      = Classes.raw,
+    Events          = Plugin.events,
+    Functions       = Plugin.functions,
+
+    Window          = Formstone.window,
+    $Window         = Formstone.$window,
+    $Body,
+    ScrollTop       = 0,
+    $Instances      = [],
+    ViewportSetup   = false;
+    // $LazyInstances  = [];
+
+})
+
+);
 
 /* ==========================================================================
   Demo
 ============================================================================= */
 
-  /* global picturefill */
+  (function($, Formstone) {
+    var $window,
+        $body,
+        opts = {};
 
-  Site.modules.Demo = (function($, Site) {
+    opts.minXS = "320";
+    opts.minSM = "500";
+    opts.minMD = "740";
+    opts.minLG = "980";
+    opts.minXL = "1220";
+
+    opts.maxXS = opts.minXS - 1;
+    opts.maxSM = opts.minSM - 1;
+    opts.maxMD = opts.minMD - 1;
+    opts.maxLG = opts.minLG - 1;
+    opts.maxXL = opts.minXL - 1;
+
+    opts.minHTsm = parseInt("800_sm", 10);
+    opts.minHT   = parseInt("800", 10);
+
+    opts.maxHTsm = opts.minHTsm - 1;
+    opts.maxHT   = opts.minHT - 1;
 
     function init() {
-      $.cookie({
-        path: '/'
-      });
+      $window = $(window);
+      $body   = $("body");
+
+      if ($.mediaquery) {
+        $.mediaquery({
+          minWidth: [ opts.minXS, opts.minSM, opts.minMD, opts.minLG, opts.minXL ],
+          maxWidth: [ opts.maxXL, opts.maxLG, opts.maxMD, opts.maxSM, opts.maxXS ],
+          minHeight: [ opts.minHTsm, opts.minHT ],
+          maxHeight: [ opts.maxHT, opts.maxHTsm ]
+        });
+      }
+
+      if ($.cookie) {
+        $.cookie({
+          path: "/"
+        });
+      }
 
       buildDemoTabs();
       buildPlugins("fs-light");
-
-      Site.onScroll.push(scroll);
-      Site.onResize.push(resize);
-      Site.onRespond.push(respond);
-
-      Site.scroll();
-    }
-
-    function scroll() {
-
-    }
-
-    function resize() {
-      scroll();
-    }
-
-    function respond() {
-      scroll();
     }
 
     function buildDemoTabs() {
       $(".demo_container").each(function(index) {
-        var html  = "",
-          $demo = $(this),
-          $example = $demo.find(".demo_example"),
-          $code    = $demo.find(".demo_code");
+        var html     = "",
+            $demo    = $(this),
+            $example = $demo.find(".demo_example"),
+            $code    = $demo.find(".demo_code");
 
         $example.attr("id", "example-" + index);
         $code.attr("id", "code-" + index);
@@ -1116,59 +15540,59 @@ Prism.languages.js = Prism.languages.javascript;
 
       // Destroy
 
-      Site.$body.find(".js-background").background("destroy");
-      Site.$body.find(".js-carousel").carousel("destroy");
-      Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
-            Site.$body.find(".js-checkpoint").checkpoint("destroy");
-      Site.$body.find(".js-dropdown").dropdown("destroy");
-      Site.$body.find(".js-equalize").equalize("destroy");
-      Site.$body.find(".js-lightbox").lightbox("destroy");
-      Site.$body.find(".js-navigation").navigation("destroy");
-      Site.$body.find("input[type=number]").number("destroy");
-      Site.$body.find(".js-pagination").pagination("destroy");
-      Site.$body.find("input[type=range]").range("destroy");
-      Site.$body.find(".js-scrollbar").scrollbar("destroy");
-      Site.$body.find(".js-sticky").sticky("destroy");
-      Site.$body.find(".js-swap").swap("destroy");
-      Site.$body.find(".js-tabs").tabs("destroy");
-      Site.$body.find(".js-tooltip").tooltip("destroy");
-      Site.$body.find(".js-upload").upload("destroy");
-      Site.$body.find(".js-viewer").viewer("destroy");
+      $body.find(".js-background").background("destroy");
+      $body.find(".js-carousel").carousel("destroy");
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
+      $body.find(".js-checkpoint").checkpoint("destroy");
+      $body.find(".js-dropdown").dropdown("destroy");
+      $body.find(".js-equalize").equalize("destroy");
+      $body.find(".js-lightbox").lightbox("destroy");
+      $body.find(".js-navigation").navigation("destroy");
+      $body.find("input[type=number]").number("destroy");
+      $body.find(".js-pagination").pagination("destroy");
+      $body.find("input[type=range]").range("destroy");
+      $body.find(".js-scrollbar").scrollbar("destroy");
+      $body.find(".js-sticky").sticky("destroy");
+      $body.find(".js-swap").swap("destroy");
+      $body.find(".js-tabs").tabs("destroy");
+      $body.find(".js-tooltip").tooltip("destroy");
+      $body.find(".js-upload").upload("destroy");
+      $body.find(".js-viewer").viewer("destroy");
 
       // Init
 
-      Site.$body.find(".js-background").background(options);
-      Site.$body.find(".js-carousel").carousel(options);
-      Site.$body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
-            Site.$body.find(".js-checkpoint").checkpoint();
-      Site.$body.find(".js-dropdown").dropdown(options);
-      Site.$body.find(".js-equalize").equalize(options);
-      Site.$body.find(".js-lightbox").lightbox(options);
-      Site.$body.find(".js-navigation").navigation(options);
-      Site.$body.find("input[type=number]").number(options);
-      Site.$body.find(".js-pagination").pagination(options);
-      Site.$body.find("input[type=range]").range(options);
-      Site.$body.find(".js-scrollbar").scrollbar(options);
-      Site.$body.find(".js-sticky").sticky(options);
-      Site.$body.find(".js-swap").swap(options);
-      Site.$body.find(".js-tabs").tabs(options);
-      Site.$body.find(".js-tooltip").tooltip(options);
-      Site.$body.find(".js-upload").upload(options);
-      Site.$body.find(".js-viewer").viewer(options);
+      $body.find(".js-background").background(options);
+      $body.find(".js-carousel").carousel(options);
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
+      $body.find(".js-checkpoint").checkpoint();
+      $body.find(".js-dropdown").dropdown(options);
+      $body.find(".js-equalize").equalize(options);
+      $body.find(".js-lightbox").lightbox(options);
+      $body.find(".js-navigation").navigation(options);
+      $body.find("input[type=number]").number(options);
+      $body.find(".js-pagination").pagination(options);
+      $body.find("input[type=range]").range(options);
+      $body.find(".js-scrollbar").scrollbar(options);
+      $body.find(".js-sticky").sticky(options);
+      $body.find(".js-swap").swap(options);
+      $body.find(".js-tabs").tabs(options);
+      $body.find(".js-tooltip").tooltip(options);
+      $body.find(".js-upload").upload(options);
+      $body.find(".js-viewer").viewer(options);
 
       // Demo Tabs
 
-      Site.$body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
+      $body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
 
-      Site.$body.find(".js-demo_tabs").tabs({
+      $body.find(".js-demo_tabs").tabs({
         mobileMaxWidth: "0px",
         theme: "fs-demo"
       }).on("update.tabs", resetPlugins);
     }
 
     function resetPlugins() {
-      var $tab = $(this),
-        $content = $( $tab.attr("href") );
+      var $tab     = $(this),
+          $content = $( $tab.attr("href") );
 
       $content.find(".js-background").background("resize");
       $content.find(".js-carousel").carousel("resize");
@@ -1177,12 +15601,9 @@ Prism.languages.js = Prism.languages.javascript;
       $content.find(".js-scrollbar").scrollbar("resize");
     }
 
-    /* Hook Into Main init Routine */
+    // Ready
 
-    Site.onInit.push(init);
+    Formstone.Ready(init);
 
-    return {
-
-    };
-  })(jQuery, Site);
+  })(jQuery, Formstone);
 

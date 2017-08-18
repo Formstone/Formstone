@@ -96,7 +96,10 @@
     var url = e.currentTarget;
 
     // Ignore everything but normal click
-    if ( (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) || (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank" ) {
+    if (
+      (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) ||
+      (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank"
+    ) {
       return;
     }
 
@@ -161,13 +164,13 @@
     // Get transition out deferred
     Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
 
-    var parsed     = parseURL(url),
-      params     = parsed.params,
-      hash       = parsed.hash,
-      cleanURL   = parsed.clean,
-      error      = "User error",
-      response   = null,
-      requestDeferred = $.Deferred();
+    var parsed   = parseURL(url),
+        params   = parsed.params,
+        hash     = parsed.hash,
+        cleanURL = parsed.clean,
+        error    = "User error",
+        response = null,
+        requestDeferred = $.Deferred();
 
     params[ Instance.requestKey ] = true;
 
@@ -358,8 +361,8 @@
 
   function pushState(id, url) {
     history.pushState({
-      id: id,
-      url: url
+      id  : id,
+      url : url
     }, Namespace + id, url);
   }
 
@@ -387,10 +390,10 @@
 
   function parseURL(url) {
     var queryIndex = url.indexOf("?"),
-      hashIndex  = url.indexOf("#"),
-      params     = {},
-      hash       = "",
-      cleanURL   = url;
+        hashIndex  = url.indexOf("#"),
+        params     = {},
+        hash       = "",
+        cleanURL   = url;
 
     if (hashIndex > -1) {
       hash = url.slice(hashIndex);
@@ -403,10 +406,10 @@
     }
 
     return {
-      hash     : hash,
-      params   : params,
-      url      : url,
-      clean    : cleanURL
+      hash   : hash,
+      params : params,
+      url    : url,
+      clean  : cleanURL
     };
   }
 
@@ -422,68 +425,68 @@
    */
 
   var Plugin = Formstone.Plugin("asap", {
-      utilities: {
-        _initialize    : initialize,
+        utilities: {
+          _initialize : initialize,
 
-        load           : loadURL,
-        replace        : replaceURL
-      },
+          load        : loadURL,
+          replace     : replaceURL
+        },
+
+        /**
+         * @events
+         * @event requested.asap "Before request is made; triggered on window; Second parameter 'true' if pop event"
+         * @event progress.asap "As request is loaded; triggered on window; Second parameter contains percentage complete"
+         * @event loaded.asap "After request is loaded; triggered on window"
+         * @event rendered.asap "After state is rendered; triggered on window"
+         * @event failed.asap "After load error; triggered on window"
+         */
+
+        events: {
+          failed    : "failed",
+          loaded    : "loaded",
+          popState  : "popstate",
+          progress  : "progress",
+          requested : "requested",
+          rendered  : "rendered"
+        }
+      }),
 
       /**
-       * @events
-       * @event requested.asap "Before request is made; triggered on window; Second parameter 'true' if pop event"
-       * @event progress.asap "As request is loaded; triggered on window; Second parameter contains percentage complete"
-       * @event loaded.asap "After request is loaded; triggered on window"
-       * @event rendered.asap "After state is rendered; triggered on window"
-       * @event failed.asap "After load error; triggered on window"
+       * @options
+       * @param cache [boolean] <true> "Flag to cache AJAX responses"
+       * @param ignoreTypes [regex] <> "File types to ignore"
+       * @param render [function] <$.noop> "Custom render function"
+       * @param requestKey [string] <'fs-asap'> "GET variable for requests"
+       * @param selector [string] <'a'> "Target DOM Selector"
+       * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
        */
 
-      events: {
-        failed      : "failed",
-        loaded      : "loaded",
-        popState    : "popstate",
-        progress    : "progress",
-        requested   : "requested",
-        rendered    : "rendered"
-      }
-    }),
+      Defaults = {
+        cache         : true,
+        ignoreTypes   : /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        render        : $.noop,
+        requestKey    : "fs-asap",
+        selector      : "a",
+        transitionOut : $.noop
+      },
 
-    /**
-     * @options
-     * @param cache [boolean] <true> "Flag to cache AJAX responses"
-     * @param ignoreTypes [regex] <> "File types to ignore"
-     * @param render [function] <$.noop> "Custom render function"
-     * @param requestKey [string] <'fs-asap'> "GET variable for requests"
-     * @param selector [string] <'a'> "Target DOM Selector"
-     * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
-     */
+      // Localize References
 
-    Defaults = {
-      cache         : true,
-      ignoreTypes   : /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
-      render        : $.noop,
-      requestKey    : "fs-asap",
-      selector      : "a",
-      transitionOut : $.noop
-    },
+      $Window    = Formstone.$window,
+      Window     = $Window[0],
+      $Body,
 
-    // Localize References
+      Functions  = Plugin.functions,
+      Events     = Plugin.events,
+      RawClasses = Plugin.classes.raw,
 
-    $Window       = Formstone.$window,
-    Window        = $Window[0],
-    $Body,
+      // Internal
 
-    Functions     = Plugin.functions,
-    Events        = Plugin.events,
-    RawClasses    = Plugin.classes.raw,
-
-    // Internal
-
-    Namespace     = "asap-",
-    CurrentURL    = '',
-    CurrentID     = 1,
-    Request,
-    Instance;
+      Namespace  = "asap-",
+      CurrentURL = '',
+      CurrentID  = 1,
+      Request,
+      Instance;
 
 })
 

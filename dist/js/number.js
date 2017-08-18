@@ -1,2 +1,367 @@
-/*! formstone v1.3.3 [number.js] 2017-08-17 | GPL-3.0 License | formstone.it */
-!function(t){"function"==typeof define&&define.amd?define(["jquery","./core"],t):t(jQuery,Formstone)}(function(t,e){"use strict";function a(t){t.data.$container.addClass(m.focus)}function n(t){o(t.data,0),t.data.$container.removeClass(m.focus)}function i(t){var e=t.data;38!==t.keyCode&&40!==t.keyCode||(t.preventDefault(),o(e,38===t.keyCode?e.step:-e.step))}function s(e){f.killEvent(e),r(e);var a=e.data;if(!a.disabled&&e.which<=1){var n=t(e.target).hasClass(m.up)?a.step:-a.step;a.timer=f.startTimer(a.timer,300,function(){a.timer=f.startTimer(a.timer,125,function(){o(a,n)},!0)}),o(a,n),b.on([p.touchEnd,p.mouseUp].join(" "),a,r)}}function r(t){f.killEvent(t);var e=t.data;f.clearTimer(e.timer,!0),b.off(p.namespace)}function o(e,a){var n=parseFloat(e.$el.val()),i=a;"undefined"===t.type(n)||isNaN(n)?i=!1!==e.min?e.min:0:!1!==e.min&&n<e.min?i=e.min:i+=n;var s=(i-e.min)%e.step;0!==s&&(i-=s),!1!==e.min&&i<e.min&&(i=e.min),!1!==e.max&&i>e.max&&(i=e.max),i!==n&&(i=l(i,e.digits),e.$el.val(i).trigger(p.raw.change,[!0]))}function d(t){var e=String(t);return e.indexOf(".")>-1?e.length-e.indexOf(".")-1:0}function l(t,e){var a=Math.pow(10,e);return Math.round(t*a)/a}var u=e.Plugin("number",{widget:!0,defaults:{customClass:"",labels:{up:"Up",down:"Down"},theme:"fs-light"},classes:["arrow","up","down","disabled","focus"],methods:{_setup:function(){b=e.$body},_construct:function(t){var e=parseFloat(this.attr("min")),r=parseFloat(this.attr("max"));t.min=!(!e&&0!==e)&&e,t.max=!(!r&&0!==r)&&r,t.step=parseFloat(this.attr("step"))||1,t.timer=null,t.digits=d(t.step),t.disabled=this.is(":disabled")||this.is("[readonly]");var l="";l+='<button type="button" class="'+[m.arrow,m.up].join(" ")+'" aria-hidden="true" tabindex="-1">'+t.labels.up+"</button>",l+='<button type="button" class="'+[m.arrow,m.down].join(" ")+'" aria-hidden="true" tabindex="-1">'+t.labels.down+"</button>",this.wrap('<div class="'+[m.base,t.theme,t.customClass,t.disabled?m.disabled:""].join(" ")+'"></div>').after(l),t.$container=this.parent(c.base),t.$arrows=t.$container.find(c.arrow),this.on(p.focus,t,a).on(p.blur,t,n).on(p.keyPress,t,i),t.$container.on([p.touchStart,p.mouseDown].join(" "),c.arrow,t,s),o(t,0)},_destruct:function(t){t.$arrows.remove(),this.unwrap().off(p.namespace)},enable:function(t){t.disabled&&(this.prop("disabled",!1),t.$container.removeClass(m.disabled),t.disabled=!1)},disable:function(t){t.disabled||(this.prop("disabled",!0),t.$container.addClass(m.disabled),t.disabled=!0)},update:function(t){var e=parseFloat(t.$el.attr("min")),a=parseFloat(t.$el.attr("max"));t.min=!(!e&&0!==e)&&e,t.max=!(!a&&0!==a)&&a,t.step=parseFloat(t.$el.attr("step"))||1,t.timer=null,t.digits=d(t.step),t.disabled=t.$el.is(":disabled")||t.$el.is("[readonly]"),o(t,0)}}}),c=u.classes,m=c.raw,p=u.events,f=u.functions,b=null});
+/*! formstone v1.3.3 [number.js] 2017-08-18 | GPL-3.0 License | formstone.it */
+/* global define */
+
+(function(factory) {
+  if (typeof define === "function" && define.amd) {
+    define([
+      "jquery",
+      "./core"
+    ], factory);
+  } else {
+    factory(jQuery, Formstone);
+  }
+}(function($, Formstone) {
+
+  "use strict";
+
+  /**
+   * @method private
+   * @name setup
+   * @description Setup plugin.
+   */
+
+  function setup() {
+    $Body = Formstone.$body;
+  }
+
+  /**
+   * @method private
+   * @name construct
+   * @description Builds instance.
+   * @param data [object] "Instance data"
+   */
+
+  function construct(data) {
+    var min = parseFloat(this.attr("min")),
+      max = parseFloat(this.attr("max"));
+
+    // Mask as text
+
+    data.min  = (min || min === 0) ? min : false;
+    data.max  = (max || max === 0) ? max : false;
+    data.step = parseFloat(this.attr("step")) || 1;
+    data.timer        = null;
+    data.digits       = significantDigits(data.step);
+    data.disabled     = this.is(":disabled") || this.is("[readonly]");
+
+    var html = "";
+    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '" aria-hidden="true" tabindex="-1">'   + data.labels.up + '</button>';
+    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '" aria-hidden="true" tabindex="-1">' + data.labels.down + '</button>';
+
+    // Modify DOM
+    this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+      .after(html);
+
+    // Store data
+    data.$container    = this.parent(Classes.base);
+    data.$arrows       = data.$container.find(Classes.arrow);
+
+    // Bind events
+    this.on(Events.focus, data, onFocus)
+      .on(Events.blur, data, onBlur)
+      .on(Events.keyPress, data, onKeyup);
+
+    data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
+
+    step(data, 0);
+  }
+
+  /**
+   * @method private
+   * @name destruct
+   * @description Tears down instance.
+   * @param data [object] "Instance data"
+   */
+
+  function destruct(data) {
+    data.$arrows.remove();
+
+    this.unwrap()
+      .off(Events.namespace);
+  }
+
+  /**
+   * @method
+   * @name enable
+   * @description Enables target instance
+   * @example $(".target").number("enable");
+   */
+
+  function enable(data) {
+    if (data.disabled) {
+      this.prop("disabled", false);
+
+      data.$container.removeClass(RawClasses.disabled);
+
+      data.disabled = false;
+    }
+  }
+
+  /**
+   * @method
+   * @name disable
+   * @description Disables target instance
+   * @example $(".target").number("disable");
+   */
+
+  function disable(data) {
+    if (!data.disabled) {
+      this.prop("disabled", true);
+
+      data.$container.addClass(RawClasses.disabled);
+
+      data.disabled = true;
+    }
+  }
+
+  /**
+  * @method
+  * @name update
+  * @description Updates instance.
+  * @example $(".target").number("update");
+  */
+
+  function updateInstance(data) {
+    var min = parseFloat(data.$el.attr("min")),
+      max = parseFloat(data.$el.attr("max"));
+
+    data.min  = (min || min === 0) ? min : false;
+    data.max  = (max || max === 0) ? max : false;
+    data.step = parseFloat(data.$el.attr("step")) || 1;
+    data.timer        = null;
+    data.digits       = significantDigits(data.step);
+    data.disabled     = data.$el.is(":disabled") || data.$el.is("[readonly]");
+
+    step(data, 0);
+  }
+
+  /**
+   * @method private
+   * @name onFocus
+   * @description Handles instance focus
+   * @param e [object] "Event data"
+   */
+
+  function onFocus(e) {
+    e.data.$container.addClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onBlur
+   * @description Handles instance blur
+   * @param e [object] "Event data"
+   */
+
+  function onBlur(e) {
+    step(e.data, 0);
+
+    e.data.$container.removeClass(RawClasses.focus);
+  }
+
+  /**
+   * @method private
+   * @name onKeyup
+   * @description Handles keypress event on inputs
+   * @param e [object] "Event data"
+   */
+
+  function onKeyup(e) {
+    var data = e.data;
+
+    // If arrow keys
+    if (e.keyCode === 38 || e.keyCode === 40) {
+      e.preventDefault();
+
+      step(data, (e.keyCode === 38) ? data.step : -data.step);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerDown
+   * @description Handles pointer down event on instance arrows
+   * @param e [object] "Event data"
+   */
+
+  function onPointerDown(e) {
+    Functions.killEvent(e);
+
+    // Make sure we reset the states
+    onPointerUp(e);
+
+    var data = e.data;
+
+    if (!data.disabled && e.which <= 1) {
+      var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
+
+      data.timer = Functions.startTimer(data.timer, 300, function() {
+
+        data.timer = Functions.startTimer(data.timer, 125, function() {
+          step(data, change, false);
+        }, true);
+
+      });
+
+      step(data, change);
+
+      $Body.on( [Events.touchEnd, Events.mouseUp].join(" "), data, onPointerUp);
+    }
+  }
+
+  /**
+   * @method private
+   * @name onPointerUp
+   * @description Handles pointer up event on instance arrows
+   * @param e [object] "Event data"
+   */
+
+  function onPointerUp(e) {
+    Functions.killEvent(e);
+
+    var data = e.data;
+
+    Functions.clearTimer(data.timer, true);
+
+    $Body.off(Events.namespace);
+  }
+
+  /**
+   * @method private
+   * @name step
+   * @description Steps through values
+   * @param e [object] "Event data"
+   * @param change [string] "Change value"
+   */
+
+  function step(data, change) {
+    var oValue = parseFloat(data.$el.val()),
+      value = change;
+
+    if ($.type(oValue) === "undefined" || isNaN(oValue)) {
+      if (data.min !== false) {
+        value = data.min;
+      } else {
+        value = 0;
+      }
+    } else if (data.min !== false && oValue < data.min) {
+      value = data.min;
+    } else {
+      value += oValue;
+    }
+
+    var diff = (value - data.min) % data.step;
+    if (diff !== 0) {
+      value -= diff;
+    }
+
+    if (data.min !== false && value < data.min) {
+      value = data.min;
+    }
+    if (data.max !== false && value > data.max) {
+      value = data.max;
+    }
+
+    if (value !== oValue) {
+      value = round(value, data.digits);
+
+      data.$el.val(value)
+          .trigger(Events.raw.change, [ true ]);
+    }
+  }
+
+  /**
+   * @method private
+   * @name significantDigits
+   * @description Analyzes and returns significant digit count
+   * @param value [float] "Value to analyze"
+   * @return [int] "Number of significant digits"
+   */
+  function significantDigits(value) {
+    var test = String(value);
+
+    if (test.indexOf(".") > -1) {
+      return test.length - test.indexOf(".") - 1;
+    } else {
+      return 0;
+    }
+  }
+
+  /**
+   * @method private
+   * @name round
+   * @description Rounds a number to a sepcific significant digit count
+   * @param value [float] "Value to round"
+   * @param digits [float] "Digits to round to"
+   * @return [number] "Rounded number"
+   */
+
+  function round(value, digits) {
+    var exp = Math.pow(10, digits);
+    return Math.round(value * exp) / exp;
+  }
+
+  /**
+   * @plugin
+   * @name Number
+   * @description A jQuery plugin for cross browser number inputs.
+   * @type widget
+   * @main number.js
+   * @main number.css
+   * @dependency jQuery
+   * @dependency core.js
+   */
+
+  var Plugin = Formstone.Plugin("number", {
+      widget: true,
+
+      /**
+       * @options
+       * @param customClass [string] <''> "Class applied to instance"
+       * @param labels.up [string] <'Up'> "Up arrow label"
+       * @param labels.down [string] <'Down'> "Down arrow label"
+       * @param theme [string] <"fs-light"> "Theme class name"
+       */
+
+      defaults: {
+        customClass    : "",
+        labels : {
+          up         : "Up",
+          down       : "Down"
+        },
+        theme          : "fs-light"
+      },
+
+      classes: [
+        "arrow",
+        "up",
+        "down",
+        "disabled",
+        "focus"
+      ],
+
+      methods: {
+        _setup        : setup,
+        _construct    : construct,
+        _destruct     : destruct,
+
+        // Public Methods
+
+        enable        : enable,
+        disable       : disable,
+        update        : updateInstance
+      }
+    }),
+
+    // Localize References
+
+    Classes       = Plugin.classes,
+    RawClasses    = Classes.raw,
+    Events        = Plugin.events,
+    Functions     = Plugin.functions,
+
+    $Body    = null;
+
+})
+
+);
