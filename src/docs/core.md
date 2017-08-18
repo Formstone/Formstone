@@ -355,6 +355,16 @@ data.$el.on(Events.click, onClick);
 | `touchStart` | Default | `touchstart.namespace` |
 | `transitionEnd` | Default | `transitionEnd.namespace` |
 
+### Document Ready
+
+Changes introduced to the `ready` event handler in jQuery 3 can cause a flash of unstyled content before widget plugins have completely initialized. The `Formstone.Ready` handler utilizes the native 'DOMContentLoaded' event to avoid the flash and can be safely used a jQuery `ready` replacement:
+
+```javascript
+Formstone.Ready(function() {
+  ...
+});
+```
+
 ### No Conflict
 
 One benefit of Formstone is the module nature of the components, allowing developers to include only what's required. Certain edge cases may require overlapping namespaces between two or more libraries. To avoid (some) namespace collisions with other libraries, such as Bootstrap or Lightbox, developers can call the `Formstone.NoConflict()` method to restore all jQuery plugin namespaces to their 'original' functions. Other libraries should be included before Formstone components, however Formstone will remember this flag and avoid registering un-namespaced plugins included after the initial call. Note: This does not effect data attributes or events, only the jQuery plugin namespace.
