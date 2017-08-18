@@ -827,7 +827,10 @@
               });
             }
 
-            Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+            if (Instance.$thumbnails.length) {
+              Instance.spacerHeight += Instance.$thumbnails.outerHeight(true);
+            }
+            Instance.spacerHeight += 10;
 
             fitImage();
 
@@ -891,7 +894,7 @@
         width = (!Instance.isMobile) ? Instance.viewportWidth : Instance.contentWidth;
 
       if (Instance.isWide) {
-        //WIDE
+        // WIDE
         Instance.targetImageWidth = width;
         Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
 
@@ -900,7 +903,7 @@
           Instance.targetImageWidth = Instance.targetImageHeight * Instance.ratioVertical;
         }
       } else {
-        //TALL
+        // TALL
         Instance.targetImageHeight = height;
         Instance.targetImageWidth = Instance.targetImageHeight * Instance.ratioVertical;
 
@@ -1529,8 +1532,8 @@
         classes: [
           "loading",
           "animating",
-          "scaling",
-          "zooming",
+          // "scaling",
+          // "zooming",
           "fixed",
           "mobile",
           "touch",

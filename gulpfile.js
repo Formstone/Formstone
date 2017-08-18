@@ -219,10 +219,12 @@ gulp.task('default', sequence(
   ['zetzer', 'license']
 ));
 
-gulp.task('demo', sequence(
-  ['styles', 'scripts'],
-  ['demoStyles', 'demoScripts']
-));
+gulp.task('demo', function(callback) {
+  sequence(
+    ['styles', 'scripts'],
+    ['demoStyles', 'demoScripts']
+  )(callback);
+});
 
 gulp.task('dev', ['default'], function() {
   gulp.watch('./src/less/**/*.less', ['demo']);
