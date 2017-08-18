@@ -21,6 +21,8 @@ var watch          = require('gulp-watch');
 var zetzer         = require('gulp-zetzer');
 var buildDocs      = require('./tasks/docs.js');
 
+var lessImportNPM  = require('less-plugin-npm-import');
+
 // Vars
 var pkg = require('./package.json');
 var date = moment().format('YYYY-MM-DD');
@@ -38,6 +40,7 @@ gulp.task('clean', function () {
 gulp.task('styles', function() {
   return gulp.src(['./src/less/**/*.less', '!./src/less/imports/*'])
     .pipe(less({
+      plugins: [ new lessImportNPM() ],
       globalVars: pkg.src.vars
     }))
     .pipe(autoprefixer({
@@ -77,6 +80,7 @@ gulp.task('buildDocs', function () {
 gulp.task('demoStyles', function() {
   return gulp.src(['./demo/css/src/*.less'])
     .pipe(less({
+      plugins: [ new lessImportNPM() ],
       globalVars: pkg.src.vars
     }))
     .pipe(autoprefixer({
@@ -92,7 +96,13 @@ gulp.task('demoStyles', function() {
 // Demo - JS
 gulp.task('demoScripts', function() {
   return gulp.src('./demo/js/src/*.js')
-    .pipe(include())
+    .pipe(include({
+      includePaths: [
+        __dirname,
+        __dirname + "/node_modules",
+        __dirname + "/demo/js/src"
+      ]
+    }))
     .pipe(replaceInclude({
       prefix: '@',
       global: pkg.src.vars

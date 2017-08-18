@@ -44,8 +44,12 @@
     "gulp-uglify": "^3.0.0",
     "gulp-watch": "^4.3.11",
     "gulp-zetzer": "^1.0.4",
+    "jQuery": "^1.7.4",
     "jshint": "^2.9.5",
-    "moment": "^2.18.1"
+    "less-plugin-npm-import": "^2.1.0",
+    "moment": "^2.18.1",
+    "normalize-css": "^2.3.1",
+    "prismjs": "^1.6.0"
   },
   "src": {
     "vars": {
