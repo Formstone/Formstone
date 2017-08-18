@@ -14,7 +14,6 @@ var modernizr      = require('gulp-modernizr');
 var rename         = require('gulp-rename');
 var replaceInclude = require('gulp-replace-include');
 var sequence       = require('gulp-sequence');
-var syncBower      = require('gulp-sync-bower');
 var uglify         = require('gulp-uglify');
 var watch          = require('gulp-watch');
 var zetzer         = require('gulp-zetzer');
@@ -112,7 +111,7 @@ gulp.task('demoModernizr', function () {
       'options': [
         'setClasses',
         'addTest',
-        'html5printshiv',
+        // 'html5printshiv',
         'testProp',
         'fnBind'
       ]
@@ -139,33 +138,33 @@ gulp.task('zetzer', function(){
     .pipe(gulp.dest('./demo'));
 });
 
-// Bower
-gulp.task('bower', function () {
-  var p = {
-    name:         pkg.name,
-    version:      pkg.version,
-    description:  pkg.description,
-    license:      pkg.license,
-    homepage:     pkg.homepage,
-    dependencies: pkg.dependencies,
-    devDependencies: {
-      "normalize-css": "^7.0.0",
-      "prism": "#gh-pages"
-    },
-    main:         [ pkg.main ],
-    ignore:       [
-      "demo/",
-      "docs/"
-    ],
-    authors:      [ pkg.author ]
-  };
-
-  return gulp.src('bower.json')
-    .pipe(syncBower({
-      pkg: p
-    }))
-    .pipe(gulp.dest('.'))
-});
+// // Bower
+// gulp.task('bower', function () {
+//   var p = {
+//     name:         pkg.name,
+//     version:      pkg.version,
+//     description:  pkg.description,
+//     license:      pkg.license,
+//     homepage:     pkg.homepage,
+//     dependencies: pkg.dependencies,
+//     devDependencies: {
+//       "normalize-css": "^7.0.0",
+//       "prism": "#gh-pages"
+//     },
+//     main:         [ pkg.main ],
+//     ignore:       [
+//       "demo/",
+//       "docs/"
+//     ],
+//     authors:      [ pkg.author ]
+//   };
+//
+//   return gulp.src('bower.json')
+//     .pipe(syncBower({
+//       pkg: p
+//     }))
+//     .pipe(gulp.dest('.'))
+// });
 
 // License
 gulp.task('license', function() {
@@ -186,7 +185,7 @@ gulp.task('default', sequence(
   'buildDocs',
   ['demoStyles', 'demoScripts'],
   'demoModernizr',
-  ['zetzer', 'bower', 'license']
+  ['zetzer', 'license']
 ));
 
 gulp.task('dev', ['styles', 'scripts', 'buildDocs', 'zetzer'], function() {

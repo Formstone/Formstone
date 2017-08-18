@@ -196,7 +196,7 @@
   })(jQuery, window);
 
   // !Ready
-  $(document).ready(function() {
+  $(function() {
     Site.init("FormstoneSite");
   });
 

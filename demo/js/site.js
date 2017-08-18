@@ -1047,7 +1047,7 @@ Prism.languages.js = Prism.languages.javascript;
   })(jQuery, window);
 
   // !Ready
-  $(document).ready(function() {
+  $(function() {
     Site.init("FormstoneSite");
   });
 
