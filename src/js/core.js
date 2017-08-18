@@ -347,7 +347,7 @@
 
     /**
      * @method
-     * @name ready
+     * @name Ready
      * @description Replacement for jQuery ready
      * @param e [object] "Event data"
      */

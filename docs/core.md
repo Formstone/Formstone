@@ -430,7 +430,7 @@ Formstone.Plugin("namespace", { ... });
 | `namespace` | `string` | &nbsp; | Plugin namespace |
 | `settings` | `object` | &nbsp; | Plugin settings |
 
-### ready
+### Ready
 
 Replacement for jQuery ready
 
