@@ -837,61 +837,61 @@ Prism.languages.js = Prism.languages.javascript;
 /* global ga */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([ "jquery" ], factory);
-  } else {
-    factory(jQuery);
-  }
-}(function($) {
+    if (typeof define === "function" && define.amd) {
+      define(["jquery"], factory);
+    } else {
+      factory(jQuery);
+    }
+  }(function($) {
 
-  "use strict";
+    "use strict";
 
-  // Namespace
+    // Namespace
 
-  var Win  = typeof window !== "undefined" ? window : this,
-      Doc  = Win.document,
+    var Win = typeof window !== "undefined" ? window : this,
+      Doc = Win.document,
       Core = function() {
         this.Version = '@version';
         this.Plugins = {};
 
-        this.DontConflict   = false;
-        this.Conflicts      = {
+        this.DontConflict = false;
+        this.Conflicts = {
           fn: {}
         };
         this.ResizeHandlers = [];
-        this.RAFHandlers    = [];
+        this.RAFHandlers = [];
 
         // Globals
 
-        this.window               = Win;
-        this.$window              = $(Win);
-        this.document             = Doc;
-        this.$document            = $(Doc);
-        this.$body                = null;
+        this.window = Win;
+        this.$window = $(Win);
+        this.document = Doc;
+        this.$document = $(Doc);
+        this.$body = null;
 
-        this.windowWidth          = 0;
-        this.windowHeight         = 0;
-        this.fallbackWidth        = 1024;
-        this.fallbackHeight       = 768;
-        this.userAgent            = window.navigator.userAgent || window.navigator.vendor || window.opera;
-        this.isFirefox            = /Firefox/i.test(this.userAgent);
-        this.isChrome             = /Chrome/i.test(this.userAgent);
-        this.isSafari             = /Safari/i.test(this.userAgent) && !this.isChrome;
-        this.isMobile             = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( this.userAgent );
-        this.isIEMobile           = /IEMobile/i.test(this.userAgent);
-        this.isFirefoxMobile      = (this.isFirefox && this.isMobile);
-        this.transform            = null;
-        this.transition           = null;
+        this.windowWidth = 0;
+        this.windowHeight = 0;
+        this.fallbackWidth = 1024;
+        this.fallbackHeight = 768;
+        this.userAgent = window.navigator.userAgent || window.navigator.vendor || window.opera;
+        this.isFirefox = /Firefox/i.test(this.userAgent);
+        this.isChrome = /Chrome/i.test(this.userAgent);
+        this.isSafari = /Safari/i.test(this.userAgent) && !this.isChrome;
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(this.userAgent);
+        this.isIEMobile = /IEMobile/i.test(this.userAgent);
+        this.isFirefoxMobile = (this.isFirefox && this.isMobile);
+        this.transform = null;
+        this.transition = null;
 
         this.support = {
-          file          : !!(window.File && window.FileList && window.FileReader),
-          history       : !!(window.history && window.history.pushState && window.history.replaceState),
-          matchMedia    : !!(window.matchMedia || window.msMatchMedia),
-          pointer       : !!(window.PointerEvent),
-          raf           : !!(window.requestAnimationFrame && window.cancelAnimationFrame),
-          touch         : !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
-          transition    : false,
-          transform     : false
+          file: !!(window.File && window.FileList && window.FileReader),
+          history: !!(window.history && window.history.pushState && window.history.replaceState),
+          matchMedia: !!(window.matchMedia || window.msMatchMedia),
+          pointer: !!(window.PointerEvent),
+          raf: !!(window.requestAnimationFrame && window.cancelAnimationFrame),
+          touch: !!(("ontouchstart" in window) || window.DocumentTouch && document instanceof window.DocumentTouch),
+          transition: false,
+          transform: false
         };
       },
 
@@ -912,7 +912,7 @@ Prism.languages.js = Prism.languages.javascript;
             if (immediate) {
               e.stopImmediatePropagation();
             }
-          } catch(error) {
+          } catch (error) {
             //
           }
         },
@@ -927,7 +927,7 @@ Prism.languages.js = Prism.languages.javascript;
         killGesture: function(e) {
           try {
             e.preventDefault();
-          }  catch(error) {
+          } catch (error) {
             //
           }
         },
@@ -949,8 +949,8 @@ Prism.languages.js = Prism.languages.javascript;
             }
 
             Formstone.$body.on(Events.gestureChange, Functions.killGesture)
-                     .on(Events.gestureStart, Functions.killGesture)
-                     .on(Events.gestureEnd, Functions.killGesture);
+              .on(Events.gestureStart, Functions.killGesture)
+              .on(Events.gestureEnd, Functions.killGesture);
 
             ViewportLocked = true;
           }
@@ -963,7 +963,7 @@ Prism.languages.js = Prism.languages.javascript;
          */
 
         unlockViewport: function(plugin_namespace) {
-          if ($.type( ViewportLocks[plugin_namespace] ) !== 'undefined') {
+          if ($.type(ViewportLocks[plugin_namespace]) !== 'undefined') {
             delete ViewportLocks[plugin_namespace];
           }
 
@@ -977,8 +977,8 @@ Prism.languages.js = Prism.languages.javascript;
             }
 
             Formstone.$body.off(Events.gestureChange)
-                     .off(Events.gestureStart)
-                     .off(Events.gestureEnd);
+              .off(Events.gestureStart)
+              .off(Events.gestureEnd);
 
             ViewportLocked = false;
           }
@@ -1071,15 +1071,15 @@ Prism.languages.js = Prism.languages.javascript;
 
         parseQueryString: function(url) {
           var params = {},
-              parts = url.slice( url.indexOf("?") + 1 ).split("&");
+            parts = url.slice(url.indexOf("?") + 1).split("&");
 
           for (var i = 0; i < parts.length; i++) {
             var part = parts[i].split("=");
-            params[ part[0] ] = part[1];
+            params[part[0]] = part[1];
           }
 
           return params;
-          }
+        }
       },
 
       Formstone = new Core(),
@@ -1091,390 +1091,392 @@ Prism.languages.js = Prism.languages.javascript;
       // Classes
 
       Classes = {
-        base                 : "{ns}",
-        element              : "{ns}-element"
+        base: "{ns}",
+        element: "{ns}-element"
       },
 
       // Events
 
       Events = {
-        namespace            : ".{ns}",
-        beforeUnload         : "beforeunload.{ns}",
-        blur                 : "blur.{ns}",
-        change               : "change.{ns}",
-        click                : "click.{ns}",
-        dblClick             : "dblclick.{ns}",
-        drag                 : "drag.{ns}",
-        dragEnd              : "dragend.{ns}",
-        dragEnter            : "dragenter.{ns}",
-        dragLeave            : "dragleave.{ns}",
-        dragOver             : "dragover.{ns}",
-        dragStart            : "dragstart.{ns}",
-        drop                 : "drop.{ns}",
-        error                : "error.{ns}",
-        focus                : "focus.{ns}",
-        focusIn              : "focusin.{ns}",
-        focusOut             : "focusout.{ns}",
-        gestureChange        : "gesturechange.{ns}",
-        gestureStart         : "gesturestart.{ns}",
-        gestureEnd           : "gestureend.{ns}",
-        input                : "input.{ns}",
-        keyDown              : "keydown.{ns}",
-        keyPress             : "keypress.{ns}",
-        keyUp                : "keyup.{ns}",
-        load                 : "load.{ns}",
-        mouseDown            : "mousedown.{ns}",
-        mouseEnter           : "mouseenter.{ns}",
-        mouseLeave           : "mouseleave.{ns}",
-        mouseMove            : "mousemove.{ns}",
-        mouseOut             : "mouseout.{ns}",
-        mouseOver            : "mouseover.{ns}",
-        mouseUp              : "mouseup.{ns}",
-        panStart             : "panstart.{ns}",
-        pan                  : "pan.{ns}",
-        panEnd               : "panend.{ns}",
-        resize               : "resize.{ns}",
-        scaleStart           : "scalestart.{ns}",
-        scaleEnd             : "scaleend.{ns}",
-        scale                : "scale.{ns}",
-        scroll               : "scroll.{ns}",
-        select               : "select.{ns}",
-        swipe                : "swipe.{ns}",
-        touchCancel          : "touchcancel.{ns}",
-        touchEnd             : "touchend.{ns}",
-        touchLeave           : "touchleave.{ns}",
-        touchMove            : "touchmove.{ns}",
-        touchStart           : "touchstart.{ns}"
+        namespace: ".{ns}",
+        beforeUnload: "beforeunload.{ns}",
+        blur: "blur.{ns}",
+        change: "change.{ns}",
+        click: "click.{ns}",
+        dblClick: "dblclick.{ns}",
+        drag: "drag.{ns}",
+        dragEnd: "dragend.{ns}",
+        dragEnter: "dragenter.{ns}",
+        dragLeave: "dragleave.{ns}",
+        dragOver: "dragover.{ns}",
+        dragStart: "dragstart.{ns}",
+        drop: "drop.{ns}",
+        error: "error.{ns}",
+        focus: "focus.{ns}",
+        focusIn: "focusin.{ns}",
+        focusOut: "focusout.{ns}",
+        gestureChange: "gesturechange.{ns}",
+        gestureStart: "gesturestart.{ns}",
+        gestureEnd: "gestureend.{ns}",
+        input: "input.{ns}",
+        keyDown: "keydown.{ns}",
+        keyPress: "keypress.{ns}",
+        keyUp: "keyup.{ns}",
+        load: "load.{ns}",
+        mouseDown: "mousedown.{ns}",
+        mouseEnter: "mouseenter.{ns}",
+        mouseLeave: "mouseleave.{ns}",
+        mouseMove: "mousemove.{ns}",
+        mouseOut: "mouseout.{ns}",
+        mouseOver: "mouseover.{ns}",
+        mouseUp: "mouseup.{ns}",
+        panStart: "panstart.{ns}",
+        pan: "pan.{ns}",
+        panEnd: "panend.{ns}",
+        resize: "resize.{ns}",
+        scaleStart: "scalestart.{ns}",
+        scaleEnd: "scaleend.{ns}",
+        scale: "scale.{ns}",
+        scroll: "scroll.{ns}",
+        select: "select.{ns}",
+        swipe: "swipe.{ns}",
+        touchCancel: "touchcancel.{ns}",
+        touchEnd: "touchend.{ns}",
+        touchLeave: "touchleave.{ns}",
+        touchMove: "touchmove.{ns}",
+        touchStart: "touchstart.{ns}"
       },
 
-      ResizeTimer    = null,
-      Debounce       = 20,
+      ResizeTimer = null,
+      Debounce = 20,
 
       $ViewportMeta,
       ViewportMetaOriginal,
       ViewportMetaLocked,
-      ViewportLocks     = [],
-      ViewportLocked    = false;
+      ViewportLocks = [],
+      ViewportLocked = false;
 
-  /**
-   * @method
-   * @name NoConflict
-   * @description Resolves plugin namespace conflicts
-   * @example Formstone.NoConflict();
-   */
+    /**
+     * @method
+     * @name NoConflict
+     * @description Resolves plugin namespace conflicts
+     * @example Formstone.NoConflict();
+     */
 
-  Core.prototype.NoConflict = function() {
-    Formstone.DontConflict = true;
+    Core.prototype.NoConflict = function() {
+      Formstone.DontConflict = true;
 
-    for (var i in Formstone.Plugins) {
-      if (Formstone.Plugins.hasOwnProperty(i)) {
-        $[i]    = Formstone.Conflicts[i];
-        $.fn[i] = Formstone.Conflicts.fn[i];
+      for (var i in Formstone.Plugins) {
+        if (Formstone.Plugins.hasOwnProperty(i)) {
+          $[i] = Formstone.Conflicts[i];
+          $.fn[i] = Formstone.Conflicts.fn[i];
+        }
       }
-    }
-  };
+    };
 
-  /**
-   * @method
-   * @name ready
-   * @description Replacement for jQuery ready
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name ready
+     * @description Replacement for jQuery ready
+     * @param e [object] "Event data"
+     */
 
-  Core.prototype.Ready = function(fn) {
-    if (
-      Formstone.document.readyState === "complete" ||
-      (Formstone.document.readyState !== "loading" && !Formstone.document.documentElement.doScroll)
-    ) {
-      fn();
-    } else {
-      Formstone.document.addEventListener("DOMContentLoaded", fn);
-    }
-  };
+    Core.prototype.Ready = function(fn) {
+      if (
+        Formstone.document.readyState === "complete" ||
+        (Formstone.document.readyState !== "loading" && !Formstone.document.documentElement.doScroll)
+      ) {
+        fn();
+      } else {
+        Formstone.document.addEventListener("DOMContentLoaded", fn);
+      }
+    };
 
-  /**
-   * @method
-   * @name Plugin
-   * @description Builds a plugin and registers it with jQuery.
-   * @param namespace [string] "Plugin namespace"
-   * @param settings [object] "Plugin settings"
-   * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions`, `methods` and `utilities` keys"
-   * @example Formstone.Plugin("namespace", { ... });
-   */
+    /**
+     * @method
+     * @name Plugin
+     * @description Builds a plugin and registers it with jQuery.
+     * @param namespace [string] "Plugin namespace"
+     * @param settings [object] "Plugin settings"
+     * @return [object] "Plugin properties. Includes `defaults`, `classes`, `events`, `functions`, `methods` and `utilities` keys"
+     * @example Formstone.Plugin("namespace", { ... });
+     */
 
-  Core.prototype.Plugin = function(namespace, settings) {
-    Formstone.Plugins[namespace] = (function(namespace, settings) {
+    Core.prototype.Plugin = function(namespace, settings) {
+      Formstone.Plugins[namespace] = (function(namespace, settings) {
 
-      var namespaceDash  = "fs-" + namespace,
-          namespaceDot   = "fs." + namespace,
-          namespaceClean = "fs"  + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+        var namespaceDash = "fs-" + namespace,
+          namespaceDot = "fs." + namespace,
+          namespaceClean = "fs" + namespace.replace(/(^|\s)([a-z])/g, function(m, p1, p2) {
+            return p1 + p2.toUpperCase();
+          });
 
-      /**
-       * @method private
-       * @name initialize
-       * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call.
-       * @param options [object] <{}> "Instance options"
-       */
+        /**
+         * @method private
+         * @name initialize
+         * @description Creates plugin instance by adding base classname, creating data and scoping a _construct call.
+         * @param options [object] <{}> "Instance options"
+         */
 
-      function initialize(options) {
-        // Maintain Chain
+        function initialize(options) {
+          // Maintain Chain
 
-        var hasOptions = $.type(options) === "object",
-            args = Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0) ),
+          var hasOptions = $.type(options) === "object",
+            args = Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0)),
             $targets = this,
             $postTargets = $(),
             $element,
             i,
             count;
 
-        // Extend Defaults
+          // Extend Defaults
 
-        options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
+          options = $.extend(true, {}, settings.defaults || {}, (hasOptions ? options : {}));
 
-        // All targets
+          // All targets
 
-        for (i = 0, count = $targets.length; i < count; i++) {
-          $element = $targets.eq(i);
+          for (i = 0, count = $targets.length; i < count; i++) {
+            $element = $targets.eq(i);
 
-          // Gaurd Against Exiting Instances
+            // Gaurd Against Exiting Instances
 
-          if (!getData($element)) {
+            if (!getData($element)) {
 
-            // Extend w/ Local Options
+              // Extend w/ Local Options
 
-            var guid    = "__" + settings.guid++,
+              var guid = "__" + settings.guid++,
                 rawGuid = settings.classes.raw.base + guid,
-                locals  = $element.data(namespace + "-options"),
-                data    = $.extend(true, {
-                  $el     : $element,
-                  guid    : guid,
-                  rawGuid : rawGuid,
-                  dotGuid : "." + rawGuid
-                }, options, ($.type(locals) === "object" ? locals : {}) );
+                locals = $element.data(namespace + "-options"),
+                data = $.extend(true, {
+                  $el: $element,
+                  guid: guid,
+                  rawGuid: rawGuid,
+                  dotGuid: "." + rawGuid
+                }, options, ($.type(locals) === "object" ? locals : {}));
 
-            // Cache Instance
+              // Cache Instance
 
-            $element.addClass(settings.classes.raw.element)
-                    .data(namespaceClean, data);
+              $element.addClass(settings.classes.raw.element)
+                .data(namespaceClean, data);
 
-            // Constructor
+              // Constructor
 
-            settings.methods._construct.apply($element, [ data ].concat(args));
+              settings.methods._construct.apply($element, [data].concat(args));
+
+              // Post Constructor
+
+              $postTargets = $postTargets.add($element);
+            }
+
+          }
+
+          // Post targets
+
+          for (i = 0, count = $postTargets.length; i < count; i++) {
+            $element = $postTargets.eq(i);
 
             // Post Constructor
 
-            $postTargets = $postTargets.add($element);
+            settings.methods._postConstruct.apply($element, [getData($element)]);
           }
 
+          return $targets;
         }
 
-        // Post targets
+        /**
+         * @method private
+         * @name destroy
+         * @description Removes plugin instance by scoping a _destruct call, and removing the base classname and data.
+         * @param data [object] <{}> "Instance data"
+         */
 
-        for (i = 0, count = $postTargets.length; i < count; i++) {
-          $element = $postTargets.eq(i);
+        /**
+         * @method widget
+         * @name destroy
+         * @description Removes plugin instance.
+         * @example $(".target").{ns}("destroy");
+         */
 
-          // Post Constructor
+        function destroy(data) {
+          settings.functions.iterate.apply(this, [settings.methods._destruct].concat(Array.prototype.slice.call(arguments, 1)));
 
-          settings.methods._postConstruct.apply($element, [ getData($element) ]);
+          this.removeClass(settings.classes.raw.element)
+            .removeData(namespaceClean);
         }
 
-        return $targets;
-      }
+        /**
+         * @method private
+         * @name getData
+         * @description Creates class selector from text.
+         * @param $element [jQuery] "Target jQuery object"
+         * @return [object] "Instance data"
+         */
 
-      /**
-       * @method private
-       * @name destroy
-       * @description Removes plugin instance by scoping a _destruct call, and removing the base classname and data.
-       * @param data [object] <{}> "Instance data"
-       */
+        function getData($element) {
+          return $element.data(namespaceClean);
+        }
 
-      /**
-       * @method widget
-       * @name destroy
-       * @description Removes plugin instance.
-       * @example $(".target").{ns}("destroy");
-       */
+        /**
+         * @method private
+         * @name delegateWidget
+         * @description Delegates public methods.
+         * @param method [string] "Method to execute"
+         * @return [jQuery] "jQuery object"
+         */
 
-      function destroy(data) {
-        settings.functions.iterate.apply(this, [ settings.methods._destruct ].concat(Array.prototype.slice.call(arguments, 1)));
+        function delegateWidget(method) {
 
-        this.removeClass(settings.classes.raw.element)
-          .removeData(namespaceClean);
-      }
+          // If jQuery object
 
-      /**
-       * @method private
-       * @name getData
-       * @description Creates class selector from text.
-       * @param $element [jQuery] "Target jQuery object"
-       * @return [object] "Instance data"
-       */
+          if (this instanceof $) {
 
-      function getData($element) {
-        return $element.data(namespaceClean);
-      }
+            var _method = settings.methods[method];
 
-      /**
-       * @method private
-       * @name delegateWidget
-       * @description Delegates public methods.
-       * @param method [string] "Method to execute"
-       * @return [jQuery] "jQuery object"
-       */
+            // Public method OR false
 
-      function delegateWidget(method) {
+            if ($.type(method) === "object" || !method) {
 
-        // If jQuery object
+              // Initialize
 
-        if (this instanceof $) {
+              return initialize.apply(this, arguments);
+            } else if (_method && method.indexOf("_") !== 0) {
 
-          var _method = settings.methods[method];
+              // Wrap Public Methods
 
-          // Public method OR false
+              return settings.functions.iterate.apply(this, [_method].concat(Array.prototype.slice.call(arguments, 1)));
+            }
 
-          if ($.type(method) === "object" || !method) {
-
-            // Initialize
-
-            return initialize.apply(this, arguments);
-          } else if (_method && method.indexOf("_") !== 0) {
-
-            // Wrap Public Methods
-
-            return settings.functions.iterate.apply(this, [ _method ].concat(Array.prototype.slice.call(arguments, 1)));
+            return this;
           }
-
-          return this;
         }
-      }
 
-      /**
-       * @method private
-       * @name delegateUtility
-       * @description Delegates utility methods.
-       * @param method [string] "Method to execute"
-       */
+        /**
+         * @method private
+         * @name delegateUtility
+         * @description Delegates utility methods.
+         * @param method [string] "Method to execute"
+         */
 
-      function delegateUtility(method) {
+        function delegateUtility(method) {
 
-        // public utility OR utility init OR false
+          // public utility OR utility init OR false
 
-        var _method = settings.utilities[method] || settings.utilities._initialize || false;
+          var _method = settings.utilities[method] || settings.utilities._initialize || false;
 
-        if (_method) {
+          if (_method) {
 
-          // Wrap Utility Methods
+            // Wrap Utility Methods
 
-          return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1) ));
+            return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1)));
+          }
         }
-      }
 
-      /**
-       * @method utility
-       * @name defaults
-       * @description Extends plugin default settings; effects instances created hereafter.
-       * @param options [object] <{}> "New plugin defaults"
-       * @example $.{ns}("defaults", { ... });
-       */
+        /**
+         * @method utility
+         * @name defaults
+         * @description Extends plugin default settings; effects instances created hereafter.
+         * @param options [object] <{}> "New plugin defaults"
+         * @example $.{ns}("defaults", { ... });
+         */
 
-      function defaults(options) {
-        settings.defaults = $.extend(true, settings.defaults, options || {});
-      }
+        function defaults(options) {
+          settings.defaults = $.extend(true, settings.defaults, options || {});
+        }
 
-      /**
-       * @method private
-       * @name iterate
-       * @description Loops scoped function calls over jQuery object with instance data as first parameter.
-       * @param func [function] "Function to execute"
-       * @return [jQuery] "jQuery object"
-       */
+        /**
+         * @method private
+         * @name iterate
+         * @description Loops scoped function calls over jQuery object with instance data as first parameter.
+         * @param func [function] "Function to execute"
+         * @return [jQuery] "jQuery object"
+         */
 
-      function iterate(fn) {
-        var $targets = this,
-            args     = Array.prototype.slice.call(arguments, 1);
+        function iterate(fn) {
+          var $targets = this,
+            args = Array.prototype.slice.call(arguments, 1);
 
-        for (var i = 0, count = $targets.length; i < count; i++) {
-          var $element = $targets.eq(i),
+          for (var i = 0, count = $targets.length; i < count; i++) {
+            var $element = $targets.eq(i),
               data = getData($element) || {};
 
-          if ($.type(data.$el) !== "undefined") {
-            fn.apply($element, [ data ].concat(args));
+            if ($.type(data.$el) !== "undefined") {
+              fn.apply($element, [data].concat(args));
+            }
+          }
+
+          return $targets;
+        }
+
+        // Locals
+
+        settings.initialized = false;
+        settings.priority = settings.priority || 10;
+
+        // Namespace Classes & Events
+
+        settings.classes = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
+        settings.events = namespaceProperties("events", namespace, Events, settings.events);
+
+        // Extend Functions
+
+        settings.functions = $.extend({
+          getData: getData,
+          iterate: iterate
+        }, Functions, settings.functions);
+
+        // Extend Methods
+
+        settings.methods = $.extend(true, {
+
+          // Private Methods
+
+          _setup: $.noop, // Document ready
+          _construct: $.noop, // Constructor
+          _postConstruct: $.noop, // Post Constructor
+          _destruct: $.noop, // Destructor
+          _resize: false, // Window resize
+
+          // Public Methods
+
+          destroy: destroy
+
+        }, settings.methods);
+
+        // Extend Utilities
+
+        settings.utilities = $.extend(true, {
+
+          // Private Utilities
+
+          _initialize: false, // First Run
+          _delegate: false, // Custom Delegation
+
+          // Public Utilities
+
+          defaults: defaults
+
+        }, settings.utilities);
+
+        // Register Plugin
+
+        // Widget
+
+        if (settings.widget) {
+
+          // Store conflicting namesapaces
+          Formstone.Conflicts.fn[namespace] = $.fn[namespace];
+
+          // Widget Delegation: $(".target").fsPlugin("method", ...);
+          $.fn[namespaceClean] = delegateWidget;
+
+          if (!Formstone.DontConflict) {
+
+            // $(".target").plugin("method", ...);
+            $.fn[namespace] = $.fn[namespaceClean];
           }
         }
 
-        return $targets;
-      }
-
-      // Locals
-
-      settings.initialized = false;
-      settings.priority    = settings.priority || 10;
-
-      // Namespace Classes & Events
-
-      settings.classes   = namespaceProperties("classes", namespaceDash, Classes, settings.classes);
-      settings.events    = namespaceProperties("events",  namespace,     Events,  settings.events);
-
-      // Extend Functions
-
-      settings.functions = $.extend({
-        getData    : getData,
-        iterate    : iterate
-      }, Functions, settings.functions);
-
-      // Extend Methods
-
-      settings.methods = $.extend(true, {
-
-        // Private Methods
-
-        _setup         : $.noop,    // Document ready
-        _construct     : $.noop,    // Constructor
-        _postConstruct : $.noop,    // Post Constructor
-        _destruct      : $.noop,    // Destructor
-        _resize        : false,     // Window resize
-
-        // Public Methods
-
-        destroy        : destroy
-
-      }, settings.methods);
-
-      // Extend Utilities
-
-      settings.utilities = $.extend(true, {
-
-        // Private Utilities
-
-        _initialize    : false,    // First Run
-        _delegate      : false,    // Custom Delegation
-
-        // Public Utilities
-
-        defaults       : defaults
-
-      }, settings.utilities);
-
-      // Register Plugin
-
-      // Widget
-
-      if (settings.widget) {
-
-        // Store conflicting namesapaces
-        Formstone.Conflicts.fn[namespace] = $.fn[namespace];
-
-        // Widget Delegation: $(".target").fsPlugin("method", ...);
-        $.fn[namespaceClean] = delegateWidget;
-
-        if (!Formstone.DontConflict) {
-
-          // $(".target").plugin("method", ...);
-          $.fn[namespace] = $.fn[namespaceClean];
-        }
-      }
-
-      // Utility
+        // Utility
 
         Formstone.Conflicts[namespace] = $[namespace];
 
@@ -1487,230 +1489,230 @@ Prism.languages.js = Prism.languages.javascript;
           $[namespace] = $[namespaceClean];
         }
 
-      // Run Setup
+        // Run Setup
 
-      settings.namespace      = namespace;
-      settings.namespaceClean = namespaceClean;
+        settings.namespace = namespace;
+        settings.namespaceClean = namespaceClean;
 
-      settings.guid = 0;
+        settings.guid = 0;
 
-      // Resize handler
+        // Resize handler
 
-      if (settings.methods._resize) {
-        Formstone.ResizeHandlers.push({
-          namespace: namespace,
-          priority: settings.priority,
-          callback: settings.methods._resize
-        });
+        if (settings.methods._resize) {
+          Formstone.ResizeHandlers.push({
+            namespace: namespace,
+            priority: settings.priority,
+            callback: settings.methods._resize
+          });
 
-        // Sort handlers on push
-        Formstone.ResizeHandlers.sort(sortPriority);
+          // Sort handlers on push
+          Formstone.ResizeHandlers.sort(sortPriority);
+        }
+
+        // RAF handler
+
+        if (settings.methods._raf) {
+          Formstone.RAFHandlers.push({
+            namespace: namespace,
+            priority: settings.priority,
+            callback: settings.methods._raf
+          });
+
+          // Sort handlers on push
+          Formstone.RAFHandlers.sort(sortPriority);
+        }
+
+        return settings;
+      })(namespace, settings);
+
+      // Setup, catches lazy-loaded components, ensures order
+
+      $Ready.then(function() {
+        setupPlugin(namespace);
+      });
+
+      return Formstone.Plugins[namespace];
+    };
+
+    // Setup Plugins
+
+    function setupPlugin(namespace) {
+      if (!Formstone.Plugins[namespace].initialized) {
+        Formstone.Plugins[namespace].methods._setup.call(document);
+        Formstone.Plugins[namespace].initialized = true;
       }
-
-      // RAF handler
-
-      if (settings.methods._raf) {
-        Formstone.RAFHandlers.push({
-          namespace: namespace,
-          priority: settings.priority,
-          callback: settings.methods._raf
-        });
-
-        // Sort handlers on push
-        Formstone.RAFHandlers.sort(sortPriority);
-      }
-
-      return settings;
-    })(namespace, settings);
-
-    // Setup, catches lazy-loaded components, ensures order
-
-    $Ready.then(function() {
-      setupPlugin(namespace);
-    });
-
-    return Formstone.Plugins[namespace];
-  };
-
-  // Setup Plugins
-
-  function setupPlugin(namespace) {
-    if (!Formstone.Plugins[namespace].initialized) {
-      Formstone.Plugins[namespace].methods._setup.call(document);
-      Formstone.Plugins[namespace].initialized = true;
     }
-  }
 
-  // Namespace Properties
+    // Namespace Properties
 
-  function namespaceProperties(type, namespace, globalProps, customProps) {
-    var _props = {
+    function namespaceProperties(type, namespace, globalProps, customProps) {
+      var _props = {
           raw: {}
         },
         i;
 
-    customProps = customProps || {};
+      customProps = customProps || {};
 
-    for (i in customProps) {
-      if (customProps.hasOwnProperty(i)) {
-        if (type === "classes") {
+      for (i in customProps) {
+        if (customProps.hasOwnProperty(i)) {
+          if (type === "classes") {
 
-          // Custom classes
-          _props.raw[ customProps[i] ] = namespace + "-" + customProps[i];
-          _props[ customProps[i] ]     = "." + namespace + "-" + customProps[i];
-        } else {
-          // Custom events
-          _props.raw[ i ] = customProps[i];
-          _props[ i ]     = customProps[i] + "." + namespace;
+            // Custom classes
+            _props.raw[customProps[i]] = namespace + "-" + customProps[i];
+            _props[customProps[i]] = "." + namespace + "-" + customProps[i];
+          } else {
+            // Custom events
+            _props.raw[i] = customProps[i];
+            _props[i] = customProps[i] + "." + namespace;
+          }
         }
       }
-    }
 
-    for (i in globalProps) {
-      if (globalProps.hasOwnProperty(i)) {
-        if (type === "classes") {
+      for (i in globalProps) {
+        if (globalProps.hasOwnProperty(i)) {
+          if (type === "classes") {
 
-          // Global classes
-          _props.raw[ i ] = globalProps[i].replace(/{ns}/g, namespace);
-          _props[ i ]     = globalProps[i].replace(/{ns}/g, "." + namespace);
-        } else {
-          // Global events
-          _props.raw[ i ] = globalProps[i].replace(/.{ns}/g, "");
-          _props[ i ]     = globalProps[i].replace(/{ns}/g, namespace);
+            // Global classes
+            _props.raw[i] = globalProps[i].replace(/{ns}/g, namespace);
+            _props[i] = globalProps[i].replace(/{ns}/g, "." + namespace);
+          } else {
+            // Global events
+            _props.raw[i] = globalProps[i].replace(/.{ns}/g, "");
+            _props[i] = globalProps[i].replace(/{ns}/g, namespace);
+          }
         }
       }
+
+      return _props;
     }
 
-    return _props;
-  }
+    // Set Browser Prefixes
 
-  // Set Browser Prefixes
-
-  function setBrowserPrefixes() {
-    var transitionEvents = {
-          "WebkitTransition"    : "webkitTransitionEnd",
-          "MozTransition"       : "transitionend",
-          "OTransition"         : "otransitionend",
-          "transition"          : "transitionend"
+    function setBrowserPrefixes() {
+      var transitionEvents = {
+          "WebkitTransition": "webkitTransitionEnd",
+          "MozTransition": "transitionend",
+          "OTransition": "otransitionend",
+          "transition": "transitionend"
         },
         transitionProperties = [
           "transition",
           "-webkit-transition"
         ],
         transformProperties = {
-          'transform'          : 'transform',
-          'MozTransform'       : '-moz-transform',
-          'OTransform'         : '-o-transform',
-          'msTransform'        : '-ms-transform',
-          'webkitTransform'    : '-webkit-transform'
+          'transform': 'transform',
+          'MozTransform': '-moz-transform',
+          'OTransform': '-o-transform',
+          'msTransform': '-ms-transform',
+          'webkitTransform': '-webkit-transform'
         },
-        transitionEvent       = "transitionend",
-        transitionProperty    = "",
-        transformProperty     = "",
-        testDiv               = document.createElement("div"),
+        transitionEvent = "transitionend",
+        transitionProperty = "",
+        transformProperty = "",
+        testDiv = document.createElement("div"),
         i;
 
-    for (i in transitionEvents) {
-      if (transitionEvents.hasOwnProperty(i) && i in testDiv.style) {
-        transitionEvent = transitionEvents[i];
-        Formstone.support.transition = true;
-        break;
+      for (i in transitionEvents) {
+        if (transitionEvents.hasOwnProperty(i) && i in testDiv.style) {
+          transitionEvent = transitionEvents[i];
+          Formstone.support.transition = true;
+          break;
+        }
       }
+
+      Events.transitionEnd = transitionEvent + ".{ns}";
+
+      for (i in transitionProperties) {
+        if (transitionProperties.hasOwnProperty(i) && transitionProperties[i] in testDiv.style) {
+          transitionProperty = transitionProperties[i];
+          break;
+        }
+      }
+
+      Formstone.transition = transitionProperty;
+
+      for (i in transformProperties) {
+        if (transformProperties.hasOwnProperty(i) && transformProperties[i] in testDiv.style) {
+          Formstone.support.transform = true;
+          transformProperty = transformProperties[i];
+          break;
+        }
+      }
+
+      Formstone.transform = transformProperty;
     }
 
-    Events.transitionEnd = transitionEvent + ".{ns}";
+    // Window resize
 
-    for (i in transitionProperties) {
-      if (transitionProperties.hasOwnProperty(i) && transitionProperties[i] in testDiv.style) {
-        transitionProperty = transitionProperties[i];
-        break;
-      }
+    function onWindowResize() {
+      Formstone.windowWidth = Formstone.$window.width();
+      Formstone.windowHeight = Formstone.$window.height();
+
+      ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
     }
 
-    Formstone.transition = transitionProperty;
-
-    for (i in transformProperties) {
-      if (transformProperties.hasOwnProperty(i) && transformProperties[i] in testDiv.style) {
-        Formstone.support.transform = true;
-        transformProperty = transformProperties[i];
-        break;
-      }
-    }
-
-    Formstone.transform = transformProperty;
-  }
-
-  // Window resize
-
-  function onWindowResize() {
-    Formstone.windowWidth  = Formstone.$window.width();
-    Formstone.windowHeight = Formstone.$window.height();
-
-    ResizeTimer = Functions.startTimer(ResizeTimer, Debounce, handleWindowResize);
-  }
-
-  function handleWindowResize() {
-    for (var i in Formstone.ResizeHandlers) {
-      if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
-        Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth, Formstone.windowHeight);
-      }
-    }
-  }
-
-  Formstone.$window.on("resize.fs", onWindowResize);
-  onWindowResize();
-
-  // RAF
-
-  function handleRAF() {
-    if (Formstone.support.raf) {
-      Formstone.window.requestAnimationFrame(handleRAF);
-
-      for (var i in Formstone.RAFHandlers) {
-        if (Formstone.RAFHandlers.hasOwnProperty(i)) {
-          Formstone.RAFHandlers[i].callback.call(window);
+    function handleWindowResize() {
+      for (var i in Formstone.ResizeHandlers) {
+        if (Formstone.ResizeHandlers.hasOwnProperty(i)) {
+          Formstone.ResizeHandlers[i].callback.call(window, Formstone.windowWidth, Formstone.windowHeight);
         }
       }
     }
-  }
 
-  handleRAF();
+    Formstone.$window.on("resize.fs", onWindowResize);
+    onWindowResize();
 
-  // Sort Priority
+    // RAF
 
-  function sortPriority(a, b) {
-    return (parseInt(a.priority) - parseInt(b.priority));
-  }
+    function handleRAF() {
+      if (Formstone.support.raf) {
+        Formstone.window.requestAnimationFrame(handleRAF);
 
-  // Document Ready
+        for (var i in Formstone.RAFHandlers) {
+          if (Formstone.RAFHandlers.hasOwnProperty(i)) {
+            Formstone.RAFHandlers[i].callback.call(window);
+          }
+        }
+      }
+    }
 
-  Formstone.Ready(function() {
-    Formstone.$body = $("body");
+    handleRAF();
 
-    // Viewport
-    $ViewportMeta = $('meta[name="viewport"]');
-    ViewportMetaOriginal = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
-    ViewportMetaLocked   = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+    // Sort Priority
 
-    $Ready.resolve();
+    function sortPriority(a, b) {
+      return (parseInt(a.priority) - parseInt(b.priority));
+    }
 
-    // ie8 fallback support
-    Formstone.support.nativeMatchMedia = Formstone.support.matchMedia && !$("html").hasClass("no-matchmedia");
-  });
+    // Document Ready
 
-  // Custom Events
+    Formstone.Ready(function() {
+      Formstone.$body = $("body");
 
-  Events.clickTouchStart = Events.click + " " + Events.touchStart;
+      // Viewport
+      $ViewportMeta = $('meta[name="viewport"]');
+      ViewportMetaOriginal = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
+      ViewportMetaLocked = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
 
-  // Browser Prefixes
+      $Ready.resolve();
 
-  setBrowserPrefixes();
+      // ie8 fallback support
+      Formstone.support.nativeMatchMedia = Formstone.support.matchMedia && !$("html").hasClass("no-matchmedia");
+    });
 
-  window.Formstone = Formstone;
+    // Custom Events
 
-  return Formstone;
+    Events.clickTouchStart = Events.click + " " + Events.touchStart;
 
-})
+    // Browser Prefixes
+
+    setBrowserPrefixes();
+
+    window.Formstone = Formstone;
+
+    return Formstone;
+
+  })
 
 );
 
@@ -1718,357 +1720,357 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    $Body = Formstone.$body;
-  }
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function resize() {
-    if (Defaults.scrollDepth) {
-      setScrollDepths();
-    }
-  }
-
-  /**
-   * @method private
-   * @name delegate
-   */
-
-  function delegate() {
-    if (arguments.length && $.type(arguments[0]) !== "object") {
-      if (arguments[0] === "destroy") {
-        destroy.apply(this);
-      } else {
-        var args = Array.prototype.slice.call(arguments, 1);
-
-        switch (arguments[0]) {
-          case "pageview":
-            pushPageView.apply(this, args);
-            break;
-          case "event":
-            pushEvent.apply(this, args);
-            break;
-          default:
-            break;
-        }
-      }
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery"
+      ], factory);
     } else {
-      init.apply(this, arguments);
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
+
+    function setup() {
+      $Body = Formstone.$body;
     }
 
-    return null;
-  }
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-  /**
-   * @method private
-   * @name init
-   * @description Initializes plugin
-   * @param opts [object] "Initialization options"
-   */
-
-  function init(options) {
-    // Attach Analytics events
-    if (!Initialized && $Body && $Body.length) {
-      Initialized = true;
-
-      Defaults = $.extend(Defaults, options || {});
-
-      if (Defaults.autoEvents) {
-        $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
-      }
-
+    function resize() {
       if (Defaults.scrollDepth) {
         setScrollDepths();
-        $Window.on(Events.scroll, trackScroll)
-          .one(Events.load, resize);
+      }
+    }
+
+    /**
+     * @method private
+     * @name delegate
+     */
+
+    function delegate() {
+      if (arguments.length && $.type(arguments[0]) !== "object") {
+        if (arguments[0] === "destroy") {
+          destroy.apply(this);
+        } else {
+          var args = Array.prototype.slice.call(arguments, 1);
+
+          switch (arguments[0]) {
+            case "pageview":
+              pushPageView.apply(this, args);
+              break;
+            case "event":
+              pushEvent.apply(this, args);
+              break;
+            default:
+              break;
+          }
+        }
+      } else {
+        init.apply(this, arguments);
       }
 
-      $Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
+      return null;
     }
-  }
 
-  /**
-   * @method private
-   * @name destroy
-   * @description Destroys plugin
-   */
+    /**
+     * @method private
+     * @name init
+     * @description Initializes plugin
+     * @param opts [object] "Initialization options"
+     */
 
-  function destroy() {
-    if (Initialized && $Body && $Body.length) {
-      $Window.off(Events.namespace);
-      $Body.off(Events.namespace);
+    function init(options) {
+      // Attach Analytics events
+      if (!Initialized && $Body && $Body.length) {
+        Initialized = true;
 
-      Initialized = false;
+        Defaults = $.extend(Defaults, options || {});
+
+        if (Defaults.autoEvents) {
+          $Body.find("a").not("[" + DataKeyFull + "]").each(buildEvent);
+        }
+
+        if (Defaults.scrollDepth) {
+          setScrollDepths();
+          $Window.on(Events.scroll, trackScroll)
+            .one(Events.load, resize);
+        }
+
+        $Body.on(Events.click, "*[" + DataKeyFull + "]", trackEvent);
+      }
     }
-  }
 
-  /**
-   * @method private
-   * @name buildEvent
-   * @description Build events for email, phone, file types & external links
-   */
+    /**
+     * @method private
+     * @name destroy
+     * @description Destroys plugin
+     */
 
-  function buildEvent() {
-    var $target  = $(this),
-        href     = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
-        domain   = document.domain.split(".").reverse(),
+    function destroy() {
+      if (Initialized && $Body && $Body.length) {
+        $Window.off(Events.namespace);
+        $Body.off(Events.namespace);
+
+        Initialized = false;
+      }
+    }
+
+    /**
+     * @method private
+     * @name buildEvent
+     * @description Build events for email, phone, file types & external links
+     */
+
+    function buildEvent() {
+      var $target = $(this),
+        href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+        domain = document.domain.split(".").reverse(),
         internal = href.match(domain[1] + "." + domain[0]) !== null,
         eventData;
 
-    if (href.match(/^mailto\:/i)) {
-      // Email
-      eventData = "Email, Click, " + href.replace(/^mailto\:/i, "");
-    } else if (href.match(/^tel\:/i)) {
-      // Action
-      eventData = "Telephone, Click, " + href.replace(/^tel\:/i, "");
-    } else if (href.match(Defaults.fileTypes)) {
-      // Files
-      var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
-      eventData = "File, Download:" + extension[0] + ", " + href.replace(/ /g,"-");
-    } else if (!internal) {
-      // External Link
-      eventData = "ExternalLink, Click, " + href;
+      if (href.match(/^mailto\:/i)) {
+        // Email
+        eventData = "Email, Click, " + href.replace(/^mailto\:/i, "");
+      } else if (href.match(/^tel\:/i)) {
+        // Action
+        eventData = "Telephone, Click, " + href.replace(/^tel\:/i, "");
+      } else if (href.match(Defaults.fileTypes)) {
+        // Files
+        var extension = (/[.]/.exec(href)) ? /[^.]+$/.exec(href) : undefined;
+        eventData = "File, Download:" + extension[0] + ", " + href.replace(/ /g, "-");
+      } else if (!internal) {
+        // External Link
+        eventData = "ExternalLink, Click, " + href;
+      }
+
+      if (eventData) {
+        $target.attr(DataKeyFull, eventData);
+      }
     }
 
-    if (eventData) {
-      $target.attr(DataKeyFull, eventData);
+    /**
+     * @method private
+     * @name trackScroll
+     * @description Debounces scroll tracking
+     */
+
+    function trackScroll(e) {
+      Functions.startTimer(ScrollTimer, 250, doTrackScroll);
     }
-  }
 
-  /**
-   * @method private
-   * @name trackScroll
-   * @description Debounces scroll tracking
-   */
+    /**
+     * @method private
+     * @name doTrackScroll
+     * @description Handle scroll tracking
+     */
 
-  function trackScroll(e) {
-    Functions.startTimer(ScrollTimer, 250, doTrackScroll);
-  }
-
-  /**
-   * @method private
-   * @name doTrackScroll
-   * @description Handle scroll tracking
-   */
-
-  function doTrackScroll() {
-    var scrollTop = $Window.scrollTop() + Formstone.windowHeight,
-        step      = (1 / Defaults.scrollStops),
-        depth     = step,
+    function doTrackScroll() {
+      var scrollTop = $Window.scrollTop() + Formstone.windowHeight,
+        step = (1 / Defaults.scrollStops),
+        depth = step,
         key;
 
-    for (var i = 1; i <= Defaults.scrollStops; i++) {
-      key = ( Math.round(100 * depth) ).toString();
+      for (var i = 1; i <= Defaults.scrollStops; i++) {
+        key = (Math.round(100 * depth)).toString();
 
-      if (!ScrollDepths[ ScrollWidth ][ key ].passed && scrollTop > ScrollDepths[ ScrollWidth ][ key ].edge) {
-        ScrollDepths[ ScrollWidth ][ key ].passed = true;
+        if (!ScrollDepths[ScrollWidth][key].passed && scrollTop > ScrollDepths[ScrollWidth][key].edge) {
+          ScrollDepths[ScrollWidth][key].passed = true;
 
-        // Push data
-        var eventData = $.extend(Defaults.scrollFields, {
-            eventCategory  : "ScrollDepth",
-            eventAction    : ScrollWidth,
-            eventLabel     : key,
-            nonInteraction : true
+          // Push data
+          var eventData = $.extend(Defaults.scrollFields, {
+            eventCategory: "ScrollDepth",
+            eventAction: ScrollWidth,
+            eventLabel: key,
+            nonInteraction: true
           });
 
-        pushEvent(eventData);
+          pushEvent(eventData);
+        }
+
+        depth += step;
       }
-
-      depth += step;
     }
-  }
 
-  /**
-   * @method private
-   * @name setScrollDepths
-   * @description Sets scroll depths at specific widths
-   */
+    /**
+     * @method private
+     * @name setScrollDepths
+     * @description Sets scroll depths at specific widths
+     */
 
-  function setScrollDepths() {
-    var mqState    = $.mediaquery("state"),
+    function setScrollDepths() {
+      var mqState = $.mediaquery("state"),
         bodyHeight = $Body.outerHeight(),
-        newDepths  = {},
-        step       = (1 / Defaults.scrollStops),
-        depth      = step,
-        top        = 0,
+        newDepths = {},
+        step = (1 / Defaults.scrollStops),
+        depth = step,
+        top = 0,
         key;
 
-    if (mqState.minWidth) {
-      ScrollWidth = "MinWidth:" + mqState.minWidth + "px";
-    }
-
-    for (var i = 1; i <= Defaults.scrollStops; i++) {
-      top = parseInt(bodyHeight * depth);
-      key = ( Math.round(100 * depth) ).toString();
-
-      newDepths[ key ] = {
-        edge    : ( key === "100" ) ? top - 10 : top,
-        passsed : ( ScrollDepths[ ScrollWidth ] && ScrollDepths[ ScrollWidth ][ key ] ) ? ScrollDepths[ ScrollWidth ][ key ].passed : false
-      };
-
-      depth += step;
-    }
-
-    ScrollDepths[ ScrollWidth ] = newDepths;
-  }
-
-  /**
-   * @method private
-   * @name trackEvent
-   * @description Tracks event
-   * @param e [object] "Event data"
-   */
-
-  function trackEvent(e) {
-    var $target = $(this),
-        url     = $target.attr("href"),
-        data    = $target.data(DataKey).split(",");
-
-    if (Defaults.eventCallback) {
-      e.preventDefault();
-    }
-
-    // Trim data
-    for (var i in data) {
-      if (data.hasOwnProperty(i)) {
-        data[i] = $.trim(data[i]);
+      if (mqState.minWidth) {
+        ScrollWidth = "MinWidth:" + mqState.minWidth + "px";
       }
+
+      for (var i = 1; i <= Defaults.scrollStops; i++) {
+        top = parseInt(bodyHeight * depth);
+        key = (Math.round(100 * depth)).toString();
+
+        newDepths[key] = {
+          edge: (key === "100") ? top - 10 : top,
+          passsed: (ScrollDepths[ScrollWidth] && ScrollDepths[ScrollWidth][key]) ? ScrollDepths[ScrollWidth][key].passed : false
+        };
+
+        depth += step;
+      }
+
+      ScrollDepths[ScrollWidth] = newDepths;
     }
 
-    // Push data
-    pushEvent({
-      eventCategory  : data[0],
-      eventAction    : data[1],
-      eventLabel     : (data[2] || url),
-      eventValue     : data[3],
-      nonInteraction : data[4],
-    }, $target);
-  }
+    /**
+     * @method private
+     * @name trackEvent
+     * @description Tracks event
+     * @param e [object] "Event data"
+     */
 
-  /**
-   * @method private
-   * @name pushEvent
-   * @description Push event to Universal Analytics
-   */
+    function trackEvent(e) {
+      var $target = $(this),
+        url = $target.attr("href"),
+        data = $target.data(DataKey).split(",");
 
-  function pushEvent(data, $target) {
-    // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference
-    var loc = Window.location,
+      if (Defaults.eventCallback) {
+        e.preventDefault();
+      }
+
+      // Trim data
+      for (var i in data) {
+        if (data.hasOwnProperty(i)) {
+          data[i] = $.trim(data[i]);
+        }
+      }
+
+      // Push data
+      pushEvent({
+        eventCategory: data[0],
+        eventAction: data[1],
+        eventLabel: (data[2] || url),
+        eventValue: data[3],
+        nonInteraction: data[4],
+      }, $target);
+    }
+
+    /**
+     * @method private
+     * @name pushEvent
+     * @description Push event to Universal Analytics
+     */
+
+    function pushEvent(data, $target) {
+      // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference
+      var loc = Window.location,
         evt = $.extend({
-          hitType : "event"
+          hitType: "event"
         }, data);
 
-    // If active link, launch that ish!
-    if ($.type($target) !== "undefined" && !$target.attr("data-analytics-stop")) {
-      var href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
-        url  = (!href.match(/^mailto\:/i) && !href.match(/^tel\:/i) && href.indexOf(":") < 0) ? Window.location.protocol + "//" + Window.location.hostname + "/" + href : href;
+      // If active link, launch that ish!
+      if ($.type($target) !== "undefined" && !$target.attr("data-analytics-stop")) {
+        var href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+          url = (!href.match(/^mailto\:/i) && !href.match(/^tel\:/i) && href.indexOf(":") < 0) ? Window.location.protocol + "//" + Window.location.hostname + "/" + href : href;
 
-      if (url !== "") {
-        // Check Window target
-        var target = $target.attr("target");
-        if (target) {
-          Window.open(url, target);
-        } else if (Defaults.eventCallback) {
-          var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
+        if (url !== "") {
+          // Check Window target
+          var target = $target.attr("target");
+          if (target) {
+            Window.open(url, target);
+          } else if (Defaults.eventCallback) {
+            var callbackType = "hitCallback"; // GUA ? "hitCallback" : "eventCallback";
 
-          evt[ callbackType ] = function() {
-            if (LinkTimer) {
-              Functions.clearTimer(LinkTimer);
+            evt[callbackType] = function() {
+              if (LinkTimer) {
+                Functions.clearTimer(LinkTimer);
 
-              openURL( url );
-            }
-          };
+                openURL(url);
+              }
+            };
 
-          // Event timeout
-          LinkTimer = Functions.startTimer(LinkTimer, Defaults.eventTimeout, evt[ callbackType ]);
+            // Event timeout
+            LinkTimer = Functions.startTimer(LinkTimer, Defaults.eventTimeout, evt[callbackType]);
+          }
+        }
+      }
+
+      push(evt);
+    }
+
+    /**
+     * @method private
+     * @name pushPageView
+     * @description Push page view to Universal Analytics
+     */
+
+    function pushPageView(data) {
+      var pageView = $.extend({
+        hitType: "pageview"
+      }, data);
+
+      push(pageView);
+    }
+
+    /**
+     * @method private
+     * @name push
+     * @description Push data to Universal Analytics
+     */
+
+    function push(data) {
+      if ($.type(Window.ga) === "function" && $.type(Window.ga.getAll) === "function") {
+        var trackers = Window.ga.getAll();
+
+        for (var i = 0, count = trackers.length; i < count; i++) {
+          Window.ga(trackers[i].get("name") + ".send", data);
         }
       }
     }
 
-    push(evt);
-  }
-
-  /**
-   * @method private
-   * @name pushPageView
-   * @description Push page view to Universal Analytics
-   */
-
-  function pushPageView(data) {
-    var pageView = $.extend({
-          hitType : "pageview"
-        }, data);
-
-    push(pageView);
-  }
-
-  /**
-   * @method private
-   * @name push
-   * @description Push data to Universal Analytics
-   */
-
-  function push(data) {
-    if ($.type(Window.ga) === "function" && $.type(Window.ga.getAll) === "function") {
-      var trackers = Window.ga.getAll();
-
-      for (var i = 0, count = trackers.length; i < count; i++) {
-        Window.ga( trackers[i].get("name") + ".send", data);
-      }
+    /**
+     * @method private
+     * @name openURL
+     * @description Launch a url
+     */
+    function openURL(url) {
+      document.location = url;
     }
-  }
 
-  /**
-   * @method private
-   * @name openURL
-   * @description Launch a url
-   */
-  function openURL(url) {
-    document.location = url;
-  }
+    /**
+     * @plugin
+     * @name Analytics
+     * @description A jQuery plugin for Google Universal Analytics Events.
+     * @type utility
+     * @main analytics.js
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     */
 
-  /**
-   * @plugin
-   * @name Analytics
-   * @description A jQuery plugin for Google Universal Analytics Events.
-   * @type utility
-   * @main analytics.js
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   */
-
-  var Plugin = Formstone.Plugin("analytics", {
+    var Plugin = Formstone.Plugin("analytics", {
         methods: {
-          _setup    : setup,
-          _resize   : resize
+          _setup: setup,
+          _resize: resize
         },
         utilities: {
-          _delegate : delegate
+          _delegate: delegate
         }
       }),
 
@@ -2084,36 +2086,36 @@ Prism.languages.js = Prism.languages.javascript;
        */
 
       Defaults = {
-        autoEvents    : false,
-        fileTypes     : /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
-        eventCallback : false,
-        eventTimeout  : 1000,
-        scrollDepth   : false,
-        scrollStops   : 5,
-        scrollFields  : {}
+        autoEvents: false,
+        fileTypes: /\.(zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        eventCallback: false,
+        eventTimeout: 1000,
+        scrollDepth: false,
+        scrollStops: 5,
+        scrollFields: {}
       },
 
       // Localize References
 
-      Window       = Formstone.window,
-      $Window      = Formstone.$window,
-      $Body        = null,
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      $Body = null,
 
-      Functions    = Plugin.functions,
-      Events       = Plugin.events,
+      Functions = Plugin.functions,
+      Events = Plugin.events,
 
       // Internal
 
-      Initialized  = false,
-      DataKey      = "analytics-event",
-      DataKeyFull  = "data-" + DataKey,
+      Initialized = false,
+      DataKey = "analytics-event",
+      DataKeyFull = "data-" + DataKey,
 
       ScrollDepths = {},
-      ScrollTimer  = null,
-      ScrollWidth  = "Site", // default value, non-responsive
-      LinkTimer    = null;
+      ScrollTimer = null,
+      ScrollWidth = "Site", // default value, non-responsive
+      LinkTimer = null;
 
-})
+  })
 
 );
 
@@ -2122,434 +2124,434 @@ Prism.languages.js = Prism.languages.javascript;
 /* global ga */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./analytics"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name initialize
-   * @description Initializes plugin.
-   * @param opts [object] "Plugin options"
-   */
-
-  function initialize(options) {
-    if (Instance || !Formstone.support.history) {
-      return;
-    }
-
-    $Body = Formstone.$body;
-
-    Instance = $.extend(Defaults, options);
-
-    if (Instance.render === $.noop) {
-      Instance.render = renderState;
-    }
-
-    if (Instance.transitionOut === $.noop) {
-      Instance.transitionOut = function() {
-        return $.Deferred().resolve();
-      };
-    }
-
-    // Initial state
-    if (history.state) {
-      CurrentID  = history.state.id;
-      CurrentURL = history.state.url;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./analytics"
+      ], factory);
     } else {
-      CurrentURL = window.location.href;
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-      replaceState(CurrentID, CurrentURL);
+    "use strict";
+
+    /**
+     * @method private
+     * @name initialize
+     * @description Initializes plugin.
+     * @param opts [object] "Plugin options"
+     */
+
+    function initialize(options) {
+      if (Instance || !Formstone.support.history) {
+        return;
+      }
+
+      $Body = Formstone.$body;
+
+      Instance = $.extend(Defaults, options);
+
+      if (Instance.render === $.noop) {
+        Instance.render = renderState;
+      }
+
+      if (Instance.transitionOut === $.noop) {
+        Instance.transitionOut = function() {
+          return $.Deferred().resolve();
+        };
+      }
+
+      // Initial state
+      if (history.state) {
+        CurrentID = history.state.id;
+        CurrentURL = history.state.url;
+      } else {
+        CurrentURL = window.location.href;
+
+        replaceState(CurrentID, CurrentURL);
+      }
+
+      // Bind state events
+      $Window.on(Events.popState, onPop);
+
+      enable();
     }
 
-    // Bind state events
-    $Window.on(Events.popState, onPop);
+    /**
+     * @method private
+     * @name disable
+     * @description Disable ASAP
+     * @example $.asap("enable");
+     */
 
-    enable();
-  }
-
-  /**
-   * @method private
-   * @name disable
-   * @description Disable ASAP
-   * @example $.asap("enable");
-   */
-
-  function disable() {
-    if ($Body && $Body.hasClass(RawClasses.base)) {
-      $Body.off(Events.click)
-         .removeClass(RawClasses.base);
-    }
-  }
-
-  /**
-   * @method private
-   * @name enable
-   * @description Enables ASAP
-   * @example $.asap("enable");
-   */
-
-  function enable() {
-    if ($Body && !$Body.hasClass(RawClasses.base)) {
-      $Body.on(Events.click, Instance.selector, onClick)
-         .addClass(RawClasses.base);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onClick
-   * @description Handles click events
-   * @param e [object] "Event data"
-   */
-
-  function onClick(e) {
-    var url = e.currentTarget;
-
-    // Ignore everything but normal click
-    if (
-      (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) ||
-      (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank"
-    ) {
-      return;
-    }
-
-    // Update state on hash change
-    if ( url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#") ) {
-      return;
-    }
-
-    // Ignore certain file types
-    if ( url.href.match(Instance.ignoreTypes) ) {
-      return;
-    }
-
-    Functions.killEvent(e);
-    e.stopImmediatePropagation();
-
-    if (url.href !== CurrentURL) {
-      requestURL(url.href, true);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onPop
-   * @description Handles history navigation events
-   * @param e [object] "Event data"
-   */
-
-  function onPop(e) {
-    if (Request) {
-      Request.abort();
-    }
-
-    var state = e.originalEvent.state;
-      // direction = (state.id > CurrentID) ? "forward" : "back";
-
-    if (state) {
-      CurrentID = state.id;
-
-      if (state.url !== CurrentURL) {
-        requestURL(state.url, false);
+    function disable() {
+      if ($Body && $Body.hasClass(RawClasses.base)) {
+        $Body.off(Events.click)
+          .removeClass(RawClasses.base);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name requestURL
-   * @description Requests new content via AJAX
-   * @param url [string] "URL to load"
-   * @param doPush [boolean] "Flag to push to stack"
-   */
+    /**
+     * @method private
+     * @name enable
+     * @description Enables ASAP
+     * @example $.asap("enable");
+     */
 
-  function requestURL(url, doPush) {
-    if (Request) {
-      Request.abort();
+    function enable() {
+      if ($Body && !$Body.hasClass(RawClasses.base)) {
+        $Body.on(Events.click, Instance.selector, onClick)
+          .addClass(RawClasses.base);
+      }
     }
 
-    // Fire request event
-    $Window.trigger(Events.requested, [ doPush ]);
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click events
+     * @param e [object] "Event data"
+     */
 
-    // Get transition out deferred
-    Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [ false ]);
+    function onClick(e) {
+      var url = e.currentTarget;
 
-    var parsed   = parseURL(url),
-        params   = parsed.params,
-        hash     = parsed.hash,
+      // Ignore everything but normal click
+      if (
+        (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) ||
+        (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank"
+      ) {
+        return;
+      }
+
+      // Update state on hash change
+      if (url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#")) {
+        return;
+      }
+
+      // Ignore certain file types
+      if (url.href.match(Instance.ignoreTypes)) {
+        return;
+      }
+
+      Functions.killEvent(e);
+      e.stopImmediatePropagation();
+
+      if (url.href !== CurrentURL) {
+        requestURL(url.href, true);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPop
+     * @description Handles history navigation events
+     * @param e [object] "Event data"
+     */
+
+    function onPop(e) {
+      if (Request) {
+        Request.abort();
+      }
+
+      var state = e.originalEvent.state;
+      // direction = (state.id > CurrentID) ? "forward" : "back";
+
+      if (state) {
+        CurrentID = state.id;
+
+        if (state.url !== CurrentURL) {
+          requestURL(state.url, false);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name requestURL
+     * @description Requests new content via AJAX
+     * @param url [string] "URL to load"
+     * @param doPush [boolean] "Flag to push to stack"
+     */
+
+    function requestURL(url, doPush) {
+      if (Request) {
+        Request.abort();
+      }
+
+      // Fire request event
+      $Window.trigger(Events.requested, [doPush]);
+
+      // Get transition out deferred
+      Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [false]);
+
+      var parsed = parseURL(url),
+        params = parsed.params,
+        hash = parsed.hash,
         cleanURL = parsed.clean,
-        error    = "User error",
+        error = "User error",
         response = null,
         requestDeferred = $.Deferred();
 
-    params[ Instance.requestKey ] = true;
+      params[Instance.requestKey] = true;
 
-    // Request new content
-    Request = $.ajax({
-      url: cleanURL,
-      data: params,
-      dataType: "json",
-      cache: Instance.cache,
-      xhr: function() {
-        // custom xhr
-        var xhr = new Window.XMLHttpRequest();
+      // Request new content
+      Request = $.ajax({
+        url: cleanURL,
+        data: params,
+        dataType: "json",
+        cache: Instance.cache,
+        xhr: function() {
+          // custom xhr
+          var xhr = new Window.XMLHttpRequest();
 
-        /*
-        //Upload progress ?
-        xhr.upload.addEventListener("progress", function(e) {
-          if (e.lengthComputable) {
-            var percent = (e.loaded / e.total) / 2;
-            $window.trigger(Events.progress, [ percent ]);
+          /*
+          //Upload progress ?
+          xhr.upload.addEventListener("progress", function(e) {
+            if (e.lengthComputable) {
+              var percent = (e.loaded / e.total) / 2;
+              $window.trigger(Events.progress, [ percent ]);
+            }
+          }, false);
+          */
+
+          //Download progress
+          xhr.addEventListener("progress", function(e) {
+            if (e.lengthComputable) {
+              var percent = e.loaded / e.total;
+              $Window.trigger(Events.progress, [percent]);
+            }
+          }, false);
+
+          return xhr;
+        },
+        success: function(resp, status, jqXHR) {
+          response = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
+
+          // handle redirects - requires passing new location with json response
+          if (resp.location) {
+            url = resp.location;
+
+            parsed = parseURL(url);
+            hash = parsed.hash;
           }
-        }, false);
-        */
 
-        //Download progress
-        xhr.addEventListener("progress", function(e) {
-          if (e.lengthComputable) {
-            var percent = e.loaded / e.total;
-            $Window.trigger(Events.progress, [ percent ]);
-          }
-        }, false);
+          requestDeferred.resolve();
+        },
+        error: function(jqXHR, status, err) {
+          error = err;
 
-        return xhr;
-      },
-      success: function(resp, status, jqXHR) {
-        response  = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
-
-        // handle redirects - requires passing new location with json response
-        if (resp.location) {
-          url = resp.location;
-
-          parsed = parseURL(url);
-          hash   = parsed.hash;
+          requestDeferred.reject();
         }
+      });
 
-        requestDeferred.resolve();
-      },
-      error: function(jqXHR, status, err) {
-        error = err;
+      $.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
+        processResponse(parsed, response, doPush);
+      }).fail(function() {
+        $Window.trigger(Events.failed, [error]);
+      });
+    }
 
-        requestDeferred.reject();
+    /**
+     * @method private
+     * @name processResponse
+     * @description Processes a state
+     * @param parsedURL [object] "Parsed URL"
+     * @param data [object] "State Data"
+     * @param doPush [boolean] "Flag to replace or add state"
+     */
+
+    function processResponse(parsedURL, data, doPush) {
+      // Fire load event
+      $Window.trigger(Events.loaded, [data]);
+
+      // Trigger analytics page view
+      if ($.fsAnalytics !== undefined) {
+        $.fsAnalytics("pageview");
       }
-    });
 
-    $.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
-      processResponse(parsed, response, doPush);
-    }).fail(function() {
-      $Window.trigger(Events.failed, [ error ]);
-    });
-  }
+      // Render before updating
+      Instance.render.call(this, data, parsedURL.hash);
 
-  /**
-   * @method private
-   * @name processResponse
-   * @description Processes a state
-   * @param parsedURL [object] "Parsed URL"
-   * @param data [object] "State Data"
-   * @param doPush [boolean] "Flag to replace or add state"
-   */
+      // Update current url
+      CurrentURL = parsedURL.url;
 
-  function processResponse(parsedURL, data, doPush) {
-    // Fire load event
-    $Window.trigger(Events.loaded, [ data ]);
-
-    // Trigger analytics page view
-    if ($.fsAnalytics !== undefined) {
-      $.fsAnalytics("pageview");
-    }
-
-    // Render before updating
-    Instance.render.call(this, data, parsedURL.hash);
-
-    // Update current url
-    CurrentURL = parsedURL.url;
-
-    if (doPush) {
-      // Push new states to the stack
-      CurrentID++;
-      pushState(CurrentID, CurrentURL);
-    }
-
-    $Window.trigger(Events.rendered, [ data ]);
-
-    var scrollTop = false;
-
-    if (parsedURL.hash !== "") {
-      var $el = $(parsedURL.hash);
-
-      if ($el.length) {
-        scrollTop = $el.offset().top;
+      if (doPush) {
+        // Push new states to the stack
+        CurrentID++;
+        pushState(CurrentID, CurrentURL);
       }
-    }
 
-    if (scrollTop !== false) {
-      $Window.scrollTop(scrollTop);
-    }
-  }
+      $Window.trigger(Events.rendered, [data]);
 
-  /**
-   * @method private
-   * @name renderHTML
-   * @description Renders a new state
-   * @param data [object] "State Data"
-   * @param hash [string] "Hash"
-   */
+      var scrollTop = false;
 
-  function renderState(data, hash) {
-    // Update DOM
-    if ($.type(data) !== "undefined") {
-      var $target;
+      if (parsedURL.hash !== "") {
+        var $el = $(parsedURL.hash);
 
-      for (var key in data) {
-        if (data.hasOwnProperty(key)) {
-          $target = $(key);
-
-          if ($target.length) {
-            $target.html(data[key]);
-          }
+        if ($el.length) {
+          scrollTop = $el.offset().top;
         }
       }
-    }
-  }
 
-  /**
-   * @method private
-   * @name loadURL
-   * @description Loads new page
-   * @param opts [url] <''> "URL to load"
-   */
-
-  /**
-   * @method
-   * @name load
-   * @description Loads new page
-   * @param opts [url] <''> "URL to load"
-   * @example $.asap("load", "http://example.com/page/");
-   */
-
-  function loadURL(url) {
-    if (!Instance || !Formstone.support.history) {
-      window.location.href = url;
-    } else if (url) {
-      requestURL(url, true);
+      if (scrollTop !== false) {
+        $Window.scrollTop(scrollTop);
+      }
     }
 
-    return;
-  }
+    /**
+     * @method private
+     * @name renderHTML
+     * @description Renders a new state
+     * @param data [object] "State Data"
+     * @param hash [string] "Hash"
+     */
 
-  /**
-   * @method private
-   * @name replaceURL
-   * @description Updates current url in history
-   * @param url [string] <''> "New URL"
-   */
+    function renderState(data, hash) {
+      // Update DOM
+      if ($.type(data) !== "undefined") {
+        var $target;
 
-  /**
-   * @method
-   * @name replace
-   * @description Updates current url in history
-   * @param url [string] <''> "New URL"
-   * @example $.asap("replace", "http://example.com/page/");
-   */
+        for (var key in data) {
+          if (data.hasOwnProperty(key)) {
+            $target = $(key);
 
-  function replaceURL(url) {
-    var state = history.state;
-
-    CurrentURL = url;
-
-    replaceState(state.id, url);
-  }
-
-  /**
-   * @method private
-   * @name pushState
-   * @description Push state to the history stack
-   * @param id [int] "State id"
-   * @param url [string] "State url"
-   */
-
-  function pushState(id, url) {
-    history.pushState({
-      id  : id,
-      url : url
-    }, Namespace + id, url);
-  }
-
-  /**
-   * @method private
-   * @name replaceState
-   * @description Push state to the history stack
-   * @param id [int] "State id"
-   * @param url [string] "State url"
-   */
-
-  function replaceState(id, url) {
-    history.replaceState({
-      id: id,
-      url: url
-    }, Namespace + id, url);
-  }
-
-  /**
-   * @method private
-   * @name parseURL
-   * @description Parse url parts
-   * @param url [string] "URL to parse"
-   */
-
-  function parseURL(url) {
-    var queryIndex = url.indexOf("?"),
-        hashIndex  = url.indexOf("#"),
-        params     = {},
-        hash       = "",
-        cleanURL   = url;
-
-    if (hashIndex > -1) {
-      hash = url.slice(hashIndex);
-      cleanURL = url.slice(0, hashIndex);
+            if ($target.length) {
+              $target.html(data[key]);
+            }
+          }
+        }
+      }
     }
 
-    if (queryIndex > -1) {
-      params = Functions.parseQueryString( url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)) );
-      cleanURL = url.slice(0, queryIndex);
+    /**
+     * @method private
+     * @name loadURL
+     * @description Loads new page
+     * @param opts [url] <''> "URL to load"
+     */
+
+    /**
+     * @method
+     * @name load
+     * @description Loads new page
+     * @param opts [url] <''> "URL to load"
+     * @example $.asap("load", "http://example.com/page/");
+     */
+
+    function loadURL(url) {
+      if (!Instance || !Formstone.support.history) {
+        window.location.href = url;
+      } else if (url) {
+        requestURL(url, true);
+      }
+
+      return;
     }
 
-    return {
-      hash   : hash,
-      params : params,
-      url    : url,
-      clean  : cleanURL
-    };
-  }
+    /**
+     * @method private
+     * @name replaceURL
+     * @description Updates current url in history
+     * @param url [string] <''> "New URL"
+     */
 
-  /**
-   * @plugin
-   * @name ASAP
-   * @description A jQuery plugin for asynchronous page loads.
-   * @type utility
-   * @main asap.js
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency analytics.js
-   */
+    /**
+     * @method
+     * @name replace
+     * @description Updates current url in history
+     * @param url [string] <''> "New URL"
+     * @example $.asap("replace", "http://example.com/page/");
+     */
 
-  var Plugin = Formstone.Plugin("asap", {
+    function replaceURL(url) {
+      var state = history.state;
+
+      CurrentURL = url;
+
+      replaceState(state.id, url);
+    }
+
+    /**
+     * @method private
+     * @name pushState
+     * @description Push state to the history stack
+     * @param id [int] "State id"
+     * @param url [string] "State url"
+     */
+
+    function pushState(id, url) {
+      history.pushState({
+        id: id,
+        url: url
+      }, Namespace + id, url);
+    }
+
+    /**
+     * @method private
+     * @name replaceState
+     * @description Push state to the history stack
+     * @param id [int] "State id"
+     * @param url [string] "State url"
+     */
+
+    function replaceState(id, url) {
+      history.replaceState({
+        id: id,
+        url: url
+      }, Namespace + id, url);
+    }
+
+    /**
+     * @method private
+     * @name parseURL
+     * @description Parse url parts
+     * @param url [string] "URL to parse"
+     */
+
+    function parseURL(url) {
+      var queryIndex = url.indexOf("?"),
+        hashIndex = url.indexOf("#"),
+        params = {},
+        hash = "",
+        cleanURL = url;
+
+      if (hashIndex > -1) {
+        hash = url.slice(hashIndex);
+        cleanURL = url.slice(0, hashIndex);
+      }
+
+      if (queryIndex > -1) {
+        params = Functions.parseQueryString(url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)));
+        cleanURL = url.slice(0, queryIndex);
+      }
+
+      return {
+        hash: hash,
+        params: params,
+        url: url,
+        clean: cleanURL
+      };
+    }
+
+    /**
+     * @plugin
+     * @name ASAP
+     * @description A jQuery plugin for asynchronous page loads.
+     * @type utility
+     * @main asap.js
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency analytics.js
+     */
+
+    var Plugin = Formstone.Plugin("asap", {
         utilities: {
-          _initialize : initialize,
+          _initialize: initialize,
 
-          load        : loadURL,
-          replace     : replaceURL
+          load: loadURL,
+          replace: replaceURL
         },
 
         /**
@@ -2562,12 +2564,12 @@ Prism.languages.js = Prism.languages.javascript;
          */
 
         events: {
-          failed    : "failed",
-          loaded    : "loaded",
-          popState  : "popstate",
-          progress  : "progress",
-          requested : "requested",
-          rendered  : "rendered"
+          failed: "failed",
+          loaded: "loaded",
+          popState: "popstate",
+          progress: "progress",
+          requested: "requested",
+          rendered: "rendered"
         }
       }),
 
@@ -2582,33 +2584,33 @@ Prism.languages.js = Prism.languages.javascript;
        */
 
       Defaults = {
-        cache         : true,
-        ignoreTypes   : /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
-        render        : $.noop,
-        requestKey    : "fs-asap",
-        selector      : "a",
-        transitionOut : $.noop
+        cache: true,
+        ignoreTypes: /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        render: $.noop,
+        requestKey: "fs-asap",
+        selector: "a",
+        transitionOut: $.noop
       },
 
       // Localize References
 
-      $Window    = Formstone.$window,
-      Window     = $Window[0],
+      $Window = Formstone.$window,
+      Window = $Window[0],
       $Body,
 
-      Functions  = Plugin.functions,
-      Events     = Plugin.events,
+      Functions = Plugin.functions,
+      Events = Plugin.events,
       RawClasses = Plugin.classes.raw,
 
       // Internal
 
-      Namespace  = "asap-",
+      Namespace = "asap-",
       CurrentURL = '',
-      CurrentID  = 1,
+      CurrentID = 1,
       Request,
       Instance;
 
-})
+  })
 
 );
 
@@ -2616,425 +2618,431 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./transition"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    scroll();
-    $Window.on("scroll", scroll);
-  }
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize() {
-    Functions.iterate.call($Instances, resizeInstance);
-    Functions.iterate.call($LazyInstances, cacheScrollPosition);
-    Functions.iterate.call($LazyInstances, checkScrollPosition);
-  }
-
-  /**
-   * @method private
-   * @name scroll
-   * @description Handles window scroll
-   */
-
-  function scroll() {
-    ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
-
-    if (ScrollTop < 0) {
-      ScrollTop = 0;
-    }
-
-    Functions.iterate.call($LazyInstances, checkScrollPosition);
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances     = $(Classes.base);
-    $LazyInstances = $(Classes.lazy);
-
-    Functions.iterate.call($LazyInstances, cacheScrollPosition);
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    // guid
-    data.youTubeGuid  = 0;
-
-    data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
-
-    data.thisClasses = [RawClasses.base, data.customClass];
-    data.visible = true;
-
-    if (data.lazy) {
-      data.visible = false;
-      data.thisClasses.push(RawClasses.lazy);
-    }
-
-    this.addClass(data.thisClasses.join(" "));
-
-    cacheInstances();
-
-    if (data.lazy) {
-      cacheScrollPosition(data);
-      checkScrollPosition(data);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./transition"
+      ], factory);
     } else {
-      loadInitialSource(data);
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+    "use strict";
 
-  function destruct(data) {
-    data.$container.remove();
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-    this.removeClass(data.thisClasses.join(" "))
-      .off(Events.namespace);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method private
-   * @name loadInitialSource
-   * @description Loads initial source.
-   * @param data [object] "Instance data"
-   */
-
-  function loadInitialSource(data) {
-    if (data.visible) {
-      var source = data.source;
-      data.source = null;
-
-      loadMedia(data, source, true);
+    function setup() {
+      scroll();
+      $Window.on("scroll", scroll);
     }
-  }
 
-  /**
-   * @method
-   * @name load
-   * @description Loads source media
-   * @param source [string OR object] "Source image (string or object) or video (object)"
-   * @example $(".target").background("load", "path/to/image.jpg");
-   * @example $(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "path/to/image-large.jpg" });
-   * @example $(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
-   */
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
 
-  /**
-   * @method private
-   * @name loadMedia
-   * @description Determines how to handle source media
-   * @param data [object] "Instance data"
-   * @param source [string OR object] "Source image (string) or video (object)"
-   * @param firstLoad [boolean] "Flag for first load"
-   */
+    function resize() {
+      Functions.iterate.call($Instances, resizeInstance);
+      Functions.iterate.call($LazyInstances, cacheScrollPosition);
+      Functions.iterate.call($LazyInstances, checkScrollPosition);
+    }
 
-  function loadMedia(data, source, firstLoad) {
-    // Check if the source is new
-    if (source !== data.source && data.visible) {
-      data.source        = source;
-      data.responsive    = false;
-      data.isYouTube     = false;
+    /**
+     * @method private
+     * @name scroll
+     * @description Handles window scroll
+     */
 
-      // Check YouTube
-      if ($.type(source) === "object" && $.type(source.video) === "string") {
-        var parts = source.video.match( /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i );
+    function scroll() {
+      ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
 
-        if (parts && parts.length >= 1) {
-          data.isYouTube = true;
-          data.videoId = parts[1];
-        }
+      if (ScrollTop < 0) {
+        ScrollTop = 0;
       }
 
-      var isVideo = !data.isYouTube && ($.type(source) === "object" &&
-                      (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm") )
-                    );
+      Functions.iterate.call($LazyInstances, checkScrollPosition);
+    }
 
-      data.video      = data.isYouTube || isVideo;
-      data.playing    = false;
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
 
-      if (data.isYouTube) {
-        // youtube video
-        data.playerReady = false;
-        data.posterLoaded = false;
+    function cacheInstances() {
+      $Instances = $(Classes.base);
+      $LazyInstances = $(Classes.lazy);
 
-        loadYouTube(data, source, firstLoad);
-      } else if ($.type(source) === "object" && source.hasOwnProperty("poster")) {
-        // html5 video
-        loadVideo(data, source, firstLoad);
+      Functions.iterate.call($LazyInstances, cacheScrollPosition);
+    }
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
+
+    function construct(data) {
+      // guid
+      data.youTubeGuid = 0;
+
+      data.$container = $('<div class="' + RawClasses.container + '"></div>').appendTo(this);
+
+      data.thisClasses = [RawClasses.base, data.customClass];
+      data.visible = true;
+
+      if (data.lazy) {
+        data.visible = false;
+        data.thisClasses.push(RawClasses.lazy);
+      }
+
+      this.addClass(data.thisClasses.join(" "));
+
+      cacheInstances();
+
+      if (data.lazy) {
+        cacheScrollPosition(data);
+        checkScrollPosition(data);
       } else {
-        var newSource = source;
+        loadInitialSource(data);
+      }
+    }
 
-        // Responsive image handling
-        if ($.type(source) === "object") {
-          var cache = [],
-              keys  = [],
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      data.$container.remove();
+
+      this.removeClass(data.thisClasses.join(" "))
+        .off(Events.namespace);
+
+      cacheInstances();
+    }
+
+    /**
+     * @method private
+     * @name loadInitialSource
+     * @description Loads initial source.
+     * @param data [object] "Instance data"
+     */
+
+    function loadInitialSource(data) {
+      if (data.visible) {
+        var source = data.source;
+        data.source = null;
+
+        loadMedia(data, source, true);
+      }
+    }
+
+    /**
+     * @method
+     * @name load
+     * @description Loads source media
+     * @param source [string OR object] "Source image (string or object) or video (object)"
+     * @example $(".target").background("load", "path/to/image.jpg");
+     * @example $(".target").background("load", { "0px": "path/to/image-small.jpg", "980px": "path/to/image-large.jpg" });
+     * @example $(".target").background("load", { "poster": "path/to/image.jpg", "webm": "path/to/video.webm", "mp4": "path/to/video.mp4", "ogg": "path/to/video.ogv" });
+     */
+
+    /**
+     * @method private
+     * @name loadMedia
+     * @description Determines how to handle source media
+     * @param data [object] "Instance data"
+     * @param source [string OR object] "Source image (string) or video (object)"
+     * @param firstLoad [boolean] "Flag for first load"
+     */
+
+    function loadMedia(data, source, firstLoad) {
+      // Check if the source is new
+      if (source !== data.source && data.visible) {
+        data.source = source;
+        data.responsive = false;
+        data.isYouTube = false;
+
+        // Check YouTube
+        if ($.type(source) === "object" && $.type(source.video) === "string") {
+          var parts = source.video.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);
+
+          if (parts && parts.length >= 1) {
+            data.isYouTube = true;
+            data.videoId = parts[1];
+          }
+        }
+
+        var isVideo = !data.isYouTube && ($.type(source) === "object" &&
+          (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm"))
+        );
+
+        data.video = data.isYouTube || isVideo;
+        data.playing = false;
+
+        if (data.isYouTube) {
+          // youtube video
+          data.playerReady = false;
+          data.posterLoaded = false;
+
+          loadYouTube(data, source, firstLoad);
+        } else if ($.type(source) === "object" && source.hasOwnProperty("poster")) {
+          // html5 video
+          loadVideo(data, source, firstLoad);
+        } else {
+          var newSource = source;
+
+          // Responsive image handling
+          if ($.type(source) === "object") {
+            var cache = [],
+              keys = [],
               i;
 
-          for (i in source) {
-            if (source.hasOwnProperty(i)) {
-              keys.push(i);
+            for (i in source) {
+              if (source.hasOwnProperty(i)) {
+                keys.push(i);
+              }
             }
+
+            keys.sort(Functions.sortAsc);
+
+            for (i in keys) {
+              if (keys.hasOwnProperty(i)) {
+                cache.push({
+                  width: parseInt(keys[i]),
+                  url: source[keys[i]],
+                  mq: Window.matchMedia("(min-width: " + parseInt(keys[i]) + "px)")
+                });
+              }
+            }
+
+            data.responsive = true;
+            data.sources = cache;
+
+            newSource = calculateSource(data);
           }
 
-          keys.sort(Functions.sortAsc);
+          loadImage(data, newSource, false, firstLoad);
+        }
+      } else {
+        data.$el.trigger(Events.loaded);
+      }
+    }
 
-          for (i in keys) {
-            if (keys.hasOwnProperty(i)) {
-              cache.push({
-                width    : parseInt( keys[i] ),
-                url      : source[ keys[i] ],
-                mq       : Window.matchMedia( "(min-width: " + parseInt( keys[i] ) + "px)" )
+    /**
+     * @method private
+     * @name calculateSource
+     * @description Determines responsive source
+     * @param data [object] "Instance data"
+     * @return [string] "New source url"
+     */
+
+    function calculateSource(data) {
+      var source = data.source;
+
+      if (data.responsive) {
+        source = data.sources[0].url;
+
+        for (var i in data.sources) {
+          if (data.sources.hasOwnProperty(i)) {
+            if (Formstone.support.nativeMatchMedia) {
+              if (data.sources[i].mq.matches) {
+                source = data.sources[i].url;
+              }
+            } else {
+              // Fallback, grab the first breakpoint that's large enough
+              if (data.sources[i].width < Formstone.fallbackWidth) {
+                source = data.sources[i].url;
+              }
+            }
+          }
+        }
+      }
+
+      return source;
+    }
+
+    /**
+     * @method private
+     * @name loadImage
+     * @description Loads source image
+     * @param data [object] "Instance data",
+     * @param source [string] "Source image"
+     * @param poster [boolean] "Flag for video poster"
+     * @param firstLoad [boolean] "Flag for first load"
+     */
+
+    function loadImage(data, source, poster, firstLoad) {
+      var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+        $media = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
+        $img = $media.find("img"),
+        newSource = source;
+
+      // Load image
+      $img.one(Events.load, function() {
+          if (BGSupport) {
+            $media.addClass(RawClasses.native)
+              .css({
+                backgroundImage: "url('" + newSource + "')"
               });
-            }
           }
 
-          data.responsive = true;
-          data.sources = cache;
+          // YTransition in
+          $media.fsTransition({
+              property: "opacity"
+            },
+            function() {
+              if (!poster) {
+                cleanMedia(data);
+              }
+            }).css({
+            opacity: 1
+          });
 
-          newSource = calculateSource(data);
-        }
+          doResizeInstance(data);
 
-        loadImage(data, newSource, false, firstLoad);
-      }
-    } else {
-      data.$el.trigger(Events.loaded);
-    }
-  }
-
-  /**
-   * @method private
-   * @name calculateSource
-   * @description Determines responsive source
-   * @param data [object] "Instance data"
-   * @return [string] "New source url"
-   */
-
-  function calculateSource(data) {
-    var source = data.source;
-
-    if (data.responsive) {
-      source = data.sources[0].url;
-
-      for (var i in data.sources) {
-        if (data.sources.hasOwnProperty(i)) {
-          if (Formstone.support.nativeMatchMedia) {
-            if (data.sources[i].mq.matches) {
-              source = data.sources[i].url;
-            }
-          } else {
-            // Fallback, grab the first breakpoint that's large enough
-            if (data.sources[i].width < Formstone.fallbackWidth) {
-              source = data.sources[i].url;
-            }
+          if (!poster || firstLoad) {
+            data.$el.trigger(Events.loaded);
           }
-        }
+        }).one(Events.error, data, loadError)
+        .attr("src", newSource);
+
+      if (data.responsive) {
+        $media.addClass(RawClasses.responsive);
       }
-    }
-
-    return source;
-  }
-
-  /**
-   * @method private
-   * @name loadImage
-   * @description Loads source image
-   * @param data [object] "Instance data",
-   * @param source [string] "Source image"
-   * @param poster [boolean] "Flag for video poster"
-   * @param firstLoad [boolean] "Flag for first load"
-   */
-
-  function loadImage(data, source, poster, firstLoad) {
-    var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-        $media       = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
-        $img         = $media.find("img"),
-        newSource    = source;
-
-    // Load image
-    $img.one(Events.load, function() {
-      if (BGSupport) {
-        $media.addClass(RawClasses.native)
-            .css({ backgroundImage: "url('" + newSource + "')" });
-      }
-
-      // YTransition in
-      $media.fsTransition({
-        property: "opacity"
-      },
-      function() {
-        if (!poster) {
-          cleanMedia(data);
-        }
-      }).css({ opacity: 1 });
-
-      doResizeInstance(data);
-
-      if (!poster || firstLoad) {
-        data.$el.trigger(Events.loaded);
-      }
-    }).one(Events.error, data, loadError)
-      .attr("src", newSource);
-
-    if (data.responsive) {
-      $media.addClass(RawClasses.responsive);
-    }
-
-    data.$container.append($media);
-
-    // Check if image is cached
-    if ($img[0].complete || $img[0].readyState === 4) {
-      $img.trigger(Events.load);
-    }
-
-    data.currentSource = newSource;
-  }
-
-  /**
-   * @method private
-   * @name loadVideo
-   * @description Loads source video
-   * @param data [object] "Instance data"
-   * @param source [object] "Source video"
-   * @param firstLoad [boolean] "Flag for first load"
-   */
-
-  function loadVideo(data, source, firstLoad) {
-    if (data.source && data.source.poster) {
-      loadImage(data, data.source.poster, true, true);
-
-      firstLoad = false;
-    }
-
-    if (!Formstone.isMobile) {
-      var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-          html = '<div class="' + videoClasses + '" aria-hidden="true">';
-
-      html += '<video';
-      if (data.loop) {
-        html += ' loop';
-      }
-      if (data.mute) {
-        html += ' muted';
-      }
-      html += '>';
-      if (data.source.webm) {
-        html += '<source src="' + data.source.webm + '" type="video/webm" />';
-      }
-      if (data.source.mp4) {
-        html += '<source src="' + data.source.mp4 + '" type="video/mp4" />';
-      }
-      if (data.source.ogg) {
-        html += '<source src="' + data.source.ogg + '" type="video/ogg" />';
-      }
-      html += '</video>';
-      html += '</div>';
-
-      var $media = $(html),
-          $video = $media.find("video");
-
-      $video.one(Events.loadedMetaData, function(e) {
-        $media.fsTransition({
-          property: "opacity"
-        },
-        function() {
-          cleanMedia(data);
-        }).css({ opacity: 1 });
-
-        doResizeInstance(data);
-
-        data.$el.trigger(Events.loaded);
-
-        // Events
-        if (data.autoPlay) {
-          playVideo(data);
-        }
-      });
 
       data.$container.append($media);
-    }
-  }
 
-  /**
-   * @method private
-   * @name loadYouTube
-   * @description Loads YouTube video
-   * @param data [object] "Instance data"
-   * @param source [string] "YouTube URL"
-   */
-
-  function loadYouTube(data, source, firstLoad) {
-    if (!data.videoId) {
-      var parts = source.match( /^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/ );
-      data.videoId = parts[1];
-    }
-
-    if (!data.posterLoaded) {
-      if (!data.source.poster) {
-        data.source.poster = "//img.youtube.com/vi/" + data.videoId + "/0.jpg";
+      // Check if image is cached
+      if ($img[0].complete || $img[0].readyState === 4) {
+        $img.trigger(Events.load);
       }
 
-      data.posterLoaded = true;
-      loadImage(data, data.source.poster, true, firstLoad);
-
-      firstLoad = false;
+      data.currentSource = newSource;
     }
 
-    if (!Formstone.isMobile) {
-      if (!$("script[src*='youtube.com/iframe_api']").length) {
-        $("head").append('<script src="//www.youtube.com/iframe_api"></script>');
+    /**
+     * @method private
+     * @name loadVideo
+     * @description Loads source video
+     * @param data [object] "Instance data"
+     * @param source [object] "Source video"
+     * @param firstLoad [boolean] "Flag for first load"
+     */
+
+    function loadVideo(data, source, firstLoad) {
+      if (data.source && data.source.poster) {
+        loadImage(data, data.source.poster, true, true);
+
+        firstLoad = false;
       }
 
-      if (!YouTubeReady) {
-        YouTubeQueue.push({
-          data: data,
-          source: source
-        });
-      } else {
-        var guid = data.guid + "_" + (data.youTubeGuid++),
-            youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-            html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
+      if (!Formstone.isMobile) {
+        var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+          html = '<div class="' + videoClasses + '" aria-hidden="true">';
 
-        html += '<div id="' + guid + '"></div>';
+        html += '<video';
+        if (data.loop) {
+          html += ' loop';
+        }
+        if (data.mute) {
+          html += ' muted';
+        }
+        html += '>';
+        if (data.source.webm) {
+          html += '<source src="' + data.source.webm + '" type="video/webm" />';
+        }
+        if (data.source.mp4) {
+          html += '<source src="' + data.source.mp4 + '" type="video/mp4" />';
+        }
+        if (data.source.ogg) {
+          html += '<source src="' + data.source.ogg + '" type="video/ogg" />';
+        }
+        html += '</video>';
         html += '</div>';
 
         var $media = $(html),
+          $video = $media.find("video");
+
+        $video.one(Events.loadedMetaData, function(e) {
+          $media.fsTransition({
+              property: "opacity"
+            },
+            function() {
+              cleanMedia(data);
+            }).css({
+            opacity: 1
+          });
+
+          doResizeInstance(data);
+
+          data.$el.trigger(Events.loaded);
+
+          // Events
+          if (data.autoPlay) {
+            playVideo(data);
+          }
+        });
+
+        data.$container.append($media);
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadYouTube
+     * @description Loads YouTube video
+     * @param data [object] "Instance data"
+     * @param source [string] "YouTube URL"
+     */
+
+    function loadYouTube(data, source, firstLoad) {
+      if (!data.videoId) {
+        var parts = source.match(/^.*(?:youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#\&\?]*).*/);
+        data.videoId = parts[1];
+      }
+
+      if (!data.posterLoaded) {
+        if (!data.source.poster) {
+          data.source.poster = "//img.youtube.com/vi/" + data.videoId + "/0.jpg";
+        }
+
+        data.posterLoaded = true;
+        loadImage(data, data.source.poster, true, firstLoad);
+
+        firstLoad = false;
+      }
+
+      if (!Formstone.isMobile) {
+        if (!$("script[src*='youtube.com/iframe_api']").length) {
+          $("head").append('<script src="//www.youtube.com/iframe_api"></script>');
+        }
+
+        if (!YouTubeReady) {
+          YouTubeQueue.push({
+            data: data,
+            source: source
+          });
+        } else {
+          var guid = data.guid + "_" + (data.youTubeGuid++),
+            youTubeClasses = [RawClasses.media, RawClasses.embed, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
+            html = '<div class="' + youTubeClasses + '" aria-hidden="true">';
+
+          html += '<div id="' + guid + '"></div>';
+          html += '</div>';
+
+          var $media = $(html),
             ytOptions = $.extend(true, {}, {
               controls: 0,
               rel: 0,
@@ -3048,440 +3056,446 @@ Prism.languages.js = Prism.languages.javascript;
               origin: Window.location.protocol + "//" + Window.location.host
             }, data.youtubeOptions);
 
-        // For youtube auto so events fire, disabled by plugin
-        ytOptions.autoplay = 1;
+          // For youtube auto so events fire, disabled by plugin
+          ytOptions.autoplay = 1;
 
-        data.$container.append($media);
+          data.$container.append($media);
 
-        if (data.player) {
-          data.oldPlayer = data.player;
-          data.player = null;
-        }
+          if (data.player) {
+            data.oldPlayer = data.player;
+            data.player = null;
+          }
 
-        data.player = new Window.YT.Player(guid, {
-          videoId    : data.videoId,
-          playerVars : ytOptions,
-          events : {
-            onReady: function (e) {
-              /* console.log("onReady", e); */
+          data.player = new Window.YT.Player(guid, {
+            videoId: data.videoId,
+            playerVars: ytOptions,
+            events: {
+              onReady: function(e) {
+                /* console.log("onReady", e); */
 
-              data.playerReady = true;
-              /* data.player.setPlaybackQuality("highres"); */
+                data.playerReady = true;
+                /* data.player.setPlaybackQuality("highres"); */
 
-              if (data.mute) {
-                data.player.mute();
-              }
+                if (data.mute) {
+                  data.player.mute();
+                }
 
-              if (!data.autoPlay) {
-                // make sure the video plays
-                data.player.pauseVideo();
-              }
-            },
-            onStateChange: function (e) {
-              /* console.log("onStateChange", e); */
+                if (!data.autoPlay) {
+                  // make sure the video plays
+                  data.player.pauseVideo();
+                }
+              },
+              onStateChange: function(e) {
+                /* console.log("onStateChange", e); */
 
-              // -1 = unstarted
-              //  0 = ended
-              //  1 = playing
-              //  2 = paused
-              //  3 = buffering
-              //  4 =
-              //  5 = cued
+                // -1 = unstarted
+                //  0 = ended
+                //  1 = playing
+                //  2 = paused
+                //  3 = buffering
+                //  4 =
+                //  5 = cued
 
-              if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
-                data.playing = true;
+                if (!data.playing && e.data === Window.YT.PlayerState.PLAYING) {
+                  data.playing = true;
 
-                $media.fsTransition({
-                  property: "opacity"
-                },
-                function() {
-                  cleanMedia(data);
-                }).css({ opacity: 1 });
+                  $media.fsTransition({
+                      property: "opacity"
+                    },
+                    function() {
+                      cleanMedia(data);
+                    }).css({
+                    opacity: 1
+                  });
 
-                doResizeInstance(data);
+                  doResizeInstance(data);
 
-                data.$el.trigger(Events.loaded);
-              } else if (data.loop && data.playing && e.data === Window.YT.PlayerState.ENDED) {
-                // fix looping option
-                data.player.playVideo();
-              }
+                  data.$el.trigger(Events.loaded);
+                } else if (data.loop && data.playing && e.data === Window.YT.PlayerState.ENDED) {
+                  // fix looping option
+                  data.player.playVideo();
+                }
 
-              /* if (!isSafari) { */
+                /* if (!isSafari) { */
                 // Fix for Safari's overly secure security settings...
                 data.$el.find(Classes.embed)
-                    .addClass(RawClasses.ready);
-              /* } */
-            },
-            onPlaybackQualityChange: function(e) {
-              /* console.log("onPlaybackQualityChange", e); */
-            },
-            onPlaybackRateChange: function(e) {
-              /* console.log("onPlaybackRateChange", e); */
-            },
-            onError: function(e) {
-              /* console.log("onError", e); */
-              loadError({ data: data });
-            },
-            onApiChange: function(e) {
-              /* console.log("onApiChange", e); */
+                  .addClass(RawClasses.ready);
+                /* } */
+              },
+              onPlaybackQualityChange: function(e) {
+                /* console.log("onPlaybackQualityChange", e); */
+              },
+              onPlaybackRateChange: function(e) {
+                /* console.log("onPlaybackRateChange", e); */
+              },
+              onError: function(e) {
+                /* console.log("onError", e); */
+                loadError({
+                  data: data
+                });
+              },
+              onApiChange: function(e) {
+                /* console.log("onApiChange", e); */
+              }
             }
+          });
+
+          // Resize
+          doResizeInstance(data);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name cleanMedia
+     * @description Cleans up old media
+     * @param data [object] "Instance data"
+     */
+
+    function cleanMedia(data) {
+      var $media = data.$container.find(Classes.media);
+
+      if ($media.length >= 1) {
+        $media.not(":last").remove();
+        data.oldPlayer = null;
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadError
+     * @description Error when resource fails to load.
+     */
+
+    function loadError(e) {
+      var data = e.data;
+
+      data.$el.trigger(Events.error);
+    }
+
+    /**
+     * @method
+     * @name unload
+     * @description Unloads current media
+     * @example $(".target").background("unload");
+     */
+
+    /**
+     * @method private
+     * @name uploadMedia
+     * @description Unloads current media
+     * @param data [object] "Instance data"
+     */
+
+    function unloadMedia(data) {
+      var $media = data.$container.find(Classes.media);
+
+      if ($media.length >= 1) {
+        $media.fsTransition({
+            property: "opacity"
+          },
+          function() {
+            $media.remove();
+            delete data.source;
+          }).css({
+          opacity: 0
+        });
+      }
+    }
+
+    /**
+     * @method private
+     * @name pauseVideo
+     * @description Pauses target video
+     * @param data [object] "Instance data"
+     */
+
+    /**
+     * @method
+     * @name pause
+     * @description Pauses target video
+     * @example $(".target").background("pause");
+     */
+
+    function pauseVideo(data) {
+      if (data.video && data.playing) {
+        if (data.isYouTube) {
+          if (data.playerReady) {
+            data.player.pauseVideo();
+          } else {
+            data.autoPlay = false;
           }
-            });
+        } else {
+          var $video = data.$container.find("video");
 
-        // Resize
-        doResizeInstance(data);
+          if ($video.length) {
+            $video[0].pause();
+          }
+        }
+
+        data.playing = false;
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name cleanMedia
-   * @description Cleans up old media
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name playVideo
+     * @description Plays target video
+     * @param data [object] "Instance data"
+     */
 
-  function cleanMedia(data) {
-    var $media = data.$container.find(Classes.media);
+    /**
+     * @method
+     * @name play
+     * @description Plays target video
+     * @example $(".target").background("play");
+     */
 
-    if ($media.length >= 1) {
-      $media.not(":last").remove();
-      data.oldPlayer = null;
-    }
-  }
-
-  /**
-   * @method private
-   * @name loadError
-   * @description Error when resource fails to load.
-   */
-
-  function loadError(e) {
-    var data = e.data;
-
-    data.$el.trigger(Events.error);
-  }
-
-  /**
-   * @method
-   * @name unload
-   * @description Unloads current media
-   * @example $(".target").background("unload");
-   */
-
-  /**
-   * @method private
-   * @name uploadMedia
-   * @description Unloads current media
-   * @param data [object] "Instance data"
-   */
-
-  function unloadMedia(data) {
-    var $media = data.$container.find(Classes.media);
-
-    if ($media.length >= 1) {
-      $media.fsTransition({
-        property: "opacity"
-      },
-      function() {
-        $media.remove();
-        delete data.source;
-      }).css({ opacity: 0 });
-    }
-  }
-
-  /**
-   * @method private
-   * @name pauseVideo
-   * @description Pauses target video
-   * @param data [object] "Instance data"
-   */
-
-  /**
-   * @method
-   * @name pause
-   * @description Pauses target video
-   * @example $(".target").background("pause");
-   */
-
-  function pauseVideo(data) {
-    if (data.video && data.playing) {
-      if (data.isYouTube) {
-        if (data.playerReady) {
-          data.player.pauseVideo();
+    function playVideo(data) {
+      if (data.video && !data.playing) {
+        if (data.isYouTube) {
+          if (data.playerReady) {
+            data.player.playVideo();
+          } else {
+            data.autoPlay = true;
+          }
         } else {
-          data.autoPlay = false;
-        }
-      } else {
-        var $video = data.$container.find("video");
+          var $video = data.$container.find("video");
 
-        if ($video.length) {
-          $video[0].pause();
+          if ($video.length) {
+            $video[0].play();
+          }
+
+          data.playing = true;
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name muteVideo
+     * @description Mutes target video
+     * @param data [object] "Instance data"
+     */
+
+    /**
+     * @method
+     * @name mute
+     * @description Mutes target video
+     * @example $(".target").background("mute");
+     */
+
+    function muteVideo(data) {
+      if (data.video) {
+        if (data.isYouTube && data.playerReady) {
+          data.player.mute();
+        } else {
+          var $video = data.$container.find("video");
+
+          if ($video.length) {
+            $video[0].muted = true;
+          }
         }
       }
 
-      data.playing = false;
+      data.mute = true;
     }
-  }
 
-  /**
-   * @method private
-   * @name playVideo
-   * @description Plays target video
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name unmuteVideo
+     * @description Unmutes target video
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method
-   * @name play
-   * @description Plays target video
-   * @example $(".target").background("play");
-   */
+    /**
+     * @method
+     * @name unmute
+     * @description Unmutes target video
+     * @example $(".target").background("unmute");
+     */
 
-  function playVideo(data) {
-    if (data.video && !data.playing) {
-      if (data.isYouTube) {
-        if (data.playerReady) {
-          data.player.playVideo();
+    function unmuteVideo(data) {
+      if (data.video) {
+        if (data.isYouTube && data.playerReady) {
+          data.player.unMute();
         } else {
-          data.autoPlay = true;
-        }
-      } else {
-        var $video = data.$container.find("video");
+          var $video = data.$container.find("video");
 
-        if ($video.length) {
-          $video[0].play();
+          if ($video.length) {
+            $video[0].muted = false;
+          }
         }
 
         data.playing = true;
       }
-    }
-  }
 
-  /**
-   * @method private
-   * @name muteVideo
-   * @description Mutes target video
-   * @param data [object] "Instance data"
-   */
-
-  /**
-   * @method
-   * @name mute
-   * @description Mutes target video
-   * @example $(".target").background("mute");
-   */
-
-  function muteVideo(data) {
-    if (data.video) {
-      if (data.isYouTube && data.playerReady) {
-        data.player.mute();
-      } else {
-        var $video = data.$container.find("video");
-
-        if ($video.length) {
-          $video[0].muted = true;
-        }
-      }
+      data.mute = false;
     }
 
-    data.mute = true;
-  }
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Handle window resize event
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method private
-   * @name unmuteVideo
-   * @description Unmutes target video
-   * @param data [object] "Instance data"
-   */
+    function resizeInstance(data) {
+      if (data.visible) {
+        if (data.responsive) {
+          var newSource = calculateSource(data);
 
-  /**
-   * @method
-   * @name unmute
-   * @description Unmutes target video
-   * @example $(".target").background("unmute");
-   */
-
-  function unmuteVideo(data) {
-    if (data.video) {
-      if (data.isYouTube && data.playerReady) {
-        data.player.unMute();
-      } else {
-        var $video = data.$container.find("video");
-
-        if ($video.length) {
-          $video[0].muted = false;
-        }
-      }
-
-      data.playing = true;
-    }
-
-    data.mute = false;
-  }
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Handle window resize event
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-    if (data.visible) {
-      if (data.responsive) {
-        var newSource = calculateSource(data);
-
-        if (newSource !== data.currentSource) {
-          loadImage(data, newSource, false, true);
+          if (newSource !== data.currentSource) {
+            loadImage(data, newSource, false, true);
+          } else {
+            doResizeInstance(data);
+          }
         } else {
           doResizeInstance(data);
         }
-      } else {
-        doResizeInstance(data);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name resize
-   * @description Resize target instance
-   * @example $(".target").background("resize");
-   */
+    /**
+     * @method private
+     * @name resize
+     * @description Resize target instance
+     * @example $(".target").background("resize");
+     */
 
-  /**
-   * @method private
-   * @name doResizeInstance
-   * @description Resize target instance
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name doResizeInstance
+     * @description Resize target instance
+     * @param data [object] "Instance data"
+     */
 
-  function doResizeInstance(data) {
-    // Target all media
-    var $all = data.$container.find(Classes.media);
+    function doResizeInstance(data) {
+      // Target all media
+      var $all = data.$container.find(Classes.media);
 
-    for (var i = 0, count = $all.length; i < count; i++) {
-      var $m     = $all.eq(i),
-          type   = (data.isYouTube) ? "iframe" : ($m.find("video").length ? "video" : "img"),
+      for (var i = 0, count = $all.length; i < count; i++) {
+        var $m = $all.eq(i),
+          type = (data.isYouTube) ? "iframe" : ($m.find("video").length ? "video" : "img"),
           $media = $m.find(type);
 
-      // If media found and scaling is not natively support
-      if ($media.length && !(type === "img" && BGSupport)) {
-        var frameWidth  = data.$el.outerWidth(),
+        // If media found and scaling is not natively support
+        if ($media.length && !(type === "img" && BGSupport)) {
+          var frameWidth = data.$el.outerWidth(),
             frameHeight = data.$el.outerHeight(),
-            frameRatio  = frameWidth / frameHeight,
-            nSize       = naturalSize(data, $media);
+            frameRatio = frameWidth / frameHeight,
+            nSize = naturalSize(data, $media);
 
-        data.width  = nSize.width;
-        data.height = nSize.height;
-        data.left   = 0;
-        data.top    = 0;
+          data.width = nSize.width;
+          data.height = nSize.height;
+          data.left = 0;
+          data.top = 0;
 
-        var mediaRatio = (data.isYouTube) ? data.embedRatio : (data.width / data.height);
+          var mediaRatio = (data.isYouTube) ? data.embedRatio : (data.width / data.height);
 
-        // First check the height
-        data.height = frameHeight;
-        data.width  = data.height * mediaRatio;
+          // First check the height
+          data.height = frameHeight;
+          data.width = data.height * mediaRatio;
 
-        // Next check the width
-        if (data.width < frameWidth) {
-          data.width  = frameWidth;
-          data.height = data.width / mediaRatio;
+          // Next check the width
+          if (data.width < frameWidth) {
+            data.width = frameWidth;
+            data.height = data.width / mediaRatio;
+          }
+
+          // Position the media
+          data.left = -(data.width - frameWidth) / 2;
+          data.top = -(data.height - frameHeight) / 2;
+
+          $m.css({
+            height: data.height,
+            width: data.width,
+            left: data.left,
+            top: data.top
+          });
         }
-
-        // Position the media
-        data.left = -(data.width - frameWidth) / 2;
-        data.top  = -(data.height - frameHeight) / 2;
-
-        $m.css({
-          height : data.height,
-          width  : data.width,
-          left   : data.left,
-          top    : data.top
-        });
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name cacheScrollPosition
-   * @description Cahce target scroll position
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name cacheScrollPosition
+     * @description Cahce target scroll position
+     * @param data [object] "Instance data"
+     */
 
-  function cacheScrollPosition(data) {
-    data.scrollTop = data.$el.offset().top;
-  }
-
-  /**
-   * @method private
-   * @name checkScrollPosition
-   * @description Check target scroll position against window
-   * @param data [object] "Instance data"
-   */
-
-  function checkScrollPosition(data) {
-    if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
-      data.visible = true;
-      loadInitialSource(data);
+    function cacheScrollPosition(data) {
+      data.scrollTop = data.$el.offset().top;
     }
-  }
 
-  /**
-   * @method private
-   * @name naturalSize
-   * @description Determines natural size of target media
-   * @param data [object] "Instance data"
-   * @param $media [jQuery object] "Source media object"
-   * @return [object OR boolean] "Object containing natural height and width values or false"
-   */
+    /**
+     * @method private
+     * @name checkScrollPosition
+     * @description Check target scroll position against window
+     * @param data [object] "Instance data"
+     */
 
-  function naturalSize(data, $media) {
-    if (data.isYouTube) {
-      return {
-        height: 500,
-        width:  500 / data.embedRatio
-      };
-    } else if ($media.is("img")) {
-      var node = $media[0];
+    function checkScrollPosition(data) {
+      if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
+        data.visible = true;
+        loadInitialSource(data);
+      }
+    }
 
-      if ($.type(node.naturalHeight) !== "undefined") {
+    /**
+     * @method private
+     * @name naturalSize
+     * @description Determines natural size of target media
+     * @param data [object] "Instance data"
+     * @param $media [jQuery object] "Source media object"
+     * @return [object OR boolean] "Object containing natural height and width values or false"
+     */
+
+    function naturalSize(data, $media) {
+      if (data.isYouTube) {
         return {
-          height : node.naturalHeight,
-          width  :  node.naturalWidth
+          height: 500,
+          width: 500 / data.embedRatio
         };
+      } else if ($media.is("img")) {
+        var node = $media[0];
+
+        if ($.type(node.naturalHeight) !== "undefined") {
+          return {
+            height: node.naturalHeight,
+            width: node.naturalWidth
+          };
+        } else {
+          var img = new Image();
+          img.src = node.src;
+          return {
+            height: img.height,
+            width: img.width
+          };
+        }
       } else {
-        var img = new Image();
-        img.src = node.src;
         return {
-          height : img.height,
-          width  :  img.width
+          height: $media[0].videoHeight,
+          width: $media[0].videoWidth
         };
       }
-    } else {
-      return {
-        height : $media[0].videoHeight,
-        width  :  $media[0].videoWidth
-      };
+      return false;
     }
-    return false;
-  }
 
-  /**
-   * @plugin
-   * @name Background
-   * @description A jQuery plugin for full-frame image and video backgrounds.
-   * @type widget
-   * @main background.js
-   * @main background.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency transition.js
-   */
+    /**
+     * @plugin
+     * @name Background
+     * @description A jQuery plugin for full-frame image and video backgrounds.
+     * @type widget
+     * @main background.js
+     * @main background.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency transition.js
+     */
 
-  var Plugin = Formstone.Plugin("background", {
+    var Plugin = Formstone.Plugin("background", {
         widget: true,
 
         /**
@@ -3496,15 +3510,15 @@ Prism.languages.js = Prism.languages.javascript;
          * @param source [string OR object] <null> "Source image (string or object) or video (object)"
          */
         defaults: {
-          autoPlay       : true,
-          customClass    : "",
-          embedRatio     : 1.777777,
-          lazy           : false,
-          lazyEdge       : 100,
-          loop           : true,
-          mute           : true,
-          source         : null,
-          youtubeOptions : {}
+          autoPlay: true,
+          customClass: "",
+          embedRatio: 1.777777,
+          lazy: false,
+          lazyEdge: 100,
+          loop: true,
+          mute: true,
+          source: null,
+          youtubeOptions: {}
         },
 
         classes: [
@@ -3526,67 +3540,68 @@ Prism.languages.js = Prism.languages.javascript;
          */
 
         events: {
-          loaded : "loaded",
-          ready  : "ready",
-          loadedMetaData : "loadedmetadata"
+          loaded: "loaded",
+          ready: "ready",
+          loadedMetaData: "loadedmetadata"
         },
 
         methods: {
-          _setup     : setup,
-          _construct : construct,
-          _destruct  : destruct,
-          _resize    : resize,
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
 
-          play       : playVideo,
-          pause      : pauseVideo,
-          mute       : muteVideo,
-          unmute     : unmuteVideo,
-          resize     : doResizeInstance,
-          load       : loadMedia,
-          unload     : unloadMedia
+          play: playVideo,
+          pause: pauseVideo,
+          mute: muteVideo,
+          unmute: unmuteVideo,
+          resize: doResizeInstance,
+          load: loadMedia,
+          unload: unloadMedia
         }
       }),
 
       // Localize References
 
-      Classes         = Plugin.classes,
-      RawClasses      = Classes.raw,
-      Events          = Plugin.events,
-      Functions       = Plugin.functions,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-      Window          = Formstone.window,
-      $Window         = Formstone.$window,
-      ScrollTop       = 0,
-      $Instances      = [],
-      $LazyInstances  = [],
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      ScrollTop = 0,
+      $Instances = [],
+      $LazyInstances = [],
 
-      BGSupport       = ("backgroundSize" in Formstone.document.documentElement.style),
-      YouTubeReady    = false,
-      YouTubeQueue    = [];
+      BGSupport = ("backgroundSize" in Formstone.document.documentElement.style),
+      YouTubeReady = false,
+      YouTubeQueue = [];
 
-  /**
-   * @method private global
-   * @name window.onYouTubeIframeAPIReady
-   * @description Attaches YouTube players to active instances
-   */
-  Window.onYouTubeIframeAPIReady = function() {
-    YouTubeReady = true;
+    /**
+     * @method private global
+     * @name window.onYouTubeIframeAPIReady
+     * @description Attaches YouTube players to active instances
+     */
+    Window.onYouTubeIframeAPIReady = function() {
+      YouTubeReady = true;
 
-    for (var i in YouTubeQueue) {
-      if (YouTubeQueue.hasOwnProperty(i)) {
-        loadYouTube(YouTubeQueue[i].data, YouTubeQueue[i].source);
+      for (var i in YouTubeQueue) {
+        if (YouTubeQueue.hasOwnProperty(i)) {
+          loadYouTube(YouTubeQueue[i].data, YouTubeQueue[i].source);
+        }
       }
-    }
 
-    YouTubeQueue = [];
-  };
+      YouTubeQueue = [];
+    };
 
-})
+  })
 
 );
 
 /*! formstone v1.3.3 [carousel.js] 2017-08-18 | GPL-3.0 License | formstone.it */
 /* global define */
+
 (function(factory) {
     if (typeof define === "function" && define.amd) {
       define([
@@ -5081,338 +5096,342 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    var $parent      = this.closest("label"),
-      $label       = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
-      baseClass    = [RawClasses.base, data.theme, data.customClass].join(" "),
-      labelClass   = [RawClasses.label, data.theme, data.customClass].join(" "),
-      html         = "";
-
-    data.radio = (this.attr("type") === "radio");
-    data.group = this.attr("name");
-
-    html += '<div class="' + RawClasses.marker + '" aria-hidden="true">';
-    html += '<div class="' + RawClasses.flag + '"></div>';
-
-    if (data.toggle) {
-      baseClass  += " " + RawClasses.toggle;
-      labelClass += " " + RawClasses.toggle;
-      html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">'  + data.labels.on  + '</span>';
-      html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
     }
+  }(function($, Formstone) {
 
-    if (data.radio) {
-      baseClass  += " " + RawClasses.radio;
-      labelClass += " " + RawClasses.radio;
-    }
+    "use strict";
 
-    html += '</div>';
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    // Modify DOM
-    data.$placeholder = $('<span class="' + RawClasses.element_placeholder + '"></span>');
-    this.before(data.$placeholder);
+    function construct(data) {
+      var $parent = this.closest("label"),
+        $label = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
+        baseClass = [RawClasses.base, data.theme, data.customClass].join(" "),
+        labelClass = [RawClasses.label, data.theme, data.customClass].join(" "),
+        html = "";
 
-        data.labelParent = ($label.find(this).length);
-    data.labelClass  = labelClass;
+      data.radio = (this.attr("type") === "radio");
+      data.group = this.attr("name");
 
-    $label.addClass( labelClass );
+      html += '<div class="' + RawClasses.marker + '" aria-hidden="true">';
+      html += '<div class="' + RawClasses.flag + '"></div>';
 
-        if (data.labelParent) {
+      if (data.toggle) {
+        baseClass += " " + RawClasses.toggle;
+        labelClass += " " + RawClasses.toggle;
+        html += '<span class="' + [RawClasses.state, RawClasses.state_on].join(" ") + '">' + data.labels.on + '</span>';
+        html += '<span class="' + [RawClasses.state, RawClasses.state_off].join(" ") + '">' + data.labels.off + '</span>';
+      }
+
+      if (data.radio) {
+        baseClass += " " + RawClasses.radio;
+        labelClass += " " + RawClasses.radio;
+      }
+
+      html += '</div>';
+
+      // Modify DOM
+      data.$placeholder = $('<span class="' + RawClasses.element_placeholder + '"></span>');
+      this.before(data.$placeholder);
+
+      data.labelParent = ($label.find(this).length);
+      data.labelClass = labelClass;
+
+      $label.addClass(labelClass);
+
+      if (data.labelParent) {
         $label.wrap('<div class="' + baseClass + '"></div>')
           .before(html);
-    } else {
-      this.before('<div class=" ' + baseClass + '">' + html + '</div>');
+      } else {
+        this.before('<div class=" ' + baseClass + '">' + html + '</div>');
+      }
+
+      // Store plugin data
+      data.$checkbox = (data.labelParent) ? $label.parents(Classes.base) : this.prev(Classes.base);
+      data.$marker = data.$checkbox.find(Classes.marker);
+      data.$states = data.$checkbox.find(Classes.state);
+      data.$label = $label;
+      data.$classable = $().add(data.$checkbox).add(data.$label);
+
+      // Check checked
+      if (this.is(":checked")) {
+        data.$classable.addClass(RawClasses.checked);
+      }
+
+      // Check disabled
+      if (this.is(":disabled") /* || this.is("[readonly]") */ ) {
+        data.$classable.addClass(RawClasses.disabled);
+      }
+
+      // Move original checkbox
+      this.appendTo(data.$marker);
+
+      // Bind click events
+      this.on(Events.focus, data, onFocus)
+        .on(Events.blur, data, onBlur)
+        .on(Events.change, data, onChange)
+        .on(Events.click, data, onClick)
+        .on(Events.deselect, data, onDeselect);
+
+      data.$checkbox.on(Events.click, data, onClick);
     }
 
-    // Store plugin data
-    data.$checkbox     = (data.labelParent) ? $label.parents(Classes.base) : this.prev(Classes.base);
-    data.$marker       = data.$checkbox.find(Classes.marker);
-    data.$states       = data.$checkbox.find(Classes.state);
-    data.$label        = $label;
-        data.$classable    = $().add(data.$checkbox).add(data.$label);
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-    // Check checked
-    if (this.is(":checked")) {
-      data.$classable.addClass(RawClasses.checked);
+    function destruct(data) {
+      data.$checkbox.off(Events.namespace);
+      // .fsTouch("destroy");
+
+      data.$marker.remove();
+      data.$states.remove();
+
+      data.$label.removeClass(data.labelClass);
+
+      if (data.labelParent) {
+        data.$label.unwrap();
+      } else {
+        this.unwrap();
+      }
+
+      data.$placeholder.before(this);
+      data.$placeholder.remove();
+
+      this.off(Events.namespace);
     }
 
-    // Check disabled
-    if (this.is(":disabled") /* || this.is("[readonly]") */ ) {
+    /**
+     * @method
+     * @name enable
+     * @description Enables target instance
+     * @example $(".target").checkbox("enable");
+     */
+
+    function enable(data) {
+      this.prop("disabled", false);
+      data.$classable.removeClass(RawClasses.disabled);
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables target instance
+     * @example $(".target").checkbox("disable");
+     */
+
+    function disable(data) {
+      this.prop("disabled", true);
       data.$classable.addClass(RawClasses.disabled);
     }
 
-    // Move original checkbox
-    this.appendTo(data.$marker);
+    /**
+     * @method
+     * @name update
+     * @description Updates target instance
+     * @example $(".target").checkbox("update");
+     */
 
-    // Bind click events
-    this.on(Events.focus, data, onFocus)
-      .on(Events.blur, data, onBlur)
-      .on(Events.change, data, onChange)
-      .on(Events.click, data, onClick)
-      .on(Events.deselect, data, onDeselect);
+    function update(data) {
+      var disabled = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */ ,
+        checked = data.$el.is(":checked");
 
-    data.$checkbox.on(Events.click, data, onClick);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$checkbox.off(Events.namespace);
-            // .fsTouch("destroy");
-
-    data.$marker.remove();
-    data.$states.remove();
-
-        data.$label.removeClass( data.labelClass );
-
-        if (data.labelParent) {
-        data.$label.unwrap();
-        } else {
-            this.unwrap();
-        }
-
-    data.$placeholder.before(this);
-    data.$placeholder.remove();
-
-    this.off(Events.namespace);
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables target instance
-   * @example $(".target").checkbox("enable");
-   */
-
-  function enable(data) {
-    this.prop("disabled", false);
-    data.$classable.removeClass(RawClasses.disabled);
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables target instance
-   * @example $(".target").checkbox("disable");
-   */
-
-  function disable(data) {
-    this.prop("disabled", true);
-    data.$classable.addClass(RawClasses.disabled);
-  }
-
-  /**
-   * @method
-   * @name update
-   * @description Updates target instance
-   * @example $(".target").checkbox("update");
-   */
-
-  function update(data) {
-    var disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
-      checked     = data.$el.is(":checked");
-
-    if (!disabled) {
-      if (checked) {
-        onSelect({ data: data });
-      } else {
-        onDeselect({ data: data });
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name onClick
-   * @description Handles click
-   */
-
-  function onClick(e) {
-    e.stopPropagation();
-
-    var data = e.data;
-
-    if (!$(e.target).is(data.$el)) {
-      e.preventDefault();
-
-      data.$el.trigger("click");
-    }
-  }
-
-  /**
-   * @method private
-   * @name onChange
-   * @description Handles external changes
-   * @param e [object] "Event data"
-   */
-
-  function onChange(e) {
-    var data        = e.data,
-      disabled    = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */,
-      checked     = data.$el.is(":checked");
-
-    if (!disabled) {
-      if (data.radio) {
-        // radio
+      if (!disabled) {
         if (checked) {
-          onSelect(e);
-        }
-      } else {
-        // Checkbox change events fire after state has changed
-        if (checked) {
-          onSelect(e);
+          onSelect({
+            data: data
+          });
         } else {
-          onDeselect(e);
+          onDeselect({
+            data: data
+          });
         }
       }
     }
-  }
 
-  /*
-   * @method private
-   * @name onSelect
-   * @description Changes input to "checked"
-   * @param e [object] "Event data"
-   */
-  function onSelect(e) {
-    if (e.data.radio) {
-      $('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click
+     */
+
+    function onClick(e) {
+      e.stopPropagation();
+
+      var data = e.data;
+
+      if (!$(e.target).is(data.$el)) {
+        e.preventDefault();
+
+        data.$el.trigger("click");
+      }
     }
 
-    e.data.$el.trigger(Events.focus);
-    e.data.$classable.addClass(RawClasses.checked);
-  }
+    /**
+     * @method private
+     * @name onChange
+     * @description Handles external changes
+     * @param e [object] "Event data"
+     */
 
-  /**
-   * @method private
-   * @name onDeselect
-   * @description Changes input to "checked"
-   * @param e [object] "Event data"
-   */
-  function onDeselect(e) {
-    e.data.$el.trigger(Events.focus);
-    e.data.$classable.removeClass(RawClasses.checked);
-  }
+    function onChange(e) {
+      var data = e.data,
+        disabled = data.$el.is(":disabled") /* || data.$el.is("[readonly]") */ ,
+        checked = data.$el.is(":checked");
 
-  /**
-   * @method private
-   * @name onFocus
-   * @description Handles instance focus
-   * @param e [object] "Event data"
-   */
+      if (!disabled) {
+        if (data.radio) {
+          // radio
+          if (checked) {
+            onSelect(e);
+          }
+        } else {
+          // Checkbox change events fire after state has changed
+          if (checked) {
+            onSelect(e);
+          } else {
+            onDeselect(e);
+          }
+        }
+      }
+    }
 
-  function onFocus(e) {
-    e.data.$classable.addClass(RawClasses.focus);
-  }
+    /*
+     * @method private
+     * @name onSelect
+     * @description Changes input to "checked"
+     * @param e [object] "Event data"
+     */
+    function onSelect(e) {
+      if (e.data.radio) {
+        $('input[name="' + e.data.group + '"]').not(e.data.$el).trigger("deselect");
+      }
 
-  /**
-   * @method private
-   * @name onBlur
-   * @description Handles instance blur
-   * @param e [object] "Event data"
-   */
+      e.data.$el.trigger(Events.focus);
+      e.data.$classable.addClass(RawClasses.checked);
+    }
 
-  function onBlur(e) {
-    e.data.$classable.removeClass(RawClasses.focus);
-  }
+    /**
+     * @method private
+     * @name onDeselect
+     * @description Changes input to "checked"
+     * @param e [object] "Event data"
+     */
+    function onDeselect(e) {
+      e.data.$el.trigger(Events.focus);
+      e.data.$classable.removeClass(RawClasses.checked);
+    }
 
-  /**
-   * @plugin
-   * @name Checkbox
-   * @description A jQuery plugin for replacing checkboxes.
-   * @type widget
-   * @main checkbox.js
-   * @main checkbox.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @__dependency touch.js
-   */
+    /**
+     * @method private
+     * @name onFocus
+     * @description Handles instance focus
+     * @param e [object] "Event data"
+     */
 
-  var Plugin = Formstone.Plugin("checkbox", {
-      widget: true,
+    function onFocus(e) {
+      e.data.$classable.addClass(RawClasses.focus);
+    }
 
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param toggle [boolean] <false> "Render 'toggle' styles"
-       * @param labels.on [string] <'ON'> "Label for 'On' position; 'toggle' only"
-       * @param labels.off [string] <'OFF'> "Label for 'Off' position; 'toggle' only"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       */
+    /**
+     * @method private
+     * @name onBlur
+     * @description Handles instance blur
+     * @param e [object] "Event data"
+     */
 
-      defaults: {
-        customClass    : "",
-        toggle         : false,
-        labels : {
-          on         : "ON",
-          off        : "OFF"
+    function onBlur(e) {
+      e.data.$classable.removeClass(RawClasses.focus);
+    }
+
+    /**
+     * @plugin
+     * @name Checkbox
+     * @description A jQuery plugin for replacing checkboxes.
+     * @type widget
+     * @main checkbox.js
+     * @main checkbox.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @__dependency touch.js
+     */
+
+    var Plugin = Formstone.Plugin("checkbox", {
+        widget: true,
+
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param toggle [boolean] <false> "Render 'toggle' styles"
+         * @param labels.on [string] <'ON'> "Label for 'On' position; 'toggle' only"
+         * @param labels.off [string] <'OFF'> "Label for 'Off' position; 'toggle' only"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         */
+
+        defaults: {
+          customClass: "",
+          toggle: false,
+          labels: {
+            on: "ON",
+            off: "OFF"
+          },
+          theme: "fs-light"
         },
-        theme          : "fs-light"
-      },
 
-      classes: [
-        "element_placeholder",
-        "label",
-        "marker",
-        "flag",
-        "radio",
-        "focus",
-        "checked",
-        "disabled",
-        "toggle",
-        "state",
-        "state_on",
-        "state_off"
-      ],
+        classes: [
+          "element_placeholder",
+          "label",
+          "marker",
+          "flag",
+          "radio",
+          "focus",
+          "checked",
+          "disabled",
+          "toggle",
+          "state",
+          "state_on",
+          "state_off"
+        ],
 
-      methods: {
-        _construct    : construct,
-        _destruct     : destruct,
+        methods: {
+          _construct: construct,
+          _destruct: destruct,
 
-        // Public Methods
+          // Public Methods
 
-        enable        : enable,
-        disable       : disable,
-        update        : update
-      },
+          enable: enable,
+          disable: disable,
+          update: update
+        },
 
-      events: {
-        deselect : "deselect"
-      }
-    }),
+        events: {
+          deselect: "deselect"
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions;
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions;
 
-})
+  })
 
 );
 
@@ -5420,251 +5439,251 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize() {
-    WindowHeight = $Window.height();
-
-    Functions.iterate.call($Instances, resizeInstance);
-  }
-
-  /**
-   * @method private
-   * @name raf
-   * @description Handles request animation frame
-   */
-
-  function raf() {
-        ScrollTop = $Window.scrollTop();
-
-    if (ScrollTop < 0) {
-      ScrollTop = 0;
-    }
-
-    if (ScrollTop !== OldScrollTop) {
-      renderRAF();
-
-      OldScrollTop = ScrollTop;
-    }
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances = $(Classes.base);
-
-        resize();
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    var intersectParts = data.intersect.split("-");
-
-    data.windowIntersect = intersectParts[0];
-    data.elIntersect     = intersectParts[1];
-    data.visible         = false;
-
-    var $container = $( data.$el.data("checkpoint-container") );
-
-    data.$target = ($container.length) ? $container : data.$el;
-
-    data.$el.addClass(RawClasses.base);
-  }
-
-  /**
-   * @method private
-   * @name postConstruct
-   * @description Run post build.
-   * @param data [object] "Instance data"
-   */
-
-  function postConstruct(data) {
-        cacheInstances();
-        resize();
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    cacheInstances();
-  }
-
-  /**
-   * @method private
-   * @name renderRAF
-   * @description Updates DOM based on animation values
-   */
-
-  function renderRAF() {
-        Functions.iterate.call($Instances, checkInstance);
-    }
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Handle window resize event
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-        switch (data.windowIntersect) {
-            case "top":
-                data.windowCheck = 0 - data.offset;
-                break;
-            case "middle":
-                data.windowCheck = (WindowHeight / 2) - data.offset;
-                break;
-            case "bottom":
-                data.windowCheck = WindowHeight - data.offset;
-                break;
-            default:
-                break;
-        }
-
-    switch (data.elIntersect) {
-            case "top":
-                data.elCheck = data.$target[0].offsetTop;
-                break;
-            case "middle":
-                data.elCheck = data.$target[0].offsetTop + (data.$target.outerHeight() / 2);
-                break;
-            case "bottom":
-                data.elCheck = data.$target[0].offsetTop + data.$target.outerHeight();
-                break;
-            default:
-                break;
-        }
-
-        checkInstance(data);
-  }
-
-  /**
-   * @method private
-   * @name checkInstance
-   * @description Handle window scroll event
-   * @param data [object] "Instance data"
-   */
-
-  function checkInstance(data) {
-    var check = (ScrollTop + data.windowCheck);
-
-    if ( check >= data.elCheck ) {
-            if (!data.active) {
-                data.$el.trigger(Events.activate);
-            }
-
-            data.active = true;
-      data.$el.addClass(RawClasses.active);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+      ], factory);
     } else {
-      if (data.reverse) {
-        if (data.active) {
-          data.$el.trigger(Events.deactivate);
-        }
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-        data.active = false;
-        data.$el.removeClass(RawClasses.active);
+    "use strict";
+
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
+
+    function resize() {
+      WindowHeight = $Window.height();
+
+      Functions.iterate.call($Instances, resizeInstance);
+    }
+
+    /**
+     * @method private
+     * @name raf
+     * @description Handles request animation frame
+     */
+
+    function raf() {
+      ScrollTop = $Window.scrollTop();
+
+      if (ScrollTop < 0) {
+        ScrollTop = 0;
+      }
+
+      if (ScrollTop !== OldScrollTop) {
+        renderRAF();
+
+        OldScrollTop = ScrollTop;
       }
     }
-  }
 
-  /**
-   * @plugin
-   * @name Checkpoint
-   * @description A jQuery plugin for animating visible elements.
-   * @type widget
-   * @main checkpoint.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
 
-  var Plugin = Formstone.Plugin("checkpoint", {
-      widget: true,
+    function cacheInstances() {
+      $Instances = $(Classes.base);
 
-      /**
-       * @options
-       * @param intersect [string] <'bottom-top'> "Position of intersection"
-       * @param offset [int] <0> "Element offset for activating animation"
-       * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
-       */
+      resize();
+    }
 
-      defaults: {
-        intersect    : 'bottom-top',
-        offset       : 0,
-        reverse      : false,
-      },
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-      classes: [
-        "active"
-      ],
+    function construct(data) {
+      var intersectParts = data.intersect.split("-");
 
-      /**
-       * @events
-       * @event activate.checkpoint "Checkpoint activated"
-       * @event deactivate.checkpoint "Checkpoint deactivated"
-       */
+      data.windowIntersect = intersectParts[0];
+      data.elIntersect = intersectParts[1];
+      data.visible = false;
 
-      events: {
-        activate      : "activate",
-        deactivate    : "deactivate"
-      },
+      var $container = $(data.$el.data("checkpoint-container"));
 
-      methods: {
-        _construct    : construct,
-        _postConstruct: postConstruct,
-        _destruct     : destruct,
-        _resize       : resize,
-        _raf          : raf
+      data.$target = ($container.length) ? $container : data.$el;
+
+      data.$el.addClass(RawClasses.base);
+    }
+
+    /**
+     * @method private
+     * @name postConstruct
+     * @description Run post build.
+     * @param data [object] "Instance data"
+     */
+
+    function postConstruct(data) {
+      cacheInstances();
+      resize();
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      cacheInstances();
+    }
+
+    /**
+     * @method private
+     * @name renderRAF
+     * @description Updates DOM based on animation values
+     */
+
+    function renderRAF() {
+      Functions.iterate.call($Instances, checkInstance);
+    }
+
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Handle window resize event
+     * @param data [object] "Instance data"
+     */
+
+    function resizeInstance(data) {
+      switch (data.windowIntersect) {
+        case "top":
+          data.windowCheck = 0 - data.offset;
+          break;
+        case "middle":
+          data.windowCheck = (WindowHeight / 2) - data.offset;
+          break;
+        case "bottom":
+          data.windowCheck = WindowHeight - data.offset;
+          break;
+        default:
+          break;
       }
-    }),
 
-    // Localize References
+      switch (data.elIntersect) {
+        case "top":
+          data.elCheck = data.$target[0].offsetTop;
+          break;
+        case "middle":
+          data.elCheck = data.$target[0].offsetTop + (data.$target.outerHeight() / 2);
+          break;
+        case "bottom":
+          data.elCheck = data.$target[0].offsetTop + data.$target.outerHeight();
+          break;
+        default:
+          break;
+      }
 
-    Namespace     = Plugin.namespace,
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
+      checkInstance(data);
+    }
 
-    Window        = Formstone.window,
-    $Window       = Formstone.$window,
-    $Body,
-    WindowHeight  = 0,
-    ScrollTop     = 0,
-    OldScrollTop  = 0,
-    $Instances    = [];
+    /**
+     * @method private
+     * @name checkInstance
+     * @description Handle window scroll event
+     * @param data [object] "Instance data"
+     */
 
-})
+    function checkInstance(data) {
+      var check = (ScrollTop + data.windowCheck);
+
+      if (check >= data.elCheck) {
+        if (!data.active) {
+          data.$el.trigger(Events.activate);
+        }
+
+        data.active = true;
+        data.$el.addClass(RawClasses.active);
+      } else {
+        if (data.reverse) {
+          if (data.active) {
+            data.$el.trigger(Events.deactivate);
+          }
+
+          data.active = false;
+          data.$el.removeClass(RawClasses.active);
+        }
+      }
+    }
+
+    /**
+     * @plugin
+     * @name Checkpoint
+     * @description A jQuery plugin for animating visible elements.
+     * @type widget
+     * @main checkpoint.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var Plugin = Formstone.Plugin("checkpoint", {
+        widget: true,
+
+        /**
+         * @options
+         * @param intersect [string] <'bottom-top'> "Position of intersection"
+         * @param offset [int] <0> "Element offset for activating animation"
+         * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
+         */
+
+        defaults: {
+          intersect: 'bottom-top',
+          offset: 0,
+          reverse: false,
+        },
+
+        classes: [
+          "active"
+        ],
+
+        /**
+         * @events
+         * @event activate.checkpoint "Checkpoint activated"
+         * @event deactivate.checkpoint "Checkpoint deactivated"
+         */
+
+        events: {
+          activate: "activate",
+          deactivate: "deactivate"
+        },
+
+        methods: {
+          _construct: construct,
+          _postConstruct: postConstruct,
+          _destruct: destruct,
+          _resize: resize,
+          _raf: raf
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      $Body,
+      WindowHeight = 0,
+      ScrollTop = 0,
+      OldScrollTop = 0,
+      $Instances = [];
+
+  })
 
 );
 
@@ -5672,864 +5691,854 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name delegate
-   * @param key [string] "Cookie key"
-   * @param value [string] "Cookie value"
-   * @param options [object] "Options object"
-   * @return [null || string] "Cookie value, if 'read'"
-   */
-
-  function delegate(key, value, options) {
-    if ($.type(key) === "object") {
-
-      // Set defaults
-
-      Defaults = $.extend(Defaults, key);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
     } else {
-
-      // Delegate intent
-
-      options = $.extend({}, Defaults, options || {});
-
-      if ($.type(key) !== "undefined") {
-        if ($.type(value) !== "undefined") {
-          if (value === null) {
-            eraseCookie(key, options);
-          } else {
-            createCookie(key, value, options);
-          }
-        } else {
-          return readCookie(key);
-        }
-      }
+      factory(jQuery, Formstone);
     }
+  }(function($, Formstone) {
 
-    return null;
-  }
-
-  /**
-   * @method
-   * @name create
-   * @description Creates a cookie.
-   * @param key [string] "Cookie key"
-   * @param value [string] "Cookie value"
-   * @param options [object] "Options object"
-   * @example $.cookie(key, value, options);
-   */
-
-  function createCookie(key, value, options) {
-    var expiration = false,
-      date = new Date();
-
-    // Check Expiration Date
-
-    if (options.expires && $.type(options.expires) === "number") {
-      date.setTime( date.getTime() + options.expires );
-      expiration = date.toGMTString();
-    }
-
-    var domain     = (options.domain)    ? "; domain=" + options.domain : "",
-      expires    = (expiration)        ? "; expires=" + expiration : "",
-      maxAge     = (expiration)        ? "; max-age=" + (options.expires / 1000) : "", // to seconds
-      path       = (options.path)      ? "; path=" + options.path : "",
-      secure     = (options.secure)    ? "; secure" : "";
-
-    // Set Cookie
-
-    Document.cookie = key + "=" + value + expires + maxAge + domain + path + secure;
-  }
-
-  /**
-   * @method
-   * @name read
-   * @description Returns a cookie's value, or null.
-   * @param key [string] "Cookie key"
-   * @return [string | null] "Cookie's value, or null"
-   * @example var value = $.cookie(key);
-   */
-
-  function readCookie(key) {
-    var keyString    = key + "=",
-      cookies      = Document.cookie.split(';');
-
-    // Loop Cookies
-
-    for(var i = 0; i < cookies.length; i++) {
-      var cookie = cookies[i];
-
-      while (cookie.charAt(0) === ' ') {
-        cookie = cookie.substring(1, cookie.length);
-      }
-
-      // Return Match
-
-      if (cookie.indexOf(keyString) === 0) {
-        return cookie.substring(keyString.length, cookie.length);
-      }
-    }
-
-    return null;
-  }
-
-  /**
-   * @method
-   * @name erase
-   * @description Deletes a cookie.
-   * @param key [string] "Cookie key"
-   * @example $.cookie(key, null);
-   */
-
-  function eraseCookie(key, options) {
-    createCookie(key, "", $.extend({}, options, {
-      expires: -604800000 // -7 days
-    }));
-
-    console.log(Document.cookie);
-  }
-
-  /**
-   * @plugin
-   * @name Cookie
-   * @description A jQuery plugin for simple access to browser cookies.
-   * @type utility
-   * @main cookie.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
-
-  var Plugin = Formstone.Plugin("cookie", {
-      utilities: {
-        _delegate : delegate
-      }
-    }),
+    "use strict";
 
     /**
-     * @options
-     * @param domain [string] "Cookie domain"
-     * @param expires [int] <604800000> "Time until cookie expires"
-     * @param path [string] "Cookie path"
+     * @method private
+     * @name delegate
+     * @param key [string] "Cookie key"
+     * @param value [string] "Cookie value"
+     * @param options [object] "Options object"
+     * @return [null || string] "Cookie value, if 'read'"
      */
 
-    Defaults = {
-      domain     : null,
-      expires    : 604800000, // 7 days
-      path       : null,
-      secure     : null
-    },
+    function delegate(key, value, options) {
+      if ($.type(key) === "object") {
 
-    // Localize References
+        // Set defaults
 
-    Document = Formstone.document;
+        Defaults = $.extend(Defaults, key);
+      } else {
 
-})
+        // Delegate intent
+
+        options = $.extend({}, Defaults, options || {});
+
+        if ($.type(key) !== "undefined") {
+          if ($.type(value) !== "undefined") {
+            if (value === null) {
+              eraseCookie(key, options);
+            } else {
+              createCookie(key, value, options);
+            }
+          } else {
+            return readCookie(key);
+          }
+        }
+      }
+
+      return null;
+    }
+
+    /**
+     * @method
+     * @name create
+     * @description Creates a cookie.
+     * @param key [string] "Cookie key"
+     * @param value [string] "Cookie value"
+     * @param options [object] "Options object"
+     * @example $.cookie(key, value, options);
+     */
+
+    function createCookie(key, value, options) {
+      var expiration = false,
+        date = new Date();
+
+      // Check Expiration Date
+
+      if (options.expires && $.type(options.expires) === "number") {
+        date.setTime(date.getTime() + options.expires);
+        expiration = date.toGMTString();
+      }
+
+      var domain = (options.domain) ? "; domain=" + options.domain : "",
+        expires = (expiration) ? "; expires=" + expiration : "",
+        maxAge = (expiration) ? "; max-age=" + (options.expires / 1000) : "", // to seconds
+        path = (options.path) ? "; path=" + options.path : "",
+        secure = (options.secure) ? "; secure" : "";
+
+      // Set Cookie
+
+      Document.cookie = key + "=" + value + expires + maxAge + domain + path + secure;
+    }
+
+    /**
+     * @method
+     * @name read
+     * @description Returns a cookie's value, or null.
+     * @param key [string] "Cookie key"
+     * @return [string | null] "Cookie's value, or null"
+     * @example var value = $.cookie(key);
+     */
+
+    function readCookie(key) {
+      var keyString = key + "=",
+        cookies = Document.cookie.split(';');
+
+      // Loop Cookies
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+
+        while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1, cookie.length);
+        }
+
+        // Return Match
+
+        if (cookie.indexOf(keyString) === 0) {
+          return cookie.substring(keyString.length, cookie.length);
+        }
+      }
+
+      return null;
+    }
+
+    /**
+     * @method
+     * @name erase
+     * @description Deletes a cookie.
+     * @param key [string] "Cookie key"
+     * @example $.cookie(key, null);
+     */
+
+    function eraseCookie(key, options) {
+      createCookie(key, "", $.extend({}, options, {
+        expires: -604800000 // -7 days
+      }));
+
+      console.log(Document.cookie);
+    }
+
+    /**
+     * @plugin
+     * @name Cookie
+     * @description A jQuery plugin for simple access to browser cookies.
+     * @type utility
+     * @main cookie.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var Plugin = Formstone.Plugin("cookie", {
+        utilities: {
+          _delegate: delegate
+        }
+      }),
+
+      /**
+       * @options
+       * @param domain [string] "Cookie domain"
+       * @param expires [int] <604800000> "Time until cookie expires"
+       * @param path [string] "Cookie path"
+       */
+
+      Defaults = {
+        domain: null,
+        expires: 604800000, // 7 days
+        path: null,
+        secure: null
+      },
+
+      // Localize References
+
+      Document = Formstone.document;
+
+  })
 
 );
+
 /*! formstone v1.3.3 [dropdown.js] 2017-08-18 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./scrollbar",
-      "./touch"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    $Body = Formstone.$body;
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    data.multiple  = this.prop("multiple");
-    data.disabled  = this.prop("disabled") || this.is("[readonly]");
-    data.lastIndex = false;
-
-    if (data.multiple) {
-      data.links = false;
-    } else if (data.external) {
-      data.links = true;
-    }
-
-    // Grab true original index, only if selected attribute exits
-    var $trueOriginal   = this.find("[selected]").not(":disabled"),
-      $originalOption = this.find(":selected").not(":disabled"),
-      originalLabel = $originalOption.text(),
-      originalIndex = this.find("option").index($originalOption);
-
-    if (!data.multiple && data.label !== "" && !$trueOriginal.length) {
-      $originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
-      originalLabel = data.label;
-      originalIndex = 0;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./scrollbar",
+        "./touch"
+      ], factory);
     } else {
-      data.label = "";
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
+
+    function setup() {
+      $Body = Formstone.$body;
     }
 
-    // Build options array
-    var $allOptions = this.find("option, optgroup"),
-      $options    = $allOptions.filter("option"),
-      $label      = $("[for=" + this.attr("id") + "]");
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    // Swap tab index, no more interacting with the actual input!
-    data.tabIndex = this[0].tabIndex;
-    this[0].tabIndex = -1;
+    function construct(data) {
+      data.multiple = this.prop("multiple");
+      data.disabled = this.prop("disabled") || this.is("[readonly]");
+      data.lastIndex = false;
 
-    if ($label.length) {
-      $label[0].tabIndex = -1;
+      if (data.multiple) {
+        data.links = false;
+      } else if (data.external) {
+        data.links = true;
+      }
+
+      // Grab true original index, only if selected attribute exits
+      var $trueOriginal = this.find("[selected]").not(":disabled"),
+        $originalOption = this.find(":selected").not(":disabled"),
+        originalLabel = $originalOption.text(),
+        originalIndex = this.find("option").index($originalOption);
+
+      if (!data.multiple && data.label !== "" && !$trueOriginal.length) {
+        $originalOption = this.prepend('<option value="" class="' + RawClasses.item_placeholder + '" selected>' + data.label + '</option>');
+        originalLabel = data.label;
+        originalIndex = 0;
+      } else {
+        data.label = "";
+      }
+
+      // Build options array
+      var $allOptions = this.find("option, optgroup"),
+        $options = $allOptions.filter("option"),
+        $label = $("[for=" + this.attr("id") + "]");
+
+      // Swap tab index, no more interacting with the actual input!
+      data.tabIndex = this[0].tabIndex;
+      this[0].tabIndex = -1;
+
+      if ($label.length) {
+        $label[0].tabIndex = -1;
+      }
+
+      // Build wrapper
+      var wrapperClasses = [
+        RawClasses.base,
+        data.theme,
+        data.customClass
+      ];
+
+      if (data.mobile /* || Formstone.isMobile */ ) {
+        wrapperClasses.push(RawClasses.mobile);
+      } else if (data.cover) {
+        wrapperClasses.push(RawClasses.cover);
+      }
+      if (data.multiple) {
+        wrapperClasses.push(RawClasses.multiple);
+      }
+      if (data.disabled) {
+        wrapperClasses.push(RawClasses.disabled);
+      }
+
+      // Aria
+
+      data.id = this.attr("id");
+
+      if (data.id) {
+        data.ariaId = data.id;
+      } else {
+        data.ariaId = data.rawGuid;
+      }
+
+      data.ariaId += '-dropdown';
+      data.selectedAriaId = data.ariaId + "-selected";
+
+      // Build html
+      var wrapperHtml = "",
+        innerHtml = "";
+
+      wrapperHtml += '<div class="' + wrapperClasses.join(" ") + '"id="' + data.ariaId + '" tabindex="' + data.tabIndex + '" role="listbox"';
+      if (data.multiple) {
+        wrapperHtml += ' aria-label="multi select"';
+      } else {
+        wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
+      }
+      wrapperHtml += '></div>';
+
+      // Build inner
+      if (!data.multiple) {
+        innerHtml += '<button type="button" class="' + RawClasses.selected + '" id="' + data.selectedAriaId + '" tabindex="-1">';
+        innerHtml += $('<span></span>').text(trimText(originalLabel, data.trim)).html();
+        innerHtml += '</button>';
+      }
+      innerHtml += '<div class="' + RawClasses.options + '">';
+      innerHtml += '</div>';
+
+      // Modify DOM
+      this.wrap(wrapperHtml)
+        .after(innerHtml);
+
+      // Store plugin data
+      data.$dropdown = this.parent(Classes.base);
+      data.$label = $label;
+      data.$allOptions = $allOptions;
+      data.$options = $options;
+      data.$selected = data.$dropdown.find(Classes.selected);
+      data.$wrapper = data.$dropdown.find(Classes.options);
+      data.$placeholder = data.$dropdown.find(Classes.placeholder);
+      data.index = -1;
+      data.closed = true;
+      data.focused = false;
+
+      buildOptions(data);
+
+      if (!data.multiple) {
+        updateOption(originalIndex, data);
+      }
+
+      // Scrollbar support
+      if ($.fn.fsScrollbar !== undefined) {
+        data.$wrapper.fsScrollbar({
+          theme: data.theme
+        }).find(".fs-scrollbar-content").attr("tabindex", null);
+      }
+
+      // Bind events
+      data.$dropdown.on(Events.click, data, onClick);
+      data.$selected.on(Events.click, data, onClick);
+
+      data.$dropdown.on(Events.click, Classes.item, data, onSelect)
+        .on(Events.close, data, onClose);
+
+      // Change events
+      this.on(Events.change, data, onChange);
+
+      // Focus/Blur events
+      if (!data.mobile /*!Formstone.isMobile*/ ) {
+
+        // Handle clicks to associated labels
+        this.on(Events.focusIn, data, function(e) {
+          e.data.$dropdown.trigger(Events.raw.focus);
+        });
+
+        data.$dropdown.on(Events.focusIn, data, onFocusIn)
+          .on(Events.focusOut, data, onFocusOut);
+      }
     }
 
-    // Build wrapper
-    var wrapperClasses = [
-      RawClasses.base,
-      data.theme,
-      data.customClass
-    ];
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-    if (data.mobile /* || Formstone.isMobile */) {
-      wrapperClasses.push(RawClasses.mobile);
-    } else if (data.cover) {
-      wrapperClasses.push(RawClasses.cover);
-    }
-    if (data.multiple) {
-      wrapperClasses.push(RawClasses.multiple);
-    }
-    if (data.disabled) {
-      wrapperClasses.push(RawClasses.disabled);
-    }
-
-    // Aria
-
-    data.id = this.attr("id");
-
-    if (data.id) {
-      data.ariaId = data.id;
-    } else {
-      data.ariaId = data.rawGuid;
-    }
-
-    data.ariaId += '-dropdown';
-    data.selectedAriaId = data.ariaId + "-selected";
-
-    // Build html
-    var wrapperHtml = "",
-      innerHtml   = "";
-
-    wrapperHtml += '<div class="' + wrapperClasses.join(" ") + '"id="' + data.ariaId + '" tabindex="' + data.tabIndex + '" role="listbox"';
-    if (data.multiple) {
-      wrapperHtml += ' aria-label="multi select"';
-    } else {
-      wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
-    }
-    wrapperHtml += '></div>';
-
-    // Build inner
-    if (!data.multiple) {
-      innerHtml += '<button type="button" class="' + RawClasses.selected + '" id="' + data.selectedAriaId + '" tabindex="-1">';
-      innerHtml += $('<span></span>').text( trimText(originalLabel, data.trim) ).html();
-      innerHtml += '</button>';
-    }
-    innerHtml += '<div class="' + RawClasses.options + '">';
-    innerHtml += '</div>';
-
-    // Modify DOM
-    this.wrap(wrapperHtml)
-      .after(innerHtml);
-
-    // Store plugin data
-    data.$dropdown        = this.parent(Classes.base);
-    data.$label           = $label;
-    data.$allOptions      = $allOptions;
-    data.$options         = $options;
-    data.$selected        = data.$dropdown.find(Classes.selected);
-    data.$wrapper         = data.$dropdown.find(Classes.options);
-    data.$placeholder     = data.$dropdown.find(Classes.placeholder);
-    data.index            = -1;
-    data.closed           = true;
-    data.focused          = false;
-
-    buildOptions(data);
-
-    if (!data.multiple) {
-      updateOption(originalIndex, data);
-    }
-
-    // Scrollbar support
-    if ($.fn.fsScrollbar !== undefined) {
-      data.$wrapper.fsScrollbar({
-        theme: data.theme
-      }).find(".fs-scrollbar-content").attr("tabindex", null);
-    }
-
-    // Bind events
-    data.$dropdown.on(Events.click, data, onClick);
-    data.$selected.on(Events.click, data, onClick);
-
-    data.$dropdown.on(Events.click, Classes.item, data, onSelect)
-            .on(Events.close, data, onClose);
-
-    // Change events
-    this.on(Events.change, data, onChange);
-
-    // Focus/Blur events
-    if (!data.mobile /*!Formstone.isMobile*/) {
-
-      // Handle clicks to associated labels
-      this.on(Events.focusIn, data, function(e) {
-        e.data.$dropdown.trigger(Events.raw.focus);
-      });
-
-      data.$dropdown.on(Events.focusIn, data, onFocusIn)
-              .on(Events.focusOut, data, onFocusOut);
-    }
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    if (data.$dropdown.hasClass(RawClasses.open)) {
-      data.$selected.trigger(Events.click);
-    }
-
-    // Scrollbar support
-    if ($.fn.fsScrollbar !== undefined) {
-      data.$wrapper.fsScrollbar("destroy");
-    }
-
-    data.$el[0].tabIndex = data.tabIndex;
-
-    if (data.$label.length) {
-      data.$label[0].tabIndex = data.tabIndex;
-    }
-
-    data.$dropdown.off(Events.namespace);
-    data.$options.off(Events.namespace);
-
-    data.$placeholder.remove();
-    data.$selected.remove();
-    data.$wrapper.remove();
-
-    data.$el.off(Events.namespace)
-        .show()
-        .unwrap();
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables target instance or option.
-   * @param option [string] <null> "Target option value"
-   * @example $(".target").dropdown("disable", "1");
-   */
-
-  function disableDropdown(data, option) {
-    if (typeof option !== "undefined") {
-      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
-
-      data.$items.eq(index).addClass(RawClasses.item_disabled);
-      data.$options.eq(index).prop("disabled", true);
-    } else {
+    function destruct(data) {
       if (data.$dropdown.hasClass(RawClasses.open)) {
         data.$selected.trigger(Events.click);
       }
 
-      data.$dropdown.addClass(RawClasses.disabled);
-      data.$el.prop("disabled", true);
+      // Scrollbar support
+      if ($.fn.fsScrollbar !== undefined) {
+        data.$wrapper.fsScrollbar("destroy");
+      }
 
-      data.disabled = true;
-    }
-  }
+      data.$el[0].tabIndex = data.tabIndex;
 
-  /**
-   * @method
-   * @name enable
-   * @description Enables target instance or option.
-   * @param option [string] <null> "Target option value"
-   * @example $(".target").dropdown("enable", "1");
-   */
+      if (data.$label.length) {
+        data.$label[0].tabIndex = data.tabIndex;
+      }
 
-  function enableDropdown(data, option) {
-    if (typeof option !== "undefined") {
-      var index = data.$items.index( data.$items.filter("[data-value=" + option + "]") );
-      data.$items.eq(index).removeClass(RawClasses.item_disabled);
-      data.$options.eq(index).prop("disabled", false);
-    } else {
-      data.$dropdown.removeClass(RawClasses.disabled);
-      data.$el.prop("disabled", false);
+      data.$dropdown.off(Events.namespace);
+      data.$options.off(Events.namespace);
 
-      data.disabled = false;
-    }
-  }
+      data.$placeholder.remove();
+      data.$selected.remove();
+      data.$wrapper.remove();
 
-  /**
-  * @method
-  * @name update
-  * @description Updates instance.
-  * @example $(".target").dropdown("update");
-  */
-
-  function updateDropdown(data) {
-    // Scrollbar support
-    if ($.fn.fsScrollbar !== undefined) {
-      data.$wrapper.fsScrollbar("destroy");
+      data.$el.off(Events.namespace)
+        .show()
+        .unwrap();
     }
 
-    var index = data.index;
+    /**
+     * @method
+     * @name disable
+     * @description Disables target instance or option.
+     * @param option [string] <null> "Target option value"
+     * @example $(".target").dropdown("disable", "1");
+     */
 
-    data.$allOptions = data.$el.find("option, optgroup");
-    data.$options = data.$allOptions.filter("option");
-    data.index = -1;
+    function disableDropdown(data, option) {
+      if (typeof option !== "undefined") {
+        var index = data.$items.index(data.$items.filter("[data-value=" + option + "]"));
 
-    index = data.$options.index(data.$options.filter(":selected"));
-
-    buildOptions(data);
-
-    if (!data.multiple) {
-      updateOption(index, data);
-    }
-
-    // Scrollbar support
-    if ($.fn.fsScrollbar !== undefined) {
-      data.$wrapper.fsScrollbar({
-        theme: data.theme
-      }).find(".fs-scrollbar-content").attr("tabindex", null);
-    }
-  }
-
-  /**
-   * @method private
-   * @name buildOptions
-   * @description Builds instance's option set.
-   * @param data [object] "Instance data"
-   */
-
-  function buildOptions(data) {
-    var html = '',
-      j    = 0;
-
-    for (var i = 0, count = data.$allOptions.length; i < count; i++) {
-      var $option = data.$allOptions.eq(i),
-        classes = [];
-
-      // Option group
-      if ($option[0].tagName === "OPTGROUP") {
-        classes.push(RawClasses.group);
-
-        // Disabled groups
-        if ($option.prop("disabled")) {
-          classes.push(RawClasses.disabled);
-        }
-
-        html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
+        data.$items.eq(index).addClass(RawClasses.item_disabled);
+        data.$options.eq(index).prop("disabled", true);
       } else {
-        var opVal   = $option.val(),
-          opLabel = $option.data("label"),
-          opType  = (data.links) ? "a" : 'button type="button"';
-
-        if (!$option.attr("value")) {
-          $option.attr("value", opVal);
+        if (data.$dropdown.hasClass(RawClasses.open)) {
+          data.$selected.trigger(Events.click);
         }
 
-        classes.push(RawClasses.item);
+        data.$dropdown.addClass(RawClasses.disabled);
+        data.$el.prop("disabled", true);
 
-        if ($option.hasClass(RawClasses.item_placeholder)) {
-          classes.push(RawClasses.item_placeholder);
+        data.disabled = true;
+      }
+    }
 
-          opType = "span";
-        }
-        if ($option.prop("selected")) {
-          classes.push(RawClasses.item_selected);
-        }
-        if ($option.prop("disabled")) {
-          classes.push(RawClasses.item_disabled);
-        }
+    /**
+     * @method
+     * @name enable
+     * @description Enables target instance or option.
+     * @param option [string] <null> "Target option value"
+     * @example $(".target").dropdown("enable", "1");
+     */
 
-        html += '<' + opType + ' class="' + classes.join(" ") + '"';
+    function enableDropdown(data, option) {
+      if (typeof option !== "undefined") {
+        var index = data.$items.index(data.$items.filter("[data-value=" + option + "]"));
+        data.$items.eq(index).removeClass(RawClasses.item_disabled);
+        data.$options.eq(index).prop("disabled", false);
+      } else {
+        data.$dropdown.removeClass(RawClasses.disabled);
+        data.$el.prop("disabled", false);
 
-        if (data.links) {
-          if (opType === "span") {
-            html += ' aria-hidden="true"';
-          } else {
-            html += ' href="' + opVal + '"';
+        data.disabled = false;
+      }
+    }
 
-            if (data.external) {
-              html += ' target="_blank"';
-            }
+    /**
+     * @method
+     * @name update
+     * @description Updates instance.
+     * @example $(".target").dropdown("update");
+     */
+
+    function updateDropdown(data) {
+      // Scrollbar support
+      if ($.fn.fsScrollbar !== undefined) {
+        data.$wrapper.fsScrollbar("destroy");
+      }
+
+      var index = data.index;
+
+      data.$allOptions = data.$el.find("option, optgroup");
+      data.$options = data.$allOptions.filter("option");
+      data.index = -1;
+
+      index = data.$options.index(data.$options.filter(":selected"));
+
+      buildOptions(data);
+
+      if (!data.multiple) {
+        updateOption(index, data);
+      }
+
+      // Scrollbar support
+      if ($.fn.fsScrollbar !== undefined) {
+        data.$wrapper.fsScrollbar({
+          theme: data.theme
+        }).find(".fs-scrollbar-content").attr("tabindex", null);
+      }
+    }
+
+    /**
+     * @method private
+     * @name buildOptions
+     * @description Builds instance's option set.
+     * @param data [object] "Instance data"
+     */
+
+    function buildOptions(data) {
+      var html = '',
+        j = 0;
+
+      for (var i = 0, count = data.$allOptions.length; i < count; i++) {
+        var $option = data.$allOptions.eq(i),
+          classes = [];
+
+        // Option group
+        if ($option[0].tagName === "OPTGROUP") {
+          classes.push(RawClasses.group);
+
+          // Disabled groups
+          if ($option.prop("disabled")) {
+            classes.push(RawClasses.disabled);
           }
+
+          html += '<span class="' + classes.join(" ") + '">' + $option.attr("label") + '</span>';
         } else {
-          html += ' data-value="' + opVal + '"';
-        }
+          var opVal = $option.val(),
+            opLabel = $option.data("label"),
+            opType = (data.links) ? "a" : 'button type="button"';
 
-        //html += ' tabindex="-1">';
-        html += ' role="option"';
-        if ($option.prop("selected")) {
-          html += ' "aria-selected"="true"';
-        }
-        html += '>';
+          if (!$option.attr("value")) {
+            $option.attr("value", opVal);
+          }
 
-        if (opLabel) {
-          html += opLabel;
-        } else {
-          html += Functions.decodeEntities( trimText($option.text(), data.trim) );
-        }
+          classes.push(RawClasses.item);
 
-        html += '</' + opType + '>';
+          if ($option.hasClass(RawClasses.item_placeholder)) {
+            classes.push(RawClasses.item_placeholder);
 
-        j++;
-      }
-    }
+            opType = "span";
+          }
+          if ($option.prop("selected")) {
+            classes.push(RawClasses.item_selected);
+          }
+          if ($option.prop("disabled")) {
+            classes.push(RawClasses.item_disabled);
+          }
 
-    data.$items = data.$wrapper.html( $.parseHTML(html) )
-                   .find(Classes.item);
-  }
+          html += '<' + opType + ' class="' + classes.join(" ") + '"';
 
-  /**
-   * @method private
-   * @name onClick
-   * @description Handles click to selected item.
-   * @param e [object] "Event data"
-   */
+          if (data.links) {
+            if (opType === "span") {
+              html += ' aria-hidden="true"';
+            } else {
+              html += ' href="' + opVal + '"';
 
-  function onClick(e) {
-    Functions.killEvent(e);
+              if (data.external) {
+                html += ' target="_blank"';
+              }
+            }
+          } else {
+            html += ' data-value="' + opVal + '"';
+          }
 
-    var data = e.data;
+          //html += ' tabindex="-1">';
+          html += ' role="option"';
+          if ($option.prop("selected")) {
+            html += ' "aria-selected"="true"';
+          }
+          html += '>';
 
-    if (!data.disabled) {
-      // // Handle mobile, but not Firefox, unless desktop forced
-      // if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
-      //   var el = data.$el[0];
-      //
-      //   if (Document.createEvent) { // All
-      //     var evt = Document.createEvent("MouseEvents");
-      //     evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-      //     el.dispatchEvent(evt);
-      //   } else if (el.fireEvent) { // IE
-      //     el.fireEvent("onmousedown");
-      //   }
-      // } else {
+          if (opLabel) {
+            html += opLabel;
+          } else {
+            html += Functions.decodeEntities(trimText($option.text(), data.trim));
+          }
 
-      if (!data.mobile) {
-        // Delegate intent
-        if (data.closed) {
-          openOptions(data);
-        } else {
-          closeOptions(data);
+          html += '</' + opType + '>';
+
+          j++;
         }
       }
+
+      data.$items = data.$wrapper.html($.parseHTML(html))
+        .find(Classes.item);
     }
 
-    closeOthers(data);
-  }
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click to selected item.
+     * @param e [object] "Event data"
+     */
 
-  function closeOthers(data) {
-    $(Classes.base).not(data.$dropdown).trigger(Events.close, [ data ]);
-  }
-
-  /**
-   * @method private
-   * @name openOptions
-   * @description Opens option set.
-   * @param data [object] "Instance data"
-   */
-
-  /**
-   * @method
-   * @name open
-   * @description Opens target instance.
-   * @example $(".target").dropdown("open");
-   */
-
-  function openOptions(data) {
-    // Make sure it's not already open
-    if (data.closed) {
-      var windowHeight   = $Window.height(),
-        optionsHeight  = data.$wrapper.outerHeight(true),
-        boundingRect   = data.$dropdown[0].getBoundingClientRect();
-
-      // Calculate bottom of document
-      if (boundingRect.bottom + optionsHeight > windowHeight - data.bottomEdge) {
-        data.$dropdown.addClass(RawClasses.bottom);
-      }
-
-      // Bind Events
-      $Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
-
-      data.$dropdown.trigger(Events.focusIn);
-
-      data.$dropdown.addClass(RawClasses.open);
-      scrollOptions(data);
-
-      data.closed = false;
-    }
-  }
-
-  /**
-   * @method private
-   * @name closeOptions
-   * @description Closes option set.
-   * @param data [object] "Instance data"
-   */
-
-  /**
-   * @method
-   * @name close
-   * @description Closes target instance.
-   * @example $(".target").dropdown("close");
-   */
-
-  function closeOptions(data) {
-    // Make sure it's actually open
-    if (data && !data.closed) {
-      $Body.off(Events.click + data.dotGuid);
-
-      data.$dropdown.removeClass( [RawClasses.open, RawClasses.bottom].join(" ") );
-
-      data.closed = true;
-    }
-  }
-
-  /**
-   * @method private
-   * @name closeOptionsHelper
-   * @description Determines if event target is outside instance before closing
-   * @param e [object] "Event data"
-   */
-
-  function closeOptionsHelper(e) {
-    Functions.killEvent(e);
-
-    var data = e.data;
-
-    if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
-      closeOptions(data);
-
-      data.$dropdown.trigger(Events.focusOut);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onClose
-   * @description Handles close event.
-   * @param e [object] "Event data"
-   */
-
-  function onClose(e) {
-    var data = e.data;
-
-    if (data) {
-      closeOptions(data);
-
-      data.$dropdown.trigger(Events.focusOut);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onSelect
-   * @description Handles option select.
-   * @param e [object] "Event data"
-   */
-
-  function onSelect(e) {
-    var $target = $(this),
-      data = e.data;
-
-    Functions.killEvent(e);
-
-    if (!data.disabled) {
-      var index = data.$items.index($target);
-
-      data.focusIndex = index;
-
-      if (data.$wrapper.is(":visible")) {
-        updateOption(index, data, e.shiftKey, e.metaKey || e.ctrlKey);
-        handleChange(data);
-      }
-
-      if (!data.multiple) {
-        closeOptions(data);
-      }
-
-      data.$dropdown.trigger(Events.focus);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onChange
-   * @description Handles external changes.
-   * @param e [object] "Event data"
-   */
-
-  function onChange(e, internal) {
-    var $target = $(this),
-      data    = e.data;
-
-    if (!internal && !data.multiple) {
-      var index = data.$options.index( data.$options.filter(":selected") );
-
-      data.focusIndex = index;
-
-      updateOption(index, data);
-      handleChange(data, true);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onFocusIn
-   * @description Handles instance focusIn.
-   * @param e [object] "Event data"
-   */
-
-  function onFocusIn(e) {
-    Functions.killEvent(e);
-
-    var $target = $(e.currentTarget),
-      data    = e.data;
-
-    if (!data.disabled && !data.multiple && !data.focused) {
-      closeOthers(data);
-
-      data.focused = true;
-      data.focusIndex = data.index;
-      data.input = '';
-
-      data.$dropdown.addClass(RawClasses.focus)
-              .on(Events.keyDown + data.dotGuid, data, onKeypress);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onFocusOut
-   * @description Handles instance focusOut.
-   * @param e [object] "Event data"
-   */
-
-  function onFocusOut(e) {
-    Functions.killEvent(e);
-
-    var $target = $(e.currentTarget),
-      data    = e.data;
-
-    if (data.focused && data.closed) {
-      data.focused = false;
-
-      data.$dropdown.removeClass(RawClasses.focus)
-              .off(Events.keyDown + data.dotGuid);
-
-      if (!data.multiple) {
-        // Clean up
-        closeOptions(data);
-
-        if (data.index !== data.focusIndex) {
-          handleChange(data);
-
-          data.focusIndex = data.index;
-        }
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name onKeypress
-   * @description Handles instance keypress, once focused.
-   * @param e [object] "Event data"
-   */
-
-  function onKeypress(e) {
-    var data = e.data;
-
-    data.keyTimer = Functions.startTimer(data.keyTimer, 1000, function() {
-      data.input = '';
-    });
-
-    if (e.keyCode === 13) {
-      if (!data.closed) {
-        closeOptions(data);
-        updateOption(data.index, data);
-      }
-      handleChange(data);
-    } else if (e.keyCode !== 9 && (!e.metaKey && !e.altKey && !e.ctrlKey && !e.shiftKey)) {
-      // Ignore modifiers & tabs
+    function onClick(e) {
       Functions.killEvent(e);
 
-      var total = data.$items.length - 1,
-        index = (data.index < 0) ? 0 : data.index;
+      var data = e.data;
 
-      // Firefox left/right support thanks to Kylemade
-      if ($.inArray(e.keyCode, (Formstone.isFirefox) ? [38, 40, 37, 39] : [38, 40]) > -1) {
-        // Increment / decrement using the arrow keys
-        index = index + ((e.keyCode === 38 || (Formstone.isFirefox && e.keyCode === 37)) ? -1 : 1);
+      if (!data.disabled) {
+        // // Handle mobile, but not Firefox, unless desktop forced
+        // if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
+        //   var el = data.$el[0];
+        //
+        //   if (Document.createEvent) { // All
+        //     var evt = Document.createEvent("MouseEvents");
+        //     evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        //     el.dispatchEvent(evt);
+        //   } else if (el.fireEvent) { // IE
+        //     el.fireEvent("onmousedown");
+        //   }
+        // } else {
 
-        if (index < 0) {
-          index = 0;
-        }
-        if (index > total) {
-          index = total;
-        }
-      } else {
-        var input = String.fromCharCode(e.keyCode).toUpperCase(),
-          check,
-          i;
-
-        // Store more than 1 input letter
-        data.input += input;
-
-        // Search for input from original index
-        for (i = data.index + 1; i <= total; i++) {
-          check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
-
-          if (check === data.input) {
-            index = i;
-            break;
+        if (!data.mobile) {
+          // Delegate intent
+          if (data.closed) {
+            openOptions(data);
+          } else {
+            closeOptions(data);
           }
         }
+      }
 
-        // If not, start from the beginning
-        if (index < 0 || index === data.index) {
-          for (i = 0; i <= total; i++) {
+      closeOthers(data);
+    }
+
+    function closeOthers(data) {
+      $(Classes.base).not(data.$dropdown).trigger(Events.close, [data]);
+    }
+
+    /**
+     * @method private
+     * @name openOptions
+     * @description Opens option set.
+     * @param data [object] "Instance data"
+     */
+
+    /**
+     * @method
+     * @name open
+     * @description Opens target instance.
+     * @example $(".target").dropdown("open");
+     */
+
+    function openOptions(data) {
+      // Make sure it's not already open
+      if (data.closed) {
+        var windowHeight = $Window.height(),
+          optionsHeight = data.$wrapper.outerHeight(true),
+          boundingRect = data.$dropdown[0].getBoundingClientRect();
+
+        // Calculate bottom of document
+        if (boundingRect.bottom + optionsHeight > windowHeight - data.bottomEdge) {
+          data.$dropdown.addClass(RawClasses.bottom);
+        }
+
+        // Bind Events
+        $Body.on(Events.click + data.dotGuid, ":not(" + Classes.options + ")", data, closeOptionsHelper);
+
+        data.$dropdown.trigger(Events.focusIn);
+
+        data.$dropdown.addClass(RawClasses.open);
+        scrollOptions(data);
+
+        data.closed = false;
+      }
+    }
+
+    /**
+     * @method private
+     * @name closeOptions
+     * @description Closes option set.
+     * @param data [object] "Instance data"
+     */
+
+    /**
+     * @method
+     * @name close
+     * @description Closes target instance.
+     * @example $(".target").dropdown("close");
+     */
+
+    function closeOptions(data) {
+      // Make sure it's actually open
+      if (data && !data.closed) {
+        $Body.off(Events.click + data.dotGuid);
+
+        data.$dropdown.removeClass([RawClasses.open, RawClasses.bottom].join(" "));
+
+        data.closed = true;
+      }
+    }
+
+    /**
+     * @method private
+     * @name closeOptionsHelper
+     * @description Determines if event target is outside instance before closing
+     * @param e [object] "Event data"
+     */
+
+    function closeOptionsHelper(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      if (data && $(e.currentTarget).parents(Classes.base).length === 0) {
+        closeOptions(data);
+
+        data.$dropdown.trigger(Events.focusOut);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onClose
+     * @description Handles close event.
+     * @param e [object] "Event data"
+     */
+
+    function onClose(e) {
+      var data = e.data;
+
+      if (data) {
+        closeOptions(data);
+
+        data.$dropdown.trigger(Events.focusOut);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onSelect
+     * @description Handles option select.
+     * @param e [object] "Event data"
+     */
+
+    function onSelect(e) {
+      var $target = $(this),
+        data = e.data;
+
+      Functions.killEvent(e);
+
+      if (!data.disabled) {
+        var index = data.$items.index($target);
+
+        data.focusIndex = index;
+
+        if (data.$wrapper.is(":visible")) {
+          updateOption(index, data, e.shiftKey, e.metaKey || e.ctrlKey);
+          handleChange(data);
+        }
+
+        if (!data.multiple) {
+          closeOptions(data);
+        }
+
+        data.$dropdown.trigger(Events.focus);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onChange
+     * @description Handles external changes.
+     * @param e [object] "Event data"
+     */
+
+    function onChange(e, internal) {
+      var $target = $(this),
+        data = e.data;
+
+      if (!internal && !data.multiple) {
+        var index = data.$options.index(data.$options.filter(":selected"));
+
+        data.focusIndex = index;
+
+        updateOption(index, data);
+        handleChange(data, true);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onFocusIn
+     * @description Handles instance focusIn.
+     * @param e [object] "Event data"
+     */
+
+    function onFocusIn(e) {
+      Functions.killEvent(e);
+
+      var $target = $(e.currentTarget),
+        data = e.data;
+
+      if (!data.disabled && !data.multiple && !data.focused) {
+        closeOthers(data);
+
+        data.focused = true;
+        data.focusIndex = data.index;
+        data.input = '';
+
+        data.$dropdown.addClass(RawClasses.focus)
+          .on(Events.keyDown + data.dotGuid, data, onKeypress);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onFocusOut
+     * @description Handles instance focusOut.
+     * @param e [object] "Event data"
+     */
+
+    function onFocusOut(e) {
+      Functions.killEvent(e);
+
+      var $target = $(e.currentTarget),
+        data = e.data;
+
+      if (data.focused && data.closed) {
+        data.focused = false;
+
+        data.$dropdown.removeClass(RawClasses.focus)
+          .off(Events.keyDown + data.dotGuid);
+
+        if (!data.multiple) {
+          // Clean up
+          closeOptions(data);
+
+          if (data.index !== data.focusIndex) {
+            handleChange(data);
+
+            data.focusIndex = data.index;
+          }
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onKeypress
+     * @description Handles instance keypress, once focused.
+     * @param e [object] "Event data"
+     */
+
+    function onKeypress(e) {
+      var data = e.data;
+
+      data.keyTimer = Functions.startTimer(data.keyTimer, 1000, function() {
+        data.input = '';
+      });
+
+      if (e.keyCode === 13) {
+        if (!data.closed) {
+          closeOptions(data);
+          updateOption(data.index, data);
+        }
+        handleChange(data);
+      } else if (e.keyCode !== 9 && (!e.metaKey && !e.altKey && !e.ctrlKey && !e.shiftKey)) {
+        // Ignore modifiers & tabs
+        Functions.killEvent(e);
+
+        var total = data.$items.length - 1,
+          index = (data.index < 0) ? 0 : data.index;
+
+        // Firefox left/right support thanks to Kylemade
+        if ($.inArray(e.keyCode, (Formstone.isFirefox) ? [38, 40, 37, 39] : [38, 40]) > -1) {
+          // Increment / decrement using the arrow keys
+          index = index + ((e.keyCode === 38 || (Formstone.isFirefox && e.keyCode === 37)) ? -1 : 1);
+
+          if (index < 0) {
+            index = 0;
+          }
+          if (index > total) {
+            index = total;
+          }
+        } else {
+          var input = String.fromCharCode(e.keyCode).toUpperCase(),
+            check,
+            i;
+
+          // Store more than 1 input letter
+          data.input += input;
+
+          // Search for input from original index
+          for (i = data.index + 1; i <= total; i++) {
             check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
 
             if (check === data.input) {
@@ -6537,282 +6546,296 @@ Prism.languages.js = Prism.languages.javascript;
               break;
             }
           }
+
+          // If not, start from the beginning
+          if (index < 0 || index === data.index) {
+            for (i = 0; i <= total; i++) {
+              check = data.$options.eq(i).text().substr(0, data.input.length).toUpperCase();
+
+              if (check === data.input) {
+                index = i;
+                break;
+              }
+            }
+          }
+        }
+
+        // Update
+        if (index >= 0) {
+          updateOption(index, data);
+          scrollOptions(data);
         }
       }
-
-      // Update
-      if (index >= 0) {
-        updateOption(index, data);
-        scrollOptions(data);
-      }
     }
-  }
 
-  /**
-   * @method private
-   * @name updateOption
-   * @description Updates instance based on new target index.
-   * @param index [int] "Selected option index"
-   * @param data [object] "instance data"
-   */
+    /**
+     * @method private
+     * @name updateOption
+     * @description Updates instance based on new target index.
+     * @param index [int] "Selected option index"
+     * @param data [object] "instance data"
+     */
 
-  function updateOption(index, data, shiftKey, metaKey) {
-    var $item      = data.$items.eq(index),
-      $option    = data.$options.eq(index),
-      isSelected = $item.hasClass(RawClasses.item_selected),
-      isDisabled = $item.hasClass(RawClasses.item_disabled);
+    function updateOption(index, data, shiftKey, metaKey) {
+      var $item = data.$items.eq(index),
+        $option = data.$options.eq(index),
+        isSelected = $item.hasClass(RawClasses.item_selected),
+        isDisabled = $item.hasClass(RawClasses.item_disabled);
 
-    // Check for disabled options
-    if (!isDisabled) {
-      if (data.multiple) {
-        if (data.mobile /* Formstone.isMobile*/) {
-          if (isSelected) {
-            $option.prop("selected", null)
-                 .attr("aria-selected", null);
-            $item.removeClass(RawClasses.item_selected);
-          } else {
-            $option.prop("selected", true)
-                 .attr("aria-selected", true);
-            $item.addClass(RawClasses.item_selected);
-          }
-        } else {
-          if (shiftKey && data.lastIndex !== false) {
-            var start = (data.lastIndex > index)  ? index : data.lastIndex,
-              end   = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
-
-            data.$options.prop("selected", null)
-                   .attr("aria-selected", null);
-            data.$items.filter(Classes.item_selected)
-              .removeClass(RawClasses.item_selected);
-
-            data.$options.slice(start, end).not("[disabled]").prop("selected", true);
-            data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
-          } else if (metaKey) {
+      // Check for disabled options
+      if (!isDisabled) {
+        if (data.multiple) {
+          if (data.mobile /* Formstone.isMobile*/ ) {
             if (isSelected) {
               $option.prop("selected", null)
-                   .attr("aria-selected", null);
+                .attr("aria-selected", null);
               $item.removeClass(RawClasses.item_selected);
             } else {
               $option.prop("selected", true)
-                   .attr("aria-selected", true);
+                .attr("aria-selected", true);
               $item.addClass(RawClasses.item_selected);
             }
-
-            data.lastIndex = index;
           } else {
-            data.$options.prop("selected", null)
-                   .attr("aria-selected", null);
+            if (shiftKey && data.lastIndex !== false) {
+              var start = (data.lastIndex > index) ? index : data.lastIndex,
+                end = ((data.lastIndex > index) ? data.lastIndex : index) + 1;
+
+              data.$options.prop("selected", null)
+                .attr("aria-selected", null);
+              data.$items.filter(Classes.item_selected)
+                .removeClass(RawClasses.item_selected);
+
+              data.$options.slice(start, end).not("[disabled]").prop("selected", true);
+              data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
+            } else if (metaKey) {
+              if (isSelected) {
+                $option.prop("selected", null)
+                  .attr("aria-selected", null);
+                $item.removeClass(RawClasses.item_selected);
+              } else {
+                $option.prop("selected", true)
+                  .attr("aria-selected", true);
+                $item.addClass(RawClasses.item_selected);
+              }
+
+              data.lastIndex = index;
+            } else {
+              data.$options.prop("selected", null)
+                .attr("aria-selected", null);
+              data.$items.filter(Classes.item_selected)
+                .removeClass(RawClasses.item_selected);
+
+              $option.prop("selected", true)
+                .attr("aria-selected", true);
+              $item.addClass(RawClasses.item_selected);
+
+              data.lastIndex = index;
+            }
+          }
+        } else if (index > -1 && index < data.$items.length) {
+          if (index !== data.index) {
+            var label = $option.data("label") || $item.html();
+
+            data.$selected.html(label)
+              .removeClass(Classes.item_placeholder);
+
             data.$items.filter(Classes.item_selected)
               .removeClass(RawClasses.item_selected);
 
-            $option.prop("selected", true)
-                 .attr("aria-selected", true);
+            data.$el[0].selectedIndex = index;
+
             $item.addClass(RawClasses.item_selected);
-
-            data.lastIndex = index;
+            data.index = index;
           }
+        } else if (data.label !== "") {
+          data.$selected.html(data.label);
         }
-      } else if (index > -1 && index < data.$items.length) {
-        if (index !== data.index) {
-          var label = $option.data("label") || $item.html();
-
-          data.$selected.html(label)
-                  .removeClass(Classes.item_placeholder);
-
-          data.$items.filter(Classes.item_selected)
-                 .removeClass(RawClasses.item_selected);
-
-          data.$el[0].selectedIndex = index;
-
-          $item.addClass(RawClasses.item_selected);
-          data.index = index;
-        }
-      } else if (data.label !== "") {
-        data.$selected.html(data.label);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name scrollOptions
-   * @description Scrolls options wrapper to specific option.
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name scrollOptions
+     * @description Scrolls options wrapper to specific option.
+     * @param data [object] "Instance data"
+     */
 
-  function scrollOptions(data) {
-    var $selected      = data.$items.eq(data.index),
-      selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : { left: 0, top: 0 },
-      buffer         = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
+    function scrollOptions(data) {
+      var $selected = data.$items.eq(data.index),
+        selectedOffset = (data.index >= 0 && !$selected.hasClass(RawClasses.item_placeholder)) ? $selected.position() : {
+          left: 0,
+          top: 0
+        },
+        buffer = (data.$wrapper.outerHeight() - $selected.outerHeight()) / 2;
 
-    if ($.fn.fsScrollbar !== undefined) {
-      data.$wrapper.fsScrollbar("resize")
-             .fsScrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top) );
-    } else {
-      data.$wrapper.scrollTop( data.$wrapper.scrollTop() + selectedOffset.top - buffer );
-    }
-  }
-
-  /**
-   * @method private
-   * @name handleChange
-   * @description Handles change events.
-   * @param data [object] "Instance data"
-   */
-
-  function handleChange(data, external) {
-    if (data.links) {
-      launchLink(data);
-    } else {
-      if (!external) {
-        data.$el.trigger(Events.raw.change, [ true ]);
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name launchLink
-   * @description Launches link.
-   * @param data [object] "Instance data"
-   */
-
-  function launchLink(data) {
-    var url = data.$el.val();
-
-    if (data.external) {
-      // Open link in a new tab/window
-      Window.open(url);
-    } else {
-      // Open link in same tab/window
-      Window.location.href = url;
-    }
-  }
-
-  /**
-   * @method private
-   * @name trimText
-   * @description Trims text, if specified length is greater then 0.
-   * @param length [int] "Length to trim at"
-   * @param text [string] "Text to trim"
-   * @return [string] "Trimmed string"
-   */
-
-  function trimText(text, length) {
-    if (length === 0) {
-      return text;
-    } else {
-      if (text.length > length) {
-        return text.substring(0, length) + "...";
+      if ($.fn.fsScrollbar !== undefined) {
+        data.$wrapper.fsScrollbar("resize")
+          .fsScrollbar("scroll", (data.$wrapper.find(".fs-scrollbar-content").scrollTop() + selectedOffset.top));
       } else {
-        return text;
+        data.$wrapper.scrollTop(data.$wrapper.scrollTop() + selectedOffset.top - buffer);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name escapeText
-   * @description Escapes text.
-   * @param text [string] "Text to escape"
-   */
+    /**
+     * @method private
+     * @name handleChange
+     * @description Handles change events.
+     * @param data [object] "Instance data"
+     */
 
-  function escapeText(text) {
-    return (typeof text === "string") ? text.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') : text;
-  }
-
-  /**
-   * @plugin
-   * @name Dropdown
-   * @description A jQuery plugin for custom select elements.
-   * @type widget
-   * @main dropdown.js
-   * @main dropdown.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency scrollbar.js (optional)
-   * @dependency touch.js (optional, for scrollbar)
-   */
-
-  var Plugin = Formstone.Plugin("dropdown", {
-      widget: true,
-
-      /**
-       * @options
-       * @param bottomEdge [int] <0> "Threshold for bottom position”
-       * @param cover [boolean] <false> "Cover handle with option set"
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param label [string] <''> "Label displayed before selection"
-       * @param external [boolean] <false> "Open options as links in new window"
-       * @param links [boolean] <false> "Open options as links in same window"
-       * @param mobile [boolean] <false> "Use native browser UI on mobile"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param trim [int] <0> "Trim options to specified length; 0 to disable”
-       */
-      defaults: {
-        bottomEdge     : 0,
-        cover          : false,
-        customClass    : "",
-        label          : "",
-        external       : false,
-        links          : false,
-        mobile         : false,
-        theme          : "fs-light",
-        trim           : 0
-      },
-
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
-
-        disable       : disableDropdown,
-        enable        : enableDropdown,
-        update        : updateDropdown,
-        open          : openOptions,
-        close         : closeOptions
-      },
-
-      classes: [
-        "cover",
-        "bottom",
-        "multiple",
-        "mobile",
-
-        "open",
-        "disabled",
-        "focus",
-
-        "selected",
-        "options",
-        "group",
-        "item",
-
-        "item_disabled",
-        "item_selected",
-        "item_placeholder"
-      ],
-
-      events: {
-        close: "close"
+    function handleChange(data, external) {
+      if (data.links) {
+        launchLink(data);
+      } else {
+        if (!external) {
+          data.$el.trigger(Events.raw.change, [true]);
+        }
       }
-    }),
+    }
 
-    // Localize References
+    /**
+     * @method private
+     * @name launchLink
+     * @description Launches link.
+     * @param data [object] "Instance data"
+     */
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
+    function launchLink(data) {
+      var url = data.$el.val();
 
-    // Local
+      if (data.external) {
+        // Open link in a new tab/window
+        Window.open(url);
+      } else {
+        // Open link in same tab/window
+        Window.location.href = url;
+      }
+    }
 
-    Window        = Formstone.window,
-    $Window       = Formstone.$window,
-    Document      = Formstone.document,
-    $Body         = null;
+    /**
+     * @method private
+     * @name trimText
+     * @description Trims text, if specified length is greater then 0.
+     * @param length [int] "Length to trim at"
+     * @param text [string] "Text to trim"
+     * @return [string] "Trimmed string"
+     */
 
-})
+    function trimText(text, length) {
+      if (length === 0) {
+        return text;
+      } else {
+        if (text.length > length) {
+          return text.substring(0, length) + "...";
+        } else {
+          return text;
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name escapeText
+     * @description Escapes text.
+     * @param text [string] "Text to escape"
+     */
+
+    function escapeText(text) {
+      return (typeof text === "string") ? text.replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') : text;
+    }
+
+    /**
+     * @plugin
+     * @name Dropdown
+     * @description A jQuery plugin for custom select elements.
+     * @type widget
+     * @main dropdown.js
+     * @main dropdown.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency scrollbar.js (optional)
+     * @dependency touch.js (optional, for scrollbar)
+     */
+
+    var Plugin = Formstone.Plugin("dropdown", {
+        widget: true,
+
+        /**
+         * @options
+         * @param bottomEdge [int] <0> "Threshold for bottom position”
+         * @param cover [boolean] <false> "Cover handle with option set"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param label [string] <''> "Label displayed before selection"
+         * @param external [boolean] <false> "Open options as links in new window"
+         * @param links [boolean] <false> "Open options as links in same window"
+         * @param mobile [boolean] <false> "Use native browser UI on mobile"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param trim [int] <0> "Trim options to specified length; 0 to disable”
+         */
+        defaults: {
+          bottomEdge: 0,
+          cover: false,
+          customClass: "",
+          label: "",
+          external: false,
+          links: false,
+          mobile: false,
+          theme: "fs-light",
+          trim: 0
+        },
+
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
+
+          disable: disableDropdown,
+          enable: enableDropdown,
+          update: updateDropdown,
+          open: openOptions,
+          close: closeOptions
+        },
+
+        classes: [
+          "cover",
+          "bottom",
+          "multiple",
+          "mobile",
+
+          "open",
+          "disabled",
+          "focus",
+
+          "selected",
+          "options",
+          "group",
+          "item",
+
+          "item_disabled",
+          "item_selected",
+          "item_placeholder"
+        ],
+
+        events: {
+          close: "close"
+        }
+      }),
+
+      // Localize References
+
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      // Local
+
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      Document = Formstone.document,
+      $Body = null;
+
+  })
 
 );
 
@@ -6820,1861 +6843,1864 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize(windowWidth) {
-    Functions.iterate.call($Instances, resizeInstance);
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances = $(Classes.element);
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance Data"
-   */
-
-  function construct(data) {
-    data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
-    data.mq       = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
-    data.type     = (data.property === "height") ? "outerHeight" : "outerWidth";
-
-    if (data.target) {
-      if (!$.isArray(data.target)) {
-        data.target = [ data.target ];
-      }
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery"
+      ], factory);
     } else {
-      data.target = [ "> *" ];
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
+
+    function resize(windowWidth) {
+      Functions.iterate.call($Instances, resizeInstance);
     }
 
-    cacheInstances();
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
 
-    $.fsMediaquery("bind", data.rawGuid, data.mq, {
-      enter: function() {
-        enable.call(data.$el, data);
-      },
-      leave: function() {
-        disable.call(data.$el, data);
+    function cacheInstances() {
+      $Instances = $(Classes.element);
+    }
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance Data"
+     */
+
+    function construct(data) {
+      data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+      data.mq = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+      data.type = (data.property === "height") ? "outerHeight" : "outerWidth";
+
+      if (data.target) {
+        if (!$.isArray(data.target)) {
+          data.target = [data.target];
+        }
+      } else {
+        data.target = ["> *"];
       }
-    });
-  }
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+      cacheInstances();
 
-  function destruct(data) {
-    tearDown(data);
-
-    $.fsMediaquery("unbind", data.rawGuid);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method
-   * @name resize
-   * @description Resizes instance
-   * @example $(".target").equalize("resize");
-   */
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Handle window resize event
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-    if (data.data) {
-      data = data.data; // normalize image resize events
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          enable.call(data.$el, data);
+        },
+        leave: function() {
+          disable.call(data.$el, data);
+        }
+      });
     }
 
-    if (data.enabled) {
-      var value,
-        check,
-        $target;
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-      for (var i = 0; i < data.target.length; i++) {
-        value = 0;
-        check = 0;
-        $target = data.$el.find( data.target[i] );
+    function destruct(data) {
+      tearDown(data);
 
-        $target.css(data.property, "");
+      $.fsMediaquery("unbind", data.rawGuid);
 
-        for (var j = 0; j < $target.length; j++) {
-          check = $target.eq(j)[ data.type ]();
+      cacheInstances();
+    }
 
-          if (check > value) {
-            value = check;
+    /**
+     * @method
+     * @name resize
+     * @description Resizes instance
+     * @example $(".target").equalize("resize");
+     */
+
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Handle window resize event
+     * @param data [object] "Instance data"
+     */
+
+    function resizeInstance(data) {
+      if (data.data) {
+        data = data.data; // normalize image resize events
+      }
+
+      if (data.enabled) {
+        var value,
+          check,
+          $target;
+
+        for (var i = 0; i < data.target.length; i++) {
+          value = 0;
+          check = 0;
+          $target = data.$el.find(data.target[i]);
+
+          $target.css(data.property, "");
+
+          for (var j = 0; j < $target.length; j++) {
+            check = $target.eq(j)[data.type]();
+
+            if (check > value) {
+              value = check;
+            }
           }
+
+          $target.css(data.property, value);
+        }
+      }
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance of plugin
+     * @example $(".target").equalize("disable");
+     */
+
+    function disable(data) {
+      if (data.enabled) {
+        data.enabled = false;
+
+        tearDown(data);
+      }
+    }
+
+    /**
+     * @method
+     * @name enable
+     * @description Enables instance of plugin
+     * @example $(".target").equalize("enable");
+     */
+
+    function enable(data) {
+      if (!data.enabled) {
+        data.enabled = true;
+
+        var $images = data.$el.find("img");
+
+        if ($images.length) {
+          $images.on(Events.load, data, resizeInstance);
         }
 
-        $target.css(data.property, value);
+        resizeInstance(data);
       }
     }
-  }
 
-  /**
-   * @method
-   * @name disable
-   * @description Disables instance of plugin
-   * @example $(".target").equalize("disable");
-   */
+    /**
+     * @method private
+     * @name tearDown
+     * @description Removes styling from elements
+     * @param data [object] "Instance data"
+     */
 
-  function disable(data) {
-    if (data.enabled) {
-      data.enabled = false;
-
-      tearDown(data);
-    }
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables instance of plugin
-   * @example $(".target").equalize("enable");
-   */
-
-  function enable(data) {
-    if (!data.enabled) {
-      data.enabled = true;
-
-      var $images = data.$el.find("img");
-
-      if ($images.length) {
-        $images.on(Events.load, data, resizeInstance);
+    function tearDown(data) {
+      for (var i = 0; i < data.target.length; i++) {
+        data.$el.find(data.target[i]).css(data.property, "");
       }
 
-      resizeInstance(data);
-    }
-  }
-
-  /**
-   * @method private
-   * @name tearDown
-   * @description Removes styling from elements
-   * @param data [object] "Instance data"
-   */
-
-  function tearDown(data) {
-    for (var i = 0; i < data.target.length; i++) {
-      data.$el.find( data.target[i] ).css(data.property, "");
+      data.$el.find("img").off(Events.namespace);
     }
 
-    data.$el.find("img").off(Events.namespace);
-  }
+    /**
+     * @plugin
+     * @name Equalize
+     * @description A jQuery plugin for equal dimensions.
+     * @type widget
+     * @main equalize.js
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     */
 
-  /**
-   * @plugin
-   * @name Equalize
-   * @description A jQuery plugin for equal dimensions.
-   * @type widget
-   * @main equalize.js
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   */
+    var Plugin = Formstone.Plugin("equalize", {
+        widget: true,
+        priority: 5,
 
-  var Plugin = Formstone.Plugin("equalize", {
-      widget: true,
-      priority: 5,
+        /**
+         * @options
+         * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+         * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
+         * @param property [string] <"height"> "Property to size; 'height' or 'width'"
+         * @param target [string OR array] <null> "Target child selector(s); Defaults to direct descendants"
+         */
 
-      /**
-       * @options
-       * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
-       * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
-       * @param property [string] <"height"> "Property to size; 'height' or 'width'"
-       * @param target [string OR array] <null> "Target child selector(s); Defaults to direct descendants"
-       */
+        defaults: {
+          maxWidth: Infinity,
+          minWidth: "0px",
+          property: "height",
+          target: null
+        },
 
-      defaults: {
-        maxWidth    : Infinity,
-        minWidth    : "0px",
-        property    : "height",
-        target      : null
-      },
+        methods: {
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
 
-      methods : {
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
+          resize: resizeInstance
+        }
+      }),
 
-        resize        : resizeInstance
-      }
-    }),
+      // Localize References
 
-    // Localize References
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-    Classes        = Plugin.classes,
-    RawClasses     = Classes.raw,
-    Events         = Plugin.events,
-    Functions      = Plugin.functions,
+      $Instances = [];
 
-    $Instances     = [];
-
-})
+  })
 
 );
+
 /*! formstone v1.3.3 [lightbox.js] 2017-08-18 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./touch",
-      "./transition",
-      "./viewer"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    $Body  = Formstone.$body;
-    $Locks = $("html, body");
-
-    OnLoad = Formstone.window.location.hash.replace("#", "");
-  }
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize() {
-    if (Instance) {
-      resizeLightbox();
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./touch",
+        "./transition",
+        "./viewer"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
+    "use strict";
 
-  function construct(data) {
-    this.on(Events.click, data, buildLightbox);
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-    var gallery = this.data(Namespace + "-gallery");
+    function setup() {
+      $Body = Formstone.$body;
+      $Locks = $("html, body");
 
-    if (!OnLoaded && OnLoad && gallery === OnLoad) {
-      OnLoaded = true;
-
-      this.trigger(Events.click);
+      OnLoad = Formstone.window.location.hash.replace("#", "");
     }
-  }
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
 
-  function destruct(data) {
-    closeLightbox();
-
-    this.off(Events.namespace);
-  }
-
-  /**
-   * @method private
-   * @name initialize
-   * @description Builds instance from $target.
-   * @param $target [jQuery] "Target jQuery object"
-   */
-
-  function initialize($target, options) {
-    if ($target instanceof $) {
-
-      // Emulate event
-
-      buildLightbox.apply(Window, [{ data: $.extend(true, {}, {
-        $object: $target
-      }, Defaults, options || {}) }]);
+    function resize() {
+      if (Instance) {
+        resizeLightbox();
+      }
     }
-  }
 
-  /**
-   * @method private
-   * @name buildLightbox
-   * @description Builds new lightbox.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-  function buildLightbox(e) {
-    if (!Instance) {
-      var data = e.data;
+    function construct(data) {
+      this.on(Events.click, data, buildLightbox);
 
-      // Cache internal data
-      Instance = $.extend({}, {
-        visible            : false,
-        gallery: {
-          active         : false
-        },
-        isMobile           : (Formstone.isMobile || data.mobile),
-        isTouch            : Formstone.support.touch,
-        isAnimating        : true,
-        isZooming          : false,
-        oldContentHeight   : 0,
-        oldContentWidth    : 0,
-        metaHeight         : 0,
-        thumbnailHeight    : 0,
-        captionOpen        : false,
-        thumbnailsOpen     : false,
-        tapTimer           : null
-      }, data);
+      var gallery = this.data(Namespace + "-gallery");
 
-      Instance.isViewer = (Instance.isMobile && data.viewer && typeof $.fn.fsViewer !== "undefined");
+      if (!OnLoaded && OnLoad && gallery === OnLoad) {
+        OnLoaded = true;
 
-      // Check target type
-      var $el            = data.$el,
-        $object        = data.$object,
-        source         = ($el && $el[0].href) ? $el[0].href || "" : "",
-        hash           = ($el && $el[0].hash) ? $el[0].hash || "" : "",
-        sourceParts    = source.toLowerCase().split(".").pop().split(/\#|\?/),
-        type           = ($el) ? $el.data(Namespace + "-type") : "",
-        isImage         = ( (type === "image") || (source.match(data.fileTypes) || source.substr(0, 10) === "data:image") ),
-        isVideo         = checkVideo(source),
-        isUrl         = ( (type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash) ),
-        isElement      = ( (type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#")) ),
-        isObject       = ( (typeof $object !== "undefined") );
-
-      if (isElement) {
-        source = hash;
+        this.trigger(Events.click);
       }
+    }
 
-      // Retain default click
-      if ( !(isImage || isVideo || isUrl || isElement || isObject) ) {
-        Instance = null;
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-        return;
+    function destruct(data) {
+      closeLightbox();
+
+      this.off(Events.namespace);
+    }
+
+    /**
+     * @method private
+     * @name initialize
+     * @description Builds instance from $target.
+     * @param $target [jQuery] "Target jQuery object"
+     */
+
+    function initialize($target, options) {
+      if ($target instanceof $) {
+
+        // Emulate event
+
+        buildLightbox.apply(Window, [{
+          data: $.extend(true, {}, {
+            $object: $target
+          }, Defaults, options || {})
+        }]);
       }
+    }
 
-      // Kill event
-      Functions.killEvent(e);
+    /**
+     * @method private
+     * @name buildLightbox
+     * @description Builds new lightbox.
+     * @param e [object] "Event data"
+     */
 
-      // Double the margin
-      Instance.margin *= 2;
+    function buildLightbox(e) {
+      if (!Instance) {
+        var data = e.data;
 
-      if (isImage) {
-        Instance.type = "image";
-      } else if (isVideo) {
-        Instance.type = "video";
-      } else {
-        Instance.type = "element";
-      }
+        // Cache internal data
+        Instance = $.extend({}, {
+          visible: false,
+          gallery: {
+            active: false
+          },
+          isMobile: (Formstone.isMobile || data.mobile),
+          isTouch: Formstone.support.touch,
+          isAnimating: true,
+          isZooming: false,
+          oldContentHeight: 0,
+          oldContentWidth: 0,
+          metaHeight: 0,
+          thumbnailHeight: 0,
+          captionOpen: false,
+          thumbnailsOpen: false,
+          tapTimer: null
+        }, data);
 
-      if (isImage || isVideo) {
-        // Check for gallery
-        var id = $el.data(Namespace + "-gallery");
+        Instance.isViewer = (Instance.isMobile && data.viewer && typeof $.fn.fsViewer !== "undefined");
 
-        if (id) {
-          Instance.gallery.active    = true;
-          Instance.gallery.id        = id;
-          Instance.gallery.$items    = $("a[data-lightbox-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
-          Instance.gallery.index     = Instance.gallery.$items.index(Instance.$el);
-          Instance.gallery.total     = Instance.gallery.$items.length - 1;
-        }
-      }
+        // Check target type
+        var $el = data.$el,
+          $object = data.$object,
+          source = ($el && $el[0].href) ? $el[0].href || "" : "",
+          hash = ($el && $el[0].hash) ? $el[0].hash || "" : "",
+          sourceParts = source.toLowerCase().split(".").pop().split(/\#|\?/),
+          type = ($el) ? $el.data(Namespace + "-type") : "",
+          isImage = ((type === "image") || (source.match(data.fileTypes) || source.substr(0, 10) === "data:image")),
+          isVideo = checkVideo(source),
+          isUrl = ((type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash)),
+          isElement = ((type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#"))),
+          isObject = ((typeof $object !== "undefined"));
 
-      // Thumbnails support
-      if ( !(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active) ) {
-        Instance.thumbnails = false;
-      }
-
-      // Assemble HTML
-      var html = '';
-      if (!Instance.isMobile) {
-        html += '<div class="' + [RawClasses.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
-      }
-      var lightboxClasses = [
-        RawClasses.base,
-        RawClasses.loading,
-        RawClasses.animating,
-        Instance.theme,
-        Instance.customClass
-      ];
-
-      if (Instance.fixed) {
-        lightboxClasses.push(RawClasses.fixed);
-      }
-      if (Instance.isMobile) {
-        lightboxClasses.push(RawClasses.mobile);
-      }
-      if (Instance.isTouch) {
-        lightboxClasses.push(RawClasses.touch);
-      }
-      if (isUrl) {
-        lightboxClasses.push(RawClasses.iframed);
-      }
-      if (isElement || isObject) {
-        lightboxClasses.push(RawClasses.inline);
-      }
-      if (Instance.thumbnails) {
-        lightboxClasses.push(RawClasses.thumbnailed);
-      }
-
-      html += '<div class="' + lightboxClasses.join(" ") + '" role="dialog" aria-label="lightbox" tabindex="-1">';
-      html += '<button type="button" class="' + RawClasses.close + '">' + Instance.labels.close + '</button>';
-      html += '<span class="' + RawClasses.loading_icon + '"></span>';
-      html += '<div class="' + RawClasses.container + '">';
-
-      // Thumbnails
-      if (Instance.gallery.active && Instance.thumbnails) {
-        html += '<div class="' + [RawClasses.thumbnails] + '">';
-        html += '<div class="' + [RawClasses.thumbnail_container] + '">';
-
-        var $item,
-          thumb;
-
-        for (var i = 0, count = Instance.gallery.$items.length; i < count; i++) {
-          $item = Instance.gallery.$items.eq(i);
-          thumb = $item.data("lightbox-thumbnail");
-
-          if (!thumb) {
-            thumb = $item.find("img").attr("src");
-          }
-
-          html += '<button class="' + [RawClasses.thumbnail_item] + '">';
-          html += '<img src="' + thumb + '" alt="">';
-          html += '</button>';
+        if (isElement) {
+          source = hash;
         }
 
-        html += '</div></div>';
-      }
+        // Retain default click
+        if (!(isImage || isVideo || isUrl || isElement || isObject)) {
+          Instance = null;
 
-      html += '<div class="' + RawClasses.content + '"></div>';
-
-      if (isImage || isVideo) {
-
-        html += '<div class="' + RawClasses.tools + '">';
-
-        html += '<div class="' + RawClasses.controls + '">';
-        if (Instance.gallery.active) {
-          html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
-          html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+          return;
         }
-        if (Instance.isMobile && Instance.isTouch) {
-          html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
 
-          if (Instance.gallery.active && Instance.thumbnails) {
-            html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.thumbnail_toggle].join(" ") + '">' + Instance.labels.thumbnailsClosed + '</button>';
-          }
-        }
-        html += '</div>'; // controls
+        // Kill event
+        Functions.killEvent(e);
 
-        html += '<div class="' + RawClasses.meta + '">';
-        html += '<div class="' + RawClasses.meta_content + '">';
-        if (Instance.gallery.active) {
-          html += '<p class="' + RawClasses.position + '"';
-          if (Instance.gallery.total < 1) {
-            html += ' style="display: none;"';
-          }
-          html += '>';
-          html += '<span class="' + RawClasses.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
-          html += Instance.labels.count;
-          html += ' <span class="' + RawClasses.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
-          html += '</p>';
-        }
-        html += '<div class="' + RawClasses.caption + '">';
-        html += Instance.formatter.call($el, data);
-        html += '</div></div></div>'; // caption, meta_content, meta
+        // Double the margin
+        Instance.margin *= 2;
 
-        html += '</div>'; // tools
-      }
-      html += '</div></div>'; //container, content, lightbox
-
-      // Modify Dom
-      $Body.append(html);
-
-      // Cache jquery objects
-      Instance.$overlay               = $(Classes.overlay);
-      Instance.$lightbox              = $(Classes.base);
-      Instance.$close                 = $(Classes.close);
-      Instance.$container             = $(Classes.container);
-      Instance.$content               = $(Classes.content);
-      Instance.$tools                 = $(Classes.tools);
-      Instance.$meta                  = $(Classes.meta);
-      Instance.$metaContent           = $(Classes.meta_content);
-      Instance.$position              = $(Classes.position);
-      Instance.$caption               = $(Classes.caption);
-      Instance.$controlBox            = $(Classes.controls);
-      Instance.$controls              = $(Classes.control);
-      Instance.$thumbnails            = $(Classes.thumbnails);
-      Instance.$thumbnailContainer    = $(Classes.thumbnail_container);
-      Instance.$thumbnailItems        = $(Classes.thumbnail_item);
-
-      if (Instance.isMobile) {
-        Instance.paddingVertical   = Instance.$close.outerHeight();
-        Instance.paddingHorizontal = 0;
-
-        Instance.mobilePaddingVertical   = parseInt(Instance.$content.css("paddingTop"), 10)  + parseInt(Instance.$content.css("paddingBottom"), 10);
-        Instance.mobilePaddingHorizontal = parseInt(Instance.$content.css("paddingLeft"), 10) + parseInt(Instance.$content.css("paddingRight"), 10);
-      } else {
-        Instance.paddingVertical   = parseInt(Instance.$lightbox.css("paddingTop"), 10)  + parseInt(Instance.$lightbox.css("paddingBottom"), 10);
-        Instance.paddingHorizontal = parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10);
-
-        Instance.mobilePaddingVertical   = 0;
-        Instance.mobilePaddingHorizontal = 0;
-      }
-
-      Instance.contentHeight     = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
-      Instance.contentWidth      = Instance.$lightbox.outerWidth()  - Instance.paddingHorizontal;
-      Instance.controlHeight     = Instance.$controls.outerHeight();
-
-      // Center
-      centerLightbox();
-
-      // Update gallery
-      if (Instance.gallery.active) {
-        Instance.$lightbox.addClass(RawClasses.has_controls);
-        updateGalleryControls();
-      }
-
-      // Bind events
-      $Window.on(Events.keyDown, onKeyDown);
-      $Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox)
-         .on( [ Events.focus, Events.focusIn ].join(" "), onDocumentFocus);
-
-      if (Instance.gallery.active) {
-        Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
-      }
-
-      if (Instance.thumbnails) {
-        Instance.$lightbox.on(Events.click, Classes.thumbnail_item, jumpGallery);
-      }
-
-      if (Instance.isMobile && Instance.isTouch) {
-        Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
-                  .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
-      }
-
-      Instance.$lightbox.fsTransition({
-        property: "opacity"
-      },
-      function() {
         if (isImage) {
-          loadImage(source);
+          Instance.type = "image";
         } else if (isVideo) {
-          loadVideo(source);
-        } else if (isUrl) {
-          loadURL(source);
-        } else if (isElement) {
-          appendContents(source);
-        } else if (isObject) {
-          appendObject(Instance.$object);
-        }
-      }).addClass(RawClasses.open);
-
-      Instance.$overlay.addClass(RawClasses.open);
-    }
-  }
-
-  /**
-   * @method
-   * @name resize
-   * @description Resizes lightbox.
-   * @example $.lightbox("resize");
-   * @param height [int | false] "Target height or false to auto size"
-   * @param width [int | false] "Target width or false to auto size"
-   */
-
-  /**
-   * @method private
-   * @name resizeLightbox
-   * @description Triggers resize of instance.
-   */
-
-  function resizeLightbox(e) {
-    if (typeof e !== "object") {
-      Instance.targetHeight = arguments[0];
-      Instance.targetWidth  = arguments[1];
-    }
-
-    if (Instance.type === "element") {
-      sizeContent(Instance.$content.find("> :first-child"));
-    } else if (Instance.type === "image") {
-      sizeImage();
-    } else if (Instance.type === "video") {
-      sizeVideo();
-    }
-
-    sizeLightbox();
-  }
-
-  /**
-   * @method
-   * @name close
-   * @description Closes active instance.
-   * @example $.lightbox("close");
-   */
-
-  /**
-   * @method private
-   * @name closeLightbox
-   * @description Closes active instance.
-   * @param e [object] "Event data"
-   */
-
-  function closeLightbox(e) {
-    Functions.killEvent(e);
-
-    if (Instance) {
-      Instance.$lightbox.fsTransition("destroy");
-      Instance.$content.fsTransition("destroy");
-
-      Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
-        property: "opacity"
-      },
-      function(e) {
-        // Clean up
-        if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
-          restoreContents();
+          Instance.type = "video";
+        } else {
+          Instance.type = "element";
         }
 
-        if (Instance.isViewer && Instance.$imageContainer && Instance.$imageContainer.length) {
-          Instance.$imageContainer.fsViewer("destroy");
+        if (isImage || isVideo) {
+          // Check for gallery
+          var id = $el.data(Namespace + "-gallery");
+
+          if (id) {
+            Instance.gallery.active = true;
+            Instance.gallery.id = id;
+            Instance.gallery.$items = $("a[data-lightbox-gallery= " + Instance.gallery.id + "], a[rel= " + Instance.gallery.id + "]"); // backwards compatibility
+            Instance.gallery.index = Instance.gallery.$items.index(Instance.$el);
+            Instance.gallery.total = Instance.gallery.$items.length - 1;
+          }
         }
 
-        Instance.$lightbox.off(Events.namespace);
-        Instance.$container.off(Events.namespace);
-        $Window.off(Events.keyDown);
-        $Body.off(Events.namespace);
-        $Body.off(Events.namespace);
-
-        Instance.$overlay.remove();
-        Instance.$lightbox.remove();
-
-        if (typeof Instance.$el !== "undefined" && Instance.$el && Instance.$el.length) {
-          Instance.$el.focus();
+        // Thumbnails support
+        if (!(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active)) {
+          Instance.thumbnails = false;
         }
 
-        // Reset Instance
-        Instance = null;
+        // Assemble HTML
+        var html = '';
+        if (!Instance.isMobile) {
+          html += '<div class="' + [RawClasses.overlay, Instance.theme, Instance.customClass].join(" ") + '"></div>';
+        }
+        var lightboxClasses = [
+          RawClasses.base,
+          RawClasses.loading,
+          RawClasses.animating,
+          Instance.theme,
+          Instance.customClass
+        ];
 
-        $Window.trigger(Events.close);
-      });
-
-      Instance.$lightbox.removeClass(RawClasses.open);
-      Instance.$overlay.removeClass(RawClasses.open);
-
-      if (Instance.isMobile) {
-        $Locks.removeClass(RawClasses.lock);
-
-        Functions.unlockViewport(Namespace);
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name openLightbox
-   * @description Opens active instance.
-   */
-
-  function openLightbox() {
-    var position = calculatePosition(),
-      durration = Instance.isMobile ? 0 : Instance.duration;
-
-    if (Instance.isMobile) {
-      Functions.lockViewport(Namespace);
-    } else {
-      Instance.$controls.css({
-        marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
-      });
-    }
-
-    if (Instance.$caption.html() === "") {
-      Instance.$caption.hide();
-      Instance.$lightbox.removeClass(RawClasses.has_caption);
-
-      if (!Instance.gallery.active) {
-        Instance.$tools.hide();
-      }
-    } else {
-      Instance.$caption.show();
-      Instance.$lightbox.addClass(RawClasses.has_caption);
-    }
-
-    Instance.$lightbox.fsTransition({
-      property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
-    },
-    function() {
-      Instance.$content.fsTransition({
-        property: "opacity"
-      },
-      function() {
-        Instance.$lightbox.removeClass(RawClasses.animating);
-        Instance.isAnimating = false;
-      });
-
-      Instance.$lightbox.removeClass(RawClasses.loading)
-                .addClass(RawClasses.ready);
-
-      Instance.visible = true;
-
-      // Fire open event
-      $Window.trigger(Events.open);
-
-      // Start preloading
-      if (Instance.gallery.active) {
-        preloadGallery();
-        updateThumbnails();
-        positionThumbnails();
-      }
-
-      // Focus
-      Instance.$lightbox.focus();
-    });
-
-    if (!Instance.isMobile) {
-      Instance.$lightbox.css({
-        height: Instance.contentHeight + Instance.paddingVertical,
-        width:  Instance.contentWidth  + Instance.paddingHorizontal,
-        top:    (!Instance.fixed) ? position.top : 0
-      });
-    }
-
-    // Trigger event in case the content size hasn't changed
-    var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
-
-    if (Instance.isMobile || !contentHasChanged) {
-      Instance.$lightbox.fsTransition("resolve");
-    }
-
-    // Track content size changes
-    Instance.oldContentHeight = Instance.contentHeight;
-    Instance.oldContentWidth  = Instance.contentWidth;
-
-    if (Instance.isMobile) {
-      $Locks.addClass(RawClasses.lock);
-    }
-  }
-
-  /**
-   * @method private
-   * @name sizeLightbox
-   * @description Sizes active instance.
-   */
-
-  function sizeLightbox() {
-    if (Instance.visible && !Instance.isMobile) {
-      var position = calculatePosition();
-
-      Instance.$controls.css({
-        marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
-      });
-
-      Instance.$lightbox.css({
-        height: Instance.contentHeight + Instance.paddingVertical,
-        width:  Instance.contentWidth  + Instance.paddingHorizontal,
-        top:    (!Instance.fixed) ? position.top : 0
-      });
-
-      Instance.oldContentHeight = Instance.contentHeight;
-      Instance.oldContentWidth  = Instance.contentWidth;
-    }
-  }
-
-  /**
-   * @method private
-   * @name centerLightbox
-   * @description Centers instance.
-   */
-
-  function centerLightbox() {
-    var position = calculatePosition();
-
-    Instance.$lightbox.css({
-      top: (!Instance.fixed) ? position.top : 0
-    });
-  }
-
-  /**
-   * @method private
-   * @name calculatePosition
-   * @description Calculates positions.
-   * @return [object] "Object containing top and left positions"
-   */
-
-  function calculatePosition() {
-    if (Instance.isMobile) {
-      return {
-        left: 0,
-        top: 0
-      };
-    }
-
-    var pos = {
-      left: (Formstone.windowWidth - Instance.contentWidth - Instance.paddingHorizontal) / 2,
-      top: (Instance.top <= 0) ? ((Formstone.windowHeight - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
-    };
-
-    if (Instance.fixed !== true) {
-      pos.top += $Window.scrollTop();
-    }
-
-    return pos;
-  }
-
-
-  /**
-   * @method private
-   * @name toggleCaption
-   * @description Toggle caption.
-   */
-
-  function toggleCaption(e) {
-    Functions.killEvent(e);
-
-    if (Instance.captionOpen) {
-      closeCaption();
-    } else {
-      closeThumbnails();
-
-      var height = parseInt( Instance.$metaContent.outerHeight(true) );
-      height += parseInt( Instance.$meta.css("padding-top") );
-      height += parseInt( Instance.$meta.css("padding-bottom") );
-
-      Instance.$meta.css({
-        height: height
-      });
-
-      Instance.$lightbox.addClass(RawClasses.caption_open)
-        .find(Classes.caption_toggle).text(Instance.labels.captionOpen);
-
-      Instance.captionOpen = true;
-    }
-  }
-
-  /**
-   * @method private
-   * @name closeCaption
-   * @description Close caption.
-   */
-
-  function closeCaption() {
-    Instance.$lightbox.removeClass(RawClasses.caption_open)
-      .find(Classes.caption_toggle).text(Instance.labels.captionClosed);
-    Instance.captionOpen = false;
-  }
-
-  /**
-   * @method private
-   * @name formatCaption
-   * @description Formats caption.
-   * @param $target [jQuery object] "Target element"
-   */
-
-  function formatCaption() {
-    var title = this.attr("title"),
-      t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g,'') : false;
-
-    return t ? '<p class="caption">' + t + '</p>' : "";
-  }
-
-  /**
-   * @method private
-   * @name toggleThumbnails
-   * @description Toggle thumbnails.
-   */
-
-  function toggleThumbnails(e) {
-    Functions.killEvent(e);
-
-    if (Instance.thumbnailsOpen) {
-      closeThumbnails();
-    } else {
-      closeCaption();
-
-      Instance.$lightbox.addClass(RawClasses.thumbnails_open)
-        .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsOpen);
-
-      Instance.thumbnailsOpen = true;
-    }
-  }
-
-  /**
-   * @method private
-   * @name closeThumbnails
-   * @description Close thumbnails.
-   */
-
-  function closeThumbnails() {
-    Instance.$lightbox.removeClass(RawClasses.thumbnails_open)
-      .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsClosed);
-    Instance.thumbnailsOpen = false;
-  }
-
-  /**
-   * @method private
-   * @name loadImage
-   * @description Loads source image.
-   * @param source [string] "Source image URL"
-   */
-
-  function loadImage(source) {
-    if (Instance.isViewer) {
-      Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
-      Instance.$image = Instance.$imageContainer.find("img");
-
-      Instance.$image.attr("src", source)
-               .addClass(RawClasses.image);
-
-      Instance.$content.prepend(Instance.$imageContainer);
-
-      sizeImage();
-
-      Instance.$imageContainer.one("loaded.viewer", function() {
-        openLightbox();
-      }).fsViewer({
-        theme: Instance.theme
-      });
-    } else {
-      // Cache current image
-      Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
-      Instance.$image = Instance.$imageContainer.find("img");
-
-      Instance.$image.one(Events.load, function() {
-        var naturalSize = calculateNaturalSize(Instance.$image);
-
-        Instance.naturalHeight = naturalSize.naturalHeight;
-        Instance.naturalWidth  = naturalSize.naturalWidth;
-
-        if (Instance.retina) {
-          Instance.naturalHeight /= 2;
-          Instance.naturalWidth  /= 2;
+        if (Instance.fixed) {
+          lightboxClasses.push(RawClasses.fixed);
+        }
+        if (Instance.isMobile) {
+          lightboxClasses.push(RawClasses.mobile);
+        }
+        if (Instance.isTouch) {
+          lightboxClasses.push(RawClasses.touch);
+        }
+        if (isUrl) {
+          lightboxClasses.push(RawClasses.iframed);
+        }
+        if (isElement || isObject) {
+          lightboxClasses.push(RawClasses.inline);
+        }
+        if (Instance.thumbnails) {
+          lightboxClasses.push(RawClasses.thumbnailed);
         }
 
-        Instance.$content.prepend(Instance.$imageContainer);
+        html += '<div class="' + lightboxClasses.join(" ") + '" role="dialog" aria-label="lightbox" tabindex="-1">';
+        html += '<button type="button" class="' + RawClasses.close + '">' + Instance.labels.close + '</button>';
+        html += '<span class="' + RawClasses.loading_icon + '"></span>';
+        html += '<div class="' + RawClasses.container + '">';
 
-        // Size content to be sure it fits the viewport
-        sizeImage();
+        // Thumbnails
+        if (Instance.gallery.active && Instance.thumbnails) {
+          html += '<div class="' + [RawClasses.thumbnails] + '">';
+          html += '<div class="' + [RawClasses.thumbnail_container] + '">';
 
-        openLightbox();
-      }).on(Events.error, loadError)
-        .attr("src", source)
-        .addClass(RawClasses.image);
+          var $item,
+            thumb;
 
-      // If image has already loaded into cache, trigger load event
-      if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
-        Instance.$image.trigger(Events.load);
-      }
-    }
-  }
+          for (var i = 0, count = Instance.gallery.$items.length; i < count; i++) {
+            $item = Instance.gallery.$items.eq(i);
+            thumb = $item.data("lightbox-thumbnail");
 
-  /**
-   * @method private
-   * @name sizeImage
-   * @description Sizes image to fit in viewport.
-   * @param count [int] "Number of resize attempts"
-   */
+            if (!thumb) {
+              thumb = $item.find("img").attr("src");
+            }
 
-  function sizeImage() {
-    if (Instance.$image) {
-      var count = 0;
+            html += '<button class="' + [RawClasses.thumbnail_item] + '">';
+            html += '<img src="' + thumb + '" alt="">';
+            html += '</button>';
+          }
 
-      Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
-      Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
-
-      Instance.contentHeight = Infinity;
-      Instance.contentWidth = Infinity;
-
-      Instance.imageMarginTop  = 0;
-      Instance.imageMarginLeft = 0;
-
-      while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
-        Instance.imageHeight     = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
-        Instance.imageWidth      = (count === 0) ? Instance.naturalWidth  : Instance.$image.outerWidth();
-        Instance.metaHeight      = (count === 0) ? 0 : Instance.metaHeight;
-        Instance.spacerHeight    = (count === 0) ? 0 : Instance.spacerHeight;
-        Instance.thumbnailHeight = (count === 0) ? 0 : Instance.thumbnailHeight;
-
-        if (count === 0) {
-          Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
-          Instance.ratioVertical   = Instance.imageWidth  / Instance.imageHeight;
-
-          Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
+          html += '</div></div>';
         }
 
-        // Double check min and max
-        if (Instance.imageHeight < Instance.minHeight) {
-          Instance.minHeight = Instance.imageHeight;
+        html += '<div class="' + RawClasses.content + '"></div>';
+
+        if (isImage || isVideo) {
+
+          html += '<div class="' + RawClasses.tools + '">';
+
+          html += '<div class="' + RawClasses.controls + '">';
+          if (Instance.gallery.active) {
+            html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
+            html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+          }
+          if (Instance.isMobile && Instance.isTouch) {
+            html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.caption_toggle].join(" ") + '">' + Instance.labels.captionClosed + '</button>';
+
+            if (Instance.gallery.active && Instance.thumbnails) {
+              html += '<button type="button" class="' + [RawClasses.toggle, RawClasses.thumbnail_toggle].join(" ") + '">' + Instance.labels.thumbnailsClosed + '</button>';
+            }
+          }
+          html += '</div>'; // controls
+
+          html += '<div class="' + RawClasses.meta + '">';
+          html += '<div class="' + RawClasses.meta_content + '">';
+          if (Instance.gallery.active) {
+            html += '<p class="' + RawClasses.position + '"';
+            if (Instance.gallery.total < 1) {
+              html += ' style="display: none;"';
+            }
+            html += '>';
+            html += '<span class="' + RawClasses.position_current + '">' + (Instance.gallery.index + 1) + '</span> ';
+            html += Instance.labels.count;
+            html += ' <span class="' + RawClasses.position_total + '">' + (Instance.gallery.total + 1) + '</span>';
+            html += '</p>';
+          }
+          html += '<div class="' + RawClasses.caption + '">';
+          html += Instance.formatter.call($el, data);
+          html += '</div></div></div>'; // caption, meta_content, meta
+
+          html += '</div>'; // tools
         }
-        if (Instance.imageWidth < Instance.minWidth) {
-          Instance.minWidth = Instance.imageWidth;
-        }
+        html += '</div></div>'; //container, content, lightbox
+
+        // Modify Dom
+        $Body.append(html);
+
+        // Cache jquery objects
+        Instance.$overlay = $(Classes.overlay);
+        Instance.$lightbox = $(Classes.base);
+        Instance.$close = $(Classes.close);
+        Instance.$container = $(Classes.container);
+        Instance.$content = $(Classes.content);
+        Instance.$tools = $(Classes.tools);
+        Instance.$meta = $(Classes.meta);
+        Instance.$metaContent = $(Classes.meta_content);
+        Instance.$position = $(Classes.position);
+        Instance.$caption = $(Classes.caption);
+        Instance.$controlBox = $(Classes.controls);
+        Instance.$controls = $(Classes.control);
+        Instance.$thumbnails = $(Classes.thumbnails);
+        Instance.$thumbnailContainer = $(Classes.thumbnail_container);
+        Instance.$thumbnailItems = $(Classes.thumbnail_item);
 
         if (Instance.isMobile) {
-          if (Instance.isTouch) {
-            Instance.$controlBox.css({
-              width: Formstone.windowWidth
-            });
-            Instance.spacerHeight = Instance.$controls.outerHeight(true);
-          } else {
-            Instance.$tools.css({
-              width: Formstone.windowWidth
-            });
-            Instance.spacerHeight = Instance.$tools.outerHeight(true);
-          }
+          Instance.paddingVertical = Instance.$close.outerHeight();
+          Instance.paddingHorizontal = 0;
 
-          // Content match viewport
-          Instance.contentHeight = Instance.viewportHeight;
-          Instance.contentWidth  = Instance.viewportWidth;
-
-          if (!Instance.isTouch) {
-            Instance.$content.css({
-              height: Instance.contentHeight - Instance.spacerHeight // - 10
-            });
-          }
-
-          Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
-
-          fitImage();
-
-          Instance.imageMarginTop  = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
-          Instance.imageMarginLeft = (Instance.contentWidth  - Instance.targetImageWidth) / 2;
+          Instance.mobilePaddingVertical = parseInt(Instance.$content.css("paddingTop"), 10) + parseInt(Instance.$content.css("paddingBottom"), 10);
+          Instance.mobilePaddingHorizontal = parseInt(Instance.$content.css("paddingLeft"), 10) + parseInt(Instance.$content.css("paddingRight"), 10);
         } else {
-          // Viewport should match window, less margin, padding and meta
-          if (count === 0) {
-            Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
-            Instance.viewportWidth  -= (Instance.margin + Instance.paddingHorizontal);
-          }
-          Instance.viewportHeight -= Instance.metaHeight;
+          Instance.paddingVertical = parseInt(Instance.$lightbox.css("paddingTop"), 10) + parseInt(Instance.$lightbox.css("paddingBottom"), 10);
+          Instance.paddingHorizontal = parseInt(Instance.$lightbox.css("paddingLeft"), 10) + parseInt(Instance.$lightbox.css("paddingRight"), 10);
 
-          if (Instance.thumbnails) {
-            Instance.viewportHeight -= Instance.thumbnailHeight;
-          }
-
-          fitImage();
-
-          Instance.contentHeight = Instance.targetImageHeight;
-          Instance.contentWidth  = Instance.targetImageWidth;
+          Instance.mobilePaddingVertical = 0;
+          Instance.mobilePaddingHorizontal = 0;
         }
 
-        // Modify DOM
-        if (!Instance.isMobile && !Instance.isTouch) {
-          Instance.$meta.css({
-            width: Instance.contentWidth
-          });
+        Instance.contentHeight = Instance.$lightbox.outerHeight() - Instance.paddingVertical;
+        Instance.contentWidth = Instance.$lightbox.outerWidth() - Instance.paddingHorizontal;
+        Instance.controlHeight = Instance.$controls.outerHeight();
+
+        // Center
+        centerLightbox();
+
+        // Update gallery
+        if (Instance.gallery.active) {
+          Instance.$lightbox.addClass(RawClasses.has_controls);
+          updateGalleryControls();
         }
 
-        Instance.$image.css({
-          height        : Instance.targetImageHeight,
-          width         : Instance.targetImageWidth,
-          marginTop     : Instance.imageMarginTop,
-          marginLeft    : Instance.imageMarginLeft
-        });
+        // Bind events
+        $Window.on(Events.keyDown, onKeyDown);
+        $Body.on(Events.click, [Classes.overlay, Classes.close].join(", "), closeLightbox)
+          .on([Events.focus, Events.focusIn].join(" "), onDocumentFocus);
 
-        if (!Instance.isMobile) {
-          Instance.metaHeight = Instance.$meta.outerHeight(true);
-          Instance.contentHeight += Instance.metaHeight;
+        if (Instance.gallery.active) {
+          Instance.$lightbox.on(Events.click, Classes.control, advanceGallery);
         }
 
         if (Instance.thumbnails) {
-          Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
-          Instance.contentHeight += Instance.thumbnailHeight;
+          Instance.$lightbox.on(Events.click, Classes.thumbnail_item, jumpGallery);
         }
 
-        count ++;
-      }
-    }
-  }
+        if (Instance.isMobile && Instance.isTouch) {
+          Instance.$lightbox.on(Events.click, Classes.caption_toggle, toggleCaption)
+            .on(Events.click, Classes.thumbnail_toggle, toggleThumbnails);
+        }
 
-  /**
-   * @method private
-   * @name fitImage
-   * @description Calculates target image size.
-   */
+        Instance.$lightbox.fsTransition({
+            property: "opacity"
+          },
+          function() {
+            if (isImage) {
+              loadImage(source);
+            } else if (isVideo) {
+              loadVideo(source);
+            } else if (isUrl) {
+              loadURL(source);
+            } else if (isElement) {
+              appendContents(source);
+            } else if (isObject) {
+              appendObject(Instance.$object);
+            }
+          }).addClass(RawClasses.open);
 
-  function fitImage() {
-    var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.spacerHeight,
-      width  = (!Instance.isMobile) ? Instance.viewportWidth  : Instance.contentWidth;
-
-    if (Instance.isWide) {
-      //WIDE
-      Instance.targetImageWidth  = width;
-      Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
-
-      if (Instance.targetImageHeight > height) {
-        Instance.targetImageHeight = height;
-        Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
-      }
-    } else {
-      //TALL
-      Instance.targetImageHeight = height;
-      Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
-
-      if (Instance.targetImageWidth > width) {
-        Instance.targetImageWidth  = width;
-        Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+        Instance.$overlay.addClass(RawClasses.open);
       }
     }
 
-    // MAX
-    if (Instance.targetImageWidth > Instance.imageWidth || Instance.targetImageHeight > Instance.imageHeight) {
-      Instance.targetImageHeight = Instance.imageHeight;
-      Instance.targetImageWidth  = Instance.imageWidth;
+    /**
+     * @method
+     * @name resize
+     * @description Resizes lightbox.
+     * @example $.lightbox("resize");
+     * @param height [int | false] "Target height or false to auto size"
+     * @param width [int | false] "Target width or false to auto size"
+     */
+
+    /**
+     * @method private
+     * @name resizeLightbox
+     * @description Triggers resize of instance.
+     */
+
+    function resizeLightbox(e) {
+      if (typeof e !== "object") {
+        Instance.targetHeight = arguments[0];
+        Instance.targetWidth = arguments[1];
+      }
+
+      if (Instance.type === "element") {
+        sizeContent(Instance.$content.find("> :first-child"));
+      } else if (Instance.type === "image") {
+        sizeImage();
+      } else if (Instance.type === "video") {
+        sizeVideo();
+      }
+
+      sizeLightbox();
     }
 
-    // MIN
-    if (Instance.targetImageWidth < Instance.minWidth || Instance.targetImageHeight < Instance.minHeight) {
-      if (Instance.targetImageWidth < Instance.minWidth) {
-        Instance.targetImageWidth  = Instance.minWidth;
-        Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+    /**
+     * @method
+     * @name close
+     * @description Closes active instance.
+     * @example $.lightbox("close");
+     */
+
+    /**
+     * @method private
+     * @name closeLightbox
+     * @description Closes active instance.
+     * @param e [object] "Event data"
+     */
+
+    function closeLightbox(e) {
+      Functions.killEvent(e);
+
+      if (Instance) {
+        Instance.$lightbox.fsTransition("destroy");
+        Instance.$content.fsTransition("destroy");
+
+        Instance.$lightbox.addClass(RawClasses.animating).fsTransition({
+            property: "opacity"
+          },
+          function(e) {
+            // Clean up
+            if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
+              restoreContents();
+            }
+
+            if (Instance.isViewer && Instance.$imageContainer && Instance.$imageContainer.length) {
+              Instance.$imageContainer.fsViewer("destroy");
+            }
+
+            Instance.$lightbox.off(Events.namespace);
+            Instance.$container.off(Events.namespace);
+            $Window.off(Events.keyDown);
+            $Body.off(Events.namespace);
+            $Body.off(Events.namespace);
+
+            Instance.$overlay.remove();
+            Instance.$lightbox.remove();
+
+            if (typeof Instance.$el !== "undefined" && Instance.$el && Instance.$el.length) {
+              Instance.$el.focus();
+            }
+
+            // Reset Instance
+            Instance = null;
+
+            $Window.trigger(Events.close);
+          });
+
+        Instance.$lightbox.removeClass(RawClasses.open);
+        Instance.$overlay.removeClass(RawClasses.open);
+
+        if (Instance.isMobile) {
+          $Locks.removeClass(RawClasses.lock);
+
+          Functions.unlockViewport(Namespace);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name openLightbox
+     * @description Opens active instance.
+     */
+
+    function openLightbox() {
+      var position = calculatePosition(),
+        durration = Instance.isMobile ? 0 : Instance.duration;
+
+      if (Instance.isMobile) {
+        Functions.lockViewport(Namespace);
       } else {
-        Instance.targetImageHeight = Instance.minHeight;
-        Instance.targetImageWidth  = Instance.targetImageHeight * Instance.ratioVertical;
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name loadVideo
-   * @description Loads source video.
-   * @param source [string] "Source video URL"
-   */
-
-  function formatYouTube(parts) {
-    return "//www.youtube.com/embed/" + parts[1];
-  }
-
-  function formatVimeo(parts) {
-    return "//player.vimeo.com/video/" + parts[3];
-  }
-
-  function loadVideo(source) {
-    var parts,
-      url = checkVideo(source),
-      queryString = source.split("?");
-
-    if (url) {
-      // if we have a query string
-      if (queryString.length >= 2) {
-        url += "?" + queryString.slice(1)[0].trim();
-      }
-
-      Instance.$videoWrapper = $('<div class="' + RawClasses.video_wrapper + '"></div>');
-      Instance.$video = $('<iframe class="' + RawClasses.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
-
-      Instance.$video.attr("src", url)
-             .addClass(RawClasses.video)
-             .prependTo(Instance.$videoWrapper);
-
-      Instance.$content.prepend(Instance.$videoWrapper);
-
-      sizeVideo();
-      openLightbox();
-    } else {
-      loadError();
-    }
-  }
-
-  /**
-   * @method private
-   * @name sizeVideo
-   * @description Sizes video to fit in viewport.
-   */
-
-  function sizeVideo() {
-    // Set initial vars
-    Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
-    Instance.windowWidth  = Instance.viewportWidth  = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
-    Instance.videoMarginTop = 0;
-    Instance.videoMarginLeft = 0;
-
-    if (Instance.isMobile) {
-      if (Instance.isTouch) {
-        Instance.$controlBox.css({
-          width: Formstone.windowWidth
+        Instance.$controls.css({
+          marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
         });
-        Instance.spacerHeight = Instance.$controls.outerHeight(true) + 10;
+      }
+
+      if (Instance.$caption.html() === "") {
+        Instance.$caption.hide();
+        Instance.$lightbox.removeClass(RawClasses.has_caption);
+
+        if (!Instance.gallery.active) {
+          Instance.$tools.hide();
+        }
       } else {
-        Instance.$tools.css({
-          width: Formstone.windowWidth
+        Instance.$caption.show();
+        Instance.$lightbox.addClass(RawClasses.has_caption);
+      }
+
+      Instance.$lightbox.fsTransition({
+          property: (Instance.contentHeight !== Instance.oldContentHeight) ? "height" : "width"
+        },
+        function() {
+          Instance.$content.fsTransition({
+              property: "opacity"
+            },
+            function() {
+              Instance.$lightbox.removeClass(RawClasses.animating);
+              Instance.isAnimating = false;
+            });
+
+          Instance.$lightbox.removeClass(RawClasses.loading)
+            .addClass(RawClasses.ready);
+
+          Instance.visible = true;
+
+          // Fire open event
+          $Window.trigger(Events.open);
+
+          // Start preloading
+          if (Instance.gallery.active) {
+            preloadGallery();
+            updateThumbnails();
+            positionThumbnails();
+          }
+
+          // Focus
+          Instance.$lightbox.focus();
         });
-        Instance.spacerHeight = Instance.$tools.outerHeight(true);
-        Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+
+      if (!Instance.isMobile) {
+        Instance.$lightbox.css({
+          height: Instance.contentHeight + Instance.paddingVertical,
+          width: Instance.contentWidth + Instance.paddingHorizontal,
+          top: (!Instance.fixed) ? position.top : 0
+        });
       }
 
-      Instance.viewportHeight -= Instance.spacerHeight;
+      // Trigger event in case the content size hasn't changed
+      var contentHasChanged = (Instance.oldContentHeight !== Instance.contentHeight || Instance.oldContentWidth !== Instance.contentWidth);
 
-      Instance.targetVideoWidth  = Instance.viewportWidth;
-      Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
-
-      if (Instance.targetVideoHeight > Instance.viewportHeight) {
-        Instance.targetVideoHeight = Instance.viewportHeight;
-        Instance.targetVideoWidth  = Instance.targetVideoHeight / Instance.videoRatio;
+      if (Instance.isMobile || !contentHasChanged) {
+        Instance.$lightbox.fsTransition("resolve");
       }
 
-      Instance.videoMarginTop  = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
-      Instance.videoMarginLeft = (Instance.viewportWidth  - Instance.targetVideoWidth)  / 2;
-    } else {
-      Instance.viewportHeight = Instance.windowHeight - Instance.margin;
-      Instance.viewportWidth  = Instance.windowWidth  - Instance.margin;
+      // Track content size changes
+      Instance.oldContentHeight = Instance.contentHeight;
+      Instance.oldContentWidth = Instance.contentWidth;
 
-      Instance.targetVideoWidth  = (Instance.videoWidth > Instance.viewportWidth) ? Instance.viewportWidth : Instance.videoWidth;
-      if (Instance.targetVideoWidth < Instance.minWidth) {
-        Instance.targetVideoWidth = Instance.minWidth;
+      if (Instance.isMobile) {
+        $Locks.addClass(RawClasses.lock);
       }
-      Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
-
-      Instance.contentHeight = Instance.targetVideoHeight;
-      Instance.contentWidth  = Instance.targetVideoWidth;
     }
 
-    // Update dom
-    if (!Instance.isMobile && !Instance.isTouch) {
-      Instance.$meta.css({
-        width: Instance.contentWidth
+    /**
+     * @method private
+     * @name sizeLightbox
+     * @description Sizes active instance.
+     */
+
+    function sizeLightbox() {
+      if (Instance.visible && !Instance.isMobile) {
+        var position = calculatePosition();
+
+        Instance.$controls.css({
+          marginTop: ((Instance.contentHeight - Instance.controlHeight - Instance.metaHeight + Instance.thumbnailHeight) / 2)
+        });
+
+        Instance.$lightbox.css({
+          height: Instance.contentHeight + Instance.paddingVertical,
+          width: Instance.contentWidth + Instance.paddingHorizontal,
+          top: (!Instance.fixed) ? position.top : 0
+        });
+
+        Instance.oldContentHeight = Instance.contentHeight;
+        Instance.oldContentWidth = Instance.contentWidth;
+      }
+    }
+
+    /**
+     * @method private
+     * @name centerLightbox
+     * @description Centers instance.
+     */
+
+    function centerLightbox() {
+      var position = calculatePosition();
+
+      Instance.$lightbox.css({
+        top: (!Instance.fixed) ? position.top : 0
       });
     }
 
-    Instance.$videoWrapper.css({
-      height:     Instance.targetVideoHeight,
-      width:      Instance.targetVideoWidth,
-      marginTop:  Instance.videoMarginTop,
-      marginLeft: Instance.videoMarginLeft
-    });
-
-    if (!Instance.isMobile) {
-      Instance.metaHeight = Instance.$meta.outerHeight(true);
-      Instance.contentHeight += Instance.metaHeight;
-    }
-
-    if (Instance.thumbnails) {
-      Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
-      Instance.contentHeight += Instance.thumbnailHeight;
-    }
-  }
-
-  /**
-   * @method private
-   * @name preloadGallery
-   * @description Preloads previous and next images in gallery for faster rendering.
-   * @param e [object] "Event Data"
-   */
-
-  function preloadGallery(e) {
-    var source = '';
-
-    if (Instance.gallery.index > 0) {
-      source = Instance.gallery.$items.eq(Instance.gallery.index - 1).attr("href");
-      if (!checkVideo(source)) {
-        $('<img src="' + source + '">');
-      }
-    }
-    if (Instance.gallery.index < Instance.gallery.total) {
-      source = Instance.gallery.$items.eq(Instance.gallery.index + 1).attr("href");
-      if (!checkVideo(source)) {
-        $('<img src="' + source + '">');
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name advanceGallery
-   * @description Advances gallery base on direction.
-   * @param e [object] "Event Data"
-   */
-
-  function advanceGallery(e) {
-    Functions.killEvent(e);
-
-    var $control = $(e.currentTarget);
-
-    if (!Instance.isAnimating && !$control.hasClass(RawClasses.control_disabled)) {
-      Instance.isAnimating = true;
-
-      closeCaption();
-
-      Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
-      if (Instance.gallery.index > Instance.gallery.total) {
-        Instance.gallery.index = (Instance.infinite) ? 0 : Instance.gallery.total;
-      }
-      if (Instance.gallery.index < 0) {
-        Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
-      }
-
-      updateThumbnails();
-
-      Instance.$lightbox.addClass(RawClasses.animating);
-
-      Instance.$content.fsTransition({
-        property: "opacity"
-      }, cleanGallery);
-
-      Instance.$lightbox.addClass(RawClasses.loading);
-    }
-  }
-
-  /**
-   * @method private
-   * @name jumpGallery
-   * @description Jumps gallery base on thumbnail click.
-   * @param e [object] "Event Data"
-   */
-
-  function jumpGallery(e) {
-    Functions.killEvent(e);
-
-    var $thumbnail = $(e.currentTarget);
-
-    if (!Instance.isAnimating && !$thumbnail.hasClass(RawClasses.active)) {
-      Instance.isAnimating = true;
-
-      closeCaption();
-
-      Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
-
-      updateThumbnails();
-
-      Instance.$lightbox.addClass(RawClasses.animating);
-
-      Instance.$content.fsTransition({
-        property: "opacity"
-      }, cleanGallery);
-
-      Instance.$lightbox.addClass(RawClasses.loading);
-    }
-  }
-
-  /**
-   * @method private
-   * @name jumpGallery
-   * @description
-   */
-
-  function updateThumbnails() {
-    // Thumbnails
-    if (Instance.thumbnails) {
-      var $thumb = Instance.$thumbnailItems.eq(Instance.gallery.index);
-
-      Instance.$thumbnailItems.removeClass(RawClasses.active);
-      $thumb.addClass(RawClasses.active);
-    }
-  }
-
-  /**
-   * @method private
-   * @name jumpGallery
-   * @description
-   */
-
-  function positionThumbnails() {
-    // Thumbnails
-    if (Instance.thumbnails) {
-      var $thumb     = Instance.$thumbnailItems.eq(Instance.gallery.index),
-        scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
-
-      Instance.$thumbnailContainer.stop().animate({
-        scrollLeft: scrollLeft
-      }, 200, "linear");
-    }
-  }
-
-  /**
-   * @method private
-   * @name cleanGallery
-   * @description Cleans gallery.
-   */
-
-  function cleanGallery() {
-    if (typeof Instance.$imageContainer !== 'undefined') {
-      if (Instance.isViewer) {
-        Instance.$imageContainer.fsViewer("destroy");
-      }
-      Instance.$imageContainer.remove();
-    }
-    if (typeof Instance.$videoWrapper !== 'undefined') {
-      Instance.$videoWrapper.remove();
-    }
-    Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
-
-    Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
-    Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
-
-    var source = Instance.$el.attr("href"),
-      isVideo = checkVideo(source);
-
-    if (isVideo) {
-      Instance.type = "video";
-
-      loadVideo(source);
-    } else {
-      Instance.type = "image";
-
-      loadImage(source);
-    }
-
-    updateGalleryControls();
-  }
-
-  /**
-   * @method private
-   * @name updateGalleryControls
-   * @description Updates gallery control states.
-   */
-
-  function updateGalleryControls() {
-    Instance.$controls.removeClass(RawClasses.control_disabled);
-
-    if (!Instance.infinite) {
-      if (Instance.gallery.index === 0) {
-        Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
-      }
-      if (Instance.gallery.index === Instance.gallery.total) {
-        Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name onKeyDown
-   * @description Handles keypress in gallery.
-   * @param e [object] "Event data"
-   */
-
-  function onKeyDown(e) {
-    if (Instance.gallery.active && (e.keyCode === 37 || e.keyCode === 39)) {
-      Functions.killEvent(e);
-
-      Instance.$controls.filter((e.keyCode === 37) ? Classes.control_previous : Classes.control_next).trigger(Events.click);
-    } else if (e.keyCode === 27) {
-      Instance.$close.trigger(Events.click);
-    }
-  }
-
-  /**
-   * @method private
-   * @name appendContents
-   * @description Moves target inline element.
-   * @param id [string] "Target element id"
-   */
-
-  function appendContents(id) {
-    Instance.$inlineTarget   = $(id);
-    Instance.$inlineContents = Instance.$inlineTarget.children().detach();
-
-    appendObject(Instance.$inlineContents);
-  }
-
-  /**
-   * @method private
-   * @name restoreContents
-   * @description Restores inline element.
-   */
-
-  function restoreContents() {
-    Instance.$inlineTarget.append( Instance.$inlineContents.detach() );
-  }
-
-  /**
-   * @method private
-   * @name loadURL
-   * @description Load URL into iframe.
-   * @param source [string] "Target URL"
-   */
-
-  function loadURL(source) {
-    source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
-    var $iframe = $('<iframe class="' + RawClasses.iframe + '" src="' + source + '"></iframe>');
-    appendObject($iframe);
-  }
-
-  /**
-   * @method private
-   * @name appendObject
-   * @description Appends and sizes object.
-   * @param $object [jQuery Object] "Object to append"
-   */
-
-  function appendObject($object) {
-    Instance.$content.append($object);
-    sizeContent($object);
-    openLightbox();
-  }
-
-  /**
-   * @method private
-   * @name sizeContent
-   * @description Sizes jQuery object to fir in viewport.
-   * @param $object [jQuery Object] "Object to size"
-   */
-
-  function sizeContent($object) {
-    Instance.windowHeight    = Formstone.windowHeight - Instance.mobilePaddingVertical   - Instance.paddingVertical;
-    Instance.windowWidth    = Formstone.windowWidth  - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
-
-    Instance.objectHeight    = $object.outerHeight(true);
-    Instance.objectWidth    = $object.outerWidth(true);
-    Instance.targetHeight    = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
-    Instance.targetWidth    = Instance.targetWidth  || (Instance.$el ? Instance.$el.data(Namespace + "-width")  : null);
-    Instance.maxHeight      = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
-    Instance.isIframe      = $object.is("iframe");
-    Instance.objectMarginTop  = 0;
-    Instance.objectMarginLeft = 0;
-
-    if (!Instance.isMobile) {
-      Instance.windowHeight -= Instance.margin;
-      Instance.windowWidth  -= Instance.margin;
-    }
-
-    Instance.contentHeight = (Instance.targetHeight) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
-    Instance.contentWidth  = (Instance.targetWidth)  ? Instance.targetWidth  : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth  : Instance.objectWidth;
-
-    if ((Instance.isIframe || Instance.isObject) && Instance.isMobile) {
-      Instance.contentHeight = Instance.windowHeight;
-      Instance.contentWidth  = Instance.windowWidth;
-    } else if (Instance.isObject) {
-      Instance.contentHeight = (Instance.contentHeight > Instance.windowHeight) ? Instance.windowHeight : Instance.contentHeight;
-      Instance.contentWidth  = (Instance.contentWidth  > Instance.windowWidth)  ? Instance.windowWidth  : Instance.contentWidth;
-    }
-
-    if (!Instance.isMobile) {
-      if (Instance.contentHeight > Instance.maxHeight) {
-        Instance.contentHeight = Instance.maxHeight;
-      }
-      if (Instance.contentWidth > Instance.maxWidth) {
-        Instance.contentWidth = Instance.maxWidth;
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name loadError
-   * @description Error when resource fails to load.
-   */
-
-  function loadError() {
-    var $error = $('<div class="' + RawClasses.error + '"><p>Error Loading Resource</p></div>');
-
-    // Clean up
-    Instance.type = "element";
-    Instance.$tools.remove();
-
-    Instance.$image.off(Events.namespace);
-
-    appendObject($error);
-
-    $Window.trigger(Events.error);
-  }
-
-  /**
-   * @method private
-   * @name calculateNaturalSize
-   * @description Determines natural size of target image.
-   * @param $img [jQuery object] "Source image object"
-   * @return [object | boolean] "Object containing natural height and width values or false"
-   */
-
-  function calculateNaturalSize($img) {
-    var node = $img[0],
-      img = new Image();
-
-    if (typeof node.naturalHeight !== "undefined") {
-      return {
-        naturalHeight: node.naturalHeight,
-        naturalWidth:  node.naturalWidth
-      };
-    } else {
-      if (node.tagName.toLowerCase() === 'img') {
-        img.src = node.src;
+    /**
+     * @method private
+     * @name calculatePosition
+     * @description Calculates positions.
+     * @return [object] "Object containing top and left positions"
+     */
+
+    function calculatePosition() {
+      if (Instance.isMobile) {
         return {
-          naturalHeight: img.height,
-          naturalWidth:  img.width
+          left: 0,
+          top: 0
         };
       }
+
+      var pos = {
+        left: (Formstone.windowWidth - Instance.contentWidth - Instance.paddingHorizontal) / 2,
+        top: (Instance.top <= 0) ? ((Formstone.windowHeight - Instance.contentHeight - Instance.paddingVertical) / 2) : Instance.top
+      };
+
+      if (Instance.fixed !== true) {
+        pos.top += $Window.scrollTop();
+      }
+
+      return pos;
     }
 
-    return false;
-  }
 
-  /**
-   * @method private
-   * @name checkVideo
-   * @description Determines if url is a YouTube or Vimeo url.
-   * @param source [string] "Source url"
-   * @return [boolean] "True if YouTube or Vimeo url"
-   */
+    /**
+     * @method private
+     * @name toggleCaption
+     * @description Toggle caption.
+     */
 
-  function checkVideo(source) {
-    var formats = Instance.videoFormatter,
-      parts;
+    function toggleCaption(e) {
+      Functions.killEvent(e);
 
-    for (var i in formats) {
-      if (formats.hasOwnProperty(i)) {
-        parts = source.match( formats[i].pattern );
+      if (Instance.captionOpen) {
+        closeCaption();
+      } else {
+        closeThumbnails();
 
-        if (parts !== null) {
-          return formats[i].format.call(Instance, parts);
+        var height = parseInt(Instance.$metaContent.outerHeight(true));
+        height += parseInt(Instance.$meta.css("padding-top"));
+        height += parseInt(Instance.$meta.css("padding-bottom"));
+
+        Instance.$meta.css({
+          height: height
+        });
+
+        Instance.$lightbox.addClass(RawClasses.caption_open)
+          .find(Classes.caption_toggle).text(Instance.labels.captionOpen);
+
+        Instance.captionOpen = true;
+      }
+    }
+
+    /**
+     * @method private
+     * @name closeCaption
+     * @description Close caption.
+     */
+
+    function closeCaption() {
+      Instance.$lightbox.removeClass(RawClasses.caption_open)
+        .find(Classes.caption_toggle).text(Instance.labels.captionClosed);
+      Instance.captionOpen = false;
+    }
+
+    /**
+     * @method private
+     * @name formatCaption
+     * @description Formats caption.
+     * @param $target [jQuery object] "Target element"
+     */
+
+    function formatCaption() {
+      var title = this.attr("title"),
+        t = (title !== undefined && title) ? title.replace(/^\s+|\s+$/g, '') : false;
+
+      return t ? '<p class="caption">' + t + '</p>' : "";
+    }
+
+    /**
+     * @method private
+     * @name toggleThumbnails
+     * @description Toggle thumbnails.
+     */
+
+    function toggleThumbnails(e) {
+      Functions.killEvent(e);
+
+      if (Instance.thumbnailsOpen) {
+        closeThumbnails();
+      } else {
+        closeCaption();
+
+        Instance.$lightbox.addClass(RawClasses.thumbnails_open)
+          .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsOpen);
+
+        Instance.thumbnailsOpen = true;
+      }
+    }
+
+    /**
+     * @method private
+     * @name closeThumbnails
+     * @description Close thumbnails.
+     */
+
+    function closeThumbnails() {
+      Instance.$lightbox.removeClass(RawClasses.thumbnails_open)
+        .find(Classes.thumbnail_toggle).text(Instance.labels.thumbnailsClosed);
+      Instance.thumbnailsOpen = false;
+    }
+
+    /**
+     * @method private
+     * @name loadImage
+     * @description Loads source image.
+     * @param source [string] "Source image URL"
+     */
+
+    function loadImage(source) {
+      if (Instance.isViewer) {
+        Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+        Instance.$image = Instance.$imageContainer.find("img");
+
+        Instance.$image.attr("src", source)
+          .addClass(RawClasses.image);
+
+        Instance.$content.prepend(Instance.$imageContainer);
+
+        sizeImage();
+
+        Instance.$imageContainer.one("loaded.viewer", function() {
+          openLightbox();
+        }).fsViewer({
+          theme: Instance.theme
+        });
+      } else {
+        // Cache current image
+        Instance.$imageContainer = $('<div class="' + RawClasses.image_container + '"><img></div>');
+        Instance.$image = Instance.$imageContainer.find("img");
+
+        Instance.$image.one(Events.load, function() {
+            var naturalSize = calculateNaturalSize(Instance.$image);
+
+            Instance.naturalHeight = naturalSize.naturalHeight;
+            Instance.naturalWidth = naturalSize.naturalWidth;
+
+            if (Instance.retina) {
+              Instance.naturalHeight /= 2;
+              Instance.naturalWidth /= 2;
+            }
+
+            Instance.$content.prepend(Instance.$imageContainer);
+
+            // Size content to be sure it fits the viewport
+            sizeImage();
+
+            openLightbox();
+          }).on(Events.error, loadError)
+          .attr("src", source)
+          .addClass(RawClasses.image);
+
+        // If image has already loaded into cache, trigger load event
+        if (Instance.$image[0].complete || Instance.$image[0].readyState === 4) {
+          Instance.$image.trigger(Events.load);
         }
       }
     }
 
-    return false;
-  }
+    /**
+     * @method private
+     * @name sizeImage
+     * @description Sizes image to fit in viewport.
+     * @param count [int] "Number of resize attempts"
+     */
 
-  /**
-   * @method private
-   * @name onDocumentFocus
-   * @description Hanle document focus
-   * @param e [object] "Event data"
-   */
+    function sizeImage() {
+      if (Instance.$image) {
+        var count = 0;
 
-  function onDocumentFocus(e) {
-    var target = e.target;
+        Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical - Instance.paddingVertical;
+        Instance.windowWidth = Instance.viewportWidth = Formstone.windowWidth - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
 
-    if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$lightbox[0] && target !== Instance.$overlay[0]) {
+        Instance.contentHeight = Infinity;
+        Instance.contentWidth = Infinity;
+
+        Instance.imageMarginTop = 0;
+        Instance.imageMarginLeft = 0;
+
+        while (Instance.contentHeight > Instance.viewportHeight && count < 2) {
+          Instance.imageHeight = (count === 0) ? Instance.naturalHeight : Instance.$image.outerHeight();
+          Instance.imageWidth = (count === 0) ? Instance.naturalWidth : Instance.$image.outerWidth();
+          Instance.metaHeight = (count === 0) ? 0 : Instance.metaHeight;
+          Instance.spacerHeight = (count === 0) ? 0 : Instance.spacerHeight;
+          Instance.thumbnailHeight = (count === 0) ? 0 : Instance.thumbnailHeight;
+
+          if (count === 0) {
+            Instance.ratioHorizontal = Instance.imageHeight / Instance.imageWidth;
+            Instance.ratioVertical = Instance.imageWidth / Instance.imageHeight;
+
+            Instance.isWide = (Instance.imageWidth > Instance.imageHeight);
+          }
+
+          // Double check min and max
+          if (Instance.imageHeight < Instance.minHeight) {
+            Instance.minHeight = Instance.imageHeight;
+          }
+          if (Instance.imageWidth < Instance.minWidth) {
+            Instance.minWidth = Instance.imageWidth;
+          }
+
+          if (Instance.isMobile) {
+            if (Instance.isTouch) {
+              Instance.$controlBox.css({
+                width: Formstone.windowWidth
+              });
+              Instance.spacerHeight = Instance.$controls.outerHeight(true);
+            } else {
+              Instance.$tools.css({
+                width: Formstone.windowWidth
+              });
+              Instance.spacerHeight = Instance.$tools.outerHeight(true);
+            }
+
+            // Content match viewport
+            Instance.contentHeight = Instance.viewportHeight;
+            Instance.contentWidth = Instance.viewportWidth;
+
+            if (!Instance.isTouch) {
+              Instance.$content.css({
+                height: Instance.contentHeight - Instance.spacerHeight // - 10
+              });
+            }
+
+            Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+
+            fitImage();
+
+            Instance.imageMarginTop = (Instance.contentHeight - Instance.targetImageHeight - Instance.spacerHeight) / 2;
+            Instance.imageMarginLeft = (Instance.contentWidth - Instance.targetImageWidth) / 2;
+          } else {
+            // Viewport should match window, less margin, padding and meta
+            if (count === 0) {
+              Instance.viewportHeight -= (Instance.margin + Instance.paddingVertical);
+              Instance.viewportWidth -= (Instance.margin + Instance.paddingHorizontal);
+            }
+            Instance.viewportHeight -= Instance.metaHeight;
+
+            if (Instance.thumbnails) {
+              Instance.viewportHeight -= Instance.thumbnailHeight;
+            }
+
+            fitImage();
+
+            Instance.contentHeight = Instance.targetImageHeight;
+            Instance.contentWidth = Instance.targetImageWidth;
+          }
+
+          // Modify DOM
+          if (!Instance.isMobile && !Instance.isTouch) {
+            Instance.$meta.css({
+              width: Instance.contentWidth
+            });
+          }
+
+          Instance.$image.css({
+            height: Instance.targetImageHeight,
+            width: Instance.targetImageWidth,
+            marginTop: Instance.imageMarginTop,
+            marginLeft: Instance.imageMarginLeft
+          });
+
+          if (!Instance.isMobile) {
+            Instance.metaHeight = Instance.$meta.outerHeight(true);
+            Instance.contentHeight += Instance.metaHeight;
+          }
+
+          if (Instance.thumbnails) {
+            Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+            Instance.contentHeight += Instance.thumbnailHeight;
+          }
+
+          count++;
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name fitImage
+     * @description Calculates target image size.
+     */
+
+    function fitImage() {
+      var height = (!Instance.isMobile) ? Instance.viewportHeight : Instance.contentHeight - Instance.spacerHeight,
+        width = (!Instance.isMobile) ? Instance.viewportWidth : Instance.contentWidth;
+
+      if (Instance.isWide) {
+        //WIDE
+        Instance.targetImageWidth = width;
+        Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+
+        if (Instance.targetImageHeight > height) {
+          Instance.targetImageHeight = height;
+          Instance.targetImageWidth = Instance.targetImageHeight * Instance.ratioVertical;
+        }
+      } else {
+        //TALL
+        Instance.targetImageHeight = height;
+        Instance.targetImageWidth = Instance.targetImageHeight * Instance.ratioVertical;
+
+        if (Instance.targetImageWidth > width) {
+          Instance.targetImageWidth = width;
+          Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+        }
+      }
+
+      // MAX
+      if (Instance.targetImageWidth > Instance.imageWidth || Instance.targetImageHeight > Instance.imageHeight) {
+        Instance.targetImageHeight = Instance.imageHeight;
+        Instance.targetImageWidth = Instance.imageWidth;
+      }
+
+      // MIN
+      if (Instance.targetImageWidth < Instance.minWidth || Instance.targetImageHeight < Instance.minHeight) {
+        if (Instance.targetImageWidth < Instance.minWidth) {
+          Instance.targetImageWidth = Instance.minWidth;
+          Instance.targetImageHeight = Instance.targetImageWidth * Instance.ratioHorizontal;
+        } else {
+          Instance.targetImageHeight = Instance.minHeight;
+          Instance.targetImageWidth = Instance.targetImageHeight * Instance.ratioVertical;
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadVideo
+     * @description Loads source video.
+     * @param source [string] "Source video URL"
+     */
+
+    function formatYouTube(parts) {
+      return "//www.youtube.com/embed/" + parts[1];
+    }
+
+    function formatVimeo(parts) {
+      return "//player.vimeo.com/video/" + parts[3];
+    }
+
+    function loadVideo(source) {
+      var parts,
+        url = checkVideo(source),
+        queryString = source.split("?");
+
+      if (url) {
+        // if we have a query string
+        if (queryString.length >= 2) {
+          url += "?" + queryString.slice(1)[0].trim();
+        }
+
+        Instance.$videoWrapper = $('<div class="' + RawClasses.video_wrapper + '"></div>');
+        Instance.$video = $('<iframe class="' + RawClasses.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
+
+        Instance.$video.attr("src", url)
+          .addClass(RawClasses.video)
+          .prependTo(Instance.$videoWrapper);
+
+        Instance.$content.prepend(Instance.$videoWrapper);
+
+        sizeVideo();
+        openLightbox();
+      } else {
+        loadError();
+      }
+    }
+
+    /**
+     * @method private
+     * @name sizeVideo
+     * @description Sizes video to fit in viewport.
+     */
+
+    function sizeVideo() {
+      // Set initial vars
+      Instance.windowHeight = Instance.viewportHeight = Formstone.windowHeight - Instance.mobilePaddingVertical - Instance.paddingVertical;
+      Instance.windowWidth = Instance.viewportWidth = Formstone.windowWidth - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+      Instance.videoMarginTop = 0;
+      Instance.videoMarginLeft = 0;
+
+      if (Instance.isMobile) {
+        if (Instance.isTouch) {
+          Instance.$controlBox.css({
+            width: Formstone.windowWidth
+          });
+          Instance.spacerHeight = Instance.$controls.outerHeight(true) + 10;
+        } else {
+          Instance.$tools.css({
+            width: Formstone.windowWidth
+          });
+          Instance.spacerHeight = Instance.$tools.outerHeight(true);
+          Instance.spacerHeight += Instance.$thumbnails.outerHeight(true) + 10;
+        }
+
+        Instance.viewportHeight -= Instance.spacerHeight;
+
+        Instance.targetVideoWidth = Instance.viewportWidth;
+        Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+        if (Instance.targetVideoHeight > Instance.viewportHeight) {
+          Instance.targetVideoHeight = Instance.viewportHeight;
+          Instance.targetVideoWidth = Instance.targetVideoHeight / Instance.videoRatio;
+        }
+
+        Instance.videoMarginTop = (Instance.viewportHeight - Instance.targetVideoHeight) / 2;
+        Instance.videoMarginLeft = (Instance.viewportWidth - Instance.targetVideoWidth) / 2;
+      } else {
+        Instance.viewportHeight = Instance.windowHeight - Instance.margin;
+        Instance.viewportWidth = Instance.windowWidth - Instance.margin;
+
+        Instance.targetVideoWidth = (Instance.videoWidth > Instance.viewportWidth) ? Instance.viewportWidth : Instance.videoWidth;
+        if (Instance.targetVideoWidth < Instance.minWidth) {
+          Instance.targetVideoWidth = Instance.minWidth;
+        }
+        Instance.targetVideoHeight = Instance.targetVideoWidth * Instance.videoRatio;
+
+        Instance.contentHeight = Instance.targetVideoHeight;
+        Instance.contentWidth = Instance.targetVideoWidth;
+      }
+
+      // Update dom
+      if (!Instance.isMobile && !Instance.isTouch) {
+        Instance.$meta.css({
+          width: Instance.contentWidth
+        });
+      }
+
+      Instance.$videoWrapper.css({
+        height: Instance.targetVideoHeight,
+        width: Instance.targetVideoWidth,
+        marginTop: Instance.videoMarginTop,
+        marginLeft: Instance.videoMarginLeft
+      });
+
+      if (!Instance.isMobile) {
+        Instance.metaHeight = Instance.$meta.outerHeight(true);
+        Instance.contentHeight += Instance.metaHeight;
+      }
+
+      if (Instance.thumbnails) {
+        Instance.thumbnailHeight = Instance.$thumbnails.outerHeight(true);
+        Instance.contentHeight += Instance.thumbnailHeight;
+      }
+    }
+
+    /**
+     * @method private
+     * @name preloadGallery
+     * @description Preloads previous and next images in gallery for faster rendering.
+     * @param e [object] "Event Data"
+     */
+
+    function preloadGallery(e) {
+      var source = '';
+
+      if (Instance.gallery.index > 0) {
+        source = Instance.gallery.$items.eq(Instance.gallery.index - 1).attr("href");
+        if (!checkVideo(source)) {
+          $('<img src="' + source + '">');
+        }
+      }
+      if (Instance.gallery.index < Instance.gallery.total) {
+        source = Instance.gallery.$items.eq(Instance.gallery.index + 1).attr("href");
+        if (!checkVideo(source)) {
+          $('<img src="' + source + '">');
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name advanceGallery
+     * @description Advances gallery base on direction.
+     * @param e [object] "Event Data"
+     */
+
+    function advanceGallery(e) {
       Functions.killEvent(e);
 
-      Instance.$lightbox.focus();
-    }
-  }
+      var $control = $(e.currentTarget);
 
-  /**
-   * @plugin
-   * @name Lightbox
-   * @description A jQuery plugin for simple modals.
-   * @type widget
-   * @main lightbox.js
-   * @main lightbox.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency touch.js
-   * @dependency transition.js
-   * @dependency viewer.js (optional)
-   */
+      if (!Instance.isAnimating && !$control.hasClass(RawClasses.control_disabled)) {
+        Instance.isAnimating = true;
 
-  var Plugin = Formstone.Plugin("lightbox", {
-      widget: true,
+        closeCaption();
 
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param fileTypes [regex] <> "Image file types"
-       * @param fixed [boolean] <false> "Flag for fixed positioning"
-       * @param formatter [function] <$.noop> "Caption format function"
-       * @param infinite [boolean] <false> "Flag for infinite galleries"
-       * @param labels.close [string] <'Close'> "Close button text"
-       * @param labels.count [string] <'of'> "Gallery count separator text"
-       * @param labels.next [string] <'Next'> "Gallery control text"
-       * @param labels.previous [string] <'Previous'> "Gallery control text"
-       * @param labels.captionClosed [string] <'Close Caption'> "Mobile caption toggle text, closed state"
-       * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
-       * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
-       * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
-       * @param margin [int] <50> "Margin used when sizing (single side)"
-       * @param maxHeight [int] <10000> "Maximum height of element modal"
-       * @param maxWidth [int] <10000> "Maximum width of element modal"
-       * @param minHeight [int] <100> "Minimum height of modal"
-       * @param minWidth [int] <100> "Minimum width of modal"
-       * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
-       * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
-       * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param thumbnails [boolean] <false> "Flag to display thumbnail strip"
-       * @param top [int] <0> "Target top position; over-rides centering"
-       * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
-       * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
-       * @param videoWidth [int] <800> "Video max width"
-       * @param viewer [boolean] <false> "Flag to force 'Viewer' rendering, if available"
-       */
+        Instance.gallery.index += ($control.hasClass(RawClasses.control_next)) ? 1 : -1;
+        if (Instance.gallery.index > Instance.gallery.total) {
+          Instance.gallery.index = (Instance.infinite) ? 0 : Instance.gallery.total;
+        }
+        if (Instance.gallery.index < 0) {
+          Instance.gallery.index = (Instance.infinite) ? Instance.gallery.total : 0;
+        }
 
-      defaults: {
-        customClass    : "",
-        fileTypes      : /\.(jpg|sjpg|jpeg|png|gif)$/i,
-        fixed          : false,
-        formatter      : formatCaption,
-        infinite       : false,
-        labels: {
-          close            : "Close",
-          count            : "of",
-          next             : "Next",
-          previous         : "Previous",
-          captionClosed    : "View Caption",
-          captionOpen      : "Close Caption",
-          thumbnailsClosed : "View Thumbnails",
-          thumbnailsOpen   : "Close Thumbnails"
-        },
-        margin         : 50,
-        maxHeight      : 10000,
-        maxWidth       : 10000,
-        minHeight      : 100,
-        minWidth       : 100,
-        mobile         : false,
-        retina         : false,
-        requestKey     : "fs-lightbox",
-        theme          : "fs-light",
-        thumbnails     : false,
-        top            : 0,
-        videoFormatter : {
-          "youtube": {
-            pattern : /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,
-            format  : formatYouTube
-          },
-          "vimeo": {
-            pattern : /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,
-            format  : formatVimeo
-          }
-        },
-        videoRatio     : 0.5625,
-        videoWidth     : 800,
-        viewer         : true
-      },
+        updateThumbnails();
 
-      classes: [
-        "loading",
-        "animating",
-        "scaling",
-        "zooming",
-        "fixed",
-        "mobile",
-        "touch",
-        "inline",
-        "iframed",
-        "open",
-        "ready",
-        "overlay",
-        "close",
-        "loading_icon",
-        "container",
-        "content",
-        "image",
-        "image_container",
-        "video",
-        "video_wrapper",
-        "tools",
-        "meta",
-        "meta_content",
-        "controls",
-        "control",
-        "control_previous",
-        "control_next",
-        "control_disabled",
-        "position",
-        "position_current",
-        "position_total",
-        "toggle",
-        "caption_toggle",
-        "caption",
-        "caption_open",
-        "thumbnailed",
-        "thumbnails_open",
-        "thumbnail_toggle",
-        "thumbnails",
-        "thumbnail_container",
-        "thumbnail_item",
-        "active",
-        "has_controls",
-        "has_caption",
-        "iframe",
-        "error",
-        "active",
-        "lock"
-      ],
+        Instance.$lightbox.addClass(RawClasses.animating);
 
-      /**
-       * @events
-       * @event open.lightbox "Lightbox opened; Triggered on window"
-       * @event close.lightbox "Lightbox closed; Triggered on window"
-       * @event error.lightbox "Lightbox error; Triggered on window"
-       */
+        Instance.$content.fsTransition({
+          property: "opacity"
+        }, cleanGallery);
 
-      events: {
-        open     : "open",
-        close    : "close"
-      },
-
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
-
-        resize        : resizeLightbox
-      },
-
-      utilities: {
-        _initialize    : initialize,
-
-        close          : closeLightbox
+        Instance.$lightbox.addClass(RawClasses.loading);
       }
-    }),
+    }
 
-    // Localize References
+    /**
+     * @method private
+     * @name jumpGallery
+     * @description Jumps gallery base on thumbnail click.
+     * @param e [object] "Event Data"
+     */
 
-    Namespace     = Plugin.namespace,
-    Defaults      = Plugin.defaults,
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
-    Window        = Formstone.window,
-    $Window       = Formstone.$window,
-    $Body         = null,
+    function jumpGallery(e) {
+      Functions.killEvent(e);
 
-    // Internal
+      var $thumbnail = $(e.currentTarget);
 
-    $Locks        = null,
-    OnLoad        = false,
-    OnLoaded      = false,
+      if (!Instance.isAnimating && !$thumbnail.hasClass(RawClasses.active)) {
+        Instance.isAnimating = true;
 
-    // Singleton
+        closeCaption();
 
-    Instance      = null;
+        Instance.gallery.index = Instance.$thumbnailItems.index($thumbnail);
 
-})
+        updateThumbnails();
+
+        Instance.$lightbox.addClass(RawClasses.animating);
+
+        Instance.$content.fsTransition({
+          property: "opacity"
+        }, cleanGallery);
+
+        Instance.$lightbox.addClass(RawClasses.loading);
+      }
+    }
+
+    /**
+     * @method private
+     * @name jumpGallery
+     * @description
+     */
+
+    function updateThumbnails() {
+      // Thumbnails
+      if (Instance.thumbnails) {
+        var $thumb = Instance.$thumbnailItems.eq(Instance.gallery.index);
+
+        Instance.$thumbnailItems.removeClass(RawClasses.active);
+        $thumb.addClass(RawClasses.active);
+      }
+    }
+
+    /**
+     * @method private
+     * @name jumpGallery
+     * @description
+     */
+
+    function positionThumbnails() {
+      // Thumbnails
+      if (Instance.thumbnails) {
+        var $thumb = Instance.$thumbnailItems.eq(Instance.gallery.index),
+          scrollLeft = $thumb.position().left + ($thumb.outerWidth(false) / 2) - (Instance.$thumbnailContainer.outerWidth(true) / 2);
+
+        Instance.$thumbnailContainer.stop().animate({
+          scrollLeft: scrollLeft
+        }, 200, "linear");
+      }
+    }
+
+    /**
+     * @method private
+     * @name cleanGallery
+     * @description Cleans gallery.
+     */
+
+    function cleanGallery() {
+      if (typeof Instance.$imageContainer !== 'undefined') {
+        if (Instance.isViewer) {
+          Instance.$imageContainer.fsViewer("destroy");
+        }
+        Instance.$imageContainer.remove();
+      }
+      if (typeof Instance.$videoWrapper !== 'undefined') {
+        Instance.$videoWrapper.remove();
+      }
+      Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
+
+      Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+      Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
+
+      var source = Instance.$el.attr("href"),
+        isVideo = checkVideo(source);
+
+      if (isVideo) {
+        Instance.type = "video";
+
+        loadVideo(source);
+      } else {
+        Instance.type = "image";
+
+        loadImage(source);
+      }
+
+      updateGalleryControls();
+    }
+
+    /**
+     * @method private
+     * @name updateGalleryControls
+     * @description Updates gallery control states.
+     */
+
+    function updateGalleryControls() {
+      Instance.$controls.removeClass(RawClasses.control_disabled);
+
+      if (!Instance.infinite) {
+        if (Instance.gallery.index === 0) {
+          Instance.$controls.filter(Classes.control_previous).addClass(RawClasses.control_disabled);
+        }
+        if (Instance.gallery.index === Instance.gallery.total) {
+          Instance.$controls.filter(Classes.control_next).addClass(RawClasses.control_disabled);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onKeyDown
+     * @description Handles keypress in gallery.
+     * @param e [object] "Event data"
+     */
+
+    function onKeyDown(e) {
+      if (Instance.gallery.active && (e.keyCode === 37 || e.keyCode === 39)) {
+        Functions.killEvent(e);
+
+        Instance.$controls.filter((e.keyCode === 37) ? Classes.control_previous : Classes.control_next).trigger(Events.click);
+      } else if (e.keyCode === 27) {
+        Instance.$close.trigger(Events.click);
+      }
+    }
+
+    /**
+     * @method private
+     * @name appendContents
+     * @description Moves target inline element.
+     * @param id [string] "Target element id"
+     */
+
+    function appendContents(id) {
+      Instance.$inlineTarget = $(id);
+      Instance.$inlineContents = Instance.$inlineTarget.children().detach();
+
+      appendObject(Instance.$inlineContents);
+    }
+
+    /**
+     * @method private
+     * @name restoreContents
+     * @description Restores inline element.
+     */
+
+    function restoreContents() {
+      Instance.$inlineTarget.append(Instance.$inlineContents.detach());
+    }
+
+    /**
+     * @method private
+     * @name loadURL
+     * @description Load URL into iframe.
+     * @param source [string] "Target URL"
+     */
+
+    function loadURL(source) {
+      source = source + ((source.indexOf("?") > -1) ? "&" + Instance.requestKey + "=true" : "?" + Instance.requestKey + "=true");
+      var $iframe = $('<iframe class="' + RawClasses.iframe + '" src="' + source + '"></iframe>');
+      appendObject($iframe);
+    }
+
+    /**
+     * @method private
+     * @name appendObject
+     * @description Appends and sizes object.
+     * @param $object [jQuery Object] "Object to append"
+     */
+
+    function appendObject($object) {
+      Instance.$content.append($object);
+      sizeContent($object);
+      openLightbox();
+    }
+
+    /**
+     * @method private
+     * @name sizeContent
+     * @description Sizes jQuery object to fir in viewport.
+     * @param $object [jQuery Object] "Object to size"
+     */
+
+    function sizeContent($object) {
+      Instance.windowHeight = Formstone.windowHeight - Instance.mobilePaddingVertical - Instance.paddingVertical;
+      Instance.windowWidth = Formstone.windowWidth - Instance.mobilePaddingHorizontal - Instance.paddingHorizontal;
+
+      Instance.objectHeight = $object.outerHeight(true);
+      Instance.objectWidth = $object.outerWidth(true);
+      Instance.targetHeight = Instance.targetHeight || (Instance.$el ? Instance.$el.data(Namespace + "-height") : null);
+      Instance.targetWidth = Instance.targetWidth || (Instance.$el ? Instance.$el.data(Namespace + "-width") : null);
+      Instance.maxHeight = (Instance.windowHeight < 0) ? Instance.minHeight : Instance.windowHeight;
+      Instance.isIframe = $object.is("iframe");
+      Instance.objectMarginTop = 0;
+      Instance.objectMarginLeft = 0;
+
+      if (!Instance.isMobile) {
+        Instance.windowHeight -= Instance.margin;
+        Instance.windowWidth -= Instance.margin;
+      }
+
+      Instance.contentHeight = (Instance.targetHeight) ? Instance.targetHeight : (Instance.isIframe || Instance.isMobile) ? Instance.windowHeight : Instance.objectHeight;
+      Instance.contentWidth = (Instance.targetWidth) ? Instance.targetWidth : (Instance.isIframe || Instance.isMobile) ? Instance.windowWidth : Instance.objectWidth;
+
+      if ((Instance.isIframe || Instance.isObject) && Instance.isMobile) {
+        Instance.contentHeight = Instance.windowHeight;
+        Instance.contentWidth = Instance.windowWidth;
+      } else if (Instance.isObject) {
+        Instance.contentHeight = (Instance.contentHeight > Instance.windowHeight) ? Instance.windowHeight : Instance.contentHeight;
+        Instance.contentWidth = (Instance.contentWidth > Instance.windowWidth) ? Instance.windowWidth : Instance.contentWidth;
+      }
+
+      if (!Instance.isMobile) {
+        if (Instance.contentHeight > Instance.maxHeight) {
+          Instance.contentHeight = Instance.maxHeight;
+        }
+        if (Instance.contentWidth > Instance.maxWidth) {
+          Instance.contentWidth = Instance.maxWidth;
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadError
+     * @description Error when resource fails to load.
+     */
+
+    function loadError() {
+      var $error = $('<div class="' + RawClasses.error + '"><p>Error Loading Resource</p></div>');
+
+      // Clean up
+      Instance.type = "element";
+      Instance.$tools.remove();
+
+      Instance.$image.off(Events.namespace);
+
+      appendObject($error);
+
+      $Window.trigger(Events.error);
+    }
+
+    /**
+     * @method private
+     * @name calculateNaturalSize
+     * @description Determines natural size of target image.
+     * @param $img [jQuery object] "Source image object"
+     * @return [object | boolean] "Object containing natural height and width values or false"
+     */
+
+    function calculateNaturalSize($img) {
+      var node = $img[0],
+        img = new Image();
+
+      if (typeof node.naturalHeight !== "undefined") {
+        return {
+          naturalHeight: node.naturalHeight,
+          naturalWidth: node.naturalWidth
+        };
+      } else {
+        if (node.tagName.toLowerCase() === 'img') {
+          img.src = node.src;
+          return {
+            naturalHeight: img.height,
+            naturalWidth: img.width
+          };
+        }
+      }
+
+      return false;
+    }
+
+    /**
+     * @method private
+     * @name checkVideo
+     * @description Determines if url is a YouTube or Vimeo url.
+     * @param source [string] "Source url"
+     * @return [boolean] "True if YouTube or Vimeo url"
+     */
+
+    function checkVideo(source) {
+      var formats = Instance.videoFormatter,
+        parts;
+
+      for (var i in formats) {
+        if (formats.hasOwnProperty(i)) {
+          parts = source.match(formats[i].pattern);
+
+          if (parts !== null) {
+            return formats[i].format.call(Instance, parts);
+          }
+        }
+      }
+
+      return false;
+    }
+
+    /**
+     * @method private
+     * @name onDocumentFocus
+     * @description Hanle document focus
+     * @param e [object] "Event data"
+     */
+
+    function onDocumentFocus(e) {
+      var target = e.target;
+
+      if (!$.contains(Instance.$lightbox[0], target) && target !== Instance.$lightbox[0] && target !== Instance.$overlay[0]) {
+        Functions.killEvent(e);
+
+        Instance.$lightbox.focus();
+      }
+    }
+
+    /**
+     * @plugin
+     * @name Lightbox
+     * @description A jQuery plugin for simple modals.
+     * @type widget
+     * @main lightbox.js
+     * @main lightbox.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency touch.js
+     * @dependency transition.js
+     * @dependency viewer.js (optional)
+     */
+
+    var Plugin = Formstone.Plugin("lightbox", {
+        widget: true,
+
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param fileTypes [regex] <> "Image file types"
+         * @param fixed [boolean] <false> "Flag for fixed positioning"
+         * @param formatter [function] <$.noop> "Caption format function"
+         * @param infinite [boolean] <false> "Flag for infinite galleries"
+         * @param labels.close [string] <'Close'> "Close button text"
+         * @param labels.count [string] <'of'> "Gallery count separator text"
+         * @param labels.next [string] <'Next'> "Gallery control text"
+         * @param labels.previous [string] <'Previous'> "Gallery control text"
+         * @param labels.captionClosed [string] <'Close Caption'> "Mobile caption toggle text, closed state"
+         * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
+         * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
+         * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
+         * @param margin [int] <50> "Margin used when sizing (single side)"
+         * @param maxHeight [int] <10000> "Maximum height of element modal"
+         * @param maxWidth [int] <10000> "Maximum width of element modal"
+         * @param minHeight [int] <100> "Minimum height of modal"
+         * @param minWidth [int] <100> "Minimum width of modal"
+         * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
+         * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
+         * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param thumbnails [boolean] <false> "Flag to display thumbnail strip"
+         * @param top [int] <0> "Target top position; over-rides centering"
+         * @param videoFormatter [array] <[]> "Object of video formatter objects containing a 'pattern' regex and 'format' callback"
+         * @param videoRatio [number] <0.5625> "Video height / width ratio (9 / 16 = 0.5625)"
+         * @param videoWidth [int] <800> "Video max width"
+         * @param viewer [boolean] <false> "Flag to force 'Viewer' rendering, if available"
+         */
+
+        defaults: {
+          customClass: "",
+          fileTypes: /\.(jpg|sjpg|jpeg|png|gif)$/i,
+          fixed: false,
+          formatter: formatCaption,
+          infinite: false,
+          labels: {
+            close: "Close",
+            count: "of",
+            next: "Next",
+            previous: "Previous",
+            captionClosed: "View Caption",
+            captionOpen: "Close Caption",
+            thumbnailsClosed: "View Thumbnails",
+            thumbnailsOpen: "Close Thumbnails"
+          },
+          margin: 50,
+          maxHeight: 10000,
+          maxWidth: 10000,
+          minHeight: 100,
+          minWidth: 100,
+          mobile: false,
+          retina: false,
+          requestKey: "fs-lightbox",
+          theme: "fs-light",
+          thumbnails: false,
+          top: 0,
+          videoFormatter: {
+            "youtube": {
+              pattern: /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,
+              format: formatYouTube
+            },
+            "vimeo": {
+              pattern: /(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/,
+              format: formatVimeo
+            }
+          },
+          videoRatio: 0.5625,
+          videoWidth: 800,
+          viewer: true
+        },
+
+        classes: [
+          "loading",
+          "animating",
+          "scaling",
+          "zooming",
+          "fixed",
+          "mobile",
+          "touch",
+          "inline",
+          "iframed",
+          "open",
+          "ready",
+          "overlay",
+          "close",
+          "loading_icon",
+          "container",
+          "content",
+          "image",
+          "image_container",
+          "video",
+          "video_wrapper",
+          "tools",
+          "meta",
+          "meta_content",
+          "controls",
+          "control",
+          "control_previous",
+          "control_next",
+          "control_disabled",
+          "position",
+          "position_current",
+          "position_total",
+          "toggle",
+          "caption_toggle",
+          "caption",
+          "caption_open",
+          "thumbnailed",
+          "thumbnails_open",
+          "thumbnail_toggle",
+          "thumbnails",
+          "thumbnail_container",
+          "thumbnail_item",
+          "active",
+          "has_controls",
+          "has_caption",
+          "iframe",
+          "error",
+          "active",
+          "lock"
+        ],
+
+        /**
+         * @events
+         * @event open.lightbox "Lightbox opened; Triggered on window"
+         * @event close.lightbox "Lightbox closed; Triggered on window"
+         * @event error.lightbox "Lightbox error; Triggered on window"
+         */
+
+        events: {
+          open: "open",
+          close: "close"
+        },
+
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
+
+          resize: resizeLightbox
+        },
+
+        utilities: {
+          _initialize: initialize,
+
+          close: closeLightbox
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      Defaults = Plugin.defaults,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      $Body = null,
+
+      // Internal
+
+      $Locks = null,
+      OnLoad = false,
+      OnLoaded = false,
+
+      // Singleton
+
+      Instance = null;
+
+  })
 
 );
 
@@ -8682,726 +8708,727 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-  "use strict";
+    "use strict";
 
-  /**
-   * @method private
-   * @name initialize
-   * @description Initializes plugin.
-   * @param opts [object] "Plugin options"
-   */
+    /**
+     * @method private
+     * @name initialize
+     * @description Initializes plugin.
+     * @param opts [object] "Plugin options"
+     */
 
-  function initialize(options) {
-    options = options || {};
+    function initialize(options) {
+      options = options || {};
 
-    // Build Media Queries
+      // Build Media Queries
 
-    for (var i in MQStrings) {
-      if (MQStrings.hasOwnProperty(i)) {
-        Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
+      for (var i in MQStrings) {
+        if (MQStrings.hasOwnProperty(i)) {
+          Defaults[i] = (options[i]) ? $.merge(options[i], Defaults[i]) : Defaults[i];
+        }
+      }
+
+      Defaults = $.extend(Defaults, options);
+
+      // Sort
+
+      Defaults.minWidth.sort(Functions.sortDesc);
+      Defaults.maxWidth.sort(Functions.sortAsc);
+      Defaults.minHeight.sort(Functions.sortDesc);
+      Defaults.maxHeight.sort(Functions.sortAsc);
+
+      // Bind Media Query Matches
+
+      for (var j in MQStrings) {
+        if (MQStrings.hasOwnProperty(j)) {
+          MQMatches[j] = {};
+          for (var k in Defaults[j]) {
+            if (Defaults[j].hasOwnProperty(k)) {
+              var mq = window.matchMedia("(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")");
+              mq.addListener(onStateChange);
+              MQMatches[j][Defaults[j][k]] = mq;
+            }
+          }
+        }
+      }
+
+      // Initial Trigger
+
+      onStateChange();
+    }
+
+    /**
+     * @method
+     * @name bind
+     * @description Binds callbacks to media query matching.
+     * @param key [string] "Instance key"
+     * @param media [string] "Media query to match"
+     * @param data [object] "Object containing 'enter' and 'leave' callbacks"
+     * @example $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
+     */
+
+    function bind(key, media, data) {
+      var mq = Window.matchMedia(media),
+        mqKey = createKey(mq.media);
+
+      if (!Bindings[mqKey]) {
+        Bindings[mqKey] = {
+          mq: mq,
+          active: true,
+          enter: {},
+          leave: {}
+        };
+
+        Bindings[mqKey].mq.addListener(onBindingChange);
+      }
+
+      for (var i in data) {
+        if (data.hasOwnProperty(i) && Bindings[mqKey].hasOwnProperty(i)) {
+          Bindings[mqKey][i][key] = data[i];
+        }
+      }
+
+      var binding = Bindings[mqKey],
+        matches = mq.matches;
+
+      if (matches && binding[Events.enter].hasOwnProperty(key)) {
+        binding[Events.enter][key].apply(mq);
+        binding.active = true;
+      } else if (!matches && binding[Events.leave].hasOwnProperty(key)) {
+        binding[Events.leave][key].apply(mq);
+        binding.active = false;
       }
     }
 
-    Defaults = $.extend(Defaults, options);
+    /**
+     * @method
+     * @name unbind
+     * @description Unbinds all callbacks from media query.
+     * @param key [string] "Instance key"
+     * @param media [string] "Media query to unbind; defaults to all"
+     * @example $.mediaquery("unbind", "key");
+     */
 
-    // Sort
+    function unbind(key, media) {
+      if (!key) {
+        return;
+      }
 
-    Defaults.minWidth.sort(Functions.sortDesc);
-    Defaults.maxWidth.sort(Functions.sortAsc);
-    Defaults.minHeight.sort(Functions.sortDesc);
-    Defaults.maxHeight.sort(Functions.sortAsc);
+      if (media) {
+        // unbind specific query
+        var mqKey = createKey(media);
 
-    // Bind Media Query Matches
+        if (Bindings[mqKey]) {
+          if (Bindings[mqKey].enter[key]) {
+            delete Bindings[mqKey].enter[key];
+          }
 
-    for (var j in MQStrings) {
-      if (MQStrings.hasOwnProperty(j)) {
-        MQMatches[j] = {};
-        for (var k in Defaults[j]) {
-          if (Defaults[j].hasOwnProperty(k)) {
-            var mq = window.matchMedia( "(" + MQStrings[j] + ": " + (Defaults[j][k] === Infinity ? 100000 : Defaults[j][k]) + Defaults.unit + ")" );
-            mq.addListener( onStateChange );
-            MQMatches[j][ Defaults[j][k] ] = mq;
+          if (Bindings[mqKey].leave[key]) {
+            delete Bindings[mqKey].leave[key];
+          }
+        }
+      } else {
+        // unbind all
+        for (var i in Bindings) {
+          if (Bindings.hasOwnProperty(i)) {
+            if (Bindings[i].enter[key]) {
+              delete Bindings[i].enter[key];
+            }
+
+            if (Bindings[i].leave[key]) {
+              delete Bindings[i].leave[key];
+            }
           }
         }
       }
     }
 
-    // Initial Trigger
+    /**
+     * @method private
+     * @name setState
+     * @description Sets current media query match state.
+     */
 
-    onStateChange();
-  }
-
-  /**
-   * @method
-   * @name bind
-   * @description Binds callbacks to media query matching.
-   * @param key [string] "Instance key"
-   * @param media [string] "Media query to match"
-   * @param data [object] "Object containing 'enter' and 'leave' callbacks"
-   * @example $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
-   */
-
-  function bind(key, media, data) {
-    var mq = Window.matchMedia(media),
-      mqKey = createKey(mq.media);
-
-    if (!Bindings[mqKey]) {
-      Bindings[mqKey] = {
-        mq        : mq,
-        active    : true,
-        enter     : {},
-        leave     : {}
+    function setState() {
+      State = {
+        unit: Defaults.unit
       };
 
-      Bindings[mqKey].mq.addListener(onBindingChange);
-    }
+      for (var i in MQStrings) {
+        if (MQStrings.hasOwnProperty(i)) {
 
-    for (var i in data) {
-      if (data.hasOwnProperty(i) && Bindings[mqKey].hasOwnProperty(i)) {
-        Bindings[mqKey][i][key] = data[i];
-      }
-    }
+          for (var j in MQMatches[i]) {
+            if (MQMatches[i].hasOwnProperty(j)) {
 
-    var binding    = Bindings[mqKey],
-      matches    = mq.matches;
+              var state = (j === "Infinity") ? Infinity : parseInt(j, 10),
+                check = (MQStrings[i].indexOf("width") > -1) ? Formstone.fallbackWidth : Formstone.fallbackHeight,
+                isMax = i.indexOf("max") > -1;
 
-    if (matches && binding[Events.enter].hasOwnProperty(key)) {
-      binding[Events.enter][key].apply(mq);
-      binding.active = true;
-    } else if (!matches && binding[Events.leave].hasOwnProperty(key)) {
-      binding[Events.leave][key].apply(mq);
-      binding.active = false;
-    }
-  }
-
-  /**
-   * @method
-   * @name unbind
-   * @description Unbinds all callbacks from media query.
-   * @param key [string] "Instance key"
-   * @param media [string] "Media query to unbind; defaults to all"
-   * @example $.mediaquery("unbind", "key");
-   */
-
-  function unbind(key, media) {
-    if (!key) {
-      return;
-    }
-
-    if (media) {
-      // unbind specific query
-      var mqKey = createKey(media);
-
-      if (Bindings[mqKey]) {
-        if (Bindings[mqKey].enter[key]) {
-          delete Bindings[mqKey].enter[key];
-        }
-
-        if (Bindings[mqKey].leave[key]) {
-          delete Bindings[mqKey].leave[key];
-        }
-      }
-    } else {
-      // unbind all
-      for (var i in Bindings) {
-        if (Bindings.hasOwnProperty(i)) {
-          if (Bindings[i].enter[key]) {
-            delete Bindings[i].enter[key];
-          }
-
-          if (Bindings[i].leave[key]) {
-            delete Bindings[i].leave[key];
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name setState
-   * @description Sets current media query match state.
-   */
-
-  function setState() {
-    State = {
-      unit: Defaults.unit
-    };
-
-    for (var i in MQStrings) {
-      if (MQStrings.hasOwnProperty(i)) {
-
-        for (var j in MQMatches[i]) {
-          if (MQMatches[i].hasOwnProperty(j)) {
-
-            var state = (j === "Infinity") ? Infinity : parseInt(j, 10),
-              check = (MQStrings[i].indexOf("width") > -1) ? Formstone.fallbackWidth : Formstone.fallbackHeight,
-              isMax = i.indexOf("max") > -1;
-
-            if (Formstone.support.nativeMatchMedia) {
-              // Native
-              if (MQMatches[i][j].matches) {
+              if (Formstone.support.nativeMatchMedia) {
+                // Native
+                if (MQMatches[i][j].matches) {
+                  if (isMax) {
+                    if (!State[i] || state < State[i]) {
+                      State[i] = state;
+                    }
+                  } else {
+                    if (!State[i] || state > State[i]) {
+                      State[i] = state;
+                    }
+                  }
+                }
+              } else {
+                // Fallback
                 if (isMax) {
-                  if (!State[i] || state < State[i]) {
+                  if (!State[i] && state > check) {
                     State[i] = state;
                   }
                 } else {
-                  if (!State[i] || state > State[i]) {
+                  if ((!State[i] && State[i] !== 0) || (state > State[i] && state < check)) {
                     State[i] = state;
                   }
                 }
               }
-            } else {
-              // Fallback
-              if (isMax) {
-                if (!State[i] && state > check) {
-                  State[i] = state;
-                }
-              } else {
-                if ( (!State[i] && State[i] !== 0) || (state > State[i] && state < check) ) {
-                  State[i] = state;
-                }
-              }
-            }
 
+            }
+          }
+
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onStateChange
+     * @description Handles media query changes.
+     */
+
+    function onStateChange() {
+      setState();
+
+      $Window.trigger(Events.mqChange, [State]);
+    }
+
+    /**
+     * @method private
+     * @name onBindingChange
+     * @description Handles a binding's media query change.
+     */
+
+    function onBindingChange(mq) {
+      var mqkey = createKey(mq.media),
+        binding = Bindings[mqkey],
+        matches = mq.matches,
+        event = matches ? Events.enter : Events.leave;
+
+      if (binding && (binding.active || (!binding.active && matches))) {
+        for (var i in binding[event]) {
+          if (binding[event].hasOwnProperty(i)) {
+            binding[event][i].apply(binding.mq);
           }
         }
 
+        binding.active = true;
       }
     }
-  }
-
-  /**
-   * @method private
-   * @name onStateChange
-   * @description Handles media query changes.
-   */
-
-  function onStateChange() {
-    setState();
-
-    $Window.trigger(Events.mqChange, [ State ]);
-  }
-
-  /**
-   * @method private
-   * @name onBindingChange
-   * @description Handles a binding's media query change.
-   */
-
-  function onBindingChange(mq) {
-    var mqkey      = createKey(mq.media),
-      binding    = Bindings[mqkey],
-      matches    = mq.matches,
-      event      = matches ? Events.enter : Events.leave;
-
-    if (binding && (binding.active || (!binding.active && matches) ) ) {
-      for (var i in binding[event]) {
-        if (binding[event].hasOwnProperty(i)) {
-          binding[event][i].apply(binding.mq);
-        }
-      }
-
-      binding.active = true;
-    }
-  }
-
-  /**
-   * @method private
-   * @name createKey
-   * @description Creates valid object key from string.
-   * @param text [String] "String to create key from"
-   * @return [string] Valid object key
-   */
-
-  function createKey(text) {
-    return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g,'');
-  }
-
-  /**
-   * @method
-   * @name state
-   * @description Returns the current state.
-   * @return [object] "Current state object"
-   * @example var state = $.mediaquery("state");
-   */
-
-  /**
-   * @method private
-   * @name getState
-   * @description Returns the current state.
-   * @return [object] "Current state object"
-   */
-
-  function getState() {
-    return State;
-  }
-
-  /**
-   * @plugin
-   * @name Media Query
-   * @description A jQuery plugin for responsive media query events.
-   * @type utility
-   * @main mediaquery.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
-
-  var Plugin = Formstone.Plugin("mediaquery", {
-      utilities: {
-        _initialize    : initialize,
-        state          : getState,
-        bind           : bind,
-        unbind         : unbind
-      },
-
-      /**
-       * @events
-       * @event mqchange.mediaquery "Change to a media query match; Triggered on window"
-       */
-
-      events: {
-        mqChange    : "mqchange"
-      }
-    }),
 
     /**
-     * @options
-     * @param minWidth [array] <[ 0 ]> "Array of min-widths"
-     * @param maxWidth [array] <[ Infinity ]> "Array of max-widths"
-     * @param minHeight [array] <[ 0 ]> "Array of min-heights"
-     * @param maxHeight [array] <[ Infinity ]> "Array of max-heights"
-     * @param unit [string] <'px'> "Unit to use when matching widths and heights"
+     * @method private
+     * @name createKey
+     * @description Creates valid object key from string.
+     * @param text [String] "String to create key from"
+     * @return [string] Valid object key
      */
 
-    Defaults = {
-      minWidth     : [ 0 ],
-      maxWidth     : [ Infinity ],
-      minHeight    : [ 0 ],
-      maxHeight    : [ Infinity ],
-      unit         : "px"
-    },
+    function createKey(text) {
+      return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g, '');
+    }
 
-    // Raw events for switch
-    Events = $.extend(Plugin.events, {
-      enter       : "enter",
-      leave       : "leave"
-    }),
+    /**
+     * @method
+     * @name state
+     * @description Returns the current state.
+     * @return [object] "Current state object"
+     * @example var state = $.mediaquery("state");
+     */
 
-    // Localize References
+    /**
+     * @method private
+     * @name getState
+     * @description Returns the current state.
+     * @return [object] "Current state object"
+     */
 
-    $Window        = Formstone.$window,
-    Window         = $Window[0],
+    function getState() {
+      return State;
+    }
 
-    Functions      = Plugin.functions,
+    /**
+     * @plugin
+     * @name Media Query
+     * @description A jQuery plugin for responsive media query events.
+     * @type utility
+     * @main mediaquery.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
 
-    // Internal
+    var Plugin = Formstone.Plugin("mediaquery", {
+        utilities: {
+          _initialize: initialize,
+          state: getState,
+          bind: bind,
+          unbind: unbind
+        },
 
-    State          = null,
-    Bindings       = [],
-    MQMatches      = {},
-    MQStrings      = {
-      minWidth:     "min-width",
-      maxWidth:     "max-width",
-      minHeight:    "min-height",
-      maxHeight:    "max-height"
-    };
+        /**
+         * @events
+         * @event mqchange.mediaquery "Change to a media query match; Triggered on window"
+         */
 
-})
+        events: {
+          mqChange: "mqchange"
+        }
+      }),
+
+      /**
+       * @options
+       * @param minWidth [array] <[ 0 ]> "Array of min-widths"
+       * @param maxWidth [array] <[ Infinity ]> "Array of max-widths"
+       * @param minHeight [array] <[ 0 ]> "Array of min-heights"
+       * @param maxHeight [array] <[ Infinity ]> "Array of max-heights"
+       * @param unit [string] <'px'> "Unit to use when matching widths and heights"
+       */
+
+      Defaults = {
+        minWidth: [0],
+        maxWidth: [Infinity],
+        minHeight: [0],
+        maxHeight: [Infinity],
+        unit: "px"
+      },
+
+      // Raw events for switch
+      Events = $.extend(Plugin.events, {
+        enter: "enter",
+        leave: "leave"
+      }),
+
+      // Localize References
+
+      $Window = Formstone.$window,
+      Window = $Window[0],
+
+      Functions = Plugin.functions,
+
+      // Internal
+
+      State = null,
+      Bindings = [],
+      MQMatches = {},
+      MQStrings = {
+        minWidth: "min-width",
+        maxWidth: "max-width",
+        minHeight: "min-height",
+        maxHeight: "max-height"
+      };
+
+  })
 
 );
+
 /*! formstone v1.3.3 [pagination.js] 2017-08-18 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-  "use strict";
+    "use strict";
 
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-  function construct(data) {
-    data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
+    function construct(data) {
+      data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
 
-    var html = "";
-    html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
-    html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
-    html += '<div class="' + RawClasses.position + '" aria-hidden="true">';
-    html += '<span class="' + RawClasses.current + '">0</span>';
-    html += ' ' + data.labels.count + ' ';
-    html += '<span class="' + RawClasses.total + '">0</span>';
-    html += '<select class="' + RawClasses.select + '" tabindex="-1" aria-hidden="true"></select>';
-    html += '</div>';
+      var html = "";
+      html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + data.labels.previous + '</button>';
+      html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + data.labels.next + '</button>';
+      html += '<div class="' + RawClasses.position + '" aria-hidden="true">';
+      html += '<span class="' + RawClasses.current + '">0</span>';
+      html += ' ' + data.labels.count + ' ';
+      html += '<span class="' + RawClasses.total + '">0</span>';
+      html += '<select class="' + RawClasses.select + '" tabindex="-1" aria-hidden="true"></select>';
+      html += '</div>';
 
-    data.thisClasses = [RawClasses.base, data.theme, data.customClass];
+      data.thisClasses = [RawClasses.base, data.theme, data.customClass];
 
-    this.addClass(data.thisClasses.join(" "))
-      .wrapInner('<div class="' + RawClasses.pages + '" aria-label="pagination"></div>')
-      .prepend(html);
+      this.addClass(data.thisClasses.join(" "))
+        .wrapInner('<div class="' + RawClasses.pages + '" aria-label="pagination"></div>')
+        .prepend(html);
 
-    data.$controls  = this.find(Classes.control);
-    data.$pages     = this.find(Classes.pages);
-    data.$items     = data.$pages.children().addClass(RawClasses.page);
-    data.$position  = this.find(Classes.position);
-    data.$select    = this.find(Classes.select);
-    data.index      = -1;
+      data.$controls = this.find(Classes.control);
+      data.$pages = this.find(Classes.pages);
+      data.$items = data.$pages.children().addClass(RawClasses.page);
+      data.$position = this.find(Classes.position);
+      data.$select = this.find(Classes.select);
+      data.index = -1;
 
-    data.total = data.$items.length - 1;
+      data.total = data.$items.length - 1;
 
-    var index = data.$items.index(data.$items.filter("[data-" + Plugin.namespace + "-active]"));
-    if (!index) {
-      index = data.$items.index(data.$items.filter(Classes.active)); // reverse compat.
+      var index = data.$items.index(data.$items.filter("[data-" + Plugin.namespace + "-active]"));
+      if (!index) {
+        index = data.$items.index(data.$items.filter(Classes.active)); // reverse compat.
+      }
+
+      data.$items.eq(0)
+        .addClass(RawClasses.first)
+        .after('<span class="' + RawClasses.ellipsis + '">&hellip;</span>')
+        .end()
+        .eq(data.total)
+        .addClass(RawClasses.last)
+        .before('<span class="' + RawClasses.ellipsis + '">&hellip;</span>');
+
+      data.$ellipsis = data.$pages.find(Classes.ellipsis);
+
+      buildMobilePages(data);
+
+      this.on(Events.click, Classes.page, data, onPageClick)
+        .on(Events.click, Classes.control, data, onControlClick)
+        // .on(Events.click, Classes.position, data, onPositionClick)
+        .on(Events.change, Classes.select, data, onPageSelect);
+
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          data.$el.addClass(RawClasses.mobile);
+        },
+        leave: function() {
+          data.$el.removeClass(RawClasses.mobile);
+        }
+      });
+
+      updatePage(data, index);
     }
 
-    data.$items.eq(0)
-           .addClass(RawClasses.first)
-           .after('<span class="' + RawClasses.ellipsis + '">&hellip;</span>')
-           .end()
-           .eq(data.total)
-           .addClass(RawClasses.last)
-           .before('<span class="' + RawClasses.ellipsis + '">&hellip;</span>');
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-    data.$ellipsis = data.$pages.find(Classes.ellipsis);
+    function destruct(data) {
+      $.fsMediaquery("unbind", data.rawGuid);
 
-    buildMobilePages(data);
+      data.$controls.remove();
+      data.$ellipsis.remove();
+      data.$select.remove();
+      data.$position.remove();
+      data.$items.removeClass([RawClasses.page, RawClasses.active, RawClasses.visible, RawClasses.first, RawClasses.last].join(" "))
+        .unwrap();
 
-    this.on(Events.click, Classes.page, data, onPageClick)
-      .on(Events.click, Classes.control, data, onControlClick)
-      // .on(Events.click, Classes.position, data, onPositionClick)
-      .on(Events.change, Classes.select, data, onPageSelect);
+      this.removeClass(data.thisClasses.join(" "))
+        .off(Events.namespace);
+    }
 
-    $.fsMediaquery("bind", data.rawGuid, data.mq, {
-      enter: function() {
-        data.$el.addClass(RawClasses.mobile);
-      },
-      leave: function() {
-        data.$el.removeClass(RawClasses.mobile);
-      }
-    });
+    /**
+     * @method
+     * @name jump
+     * @description Jump instance of plugin to specific page
+     * @example $(".target").pagination("jump", 1);
+     */
 
-    updatePage(data, index);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    $.fsMediaquery("unbind", data.rawGuid);
-
-    data.$controls.remove();
-    data.$ellipsis.remove();
-    data.$select.remove();
-    data.$position.remove();
-    data.$items.removeClass( [RawClasses.page, RawClasses.active, RawClasses.visible, RawClasses.first, RawClasses.last].join(" ") )
-           .unwrap();
-
-    this.removeClass(data.thisClasses.join(" "))
-      .off(Events.namespace);
-  }
-
-  /**
-   * @method
-   * @name jump
-   * @description Jump instance of plugin to specific page
-   * @example $(".target").pagination("jump", 1);
-   */
-
-  function jump(data, index) {
-    data.$items.eq(index).trigger(Events.raw.click);
-  }
-
-  /**
-   * @method private
-   * @name onControlClick
-   * @description Traverses pages
-   * @param e [object] "Event data"
-   */
-
-  function onControlClick(e) {
-    Functions.killEvent(e);
-
-    var data = e.data,
-      index = data.index + ( $(e.currentTarget).hasClass(RawClasses.control_previous) ? -1 : 1 );
-
-    if (index >= 0) {
+    function jump(data, index) {
       data.$items.eq(index).trigger(Events.raw.click);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPageSelect
-   * @description Jumps to a page
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onControlClick
+     * @description Traverses pages
+     * @param e [object] "Event data"
+     */
 
-  function onPageSelect(e) {
-    Functions.killEvent(e);
-
-    var data = e.data,
-      $target = $(e.currentTarget),
-      index = parseInt($target.val(), 10);
-
-    data.$items.eq(index).trigger(Events.raw.click);
-  }
-
-  /**
-   * @method private
-   * @name onPageClick
-   * @description Jumps to a page
-   * @param e [object] "Event data"
-   */
-
-  function onPageClick(e) {
-    var data    = e.data,
-      $target = $(e.currentTarget),
-      index   = data.$items.index($target);
-
-    if (data.ajax) {
+    function onControlClick(e) {
       Functions.killEvent(e);
-    } else {
-      $target[0].click();
-    }
 
-    updatePage(data, index);
-  }
+      var data = e.data,
+        index = data.index + ($(e.currentTarget).hasClass(RawClasses.control_previous) ? -1 : 1);
 
-  /**
-   * @method private
-   * @name onPositionClick
-   * @description Opens mobile select
-   * @param e [object] "Event data"
-   */
-
-  function onPositionClick(e) {
-    Functions.killEvent(e);
-
-    var data = e.data;
-
-    if (Formstone.isMobile && !Formstone.isFirefoxMobile) {
-      // Only open select on non-firefox mobile
-      var el = data.$select[0];
-      if (window.document.createEvent) { // All
-        var evt = window.document.createEvent("MouseEvents");
-        evt.initMouseEvent("mousedown", false, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        el.dispatchEvent(evt);
-      } else if (el.fireEvent) { // IE
-        el.fireEvent("onmousedown");
+      if (index >= 0) {
+        data.$items.eq(index).trigger(Events.raw.click);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name updatePage
-   * @description Updates pagination state
-   * @param data [object] "Instance data"
-   * @param index [int] "New page index"
-   */
+    /**
+     * @method private
+     * @name onPageSelect
+     * @description Jumps to a page
+     * @param e [object] "Event data"
+     */
 
-  function updatePage(data, index) {
-    if (index < 0) {
-      index = 0;
-    }
-    if (index > data.total) {
-      index = data.total;
-    }
+    function onPageSelect(e) {
+      Functions.killEvent(e);
 
-    if (index !== data.index) {
-      data.index = index;
+      var data = e.data,
+        $target = $(e.currentTarget),
+        index = parseInt($target.val(), 10);
 
-      var start = data.index - data.visible,
-        end = data.index + (data.visible + 1);
-
-      if (start < 0) {
-        start = 0;
-      }
-      if (end > data.total) {
-        end = data.total;
-      }
-
-      data.$items.removeClass(RawClasses.visible)
-             .removeClass(RawClasses.hidden)
-             .filter(Classes.active)
-             .removeClass(RawClasses.active)
-             .end()
-             .eq(data.index)
-             .addClass(RawClasses.active)
-             .end()
-             .slice(start, end)
-             .addClass(RawClasses.visible);
-
-      data.$items.not(Classes.visible).addClass(RawClasses.hidden);
-
-      data.$position.find(Classes.current)
-              .text(data.index + 1)
-              .end()
-              .find(Classes.total)
-              .text(data.total + 1);
-
-      data.$select.val(data.index);
-
-      // controls
-      data.$controls.removeClass(RawClasses.visible);
-
-      if (index > 0) {
-        data.$controls.filter(Classes.control_previous).addClass(RawClasses.visible);
-      }
-      if (index < data.total) {
-        data.$controls.filter(Classes.control_next).addClass(RawClasses.visible);
-      }
-
-      // elipsis
-      data.$ellipsis.removeClass(RawClasses.visible);
-      if (index > data.visible + 1) {
-        data.$ellipsis.eq(0).addClass(RawClasses.visible);
-      }
-      if (index < data.total - data.visible - 1) {
-        data.$ellipsis.eq(1).addClass(RawClasses.visible);
-      }
-
-      // Update
-      data.$el.trigger(Events.update, [ data.index ]);
-    }
-  }
-
-  /**
-   * @method private
-   * @name buildMobilePages
-   * @description Builds options for mobile select
-   * @param data [object] "Instance data"
-   */
-
-  function buildMobilePages(data) {
-    var html = '';
-
-    for (var i = 0; i <= data.total; i++) {
-      html += '<option value="' + i + '"';
-      if (i === data.index) {
-        html += 'selected="selected"';
-      }
-      html += '>Page ' + (i+1) + '</option>';
+      data.$items.eq(index).trigger(Events.raw.click);
     }
 
-    data.$select.html(html);
-  }
+    /**
+     * @method private
+     * @name onPageClick
+     * @description Jumps to a page
+     * @param e [object] "Event data"
+     */
 
-  /**
-   * @plugin
-   * @name Pagination
-   * @description A jQuery plugin for simple pagination.
-   * @type widget
-   * @main pagination.js
-   * @main pagination.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   */
+    function onPageClick(e) {
+      var data = e.data,
+        $target = $(e.currentTarget),
+        index = data.$items.index($target);
 
-  var Plugin = Formstone.Plugin("pagination", {
-      widget: true,
+      if (data.ajax) {
+        Functions.killEvent(e);
+      } else {
+        $target[0].click();
+      }
 
-      /**
-       * @options
-       * @param ajax [boolean] <false> "Flag to disable default click actions"
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param labels.close [string] <'Close'> "Close button text"
-       * @param labels.count [string] <'of'> "Gallery count separator text"
-       * @param labels.next [string] <'Next'> "Gallery control text"
-       * @param labels.previous [string] <'Previous'> "Gallery control text"
-       * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param visible [int] <2> "Visible pages before and after current page"
-       */
+      updatePage(data, index);
+    }
 
-      defaults: {
-        ajax            : false,
-        customClass     : "",
-        labels: {
-          count       : "of",
-          next        : "Next",
-          previous    : "Previous"
+    /**
+     * @method private
+     * @name onPositionClick
+     * @description Opens mobile select
+     * @param e [object] "Event data"
+     */
+
+    function onPositionClick(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      if (Formstone.isMobile && !Formstone.isFirefoxMobile) {
+        // Only open select on non-firefox mobile
+        var el = data.$select[0];
+        if (window.document.createEvent) { // All
+          var evt = window.document.createEvent("MouseEvents");
+          evt.initMouseEvent("mousedown", false, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+          el.dispatchEvent(evt);
+        } else if (el.fireEvent) { // IE
+          el.fireEvent("onmousedown");
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name updatePage
+     * @description Updates pagination state
+     * @param data [object] "Instance data"
+     * @param index [int] "New page index"
+     */
+
+    function updatePage(data, index) {
+      if (index < 0) {
+        index = 0;
+      }
+      if (index > data.total) {
+        index = data.total;
+      }
+
+      if (index !== data.index) {
+        data.index = index;
+
+        var start = data.index - data.visible,
+          end = data.index + (data.visible + 1);
+
+        if (start < 0) {
+          start = 0;
+        }
+        if (end > data.total) {
+          end = data.total;
+        }
+
+        data.$items.removeClass(RawClasses.visible)
+          .removeClass(RawClasses.hidden)
+          .filter(Classes.active)
+          .removeClass(RawClasses.active)
+          .end()
+          .eq(data.index)
+          .addClass(RawClasses.active)
+          .end()
+          .slice(start, end)
+          .addClass(RawClasses.visible);
+
+        data.$items.not(Classes.visible).addClass(RawClasses.hidden);
+
+        data.$position.find(Classes.current)
+          .text(data.index + 1)
+          .end()
+          .find(Classes.total)
+          .text(data.total + 1);
+
+        data.$select.val(data.index);
+
+        // controls
+        data.$controls.removeClass(RawClasses.visible);
+
+        if (index > 0) {
+          data.$controls.filter(Classes.control_previous).addClass(RawClasses.visible);
+        }
+        if (index < data.total) {
+          data.$controls.filter(Classes.control_next).addClass(RawClasses.visible);
+        }
+
+        // elipsis
+        data.$ellipsis.removeClass(RawClasses.visible);
+        if (index > data.visible + 1) {
+          data.$ellipsis.eq(0).addClass(RawClasses.visible);
+        }
+        if (index < data.total - data.visible - 1) {
+          data.$ellipsis.eq(1).addClass(RawClasses.visible);
+        }
+
+        // Update
+        data.$el.trigger(Events.update, [data.index]);
+      }
+    }
+
+    /**
+     * @method private
+     * @name buildMobilePages
+     * @description Builds options for mobile select
+     * @param data [object] "Instance data"
+     */
+
+    function buildMobilePages(data) {
+      var html = '';
+
+      for (var i = 0; i <= data.total; i++) {
+        html += '<option value="' + i + '"';
+        if (i === data.index) {
+          html += 'selected="selected"';
+        }
+        html += '>Page ' + (i + 1) + '</option>';
+      }
+
+      data.$select.html(html);
+    }
+
+    /**
+     * @plugin
+     * @name Pagination
+     * @description A jQuery plugin for simple pagination.
+     * @type widget
+     * @main pagination.js
+     * @main pagination.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     */
+
+    var Plugin = Formstone.Plugin("pagination", {
+        widget: true,
+
+        /**
+         * @options
+         * @param ajax [boolean] <false> "Flag to disable default click actions"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param labels.close [string] <'Close'> "Close button text"
+         * @param labels.count [string] <'of'> "Gallery count separator text"
+         * @param labels.next [string] <'Next'> "Gallery control text"
+         * @param labels.previous [string] <'Previous'> "Gallery control text"
+         * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param visible [int] <2> "Visible pages before and after current page"
+         */
+
+        defaults: {
+          ajax: false,
+          customClass: "",
+          labels: {
+            count: "of",
+            next: "Next",
+            previous: "Previous"
+          },
+          maxWidth: "740px",
+          theme: "fs-light",
+          visible: 2
         },
-        maxWidth        : "740px",
-        theme           : "fs-light",
-        visible         : 2
-      },
 
-      classes: [
-        "pages",
-        "page",
+        classes: [
+          "pages",
+          "page",
 
-        "active",
-        "first",
-        "last",
-        "ellipsis",
-        "visible",
-        "hidden",
+          "active",
+          "first",
+          "last",
+          "ellipsis",
+          "visible",
+          "hidden",
 
-        "control",
-        "control_previous",
-        "control_next",
+          "control",
+          "control_previous",
+          "control_next",
 
-        "position",
-        "select",
+          "position",
+          "select",
 
-        "mobile",
+          "mobile",
 
-        "current",
-        "total"
-      ],
+          "current",
+          "total"
+        ],
 
-      /**
-       * @events
-       * @event update.pagination "Page updated"
-       */
+        /**
+         * @events
+         * @event update.pagination "Page updated"
+         */
 
-      events: {
-        update    : "update"
-      },
+        events: {
+          update: "update"
+        },
 
-      methods: {
-        _construct    : construct,
-        _destruct     : destruct
-      }
-    }),
+        methods: {
+          _construct: construct,
+          _destruct: destruct
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions;
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions;
 
-})
+  })
 
 );
 
@@ -9409,558 +9436,558 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery",
-      "./swap"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    // $Body  = Formstone.$body;
-    $Locks = $("html, body");
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    // guid
-    data.handleGuid   = RawClasses.handle + data.guid;
-
-    data.isToggle     = (data.type === "toggle");
-    data.open         = false;
-
-    if (data.isToggle) {
-      data.gravity  = "";
-    }
-
-    var baseClass     = RawClasses.base,
-      typeClass     = [baseClass, data.type].join("-"),
-      gravityClass  = data.gravity ? [typeClass, data.gravity].join("-") : "",
-      classGroup    = [data.rawGuid, data.theme, data.customClass].join(" ");
-
-    data.handle       = this.data(Namespace + "-handle");
-    data.content      = this.data(Namespace + "-content");
-
-    data.handleClasses = [
-      RawClasses.handle,
-      RawClasses.handle.replace(baseClass, typeClass),
-      gravityClass ? RawClasses.handle.replace(baseClass, gravityClass) : "",
-      data.handleGuid,
-      classGroup
-    ].join(" ");
-
-    data.thisClasses = [
-      RawClasses.nav.replace(baseClass, typeClass),
-      gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
-      classGroup
-    ];
-
-    data.contentClasses = [
-      RawClasses.content.replace(baseClass, typeClass),
-      classGroup
-    ].join(" ");
-
-    data.contentClassesOpen = [
-      gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
-      RawClasses.open
-    ].join(" ");
-
-    // DOM
-
-    data.$nav        = this.addClass(data.thisClasses.join(" ")).attr("role", "navigation");
-    data.$handle     = $(data.handle).addClass(data.handleClasses);
-    data.$content    = $(data.content).addClass(data.contentClasses);
-    data.$animate    = $().add(data.$nav).add(data.$content);
-
-    cacheLabel(data);
-
-    // Tab index
-
-    data.navTabIndex = data.$nav.attr("tabindex");
-    data.$nav.attr("tabindex", -1);
-
-    // Aria
-
-    data.id = this.attr("id");
-
-    if (data.id) {
-      data.ariaId = data.id;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery",
+        "./swap"
+      ], factory);
     } else {
-      data.ariaId = data.rawGuid;
-      this.attr("id", data.ariaId);
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
+
+    function setup() {
+      // $Body  = Formstone.$body;
+      $Locks = $("html, body");
     }
 
-    // toggle
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    data.$handle.attr("data-swap-target", data.dotGuid)
-          .attr("data-swap-linked", data.handleGuid)
-          .attr("data-swap-group", RawClasses.base)
-          .attr("tabindex", 0)
-          .on("activate.swap" + data.dotGuid, data, onOpen)
-          .on("deactivate.swap" + data.dotGuid, data, onClose)
-          .on("enable.swap" + data.dotGuid, data, onEnable)
-          .on("disable.swap" + data.dotGuid, data, onDisable)
-          .on(Events.focus + data.dotGuid, data, onFocus)
-          .on(Events.blur + data.dotGuid, data, onBlur)
-          .fsSwap({
-            maxWidth: data.maxWidth,
-            classes: {
-              target  : data.dotGuid,
-              enabled : Classes.enabled,
-              active  : Classes.open,
-              raw: {
-                target  : data.rawGuid,
-                enabled : RawClasses.enabled,
-                active  : RawClasses.open
-              }
+    function construct(data) {
+      // guid
+      data.handleGuid = RawClasses.handle + data.guid;
+
+      data.isToggle = (data.type === "toggle");
+      data.open = false;
+
+      if (data.isToggle) {
+        data.gravity = "";
+      }
+
+      var baseClass = RawClasses.base,
+        typeClass = [baseClass, data.type].join("-"),
+        gravityClass = data.gravity ? [typeClass, data.gravity].join("-") : "",
+        classGroup = [data.rawGuid, data.theme, data.customClass].join(" ");
+
+      data.handle = this.data(Namespace + "-handle");
+      data.content = this.data(Namespace + "-content");
+
+      data.handleClasses = [
+        RawClasses.handle,
+        RawClasses.handle.replace(baseClass, typeClass),
+        gravityClass ? RawClasses.handle.replace(baseClass, gravityClass) : "",
+        data.handleGuid,
+        classGroup
+      ].join(" ");
+
+      data.thisClasses = [
+        RawClasses.nav.replace(baseClass, typeClass),
+        gravityClass ? RawClasses.nav.replace(baseClass, gravityClass) : "",
+        classGroup
+      ];
+
+      data.contentClasses = [
+        RawClasses.content.replace(baseClass, typeClass),
+        classGroup
+      ].join(" ");
+
+      data.contentClassesOpen = [
+        gravityClass ? RawClasses.content.replace(baseClass, gravityClass) : "",
+        RawClasses.open
+      ].join(" ");
+
+      // DOM
+
+      data.$nav = this.addClass(data.thisClasses.join(" ")).attr("role", "navigation");
+      data.$handle = $(data.handle).addClass(data.handleClasses);
+      data.$content = $(data.content).addClass(data.contentClasses);
+      data.$animate = $().add(data.$nav).add(data.$content);
+
+      cacheLabel(data);
+
+      // Tab index
+
+      data.navTabIndex = data.$nav.attr("tabindex");
+      data.$nav.attr("tabindex", -1);
+
+      // Aria
+
+      data.id = this.attr("id");
+
+      if (data.id) {
+        data.ariaId = data.id;
+      } else {
+        data.ariaId = data.rawGuid;
+        this.attr("id", data.ariaId);
+      }
+
+      // toggle
+
+      data.$handle.attr("data-swap-target", data.dotGuid)
+        .attr("data-swap-linked", data.handleGuid)
+        .attr("data-swap-group", RawClasses.base)
+        .attr("tabindex", 0)
+        .on("activate.swap" + data.dotGuid, data, onOpen)
+        .on("deactivate.swap" + data.dotGuid, data, onClose)
+        .on("enable.swap" + data.dotGuid, data, onEnable)
+        .on("disable.swap" + data.dotGuid, data, onDisable)
+        .on(Events.focus + data.dotGuid, data, onFocus)
+        .on(Events.blur + data.dotGuid, data, onBlur)
+        .fsSwap({
+          maxWidth: data.maxWidth,
+          classes: {
+            target: data.dotGuid,
+            enabled: Classes.enabled,
+            active: Classes.open,
+            raw: {
+              target: data.rawGuid,
+              enabled: RawClasses.enabled,
+              active: RawClasses.open
             }
-          });
+          }
+        });
 
-    if (!data.$handle.is("a, button")) {
-      data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
+      if (!data.$handle.is("a, button")) {
+        data.$handle.on(Events.keyPress + data.dotGuid, data, onKeyup);
+      }
+
+      // $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
     }
 
-    // $Body.on( [ Events.focus + data.dotGuid, Events.focusIn + data.dotGuid ].join(" "), data, onDocumentFocus);
-  }
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+    function destruct(data) {
+      data.$content.removeClass([data.contentClasses, data.contentClassesOpen].join(" "))
+        .off(Events.namespace);
 
-  function destruct(data) {
-    data.$content.removeClass( [data.contentClasses, data.contentClassesOpen].join(" ") )
-           .off(Events.namespace);
+      data.$handle.removeAttr("aria-controls")
+        .removeAttr("aria-expanded")
+        .removeAttr("data-swap-target")
+        .removeData("swap-target")
+        .removeAttr("data-swap-linked")
+        .removeAttr("data-swap-group")
+        .removeData("swap-linked")
+        .removeData("tabindex")
+        .removeClass(data.handleClasses)
+        .off(data.dotGuid)
+        .html(data.originalLabel)
+        .fsSwap("destroy");
 
-    data.$handle.removeAttr("aria-controls")
-          .removeAttr("aria-expanded")
-          .removeAttr("data-swap-target")
-          .removeData("swap-target")
-          .removeAttr("data-swap-linked")
-          .removeAttr("data-swap-group")
-          .removeData("swap-linked")
-          .removeData("tabindex")
-          .removeClass(data.handleClasses)
-          .off(data.dotGuid)
-          .html(data.originalLabel)
-          .fsSwap("destroy");
+      data.$nav.attr("tabindex", data.navTabIndex);
 
-    data.$nav.attr("tabindex", data.navTabIndex);
+      // $Body.off(data.dotGuid);
 
-    // $Body.off(data.dotGuid);
+      restoreLabel(data);
 
-    restoreLabel(data);
+      clearLocks(data);
 
-    clearLocks(data);
+      this.removeAttr("aria-hidden")
+        .removeClass(data.thisClasses.join(" "))
+        .off(Events.namespace);
 
-    this.removeAttr("aria-hidden")
-      .removeClass(data.thisClasses.join(" "))
-      .off(Events.namespace);
-
-    if (this.attr("id") === data.rawGuid) {
-      this.removeAttr("id");
+      if (this.attr("id") === data.rawGuid) {
+        this.removeAttr("id");
+      }
     }
-  }
 
-  /**
-   * @method
-   * @name open
-   * @description Opens instance.
-   * @example $(".target").navigation("open");
-   */
+    /**
+     * @method
+     * @name open
+     * @description Opens instance.
+     * @example $(".target").navigation("open");
+     */
 
-  function open(data) {
-    data.$handle.fsSwap("activate");
-  }
-
-  /**
-   * @method
-   * @name close
-   * @description Closes instance.
-   * @example $(".target").navigation("close");
-   */
-
-  function close(data) {
-    data.$handle.fsSwap("deactivate");
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables instance.
-   * @example $(".target").navigation("enable");
-   */
-
-  function enable(data) {
-    data.$handle.fsSwap("enable");
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables instance.
-   * @example $(".target").navigation("disable");
-   */
-
-  function disable(data) {
-    data.$handle.fsSwap("disable");
-  }
-
-  /**
-   * @method private
-   * @name onFocus
-   * @description Handles instance focus
-   * @param e [object] "Event data"
-   */
-
-  function onFocus(e) {
-    e.data.$handle.addClass(RawClasses.focus);
-  }
-
-  /**
-   * @method private
-   * @name onBlur
-   * @description Handles instance blur
-   * @param e [object] "Event data"
-   */
-
-  function onBlur(e) {
-    e.data.$handle.removeClass(RawClasses.focus);
-  }
-
-  /**
-   * @method private
-   * @name onKeyup
-   * @description Handles keypress event on inputs
-   * @param e [object] "Event data"
-   */
-
-  function onKeyup(e) {
-    var data = e.data;
-
-    // If arrow keys
-    if (e.keyCode === 13 || e.keyCode === 32) {
-      Functions.killEvent(e);
-
-      data.$handle.trigger(Events.raw.click);
+    function open(data) {
+      data.$handle.fsSwap("activate");
     }
-  }
 
-  /**
-   * @method private
-   * @name onOpen
-   * @description Handles nav open event.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name close
+     * @description Closes instance.
+     * @example $(".target").navigation("close");
+     */
 
-  function onOpen(e) {
-    if (!e.originalEvent) { // thanks IE :/
+    function close(data) {
+      data.$handle.fsSwap("deactivate");
+    }
+
+    /**
+     * @method
+     * @name enable
+     * @description Enables instance.
+     * @example $(".target").navigation("enable");
+     */
+
+    function enable(data) {
+      data.$handle.fsSwap("enable");
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance.
+     * @example $(".target").navigation("disable");
+     */
+
+    function disable(data) {
+      data.$handle.fsSwap("disable");
+    }
+
+    /**
+     * @method private
+     * @name onFocus
+     * @description Handles instance focus
+     * @param e [object] "Event data"
+     */
+
+    function onFocus(e) {
+      e.data.$handle.addClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onBlur
+     * @description Handles instance blur
+     * @param e [object] "Event data"
+     */
+
+    function onBlur(e) {
+      e.data.$handle.removeClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onKeyup
+     * @description Handles keypress event on inputs
+     * @param e [object] "Event data"
+     */
+
+    function onKeyup(e) {
       var data = e.data;
 
-      if (!data.open) {
-        data.$el.trigger(Events.open)
+      // If arrow keys
+      if (e.keyCode === 13 || e.keyCode === 32) {
+        Functions.killEvent(e);
+
+        data.$handle.trigger(Events.raw.click);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onOpen
+     * @description Handles nav open event.
+     * @param e [object] "Event data"
+     */
+
+    function onOpen(e) {
+      if (!e.originalEvent) { // thanks IE :/
+        var data = e.data;
+
+        if (!data.open) {
+          data.$el.trigger(Events.open)
             .attr("aria-hidden", false);
 
-        data.$content.addClass(data.contentClassesOpen)
-               .one(Events.click, function() {
-                close(data);
-               });
+          data.$content.addClass(data.contentClassesOpen)
+            .one(Events.click, function() {
+              close(data);
+            });
 
-        data.$handle.attr("aria-expanded", true);
+          data.$handle.attr("aria-expanded", true);
 
-        if (data.label) {
-          data.$handle.html(data.labels.open);
+          if (data.label) {
+            data.$handle.html(data.labels.open);
+          }
+
+          addLocks(data);
+
+          data.open = true;
+
+          data.$nav.focus();
         }
-
-        addLocks(data);
-
-        data.open = true;
-
-        data.$nav.focus();
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name onClose
-   * @description Handles nav close event.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onClose
+     * @description Handles nav close event.
+     * @param e [object] "Event data"
+     */
 
-  function onClose(e) {
-    if (!e.originalEvent) { // thanks IE :/
-      var data = e.data;
+    function onClose(e) {
+      if (!e.originalEvent) { // thanks IE :/
+        var data = e.data;
 
-      if (data.open) {
-        data.$el.trigger(Events.close)
+        if (data.open) {
+          data.$el.trigger(Events.close)
             .attr("aria-hidden", true);
 
-        data.$content.removeClass(data.contentClassesOpen)
-               .off(Events.namespace);
+          data.$content.removeClass(data.contentClassesOpen)
+            .off(Events.namespace);
 
-        data.$handle.attr("aria-expanded", false);
+          data.$handle.attr("aria-expanded", false);
 
-        if (data.label) {
-          data.$handle.html(data.labels.closed);
+          if (data.label) {
+            data.$handle.html(data.labels.closed);
+          }
+
+          clearLocks(data);
+
+          data.open = false;
+
+          data.$el.focus();
         }
-
-        clearLocks(data);
-
-        data.open = false;
-
-        data.$el.focus();
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name onEnable
-   * @description Handles nav enable event.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onEnable
+     * @description Handles nav enable event.
+     * @param e [object] "Event data"
+     */
 
-  function onEnable(e) {
-    var data = e.data;
+    function onEnable(e) {
+      var data = e.data;
 
-    data.$el.attr("aria-hidden", true);
-    data.$handle.attr("aria-controls", data.ariaId)
-          .attr("aria-expanded", false);
-    data.$content.addClass(RawClasses.enabled);
+      data.$el.attr("aria-hidden", true);
+      data.$handle.attr("aria-controls", data.ariaId)
+        .attr("aria-expanded", false);
+      data.$content.addClass(RawClasses.enabled);
 
-    setTimeout(function() {
-      data.$animate.addClass(RawClasses.animated);
-    }, 0);
+      setTimeout(function() {
+        data.$animate.addClass(RawClasses.animated);
+      }, 0);
 
-    if (data.label) {
-      data.$handle.html(data.labels.closed);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onDisable
-   * @description Handles nav disable event.
-   * @param e [object] "Event data"
-   */
-
-  function onDisable(e) {
-    var data = e.data;
-
-    data.$el.removeAttr("aria-hidden");
-    data.$handle.removeAttr("aria-controls")
-          .removeAttr("aria-expanded");
-    data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
-    data.$animate.removeClass(RawClasses.animated);
-
-    restoreLabel(data);
-
-    clearLocks(data);
-  }
-
-  /**
-   * @method private
-   * @name addLocks
-   * @description Locks scrolling
-   * @param data [object] "Instance data"
-   */
-
-  function addLocks(data) {
-    if (!data.isToggle) {
-      $Locks.addClass(RawClasses.lock);
-    }
-  }
-
-  /**
-   * @method private
-   * @name clearLocks
-   * @description Unlocks scrolling
-   * @param data [object] "Instance data"
-   */
-
-  function clearLocks(data) {
-    if (!data.isToggle) {
-      $Locks.removeClass(RawClasses.lock);
-    }
-  }
-
-  /**
-   * @method private
-   * @name cacheLabel
-   * @description Sets handle labels
-   * @param data [object] "Instance data"
-   */
-
-  function cacheLabel(data) {
-    if (data.label) {
-      if (data.$handle.length > 1) {
-        data.originalLabel = [];
-
-        for (var i = 0, count = data.$handle.length; i < count; i++) {
-          data.originalLabel[i] = data.$handle.eq(i).html();
-        }
-      } else {
-        data.originalLabel = data.$handle.html();
+      if (data.label) {
+        data.$handle.html(data.labels.closed);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name restoreLabel
-   * @description restores handle labels
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name onDisable
+     * @description Handles nav disable event.
+     * @param e [object] "Event data"
+     */
 
-  function restoreLabel(data) {
-    if (data.label) {
-      if (data.$handle.length > 1) {
-        for (var i = 0, count = data.$handle.length; i < count; i++) {
-          data.$handle.eq(i).html(data.originalLabel[i]);
-        }
-      } else {
-        data.$handle.html(data.originalLabel);
+    function onDisable(e) {
+      var data = e.data;
+
+      data.$el.removeAttr("aria-hidden");
+      data.$handle.removeAttr("aria-controls")
+        .removeAttr("aria-expanded");
+      data.$content.removeClass(RawClasses.enabled, RawClasses.animated);
+      data.$animate.removeClass(RawClasses.animated);
+
+      restoreLabel(data);
+
+      clearLocks(data);
+    }
+
+    /**
+     * @method private
+     * @name addLocks
+     * @description Locks scrolling
+     * @param data [object] "Instance data"
+     */
+
+    function addLocks(data) {
+      if (!data.isToggle) {
+        $Locks.addClass(RawClasses.lock);
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name onDocumentFocus
-   * @description Handles document focus
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name clearLocks
+     * @description Unlocks scrolling
+     * @param data [object] "Instance data"
+     */
 
-  // function onDocumentFocus(e) {
-  //   var target = e.target,
-  //     data   = e.data;
-  //
-  //   if (data.open && !$.contains(data.$nav, target) && target !== data.$nav[0] && target !== data.$handle[0]) {
-  //     Functions.killEvent(e);
-  //
-  //     data.$nav.focus();
-  //   }
-  // }
+    function clearLocks(data) {
+      if (!data.isToggle) {
+        $Locks.removeClass(RawClasses.lock);
+      }
+    }
 
-  /**
-   * @plugin
-   * @name Navigation
-   * @description A jQuery plugin for simple responsive navigation.
-   * @type widget
-   * @main navigation.js
-   * @main navigation.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   * @dependency swap.js
-   */
+    /**
+     * @method private
+     * @name cacheLabel
+     * @description Sets handle labels
+     * @param data [object] "Instance data"
+     */
 
-  var Plugin = Formstone.Plugin("navigation", {
-      widget: true,
+    function cacheLabel(data) {
+      if (data.label) {
+        if (data.$handle.length > 1) {
+          data.originalLabel = [];
 
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param gravity [string] <'left'> "Gravity of 'push', 'reveal' and 'overlay' navigation; 'right', 'left'"
-       * @param label [boolean] <true> "Display handle width label"
-       * @param labels.closed [string] <'Menu'> "Closed state text"
-       * @param labels.open [string] <'Close'> "Open state text"
-       * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'reveal', 'overlay'"
-       */
+          for (var i = 0, count = data.$handle.length; i < count; i++) {
+            data.originalLabel[i] = data.$handle.eq(i).html();
+          }
+        } else {
+          data.originalLabel = data.$handle.html();
+        }
+      }
+    }
 
-      defaults: {
-        customClass    : "",
-        gravity        : "left",
-        label          : true,
-        labels: {
-          closed     : "Menu",
-          open       : "Close"
+    /**
+     * @method private
+     * @name restoreLabel
+     * @description restores handle labels
+     * @param data [object] "Instance data"
+     */
+
+    function restoreLabel(data) {
+      if (data.label) {
+        if (data.$handle.length > 1) {
+          for (var i = 0, count = data.$handle.length; i < count; i++) {
+            data.$handle.eq(i).html(data.originalLabel[i]);
+          }
+        } else {
+          data.$handle.html(data.originalLabel);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onDocumentFocus
+     * @description Handles document focus
+     * @param e [object] "Event data"
+     */
+
+    // function onDocumentFocus(e) {
+    //   var target = e.target,
+    //     data   = e.data;
+    //
+    //   if (data.open && !$.contains(data.$nav, target) && target !== data.$nav[0] && target !== data.$handle[0]) {
+    //     Functions.killEvent(e);
+    //
+    //     data.$nav.focus();
+    //   }
+    // }
+
+    /**
+     * @plugin
+     * @name Navigation
+     * @description A jQuery plugin for simple responsive navigation.
+     * @type widget
+     * @main navigation.js
+     * @main navigation.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     * @dependency swap.js
+     */
+
+    var Plugin = Formstone.Plugin("navigation", {
+        widget: true,
+
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param gravity [string] <'left'> "Gravity of 'push', 'reveal' and 'overlay' navigation; 'right', 'left'"
+         * @param label [boolean] <true> "Display handle width label"
+         * @param labels.closed [string] <'Menu'> "Closed state text"
+         * @param labels.open [string] <'Close'> "Open state text"
+         * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param type [string] <'toggle'> "Type of navigation; 'toggle', 'push', 'reveal', 'overlay'"
+         */
+
+        defaults: {
+          customClass: "",
+          gravity: "left",
+          label: true,
+          labels: {
+            closed: "Menu",
+            open: "Close"
+          },
+          maxWidth: "980px",
+          theme: "fs-light",
+          type: "toggle"
         },
-        maxWidth       : "980px",
-        theme          : "fs-light",
-        type           : "toggle"
-      },
 
-      classes: [
-        "handle",
-        "nav",
-        "content",
-        "animated",
-        "enabled",
-        "focus",
-        "open",
-        "toggle",
-        "push",
-        "reveal",
-        "overlay",
-        "left",
-        "right",
-        "lock"
-      ],
+        classes: [
+          "handle",
+          "nav",
+          "content",
+          "animated",
+          "enabled",
+          "focus",
+          "open",
+          "toggle",
+          "push",
+          "reveal",
+          "overlay",
+          "left",
+          "right",
+          "lock"
+        ],
 
-      /**
-       * @events
-       * @event open.navigation "Navigation opened"
-       * @event close.navigation "Navigation closed"
-       */
+        /**
+         * @events
+         * @event open.navigation "Navigation opened"
+         * @event close.navigation "Navigation closed"
+         */
 
-      events: {
-        open     : "open",
-        close    : "close"
-      },
+        events: {
+          open: "open",
+          close: "close"
+        },
 
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
 
-        // Public Methods
+          // Public Methods
 
-        open          : open,
-        close         : close,
-        enable        : enable,
-        disable       : disable
-      }
-    }),
+          open: open,
+          close: close,
+          enable: enable,
+          disable: disable
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Namespace     = Plugin.namespace,
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
-    // $Body         = null,
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+      // $Body         = null,
 
-    // Internal
+      // Internal
 
-    $Locks        = null;
+      $Locks = null;
 
-})
+  })
 
 );
 
@@ -9968,367 +9995,367 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    $Body = Formstone.$body;
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    var min = parseFloat(this.attr("min")),
-      max = parseFloat(this.attr("max"));
-
-    // Mask as text
-
-    data.min  = (min || min === 0) ? min : false;
-    data.max  = (max || max === 0) ? max : false;
-    data.step = parseFloat(this.attr("step")) || 1;
-    data.timer        = null;
-    data.digits       = significantDigits(data.step);
-    data.disabled     = this.is(":disabled") || this.is("[readonly]");
-
-    var html = "";
-    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '" aria-hidden="true" tabindex="-1">'   + data.labels.up + '</button>';
-    html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '" aria-hidden="true" tabindex="-1">' + data.labels.down + '</button>';
-
-    // Modify DOM
-    this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
-      .after(html);
-
-    // Store data
-    data.$container    = this.parent(Classes.base);
-    data.$arrows       = data.$container.find(Classes.arrow);
-
-    // Bind events
-    this.on(Events.focus, data, onFocus)
-      .on(Events.blur, data, onBlur)
-      .on(Events.keyPress, data, onKeyup);
-
-    data.$container.on( [Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
-
-    step(data, 0);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$arrows.remove();
-
-    this.unwrap()
-      .off(Events.namespace);
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables target instance
-   * @example $(".target").number("enable");
-   */
-
-  function enable(data) {
-    if (data.disabled) {
-      this.prop("disabled", false);
-
-      data.$container.removeClass(RawClasses.disabled);
-
-      data.disabled = false;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method
-   * @name disable
-   * @description Disables target instance
-   * @example $(".target").number("disable");
-   */
+    "use strict";
 
-  function disable(data) {
-    if (!data.disabled) {
-      this.prop("disabled", true);
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-      data.$container.addClass(RawClasses.disabled);
-
-      data.disabled = true;
+    function setup() {
+      $Body = Formstone.$body;
     }
-  }
 
-  /**
-  * @method
-  * @name update
-  * @description Updates instance.
-  * @example $(".target").number("update");
-  */
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-  function updateInstance(data) {
-    var min = parseFloat(data.$el.attr("min")),
-      max = parseFloat(data.$el.attr("max"));
+    function construct(data) {
+      var min = parseFloat(this.attr("min")),
+        max = parseFloat(this.attr("max"));
 
-    data.min  = (min || min === 0) ? min : false;
-    data.max  = (max || max === 0) ? max : false;
-    data.step = parseFloat(data.$el.attr("step")) || 1;
-    data.timer        = null;
-    data.digits       = significantDigits(data.step);
-    data.disabled     = data.$el.is(":disabled") || data.$el.is("[readonly]");
+      // Mask as text
 
-    step(data, 0);
-  }
+      data.min = (min || min === 0) ? min : false;
+      data.max = (max || max === 0) ? max : false;
+      data.step = parseFloat(this.attr("step")) || 1;
+      data.timer = null;
+      data.digits = significantDigits(data.step);
+      data.disabled = this.is(":disabled") || this.is("[readonly]");
 
-  /**
-   * @method private
-   * @name onFocus
-   * @description Handles instance focus
-   * @param e [object] "Event data"
-   */
+      var html = "";
+      html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.up].join(" ") + '" aria-hidden="true" tabindex="-1">' + data.labels.up + '</button>';
+      html += '<button type="button" class="' + [RawClasses.arrow, RawClasses.down].join(" ") + '" aria-hidden="true" tabindex="-1">' + data.labels.down + '</button>';
 
-  function onFocus(e) {
-    e.data.$container.addClass(RawClasses.focus);
-  }
+      // Modify DOM
+      this.wrap('<div class="' + [RawClasses.base, data.theme, data.customClass, (data.disabled) ? RawClasses.disabled : ""].join(" ") + '"></div>')
+        .after(html);
 
-  /**
-   * @method private
-   * @name onBlur
-   * @description Handles instance blur
-   * @param e [object] "Event data"
-   */
+      // Store data
+      data.$container = this.parent(Classes.base);
+      data.$arrows = data.$container.find(Classes.arrow);
 
-  function onBlur(e) {
-    step(e.data, 0);
+      // Bind events
+      this.on(Events.focus, data, onFocus)
+        .on(Events.blur, data, onBlur)
+        .on(Events.keyPress, data, onKeyup);
 
-    e.data.$container.removeClass(RawClasses.focus);
-  }
+      data.$container.on([Events.touchStart, Events.mouseDown].join(" "), Classes.arrow, data, onPointerDown);
 
-  /**
-   * @method private
-   * @name onKeyup
-   * @description Handles keypress event on inputs
-   * @param e [object] "Event data"
-   */
-
-  function onKeyup(e) {
-    var data = e.data;
-
-    // If arrow keys
-    if (e.keyCode === 38 || e.keyCode === 40) {
-      e.preventDefault();
-
-      step(data, (e.keyCode === 38) ? data.step : -data.step);
+      step(data, 0);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPointerDown
-   * @description Handles pointer down event on instance arrows
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-  function onPointerDown(e) {
-    Functions.killEvent(e);
+    function destruct(data) {
+      data.$arrows.remove();
 
-    // Make sure we reset the states
-    onPointerUp(e);
-
-    var data = e.data;
-
-    if (!data.disabled && e.which <= 1) {
-      var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
-
-      data.timer = Functions.startTimer(data.timer, 300, function() {
-
-        data.timer = Functions.startTimer(data.timer, 125, function() {
-          step(data, change, false);
-        }, true);
-
-      });
-
-      step(data, change);
-
-      $Body.on( [Events.touchEnd, Events.mouseUp].join(" "), data, onPointerUp);
+      this.unwrap()
+        .off(Events.namespace);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPointerUp
-   * @description Handles pointer up event on instance arrows
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name enable
+     * @description Enables target instance
+     * @example $(".target").number("enable");
+     */
 
-  function onPointerUp(e) {
-    Functions.killEvent(e);
+    function enable(data) {
+      if (data.disabled) {
+        this.prop("disabled", false);
 
-    var data = e.data;
+        data.$container.removeClass(RawClasses.disabled);
 
-    Functions.clearTimer(data.timer, true);
+        data.disabled = false;
+      }
+    }
 
-    $Body.off(Events.namespace);
-  }
+    /**
+     * @method
+     * @name disable
+     * @description Disables target instance
+     * @example $(".target").number("disable");
+     */
 
-  /**
-   * @method private
-   * @name step
-   * @description Steps through values
-   * @param e [object] "Event data"
-   * @param change [string] "Change value"
-   */
+    function disable(data) {
+      if (!data.disabled) {
+        this.prop("disabled", true);
 
-  function step(data, change) {
-    var oValue = parseFloat(data.$el.val()),
-      value = change;
+        data.$container.addClass(RawClasses.disabled);
 
-    if ($.type(oValue) === "undefined" || isNaN(oValue)) {
-      if (data.min !== false) {
+        data.disabled = true;
+      }
+    }
+
+    /**
+     * @method
+     * @name update
+     * @description Updates instance.
+     * @example $(".target").number("update");
+     */
+
+    function updateInstance(data) {
+      var min = parseFloat(data.$el.attr("min")),
+        max = parseFloat(data.$el.attr("max"));
+
+      data.min = (min || min === 0) ? min : false;
+      data.max = (max || max === 0) ? max : false;
+      data.step = parseFloat(data.$el.attr("step")) || 1;
+      data.timer = null;
+      data.digits = significantDigits(data.step);
+      data.disabled = data.$el.is(":disabled") || data.$el.is("[readonly]");
+
+      step(data, 0);
+    }
+
+    /**
+     * @method private
+     * @name onFocus
+     * @description Handles instance focus
+     * @param e [object] "Event data"
+     */
+
+    function onFocus(e) {
+      e.data.$container.addClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onBlur
+     * @description Handles instance blur
+     * @param e [object] "Event data"
+     */
+
+    function onBlur(e) {
+      step(e.data, 0);
+
+      e.data.$container.removeClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onKeyup
+     * @description Handles keypress event on inputs
+     * @param e [object] "Event data"
+     */
+
+    function onKeyup(e) {
+      var data = e.data;
+
+      // If arrow keys
+      if (e.keyCode === 38 || e.keyCode === 40) {
+        e.preventDefault();
+
+        step(data, (e.keyCode === 38) ? data.step : -data.step);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerDown
+     * @description Handles pointer down event on instance arrows
+     * @param e [object] "Event data"
+     */
+
+    function onPointerDown(e) {
+      Functions.killEvent(e);
+
+      // Make sure we reset the states
+      onPointerUp(e);
+
+      var data = e.data;
+
+      if (!data.disabled && e.which <= 1) {
+        var change = $(e.target).hasClass(RawClasses.up) ? data.step : -data.step;
+
+        data.timer = Functions.startTimer(data.timer, 300, function() {
+
+          data.timer = Functions.startTimer(data.timer, 125, function() {
+            step(data, change, false);
+          }, true);
+
+        });
+
+        step(data, change);
+
+        $Body.on([Events.touchEnd, Events.mouseUp].join(" "), data, onPointerUp);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerUp
+     * @description Handles pointer up event on instance arrows
+     * @param e [object] "Event data"
+     */
+
+    function onPointerUp(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      Functions.clearTimer(data.timer, true);
+
+      $Body.off(Events.namespace);
+    }
+
+    /**
+     * @method private
+     * @name step
+     * @description Steps through values
+     * @param e [object] "Event data"
+     * @param change [string] "Change value"
+     */
+
+    function step(data, change) {
+      var oValue = parseFloat(data.$el.val()),
+        value = change;
+
+      if ($.type(oValue) === "undefined" || isNaN(oValue)) {
+        if (data.min !== false) {
+          value = data.min;
+        } else {
+          value = 0;
+        }
+      } else if (data.min !== false && oValue < data.min) {
         value = data.min;
       } else {
-        value = 0;
+        value += oValue;
       }
-    } else if (data.min !== false && oValue < data.min) {
-      value = data.min;
-    } else {
-      value += oValue;
+
+      var diff = (value - data.min) % data.step;
+      if (diff !== 0) {
+        value -= diff;
+      }
+
+      if (data.min !== false && value < data.min) {
+        value = data.min;
+      }
+      if (data.max !== false && value > data.max) {
+        value = data.max;
+      }
+
+      if (value !== oValue) {
+        value = round(value, data.digits);
+
+        data.$el.val(value)
+          .trigger(Events.raw.change, [true]);
+      }
     }
 
-    var diff = (value - data.min) % data.step;
-    if (diff !== 0) {
-      value -= diff;
+    /**
+     * @method private
+     * @name significantDigits
+     * @description Analyzes and returns significant digit count
+     * @param value [float] "Value to analyze"
+     * @return [int] "Number of significant digits"
+     */
+    function significantDigits(value) {
+      var test = String(value);
+
+      if (test.indexOf(".") > -1) {
+        return test.length - test.indexOf(".") - 1;
+      } else {
+        return 0;
+      }
     }
 
-    if (data.min !== false && value < data.min) {
-      value = data.min;
+    /**
+     * @method private
+     * @name round
+     * @description Rounds a number to a sepcific significant digit count
+     * @param value [float] "Value to round"
+     * @param digits [float] "Digits to round to"
+     * @return [number] "Rounded number"
+     */
+
+    function round(value, digits) {
+      var exp = Math.pow(10, digits);
+      return Math.round(value * exp) / exp;
     }
-    if (data.max !== false && value > data.max) {
-      value = data.max;
-    }
 
-    if (value !== oValue) {
-      value = round(value, data.digits);
+    /**
+     * @plugin
+     * @name Number
+     * @description A jQuery plugin for cross browser number inputs.
+     * @type widget
+     * @main number.js
+     * @main number.css
+     * @dependency jQuery
+     * @dependency core.js
+     */
 
-      data.$el.val(value)
-          .trigger(Events.raw.change, [ true ]);
-    }
-  }
+    var Plugin = Formstone.Plugin("number", {
+        widget: true,
 
-  /**
-   * @method private
-   * @name significantDigits
-   * @description Analyzes and returns significant digit count
-   * @param value [float] "Value to analyze"
-   * @return [int] "Number of significant digits"
-   */
-  function significantDigits(value) {
-    var test = String(value);
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param labels.up [string] <'Up'> "Up arrow label"
+         * @param labels.down [string] <'Down'> "Down arrow label"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         */
 
-    if (test.indexOf(".") > -1) {
-      return test.length - test.indexOf(".") - 1;
-    } else {
-      return 0;
-    }
-  }
-
-  /**
-   * @method private
-   * @name round
-   * @description Rounds a number to a sepcific significant digit count
-   * @param value [float] "Value to round"
-   * @param digits [float] "Digits to round to"
-   * @return [number] "Rounded number"
-   */
-
-  function round(value, digits) {
-    var exp = Math.pow(10, digits);
-    return Math.round(value * exp) / exp;
-  }
-
-  /**
-   * @plugin
-   * @name Number
-   * @description A jQuery plugin for cross browser number inputs.
-   * @type widget
-   * @main number.js
-   * @main number.css
-   * @dependency jQuery
-   * @dependency core.js
-   */
-
-  var Plugin = Formstone.Plugin("number", {
-      widget: true,
-
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param labels.up [string] <'Up'> "Up arrow label"
-       * @param labels.down [string] <'Down'> "Down arrow label"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       */
-
-      defaults: {
-        customClass    : "",
-        labels : {
-          up         : "Up",
-          down       : "Down"
+        defaults: {
+          customClass: "",
+          labels: {
+            up: "Up",
+            down: "Down"
+          },
+          theme: "fs-light"
         },
-        theme          : "fs-light"
-      },
 
-      classes: [
-        "arrow",
-        "up",
-        "down",
-        "disabled",
-        "focus"
-      ],
+        classes: [
+          "arrow",
+          "up",
+          "down",
+          "disabled",
+          "focus"
+        ],
 
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
 
-        // Public Methods
+          // Public Methods
 
-        enable        : enable,
-        disable       : disable,
-        update        : updateInstance
-      }
-    }),
+          enable: enable,
+          disable: disable,
+          update: updateInstance
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-    $Body    = null;
+      $Body = null;
 
-})
+  })
 
 );
 
@@ -10336,461 +10363,461 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./touch"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize(windowWidth) {
-    Functions.iterate.call($Instances, resizeInstance);
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances = $(Classes.element);
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    if (!data.formatter) {
-      data.formatter = formatNumber;
-    }
-
-    data.min       = parseFloat(this.attr("min"))  || 0;
-    data.max       = parseFloat(this.attr("max"))  || 100;
-    data.step      = parseFloat(this.attr("step")) || 1;
-    data.digits    = data.step.toString().length - data.step.toString().indexOf(".");
-    data.value     = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
-
-    var html = "";
-
-    // Not valid in the spec
-    data.vertical = this.attr("orient") === "vertical" || data.vertical;
-    data.disabled = this.is(":disabled") || this.is("[readonly]");
-
-    html += '<div class="' + RawClasses.track + '" aria-hidden="true">';
-    if (data.fill) {
-      html += '<span class="' + RawClasses.fill + '"></span>';
-    }
-    html += '<div class="' + RawClasses.handle + '" role="slider">';
-    html += '<span class="' + RawClasses.marker + '"></span>';
-    html += '</div>';
-    html += '</div>';
-
-    var baseClasses = [
-      RawClasses.base,
-      data.theme,
-      data.customClass,
-      (data.vertical) ? RawClasses.vertical : "",
-      (data.labels)   ? RawClasses.labels   : "",
-      (data.disabled) ? RawClasses.disabled : ""
-    ];
-
-    this.addClass(RawClasses.element)
-      .wrap('<div class="' + baseClasses.join(" ") + '"></div>')
-      .after(html);
-
-    data.$container = this.parents(Classes.base);
-    data.$track     = data.$container.find(Classes.track);
-    data.$fill      = data.$container.find(Classes.fill);
-    data.$handle    = data.$container.find(Classes.handle);
-    data.$output    = data.$container.find(Classes.output);
-
-    if (data.labels) {
-      var labelMax = '<span class="' + [RawClasses.label, RawClasses.label_max].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) + '</span>',
-        labelMin = '<span class="' + [RawClasses.label, RawClasses.label_min].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) + '</span>';
-
-      data.$container.prepend((data.vertical) ? labelMax : labelMin)
-               .append( (data.vertical) ? labelMin : labelMax);
-    }
-
-    data.$labels = data.$container.find(Classes.label);
-
-    // Bind click events
-    this.on(Events.focus, data, onFocus)
-      .on(Events.blur, data, onBlur)
-      .on(Events.change, data, onChange);
-
-    data.$container.fsTouch({
-      pan: true,
-      axis: data.vertical ? "y" : "x"
-    }).on(Events.panStart, data, onPanStart)
-      .on(Events.pan, data, onPan)
-      .on(Events.panEnd, data, onPanEnd);
-
-    cacheInstances();
-
-    resizeInstance.call(this, data);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$container.off(Events.namespace)
-             .fsTouch("destroy");
-
-    data.$track.remove();
-    data.$labels.remove();
-
-    this.unwrap()
-      .removeClass(RawClasses.element)
-      .off(Events.namespace);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables target instance
-   * @example $(".target").range("enable");
-   */
-
-  function enable(data) {
-    if (data.disabled) {
-      this.prop("disabled", false);
-
-      data.$container.removeClass(RawClasses.disabled);
-
-      data.disabled = false;
-    }
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables target instance
-   * @example $(".target").range("disable");
-   */
-
-  function disable(data) {
-    if (!data.disabled) {
-      this.prop("disabled", true);
-
-      data.$container.addClass(RawClasses.disabled);
-
-      data.disabled = true;
-    }
-  }
-
-  /**
-  * @method
-  * @name update
-  * @description Updates instance.
-  * @example $(".target").range("update");
-  */
-
-  function updateInstance(data) {
-    data.min       = parseFloat(data.$el.attr("min"))  || 0;
-    data.max       = parseFloat(data.$el.attr("max"))  || 100;
-    data.step      = parseFloat(data.$el.attr("step")) || 1;
-    data.digits    = data.step.toString().length - data.step.toString().indexOf(".");
-    data.value     = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
-
-    if (data.labels) {
-      data.$labels.filter(Classes.label_max).html( data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) );
-      data.$labels.filter(Classes.label_min).html( data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) );
-    }
-
-    resizeInstance.call(this, data);
-  }
-
-  /**
-   * @method
-   * @name resize
-   * @description Resizes instance
-   * @example $(".target").range("resize");
-   */
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Resizes each instance
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-    data.stepCount = (data.max - data.min) / data.step;
-    data.offset = data.$track.offset();
-
-    if (data.vertical) {
-      data.trackHeight  = data.$track.outerHeight();
-      data.handleHeight = data.$handle.outerHeight();
-      data.increment    = data.trackHeight / data.stepCount;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./touch"
+      ], factory);
     } else {
-      data.trackWidth  = data.$track.outerWidth();
-      data.handleWidth = data.$handle.outerWidth();
-      data.increment   = data.trackWidth / data.stepCount;
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
+
+    function resize(windowWidth) {
+      Functions.iterate.call($Instances, resizeInstance);
     }
 
-    var percent = (data.$el.val() - data.min) / (data.max - data.min);
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
 
-    position(data, percent, true); // isResize
-  }
-
-  /**
-   * @method private
-   * @name onTrackDown
-   * @description Handles panstart event to track
-   * @param e [object] "Event data"
-   */
-
-  function onPanStart(e) {
-    Functions.killEvent(e);
-
-    var data = e.data;
-
-    if (!data.disabled) {
-      onPan(e);
-
-      data.$container.addClass(RawClasses.focus);
+    function cacheInstances() {
+      $Instances = $(Classes.element);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPan
-   * @description Handles pan event
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-  function onPan(e) {
-    Functions.killEvent();
-
-    var data = e.data,
-      percent = 0;
-
-    if (!data.disabled) {
-      if (data.vertical) {
-        percent = 1 - (e.pageY - data.offset.top) / data.trackHeight;
-      } else {
-        percent = (e.pageX - data.offset.left) / data.trackWidth;
+    function construct(data) {
+      if (!data.formatter) {
+        data.formatter = formatNumber;
       }
 
-      position(data, percent);
+      data.min = parseFloat(this.attr("min")) || 0;
+      data.max = parseFloat(this.attr("max")) || 100;
+      data.step = parseFloat(this.attr("step")) || 1;
+      data.digits = data.step.toString().length - data.step.toString().indexOf(".");
+      data.value = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
+
+      var html = "";
+
+      // Not valid in the spec
+      data.vertical = this.attr("orient") === "vertical" || data.vertical;
+      data.disabled = this.is(":disabled") || this.is("[readonly]");
+
+      html += '<div class="' + RawClasses.track + '" aria-hidden="true">';
+      if (data.fill) {
+        html += '<span class="' + RawClasses.fill + '"></span>';
+      }
+      html += '<div class="' + RawClasses.handle + '" role="slider">';
+      html += '<span class="' + RawClasses.marker + '"></span>';
+      html += '</div>';
+      html += '</div>';
+
+      var baseClasses = [
+        RawClasses.base,
+        data.theme,
+        data.customClass,
+        (data.vertical) ? RawClasses.vertical : "",
+        (data.labels) ? RawClasses.labels : "",
+        (data.disabled) ? RawClasses.disabled : ""
+      ];
+
+      this.addClass(RawClasses.element)
+        .wrap('<div class="' + baseClasses.join(" ") + '"></div>')
+        .after(html);
+
+      data.$container = this.parents(Classes.base);
+      data.$track = data.$container.find(Classes.track);
+      data.$fill = data.$container.find(Classes.fill);
+      data.$handle = data.$container.find(Classes.handle);
+      data.$output = data.$container.find(Classes.output);
+
+      if (data.labels) {
+        var labelMax = '<span class="' + [RawClasses.label, RawClasses.label_max].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max) + '</span>',
+          labelMin = '<span class="' + [RawClasses.label, RawClasses.label_min].join(" ") + '">' + data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min) + '</span>';
+
+        data.$container.prepend((data.vertical) ? labelMax : labelMin)
+          .append((data.vertical) ? labelMin : labelMax);
+      }
+
+      data.$labels = data.$container.find(Classes.label);
+
+      // Bind click events
+      this.on(Events.focus, data, onFocus)
+        .on(Events.blur, data, onBlur)
+        .on(Events.change, data, onChange);
+
+      data.$container.fsTouch({
+          pan: true,
+          axis: data.vertical ? "y" : "x"
+        }).on(Events.panStart, data, onPanStart)
+        .on(Events.pan, data, onPan)
+        .on(Events.panEnd, data, onPanEnd);
+
+      cacheInstances();
+
+      resizeInstance.call(this, data);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPanEnd
-   * @description Handles panend event
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-  function onPanEnd(e) {
-    Functions.killEvent(e);
+    function destruct(data) {
+      data.$container.off(Events.namespace)
+        .fsTouch("destroy");
 
-    var data = e.data;
+      data.$track.remove();
+      data.$labels.remove();
 
-    if (!data.disabled) {
-      data.$container.removeClass(RawClasses.focus);
+      this.unwrap()
+        .removeClass(RawClasses.element)
+        .off(Events.namespace);
+
+      cacheInstances();
     }
-  }
 
-  /**
-   * @method private
-   * @name onFocus
-   * @description Handles instance focus
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name enable
+     * @description Enables target instance
+     * @example $(".target").range("enable");
+     */
 
-  function onFocus(e) {
-    e.data.$container.addClass(RawClasses.focus);
-  }
+    function enable(data) {
+      if (data.disabled) {
+        this.prop("disabled", false);
 
-  /**
-   * @method private
-   * @name onBlur
-   * @description Handles instance blur
-   * @param e [object] "Event data"
-   */
+        data.$container.removeClass(RawClasses.disabled);
 
-  function onBlur(e) {
-    e.data.$container.removeClass(RawClasses.focus);
-  }
-
-  /**
-   * @method private
-   * @name position
-   * @description Positions handle
-   * @param data [object] "Instance Data"
-   * @param perc [number] "Position precentage"
-   * @param isResize [boolean] "Called from resize"
-   */
-
-  function position(data, perc, isResize) {
-    if (data.increment > 1) {
-      if (data.vertical) {
-        perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackHeight;
-      } else {
-        perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackWidth;
+        data.disabled = false;
       }
     }
 
-    if (perc < 0) {
-      perc = 0;
+    /**
+     * @method
+     * @name disable
+     * @description Disables target instance
+     * @example $(".target").range("disable");
+     */
+
+    function disable(data) {
+      if (!data.disabled) {
+        this.prop("disabled", true);
+
+        data.$container.addClass(RawClasses.disabled);
+
+        data.disabled = true;
+      }
     }
-    if (perc > 1) {
-      perc = 1;
+
+    /**
+     * @method
+     * @name update
+     * @description Updates instance.
+     * @example $(".target").range("update");
+     */
+
+    function updateInstance(data) {
+      data.min = parseFloat(data.$el.attr("min")) || 0;
+      data.max = parseFloat(data.$el.attr("max")) || 100;
+      data.step = parseFloat(data.$el.attr("step")) || 1;
+      data.digits = data.step.toString().length - data.step.toString().indexOf(".");
+      data.value = parseFloat(this.val()) || (data.min + ((data.max - data.min) / 2));
+
+      if (data.labels) {
+        data.$labels.filter(Classes.label_max).html(data.formatter.call(this, (data.labels.max) ? data.labels.max : data.max));
+        data.$labels.filter(Classes.label_min).html(data.formatter.call(this, (data.labels.max) ? data.labels.min : data.min));
+      }
+
+      resizeInstance.call(this, data);
     }
 
-    var value = ((data.min - data.max) * perc);
-    value = -parseFloat(value.toFixed(data.digits));
+    /**
+     * @method
+     * @name resize
+     * @description Resizes instance
+     * @example $(".target").range("resize");
+     */
 
-    data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
-    data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
-    /* .attr("aria-valuenow", value) */
-    value += data.min;
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Resizes each instance
+     * @param data [object] "Instance data"
+     */
 
-    if (value !== data.value && value !== false && isResize !== true) {
-      data.$el.val(value)
-          .trigger(Events.raw.change, [ true ]);
+    function resizeInstance(data) {
+      data.stepCount = (data.max - data.min) / data.step;
+      data.offset = data.$track.offset();
 
-      data.value = value;
-    }
-  }
+      if (data.vertical) {
+        data.trackHeight = data.$track.outerHeight();
+        data.handleHeight = data.$handle.outerHeight();
+        data.increment = data.trackHeight / data.stepCount;
+      } else {
+        data.trackWidth = data.$track.outerWidth();
+        data.handleWidth = data.$handle.outerWidth();
+        data.increment = data.trackWidth / data.stepCount;
+      }
 
-  /**
-   * @method private
-   * @name onChange
-   * @description Handles change events
-   * @param e [object] "Event data"
-   * @param internal [boolean] "Flag for internal change"
-   */
-
-  function onChange(e, internal) {
-    var data = e.data;
-
-    if (!internal && !data.disabled) {
       var percent = (data.$el.val() - data.min) / (data.max - data.min);
 
-      position(data, percent);
+      position(data, percent, true); // isResize
     }
-  }
 
-  /**
-   * @method private
-   * @name formatNumber
-   * @description Formats provided number
-   * @param number [number] "Number to format"
-   */
+    /**
+     * @method private
+     * @name onTrackDown
+     * @description Handles panstart event to track
+     * @param e [object] "Event data"
+     */
 
-  function formatNumber(number) {
-    var parts = number.toString().split(".");
+    function onPanStart(e) {
+      Functions.killEvent(e);
 
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      var data = e.data;
 
-    return parts.join(".");
-  }
+      if (!data.disabled) {
+        onPan(e);
 
-  /**
-   * @plugin
-   * @name Range
-   * @description A jQuery plugin for cross browser range inputs.
-   * @type widget
-   * @main range.js
-   * @main range.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency touch.js
-   */
-
-  var Plugin = Formstone.Plugin("range", {
-      widget: true,
-
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param fill [boolean] <false> "Flag to draw fill"
-       * @param formatter [function] <false> "Value format function"
-       * @param labels [boolean] <true> "Flag to draw labels"
-       * @param labels.max [string] "Max value label; defaults to max value"
-       * @param labels.min [string] "Min value label; defaults to min value"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
-       */
-
-      defaults: {
-        customClass    : "",
-        fill           : false,
-        formatter      : false,
-        labels: {
-          max        : false,
-          min        : false
-        },
-        theme          : "fs-light",
-        vertical       : false
-      },
-
-      classes: [
-        "track",
-        "handle",
-        "fill",
-        "marker",
-        "labels",
-        "label",
-        "label_min",
-        "label_max",
-        "vertical",
-        "focus",
-        "disabled"
-      ],
-
-      methods: {
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
-
-        // Public Methods
-
-        enable        : enable,
-        disable       : disable,
-        resize        : resizeInstance,
-        update        : updateInstance
+        data.$container.addClass(RawClasses.focus);
       }
-    }),
+    }
 
-    // Localize References
+    /**
+     * @method private
+     * @name onPan
+     * @description Handles pan event
+     * @param e [object] "Event data"
+     */
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
+    function onPan(e) {
+      Functions.killEvent();
 
-    $Instances    = [];
+      var data = e.data,
+        percent = 0;
 
-})
+      if (!data.disabled) {
+        if (data.vertical) {
+          percent = 1 - (e.pageY - data.offset.top) / data.trackHeight;
+        } else {
+          percent = (e.pageX - data.offset.left) / data.trackWidth;
+        }
+
+        position(data, percent);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPanEnd
+     * @description Handles panend event
+     * @param e [object] "Event data"
+     */
+
+    function onPanEnd(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      if (!data.disabled) {
+        data.$container.removeClass(RawClasses.focus);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onFocus
+     * @description Handles instance focus
+     * @param e [object] "Event data"
+     */
+
+    function onFocus(e) {
+      e.data.$container.addClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onBlur
+     * @description Handles instance blur
+     * @param e [object] "Event data"
+     */
+
+    function onBlur(e) {
+      e.data.$container.removeClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name position
+     * @description Positions handle
+     * @param data [object] "Instance Data"
+     * @param perc [number] "Position precentage"
+     * @param isResize [boolean] "Called from resize"
+     */
+
+    function position(data, perc, isResize) {
+      if (data.increment > 1) {
+        if (data.vertical) {
+          perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackHeight;
+        } else {
+          perc = (Math.round(perc * data.stepCount) * data.increment) / data.trackWidth;
+        }
+      }
+
+      if (perc < 0) {
+        perc = 0;
+      }
+      if (perc > 1) {
+        perc = 1;
+      }
+
+      var value = ((data.min - data.max) * perc);
+      value = -parseFloat(value.toFixed(data.digits));
+
+      data.$fill.css((data.vertical) ? "height" : "width", (perc * 100) + "%");
+      data.$handle.css((data.vertical) ? "bottom" : "left", (perc * 100) + "%");
+      /* .attr("aria-valuenow", value) */
+      value += data.min;
+
+      if (value !== data.value && value !== false && isResize !== true) {
+        data.$el.val(value)
+          .trigger(Events.raw.change, [true]);
+
+        data.value = value;
+      }
+    }
+
+    /**
+     * @method private
+     * @name onChange
+     * @description Handles change events
+     * @param e [object] "Event data"
+     * @param internal [boolean] "Flag for internal change"
+     */
+
+    function onChange(e, internal) {
+      var data = e.data;
+
+      if (!internal && !data.disabled) {
+        var percent = (data.$el.val() - data.min) / (data.max - data.min);
+
+        position(data, percent);
+      }
+    }
+
+    /**
+     * @method private
+     * @name formatNumber
+     * @description Formats provided number
+     * @param number [number] "Number to format"
+     */
+
+    function formatNumber(number) {
+      var parts = number.toString().split(".");
+
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+      return parts.join(".");
+    }
+
+    /**
+     * @plugin
+     * @name Range
+     * @description A jQuery plugin for cross browser range inputs.
+     * @type widget
+     * @main range.js
+     * @main range.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency touch.js
+     */
+
+    var Plugin = Formstone.Plugin("range", {
+        widget: true,
+
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param fill [boolean] <false> "Flag to draw fill"
+         * @param formatter [function] <false> "Value format function"
+         * @param labels [boolean] <true> "Flag to draw labels"
+         * @param labels.max [string] "Max value label; defaults to max value"
+         * @param labels.min [string] "Min value label; defaults to min value"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param vertical [boolean] <false> "Flag to render vertical range; Deprecated use 'orientation' attribute instead
+         */
+
+        defaults: {
+          customClass: "",
+          fill: false,
+          formatter: false,
+          labels: {
+            max: false,
+            min: false
+          },
+          theme: "fs-light",
+          vertical: false
+        },
+
+        classes: [
+          "track",
+          "handle",
+          "fill",
+          "marker",
+          "labels",
+          "label",
+          "label_min",
+          "label_max",
+          "vertical",
+          "focus",
+          "disabled"
+        ],
+
+        methods: {
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
+
+          // Public Methods
+
+          enable: enable,
+          disable: disable,
+          resize: resizeInstance,
+          update: updateInstance
+        }
+      }),
+
+      // Localize References
+
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      $Instances = [];
+
+  })
 
 );
 
@@ -10798,580 +10825,580 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./touch"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./touch"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-  "use strict";
+    "use strict";
 
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-  function setup() {
-    $Body = Formstone.$body;
-  }
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize(windowWidth) {
-    Functions.iterate.call($Instances, resizeInstance);
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances = $(Classes.base);
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    var html = '';
-
-    html += '<div class="' + RawClasses.bar + '">';
-    html += '<div class="' + RawClasses.track + '">';
-    html += '<button type="button" class="' + RawClasses.handle + '" aria-hidden="true" tabindex="-1"></button>';
-    html += '</div></div>';
-
-    data.paddingRight     = parseInt(this.css("padding-right"), 10);
-    data.paddingBottom    = parseInt(this.css("padding-bottom"), 10);
-    data.thisClasses      = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")];
-
-    this.addClass(data.thisClasses.join(" "))
-      .wrapInner('<div class="' + RawClasses.content + '" tabindex="0"></div>')
-      .prepend(html);
-
-    data.$content    = this.find(Classes.content);
-    data.$bar        = this.find(Classes.bar);
-    data.$track      = this.find(Classes.track);
-    data.$handle     = this.find(Classes.handle);
-
-    data.trackMargin = parseInt(data.trackMargin, 10);
-
-    // Events
-
-    data.$content.on(Events.scroll, data, onScroll);
-
-    if (data.mouseWheel) {
-      data.$content.on("wheel" + Events.namespace, data, onMouseWheel);
+    function setup() {
+      $Body = Formstone.$body;
     }
 
-    data.$track.fsTouch({
-      axis    : (data.horizontal) ? "x" : "y",
-      pan     : true
-    }).on(Events.panStart, data, onPanStart)
-      .on(Events.pan, data, onPan)
-      .on(Events.panEnd, data, onPanEnd)
-      .on(Events.click, Functions.killEvent)
-      .on("wheel" + Events.namespace, data, onTrackMouseWheel);
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
 
-    resizeInstance(data);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$track.fsTouch("destroy");
-
-    data.$bar.remove();
-
-    data.$content.off(Events.namespace)
-           .contents()
-           .unwrap();
-
-    this.removeClass(data.thisClasses.join(" "))
-      .off(Events.namespace);
-
-    if (this.attr("id") === data.rawGuid) {
-      this.removeAttr("id");
+    function resize(windowWidth) {
+      Functions.iterate.call($Instances, resizeInstance);
     }
-  }
 
-  /**
-   * @method
-   * @name scroll
-   * @description Scrolls instance of plugin to element or position
-   * @param position [string or int] <null> "Target element selector or static position"
-   * @param duration [int] <null> "Optional scroll duration"
-   * @example $(".target").scrollbar("scroll", position, duration);
-   */
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
 
-  function scroll(data, position, dur) {
-    var duration = dur || data.duration,
-      styles = {};
+    function cacheInstances() {
+      $Instances = $(Classes.base);
+    }
 
-    if ($.type(position) !== "number") {
-      var $target = $(position);
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-      if ($target.length > 0) {
-        var offset = $target.position();
+    function construct(data) {
+      var html = '';
 
-        if (data.horizontal) {
-          position = offset.left + data.$content.scrollLeft();
+      html += '<div class="' + RawClasses.bar + '">';
+      html += '<div class="' + RawClasses.track + '">';
+      html += '<button type="button" class="' + RawClasses.handle + '" aria-hidden="true" tabindex="-1"></button>';
+      html += '</div></div>';
+
+      data.paddingRight = parseInt(this.css("padding-right"), 10);
+      data.paddingBottom = parseInt(this.css("padding-bottom"), 10);
+      data.thisClasses = [RawClasses.base, data.theme, data.customClass, (data.horizontal ? RawClasses.horizontal : "")];
+
+      this.addClass(data.thisClasses.join(" "))
+        .wrapInner('<div class="' + RawClasses.content + '" tabindex="0"></div>')
+        .prepend(html);
+
+      data.$content = this.find(Classes.content);
+      data.$bar = this.find(Classes.bar);
+      data.$track = this.find(Classes.track);
+      data.$handle = this.find(Classes.handle);
+
+      data.trackMargin = parseInt(data.trackMargin, 10);
+
+      // Events
+
+      data.$content.on(Events.scroll, data, onScroll);
+
+      if (data.mouseWheel) {
+        data.$content.on("wheel" + Events.namespace, data, onMouseWheel);
+      }
+
+      data.$track.fsTouch({
+          axis: (data.horizontal) ? "x" : "y",
+          pan: true
+        }).on(Events.panStart, data, onPanStart)
+        .on(Events.pan, data, onPan)
+        .on(Events.panEnd, data, onPanEnd)
+        .on(Events.click, Functions.killEvent)
+        .on("wheel" + Events.namespace, data, onTrackMouseWheel);
+
+      resizeInstance(data);
+
+      cacheInstances();
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      data.$track.fsTouch("destroy");
+
+      data.$bar.remove();
+
+      data.$content.off(Events.namespace)
+        .contents()
+        .unwrap();
+
+      this.removeClass(data.thisClasses.join(" "))
+        .off(Events.namespace);
+
+      if (this.attr("id") === data.rawGuid) {
+        this.removeAttr("id");
+      }
+    }
+
+    /**
+     * @method
+     * @name scroll
+     * @description Scrolls instance of plugin to element or position
+     * @param position [string or int] <null> "Target element selector or static position"
+     * @param duration [int] <null> "Optional scroll duration"
+     * @example $(".target").scrollbar("scroll", position, duration);
+     */
+
+    function scroll(data, position, dur) {
+      var duration = dur || data.duration,
+        styles = {};
+
+      if ($.type(position) !== "number") {
+        var $target = $(position);
+
+        if ($target.length > 0) {
+          var offset = $target.position();
+
+          if (data.horizontal) {
+            position = offset.left + data.$content.scrollLeft();
+          } else {
+            position = offset.top + data.$content.scrollTop();
+          }
         } else {
-          position = offset.top + data.$content.scrollTop();
+          if (position === "top") {
+            position = 0;
+          } else if (position === "bottom") {
+            position = data.horizontal ? data.$content[0].scrollWidth : data.$content[0].scrollHeight;
+          } else {
+            position = data.$content.scrollTop();
+          }
+        }
+      }
+
+      styles[(data.horizontal ? "scrollLeft" : "scrollTop")] = position;
+
+      data.$content.stop()
+        .animate(styles, duration);
+    }
+
+    /**
+     * @method
+     * @name resize
+     * @description Resizes layout on instance of plugin
+     * @example $(".target").scrollbar("resize");
+     */
+
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Resizes layout on instance of plugin
+     */
+
+    function resizeInstance(data) {
+      data.$el.addClass(RawClasses.isSetup);
+
+      var barStyles = {},
+        trackStyles = {},
+        handleStyles = {},
+        handlePosition = 0,
+        active = true;
+
+      if (data.horizontal) {
+        // Horizontal
+        data.barHeight = data.$content[0].offsetHeight - data.$content[0].clientHeight;
+        data.frameWidth = data.$content.outerWidth();
+        data.trackWidth = data.frameWidth - (data.trackMargin * 2);
+        data.scrollWidth = data.$content[0].scrollWidth;
+        data.ratio = data.trackWidth / data.scrollWidth;
+        data.trackRatio = data.trackWidth / data.scrollWidth;
+        data.handleWidth = (data.handleSize > 0) ? data.handleSize : data.trackWidth * data.trackRatio;
+        data.scrollRatio = (data.scrollWidth - data.frameWidth) / (data.trackWidth - data.handleWidth);
+        data.handleBounds = {
+          left: 0,
+          right: data.trackWidth - data.handleWidth
+        };
+
+        data.$content.css({
+          paddingBottom: data.barHeight + data.paddingBottom
+        });
+
+        var scrollLeft = data.$content.scrollLeft();
+
+        handlePosition = scrollLeft * data.ratio;
+        active = (data.scrollWidth <= data.frameWidth);
+
+        barStyles = {
+          width: data.frameWidth
+        };
+
+        trackStyles = {
+          width: data.trackWidth,
+          marginLeft: data.trackMargin,
+          marginRight: data.trackMargin
+        };
+
+        handleStyles = {
+          width: data.handleWidth
+        };
+      } else {
+        // Vertical
+        data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
+        data.frameHeight = data.$content.outerHeight();
+        data.trackHeight = data.frameHeight - (data.trackMargin * 2);
+        data.scrollHeight = data.$content[0].scrollHeight;
+        data.ratio = data.trackHeight / data.scrollHeight;
+        data.trackRatio = data.trackHeight / data.scrollHeight;
+        data.handleHeight = (data.handleSize > 0) ? data.handleSize : data.trackHeight * data.trackRatio;
+        data.scrollRatio = (data.scrollHeight - data.frameHeight) / (data.trackHeight - data.handleHeight);
+        data.handleBounds = {
+          top: 0,
+          bottom: data.trackHeight - data.handleHeight
+        };
+
+        var scrollTop = data.$content.scrollTop();
+
+        handlePosition = scrollTop * data.ratio;
+        active = (data.scrollHeight <= data.frameHeight);
+
+        barStyles = {
+          height: data.frameHeight
+        };
+
+        trackStyles = {
+          height: data.trackHeight,
+          marginBottom: data.trackMargin,
+          marginTop: data.trackMargin
+        };
+
+        handleStyles = {
+          height: data.handleHeight
+        };
+      }
+
+      // Updates
+
+      if (active) {
+        data.$el.removeClass(RawClasses.active);
+      } else {
+        data.$el.addClass(RawClasses.active);
+      }
+
+      data.$bar.css(barStyles);
+      data.$track.css(trackStyles);
+      data.$handle.css(handleStyles);
+
+      data.panning = false;
+
+      positionContent(data, handlePosition);
+
+      onScroll({
+        data: data
+      });
+
+      data.$el.removeClass(RawClasses.setup);
+    }
+
+    /**
+     * @method private
+     * @name onScroll
+     * @description Handles scroll event
+     * @param e [object] "Event data"
+     */
+
+    function onScroll(e) {
+      Functions.killEvent(e);
+
+      var data = e.data,
+        handleStyles = {};
+
+      if (!data.panning) {
+        if (data.horizontal) {
+          // Horizontal
+          var scrollLeft = data.$content.scrollLeft();
+
+          if (scrollLeft < 0) {
+            scrollLeft = 0;
+          }
+
+          data.handleLeft = scrollLeft / data.scrollRatio;
+
+          if (data.handleLeft > data.handleBounds.right) {
+            data.handleLeft = data.handleBounds.right;
+          }
+
+          handleStyles = {
+            left: data.handleLeft
+          };
+        } else {
+          // Vertical
+          var scrollTop = data.$content.scrollTop();
+
+          if (scrollTop < 0) {
+            scrollTop = 0;
+          }
+
+          data.handleTop = scrollTop / data.scrollRatio;
+
+          if (data.handleTop > data.handleBounds.bottom) {
+            data.handleTop = data.handleBounds.bottom;
+          }
+
+          handleStyles = {
+            top: data.handleTop
+          };
+        }
+
+        data.$handle.css(handleStyles);
+      }
+    }
+
+    function onTrackMouseWheel(e) {
+      onMouseWheel(e, true);
+    }
+
+    /**
+     * @method private
+     * @name onMouseWheel
+     * @description Handles mousewheel event on content
+     * @param e [object] "Event data"
+     */
+
+    function onMouseWheel(e, fromTrack) {
+      // http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
+      var data = e.data,
+        delta,
+        direction;
+
+      if (data.horizontal) {
+        // Horizontal
+        var scrollLeft = data.$content[0].scrollLeft,
+          scrollWidth = data.$content[0].scrollWidth,
+          width = data.$content.outerWidth();
+
+        delta = e.originalEvent.deltaX * ((fromTrack === true) ? -1 : 1);
+
+        if (fromTrack === true) {
+          data.$content.scrollLeft(scrollLeft - delta);
+          return killEvent(e);
+        }
+
+        direction = (delta < 0) ? "right" : "left";
+
+        if (direction === "left" && delta > (scrollWidth - width - scrollLeft)) {
+          data.$content.scrollLeft(scrollWidth);
+          return killEvent(e);
+        } else if (direction === "right" && -delta > scrollLeft) {
+          data.$content.scrollLeft(0);
+          return killEvent(e);
         }
       } else {
-        if (position === "top") {
-          position = 0;
-        } else if (position === "bottom") {
-          position = data.horizontal ? data.$content[0].scrollWidth : data.$content[0].scrollHeight;
-        } else {
-          position = data.$content.scrollTop();
+        // Vertical
+        var scrollTop = data.$content[0].scrollTop,
+          scrollHeight = data.$content[0].scrollHeight,
+          height = data.$content.outerHeight();
+
+        delta = e.originalEvent.deltaY * ((fromTrack === true) ? -1 : 1);
+
+        if (fromTrack === true) {
+          data.$content.scrollTop(scrollTop - delta);
+          return killEvent(e);
+        }
+
+        direction = (delta < 0) ? "up" : "down";
+
+        if (direction === "down" && delta > (scrollHeight - height - scrollTop)) {
+          data.$content.scrollTop(scrollHeight);
+          return killEvent(e);
+        } else if (direction === "up" && -delta > scrollTop) {
+          data.$content.scrollTop(0);
+          return killEvent(e);
         }
       }
     }
 
-    styles[ (data.horizontal ? "scrollLeft" : "scrollTop") ] = position;
+    /**
+     * @method private
+     * @name killEvent
+     * @description Localized version of Formstone.killEvent()
+     * @param e [object] "Event data"
+     */
 
-    data.$content.stop()
-           .animate(styles, duration);
-  }
-
-  /**
-   * @method
-   * @name resize
-   * @description Resizes layout on instance of plugin
-   * @example $(".target").scrollbar("resize");
-   */
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Resizes layout on instance of plugin
-   */
-
-  function resizeInstance(data)  {
-    data.$el.addClass(RawClasses.isSetup);
-
-    var barStyles = {},
-      trackStyles = {},
-      handleStyles = {},
-      handlePosition = 0,
-      active = true;
-
-    if (data.horizontal) {
-      // Horizontal
-      data.barHeight       = data.$content[0].offsetHeight - data.$content[0].clientHeight;
-      data.frameWidth      = data.$content.outerWidth();
-      data.trackWidth      = data.frameWidth - (data.trackMargin * 2);
-      data.scrollWidth     = data.$content[0].scrollWidth;
-      data.ratio           = data.trackWidth / data.scrollWidth;
-      data.trackRatio      = data.trackWidth / data.scrollWidth;
-      data.handleWidth     = (data.handleSize > 0) ? data.handleSize : data.trackWidth * data.trackRatio;
-      data.scrollRatio     = (data.scrollWidth - data.frameWidth) / (data.trackWidth - data.handleWidth);
-      data.handleBounds    = {
-        left: 0,
-        right: data.trackWidth - data.handleWidth
-      };
-
-      data.$content.css({
-        paddingBottom: data.barHeight + data.paddingBottom
-      });
-
-      var scrollLeft = data.$content.scrollLeft();
-
-      handlePosition = scrollLeft * data.ratio;
-      active = (data.scrollWidth <= data.frameWidth);
-
-      barStyles = {
-        width: data.frameWidth
-      };
-
-      trackStyles = {
-        width: data.trackWidth,
-        marginLeft: data.trackMargin,
-        marginRight: data.trackMargin
-      };
-
-      handleStyles = {
-        width: data.handleWidth
-      };
-    } else {
-      // Vertical
-      data.barWidth = data.$content[0].offsetWidth - data.$content[0].clientWidth;
-      data.frameHeight = data.$content.outerHeight();
-      data.trackHeight = data.frameHeight - (data.trackMargin * 2);
-      data.scrollHeight = data.$content[0].scrollHeight;
-      data.ratio = data.trackHeight / data.scrollHeight;
-      data.trackRatio = data.trackHeight / data.scrollHeight;
-      data.handleHeight = (data.handleSize > 0) ? data.handleSize : data.trackHeight * data.trackRatio;
-      data.scrollRatio = (data.scrollHeight - data.frameHeight) / (data.trackHeight - data.handleHeight);
-      data.handleBounds = {
-        top: 0,
-        bottom: data.trackHeight - data.handleHeight
-      };
-
-      var scrollTop = data.$content.scrollTop();
-
-      handlePosition = scrollTop * data.ratio;
-      active = (data.scrollHeight <= data.frameHeight);
-
-      barStyles = {
-        height: data.frameHeight
-      };
-
-      trackStyles = {
-        height: data.trackHeight,
-        marginBottom: data.trackMargin,
-        marginTop: data.trackMargin
-      };
-
-      handleStyles = {
-        height: data.handleHeight
-      };
+    function killEvent(e) {
+      Functions.killEvent(e);
+      e.returnValue = false;
+      return false;
     }
 
-    // Updates
+    /**
+     * @method private
+     * @name onPanStart
+     * @description Handles pan event on track
+     * @param e [object] "Event data"
+     */
 
-    if (active) {
-      data.$el.removeClass(RawClasses.active);
-    } else {
-      data.$el.addClass(RawClasses.active);
+    function onPanStart(e) {
+      var data = e.data,
+        offset = data.$track.offset(),
+        handlePosition;
+
+      data.panning = true;
+
+      if (data.horizontal) {
+        handlePosition = data.handleLeft = e.pageX - offset.left /* + $Window.scrollLeft() */ - (data.handleWidth / 2);
+      } else {
+        handlePosition = data.handleTop = e.pageY - offset.top /* + $Window.scrollTop() */ - (data.handleHeight / 2);
+      }
+
+      positionContent(data, handlePosition);
     }
 
-    data.$bar.css(barStyles);
-    data.$track.css(trackStyles);
-    data.$handle.css(handleStyles);
+    function onPan(e) {
+      var data = e.data,
+        handlePosition;
 
-    data.panning = false;
+      if (data.horizontal) {
+        handlePosition = data.handleLeft + e.deltaX;
+      } else {
+        handlePosition = data.handleTop + e.deltaY;
+      }
 
-    positionContent(data, handlePosition);
+      positionContent(data, handlePosition);
+    }
 
-    onScroll({
-      data : data
-    });
+    function onPanEnd(e) {
+      var data = e.data;
 
-    data.$el.removeClass(RawClasses.setup);
-  }
+      data.panning = false;
 
-  /**
-   * @method private
-   * @name onScroll
-   * @description Handles scroll event
-   * @param e [object] "Event data"
-   */
+      if (data.horizontal) {
+        data.handleLeft += e.deltaX;
+      } else {
+        data.handleTop += e.deltaY;
+      }
 
-  function onScroll(e) {
-    Functions.killEvent(e);
+      // positionContent(data, handlePosition);
+    }
 
-    var data = e.data,
-      handleStyles = {};
+    /**
+     * @method private
+     * @name position
+     * @description Position handle based on scroll
+     * @param data [object] "Instance data"
+     * @param position [int] "Scroll position"
+     */
 
-    if (!data.panning) {
+    function positionContent(data, position) {
+      var handleStyles = {};
+
       if (data.horizontal) {
         // Horizontal
-        var scrollLeft = data.$content.scrollLeft();
-
-        if (scrollLeft < 0) {
-          scrollLeft = 0;
+        if (position < data.handleBounds.left) {
+          position = data.handleBounds.left;
         }
 
-        data.handleLeft = scrollLeft / data.scrollRatio;
-
-        if (data.handleLeft > data.handleBounds.right) {
-          data.handleLeft = data.handleBounds.right;
+        if (position > data.handleBounds.right) {
+          position = data.handleBounds.right;
         }
 
         handleStyles = {
-          left: data.handleLeft
+          left: position
         };
+
+        data.$content.scrollLeft(Math.round(position * data.scrollRatio));
       } else {
         // Vertical
-        var scrollTop = data.$content.scrollTop();
-
-        if (scrollTop < 0) {
-          scrollTop = 0;
+        if (position < data.handleBounds.top) {
+          position = data.handleBounds.top;
         }
 
-        data.handleTop = scrollTop / data.scrollRatio;
-
-        if (data.handleTop > data.handleBounds.bottom) {
-          data.handleTop = data.handleBounds.bottom;
+        if (position > data.handleBounds.bottom) {
+          position = data.handleBounds.bottom;
         }
 
         handleStyles = {
-          top: data.handleTop
+          top: position
         };
+
+        data.$content.scrollTop(Math.round(position * data.scrollRatio));
       }
 
       data.$handle.css(handleStyles);
     }
-  }
 
-  function onTrackMouseWheel(e) {
-    onMouseWheel(e, true);
-  }
+    /**
+     * @plugin
+     * @name Scrollbar
+     * @description A jQuery plugin for custom scrollbars.
+     * @type widget
+     * @main scrollbar.js
+     * @main scrollbar.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency touch.js
+     */
 
-  /**
-   * @method private
-   * @name onMouseWheel
-   * @description Handles mousewheel event on content
-   * @param e [object] "Event data"
-   */
+    var Plugin = Formstone.Plugin("scrollbar", {
+        widget: true,
 
-  function onMouseWheel(e, fromTrack) {
-    // http://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element/16324762#16324762
-    var data = e.data,
-      delta,
-      direction;
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param duration [int] <0> "Scroll animation length"
+         * @param handleSize [int] <0> "Handle size; 0 to auto size"
+         * @param horizontal [boolean] <false> "Scroll horizontally"
+         * @param mouseWheel [boolean] <true> "Flag to prevent scrolling of parent element"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param trackMargin [int] <0> "Margin between track and handle edge”
+         */
 
-    if (data.horizontal) {
-      // Horizontal
-      var scrollLeft   = data.$content[0].scrollLeft,
-        scrollWidth  = data.$content[0].scrollWidth,
-        width        = data.$content.outerWidth();
+        defaults: {
+          customClass: "",
+          duration: 0,
+          handleSize: 0,
+          horizontal: false,
+          mouseWheel: true,
+          theme: "fs-light",
+          trackMargin: 0
+        },
 
-      delta = e.originalEvent.deltaX * ( (fromTrack === true) ? -1 : 1 );
+        classes: [
+          "content",
+          "bar",
+          "track",
+          "handle",
+          "horizontal",
+          "setup",
+          "active"
+        ],
 
-      if (fromTrack === true) {
-        data.$content.scrollLeft(scrollLeft - delta);
-        return killEvent(e);
-      }
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
 
-      direction = (delta < 0) ? "right" : "left";
+          // Public Methods
+          scroll: scroll,
+          resize: resizeInstance
+        }
+      }),
 
-      if (direction === "left" && delta > (scrollWidth - width - scrollLeft)) {
-        data.$content.scrollLeft(scrollWidth);
-        return killEvent(e);
-      } else if (direction === "right" && -delta > scrollLeft) {
-        data.$content.scrollLeft(0);
-        return killEvent(e);
-      }
-    } else {
-      // Vertical
-      var scrollTop    = data.$content[0].scrollTop,
-        scrollHeight = data.$content[0].scrollHeight,
-        height       = data.$content.outerHeight();
+      // Localize References
 
-      delta = e.originalEvent.deltaY * ( (fromTrack === true) ? -1 : 1 );
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-      if (fromTrack === true) {
-        data.$content.scrollTop(scrollTop - delta);
-        return killEvent(e);
-      }
+      $Body,
+      $Window = Formstone.$window,
+      $Instances = [];
 
-      direction = (delta < 0) ? "up" : "down";
-
-      if (direction === "down" && delta > (scrollHeight - height - scrollTop)) {
-        data.$content.scrollTop(scrollHeight);
-        return killEvent(e);
-      } else if (direction === "up" && -delta > scrollTop) {
-        data.$content.scrollTop(0);
-        return killEvent(e);
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name killEvent
-   * @description Localized version of Formstone.killEvent()
-   * @param e [object] "Event data"
-   */
-
-  function killEvent(e) {
-    Functions.killEvent(e);
-    e.returnValue = false;
-    return false;
-  }
-
-  /**
-   * @method private
-   * @name onPanStart
-   * @description Handles pan event on track
-   * @param e [object] "Event data"
-   */
-
-  function onPanStart(e) {
-    var data      = e.data,
-      offset    = data.$track.offset(),
-      handlePosition;
-
-    data.panning = true;
-
-    if (data.horizontal) {
-      handlePosition = data.handleLeft = e.pageX - offset.left /* + $Window.scrollLeft() */ - (data.handleWidth / 2);
-    } else {
-      handlePosition = data.handleTop = e.pageY - offset.top /* + $Window.scrollTop() */ - (data.handleHeight / 2);
-    }
-
-    positionContent(data, handlePosition);
-  }
-
-  function onPan(e) {
-    var data = e.data,
-      handlePosition;
-
-    if (data.horizontal) {
-      handlePosition = data.handleLeft + e.deltaX;
-    } else {
-      handlePosition = data.handleTop + e.deltaY;
-    }
-
-    positionContent(data, handlePosition);
-  }
-
-  function onPanEnd(e) {
-    var data = e.data;
-
-    data.panning = false;
-
-    if (data.horizontal) {
-      data.handleLeft += e.deltaX;
-    } else {
-      data.handleTop += e.deltaY;
-    }
-
-    // positionContent(data, handlePosition);
-  }
-
-  /**
-   * @method private
-   * @name position
-   * @description Position handle based on scroll
-   * @param data [object] "Instance data"
-   * @param position [int] "Scroll position"
-   */
-
-  function positionContent(data, position) {
-    var handleStyles = {};
-
-    if (data.horizontal) {
-      // Horizontal
-      if (position < data.handleBounds.left) {
-        position = data.handleBounds.left;
-      }
-
-      if (position > data.handleBounds.right) {
-        position = data.handleBounds.right;
-      }
-
-      handleStyles = {
-        left: position
-      };
-
-      data.$content.scrollLeft(Math.round(position * data.scrollRatio));
-    } else {
-      // Vertical
-      if (position < data.handleBounds.top) {
-        position = data.handleBounds.top;
-      }
-
-      if (position > data.handleBounds.bottom) {
-        position = data.handleBounds.bottom;
-      }
-
-      handleStyles = {
-        top: position
-      };
-
-      data.$content.scrollTop(Math.round(position * data.scrollRatio));
-    }
-
-    data.$handle.css(handleStyles);
-  }
-
-  /**
-   * @plugin
-   * @name Scrollbar
-   * @description A jQuery plugin for custom scrollbars.
-   * @type widget
-   * @main scrollbar.js
-   * @main scrollbar.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency touch.js
-   */
-
-  var Plugin = Formstone.Plugin("scrollbar", {
-      widget: true,
-
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param duration [int] <0> "Scroll animation length"
-       * @param handleSize [int] <0> "Handle size; 0 to auto size"
-       * @param horizontal [boolean] <false> "Scroll horizontally"
-       * @param mouseWheel [boolean] <true> "Flag to prevent scrolling of parent element"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param trackMargin [int] <0> "Margin between track and handle edge”
-       */
-
-      defaults: {
-        customClass    : "",
-        duration       : 0,
-        handleSize     : 0,
-        horizontal     : false,
-        mouseWheel     : true,
-        theme          : "fs-light",
-        trackMargin    : 0
-      },
-
-      classes: [
-        "content",
-        "bar",
-        "track",
-        "handle",
-        "horizontal",
-        "setup",
-        "active"
-      ],
-
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
-
-        // Public Methods
-        scroll        : scroll,
-        resize        : resizeInstance
-      }
-    }),
-
-    // Localize References
-
-    Classes        = Plugin.classes,
-    RawClasses     = Classes.raw,
-    Events         = Plugin.events,
-    Functions      = Plugin.functions,
-
-    $Body,
-    $Window        = Formstone.$window,
-    $Instances     = [];
-
-})
+  })
 
 );
 
@@ -11379,316 +11406,316 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize() {
-    Functions.iterate.call($Instances, resizeInstance);
-  }
-
-  /**
-   * @method private
-   * @name raf
-   * @description Handles request animation frame
-   */
-
-  function raf() {
-        ScrollTop = $Window.scrollTop();
-
-    if (ScrollTop < 0) {
-      ScrollTop = 0;
-    }
-
-    if (ScrollTop !== OldScrollTop) {
-      renderRAF();
-
-      OldScrollTop = ScrollTop;
-    }
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances = $(Classes.base);
-
-        resize();
-  }
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    data.stuck    = false;
-    data.passed   = true;
-    data.$clone   = data.$el.clone();
-
-    data.container  = data.$el.data("sticky-container");
-    data.$container = $(data.container);
-
-    data.$el.addClass(RawClasses.base);
-    data.$clone.removeClass(RawClasses.element)
-           .addClass(RawClasses.clone);
-    data.$container.addClass(RawClasses.container);
-
-    data.$stickys = $().add(data.$el).add(data.$clone);
-
-    data.$el.after(data.$clone);
-  }
-
-  /**
-   * @method private
-   * @name postConstruct
-   * @description Run post build.
-   * @param data [object] "Instance data"
-   */
-
-  function postConstruct(data) {
-        cacheInstances();
-        resize();
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$clone.remove();
-    data.$container.removeClass(RawClasses.container);
-
-    data.$el.css({
-      height: '',
-      width:  '',
-      top:    '',
-      bottom: '',
-      marginBottom: ''
-    }).removeClass(RawClasses.base);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method private
-   * @name renderRAF
-   * @description Updates DOM based on animation values
-   */
-
-  function renderRAF() {
-        Functions.iterate.call($Instances, checkInstance);
-    }
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Handle window resize event
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-    cacheProps(data);
-
-    if (data.$container.length) {
-      var containerPos = data.$container.position();
-
-            data.min = containerPos.top + data.containerMargin - data.margin;
-      data.max = data.min + data.$container.outerHeight(false) - data.height;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+      ], factory);
     } else {
-            var $el;
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-            if (data.stuck) {
-                $el = data.$clone;
-            } else {
-                $el = data.$el;
-            }
+    "use strict";
 
-            var elPos = $el.position();
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
 
-            data.min = elPos.top;
-      data.max = false;
+    function resize() {
+      Functions.iterate.call($Instances, resizeInstance);
     }
 
-        checkInstance(data);
-  }
+    /**
+     * @method private
+     * @name raf
+     * @description Handles request animation frame
+     */
 
-  function cacheProps(data) {
-        var $el;
+    function raf() {
+      ScrollTop = $Window.scrollTop();
 
-        if (data.stuck) {
-            $el = data.$clone;
-        } else {
-            $el = data.$el;
-        }
-
-    data.margin = parseInt( $el.css("margin-top"), 10);
-
-    if (data.$container.length) {
-       data.containerMargin = parseInt( data.$container.css("margin-top"), 10);
-    } else {
-      data.containerMargin = 0;
-    }
-
-    data.height = $el.outerHeight();
-    data.width  = $el.outerWidth();
-  }
-
-  /**
-   * @method private
-   * @name checkInstance
-   * @description Handle window scroll event
-   * @param data [object] "Instance data"
-   */
-
-  function checkInstance(data) {
-    var check = (ScrollTop + data.offset);
-
-    if ( check >= data.min ) {
-            data.stuck = true;
-      data.$stickys.addClass(RawClasses.stuck);
-
-      if (!data.stuck) {
-        data.$el.trigger(Events.stuck);
-
-        cacheProps(data);
+      if (ScrollTop < 0) {
+        ScrollTop = 0;
       }
 
-      var top = data.offset;
-      var bottom = '';
+      if (ScrollTop !== OldScrollTop) {
+        renderRAF();
 
-      if (data.max && check > data.max) {
-        if (!data.passed) {
-          data.$el.trigger(Events.passed);
-        }
-
-        data.passed = true;
-        data.$stickys.addClass(RawClasses.passed);
-
-        top = '';
-        bottom = 0;
-      } else {
-        data.passed = false;
-        data.$stickys.removeClass(RawClasses.passed);
+        OldScrollTop = ScrollTop;
       }
+    }
 
-            data.$el.css({
-                height: data.height,
-        width:  data.width,
-        top:    top,
-        bottom: bottom,
-        marginBottom: 0
-      });
-    } else {
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
+
+    function cacheInstances() {
+      $Instances = $(Classes.base);
+
+      resize();
+    }
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
+
+    function construct(data) {
       data.stuck = false;
-            data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+      data.passed = true;
+      data.$clone = data.$el.clone();
 
-      if (data.stuck) {
-        data.$el.trigger(Events.unstuck);
+      data.container = data.$el.data("sticky-container");
+      data.$container = $(data.container);
 
-        // cacheProps(data);
-      }
+      data.$el.addClass(RawClasses.base);
+      data.$clone.removeClass(RawClasses.element)
+        .addClass(RawClasses.clone);
+      data.$container.addClass(RawClasses.container);
+
+      data.$stickys = $().add(data.$el).add(data.$clone);
+
+      data.$el.after(data.$clone);
+    }
+
+    /**
+     * @method private
+     * @name postConstruct
+     * @description Run post build.
+     * @param data [object] "Instance data"
+     */
+
+    function postConstruct(data) {
+      cacheInstances();
+      resize();
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      data.$clone.remove();
+      data.$container.removeClass(RawClasses.container);
 
       data.$el.css({
         height: '',
-        width:  '',
-        top:    '',
+        width: '',
+        top: '',
         bottom: '',
         marginBottom: ''
-      });
+      }).removeClass(RawClasses.base);
+
+      cacheInstances();
     }
-  }
 
-  /**
-   * @plugin
-   * @name Sticky
-   * @description A jQuery plugin for sticky elements.
-   * @type widget
-   * @main sticky.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
+    /**
+     * @method private
+     * @name renderRAF
+     * @description Updates DOM based on animation values
+     */
 
-  var Plugin = Formstone.Plugin("sticky", {
-      widget: true,
+    function renderRAF() {
+      Functions.iterate.call($Instances, checkInstance);
+    }
 
-      /**
-       * @options
-       * @param offset [int] <0> "Element offset for activating sticky position"
-       */
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Handle window resize event
+     * @param data [object] "Instance data"
+     */
 
-      defaults: {
-        offset    : 0,
-      },
+    function resizeInstance(data) {
+      cacheProps(data);
 
-      classes: [
-        "sticky",
-        "stuck",
-        "clone",
-        "container",
-        "passed"
-      ],
+      if (data.$container.length) {
+        var containerPos = data.$container.position();
 
-      /**
-       * @events
-       * @event passed.sticky "Element passed"
-       * @event stuck.sticky "Element stuck"
-       * @event unstuck.sticky "Element unstuck"
-       */
+        data.min = containerPos.top + data.containerMargin - data.margin;
+        data.max = data.min + data.$container.outerHeight(false) - data.height;
+      } else {
+        var $el;
 
-      events: {
-        passed     : "passed",
-        stuck      : "stuck",
-        unstuck    : "unstuck"
-      },
+        if (data.stuck) {
+          $el = data.$clone;
+        } else {
+          $el = data.$el;
+        }
 
-      methods: {
-        _construct    : construct,
-        _postConstruct: postConstruct,
-        _destruct     : destruct,
-        _resize       : resize,
-        _raf          : raf
+        var elPos = $el.position();
+
+        data.min = elPos.top;
+        data.max = false;
       }
-    }),
 
-    // Localize References
+      checkInstance(data);
+    }
 
-    Namespace     = Plugin.namespace,
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-        Events        = Plugin.events,
-    Functions     = Plugin.functions,
+    function cacheProps(data) {
+      var $el;
 
-    Window        = Formstone.window,
-    $Window       = Formstone.$window,
-    $Body,
-    ScrollTop     = 0,
-    OldScrollTop  = 0,
-    $Instances    = [];
+      if (data.stuck) {
+        $el = data.$clone;
+      } else {
+        $el = data.$el;
+      }
 
-})
+      data.margin = parseInt($el.css("margin-top"), 10);
+
+      if (data.$container.length) {
+        data.containerMargin = parseInt(data.$container.css("margin-top"), 10);
+      } else {
+        data.containerMargin = 0;
+      }
+
+      data.height = $el.outerHeight();
+      data.width = $el.outerWidth();
+    }
+
+    /**
+     * @method private
+     * @name checkInstance
+     * @description Handle window scroll event
+     * @param data [object] "Instance data"
+     */
+
+    function checkInstance(data) {
+      var check = (ScrollTop + data.offset);
+
+      if (check >= data.min) {
+        data.stuck = true;
+        data.$stickys.addClass(RawClasses.stuck);
+
+        if (!data.stuck) {
+          data.$el.trigger(Events.stuck);
+
+          cacheProps(data);
+        }
+
+        var top = data.offset;
+        var bottom = '';
+
+        if (data.max && check > data.max) {
+          if (!data.passed) {
+            data.$el.trigger(Events.passed);
+          }
+
+          data.passed = true;
+          data.$stickys.addClass(RawClasses.passed);
+
+          top = '';
+          bottom = 0;
+        } else {
+          data.passed = false;
+          data.$stickys.removeClass(RawClasses.passed);
+        }
+
+        data.$el.css({
+          height: data.height,
+          width: data.width,
+          top: top,
+          bottom: bottom,
+          marginBottom: 0
+        });
+      } else {
+        data.stuck = false;
+        data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+
+        if (data.stuck) {
+          data.$el.trigger(Events.unstuck);
+
+          // cacheProps(data);
+        }
+
+        data.$el.css({
+          height: '',
+          width: '',
+          top: '',
+          bottom: '',
+          marginBottom: ''
+        });
+      }
+    }
+
+    /**
+     * @plugin
+     * @name Sticky
+     * @description A jQuery plugin for sticky elements.
+     * @type widget
+     * @main sticky.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var Plugin = Formstone.Plugin("sticky", {
+        widget: true,
+
+        /**
+         * @options
+         * @param offset [int] <0> "Element offset for activating sticky position"
+         */
+
+        defaults: {
+          offset: 0,
+        },
+
+        classes: [
+          "sticky",
+          "stuck",
+          "clone",
+          "container",
+          "passed"
+        ],
+
+        /**
+         * @events
+         * @event passed.sticky "Element passed"
+         * @event stuck.sticky "Element stuck"
+         * @event unstuck.sticky "Element unstuck"
+         */
+
+        events: {
+          passed: "passed",
+          stuck: "stuck",
+          unstuck: "unstuck"
+        },
+
+        methods: {
+          _construct: construct,
+          _postConstruct: postConstruct,
+          _destruct: destruct,
+          _resize: resize,
+          _raf: raf
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      $Body,
+      ScrollTop = 0,
+      OldScrollTop = 0,
+      $Instances = [];
+
+  })
 
 );
 
@@ -11696,285 +11723,285 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    data.enabled    = false;
-    data.active     = false;
-
-    data.classes    = $.extend(true, {}, Classes, data.classes);
-
-    data.target     = this.data(Namespace + "-target");
-    data.$target    = $(data.target).addClass(data.classes.raw.target);
-
-    data.mq         = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
-
-    // live query for linked to avoid missing new elements
-    var linked      = this.data(Namespace + "-linked");
-    data.linked     = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
-
-    // live query for the group to avoid missing new elements
-    var group       = this.data(Namespace + "-group");
-    data.group      = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
-
-    data.$swaps     = $().add(this).add(data.$target);
-
-    this.on(Events.click + data.dotGuid, data, onClick);
-  }
-
-  /**
-   * @method private
-   * @name postConstruct
-   * @description Run post build.
-   * @param data [object] "Instance data"
-   */
-
-  function postConstruct(data) {
-    if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
-      $(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
-    }
-
-    // Should be activate when enabled
-    data.onEnable = this.data(Namespace + "-active") || false;
-
-    // Media Query support
-    $.fsMediaquery("bind", data.rawGuid, data.mq, {
-      enter: function() {
-        enable.call(data.$el, data, true);
-      },
-      leave: function() {
-        disable.call(data.$el, data, true);
-      }
-    });
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    $.fsMediaquery("unbind", data.rawGuid);
-
-    data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") )
-           .off(Events.namespace);
-  }
-
-  /**
-   * @method
-   * @name activate
-   * @description Activate instance.
-   * @example $(".target").swap("activate");
-   */
-
-  function activate(data, fromLinked) {
-    if (data.enabled && !data.active) {
-      if (data.group && !fromLinked) {
-        // Deactivates grouped instances
-        $(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate", true);
-      }
-
-      // index in group
-      var index = (data.group) ? $(data.group).index(data.$el) : null;
-
-      data.$swaps.addClass(data.classes.raw.active);
-
-      if (!fromLinked) {
-        if (data.linked) {
-          // Linked handles
-          $(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
-        }
-      }
-
-      this.trigger(Events.activate, [index]);
-
-      data.active = true;
-    }
-  }
-
-  /**
-   * @method
-   * @name deactivate
-   * @description Deactivates instance.
-   * @example $(".target").swap("deactivate");
-   */
-
-  function deactivate(data, fromLinked) {
-    if (data.enabled && data.active) {
-      data.$swaps.removeClass(data.classes.raw.active);
-
-      if (!fromLinked) {
-        if (data.linked) {
-          // Linked handles
-          $(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
-        }
-      }
-
-      this.trigger(Events.deactivate);
-
-      data.active = false;
-    }
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables instance.
-   * @example $(".target").swap("enable");
-   */
-
-  function enable(data, fromLinked) {
-    if (!data.enabled) {
-      data.enabled = true;
-
-      data.$swaps.addClass(data.classes.raw.enabled);
-
-      if (!fromLinked) {
-        // Linked handles
-        $(data.linked).not(data.$el)[Plugin.namespaceClean]("enable");
-      }
-
-      this.trigger(Events.enable);
-
-      if (data.onEnable) {
-        data.active = false;
-        activate.call(this, data);
-      } else {
-        data.active = true;
-        deactivate.call(this, data);
-      }
-    }
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables instance.
-   * @example $(".target").swap("disable");
-   */
-
-  function disable(data, fromLinked) {
-    if (data.enabled) {
-      data.enabled = false;
-
-      data.$swaps.removeClass( [data.classes.raw.enabled, data.classes.raw.active].join(" ") );
-
-      if (!fromLinked) {
-        // Linked handles
-        $(data.linked).not(data.$el)[Plugin.namespaceClean]("disable");
-      }
-
-      this.trigger(Events.disable);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onClick
-   * @description Handles click nav click.
-   * @param e [object] "Event data"
-   */
-
-  function onClick(e) {
-    Functions.killEvent(e);
-
-    var data = e.data;
-
-    if (data.active && data.collapse) {
-      deactivate.call(data.$el, data);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery"
+      ], factory);
     } else {
-      activate.call(data.$el, data);
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @plugin
-   * @name Swap
-   * @description A jQuery plugin for toggling states.
-   * @type widget
-   * @main swap.js
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   */
+    "use strict";
 
-  var Plugin = Formstone.Plugin("swap", {
-      widget: true,
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-      /**
-       * @options
-       * @param collapse [boolean] <true> "Allow swap to collapse it's target"
-       * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
-       */
+    function construct(data) {
+      data.enabled = false;
+      data.active = false;
 
-      defaults: {
-        collapse       : true,
-        maxWidth       : Infinity
-      },
+      data.classes = $.extend(true, {}, Classes, data.classes);
 
-      classes: [
-        "target",
-        "enabled",
-        "active"
-      ],
+      data.target = this.data(Namespace + "-target");
+      data.$target = $(data.target).addClass(data.classes.raw.target);
 
-      /**
-       * @events
-       * @event activate.swap "Swap activated"
-       * @event deactivate.swap "Swap deactivated"
-       * @event enable.swap "Swap enabled"
-       * @event disable.swap "Swap diabled"
-       */
+      data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
 
-      events: {
-        activate      : "activate",
-        deactivate    : "deactivate",
-        enable        : "enable",
-        disable       : "disable"
-      },
+      // live query for linked to avoid missing new elements
+      var linked = this.data(Namespace + "-linked");
+      data.linked = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
 
-      methods: {
-        _construct    : construct,
-        _postConstruct: postConstruct,
-        _destruct     : destruct,
+      // live query for the group to avoid missing new elements
+      var group = this.data(Namespace + "-group");
+      data.group = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
 
-        // Public Methods
+      data.$swaps = $().add(this).add(data.$target);
 
-        activate      : activate,
-        deactivate    : deactivate,
-        enable        : enable,
-        disable       : disable
+      this.on(Events.click + data.dotGuid, data, onClick);
+    }
+
+    /**
+     * @method private
+     * @name postConstruct
+     * @description Run post build.
+     * @param data [object] "Instance data"
+     */
+
+    function postConstruct(data) {
+      if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
+        $(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
       }
-    }),
 
-    // Localize References
+      // Should be activate when enabled
+      data.onEnable = this.data(Namespace + "-active") || false;
 
-    Namespace     = Plugin.namespace,
-    Classes       = Plugin.classes,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions;
+      // Media Query support
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          enable.call(data.$el, data, true);
+        },
+        leave: function() {
+          disable.call(data.$el, data, true);
+        }
+      });
+    }
 
-})
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      $.fsMediaquery("unbind", data.rawGuid);
+
+      data.$swaps.removeClass([data.classes.raw.enabled, data.classes.raw.active].join(" "))
+        .off(Events.namespace);
+    }
+
+    /**
+     * @method
+     * @name activate
+     * @description Activate instance.
+     * @example $(".target").swap("activate");
+     */
+
+    function activate(data, fromLinked) {
+      if (data.enabled && !data.active) {
+        if (data.group && !fromLinked) {
+          // Deactivates grouped instances
+          $(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate", true);
+        }
+
+        // index in group
+        var index = (data.group) ? $(data.group).index(data.$el) : null;
+
+        data.$swaps.addClass(data.classes.raw.active);
+
+        if (!fromLinked) {
+          if (data.linked) {
+            // Linked handles
+            $(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
+          }
+        }
+
+        this.trigger(Events.activate, [index]);
+
+        data.active = true;
+      }
+    }
+
+    /**
+     * @method
+     * @name deactivate
+     * @description Deactivates instance.
+     * @example $(".target").swap("deactivate");
+     */
+
+    function deactivate(data, fromLinked) {
+      if (data.enabled && data.active) {
+        data.$swaps.removeClass(data.classes.raw.active);
+
+        if (!fromLinked) {
+          if (data.linked) {
+            // Linked handles
+            $(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
+          }
+        }
+
+        this.trigger(Events.deactivate);
+
+        data.active = false;
+      }
+    }
+
+    /**
+     * @method
+     * @name enable
+     * @description Enables instance.
+     * @example $(".target").swap("enable");
+     */
+
+    function enable(data, fromLinked) {
+      if (!data.enabled) {
+        data.enabled = true;
+
+        data.$swaps.addClass(data.classes.raw.enabled);
+
+        if (!fromLinked) {
+          // Linked handles
+          $(data.linked).not(data.$el)[Plugin.namespaceClean]("enable");
+        }
+
+        this.trigger(Events.enable);
+
+        if (data.onEnable) {
+          data.active = false;
+          activate.call(this, data);
+        } else {
+          data.active = true;
+          deactivate.call(this, data);
+        }
+      }
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance.
+     * @example $(".target").swap("disable");
+     */
+
+    function disable(data, fromLinked) {
+      if (data.enabled) {
+        data.enabled = false;
+
+        data.$swaps.removeClass([data.classes.raw.enabled, data.classes.raw.active].join(" "));
+
+        if (!fromLinked) {
+          // Linked handles
+          $(data.linked).not(data.$el)[Plugin.namespaceClean]("disable");
+        }
+
+        this.trigger(Events.disable);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click nav click.
+     * @param e [object] "Event data"
+     */
+
+    function onClick(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      if (data.active && data.collapse) {
+        deactivate.call(data.$el, data);
+      } else {
+        activate.call(data.$el, data);
+      }
+    }
+
+    /**
+     * @plugin
+     * @name Swap
+     * @description A jQuery plugin for toggling states.
+     * @type widget
+     * @main swap.js
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     */
+
+    var Plugin = Formstone.Plugin("swap", {
+        widget: true,
+
+        /**
+         * @options
+         * @param collapse [boolean] <true> "Allow swap to collapse it's target"
+         * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
+         */
+
+        defaults: {
+          collapse: true,
+          maxWidth: Infinity
+        },
+
+        classes: [
+          "target",
+          "enabled",
+          "active"
+        ],
+
+        /**
+         * @events
+         * @event activate.swap "Swap activated"
+         * @event deactivate.swap "Swap deactivated"
+         * @event enable.swap "Swap enabled"
+         * @event disable.swap "Swap diabled"
+         */
+
+        events: {
+          activate: "activate",
+          deactivate: "deactivate",
+          enable: "enable",
+          disable: "disable"
+        },
+
+        methods: {
+          _construct: construct,
+          _postConstruct: postConstruct,
+          _destruct: destruct,
+
+          // Public Methods
+
+          activate: activate,
+          deactivate: deactivate,
+          enable: enable,
+          disable: disable
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      Events = Plugin.events,
+      Functions = Plugin.functions;
+
+  })
 
 );
 
@@ -11982,392 +12009,392 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./mediaquery",
-      "./swap"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    data.mq           = "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")";
-
-    data.content      = this.attr("href");
-    data.group        = this.data(Namespace + "-group");
-
-    data.elementClasses      = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
-    data.mobileTabClasses    = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass];
-    data.contentClasses      = [RawClasses.content, data.rawGuid, data.theme, data.customClass];
-
-    // DOM
-
-    data.$mobileTab    = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.text() + '</button>');
-    data.$content      = $(data.content).addClass( data.contentClasses.join(" ") );
-
-    data.$content.before(data.$mobileTab)
-           .attr("role", "tabpanel");
-
-    this.attr("role", "tab");
-
-    // Aria
-
-    data.id = this.attr("id");
-
-    if (data.id) {
-      data.ariaId = data.id;
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./mediaquery",
+        "./swap"
+      ], factory);
     } else {
-      data.ariaId = data.rawGuid;
-      this.attr("id", data.ariaId);
+      factory(jQuery, Formstone);
     }
+  }(function($, Formstone) {
 
-    data.contentId   = data.$content.attr("id");
-    data.contentGuid = data.rawGuid + "_content";
+    "use strict";
 
-    if (data.contentId) {
-      data.ariacontentId = data.contentId;
-    } else {
-      data.ariaContentId = data.contentGuid;
-      data.$content.attr("id", data.ariaContentId);
-    }
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    // Check for hash
+    function construct(data) {
+      data.mq = "(max-width:" + (data.mobileMaxWidth === Infinity ? "100000px" : data.mobileMaxWidth) + ")";
 
-    var hash = Formstone.window.location.hash,
-      hashActive = false,
-      hashGroup  = false;
+      data.content = this.attr("href");
+      data.group = this.data(Namespace + "-group");
 
-    if (hash.length) {
+      data.elementClasses = [RawClasses.tab, data.rawGuid, data.theme, data.customClass];
+      data.mobileTabClasses = [RawClasses.tab, RawClasses.tab_mobile, data.rawGuid, data.theme, data.customClass];
+      data.contentClasses = [RawClasses.content, data.rawGuid, data.theme, data.customClass];
+
+      // DOM
+
+      data.$mobileTab = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.text() + '</button>');
+      data.$content = $(data.content).addClass(data.contentClasses.join(" "));
+
+      data.$content.before(data.$mobileTab)
+        .attr("role", "tabpanel");
+
+      this.attr("role", "tab");
+
+      // Aria
+
+      data.id = this.attr("id");
+
+      if (data.id) {
+        data.ariaId = data.id;
+      } else {
+        data.ariaId = data.rawGuid;
+        this.attr("id", data.ariaId);
+      }
+
+      data.contentId = data.$content.attr("id");
+      data.contentGuid = data.rawGuid + "_content";
+
+      if (data.contentId) {
+        data.ariacontentId = data.contentId;
+      } else {
+        data.ariaContentId = data.contentGuid;
+        data.$content.attr("id", data.ariaContentId);
+      }
+
+      // Check for hash
+
+      var hash = Formstone.window.location.hash,
+        hashActive = false,
+        hashGroup = false;
+
+      if (hash.length) {
         hashActive = (this.filter("[href*='" + hash + "']").length > 0);
-        hashGroup  = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*='" + hash + "']").length > 0);
+        hashGroup = data.group && ($('[data-' + Namespace + '-group="' + data.group + '"]').filter("[href*='" + hash + "']").length > 0);
+      }
+
+      if (hashActive) {
+        // If this matches hash
+        this.attr("data-swap-active", "true");
+      } else if (hashGroup) {
+        // If item in group matches hash
+        this.removeAttr("data-swap-active")
+          .removeData("data-swap-active");
+      } else if (this.attr("data-tabs-active") === "true") {
+        // If this has active attribute
+        this.attr("data-swap-active", "true");
+      }
+
+      this.attr("data-swap-target", data.content)
+        .attr("data-swap-group", data.group)
+        .addClass(data.elementClasses.join(" "))
+        .on("activate.swap" + data.dotGuid, data, onActivate)
+        .on("deactivate.swap" + data.dotGuid, data, onDeactivate)
+        .on("enable.swap" + data.dotGuid, data, onEnable)
+        .on("disable.swap" + data.dotGuid, data, onDisable);
     }
 
-    if (hashActive) {
-      // If this matches hash
-      this.attr("data-swap-active", "true");
-    } else if (hashGroup) {
-      // If item in group matches hash
-      this.removeAttr("data-swap-active")
-        .removeData("data-swap-active");
-    } else if (this.attr("data-tabs-active") === "true") {
-      // If this has active attribute
-      this.attr("data-swap-active", "true");
-    }
+    /**
+     * @method private
+     * @name postConstruct
+     * @description Run post build.
+     * @param data [object] "Instance data"
+     */
 
-    this.attr("data-swap-target", data.content)
-      .attr("data-swap-group", data.group)
-      .addClass(data.elementClasses.join(" "))
-      .on("activate.swap" + data.dotGuid, data, onActivate)
-      .on("deactivate.swap" + data.dotGuid, data, onDeactivate)
-      .on("enable.swap" + data.dotGuid, data, onEnable)
-      .on("disable.swap" + data.dotGuid, data, onDisable);
-  }
-
-  /**
-   * @method private
-   * @name postConstruct
-   * @description Run post build.
-   * @param data [object] "Instance data"
-   */
-
-  function postConstruct(data) {
-    this.fsSwap({
+    function postConstruct(data) {
+      this.fsSwap({
         maxWidth: data.maxWidth,
         classes: {
-          target  : data.dotGuid,
-          enabled : Classes.enabled,
-          active  : Classes.active,
+          target: data.dotGuid,
+          enabled: Classes.enabled,
+          active: Classes.active,
           raw: {
-            target  : data.rawGuid,
-            enabled : RawClasses.enabled,
-            active  : RawClasses.active
+            target: data.rawGuid,
+            enabled: RawClasses.enabled,
+            active: RawClasses.active
           }
         },
         collapse: false
       });
 
-    data.$mobileTab.on("click" + data.dotGuid, data, onMobileActivate);
+      data.$mobileTab.on("click" + data.dotGuid, data, onMobileActivate);
 
-    // Media Query support
-    $.fsMediaquery("bind", data.rawGuid, data.mq, {
-      enter: function() {
-        mobileEnable.call(data.$el, data);
-      },
-      leave: function() {
-        mobileDisable.call(data.$el, data);
+      // Media Query support
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          mobileEnable.call(data.$el, data);
+        },
+        leave: function() {
+          mobileDisable.call(data.$el, data);
+        }
+      });
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      $.fsMediaquery("unbind", data.rawGuid);
+
+      data.$mobileTab.off(Events.namespace)
+        .remove();
+
+      data.elementClasses.push(RawClasses.mobile);
+      data.contentClasses.push(RawClasses.mobile);
+
+      data.$content.removeAttr("aria-labelledby")
+        .removeAttr("aria-hidden")
+        .removeAttr("role")
+        .removeClass(data.contentClasses.join(" "));
+
+      if (data.$content.attr("id") === data.contentGuid) {
+        data.$content.removeAttr("id");
       }
-    });
-  }
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+      this.removeAttr("aria-controls")
+        .removeAttr("aria-selected")
+        .removeAttr("data-swap-active")
+        .removeData("data-swap-active")
+        .removeAttr("data-swap-target")
+        .removeData("data-swap-target")
+        .removeAttr("data-swap-group")
+        .removeData("data-swap-group")
+        .removeAttr("role")
+        .removeClass(data.elementClasses.join(" "))
+        .off(Events.namespace)
+        .fsSwap("destroy");
 
-  function destruct(data) {
-    $.fsMediaquery("unbind", data.rawGuid);
-
-    data.$mobileTab.off(Events.namespace)
-             .remove();
-
-    data.elementClasses.push(RawClasses.mobile);
-    data.contentClasses.push(RawClasses.mobile);
-
-    data.$content.removeAttr("aria-labelledby")
-           .removeAttr("aria-hidden")
-           .removeAttr("role")
-           .removeClass( data.contentClasses.join(" ") );
-
-    if (data.$content.attr("id") === data.contentGuid) {
-      data.$content.removeAttr("id");
+      if (this.attr("id") === data.rawGuid) {
+        this.removeAttr("id");
+      }
     }
 
-    this.removeAttr("aria-controls")
-      .removeAttr("aria-selected")
-      .removeAttr("data-swap-active")
-      .removeData("data-swap-active")
-      .removeAttr("data-swap-target")
-      .removeData("data-swap-target")
-      .removeAttr("data-swap-group")
-      .removeData("data-swap-group")
-      .removeAttr("role")
-      .removeClass( data.elementClasses.join(" ") )
-      .off(Events.namespace)
-      .fsSwap("destroy");
+    /**
+     * @method
+     * @name activate
+     * @description Activates instance.
+     * @example $(".target").tabs("activate");
+     */
 
-    if (this.attr("id") === data.rawGuid) {
-      this.removeAttr("id");
+    function activate(data) {
+      this.fsSwap("activate");
     }
-  }
 
-  /**
-   * @method
-   * @name activate
-   * @description Activates instance.
-   * @example $(".target").tabs("activate");
-   */
+    /**
+     * @method
+     * @name enable
+     * @description Enables instance.
+     * @example $(".target").tabs("enable");
+     */
 
-  function activate(data) {
-    this.fsSwap("activate");
-  }
-
-  /**
-   * @method
-   * @name enable
-   * @description Enables instance.
-   * @example $(".target").tabs("enable");
-   */
-
-  function enable(data) {
-    this.fsSwap("enable");
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables instance.
-   * @example $(".target").tabs("disable");
-   */
-
-  function disable(data) {
-    this.fsSwap("disable");
-  }
-
-  /**
-   * @method private
-   * @name onActivate
-   * @description Handles tab open event.
-   * @param e [object] "Event data"
-   */
-
-  function onActivate(e) {
-    if (!e.originalEvent) { // thanks IE :/
-      var data = e.data,
-        index = 0;
-
-      data.$el.attr("aria-selected", true)
-          .trigger(Events.update, [ index ]);
-      data.$mobileTab.addClass(RawClasses.active);
-      data.$content.attr("aria-hidden", false)
-             .addClass(RawClasses.active);
+    function enable(data) {
+      this.fsSwap("enable");
     }
-  }
 
-  /**
-   * @method private
-   * @name onDeactivate
-   * @description Handles tab close event.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance.
+     * @example $(".target").tabs("disable");
+     */
 
-  function onDeactivate(e) {
-    if (!e.originalEvent) { // thanks IE :/
+    function disable(data) {
+      this.fsSwap("disable");
+    }
+
+    /**
+     * @method private
+     * @name onActivate
+     * @description Handles tab open event.
+     * @param e [object] "Event data"
+     */
+
+    function onActivate(e) {
+      if (!e.originalEvent) { // thanks IE :/
+        var data = e.data,
+          index = 0;
+
+        data.$el.attr("aria-selected", true)
+          .trigger(Events.update, [index]);
+        data.$mobileTab.addClass(RawClasses.active);
+        data.$content.attr("aria-hidden", false)
+          .addClass(RawClasses.active);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onDeactivate
+     * @description Handles tab close event.
+     * @param e [object] "Event data"
+     */
+
+    function onDeactivate(e) {
+      if (!e.originalEvent) { // thanks IE :/
+        var data = e.data;
+
+        data.$el.attr("aria-selected", false);
+        data.$mobileTab.removeClass(RawClasses.active);
+        data.$content.attr("aria-hidden", true)
+          .removeClass(RawClasses.active);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onEnable
+     * @description Handles tab enable event.
+     * @param e [object] "Event data"
+     */
+
+    function onEnable(e) {
       var data = e.data;
 
-      data.$el.attr("aria-selected", false);
-      data.$mobileTab.removeClass(RawClasses.active);
-      data.$content.attr("aria-hidden", true)
-             .removeClass(RawClasses.active);
+      data.$el.attr("aria-controls", data.ariaContentId);
+      data.$mobileTab.addClass(RawClasses.enabled);
+      data.$content.attr("aria-labelledby", data.ariaId)
+        .addClass(RawClasses.enabled);
     }
-  }
 
-  /**
-   * @method private
-   * @name onEnable
-   * @description Handles tab enable event.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onDisable
+     * @description Handles tab disable event.
+     * @param e [object] "Event data"
+     */
 
-  function onEnable(e) {
-    var data = e.data;
+    function onDisable(e) {
+      var data = e.data;
 
-    data.$el.attr("aria-controls", data.ariaContentId);
-    data.$mobileTab.addClass(RawClasses.enabled);
-    data.$content.attr("aria-labelledby", data.ariaId)
-           .addClass(RawClasses.enabled);
-  }
-
-  /**
-   * @method private
-   * @name onDisable
-   * @description Handles tab disable event.
-   * @param e [object] "Event data"
-   */
-
-  function onDisable(e) {
-    var data = e.data;
-
-    data.$el.removeAttr("aria-controls")
+      data.$el.removeAttr("aria-controls")
         .removeAttr("aria-selected");
-    data.$mobileTab.removeClass(RawClasses.enabled);
-    data.$content.removeAttr("aria-labelledby")
-           .removeAttr("aria-hidden")
-           .removeClass(RawClasses.enabled);
-  }
+      data.$mobileTab.removeClass(RawClasses.enabled);
+      data.$content.removeAttr("aria-labelledby")
+        .removeAttr("aria-hidden")
+        .removeClass(RawClasses.enabled);
+    }
 
-  /**
-   * @method private
-   * @name onMobileActivate
-   * @description Activates instance.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onMobileActivate
+     * @description Activates instance.
+     * @param e [object] "Event data"
+     */
 
-  function onMobileActivate(e) {
-    e.data.$el.fsSwap("activate");
-  }
+    function onMobileActivate(e) {
+      e.data.$el.fsSwap("activate");
+    }
 
-  /**
-   * @method private
-   * @name mobileEnable
-   * @description Handles mobile enable event.
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name mobileEnable
+     * @description Handles mobile enable event.
+     * @param data [object] "Instance data"
+     */
 
-  function mobileEnable(data) {
-    data.$el.addClass(RawClasses.mobile);
-    data.$mobileTab.addClass(RawClasses.mobile);
-    data.$content.addClass(RawClasses.mobile);
-  }
+    function mobileEnable(data) {
+      data.$el.addClass(RawClasses.mobile);
+      data.$mobileTab.addClass(RawClasses.mobile);
+      data.$content.addClass(RawClasses.mobile);
+    }
 
-  /**
-   * @method private
-   * @name mobileDisable
-   * @description Handles mobile disable event.
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name mobileDisable
+     * @description Handles mobile disable event.
+     * @param data [object] "Instance data"
+     */
 
-  function mobileDisable(data) {
-    data.$el.removeClass(RawClasses.mobile);
-    data.$mobileTab.removeClass(RawClasses.mobile);
-    data.$content.removeClass(RawClasses.mobile);
-  }
+    function mobileDisable(data) {
+      data.$el.removeClass(RawClasses.mobile);
+      data.$mobileTab.removeClass(RawClasses.mobile);
+      data.$content.removeClass(RawClasses.mobile);
+    }
 
-  /**
-   * @plugin
-   * @name Tabs
-   * @description A jQuery plugin for simple tabs.
-   * @type widget
-   * @main tabs.js
-   * @main tabs.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency mediaquery.js
-   * @dependency swap.js
-   */
+    /**
+     * @plugin
+     * @name Tabs
+     * @description A jQuery plugin for simple tabs.
+     * @type widget
+     * @main tabs.js
+     * @main tabs.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency mediaquery.js
+     * @dependency swap.js
+     */
 
-  var Plugin = Formstone.Plugin("tabs", {
-      widget: true,
+    var Plugin = Formstone.Plugin("tabs", {
+        widget: true,
 
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
-       * @param mobileMaxWidth [string] <'740px'> "Width at which to auto-disable mobile styles"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       */
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
+         * @param mobileMaxWidth [string] <'740px'> "Width at which to auto-disable mobile styles"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         */
 
-      defaults: {
-        customClass       : "",
-        maxWidth          : Infinity,
-        mobileMaxWidth    : "740px",
-        theme             : "fs-light"
-      },
+        defaults: {
+          customClass: "",
+          maxWidth: Infinity,
+          mobileMaxWidth: "740px",
+          theme: "fs-light"
+        },
 
-      classes: [
-        "tab",
-        "tab_mobile",
-        "mobile",
-        "content",
-        "enabled",
-        "active"
-      ],
+        classes: [
+          "tab",
+          "tab_mobile",
+          "mobile",
+          "content",
+          "enabled",
+          "active"
+        ],
 
-      /**
-       * @events
-       * @event update.tabs "Tab activated"
-       */
+        /**
+         * @events
+         * @event update.tabs "Tab activated"
+         */
 
-      events: {
-        update   : "update"
-      },
+        events: {
+          update: "update"
+        },
 
-      methods: {
-        _construct    : construct,
-        _postConstruct: postConstruct,
-        _destruct     : destruct,
+        methods: {
+          _construct: construct,
+          _postConstruct: postConstruct,
+          _destruct: destruct,
 
-        // Public Methods
+          // Public Methods
 
-        activate      : activate,
-        enable        : enable,
-        disable       : disable
-      }
-    }),
+          activate: activate,
+          enable: enable,
+          disable: disable
+        }
+      }),
 
-    // Localize References
+      // Localize References
 
-    Namespace     = Plugin.namespace,
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions;
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions;
 
-})
+  })
 
 );
 
@@ -12375,325 +12402,325 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    this.on(Events.mouseEnter, data, onMouseEnter);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    removeTooltip();
-
-    this.off(Events.namespace);
-  }
-
-  /**
-   * @method private
-   * @name onMouseEnter
-   * @description Handles mouse enter event.
-   * @param e [object] "Event data"
-   */
-
-  function onMouseEnter(e) {
-    removeTooltip();
-
-    var data = e.data;
-
-    data.left = e.pageX;
-    data.top  = e.pageY;
-
-    buildTooltip(data);
-  }
-
-  /**
-   * @method private
-   * @name onMouseLeave
-   * @description Handles mouse leave event.
-   * @param e [object] "Event data"
-   */
-
-  function onMouseLeave(e) {
-    var data = e.data;
-
-    Functions.clearTimer(data.timer);
-
-    removeTooltip();
-  }
-
-  /**
-   * @method private
-   * @name onMouseLeave
-   * @description Handles mouse move event.
-   * @param e [object] "Event data"
-   */
-
-  function onMouseMove(e) {
-    positionTooltip(e.pageX, e.pageY);
-  }
-
-  /**
-   * @method private
-   * @name buildTooltip
-   * @description Builds new tooltip instance.
-   * @param data [object] "Instance data"
-   */
-
-  function buildTooltip(data) {
-    removeTooltip();
-
-    var html = '';
-
-    html += '<div class="';
-    html += [RawClasses.base, RawClasses[data.direction], data.theme, data.customClass].join(" ");
-    html += '">';
-    html += '<div class="' + RawClasses.content + '">';
-    html += data.formatter.call(data.$el, data);
-    html += '<span class="' + RawClasses.caret + '"></span>';
-    html += '</div>';
-    html += '</div>';
-
-    Instance = {
-      $tooltip    : $(html),
-      $el         : data.$el
-    };
-
-    Formstone.$body.append(Instance.$tooltip);
-
-    var $content = Instance.$tooltip.find(Classes.content),
-      $caret   = Instance.$tooltip.find(Classes.caret),
-
-      offset = data.$el.offset(),
-      height = data.$el.outerHeight(),
-      width  = data.$el.outerWidth(),
-
-      tooltipLeft     = 0,
-      tooltipTop      = 0,
-      contentLeft     = 0,
-      contentTop      = 0,
-      caretLeft       = false,
-      caretTop        = false,
-
-      caretHeight     = $caret.outerHeight(true),
-      caretWidth      = $caret.outerWidth(true),
-      contentHeight   = $content.outerHeight(true),
-      contentWidth    = $content.outerWidth(true);
-
-    // position content
-    if (data.direction === "right" || data.direction === "left") {
-      caretTop   = (contentHeight - caretHeight) / 2;
-      contentTop = -contentHeight / 2;
-
-      if (data.direction === "right") {
-        contentLeft = data.margin;
-      } else if (data.direction === "left") {
-        contentLeft = -(contentWidth + data.margin);
-      }
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
     } else {
-      caretLeft = (contentWidth - caretWidth) / 2;
-      contentLeft = -contentWidth / 2;
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-      if (data.direction === "bottom") {
-        contentTop = data.margin;
-      } else if (data.direction === "top") {
-        contentTop = -(contentHeight + data.margin);
-      }
+    "use strict";
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
+
+    function construct(data) {
+      this.on(Events.mouseEnter, data, onMouseEnter);
     }
 
-    // Modify Dom
-    $content.css({
-      top:  contentTop,
-      left: contentLeft
-    });
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-    $caret.css({
-      top:  caretTop,
-      left: caretLeft
-    });
+    function destruct(data) {
+      removeTooltip();
 
-    // Position tooltip
-    if (data.follow) {
-      data.$el.on(Events.mouseMove, data, onMouseMove);
-    } else {
-      if (data.match) {
-        if (data.direction === "right" || data.direction === "left") {
-          tooltipTop = data.top; // mouse pos
+      this.off(Events.namespace);
+    }
 
-          if (data.direction === "right") {
-            tooltipLeft = offset.left + width;
-          } else if (data.direction === "left") {
-            tooltipLeft = offset.left;
-          }
-        } else {
-          tooltipLeft = data.left; // mouse pos
+    /**
+     * @method private
+     * @name onMouseEnter
+     * @description Handles mouse enter event.
+     * @param e [object] "Event data"
+     */
 
-          if (data.direction === "bottom") {
-            tooltipTop = offset.top + height;
-          } else if (data.direction === "top") {
-            tooltipTop = offset.top;
-          }
+    function onMouseEnter(e) {
+      removeTooltip();
+
+      var data = e.data;
+
+      data.left = e.pageX;
+      data.top = e.pageY;
+
+      buildTooltip(data);
+    }
+
+    /**
+     * @method private
+     * @name onMouseLeave
+     * @description Handles mouse leave event.
+     * @param e [object] "Event data"
+     */
+
+    function onMouseLeave(e) {
+      var data = e.data;
+
+      Functions.clearTimer(data.timer);
+
+      removeTooltip();
+    }
+
+    /**
+     * @method private
+     * @name onMouseLeave
+     * @description Handles mouse move event.
+     * @param e [object] "Event data"
+     */
+
+    function onMouseMove(e) {
+      positionTooltip(e.pageX, e.pageY);
+    }
+
+    /**
+     * @method private
+     * @name buildTooltip
+     * @description Builds new tooltip instance.
+     * @param data [object] "Instance data"
+     */
+
+    function buildTooltip(data) {
+      removeTooltip();
+
+      var html = '';
+
+      html += '<div class="';
+      html += [RawClasses.base, RawClasses[data.direction], data.theme, data.customClass].join(" ");
+      html += '">';
+      html += '<div class="' + RawClasses.content + '">';
+      html += data.formatter.call(data.$el, data);
+      html += '<span class="' + RawClasses.caret + '"></span>';
+      html += '</div>';
+      html += '</div>';
+
+      Instance = {
+        $tooltip: $(html),
+        $el: data.$el
+      };
+
+      Formstone.$body.append(Instance.$tooltip);
+
+      var $content = Instance.$tooltip.find(Classes.content),
+        $caret = Instance.$tooltip.find(Classes.caret),
+
+        offset = data.$el.offset(),
+        height = data.$el.outerHeight(),
+        width = data.$el.outerWidth(),
+
+        tooltipLeft = 0,
+        tooltipTop = 0,
+        contentLeft = 0,
+        contentTop = 0,
+        caretLeft = false,
+        caretTop = false,
+
+        caretHeight = $caret.outerHeight(true),
+        caretWidth = $caret.outerWidth(true),
+        contentHeight = $content.outerHeight(true),
+        contentWidth = $content.outerWidth(true);
+
+      // position content
+      if (data.direction === "right" || data.direction === "left") {
+        caretTop = (contentHeight - caretHeight) / 2;
+        contentTop = -contentHeight / 2;
+
+        if (data.direction === "right") {
+          contentLeft = data.margin;
+        } else if (data.direction === "left") {
+          contentLeft = -(contentWidth + data.margin);
         }
       } else {
-        if (data.direction === "right" || data.direction === "left") {
-          tooltipTop = offset.top + (height / 2);
+        caretLeft = (contentWidth - caretWidth) / 2;
+        contentLeft = -contentWidth / 2;
 
-          if (data.direction === "right") {
-            tooltipLeft = offset.left + width;
-          } else if (data.direction === "left") {
-            tooltipLeft = offset.left;
-          }
-        } else {
-          tooltipLeft = offset.left + (width / 2);
-
-          if (data.direction === "bottom") {
-            tooltipTop = offset.top + height;
-          } else if (data.direction === "top") {
-            tooltipTop = offset.top;
-          }
+        if (data.direction === "bottom") {
+          contentTop = data.margin;
+        } else if (data.direction === "top") {
+          contentTop = -(contentHeight + data.margin);
         }
       }
 
-      positionTooltip(tooltipLeft, tooltipTop);
-    }
-
-    data.timer = Functions.startTimer(data.timer, data.delay, function() {
-      Instance.$tooltip.addClass(RawClasses.visible);
-    });
-
-    data.$el.one(Events.mouseLeave, data, onMouseLeave);
-  }
-
-  /**
-   * @method private
-   * @name positionTooltip
-   * @description Positions active tooltip instance.
-   * @param left [int] "Left position"
-   * @param top [int] "Top position"
-   */
-
-  function positionTooltip(left, top) {
-    if (Instance) {
-      Instance.$tooltip.css({
-        left : left,
-        top  : top
+      // Modify Dom
+      $content.css({
+        top: contentTop,
+        left: contentLeft
       });
-    }
-  }
 
-  /**
-   * @method private
-   * @name removeTooltip
-   * @description Removes active tooltip instance.
-   */
+      $caret.css({
+        top: caretTop,
+        left: caretLeft
+      });
 
-  function removeTooltip() {
-    if (Instance) {
-      Instance.$el.off( [Events.mouseMove, Events.mouseLeave].join(" ") );
+      // Position tooltip
+      if (data.follow) {
+        data.$el.on(Events.mouseMove, data, onMouseMove);
+      } else {
+        if (data.match) {
+          if (data.direction === "right" || data.direction === "left") {
+            tooltipTop = data.top; // mouse pos
 
-      Instance.$tooltip.remove();
-      Instance = null;
-    }
-  }
+            if (data.direction === "right") {
+              tooltipLeft = offset.left + width;
+            } else if (data.direction === "left") {
+              tooltipLeft = offset.left;
+            }
+          } else {
+            tooltipLeft = data.left; // mouse pos
 
-  /**
-   * @method private
-   * @name format
-   * @description Formats tooltip text.
-   * @return [string] "Tooltip text"
-   */
+            if (data.direction === "bottom") {
+              tooltipTop = offset.top + height;
+            } else if (data.direction === "top") {
+              tooltipTop = offset.top;
+            }
+          }
+        } else {
+          if (data.direction === "right" || data.direction === "left") {
+            tooltipTop = offset.top + (height / 2);
 
-  function format(data) {
-    return this.data("title");
-  }
+            if (data.direction === "right") {
+              tooltipLeft = offset.left + width;
+            } else if (data.direction === "left") {
+              tooltipLeft = offset.left;
+            }
+          } else {
+            tooltipLeft = offset.left + (width / 2);
 
-  /**
-   * @plugin
-   * @name Tooltip
-   * @description A jQuery plugin for simple tooltips.
-   * @type widget
-   * @main tooltip.js
-   * @main tooltip.css
-   * @dependency jQuery
-   * @dependency core.js
-   */
+            if (data.direction === "bottom") {
+              tooltipTop = offset.top + height;
+            } else if (data.direction === "top") {
+              tooltipTop = offset.top;
+            }
+          }
+        }
 
-  var Plugin = Formstone.Plugin("tooltip", {
-      widget: true,
-
-      /**
-       * @options
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param delay [int] <0> "Hover delay"
-       * @param direction [string] <'top'> "Tooltip direction"
-       * @param follow [boolean] <false> "Flag to follow mouse"
-       * @param formatter [function] <$.noop> "Text format function"
-       * @param margin [int] <15> "Tooltip margin"
-       * @param match [boolean] <false> "Flag to match mouse position"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       */
-
-      defaults: {
-        customClass    : "",
-        delay          : 0,
-        direction      : "top",
-        follow         : false,
-        formatter      : format,
-        margin         : 15,
-        match          : false,
-        theme          : "fs-light"
-      },
-
-      classes: [
-        "content",
-        "caret",
-        "visible",
-        "top",
-        "bottom",
-        "right",
-        "left"
-      ],
-
-      methods: {
-        _construct    : construct,
-        _destruct     : destruct
+        positionTooltip(tooltipLeft, tooltipTop);
       }
-    }),
 
-    // Localize References
+      data.timer = Functions.startTimer(data.timer, data.delay, function() {
+        Instance.$tooltip.addClass(RawClasses.visible);
+      });
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
+      data.$el.one(Events.mouseLeave, data, onMouseLeave);
+    }
 
-    // Singleton
+    /**
+     * @method private
+     * @name positionTooltip
+     * @description Positions active tooltip instance.
+     * @param left [int] "Left position"
+     * @param top [int] "Top position"
+     */
 
-    Instance     = null;
+    function positionTooltip(left, top) {
+      if (Instance) {
+        Instance.$tooltip.css({
+          left: left,
+          top: top
+        });
+      }
+    }
 
-})
+    /**
+     * @method private
+     * @name removeTooltip
+     * @description Removes active tooltip instance.
+     */
+
+    function removeTooltip() {
+      if (Instance) {
+        Instance.$el.off([Events.mouseMove, Events.mouseLeave].join(" "));
+
+        Instance.$tooltip.remove();
+        Instance = null;
+      }
+    }
+
+    /**
+     * @method private
+     * @name format
+     * @description Formats tooltip text.
+     * @return [string] "Tooltip text"
+     */
+
+    function format(data) {
+      return this.data("title");
+    }
+
+    /**
+     * @plugin
+     * @name Tooltip
+     * @description A jQuery plugin for simple tooltips.
+     * @type widget
+     * @main tooltip.js
+     * @main tooltip.css
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var Plugin = Formstone.Plugin("tooltip", {
+        widget: true,
+
+        /**
+         * @options
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param delay [int] <0> "Hover delay"
+         * @param direction [string] <'top'> "Tooltip direction"
+         * @param follow [boolean] <false> "Flag to follow mouse"
+         * @param formatter [function] <$.noop> "Text format function"
+         * @param margin [int] <15> "Tooltip margin"
+         * @param match [boolean] <false> "Flag to match mouse position"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         */
+
+        defaults: {
+          customClass: "",
+          delay: 0,
+          direction: "top",
+          follow: false,
+          formatter: format,
+          margin: 15,
+          match: false,
+          theme: "fs-light"
+        },
+
+        classes: [
+          "content",
+          "caret",
+          "visible",
+          "top",
+          "bottom",
+          "right",
+          "left"
+        ],
+
+        methods: {
+          _construct: construct,
+          _destruct: destruct
+        }
+      }),
+
+      // Localize References
+
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      // Singleton
+
+      Instance = null;
+
+  })
 
 );
 
@@ -12701,501 +12728,501 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    data.touches     = [];
-    data.touching    = false;
-
-    this.on( Events.dragStart, Functions.killEvent );
-
-    if (data.swipe) {
-      data.pan = true;
-    }
-
-    if (data.scale) {
-      data.axis = false;
-    }
-
-    data.axisX = data.axis === "x";
-    data.axisY = data.axis === "y";
-
-    if (Formstone.support.pointer) {
-      var action = "";
-
-      if (!data.axis || (data.axisX && data.axisY)) {
-        action = "none";
-      } else {
-        if (data.axisX) {
-          action += " pan-y";
-        }
-        if (data.axisY) {
-          action += " pan-x";
-        }
-      }
-
-      touchAction(this, action);
-
-      this.on(Events.pointerDown, data, onTouch);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
     } else {
-      this.on(Events.touchStart, data, onTouch)
-        .on(Events.mouseDown, data, onPointerStart);
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+    "use strict";
 
-  function destruct(data) {
-    this.off(Events.namespace);
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    touchAction(this, "");
-  }
+    function construct(data) {
+      data.touches = [];
+      data.touching = false;
 
-  /**
-   * @method private
-   * @name onTouch
-   * @description Delegates touch events.
-   * @param e [object] "Event data"
-   */
+      this.on(Events.dragStart, Functions.killEvent);
 
-  function onTouch(e) {
-    // Stop panning and zooming
-    if (e.preventManipulation) {
-      e.preventManipulation();
-    }
-
-    var data    = e.data,
-      oe      = e.originalEvent;
-
-    if (oe.type.match(/(up|end|cancel)$/i)) {
-      onPointerEnd(e);
-      return;
-    }
-
-    if (oe.pointerId) {
-      // Normalize MS pointer events back to standard touches
-      var activeTouch = false;
-      for (var i in data.touches) {
-        if (data.touches[i].id === oe.pointerId) {
-          activeTouch = true;
-          data.touches[i].pageX    = oe.pageX;
-          data.touches[i].pageY    = oe.pageY;
-        }
+      if (data.swipe) {
+        data.pan = true;
       }
-      if (!activeTouch) {
-        data.touches.push({
-          id       : oe.pointerId,
-          pageX    : oe.pageX,
-          pageY    : oe.pageY
-        });
+
+      if (data.scale) {
+        data.axis = false;
       }
-    } else {
-      // Alias normal touches
-      data.touches = oe.touches;
-    }
 
-    // Delegate touch actions
-    if (oe.type.match(/(down|start)$/i)) {
-      onPointerStart(e);
-    } else if (oe.type.match(/move$/i)) {
-      onPointerMove(e);
-    }
-  }
-
-  /**
-   * @method private
-   * @name onPointerStart
-   * @description Handles pointer start.
-   * @param e [object] "Event data"
-   */
-
-  function onPointerStart(e) {
-    var data     = e.data,
-      touch    = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
-
-    if (touch) {
-      data.$el.off(Events.mouseDown);
-    }
-
-    if (!data.touching) {
-      data.startE      = e.originalEvent;
-      data.startX      = (touch) ? touch.pageX : e.pageX;
-      data.startY      = (touch) ? touch.pageY : e.pageY;
-      data.startT      = new Date().getTime();
-      data.scaleD      = 1;
-      data.passed      = false;
-    }
-
-    // Clear old click events
-
-    if (data.$links) {
-      data.$links.off(Events.click);
-    }
-
-    // Pan / Scale
-
-    var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
-
-    if (data.scale && data.touches && data.touches.length >= 2) {
-      var t = data.touches;
-
-      data.pinch = {
-        startX     : midpoint(t[0].pageX, t[1].pageX),
-        startY     : midpoint(t[0].pageY, t[1].pageY),
-        startD     : pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY))
-      };
-
-      newE.pageX    = data.startX   = data.pinch.startX;
-      newE.pageY    = data.startY   = data.pinch.startY;
-    }
-
-    // Only bind at first touch
-    if (!data.touching) {
-      data.touching = true;
-
-      if (data.pan && !touch) {
-        $Window.on(Events.mouseMove, data, onPointerMove)
-             .on(Events.mouseUp, data, onPointerEnd);
-      }
+      data.axisX = data.axis === "x";
+      data.axisY = data.axis === "y";
 
       if (Formstone.support.pointer) {
-        $Window.on( [
-          Events.pointerMove,
-          Events.pointerUp,
-          Events.pointerCancel
-        ].join(" ") , data, onTouch);
+        var action = "";
+
+        if (!data.axis || (data.axisX && data.axisY)) {
+          action = "none";
+        } else {
+          if (data.axisX) {
+            action += " pan-y";
+          }
+          if (data.axisY) {
+            action += " pan-x";
+          }
+        }
+
+        touchAction(this, action);
+
+        this.on(Events.pointerDown, data, onTouch);
       } else {
-        $Window.on( [
-          Events.touchMove,
-          Events.touchEnd,
-          Events.touchCancel
-        ].join(" ") , data, onTouch);
+        this.on(Events.touchStart, data, onTouch)
+          .on(Events.mouseDown, data, onPointerStart);
       }
-
-      data.$el.trigger(newE);
     }
-  }
 
-  /**
-   * @method private
-   * @name onPointerMove
-   * @description Handles pointer move.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-  function onPointerMove(e) {
-    var data      = e.data,
-      touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
-      newX      = (touch) ? touch.pageX : e.pageX,
-      newY      = (touch) ? touch.pageY : e.pageY,
-      deltaX    = newX - data.startX,
-      deltaY    = newY - data.startY,
-      dirX      = (deltaX > 0) ? "right" : "left",
-      dirY      = (deltaY > 0) ? "down"  : "up",
-      movedX    = Math.abs(deltaX) > TouchThreshold,
-      movedY    = Math.abs(deltaY) > TouchThreshold;
+    function destruct(data) {
+      this.off(Events.namespace);
 
-    if (!data.passed && data.axis && ((data.axisX && movedY) || (data.axisY && movedX)) ) {
-      // if axis and moved in opposite direction
-      onPointerEnd(e);
-    } else {
-      if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
-        // if has axis and moved in same direction
-        data.passed = true;
+      touchAction(this, "");
+    }
+
+    /**
+     * @method private
+     * @name onTouch
+     * @description Delegates touch events.
+     * @param e [object] "Event data"
+     */
+
+    function onTouch(e) {
+      // Stop panning and zooming
+      if (e.preventManipulation) {
+        e.preventManipulation();
       }
 
-      if (data.passed) {
-        Functions.killEvent(e);
-        Functions.killEvent(data.startE);
+      var data = e.data,
+        oe = e.originalEvent;
+
+      if (oe.type.match(/(up|end|cancel)$/i)) {
+        onPointerEnd(e);
+        return;
+      }
+
+      if (oe.pointerId) {
+        // Normalize MS pointer events back to standard touches
+        var activeTouch = false;
+        for (var i in data.touches) {
+          if (data.touches[i].id === oe.pointerId) {
+            activeTouch = true;
+            data.touches[i].pageX = oe.pageX;
+            data.touches[i].pageY = oe.pageY;
+          }
+        }
+        if (!activeTouch) {
+          data.touches.push({
+            id: oe.pointerId,
+            pageX: oe.pageX,
+            pageY: oe.pageY
+          });
+        }
+      } else {
+        // Alias normal touches
+        data.touches = oe.touches;
+      }
+
+      // Delegate touch actions
+      if (oe.type.match(/(down|start)$/i)) {
+        onPointerStart(e);
+      } else if (oe.type.match(/move$/i)) {
+        onPointerMove(e);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerStart
+     * @description Handles pointer start.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerStart(e) {
+      var data = e.data,
+        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+
+      if (touch) {
+        data.$el.off(Events.mouseDown);
+      }
+
+      if (!data.touching) {
+        data.startE = e.originalEvent;
+        data.startX = (touch) ? touch.pageX : e.pageX;
+        data.startY = (touch) ? touch.pageY : e.pageY;
+        data.startT = new Date().getTime();
+        data.scaleD = 1;
+        data.passed = false;
+      }
+
+      // Clear old click events
+
+      if (data.$links) {
+        data.$links.off(Events.click);
       }
 
       // Pan / Scale
 
-      var fire    = true,
-        newE    = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+      var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
+
+      if (data.scale && data.touches && data.touches.length >= 2) {
+        var t = data.touches;
+
+        data.pinch = {
+          startX: midpoint(t[0].pageX, t[1].pageX),
+          startY: midpoint(t[0].pageY, t[1].pageY),
+          startD: pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY))
+        };
+
+        newE.pageX = data.startX = data.pinch.startX;
+        newE.pageY = data.startY = data.pinch.startY;
+      }
+
+      // Only bind at first touch
+      if (!data.touching) {
+        data.touching = true;
+
+        if (data.pan && !touch) {
+          $Window.on(Events.mouseMove, data, onPointerMove)
+            .on(Events.mouseUp, data, onPointerEnd);
+        }
+
+        if (Formstone.support.pointer) {
+          $Window.on([
+            Events.pointerMove,
+            Events.pointerUp,
+            Events.pointerCancel
+          ].join(" "), data, onTouch);
+        } else {
+          $Window.on([
+            Events.touchMove,
+            Events.touchEnd,
+            Events.touchCancel
+          ].join(" "), data, onTouch);
+        }
+
+        data.$el.trigger(newE);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerMove
+     * @description Handles pointer move.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerMove(e) {
+      var data = e.data,
+        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        newX = (touch) ? touch.pageX : e.pageX,
+        newY = (touch) ? touch.pageY : e.pageY,
+        deltaX = newX - data.startX,
+        deltaY = newY - data.startY,
+        dirX = (deltaX > 0) ? "right" : "left",
+        dirY = (deltaY > 0) ? "down" : "up",
+        movedX = Math.abs(deltaX) > TouchThreshold,
+        movedY = Math.abs(deltaY) > TouchThreshold;
+
+      if (!data.passed && data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) {
+        // if axis and moved in opposite direction
+        onPointerEnd(e);
+      } else {
+        if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
+          // if has axis and moved in same direction
+          data.passed = true;
+        }
+
+        if (data.passed) {
+          Functions.killEvent(e);
+          Functions.killEvent(data.startE);
+        }
+
+        // Pan / Scale
+
+        var fire = true,
+          newE = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+        if (data.scale) {
+          if (data.touches && data.touches.length >= 2) {
+            var t = data.touches;
+
+            data.pinch.endX = midpoint(t[0].pageX, t[1].pageX);
+            data.pinch.endY = midpoint(t[0].pageY, t[1].pageY);
+            data.pinch.endD = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
+            data.scaleD = (data.pinch.endD / data.pinch.startD);
+            newE.pageX = data.pinch.endX;
+            newE.pageY = data.pinch.endY;
+            newE.scale = data.scaleD;
+            newE.deltaX = data.pinch.endX - data.pinch.startX;
+            newE.deltaY = data.pinch.endY - data.pinch.startY;
+          } else if (!data.pan) {
+            fire = false;
+          }
+        }
+
+        if (fire) {
+          data.$el.trigger(newE);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerEnd
+     * @description Handles pointer end / cancel.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerEnd(e) {
+      var data = e.data;
+
+      // Pan / Swipe / Scale
+
+      var touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        newX = (touch) ? touch.pageX : e.pageX,
+        newY = (touch) ? touch.pageY : e.pageY,
+        deltaX = newX - data.startX,
+        deltaY = newY - data.startY,
+        endT = new Date().getTime(),
+        eType = data.scale ? Events.scaleEnd : Events.panEnd,
+        dirX = (deltaX > 0) ? "right" : "left",
+        dirY = (deltaY > 0) ? "down" : "up",
+        movedX = Math.abs(deltaX) > 1,
+        movedY = Math.abs(deltaY) > 1;
+
+      // Swipe
+
+      if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
+        eType = Events.swipe;
+      }
+
+      // Kill clicks to internal links
+
+      if ((data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) || (movedX || movedY)) {
+        data.$links = data.$el.find("a");
+
+        for (var i = 0, count = data.$links.length; i < count; i++) {
+          bindLink(data.$links.eq(i), data);
+        }
+      }
+
+      var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+      $Window.off([
+        Events.touchMove,
+        Events.touchEnd,
+        Events.touchCancel,
+        Events.mouseMove,
+        Events.mouseUp,
+        Events.pointerMove,
+        Events.pointerUp,
+        Events.pointerCancel
+      ].join(" "));
+
+      data.$el.trigger(newE);
+
+      data.touches = [];
 
       if (data.scale) {
-        if (data.touches && data.touches.length >= 2) {
-          var t = data.touches;
-
-          data.pinch.endX     = midpoint(t[0].pageX, t[1].pageX);
-          data.pinch.endY     = midpoint(t[0].pageY, t[1].pageY);
-          data.pinch.endD     = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
-          data.scaleD    = (data.pinch.endD / data.pinch.startD);
-          newE.pageX     = data.pinch.endX;
-          newE.pageY     = data.pinch.endY;
-          newE.scale     = data.scaleD;
-          newE.deltaX    = data.pinch.endX - data.pinch.startX;
-          newE.deltaY    = data.pinch.endY - data.pinch.startY;
-        } else if (!data.pan) {
-          fire = false;
-        }
-      }
-
-      if (fire) {
-        data.$el.trigger( newE );
-      }
-    }
-  }
-
-  /**
-   * @method private
-   * @name onPointerEnd
-   * @description Handles pointer end / cancel.
-   * @param e [object] "Event data"
-   */
-
-  function onPointerEnd(e) {
-    var data = e.data;
-
-    // Pan / Swipe / Scale
-
-    var touch     = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
-      newX      = (touch) ? touch.pageX : e.pageX,
-      newY      = (touch) ? touch.pageY : e.pageY,
-      deltaX    = newX - data.startX,
-      deltaY    = newY - data.startY,
-      endT      = new Date().getTime(),
-      eType     = data.scale ? Events.scaleEnd : Events.panEnd,
-      dirX      = (deltaX > 0) ? "right" : "left",
-      dirY      = (deltaY > 0) ? "down"  : "up",
-      movedX    = Math.abs(deltaX) > 1,
-      movedY    = Math.abs(deltaY) > 1;
-
-    // Swipe
-
-    if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
-      eType = Events.swipe;
-    }
-
-    // Kill clicks to internal links
-
-    if ( (data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) || (movedX || movedY) ) {
-      data.$links = data.$el.find("a");
-
-      for (var i = 0, count = data.$links.length; i < count; i++) {
-        bindLink(data.$links.eq(i), data);
-      }
-    }
-
-    var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
-
-    $Window.off( [
-      Events.touchMove,
-      Events.touchEnd,
-      Events.touchCancel,
-      Events.mouseMove,
-      Events.mouseUp,
-      Events.pointerMove,
-      Events.pointerUp,
-      Events.pointerCancel
-    ].join(" ") );
-
-    data.$el.trigger(newE);
-
-    data.touches = [];
-
-    if (data.scale) {
-      /*
-      if (e.originalEvent.pointerId) {
-        for (var i in data.touches) {
-          if (data.touches[i].id === e.originalEvent.pointerId) {
-            data.touches.splice(i, 1);
+        /*
+        if (e.originalEvent.pointerId) {
+          for (var i in data.touches) {
+            if (data.touches[i].id === e.originalEvent.pointerId) {
+              data.touches.splice(i, 1);
+            }
           }
+        } else {
+          data.touches = e.originalEvent.touches;
         }
-      } else {
-        data.touches = e.originalEvent.touches;
-      }
-      */
+        */
 
-      /*
-      if (data.touches.length) {
-        onPointerStart($.extend(e, {
-          data: data,
-          originalEvent: {
-            touches: data.touches
-          }
-        }));
+        /*
+        if (data.touches.length) {
+          onPointerStart($.extend(e, {
+            data: data,
+            originalEvent: {
+              touches: data.touches
+            }
+          }));
+        }
+        */
       }
-      */
+
+      if (touch) {
+        data.touchTimer = Functions.startTimer(data.touchTimer, 5, function() {
+          data.$el.on(Events.mouseDown, data, onPointerStart);
+        });
+      }
+
+      data.touching = false;
     }
 
-    if (touch) {
-      data.touchTimer = Functions.startTimer(data.touchTimer, 5, function() {
-        data.$el.on(Events.mouseDown, data, onPointerStart);
+    /**
+     * @method private
+     * @name bindLink
+     * @description Bind events to internal links
+     * @param $link [object] "Object to bind"
+     * @param data [object] "Instance data"
+     */
+
+    function bindLink($link, data) {
+      $link.on(Events.click, data, onLinkClick);
+
+      // http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+      var events = $._data($link[0], "events")["click"];
+      events.unshift(events.pop());
+    }
+
+    /**
+     * @method private
+     * @name onLinkClick
+     * @description Handles clicks to internal links
+     * @param e [object] "Event data"
+     */
+
+    function onLinkClick(e) {
+      Functions.killEvent(e, true);
+      e.data.$links.off(Events.click);
+    }
+
+    /**
+     * @method private
+     * @name buildEvents
+     * @description Builds new event.
+     * @param type [type] "Event type"
+     * @param oe [object] "Original event"
+     * @param x [int] "X value"
+     * @param y [int] "Y value"
+     * @param scale [float] "Scale value"
+     * @param dx [float] "Delta X value"
+     * @param dy [float] "Delta Y value"
+     */
+
+    function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
+      return $.Event(type, {
+        originalEvent: oe,
+        bubbles: true,
+        pageX: px,
+        pageY: py,
+        scale: s,
+        deltaX: dx,
+        deltaY: dy,
+        directionX: dirx,
+        directionY: diry
       });
     }
 
-    data.touching = false;
-  }
+    /**
+     * @method private
+     * @name midpoint
+     * @description Calculates midpoint.
+     * @param a [float] "Value 1"
+     * @param b [float] "Value 2"
+     */
 
-  /**
-   * @method private
-   * @name bindLink
-   * @description Bind events to internal links
-   * @param $link [object] "Object to bind"
-   * @param data [object] "Instance data"
-   */
+    function midpoint(a, b) {
+      return (a + b) / 2.0;
+    }
 
-  function bindLink($link, data) {
-    $link.on(Events.click, data, onLinkClick);
+    /**
+     * @method private
+     * @name pythagorus
+     * @description Pythagorean theorem.
+     * @param a [float] "Value 1"
+     * @param b [float] "Value 2"
+     */
 
-    // http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
-    var events = $._data($link[0], "events")["click"];
-    events.unshift(events.pop());
-  }
+    function pythagorus(a, b) {
+      return Math.sqrt((a * a) + (b * b));
+    }
 
-  /**
-   * @method private
-   * @name onLinkClick
-   * @description Handles clicks to internal links
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name touchAction
+     * @description Set ms touch action on target.
+     * @param action [string] "Touch action value"
+     */
 
-  function onLinkClick(e) {
-    Functions.killEvent(e, true);
-    e.data.$links.off(Events.click);
-  }
+    function touchAction($target, action) {
+      $target.css({
+        "-ms-touch-action": action,
+        "touch-action": action
+      });
+    }
 
-  /**
-   * @method private
-   * @name buildEvents
-   * @description Builds new event.
-   * @param type [type] "Event type"
-   * @param oe [object] "Original event"
-   * @param x [int] "X value"
-   * @param y [int] "Y value"
-   * @param scale [float] "Scale value"
-   * @param dx [float] "Delta X value"
-   * @param dy [float] "Delta Y value"
-   */
+    /**
+     * @plugin
+     * @name Touch
+     * @description A jQuery plugin for multi-touch events.
+     * @type widget
+     * @main touch.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
 
-  function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
-    return $.Event(type, {
-      originalEvent : oe,
-      bubbles       : true,
-      pageX         : px,
-      pageY         : py,
-      scale         : s,
-      deltaX        : dx,
-      deltaY        : dy,
-      directionX    : dirx,
-      directionY    : diry
-    });
-  }
+    var legacyPointer = !(Formstone.window.PointerEvent),
+      Plugin = Formstone.Plugin("touch", {
+        widget: true,
 
-  /**
-   * @method private
-   * @name midpoint
-   * @description Calculates midpoint.
-   * @param a [float] "Value 1"
-   * @param b [float] "Value 2"
-   */
+        /**
+         * @options
+         * @param axis [string] <null> "Limit axis for pan and swipe; 'x' or 'y'"
+         * @param pan [boolean] <false> "Pan events"
+         * @param scale [boolean] <false> "Scale events"
+         * @param swipe [boolean] <false> "Swipe events"
+         */
 
-  function midpoint(a, b) {
-    return (a + b) / 2.0;
-  }
+        defaults: {
+          axis: false,
+          pan: false,
+          scale: false,
+          swipe: false
+        },
 
-  /**
-   * @method private
-   * @name pythagorus
-   * @description Pythagorean theorem.
-   * @param a [float] "Value 1"
-   * @param b [float] "Value 2"
-   */
+        methods: {
+          _construct: construct,
+          _destruct: destruct
+        },
 
-  function pythagorus(a, b) {
-    return Math.sqrt((a * a) + (b * b));
-  }
+        events: {
+          pointerDown: legacyPointer ? "MSPointerDown" : "pointerdown",
+          pointerUp: legacyPointer ? "MSPointerUp" : "pointerup",
+          pointerMove: legacyPointer ? "MSPointerMove" : "pointermove",
+          pointerCancel: legacyPointer ? "MSPointerCancel" : "pointercancel"
+        }
+      }),
 
-  /**
-   * @method private
-   * @name touchAction
-   * @description Set ms touch action on target.
-   * @param action [string] "Touch action value"
-   */
+      // Localize References
 
-  function touchAction($target, action) {
-    $target.css({
-      "-ms-touch-action": action,
-          "touch-action": action
-    });
-  }
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-  /**
-   * @plugin
-   * @name Touch
-   * @description A jQuery plugin for multi-touch events.
-   * @type widget
-   * @main touch.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
+      // Local
 
-  var legacyPointer = !(Formstone.window.PointerEvent),
-    Plugin = Formstone.Plugin("touch", {
-      widget: true,
-
-      /**
-       * @options
-       * @param axis [string] <null> "Limit axis for pan and swipe; 'x' or 'y'"
-       * @param pan [boolean] <false> "Pan events"
-       * @param scale [boolean] <false> "Scale events"
-       * @param swipe [boolean] <false> "Swipe events"
-       */
-
-      defaults : {
-        axis     : false,
-        pan      : false,
-        scale    : false,
-        swipe    : false
-      },
-
-      methods : {
-        _construct    : construct,
-        _destruct     : destruct
-      },
-
-      events: {
-        pointerDown    : legacyPointer ? "MSPointerDown"   : "pointerdown",
-        pointerUp      : legacyPointer ? "MSPointerUp"     : "pointerup",
-        pointerMove    : legacyPointer ? "MSPointerMove"   : "pointermove",
-        pointerCancel  : legacyPointer ? "MSPointerCancel" : "pointercancel"
-      }
-    }),
-
-    // Localize References
-
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
-
-    // Local
-
-    $Window           = Formstone.$window,
-    TouchThreshold    = 10,
-    TouchTime         = 50;
+      $Window = Formstone.$window,
+      TouchThreshold = 10,
+      TouchTime = 50;
 
     /**
      * @events
@@ -13208,15 +13235,15 @@ Prism.languages.js = Prism.languages.javascript;
      * @event swipe "Swipe"
      */
 
-    Events.pan           = "pan";
-    Events.panStart      = "panstart";
-    Events.panEnd        = "panend";
-    Events.scale         = "scale";
-    Events.scaleStart    = "scalestart";
-    Events.scaleEnd      = "scaleend";
-    Events.swipe         = "swipe";
+    Events.pan = "pan";
+    Events.panStart = "panstart";
+    Events.panEnd = "panend";
+    Events.scale = "scale";
+    Events.scaleStart = "scalestart";
+    Events.scaleEnd = "scaleend";
+    Events.swipe = "swipe";
 
-})
+  })
 
 );
 
@@ -13224,238 +13251,238 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance Data"
-   * @param callback [object] "Function to call"
-   */
-
-  function construct(data, callback) {
-    if (callback) {
-      // Target child element, for event delegation
-
-      data.$target     = this.find(data.target);
-      data.$check      = data.target ? data.$target : this;
-      data.callback    = callback;
-      data.styles      = getStyles(data.$check);
-      data.timer       = null;
-
-      var duration = data.$check.css( Formstone.transition + "-duration" ),
-        durationValue = parseFloat(duration);
-
-      if (Formstone.support.transition && duration && durationValue) {
-        // If transitions supported and active
-
-        this.on(Events.transitionEnd, data, onTranistionEnd);
-      } else {
-        data.timer = Functions.startTimer(data.timer, 50, function() {
-          checkStyles(data);
-        }, true);
-      }
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
+    "use strict";
 
-  function destruct(data) {
-    Functions.clearTimer(data.timer, true);
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance Data"
+     * @param callback [object] "Function to call"
+     */
 
-    this.off(Events.namespace);
-  }
+    function construct(data, callback) {
+      if (callback) {
+        // Target child element, for event delegation
 
-  /**
-   * @method private
-   * @name onTransitionEnd
-   * @description Handles transition end events.
-   * @param e [object] "Event data"
-   */
+        data.$target = this.find(data.target);
+        data.$check = data.target ? data.$target : this;
+        data.callback = callback;
+        data.styles = getStyles(data.$check);
+        data.timer = null;
 
-  function onTranistionEnd(e) {
-    e.stopPropagation();
-    e.preventDefault();
+        var duration = data.$check.css(Formstone.transition + "-duration"),
+          durationValue = parseFloat(duration);
 
-    var data           = e.data,
-      oe             = e.originalEvent,
-      $target        = data.target ? data.$target : data.$el;
+        if (Formstone.support.transition && duration && durationValue) {
+          // If transitions supported and active
 
-    // Check property and target
-    if ( (!data.property || oe.propertyName === data.property) && $(oe.target).is($target) ) {
-      resolve(data);
-    }
-  }
-
-  /**
-   * @method private
-   * @name resolve
-   * @description Resolves transition end events.
-   * @param e [object] "Event data"
-   */
-  /**
-   * @method
-   * @name resolve
-   * @description Resolves current transition end events.
-   * @example $(".target").transition("resolve");
-   */
-
-  function resolve(data) {
-    if (!data.always) {
-      // Unbind events, clear timers, similiar to .one()
-
-      data.$el[Plugin.namespaceClean]("destroy"); // clean up old data?
-    }
-
-    // fire callback
-
-    data.callback.apply(data.$el);
-  }
-
-  /**
-   * @method private
-   * @name checkStyles
-   * @description Compares current CSS to previous styles.
-   * @param data [object] "Instance data"
-   */
-
-  function checkStyles(data) {
-    var styles = getStyles(data.$check);
-
-    if (!isEqual(data.styles, styles)) {
-      resolve(data);
-    }
-
-    data.styles = styles;
-  }
-
-  /**
-   * @method private
-   * @name getStyles
-   * @description Returns element's styles.
-   * @param el [DOM] "Element to check"
-   */
-
-  function getStyles(el) {
-    var computed,
-      styles = {},
-      prop,
-      val;
-
-    if (el instanceof $) {
-      el = el[0];
-    }
-
-    if (Window.getComputedStyle) {
-      // FireFox, Chrome, Safari
-
-      computed = Window.getComputedStyle(el, null);
-
-      for (var i = 0, count = computed.length; i < count; i++) {
-        prop = computed[i];
-        val = computed.getPropertyValue(prop);
-
-        styles[prop] = val;
-      }
-    } else if (el.currentStyle) {
-      // IE, Opera
-
-      computed = el.currentStyle;
-
-      for (prop in computed) {
-        if (computed[prop]) { // ie8...
-          styles[prop] = computed[prop];
+          this.on(Events.transitionEnd, data, onTranistionEnd);
+        } else {
+          data.timer = Functions.startTimer(data.timer, 50, function() {
+            checkStyles(data);
+          }, true);
         }
       }
     }
 
-    return styles;
-  }
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method private
-   * @name isEqual
-   * @description Compares two obejcts.
-   * @param a [object] "Object to compare"
-   * @param b [object] "Object to compare"
-   */
+    function destruct(data) {
+      Functions.clearTimer(data.timer, true);
 
-  function isEqual(a, b) {
-    if ($.type(a) !== $.type(b)) {
-      return false;
+      this.off(Events.namespace);
     }
 
-    for (var i in a) {
+    /**
+     * @method private
+     * @name onTransitionEnd
+     * @description Handles transition end events.
+     * @param e [object] "Event data"
+     */
 
-      if (a.hasOwnProperty(i)) {
-        if ( !(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i]) ) {
-          return false;
+    function onTranistionEnd(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      var data = e.data,
+        oe = e.originalEvent,
+        $target = data.target ? data.$target : data.$el;
+
+      // Check property and target
+      if ((!data.property || oe.propertyName === data.property) && $(oe.target).is($target)) {
+        resolve(data);
+      }
+    }
+
+    /**
+     * @method private
+     * @name resolve
+     * @description Resolves transition end events.
+     * @param e [object] "Event data"
+     */
+    /**
+     * @method
+     * @name resolve
+     * @description Resolves current transition end events.
+     * @example $(".target").transition("resolve");
+     */
+
+    function resolve(data) {
+      if (!data.always) {
+        // Unbind events, clear timers, similiar to .one()
+
+        data.$el[Plugin.namespaceClean]("destroy"); // clean up old data?
+      }
+
+      // fire callback
+
+      data.callback.apply(data.$el);
+    }
+
+    /**
+     * @method private
+     * @name checkStyles
+     * @description Compares current CSS to previous styles.
+     * @param data [object] "Instance data"
+     */
+
+    function checkStyles(data) {
+      var styles = getStyles(data.$check);
+
+      if (!isEqual(data.styles, styles)) {
+        resolve(data);
+      }
+
+      data.styles = styles;
+    }
+
+    /**
+     * @method private
+     * @name getStyles
+     * @description Returns element's styles.
+     * @param el [DOM] "Element to check"
+     */
+
+    function getStyles(el) {
+      var computed,
+        styles = {},
+        prop,
+        val;
+
+      if (el instanceof $) {
+        el = el[0];
+      }
+
+      if (Window.getComputedStyle) {
+        // FireFox, Chrome, Safari
+
+        computed = Window.getComputedStyle(el, null);
+
+        for (var i = 0, count = computed.length; i < count; i++) {
+          prop = computed[i];
+          val = computed.getPropertyValue(prop);
+
+          styles[prop] = val;
         }
-      } else {
+      } else if (el.currentStyle) {
+        // IE, Opera
+
+        computed = el.currentStyle;
+
+        for (prop in computed) {
+          if (computed[prop]) { // ie8...
+            styles[prop] = computed[prop];
+          }
+        }
+      }
+
+      return styles;
+    }
+
+    /**
+     * @method private
+     * @name isEqual
+     * @description Compares two obejcts.
+     * @param a [object] "Object to compare"
+     * @param b [object] "Object to compare"
+     */
+
+    function isEqual(a, b) {
+      if ($.type(a) !== $.type(b)) {
         return false;
       }
+
+      for (var i in a) {
+
+        if (a.hasOwnProperty(i)) {
+          if (!(a.hasOwnProperty(i) && b.hasOwnProperty(i) && a[i] === b[i])) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+
+      return true;
     }
 
-    return true;
-  }
+    /**
+     * @plugin
+     * @name Transition
+     * @description A jQuery plugin for CSS transition events.
+     * @type widget
+     * @main transition.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
 
-  /**
-   * @plugin
-   * @name Transition
-   * @description A jQuery plugin for CSS transition events.
-   * @type widget
-   * @main transition.js
-   * @dependency jQuery
-   * @dependency core.js
-   */
+    var Plugin = Formstone.Plugin("transition", {
+        widget: true,
 
-  var Plugin = Formstone.Plugin("transition", {
-      widget: true,
+        /**
+         * @options
+         * @param always [boolean] <False> "Flag to always react to transition end (.on vs .one)"
+         * @param property [string] <null> "Property to react to"
+         * @param target [string] <null> "Target child selector"
+         */
 
-      /**
-       * @options
-       * @param always [boolean] <False> "Flag to always react to transition end (.on vs .one)"
-       * @param property [string] <null> "Property to react to"
-       * @param target [string] <null> "Target child selector"
-       */
+        defaults: {
+          always: false,
+          property: null,
+          target: null
+        },
 
-      defaults: {
-        always      : false,
-        property    : null,
-        target      : null
-      },
+        methods: {
+          _construct: construct,
+          _destruct: destruct,
+          resolve: resolve
+        }
+      }),
 
-      methods : {
-        _construct    : construct,
-        _destruct     : destruct,
-        resolve       : resolve
-      }
-    }),
+      // Localize References
 
-    // Localize References
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-    Events       = Plugin.events,
-    Functions    = Plugin.functions,
+      Window = Formstone.window;
 
-    Window       = Formstone.window;
-
-})
+  })
 
 );
 
@@ -13463,740 +13490,742 @@ Prism.languages.js = Prism.languages.javascript;
 /* global define */
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
 
-  "use strict";
+    "use strict";
 
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-  function setup() {
-    var blobSliceMethods = [
+    function setup() {
+      var blobSliceMethods = [
         'mozSlice',
         'webkitSlice',
         'slice'
       ];
 
-    if (Formstone.support.file) {
-      var testFile = false;
+      if (Formstone.support.file) {
+        var testFile = false;
 
-      try {
-        testFile = new File([""], "f");
-      } catch (e) {}
-
-      if (!testFile) {
-        // Safari & IE/Edge :/
         try {
-          testFile = new Blob([""], {});
+          testFile = new File([""], "f");
         } catch (e) {}
-      }
 
-      if (testFile) {
-        for (var i in blobSliceMethods) {
-          if (blobSliceMethods.hasOwnProperty(i) && blobSliceMethods[i] in testFile) {
-            BlobSliceMethod = blobSliceMethods[i];
-            break;
-          }
+        if (!testFile) {
+          // Safari & IE/Edge :/
+          try {
+            testFile = new Blob([""], {});
+          } catch (e) {}
         }
-      }
-    }
-  }
 
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
-
-  function construct(data) {
-    if (Formstone.support.file) {
-      var html = "";
-
-      if (!BlobSliceMethod) {
-        data.chunked = false;
-      }
-
-      // Backwards compat
-      if (data.maxQueue) {
-        data.maxConcurrent = data.maxQueue;
-      }
-
-      if (data.label !== false) {
-        html += '<div class="' + RawClasses.target + '">';
-        html += data.label;
-        html += '</div>';
-      }
-      html += '<input class="' + RawClasses.input + '" type="file"';
-      if (data.multiple) {
-        html += ' multiple';
-      }
-      if (data.accept) {
-        html += ' accept="' + data.accept + '"';
-      }
-      html += '>';
-
-      data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
-
-      this.addClass(data.baseClasses)
-        .append(html);
-
-      data.$input       = this.find(Classes.input);
-      data.queue        = [];
-      data.total        = 0;
-      data.uploaded     = 0;
-      data.uploading    = false;
-      data.disabled     = true;
-      data.aborting     = false;
-
-      this.on(Events.click, Classes.target, data, onClick)
-        .on(Events.dragEnter, data, onDragEnter)
-        .on(Events.dragOver, data, onDragOver)
-        .on(Events.dragLeave, data, onDragOut)
-        .on(Events.drop, data, onDrop);
-
-      data.$input.on(Events.focus, data, onFocus)
-             .on(Events.blur, data, onBlur)
-             .on(Events.change, data, onChange);
-
-      enableUpload.call(this, data);
-    }
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    if (Formstone.support.file) {
-      data.$input.off(Events.namespace);
-
-      this.off(Events.namespace)
-        .removeClass(data.baseClasses)
-        .html("");
-    }
-  }
-
-  /**
-   * @method private
-   * @name abortUpload
-   * @description Cancels all active uploads.
-   * @param data [object] "Instance data"
-   * @param index [int] "File index"
-   */
-
-  /**
-   * @method
-   * @name abort
-   * @description Cancels all active uploads.
-   * @example $(".target").upload("abort");
-   */
-
-  function abortUpload(data, index) {
-    var file;
-
-    data.aborting = true;
-
-    for (var i in data.queue) {
-      if (data.queue.hasOwnProperty(i)) {
-        file = data.queue[i];
-
-        if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
-          // Abort all
-          if (file.started && !file.complete) {
-            if (data.chunked) {
-              file.chunkTransfer.abort();
-            } else {
-              file.transfer.abort();
+        if (testFile) {
+          for (var i in blobSliceMethods) {
+            if (blobSliceMethods.hasOwnProperty(i) && blobSliceMethods[i] in testFile) {
+              BlobSliceMethod = blobSliceMethods[i];
+              break;
             }
-          } else {
-            abortFile(data, file, "abort");
           }
         }
       }
     }
 
-    data.aborting = false;
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    checkQueue(data);
-  }
+    function construct(data) {
+      if (Formstone.support.file) {
+        var html = "";
 
-  /**
-   * @method private
-   * @name abortFile
-   * @description Aborts file.
-   * @param data [object] "Instance data"
-   * @param formData [object] "Target form"
-   * @param file [object] "Target file"
-   */
+        if (!BlobSliceMethod) {
+          data.chunked = false;
+        }
 
-  function abortFile(data, file, error) {
-    file.error = true;
-    data.$el.trigger(Events.fileError, [ file, error ]);
+        // Backwards compat
+        if (data.maxQueue) {
+          data.maxConcurrent = data.maxQueue;
+        }
 
-    if (!data.aborting) {
+        if (data.label !== false) {
+          html += '<div class="' + RawClasses.target + '">';
+          html += data.label;
+          html += '</div>';
+        }
+        html += '<input class="' + RawClasses.input + '" type="file"';
+        if (data.multiple) {
+          html += ' multiple';
+        }
+        if (data.accept) {
+          html += ' accept="' + data.accept + '"';
+        }
+        html += '>';
+
+        data.baseClasses = [RawClasses.base, data.theme, data.customClass].join(" ");
+
+        this.addClass(data.baseClasses)
+          .append(html);
+
+        data.$input = this.find(Classes.input);
+        data.queue = [];
+        data.total = 0;
+        data.uploaded = 0;
+        data.uploading = false;
+        data.disabled = true;
+        data.aborting = false;
+
+        this.on(Events.click, Classes.target, data, onClick)
+          .on(Events.dragEnter, data, onDragEnter)
+          .on(Events.dragOver, data, onDragOver)
+          .on(Events.dragLeave, data, onDragOut)
+          .on(Events.drop, data, onDrop);
+
+        data.$input.on(Events.focus, data, onFocus)
+          .on(Events.blur, data, onBlur)
+          .on(Events.change, data, onChange);
+
+        enableUpload.call(this, data);
+      }
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      if (Formstone.support.file) {
+        data.$input.off(Events.namespace);
+
+        this.off(Events.namespace)
+          .removeClass(data.baseClasses)
+          .html("");
+      }
+    }
+
+    /**
+     * @method private
+     * @name abortUpload
+     * @description Cancels all active uploads.
+     * @param data [object] "Instance data"
+     * @param index [int] "File index"
+     */
+
+    /**
+     * @method
+     * @name abort
+     * @description Cancels all active uploads.
+     * @example $(".target").upload("abort");
+     */
+
+    function abortUpload(data, index) {
+      var file;
+
+      data.aborting = true;
+
+      for (var i in data.queue) {
+        if (data.queue.hasOwnProperty(i)) {
+          file = data.queue[i];
+
+          if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
+            // Abort all
+            if (file.started && !file.complete) {
+              if (data.chunked) {
+                file.chunkTransfer.abort();
+              } else {
+                file.transfer.abort();
+              }
+            } else {
+              abortFile(data, file, "abort");
+            }
+          }
+        }
+      }
+
+      data.aborting = false;
+
       checkQueue(data);
     }
-  }
 
-  /**
-   * @method private
-   * @name abortChunk
-   * @description Aborts file chunk.
-   * @param data [object] "Instance data"
-   * @param formData [object] "Target form"
-   * @param file [object] "Target file"
-   */
+    /**
+     * @method private
+     * @name abortFile
+     * @description Aborts file.
+     * @param data [object] "Instance data"
+     * @param formData [object] "Target form"
+     * @param file [object] "Target file"
+     */
 
-  function abortChunk(data, file, error) {
-    data.$el.trigger(Events.chunkError, [ file, error ]);
+    function abortFile(data, file, error) {
+      file.error = true;
+      data.$el.trigger(Events.fileError, [file, error]);
 
-    abortFile(data, file, error);
-  }
-
-  /**
-   * @method
-   * @name disable
-   * @description Disables target instance.
-   * @example $(".target").upload("disable");
-   */
-
-  function disableUpload(data) {
-    if (!data.disabled) {
-      this.addClass(RawClasses.disabled);
-      data.$input.prop("disabled", true);
-
-      data.disabled = true;
+      if (!data.aborting) {
+        checkQueue(data);
+      }
     }
-  }
 
-  /**
-   * @method
-   * @name enable
-   * @description Enables target instance.
-   * @example $(".target").upload("enable");
-   */
+    /**
+     * @method private
+     * @name abortChunk
+     * @description Aborts file chunk.
+     * @param data [object] "Instance data"
+     * @param formData [object] "Target form"
+     * @param file [object] "Target file"
+     */
 
-  function enableUpload(data) {
-    if (data.disabled) {
-      this.removeClass(RawClasses.disabled);
-      data.$input.prop("disabled", false);
+    function abortChunk(data, file, error) {
+      data.$el.trigger(Events.chunkError, [file, error]);
 
-      data.disabled = false;
+      abortFile(data, file, error);
     }
-  }
 
-  /**
-   * @method private
-   * @name onClick
-   * @description Handles click to target.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name disable
+     * @description Disables target instance.
+     * @example $(".target").upload("disable");
+     */
 
-  function onClick(e) {
-    Functions.killEvent(e);
+    function disableUpload(data) {
+      if (!data.disabled) {
+        this.addClass(RawClasses.disabled);
+        data.$input.prop("disabled", true);
 
-    var data = e.data;
-
-    if (!data.disabled) {
-      data.$input.trigger(Events.click);
+        data.disabled = true;
+      }
     }
-  }
 
-  /**
-   * @method private
-   * @name onFocus
-   * @description Handles instance focus
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method
+     * @name enable
+     * @description Enables target instance.
+     * @example $(".target").upload("enable");
+     */
 
-  function onFocus(e) {
-    e.data.$el.addClass(RawClasses.focus);
-  }
+    function enableUpload(data) {
+      if (data.disabled) {
+        this.removeClass(RawClasses.disabled);
+        data.$input.prop("disabled", false);
 
-  /**
-   * @method private
-   * @name onBlur
-   * @description Handles instance blur
-   * @param e [object] "Event data"
-   */
-
-  function onBlur(e) {
-    e.data.$el.removeClass(RawClasses.focus);
-  }
-
-  /**
-   * @method private
-   * @name onChange
-   * @description Handles change to hidden input.
-   * @param e [object] "Event data"
-   */
-
-  function onChange(e) {
-    Functions.killEvent(e);
-
-    var data = e.data,
-      files = data.$input[0].files;
-
-    if (!data.disabled && files.length) {
-      handleUpload(data, files);
+        data.disabled = false;
+      }
     }
-  }
 
-  /**
-   * @method private
-   * @name onDragEnter
-   * @description Handles dragenter to target.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click to target.
+     * @param e [object] "Event data"
+     */
 
-  function onDragEnter(e) {
-    Functions.killEvent(e);
+    function onClick(e) {
+      Functions.killEvent(e);
 
-    var data = e.data;
+      var data = e.data;
 
-    // if (!data.disabled) {
+      if (!data.disabled) {
+        data.$input.trigger(Events.click);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onFocus
+     * @description Handles instance focus
+     * @param e [object] "Event data"
+     */
+
+    function onFocus(e) {
+      e.data.$el.addClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onBlur
+     * @description Handles instance blur
+     * @param e [object] "Event data"
+     */
+
+    function onBlur(e) {
+      e.data.$el.removeClass(RawClasses.focus);
+    }
+
+    /**
+     * @method private
+     * @name onChange
+     * @description Handles change to hidden input.
+     * @param e [object] "Event data"
+     */
+
+    function onChange(e) {
+      Functions.killEvent(e);
+
+      var data = e.data,
+        files = data.$input[0].files;
+
+      if (!data.disabled && files.length) {
+        handleUpload(data, files);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onDragEnter
+     * @description Handles dragenter to target.
+     * @param e [object] "Event data"
+     */
+
+    function onDragEnter(e) {
+      Functions.killEvent(e);
+
+      var data = e.data;
+
+      // if (!data.disabled) {
       data.$el.addClass(RawClasses.dropping)
-          .trigger(Events.fileDragEnter);
-    // }
-  }
+        .trigger(Events.fileDragEnter);
+      // }
+    }
 
-  /**
-   * @method private
-   * @name onDragOver
-   * @description Handles dragover to target.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onDragOver
+     * @description Handles dragover to target.
+     * @param e [object] "Event data"
+     */
 
-  function onDragOver(e) {
-    Functions.killEvent(e);
+    function onDragOver(e) {
+      Functions.killEvent(e);
 
-    var data = e.data;
+      var data = e.data;
 
-    // if (!data.disabled) {
+      // if (!data.disabled) {
       data.$el.addClass(RawClasses.dropping)
-          .trigger(Events.fileDragOver);
-    // }
-  }
+        .trigger(Events.fileDragOver);
+      // }
+    }
 
-  /**
-   * @method private
-   * @name onDragOut
-   * @description Handles dragout to target.
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onDragOut
+     * @description Handles dragout to target.
+     * @param e [object] "Event data"
+     */
 
-  function onDragOut(e) {
-    Functions.killEvent(e);
+    function onDragOut(e) {
+      Functions.killEvent(e);
 
-    var data = e.data;
+      var data = e.data;
 
-    // if (!data.disabled) {
+      // if (!data.disabled) {
       data.$el.removeClass(RawClasses.dropping)
-          .trigger(Events.fileDragLeave);
-    // }
-  }
-
-  /**
-   * @method private
-   * @name onDrop
-   * @description Handles drop to target.
-   * @param e [object] "Event data"
-   */
-
-  function onDrop(e) {
-    Functions.killEvent(e);
-
-    var data = e.data,
-      files = e.originalEvent.dataTransfer.files;
-
-    data.$el.removeClass(RawClasses.dropping);
-
-    if (!data.disabled) {
-      handleUpload(data, files);
+        .trigger(Events.fileDragLeave);
+      // }
     }
-  }
 
-  /**
-   * @method private
-   * @name handleUpload
-   * @description Handles new files.
-   * @param data [object] "Instance data"
-   * @param files [object] "File list"
-   */
+    /**
+     * @method private
+     * @name onDrop
+     * @description Handles drop to target.
+     * @param e [object] "Event data"
+     */
 
-  function handleUpload(data, files) {
-    var newFiles = [],
-      numFiles = files.length;
+    function onDrop(e) {
+      Functions.killEvent(e);
 
-    if (data.maxFiles) {
-      var filesRemaining = data.maxFiles - data.uploaded;
+      var data = e.data,
+        files = e.originalEvent.dataTransfer.files;
 
-      if (filesRemaining >= 0 && files.length > filesRemaining) {
-        numFiles = filesRemaining;
+      data.$el.removeClass(RawClasses.dropping);
+
+      if (!data.disabled) {
+        handleUpload(data, files);
       }
     }
 
-    if (numFiles > 0) {
-      for (var i = 0; i < numFiles; i++) {
-        var file = {
-          index       : data.total++,
-          file        : files[i],
-          name        : files[i].name,
-          size        : files[i].size,
-          started     : false,
-          complete    : false,
-          error       : false,
-          transfer    : null
-        };
+    /**
+     * @method private
+     * @name handleUpload
+     * @description Handles new files.
+     * @param data [object] "Instance data"
+     * @param files [object] "File list"
+     */
 
-        newFiles.push(file);
-        data.queue.push(file);
+    function handleUpload(data, files) {
+      var newFiles = [],
+        numFiles = files.length;
+
+      if (data.maxFiles) {
+        var filesRemaining = data.maxFiles - data.uploaded;
+
+        if (filesRemaining >= 0 && files.length > filesRemaining) {
+          numFiles = filesRemaining;
+        }
       }
 
-      data.$el.trigger(Events.queued, [ newFiles ]);
+      if (numFiles > 0) {
+        for (var i = 0; i < numFiles; i++) {
+          var file = {
+            index: data.total++,
+            file: files[i],
+            name: files[i].name,
+            size: files[i].size,
+            started: false,
+            complete: false,
+            error: false,
+            transfer: null
+          };
 
-      if (data.autoUpload) {
-        startUpload(data);
-      }
-    }
-
-    data.$input.val("");
-  }
-
-  /**
-   * @method private
-   * @name startUpload
-   * @description Start queued uploads.
-   * @param data [object] "Instance data"
-   */
-
-  /**
-   * @method
-   * @name start
-   * @description Starts queued uploads; Use when autoUpload is set to false.
-   * @example $(".target").upload("start");
-   */
-
-  function startUpload(data) {
-    if (!data.uploading) {
-      $Window.on(Events.beforeUnload, function() {
-        return data.leave;
-      });
-
-      data.uploading = true;
-
-      data.$el.trigger(Events.start, [ data.queue ]);
-    }
-
-    checkQueue(data);
-  }
-
-  /**
-   * @method private
-   * @name checkQueue
-   * @description Checks and updates file queue.
-   * @param data [object] "Instance data"
-   */
-
-  function checkQueue(data) {
-    var transfering = 0,
-      newQueue = [];
-
-    // remove lingering items from queue
-    for (var i in data.queue) {
-      if (data.queue.hasOwnProperty(i) && !data.queue[i].complete && !data.queue[i].error) {
-        newQueue.push(data.queue[i]);
-      }
-    }
-
-    data.queue = newQueue;
-
-    for (var j in data.queue) {
-      if (data.queue.hasOwnProperty(j)) {
-        if (!data.queue[j].started) {
-          uploadFile(data, data.queue[j]);
+          newFiles.push(file);
+          data.queue.push(file);
         }
 
-        transfering++;
+        data.$el.trigger(Events.queued, [newFiles]);
 
-        if (transfering >= data.maxConcurrent) {
-          return;
+        if (data.autoUpload) {
+          startUpload(data);
+        }
+      }
+
+      data.$input.val("");
+    }
+
+    /**
+     * @method private
+     * @name startUpload
+     * @description Start queued uploads.
+     * @param data [object] "Instance data"
+     */
+
+    /**
+     * @method
+     * @name start
+     * @description Starts queued uploads; Use when autoUpload is set to false.
+     * @example $(".target").upload("start");
+     */
+
+    function startUpload(data) {
+      if (!data.uploading) {
+        $Window.on(Events.beforeUnload, function() {
+          return data.leave;
+        });
+
+        data.uploading = true;
+
+        data.$el.trigger(Events.start, [data.queue]);
+      }
+
+      checkQueue(data);
+    }
+
+    /**
+     * @method private
+     * @name checkQueue
+     * @description Checks and updates file queue.
+     * @param data [object] "Instance data"
+     */
+
+    function checkQueue(data) {
+      var transfering = 0,
+        newQueue = [];
+
+      // remove lingering items from queue
+      for (var i in data.queue) {
+        if (data.queue.hasOwnProperty(i) && !data.queue[i].complete && !data.queue[i].error) {
+          newQueue.push(data.queue[i]);
+        }
+      }
+
+      data.queue = newQueue;
+
+      for (var j in data.queue) {
+        if (data.queue.hasOwnProperty(j)) {
+          if (!data.queue[j].started) {
+            uploadFile(data, data.queue[j]);
+          }
+
+          transfering++;
+
+          if (transfering >= data.maxConcurrent) {
+            return;
+          } else {
+            i++;
+          }
+        }
+      }
+
+      if (transfering === 0) {
+        $Window.off(Events.beforeUnload);
+
+        data.uploading = false;
+
+        data.$el.trigger(Events.complete);
+      }
+    }
+
+    /**
+     * @method private
+     * @name uploadFile
+     * @description Uploads file.
+     * @param data [object] "Instance data"
+     * @param file [object] "Target file"
+     */
+
+    function uploadFile(data, file) {
+      if (file.size >= data.maxSize || file.error === true) {
+        abortFile(data, file, "size");
+      } else if (data.chunked) {
+        // Chunked upload
+        file.started = true;
+
+        file.chunkSize = (1024 * data.chunkSize);
+        file.totalChunks = Math.ceil(file.size / file.chunkSize);
+        file.currentChunk = 0;
+
+        data.$el.trigger(Events.fileStart, [file]);
+
+        uploadChunk(data, file);
+      } else {
+        var formData = new FormData();
+
+        formData.append(data.postKey, file.file);
+        formData = setFormData(data, formData, file);
+
+        if (formData === false) {
+          abortFile(data, file, "abort");
         } else {
-          i++;
+          // Standard upload
+          file.started = true;
+          file.transfer = $.ajax({
+            url: data.action,
+            data: formData,
+            dataType: data.dataType,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            cache: false,
+            xhr: function() {
+              var $xhr = $.ajaxSettings.xhr();
+
+              if ($xhr.upload) {
+                // Clean progress event
+                $xhr.upload.addEventListener("progress", function(e) {
+                  var percent = 0,
+                    position = e.loaded || e.position,
+                    total = e.total;
+
+                  if (e.lengthComputable) {
+                    percent = Math.ceil((position / total) * 100);
+                  }
+
+                  data.$el.trigger(Events.fileProgress, [file, percent]);
+                }, false);
+              }
+
+              return $xhr;
+            },
+            beforeSend: function(jqXHR, settings) {
+              data.$el.trigger(Events.fileStart, [file, settings, jqXHR]);
+            },
+            success: function(response, status, jqXHR) {
+              file.complete = true;
+
+              data.uploaded++;
+              data.$el.trigger(Events.fileComplete, [file, response, status, jqXHR]);
+
+              checkQueue(data);
+            },
+            error: function(jqXHR, status, error) {
+              abortFile(data, file, error, jqXHR);
+            }
+          });
         }
       }
     }
 
-    if (transfering === 0) {
-      $Window.off(Events.beforeUnload);
+    /**
+     * @method private
+     * @name uploadChunk
+     * @description Uploads file chunk.
+     * @param data [object] "Instance data"
+     * @param formData [object] "Target form"
+     * @param file [object] "Target file"
+     */
 
-      data.uploading = false;
+    function uploadChunk(data, file) {
+      var chunkStart = (file.chunkSize * file.currentChunk),
+        chunkEnd = (chunkStart + file.chunkSize);
 
-      data.$el.trigger(Events.complete);
-    }
-  }
+      if (chunkEnd > file.size) {
+        chunkEnd = file.size;
+      }
 
-  /**
-   * @method private
-   * @name uploadFile
-   * @description Uploads file.
-   * @param data [object] "Instance data"
-   * @param file [object] "Target file"
-   */
+      var newChunk = file.file[BlobSliceMethod](chunkStart, chunkEnd),
+        formData = new FormData();
 
-  function uploadFile(data, file) {
-    if (file.size >= data.maxSize || file.error === true) {
-      abortFile(data, file, "size");
-    } else if (data.chunked) {
-      // Chunked upload
-      file.started = true;
+      formData.append(data.postKey, newChunk, file.file.name);
+      formData.append("chunks", file.totalChunks);
+      formData.append("chunk", file.currentChunk);
 
-      file.chunkSize = (1024 * data.chunkSize);
-      file.totalChunks = Math.ceil( file.size / file.chunkSize );
-      file.currentChunk = 0;
-
-      data.$el.trigger(Events.fileStart, [ file ]);
-
-      uploadChunk(data, file);
-    } else {
-      var formData = new FormData();
-
-      formData.append(data.postKey, file.file);
       formData = setFormData(data, formData, file);
 
       if (formData === false) {
         abortFile(data, file, "abort");
       } else {
-        // Standard upload
-        file.started = true;
-        file.transfer = $.ajax({
-          url         : data.action,
-          data        : formData,
-          dataType    : data.dataType,
-          type        : "POST",
-          contentType : false,
-          processData : false,
-          cache       : false,
-          xhr: function() {
-            var $xhr = $.ajaxSettings.xhr();
-
-            if ($xhr.upload) {
-              // Clean progress event
-              $xhr.upload.addEventListener("progress", function(e) {
-                var percent = 0,
-                  position = e.loaded || e.position,
-                  total = e.total;
-
-                if (e.lengthComputable) {
-                  percent = Math.ceil((position / total) * 100);
-                }
-
-                data.$el.trigger(Events.fileProgress, [ file, percent ]);
-              }, false);
-            }
-
-            return $xhr;
-          },
+        file.chunkTransfer = $.ajax({
+          url: data.action,
+          data: formData,
+          dataType: data.dataType,
+          type: "POST",
+          contentType: false,
+          processData: false,
+          cache: false,
           beforeSend: function(jqXHR, settings) {
-            data.$el.trigger(Events.fileStart, [ file, settings, jqXHR ]);
+            data.$el.trigger(Events.chunkStart, [file, settings, jqXHR]);
           },
           success: function(response, status, jqXHR) {
-            file.complete = true;
+            file.currentChunk++;
 
-            data.uploaded++;
-            data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
+            data.$el.trigger(Events.chunkComplete, [file]);
 
-            checkQueue(data);
+            var percent = Math.ceil((file.currentChunk / file.totalChunks) * 100);
+            data.$el.trigger(Events.fileProgress, [file, percent, status, jqXHR]);
+
+            if (file.currentChunk < file.totalChunks) {
+              uploadChunk(data, file);
+            } else {
+              file.complete = true;
+              data.$el.trigger(Events.fileComplete, [file, response, status, jqXHR]);
+
+              checkQueue(data);
+            }
           },
           error: function(jqXHR, status, error) {
-            abortFile(data, file, error, jqXHR);
+            abortChunk(data, file, error, jqXHR);
           }
         });
       }
     }
-  }
 
-  /**
-   * @method private
-   * @name uploadChunk
-   * @description Uploads file chunk.
-   * @param data [object] "Instance data"
-   * @param formData [object] "Target form"
-   * @param file [object] "Target file"
-   */
-
-  function uploadChunk(data, file) {
-    var chunkStart = (file.chunkSize * file.currentChunk),
-      chunkEnd   = (chunkStart + file.chunkSize);
-
-    if (chunkEnd > file.size) {
-      chunkEnd = file.size;
-    }
-
-    var newChunk = file.file[ BlobSliceMethod ]( chunkStart, chunkEnd ),
-      formData = new FormData();
-
-    formData.append(data.postKey, newChunk, file.file.name);
-    formData.append("chunks", file.totalChunks);
-    formData.append("chunk", file.currentChunk);
-
-    formData = setFormData(data, formData, file);
-
-    if (formData === false) {
-      abortFile(data, file, "abort");
-    } else {
-      file.chunkTransfer = $.ajax({
-        url         : data.action,
-        data        : formData,
-        dataType    : data.dataType,
-        type        : "POST",
-        contentType : false,
-        processData : false,
-        cache       : false,
-        beforeSend: function(jqXHR, settings) {
-          data.$el.trigger(Events.chunkStart, [ file, settings, jqXHR ]);
-        },
-        success: function(response, status, jqXHR) {
-          file.currentChunk++;
-
-          data.$el.trigger(Events.chunkComplete, [ file ]);
-
-          var percent = Math.ceil((file.currentChunk / file.totalChunks) * 100);
-          data.$el.trigger(Events.fileProgress, [ file, percent, status, jqXHR ]);
-
-          if (file.currentChunk < file.totalChunks) {
-            uploadChunk(data, file);
-          } else {
-            file.complete = true;
-            data.$el.trigger(Events.fileComplete, [ file, response, status, jqXHR ]);
-
-            checkQueue(data);
-          }
-        },
-        error: function(jqXHR, status, error) {
-          abortChunk(data, file, error, jqXHR);
+    function setFormData(data, formData, file) {
+      for (var i in data.postData) {
+        if (data.postData.hasOwnProperty(i)) {
+          formData.append(i, data.postData[i]);
         }
-      });
-    }
-  }
-
-  function setFormData(data, formData, file) {
-    for (var i in data.postData) {
-      if (data.postData.hasOwnProperty(i)) {
-        formData.append(i, data.postData[i]);
       }
+
+      // Modify data before upload
+      formData = data.beforeSend.call(data.$el, formData, file);
+
+      return formData;
     }
 
-    // Modify data before upload
-    formData = data.beforeSend.call(data.$el, formData, file);
+    /**
+     * @plugin
+     * @name Upload
+     * @description A jQuery plugin for simple drag and drop uploads.
+     * @type widget
+     * @main upload.js
+     * @main upload.css
+     * @dependency jQuery
+     * @dependency core.js
+     */
 
-    return formData;
-  }
+    var Plugin = Formstone.Plugin("upload", {
+        widget: true,
 
-  /**
-   * @plugin
-   * @name Upload
-   * @description A jQuery plugin for simple drag and drop uploads.
-   * @type widget
-   * @main upload.js
-   * @main upload.css
-   * @dependency jQuery
-   * @dependency core.js
-   */
+        /**
+         * @options
+         * @param accept [string] "Input accept attribute"
+         * @param action [string] "Where to submit uploads"
+         * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
+         * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
+         * @param chunked [boolean] <false> "Use chunked uploading, if supported"
+         * @param chunkSize [int] <100> "Size to chunk, in kB"
+         * @param customClass [string] <''> "Class applied to instance"
+         * @param dataType [string] <'html'> "Data type of AJAX request"
+         * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
+         * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
+         * @param maxConcurrent [int] <2> "Number of files to simultaneously upload"
+         * @param maxFiles [int OR boolean] <false> "Total number of files that can be uploaded; `false` to disable"
+         * @param maxSize [int] <5242880> "Max file size allowed"
+         * @param multiple [true] <true> "Flag to allow mutiple file uploads"
+         * @param postData [object] "Extra data to post with upload"
+         * @param postKey [string] <'file'> "Key to upload file as"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         */
 
-  var Plugin = Formstone.Plugin("upload", {
-      widget: true,
+        defaults: {
+          accept: false,
+          action: "",
+          autoUpload: true,
+          beforeSend: function(formdata) {
+            return formdata;
+          },
+          chunked: false,
+          chunkSize: 100,
+          customClass: "",
+          dataType: "html",
+          label: "Drag and drop files or click to select",
+          leave: "You have uploads pending, are you sure you want to leave this page?",
+          maxConcurrent: 2,
+          // maxQueue       : 2,
+          maxFiles: false,
+          maxSize: 5242880, // 5 mb
+          multiple: true,
+          postData: {},
+          postKey: "file",
+          theme: "fs-light"
+        },
 
-      /**
-       * @options
-       * @param accept [string] "Input accept attribute"
-       * @param action [string] "Where to submit uploads"
-       * @param autoUpload [boolean] <false> "Beging upload when files are dropped"
-       * @param beforeSend [function] "Run before request sent, must return modified formdata or `false` to cancel"
-       * @param chunked [boolean] <false> "Use chunked uploading, if supported"
-       * @param chunkSize [int] <100> "Size to chunk, in kB"
-       * @param customClass [string] <''> "Class applied to instance"
-       * @param dataType [string] <'html'> "Data type of AJAX request"
-       * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
-       * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
-       * @param maxConcurrent [int] <2> "Number of files to simultaneously upload"
-       * @param maxFiles [int OR boolean] <false> "Total number of files that can be uploaded; `false` to disable"
-       * @param maxSize [int] <5242880> "Max file size allowed"
-       * @param multiple [true] <true> "Flag to allow mutiple file uploads"
-       * @param postData [object] "Extra data to post with upload"
-       * @param postKey [string] <'file'> "Key to upload file as"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       */
+        classes: [
+          "input",
+          "target",
+          "multiple",
+          "dropping",
+          "disabled",
+          "focus"
+        ],
 
-      defaults: {
-        accept         : false,
-        action         : "",
-        autoUpload     : true,
-        beforeSend     : function(formdata) { return formdata; },
-        chunked        : false,
-        chunkSize      : 100,
-        customClass    : "",
-        dataType       : "html",
-        label          : "Drag and drop files or click to select",
-        leave          : "You have uploads pending, are you sure you want to leave this page?",
-        maxConcurrent  : 2,
-        // maxQueue       : 2,
-        maxFiles       : false,
-        maxSize        : 5242880, // 5 mb
-        multiple       : true,
-        postData       : {},
-        postKey        : "file",
-        theme          : "fs-light"
-      },
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
 
-      classes: [
-        "input",
-        "target",
-        "multiple",
-        "dropping",
-        "disabled",
-        "focus"
-      ],
+          disable: disableUpload,
+          enable: enableUpload,
+          abort: abortUpload,
+          start: startUpload
+        }
+      }),
 
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
+      // Localize References
 
-        disable       : disableUpload,
-        enable        : enableUpload,
-        abort         : abortUpload,
-        start         : startUpload
-      }
-    }),
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
 
-    // Localize References
+      Window = Formstone.window,
+      $Window = Formstone.$window,
 
-    Classes       = Plugin.classes,
-    RawClasses    = Classes.raw,
-    Events        = Plugin.events,
-    Functions     = Plugin.functions,
-
-    Window        = Formstone.window,
-    $Window       = Formstone.$window,
-
-    // Internal
-    BlobSliceMethod = false;
+      // Internal
+      BlobSliceMethod = false;
 
     /**
      * @events
@@ -14215,21 +14244,21 @@ Prism.languages.js = Prism.languages.javascript;
      * @event queued "Files are queued for upload"
      */
 
-    Events.chunkComplete   = "chunkcomplete";
-    Events.chunkError      = "chunkerror";
-    Events.chunkStart      = "chunkstart";
-    Events.complete        = "complete";
-    Events.fileComplete    = "filecomplete";
-    Events.fileDragEnter   = "filedragenter";
-    Events.fileDragLeave   = "filedragleave";
-    Events.fileDragOver    = "filedragover";
-    Events.fileError       = "fileerror";
-    Events.fileProgress    = "fileprogress";
-    Events.fileStart       = "filestart";
-    Events.start           = "start";
-    Events.queued          = "queued";
+    Events.chunkComplete = "chunkcomplete";
+    Events.chunkError = "chunkerror";
+    Events.chunkStart = "chunkstart";
+    Events.complete = "complete";
+    Events.fileComplete = "filecomplete";
+    Events.fileDragEnter = "filedragenter";
+    Events.fileDragLeave = "filedragleave";
+    Events.fileDragOver = "filedragover";
+    Events.fileError = "fileerror";
+    Events.fileProgress = "fileprogress";
+    Events.fileStart = "filestart";
+    Events.start = "start";
+    Events.queued = "queued";
 
-})
+  })
 
 );
 
@@ -14240,1223 +14269,1223 @@ Prism.languages.js = Prism.languages.javascript;
 // TODO: Add swipe next/previous when zoomed out?
 
 (function(factory) {
-  if (typeof define === "function" && define.amd) {
-    define([
-      "jquery",
-      "./core",
-      "./transition"
-    ], factory);
-  } else {
-    factory(jQuery, Formstone);
-  }
-}(function($, Formstone) {
-
-  "use strict";
-
-  /**
-   * @method private
-   * @name setup
-   * @description Setup plugin.
-   */
-
-  function setup() {
-    scroll();
-    $Window.on("scroll", scroll);
-    $Body = Formstone.$body;
-  }
-
-  /**
-   * @method private
-   * @name resize
-   * @description Handles window resize
-   */
-
-  function resize() {
-    Functions.iterate.call($Instances, resizeInstance);
-    // Functions.iterate.call($LazyInstances, cacheScrollPosition);
-    // Functions.iterate.call($LazyInstances, checkScrollPosition);
-  }
-
-  /**
-   * @method private
-   * @name scroll
-   * @description Handles window scroll
-   */
-
-  function scroll() {
-    ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
-
-    if (ScrollTop < 0) {
-      ScrollTop = 0;
-    }
-
-    // Functions.iterate.call($LazyInstances, checkScrollPosition);
-  }
-
-  /**
-   * @method private
-   * @name raf
-   * @description Handles request animation frame
-   */
-
-  function raf() {
-    Functions.iterate.call($Instances, renderRAF);
-  }
-
-  /**
-   * @method private
-   * @name cacheInstances
-   * @description Caches active instances
-   */
-
-  function cacheInstances() {
-    $Instances     = $(Classes.base);
-    // $LazyInstances = $(Classes.lazy);
-
-    // Functions.iterate.call($LazyInstances, cacheScrollPosition);
-
-    if ($Instances.length) {
-      Functions.lockViewport(Namespace);
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./transition"
+      ], factory);
     } else {
-      Functions.unlockViewport(Namespace);
+      factory(jQuery, Formstone);
     }
-  }
+  }(function($, Formstone) {
 
-  /**
-   * @method private
-   * @name construct
-   * @description Builds instance.
-   * @param data [object] "Instance data"
-   */
+    "use strict";
 
-  function construct(data) {
-    var $image,
-      imageData,
-      html = '',
-      controlPrevClasses    = [RawClasses.control, RawClasses.control_previous].join(" "),
-      controlNextClasses    = [RawClasses.control, RawClasses.control_next].join(" "),
-      controlZoomInClasses  = [RawClasses.control, RawClasses.control_zoom_in].join(" "),
-      controlZoomOutClasses = [RawClasses.control, RawClasses.control_zoom_out].join(" ");
+    /**
+     * @method private
+     * @name setup
+     * @description Setup plugin.
+     */
 
-    data.thisClasses = [RawClasses.base, RawClasses.loading, data.customClass, data.theme];
-    data.images      = [];
-    data.source      = false;
-    data.gallery     = false;
-    data.tapTimer    = null;
-    data.action      = false;
-    data.isRendering = false;
-    data.isZooming   = false;
-    data.isAnimating = false;
+    function setup() {
+      scroll();
+      $Window.on("scroll", scroll);
+      $Body = Formstone.$body;
+    }
 
-    data.keyDownTime  = 1;
+    /**
+     * @method private
+     * @name resize
+     * @description Handles window resize
+     */
 
-    data.$images    = this.find("img").addClass(RawClasses.source);
-    data.index      = 0;
-    data.total      = data.$images.length - 1;
+    function resize() {
+      Functions.iterate.call($Instances, resizeInstance);
+      // Functions.iterate.call($LazyInstances, cacheScrollPosition);
+      // Functions.iterate.call($LazyInstances, checkScrollPosition);
+    }
 
-    // Check custom controls
-    data.customControls = ($.type(data.controls) === "object" && data.controls.zoom_in && data.controls.zoom_out);
+    /**
+     * @method private
+     * @name scroll
+     * @description Handles window scroll
+     */
 
-    if (data.$images.length > 1) {
-      data.gallery = true;
-      data.thisClasses.push(RawClasses.gallery);
+    function scroll() {
+      ScrollTop = $Window.scrollTop() + Formstone.windowHeight;
 
-      // Requie zoom for gallery custom controls
-      if (data.customControls && (!data.controls.previous || !data.controls.next) ) {
-        data.customControls = false;
+      if (ScrollTop < 0) {
+        ScrollTop = 0;
+      }
+
+      // Functions.iterate.call($LazyInstances, checkScrollPosition);
+    }
+
+    /**
+     * @method private
+     * @name raf
+     * @description Handles request animation frame
+     */
+
+    function raf() {
+      Functions.iterate.call($Instances, renderRAF);
+    }
+
+    /**
+     * @method private
+     * @name cacheInstances
+     * @description Caches active instances
+     */
+
+    function cacheInstances() {
+      $Instances = $(Classes.base);
+      // $LazyInstances = $(Classes.lazy);
+
+      // Functions.iterate.call($LazyInstances, cacheScrollPosition);
+
+      if ($Instances.length) {
+        Functions.lockViewport(Namespace);
+      } else {
+        Functions.unlockViewport(Namespace);
       }
     }
 
-    for (var i = 0; i < data.$images.length; i++) {
-      $image = data.$images.eq(i);
-      data.images.push($image.attr("src"));
-    }
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
 
-    html += '<div class="' + RawClasses.wrapper + '">';
-    html += '<div class="' + RawClasses.loading_icon + '"></div>';
-    html += '<div class="' + RawClasses.viewport + '"></div>';
-    html += '</div>'; // wrapper
+    function construct(data) {
+      var $image,
+        imageData,
+        html = '',
+        controlPrevClasses = [RawClasses.control, RawClasses.control_previous].join(" "),
+        controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" "),
+        controlZoomInClasses = [RawClasses.control, RawClasses.control_zoom_in].join(" "),
+        controlZoomOutClasses = [RawClasses.control, RawClasses.control_zoom_out].join(" ");
 
-    if (data.controls && !data.customControls) {
-      html += '<div class="' + RawClasses.controls + '">';
-      html += '<button type="button" class="' + controlPrevClasses+ '">' + data.labels.previous + '</button>';
-      html += '<button type="button" class="' + controlZoomOutClasses + '">' + data.labels.zoom_out + '</button>';
-      html += '<button type="button" class="' + controlZoomInClasses + '">' + data.labels.zoom_in + '</button>';
-      html += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
-      html += '</div>'; // controls
-    }
+      data.thisClasses = [RawClasses.base, RawClasses.loading, data.customClass, data.theme];
+      data.images = [];
+      data.source = false;
+      data.gallery = false;
+      data.tapTimer = null;
+      data.action = false;
+      data.isRendering = false;
+      data.isZooming = false;
+      data.isAnimating = false;
 
-    this.addClass(data.thisClasses.join(" "))
-      .prepend(html);
+      data.keyDownTime = 1;
 
-    data.$wrapper      = this.find(Classes.wrapper);
-    data.$viewport     = this.find(Classes.viewport);
+      data.$images = this.find("img").addClass(RawClasses.source);
+      data.index = 0;
+      data.total = data.$images.length - 1;
 
-    if (data.customControls) {
-      data.$controls           = $(data.controls.container).addClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
-      data.$controlPrevious    = $(data.controls.previous).addClass(controlPrevClasses);
-      data.$controlNext        = $(data.controls.next).addClass(controlNextClasses);
-      data.$controlZoomIn      = $(data.controls.zoom_in).addClass(controlZoomInClasses);
-      data.$controlZoomOut     = $(data.controls.zoom_out).addClass(controlZoomOutClasses);
-    } else {
-      data.$controls           = this.find(Classes.controls);
-      data.$controlPrevious    = this.find(Classes.control_previous);
-      data.$controlNext        = this.find(Classes.control_next);
-      data.$controlZoomIn      = this.find(Classes.control_zoom_in);
-      data.$controlZoomOut     = this.find(Classes.control_zoom_out);
-    }
+      // Check custom controls
+      data.customControls = ($.type(data.controls) === "object" && data.controls.zoom_in && data.controls.zoom_out);
 
-    data.$controlItems = data.$controlPrevious.add(data.$controlNext);
-    data.$controlZooms = data.$controlZoomIn.add(data.$controlZoomOut);
-
-    cacheInstances();
-
-    data.$controlItems.on(Events.click, data, advanceGallery);
-    data.$controlZooms.on( [Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
-              .on( [Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
-
-    // if (data.lazy) {
-    //  checkScrollPosition(data);
-    // } else {
-      loadImage(data, data.images[ data.index ], true);
-    // }
-
-    updateControls(data);
-  }
-
-  /**
-   * @method private
-   * @name destruct
-   * @description Tears down instance.
-   * @param data [object] "Instance data"
-   */
-
-  function destruct(data) {
-    data.$wrapper.remove();
-
-    data.$image.removeClass(RawClasses.source);
-
-    if (data.controls && !data.customControls) {
-      data.$controls.remove();
-    }
-
-    if (data.customControls) {
-      data.$controls.removeClass( [RawClasses.controls, RawClasses.controls_custom].join(" ") );
-      data.$controlItems.off(Events.click).removeClass( [RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" ") );
-      data.$controlZooms.off( [Events.touchStart, Events.mouseDown].join(" ") )
-                .off( [Events.touchStart, Events.mouseDown].join(" ") )
-                .off( [Events.touchEnd, Events.mouseUp].join(" ") )
-                .removeClass( [RawClasses.control, RawClasses.control_zoom_in, RawClasses.control_zoom_out].join(" ") );
-    }
-
-    this.removeClass(data.thisClasses.join(" "))
-      .off(Events.namespace);
-
-    cacheInstances();
-  }
-
-  /**
-   * @method
-   * @name load
-   * @description Loads source image
-   * @param source [string OR array] "Source image (string) or array of images (array)"
-   * @example $(".target").viewer("load", "path/to/image.jpg");
-   * @example $(".target").viewer("load", ["path/to/image-1.jpg","path/to/image-2.jpg"]);
-   */
-
-  function load(data, source) {
-    data.index = 0;
-
-    if (typeof source === "string") {
-      data.total      = 0;
-      data.images     = [ source ];
-      data.gallery    = false;
-
-      data.$el.removeClass(RawClasses.gallery);
-    } else {
-      data.total      = source.length - 1;
-      data.images     = source;
-
-      if (source.length > 1) {
+      if (data.$images.length > 1) {
         data.gallery = true;
-        data.$el.addClass(RawClasses.gallery);
+        data.thisClasses.push(RawClasses.gallery);
+
+        // Requie zoom for gallery custom controls
+        if (data.customControls && (!data.controls.previous || !data.controls.next)) {
+          data.customControls = false;
+        }
       }
 
-      source = data.images[ data.index ];
-    }
-
-    unloadImage(data, function() {
-      loadImage(data, source);
-    });
-  }
-
-  /**
-   * @method private
-   * @name loadInitialImage
-   * @description Loads first source image
-   * @param data [object] "Instance data"
-   */
-
-  function loadInitialImage(data) {
-    loadImage(data, data.images[ data.index ]);
-  }
-
-  /**
-   * @method private
-   * @name loadImage
-   * @description Loads source image
-   * @param data [object] "Instance data"
-   * @param source [string] "Source image"
-   * @param initialLoad [boolean] "Is initial load"
-   */
-
-  function loadImage(data, source, initialLoad) {
-    if (!data.isAnimating) {
-      data.isAnimating = true;
-
-      data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
-      data.$image = data.$container.find("img");
-
-      data.$viewport.append(data.$container);
-
-      // Load image
-      data.$image.one(Events.load, function() {
-        onImageReady(data);
-
-        data.isAnimating = false;
-
-        // Transition in
-        data.$container.fsTransition({
-          property: "opacity"
-        },
-        function() {
-          // console.log("loaded!");
-        });
-
-        data.$el.removeClass(RawClasses.loading);
-
-        data.$container.fsTouch({
-          pan      : true,
-          scale    : true
-        }).on(Events.scaleStart, data, onScaleStart)
-          .on(Events.scaleEnd, data, onScaleEnd)
-          .on(Events.scale, data, onScale);
-
-        data.$el.trigger(Events.loaded);
-      }).one(Events.error, data, loadError)
-        .attr("src", source)
-        .addClass(RawClasses.image);
-
-      // Check if image is cached
-      if (data.$image[0].complete || data.$image[0].readyState === 4) {
-        data.$image.trigger(Events.load);
+      for (var i = 0; i < data.$images.length; i++) {
+        $image = data.$images.eq(i);
+        data.images.push($image.attr("src"));
       }
 
-      data.source = source;
-    }
-  }
+      html += '<div class="' + RawClasses.wrapper + '">';
+      html += '<div class="' + RawClasses.loading_icon + '"></div>';
+      html += '<div class="' + RawClasses.viewport + '"></div>';
+      html += '</div>'; // wrapper
 
-  /**
-   * @method private
-   * @name loadError
-   * @description Error when resource fails to load.
-   */
-
-  function loadError(e) {
-    var data = e.data;
-
-    data.$el.trigger(Events.error);
-  }
-
-  /**
-   * @method private
-   * @name onImageReady
-   * @description Sets up image data
-   * @param data [object] "Instance data"
-   */
-
-  // on initial load
-  function onImageReady(data) {
-    // Cache image properties
-    // First for container
-    cacheImageProps(data);
-
-    // Cache viewport properties
-    cacheViewportProps(data);
-
-    // Set initial container position
-    data.containerTop  = (data.viewportHeight / 2);
-    data.containerLeft = (data.viewportWidth  / 2);
-
-    // Cache image min max
-    cacheImageMinMax(data);
-
-    // Set initial image size
-    data.imageHeight = data.naturalHeight;
-    data.imageWidth  = data.naturalWidth;
-
-    // Size the image to fit into the viewport
-    fitToViewport(data);
-
-    // Cache container min max
-    cacheContainerMinMax(data);
-
-    // Cache image top left
-    cacheImageTopLeft(data);
-
-    // Cache last props
-    cacheLastProps(data);
-
-    // Cache render props
-    cacheRenderProps(data);
-
-    // Update dom
-    var props = {
-      containerTop     : data.containerTop,
-      containerLeft    : data.containerLeft,
-      imageHeight      : data.imageHeight,
-      imageWidth       : data.imageWidth,
-      imageTop         : data.imageTop,
-      imageLeft        : data.imageLeft,
-    };
-
-    setSizeAndPosition(data, props);
-
-    data.isRendering = true;
-  }
-
-  /**
-   * @method private
-   * @name cacheImageProps
-   * @description Caches image properties
-   * @param data [object] "Instance data"
-   */
-
-  function cacheImageProps(data) {
-    var naturalSize = calculateNaturalSize(data.$image);
-
-    data.naturalHeight = naturalSize.naturalHeight;
-    data.naturalWidth  = naturalSize.naturalWidth;
-
-    data.ratioHorizontal = data.naturalHeight / data.naturalWidth;
-    data.ratioVertical   = data.naturalWidth  / data.naturalHeight;
-
-    data.isWide  = (data.naturalWidth > data.naturalHeight);
-  }
-
-  /**
-   * @method private
-   * @name cacheViewportProps
-   * @description Caches viewport properties
-   * @param data [object] "Instance data"
-   */
-
-  function cacheViewportProps(data) {
-    data.viewportHeight = data.$viewport.outerHeight();
-    data.viewportWidth  = data.$viewport.outerWidth();
-  }
-
-  /**
-   * @method private
-   * @name cacheContainerProps
-   * @description Caches container properties
-   * @param data [object] "Instance data"
-   */
-
-  function cacheContainerMinMax(data) {
-    if (data.imageHeight <= data.viewportHeight) {
-      data.containerMinTop = ( data.viewportHeight / 2 );
-      data.containerMaxTop = ( data.viewportHeight / 2 );
-    } else {
-      data.containerMinTop = data.viewportHeight - ( data.imageHeight / 2 );
-      data.containerMaxTop = ( data.imageHeight / 2 );
-    }
-
-    if (data.imageWidth <= data.viewportWidth) {
-      data.containerMinLeft = ( data.viewportWidth / 2 );
-      data.containerMaxLeft = ( data.viewportWidth / 2 );
-    } else {
-      data.containerMinLeft = data.viewportWidth  - ( data.imageWidth  / 2 );
-      data.containerMaxLeft = ( data.imageWidth  / 2 );
-    }
-  }
-
-  /**
-   * @method private
-   * @name cacheImageMinMax
-   * @description Caches image min and max based on viewport and size
-   * @param data [object] "Instance data"
-   */
-
-  function cacheImageMinMax(data) {
-    // Set min
-    if (data.isWide) {
-      //WIDE
-      data.imageMinWidth  = data.viewportWidth;
-      data.imageMinHeight = data.imageMinWidth * data.ratioHorizontal;
-
-      if (data.imageMinHeight > data.viewportHeight) {
-        data.imageMinHeight = data.viewportHeight;
-        data.imageMinWidth  = data.imageMinHeight * data.ratioVertical;
+      if (data.controls && !data.customControls) {
+        html += '<div class="' + RawClasses.controls + '">';
+        html += '<button type="button" class="' + controlPrevClasses + '">' + data.labels.previous + '</button>';
+        html += '<button type="button" class="' + controlZoomOutClasses + '">' + data.labels.zoom_out + '</button>';
+        html += '<button type="button" class="' + controlZoomInClasses + '">' + data.labels.zoom_in + '</button>';
+        html += '<button type="button" class="' + controlNextClasses + '">' + data.labels.next + '</button>';
+        html += '</div>'; // controls
       }
-    } else {
-      //TALL
-      data.imageMinHeight = data.viewportHeight;
-      data.imageMinWidth  = data.imageMinHeight * data.ratioVertical;
 
-      if (data.imageMinWidth > data.viewportWidth) {
-        data.imageMinWidth  = data.viewportWidth;
+      this.addClass(data.thisClasses.join(" "))
+        .prepend(html);
+
+      data.$wrapper = this.find(Classes.wrapper);
+      data.$viewport = this.find(Classes.viewport);
+
+      if (data.customControls) {
+        data.$controls = $(data.controls.container).addClass([RawClasses.controls, RawClasses.controls_custom].join(" "));
+        data.$controlPrevious = $(data.controls.previous).addClass(controlPrevClasses);
+        data.$controlNext = $(data.controls.next).addClass(controlNextClasses);
+        data.$controlZoomIn = $(data.controls.zoom_in).addClass(controlZoomInClasses);
+        data.$controlZoomOut = $(data.controls.zoom_out).addClass(controlZoomOutClasses);
+      } else {
+        data.$controls = this.find(Classes.controls);
+        data.$controlPrevious = this.find(Classes.control_previous);
+        data.$controlNext = this.find(Classes.control_next);
+        data.$controlZoomIn = this.find(Classes.control_zoom_in);
+        data.$controlZoomOut = this.find(Classes.control_zoom_out);
+      }
+
+      data.$controlItems = data.$controlPrevious.add(data.$controlNext);
+      data.$controlZooms = data.$controlZoomIn.add(data.$controlZoomOut);
+
+      cacheInstances();
+
+      data.$controlItems.on(Events.click, data, advanceGallery);
+      data.$controlZooms.on([Events.touchStart, Events.mouseDown].join(" "), data, onZoomStart)
+        .on([Events.touchEnd, Events.mouseUp].join(" "), data, onClearZoom);
+
+      // if (data.lazy) {
+      //  checkScrollPosition(data);
+      // } else {
+      loadImage(data, data.images[data.index], true);
+      // }
+
+      updateControls(data);
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      data.$wrapper.remove();
+
+      data.$image.removeClass(RawClasses.source);
+
+      if (data.controls && !data.customControls) {
+        data.$controls.remove();
+      }
+
+      if (data.customControls) {
+        data.$controls.removeClass([RawClasses.controls, RawClasses.controls_custom].join(" "));
+        data.$controlItems.off(Events.click).removeClass([RawClasses.control, RawClasses.control_previous, RawClasses.control_next].join(" "));
+        data.$controlZooms.off([Events.touchStart, Events.mouseDown].join(" "))
+          .off([Events.touchStart, Events.mouseDown].join(" "))
+          .off([Events.touchEnd, Events.mouseUp].join(" "))
+          .removeClass([RawClasses.control, RawClasses.control_zoom_in, RawClasses.control_zoom_out].join(" "));
+      }
+
+      this.removeClass(data.thisClasses.join(" "))
+        .off(Events.namespace);
+
+      cacheInstances();
+    }
+
+    /**
+     * @method
+     * @name load
+     * @description Loads source image
+     * @param source [string OR array] "Source image (string) or array of images (array)"
+     * @example $(".target").viewer("load", "path/to/image.jpg");
+     * @example $(".target").viewer("load", ["path/to/image-1.jpg","path/to/image-2.jpg"]);
+     */
+
+    function load(data, source) {
+      data.index = 0;
+
+      if (typeof source === "string") {
+        data.total = 0;
+        data.images = [source];
+        data.gallery = false;
+
+        data.$el.removeClass(RawClasses.gallery);
+      } else {
+        data.total = source.length - 1;
+        data.images = source;
+
+        if (source.length > 1) {
+          data.gallery = true;
+          data.$el.addClass(RawClasses.gallery);
+        }
+
+        source = data.images[data.index];
+      }
+
+      unloadImage(data, function() {
+        loadImage(data, source);
+      });
+    }
+
+    /**
+     * @method private
+     * @name loadInitialImage
+     * @description Loads first source image
+     * @param data [object] "Instance data"
+     */
+
+    function loadInitialImage(data) {
+      loadImage(data, data.images[data.index]);
+    }
+
+    /**
+     * @method private
+     * @name loadImage
+     * @description Loads source image
+     * @param data [object] "Instance data"
+     * @param source [string] "Source image"
+     * @param initialLoad [boolean] "Is initial load"
+     */
+
+    function loadImage(data, source, initialLoad) {
+      if (!data.isAnimating) {
+        data.isAnimating = true;
+
+        data.$container = $('<div class="' + RawClasses.container + '"><img></div>');
+        data.$image = data.$container.find("img");
+
+        data.$viewport.append(data.$container);
+
+        // Load image
+        data.$image.one(Events.load, function() {
+            onImageReady(data);
+
+            data.isAnimating = false;
+
+            // Transition in
+            data.$container.fsTransition({
+                property: "opacity"
+              },
+              function() {
+                // console.log("loaded!");
+              });
+
+            data.$el.removeClass(RawClasses.loading);
+
+            data.$container.fsTouch({
+                pan: true,
+                scale: true
+              }).on(Events.scaleStart, data, onScaleStart)
+              .on(Events.scaleEnd, data, onScaleEnd)
+              .on(Events.scale, data, onScale);
+
+            data.$el.trigger(Events.loaded);
+          }).one(Events.error, data, loadError)
+          .attr("src", source)
+          .addClass(RawClasses.image);
+
+        // Check if image is cached
+        if (data.$image[0].complete || data.$image[0].readyState === 4) {
+          data.$image.trigger(Events.load);
+        }
+
+        data.source = source;
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadError
+     * @description Error when resource fails to load.
+     */
+
+    function loadError(e) {
+      var data = e.data;
+
+      data.$el.trigger(Events.error);
+    }
+
+    /**
+     * @method private
+     * @name onImageReady
+     * @description Sets up image data
+     * @param data [object] "Instance data"
+     */
+
+    // on initial load
+    function onImageReady(data) {
+      // Cache image properties
+      // First for container
+      cacheImageProps(data);
+
+      // Cache viewport properties
+      cacheViewportProps(data);
+
+      // Set initial container position
+      data.containerTop = (data.viewportHeight / 2);
+      data.containerLeft = (data.viewportWidth / 2);
+
+      // Cache image min max
+      cacheImageMinMax(data);
+
+      // Set initial image size
+      data.imageHeight = data.naturalHeight;
+      data.imageWidth = data.naturalWidth;
+
+      // Size the image to fit into the viewport
+      fitToViewport(data);
+
+      // Cache container min max
+      cacheContainerMinMax(data);
+
+      // Cache image top left
+      cacheImageTopLeft(data);
+
+      // Cache last props
+      cacheLastProps(data);
+
+      // Cache render props
+      cacheRenderProps(data);
+
+      // Update dom
+      var props = {
+        containerTop: data.containerTop,
+        containerLeft: data.containerLeft,
+        imageHeight: data.imageHeight,
+        imageWidth: data.imageWidth,
+        imageTop: data.imageTop,
+        imageLeft: data.imageLeft,
+      };
+
+      setSizeAndPosition(data, props);
+
+      data.isRendering = true;
+    }
+
+    /**
+     * @method private
+     * @name cacheImageProps
+     * @description Caches image properties
+     * @param data [object] "Instance data"
+     */
+
+    function cacheImageProps(data) {
+      var naturalSize = calculateNaturalSize(data.$image);
+
+      data.naturalHeight = naturalSize.naturalHeight;
+      data.naturalWidth = naturalSize.naturalWidth;
+
+      data.ratioHorizontal = data.naturalHeight / data.naturalWidth;
+      data.ratioVertical = data.naturalWidth / data.naturalHeight;
+
+      data.isWide = (data.naturalWidth > data.naturalHeight);
+    }
+
+    /**
+     * @method private
+     * @name cacheViewportProps
+     * @description Caches viewport properties
+     * @param data [object] "Instance data"
+     */
+
+    function cacheViewportProps(data) {
+      data.viewportHeight = data.$viewport.outerHeight();
+      data.viewportWidth = data.$viewport.outerWidth();
+    }
+
+    /**
+     * @method private
+     * @name cacheContainerProps
+     * @description Caches container properties
+     * @param data [object] "Instance data"
+     */
+
+    function cacheContainerMinMax(data) {
+      if (data.imageHeight <= data.viewportHeight) {
+        data.containerMinTop = (data.viewportHeight / 2);
+        data.containerMaxTop = (data.viewportHeight / 2);
+      } else {
+        data.containerMinTop = data.viewportHeight - (data.imageHeight / 2);
+        data.containerMaxTop = (data.imageHeight / 2);
+      }
+
+      if (data.imageWidth <= data.viewportWidth) {
+        data.containerMinLeft = (data.viewportWidth / 2);
+        data.containerMaxLeft = (data.viewportWidth / 2);
+      } else {
+        data.containerMinLeft = data.viewportWidth - (data.imageWidth / 2);
+        data.containerMaxLeft = (data.imageWidth / 2);
+      }
+    }
+
+    /**
+     * @method private
+     * @name cacheImageMinMax
+     * @description Caches image min and max based on viewport and size
+     * @param data [object] "Instance data"
+     */
+
+    function cacheImageMinMax(data) {
+      // Set min
+      if (data.isWide) {
+        //WIDE
+        data.imageMinWidth = data.viewportWidth;
         data.imageMinHeight = data.imageMinWidth * data.ratioHorizontal;
+
+        if (data.imageMinHeight > data.viewportHeight) {
+          data.imageMinHeight = data.viewportHeight;
+          data.imageMinWidth = data.imageMinHeight * data.ratioVertical;
+        }
+      } else {
+        //TALL
+        data.imageMinHeight = data.viewportHeight;
+        data.imageMinWidth = data.imageMinHeight * data.ratioVertical;
+
+        if (data.imageMinWidth > data.viewportWidth) {
+          data.imageMinWidth = data.viewportWidth;
+          data.imageMinHeight = data.imageMinWidth * data.ratioHorizontal;
+        }
       }
+
+      // Check natural max against new min
+      if (data.imageMinWidth > data.naturalWidth || data.imageMinHeight > data.naturalHeight) {
+        data.imageMinHeight = data.naturalHeight;
+        data.imageMinWidth = data.naturalWidth;
+      }
+
+      // Set max
+      data.imageMaxHeight = data.naturalHeight;
+      data.imageMaxWidth = data.naturalWidth;
     }
 
-    // Check natural max against new min
-    if (data.imageMinWidth > data.naturalWidth || data.imageMinHeight > data.naturalHeight) {
-      data.imageMinHeight = data.naturalHeight;
-      data.imageMinWidth  = data.naturalWidth;
+    /**
+     * @method private
+     * @name cacheImageTopLeft
+     * @description Caches image top and left based on viewport and size
+     * @param data [object] "Instance data"
+     */
+
+    function cacheImageTopLeft(data) {
+      data.imageTop = -(data.imageHeight / 2);
+      data.imageLeft = -(data.imageWidth / 2);
     }
 
-    // Set max
-    data.imageMaxHeight = data.naturalHeight;
-    data.imageMaxWidth  = data.naturalWidth;
-  }
+    /**
+     * @method private
+     * @name cacheLastProps
+     * @description Caches last container and image properties
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method private
-   * @name cacheImageTopLeft
-   * @description Caches image top and left based on viewport and size
-   * @param data [object] "Instance data"
-   */
+    function cacheLastProps(data) {
+      data.lastContainerTop = data.containerTop;
+      data.lastContainerLeft = data.containerLeft;
 
-  function cacheImageTopLeft(data) {
-    data.imageTop  = -(data.imageHeight / 2);
-    data.imageLeft = -(data.imageWidth / 2);
-  }
+      data.lastImageHeight = data.imageHeight;
+      data.lastImageWidth = data.imageWidth;
 
-  /**
-   * @method private
-   * @name cacheLastProps
-   * @description Caches last container and image properties
-   * @param data [object] "Instance data"
-   */
+      data.lastImageTop = data.imageTop;
+      data.lastImageLeft = data.imageLeft;
+    }
 
-  function cacheLastProps(data) {
-    data.lastContainerTop  = data.containerTop;
-    data.lastContainerLeft = data.containerLeft;
+    /**
+     * @method private
+     * @name cacheRenderProps
+     * @description Caches container and image render properties
+     * @param data [object] "Instance data"
+     */
 
-    data.lastImageHeight = data.imageHeight;
-    data.lastImageWidth  = data.imageWidth;
+    function cacheRenderProps(data) {
+      data.renderContainerTop = data.lastContainerTop;
+      data.renderContainerLeft = data.lastContainerLeft;
 
-    data.lastImageTop  = data.imageTop;
-    data.lastImageLeft = data.imageLeft;
-  }
+      data.renderImageTop = data.lastImageTop;
+      data.renderImageLeft = data.lastImageLeft;
 
-  /**
-   * @method private
-   * @name cacheRenderProps
-   * @description Caches container and image render properties
-   * @param data [object] "Instance data"
-   */
+      data.renderImageHeight = data.lastImageHeight;
+      data.renderImageWidth = data.lastImageWidth;
+    }
 
-  function cacheRenderProps(data) {
-    data.renderContainerTop  = data.lastContainerTop;
-    data.renderContainerLeft = data.lastContainerLeft;
+    /**
+     * @method private
+     * @name fitToViewport
+     * @description Fits image to viewport size
+     * @param data [object] "Instance data"
+     */
 
-    data.renderImageTop  = data.lastImageTop;
-    data.renderImageLeft = data.lastImageLeft;
-
-    data.renderImageHeight = data.lastImageHeight;
-    data.renderImageWidth  = data.lastImageWidth;
-  }
-
-  /**
-   * @method private
-   * @name fitToViewport
-   * @description Fits image to viewport size
-   * @param data [object] "Instance data"
-   */
-
-  function fitToViewport(data) {
-    data.imageHeight = data.imageMinHeight;
-    data.imageWidth  = data.imageMinWidth;
-  }
-
-  /**
-   * @method private
-   * @name checkImageMinMax
-   * @description Checks image properties against min and max
-   * @param data [object] "Instance data"
-   */
-
-  // on scale
-  function checkImageMinMax(data) {
-    if (data.imageHeight < data.imageMinHeight) {
+    function fitToViewport(data) {
       data.imageHeight = data.imageMinHeight;
-    }
-    if (data.imageHeight > data.imageMaxHeight) {
-      data.imageHeight = data.imageMaxHeight;
-    }
-
-    if (data.imageWidth < data.imageMinWidth) {
       data.imageWidth = data.imageMinWidth;
     }
-    if (data.imageWidth > data.imageMaxWidth) {
-      data.imageWidth = data.imageMaxWidth;
-    }
-  }
 
-  /**
-   * @method private
-   * @name checkContainerTopLeft
-   * @description Checks container properties against top and left
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name checkImageMinMax
+     * @description Checks image properties against min and max
+     * @param data [object] "Instance data"
+     */
 
-  function checkContainerTopLeft(data) {
-    if (data.containerTop < data.containerMinTop) {
-      data.containerTop = data.containerMinTop;
-    }
-    if (data.containerTop > data.containerMaxTop) {
-      data.containerTop = data.containerMaxTop;
+    // on scale
+    function checkImageMinMax(data) {
+      if (data.imageHeight < data.imageMinHeight) {
+        data.imageHeight = data.imageMinHeight;
+      }
+      if (data.imageHeight > data.imageMaxHeight) {
+        data.imageHeight = data.imageMaxHeight;
+      }
+
+      if (data.imageWidth < data.imageMinWidth) {
+        data.imageWidth = data.imageMinWidth;
+      }
+      if (data.imageWidth > data.imageMaxWidth) {
+        data.imageWidth = data.imageMaxWidth;
+      }
     }
 
-    if (data.containerLeft < data.containerMinLeft) {
-      data.containerLeft = data.containerMinLeft;
-    }
-    if (data.containerLeft > data.containerMaxLeft) {
-      data.containerLeft = data.containerMaxLeft;
-    }
-  }
+    /**
+     * @method private
+     * @name checkContainerTopLeft
+     * @description Checks container properties against top and left
+     * @param data [object] "Instance data"
+     */
 
-  /**
-   * @method private
-   * @name checkDoubleTap
-   * @description Checks is double tapping
-   * @param data [object] "Instance data"
-   */
+    function checkContainerTopLeft(data) {
+      if (data.containerTop < data.containerMinTop) {
+        data.containerTop = data.containerMinTop;
+      }
+      if (data.containerTop > data.containerMaxTop) {
+        data.containerTop = data.containerMaxTop;
+      }
 
-  function checkDoubleTap(data) {
-    if (data.tapTimer === null) {
-      data.tapTimer = Functions.startTimer(data.tapTimer, 500, function() {
+      if (data.containerLeft < data.containerMinLeft) {
+        data.containerLeft = data.containerMinLeft;
+      }
+      if (data.containerLeft > data.containerMaxLeft) {
+        data.containerLeft = data.containerMaxLeft;
+      }
+    }
+
+    /**
+     * @method private
+     * @name checkDoubleTap
+     * @description Checks is double tapping
+     * @param data [object] "Instance data"
+     */
+
+    function checkDoubleTap(data) {
+      if (data.tapTimer === null) {
+        data.tapTimer = Functions.startTimer(data.tapTimer, 500, function() {
+          clearDoubleTap(data);
+        });
+      } else {
         clearDoubleTap(data);
-      });
-    } else {
+        onImageZoom(data);
+      }
+    }
+
+    /**
+     * @method private
+     * @name clearDoubleTap
+     * @description Clears double tap timer
+     * @param data [object] "Instance data"
+     */
+
+    function clearDoubleTap(data) {
+      Functions.clearTimer(data.tapTimer);
+      data.tapTimer = null;
+    }
+
+    /**
+     * @method private
+     * @name setSizeAndPosition
+     * @description Updates image and container DOM
+     * @param data [object] "Instance data"
+     */
+
+    function setSizeAndPosition(data, props) {
+      if (Formstone.transform) {
+        var scaleX = props.imageWidth / data.naturalWidth,
+          scaleY = props.imageHeight / data.naturalHeight;
+
+        data.$container.css(Formstone.transform, "translate3d(" + props.containerLeft + "px, " + props.containerTop + "px, 0)");
+        data.$image.css(Formstone.transform, "translate3d(-50%, -50%, 0) scale(" + scaleX + "," + scaleY + ")");
+      } else {
+        data.$container.css({
+          top: props.containerTop,
+          left: props.containerLeft
+        });
+
+        data.$image.css({
+          height: props.imageHeight,
+          width: props.imageWidth,
+          top: props.imageTop,
+          left: props.imageLeft
+        });
+      }
+    }
+
+    /**
+     * @method private
+     * @name onScaleStart
+     * @description Handles scale start event
+     * @param e [object] "Event data"
+     */
+
+    function onScaleStart(e) {
+      var data = e.data;
+
+      // Check double tap
+      checkDoubleTap(data);
+
+      // Cache previous values
+      cacheLastProps(data);
+    }
+
+    /**
+     * @method private
+     * @name onScale
+     * @description Handles scale event
+     * @param e [object] "Event data"
+     */
+
+    function onScale(e) {
+      var data = e.data;
+
+      // Clear double tap
       clearDoubleTap(data);
-      onImageZoom(data);
+
+      data.isRendering = false;
+      data.isZooming = false;
+
+      var zoomed = (data.imageHeight > data.imageMinHeight + 1);
+
+      // Change container position
+      data.containerTop = data.lastContainerTop + e.deltaY;
+      data.containerLeft = data.lastContainerLeft + e.deltaX;
+
+      /*
+          var diffX  = data.lastContainerLeft - data.containerLeft,
+            diffY  = data.lastContainerTop - data.containerTop;
+
+          data.containerLeft -= diffX;
+          data.containerTop  -= diffY;
+      */
+
+      // Change image size
+      data.imageHeight = data.lastImageHeight * e.scale;
+      data.imageWidth = data.lastImageWidth * e.scale;
+
+      // Cache container min max
+      cacheContainerMinMax(data);
+
+      // Check container top left
+      checkContainerTopLeft(data);
+
+      // Check image min max
+      checkImageMinMax(data);
+
+      // Cache image top left
+      cacheImageTopLeft(data);
+
+      // Update dom
+      var props = {
+        containerTop: data.containerTop,
+        containerLeft: data.containerLeft,
+        imageHeight: data.imageHeight,
+        imageWidth: data.imageWidth,
+        imageTop: data.imageTop,
+        imageLeft: data.imageLeft,
+      };
+
+      setSizeAndPosition(data, props);
     }
-  }
 
-  /**
-   * @method private
-   * @name clearDoubleTap
-   * @description Clears double tap timer
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name onScaleEnd
+     * @description Handles scale end event
+     * @param e [object] "Event data"
+     */
 
-  function clearDoubleTap(data) {
-    Functions.clearTimer(data.tapTimer);
-    data.tapTimer = null;
-  }
+    function onScaleEnd(e) {
+      var data = e.data;
 
-  /**
-   * @method private
-   * @name setSizeAndPosition
-   * @description Updates image and container DOM
-   * @param data [object] "Instance data"
-   */
+      if (!data.isZooming) {
+        // Cache last properties
+        cacheLastProps(data);
 
-  function setSizeAndPosition(data, props) {
-    if (Formstone.transform) {
-      var scaleX = props.imageWidth  / data.naturalWidth,
-        scaleY = props.imageHeight / data.naturalHeight;
+        // Cache rander properties
+        cacheRenderProps(data);
 
-      data.$container.css( Formstone.transform, "translate3d(" + props.containerLeft + "px, " + props.containerTop + "px, 0)" );
-      data.$image.css( Formstone.transform, "translate3d(-50%, -50%, 0) scale(" + scaleX + "," + scaleY + ")" );
-    } else {
-      data.$container.css({
-        top     : props.containerTop,
-        left    : props.containerLeft
-      });
-
-      data.$image.css({
-        height    : props.imageHeight,
-        width     : props.imageWidth,
-        top       : props.imageTop,
-        left      : props.imageLeft
-      });
+        data.isRendering = true;
+      }
     }
-  }
 
-  /**
-   * @method private
-   * @name onScaleStart
-   * @description Handles scale start event
-   * @param e [object] "Event data"
-   */
+    /**
+     * @method private
+     * @name onImageZoom
+     * @description Zooms image in or out depending on current size
+     * @param data [object] "Instance data"
+     */
 
-  function onScaleStart(e) {
-    var data = e.data;
+    function onImageZoom(data) {
+      var zoomed = (data.imageHeight > data.imageMinHeight + 1);
 
-    // Check double tap
-    checkDoubleTap(data);
+      data.isZooming = true;
 
-    // Cache previous values
-    cacheLastProps(data);
-  }
-
-  /**
-   * @method private
-   * @name onScale
-   * @description Handles scale event
-   * @param e [object] "Event data"
-   */
-
-  function onScale(e) {
-    var data = e.data;
-
-    // Clear double tap
-    clearDoubleTap(data);
-
-    data.isRendering = false;
-    data.isZooming   = false;
-
-    var zoomed = (data.imageHeight > data.imageMinHeight + 1);
-
-    // Change container position
-    data.containerTop  = data.lastContainerTop  + e.deltaY;
-    data.containerLeft = data.lastContainerLeft + e.deltaX;
-
-/*
-    var diffX  = data.lastContainerLeft - data.containerLeft,
-      diffY  = data.lastContainerTop - data.containerTop;
-
-    data.containerLeft -= diffX;
-    data.containerTop  -= diffY;
-*/
-
-    // Change image size
-    data.imageHeight = data.lastImageHeight * e.scale;
-    data.imageWidth  = data.lastImageWidth  * e.scale;
-
-    // Cache container min max
-    cacheContainerMinMax(data);
-
-    // Check container top left
-    checkContainerTopLeft(data);
-
-    // Check image min max
-    checkImageMinMax(data);
-
-    // Cache image top left
-    cacheImageTopLeft(data);
-
-    // Update dom
-    var props = {
-      containerTop     : data.containerTop,
-      containerLeft    : data.containerLeft,
-      imageHeight      : data.imageHeight,
-      imageWidth       : data.imageWidth,
-      imageTop         : data.imageTop,
-      imageLeft        : data.imageLeft,
-    };
-
-    setSizeAndPosition(data, props);
-  }
-
-  /**
-   * @method private
-   * @name onScaleEnd
-   * @description Handles scale end event
-   * @param e [object] "Event data"
-   */
-
-  function onScaleEnd(e) {
-    var data = e.data;
-
-    if (!data.isZooming) {
       // Cache last properties
       cacheLastProps(data);
 
       // Cache rander properties
       cacheRenderProps(data);
 
+      if (zoomed) {
+        // zoomed in (go to min)
+        data.imageHeight = data.imageMinHeight;
+        data.imageWidth = data.imageMinWidth;
+      } else {
+        // zoomed out (go to max)
+        data.imageHeight = data.imageMaxHeight;
+        data.imageWidth = data.imageMaxWidth;
+      }
+
+      // Cache container min max
+      cacheContainerMinMax(data);
+
+      // Check container top left
+      checkContainerTopLeft(data);
+
+      // Cache image top left
+      cacheImageTopLeft(data);
+
       data.isRendering = true;
     }
-  }
 
-  /**
-   * @method private
-   * @name onImageZoom
-   * @description Zooms image in or out depending on current size
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name onZoomStart
+     * @description Handle zoom start
+     * @param e [object] "Event data"
+     */
 
-  function onImageZoom(data) {
-    var zoomed = (data.imageHeight > data.imageMinHeight + 1);
+    function onZoomStart(e) {
+      Functions.killEvent(e);
 
-    data.isZooming = true;
+      var $target = $(e.currentTarget),
+        data = e.data,
+        direction = ($target.hasClass(RawClasses.control_zoom_out)) ? 'out' : 'in';
 
-    // Cache last properties
-    cacheLastProps(data);
-
-    // Cache rander properties
-    cacheRenderProps(data);
-
-    if (zoomed) {
-      // zoomed in (go to min)
-      data.imageHeight = data.imageMinHeight;
-      data.imageWidth  = data.imageMinWidth;
-    } else {
-      // zoomed out (go to max)
-      data.imageHeight = data.imageMaxHeight;
-      data.imageWidth  = data.imageMaxWidth;
+      if (direction === 'out') {
+        onZoomOut(data);
+      } else {
+        onZoomIn(data);
+      }
     }
 
-    // Cache container min max
-    cacheContainerMinMax(data);
+    /**
+     * @method private
+     * @name onZoomIn
+     * @description Handle zoom in
+     * @param data [object] "Instance data"
+     */
 
-    // Check container top left
-    checkContainerTopLeft(data);
-
-    // Cache image top left
-    cacheImageTopLeft(data);
-
-    data.isRendering = true;
-  }
-
-  /**
-   * @method private
-   * @name onZoomStart
-   * @description Handle zoom start
-   * @param e [object] "Event data"
-   */
-
-  function onZoomStart(e) {
-    Functions.killEvent(e);
-
-    var $target   = $(e.currentTarget),
-      data      = e.data,
-      direction = ($target.hasClass(RawClasses.control_zoom_out)) ? 'out' : 'in';
-
-    if (direction === 'out') {
-      onZoomOut(data);
-    } else {
-      onZoomIn(data);
+    function onZoomIn(data) {
+      data.keyDownTime = 1;
+      data.action = 'zoom_in';
     }
-  }
 
-  /**
-   * @method private
-   * @name onZoomIn
-   * @description Handle zoom in
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name onZoomOut
+     * @description Handle zoom out
+     * @param data [object] "Instance data"
+     */
 
-  function onZoomIn(data) {
-    data.keyDownTime = 1;
-    data.action = 'zoom_in';
-  }
+    function onZoomOut(data) {
+      data.keyDownTime = 1;
+      data.action = 'zoom_out';
+    }
 
-  /**
-   * @method private
-   * @name onZoomOut
-   * @description Handle zoom out
-   * @param data [object] "Instance data"
-   */
+    /**
+     * @method private
+     * @name onClearZoom
+     * @description Handle clear zoom
+     * @param e [object] "Event data"
+     */
 
-  function onZoomOut(data) {
-    data.keyDownTime = 1;
-    data.action = 'zoom_out';
-  }
+    function onClearZoom(e) {
+      var data = e.data;
 
-  /**
-   * @method private
-   * @name onClearZoom
-   * @description Handle clear zoom
-   * @param e [object] "Event data"
-   */
+      data.action = false;
+    }
 
-  function onClearZoom(e) {
-    var data = e.data;
+    /**
+     * @method private
+     * @name renderRAF
+     * @description Updates DOM based on animation values
+     * @param data [object] "Instance data"
+     */
 
-    data.action = false;
-  }
+    function renderRAF(data) {
+      if (data.isRendering) {
+        if (data.action) {
+          data.keyDownTime += data.zoomIncrement;
 
-  /**
-   * @method private
-   * @name renderRAF
-   * @description Updates DOM based on animation values
-   * @param data [object] "Instance data"
-   */
+          var delta = ((data.action === "zoom_out") ? -1 : 1) * Math.round((data.imageWidth * data.keyDownTime) - data.imageWidth);
 
-  function renderRAF(data) {
-    if (data.isRendering) {
-      if (data.action) {
-        data.keyDownTime += data.zoomIncrement;
+          if (delta > data.zoomDelta) {
+            delta = data.zoomDelta;
+          }
 
-        var delta = ((data.action === "zoom_out") ? -1 : 1) * Math.round((data.imageWidth * data.keyDownTime) - data.imageWidth);
+          if (data.isWide) {
+            data.imageWidth += delta;
+            data.imageHeight = Math.round(data.imageWidth / data.ratioVertical);
+          } else {
+            data.imageHeight += delta;
+            data.imageWidth = Math.round(data.imageHeight / data.ratioHorizontal);
+          }
 
-        if (delta > data.zoomDelta) {
-          delta = data.zoomDelta;
+          // Check image min max
+          checkImageMinMax(data);
+
+          // Cache image top left
+          cacheImageTopLeft(data);
+
+          // Cache container min max
+          cacheContainerMinMax(data);
+
+          // Check container top left
+          checkContainerTopLeft(data);
         }
 
-        if (data.isWide) {
-          data.imageWidth += delta;
-          data.imageHeight = Math.round(data.imageWidth / data.ratioVertical);
-        } else {
-          data.imageHeight += delta;
-          data.imageWidth = Math.round(data.imageHeight / data.ratioHorizontal);
-        }
+        data.renderContainerTop += Math.round((data.containerTop - data.renderContainerTop) * data.zoomEnertia);
+        data.renderContainerLeft += Math.round((data.containerLeft - data.renderContainerLeft) * data.zoomEnertia);
 
-        // Check image min max
-        checkImageMinMax(data);
+        data.renderImageTop += Math.round((data.imageTop - data.renderImageTop) * data.zoomEnertia);
+        data.renderImageLeft += Math.round((data.imageLeft - data.renderImageLeft) * data.zoomEnertia);
 
-        // Cache image top left
-        cacheImageTopLeft(data);
+        data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.zoomEnertia);
+        data.renderImageWidth += Math.round((data.imageWidth - data.renderImageWidth) * data.zoomEnertia);
 
-        // Cache container min max
-        cacheContainerMinMax(data);
+        // Update DOM
 
-        // Check container top left
-        checkContainerTopLeft(data);
-      }
-
-      data.renderContainerTop  += Math.round((data.containerTop  - data.renderContainerTop)  * data.zoomEnertia);
-      data.renderContainerLeft += Math.round((data.containerLeft - data.renderContainerLeft) * data.zoomEnertia);
-
-      data.renderImageTop  += Math.round((data.imageTop  - data.renderImageTop)  * data.zoomEnertia);
-      data.renderImageLeft += Math.round((data.imageLeft - data.renderImageLeft) * data.zoomEnertia);
-
-      data.renderImageHeight += Math.round((data.imageHeight - data.renderImageHeight) * data.zoomEnertia);
-      data.renderImageWidth  += Math.round((data.imageWidth  - data.renderImageWidth)  * data.zoomEnertia);
-
-      // Update DOM
-
-      var props = {
-        containerTop     : data.renderContainerTop,
-        containerLeft    : data.renderContainerLeft,
-        imageHeight      : data.renderImageHeight,
-        imageWidth       : data.renderImageWidth,
-        imageTop         : data.renderImageTop,
-        imageLeft        : data.renderImageLeft,
-      };
-
-      setSizeAndPosition(data, props);
-    }
-  }
-
-  /**
-   * @method
-   * @name unload
-   * @description Unloads current image
-   * @example $(".target").viewer("unload");
-   */
-
-   function unload(data) {
-    unloadImage(data);
-  }
-
-  /**
-   * @method private
-   * @name unloadImage
-   * @description Unloads current image
-   * @param data [object] "Instance data"
-   * @param callback [function] "Callback function"
-   */
-
-  function unloadImage(data, callback) {
-    if (!data.isAnimating) {
-      clearDoubleTap(data);
-
-      data.isAnimating = true;
-      data.isRendering = false;
-      data.isZooming   = false;
-
-      clearTouch(data);
-
-      data.$container.fsTransition({
-        property: "opacity"
-      },
-      function() {
-        data.isAnimating = false;
-
-        data.$container.remove();
-
-        if (typeof callback === "function") {
-          callback.call(window, data);
-        }
-      });
-
-      data.$el.addClass(RawClasses.loading);
-    }
-  }
-
-  /**
-   * @method private
-   * @name advanceGallery
-   * @description Advances gallery
-   * @param e [object] "Event data"
-   */
-
-  function advanceGallery(e) {
-    Functions.killEvent(e);
-
-    var $target = $(e.currentTarget),
-      data    = e.data,
-      index   = data.index + (( $target.hasClass(RawClasses.control_next) ) ? 1 : -1);
-
-    if (!data.isAnimating) {
-      if (index < 0) {
-        index = 0;
-      }
-
-      if (index > data.total) {
-        index = data.total;
-      }
-
-      if (index !== data.index) {
-        data.index = index;
-
-        unloadImage(data, function() {
-          loadImage(data, data.images[ data.index ]);
-        });
-      }
-
-      updateControls(data);
-    }
-  }
-
-  /**
-   * @method private
-   * @name updateControls
-   * @description Update control states
-   * @param data [object] Instance data
-   */
-
-  function updateControls(data) {
-    data.$controlItems.removeClass(RawClasses.control_disabled);
-
-    if (data.index === 0) {
-      data.$controlPrevious.addClass(RawClasses.control_disabled);
-    }
-    if (data.index === data.images.length - 1) {
-      data.$controlNext.addClass(RawClasses.control_disabled);
-    }
-  }
-
-  /**
-   * @method private
-   * @name resize
-   * @description Resize target instance
-   * @example $(".target").viewer("resize");
-   */
-
-  /**
-   * @method private
-   * @name resizeInstance
-   * @description Handle window resize event
-   * @param data [object] "Instance data"
-   */
-
-  function resizeInstance(data) {
-    cacheViewportProps(data);
-
-    cacheContainerMinMax(data);
-
-    cacheImageMinMax(data);
-
-    cacheImageTopLeft(data);
-
-    cacheContainerMinMax(data);
-
-    checkContainerTopLeft(data);
-
-    checkImageMinMax(data);
-  }
-
-  /**
-   * @method private
-   * @name clearTouch
-   * @description Clears current touch action.
-   */
-
-  function clearTouch(data) {
-    if (data.$container && data.$container.length) {
-      data.$container.fsTouch("destroy")
-               .off(Events.scaleStart, onScaleStart)
-               .off(Events.scaleEnd, onScaleEnd)
-               .off(Events.scale, onScale);
-    }
-  }
-
-  /**
-   * @method private
-   * @name cacheScrollPosition
-   * @description Cahce target scroll position
-   * @param data [object] "Instance data"
-   */
-
-  function cacheScrollPosition(data) {
-    data.scrollTop = data.$el.offset().top;
-  }
-
-  // /**
-  //  * @method private
-  //  * @name checkScrollPosition
-  //  * @description Check target scroll position against window
-  //  * @param data [object] "Instance data"
-  //  */
-  //
-  // function checkScrollPosition(data) {
-  //   if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
-  //     data.visible = true;
-  //     loadInitialImage(data);
-  //   }
-  // }
-
-  /**
-   * @method private
-   * @name calculateNaturalSize
-   * @description Determines natural size of target image.
-   * @param $img [jQuery object] "Source image object"
-   * @return [object | boolean] "Object containing natural height and width values or false"
-   */
-
-  function calculateNaturalSize($img) {
-    var node = $img[0],
-      img = new Image();
-
-    if (typeof node.naturalHeight !== "undefined") {
-      return {
-        naturalHeight: node.naturalHeight,
-        naturalWidth:  node.naturalWidth
-      };
-    } else {
-      if (node.tagName.toLowerCase() === 'img') {
-        img.src = node.src;
-        return {
-          naturalHeight: img.height,
-          naturalWidth:  img.width
+        var props = {
+          containerTop: data.renderContainerTop,
+          containerLeft: data.renderContainerLeft,
+          imageHeight: data.renderImageHeight,
+          imageWidth: data.renderImageWidth,
+          imageTop: data.renderImageTop,
+          imageLeft: data.renderImageLeft,
         };
+
+        setSizeAndPosition(data, props);
       }
     }
 
-    return false;
-  }
+    /**
+     * @method
+     * @name unload
+     * @description Unloads current image
+     * @example $(".target").viewer("unload");
+     */
 
-  /**
-   * @plugin
-   * @name Viewer
-   * @description A jQuery plugin for image exploration.
-   * @type widget
-   * @main viewer.js
-   * @main viewer.css
-   * @dependency jQuery
-   * @dependency core.js
-   * @dependency touch.js
-   * @dependency transition.js
-   */
+    function unload(data) {
+      unloadImage(data);
+    }
 
-  var Plugin = Formstone.Plugin("viewer", {
-      widget: true,
+    /**
+     * @method private
+     * @name unloadImage
+     * @description Unloads current image
+     * @param data [object] "Instance data"
+     * @param callback [function] "Callback function"
+     */
 
-      /**
-       * @options
-       * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
-       * @param customClass [string] <''> "Class applied to instance"
-       // param lazy [boolean] <false> "Lazy load with scroll"
-       // param lazyEdge [int] <100> "Lazy load edge"
-       * @param labels.count [string] <'of'> "Gallery count separator text"
-       * @param labels.next [string] <'Next'> "Gallery control text"
-       * @param labels.previous [string] <'Previous'> "Gallery control text"
-       * @param labels.zoom_in [string] <'Zoom In'> "Image zoom text"
-       * @param labels.zoom_out [string] <'Zoom Out'> "Image zoom text"
-       * @param theme [string] <"fs-light"> "Theme class name"
-       * @param zoomDelta [int] <100> "Max zoom change"
-       * @param zoomEnertia [float] <0.2> "Enertia for zoom"
-       * @param zoomIncrement [float] <0.01> "Increment for zoom buttons"
-       */
+    function unloadImage(data, callback) {
+      if (!data.isAnimating) {
+        clearDoubleTap(data);
 
-      defaults: {
-        controls       : true,
-        customClass    : "",
-        // lazy           : false,
-        // lazyEdge       : 100,
-        labels: {
-          count      : "of",
-          next       : "Next",
-          previous   : "Previous",
-          zoom_in    : "Zoom In",
-          zoom_out   : "Zoom Out"
-        },
-        theme          : "fs-light",
-        zoomDelta      : 100,
-        zoomEnertia    : 0.2,
-        zoomIncrement  : 0.01
-      },
+        data.isAnimating = true;
+        data.isRendering = false;
+        data.isZooming = false;
 
-      classes: [
-        "source",
-        "wrapper",
-        "viewport",
-        "container",
-        "image",
-        "gallery",
-        "loading_icon",
+        clearTouch(data);
 
-        "controls",
-        "controls_custom",
-        "control",
-        "control_previous",
-        "control_next",
-        "control_zoom_in",
-        "control_zoom_out",
-        "control_disabled",
-        // "lazy"
-        "loading"
-      ],
+        data.$container.fsTransition({
+            property: "opacity"
+          },
+          function() {
+            data.isAnimating = false;
 
-      /**
-       * @events
-       * @event loaded.viewer "Image loaded"
-       * @event ready.viewer "Image ready"
-       */
+            data.$container.remove();
 
-      events: {
-        loaded    : "loaded",
-        ready     : "ready"
-      },
+            if (typeof callback === "function") {
+              callback.call(window, data);
+            }
+          });
 
-      methods: {
-        _setup        : setup,
-        _construct    : construct,
-        _destruct     : destruct,
-        _resize       : resize,
-        _raf          : raf,
-
-        resize        : resizeInstance,
-        load          : load,
-        unload        : unload
+        data.$el.addClass(RawClasses.loading);
       }
-    }),
+    }
 
-    // Localize References
+    /**
+     * @method private
+     * @name advanceGallery
+     * @description Advances gallery
+     * @param e [object] "Event data"
+     */
 
-    Namespace       = Plugin.namespace,
-    Classes         = Plugin.classes,
-    RawClasses      = Classes.raw,
-    Events          = Plugin.events,
-    Functions       = Plugin.functions,
+    function advanceGallery(e) {
+      Functions.killEvent(e);
 
-    Window          = Formstone.window,
-    $Window         = Formstone.$window,
-    $Body,
-    ScrollTop       = 0,
-    $Instances      = [],
-    ViewportSetup   = false;
+      var $target = $(e.currentTarget),
+        data = e.data,
+        index = data.index + (($target.hasClass(RawClasses.control_next)) ? 1 : -1);
+
+      if (!data.isAnimating) {
+        if (index < 0) {
+          index = 0;
+        }
+
+        if (index > data.total) {
+          index = data.total;
+        }
+
+        if (index !== data.index) {
+          data.index = index;
+
+          unloadImage(data, function() {
+            loadImage(data, data.images[data.index]);
+          });
+        }
+
+        updateControls(data);
+      }
+    }
+
+    /**
+     * @method private
+     * @name updateControls
+     * @description Update control states
+     * @param data [object] Instance data
+     */
+
+    function updateControls(data) {
+      data.$controlItems.removeClass(RawClasses.control_disabled);
+
+      if (data.index === 0) {
+        data.$controlPrevious.addClass(RawClasses.control_disabled);
+      }
+      if (data.index === data.images.length - 1) {
+        data.$controlNext.addClass(RawClasses.control_disabled);
+      }
+    }
+
+    /**
+     * @method private
+     * @name resize
+     * @description Resize target instance
+     * @example $(".target").viewer("resize");
+     */
+
+    /**
+     * @method private
+     * @name resizeInstance
+     * @description Handle window resize event
+     * @param data [object] "Instance data"
+     */
+
+    function resizeInstance(data) {
+      cacheViewportProps(data);
+
+      cacheContainerMinMax(data);
+
+      cacheImageMinMax(data);
+
+      cacheImageTopLeft(data);
+
+      cacheContainerMinMax(data);
+
+      checkContainerTopLeft(data);
+
+      checkImageMinMax(data);
+    }
+
+    /**
+     * @method private
+     * @name clearTouch
+     * @description Clears current touch action.
+     */
+
+    function clearTouch(data) {
+      if (data.$container && data.$container.length) {
+        data.$container.fsTouch("destroy")
+          .off(Events.scaleStart, onScaleStart)
+          .off(Events.scaleEnd, onScaleEnd)
+          .off(Events.scale, onScale);
+      }
+    }
+
+    /**
+     * @method private
+     * @name cacheScrollPosition
+     * @description Cahce target scroll position
+     * @param data [object] "Instance data"
+     */
+
+    function cacheScrollPosition(data) {
+      data.scrollTop = data.$el.offset().top;
+    }
+
+    // /**
+    //  * @method private
+    //  * @name checkScrollPosition
+    //  * @description Check target scroll position against window
+    //  * @param data [object] "Instance data"
+    //  */
+    //
+    // function checkScrollPosition(data) {
+    //   if (!data.visible && data.scrollTop < ScrollTop + data.lazyEdge) {
+    //     data.visible = true;
+    //     loadInitialImage(data);
+    //   }
+    // }
+
+    /**
+     * @method private
+     * @name calculateNaturalSize
+     * @description Determines natural size of target image.
+     * @param $img [jQuery object] "Source image object"
+     * @return [object | boolean] "Object containing natural height and width values or false"
+     */
+
+    function calculateNaturalSize($img) {
+      var node = $img[0],
+        img = new Image();
+
+      if (typeof node.naturalHeight !== "undefined") {
+        return {
+          naturalHeight: node.naturalHeight,
+          naturalWidth: node.naturalWidth
+        };
+      } else {
+        if (node.tagName.toLowerCase() === 'img') {
+          img.src = node.src;
+          return {
+            naturalHeight: img.height,
+            naturalWidth: img.width
+          };
+        }
+      }
+
+      return false;
+    }
+
+    /**
+     * @plugin
+     * @name Viewer
+     * @description A jQuery plugin for image exploration.
+     * @type widget
+     * @main viewer.js
+     * @main viewer.css
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency touch.js
+     * @dependency transition.js
+     */
+
+    var Plugin = Formstone.Plugin("viewer", {
+        widget: true,
+
+        /**
+         * @options
+         * @param controls [boolean or object] <true> "Flag to draw controls OR object containing container, next, previous, zoom_in and zoom_out control selectors (Must be fully qualified selectors)"
+         * @param customClass [string] <''> "Class applied to instance"
+         // param lazy [boolean] <false> "Lazy load with scroll"
+         // param lazyEdge [int] <100> "Lazy load edge"
+         * @param labels.count [string] <'of'> "Gallery count separator text"
+         * @param labels.next [string] <'Next'> "Gallery control text"
+         * @param labels.previous [string] <'Previous'> "Gallery control text"
+         * @param labels.zoom_in [string] <'Zoom In'> "Image zoom text"
+         * @param labels.zoom_out [string] <'Zoom Out'> "Image zoom text"
+         * @param theme [string] <"fs-light"> "Theme class name"
+         * @param zoomDelta [int] <100> "Max zoom change"
+         * @param zoomEnertia [float] <0.2> "Enertia for zoom"
+         * @param zoomIncrement [float] <0.01> "Increment for zoom buttons"
+         */
+
+        defaults: {
+          controls: true,
+          customClass: "",
+          // lazy           : false,
+          // lazyEdge       : 100,
+          labels: {
+            count: "of",
+            next: "Next",
+            previous: "Previous",
+            zoom_in: "Zoom In",
+            zoom_out: "Zoom Out"
+          },
+          theme: "fs-light",
+          zoomDelta: 100,
+          zoomEnertia: 0.2,
+          zoomIncrement: 0.01
+        },
+
+        classes: [
+          "source",
+          "wrapper",
+          "viewport",
+          "container",
+          "image",
+          "gallery",
+          "loading_icon",
+
+          "controls",
+          "controls_custom",
+          "control",
+          "control_previous",
+          "control_next",
+          "control_zoom_in",
+          "control_zoom_out",
+          "control_disabled",
+          // "lazy"
+          "loading"
+        ],
+
+        /**
+         * @events
+         * @event loaded.viewer "Image loaded"
+         * @event ready.viewer "Image ready"
+         */
+
+        events: {
+          loaded: "loaded",
+          ready: "ready"
+        },
+
+        methods: {
+          _setup: setup,
+          _construct: construct,
+          _destruct: destruct,
+          _resize: resize,
+          _raf: raf,
+
+          resize: resizeInstance,
+          load: load,
+          unload: unload
+        }
+      }),
+
+      // Localize References
+
+      Namespace = Plugin.namespace,
+      Classes = Plugin.classes,
+      RawClasses = Classes.raw,
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      Window = Formstone.window,
+      $Window = Formstone.$window,
+      $Body,
+      ScrollTop = 0,
+      $Instances = [],
+      ViewportSetup = false;
     // $LazyInstances  = [];
 
-})
+  })
 
 );
 

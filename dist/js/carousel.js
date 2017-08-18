@@ -1,5 +1,6 @@
 /*! formstone v1.3.3 [carousel.js] 2017-08-18 | GPL-3.0 License | formstone.it */
 /* global define */
+
 (function(factory) {
     if (typeof define === "function" && define.amd) {
       define([

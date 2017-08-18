@@ -3,6 +3,7 @@ var moment         = require('moment');
 var gulp           = require('gulp');
 var autoprefixer   = require('gulp-autoprefixer');
 var jsbeautify     = require('gulp-beautify');
+var cssbeautify    = require('gulp-cssbeautify');
 var clean          = require('gulp-clean');
 var cleanCSS       = require('gulp-clean-css');
 var clip           = require('gulp-clip-empty-files');
@@ -180,12 +181,22 @@ gulp.task('license', function() {
 
 // Beautify
 
-gulp.task('beautify', function() {
-  gulp.src('./src/js/*.js')
-    .pipe(beautify({
-      indent_size: 2
+gulp.task('beautifyScripts', function() {
+  gulp.src('./src/js/**/*.js')
+    .pipe(jsbeautify({
+      indent_size: 2,
+      end_with_newline: true
     }))
     .pipe(gulp.dest('./src/js/'));
+});
+
+gulp.task('beautifyStyles', function() {
+  gulp.src('./src/css/**/*.less')
+    .pipe(cssbeautify({
+      indent: '  ',
+      autosemicolon: true
+    }))
+    .pipe(gulp.dest('./src/css/'));
 });
 
 // Tasks
@@ -209,3 +220,5 @@ gulp.task('dev', ['default'], function() {
   gulp.watch('./src/js/**/*.js', ['demo']);
   gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
 });
+
+gulp.task('beautify', ['beautifyStyles', 'beautifyScripts']);
