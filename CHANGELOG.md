@@ -4,10 +4,11 @@
 
 ### 1.4.0
 
-* Updated minimum jQuery version
-* Updated build dependencies
+* Updated minimum jQuery version and
+* Movied to Gulp build process
 * Added Checkpoint plugin for CSS animations scroll
 * Added Sticky plugin for sticky elements on scroll
+* Added Formstone.Ready handler to Core
 * Added additional AJAX parameters in Upload events
 * Fixed issue with moving input elements in Checkbox
 * Removed IE 8 & 9 support
