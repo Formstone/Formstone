@@ -135,8 +135,8 @@ gulp.task('demoModernizr', function () {
 gulp.task('zetzer', function(){
    return gulp.src('./demo/_src/pages/**/*.md')
     .pipe(zetzer({
-      partials: './demo/_src/templates/partials/',
-      templates: './demo/_src/templates/',
+      partials: './demo/_src/_templates/',
+      templates: './demo/_src/_templates/',
       env: {
         title: 'Formstone',
         version: pkg.version
