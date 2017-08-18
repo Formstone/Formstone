@@ -1,5 +1,4 @@
 //=require ../../../demo/bower/jquery/dist/jquery.min.js
-//= require ../../../demo/bower/prism/prism.js
 //=require ../../../dist/js/core.js
 //=require ../../../dist/js/analytics.js
 //=require ../../../dist/js/asap.js
@@ -26,3 +25,4 @@
 //=require ../../../dist/js/upload.js
 //=require ../../../dist/js/viewer.js
 //=require ../../../demo/js/src/includes/demo.js
+//=require ../../../demo/bower/prism/prism.js

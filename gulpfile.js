@@ -59,7 +59,7 @@ gulp.task('scripts', function() {
   return gulp.src('./src/js/*.js')
     .pipe(include())
     .pipe(jshint())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(header(comment, {
       pkg:  pkg,
       date: date
@@ -98,7 +98,7 @@ gulp.task('demoScripts', function() {
       global: pkg.src.vars
     }))
     .pipe(jshint())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
 });
 
@@ -113,7 +113,6 @@ gulp.task('demoModernizr', function () {
       'options': [
         'setClasses',
         'addTest',
-        // 'html5printshiv',
         'testProp',
         'fnBind'
       ]
@@ -182,7 +181,7 @@ gulp.task('license', function() {
 // Beautify
 
 gulp.task('beautifyScripts', function() {
-  gulp.src('./src/js/**/*.js')
+  return gulp.src('./src/js/**/*.js')
     .pipe(jsbeautify({
       indent_size: 2,
       end_with_newline: true
@@ -191,12 +190,12 @@ gulp.task('beautifyScripts', function() {
 });
 
 gulp.task('beautifyStyles', function() {
-  gulp.src('./src/css/**/*.less')
-    .pipe(cssbeautify({
-      indent: '  ',
-      autosemicolon: true
-    }))
-    .pipe(gulp.dest('./src/css/'));
+  // return gulp.src('./src/css/**/*.less')
+  //   .pipe(cssbeautify({
+  //     indent: '  ',
+  //     autosemicolon: true
+  //   }))
+  //   .pipe(gulp.dest('./src/css/'));
 });
 
 // Tasks

@@ -483,8 +483,8 @@
          * @return [object] "Instance data"
          */
 
-        function getData($element) {
-          return $element.data(namespaceClean);
+        function getData($el) {
+          return $el.data(namespaceClean);
         }
 
         /**
@@ -514,7 +514,9 @@
 
               // Wrap Public Methods
 
-              return settings.functions.iterate.apply(this, [_method].concat(Array.prototype.slice.call(arguments, 1)));
+              var args = [_method].concat(Array.prototype.slice.call(arguments, 1));
+
+              return settings.functions.iterate.apply(this, args);
             }
 
             return this;
@@ -538,7 +540,9 @@
 
             // Wrap Utility Methods
 
-            return _method.apply(window, Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1)));
+            var args = Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1));
+
+            return _method.apply(window, args);
           }
         }
 
