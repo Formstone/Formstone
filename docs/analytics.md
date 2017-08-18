@@ -13,7 +13,8 @@ A jQuery plugin for Google Universal Analytics Events.
 
 <!-- DEMO BUTTON -->
 
-<a name="use"></a>## Using Analytics
+<a name="use"></a>
+## Using Analytics
 
 
 #### Main
@@ -81,7 +82,8 @@ Note: The [Google Analytics Debugger](https://chrome.google.com/webstore/detail/
 
 
 
-<a name="options"></a>## Options
+<a name="options"></a>
+## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 

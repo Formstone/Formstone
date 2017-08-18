@@ -14,7 +14,8 @@ A jQuery plugin for simple access to browser cookies.
 
 <!-- DEMO BUTTON -->
 
-<a name="use"></a>## Using Cookie
+<a name="use"></a>
+## Using Cookie
 
 
 #### Main
@@ -55,7 +56,8 @@ $.cookie(key, null);
 ```
 
 
-<a name="options"></a>## Options
+<a name="options"></a>
+## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
@@ -66,7 +68,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `path` | `string` | &nbsp; | Cookie path |
 
 <hr>
-<a name="methods"></a>## Methods
+<a name="methods"></a>
+## Methods
 
 Methods are publicly available, unless otherwise stated.
 

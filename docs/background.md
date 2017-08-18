@@ -16,7 +16,8 @@ A jQuery plugin for full-frame image and video backgrounds.
 
 <!-- DEMO BUTTON -->
 
-<a name="use"></a>## Using Background
+<a name="use"></a>
+## Using Background
 
 
 #### Main
@@ -99,7 +100,8 @@ $(".target").background({
 
 
 
-<a name="options"></a>## Options
+<a name="options"></a>
+## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-background-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -115,7 +117,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `source` | `string OR object` | `null` | Source image (string or object) or video (object) |
 
 <hr>
-<a name="events"></a>## Events
+<a name="events"></a>
+## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -126,7 +129,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `error.background` | Background media error |
 
 <hr>
-<a name="methods"></a>## Methods
+<a name="methods"></a>
+## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -191,7 +195,8 @@ $(".target").background("unmute");
 ```
 
 <hr>
-<a name="css"></a>## CSS
+<a name="css"></a>
+## CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

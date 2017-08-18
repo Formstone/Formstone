@@ -13,7 +13,8 @@ Formstone Library core. Required for all plugins.
 
 <!-- DEMO BUTTON -->
 
-<a name="use"></a>## Using Core
+<a name="use"></a>
+## Using Core
 
 ### Formstone Object
 
@@ -403,7 +404,8 @@ Formstone styles depend on a few basic [Modernizr](https://modernizr.com/) class
 
 
 <hr>
-<a name="methods"></a>## Methods
+<a name="methods"></a>
+## Methods
 
 ### NoConflict
 
