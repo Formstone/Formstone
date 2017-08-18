@@ -16,7 +16,7 @@ A jQuery plugin for image exploration.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Using Viewer
+<a name="use"></a>## Using Viewer
 
 
 #### Main
@@ -68,7 +68,7 @@ $(".target").viewer();
 
 
 
-## <a name="options"></a> Options
+<a name="options"></a>## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-viewer-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.
 
@@ -87,7 +87,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `zoomIncrement` | `float` | `0.01` | Increment for zoom buttons |
 
 <hr>
-## <a name="events"></a> Events
+<a name="events"></a>## Events
 
 Events are triggered on the target instance's element, unless otherwise stated.
 
@@ -97,7 +97,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `ready.viewer` | Image ready |
 
 <hr>
-## <a name="methods"></a> Methods
+<a name="methods"></a>## Methods
 
 Methods are publicly available to all active instances, unless otherwise stated.
 
@@ -149,7 +149,7 @@ $(".target").viewer("unload");
 ```
 
 <hr>
-## <a name="css"></a> CSS
+<a name="css"></a>## CSS
 
 | Class | Type | Description |
 | --- | --- | --- |

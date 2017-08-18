@@ -15,7 +15,7 @@ A jQuery plugin for responsive media query events.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Using Media Query
+<a name="use"></a>## Using Media Query
 
 
 #### Main
@@ -80,7 +80,7 @@ $.mediaquery("unbind", "mq-key");
 
 
 
-## <a name="options"></a> Options
+<a name="options"></a>## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
@@ -93,7 +93,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `unit` | `string` | `'px'` | Unit to use when matching widths and heights |
 
 <hr>
-## <a name="events"></a> Events
+<a name="events"></a>## Events
 
 Events are triggered on the `window`, unless otherwise stated.
 
@@ -102,7 +102,7 @@ Events are triggered on the `window`, unless otherwise stated.
 | `mqchange.mediaquery` | Change to a media query match; Triggered on window |
 
 <hr>
-## <a name="methods"></a> Methods
+<a name="methods"></a>## Methods
 
 Methods are publicly available, unless otherwise stated.
 

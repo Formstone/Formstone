@@ -334,7 +334,8 @@ module.exports = function() {
     md += '\n<!-- DEMO BUTTON -->\n';
 
     md += '\n';
-    md += heading + '# <a name="use"></a> Using ' + doc.name;
+    md += '<a name="use"></a>';
+    md += heading + '# Using ' + doc.name;
     md += '\n\n';
 
     if (doc.main && doc.main.length) {
@@ -372,7 +373,8 @@ module.exports = function() {
 
     if (doc.options && doc.options.length) {
       md += '\n';
-      md += heading + '# <a name="options"></a> Options';
+      md += '<a name="options"></a>';
+      md += heading + '# Options';
       md += '\n\n';
       if (doc.type === "widget") {
         md += 'Set instance options by passing a valid object at initialization, or to the public `defaults` method. Custom options for a specific instance can also be set by attaching a `data-' + namespace + '-options` attribute to the target elment. This attribute should contain the properly formatted JSON object representing the custom options.';
@@ -398,7 +400,8 @@ module.exports = function() {
 
     if (doc.events && doc.events.length) {
       md += '<hr>\n';
-      md += heading + '# <a name="events"></a> Events';
+      md += '<a name="events"></a>';
+      md += heading + '# Events';
       md += '\n\n';
       if (doc.type === "widget") {
         md += 'Events are triggered on the target instance\'s element, unless otherwise stated.';
@@ -423,7 +426,8 @@ module.exports = function() {
 
     if (doc.methods && doc.methods.length) {
       md += '<hr>\n';
-      md += heading + '# <a name="methods"></a> Methods';
+      md += '<a name="methods"></a>';
+      md += heading + '# Methods';
       md += '\n\n';
       if (doc.type === "widget") {
         md += 'Methods are publicly available to all active instances, unless otherwise stated.';
@@ -472,7 +476,8 @@ module.exports = function() {
 
     if (doc.css && doc.css.length) {
       md += '<hr>\n';
-      md += heading + '# <a name="css"></a> CSS';
+      md += '<a name="css"></a>';
+      md += heading + '# CSS';
       md += '\n\n';
       md += '| Class | Type | Description |';
       md += '\n';

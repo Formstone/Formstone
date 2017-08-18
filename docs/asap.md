@@ -15,7 +15,7 @@ A jQuery plugin for asynchronous page loads.
 
 <!-- DEMO BUTTON -->
 
-## <a name="use"></a> Using ASAP
+<a name="use"></a>## Using ASAP
 
 
 #### Main
@@ -110,7 +110,7 @@ $(window).on("requested.asap", function(e) {
 
 
 
-## <a name="options"></a> Options
+<a name="options"></a>## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
 
@@ -124,7 +124,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `transitionOut` | `function` | `$.noop` | Transition timing callback; should return user defined $.Deferred object, which must eventually resolve |
 
 <hr>
-## <a name="events"></a> Events
+<a name="events"></a>## Events
 
 Events are triggered on the `window`, unless otherwise stated.
 
@@ -137,7 +137,7 @@ Events are triggered on the `window`, unless otherwise stated.
 | `failed.asap` | After load error; triggered on window |
 
 <hr>
-## <a name="methods"></a> Methods
+<a name="methods"></a>## Methods
 
 Methods are publicly available, unless otherwise stated.
 
