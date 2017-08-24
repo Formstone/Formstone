@@ -78,6 +78,12 @@
       data.$stickys = $().add(data.$el).add(data.$clone);
 
       data.$el.after(data.$clone);
+
+      var $images = $().add( data.$target.find("img") ).add( data.$container.find("img") );
+
+      if ($images.length) {
+        $images.on(Events.load, data, resizeInstance);
+      }
     }
 
     /**

@@ -75,6 +75,12 @@
 
       data.$target = ($container.length) ? $container : data.$el;
 
+      var $images = data.$target.find("img");
+
+      if ($images.length) {
+        $images.on(Events.load, data, resizeInstance);
+      }
+
       data.$el.addClass(RawClasses.base);
     }
 
