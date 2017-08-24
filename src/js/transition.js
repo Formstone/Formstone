@@ -156,9 +156,7 @@
         computed = el.currentStyle;
 
         for (prop in computed) {
-          if (computed[prop]) { // ie8...
-            styles[prop] = computed[prop];
-          }
+          styles[prop] = computed[prop];
         }
       }
 

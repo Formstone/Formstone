@@ -12,6 +12,7 @@
 * Added additional AJAX parameters in Upload events
 * Fixed issue with moving input elements in Checkbox
 * Fixed issue with load order and `setup` calls
+* Removed Modernizr requirement
 * Removed IE 8 & 9 support
 
 ### 1.3.3

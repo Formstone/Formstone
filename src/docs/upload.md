@@ -12,7 +12,7 @@ $(".target").upload({
 <div class="target"></div>
 ```
 
-Note: IE9 does not support the <a href="http://caniuse.com/#feat=fileapi" target="_blank">File API</a>. The developer will need to provide a proper fallback. Support can be checked in the `Formstone.support` object:
+Note: Older browsers do not support the <a href="http://caniuse.com/#feat=fileapi" target="_blank">File API</a>. Developers will need to provide a proper fallback. Support can be checked in the `Formstone.support` object:
 
 ```js
 if (Formstone.support.file) {
@@ -34,10 +34,10 @@ function onBeforeSend(formData, file) {
   if (file.name.indexOf(".jpg") < 0) {
     return false;
   }
-  
+
   // Modify and return form data
   formdata.append("input_name", "input_value");
-  
+
   return formData;
 }
 ```

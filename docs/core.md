@@ -391,17 +391,6 @@ One benefit of Formstone is the module nature of the components, allowing develo
 Formstone.NoConflict();
 ```
 
-### Modernizr Support
-
-Formstone styles depend on a few basic [Modernizr](https://modernizr.com/) classes:
-
-| Test |
-| --- |
-| csstransforms |
-| csstransforms3d |
-| opacity |
-| touchevents |
-
 
 <hr>
 <a name="methods"></a>

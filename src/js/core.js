@@ -848,15 +848,14 @@
     Formstone.Ready(function() {
       Formstone.$body = $("body");
 
+      $("html").addClass( (Formstone.support.touch) ? "touchevents" : "no-touchevents" );
+
       // Viewport
       $ViewportMeta = $('meta[name="viewport"]');
       ViewportMetaOriginal = ($ViewportMeta.length) ? $ViewportMeta.attr("content") : false;
       ViewportMetaLocked = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
 
       $Ready.resolve();
-
-      // ie8 fallback support
-      Formstone.support.nativeMatchMedia = Formstone.support.matchMedia && !$("html").hasClass("no-matchmedia");
     });
 
     // Custom Events

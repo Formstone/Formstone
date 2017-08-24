@@ -175,20 +175,12 @@
 
   .@{theme_name}&-push-left-nav&-enabled,
   .@{theme_name}&-overlay-left-nav&-enabled {
-    transform: translateX(-(@fs-navigation-offscreen-width));
-
-    .csstransforms3d & {
-      transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
-    }
+    transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
   }
 
   .@{theme_name}&-push-right-nav&-enabled,
   .@{theme_name}&-overlay-right-nav&-enabled {
-    transform: translateX(@fs-navigation-offscreen-width);
-
-    .csstransforms3d & {
-      transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
-    }
+    transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
   }
 
   // overlay
@@ -215,16 +207,12 @@
 
   .@{theme_name}&-push-nav&-open,
   .@{theme_name}&-overlay-nav&-open {
-    transform: translateX(0);
+    transform: translate3D(0, 0, 0);
     transition:
       box-shadow 0.001s @fs-navigation-offscreen-transition-timing,
       transform @fs-navigation-offscreen-transition-speed @fs-navigation-offscreen-transition-timing,
       visibility 0.001s @fs-navigation-offscreen-transition-timing;
     visibility: visible;
-
-    .csstransforms3d & {
-      transform: translate3D(0, 0, 0);
-    }
   }
 
   // handles
@@ -280,11 +268,7 @@
     z-index: @fs-navigation-push-content-zindex;
 
     box-shadow: 0 0 @fs-navigation-offscreen-content-box-shadow-blur @fs-navigation-offscreen-content-box-shadow-color;
-    transform: translateX(0);
-
-    .csstransforms3d & {
-      transform: translate3D(0, 0, 0);
-    }
+    transform: translate3D(0, 0, 0);
   }
 
   .@{theme_name}&-reveal-content&-animated,
@@ -308,20 +292,12 @@
 
   .@{theme_name}&-reveal-left-content&-open,
   .@{theme_name}&-push-left-content&-open {
-    transform: translateX(@fs-navigation-offscreen-width);
-
-    .csstransforms3d & {
-      transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
-    }
+    transform: translate3D(@fs-navigation-offscreen-width, 0, 0);
   }
 
   .@{theme_name}&-reveal-right-content&-open,
   .@{theme_name}&-push-right-content&-open {
-    transform: translateX(-(@fs-navigation-offscreen-width));
-
-    .csstransforms3d & {
-      transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
-    }
+    transform: translate3D(-(@fs-navigation-offscreen-width), 0, 0);
   }
 
   // Handles

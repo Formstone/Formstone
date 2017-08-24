@@ -16,18 +16,7 @@
     <script src="../../js/modernizr.js"></script>
 
     <!-- Compiled CSS -->
-    <!--[if gt IE 8]><!--><link rel="stylesheet" href="../../css/site.css?v="><!--<![endif]-->
-
-    <!--[if IE 8]>
-      <script>var IE8 = true;</script>
-      <script src="../../js/site-ie8.js"></script>
-      <link rel="stylesheet" href="../../css/site-ie8.css">
-    <![endif]-->
-    <!--[if IE 9]>
-      <script>var IE9 = true;</script>
-      <script src="../../js/site-ie9.js"></script>
-      <link rel="stylesheet" href="../../css/site-ie9.css">
-    <![endif]-->
+    <link rel="stylesheet" href="../../css/site.css?v=">
 
     <!-- Compiled JS -->
     <script src="../../js/site.js"></script>
