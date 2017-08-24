@@ -22,9 +22,6 @@ var buildDocs      = require('./tasks/docs.js');
 
 var lessImportNPM  = require('less-plugin-npm-import');
 
-// var sass           = require('gulp-sass');
-// var lessToSass     = require('gulp-less-to-scss');
-
 // Vars
 var pkg = require('./package.json');
 var date = moment().format('YYYY-MM-DD');
@@ -209,21 +206,6 @@ gulp.task('beautifyStyles', function() {
   //   }))
   //   .pipe(gulp.dest('./src/css/'));
 });
-
-// // Less to Sass
-//
-// gulp.task('lessToSass', function() {
-//   return gulp.src('./src/less/**/*.less')
-//     .pipe(lessToSass())
-//     .pipe(gulp.dest('./src/scss'));
-// });
-// gulp.task('sass', function () {
-//   return gulp.src('./src/scss/**/*.scss')
-//     .pipe(sass().on('error', sass.logError))
-//     .pipe(gulp.dest('./scss'));
-// });
-//
-// gulp.task('testSass', ['lessToSass', 'sass']);
 
 // Tasks
 
