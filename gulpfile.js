@@ -199,12 +199,12 @@ gulp.task('beautifyScripts', function() {
 });
 
 gulp.task('beautifyStyles', function() {
-  // return gulp.src('./src/css/**/*.less')
+  // return gulp.src('./src/less/**/*.less')
   //   .pipe(cssbeautify({
   //     indent: '  ',
   //     autosemicolon: true
   //   }))
-  //   .pipe(gulp.dest('./src/css/'));
+  //   .pipe(gulp.dest('./src/less/'));
 });
 
 // Tasks
