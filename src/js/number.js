@@ -340,7 +340,6 @@
         ],
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
 
@@ -360,6 +359,10 @@
       Functions = Plugin.functions,
 
       $Body = null;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 

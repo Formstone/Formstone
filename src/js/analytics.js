@@ -347,7 +347,6 @@
 
     var Plugin = Formstone.Plugin("analytics", {
         methods: {
-          _setup: setup,
           _resize: resize
         },
         utilities: {
@@ -395,6 +394,10 @@
       ScrollTimer = null,
       ScrollWidth = "Site", // default value, non-responsive
       LinkTimer = null;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 

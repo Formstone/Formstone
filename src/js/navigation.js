@@ -526,7 +526,6 @@
         },
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
 
@@ -551,6 +550,10 @@
       // Internal
 
       $Locks = null;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 

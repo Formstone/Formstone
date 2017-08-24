@@ -714,7 +714,6 @@
         ],
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
 
@@ -737,6 +736,10 @@
 
       // Internal
       BlobSliceMethod = false;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
     /**
      * @events

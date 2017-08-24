@@ -605,7 +605,6 @@
 
           // Private Methods
 
-          _setup: $.noop, // Document ready
           _construct: $.noop, // Constructor
           _postConstruct: $.noop, // Post Constructor
           _destruct: $.noop, // Destructor
@@ -700,23 +699,8 @@
         return settings;
       })(namespace, settings);
 
-      // Setup, catches lazy-loaded components, ensures order
-
-      $Ready.then(function() {
-        setupPlugin(namespace);
-      });
-
       return Formstone.Plugins[namespace];
     };
-
-    // Setup Plugins
-
-    function setupPlugin(namespace) {
-      if (!Formstone.Plugins[namespace].initialized) {
-        Formstone.Plugins[namespace].methods._setup.call(document);
-        Formstone.Plugins[namespace].initialized = true;
-      }
-    }
 
     // Namespace Properties
 

@@ -552,7 +552,6 @@
         ],
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
           _resize: resize,
@@ -573,6 +572,10 @@
       $Body,
       $Window = Formstone.$window,
       $Instances = [];
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 

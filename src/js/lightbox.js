@@ -1593,7 +1593,6 @@
         },
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
           _resize: resize,
@@ -1629,6 +1628,10 @@
       // Singleton
 
       Instance = null;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 

@@ -929,7 +929,6 @@
         },
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
           _resize: resize,
@@ -960,6 +959,10 @@
       BGSupport = ("backgroundSize" in Formstone.document.documentElement.style),
       YouTubeReady = false,
       YouTubeQueue = [];
+
+    // Setup
+
+    Formstone.Ready(setup);
 
     /**
      * @method private global

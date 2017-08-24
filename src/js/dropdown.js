@@ -924,7 +924,6 @@
         },
 
         methods: {
-          _setup: setup,
           _construct: construct,
           _destruct: destruct,
 
@@ -973,6 +972,10 @@
       $Window = Formstone.$window,
       Document = Formstone.document,
       $Body = null;
+
+    // Setup
+
+    Formstone.Ready(setup);
 
   })
 
