@@ -72,9 +72,9 @@
  */
 /**
  * @class
- * @name .fs-dropdown.fs-dropdown-mobile
+ * @name .fs-dropdown.fs-dropdown-native
  * @type modifer
- * @description Indicates mobile option
+ * @description Indicates native options
  */
 
 .fs-dropdown {
@@ -115,13 +115,15 @@
     }
   }
 
-  // Mobile
+  // Mative
 
-  &-mobile &-element {
+  &-mobile &-element, // TODO: remove
+  &-native &-element {
     z-index: 7;
   }
 
-  &-mobile&-multiple &-element {
+  &-mobile&-multiple &-element, // TODO: remove
+  &-native&-multiple &-element {
     z-index: -1;
   }
 

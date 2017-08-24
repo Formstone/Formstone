@@ -37,6 +37,9 @@
       data.disabled = this.prop("disabled") || this.is("[readonly]");
       data.lastIndex = false;
 
+      data.native = data.mobile || data.native; // TODO: remove mobile
+      data.useNative = data.native || Formstone.isMobile;
+
       if (data.multiple) {
         data.links = false;
       } else if (data.external) {
@@ -77,8 +80,8 @@
         data.customClass
       ];
 
-      if (data.mobile /* || Formstone.isMobile */ ) {
-        wrapperClasses.push(RawClasses.mobile);
+      if (data.useNative) {
+        wrapperClasses.push(RawClasses.native);
       } else if (data.cover) {
         wrapperClasses.push(RawClasses.cover);
       }
@@ -163,8 +166,7 @@
       this.on(Events.change, data, onChange);
 
       // Focus/Blur events
-      if (!data.mobile /*!Formstone.isMobile*/ ) {
-
+      if (!data.useNative) {
         // Handle clicks to associated labels
         this.on(Events.focusIn, data, function(e) {
           e.data.$dropdown.trigger(Events.raw.focus);
@@ -391,27 +393,12 @@
 
       var data = e.data;
 
-      if (!data.disabled) {
-        // // Handle mobile, but not Firefox, unless desktop forced
-        // if (!data.mobile && Formstone.isMobile && !Formstone.isFirefoxMobile && !Formstone.isIEMobile) {
-        //   var el = data.$el[0];
-        //
-        //   if (Document.createEvent) { // All
-        //     var evt = Document.createEvent("MouseEvents");
-        //     evt.initMouseEvent("mousedown", false, true, Window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-        //     el.dispatchEvent(evt);
-        //   } else if (el.fireEvent) { // IE
-        //     el.fireEvent("onmousedown");
-        //   }
-        // } else {
-
-        if (!data.mobile) {
-          // Delegate intent
-          if (data.closed) {
-            openOptions(data);
-          } else {
-            closeOptions(data);
-          }
+      if (!data.disabled && !data.useNative) {
+        // Delegate intent
+        if (data.closed) {
+          openOptions(data);
+        } else {
+          closeOptions(data);
         }
       }
 
@@ -724,7 +711,7 @@
       // Check for disabled options
       if (!isDisabled) {
         if (data.multiple) {
-          if (data.mobile /* Formstone.isMobile*/ ) {
+          if (data.useNative) {
             if (isSelected) {
               $option.prop("selected", null)
                 .attr("aria-selected", null);
@@ -907,7 +894,7 @@
          * @param label [string] <''> "Label displayed before selection"
          * @param external [boolean] <false> "Open options as links in new window"
          * @param links [boolean] <false> "Open options as links in same window"
-         * @param mobile [boolean] <false> "Use native browser UI on mobile"
+         * @param native [boolean] <false> "Use native browser options"
          * @param theme [string] <"fs-light"> "Theme class name"
          * @param trim [int] <0> "Trim options to specified length; 0 to disable”
          */
@@ -918,7 +905,8 @@
           label: "",
           external: false,
           links: false,
-          mobile: false,
+          mobile: false, // deprecated
+          native: false,
           theme: "fs-light",
           trim: 0
         },
@@ -938,7 +926,8 @@
           "cover",
           "bottom",
           "multiple",
-          "mobile",
+          "mobile", // deprecated
+          "native",
 
           "open",
           "disabled",

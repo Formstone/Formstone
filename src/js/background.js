@@ -499,11 +499,9 @@
                   data.player.playVideo();
                 }
 
-                /* if (!isSafari) { */
                 // Fix for Safari's overly secure security settings...
                 data.$el.find(Classes.embed)
                   .addClass(RawClasses.ready);
-                /* } */
               },
               onPlaybackQualityChange: function(e) {
                 /* console.log("onPlaybackQualityChange", e); */
