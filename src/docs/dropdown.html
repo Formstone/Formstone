@@ -133,7 +133,7 @@
     <form action="#" method="GET" class="form demo_form">
       <fieldset class="form_fieldset">
         <label for="demo_cover" class="form_label">Label</label>
-        <select name="demo_cover" id="demo_cover" class="js-dropdown" data-dropdown-options='{"cover":"true"}'>
+        <select name="demo_cover" id="demo_cover" class="js-dropdown" data-dropdown-options='{"cover":true}'>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -144,12 +144,39 @@
     </form>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
 &Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
 &Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
 &lt;/select&gt;</code></pre>
     <pre><code class="language-javascript">$(".dropdown").dropdown({
   cover: true
+});</code></pre>
+  </div>
+</div>
+
+<h4>Native</h4>
+<div class="demo_container">
+  <div class="demo_example">
+    <form action="#" method="GET" class="form demo_form">
+      <fieldset class="form_fieldset">
+        <label for="demo_native" class="form_label">Label</label>
+        <select name="demo_native" id="demo_native" class="js-dropdown" data-dropdown-options='{"native":true}'>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+          <option value="4">Four</option>
+          <option value="5">Five</option>
+        </select>
+      </fieldset>
+    </form>
+  </div>
+  <div class="demo_code">
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
+&Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
+&Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+    <pre><code class="language-javascript">$(".dropdown").dropdown({
+  native: true
 });</code></pre>
   </div>
 </div>
@@ -253,13 +280,11 @@
     </form>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
 &Tab;&lt;option value=&quot;1&quot; data-label=&quot;Option One&quot;&gt;One&lt;/option&gt;
 &Tab;&lt;option value=&quot;2&quot; data-label=&quot;Option Two&quot;&gt;Two&lt;/option&gt;
 &lt;/select&gt;</code></pre>
-    <pre><code class="language-javascript">$(".dropdown").dropdown({
-  cover: true
-});</code></pre>
+    <pre><code class="language-javascript">$(".dropdown").dropdown();</code></pre>
   </div>
 </div>
 
@@ -280,13 +305,11 @@
     </form>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
 &Tab;&lt;option value=&quot;1&quot; data-label=&quot; &amp;lt;em&amp;gt;Option One  &amp;lt;/em&amp;gt; &quot;&gt;One&lt;/option&gt;
 &Tab;&lt;option value=&quot;2&quot; data-label=&quot; &amp;lt;em&amp;gt;Option Two  &amp;lt;/em&amp;gt; &quot;&gt;Two&lt;/option&gt;
 &lt;/select&gt;</code></pre>
-    <pre><code class="language-javascript">$(".dropdown").dropdown({
-  cover: true
-});</code></pre>
+    <pre><code class="language-javascript">$(".dropdown").dropdown();</code></pre>
   </div>
 </div>
 
@@ -321,7 +344,7 @@
     <form action="#" method="GET" class="form demo_form">
       <fieldset class="form_fieldset">
         <label for="demo_external" class="form_label">Label</label>
-        <select name="demo_external" id="demo_external" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","external":"true"}'>
+        <select name="demo_external" id="demo_external" class="js-dropdown" data-dropdown-options='{"label":"Jump Sites","external":true}'>
           <option value="http://google.com">Google Search</option>
           <option value="http://boingboing.com">Boing  Boing</option>
           <option value="http://cnn.com">CNN News</option>
@@ -330,7 +353,7 @@
     </form>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
   &Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link One&lt;/option&gt;
   &Tab;&lt;option value=&quot;http://example.com&quot;&gt;Link Two&lt;/option&gt;
 &lt;/select&gt;</code></pre>
@@ -403,7 +426,7 @@
     </form>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown multiple&quot;&gt;
+    <pre><code class="language-html">&lt;select name=&quot;dropdown&quot; class=&quot;dropdown&quot;&gt;
 &Tab;&lt;option value=&quot;1&quot;&gt;One&lt;/option&gt;
 &Tab;&lt;option value=&quot;2&quot;&gt;Two&lt;/option&gt;
 &lt;/select&gt;</code></pre>
@@ -419,7 +442,7 @@
       <h4>Detached Options</h4>
       <fieldset class="form_fieldset">
         <label for="demo_detached" class="form_label">Label</label>
-        <select name="demo_detached" id="demo_detached" class="js-dropdown" data-dropdown-options='{"detached":"true"}'>
+        <select name="demo_detached" id="demo_detached" class="js-dropdown" data-dropdown-options='{"detached":true}'>
           <option value="1">One</option>
           <option value="2">Two</option>
           <option value="3">Three</option>
@@ -429,17 +452,3 @@
       </fieldset>
     </div>
 -->
-
-
-
-<form action="#" method="GET" class="form demo_form">
-  <fieldset class="form_fieldset">
-    <label for="demo_basic" class="form_label">Label</label>
-    <select name="demo_basic" id="demo_basic" class="js-dropdown" data-dropdown-options='{"mobile":true}'>
-      <!-- <option data-label="Option One">One</option>
-      <option data-label="Option Two">Two</option> -->
-      <option value="1">One</option>
-      <option value="2">Two</option>
-    </select>
-  </fieldset>
-</form>
