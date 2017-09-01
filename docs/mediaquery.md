@@ -83,6 +83,7 @@ $.mediaquery("unbind", "mq-key");
 
 
 <a name="options"></a>
+
 ## Options
 
 Set instance options by passing a valid object at initialization, or to the public `defaults` method.
@@ -97,6 +98,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 <hr>
 <a name="events"></a>
+
 ## Events
 
 Events are triggered on the `window`, unless otherwise stated.
@@ -107,6 +109,7 @@ Events are triggered on the `window`, unless otherwise stated.
 
 <hr>
 <a name="methods"></a>
+
 ## Methods
 
 Methods are publicly available, unless otherwise stated.

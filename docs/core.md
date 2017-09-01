@@ -395,6 +395,7 @@ Formstone.NoConflict();
 
 <hr>
 <a name="methods"></a>
+
 ## Methods
 
 ### NoConflict

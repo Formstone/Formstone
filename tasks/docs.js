@@ -373,7 +373,7 @@ module.exports = function() {
 
     if (doc.options && doc.options.length) {
       md += '\n';
-      md += '<a name="options"></a>\n';
+      md += '<a name="options"></a>\n\n';
       md += heading + '# Options';
       md += '\n\n';
       if (doc.type === "widget") {
@@ -400,7 +400,7 @@ module.exports = function() {
 
     if (doc.events && doc.events.length) {
       md += '<hr>\n';
-      md += '<a name="events"></a>\n';
+      md += '<a name="events"></a>\n\n';
       md += heading + '# Events';
       md += '\n\n';
       if (doc.type === "widget") {
@@ -426,7 +426,7 @@ module.exports = function() {
 
     if (doc.methods && doc.methods.length) {
       md += '<hr>\n';
-      md += '<a name="methods"></a>\n';
+      md += '<a name="methods"></a>\n\n';
       md += heading + '# Methods';
       md += '\n\n';
       if (doc.type === "widget") {
@@ -476,7 +476,7 @@ module.exports = function() {
 
     if (doc.css && doc.css.length) {
       md += '<hr>\n';
-      md += '<a name="css"></a>\n';
+      md += '<a name="css"></a>\n\n';
       md += heading + '# CSS';
       md += '\n\n';
       md += '| Class | Type | Description |';
