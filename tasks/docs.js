@@ -334,7 +334,7 @@ module.exports = function() {
     md += '\n<!-- DEMO BUTTON -->\n';
 
     md += '\n';
-    md += '<a name="use"></a>\n';
+    md += '<a name="use"></a>\n\n';
     md += heading + '# Using ' + doc.name;
     md += '\n\n';
 

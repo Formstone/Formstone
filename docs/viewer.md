@@ -17,6 +17,7 @@ A jQuery plugin for image exploration.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Viewer
 
 

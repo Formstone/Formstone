@@ -9,12 +9,14 @@ A jQuery plugin for animating visible elements.
 * [Use](#use)
 * [Options](#options)
 * [Events](#events)
+* [Methods](#methods)
 
 <!-- NAV END -->
 
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Checkpoint
 
 
@@ -59,4 +61,18 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | --- | --- |
 | `activate.checkpoint` | Checkpoint activated |
 | `deactivate.checkpoint` | Checkpoint deactivated |
+
+<hr>
+<a name="methods"></a>
+## Methods
+
+Methods are publicly available to all active instances, unless otherwise stated.
+
+### resize
+
+Updates instance.
+
+```javascript
+$(".target").checkpoint("resize");
+```
 

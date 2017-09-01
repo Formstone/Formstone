@@ -16,6 +16,7 @@ A jQuery plugin for cross browser range inputs.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Range
 
 

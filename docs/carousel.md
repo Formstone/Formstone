@@ -17,6 +17,7 @@ A jQuery plugin for simple content carousels.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Carousel
 
 

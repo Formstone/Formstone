@@ -137,6 +137,9 @@
       $content.find(".js-equalize").equalize("resize");
       $content.find("input[type=range]").range("resize");
       $content.find(".js-scrollbar").scrollbar("resize");
+
+      $body.find(".js-checkpoint").checkpoint("resize");
+      $body.find(".js-sticky").sticky("resize");
     }
 
     // Ready

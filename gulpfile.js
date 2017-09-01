@@ -229,6 +229,9 @@ gulp.task('dev', ['default'], function() {
   gulp.watch('./src/less/**/*.less', ['demo']);
   gulp.watch('./src/js/**/*.js', ['demo']);
   gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
+
+  gulp.watch('./demo/css/src/**/*', ['demoStyles']);
+  gulp.watch('./demo/js/src/**/*', ['demoScripts']);
 });
 
 gulp.task('beautify', ['beautifyStyles', 'beautifyScripts']);

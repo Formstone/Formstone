@@ -17,6 +17,7 @@ A jQuery plugin for simple drag and drop uploads.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Upload
 
 

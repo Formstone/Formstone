@@ -17,6 +17,7 @@ A jQuery plugin for toggling states.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Swap
 
 

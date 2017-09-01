@@ -17,6 +17,7 @@ A jQuery plugin for simple modals.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Lightbox
 
 

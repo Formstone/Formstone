@@ -118,6 +118,13 @@
     }
 
     /**
+     * @method
+     * @name resize
+     * @description Updates instance.
+     * @example $(".target").checkpoint("resize");
+     */
+
+    /**
      * @method private
      * @name resizeInstance
      * @description Handle window resize event
@@ -231,7 +238,9 @@
           _postConstruct: postConstruct,
           _destruct: destruct,
           _resize: resize,
-          _raf: raf
+          _raf: raf,
+
+          resize: resizeInstance
         }
       }),
 

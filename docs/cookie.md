@@ -15,6 +15,7 @@ A jQuery plugin for simple access to browser cookies.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Cookie
 
 

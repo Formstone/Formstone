@@ -148,10 +148,13 @@
 
 // !Small, 540 (max 740)
 .fs_cell_xs(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-max-sm) {
+
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column(@total, @fs-grid-gutter, @count);
     }
@@ -160,10 +163,13 @@
 
 // Push
 .fs_push_xs(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-max-sm) {
+
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-sm, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
     }
@@ -172,10 +178,13 @@
 
 // !Min, 300 (max 500)
 .fs_cell_sm(@count, @total:0) {
+
   @media screen and (~"@{fs-grid-mq-max-md}") {
+
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column(@total, @fs-grid-gutter, @count);
     }
@@ -184,10 +193,13 @@
 
 // Push
 .fs_push_sm(@count, @total:0) {
+
   @media screen and (~"@{fs-grid-mq-max-md}") {
+
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-sm, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
     }
@@ -196,10 +208,13 @@
 
 // !Medium, 6 column, 720 (min 740)
 .fs_cell_md(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
+
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-md, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column(@total, @fs-grid-gutter, @count);
     }
@@ -208,10 +223,13 @@
 
 // Push
 .fs_push_md(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
+
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-md, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
     }
@@ -220,10 +238,13 @@
 
 // !Large, 12 column, 960 (min 980)
 .fs_cell_lg(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-lg) {
+
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column(@total, @fs-grid-gutter, @count);
     }
@@ -232,10 +253,13 @@
 
 // Push
 .fs_push_lg(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-lg) {
+
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-lg, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
     }
@@ -244,10 +268,13 @@
 
 // !XLarge, 12 column, 1200 (min 1220)
 .fs_cell_xl(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-xl) {
+
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-lg, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column(@total, @fs-grid-gutter, @count);
     }
@@ -256,12 +283,99 @@
 
 // Push
 .fs_push_xl(@count, @total:0) {
+
   @media screen and (@fs-grid-mq-min-xl) {
+
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-lg, @fs-grid-gutter, @count);
     }
+
     & when not (@total = 0) {
       .fs_grid_column_pushed(@total, @fs-grid-gutter, @count);
     }
   }
 }
+
+
+
+// // FLEX
+//
+// .fs-flex-row {
+//   display: flex;
+//   flex-wrap: wrap;
+//
+//   // !Row Default
+//   min-width: @fs-grid-width-xs;
+//
+//   margin-left: auto;
+//   margin-right: auto;
+//
+//   @media screen and (max-width: (@fs-grid-width-break-md - 1px)) {
+//     .fs_grid_row_fluid;
+//   }
+//
+//   @media screen and (min-width: @fs-grid-width-break-md) {
+//     width: @fs-grid-width-md;
+//   }
+//
+//   @media screen and (min-width: @fs-grid-width-break-lg) {
+//     width: @fs-grid-width-lg;
+//   }
+//
+//   @media screen and (min-width: @fs-grid-width-break-xl) {
+//     width: @fs-grid-width-xl;
+//   }
+//
+//
+//   [class*="@{fs-grid-class-cell}"] {
+//     flex: 0 0 100%;
+//
+//     margin-left: @fs-grid-gutter;
+//     margin-right: @fs-grid-gutter;
+//   }
+//
+//   .fs_flex_grid_columns(@fs-grid-class-md, @fs-grid-gutter, @fs-grid-columns-md, "");
+// }
+//
+//
+//
+// .fs_flex_grid_column(@total, @margin, @count) {
+//   flex: 0 0 (((100% / @total) * @count) - (@margin * 2));
+// }
+//
+// .fs_flex_grid_columns(@class, @margin, @total, @combo:~"", @count:1) when (@count <= @total) {
+//   // Percentage
+//   & when (@combo = "") {
+//
+//     .@{class}-@{count} {
+//       .fs_flex_grid_column(@total, @margin, @count);
+//     }
+//   }
+//
+//   & when not (@combo = "") {
+//
+//     [class*="@{combo}"] {
+//
+//       &.@{class}-@{count} {
+//         .fs_flex_grid_column(@total, @margin, @count);
+//       }
+//     }
+//   }
+//
+//   .fs_flex_grid_columns(@class, @margin, @total, @combo, (@count + 1));
+// }
+//
+// // !Medium, 6 column, 720 (min 740)
+// .fs_flex_cell_md(@count, @total:0) {
+//
+//   @media screen and (@fs-grid-mq-min-md) and (@fs-grid-mq-max-lg) {
+//
+//     & when (@total = 0) {
+//       .fs_grid_column(@fs-grid-columns-md, @fs-grid-gutter, @count);
+//     }
+//
+//     & when not (@total = 0) {
+//       .fs_grid_column(@total, @fs-grid-gutter, @count);
+//     }
+//   }
+// }

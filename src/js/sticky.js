@@ -79,7 +79,7 @@
 
       data.$el.after(data.$clone);
 
-      var $images = $().add( data.$target.find("img") ).add( data.$container.find("img") );
+      var $images = $().add( data.$el.find("img") ).add( data.$container.find("img") );
 
       if ($images.length) {
         $images.on(Events.load, data, resizeInstance);
@@ -129,6 +129,13 @@
     function renderRAF() {
       Functions.iterate.call($Instances, checkInstance);
     }
+
+    /**
+     * @method
+     * @name resize
+     * @description Updates instance.
+     * @example $(".target").sticky("resize");
+     */
 
     /**
      * @method private
@@ -297,7 +304,9 @@
           _postConstruct: postConstruct,
           _destruct: destruct,
           _resize: resize,
-          _raf: raf
+          _raf: raf,
+
+          resize: resizeInstance
         }
       }),
 

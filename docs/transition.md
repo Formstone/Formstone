@@ -16,6 +16,7 @@ A jQuery plugin for CSS transition events.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Transition
 
 

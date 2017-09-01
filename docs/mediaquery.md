@@ -16,6 +16,7 @@ A jQuery plugin for responsive media query events.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Media Query
 
 

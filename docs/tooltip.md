@@ -16,6 +16,7 @@ A jQuery plugin for simple tooltips.
 <!-- DEMO BUTTON -->
 
 <a name="use"></a>
+
 ## Using Tooltip
 
 
