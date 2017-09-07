@@ -589,7 +589,7 @@ module.exports = function() {
     for (var i in allDocs.grid) {
       var d = allDocs.grid[i];
 
-      if (d.demo.toLowerCase().indexOf("no demo") < 0) {
+      if (d.demo && d.demo.toLowerCase().indexOf("no demo") < 0) {
         demosmd += '* [' + d.name + '](components/' + d.name.toLowerCase().replace(/ /g, "") + '.html)';
         demosmd += '\n';
       }

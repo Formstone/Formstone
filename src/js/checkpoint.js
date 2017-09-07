@@ -65,13 +65,22 @@
      */
 
     function construct(data) {
+      var $container = $(data.$el.data("checkpoint-container")),
+          intersect  = data.$el.data("checkpoint-intersect"),
+          offset     = data.$el.data("checkpoint-offset");
+
+      if (intersect) {
+        data.intersect = intersect;
+      }
+      if (offset) {
+        data.offset = offset;
+      }
+
       var intersectParts = data.intersect.split("-");
 
       data.windowIntersect = intersectParts[0];
       data.elIntersect = intersectParts[1];
       data.visible = false;
-
-      var $container = $(data.$el.data("checkpoint-container"));
 
       data.$target = ($container.length) ? $container : data.$el;
 

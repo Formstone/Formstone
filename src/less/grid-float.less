@@ -1,12 +1,12 @@
 /**
  * @grid
- * @name Grid
+ * @name Grid (Float)
  * @description A responsive CSS grid.
  */
 
 @import "imports/utils.less";
-@import "imports/grid-flex-config.less";
-@import "imports/grid-flex-mixins.less";
+@import "imports/grid-float-config.less";
+@import "imports/grid-float-mixins.less";
 
 // !Reset Box-sizing
 
@@ -49,29 +49,14 @@
         &:extend(.fs_grid_cell_contained);
       }
 
-      // !Padded Cells
-      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-padded}"] {
-        &:extend(.fs_grid_cell_padded);
+      // !Right Cells
+      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-right}"] {
+        &:extend(.fs_grid_cell_right);
       }
 
-      // // !Right Cells
-      // [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-right}"] {
-      //   &:extend(.fs_grid_cell_right);
-      // }
-      //
-      // // !Centered Cells
-      // [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-centered}"] {
-      //   &:extend(.fs_grid_cell_centered);
-      // }
-
-      // !First Cells
-      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-first}"] {
-        &:extend(.fs_grid_cell_first);
-      }
-
-      // !Last Cells
-      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-last}"] {
-        &:extend(.fs_grid_cell_last);
+      // !Centered Cells
+      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-centered}"] {
+        &:extend(.fs_grid_cell_centered);
       }
 
       // !All Sizes
@@ -194,7 +179,7 @@
 // !Min, 300 (max 500)
 .fs_cell_sm(@count, @total:0) {
 
-  @media screen and (@fs-grid-mq-max-md) {
+  @media screen and (~"@{fs-grid-mq-max-md}") {
 
     & when (@total = 0) {
       .fs_grid_column(@fs-grid-columns-sm, @fs-grid-gutter, @count);
@@ -209,7 +194,7 @@
 // Push
 .fs_push_sm(@count, @total:0) {
 
-  @media screen and (@fs-grid-mq-max-md) {
+  @media screen and (~"@{fs-grid-mq-max-md}") {
 
     & when (@total = 0) {
       .fs_grid_column_pushed(@fs-grid-columns-sm, @fs-grid-gutter, @count);

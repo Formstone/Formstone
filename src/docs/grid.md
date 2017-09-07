@@ -54,6 +54,22 @@ This will effect every element on the page and can have unexpected results. In t
 | `lg` | 980px to 1220px | 960px | 12 |
 | `xl` | larger than 1220px | 1200px | 12 |
 
+### Row Helper Classes
+
+Helper classes can be added to rows to modify their default behavior in predictable ways.
+
+| Class | Description |
+| --- | --- |
+| `fs-[x]-reverse` | reverse order of cells |
+| `fs-[x]-justify-between` | even spacing between cells |
+| `fs-[x]-justify-around` | even spacing around cells |
+| `fs-[x]-justify-start` | align to start of row horizontally |
+| `fs-[x]-justify-center` | align to center of row horizontally |
+| `fs-[x]-justify-end` | align to end of row horizontally |
+| `fs-[x]-align-start` | align to top of row vertically |
+| `fs-[x]-align-center` | align to center of row vertically |
+| `fs-[x]-align-end` | align to bottom of row vertically |
+
 ### Defining Cells
 
 | Class | Description |
@@ -95,28 +111,19 @@ The fraction classes can be used in place of specific column counts:
 | `fs-[x]-fourth` | 1/4 row width |
 | `fs-[x]-fifth` | 1/5 row width |
 
-### Hidden Cells
-
-To hide cells at specific screen sizes:
-
-| Class | Description |
-| --- | --- |
-| `fs-xs-hide` | Hide on extra small |
-| `fs-sm-hide` | Hide on small |
-| `fs-md-hide` | Hide on medium |
-| `fs-lg-hide` | Hide on large |
-| `fs-xl-hide` | Hide on extra large |
-
-### Helper Classes
+### Cell Helper Classes
 
 Helper classes can be added to cells to modify their default behavior in predictable ways.
 
 | Class | Description |
 | --- | --- |
+| `fs-[x]-first` | Force cell to front of row. |
+| `fs-[x]-last` | Force cell to end of row. |
+| `fs-[x]-hide` | Hide cell at specific size. |
 | `fs-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
 | `fs-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
-| `fs-centered` | Centers cell. Useful for centering odd column count cells. |
-| `fs-right` | Right aligns cell. Useful for changing document flow on different device sizes. |
+<!-- | `fs-centered` | Centers cell. Useful for centering odd column count cells. |
+| `fs-right` | Right aligns cell. Useful for changing document flow on different device sizes. | -->
 
 ### LESS Configuration
 
@@ -168,9 +175,9 @@ Grid can also be configured and rebuilt using Grunt. Simply edit the variables f
 | **Mixin-Only Grid** | | |
 | `@fs-grid-mixin-only` | `false` | Disables generation of classes based grid |
 
-### LESS Extends & Mixins 
+### LESS Extends & Mixins
 
-Grid can be compiled into CSS directly. This allows for a similar declarative approach, without adding classes to markup. 
+Grid can be compiled into CSS directly. This allows for a similar declarative approach, without adding classes to markup.
 
 | Name | Description |
 | --- | --- |

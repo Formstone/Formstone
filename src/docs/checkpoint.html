@@ -4,8 +4,16 @@
 
 <style>
   .check_container { background: #f9f9f9; overflow: hidden; }
-  .spacer { margin: 200px 0; border: 1px solid #eee; border-radius: 3px; height: 202px; margin: 300px auto; width: 302px; }
+  .spacer { margin: 100px auto; border: 1px solid #eee; border-radius: 3px; height: 202px; width: 302px; }
   .checkpoint { background: #00bcd4; border-radius: 3px; color: #fff; height: 200px; line-height: 200px; margin: 0 auto; text-align: center; width: 300px; }
+
+  @media screen and (min-width: 980px) {
+    .spacer { margin: 200px auto; }
+  }
+
+  @media screen and (min-width: 1220px) {
+    .spacer { margin: 300px auto; }
+  }
 
   .marker {
     position: fixed;
@@ -60,6 +68,33 @@ Formstone.Ready(function() {
       <div class="checkpoint demo-checkpoint" data-checkpoint-options='{"offset":100,"intersect":"bottom-bottom"}' data-checkpoint-animation="fade-up" data-checkpoint-container=".check_container">Target</div>
     </div>
   </div> -->
+
+<div class="demo_container">
+  <div class="demo_example">
+    <div class="spacer">
+      <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up">Fade Up</div>
+    </div>
+  </div>
+  <div class="demo_code">
+    <pre><code class="language-html">&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;fade-up&quot;&gt;Fade Up&lt;/div&gt;</code></pre>
+    <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
+  </div>
+</div>
+
+<!-- END: FIRSTDEMO -->
+
+<h4>Custom Position</h4>
+<div class="demo_container">
+  <div class="demo_example">
+    <div class="spacer">
+      <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up" data-checkpoint-offset="100" data-checkpoint-intersect="bottom-bottom">Fade Up</div>
+    </div>
+  </div>
+  <div class="demo_code">
+    <pre><code class="language-html">&lt;div class=&quot;checkpoint&quot; data-checkpoint-offset=&quot;100&quot; data-checkpoint-intersect=&quot;bottom-bottom&quot; data-checkpoint-animation=&quot;fade-up&quot;&gt;Fade Up&lt;/div&gt;</code></pre>
+    <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
+  </div>
+</div>
 
 <!-- FADE -->
 
@@ -176,5 +211,3 @@ Formstone.Ready(function() {
     <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
   </div>
 </div>
-
-<!-- END: FIRSTDEMO -->

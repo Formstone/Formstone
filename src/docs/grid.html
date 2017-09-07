@@ -50,16 +50,18 @@
   .button.bookmarklet { clear: both; }
 
   .example { margin: 20px 0; }
-  .example .fs-row { background: #CFD8DC; border-radius: 2px; overflow: hidden; padding-top: 1.8%; }
-  .example [class*="fs-cell"] { background: #455a64; color: #fff; border-radius: 2px; margin-bottom: 1.8%; overflow: hidden; text-align: center; }
-  .example .nested { margin-top: 0; margin-bottom: 0; }
+  .example .fs-row { background: #CFD8DC; border-radius: 2px; padding-top: 1.8%; }
+  .example [class*="fs-cell"] { background: #455a64; color: #fff; border-radius: 2px; margin-bottom: 1.8%; text-align: center; }
+  .example .tall { height: 100px; }
+  .example .highlight { background: #00bcd4; }
+  .example .nested { background: none; margin-top: 0; margin-bottom: 0; }
   .example .nested .fs-row { padding-top: 0; }
-  .example [class*="label"] { background: #ccc; display: block; padding-top: 15px; padding-bottom: 15px; }
+  .example [class*="label"] { display: block; padding-top: 15px; padding-bottom: 15px; }
 
-  .example .label,
+  /*.example .label,
   .example .label_small,
   .example .label_medium,
-  .example .label_large { background: #455a64; }
+  .example .label_large { background: #455a64; }*/
 
   .example .label_small,
   .example .label_medium,
@@ -135,14 +137,14 @@
   </div>
 </div>
 
-<h4>Centered</h4>
+<!-- <h4>Centered</h4>
 <div class="example">
   <div class="fs-row">
     <div class="fs-cell-centered fs-all-half">
       <span class="label">-centered fs-all-half</span>
     </div>
   </div>
-</div>
+</div> -->
 
 <h4>Contained</h4>
 <div class="example">
@@ -202,26 +204,162 @@
   </div>
 </div>
 
-
-<!-- </div>
+<h4>Justify Around</h4>
+<div class="example">
+  <div class="fs-row fs-all-justify-around">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+  </div>
 </div>
 
-<h4>Flex Box</h4>
+<h4>Justify Between</h4>
 <div class="example">
-  <div class="fs-flex-row">
-    <div class="fs-cell fs-sm-1 fs-md-2 fs-lg-4">
-      <span class="label_small">fs-sm-1</span>
-      <span class="label_medium">fs-md-2</span>
-      <span class="label_large">fs-lg-4</span>
+  <div class="fs-row fs-all-justify-between">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
     </div>
-    <div class="fs-cell fs-sm-2 fs-md-4 fs-lg-8">
-      <span class="label_small">fs-sm-2</span>
-      <span class="label_medium">fs-md-4</span>
-      <span class="label_large">fs-lg-8</span>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
     </div>
   </div>
 </div>
 
 
-<div class="fs-row">
-<div class="fs-cell"> -->
+<h4>Justify Start</h4>
+<div class="example">
+  <div class="fs-row fs-all-justify-start">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>Justify Center</h4>
+<div class="example">
+  <div class="fs-row fs-all-justify-center">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>Justify End</h4>
+<div class="example">
+  <div class="fs-row fs-all-justify-end">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>Align Start</h4>
+<div class="example">
+  <div class="fs-row fs-all-align-start">
+    <div class="fs-cell fs-all-half tall">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-half">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>Align Center</h4>
+<div class="example">
+  <div class="fs-row fs-all-align-center">
+    <div class="fs-cell fs-all-half tall">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-half">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>Align End</h4>
+<div class="example">
+  <div class="fs-row fs-all-align-end">
+    <div class="fs-cell fs-all-half tall">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-half">
+      <span class="label">2</span>
+    </div>
+  </div>
+</div>
+
+<h4>First</h4>
+<div class="example">
+  <div class="fs-row">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+    <div class="fs-cell fs-all-third fs-first highlight">
+      <span class="label">3</span>
+    </div>
+  </div>
+</div>
+
+<h4>Last</h4>
+<div class="example">
+  <div class="fs-row">
+    <div class="fs-cell fs-all-third fs-last highlight">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">3</span>
+    </div>
+  </div>
+</div>
+
+<h4>Reverse</h4>
+<div class="example">
+  <div class="fs-row fs-reverse">
+    <div class="fs-cell fs-all-third">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">2</span>
+    </div>
+    <div class="fs-cell fs-all-third">
+      <span class="label">3</span>
+    </div>
+  </div>
+</div>
+
+<h4>Auto</h4>
+<div class="example">
+  <div class="fs-row fs-reverse">
+    <div class="fs-cell fs-all-auto">
+      <span class="label">1</span>
+    </div>
+    <div class="fs-cell fs-all-auto">
+      <span class="label">2</span>
+    </div>
+    <div class="fs-cell fs-all-auto">
+      <span class="label">3</span>
+    </div>
+    <div class="fs-cell fs-all-auto">
+      <span class="label">4</span>
+    </div>
+  </div>
+</div>
