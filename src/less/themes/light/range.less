@@ -6,59 +6,59 @@
 
 .fs-range {
 
-    @import "_config.less";
+  @import "_config.less";
 
   @theme_name: fs-light;
 
   // Config
 
-  @fs-range-track-height:            20px;
+  @fs-range-track-height:                   20px;
 
-  @fs-range-track-background-color:      @fs-light-white;
-  @fs-range-track-border-color:        @fs-light-primary_600;
-  @fs-range-track-border-width:        1px;
-  @fs-range-track-border-radius:        2px;
+  @fs-range-track-background-color:         @fs-light-white;
+  @fs-range-track-border-color:             @fs-light-primary_600;
+  @fs-range-track-border-width:             1px;
+  @fs-range-track-border-radius:            2px;
 
-  @fs-range-track-margin:           10px 0;
+  @fs-range-track-margin:                   10px 0;
 
-  @fs-range-hover-track-border-color:      @fs-light-primary_900;
+  @fs-range-hover-track-border-color:       @fs-light-primary_900;
 
   // Fill
 
-  @fs-range-fill-color:            @fs-light-primary_300;
+  @fs-range-fill-color:                     @fs-light-primary_300;
 
   // Track
 
-  @fs-range-marker-size:            30px;
-  @fs-range-marker-margin:          -6px;
+  @fs-range-marker-size:                    30px;
+  @fs-range-marker-margin:                  -6px;
 
-  @fs-range-marker-background-color:      @fs-light-primary_600;
-  @fs-range-marker-border-radius:        2px;
+  @fs-range-marker-background-color:        @fs-light-primary_600;
+  @fs-range-marker-border-radius:           2px;
 
   @fs-range-hover-marker-background-color:  @fs-light-primary_900;
 
   // Icon
 
-  @fs-range-marker-icon-color:        @fs-light-white;
-  @fs-range-marker-icon-width:        2px;
-  @fs-range-marker-icon-height:        10px;
-  @fs-range-marker-icon-gap:          1px;
+  @fs-range-marker-icon-color:              @fs-light-white;
+  @fs-range-marker-icon-width:              2px;
+  @fs-range-marker-icon-height:             10px;
+  @fs-range-marker-icon-gap:                1px;
 
   // Labels
 
-  @fs-range-label-text-color:          @fs-light-primary_900;
-  @fs-range-label-font-size:          14px;
-  @fs-range-label-line-height:        38px;
+  @fs-range-label-text-color:               @fs-light-primary_900;
+  @fs-range-label-font-size:                14px;
+  @fs-range-label-line-height:              38px;
 
   // Vertical
 
-  @fs-range-vertical-height:          300px;
-
-  @fs-range-vertical-track-width:        20px;
+  @fs-range-vertical-height:                300px;
+  @fs-range-vertical-label-line-height:     38px;
+  @fs-range-vertical-track-width:           20px;
 
   // Disabled
 
-  @fs-range-disabled-opacity:          0.5;
+  @fs-range-disabled-opacity:               0.5;
 
 
   &.@{theme_name}  &-track {
@@ -157,6 +157,7 @@
   }
 
   .@{theme_name}&-vertical &-label {
+    line-height: @fs-range-vertical-label-line-height;
   }
 
   .@{theme_name}&-vertical &-label_min {

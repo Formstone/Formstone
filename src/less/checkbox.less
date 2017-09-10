@@ -3,8 +3,6 @@
  * @name Checkbox
  */
 
-// TODO flexbox
-
 @import "imports/utils.less";
 
 // Config
@@ -14,16 +12,16 @@
 
 @fs-checkbox-marker-height-width:      20px;
 
-@fs-checkbox-flag-background:        #666;
+@fs-checkbox-flag-background:          #666;
 
 // Disabled
 
-@fs-checkbox-disabled-opacity:        0.5;
+@fs-checkbox-disabled-opacity:         0.5;
 
 // Toggle
-@fs-checkbox-toggle-marker-background:    #666;
+@fs-checkbox-toggle-marker-background: #666;
 
-@fs-checkbox-toggle-marker-height:      40px;
+@fs-checkbox-toggle-marker-height:     40px;
 @fs-checkbox-toggle-marker-width:      100px;
 
 /**
@@ -85,9 +83,11 @@
    */
 
   &&-enabled {
-    cursor: pointer;
-    overflow: hidden;
+    // cursor: pointer;
+    // overflow: hidden;
   }
+
+  display: inline-block;
 
   &,
   &:after,
@@ -136,7 +136,7 @@
 
   &-label {
     cursor: pointer;
-    display: block;;
+    display: inline-block;
     line-height: @fs-checkbox-marker-height-width;
     overflow: hidden;
     user-select: none;
@@ -157,8 +157,8 @@
 
     border: 1px solid;
     cursor: pointer;
-    display: block;
-    float: left;
+    display: inline-block;
+    // float: left;
   }
 
   /**

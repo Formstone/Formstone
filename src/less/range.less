@@ -3,29 +3,27 @@
  * @name Range
  */
 
-// TODO flexbox
-
 @import "imports/utils.less";
 
 // Config
 
 @fs-range-track-background-color:  #ddd;
-@fs-range-track-height:        10px;
+@fs-range-track-height:            10px;
 
-@fs-range-fill-background-color:  #aaa;
+@fs-range-fill-background-color:   #aaa;
 
-@fs-range-marker-size:        20px;
-@fs-range-marker-background-color:  #666;
+@fs-range-marker-size:             20px;
+@fs-range-marker-background-color: #666;
 
 // Vertical
 
-@fs-range-vertical-height:      300px;
+@fs-range-vertical-height:         300px;
 
 @fs-range-vertical-track-width:    10px;
 
 // Disabled
 
-@fs-range-disabled-opacity:          0.5;
+@fs-range-disabled-opacity:        0.5;
 
 /**
  * @class
@@ -76,6 +74,9 @@
 
   position: relative;
 
+  display: flex;
+  flex-wrap: nowrap;
+
   &,
   &:after,
   &:before,
@@ -113,7 +114,7 @@
     position: relative;
 
     background: @fs-range-track-background-color;
-    float: left;
+    flex-grow: 1;
     margin: (@fs-range-marker-size / 2) 0;
   }
 
@@ -220,7 +221,6 @@
    */
 
   &-label_min {
-    float: left;
     margin: 0 2% 0 0;
     text-align: right;
   }
@@ -233,7 +233,6 @@
    */
 
   &-label_max {
-    float: right;
     margin: 0 0 0 2%;
     text-align: left;
   }
@@ -243,13 +242,14 @@
   &-vertical {
     width: (@fs-range-marker-size * 2);
     height: @fs-range-vertical-height;
+
+    flex-direction: column;
   }
 
   &-vertical &-track {
     width: @fs-range-vertical-track-width;
     height: 75%;
 
-    float: none;
     margin: 0 auto;
   }
 
@@ -281,9 +281,8 @@
     height: 10%;
     width: 100%;
 
-    clear: both;
-    float: none;
-    line-height: 100%;
+    line-height: 30px;
+    margin: 0;
     text-align: center;
   }
 

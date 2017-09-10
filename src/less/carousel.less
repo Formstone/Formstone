@@ -3,8 +3,6 @@
  * @name Carousel
  */
 
-// TODO flexbox
-
 @import "imports/utils.less";
 
 // Config
@@ -128,7 +126,7 @@
    */
 
   &-enabled &-container {
-    .fs_clearfix();
+    // .fs_clearfix();
 
     position: relative;
   }
@@ -144,6 +142,7 @@
     position: relative;
 
     backface-visibility: hidden;
+    display: flex;
     margin: 0;
     overflow: hidden;
     transition: transform @fs-carousel-transition-duration @fs-carousel-transition-timing;
@@ -174,7 +173,6 @@
     min-height: 1px;
 
     display: block;
-    float: left;
 
     img {
       -webkit-user-drag: none;
@@ -339,7 +337,6 @@
   }
 
   &-enabled&-rtl &-item {
-    float: right;
   }
 
 }

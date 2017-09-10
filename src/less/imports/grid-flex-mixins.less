@@ -151,15 +151,13 @@
     align-self: flex-end;
   }
 
-  // .fs_grid_cell_right {
-  //   // float: right; // TODO
-  // }
-  //
-  // .fs_grid_cell_centered {
-  //   // float: none;
-  //   margin-left: auto;
-  //   margin-right: auto;
-  // }
+  .fs_grid_cell_right {
+    &:extend(.fs_grid_cell_align_right all);
+  }
+
+  .fs_grid_cell_centered {
+    &:extend(.fs_grid_cell_align_center all);
+  }
 
   .fs_grid_cell_first {
     order: -1;
@@ -181,9 +179,9 @@
 
 // !Mixins
 
-  .fs_grid_row_alignment(@class) {
+  // Row Alignment
 
-    // TODO clean up the class names?
+  .fs_grid_row_alignment(@class) {
 
     .@{class}-reverse {
       .fs_grid_row_reverse;
@@ -222,9 +220,9 @@
     }
   }
 
-  .fs_grid_columns_alignment(@class) {
+  // Cell Alignment
 
-    // TODO clean up the class names?
+  .fs_grid_columns_alignment(@class) {
 
     .@{class}-align-start {
       .fs_grid_cell_align_start;
