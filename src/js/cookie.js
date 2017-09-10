@@ -126,8 +126,6 @@
       createCookie(key, "", $.extend({}, options, {
         expires: -604800000 // -7 days
       }));
-
-      console.log(Document.cookie);
     }
 
     /**

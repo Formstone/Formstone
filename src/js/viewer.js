@@ -294,7 +294,7 @@
                 property: "opacity"
               },
               function() {
-                // console.log("loaded!");
+                // Loaded
               });
 
             data.$el.removeClass(RawClasses.loading);
