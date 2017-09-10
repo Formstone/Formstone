@@ -924,7 +924,7 @@
       } else if ($.type(data.show) === "array") {
         for (var i in data.show) {
           if (data.show.hasOwnProperty(i)) {
-            if (Formstone.support.nativeMatchMedia) {
+            if (Formstone.support.matchMedia) {
               if (data.show[i].mq.matches) {
                 show = data.show[i].count;
               }

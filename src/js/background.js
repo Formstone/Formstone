@@ -239,7 +239,7 @@
 
         for (var i in data.sources) {
           if (data.sources.hasOwnProperty(i)) {
-            if (Formstone.support.nativeMatchMedia) {
+            if (Formstone.support.matchMedia) {
               if (data.sources[i].mq.matches) {
                 source = data.sources[i].url;
               }

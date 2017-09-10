@@ -7,11 +7,11 @@
         $body,
         opts = {};
 
-    opts.minXS = "@mq_min_xs";
-    opts.minSM = "@mq_min_sm";
-    opts.minMD = "@mq_min_md";
-    opts.minLG = "@mq_min_lg";
-    opts.minXL = "@mq_min_xl";
+    opts.minXS = parseInt("@mq_min_xs", 10);
+    opts.minSM = parseInt("@mq_min_sm", 10);
+    opts.minMD = parseInt("@mq_min_md", 10);
+    opts.minLG = parseInt("@mq_min_lg", 10);
+    opts.minXL = parseInt("@mq_min_xl", 10);
 
     opts.maxXS = opts.minXS - 1;
     opts.maxSM = opts.minSM - 1;

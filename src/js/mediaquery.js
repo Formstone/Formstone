@@ -162,32 +162,16 @@
 
           for (var j in MQMatches[i]) {
             if (MQMatches[i].hasOwnProperty(j)) {
-
               var state = (j === "Infinity") ? Infinity : parseInt(j, 10),
-                check = (MQStrings[i].indexOf("width") > -1) ? Formstone.fallbackWidth : Formstone.fallbackHeight,
                 isMax = i.indexOf("max") > -1;
 
-              if (Formstone.support.nativeMatchMedia) {
-                // Native
-                if (MQMatches[i][j].matches) {
-                  if (isMax) {
-                    if (!State[i] || state < State[i]) {
-                      State[i] = state;
-                    }
-                  } else {
-                    if (!State[i] || state > State[i]) {
-                      State[i] = state;
-                    }
-                  }
-                }
-              } else {
-                // Fallback
+              if (MQMatches[i][j].matches) {
                 if (isMax) {
-                  if (!State[i] && state > check) {
+                  if (!State[i] || state < State[i]) {
                     State[i] = state;
                   }
                 } else {
-                  if ((!State[i] && State[i] !== 0) || (state > State[i] && state < check)) {
+                  if (!State[i] || state > State[i]) {
                     State[i] = state;
                   }
                 }
