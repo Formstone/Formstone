@@ -151,20 +151,28 @@
     align-self: flex-end;
   }
 
-  .fs_grid_cell_align_left {
-    align-self: left;
+  .fs_grid_cell_justify_start {
+    // align-self: left;
+    margin-left: right;
   }
 
-  .fs_grid_cell_align_right {
-    align-self: right;
+  .fs_grid_cell_justify_center {
+    // align-self: left;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .fs_grid_cell_justify_end {
+    // align-self: right;
+    margin-left: auto;
   }
 
   .fs_grid_cell_right {
-    &:extend(.fs_grid_cell_align_right all);
+    &:extend(.fs_grid_cell_justify_end all);
   }
 
   .fs_grid_cell_centered {
-    &:extend(.fs_grid_cell_align_center all);
+    &:extend(.fs_grid_cell_justify_center all);
   }
 
   .fs_grid_cell_first {
@@ -244,12 +252,16 @@
       .fs_grid_cell_align_end;
     }
 
-    &.@{class}-align-left {
-      .fs_grid_cell_align_left;
+    .@{class}-justify-start {
+      .fs_grid_cell_justify_start;
     }
 
-    &.@{class}-align-right {
-      .fs_grid_cell_align_right;
+    .@{class}-justify-center {
+      .fs_grid_cell_justify_center;
+    }
+
+    .@{class}-justify-end {
+      .fs_grid_cell_justify_end;
     }
   }
 
