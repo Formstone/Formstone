@@ -10,7 +10,6 @@
     "url": "https://github.com/Formstone/Formstone/"
   },
   "scripts": {
-    "postinstall": "gulp"
   },
   "homepage": "http://formstone.it/",
   "homepage_short": "formstone.it",
