@@ -151,6 +151,14 @@
     align-self: flex-end;
   }
 
+  .fs_grid_cell_align_left {
+    align-self: left;
+  }
+
+  .fs_grid_cell_align_right {
+    align-self: right;
+  }
+
   .fs_grid_cell_right {
     &:extend(.fs_grid_cell_align_right all);
   }
@@ -224,16 +232,24 @@
 
   .fs_grid_columns_alignment(@class) {
 
-    &.@{class}-align-start {
+    .@{class}-align-start {
       .fs_grid_cell_align_start;
     }
 
-    &.@{class}-align-center {
+    .@{class}-align-center {
       .fs_grid_cell_align_center;
     }
 
-    &.@{class}-align-end {
+    .@{class}-align-end {
       .fs_grid_cell_align_end;
+    }
+
+    &.@{class}-align-left {
+      .fs_grid_cell_align_left;
+    }
+
+    &.@{class}-align-right {
+      .fs_grid_cell_align_right;
     }
   }
 
