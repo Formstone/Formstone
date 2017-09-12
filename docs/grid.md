@@ -83,12 +83,12 @@ Helper classes can be added to rows to modify their default behavior in predicta
 | `fs-[x]-reverse` | reverse order of cells |
 | `fs-[x]-justify-between` | even spacing between cells |
 | `fs-[x]-justify-around` | even spacing around cells |
-| `fs-[x]-justify-start` | align to start of row horizontally |
-| `fs-[x]-justify-center` | align to center of row horizontally |
-| `fs-[x]-justify-end` | align to end of row horizontally |
-| `fs-[x]-align-start` | align to top of row vertically |
-| `fs-[x]-align-center` | align to center of row vertically |
-| `fs-[x]-align-end` | align to bottom of row vertically |
+| `fs-[x]-justify-start` | align cells to start of row horizontally |
+| `fs-[x]-justify-center` | align cells to center of row horizontally |
+| `fs-[x]-justify-end` | align cells to end of row horizontally |
+| `fs-[x]-align-start` | align cells to top of row vertically |
+| `fs-[x]-align-center` | align cells to center of row vertically |
+| `fs-[x]-align-end` | align cells to bottom of row vertically |
 
 ### Defining Cells
 
@@ -140,8 +140,14 @@ Helper classes can be added to cells to modify their default behavior in predict
 | `fs-[x]-first` | Force cell to front of row. |
 | `fs-[x]-last` | Force cell to end of row. |
 | `fs-[x]-hide` | Hide cell at specific size. |
-| `fs-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
-| `fs-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
+| `fs-[x]-justify-start` | align cell to start of row horizontally |
+| `fs-[x]-justify-center` | align cell to center of row horizontally |
+| `fs-[x]-justify-end` | align cell to end of row horizontally |
+| `fs-[x]-align-start` | align cell to top of row vertically |
+| `fs-[x]-align-center` | align cell to center of row vertically |
+| `fs-[x]-align-end` | align cell to bottom of row vertically |
+| `fs-cell-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
+| `fs-cell-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
 <!-- | `fs-centered` | Centers cell. Useful for centering odd column count cells. |
 | `fs-right` | Right aligns cell. Useful for changing document flow on different device sizes. | -->
 
@@ -205,13 +211,31 @@ Grid can be compiled into CSS directly. This allows for a similar declarative ap
 | `.fs_grid_row` | Base row |
 | `.fs_grid_row_fluid` | Base fluid row |
 | `.fs_grid_row_fluid_sm` | Base fluid row (small only) |
+| `.fs_grid_row_adaptive` | Base adaptive row |
+| `.fs_grid_row_reverse` | Base reversed row |
+| `.fs_grid_row_justify_around` | Base justify around row |
+| `.fs_grid_row_justify_between` | Base justify between row |
+| `.fs_grid_row_justify_start` | Base justify start row |
+| `.fs_grid_row_justify_center` | Base justify center row |
+| `.fs_grid_row_justify_end` | Base justify end row |
+| `.fs_grid_row_align_start` | Base align start row |
+| `.fs_grid_row_align_center` | Base align center row |
+| `.fs_grid_row_align_end` | Base align end row |
 | `.fs_grid_row_row` | Base nested row |
 | `.fs_grid_row_row_contained` | Base nested row (parent cell is contained) |
+| `.fs_grid_row_destroy` | Base destroy row |
 | `.fs_grid_cell` | Base cell |
-| `.fs_grid_cell_centered` | Base centered cell |
 | `.fs_grid_cell_padded` | Base padded cell |
 | `.fs_grid_cell_contained` | Base contained cell |
-| `.fs_grid_cell_right` | Base right cell |
+| `.fs_grid_cell_justify_start` | Base justify start cell |
+| `.fs_grid_cell_justify_center` | Base justify center cell |
+| `.fs_grid_cell_justify_end` | Base justify end cell |
+| `.fs_grid_cell_align_start` | Base align start cell |
+| `.fs_grid_cell_align_center` | Base align center cell |
+| `.fs_grid_cell_align_end` | Base align end cell |
+| `.fs_grid_cell_first` | Base first cell |
+| `.fs_grid_cell_last` | Base last cell |
+| `.fs_grid_cell_destroy` | Base destroy cell |
 | **Mixins** | |
 | `.fs_row();` | Base row |
 | `.fs_row_fluid();` | Base row fluid |
@@ -219,10 +243,8 @@ Grid can be compiled into CSS directly. This allows for a similar declarative ap
 | `.fs_row_row();` | Base nested row |
 | `.fs_row_row_contained();` | Base nested row (parent cell is contained) |
 | `.fs_cell();` | Base cell |
-| `.fs_cell_centered();` | Base centered cell |
 | `.fs_cell_padded();` | Base padded cell |
 | `.fs_cell_contained();` | Base contained cell |
-| `.fs_cell_right();` | Base right cell |
 | `.fs_cell_xs(@count [, @total]);` | Extra Small cell; Pass @total to define fractions |
 | `.fs_cell_sm(@count [, @total]);` | Small cell; Pass @total to define fractions |
 | `.fs_cell_md(@count [, @total]);` | Medium cell; Pass @total to define fractions |

@@ -139,6 +139,19 @@
 
   //
 
+  .fs_grid_cell_justify_start {
+    margin-left: right;
+  }
+
+  .fs_grid_cell_justify_center {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .fs_grid_cell_justify_end {
+    margin-left: auto;
+  }
+
   .fs_grid_cell_align_start {
     align-self: flex-start;
   }
@@ -151,26 +164,11 @@
     align-self: flex-end;
   }
 
-  .fs_grid_cell_justify_start {
-    // align-self: left;
-    margin-left: right;
-  }
-
-  .fs_grid_cell_justify_center {
-    // align-self: left;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .fs_grid_cell_justify_end {
-    // align-self: right;
-    margin-left: auto;
-  }
-
+  // deprecated
   .fs_grid_cell_right {
     &:extend(.fs_grid_cell_justify_end all);
   }
-
+  // deprecated
   .fs_grid_cell_centered {
     &:extend(.fs_grid_cell_justify_center all);
   }

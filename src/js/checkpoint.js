@@ -146,6 +146,7 @@
           data.windowCheck = 0 - data.offset;
           break;
         case "middle":
+        case "center":
           data.windowCheck = (WindowHeight / 2) - data.offset;
           break;
         case "bottom":

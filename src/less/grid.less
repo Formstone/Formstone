@@ -49,21 +49,6 @@
         &:extend(.fs_grid_cell_contained);
       }
 
-      // !Padded Cells
-      [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-padded}"] {
-        &:extend(.fs_grid_cell_padded);
-      }
-
-      // // !Right Cells
-      // [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-right}"] {
-      //   &:extend(.fs_grid_cell_right);
-      // }
-      //
-      // // !Centered Cells
-      // [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-centered}"] {
-      //   &:extend(.fs_grid_cell_centered);
-      // }
-
       // !First Cells
       [class*="@{fs-grid-class-cell}"][class*="@{fs-grid-class-first}"] {
         &:extend(.fs_grid_cell_first);
@@ -149,16 +134,6 @@
 .fs_cell_contained() {
   &:extend(.fs_grid_cell);
   &:extend(.fs_grid_cell_contained);
-}
-
-.fs_cell_right() {
-  &:extend(.fs_grid_cell);
-  &:extend(.fs_grid_cell_right);
-}
-
-.fs_cell_centered() {
-  &:extend(.fs_grid_cell);
-  &:extend(.fs_grid_cell_centered);
 }
 
 // !Small, 540 (max 740)
