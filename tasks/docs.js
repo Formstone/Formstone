@@ -229,11 +229,13 @@ module.exports = function() {
               doc.css.push(klass);
             }
           } else if (content.indexOf("@grid") > -1) {
-            var grid = parseCSS(content);
-            doc.name = grid.name;
-            doc.namespace = grid.namespace;
-            doc.type = "grid";
-            doc.description = grid.description;
+            if (content.indexOf("@ignore") < 0) {
+              var grid = parseCSS(content);
+              doc.name = grid.name;
+              doc.namespace = grid.namespace;
+              doc.type = "grid";
+              doc.description = grid.description;
+            }
           }
         }
       }

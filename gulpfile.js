@@ -31,7 +31,7 @@ var comment = '/*! <%= pkg.name %> v<%= pkg.version %> [<%= filename %>] <%= dat
 // Clean
 
 gulp.task('clean', function () {
-  return gulp.src('dist/*', { read: false })
+  return gulp.src(['dist/*', 'docs/*'], { read: false })
     .pipe(clean());
 });
 

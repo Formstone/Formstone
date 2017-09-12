@@ -55,12 +55,12 @@
   "src": {
     "vars": {
       "mq_min_ht_sm": "500",
-      "mq_min_ht":    "800",
-      "mq_min_xs":    "320",
-      "mq_min_sm":    "500",
-      "mq_min_md":    "740",
-      "mq_min_lg":    "980",
-      "mq_min_xl":    "1220"
+      "mq_min_ht": "800",
+      "mq_min_xs": "320",
+      "mq_min_sm": "500",
+      "mq_min_md": "740",
+      "mq_min_lg": "980",
+      "mq_min_xl": "1220"
     }
   }
 }

@@ -3,7 +3,6 @@
 ## Library
 
 * [Core](core.md)
-* [Grid (Float)](grid(float).md)
 * [Grid](grid.md)
 
 ## Utility
