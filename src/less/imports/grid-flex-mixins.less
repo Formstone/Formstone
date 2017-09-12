@@ -151,12 +151,28 @@
     align-self: flex-end;
   }
 
+  .fs_grid_cell_justify_start {
+    // align-self: left;
+    margin-left: right;
+  }
+
+  .fs_grid_cell_justify_center {
+    // align-self: left;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .fs_grid_cell_justify_end {
+    // align-self: right;
+    margin-left: auto;
+  }
+
   .fs_grid_cell_right {
-    &:extend(.fs_grid_cell_align_right all);
+    &:extend(.fs_grid_cell_justify_end all);
   }
 
   .fs_grid_cell_centered {
-    &:extend(.fs_grid_cell_align_center all);
+    &:extend(.fs_grid_cell_justify_center all);
   }
 
   .fs_grid_cell_first {
@@ -183,39 +199,39 @@
 
   .fs_grid_row_alignment(@class) {
 
-    .@{class}-reverse {
+    &.@{class}-reverse {
       .fs_grid_row_reverse;
     }
 
-    .@{class}-justify-around {
+    &.@{class}-justify-around {
       .fs_grid_row_justify_around;
     }
 
-    .@{class}-justify-between {
+    &.@{class}-justify-between {
       .fs_grid_row_justify_between;
     }
 
-    .@{class}-justify-start {
+    &.@{class}-justify-start {
       .fs_grid_row_justify_start;
     }
 
-    .@{class}-justify-center {
+    &.@{class}-justify-center {
       .fs_grid_row_justify_center;
     }
 
-    .@{class}-justify-end {
+    &.@{class}-justify-end {
       .fs_grid_row_justify_end;
     }
 
-    .@{class}-align-start {
+    &.@{class}-align-start {
       .fs_grid_row_align_start;
     }
 
-    .@{class}-align-center {
+    &.@{class}-align-center {
       .fs_grid_row_align_center;
     }
 
-    .@{class}-align-end {
+    &.@{class}-align-end {
       .fs_grid_row_align_end;
     }
   }
@@ -234,6 +250,18 @@
 
     .@{class}-align-end {
       .fs_grid_cell_align_end;
+    }
+
+    .@{class}-justify-start {
+      .fs_grid_cell_justify_start;
+    }
+
+    .@{class}-justify-center {
+      .fs_grid_cell_justify_center;
+    }
+
+    .@{class}-justify-end {
+      .fs_grid_cell_justify_end;
     }
   }
 
