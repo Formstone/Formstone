@@ -81,6 +81,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |
+| `minWidth` | `string` | `'0'` | Width at which to auto-disable plugin |
 | `offset` | `int` | `0` | Element offset for activating sticky position |
 
 <hr>
@@ -123,6 +125,22 @@ Removes plugin instance.
 
 ```javascript
 $(".target").sticky("destroy");
+```
+
+### disable
+
+Disables instance.
+
+```javascript
+$(".target").sticky("disable");
+```
+
+### enable
+
+Enables instance.
+
+```javascript
+$(".target").sticky("enable");
 ```
 
 ### resize

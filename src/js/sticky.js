@@ -5,6 +5,7 @@
       define([
         "jquery",
         "./core",
+        "./mediaquery",
       ], factory);
     } else {
       factory(jQuery, Formstone);
@@ -63,9 +64,10 @@
      */
 
     function construct(data) {
-      data.stuck = false;
-      data.passed = true;
-      data.$clone = data.$el.clone();
+      data.enabled = false;
+      data.stuck   = false;
+      data.passed  = true;
+      data.$clone  = data.$el.clone();
 
       data.container = data.$el.data("sticky-container");
       data.$container = $(data.container);
@@ -84,6 +86,19 @@
       if ($images.length) {
         $images.on(Events.load, data, resizeInstance);
       }
+
+      data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
+      data.mq = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
+
+      // Media Query support
+      $.fsMediaquery("bind", data.rawGuid, data.mq, {
+        enter: function() {
+          enable.call(data.$el, data);
+        },
+        leave: function() {
+          disable.call(data.$el, data);
+        }
+      });
     }
 
     /**
@@ -121,6 +136,42 @@
     }
 
     /**
+     * @method
+     * @name enable
+     * @description Enables instance.
+     * @example $(".target").sticky("enable");
+     */
+
+    function enable(data) {
+      data.enabled = true;
+
+      data.$el.addClass(RawClasses.enabled);
+
+      resizeInstance(data);
+    }
+
+    /**
+     * @method
+     * @name disable
+     * @description Disables instance.
+     * @example $(".target").sticky("disable");
+     */
+
+    function disable(data) {
+      data.enabled = false;
+
+      data.$el.css({
+        height: '',
+        width: '',
+        top: '',
+        bottom: '',
+        marginBottom: ''
+      }).removeClass(RawClasses.enabled);
+
+      data.$stickys.removeClass([RawClasses.passed, RawClasses.stuck].join(" "));
+    }
+
+    /**
      * @method private
      * @name renderRAF
      * @description Updates DOM based on animation values
@@ -145,29 +196,31 @@
      */
 
     function resizeInstance(data) {
-      cacheProps(data);
+      if (data.enabled) {
+        cacheProps(data);
 
-      if (data.$container.length) {
-        var containerPos = data.$container.position();
+        if (data.$container.length) {
+          var containerPos = data.$container.position();
 
-        data.min = containerPos.top + data.containerMargin - data.margin;
-        data.max = data.min + data.$container.outerHeight(false) - data.height;
-      } else {
-        var $el;
-
-        if (data.stuck) {
-          $el = data.$clone;
+          data.min = containerPos.top + data.containerMargin - data.margin;
+          data.max = data.min + data.$container.outerHeight(false) - data.height;
         } else {
-          $el = data.$el;
+          var $el;
+
+          if (data.stuck) {
+            $el = data.$clone;
+          } else {
+            $el = data.$el;
+          }
+
+          var elPos = $el.position();
+
+          data.min = elPos.top;
+          data.max = false;
         }
 
-        var elPos = $el.position();
-
-        data.min = elPos.top;
-        data.max = false;
+        checkInstance(data);
       }
-
-      checkInstance(data);
     }
 
     function cacheProps(data) {
@@ -199,60 +252,62 @@
      */
 
     function checkInstance(data) {
-      var check = (ScrollTop + data.offset);
+      if (data.enabled) {
+        var check = (ScrollTop + data.offset);
 
-      if (check >= data.min) {
-        data.stuck = true;
-        data.$stickys.addClass(RawClasses.stuck);
+        if (check >= data.min) {
+          data.stuck = true;
+          data.$stickys.addClass(RawClasses.stuck);
 
-        if (!data.stuck) {
-          data.$el.trigger(Events.stuck);
+          if (!data.stuck) {
+            data.$el.trigger(Events.stuck);
 
-          cacheProps(data);
-        }
-
-        var top = data.offset;
-        var bottom = '';
-
-        if (data.max && check > data.max) {
-          if (!data.passed) {
-            data.$el.trigger(Events.passed);
+            cacheProps(data);
           }
 
-          data.passed = true;
-          data.$stickys.addClass(RawClasses.passed);
+          var top = data.offset;
+          var bottom = '';
 
-          top = '';
-          bottom = 0;
+          if (data.max && check > data.max) {
+            if (!data.passed) {
+              data.$el.trigger(Events.passed);
+            }
+
+            data.passed = true;
+            data.$stickys.addClass(RawClasses.passed);
+
+            top = '';
+            bottom = 0;
+          } else {
+            data.passed = false;
+            data.$stickys.removeClass(RawClasses.passed);
+          }
+
+          data.$el.css({
+            height: data.height,
+            width: data.width,
+            top: top,
+            bottom: bottom,
+            marginBottom: 0
+          });
         } else {
-          data.passed = false;
-          data.$stickys.removeClass(RawClasses.passed);
+          data.stuck = false;
+          data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
+
+          if (data.stuck) {
+            data.$el.trigger(Events.unstuck);
+
+            // cacheProps(data);
+          }
+
+          data.$el.css({
+            height: '',
+            width: '',
+            top: '',
+            bottom: '',
+            marginBottom: ''
+          });
         }
-
-        data.$el.css({
-          height: data.height,
-          width: data.width,
-          top: top,
-          bottom: bottom,
-          marginBottom: 0
-        });
-      } else {
-        data.stuck = false;
-        data.$stickys.removeClass(RawClasses.stuck).removeClass(RawClasses.passed);
-
-        if (data.stuck) {
-          data.$el.trigger(Events.unstuck);
-
-          // cacheProps(data);
-        }
-
-        data.$el.css({
-          height: '',
-          width: '',
-          top: '',
-          bottom: '',
-          marginBottom: ''
-        });
       }
     }
 
@@ -271,14 +326,19 @@
 
         /**
          * @options
+         * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
+         * @param minWidth [string] <'0'> "Width at which to auto-disable plugin"
          * @param offset [int] <0> "Element offset for activating sticky position"
          */
 
         defaults: {
-          offset: 0,
+          maxWidth: Infinity,
+          minWidth: '0px',
+          offset: 0
         },
 
         classes: [
+          "enabled",
           "sticky",
           "stuck",
           "clone",
@@ -306,6 +366,10 @@
           _resize: resize,
           _raf: raf,
 
+          disable: disable,
+          enable: enable,
+
+          reset: resizeInstance,
           resize: resizeInstance
         }
       }),
