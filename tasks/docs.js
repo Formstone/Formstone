@@ -242,7 +242,7 @@ module.exports = function() {
     }
 
     if (doc.name) {
-      var namespace = doc.name.toLowerCase();
+      var namespace = doc.name.toLowerCase().replace(/ /g, "");
 
       if (jsFile) {
         if (namespace !== "formstone" && namespace !== "core" && namespace !== "grid") {

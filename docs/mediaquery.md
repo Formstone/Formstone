@@ -135,7 +135,7 @@ $.mediaquery("bind", "key", "(min-width: 500px)", { ... });
 Extends plugin default settings; effects instances created hereafter.
 
 ```javascript
-$.media query("defaults", { ... });
+$.mediaquery("defaults", { ... });
 ```
 
 #### Parameters
