@@ -98,8 +98,8 @@ gulp.task('demoScripts', function() {
     .pipe(include({
       includePaths: [
         __dirname,
-        __dirname + "/node_modules",
-        __dirname + "/demo/js/src"
+        __dirname + "/demo/js/src",
+        __dirname + "/node_modules"
       ]
     }))
     .pipe(replaceInclude({
@@ -107,7 +107,7 @@ gulp.task('demoScripts', function() {
       global: pkg.src.vars
     }))
     .pipe(jshint())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
 });
 
