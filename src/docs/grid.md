@@ -130,8 +130,6 @@ Helper classes can be added to cells to modify their default behavior in predict
 | `fs-[x]-align-end` | align cell to bottom of row vertically |
 | `fs-cell-padded` | Swaps cell margin for padding. Allows backgrounds to touch while maintaining gutters. |
 | `fs-cell-contained` | Removes cell margin. Allows backgrounds to touch by removing gutters. |
-<!-- | `fs-centered` | Centers cell. Useful for centering odd column count cells. |
-| `fs-right` | Right aligns cell. Useful for changing document flow on different device sizes. | -->
 
 ### LESS Configuration
 
