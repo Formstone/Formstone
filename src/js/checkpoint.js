@@ -156,15 +156,17 @@
           break;
       }
 
+      data.elOffset = data.$target.offset();
+
       switch (data.elIntersect) {
         case "top":
-          data.elCheck = data.$target[0].offsetTop;
+          data.elCheck = data.elOffset.top;
           break;
         case "middle":
-          data.elCheck = data.$target[0].offsetTop + (data.$target.outerHeight() / 2);
+          data.elCheck = data.elOffset.top + (data.$target.outerHeight() / 2);
           break;
         case "bottom":
-          data.elCheck = data.$target[0].offsetTop + data.$target.outerHeight();
+          data.elCheck = data.elOffset.top + data.$target.outerHeight();
           break;
         default:
           break;
