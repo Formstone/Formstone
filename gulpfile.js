@@ -107,7 +107,7 @@ gulp.task('demoScripts', function() {
       global: pkg.src.vars
     }))
     .pipe(jshint())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
 });
 
