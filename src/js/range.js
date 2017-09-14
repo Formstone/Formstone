@@ -236,6 +236,7 @@
       var data = e.data;
 
       if (!data.disabled) {
+        resizeInstance(data);
         onPan(e);
 
         data.$container.addClass(RawClasses.focus);
