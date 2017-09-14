@@ -25,9 +25,7 @@
 
   @fs-scrollbar-handle-size: 12px;
   @fs-scrollbar-handle-background: @fs-light-primary_600;
-  @fs-scrollbar-handle-border-color: @fs-light-white;
   @fs-scrollbar-handle-border-radius: (@fs-scrollbar-bar-size / 2);
-  @fs-scrollbar-handle-border-size: 1px;
 
   // Content
 
@@ -53,6 +51,7 @@
 
   &.@{theme_name} &-track {
     background: @fs-scrollbar-track-background;
+
     border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
   }
 
@@ -65,7 +64,6 @@
     right: @fs-scrollbar-handle-position;
 
     background: @fs-scrollbar-handle-background;
-    border: @fs-scrollbar-handle-border-size solid @fs-scrollbar-handle-border-color;
     border-radius: @fs-scrollbar-handle-border-radius;
   }
 
