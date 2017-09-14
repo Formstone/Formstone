@@ -200,9 +200,9 @@
         cacheProps(data);
 
         if (data.$container.length) {
-          var containerPos = data.$container.position();
+          var containerPos = data.$container.offset();
 
-          data.min = containerPos.top + data.containerMargin - data.margin;
+          data.min = containerPos.top - data.margin;
           data.max = data.min + data.$container.outerHeight(false) - data.height;
         } else {
           var $el;
@@ -213,15 +213,22 @@
             $el = data.$el;
           }
 
-          var elPos = $el.position();
+          var elPos = $el.offset();
 
-          data.min = elPos.top;
+          data.min = elPos.top - data.margin;
           data.max = false;
         }
 
         checkInstance(data);
       }
     }
+
+    /**
+     * @method private
+     * @name cacheProps
+     * @description Cache instance props
+     * @param data [object] "Instance data"
+     */
 
     function cacheProps(data) {
       var $el;
