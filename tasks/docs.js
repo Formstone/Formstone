@@ -715,5 +715,4 @@ module.exports = function() {
            'Available under the GNU GPL v3 for all open source applications. <br>A commercial license is required for all commercial applications.';
 
   fs.write(destination, markdown);
-  // grunt.log.writeln('File "' + destination + '" created.');
 }

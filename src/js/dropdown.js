@@ -37,7 +37,7 @@
       data.disabled = this.prop("disabled") || this.is("[readonly]");
       data.lastIndex = false;
 
-      data.native = data.mobile || data.native; // TODO: remove mobile
+      data.native = data.mobile || data.native; // TODO: 'mobile' deprecated
       data.useNative = data.native || Formstone.isMobile;
 
       if (data.multiple) {
@@ -905,7 +905,7 @@
           label: "",
           external: false,
           links: false,
-          mobile: false, // deprecated
+          mobile: false, // TODO: deprecated
           native: false,
           theme: "fs-light",
           trim: 0

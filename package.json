@@ -9,8 +9,7 @@
     "type": "git",
     "url": "https://github.com/Formstone/Formstone/"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "homepage": "http://formstone.it/",
   "homepage_short": "formstone.it",
   "demo": "http://formstone.it/demo/",

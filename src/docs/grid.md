@@ -1,6 +1,4 @@
-<!-- TODO: Document flexbox changes -->
-
-The grid works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
+The Formstone Grid is flexbox-based class system that works by nesting 'cells' within 'rows'. Cells are defined by classes that set widths at specific breakpoints. The breakpoints correspond to general screen sizes. By default, Grid renders 3 columns on 'small', 6 columns on 'medium' and 12 columns on 'large' displays.
 
 ### Markup
 
@@ -133,7 +131,7 @@ Helper classes can be added to cells to modify their default behavior in predict
 
 ### LESS Configuration
 
-Grid can also be configured and rebuilt using Grunt. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `grunt` process.
+Grid can also be configured and rebuilt using Gulp. Simply edit the variables found in `/src/grid/grid-config.less` before running the default `gulp` process.
 
 | Variable | Default | Description |
 | --- | --- | --- |

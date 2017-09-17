@@ -6,7 +6,7 @@
 
 * Updated minimum jQuery version
 * Updated to Gulp build process
-* Added flex-box based grid as default (legacy float based grid still available)
+* Added flexbox based grid as default (legacy float based grid still available)
 * Added Checkpoint plugin for CSS animations scroll
 * Added Sticky plugin for sticky elements on scroll
 * Added Formstone.Ready handler to Core
