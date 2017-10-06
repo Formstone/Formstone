@@ -238,35 +238,35 @@
 
   .fs_grid_columns_alignment(@class) {
 
-    .@{class}-first {
+    &.@{class}-first {
       .fs_grid_cell_first;
     }
 
-    .@{class}-last {
+    &.@{class}-last {
       .fs_grid_cell_last;
     }
 
-    .@{class}-align-start {
+    &.@{class}-align-start {
       .fs_grid_cell_align_start;
     }
 
-    .@{class}-align-center {
+    &.@{class}-align-center {
       .fs_grid_cell_align_center;
     }
 
-    .@{class}-align-end {
+    &.@{class}-align-end {
       .fs_grid_cell_align_end;
     }
 
-    .@{class}-justify-start {
+    &.@{class}-justify-start {
       .fs_grid_cell_justify_start;
     }
 
-    .@{class}-justify-center {
+    &.@{class}-justify-center {
       .fs_grid_cell_justify_center;
     }
 
-    .@{class}-justify-end {
+    &.@{class}-justify-end {
       .fs_grid_cell_justify_end;
     }
   }
@@ -453,7 +453,9 @@
     }
 
     // Alignment
-    .fs_grid_columns_alignment(@class);
+    @{fs-grid-class-cell} {
+      .fs_grid_columns_alignment(@class);
+    }
 
     // Fractions
     .fs_grid_columns_fractioned(@class, @fs-grid-gutter, "");
