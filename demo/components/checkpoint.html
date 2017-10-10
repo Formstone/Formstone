@@ -81,6 +81,32 @@
                         background: red;
                         opacity: 0.2;
                     }
+
+                    .container_example {
+                        padding: 100px 0;
+                    }
+
+                    .container_example_spacer {
+                        margin: 0 auto;
+                    }
+
+                    @media screen and (min-width: 980px) {
+                        .container_example {
+                            padding: 200px 0;
+                        }
+                        .container_example_spacer {
+                            margin: 0 auto;
+                        }
+                    }
+
+                    @media screen and (min-width: 1220px) {
+                        .container_example {
+                            padding: 300px 0;
+                        }
+                        .container_example_spacer {
+                            margin: 0 auto;
+                        }
+                    }
                 </style>
 
                 <!-- <div class="marker" style="top: 100px;"></div>
@@ -263,6 +289,22 @@
 &lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;flip-up&quot;&gt;Flip Left&lt;/div&gt;
 &lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;flip-up&quot;&gt;Flip Right&lt;/div&gt;</code></pre>
                         <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
+                    </div>
+                </div>
+
+                <!-- Container -->
+
+                <h4>Container</h4>
+                <div class="demo_container">
+                    <div class="demo_example container_example">
+                        <div class="spacer container_example_spacer">
+                            <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up" data-checkpoint-container=".container_example">Fade Up</div>
+                        </div>
+                    </div>
+                    <div class="demo_code">
+                        <pre><code class="language-html">&lt;div class=&quot;container&quot;&gt;
+&Tab;&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;flip-up&quot; data-checkpoint-container=&quot;.container&quot;&gt;Fade Up&lt;/div&gt;
+&lt;/div&gt;</code></pre>
                     </div>
                 </div>
                 <!-- END: DEMO -->

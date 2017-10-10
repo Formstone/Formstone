@@ -65,6 +65,8 @@
      */
 
     function construct(data) {
+      data.initialized = false;
+
       var $container = $(data.$el.data("checkpoint-container")),
           intersect  = data.$el.data("checkpoint-intersect"),
           offset     = data.$el.data("checkpoint-offset");
@@ -91,6 +93,8 @@
       }
 
       data.$el.addClass(RawClasses.base);
+
+      data.initialized = true;
     }
 
     /**
@@ -141,6 +145,10 @@
      */
 
     function resizeInstance(data) {
+      if (!data.initialized) {
+        return;
+      }
+
       switch (data.windowIntersect) {
         case "top":
           data.windowCheck = 0 - data.offset;
@@ -183,6 +191,10 @@
      */
 
     function checkInstance(data) {
+      if (!data.initialized) {
+        return;
+      }
+
       var check = (ScrollTop + data.windowCheck);
 
       if (check >= data.elCheck) {
