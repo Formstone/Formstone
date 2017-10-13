@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.1
+
+* Fixed issue with nested rows in Grid
+* Fixed issue with initialization in Checkpoint
+
 ### 1.4.0
 
 * Updated minimum jQuery version
