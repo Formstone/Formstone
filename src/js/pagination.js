@@ -50,7 +50,7 @@
       data.total = data.$items.length - 1;
 
       var index = data.$items.index(data.$items.filter("[data-" + Plugin.namespace + "-active]"));
-      if (!index) {
+      if (index < 0) {
         index = data.$items.index(data.$items.filter(Classes.active)); // reverse compat.
       }
 
