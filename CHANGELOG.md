@@ -6,6 +6,7 @@
 
 * Fixed issue with nested rows in Grid
 * Fixed issue with initialization in Checkpoint
+* Fixed issue with label selector in Dropdown
 
 ### 1.4.0
 

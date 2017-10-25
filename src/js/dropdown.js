@@ -63,7 +63,7 @@
       // Build options array
       var $allOptions = this.find("option, optgroup"),
         $options = $allOptions.filter("option"),
-        $label = $("[for=" + this.attr("id") + "]");
+        $label = $('[for="' + this.attr("id") + '"]');
 
       // Swap tab index, no more interacting with the actual input!
       data.tabIndex = this[0].tabIndex;
