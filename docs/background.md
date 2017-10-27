@@ -109,6 +109,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
+| `alt` | `string` | `''` | Image `alt` attribute |
 | `autoPlay` | `boolean` | `true` | Autoplay video |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `embedRatio` | `number` | `1.777777` | Video / embed ratio (16/9) |

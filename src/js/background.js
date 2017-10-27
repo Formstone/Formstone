@@ -268,37 +268,37 @@
 
     function loadImage(data, source, poster, firstLoad) {
       var imageClasses = [RawClasses.media, RawClasses.image, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
-        $media = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt=""></div>'),
+        $media = $('<div class="' + imageClasses + '" aria-hidden="true"><img alt="' + data.alt + '"></div>'),
         $img = $media.find("img"),
         newSource = source;
 
       // Load image
       $img.one(Events.load, function() {
-          if (BGSupport) {
-            $media.addClass(RawClasses.native)
-              .css({
-                backgroundImage: "url('" + newSource + "')"
-              });
+        if (BGSupport) {
+          $media.addClass(RawClasses.native)
+            .css({
+              backgroundImage: "url('" + newSource + "')"
+            });
+        }
+
+        // YTransition in
+        $media.fsTransition({
+          property: "opacity"
+        },
+        function() {
+          if (!poster) {
+            cleanMedia(data);
           }
+        }).css({
+          opacity: 1
+        });
 
-          // YTransition in
-          $media.fsTransition({
-              property: "opacity"
-            },
-            function() {
-              if (!poster) {
-                cleanMedia(data);
-              }
-            }).css({
-            opacity: 1
-          });
+        doResizeInstance(data);
 
-          doResizeInstance(data);
-
-          if (!poster || firstLoad) {
-            data.$el.trigger(Events.loaded);
-          }
-        }).one(Events.error, data, loadError)
+        if (!poster || firstLoad) {
+          data.$el.trigger(Events.loaded);
+        }
+      }).one(Events.error, data, loadError)
         .attr("src", newSource);
 
       if (data.responsive) {
@@ -360,11 +360,11 @@
 
         $video.one(Events.loadedMetaData, function(e) {
           $media.fsTransition({
-              property: "opacity"
-            },
-            function() {
-              cleanMedia(data);
-            }).css({
+            property: "opacity"
+          },
+          function() {
+            cleanMedia(data);
+          }).css({
             opacity: 1
           });
 
@@ -483,11 +483,11 @@
                   data.playing = true;
 
                   $media.fsTransition({
-                      property: "opacity"
-                    },
-                    function() {
-                      cleanMedia(data);
-                    }).css({
+                    property: "opacity"
+                  },
+                  function() {
+                    cleanMedia(data);
+                  }).css({
                     opacity: 1
                   });
 
@@ -574,12 +574,12 @@
 
       if ($media.length >= 1) {
         $media.fsTransition({
-            property: "opacity"
-          },
-          function() {
-            $media.remove();
-            delete data.source;
-          }).css({
+          property: "opacity"
+        },
+        function() {
+          $media.remove();
+          delete data.source;
+        }).css({
           opacity: 0
         });
       }
@@ -881,6 +881,7 @@
 
         /**
          * @options
+         * @param alt [string] <''> "Image `alt` attribute"
          * @param autoPlay [boolean] <true> "Autoplay video"
          * @param customClass [string] <''> "Class applied to instance"
          * @param embedRatio [number] <1.777777> "Video / embed ratio (16/9)"
@@ -891,6 +892,7 @@
          * @param source [string OR object] <null> "Source image (string or object) or video (object)"
          */
         defaults: {
+          alt: "",
           autoPlay: true,
           customClass: "",
           embedRatio: 1.777777,

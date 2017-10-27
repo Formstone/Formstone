@@ -4,11 +4,12 @@
 
 ### 1.4.1
 
+* Added `alt` option in Background
 * Fixed issue with nested rows in Grid
 * Fixed issue with initialization in Checkpoint
 * Fixed issue with label selector in Dropdown
 * Fixed issue with rounding small steps in Number
-* Fixed accessibility issue in Pagination (Thanks @nhall!)
+* Fixed issue with accessibility in Pagination (Thanks @nhall!)
 
 ### 1.4.0
 
