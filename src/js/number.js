@@ -196,8 +196,8 @@
 
         data.timer = Functions.startTimer(data.timer, 300, function() {
 
-          data.timer = Functions.startTimer(data.timer, 125, function() {
-            step(data, change, false);
+          data.timer = Functions.startTimer(data.timer, 100, function() {
+            step(data, change);
           }, true);
 
         });
@@ -249,10 +249,12 @@
         value += oValue;
       }
 
-      var diff = (value - data.min) % data.step;
-      if (diff !== 0) {
-        value -= diff;
-      }
+      // Not sure this help...
+      // var diff = (value - data.min) % data.step;
+      //
+      // if (diff !== 0) {
+      //   value -= diff;
+      // }
 
       if (data.min !== false && value < data.min) {
         value = data.min;
@@ -261,7 +263,7 @@
         value = data.max;
       }
 
-      if (value !== oValue) {
+      if (value !== oValue || change == 0) {
         value = round(value, data.digits);
 
         data.$el.val(value)
