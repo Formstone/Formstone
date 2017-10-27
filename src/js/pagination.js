@@ -31,7 +31,7 @@
       html += '<span class="' + RawClasses.current + '">0</span>';
       html += ' ' + data.labels.count + ' ';
       html += '<span class="' + RawClasses.total + '">0</span>';
-      html += '<select class="' + RawClasses.select + '" tabindex="-1" aria-hidden="true"></select>';
+      html += '<select class="' + RawClasses.select + '" title="Select Page" tabindex="-1" aria-hidden="true"></select>';
       html += '</div>';
 
       data.thisClasses = [RawClasses.base, data.theme, data.customClass];
