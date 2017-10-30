@@ -96,6 +96,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `infinite` | `boolean` | `false` | Flag for looping items |
 | `labels.next` | `string` | `'Next'` | Control text |
 | `labels.previous` | `string` | `'Previous'` | Control text |
+| `labels.controls` | `string` | `'Carousel {guid} Controls'` | Controls aria label; {guid} replaced with instance GUID |
+| `labels.pagination` | `string` | `'Carousel {guid} Pagination'` | Pagination aria label; {guid} replaced with instance GUID |
 | `matchHeight` | `boolean` | `false` | Flag to match item heights |
 | `matchWidth` | `boolean` | `true` | Flag to match item widths; Requires CSS widths if false |
 | `maxWidth` | `string` | `'Infinity'` | Width at which to auto-disable plugin |

@@ -415,12 +415,15 @@
 
               // Extend w/ Local Options
 
-              var guid = "__" + settings.guid++,
+              settings.guid++;
+
+              var guid = "__" + settings.guid,
                 rawGuid = settings.classes.raw.base + guid,
                 locals = $element.data(namespace + "-options"),
                 data = $.extend(true, {
                   $el: $element,
                   guid: guid,
+                  numGuid: settings.guid,
                   rawGuid: rawGuid,
                   dotGuid: "." + rawGuid
                 }, options, ($.type(locals) === "object" ? locals : {}));

@@ -81,14 +81,18 @@
         controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
       if (data.controls && !data.customControls) {
-        controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="carousel controls" aria-controls="' + data.ariaId + '">';
+        data.labels.controls = data.labels.controls.replace('{guid}', data.numGuid);
+
+        controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="' + data.labels.controls + '" aria-controls="' + data.ariaId + '">';
         controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
         controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
         controlsHtml += '</div>';
       }
 
       if (data.pagination && !data.customPagination) {
-        paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="carousel pagination" aria-controls="' + data.ariaId + '" role="navigation">';
+        data.labels.pagination = data.labels.pagination.replace('{guid}', data.numGuid);
+
+        paginationHtml += '<div class="' + RawClasses.pagination + '" aria-label="' + data.labels.pagination + '" aria-controls="' + data.ariaId + '" role="navigation">';
         paginationHtml += '</div>';
       }
 
@@ -1360,6 +1364,8 @@
          * @param infinite [boolean] <false> "Flag for looping items"
          * @param labels.next [string] <'Next'> "Control text"
          * @param labels.previous [string] <'Previous'> "Control text"
+         * @param labels.controls [string] <'Carousel {guid} Controls'> "Controls aria label; {guid} replaced with instance GUID"
+         * @param labels.pagination [string] <'Carousel {guid} Pagination'> "Pagination aria label; {guid} replaced with instance GUID"
          * @param matchHeight [boolean] <false> "Flag to match item heights"
          * @param matchWidth [boolean] <true> "Flag to match item widths; Requires CSS widths if false"
          * @param maxWidth [string] <'Infinity'> "Width at which to auto-disable plugin"
@@ -1384,7 +1390,9 @@
           infinite: false,
           labels: {
             next: "Next",
-            previous: "Previous"
+            previous: "Previous",
+            controls: "Carousel {guid} Controls",
+            pagination: "Carousel {guid} Pagination"
           },
           matchHeight: false,
           matchWidth: true,

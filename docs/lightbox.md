@@ -103,6 +103,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `labels.captionOpen` | `string` | `'View Caption'` | Mobile caption toggle text, open state |
 | `labels.thumbnailsClosed` | `string` | `'Close Thumbnails'` | Mobile thumbnails toggle text, closed state |
 | `labels.thumbnailsOpen` | `string` | `'View Thumbnails'` | Mobile thumbnails toggle text, open state |
+| `labels.lightbox` | `string` | `'Lightbox {guid}'` | Lightbox aria label; {guid} replaced with instance GUID |
 | `margin` | `int` | `50` | Margin used when sizing (single side) |
 | `maxHeight` | `int` | `10000` | Maximum height of element modal |
 | `maxWidth` | `int` | `10000` | Maximum width of element modal |

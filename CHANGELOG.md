@@ -5,6 +5,7 @@
 ### 1.4.1
 
 * Added `alt` option in Background
+* Added aria labeling options in Carousel, Lightbox, and Pagination
 * Fixed issue with nested rows in Grid
 * Fixed issue with initialization in Checkpoint
 * Fixed issue with label selector in Dropdown

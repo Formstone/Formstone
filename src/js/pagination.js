@@ -31,13 +31,15 @@
       html += '<span class="' + RawClasses.current + '">0</span>';
       html += ' ' + data.labels.count + ' ';
       html += '<span class="' + RawClasses.total + '">0</span>';
-      html += '<select class="' + RawClasses.select + '" title="Select Page" tabindex="-1" aria-hidden="true"></select>';
+      html += '<select class="' + RawClasses.select + '" title="' + data.labels.select + '" tabindex="-1" aria-hidden="true"></select>';
       html += '</div>';
 
       data.thisClasses = [RawClasses.base, data.theme, data.customClass];
 
+      data.labels.pagination = data.labels.pagination.replace('{guid}', data.numGuid);
+
       this.addClass(data.thisClasses.join(" "))
-        .wrapInner('<div class="' + RawClasses.pages + '" aria-label="pagination"></div>')
+        .wrapInner('<div class="' + RawClasses.pages + '" aria-label="' + data.labels.pagination + '"></div>')
         .prepend(html);
 
       data.$controls = this.find(Classes.control);
@@ -311,9 +313,11 @@
          * @param ajax [boolean] <false> "Flag to disable default click actions"
          * @param customClass [string] <''> "Class applied to instance"
          * @param labels.close [string] <'Close'> "Close button text"
-         * @param labels.count [string] <'of'> "Gallery count separator text"
-         * @param labels.next [string] <'Next'> "Gallery control text"
-         * @param labels.previous [string] <'Previous'> "Gallery control text"
+         * @param labels.count [string] <'of'> "Pagination count separator text"
+         * @param labels.next [string] <'Next'> "Pagination control text"
+         * @param labels.previous [string] <'Previous'> "Pagination control text"
+         * @param labels.select [string] <'Select Page'> "Pagination select title"
+         * @param labels.pagination [string] <'Pagination {guid}'> "Pagination aria label; {guid} replaced with instance GUID"
          * @param maxWidth [string] <'980px'> "Width at which to auto-disable plugin"
          * @param theme [string] <"fs-light"> "Theme class name"
          * @param visible [int] <2> "Visible pages before and after current page"
@@ -325,7 +329,9 @@
           labels: {
             count: "of",
             next: "Next",
-            previous: "Previous"
+            previous: "Previous",
+            select: "Select Page",
+            pagination: "Pagination {guid}"
           },
           maxWidth: "740px",
           theme: "fs-light",

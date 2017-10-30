@@ -68,9 +68,11 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `ajax` | `boolean` | `false` | Flag to disable default click actions |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `labels.close` | `string` | `'Close'` | Close button text |
-| `labels.count` | `string` | `'of'` | Gallery count separator text |
-| `labels.next` | `string` | `'Next'` | Gallery control text |
-| `labels.previous` | `string` | `'Previous'` | Gallery control text |
+| `labels.count` | `string` | `'of'` | Pagination count separator text |
+| `labels.next` | `string` | `'Next'` | Pagination control text |
+| `labels.previous` | `string` | `'Previous'` | Pagination control text |
+| `labels.select` | `string` | `'Select Page'` | Pagination select title |
+| `labels.pagination` | `string` | `'Pagination {guid}'` | Pagination aria label; {guid} replaced with instance GUID |
 | `maxWidth` | `string` | `'980px'` | Width at which to auto-disable plugin |
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `visible` | `int` | `2` | Visible pages before and after current page |

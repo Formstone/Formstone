@@ -213,7 +213,9 @@
           lightboxClasses.push(RawClasses.thumbnailed);
         }
 
-        html += '<div class="' + lightboxClasses.join(" ") + '" role="dialog" aria-label="lightbox" tabindex="-1">';
+        Instance.labels.lightbox = Instance.labels.lightbox.replace('{guid}', data.numGuid);
+
+        html += '<div class="' + lightboxClasses.join(" ") + '" role="dialog" aria-label="' + Instance.labels.lightbox + '" tabindex="-1">';
         html += '<button type="button" class="' + RawClasses.close + '">' + Instance.labels.close + '</button>';
         html += '<span class="' + RawClasses.loading_icon + '"></span>';
         html += '<div class="' + RawClasses.container + '">';
@@ -1470,6 +1472,7 @@
          * @param labels.captionOpen [string] <'View Caption'> "Mobile caption toggle text, open state"
          * @param labels.thumbnailsClosed [string] <'Close Thumbnails'> "Mobile thumbnails toggle text, closed state"
          * @param labels.thumbnailsOpen [string] <'View Thumbnails'> "Mobile thumbnails toggle text, open state"
+         * @param labels.lightbox [string] <'Lightbox {guid}'> "Lightbox aria label; {guid} replaced with instance GUID"
          * @param margin [int] <50> "Margin used when sizing (single side)"
          * @param maxHeight [int] <10000> "Maximum height of element modal"
          * @param maxWidth [int] <10000> "Maximum width of element modal"
@@ -1501,7 +1504,8 @@
             captionClosed: "View Caption",
             captionOpen: "Close Caption",
             thumbnailsClosed: "View Thumbnails",
-            thumbnailsOpen: "Close Thumbnails"
+            thumbnailsOpen: "Close Thumbnails",
+            lightbox: "Lightbox {guid}"
           },
           margin: 50,
           maxHeight: 10000,
