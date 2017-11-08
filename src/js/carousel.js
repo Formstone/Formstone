@@ -472,7 +472,7 @@
         }
 
         if (data.paged) {
-          data.pageCount -= (data.count % data.visible);
+          data.pageCount = data.count - data.visible + 1;
         }
 
         if (data.pageCount <= 0) {
@@ -741,6 +741,8 @@
 
     function autoAdvance(data) {
       var index = data.index + 1;
+
+      console.log(data);
 
       if (index >= data.pageCount) {
         index = 0;
