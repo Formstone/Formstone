@@ -222,6 +222,7 @@
      * @description A jQuery plugin for animating visible elements.
      * @type widget
      * @main checkpoint.js
+     * @main checkpoint.css
      * @dependency jQuery
      * @dependency core.js
      */

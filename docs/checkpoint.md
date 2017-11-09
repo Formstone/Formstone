@@ -24,6 +24,7 @@ A jQuery plugin for animating visible elements.
 
 ```markup
 checkpoint.js
+checkpoint.css
 ```
 
 
