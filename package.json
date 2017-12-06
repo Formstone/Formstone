@@ -30,7 +30,7 @@
     "gulp-banner": "^0.1.3",
     "gulp-beautify": "^2.0.1",
     "gulp-clean": "^0.3.2",
-    "gulp-clean-css": "^3.7.0",
+    "gulp-clean-css": "^3.9.0",
     "gulp-clip-empty-files": "^0.1.2",
     "gulp-cssbeautify": "^0.1.3",
     "gulp-header": "^1.8.9",
@@ -46,9 +46,9 @@
     "gulp-zetzer": "^1.0.4",
     "jshint": "^2.9.5",
     "less-plugin-npm-import": "^2.1.0",
-    "moment": "^2.18.1",
+    "moment": "^2.19.3",
     "normalize-css": "^2.3.1",
-    "prismjs": "^1.6.0"
+    "prismjs": "^1.9.0"
   },
   "src": {
     "vars": {
