@@ -2,10 +2,6 @@
 
 <!-- -->
 
-### 1.4.3
-
-* Fixed issue with cell alignment in Grid
-
 ### 1.4.2
 
 * Fixed issue with 'paged' counts in Carousel
