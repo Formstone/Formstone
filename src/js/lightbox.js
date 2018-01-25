@@ -104,6 +104,10 @@
       if (!Instance) {
         var data = e.data;
 
+        if (data.overlay === true) {
+          data.mobile = true; // Backwards compatibility
+        }
+
         // Cache internal data
         Instance = $.extend({}, {
           visible: false,
@@ -1478,7 +1482,7 @@
          * @param maxWidth [int] <10000> "Maximum width of element modal"
          * @param minHeight [int] <100> "Minimum height of modal"
          * @param minWidth [int] <100> "Minimum width of modal"
-         * @param mobile [boolean] <false> "Flag to force 'mobile' rendering"
+         * @param overlay [boolean] <false> "Flag to force 'overlay' ('mobile') rendering"
          * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
          * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
          * @param theme [string] <"fs-light"> "Theme class name"
@@ -1492,7 +1496,7 @@
 
         defaults: {
           customClass: "",
-          fileTypes: /\.(jpg|sjpg|jpeg|png|gif)$/i,
+          fileTypes: /\.(jpg|sjpg|jpeg|png|gif)/i,
           fixed: false,
           formatter: formatCaption,
           infinite: false,
@@ -1513,6 +1517,7 @@
           minHeight: 100,
           minWidth: 100,
           mobile: false,
+          overlay: false,
           retina: false,
           requestKey: "fs-lightbox",
           theme: "fs-light",

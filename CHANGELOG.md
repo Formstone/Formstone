@@ -2,6 +2,13 @@
 
 <!-- -->
 
+### 1.4.3
+
+* Fixed issue with 'autoAdvanced' in Carousel
+* Fixed issue with 'first' and 'last' cells in Grid
+* Fixed issue with image URL detection in Lightbox
+* Renamed 'mobile' to 'overlay' in Lightbox
+
 ### 1.4.2
 
 * Fixed issue with 'paged' counts in Carousel

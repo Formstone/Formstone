@@ -109,7 +109,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `maxWidth` | `int` | `10000` | Maximum width of element modal |
 | `minHeight` | `int` | `100` | Minimum height of modal |
 | `minWidth` | `int` | `100` | Minimum width of modal |
-| `mobile` | `boolean` | `false` | Flag to force 'mobile' rendering |
+| `overlay` | `boolean` | `false` | Flag to force 'overlay' ('mobile') rendering |
 | `retina` | `boolean` | `false` | Flag to use 'retina' sizing (halves natural sizes) |
 | `requestKey` | `string` | `'fs-lightbox'` | GET variable for ajax / iframe requests |
 | `theme` | `string` | `"fs-light"` | Theme class name |
