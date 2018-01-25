@@ -742,8 +742,6 @@
     function autoAdvance(data) {
       var index = data.index + 1;
 
-      console.log(data);
-
       if (index >= data.pageCount) {
         index = 0;
       }
