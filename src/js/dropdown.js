@@ -113,7 +113,7 @@
       if (data.multiple) {
         wrapperHtml += ' aria-label="multi select"';
       } else {
-        wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labeledby="' + data.selectedAriaId + '"';
+        wrapperHtml += ' aria-haspopup="true" aria-live="polite" aria-labelledby="' + data.selectedAriaId + '"';
       }
       wrapperHtml += '></div>';
 
