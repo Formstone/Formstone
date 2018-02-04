@@ -108,7 +108,6 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `show` | `int / object` | `1` | Items visible per page; Object for responsive counts |
 | `single` | `boolean` | `false` | Flag to display single item at a time |
 | `theme` | `string` | `"fs-light"` | Theme class name |
-| `useMargin` | `boolean` | `false` | Use margins instead of css transitions (legacy browser support) |
 
 <hr>
 <a name="events"></a>
