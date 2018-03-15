@@ -89,6 +89,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `native` | `boolean` | `false` | Use native browser options |
 | `theme` | `string` | `"fs-light"` | Theme class name |
 | `trim` | `int` | `0` | &nbsp; |
+| `selectMultiple` | `boolean` | `false` | &nbsp; |
 
 <hr>
 <a name="methods"></a>

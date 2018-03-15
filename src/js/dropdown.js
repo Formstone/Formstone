@@ -733,7 +733,7 @@
 
               data.$options.slice(start, end).not("[disabled]").prop("selected", true);
               data.$items.slice(start, end).not(Classes.item_disabled).addClass(RawClasses.item_selected);
-            } else if (metaKey) {
+            } else if (metaKey || data.selectMultiple) {
               if (isSelected) {
                 $option.prop("selected", null)
                   .attr("aria-selected", null);
@@ -897,6 +897,7 @@
          * @param native [boolean] <false> "Use native browser options"
          * @param theme [string] <"fs-light"> "Theme class name"
          * @param trim [int] <0> "Trim options to specified length; 0 to disable”
+         * @param selectMultiple [boolean] <false> "Select multiple items without push ctrl key”
          */
         defaults: {
           bottomEdge: 0,
@@ -908,7 +909,8 @@
           mobile: false, // TODO: deprecated
           native: false,
           theme: "fs-light",
-          trim: 0
+          trim: 0,
+          selectMultiple: false
         },
 
         methods: {
