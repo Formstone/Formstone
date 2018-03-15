@@ -372,6 +372,7 @@
 
     function resizeInstance(data) {
       if (data.enabled) {
+        console.log('resize');
         var h, i, j, k, w,
           $items,
           $first,
@@ -392,7 +393,7 @@
 
         this.removeClass(RawClasses.animated);
 
-        data.$canister.find(".carousel-clone").remove();
+        data.$canister.find(Classes.clone).remove();
 
         data.containerWidth = data.$container.outerWidth(false);
 
@@ -478,7 +479,7 @@
         // Infinite
         data.indexOffset = 0;
 
-        if (data.infinite) {
+        if (!data.single && data.infinite) {
           data.indexOffset = 2;
 
           var lastPageIndex = data.pages.length - 1;
@@ -491,7 +492,7 @@
             clonePage = {
               height: data.pages[i].height,
               width: data.pages[i].width,
-              $items: data.pages[i].$items.clone().addClass("carousel-clone")
+              $items: data.pages[i].$items.clone().addClass(RawClasses.clone)
             };
             pagesAfter.push(clonePage);
             // data.pageCount++;
@@ -1572,6 +1573,7 @@
           "item",
           "item_previous",
           "item_next",
+          "clone",
 
           "controls",
           "controls_custom",
