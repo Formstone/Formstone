@@ -238,10 +238,12 @@
         value = change;
 
       if ($.type(oValue) === "undefined" || isNaN(oValue)) {
-        if (data.min !== false) {
+        if (isNaN(oValue)) {
+          value = '';
+        } else if (data.min !== false) {
           value = data.min;
         } else {
-          value = 0;
+          value = '';
         }
       } else if (data.min !== false && oValue < data.min) {
         value = data.min;
@@ -249,22 +251,19 @@
         value += oValue;
       }
 
-      // Not sure this help...
-      // var diff = (value - data.min) % data.step;
-      //
-      // if (diff !== 0) {
-      //   value -= diff;
-      // }
-
-      if (data.min !== false && value < data.min) {
-        value = data.min;
-      }
-      if (data.max !== false && value > data.max) {
-        value = data.max;
+      if (value !== "") {
+        if (data.min !== false && value < data.min) {
+          value = data.min;
+        }
+        if (data.max !== false && value > data.max) {
+          value = data.max;
+        }
       }
 
       if (value !== oValue || change == 0) {
-        value = round(value, data.digits);
+        if (value !== "") {
+          value = round(value, data.digits);
+        }
 
         data.$el.val(value)
           .trigger(Events.raw.change, [true]);

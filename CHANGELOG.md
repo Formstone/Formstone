@@ -2,6 +2,12 @@
 
 <!-- -->
 
+### 1.4.4
+
+* Added option to select multiple items without pressing 'ctl' key in Dropdown (Thanks @qtsd!)
+* Fixed issue with `contained` classes in Grid
+* Fixed issue with default behavior in Number
+
 ### 1.4.3
 
 * Fixed issue with 'autoAdvanced' in Carousel
