@@ -3,11 +3,15 @@
 <!-- START: FIRSTDEMO -->
 
 <style>
+  .carousel-clone { background: red; }
+
+
   .carousel { border-radius: 3px; margin: 20px 0; width: 100%; }
 
   .carousel_item { background: #00bcd4; border-radius: 3px; color: #fff; font-size: 75px; height: 200px; line-height: 200px; margin: 0 0 10px 0; overflow: hidden; text-align: center; width: 100%; }
 
-  .carousel_item:nth-child(even) { background: #0097A7; }
+  /* .carousel_item:nth-child(even) { background: #0097A7; } */
+  .carousel_item.odd { background: #0097A7; }
   .carousel_item img { width: 100%; }
 
   .carousel_auto_height .carousel_item:nth-child(2) { height: 300px; }
@@ -79,12 +83,11 @@
 <div class="demo_container">
   <div class="demo_example">
     <div class="carousel js-carousel" id="carousel_basic">
-      <div class="carousel_item">1</div>
+      <div class="carousel_item odd">1</div>
       <div class="carousel_item">2</div>
-      <div class="carousel_item">3</div>
+      <div class="carousel_item odd">3</div>
       <div class="carousel_item">4</div>
-      <div class="carousel_item">5</div>
-      <div class="carousel_item" style="display: none;">6</div>
+      <div class="carousel_item odd">5</div>
     </div>
   </div>
   <div class="demo_code">
@@ -128,7 +131,7 @@
   </div>
 </div>
 
-<h3>Uneven Counts</h3>
+<!-- <h3>Uneven Counts</h3>
 <div class="demo_container">
   <div class="demo_example">
     <div class="carousel js-carousel" data-carousel-options='{"show":3}'>
@@ -641,4 +644,4 @@ $(".carousel_2").carousel({
   theme: ""
 });</code></pre>
   </div>
-</div>
+</div> -->

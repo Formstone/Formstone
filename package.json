@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
