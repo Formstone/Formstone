@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.4
+
+* Fixed issue with `-first` and `-last` classes in Grid
+* Fixed issue with inactive animations in Checkpoint
+
 ### 1.4.3
 
 * Fixed issue with 'autoAdvanced' in Carousel

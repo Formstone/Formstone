@@ -117,6 +117,8 @@
      */
 
     function destruct(data) {
+      data.$el.removeClass(RawClasses.base);
+
       cacheInstances();
     }
 
