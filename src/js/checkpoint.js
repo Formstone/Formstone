@@ -43,6 +43,8 @@
 
         OldScrollTop = ScrollTop;
       }
+
+      Functions.iterate.call($Instances, scrollInstance);
     }
 
     /**
@@ -67,7 +69,8 @@
     function construct(data) {
       data.initialized = false;
 
-      var $container = $(data.$el.data("checkpoint-container")),
+      var $parent    = $(data.$el.data("checkpoint-parent")),
+          $container = $(data.$el.data("checkpoint-container")),
           intersect  = data.$el.data("checkpoint-intersect"),
           offset     = data.$el.data("checkpoint-offset");
 
@@ -85,6 +88,9 @@
       data.visible = false;
 
       data.$target = ($container.length) ? $container : data.$el;
+
+      data.hasParent = ($parent.length > 0);
+      data.$parent   = $parent;
 
       var $images = data.$target.find("img");
 
@@ -132,6 +138,20 @@
       Functions.iterate.call($Instances, checkInstance);
     }
 
+    function scrollInstance(data) {
+      if (!data.hasParent) {
+        return;
+      }
+
+      var parentScroll = data.$parent.scrollTop();
+
+      if (parentScroll !== data.parentScroll) {
+        checkInstance(data);
+
+        data.parentScroll = parentScroll;
+      }
+    }
+
     /**
      * @method
      * @name resize
@@ -151,22 +171,27 @@
         return;
       }
 
+      // data.parentWidth  = (data.hasParent) ? $(parent).outerWidth() : WindowWidth;
+      data.parentHeight = (data.hasParent) ? data.$parent.outerHeight(false) : WindowHeight;
+
       switch (data.windowIntersect) {
         case "top":
           data.windowCheck = 0 - data.offset;
           break;
         case "middle":
         case "center":
-          data.windowCheck = (WindowHeight / 2) - data.offset;
+          // data.windowCheck = (WindowHeight / 2) - data.offset;
+          data.windowCheck = (data.parentHeight / 2) - data.offset;
           break;
         case "bottom":
-          data.windowCheck = WindowHeight - data.offset;
+          // data.windowCheck = WindowHeight - data.offset;
+          data.windowCheck = data.parentHeight - data.offset;
           break;
         default:
           break;
       }
 
-      data.elOffset = data.$target.offset();
+      data.elOffset = (data.hasParent) ? data.$target.position() : data.$target.offset();
 
       switch (data.elIntersect) {
         case "top":
@@ -197,7 +222,9 @@
         return;
       }
 
-      var check = (ScrollTop + data.windowCheck);
+      var check = data.windowCheck + ((data.hasParent) ? data.parentScroll : ScrollTop);
+
+      console.log(check, data.elCheck, data);
 
       if (check >= data.elCheck) {
         if (!data.active) {

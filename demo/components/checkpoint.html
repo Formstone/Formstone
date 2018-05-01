@@ -107,6 +107,20 @@
                             margin: 0 auto;
                         }
                     }
+
+                    .demo_fixed {
+                        height: 300px;
+                        width: 500px;
+                        position: fixed;
+                        bottom: 10px;
+                        left: 10px;
+                        background: #eee;
+                        overflow-y: scroll;
+                    }
+
+                    .demo_fixed .spacer {
+                        margin-top: 500px;
+                    }
                 </style>
 
                 <!-- <div class="marker" style="top: 100px;"></div>
@@ -305,6 +319,21 @@
                         <pre><code class="language-html">&lt;div class=&quot;container&quot;&gt;
 &Tab;&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;flip-up&quot; data-checkpoint-container=&quot;.container&quot;&gt;Fade Up&lt;/div&gt;
 &lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+
+
+
+
+                <div class="demo_container">
+                    <div class="demo_example demo_fixed">
+                        <div class="spacer">
+                            <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up" data-checkpoint-parent=".demo_fixed">Fade Up</div>
+                        </div>
+                    </div>
+                    <div class="demo_code">
+                        <pre><code class="language-html">&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;fade-up&quot;&gt;Fade Up&lt;/div&gt;</code></pre>
+                        <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
                     </div>
                 </div>
                 <!-- END: DEMO -->
