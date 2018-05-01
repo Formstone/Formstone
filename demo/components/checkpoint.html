@@ -108,17 +108,14 @@
                         }
                     }
 
-                    .demo_fixed {
+                    .demo_parent {
+                        position: relative;
                         height: 300px;
-                        width: 500px;
-                        position: fixed;
-                        bottom: 10px;
-                        left: 10px;
                         background: #eee;
                         overflow-y: scroll;
                     }
 
-                    .demo_fixed .spacer {
+                    .demo_parent .spacer {
                         margin-top: 500px;
                     }
                 </style>
@@ -322,20 +319,22 @@
                     </div>
                 </div>
 
+                <!-- Parent -->
 
-
-
-                <!-- <div class="demo_container">
-  <div class="demo_example demo_fixed">
-    <div class="spacer">
-      <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up"data-checkpoint-parent=".demo_fixed">Fade Up</div>
-    </div>
-  </div>
-  <div class="demo_code">
-    <pre><code class="language-html">&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;fade-up&quot;&gt;Fade Up&lt;/div&gt;</code></pre>
-    <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
-  </div>
-</div> -->
+                <h4>Parent</h4>
+                <div class="demo_container">
+                    <div class="demo_example demo_parent">
+                        <div class="spacer">
+                            <div class="checkpoint demo-checkpoint" data-checkpoint-animation="fade-up" data-checkpoint-parent=".demo_parent">Fade Up</div>
+                        </div>
+                    </div>
+                    <div class="demo_code">
+                        <pre><code class="language-html">&lt;div class=&quot;parent&quot;&gt;
+&Tab;&lt;div class=&quot;checkpoint&quot; data-checkpoint-animation=&quot;fade-up&quot; data-checkpoint-parent=&quot;.parent&quot;&gt;Fade Up&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                        <pre><code class="language-javascript">$(".checkpoint").checkpoint();</code></pre>
+                    </div>
+                </div>
                 <!-- END: DEMO -->
                 <div class="footer">
                     <div class="copyright">

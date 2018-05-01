@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.6
+
+* Added `parent` scroll context support in Checkpoint
+* Fixed issue with Carousel
+
 ### 1.4.5
 
 * Fixed issue with `-first` and `-last` classes in Grid

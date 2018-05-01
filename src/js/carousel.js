@@ -69,10 +69,10 @@
         this.attr("id", data.ariaId);
       }
 
-      // // Legacy browser support
-      // if (!Formstone.support.transform) {
-      //   data.useMargin = true;
-      // }
+      // Legacy browser support
+      if (!Formstone.support.transform) {
+        data.useMargin = true;
+      }
 
       // Build controls and pagination
       var controlsHtml = '',
@@ -294,13 +294,13 @@
 
         hideControls(data);
 
-        // if (data.useMargin) {
-        //   data.$canister.css({
-        //     marginLeft: ""
-        //   });
-        // } else {
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: ""
+          });
+        } else {
           data.$canister.css(TransformProperty, "");
-        // }
+        }
 
         data.index = 0;
       }
@@ -372,7 +372,6 @@
 
     function resizeInstance(data) {
       if (data.enabled) {
-        console.log('resize');
         var h, i, j, k, w,
           $items,
           $first,
@@ -392,8 +391,6 @@
         }
 
         this.removeClass(RawClasses.animated);
-
-        data.$canister.find(Classes.clone).remove();
 
         data.containerWidth = data.$container.outerWidth(false);
 
@@ -415,11 +412,11 @@
         data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
         data.pageCount = Math.ceil(data.count / data.perPage);
 
-        // data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
-        // data.$canister.css({
-        //   width: (data.matchWidth) ? data.canisterWidth : 1000000,
-        //   height: ""
-        // });
+        data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
+        data.$canister.css({
+          width: (data.matchWidth) ? data.canisterWidth : 1000000,
+          height: ""
+        });
 
         data.$items.css({
           width: (data.matchWidth) ? data.itemWidth : "",
@@ -428,8 +425,6 @@
 
         // initial page
         data.pages = [];
-
-        var canisterWidth = 0;
 
         for (i = 0, j = 0; i < data.count; i += data.perPage) {
           $items = data.$items.slice(i, i + data.perPage);
@@ -444,9 +439,10 @@
             }
           }
 
-          // $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-          // left = $first.position().left;
+          $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+          left = $first.position().left;
 
+          // if (data.autoHeight) {
           for (k = 0; k < $items.length; k++) {
             w = $items.eq(k).outerWidth(true);
             h = $items.eq(k).outerHeight();
@@ -457,15 +453,16 @@
               height = h;
             }
           }
+          // } else {
+          //   height = $first.outerHeight();
+          // }
 
           data.pages.push({
-            // left: data.rtl ? left - (data.canisterWidth - width) : left,
+            left: data.rtl ? left - (data.canisterWidth - width) : left,
             height: height,
             width: width,
             $items: $items
           });
-
-          canisterWidth += width;
 
           if (height > data.itemHeight) {
             data.itemHeight = height;
@@ -474,75 +471,15 @@
           j++;
         }
 
-
-
-        // Infinite
-        data.indexOffset = 0;
-
-        if (!data.single && data.infinite) {
-          data.indexOffset = 2;
-
-          var lastPageIndex = data.pages.length - 1;
-          var clonePage;
-
-          var pagesBefore = [];
-          var pagesAfter = [];
-
-          for (i = 0; i < data.indexOffset; i++) {
-            clonePage = {
-              height: data.pages[i].height,
-              width: data.pages[i].width,
-              $items: data.pages[i].$items.clone().addClass(RawClasses.clone)
-            };
-            pagesAfter.push(clonePage);
-            // data.pageCount++;
-            canisterWidth += clonePage.width;
-            data.$canister.append(clonePage.$items);
-          }
-
-          for (i = lastPageIndex; i > lastPageIndex - 2; i--) {
-            clonePage = {
-              height: data.pages[i].height,
-              width: data.pages[i].width,
-              $items: data.pages[i].$items.clone().addClass("carousel-clone")
-            };
-            pagesBefore.push(clonePage);
-            // data.pageCount++;
-            canisterWidth += clonePage.width;
-            data.$canister.prepend(clonePage.$items);
-          }
-
-          data.pages = pagesBefore.concat(data.pages);
-          data.pages = data.pages.concat(pagesAfter);
-
-          data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * (data.pageCount + (data.indexOffset * 2)));
-          data.$canister.css({
-            width: (data.matchWidth) ? data.canisterWidth : 1000000,
-            height: ""
-          });
-        }
-
-
-        // Left pos
-        for (i = 0; i < data.pages.length; i++) {
-          $first = data.rtl ? data.pages[i].$items.eq(data.pages[i].$items.length - 1) : data.pages[i].$items.eq(0);
-          left = $first.position().left;
-
-          data.pages[i].left = left;
-        }
-
         if (data.paged) {
-          data.pageCount = data.count - data.visible + 1;
+          data.pageCount -= (data.count % data.visible);
         }
 
         if (data.pageCount <= 0) {
           data.pageCount = 1;
         }
 
-        data.minClone = -data.pages[data.indexOffset].left;
-        data.maxClone = -data.pages[data.pageCount + data.indexOffset - 1].left;
-
-        data.maxMove = -data.pages[data.pageCount + (data.indexOffset * 2) - 1].left;
+        data.maxMove = -data.pages[data.pageCount - 1].left;
 
         // auto / match height
         if (data.autoHeight) {
@@ -587,22 +524,6 @@
 
     function cacheValues(data) {
       // Cache vaules
-
-      // var $items = data.$canister.children();
-      //
-      // $items.filter(".carousel-clone").remove();
-      // $items = data.$canister.children();
-      //
-      // var length = $items.length;
-      //
-      // var $cloneFirst = $items.slice(0, length - 1).clone().addClass("carousel-clone").css('background', 'red');
-      // var $cloneLast = $items.slice(-length + 1, length).clone().addClass("carousel-clone").css('background', 'red');
-      //
-      // data.$canister.prepend($cloneLast).append($cloneFirst);
-
-
-      // data.$allItems = data.$canister.children().not(":hidden").addClass(RawClasses.item);
-      // data.$items = data.$allItems.not(".carousel-clone");
       data.$items = data.$canister.children().not(":hidden").addClass(RawClasses.item);
       data.$images = data.$canister.find("img");
 
@@ -871,67 +792,16 @@
      */
 
     function positionCanister(data, index, animate, silent, fromLinked) {
-      var newLeft = false;
-
       if (index < 0) {
         index = (data.infinite) ? data.pageCount - 1 : 0;
-
-        if (data.infinite) {
-          // if (data.useMargin) {
-          //   data.leftPosition = parseInt(data.$canister.css("marginLeft"));
-          // } else {
-            var matrix = data.$canister.css(TransformProperty).split(",");
-            data.leftPosition = parseInt(matrix[4]); // ?
-          // }
-
-          newLeft = data.leftPosition - data.pages[data.pageCount].left;
-        }
       }
       if (index >= data.pageCount) {
         index = (data.infinite) ? 0 : data.pageCount - 1;
-
-        if (data.infinite) {
-          // if (data.useMargin) {
-          //   data.leftPosition = parseInt(data.$canister.css("marginLeft"));
-          // } else {
-            var matrix = data.$canister.css(TransformProperty).split(",");
-            data.leftPosition = parseInt(matrix[4]); // ?
-          // }
-
-          newLeft = data.leftPosition + data.pages[data.pageCount].left;
-        }
       }
-
-      data.$canister.css(TransitionProperty, "0s");
-
-      console.log(newLeft);
-      if (newLeft) {
-        data.leftPosition = newLeft;
-
-        if (data.useMargin) {
-          data.$canister.css({
-            marginLeft: data.leftPosition
-          });
-        } else {
-          // data.$canister.css(TransitionProperty, "none")
-          //   .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
-          data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
-        }
-      }
-
-    //   setTimeout(function() {
-    //     pos(data, index, animate, silent, fromLinked);
-    //   }, 5);
-    // }
-    //
-    // function pos(data, index, animate, silent, fromLinked) {
-      // data.$canister.css(TransitionProperty, "");
 
       if (data.count < 1) {
         return;
       }
-
-      index += data.indexOffset;
 
       if (data.pages[index]) {
         data.leftPosition = -data.pages[index].left;
@@ -939,34 +809,23 @@
 
       data.leftPosition = checkPosition(data, data.leftPosition);
 
-      // if (data.useMargin) {
-      //   data.$canister.css({
-      //     marginLeft: data.leftPosition
-      //   });
-      // } else {
-        // if (animate === false) {
-        //   data.$canister.css(TransitionProperty, "none")
-        //     .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
-        //
-        //   // Slight delay before adding transitions back
-        //   setTimeout(function() {
-        //     data.$canister.css(TransitionProperty, "");
-        //   }, 5);
-        // } else {
+      if (data.useMargin) {
+        data.$canister.css({
+          marginLeft: data.leftPosition
+        });
+      } else {
+        if (animate === false) {
+          data.$canister.css(TransitionProperty, "none")
+            .css(TransformProperty, "translateX(" + data.leftPosition + "px)");
 
-          if (data.animationTimeout) {
-            clearTimeout(data.animationTimeout);
-            data.animationTimeout = null;
-          }
-
-          data.animationTimeout = setTimeout(function() {
-            if (animate !== false) {
-              data.$canister.css(TransitionProperty, "0.25s");
-            }
-            data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
-          }, 50);
-        // }
-      // }
+          // Slight delay before adding transitions back
+          setTimeout(function() {
+            data.$canister.css(TransitionProperty, "");
+          }, 5);
+        } else {
+          data.$canister.css(TransformProperty, "translateX(" + data.leftPosition + "px)");
+        }
+      }
 
       // Update classes
       data.$items.removeClass([RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" "));
@@ -990,7 +849,7 @@
         data.$el.trigger(Events.update, [index]);
       }
 
-      data.index = index - data.indexOffset;
+      data.index = index;
 
       // Linked
       if (data.linked && fromLinked !== true) {
@@ -1101,16 +960,14 @@
       Functions.clearTimer(data.autoTimer);
 
       if (!data.single) {
-        // if (data.useMargin) {
-        //   data.leftPosition = parseInt(data.$canister.css("marginLeft"));
-        // } else {
+        if (data.useMargin) {
+          data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+        } else {
           var matrix = data.$canister.css(TransformProperty).split(",");
           data.leftPosition = parseInt(matrix[4]); // ?
-        // }
+        }
 
-        // data.$canister.css(TransitionProperty, "none")
-        //   .css("will-change", "transform");
-        data.$canister.css(TransitionProperty, "")
+        data.$canister.css(TransitionProperty, "none")
           .css("will-change", "transform");
 
         onPan(e);
@@ -1143,22 +1000,13 @@
       if (!data.single) {
         data.touchLeft = checkPosition(data, data.leftPosition + e.deltaX);
 
-        if (data.infinite) {
-          if ( e.deltaX > 0 && data.touchLeft > data.minClone ) {
-            data.touchLeft -= data.pages[data.pageCount].left;
-          }
-          if ( e.deltaX < 0 && data.touchLeft < data.maxClone ) {
-            data.touchLeft += data.pages[data.pageCount].left;
-          }
-        }
-
-        // if (data.useMargin) {
-        //   data.$canister.css({
-        //     marginLeft: data.touchLeft
-        //   });
-        // } else {
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: data.touchLeft
+          });
+        } else {
           data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
-        // }
+        }
 
         // Linked
         if (data.linked && fromLinked !== true) {
@@ -1223,8 +1071,6 @@
         data.didPan = true;
       }
 
-      index -= data.indexOffset;
-
       // Linked
       if (data.linked && fromLinked !== true) {
         $(data.linked).not(data.$el)[NamespaceClean]("panEnd", index);
@@ -1249,12 +1095,12 @@
           percent *= -1;
         }
 
-        // if (data.useMargin) {
-        //   data.leftPosition = parseInt(data.$canister.css("marginLeft"));
-        // } else {
+        if (data.useMargin) {
+          data.leftPosition = parseInt(data.$canister.css("marginLeft"));
+        } else {
           var matrix = data.$canister.css(TransformProperty).split(",");
           data.leftPosition = parseInt(matrix[4]); // ?
-        // }
+        }
 
         data.$canister.css(TransitionProperty, "none");
 
@@ -1287,13 +1133,13 @@
 
         data.touchLeft = checkPosition(data, data.leftPosition + delta);
 
-        // if (data.useMargin) {
-        //   data.$canister.css({
-        //     marginLeft: data.touchLeft
-        //   });
-        // } else {
+        if (data.useMargin) {
+          data.$canister.css({
+            marginLeft: data.touchLeft
+          });
+        } else {
           data.$canister.css(TransformProperty, "translateX(" + data.touchLeft + "px)");
-        // }
+        }
       }
     }
 
@@ -1530,7 +1376,7 @@
          * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
          * @param single [boolean] <false> "Flag to display single item at a time"
          * @param theme [string] <"fs-light"> "Theme class name"
-         * @ param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
+         * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
          */
 
         defaults: {
@@ -1541,7 +1387,7 @@
           controls: true,
           customClass: "",
           fill: false,
-          infinite: true, // false,
+          infinite: false,
           labels: {
             next: "Next",
             previous: "Previous",
@@ -1557,8 +1403,8 @@
           rtl: false,
           show: 1,
           single: false,
-          theme: "fs-light"
-          // useMargin: false
+          theme: "fs-light",
+          useMargin: false
         },
 
         classes: [
@@ -1573,7 +1419,6 @@
           "item",
           "item_previous",
           "item_next",
-          "clone",
 
           "controls",
           "controls_custom",
