@@ -224,8 +224,6 @@
 
       var check = data.windowCheck + ((data.hasParent) ? data.parentScroll : ScrollTop);
 
-      console.log(check, data.elCheck, data);
-
       if (check >= data.elCheck) {
         if (!data.active) {
           data.$el.trigger(Events.activate);
