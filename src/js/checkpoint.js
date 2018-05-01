@@ -171,7 +171,6 @@
         return;
       }
 
-      // data.parentWidth  = (data.hasParent) ? $(parent).outerWidth() : WindowWidth;
       data.parentHeight = (data.hasParent) ? data.$parent.outerHeight(false) : WindowHeight;
 
       switch (data.windowIntersect) {
@@ -180,18 +179,16 @@
           break;
         case "middle":
         case "center":
-          // data.windowCheck = (WindowHeight / 2) - data.offset;
           data.windowCheck = (data.parentHeight / 2) - data.offset;
           break;
         case "bottom":
-          // data.windowCheck = WindowHeight - data.offset;
           data.windowCheck = data.parentHeight - data.offset;
           break;
         default:
           break;
       }
 
-      data.elOffset = (data.hasParent) ? data.$target.position() : data.$target.offset();
+      data.elOffset = data.$target.offset();
 
       switch (data.elIntersect) {
         case "top":
@@ -205,6 +202,11 @@
           break;
         default:
           break;
+      }
+
+      if (data.hasParent) {
+        var parentOffset = data.$parent.offset();
+        data.elCheck -= parentOffset.top;
       }
 
       checkInstance(data);
