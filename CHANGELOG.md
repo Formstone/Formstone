@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.7
+
+* Fixed issue with nested cell widths in Grid for legacy IE
+
 ### 1.4.6
 
 * Added `parent` scroll context support in Checkpoint
