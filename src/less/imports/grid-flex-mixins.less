@@ -279,6 +279,7 @@
 
   .fs_grid_column(@total, @margin, @count) {
     width: (((100% / @total) * @count) - (@margin * 2));
+    max-width: (((100% / @total) * @count) - (@margin * 2));
     min-width: 0;
 
     flex: 0 0 (((100% / @total) * @count) - (@margin * 2));
