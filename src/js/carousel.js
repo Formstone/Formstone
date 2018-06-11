@@ -1036,35 +1036,39 @@
 
       data.didPan = false;
 
-      if (!data.single) {
-        var i, count,
-          left = Math.abs(data.touchLeft),
-          page = false,
-          dir = (data.rtl) ? "right" : "left";
+      if (increment == 0) {
+        index = data.index;
+      } else {
+        if (!data.single) {
+          var i, count,
+            left = Math.abs(data.touchLeft),
+            page = false,
+            dir = (data.rtl) ? "right" : "left";
 
-        if (e.directionX === dir) {
-          // Left (RTL Right)
-          for (i = 0, count = data.pages.length; i < count; i++) {
-            page = data.pages[i];
+          if (e.directionX === dir) {
+            // Left (RTL Right)
+            for (i = 0, count = data.pages.length; i < count; i++) {
+              page = data.pages[i];
 
-            if (left > Math.abs(page.left) + 20) {
-              index = i + 1;
+              if (left > Math.abs(page.left) + 20) {
+                index = i + 1;
+              }
             }
-          }
-        } else {
-          // Right (RTL Left)
-          for (i = data.pages.length - 1, count = 0; i >= count; i--) {
-            page = data.pages[i];
+          } else {
+            // Right (RTL Left)
+            for (i = data.pages.length - 1, count = 0; i >= count; i--) {
+              page = data.pages[i];
 
-            if (left < Math.abs(page.left)) {
-              index = i - 1;
+              if (left < Math.abs(page.left)) {
+                index = i - 1;
+              }
             }
           }
         }
-      }
 
-      if (index === false) {
-        index = (delta < 50) ? data.index : data.index + increment;
+        if (index === false) {
+          index = (delta < 50) ? data.index : data.index + increment;
+        }
       }
 
       if (index !== data.index) {
@@ -1333,6 +1337,10 @@
      */
 
     function getIncrement(data, e) {
+      if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
+        return 0;
+      }
+
       return data.rtl ? ((e.directionX === "right") ? 1 : -1) : ((e.directionX === "left") ? 1 : -1);
     }
 

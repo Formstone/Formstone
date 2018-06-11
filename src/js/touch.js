@@ -145,7 +145,7 @@
         data.startY = (touch) ? touch.pageY : e.pageY;
         data.startT = new Date().getTime();
         data.scaleD = 1;
-        data.passed = false;
+        data.passedAxis = false;
       }
 
       // Clear old click events
@@ -214,19 +214,19 @@
         deltaY = newY - data.startY,
         dirX = (deltaX > 0) ? "right" : "left",
         dirY = (deltaY > 0) ? "down" : "up",
-        movedX = Math.abs(deltaX) > TouchThreshold,
-        movedY = Math.abs(deltaY) > TouchThreshold;
+        movedX = Math.abs(deltaX) > data.threshold,
+        movedY = Math.abs(deltaY) > data.threshold;
 
-      if (!data.passed && data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) {
+      if (!data.passedAxis && data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) {
         // if axis and moved in opposite direction
         onPointerEnd(e);
       } else {
-        if (!data.passed && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
+        if (!data.passedAxis && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
           // if has axis and moved in same direction
-          data.passed = true;
+          data.passedAxis = true;
         }
 
-        if (data.passed) {
+        if (data.passedAxis) {
           Functions.killEvent(e);
           Functions.killEvent(data.startE);
         }
@@ -285,8 +285,7 @@
         movedY = Math.abs(deltaY) > 1;
 
       // Swipe
-
-      if (data.swipe && Math.abs(deltaX) > TouchThreshold && (endT - data.startT) < TouchTime) {
+      if ( data.swipe && (endT - data.startT) < data.time && Math.abs(deltaX) > data.threshold) {
         eType = Events.swipe;
       }
 
@@ -464,13 +463,17 @@
          * @param pan [boolean] <false> "Pan events"
          * @param scale [boolean] <false> "Scale events"
          * @param swipe [boolean] <false> "Swipe events"
+         * @param threshold [int] <10> "Touch threshold for single axis"
+         * @param time [int] <50> "Touch time limit for single axis"
          */
 
         defaults: {
           axis: false,
           pan: false,
           scale: false,
-          swipe: false
+          swipe: false,
+          threshold: 10,
+          time: 50
         },
 
         methods: {
@@ -493,9 +496,7 @@
 
       // Local
 
-      $Window = Formstone.$window,
-      TouchThreshold = 10,
-      TouchTime = 50;
+      $Window = Formstone.$window;
 
     /**
      * @events

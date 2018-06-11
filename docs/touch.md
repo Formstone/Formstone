@@ -108,6 +108,8 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `pan` | `boolean` | `false` | Pan events |
 | `scale` | `boolean` | `false` | Scale events |
 | `swipe` | `boolean` | `false` | Swipe events |
+| `threshold` | `int` | `10` | Touch threshold for single axis |
+| `time` | `int` | `50` | Touch time limit for single axis |
 
 <hr>
 <a name="events"></a>
