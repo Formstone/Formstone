@@ -331,11 +331,11 @@
         firstLoad = false;
       }
 
-      if (!Formstone.isMobile) {
+      // if (!Formstone.isMobile) {
         var videoClasses = [RawClasses.media, RawClasses.video, (firstLoad !== true ? RawClasses.animated : '')].join(" "),
           html = '<div class="' + videoClasses + '" aria-hidden="true">';
 
-        html += '<video';
+        html += '<video playsinline';
         if (data.loop) {
           html += ' loop';
         }
@@ -379,7 +379,7 @@
         });
 
         data.$container.append($media);
-      }
+      // }
     }
 
     /**
@@ -407,7 +407,7 @@
         firstLoad = false;
       }
 
-      if (!Formstone.isMobile) {
+      // if (!Formstone.isMobile) {
         if (!$("script[src*='youtube.com/iframe_api']").length) {
           $("head").append('<script src="//www.youtube.com/iframe_api"></script>');
         }
@@ -524,7 +524,7 @@
           // Resize
           doResizeInstance(data);
         }
-      }
+      // }
     }
 
     /**
