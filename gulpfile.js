@@ -106,6 +106,12 @@ gulp.task('demoScripts', function() {
       prefix: '@',
       global: pkg.src.vars
     }))
+    .pipe(replaceInclude({
+      prefix: '@',
+      global: {
+        version: pkg.version
+      }
+    }))
     .pipe(jshint())
     .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
