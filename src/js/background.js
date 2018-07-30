@@ -342,6 +342,9 @@
         if (data.mute) {
           html += ' muted';
         }
+        if (data.autoPlay) {
+          html += ' autoplay';
+        }
         html += '>';
         if (data.source.webm) {
           html += '<source src="' + data.source.webm + '" type="video/webm" />';

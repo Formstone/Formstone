@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.9
+
+* Added `autoplay` attribute to `video` tags in Background
+* Fixed issue with alignment on `-contained` and `-padded` cells in Grid
+
 ### 1.4.8
 
 * Added mobile auto-play video support in Background
