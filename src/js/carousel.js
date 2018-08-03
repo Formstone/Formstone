@@ -410,10 +410,8 @@
         data.itemHeight = 0;
 
         data.pageWidth = data.paged ? data.itemWidth : data.containerWidth;
-        // data.pageCount = Math.ceil(data.count / data.perPage);
 
         if (data.matchWidth) {
-          // data.canisterWidth = data.single ? data.containerWidth : ((data.pageWidth + data.itemMargin) * data.pageCount);
           data.canisterWidth = data.single ? data.containerWidth : ((data.itemWidth + data.itemMargin) * data.count);
         } else {
           data.canisterWidth = 0;
@@ -427,7 +425,6 @@
         }
 
         data.$canister.css({
-          // width: (data.matchWidth) ? data.canisterWidth : 1000000,
           width: data.canisterWidth,
           height: ""
         });
@@ -440,111 +437,64 @@
         // initial pages
         data.pages = [];
 
-        // if (data.matchWidth) {
-        //   for (i = 0, j = 0; i < data.count; i += data.perPage) {
-        //     $items = data.$items.slice(i, i + data.perPage);
-        //     width = 0;
-        //     height = 0;
-        //
-        //     if ($items.length < data.perPage) {
-        //       if (i === 0) {
-        //         $items = data.$items;
-        //       } else {
-        //         $items = data.$items.slice(data.$items.length - data.perPage);
-        //       }
-        //     }
-        //
-        //     $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-        //     left = $first.position().left;
-        //
-        //     // if (data.autoHeight) {
-        //     for (k = 0; k < $items.length; k++) {
-        //       w = $items.eq(k).outerWidth(true);
-        //       h = $items.eq(k).outerHeight();
-        //
-        //       width += w;
-        //
-        //       if (h > height) {
-        //         height = h;
-        //       }
-        //     }
-        //     // } else {
-        //     //   height = $first.outerHeight();
-        //     // }
-        //
-        //     data.pages.push({
-        //       left: data.rtl ? left - (data.canisterWidth - width) : left,
-        //       height: height,
-        //       width: width,
-        //       $items: $items
-        //     });
-        //
-        //     if (height > data.itemHeight) {
-        //       data.itemHeight = height;
-        //     }
-        //
-        //     j++;
-        //   }
-        // } else {
-          var $item,
-            iWidth = 0,
-            iHeight = 0,
-            tWidth = 0;
+        var $item,
+          iWidth = 0,
+          iHeight = 0,
+          tWidth = 0;
 
-          width = 0;
-          height = 0;
-          $items = $();
+        width = 0;
+        height = 0;
+        $items = $();
 
-          // Pages forward
-          for (i = 0; i < data.count; i++) {
-            $item = data.$items.eq(i);
-            iWidth = data.matchWidth ? (data.itemWidth + data.itemMargin) : $item.outerWidth(true);
-            iHeight = $item.outerHeight();
+        // Pages forward
+        for (i = 0; i < data.count; i++) {
+          $item = data.$items.eq(i);
+          iWidth = data.matchWidth ? (data.itemWidth + data.itemMargin) : $item.outerWidth(true);
+          iHeight = $item.outerHeight();
 
-            // Too far
-            if (width + iWidth > data.containerWidth + data.itemMargin) {
-              $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-              left = $first.position().left;
+          // Too far / Paged
+          if ( (width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i > 0) ) {
+            $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+            left = $first.position().left;
 
-              data.pages.push({
-                left: data.rtl ? left - (data.canisterWidth - width) : left,
-                // left: data.rtl ? left - (data.canisterWidth - (data.containerWidth - width)) : left,
-                height: height,
-                width: width,
-                $items: $items
-              });
+            data.pages.push({
+              left: data.rtl ? left - (data.canisterWidth - width) : left,
+              // left: data.rtl ? left - (data.canisterWidth - (data.containerWidth - width)) : left,
+              height: height,
+              width: width,
+              $items: $items
+            });
 
-              // Reset counters
-              $items = $();
-              height = 0;
-              width = 0;
-            }
-
-            $items = $items.add($item);
-            width += iWidth;
-            tWidth += iWidth;
-
-            if (iHeight > height) {
-              height = iHeight;
-            }
-            if (height > data.itemHeight) {
-              data.itemHeight = height;
-            }
+            // Reset counters
+            $items = $();
+            height = 0;
+            width = 0;
           }
 
-          // Last page
-          $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-          left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
+          $items = $items.add($item);
+          width += iWidth;
+          tWidth += iWidth;
 
-          data.pages.push({
-            left: data.rtl ? -left : left,
-            height: height,
-            width: width,
-            $items: $items
-          });
+          if (iHeight > height) {
+            height = iHeight;
+          }
+          if (height > data.itemHeight) {
+            data.itemHeight = height;
+          }
+        }
 
-          data.pageCount = data.pages.length;
-        // }
+        // Last page
+        $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+        left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
+
+        data.pages.push({
+          left: data.rtl ? -left : left,
+          height: height,
+          width: width,
+          $items: $items
+        });
+
+        data.pageCount = data.pages.length;
 
         // Random Config
 

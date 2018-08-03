@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.10
+
+* Fixed issue with `paged` option in Carousel
+
 ### 1.4.9
 
 * Added `autoplay` attribute to `video` tags in Background
