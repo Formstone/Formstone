@@ -955,7 +955,8 @@
     function loadVideo(source) {
       var parts,
         url = checkVideo(source),
-        queryString = source.split("?");
+        queryString = source.split("?"),
+        origin = '&origin=' + encodeURIComponent(window.location.protocol + '//' + window.location.hostname);
 
       if (url) {
         // if we have a query string
@@ -966,7 +967,7 @@
         Instance.$videoWrapper = $('<div class="' + RawClasses.video_wrapper + '"></div>');
         Instance.$video = $('<iframe class="' + RawClasses.video + '" frameborder="0" seamless="seamless" allowfullscreen></iframe>');
 
-        Instance.$video.attr("src", url)
+        Instance.$video.attr("src", url + '&enablejsapi=1' + origin)
           .addClass(RawClasses.video)
           .prependTo(Instance.$videoWrapper);
 
