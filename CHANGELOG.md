@@ -4,7 +4,9 @@
 
 ### 1.4.11
 
-* Added YouTube tracking URL parameters in Lightbox (Thanks mimoduo!)
+* Added YouTube tracking URL parameters in Lightbox (Thanks @mimoduo!)
+* Fixed issue with static item widths in Carousel
+* Fixed issue with item visibility in Carousel
 * Fixed issue with scroll position in Checkbox (Thanks @Bonscho!)
 * Fixed issue with stopPropagation in Checkbox (Thanks @matthisamoto!)
 

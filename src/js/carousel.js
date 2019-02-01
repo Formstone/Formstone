@@ -436,11 +436,15 @@
 
         // initial pages
         data.pages = [];
+        data.items = [];
+        // data.pagesReverse = [];
+        // data.pagesVisible = [];
 
         var $item,
           iWidth = 0,
           iHeight = 0,
-          tWidth = 0;
+          tWidth = 0,
+          iLeft = 0;
 
         width = 0;
         height = 0;
@@ -451,6 +455,13 @@
           $item = data.$items.eq(i);
           iWidth = data.matchWidth ? (data.itemWidth + data.itemMargin) : $item.outerWidth(true);
           iHeight = $item.outerHeight();
+          iLeft = $item.position().left;
+
+          data.items.push({
+            $el: $item,
+            width: iWidth,
+            left: data.rtl ? iLeft - (data.canisterWidth - iWidth) : iLeft
+          });
 
           // Too far / Paged
           if ( ($items.length && width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i > 0) ) {
@@ -483,16 +494,67 @@
           }
         }
 
-        // Last page
-        $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-        left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
+        // // Last page
 
-        data.pages.push({
-          left: data.rtl ? -left : left,
-          height: height,
-          width: width,
-          $items: $items
-        });
+        // if (data.matchWidth) {
+        //   iWidth = 0;
+        //   iHeight = 0;
+        //   tWidth = 0;
+        //
+        //   width = 0;
+        //   height = 0;
+        //   $items = $();
+        //
+        //   // Pages reverse
+        //   for (i = data.count - 1; i >= 0; i--) {
+        //     $item = data.$items.eq(i);
+        //     iWidth = data.matchWidth ? (data.itemWidth + data.itemMargin) : $item.outerWidth(true);
+        //     iHeight = $item.outerHeight();
+        //
+        //     // Too far / Paged
+        //     if ( ($items.length && width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i < data.count - 1) ) {
+        //       $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+        //       left = $first.position().left;
+        //
+        //       data.pagesReverse.push({
+        //         left: data.rtl ? left - (data.canisterWidth - width) : left,
+        //         // left: data.rtl ? left - (data.canisterWidth - (data.containerWidth - width)) : left,
+        //         height: height,
+        //         width: width,
+        //         $items: $items
+        //       });
+        //
+        //       // Reset counters
+        //       $items = $();
+        //       height = 0;
+        //       width = 0;
+        //     }
+        //
+        //     $items = $items.add($item);
+        //     width += iWidth;
+        //     tWidth += iWidth;
+        //
+        //     if (iHeight > height) {
+        //       height = iHeight;
+        //     }
+        //     if (height > data.itemHeight) {
+        //       data.itemHeight = height;
+        //     }
+        //   }
+        //
+        //   // Final page
+        //   data.pages.push( data.pagesReverse[0] );
+        // } else {
+          $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+          left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
+
+          data.pages.push({
+            left: data.rtl ? -left : left,
+            height: height,
+            width: width,
+            $items: $items
+          });
+        // }
 
         data.pageCount = data.pages.length;
 
@@ -857,11 +919,30 @@
       // Update classes
       data.$items.removeClass([RawClasses.visible, RawClasses.item_previous, RawClasses.item_next].join(" "));
 
-      for (var i = 0, count = data.pages.length; i < count; i++) {
-        if (i === index) {
-          data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
-        } else {
-          data.pages[i].$items.not(data.pages[index].$items).addClass((i < index) ? RawClasses.item_previous : RawClasses.item_next).attr("aria-hidden", "true");
+      if (data.single) {
+        for (var i = 0, count = data.pages.length; i < count; i++) {
+          if (i === index) {
+            data.pages[i].$items.addClass(RawClasses.visible).attr("aria-hidden", "false");
+          } else {
+            data.pages[i].$items.not(data.pages[index].$items).addClass((i < index) ? RawClasses.item_previous : RawClasses.item_next).attr("aria-hidden", "true");
+          }
+        }
+      } else {
+        for (var i = 0; i < data.count; i++) {
+          var multiplier = (data.rtl ? -1 : 1),
+            posLeft = (data.leftPosition * multiplier) + (data.items[i].left * multiplier),
+            posWidth = posLeft + data.items[i].width,
+            edge = data.containerWidth + data.itemMargin + 1;
+
+          if ( posLeft >= -1 && posWidth <= edge ) {
+            data.items[i].$el.addClass(RawClasses.visible).attr("aria-hidden", "false");
+          } else {
+            if ( posLeft < 0 ) {
+              data.items[i].$el.addClass(RawClasses.item_previous).attr("aria-hidden", "false");
+            } else {
+              data.items[i].$el.addClass(RawClasses.item_next).attr("aria-hidden", "false");
+            }
+          }
         }
       }
 

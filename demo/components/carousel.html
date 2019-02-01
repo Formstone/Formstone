@@ -53,10 +53,8 @@
                         text-align: center;
                         width: 100%;
                     }
-
-                    .carousel_item {
-                        flex: 0 0 310px;
-                    }
+                    /* .carousel_item { opacity: 0.5; transition: opacity 0.25s linear; }
+  .carousel_item.fs-carousel-visible { opacity: 1; } */
 
                     .carousel_item:nth-child(even) {
                         background: #0097A7;
@@ -189,7 +187,7 @@
                 <h3>Paged</h3>
                 <div class="demo_container">
                     <div class="demo_example">
-                        <div class="carousel js-carousel" data-carousel-options='{"paged":true,"matchWidth": false}'>
+                        <div class="carousel js-carousel" data-carousel-options='{"paged":true,"show":2}'>
                             <div class="carousel_item">1</div>
                             <div class="carousel_item">2</div>
                             <div class="carousel_item">3</div>
