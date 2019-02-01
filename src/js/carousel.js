@@ -453,7 +453,7 @@
           iHeight = $item.outerHeight();
 
           // Too far / Paged
-          if ( (width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i > 0) ) {
+          if ( ($items.length && width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i > 0) ) {
             $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
             left = $first.position().left;
 
