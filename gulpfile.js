@@ -71,8 +71,8 @@ gulp.task('scripts', function() {
 
 // Docs
 
-gulp.task('buildDocs', function () {
-  return buildDocs();
+gulp.task('buildDocs', function (done) {
+  return buildDocs(done);
 });
 
 // Demo - Less
@@ -183,13 +183,15 @@ gulp.task('zetzer', function(){
 // });
 
 // License
-gulp.task('license', function() {
+gulp.task('license', function(done) {
   return fs.readFile('tasks/gpl.txt', function(err, data) {
     var content = 'Formstone \n\n' +
       'Copyright ' + moment().format('YYYY') + ' ' + pkg.author.name + ' \n\n' +
       data;
 
     fs.writeFile('license.txt', content, function() {});
+
+    done();
   });
 });
 
@@ -215,29 +217,29 @@ gulp.task('beautifyStyles', function() {
 
 // Tasks
 
-gulp.task('default', sequence(
+gulp.task('default', gulp.series(
   'clean',
-  ['styles', 'scripts'],
+  gulp.parallel('styles', 'scripts'),
   'buildDocs',
-  ['demoStyles', 'demoScripts'],
+  gulp.parallel('demoStyles', 'demoScripts'),
   'demoModernizr',
-  ['zetzer', 'license']
+  gulp.parallel('zetzer', 'license')
 ));
 
-gulp.task('demo', function(callback) {
-  sequence(
-    ['styles', 'scripts'],
-    ['demoStyles', 'demoScripts']
-  )(callback);
-});
+// gulp.task('demo', function(callback) {
+//   sequence(
+//     ['styles', 'scripts'],
+//     ['demoStyles', 'demoScripts']
+//   )(callback);
+// });
 
-gulp.task('dev', ['default'], function() {
-  gulp.watch('./src/less/**/*.less', ['demo']);
-  gulp.watch('./src/js/**/*.js', ['demo']);
-  gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
+// gulp.task('dev', ['default'], function() {
+//   gulp.watch('./src/less/**/*.less', ['demo']);
+//   gulp.watch('./src/js/**/*.js', ['demo']);
+//   gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
+//
+//   gulp.watch('./demo/css/src/**/*', ['demoStyles']);
+//   gulp.watch('./demo/js/src/**/*', ['demoScripts']);
+// });
 
-  gulp.watch('./demo/css/src/**/*', ['demoStyles']);
-  gulp.watch('./demo/js/src/**/*', ['demoScripts']);
-});
-
-gulp.task('beautify', ['beautifyStyles', 'beautifyScripts']);
+// gulp.task('beautify', ['beautifyStyles', 'beautifyScripts']);
