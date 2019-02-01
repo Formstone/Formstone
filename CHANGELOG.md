@@ -2,6 +2,12 @@
 
 <!-- -->
 
+### 1.4.11
+
+* Added YouTube tracking URL parameters in Lightbox (Thanks mimoduo!)
+* Fixed issue with scroll position in Checkbox (Thanks @Bonscho!)
+* Fixed issue with stopPropagation in Checkbox (Thanks @matthisamoto!)
+
 ### 1.4.10
 
 * Fixed issue with `paged` option in Carousel

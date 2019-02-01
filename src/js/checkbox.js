@@ -176,8 +176,6 @@
      */
 
     function onClick(e) {
-      e.stopPropagation();
-
       var data = e.data;
 
       if (!$(e.target).is(data.$el)) {
