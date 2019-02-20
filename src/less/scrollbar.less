@@ -85,7 +85,7 @@
    * @description Scrolling content
    */
 
-  &-content {
+  > &-content {
     position: relative;
     z-index: 1;
 
@@ -117,7 +117,7 @@
    * @description Scrollbar container
    */
 
-  &-bar {
+  > &-bar {
     width: @fs-scrollbar-bar-size;
     height: 100%;
 
@@ -139,7 +139,7 @@
    * @description Scrollbar track container
    */
 
-  &-track {
+  > &-bar &-track {
     width: 100%;
     height: 100%;
 
@@ -158,7 +158,7 @@
 
   @fs-scrollbar-handle-position: ((@fs-scrollbar-bar-size - @fs-scrollbar-handle-size) / 2);
 
-  &-handle {
+  > &-bar &-handle {
     width: @fs-scrollbar-handle-size;
     height: (@fs-scrollbar-handle-size * 2);
 
@@ -176,14 +176,14 @@
 
   // Horizontal
 
-  &-horizontal &-content {
+  &-horizontal > &-content {
     overflow: auto;
     overflow-x: auto;
     overflow-y: hidden;
     padding: 0 0 @fs-scrollbar-bar-size 0;
   }
 
-  &-horizontal &-bar {
+  &-horizontal > &-bar {
     width: 100%;
     height: @fs-scrollbar-bar-size;
 
@@ -193,7 +193,7 @@
     border-width: 1px 0 0 0;
   }
 
-  &-horizontal &-handle {
+  &-horizontal > &-bar &-handle {
     width: (@fs-scrollbar-handle-size * 2);
     height: @fs-scrollbar-handle-size;
 
@@ -204,13 +204,13 @@
 
   // Active / Setup
 
-  &-setup &-content,
-  &-active &-content {
+  &-setup > &-content,
+  &-active > &-content {
     padding: @fs-scrollbar-content-padding;
   }
 
-  &-setup &-bar,
-  &-active &-bar {
+  &-setup > &-bar,
+  &-active > &-bar {
     display: block;
   }
 }

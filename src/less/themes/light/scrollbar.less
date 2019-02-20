@@ -40,7 +40,7 @@
     border-radius: @fs-scrollbar-content-border-radius;
   }
 
-  &.@{theme_name} &-bar {
+  &.@{theme_name} > &-bar {
     width: @fs-scrollbar-bar-size;
 
     background: @fs-scrollbar-bar-background;
@@ -49,7 +49,7 @@
     border-width: 0 0 0 @fs-scrollbar-bar-border-size;
   }
 
-  &.@{theme_name} &-track {
+  &.@{theme_name} > &-bar &-track {
     background: @fs-scrollbar-track-background;
 
     border-radius: 0 @fs-scrollbar-content-border-radius @fs-scrollbar-content-border-radius 0;
@@ -57,7 +57,7 @@
 
   @fs-scrollbar-handle-position: ((@fs-scrollbar-bar-size - @fs-scrollbar-handle-size) / 2);
 
-  &.@{theme_name} &-handle {
+  &.@{theme_name} > &-bar &-handle {
     width: @fs-scrollbar-handle-size;
     height: (@fs-scrollbar-handle-size * 2);
 
@@ -77,18 +77,18 @@
 
   // Horizontal
 
-  .@{theme_name}&-horizontal &-content {
+  .@{theme_name}&-horizontal > &-content {
     padding: 0 0 @fs-scrollbar-bar-size 0;
   }
 
-  .@{theme_name}&-horizontal &-bar {
+  .@{theme_name}&-horizontal > &-bar {
     width: 100%;
     height: @fs-scrollbar-bar-size;
 
     border-width: @fs-scrollbar-bar-border-size 0 0 0;
   }
 
-  .@{theme_name}&-horizontal &-handle {
+  .@{theme_name}&-horizontal > &-bar &-handle {
     width: (@fs-scrollbar-handle-size * 2);
     height: @fs-scrollbar-handle-size;
 
@@ -97,8 +97,8 @@
 
   // Active / Setup
 
-  .@{theme_name}&-setup &-content,
-  .@{theme_name}&-active &-content {
+  .@{theme_name}&-setup > &-bar &-content,
+  .@{theme_name}&-active > &-bar &-content {
     padding: @fs-scrollbar-content-padding;
   }
 }
