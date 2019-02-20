@@ -526,6 +526,7 @@
             url: data.action,
             data: formData,
             dataType: data.dataType,
+            headers: data.headers,
             type: "POST",
             contentType: false,
             processData: false,
@@ -602,6 +603,7 @@
           url: data.action,
           data: formData,
           dataType: data.dataType,
+          headers: data.headers,
           type: "POST",
           contentType: false,
           processData: false,
@@ -670,6 +672,7 @@
          * @param chunkSize [int] <100> "Size to chunk, in kB"
          * @param customClass [string] <''> "Class applied to instance"
          * @param dataType [string] <'html'> "Data type of AJAX request"
+         * @param headers [object] "An object of additional header key/value pairs to send along with requests"
          * @param label [string] <'Drag and drop files or click to select'> "Drop target text; `false` to disable"
          * @param leave [string] <'You have uploads pending, are you sure you want to leave this page?'> "Before leave message"
          * @param maxConcurrent [int] <2> "Number of files to simultaneously upload"
@@ -692,6 +695,7 @@
           chunkSize: 100,
           customClass: "",
           dataType: "html",
+          headers: {},
           label: "Drag and drop files or click to select",
           leave: "You have uploads pending, are you sure you want to leave this page?",
           maxConcurrent: 2,

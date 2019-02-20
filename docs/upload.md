@@ -114,6 +114,7 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `chunkSize` | `int` | `100` | Size to chunk, in kB |
 | `customClass` | `string` | `''` | Class applied to instance |
 | `dataType` | `string` | `'html'` | Data type of AJAX request |
+| `headers` | `object` | &nbsp; | An object of additional header key/value pairs to send along with requests |
 | `label` | `string` | `'Drag and drop files or click to select'` | Drop target text; `false` to disable |
 | `leave` | `string` | `'You have uploads pending, are you sure you want to leave this page?'` | Before leave message |
 | `maxConcurrent` | `int` | `2` | Number of files to simultaneously upload |
