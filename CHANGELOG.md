@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.12
+
+* Added support for custom headers in Upload (Thanks @haagen!)
+* Fixed issue with nested Scrollbars
+
 ### 1.4.11
 
 * Added YouTube tracking URL parameters in Lightbox (Thanks @mimoduo!)
