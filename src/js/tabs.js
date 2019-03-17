@@ -34,7 +34,7 @@
 
       // DOM
 
-      data.$mobileTab = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.text() + '</button>');
+      data.$mobileTab = $('<button type="button" class="' + data.mobileTabClasses.join(" ") + '" aria-hidden="true">' + this.html() + '</button>');
       data.$content = $(data.content).addClass(data.contentClasses.join(" "));
 
       data.$content.before(data.$mobileTab)

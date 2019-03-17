@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.13
+
+* Fixed inner content issue in Tabs
+
 ### 1.4.12
 
 * Added support for custom headers in Upload (Thanks @haagen!)
