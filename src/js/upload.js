@@ -170,7 +170,7 @@
 
       data.aborting = false;
 
-      checkQueue(data);
+      checkQueue(data, data.autoUpload);
     }
 
     /**
@@ -449,9 +449,10 @@
      * @name checkQueue
      * @description Checks and updates file queue.
      * @param data [object] "Instance data"
+     * @param startAutoUpload [boolean] If true, it will continue to upload automatically
      */
 
-    function checkQueue(data) {
+    function checkQueue(data, startAutoUpload) {
       var transfering = 0,
         newQueue = [];
 
@@ -463,6 +464,9 @@
       }
 
       data.queue = newQueue;
+
+      if (startAutoUpload == false)
+        return false;
 
       for (var j in data.queue) {
         if (data.queue.hasOwnProperty(j)) {
