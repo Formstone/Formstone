@@ -43,7 +43,7 @@ gulp.task('styles', function() {
       globalVars: pkg.src.vars
     }))
     .pipe(autoprefixer({
-      browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
+      // browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
     }))
     .pipe(cleanCSS({
       compatibility: 'ie10'
@@ -83,7 +83,7 @@ gulp.task('demoStyles', function() {
       globalVars: pkg.src.vars
     }))
     .pipe(autoprefixer({
-      browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
+      // browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1', 'ie >= 10']
     }))
     .pipe(cleanCSS({
       compatibility: 'ie10'

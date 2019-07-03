@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.14
+
+* Fixed issue with autoplaying videos in Background
+
 ### 1.4.13
 
 * Fixed inner content issue in Tabs

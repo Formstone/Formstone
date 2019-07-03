@@ -43,10 +43,24 @@
                         margin: 10px 0 0;
                     }
 
+                    .filelists .start_all {
+                        background: #455a64;
+                        border-radius: 2px;
+                        color: #fff;
+                        cursor: pointer;
+                        clear: both;
+                        display: inline-block;
+                        font-size: 10px;
+                        margin: 0 10px 0 0;
+                        padding: 8px 12px;
+                        text-transform: uppercase;
+                    }
+
                     .filelists .cancel_all {
                         color: red;
                         cursor: pointer;
                         clear: both;
+                        display: inline-block;
                         font-size: 10px;
                         margin: 0;
                         text-transform: uppercase;
@@ -151,6 +165,7 @@
 
                         $(".filelist.queue").on("click", ".cancel", onCancel);
                         $(".cancel_all").on("click", onCancelAll);
+                        $(".start_all").on("click", onStart);
                     });
 
                     function onCancel(e) {
@@ -246,6 +261,11 @@
                     function onChunkError(e, file, error) {
                         console.log("Chunk Error");
                     }
+
+                    function onStart(e) {
+                        console.log("Start Upload");
+                        $(this).parents("form").find(".upload").upload("start");
+                    }
                 </script>
 
                 <div class="demo_container">
@@ -294,6 +314,32 @@
                         <pre><code class="language-javascript">$(".upload").upload({
   action: "//example.com/handle-chunked-upload.php",
   chunked: true
+});</code></pre>
+                    </div>
+                </div>
+
+                <h4>Manual Upload</h4>
+                <div class="demo_container">
+                    <div class="demo_example">
+                        <form action="#" method="GET" class="form demo_form">
+                            <div class="upload" data-upload-options='{"action":"../_extra/upload.php","autoUpload":false}'></div>
+                            <div class="filelists">
+                                <h5>Complete</h5>
+                                <ol class="filelist complete">
+                                </ol>
+                                <h5>Queued</h5>
+                                <ol class="filelist queue">
+                                </ol>
+                                <span class="start_all">Start Upload</span>
+                                <span class="cancel_all">Cancel All</span>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="demo_code">
+                        <pre><code class="language-html">&lt;div class=&quot;upload&quot;&gt;&lt;/div&gt;</code></pre>
+                        <pre><code class="language-javascript">$(".upload").upload({
+  action: "//example.com/handle-chunked-upload.php",
+  autoUpload: false
 });</code></pre>
                     </div>
                 </div>
