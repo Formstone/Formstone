@@ -132,7 +132,7 @@
     /**
      * @method private
      * @name abortUpload
-     * @description Cancels all active uploads.
+     * @description Cancels specific upload.
      * @param data [object] "Instance data"
      * @param index [int] "File index"
      */
@@ -140,8 +140,8 @@
     /**
      * @method
      * @name abort
-     * @description Cancels all active uploads.
-     * @example $(".target").upload("abort");
+     * @description Cancels all active uploads, or specific file.
+     * @example $(".target").upload("abort", [index]);
      */
 
     function abortUpload(data, index) {
@@ -455,6 +455,10 @@
       var transfering = 0,
         newQueue = [];
 
+      if (!data.uploading) {
+        return;
+      }
+
       // remove lingering items from queue
       for (var i in data.queue) {
         if (data.queue.hasOwnProperty(i) && !data.queue[i].complete && !data.queue[i].error) {
@@ -758,6 +762,7 @@
      * @event fileerror "Specific upload error"
      * @event fileprogress "Specific upload progress"
      * @event filestart "Specific upload starting"
+     * @event fileremove "Specific upload removed"
      * @event start "Uploads starting"
      * @event queued "Files are queued for upload"
      */

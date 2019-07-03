@@ -145,6 +145,7 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | `fileerror` | Specific upload error |
 | `fileprogress` | Specific upload progress |
 | `filestart` | Specific upload starting |
+| `fileremove` | Specific upload removed |
 | `start` | Uploads starting |
 | `queued` | Files are queued for upload |
 
@@ -157,10 +158,10 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 ### abort
 
-Cancels all active uploads.
+Cancels all active uploads, or specific file.
 
 ```javascript
-$(".target").upload("abort");
+$(".target").upload("abort", [index]);
 ```
 
 ### defaults

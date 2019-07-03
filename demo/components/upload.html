@@ -132,6 +132,9 @@
                         margin: 0 0 0 10px;
                         text-transform: uppercase;
                     }
+                    /* .filelist.started li .cancel { display: block; } */
+                    /* .filelist li .remove { color: red; cursor: pointer; display: block; float: right; font-size: 10px; margin: 0 0 0 10px; text-transform: uppercase; }
+  .filelist.started li .remove { display: none; } */
 
                     .filelist li.error .file {
                         color: red;
@@ -157,6 +160,7 @@
                             .on("fileprogress.upload", onFileProgress)
                             .on("filecomplete.upload", onFileComplete)
                             .on("fileerror.upload", onFileError)
+                            // .on("fileremove.upload", onFileRemove)
                             .on("chunkstart.upload", onChunkStart)
                             .on("chunkprogress.upload", onChunkProgress)
                             .on("chunkcomplete.upload", onChunkComplete)
@@ -164,6 +168,7 @@
                             .on("queued.upload", onQueued);
 
                         $(".filelist.queue").on("click", ".cancel", onCancel);
+                        // $(".filelist.queue").on("click", ".remove", onRemove);
                         $(".cancel_all").on("click", onCancelAll);
                         $(".start_all").on("click", onStart);
                     });
@@ -179,6 +184,12 @@
                         $(this).parents("form").find(".upload").upload("abort");
                     }
 
+                    // function onRemove(e) {
+                    //   console.log("Remove");
+                    //   var index = $(this).parents("li").data("index");
+                    //   $(this).parents("form").find(".upload").upload("remove", parseInt(index, 10));
+                    // }
+
                     function onBeforeSend(formData, file) {
                         console.log("Before Send");
                         formData.append("test_field", "test_value");
@@ -190,6 +201,7 @@
                         console.log("Queued");
                         var html = '';
                         for (var i = 0; i < files.length; i++) {
+                            // html += '<li data-index="' + files[i].index + '"><span class="content"><span class="file">' + files[i].name + '</span><span class="remove">Remove</span><span class="cancel">Cancel</span><span class="progress">Queued</span></span><span class="bar"></span></li>';
                             html += '<li data-index="' + files[i].index + '"><span class="content"><span class="file">' + files[i].name + '</span><span class="cancel">Cancel</span><span class="progress">Queued</span></span><span class="bar"></span></li>';
                         }
 
@@ -200,6 +212,7 @@
                     function onStart(e, files) {
                         console.log("Start");
                         $(this).parents("form").find(".filelist.queue")
+                            .addClass("started")
                             .find("li")
                             .find(".progress").text("Waiting");
                     }
@@ -244,6 +257,13 @@
                         $(this).parents("form").find(".filelist.queue")
                             .find("li[data-index=" + file.index + "]").addClass("error")
                             .find(".progress").text("Error: " + error);
+                    }
+
+                    function onFileRemove(e, file, error) {
+                        console.log("File Removed");
+                        $(this).parents("form").find(".filelist.queue")
+                            .find("li[data-index=" + file.index + "]").addClass("error")
+                            .find(".progress").text("Removed");
                     }
 
                     function onChunkStart(e, file) {
@@ -322,7 +342,7 @@
                 <div class="demo_container">
                     <div class="demo_example">
                         <form action="#" method="GET" class="form demo_form">
-                            <div class="upload" data-upload-options='{"action":"../_extra/upload.php","autoUpload":false}'></div>
+                            <div class="upload" data-upload-options='{"action":"../_extra/upload-target.php","autoUpload":false}'></div>
                             <div class="filelists">
                                 <h5>Complete</h5>
                                 <ol class="filelist complete">

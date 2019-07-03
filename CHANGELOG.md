@@ -4,7 +4,8 @@
 
 ### 1.4.14
 
-* Fixed issue with autoplaying videos in Background
+* Fixed issue with auto play videos in Background
+* Fixed issue with auto upload queues in Upload
 
 ### 1.4.13
 
