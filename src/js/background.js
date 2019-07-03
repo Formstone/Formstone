@@ -439,6 +439,7 @@
               playerapiid: guid,
               loop: (data.loop) ? 1 : 0,
               autoplay: 1,
+              mute: 1,
               origin: Window.location.protocol + "//" + Window.location.host
             }, data.youtubeOptions);
 
@@ -466,8 +467,10 @@
                   data.player.mute();
                 }
 
-                if (!data.autoPlay) {
+                if (data.autoPlay) {
                   // make sure the video plays
+                  data.player.playVideo();
+                } else {
                   data.player.pauseVideo();
                 }
               },
