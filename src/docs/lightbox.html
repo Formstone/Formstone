@@ -339,7 +339,8 @@
 <div class="demo_container">
   <div class="demo_example">
     <div class="gallery">
-      <a href="#hidden_content" class="button js-lightbox">Show Hidden Content</a>
+      <a href="#hidden_content" class="button js-lightbox" data-lightbox-gallery="inline_content">Show Hidden Content</a>
+      <a href="#hidden_content_2" class="button js-lightbox" data-lightbox-gallery="inline_content">Show Hidden Content 2</a>
     </div>
     <div id="hidden_content" style="display: none;">
       <div class="inline_content">
@@ -348,6 +349,12 @@
         <label>
           <input type="checkbox" class=""> Testing a checkbox
         </label>
+      </div>
+    </div>
+    <div id="hidden_content_2" style="display: none;">
+      <div class="inline_content">
+        <h2>More Content!</h2>
+        <p>This was hidden on the page and loaded into the new Lightbox instance.</p>
       </div>
     </div>
     <script>

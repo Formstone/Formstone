@@ -167,7 +167,7 @@
           Instance.type = "element";
         }
 
-        if (isImage || isVideo) {
+        // if (isImage || isVideo) {
           // Check for gallery
           var id = $el.data(Namespace + "-gallery");
 
@@ -178,7 +178,7 @@
             Instance.gallery.index = Instance.gallery.$items.index(Instance.$el);
             Instance.gallery.total = Instance.gallery.$items.length - 1;
           }
-        }
+        // }
 
         // Thumbnails support
         if (!(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active)) {
@@ -286,6 +286,20 @@
           html += '</div></div></div>'; // caption, meta_content, meta
 
           html += '</div>'; // tools
+        } else {
+          // Other galleries
+          if (Instance.gallery.active) {
+            html += '<div class="' + RawClasses.tools + '">';
+
+            html += '<div class="' + RawClasses.controls + '">';
+
+            html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_previous].join(" ") + '">' + Instance.labels.previous + '</button>';
+            html += '<button type="button" class="' + [RawClasses.control, RawClasses.control_next].join(" ") + '">' + Instance.labels.next + '</button>';
+
+            html += '</div>';
+
+            html += '</div>';
+          }
         }
         html += '</div></div>'; //container, content, lightbox
 
@@ -523,9 +537,13 @@
 
           // Start preloading
           if (Instance.gallery.active) {
-            preloadGallery();
-            updateThumbnails();
-            positionThumbnails();
+            if (Instance.type == 'element') {
+
+            } else {
+              preloadGallery();
+              updateThumbnails();
+              positionThumbnails();
+            }
           }
 
           // Focus
@@ -1191,31 +1209,53 @@
      */
 
     function cleanGallery() {
-      if (typeof Instance.$imageContainer !== 'undefined') {
-        if (Instance.isViewer) {
-          Instance.$imageContainer.fsViewer("destroy");
+      if (Instance.type == 'element') {
+        if (typeof Instance.$inlineTarget !== 'undefined' && Instance.$inlineTarget.length) {
+          restoreContents();
         }
-        Instance.$imageContainer.remove();
+      } else {
+        if (typeof Instance.$imageContainer !== 'undefined') {
+          if (Instance.isViewer) {
+            Instance.$imageContainer.fsViewer("destroy");
+          }
+          Instance.$imageContainer.remove();
+        }
+        if (typeof Instance.$videoWrapper !== 'undefined') {
+          Instance.$videoWrapper.remove();
+        }
       }
-      if (typeof Instance.$videoWrapper !== 'undefined') {
-        Instance.$videoWrapper.remove();
-      }
+
       Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
 
-      Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
-      Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
+      var source = Instance.$el.attr("href");
 
-      var source = Instance.$el.attr("href"),
-        isVideo = checkVideo(source);
+      if (Instance.type == 'element') {
+        // var isUrl = ((type === "url") || (source.substr(0, 4) === "http" && !hash)),
+        //   isElement = ((type === "element") || (!isUrl && (hash.substr(0, 1) === "#"))),
+        //   isObject = ((typeof $object !== "undefined"));
 
-      if (isVideo) {
-        Instance.type = "video";
-
-        loadVideo(source);
+        // if (isUrl) {
+        //   loadURL(source);
+        // } else if (isElement) {
+          appendContents(source);
+        // } else if (isObject) {
+        //   appendObject(Instance.$object);
+        // }
       } else {
-        Instance.type = "image";
+        Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
+        Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
 
-        loadImage(source);
+        var isVideo = checkVideo(source);
+
+        if (isVideo) {
+          Instance.type = "video";
+
+          loadVideo(source);
+        } else {
+          Instance.type = "image";
+
+          loadImage(source);
+        }
       }
 
       updateGalleryControls();

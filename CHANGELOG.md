@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.15
+
+* Adding basic inline content gallery support to Lightbox
+
 ### 1.4.14
 
 * Fixed issue with auto play videos in Background
