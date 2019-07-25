@@ -533,7 +533,7 @@
           Instance.visible = true;
 
           // Fire open event
-          $Window.trigger(Events.open);
+          $Window.trigger(Events.open, [{ instance: Instance }]);
 
           // Start preloading
           if (Instance.gallery.active) {
