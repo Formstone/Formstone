@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.16
+
+* Fixing issue with autoAdvance in linked Carousel
+
 ### 1.4.15
 
 * Adding basic inline content gallery support to Lightbox

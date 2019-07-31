@@ -697,7 +697,9 @@
 
     function jumpPage(data, index, silent, fromLinked, animated) {
       if (data.enabled) {
-        Functions.clearTimer(data.autoTimer);
+        if (!fromLinked) {
+          Functions.clearTimer(data.autoTimer);
+        }
 
         if (typeof animated === "undefined") {
           animated = true;
