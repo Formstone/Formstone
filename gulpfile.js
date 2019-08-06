@@ -66,6 +66,12 @@ gulp.task('scripts', function() {
       pkg:  pkg,
       date: date
     }))
+    .pipe(replaceInclude({
+      prefix: '@',
+      global: {
+        version: pkg.version
+      }
+    }))
     .pipe(gulp.dest('./dist/js'));
 });
 
