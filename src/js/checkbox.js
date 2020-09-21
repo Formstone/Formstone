@@ -22,7 +22,7 @@
 
     function construct(data) {
       var $parent = this.closest("label"),
-        $label = $parent.length ? $parent.eq(0) : $("label[for=" + this.attr("id") + "]"),
+        $label = $parent.length ? $parent.eq(0) : $('label[for="' + this.attr("id") + '"]'),
         baseClass = [RawClasses.base, data.theme, data.customClass].join(" "),
         labelClass = [RawClasses.label, data.theme, data.customClass].join(" "),
         html = "";
