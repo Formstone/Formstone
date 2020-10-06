@@ -3013,6 +3013,7 @@
       enableControls(data, data.$controlItems);
 
       data.$images.off(Events.namespace);
+
       data.$canister.fsTouch("destroy");
 
       data.$items.removeClass([RawClasses.item, RawClasses.visible, Classes.item_previous, Classes.item_next].join(" "))
@@ -3111,16 +3112,18 @@
           data: data
         }, 0);
 
-        data.$canister.fsTouch({
-            axis: "x",
-            pan: true,
-            swipe: true
-          }).on(Events.panStart, data, onPanStart)
-          .on(Events.pan, data, onPan)
-          .on(Events.panEnd, data, onPanEnd)
-          .on(Events.swipe, data, onSwipe)
-          .on(Events.focusIn, data, onItemFocus)
-          .css(TransitionProperty, "");
+        if (data.touchEvents) {
+          data.$canister.fsTouch({
+              axis: "x",
+              pan: true,
+              swipe: true
+            }).on(Events.panStart, data, onPanStart)
+            .on(Events.pan, data, onPan)
+            .on(Events.panEnd, data, onPanEnd)
+            .on(Events.swipe, data, onSwipe)
+            .on(Events.focusIn, data, onItemFocus)
+            .css(TransitionProperty, "");
+        }
 
         cacheValues(data);
 
@@ -4318,6 +4321,7 @@
          * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
          * @param single [boolean] <false> "Flag to display single item at a time"
          * @param theme [string] <"fs-light"> "Theme class name"
+         * @param theme [boolean] <true> "Use touch events"
          * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
          */
 
@@ -4346,6 +4350,7 @@
           show: 1,
           single: false,
           theme: "fs-light",
+          touch: true,
           useMargin: false
         },
 
