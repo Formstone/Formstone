@@ -2,6 +2,12 @@
 
 <!-- -->
 
+### 1.4.18
+
+* Adding option to disable touch controls in Carousel
+* Fixed issue with control accessibility in Carousel (Thanks @nhall!)
+* Fixed issue with iFrame galleries in Lightbox
+
 ### 1.4.17
 
 * Fixing issue with brackets in Checkbox

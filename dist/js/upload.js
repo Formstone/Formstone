@@ -1,4 +1,4 @@
-/*! formstone v1.4.17 [upload.js] 2020-10-06 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18 [upload.js] 2020-10-06 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
