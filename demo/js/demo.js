@@ -1,1 +1,150 @@
-!function(o,i){var n,e={};function a(){var i=o(this),e=o(i.attr("href"));e.find(".js-background").background("resize"),e.find(".js-carousel").carousel("resize"),e.find(".js-equalize").equalize("resize"),e.find("input[type=range]").range("resize"),e.find(".js-scrollbar").scrollbar("resize"),n.find(".js-checkpoint").checkpoint("resize"),n.find(".js-sticky").sticky("resize")}e.minXS=parseInt("320",10),e.minSM=parseInt("500",10),e.minMD=parseInt("740",10),e.minLG=parseInt("980",10),e.minXL=parseInt("1220",10),e.maxXS=e.minXS-1,e.maxSM=e.minSM-1,e.maxMD=e.minMD-1,e.maxLG=e.minLG-1,e.maxXL=e.minXL-1,e.minHTsm=parseInt("500",10),e.minHT=parseInt("800",10),e.maxHTsm=e.minHTsm-1,e.maxHT=e.minHT-1,i.Ready(function(){o(window),n=o("body"),o.mediaquery&&o.mediaquery({minWidth:[e.minXS,e.minSM,e.minMD,e.minLG,e.minXL],maxWidth:[e.maxXL,e.maxLG,e.maxMD,e.maxSM,e.maxXS],minHeight:[e.minHTsm,e.minHT],maxHeight:[e.maxHT,e.maxHTsm]}),o.cookie&&o.cookie({path:"/"}),o(".demo_container").each(function(i){var e="",n=o(this),a=n.find(".demo_example"),s=n.find(".demo_code");a.attr("id","example-"+i),s.attr("id","code-"+i),e+='<div class="demo_tabs contain">',e+='<a href="#example-'+i+'" class="demo_tab js-demo_tabs" data-tabs-group="demo-'+i+'">Demo</a>',e+='<a href="#code-'+i+'" class="demo_tab js-demo_tabs" data-tabs-group="demo-'+i+'">Code</a>',e+="</div>",n.prepend(e)}),function(i){var e={theme:i};o(".js-navigation_elements").appendTo("body"),n.find(".js-background").background("destroy"),n.find(".js-carousel").carousel("destroy"),n.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy"),n.find(".js-checkpoint").checkpoint("destroy"),n.find(".js-dropdown").dropdown("destroy"),n.find(".js-equalize").equalize("destroy"),n.find(".js-lightbox").lightbox("destroy"),n.find(".js-navigation").navigation("destroy"),n.find("input[type=number]").number("destroy"),n.find(".js-pagination").pagination("destroy"),n.find("input[type=range]").range("destroy"),n.find(".js-scrollbar").scrollbar("destroy"),n.find(".js-sticky").sticky("destroy"),n.find(".js-swap").swap("destroy"),n.find(".js-tabs").tabs("destroy"),n.find(".js-tooltip").tooltip("destroy"),n.find(".js-upload").upload("destroy"),n.find(".js-viewer").viewer("destroy"),n.find(".js-background").background(e),n.find(".js-carousel").carousel(e),n.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(e),n.find(".js-checkpoint").checkpoint(),n.find(".js-dropdown").dropdown(e),n.find(".js-equalize").equalize(e),n.find(".js-lightbox").lightbox(e),n.find(".js-navigation").navigation(e),n.find("input[type=number]").number(e),n.find(".js-pagination").pagination(e),n.find("input[type=range]").range(e),n.find(".js-scrollbar").scrollbar(e),n.find(".js-sticky").sticky(e),n.find(".js-swap").swap(e),n.find(".js-tabs").tabs(e),n.find(".js-tooltip").tooltip(e),n.find(".js-upload").upload(e),n.find(".js-viewer").viewer(e),n.find(".js-demo_tabs").off("update.tabs").tabs("destroy"),n.find(".js-demo_tabs").tabs({mobileMaxWidth:"0px",theme:"fs-demo"}).on("update.tabs",a)}("fs-light")})}(jQuery,Formstone);
+/* ==========================================================================
+  Demo
+============================================================================= */
+
+  (function($, Formstone) {
+    var $window,
+        $body,
+        opts = {};
+
+    opts.minXS = parseInt("320", 10);
+    opts.minSM = parseInt("500", 10);
+    opts.minMD = parseInt("740", 10);
+    opts.minLG = parseInt("980", 10);
+    opts.minXL = parseInt("1220", 10);
+
+    opts.maxXS = opts.minXS - 1;
+    opts.maxSM = opts.minSM - 1;
+    opts.maxMD = opts.minMD - 1;
+    opts.maxLG = opts.minLG - 1;
+    opts.maxXL = opts.minXL - 1;
+
+    opts.minHTsm = parseInt("500", 10);
+    opts.minHT   = parseInt("800", 10);
+
+    opts.maxHTsm = opts.minHTsm - 1;
+    opts.maxHT   = opts.minHT - 1;
+
+    function init() {
+      $window = $(window);
+      $body   = $("body");
+
+      if ($.mediaquery) {
+        $.mediaquery({
+          minWidth: [ opts.minXS, opts.minSM, opts.minMD, opts.minLG, opts.minXL ],
+          maxWidth: [ opts.maxXL, opts.maxLG, opts.maxMD, opts.maxSM, opts.maxXS ],
+          minHeight: [ opts.minHTsm, opts.minHT ],
+          maxHeight: [ opts.maxHT, opts.maxHTsm ]
+        });
+      }
+
+      if ($.cookie) {
+        $.cookie({
+          path: "/"
+        });
+      }
+
+      buildDemoTabs();
+      buildPlugins("fs-light");
+    }
+
+    function buildDemoTabs() {
+      $(".demo_container").each(function(index) {
+        var html     = "",
+            $demo    = $(this),
+            $example = $demo.find(".demo_example"),
+            $code    = $demo.find(".demo_code");
+
+        $example.attr("id", "example-" + index);
+        $code.attr("id", "code-" + index);
+
+        html += '<div class="demo_tabs contain">';
+        html += '<a href="#example-' + index + '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Demo</a>';
+        html += '<a href="#code-' + index +    '" class="demo_tab js-demo_tabs" data-tabs-group="demo-' + index + '">Code</a>';
+        html += '</div>';
+
+        $demo.prepend(html);
+      });
+    }
+
+    function buildPlugins(theme) {
+      var options = {
+        theme: theme
+      };
+
+      // Move the demo navs out
+
+      $(".js-navigation_elements").appendTo("body");
+
+      // Destroy
+
+      $body.find(".js-background").background("destroy");
+      $body.find(".js-carousel").carousel("destroy");
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox("destroy");
+      $body.find(".js-checkpoint").checkpoint("destroy");
+      $body.find(".js-dropdown").dropdown("destroy");
+      $body.find(".js-equalize").equalize("destroy");
+      $body.find(".js-lightbox").lightbox("destroy");
+      $body.find(".js-navigation").navigation("destroy");
+      $body.find("input[type=number]").number("destroy");
+      $body.find(".js-pagination").pagination("destroy");
+      $body.find("input[type=range]").range("destroy");
+      $body.find(".js-scrollbar").scrollbar("destroy");
+      $body.find(".js-sticky").sticky("destroy");
+      $body.find(".js-swap").swap("destroy");
+      $body.find(".js-tabs").tabs("destroy");
+      $body.find(".js-tooltip").tooltip("destroy");
+      $body.find(".js-upload").upload("destroy");
+      $body.find(".js-viewer").viewer("destroy");
+
+      // Init
+
+      $body.find(".js-background").background(options);
+      $body.find(".js-carousel").carousel(options);
+      $body.find(".js-checkbox, .js-radio, input[type=checkbox], input[type=radio]").checkbox(options);
+      $body.find(".js-checkpoint").checkpoint();
+      $body.find(".js-dropdown").dropdown(options);
+      $body.find(".js-equalize").equalize(options);
+      $body.find(".js-lightbox").lightbox(options);
+      $body.find(".js-navigation").navigation(options);
+      $body.find("input[type=number]").number(options);
+      $body.find(".js-pagination").pagination(options);
+      $body.find("input[type=range]").range(options);
+      $body.find(".js-scrollbar").scrollbar(options);
+      $body.find(".js-sticky").sticky(options);
+      $body.find(".js-swap").swap(options);
+      $body.find(".js-tabs").tabs(options);
+      $body.find(".js-tooltip").tooltip(options);
+      $body.find(".js-upload").upload(options);
+      $body.find(".js-viewer").viewer(options);
+
+      // Demo Tabs
+
+      $body.find(".js-demo_tabs").off("update.tabs").tabs("destroy");
+
+      $body.find(".js-demo_tabs").tabs({
+        mobileMaxWidth: "0px",
+        theme: "fs-demo"
+      }).on("update.tabs", resetPlugins);
+    }
+
+    function resetPlugins() {
+      var $tab     = $(this),
+          $content = $( $tab.attr("href") );
+
+      $content.find(".js-background").background("resize");
+      $content.find(".js-carousel").carousel("resize");
+      $content.find(".js-equalize").equalize("resize");
+      $content.find("input[type=range]").range("resize");
+      $content.find(".js-scrollbar").scrollbar("resize");
+
+      $body.find(".js-checkpoint").checkpoint("resize");
+      $body.find(".js-sticky").sticky("resize");
+    }
+
+    // Ready
+
+    Formstone.Ready(init);
+
+  })(jQuery, Formstone);
+

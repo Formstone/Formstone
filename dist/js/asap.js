@@ -1,2 +1,494 @@
 /*! formstone v1.4.17 [asap.js] 2020-10-06 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core","./analytics"],e):e(jQuery,Formstone)}(function(l,t){"use strict";function r(e){var t=e.currentTarget;1<e.which||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||window.location.protocol!==t.protocol||window.location.host!==t.host||"_blank"===t.target||t.hash&&(t.href.replace(t.hash,"")===window.location.href.replace(location.hash,"")||t.href===window.location.href+"#")||t.href.match(f.ignoreTypes)||(g.killEvent(e),e.stopImmediatePropagation(),t.href!==m&&o(t.href,!0))}function n(e){d&&d.abort();var t=e.originalEvent.state;t&&(O=t.id,t.url!==m&&o(t.url,!1))}function o(n,e){d&&d.abort(),p.trigger(y.requested,[e]),f.transitionOutDeferred=f.transitionOut.apply(h,[!1]);var o=c(n),t=o.params,r=(o.hash,o.clean),a="User error",i=null,s=l.Deferred();t[f.requestKey]=!0,d=l.ajax({url:r,data:t,dataType:"json",cache:f.cache,xhr:function(){var e=new h.XMLHttpRequest;return e.addEventListener("progress",function(e){if(e.lengthComputable){var t=e.loaded/e.total;p.trigger(y.progress,[t])}},!1),e},success:function(e,t,r){i="string"===l.type(e)?l.parseJSON(e):e,e.location&&(n=e.location,o=c(n),o.hash),s.resolve()},error:function(e,t,r){a=r,s.reject()}}),l.when(s,f.transitionOutDeferred).done(function(){!function(e,t,r){p.trigger(y.loaded,[t]),void 0!==l.fsAnalytics&&l.fsAnalytics("pageview");f.render.call(this,t,e.hash),m=e.url,r&&function(e,t){history.pushState({id:e,url:t},w+e,t)}(++O,m);p.trigger(y.rendered,[t]);var n=!1;if(""!==e.hash){var o=l(e.hash);o.length&&(n=o.offset().top)}!1!==n&&p.scrollTop(n)}(o,i,e)}).fail(function(){p.trigger(y.failed,[a])})}function a(e,t){var r;if("undefined"!==l.type(e))for(var n in e)e.hasOwnProperty(n)&&(r=l(n)).length&&r.html(e[n])}function i(e,t){history.replaceState({id:e,url:t},w+e,t)}function c(e){var t=e.indexOf("?"),r=e.indexOf("#"),n={},o="",a=e;return-1<r&&(o=e.slice(r),a=e.slice(0,r)),-1<t&&(n=g.parseQueryString(e.slice(t+1,-1<r?r:e.length)),a=e.slice(0,t)),{hash:o,params:n,url:e,clean:a}}var s,d,f,e=t.Plugin("asap",{utilities:{_initialize:function(e){!f&&t.support.history&&(s=t.$body,(f=l.extend(u,e)).render===l.noop&&(f.render=a),f.transitionOut===l.noop&&(f.transitionOut=function(){return l.Deferred().resolve()}),history.state?(O=history.state.id,m=history.state.url):(m=window.location.href,i(O,m)),p.on(y.popState,n),s&&!s.hasClass(v.base)&&s.on(y.click,f.selector,r).addClass(v.base))},load:function(e){f&&t.support.history?e&&o(e,!0):window.location.href=e},replace:function(e){var t=history.state;m=e,i(t.id,e)}},events:{failed:"failed",loaded:"loaded",popState:"popstate",progress:"progress",requested:"requested",rendered:"rendered"}}),u={cache:!0,ignoreTypes:/\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,render:l.noop,requestKey:"fs-asap",selector:"a",transitionOut:l.noop},p=t.$window,h=p[0],g=e.functions,y=e.events,v=e.classes.raw,w="asap-",m="",O=1});
+/* global define */
+/* global ga */
+
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core",
+        "./analytics"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name initialize
+     * @description Initializes plugin.
+     * @param opts [object] "Plugin options"
+     */
+
+    function initialize(options) {
+      if (Instance || !Formstone.support.history) {
+        return;
+      }
+
+      $Body = Formstone.$body;
+
+      Instance = $.extend(Defaults, options);
+
+      if (Instance.render === $.noop) {
+        Instance.render = renderState;
+      }
+
+      if (Instance.transitionOut === $.noop) {
+        Instance.transitionOut = function() {
+          return $.Deferred().resolve();
+        };
+      }
+
+      // Initial state
+      if (history.state) {
+        CurrentID = history.state.id;
+        CurrentURL = history.state.url;
+      } else {
+        CurrentURL = window.location.href;
+
+        replaceState(CurrentID, CurrentURL);
+      }
+
+      // Bind state events
+      $Window.on(Events.popState, onPop);
+
+      enable();
+    }
+
+    /**
+     * @method private
+     * @name disable
+     * @description Disable ASAP
+     * @example $.asap("enable");
+     */
+
+    function disable() {
+      if ($Body && $Body.hasClass(RawClasses.base)) {
+        $Body.off(Events.click)
+          .removeClass(RawClasses.base);
+      }
+    }
+
+    /**
+     * @method private
+     * @name enable
+     * @description Enables ASAP
+     * @example $.asap("enable");
+     */
+
+    function enable() {
+      if ($Body && !$Body.hasClass(RawClasses.base)) {
+        $Body.on(Events.click, Instance.selector, onClick)
+          .addClass(RawClasses.base);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onClick
+     * @description Handles click events
+     * @param e [object] "Event data"
+     */
+
+    function onClick(e) {
+      var url = e.currentTarget;
+
+      // Ignore everything but normal click
+      if (
+        (e.which > 1 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) ||
+        (window.location.protocol !== url.protocol || window.location.host !== url.host) || url.target === "_blank"
+      ) {
+        return;
+      }
+
+      // Update state on hash change
+      if (url.hash && (url.href.replace(url.hash, "") === window.location.href.replace(location.hash, "") || url.href === window.location.href + "#")) {
+        return;
+      }
+
+      // Ignore certain file types
+      if (url.href.match(Instance.ignoreTypes)) {
+        return;
+      }
+
+      Functions.killEvent(e);
+      e.stopImmediatePropagation();
+
+      if (url.href !== CurrentURL) {
+        requestURL(url.href, true);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPop
+     * @description Handles history navigation events
+     * @param e [object] "Event data"
+     */
+
+    function onPop(e) {
+      if (Request) {
+        Request.abort();
+      }
+
+      var state = e.originalEvent.state;
+      // direction = (state.id > CurrentID) ? "forward" : "back";
+
+      if (state) {
+        CurrentID = state.id;
+
+        if (state.url !== CurrentURL) {
+          requestURL(state.url, false);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name requestURL
+     * @description Requests new content via AJAX
+     * @param url [string] "URL to load"
+     * @param doPush [boolean] "Flag to push to stack"
+     */
+
+    function requestURL(url, doPush) {
+      if (Request) {
+        Request.abort();
+      }
+
+      // Fire request event
+      $Window.trigger(Events.requested, [doPush]);
+
+      // Get transition out deferred
+      Instance.transitionOutDeferred = Instance.transitionOut.apply(Window, [false]);
+
+      var parsed = parseURL(url),
+        params = parsed.params,
+        hash = parsed.hash,
+        cleanURL = parsed.clean,
+        error = "User error",
+        response = null,
+        requestDeferred = $.Deferred();
+
+      params[Instance.requestKey] = true;
+
+      // Request new content
+      Request = $.ajax({
+        url: cleanURL,
+        data: params,
+        dataType: "json",
+        cache: Instance.cache,
+        xhr: function() {
+          // custom xhr
+          var xhr = new Window.XMLHttpRequest();
+
+          /*
+          //Upload progress ?
+          xhr.upload.addEventListener("progress", function(e) {
+            if (e.lengthComputable) {
+              var percent = (e.loaded / e.total) / 2;
+              $window.trigger(Events.progress, [ percent ]);
+            }
+          }, false);
+          */
+
+          //Download progress
+          xhr.addEventListener("progress", function(e) {
+            if (e.lengthComputable) {
+              var percent = e.loaded / e.total;
+              $Window.trigger(Events.progress, [percent]);
+            }
+          }, false);
+
+          return xhr;
+        },
+        success: function(resp, status, jqXHR) {
+          response = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
+
+          // handle redirects - requires passing new location with json response
+          if (resp.location) {
+            url = resp.location;
+
+            parsed = parseURL(url);
+            hash = parsed.hash;
+          }
+
+          requestDeferred.resolve();
+        },
+        error: function(jqXHR, status, err) {
+          error = err;
+
+          requestDeferred.reject();
+        }
+      });
+
+      $.when(requestDeferred, Instance.transitionOutDeferred).done(function() {
+        processResponse(parsed, response, doPush);
+      }).fail(function() {
+        $Window.trigger(Events.failed, [error]);
+      });
+    }
+
+    /**
+     * @method private
+     * @name processResponse
+     * @description Processes a state
+     * @param parsedURL [object] "Parsed URL"
+     * @param data [object] "State Data"
+     * @param doPush [boolean] "Flag to replace or add state"
+     */
+
+    function processResponse(parsedURL, data, doPush) {
+      // Fire load event
+      $Window.trigger(Events.loaded, [data]);
+
+      // Trigger analytics page view
+      if ($.fsAnalytics !== undefined) {
+        $.fsAnalytics("pageview");
+      }
+
+      // Render before updating
+      Instance.render.call(this, data, parsedURL.hash);
+
+      // Update current url
+      CurrentURL = parsedURL.url;
+
+      if (doPush) {
+        // Push new states to the stack
+        CurrentID++;
+        pushState(CurrentID, CurrentURL);
+      }
+
+      $Window.trigger(Events.rendered, [data]);
+
+      var scrollTop = false;
+
+      if (parsedURL.hash !== "") {
+        var $el = $(parsedURL.hash);
+
+        if ($el.length) {
+          scrollTop = $el.offset().top;
+        }
+      }
+
+      if (scrollTop !== false) {
+        $Window.scrollTop(scrollTop);
+      }
+    }
+
+    /**
+     * @method private
+     * @name renderHTML
+     * @description Renders a new state
+     * @param data [object] "State Data"
+     * @param hash [string] "Hash"
+     */
+
+    function renderState(data, hash) {
+      // Update DOM
+      if ($.type(data) !== "undefined") {
+        var $target;
+
+        for (var key in data) {
+          if (data.hasOwnProperty(key)) {
+            $target = $(key);
+
+            if ($target.length) {
+              $target.html(data[key]);
+            }
+          }
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name loadURL
+     * @description Loads new page
+     * @param opts [url] <''> "URL to load"
+     */
+
+    /**
+     * @method
+     * @name load
+     * @description Loads new page
+     * @param opts [url] <''> "URL to load"
+     * @example $.asap("load", "http://example.com/page/");
+     */
+
+    function loadURL(url) {
+      if (!Instance || !Formstone.support.history) {
+        window.location.href = url;
+      } else if (url) {
+        requestURL(url, true);
+      }
+
+      return;
+    }
+
+    /**
+     * @method private
+     * @name replaceURL
+     * @description Updates current url in history
+     * @param url [string] <''> "New URL"
+     */
+
+    /**
+     * @method
+     * @name replace
+     * @description Updates current url in history
+     * @param url [string] <''> "New URL"
+     * @example $.asap("replace", "http://example.com/page/");
+     */
+
+    function replaceURL(url) {
+      var state = history.state;
+
+      CurrentURL = url;
+
+      replaceState(state.id, url);
+    }
+
+    /**
+     * @method private
+     * @name pushState
+     * @description Push state to the history stack
+     * @param id [int] "State id"
+     * @param url [string] "State url"
+     */
+
+    function pushState(id, url) {
+      history.pushState({
+        id: id,
+        url: url
+      }, Namespace + id, url);
+    }
+
+    /**
+     * @method private
+     * @name replaceState
+     * @description Push state to the history stack
+     * @param id [int] "State id"
+     * @param url [string] "State url"
+     */
+
+    function replaceState(id, url) {
+      history.replaceState({
+        id: id,
+        url: url
+      }, Namespace + id, url);
+    }
+
+    /**
+     * @method private
+     * @name parseURL
+     * @description Parse url parts
+     * @param url [string] "URL to parse"
+     */
+
+    function parseURL(url) {
+      var queryIndex = url.indexOf("?"),
+        hashIndex = url.indexOf("#"),
+        params = {},
+        hash = "",
+        cleanURL = url;
+
+      if (hashIndex > -1) {
+        hash = url.slice(hashIndex);
+        cleanURL = url.slice(0, hashIndex);
+      }
+
+      if (queryIndex > -1) {
+        params = Functions.parseQueryString(url.slice(queryIndex + 1, ((hashIndex > -1) ? hashIndex : url.length)));
+        cleanURL = url.slice(0, queryIndex);
+      }
+
+      return {
+        hash: hash,
+        params: params,
+        url: url,
+        clean: cleanURL
+      };
+    }
+
+    /**
+     * @plugin
+     * @name ASAP
+     * @description A jQuery plugin for asynchronous page loads.
+     * @type utility
+     * @main asap.js
+     * @dependency jQuery
+     * @dependency core.js
+     * @dependency analytics.js
+     */
+
+    var Plugin = Formstone.Plugin("asap", {
+        utilities: {
+          _initialize: initialize,
+
+          load: loadURL,
+          replace: replaceURL
+        },
+
+        /**
+         * @events
+         * @event requested.asap "Before request is made; triggered on window; Second parameter 'true' if pop event"
+         * @event progress.asap "As request is loaded; triggered on window; Second parameter contains percentage complete"
+         * @event loaded.asap "After request is loaded; triggered on window"
+         * @event rendered.asap "After state is rendered; triggered on window"
+         * @event failed.asap "After load error; triggered on window"
+         */
+
+        events: {
+          failed: "failed",
+          loaded: "loaded",
+          popState: "popstate",
+          progress: "progress",
+          requested: "requested",
+          rendered: "rendered"
+        }
+      }),
+
+      /**
+       * @options
+       * @param cache [boolean] <true> "Flag to cache AJAX responses"
+       * @param ignoreTypes [regex] <> "File types to ignore"
+       * @param render [function] <$.noop> "Custom render function"
+       * @param requestKey [string] <'fs-asap'> "GET variable for requests"
+       * @param selector [string] <'a'> "Target DOM Selector"
+       * @param transitionOut [function] <$.noop> "Transition timing callback; should return user defined $.Deferred object, which must eventually resolve"
+       */
+
+      Defaults = {
+        cache: true,
+        ignoreTypes: /\.(jpg|sjpg|jpeg|png|gif|zip|exe|dmg|pdf|doc.*|xls.*|ppt.*|mp3|txt|rar|wma|mov|avi|wmv|flv|wav)$/i,
+        render: $.noop,
+        requestKey: "fs-asap",
+        selector: "a",
+        transitionOut: $.noop
+      },
+
+      // Localize References
+
+      $Window = Formstone.$window,
+      Window = $Window[0],
+      $Body,
+
+      Functions = Plugin.functions,
+      Events = Plugin.events,
+      RawClasses = Plugin.classes.raw,
+
+      // Internal
+
+      Namespace = "asap-",
+      CurrentURL = '',
+      CurrentID = 1,
+      Request,
+      Instance;
+
+  })
+
+);

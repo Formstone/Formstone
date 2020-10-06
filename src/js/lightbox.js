@@ -1227,17 +1227,33 @@
 
       Instance.$el = Instance.gallery.$items.eq(Instance.gallery.index);
 
-      var source = Instance.$el.attr("href");
+      // var $el = Instance.$el,
+      //     source = ($el && $el[0].href) ? $el[0].href || "" : "",
+      //     hash = ($el && $el[0].hash) ? $el[0].hash || "" : "",
+      //     sourceParts = source.toLowerCase().split(".").pop().split(/\#|\?/),
+      //     type = ($el) ? $el.data(Namespace + "-type") : "",
+      //     isImage = ((type === "image") || (source.match(data.fileTypes) || source.substr(0, 10) === "data:image")),
+      //     isVideo = checkVideo(source),
+      //     isUrl = ((type === "url") || (!isImage && !isVideo && source.substr(0, 4) === "http" && !hash)),
+      //     isElement = ((type === "element") || (!isImage && !isVideo && !isUrl && (hash.substr(0, 1) === "#"))),
+      //     isObject = ((typeof $object !== "undefined"));
 
       if (Instance.type == 'element') {
+        var source = Instance.$el[0].href,
+            isUrl = (source.substr(0, 4) === "http");
+
         // var isUrl = ((type === "url") || (source.substr(0, 4) === "http" && !hash)),
         //   isElement = ((type === "element") || (!isUrl && (hash.substr(0, 1) === "#"))),
         //   isObject = ((typeof $object !== "undefined"));
 
-        // if (isUrl) {
-        //   loadURL(source);
-        // } else if (isElement) {
+        if (isUrl) {
+          loadURL(source);
+        } else {
           appendContents(source);
+        }
+
+        // } else if (isElement) {
+        // appendContents(source);
         // } else if (isObject) {
         //   appendObject(Instance.$object);
         // }

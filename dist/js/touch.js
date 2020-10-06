@@ -1,2 +1,523 @@
 /*! formstone v1.4.17 [touch.js] 2020-10-06 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(X,s){"use strict";function o(e){e.preventManipulation&&e.preventManipulation();var t=e.data,a=e.originalEvent;if(a.type.match(/(up|end|cancel)$/i))d(e);else{if(a.pointerId){var n=!1;for(var i in t.touches)t.touches[i].id===a.pointerId&&(n=!0,t.touches[i].pageX=a.pageX,t.touches[i].pageY=a.pageY);n||t.touches.push({id:a.pointerId,pageX:a.pageX,pageY:a.pageY})}else t.touches=a.touches;a.type.match(/(down|start)$/i)?Y(e):a.type.match(/move$/i)&&p(e)}}function Y(e){var t=e.data,a="undefined"!==X.type(t.touches)&&t.touches.length?t.touches[0]:null;a&&t.$el.off(w.mouseDown),t.touching||(t.startE=e.originalEvent,t.startX=a?a.pageX:e.pageX,t.startY=a?a.pageY:e.pageY,t.startT=(new Date).getTime(),t.scaleD=1,t.passedAxis=!1),t.$links&&t.$links.off(w.click);var n=x(t.scale?w.scaleStart:w.panStart,e,t.startX,t.startY,t.scaleD,0,0,"","");if(t.scale&&t.touches&&2<=t.touches.length){var i=t.touches;t.pinch={startX:f(i[0].pageX,i[1].pageX),startY:f(i[0].pageY,i[1].pageY),startD:m(i[1].pageX-i[0].pageX,i[1].pageY-i[0].pageY)},n.pageX=t.startX=t.pinch.startX,n.pageY=t.startY=t.pinch.startY}t.touching||(t.touching=!0,t.pan&&!a&&D.on(w.mouseMove,t,p).on(w.mouseUp,t,d),s.support.pointer?D.on([w.pointerMove,w.pointerUp,w.pointerCancel].join(" "),t,o):D.on([w.touchMove,w.touchEnd,w.touchCancel].join(" "),t,o),t.$el.trigger(n))}function p(e){var t=e.data,a="undefined"!==X.type(t.touches)&&t.touches.length?t.touches[0]:null,n=a?a.pageX:e.pageX,i=a?a.pageY:e.pageY,s=n-t.startX,o=i-t.startY,p=0<s?"right":"left",c=0<o?"down":"up",r=Math.abs(s)>t.threshold,l=Math.abs(o)>t.threshold;if(!t.passedAxis&&t.axis&&(t.axisX&&l||t.axisY&&r))d(e);else{!t.passedAxis&&(!t.axis||t.axis&&t.axisX&&r||t.axisY&&l)&&(t.passedAxis=!0),t.passedAxis&&(M.killEvent(e),M.killEvent(t.startE));var u=!0,h=x(t.scale?w.scale:w.pan,e,n,i,t.scaleD,s,o,p,c);if(t.scale)if(t.touches&&2<=t.touches.length){var g=t.touches;t.pinch.endX=f(g[0].pageX,g[1].pageX),t.pinch.endY=f(g[0].pageY,g[1].pageY),t.pinch.endD=m(g[1].pageX-g[0].pageX,g[1].pageY-g[0].pageY),t.scaleD=t.pinch.endD/t.pinch.startD,h.pageX=t.pinch.endX,h.pageY=t.pinch.endY,h.scale=t.scaleD,h.deltaX=t.pinch.endX-t.pinch.startX,h.deltaY=t.pinch.endY-t.pinch.startY}else t.pan||(u=!1);u&&t.$el.trigger(h)}}function d(e){var t=e.data,a="undefined"!==X.type(t.touches)&&t.touches.length?t.touches[0]:null,n=a?a.pageX:e.pageX,i=a?a.pageY:e.pageY,s=n-t.startX,o=i-t.startY,p=(new Date).getTime(),c=t.scale?w.scaleEnd:w.panEnd,r=0<s?"right":"left",l=0<o?"down":"up",u=1<Math.abs(s),h=1<Math.abs(o);if(t.swipe&&p-t.startT<t.time&&Math.abs(s)>t.threshold&&(c=w.swipe),t.axis&&(t.axisX&&h||t.axisY&&u)||u||h){t.$links=t.$el.find("a");for(var g=0,d=t.$links.length;g<d;g++)v(t.$links.eq(g),t)}var f=x(c,e,n,i,t.scaleD,s,o,r,l);D.off([w.touchMove,w.touchEnd,w.touchCancel,w.mouseMove,w.mouseUp,w.pointerMove,w.pointerUp,w.pointerCancel].join(" ")),t.$el.trigger(f),t.touches=[],t.scale,a&&(t.touchTimer=M.startTimer(t.touchTimer,5,function(){t.$el.on(w.mouseDown,t,Y)})),t.touching=!1}function v(e,t){e.on(w.click,t,n);var a=X._data(e[0],"events").click;a.unshift(a.pop())}function n(e){M.killEvent(e,!0),e.data.$links.off(w.click)}function x(e,t,a,n,i,s,o,p,c){return X.Event(e,{originalEvent:t,bubbles:!0,pageX:a,pageY:n,scale:i,deltaX:s,deltaY:o,directionX:p,directionY:c})}function f(e,t){return(e+t)/2}function m(e,t){return Math.sqrt(e*e+t*t)}function a(e,t){e.css({"-ms-touch-action":t,"touch-action":t})}var e=!s.window.PointerEvent,t=s.Plugin("touch",{widget:!0,defaults:{axis:!1,pan:!1,scale:!1,swipe:!1,threshold:10,time:50},methods:{_construct:function(e){if(e.touches=[],e.touching=!1,this.on(w.dragStart,M.killEvent),e.swipe&&(e.pan=!0),e.scale&&(e.axis=!1),e.axisX="x"===e.axis,e.axisY="y"===e.axis,s.support.pointer){var t="";!e.axis||e.axisX&&e.axisY?t="none":(e.axisX&&(t+=" pan-y"),e.axisY&&(t+=" pan-x")),a(this,t),this.on(w.pointerDown,e,o)}else this.on(w.touchStart,e,o).on(w.mouseDown,e,Y)},_destruct:function(e){this.off(w.namespace),a(this,"")}},events:{pointerDown:e?"MSPointerDown":"pointerdown",pointerUp:e?"MSPointerUp":"pointerup",pointerMove:e?"MSPointerMove":"pointermove",pointerCancel:e?"MSPointerCancel":"pointercancel"}}),w=t.events,M=t.functions,D=s.$window;w.pan="pan",w.panStart="panstart",w.panEnd="panend",w.scale="scale",w.scaleStart="scalestart",w.scaleEnd="scaleend",w.swipe="swipe"});
+/* global define */
+
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name construct
+     * @description Builds instance.
+     * @param data [object] "Instance data"
+     */
+
+    function construct(data) {
+      data.touches = [];
+      data.touching = false;
+
+      this.on(Events.dragStart, Functions.killEvent);
+
+      if (data.swipe) {
+        data.pan = true;
+      }
+
+      if (data.scale) {
+        data.axis = false;
+      }
+
+      data.axisX = data.axis === "x";
+      data.axisY = data.axis === "y";
+
+      if (Formstone.support.pointer) {
+        var action = "";
+
+        if (!data.axis || (data.axisX && data.axisY)) {
+          action = "none";
+        } else {
+          if (data.axisX) {
+            action += " pan-y";
+          }
+          if (data.axisY) {
+            action += " pan-x";
+          }
+        }
+
+        touchAction(this, action);
+
+        this.on(Events.pointerDown, data, onTouch);
+      } else {
+        this.on(Events.touchStart, data, onTouch)
+          .on(Events.mouseDown, data, onPointerStart);
+      }
+    }
+
+    /**
+     * @method private
+     * @name destruct
+     * @description Tears down instance.
+     * @param data [object] "Instance data"
+     */
+
+    function destruct(data) {
+      this.off(Events.namespace);
+
+      touchAction(this, "");
+    }
+
+    /**
+     * @method private
+     * @name onTouch
+     * @description Delegates touch events.
+     * @param e [object] "Event data"
+     */
+
+    function onTouch(e) {
+      // Stop panning and zooming
+      if (e.preventManipulation) {
+        e.preventManipulation();
+      }
+
+      var data = e.data,
+        oe = e.originalEvent;
+
+      if (oe.type.match(/(up|end|cancel)$/i)) {
+        onPointerEnd(e);
+        return;
+      }
+
+      if (oe.pointerId) {
+        // Normalize MS pointer events back to standard touches
+        var activeTouch = false;
+        for (var i in data.touches) {
+          if (data.touches[i].id === oe.pointerId) {
+            activeTouch = true;
+            data.touches[i].pageX = oe.pageX;
+            data.touches[i].pageY = oe.pageY;
+          }
+        }
+        if (!activeTouch) {
+          data.touches.push({
+            id: oe.pointerId,
+            pageX: oe.pageX,
+            pageY: oe.pageY
+          });
+        }
+      } else {
+        // Alias normal touches
+        data.touches = oe.touches;
+      }
+
+      // Delegate touch actions
+      if (oe.type.match(/(down|start)$/i)) {
+        onPointerStart(e);
+      } else if (oe.type.match(/move$/i)) {
+        onPointerMove(e);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerStart
+     * @description Handles pointer start.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerStart(e) {
+      var data = e.data,
+        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+
+      if (touch) {
+        data.$el.off(Events.mouseDown);
+      }
+
+      if (!data.touching) {
+        data.startE = e.originalEvent;
+        data.startX = (touch) ? touch.pageX : e.pageX;
+        data.startY = (touch) ? touch.pageY : e.pageY;
+        data.startT = new Date().getTime();
+        data.scaleD = 1;
+        data.passedAxis = false;
+      }
+
+      // Clear old click events
+
+      if (data.$links) {
+        data.$links.off(Events.click);
+      }
+
+      // Pan / Scale
+
+      var newE = buildEvent(data.scale ? Events.scaleStart : Events.panStart, e, data.startX, data.startY, data.scaleD, 0, 0, "", "");
+
+      if (data.scale && data.touches && data.touches.length >= 2) {
+        var t = data.touches;
+
+        data.pinch = {
+          startX: midpoint(t[0].pageX, t[1].pageX),
+          startY: midpoint(t[0].pageY, t[1].pageY),
+          startD: pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY))
+        };
+
+        newE.pageX = data.startX = data.pinch.startX;
+        newE.pageY = data.startY = data.pinch.startY;
+      }
+
+      // Only bind at first touch
+      if (!data.touching) {
+        data.touching = true;
+
+        if (data.pan && !touch) {
+          $Window.on(Events.mouseMove, data, onPointerMove)
+            .on(Events.mouseUp, data, onPointerEnd);
+        }
+
+        if (Formstone.support.pointer) {
+          $Window.on([
+            Events.pointerMove,
+            Events.pointerUp,
+            Events.pointerCancel
+          ].join(" "), data, onTouch);
+        } else {
+          $Window.on([
+            Events.touchMove,
+            Events.touchEnd,
+            Events.touchCancel
+          ].join(" "), data, onTouch);
+        }
+
+        data.$el.trigger(newE);
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerMove
+     * @description Handles pointer move.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerMove(e) {
+      var data = e.data,
+        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        newX = (touch) ? touch.pageX : e.pageX,
+        newY = (touch) ? touch.pageY : e.pageY,
+        deltaX = newX - data.startX,
+        deltaY = newY - data.startY,
+        dirX = (deltaX > 0) ? "right" : "left",
+        dirY = (deltaY > 0) ? "down" : "up",
+        movedX = Math.abs(deltaX) > data.threshold,
+        movedY = Math.abs(deltaY) > data.threshold;
+
+      if (!data.passedAxis && data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) {
+        // if axis and moved in opposite direction
+        onPointerEnd(e);
+      } else {
+        if (!data.passedAxis && (!data.axis || (data.axis && (data.axisX && movedX) || (data.axisY && movedY)))) {
+          // if has axis and moved in same direction
+          data.passedAxis = true;
+        }
+
+        if (data.passedAxis) {
+          Functions.killEvent(e);
+          Functions.killEvent(data.startE);
+        }
+
+        // Pan / Scale
+
+        var fire = true,
+          newE = buildEvent(data.scale ? Events.scale : Events.pan, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+        if (data.scale) {
+          if (data.touches && data.touches.length >= 2) {
+            var t = data.touches;
+
+            data.pinch.endX = midpoint(t[0].pageX, t[1].pageX);
+            data.pinch.endY = midpoint(t[0].pageY, t[1].pageY);
+            data.pinch.endD = pythagorus((t[1].pageX - t[0].pageX), (t[1].pageY - t[0].pageY));
+            data.scaleD = (data.pinch.endD / data.pinch.startD);
+            newE.pageX = data.pinch.endX;
+            newE.pageY = data.pinch.endY;
+            newE.scale = data.scaleD;
+            newE.deltaX = data.pinch.endX - data.pinch.startX;
+            newE.deltaY = data.pinch.endY - data.pinch.startY;
+          } else if (!data.pan) {
+            fire = false;
+          }
+        }
+
+        if (fire) {
+          data.$el.trigger(newE);
+        }
+      }
+    }
+
+    /**
+     * @method private
+     * @name onPointerEnd
+     * @description Handles pointer end / cancel.
+     * @param e [object] "Event data"
+     */
+
+    function onPointerEnd(e) {
+      var data = e.data;
+
+      // Pan / Swipe / Scale
+
+      var touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        newX = (touch) ? touch.pageX : e.pageX,
+        newY = (touch) ? touch.pageY : e.pageY,
+        deltaX = newX - data.startX,
+        deltaY = newY - data.startY,
+        endT = new Date().getTime(),
+        eType = data.scale ? Events.scaleEnd : Events.panEnd,
+        dirX = (deltaX > 0) ? "right" : "left",
+        dirY = (deltaY > 0) ? "down" : "up",
+        movedX = Math.abs(deltaX) > 1,
+        movedY = Math.abs(deltaY) > 1;
+
+      // Swipe
+      if ( data.swipe && (endT - data.startT) < data.time && Math.abs(deltaX) > data.threshold) {
+        eType = Events.swipe;
+      }
+
+      // Kill clicks to internal links
+
+      if ((data.axis && ((data.axisX && movedY) || (data.axisY && movedX))) || (movedX || movedY)) {
+        data.$links = data.$el.find("a");
+
+        for (var i = 0, count = data.$links.length; i < count; i++) {
+          bindLink(data.$links.eq(i), data);
+        }
+      }
+
+      var newE = buildEvent(eType, e, newX, newY, data.scaleD, deltaX, deltaY, dirX, dirY);
+
+      $Window.off([
+        Events.touchMove,
+        Events.touchEnd,
+        Events.touchCancel,
+        Events.mouseMove,
+        Events.mouseUp,
+        Events.pointerMove,
+        Events.pointerUp,
+        Events.pointerCancel
+      ].join(" "));
+
+      data.$el.trigger(newE);
+
+      data.touches = [];
+
+      if (data.scale) {
+        /*
+        if (e.originalEvent.pointerId) {
+          for (var i in data.touches) {
+            if (data.touches[i].id === e.originalEvent.pointerId) {
+              data.touches.splice(i, 1);
+            }
+          }
+        } else {
+          data.touches = e.originalEvent.touches;
+        }
+        */
+
+        /*
+        if (data.touches.length) {
+          onPointerStart($.extend(e, {
+            data: data,
+            originalEvent: {
+              touches: data.touches
+            }
+          }));
+        }
+        */
+      }
+
+      if (touch) {
+        data.touchTimer = Functions.startTimer(data.touchTimer, 5, function() {
+          data.$el.on(Events.mouseDown, data, onPointerStart);
+        });
+      }
+
+      data.touching = false;
+    }
+
+    /**
+     * @method private
+     * @name bindLink
+     * @description Bind events to internal links
+     * @param $link [object] "Object to bind"
+     * @param data [object] "Instance data"
+     */
+
+    function bindLink($link, data) {
+      $link.on(Events.click, data, onLinkClick);
+
+      // http://www.elijahmanor.com/how-to-access-jquerys-internal-data/
+      var events = $._data($link[0], "events")["click"];
+      events.unshift(events.pop());
+    }
+
+    /**
+     * @method private
+     * @name onLinkClick
+     * @description Handles clicks to internal links
+     * @param e [object] "Event data"
+     */
+
+    function onLinkClick(e) {
+      Functions.killEvent(e, true);
+      e.data.$links.off(Events.click);
+    }
+
+    /**
+     * @method private
+     * @name buildEvents
+     * @description Builds new event.
+     * @param type [type] "Event type"
+     * @param oe [object] "Original event"
+     * @param x [int] "X value"
+     * @param y [int] "Y value"
+     * @param scale [float] "Scale value"
+     * @param dx [float] "Delta X value"
+     * @param dy [float] "Delta Y value"
+     */
+
+    function buildEvent(type, oe, px, py, s, dx, dy, dirx, diry) {
+      return $.Event(type, {
+        originalEvent: oe,
+        bubbles: true,
+        pageX: px,
+        pageY: py,
+        scale: s,
+        deltaX: dx,
+        deltaY: dy,
+        directionX: dirx,
+        directionY: diry
+      });
+    }
+
+    /**
+     * @method private
+     * @name midpoint
+     * @description Calculates midpoint.
+     * @param a [float] "Value 1"
+     * @param b [float] "Value 2"
+     */
+
+    function midpoint(a, b) {
+      return (a + b) / 2.0;
+    }
+
+    /**
+     * @method private
+     * @name pythagorus
+     * @description Pythagorean theorem.
+     * @param a [float] "Value 1"
+     * @param b [float] "Value 2"
+     */
+
+    function pythagorus(a, b) {
+      return Math.sqrt((a * a) + (b * b));
+    }
+
+    /**
+     * @method private
+     * @name touchAction
+     * @description Set ms touch action on target.
+     * @param action [string] "Touch action value"
+     */
+
+    function touchAction($target, action) {
+      $target.css({
+        "-ms-touch-action": action,
+        "touch-action": action
+      });
+    }
+
+    /**
+     * @plugin
+     * @name Touch
+     * @description A jQuery plugin for multi-touch events.
+     * @type widget
+     * @main touch.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var legacyPointer = !(Formstone.window.PointerEvent),
+      Plugin = Formstone.Plugin("touch", {
+        widget: true,
+
+        /**
+         * @options
+         * @param axis [string] <null> "Limit axis for pan and swipe; 'x' or 'y'"
+         * @param pan [boolean] <false> "Pan events"
+         * @param scale [boolean] <false> "Scale events"
+         * @param swipe [boolean] <false> "Swipe events"
+         * @param threshold [int] <10> "Touch threshold for single axis"
+         * @param time [int] <50> "Touch time limit for single axis"
+         */
+
+        defaults: {
+          axis: false,
+          pan: false,
+          scale: false,
+          swipe: false,
+          threshold: 10,
+          time: 50
+        },
+
+        methods: {
+          _construct: construct,
+          _destruct: destruct
+        },
+
+        events: {
+          pointerDown: legacyPointer ? "MSPointerDown" : "pointerdown",
+          pointerUp: legacyPointer ? "MSPointerUp" : "pointerup",
+          pointerMove: legacyPointer ? "MSPointerMove" : "pointermove",
+          pointerCancel: legacyPointer ? "MSPointerCancel" : "pointercancel"
+        }
+      }),
+
+      // Localize References
+
+      Events = Plugin.events,
+      Functions = Plugin.functions,
+
+      // Local
+
+      $Window = Formstone.$window;
+
+    /**
+     * @events
+     * @event panstart "Panning started"
+     * @event pan "Panning"
+     * @event panend "Panning ended"
+     * @event scalestart "Scaling started"
+     * @event scale "Scaling"
+     * @event scaleend "Scaling ended"
+     * @event swipe "Swipe"
+     */
+
+    Events.pan = "pan";
+    Events.panStart = "panstart";
+    Events.panEnd = "panend";
+    Events.scale = "scale";
+    Events.scaleStart = "scalestart";
+    Events.scaleEnd = "scaleend";
+    Events.swipe = "swipe";
+
+  })
+
+);

@@ -1,2 +1,168 @@
 /*! formstone v1.4.17 [cookie.js] 2020-10-06 | GPL-3.0 License | formstone.it */
-!function(e){"function"==typeof define&&define.amd?define(["jquery","./core"],e):e(jQuery,Formstone)}(function(a,e){"use strict";function i(e,n,t){var i=!1,r=new Date;t.expires&&"number"===a.type(t.expires)&&(r.setTime(r.getTime()+t.expires),i=r.toGMTString());var u=t.domain?"; domain="+t.domain:"",o=i?"; expires="+i:"",l=i?"; max-age="+t.expires/1e3:"",s=t.path?"; path="+t.path:"",f=t.secure?"; secure":"";c.cookie=e+"="+n+o+l+u+s+f}e.Plugin("cookie",{utilities:{_delegate:function(e,n,t){if("object"===a.type(e))r=a.extend(r,e);else if(t=a.extend({},r,t||{}),"undefined"!==a.type(e)){if("undefined"===a.type(n))return function(e){for(var n=e+"=",t=c.cookie.split(";"),i=0;i<t.length;i++){for(var r=t[i];" "===r.charAt(0);)r=r.substring(1,r.length);if(0===r.indexOf(n))return r.substring(n.length,r.length)}return null}(e);null===n?function(e,n){i(e,"",a.extend({},n,{expires:-6048e5}))}(e,t):i(e,n,t)}return null}}});var r={domain:null,expires:6048e5,path:null,secure:null},c=e.document});
+/* global define */
+
+(function(factory) {
+    if (typeof define === "function" && define.amd) {
+      define([
+        "jquery",
+        "./core"
+      ], factory);
+    } else {
+      factory(jQuery, Formstone);
+    }
+  }(function($, Formstone) {
+
+    "use strict";
+
+    /**
+     * @method private
+     * @name delegate
+     * @param key [string] "Cookie key"
+     * @param value [string] "Cookie value"
+     * @param options [object] "Options object"
+     * @return [null || string] "Cookie value, if 'read'"
+     */
+
+    function delegate(key, value, options) {
+      if ($.type(key) === "object") {
+
+        // Set defaults
+
+        Defaults = $.extend(Defaults, key);
+      } else {
+
+        // Delegate intent
+
+        options = $.extend({}, Defaults, options || {});
+
+        if ($.type(key) !== "undefined") {
+          if ($.type(value) !== "undefined") {
+            if (value === null) {
+              eraseCookie(key, options);
+            } else {
+              createCookie(key, value, options);
+            }
+          } else {
+            return readCookie(key);
+          }
+        }
+      }
+
+      return null;
+    }
+
+    /**
+     * @method
+     * @name create
+     * @description Creates a cookie.
+     * @param key [string] "Cookie key"
+     * @param value [string] "Cookie value"
+     * @param options [object] "Options object"
+     * @example $.cookie(key, value, options);
+     */
+
+    function createCookie(key, value, options) {
+      var expiration = false,
+        date = new Date();
+
+      // Check Expiration Date
+
+      if (options.expires && $.type(options.expires) === "number") {
+        date.setTime(date.getTime() + options.expires);
+        expiration = date.toGMTString();
+      }
+
+      var domain = (options.domain) ? "; domain=" + options.domain : "",
+        expires = (expiration) ? "; expires=" + expiration : "",
+        maxAge = (expiration) ? "; max-age=" + (options.expires / 1000) : "", // to seconds
+        path = (options.path) ? "; path=" + options.path : "",
+        secure = (options.secure) ? "; secure" : "";
+
+      // Set Cookie
+
+      Document.cookie = key + "=" + value + expires + maxAge + domain + path + secure;
+    }
+
+    /**
+     * @method
+     * @name read
+     * @description Returns a cookie's value, or null.
+     * @param key [string] "Cookie key"
+     * @return [string | null] "Cookie's value, or null"
+     * @example var value = $.cookie(key);
+     */
+
+    function readCookie(key) {
+      var keyString = key + "=",
+        cookies = Document.cookie.split(';');
+
+      // Loop Cookies
+
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+
+        while (cookie.charAt(0) === ' ') {
+          cookie = cookie.substring(1, cookie.length);
+        }
+
+        // Return Match
+
+        if (cookie.indexOf(keyString) === 0) {
+          return cookie.substring(keyString.length, cookie.length);
+        }
+      }
+
+      return null;
+    }
+
+    /**
+     * @method
+     * @name erase
+     * @description Deletes a cookie.
+     * @param key [string] "Cookie key"
+     * @example $.cookie(key, null);
+     */
+
+    function eraseCookie(key, options) {
+      createCookie(key, "", $.extend({}, options, {
+        expires: -604800000 // -7 days
+      }));
+    }
+
+    /**
+     * @plugin
+     * @name Cookie
+     * @description A jQuery plugin for simple access to browser cookies.
+     * @type utility
+     * @main cookie.js
+     * @dependency jQuery
+     * @dependency core.js
+     */
+
+    var Plugin = Formstone.Plugin("cookie", {
+        utilities: {
+          _delegate: delegate
+        }
+      }),
+
+      /**
+       * @options
+       * @param domain [string] "Cookie domain"
+       * @param expires [int] <604800000> "Time until cookie expires"
+       * @param path [string] "Cookie path"
+       */
+
+      Defaults = {
+        domain: null,
+        expires: 604800000, // 7 days
+        path: null,
+        secure: null
+      },
+
+      // Localize References
+
+      Document = Formstone.document;
+
+  })
+
+);

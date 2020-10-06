@@ -61,7 +61,7 @@ gulp.task('scripts', function() {
   return gulp.src('./src/js/*.js')
     .pipe(include())
     .pipe(jshint())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(header(comment, {
       pkg:  pkg,
       date: date
@@ -119,7 +119,7 @@ gulp.task('demoScripts', function() {
       }
     }))
     .pipe(jshint())
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('./demo/js'));
 });
 
