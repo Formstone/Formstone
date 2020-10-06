@@ -230,6 +230,8 @@
       data.$controlItems.removeClass([Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" "))
         .off(Events.namespace);
 
+      enableControls(data, data.$controlItems);
+
       data.$images.off(Events.namespace);
       data.$canister.fsTouch("destroy");
 
@@ -980,6 +982,8 @@
       data.$controls.removeClass(RawClasses.visible);
       data.$controlItems.removeClass(RawClasses.visible);
       data.$pagination.removeClass(RawClasses.visible);
+
+      disableControls(data, data.$controlItems);
     }
 
     /**
@@ -993,6 +997,8 @@
       data.$controls.addClass(RawClasses.visible);
       data.$controlItems.addClass(RawClasses.visible);
       data.$pagination.addClass(RawClasses.visible);
+
+      enableControls(data, data.$controlItems);
     }
 
     /**
@@ -1009,16 +1015,54 @@
 
       if (data.infinite) {
         data.$controlItems.addClass(RawClasses.visible);
+
+        enableControls(data, data.$controlItems);
       } else if (data.pageCount < 1) {
         data.$controlItems.removeClass(RawClasses.visible);
+
+        disableControls(data, data.$controlItems);
       } else {
         data.$controlItems.addClass(RawClasses.visible);
 
+        enableControls(data, data.$controlItems);
+
         if (data.index <= 0) {
           data.$controlPrevious.removeClass(RawClasses.visible);
+
+          disableControls(data, data.$controlPrevious);
         } else if (data.index >= data.pageCount - 1 || (!data.single && data.leftPosition === data.maxMove)) {
           data.$controlNext.removeClass(RawClasses.visible);
+
+          disableControls(data, data.$controlNext);
         }
+      }
+    }
+
+    /**
+     * @method private
+     * @name disableControls
+     * @description Adds disabled prop to element
+     * @param data [object] "Instance data"
+     * @return [] "Target element"
+     */
+
+    function disableControls(data, $el) {
+      if (!data.customControls) {
+        $el.prop("disabled", true);
+      }
+    }
+
+    /**
+     * @method private
+     * @name enableControls
+     * @description Removes disabled prop to element
+     * @param data [object] "Instance data"
+     * @return [] "Target element"
+     */
+
+    function enableControls(data, $el) {
+      if (!data.customControls) {
+        $el.prop("disabled", false);
       }
     }
 

@@ -29,6 +29,8 @@
       $window = $(window);
       $body   = $("body");
 
+      $.analytics();
+
       if ($.mediaquery) {
         $.mediaquery({
           minWidth: [ opts.minXS, opts.minSM, opts.minMD, opts.minLG, opts.minXL ],
