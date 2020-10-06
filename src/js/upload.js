@@ -549,7 +549,7 @@
                     percent = Math.ceil((position / total) * 100);
                   }
 
-                  data.$el.trigger(Events.fileProgress, [file, percent]);
+                  data.$el.trigger(Events.fileProgress, [file, percent, e]);
                 }, false);
               }
 
