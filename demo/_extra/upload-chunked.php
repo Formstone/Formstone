@@ -2,8 +2,12 @@
 
   // Grab any extra form data!
 
+  function sanitize($s) {
+    return htmlspecialchars(stripslashes(trim($s)));
+  }
+
   foreach ($_POST as $key => $val) {
-    echo $key . ": " . $val . "\n";
+    echo sanitize($key) . ": " . sanitize($val) . "\n";
   }
 
   echo "\n\n";
@@ -13,8 +17,8 @@
   $f = $_FILES["file"];
   $file = $f["name"];
 
-  $chunk  = $_POST["chunk"];
-  $chunks = $_POST["chunks"];
+  $chunk  = sanitize($_POST["chunk"]);
+  $chunks = sanitize($_POST["chunks"]);
 
   $error = false;
 

@@ -2,8 +2,12 @@
 
   // Grab any extra form data!
 
+  function sanitize($str) {
+    return htmlspecialchars(stripslashes(trim($str)));
+  }
+
   foreach ($_POST as $key => $val) {
-    echo $key . ": " . $val . "\n";
+    echo sanitize($key) . ": " . sanitize($val) . "\n";
   }
 
   echo "\n\n";
@@ -11,7 +15,7 @@
   // Remember to process the uploads!
 
   $f = $_FILES["file"];
-  $file = $f["name"];
+  $file = sanitize($f["name"]);
 
   $error = false;
 
