@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.17
+
+* Fixing issue with brackets in Checkbox
+
 ### 1.4.16
 
 * Fixing issue with autoAdvance in linked Carousel
