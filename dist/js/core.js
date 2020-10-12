@@ -1,4 +1,4 @@
-/*! formstone v1.4.18 [core.js] 2020-10-12 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18-1 [core.js] 2020-10-12 | GPL-3.0 License | formstone.it */
 /**
  * @plugin
  * @name Core
@@ -23,7 +23,7 @@
     var Win = typeof window !== "undefined" ? window : this,
       Doc = Win.document,
       Core = function() {
-        this.Version = '1.4.18';
+        this.Version = '1.4.18-1';
         this.Plugins = {};
 
         this.DontConflict = false;
