@@ -332,7 +332,7 @@
           data: data
         }, 0);
 
-        if (data.touchEvents) {
+        if (data.touch) {
           data.$canister.fsTouch({
               axis: "x",
               pan: true,
@@ -1541,7 +1541,7 @@
          * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
          * @param single [boolean] <false> "Flag to display single item at a time"
          * @param theme [string] <"fs-light"> "Theme class name"
-         * @param theme [boolean] <true> "Use touch events"
+         * @param touch [boolean] <true> "Use touch events"
          * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
          */
 

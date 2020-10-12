@@ -1,4 +1,4 @@
-/*! formstone v1.4.18 [core.js] 2020-10-06 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18 [core.js] 2020-10-12 | GPL-3.0 License | formstone.it */
 /**
  * @plugin
  * @name Core

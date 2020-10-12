@@ -1,4 +1,4 @@
-/*! formstone v1.4.18 [carousel.js] 2020-10-06 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18 [carousel.js] 2020-10-12 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -333,7 +333,7 @@
           data: data
         }, 0);
 
-        if (data.touchEvents) {
+        if (data.touch) {
           data.$canister.fsTouch({
               axis: "x",
               pan: true,
@@ -1542,7 +1542,7 @@
          * @param show [int / object] <1> "Items visible per page; Object for responsive counts"
          * @param single [boolean] <false> "Flag to display single item at a time"
          * @param theme [string] <"fs-light"> "Theme class name"
-         * @param theme [boolean] <true> "Use touch events"
+         * @param touch [boolean] <true> "Use touch events"
          * @param useMargin [boolean] <false> "Use margins instead of css transitions (legacy browser support)"
          */
 

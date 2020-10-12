@@ -1,4 +1,4 @@
-/*! formstone v1.4.18 [checkbox.js] 2020-10-06 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18 [checkbox.js] 2020-10-12 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
