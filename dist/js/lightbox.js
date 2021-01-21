@@ -1,4 +1,4 @@
-/*! formstone v1.4.18-1 [lightbox.js] 2020-10-12 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.18-1 [lightbox.js] 2021-01-21 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -1262,7 +1262,8 @@
         Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
         Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
 
-        var isVideo = checkVideo(source);
+        var source = Instance.$el[0].href,
+            isVideo = checkVideo(source);
 
         if (isVideo) {
           Instance.type = "video";

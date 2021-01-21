@@ -1261,7 +1261,8 @@
         Instance.$caption.html(Instance.formatter.call(Instance.$el, Instance));
         Instance.$position.find(Classes.position_current).html(Instance.gallery.index + 1);
 
-        var isVideo = checkVideo(source);
+        var source = Instance.$el[0].href,
+            isVideo = checkVideo(source);
 
         if (isVideo) {
           Instance.type = "video";

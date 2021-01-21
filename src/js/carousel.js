@@ -465,6 +465,7 @@
           data.items.push({
             $el: $item,
             width: iWidth,
+            height: iHeight,
             left: data.rtl ? iLeft - (data.canisterWidth - iWidth) : iLeft
           });
 
@@ -499,73 +500,22 @@
           }
         }
 
-        // // Last page
+        // Last Page
+        $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
+        left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
 
-        // if (data.matchWidth) {
-        //   iWidth = 0;
-        //   iHeight = 0;
-        //   tWidth = 0;
-        //
-        //   width = 0;
-        //   height = 0;
-        //   $items = $();
-        //
-        //   // Pages reverse
-        //   for (i = data.count - 1; i >= 0; i--) {
-        //     $item = data.$items.eq(i);
-        //     iWidth = data.matchWidth ? (data.itemWidth + data.itemMargin) : $item.outerWidth(true);
-        //     iHeight = $item.outerHeight();
-        //
-        //     // Too far / Paged
-        //     if ( ($items.length && width + iWidth > data.containerWidth + data.itemMargin) || (data.paged && i < data.count - 1) ) {
-        //       $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-        //       left = $first.position().left;
-        //
-        //       data.pagesReverse.push({
-        //         left: data.rtl ? left - (data.canisterWidth - width) : left,
-        //         // left: data.rtl ? left - (data.canisterWidth - (data.containerWidth - width)) : left,
-        //         height: height,
-        //         width: width,
-        //         $items: $items
-        //       });
-        //
-        //       // Reset counters
-        //       $items = $();
-        //       height = 0;
-        //       width = 0;
-        //     }
-        //
-        //     $items = $items.add($item);
-        //     width += iWidth;
-        //     tWidth += iWidth;
-        //
-        //     if (iHeight > height) {
-        //       height = iHeight;
-        //     }
-        //     if (height > data.itemHeight) {
-        //       data.itemHeight = height;
-        //     }
-        //   }
-        //
-        //   // Final page
-        //   data.pages.push( data.pagesReverse[0] );
-        // } else {
-          $first = data.rtl ? $items.eq($items.length - 1) : $items.eq(0);
-          left = data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight);
-
-          data.pages.push({
-            left: data.rtl ? -left : left,
-            height: height,
-            width: width,
-            $items: $items
-          });
-        // }
+        data.pages.push({
+          left: data.rtl ? -left : left,
+          height: height,
+          width: width,
+          $items: $items
+        });
 
         data.pageCount = data.pages.length;
 
         // Random Config
 
-        if (data.paged) {
+        if (data.paged && data.matchWidth) {
           data.pageCount -= (data.count % data.visible);
         }
 
@@ -573,7 +523,16 @@
           data.pageCount = 1;
         }
 
-        data.maxMove = -data.pages[data.pageCount - 1].left;
+        data.maxMove = (data.canisterWidth - data.containerWidth - (data.rtl ? data.itemMarginLeft : data.itemMarginRight)) * (data.rtl ? 1 : -1);
+
+        if (data.paged && !data.matchWidth) {
+          for (i = 0; i < data.pages.length; i++) {
+            if (data.pages[i].left - data.pages[i].width > Math.abs(data.maxMove)) {
+              data.pageCount = i;
+              break;
+            }
+          }
+        }
 
         // auto / match height
         if (data.autoHeight) {

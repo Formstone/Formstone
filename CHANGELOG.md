@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 1.4.19
+
+* Fixed gallery regression in Lightbox
+
 ### 1.4.18
 
 * Adding option to disable touch controls in Carousel
