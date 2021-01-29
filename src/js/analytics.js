@@ -42,7 +42,7 @@
      */
 
     function delegate() {
-      if (arguments.length && $.type(arguments[0]) !== "object") {
+      if (arguments.length && typeof arguments[0] !== "object") {
         if (arguments[0] === "destroy") {
           destroy.apply(this);
         } else {
@@ -117,7 +117,7 @@
 
     function buildEvent() {
       var $target = $(this),
-        href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+        href = (typeof $target[0].href !== "undefined") ? $target[0].href : "",
         domain = document.domain.split(".").reverse(),
         internal = href.match(domain[1] + "." + domain[0]) !== null,
         eventData;
@@ -266,8 +266,8 @@
         }, data);
 
       // If active link, launch that ish!
-      if ($.type($target) !== "undefined" && !$target.attr("data-analytics-stop")) {
-        var href = ($.type($target[0].href) !== "undefined") ? $target[0].href : "",
+      if (typeof $target !== "undefined" && !$target.attr("data-analytics-stop")) {
+        var href = (typeof $target[0].href !== "undefined") ? $target[0].href : "",
           url = (!href.match(/^mailto\:/i) && !href.match(/^tel\:/i) && href.indexOf(":") < 0) ? Window.location.protocol + "//" + Window.location.hostname + "/" + href : href;
 
         if (url !== "") {
@@ -316,7 +316,7 @@
      */
 
     function push(data) {
-      if ($.type(Window.ga) === "function" && $.type(Window.ga.getAll) === "function") {
+      if (typeof Window.ga === "function" && typeof Window.ga.getAll === "function") {
         var trackers = Window.ga.getAll();
 
         for (var i = 0, count = trackers.length; i < count; i++) {

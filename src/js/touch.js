@@ -133,7 +133,7 @@
 
     function onPointerStart(e) {
       var data = e.data,
-        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+        touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null;
 
       if (touch) {
         data.$el.off(Events.mouseDown);
@@ -207,7 +207,7 @@
 
     function onPointerMove(e) {
       var data = e.data,
-        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null,
         newX = (touch) ? touch.pageX : e.pageX,
         newY = (touch) ? touch.pageY : e.pageY,
         deltaX = newX - data.startX,
@@ -272,7 +272,7 @@
 
       // Pan / Swipe / Scale
 
-      var touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+      var touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null,
         newX = (touch) ? touch.pageX : e.pageX,
         newY = (touch) ? touch.pageY : e.pageY,
         deltaX = newX - data.startX,

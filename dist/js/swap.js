@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [swap.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [swap.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {

@@ -119,7 +119,7 @@
       data.total = data.$images.length - 1;
 
       // Check custom controls
-      data.customControls = ($.type(data.controls) === "object" && data.controls.zoom_in && data.controls.zoom_out);
+      data.customControls = (typeof data.controls === "object" && data.controls.zoom_in && data.controls.zoom_out);
 
       if (data.$images.length > 1) {
         data.gallery = true;

@@ -158,7 +158,7 @@
         data.isYouTube = false;
 
         // Check YouTube
-        if ($.type(source) === "object" && $.type(source.video) === "string") {
+        if (typeof source === "object" && typeof source.video === "string") {
           var parts = source.video.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);
 
           if (parts && parts.length >= 1) {
@@ -167,7 +167,7 @@
           }
         }
 
-        var isVideo = !data.isYouTube && ($.type(source) === "object" &&
+        var isVideo = !data.isYouTube && (typeof source === "object" &&
           (source.hasOwnProperty("mp4") || source.hasOwnProperty("ogg") || source.hasOwnProperty("webm"))
         );
 
@@ -180,14 +180,14 @@
           data.posterLoaded = false;
 
           loadYouTube(data, source, firstLoad);
-        } else if ($.type(source) === "object" && source.hasOwnProperty("poster")) {
+        } else if (typeof source === "object" && source.hasOwnProperty("poster")) {
           // html5 video
           loadVideo(data, source, firstLoad);
         } else {
           var newSource = source;
 
           // Responsive image handling
-          if ($.type(source) === "object") {
+          if (typeof source === "object") {
             var cache = [],
               keys = [],
               i;
@@ -848,7 +848,7 @@
       } else if ($media.is("img")) {
         var node = $media[0];
 
-        if ($.type(node.naturalHeight) !== "undefined") {
+        if (typeof node.naturalHeight !== "undefined") {
           return {
             height: node.naturalHeight,
             width: node.naturalWidth

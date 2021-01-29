@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [upload.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [upload.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -154,7 +154,7 @@
         if (data.queue.hasOwnProperty(i)) {
           file = data.queue[i];
 
-          if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
+          if (typeof index === "undefined" || (index >= 0 && file.index === index)) {
             // Abort all
             if (file.started && !file.complete) {
               if (data.chunked) {

@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 1.4.20
+
+* Removed deprecated `$.type()`
+* Fixed in-line regression in Lightbox
+
 ### 1.4.19
 
 * Fixed issue with using `paged` and `maxWidth` options in Carousel

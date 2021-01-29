@@ -23,7 +23,7 @@
      */
 
     function delegate(key, value, options) {
-      if ($.type(key) === "object") {
+      if (typeof key === "object") {
 
         // Set defaults
 
@@ -34,8 +34,8 @@
 
         options = $.extend({}, Defaults, options || {});
 
-        if ($.type(key) !== "undefined") {
-          if ($.type(value) !== "undefined") {
+        if (typeof key !== "undefined") {
+          if (typeof value !== "undefined") {
             if (value === null) {
               eraseCookie(key, options);
             } else {
@@ -66,7 +66,7 @@
 
       // Check Expiration Date
 
-      if (options.expires && $.type(options.expires) === "number") {
+      if (options.expires && typeof options.expires === "number") {
         date.setTime(date.getTime() + options.expires);
         expiration = date.toGMTString();
       }

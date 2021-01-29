@@ -114,7 +114,7 @@
           gallery: {
             active: false
           },
-          isMobile: (Formstone.isMobile || data.mobile),
+          isMobile: ((Formstone.isMobile && data.mobile) || data.mobile),
           isTouch: Formstone.support.touch,
           isAnimating: true,
           isZooming: false,
@@ -168,6 +168,7 @@
         }
 
         // if (isImage || isVideo) {
+        if ($el && $el.length) {
           // Check for gallery
           var id = $el.data(Namespace + "-gallery");
 
@@ -178,7 +179,7 @@
             Instance.gallery.index = Instance.gallery.$items.index(Instance.$el);
             Instance.gallery.total = Instance.gallery.$items.length - 1;
           }
-        // }
+        }
 
         // Thumbnails support
         if (!(Instance.thumbnails && (isImage || isVideo) && Instance.gallery.active)) {
@@ -1240,16 +1241,17 @@
 
       if (Instance.type == 'element') {
         var source = Instance.$el[0].href,
+            hash  = (Instance.$el && Instance.$el[0].hash) ? Instance.$el[0].hash || "" : "",
             isUrl = (source.substr(0, 4) === "http");
 
         // var isUrl = ((type === "url") || (source.substr(0, 4) === "http" && !hash)),
         //   isElement = ((type === "element") || (!isUrl && (hash.substr(0, 1) === "#"))),
         //   isObject = ((typeof $object !== "undefined"));
 
-        if (isUrl) {
+        if (isUrl && !hash) {
           loadURL(source);
         } else {
-          appendContents(source);
+          appendContents(hash);
         }
 
         // } else if (isElement) {

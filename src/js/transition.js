@@ -172,7 +172,7 @@
      */
 
     function isEqual(a, b) {
-      if ($.type(a) !== $.type(b)) {
+      if (typeof a !== typeof b) {
         return false;
       }
 

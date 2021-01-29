@@ -153,7 +153,7 @@
         if (data.queue.hasOwnProperty(i)) {
           file = data.queue[i];
 
-          if ($.type(index) === "undefined" || (index >= 0 && file.index === index)) {
+          if (typeof index === "undefined" || (index >= 0 && file.index === index)) {
             // Abort all
             if (file.started && !file.complete) {
               if (data.chunked) {

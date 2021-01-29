@@ -237,13 +237,15 @@
       var oValue = parseFloat(data.$el.val()),
         value = change;
 
-      if ($.type(oValue) === "undefined" || isNaN(oValue)) {
-        if (isNaN(oValue)) {
-          value = '';
-        } else if (data.min !== false) {
+      if (change == 0) {
+        return;
+      }
+
+      if (typeof oValue === "undefined" || isNaN(oValue)) {
+        if (data.min !== false) {
           value = data.min;
         } else {
-          value = '';
+          value = 0;
         }
       } else if (data.min !== false && oValue < data.min) {
         value = data.min;

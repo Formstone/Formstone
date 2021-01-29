@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [scrollbar.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [scrollbar.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -134,7 +134,7 @@
       var duration = dur || data.duration,
         styles = {};
 
-      if ($.type(position) !== "number") {
+      if (typeof position !== "number") {
         var $target = $(position);
 
         if ($target.length > 0) {

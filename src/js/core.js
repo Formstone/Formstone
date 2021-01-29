@@ -134,7 +134,7 @@
          */
 
         unlockViewport: function(plugin_namespace) {
-          if ($.type(ViewportLocks[plugin_namespace]) !== 'undefined') {
+          if (typeof ViewportLocks[plugin_namespace] !== 'undefined') {
             delete ViewportLocks[plugin_namespace];
           }
 
@@ -392,7 +392,7 @@
         function initialize(options) {
           // Maintain Chain
 
-          var hasOptions = $.type(options) === "object",
+          var hasOptions = (typeof options === "object"),
             args = Array.prototype.slice.call(arguments, (hasOptions ? 1 : 0)),
             $targets = this,
             $postTargets = $(),
@@ -426,7 +426,7 @@
                   numGuid: settings.guid,
                   rawGuid: rawGuid,
                   dotGuid: "." + rawGuid
-                }, options, ($.type(locals) === "object" ? locals : {}));
+                }, options, (typeof locals === "object" ? locals : {}));
 
               // Cache Instance
 
@@ -508,7 +508,7 @@
 
             // Public method OR false
 
-            if ($.type(method) === "object" || !method) {
+            if (typeof method === "object" || !method) {
 
               // Initialize
 
@@ -543,7 +543,7 @@
 
             // Wrap Utility Methods
 
-            var args = Array.prototype.slice.call(arguments, ($.type(method) === "object" ? 0 : 1));
+            var args = Array.prototype.slice.call(arguments, (typeof method === "object" ? 0 : 1));
 
             return _method.apply(window, args);
           }
@@ -577,7 +577,7 @@
             var $element = $targets.eq(i),
               data = getData($element) || {};
 
-            if ($.type(data.$el) !== "undefined") {
+            if (typeof data.$el !== "undefined") {
               fn.apply($element, [data].concat(args));
             }
           }

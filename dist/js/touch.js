@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [touch.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [touch.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -134,7 +134,7 @@
 
     function onPointerStart(e) {
       var data = e.data,
-        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null;
+        touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null;
 
       if (touch) {
         data.$el.off(Events.mouseDown);
@@ -208,7 +208,7 @@
 
     function onPointerMove(e) {
       var data = e.data,
-        touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+        touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null,
         newX = (touch) ? touch.pageX : e.pageX,
         newY = (touch) ? touch.pageY : e.pageY,
         deltaX = newX - data.startX,
@@ -273,7 +273,7 @@
 
       // Pan / Swipe / Scale
 
-      var touch = ($.type(data.touches) !== "undefined" && data.touches.length) ? data.touches[0] : null,
+      var touch = (typeof data.touches !== "undefined" && data.touches.length) ? data.touches[0] : null,
         newX = (touch) ? touch.pageX : e.pageX,
         newY = (touch) ? touch.pageY : e.pageY,
         deltaX = newX - data.startX,

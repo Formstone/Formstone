@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [carousel.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [carousel.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -58,8 +58,8 @@
       data.maxWidth = (data.maxWidth === Infinity ? "100000px" : data.maxWidth);
       data.mq = "(min-width:" + data.minWidth + ") and (max-width:" + data.maxWidth + ")";
 
-      data.customControls = ($.type(data.controls) === "object" && data.controls.previous && data.controls.next);
-      data.customPagination = ($.type(data.pagination) === "string");
+      data.customControls = (typeof data.controls === "object" && data.controls.previous && data.controls.next);
+      data.customPagination = (typeof data.pagination === "string");
 
       data.id = this.attr("id");
 
@@ -165,7 +165,7 @@
       }
 
       // Responsive count handling
-      if ($.type(data.show) === "object") {
+      if (typeof data.show === "object") {
         var show = data.show,
           cache = [],
           keys = [];
@@ -1042,7 +1042,7 @@
 
       if (data.single) {
         return show;
-      } else if ($.type(data.show) === "array") {
+      } else if (typeof data.show === "object") {
         for (var i in data.show) {
           if (data.show.hasOwnProperty(i)) {
             if (Formstone.support.matchMedia) {

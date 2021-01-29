@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [number.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [number.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -238,13 +238,15 @@
       var oValue = parseFloat(data.$el.val()),
         value = change;
 
-      if ($.type(oValue) === "undefined" || isNaN(oValue)) {
-        if (isNaN(oValue)) {
-          value = '';
-        } else if (data.min !== false) {
+      if (change == 0) {
+        return;
+      }
+
+      if (typeof oValue === "undefined" || isNaN(oValue)) {
+        if (data.min !== false) {
           value = data.min;
         } else {
-          value = '';
+          value = 0;
         }
       } else if (data.min !== false && oValue < data.min) {
         value = data.min;

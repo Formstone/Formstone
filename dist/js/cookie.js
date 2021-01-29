@@ -1,4 +1,4 @@
-/*! formstone v1.4.19 [cookie.js] 2021-01-21 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20 [cookie.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 (function(factory) {
@@ -24,7 +24,7 @@
      */
 
     function delegate(key, value, options) {
-      if ($.type(key) === "object") {
+      if (typeof key === "object") {
 
         // Set defaults
 
@@ -35,8 +35,8 @@
 
         options = $.extend({}, Defaults, options || {});
 
-        if ($.type(key) !== "undefined") {
-          if ($.type(value) !== "undefined") {
+        if (typeof key !== "undefined") {
+          if (typeof value !== "undefined") {
             if (value === null) {
               eraseCookie(key, options);
             } else {
@@ -67,7 +67,7 @@
 
       // Check Expiration Date
 
-      if (options.expires && $.type(options.expires) === "number") {
+      if (options.expires && typeof options.expires === "number") {
         date.setTime(date.getTime() + options.expires);
         expiration = date.toGMTString();
       }

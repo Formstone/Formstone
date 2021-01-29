@@ -133,7 +133,7 @@
       var duration = dur || data.duration,
         styles = {};
 
-      if ($.type(position) !== "number") {
+      if (typeof position !== "number") {
         var $target = $(position);
 
         if ($target.length > 0) {

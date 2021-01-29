@@ -55,7 +55,8 @@
 
   function launchObject() {
     $.lightbox( $('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
-      mobile: true,
+      mobile: false,
+      overlay: false,
       theme: $(".js-theme_select").val()
     });
   }
@@ -384,7 +385,7 @@
     </div>
   </div>
   <div class="demo_code">
-    <pre><code class="language-html">&lt;a href=&quot;#&quot; class=&quot;launch_lightbox&quot;
+    <pre><code class="language-html">&lt;a href=&quot;#&quot; class=&quot;launch_lightbox&quot;&gt;
 &Tab;Open jQuery Content
 &lt;/a&gt;</code></pre>
     <pre><code class="language-javascript">$(".launch_lightbox").click(launchLightbox);

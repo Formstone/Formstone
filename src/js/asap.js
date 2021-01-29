@@ -205,7 +205,7 @@
           return xhr;
         },
         success: function(resp, status, jqXHR) {
-          response = ($.type(resp) === "string") ? $.parseJSON(resp) : resp;
+          response = (typeof resp === "string") ? $.parseJSON(resp) : resp;
 
           // handle redirects - requires passing new location with json response
           if (resp.location) {
@@ -288,7 +288,7 @@
 
     function renderState(data, hash) {
       // Update DOM
-      if ($.type(data) !== "undefined") {
+      if (typeof data !== "undefined") {
         var $target;
 
         for (var key in data) {

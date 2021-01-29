@@ -9,11 +9,11 @@
     <!-- Page Attributes -->
     <title>Lightbox &middot; Formstone</title>
     <!-- Modernizer -->
-    <script src="../js/modernizr.js?v=1.4.19"></script>
+    <script src="../js/modernizr.js?v=1.4.20"></script>
     <!-- Compiled CSS -->
-    <link rel="stylesheet" href="../css/site.css?v=1.4.19">
+    <link rel="stylesheet" href="../css/site.css?v=1.4.20">
     <!-- Compiled JS -->
-    <script src="../js/site.js?v=1.4.19"></script>
+    <script src="../js/site.js?v=1.4.20"></script>
     <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script> -->
 </head>
 
@@ -100,7 +100,8 @@
 
                     function launchObject() {
                         $.lightbox($('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
-                            mobile: true,
+                            mobile: false,
+                            overlay: false,
                             theme: $(".js-theme_select").val()
                         });
                     }
@@ -443,7 +444,7 @@
                         </div>
                     </div>
                     <div class="demo_code">
-                        <pre><code class="language-html">&lt;a href=&quot;#&quot; class=&quot;launch_lightbox&quot;
+                        <pre><code class="language-html">&lt;a href=&quot;#&quot; class=&quot;launch_lightbox&quot;&gt;
 &Tab;Open jQuery Content
 &lt;/a&gt;</code></pre>
                         <pre><code class="language-javascript">$(".launch_lightbox").click(launchLightbox);
