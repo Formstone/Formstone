@@ -9,11 +9,11 @@
     <!-- Page Attributes -->
     <title>Lightbox &middot; Formstone</title>
     <!-- Modernizer -->
-    <script src="../js/modernizr.js?v=1.4.20"></script>
+    <script src="../js/modernizr.js?v=1.4.20-1"></script>
     <!-- Compiled CSS -->
-    <link rel="stylesheet" href="../css/site.css?v=1.4.20">
+    <link rel="stylesheet" href="../css/site.css?v=1.4.20-1">
     <!-- Compiled JS -->
-    <script src="../js/site.js?v=1.4.20"></script>
+    <script src="../js/site.js?v=1.4.20-1"></script>
     <!-- <script src="https://code.jquery.com/jquery-migrate-3.0.0.js"></script> -->
 </head>
 
@@ -74,19 +74,6 @@
 
                 <script>
                     Formstone.Ready(function() {
-                        $.lightbox("defaults", {
-                            videoFormatter: {
-                                "viddler": {
-                                    pattern: /(?:viddler\.com\/)((v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?\/]*)/,
-                                    format: function formatViddler(parts) {
-                                        return '//www.viddler.com/embed/' + parts[6];
-                                    }
-                                }
-                            }
-                        });
-
-                        $(".lightbox").not(".lightbox_format").lightbox({});
-
                         $(".js-lightbox_format").lightbox({
                             formatter: customFormat
                         });
@@ -100,8 +87,8 @@
 
                     function launchObject() {
                         $.lightbox($('<div class="inline_content"><h2>More Content!</h2><p>This was created by jQuery and loaded into the new Lightbox instance.</p></div>'), {
-                            mobile: false,
-                            overlay: false,
+                            // mobile: false,
+                            // overlay: false,
                             theme: $(".js-theme_select").val()
                         });
                     }
@@ -176,8 +163,8 @@
                             <a href="https://spacehold.it/1200x900/1.jpg" class="button js-lightbox" data-lightbox-gallery="thumbnail_gallery" title="Curabitur blandit tempus porttitor." data-lightbox-thumbnail="https://spacehold.it/300x300/1.jpg" data-lightbox-options='{"thumbnails":true}'>
           Thumbnail Gallery
       </a>
-                            <a href="https://spacehold.it/1200x900/1.jpg" class="button js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Curabitur blandit tempus porttitor." data-lightbox-thumbnail="https://spacehold.it/300x300/1.jpg" data-lightbox-options='{"thumbnails":true,"mobile":true}'>
-          Mobile Thumbnail Gallery
+                            <a href="https://spacehold.it/1200x900/1.jpg" class="button js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Curabitur blandit tempus porttitor." data-lightbox-thumbnail="https://spacehold.it/300x300/1.jpg" data-lightbox-options='{"thumbnails":true,"overlay":true}'>
+          Overlay Thumbnail Gallery
       </a>
                         </div>
                         <div style="display: none;">
@@ -210,32 +197,32 @@
       </a>
                         </div>
                         <div style="display: none;">
-                            <a href="https://spacehold.it/1200x900/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/1200x900/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x200/2.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
+                            <a href="https://spacehold.it/900x1200/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
                                 data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/200x300/3.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/4.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Sed posuere consectetur est at lobortis." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/1200x900/4.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Sed posuere consectetur est at lobortis." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x300/4.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/5.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Nulla vitae elit libero, a pharetra augue." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/900x1200/5.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Nulla vitae elit libero, a pharetra augue." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x200/5.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/6.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Nullam quis risus eget urna mollis ornare vel eu leo." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/1200x900/6.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Nullam quis risus eget urna mollis ornare vel eu leo." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/200x300/6.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/7.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Aenean lacinia bibendum nulla sed consectetur." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/900x1200/7.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Aenean lacinia bibendum nulla sed consectetur." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x300/7.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/8.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Sed posuere consectetur est at lobortis." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/1200x900/8.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Sed posuere consectetur est at lobortis." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x200/8.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/9.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/900x1200/9.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Praesent commodo cursus magna, vel scelerisque nisl consectetur et." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/200x300/9.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/10.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="mobile_thumbnail_gallery" title="Nullam quis risus eget urna mollis ornare vel eu leo." data-lightbox-options='{"thumbnails":true}'>
+                            <a href="https://spacehold.it/1200x900/10.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="overlay_thumbnail_gallery" title="Nullam quis risus eget urna mollis ornare vel eu leo." data-lightbox-options='{"thumbnails":true}'>
           <img src="https://spacehold.it/300x300/10.jpg" alt="">
       </a>
                         </div>
@@ -294,17 +281,17 @@
                     </div>
                 </div>
 
-                <h4>Mobile</h4>
+                <h4>Overlay</h4>
                 <div class="demo_container">
                     <div class="demo_example">
                         <div class="gallery">
-                            <a href="https://spacehold.it/1200x900/1.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="">
+                            <a href="https://spacehold.it/1200x900/1.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay" data-lightbox-options='{"overlay":true}' title="">
         <img src="https://spacehold.it/300x300/1.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                            <a href="https://spacehold.it/900x1200/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay" data-lightbox-options='{"overlay":true}' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
           <img src="https://spacehold.it/300x300/2.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true}' title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.">
+                            <a href="https://spacehold.it/1200x900/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay" data-lightbox-options='{"overlay":true}' title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.">
           <img src="https://spacehold.it/300x300/3.jpg" alt="">
       </a>
                         </div>
@@ -314,22 +301,22 @@
 &Tab;&lt;img src=&quot;thumbnail_1.jpg&quot; alt=&quot;&quot;&gt;
 &lt;/a&gt;</code></pre>
                         <pre><code class="language-javascript">$(".lightbox").lightbox({
-  mobile: true
+  overlay: true
 });</code></pre>
                     </div>
                 </div>
 
-                <h4>Mobile without Viewer</h4>
+                <h4>Overlay without Viewer</h4>
                 <div class="demo_container">
                     <div class="demo_example">
                         <div class="gallery">
-                            <a href="https://spacehold.it/1200x900/1.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="">
+                            <a href="https://spacehold.it/1200x900/1.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay_viewer" data-lightbox-options='{"overlay":true,"viewer":false}' title="">
         <img src="https://spacehold.it/300x300/1.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/900x1200/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
+                            <a href="https://spacehold.it/900x1200/2.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay_viewer" data-lightbox-options='{"overlay":true,"viewer":false}' title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.">
           <img src="https://spacehold.it/300x300/2.jpg" alt="">
       </a>
-                            <a href="https://spacehold.it/1200x900/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_mobile" data-lightbox-options='{"mobile":true,"viewer":false}' title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.">
+                            <a href="https://spacehold.it/1200x900/3.jpg" class="lightbox_image js-lightbox" data-lightbox-gallery="gallery_overlay_viewer" data-lightbox-options='{"overlay":true,"viewer":false}' title="Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.">
           <img src="https://spacehold.it/300x300/3.jpg" alt="">
       </a>
                         </div>
@@ -339,7 +326,7 @@
 &Tab;&lt;img src=&quot;thumbnail_1.jpg&quot; alt=&quot;&quot;&gt;
 &lt;/a&gt;</code></pre>
                         <pre><code class="language-javascript">$(".lightbox").lightbox({
-  mobile: true,
+  overlay: true,
   viewer: false
 });</code></pre>
                     </div>

@@ -1,4 +1,4 @@
-/*! formstone v1.4.20 [viewer.js] 2021-01-29 | GPL-3.0 License | formstone.it */
+/*! formstone v1.4.20-1 [viewer.js] 2021-01-29 | GPL-3.0 License | formstone.it */
 /* global define */
 
 // TODO: external controls like carousel?

@@ -104,9 +104,9 @@
       if (!Instance) {
         var data = e.data;
 
-        if (data.overlay === true) {
-          data.mobile = true; // Backwards compatibility
-        }
+        // if (data.mobile === false) {
+        //   data.overlay = false;
+        // }
 
         // Cache internal data
         Instance = $.extend({}, {
@@ -114,7 +114,7 @@
           gallery: {
             active: false
           },
-          isMobile: ((Formstone.isMobile && data.mobile) || data.mobile),
+          isMobile: ((Formstone.isMobile && data.mobile !== false) || data.overlay),
           isTouch: Formstone.support.touch,
           isAnimating: true,
           isZooming: false,
@@ -1542,7 +1542,7 @@
          * @param maxWidth [int] <10000> "Maximum width of element modal"
          * @param minHeight [int] <100> "Minimum height of modal"
          * @param minWidth [int] <100> "Minimum width of modal"
-         * @param overlay [boolean] <false> "Flag to force 'overlay' ('mobile') rendering"
+         * @param overlay [boolean] <false> "Flag to force 'overlay' rendering"
          * @param retina [boolean] <false> "Flag to use 'retina' sizing (halves natural sizes)"
          * @param requestKey [string] <'fs-lightbox'> "GET variable for ajax / iframe requests"
          * @param theme [string] <"fs-light"> "Theme class name"
@@ -1576,7 +1576,7 @@
           maxWidth: 10000,
           minHeight: 100,
           minWidth: 100,
-          mobile: false,
+          mobile: null,
           overlay: false,
           retina: false,
           requestKey: "fs-lightbox",

@@ -31,6 +31,18 @@
 
       $.analytics();
 
+      $.lightbox("defaults", {
+        // mobile: false,
+        videoFormatter: {
+          "viddler": {
+            pattern: /(?:viddler\.com\/)((v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?\/]*)/,
+            format: function formatViddler(parts) {
+              return '//www.viddler.com/embed/' + parts[6];
+            }
+          }
+        }
+      });
+
       if ($.mediaquery) {
         $.mediaquery({
           minWidth: [ opts.minXS, opts.minSM, opts.minMD, opts.minLG, opts.minXL ],
