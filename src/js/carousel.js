@@ -78,6 +78,7 @@
       var controlsHtml = '',
         paginationHtml = '',
         controlPrevClasses = [RawClasses.control, RawClasses.control_previous].join(" "),
+        controlPauseClasses = [RawClasses.control, RawClasses.control_pause, RawClasses.paused].join(" "),
         controlNextClasses = [RawClasses.control, RawClasses.control_next].join(" ");
 
       if (data.controls && !data.customControls) {
@@ -85,6 +86,9 @@
 
         controlsHtml += '<div class="' + RawClasses.controls + '" aria-label="' + data.labels.controls + '" aria-controls="' + data.ariaId + '">';
         controlsHtml += '<button type="button" class="' + controlPrevClasses + '" aria-label="' + data.labels.previous + '">' + data.labels.previous + '</button>';
+        if (data.autoAdvance && data.autoPausable) {
+          controlsHtml += '<button type="button" class="' + controlPauseClasses + '" aria-label="' + data.labels.pause + '">' + data.labels.pause + '</button>';
+        }
         controlsHtml += '<button type="button" class="' + controlNextClasses + '" aria-label="' + data.labels.next + '">' + data.labels.next + '</button>';
         controlsHtml += '</div>';
       }
@@ -125,10 +129,12 @@
       if (data.customControls) {
         data.$controls = $(data.controls.container).addClass([RawClasses.controls, RawClasses.controls_custom].join(" "));
         data.$controlPrevious = $(data.controls.previous).addClass(controlPrevClasses);
+        data.$controlPause = $(data.controls.pause).addClass(controlPauseClasses);
         data.$controlNext = $(data.controls.next).addClass(controlNextClasses);
       } else {
         data.$controls = this.find(Classes.controls).eq(0);
         data.$controlPrevious = data.$controls.find(Classes.control_previous);
+        data.$controlPause = data.$controls.find(Classes.control_pause);
         data.$controlNext = data.$controls.find(Classes.control_next);
       }
 
@@ -144,6 +150,7 @@
       data.enabled = false;
       data.leftPosition = 0;
       data.autoTimer = null;
+      data.isPaused = true;
       data.resizeTimer = null;
 
       // live query for linked to avoid missing new elements
@@ -227,7 +234,7 @@
         this.removeAttr("id");
       }
 
-      data.$controlItems.removeClass([Classes.control, RawClasses.control_previous, Classes.control_next, Classes.visible].join(" "))
+      data.$controlItems.add(data.$controlPause).removeClass([Classes.control, RawClasses.control_previous, Classes.control_pause, Classes.control_next, Classes.visible].join(" "))
         .off(Events.namespace);
 
       enableControls(data, data.$controlItems);
@@ -236,7 +243,7 @@
 
       data.$canister.fsTouch("destroy");
 
-      data.$items.removeClass([RawClasses.item, RawClasses.visible, Classes.item_previous, Classes.item_next].join(" "))
+      data.$items.removeClass([RawClasses.item, RawClasses.visible, Classes.item_previous, Classes.control_pause, Classes.item_next].join(" "))
         .unwrap()
         .unwrap()
         .unwrap()
@@ -293,6 +300,7 @@
 
         data.$images.off(Events.namespace);
         data.$controlItems.off(Events.namespace);
+        data.$controlPause.off(Events.namespace);
         data.$pagination.html("").off(Events.namespace);
 
         hideControls(data);
@@ -319,10 +327,12 @@
     function enable(data) {
       if (!data.enabled) {
         data.enabled = true;
+        data.isPaused = true;
 
         this.addClass(RawClasses.enabled);
 
         data.$controlItems.on(Events.click, data, onAdvance);
+        data.$controlPause.on(Events.click, data, onPause);
         data.$pagination.on(Events.click, Classes.page, data, onSelect);
 
         data.$items.on(Events.click, data, onItemClick);
@@ -352,9 +362,7 @@
 
         // Auto timer
         if (data.autoAdvance) {
-          data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function() {
-            autoAdvance(data);
-          }, true);
+          autoResume(data);
         }
 
         resizeInstance.call(this, data);
@@ -772,6 +780,85 @@
       }
     }
 
+
+    /**
+     * @method
+     * @name autoPause
+     * @description Pause automatic advancing
+     * @example $(".target").carousel("autoPause");
+     */
+
+    /**
+     * @method private
+     * @name autoPause
+     * @description Pause automatic advancing
+     * @param data [object] "Instance data"
+     */
+
+    function autoPause(data) {
+      if (!data.isPaused) {
+        Functions.clearTimer(data.autoTimer);
+        data.isPaused = true;
+        data.$controlPause.addClass(RawClasses.paused);
+      }
+    }
+
+    /**
+     * @method
+     * @name autoResume
+     * @description Resume automatic advancing
+     * @example $(".target").carousel("autoResume");
+     */
+
+    /**
+     * @method private
+     * @name autoResume
+     * @description Resume automatic advancing
+     * @param data [object] "Instance data"
+     */
+
+    function autoResume(data) {
+      if (data.isPaused) {
+        data.isPaused = false;
+        data.$controlPause.removeClass(RawClasses.paused);
+        if (data.autoAdvance) {
+          data.autoTimer = Functions.startTimer(data.autoTimer, data.autoTime, function () {
+            autoAdvance(data);
+          }, true);
+        }
+      }
+    }
+
+    /**
+     * @method
+     * @name autoToggle
+     * @description Toggle automatic advancing
+     * @example $(".target").carousel("autoToggle");
+     */
+
+    /**
+     * @method private
+     * @name autoToggle
+     * @description Toggle automatic advancing
+     * @param data [object] "Instance data"
+     */
+
+    function autoToggle(data) {
+      data.isPaused ? autoResume(data) : autoPause(data);
+    }
+
+    /**
+     * @method private
+     * @name onPause
+     * @description Handles autoplay pause/resume
+     * @param e [object] "Event data"
+     */
+
+    function onPause(e) {
+      Functions.killEvent(e);
+      autoToggle(e.data);
+    }
+
     /**
      * @method private
      * @name onImageLoad
@@ -943,6 +1030,7 @@
     function hideControls(data) {
       data.$controls.removeClass(RawClasses.visible);
       data.$controlItems.removeClass(RawClasses.visible);
+      data.$controlPause.removeClass(RawClasses.visible);
       data.$pagination.removeClass(RawClasses.visible);
 
       disableControls(data, data.$controlItems);
@@ -958,6 +1046,7 @@
     function showControls(data) {
       data.$controls.addClass(RawClasses.visible);
       data.$controlItems.addClass(RawClasses.visible);
+      data.$controlPause.addClass(RawClasses.visible);
       data.$pagination.addClass(RawClasses.visible);
 
       enableControls(data, data.$controlItems);
@@ -1487,6 +1576,7 @@
          * @param fill [boolean] <false> "Flag to fill viewport if item count is less then show count"
          * @param infinite [boolean] <false> "Flag for looping items"
          * @param labels.next [string] <'Next'> "Control text"
+         * @param labels.pause [string] <'Pause/Resume'> "Control text"
          * @param labels.previous [string] <'Previous'> "Control text"
          * @param labels.controls [string] <'Carousel {guid} Controls'> "Controls aria label; {guid} replaced with instance GUID"
          * @param labels.pagination [string] <'Carousel {guid} Pagination'> "Pagination aria label; {guid} replaced with instance GUID"
@@ -1507,6 +1597,7 @@
         defaults: {
           autoAdvance: false,
           autoHeight: false,
+          autoPausable: false,
           autoTime: 8000,
           contained: true,
           controls: true,
@@ -1515,6 +1606,7 @@
           infinite: false,
           labels: {
             next: "Next",
+            pause: "Pause/Resume",
             previous: "Previous",
             controls: "Carousel {guid} Controls",
             pagination: "Carousel {guid} Pagination"
@@ -1552,6 +1644,7 @@
           "control",
           "control_previous",
           "control_next",
+          "control_pause",
 
           "pagination",
           "page",
@@ -1562,7 +1655,8 @@
           "active",
           "auto_height",
           "contained",
-          "single"
+          "single",
+          "paused"
         ],
 
         /**
@@ -1588,6 +1682,12 @@
           jump: jumpPage,
           previous: previousPage,
           next: nextPage,
+
+          // AutoAdvance
+          pauseAuto: autoPause,
+          resumeAuto: autoResume,
+          toggleAuto: autoToggle,
+
           // Pages
           jumpPage: jumpPage,
           previousPage: previousPage,
