@@ -2,6 +2,14 @@
 
 <!-- -->
 
+### 1.4.22
+
+* Fixed greedy selector in Tabs
+
+### 1.4.21
+
+* Fixed version
+
 ### 1.4.20
 
 * Removed deprecated `$.type()`
