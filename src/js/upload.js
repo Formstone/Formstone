@@ -1,5 +1,3 @@
-/* global define */
-
 (function(factory) {
     if (typeof define === "function" && define.amd) {
       define([
@@ -162,7 +160,7 @@
                 file.transfer.abort();
               }
             } else {
-              abortFile(data, file, "abort");
+              abortFile(data, file, "Removed from queue");
             }
           }
         }
@@ -503,7 +501,7 @@
 
     function uploadFile(data, file) {
       if (file.size >= data.maxSize || file.error === true) {
-        abortFile(data, file, "size");
+        abortFile(data, file, "maximum file upload size exceeded");
       } else if (data.chunked) {
         // Chunked upload
         file.started = true;
@@ -522,7 +520,7 @@
         formData = setFormData(data, formData, file);
 
         if (formData === false) {
-          abortFile(data, file, "abort");
+          abortFile(data, file, "File upload cancelled");
         } else {
           // Standard upload
           file.started = true;
@@ -567,6 +565,9 @@
               checkQueue(data);
             },
             error: function(jqXHR, status, error) {
+              if(error.toLowerCase() == 'abort'){
+              	error = "file upload cancelled";
+              }
               abortFile(data, file, error, jqXHR);
             }
           });
@@ -601,7 +602,7 @@
       formData = setFormData(data, formData, file);
 
       if (formData === false) {
-        abortFile(data, file, "abort");
+        abortFile(data, file, "file upload cancelled");
       } else {
         file.chunkTransfer = $.ajax({
           url: data.action,
