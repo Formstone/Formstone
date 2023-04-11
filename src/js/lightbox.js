@@ -1,17 +1,20 @@
 import {
-  // hasClass,
   addClass,
   removeClass,
   getAttr,
   setAttr,
-  // removeAttr,
+  removeAttr,
   extend,
+  el,
   select,
+  siblings,
   on,
   off,
   once,
   type
 } from './utils.js';
+
+// Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
 
 // Formatters
 
@@ -36,13 +39,13 @@ class Lightbox {
     threshold: 50,
     templates: {
       container: `
-<div class="fs-lightbox">
+<div class="fs-lightbox" role="dialog" aria-modal="true">
   <div class="fs-lightbox-overlay"></div>
   <div class="fs-lightbox-loading">[loading]</div>
-  <button type="button" class="fs-lightbox-close">[close]</button>
+  <button type="button" class="fs-lightbox-close" aria-label="Close">[close]</button>
   <div class="fs-lightbox-container"></div>
-  <button type="button" class="fs-lightbox-control fs-lightbox-control_previous">[previous]</button>
-  <button type="button" class="fs-lightbox-control fs-lightbox-control_next">[next]</button>
+  <button type="button" class="fs-lightbox-control fs-lightbox-control_previous" aria-label="Previous">[previous]</button>
+  <button type="button" class="fs-lightbox-control fs-lightbox-control_next" aria-label="Next">[next]</button>
 </div>`,
       //       item: `
       // <div class="fs-lightbox-item">
@@ -102,7 +105,7 @@ class Lightbox {
     try {
       optionsData = JSON.parse(dataset.lightboxOptions || '{}');
     } catch (e) {
-      console.warn('Background: Error parsing options JSON', el);
+      console.warn('Lightbox: Error parsing options JSON', el);
     }
 
     // Internal Data
@@ -161,10 +164,14 @@ class Lightbox {
 
     this.#setPositions();
 
+    this.#hideSiblings();
+
     setTimeout(() => {
       addClass(this.lightboxEl, 'fs-lightbox-open');
 
       this.isOpen = true;
+
+      this.lightboxEl.focus();
     }, 0);
   }
 
@@ -174,6 +181,8 @@ class Lightbox {
     }
 
     removeClass(this.lightboxEl, 'fs-lightbox-open');
+
+    this.#showSiblings();
 
     off(window, 'keydown', this.listeners.keydown);
 
@@ -187,6 +196,8 @@ class Lightbox {
       this.lightboxEl.remove();
 
       this.isOpen = false;
+
+      this.el.focus();
     });
   }
 
@@ -305,26 +316,26 @@ class Lightbox {
   }
 
   #drawImage(item, index) {
-    let itemEl = document.createElement('div');
-    let wrapEl = document.createElement('div');
-    let mediaEl = document.createElement('div');
-    let imgEl = document.createElement('img');
+    let itemEl = el('div');
+    let wrapEl = el('div');
+    let mediaEl = el('div');
+    let imgEl = el('img');
 
-    itemEl.className = `fs-lightbox-item fs-lightbox-item_${index}`;
-    wrapEl.className = `fs-lightbox-wrap`;
-    mediaEl.className = `fs-lightbox-media fs-lightbox-media_image`;
-    imgEl.className = `fs-lightbox-image`;
+    addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
+    addClass(wrapEl, 'fs-lightbox-wrap');
+    addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_image');
+    addClass(imgEl, 'fs-lightbox-image');
 
-    setAttr(imgEl, 'data-src', item.source);
-    setAttr(imgEl, 'draggable', 'false');
+    setAttr(imgEl, {
+      'data-src': item.source,
+      'draggable': 'false'
+    });
 
     mediaEl.append(imgEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    if (item.caption) {
-      itemEl.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
-    }
+    this.#checkCaption(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -346,31 +357,30 @@ class Lightbox {
 
     let source = `${url}?${parts.join('&')}`;
 
-    let itemEl = document.createElement('div');
-    let wrapEl = document.createElement('div');
-    let mediaEl = document.createElement('div');
-    let videoEl = document.createElement('div');
-    let iframeEl = document.createElement('iframe');
+    let itemEl = el('div');
+    let wrapEl = el('div');
+    let mediaEl = el('div');
+    let videoEl = el('div');
+    let iframeEl = el('iframe');
 
-    itemEl.className = `fs-lightbox-item fs-lightbox-item_${index}`;
-    wrapEl.className = `fs-lightbox-wrap`;
-    mediaEl.className = `fs-lightbox-media fs-lightbox-media_video`;
-    videoEl.className = `fs-lightbox-video`;
-    // iframeEl.className = `fs-lightbox-iframe`;
+    addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
+    addClass(wrapEl, 'fs-lightbox-wrap');
+    addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_video');
+    addClass(videoEl, 'fs-lightbox-video');
 
-    setAttr(iframeEl, 'frameborder', '0');
-    setAttr(iframeEl, 'seamless', 'seamless');
-    setAttr(iframeEl, 'allowfullscreen', '');
-    setAttr(iframeEl, 'data-src', source);
+    setAttr(iframeEl, {
+      'frameborder': '0',
+      'seamless': 'seamless',
+      'allowfullscreen': '',
+      'data-src': source
+    });
 
     videoEl.append(iframeEl);
     mediaEl.append(videoEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    if (item.caption) {
-      itemEl.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
-    }
+    this.#checkCaption(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -379,30 +389,29 @@ class Lightbox {
   }
 
   #drawIframe(item, index) {
-    let itemEl = document.createElement('div');
-    let wrapEl = document.createElement('div');
-    let mediaEl = document.createElement('div');
-    let containerEl = document.createElement('div');
-    let iframeEl = document.createElement('iframe');
+    let itemEl = el('div');
+    let wrapEl = el('div');
+    let mediaEl = el('div');
+    let containerEl = el('div');
+    let iframeEl = el('iframe');
 
-    itemEl.className = `fs-lightbox-item fs-lightbox-item_${index}`;
-    wrapEl.className = `fs-lightbox-wrap`;
-    mediaEl.className = `fs-lightbox-media fs-lightbox-media_iframe`;
-    containerEl.className = `fs-lightbox-iframe`;
-    // iframeEl.className = `fs-lightbox-iframe`;
+    addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
+    addClass(wrapEl, 'fs-lightbox-wrap');
+    addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_iframe');
+    addClass(containerEl, 'fs-lightbox-iframe');
 
-    setAttr(iframeEl, 'frameborder', '0');
-    setAttr(iframeEl, 'seamless', 'seamless');
-    setAttr(iframeEl, 'data-src', item.source);
+    setAttr(iframeEl, {
+      'frameborder': '0',
+      'seamless': 'seamless',
+      'data-src': item.source
+    });
 
     containerEl.append(iframeEl);
     mediaEl.append(containerEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    // if (item.caption) {
-    //   itemEl.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
-    // }
+    this.#checkCaption(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -411,26 +420,24 @@ class Lightbox {
   }
 
   #drawElement(item, index) {
-    let itemEl = document.createElement('div');
-    let wrapEl = document.createElement('div');
-    let mediaEl = document.createElement('div');
-    let containerEl = document.createElement('div');
+    let itemEl = el('div');
+    let wrapEl = el('div');
+    let mediaEl = el('div');
+    let containerEl = el('div');
 
     item.targetEl = select(item.hash)[0];
 
-    itemEl.className = `fs-lightbox-item fs-lightbox-item_${index} fs-lightbox-loaded`;
-    wrapEl.className = `fs-lightbox-wrap`;
-    mediaEl.className = `fs-lightbox-media fs-lightbox-media_element`;
-    containerEl.className = `fs-lightbox-element`;
+    addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`, 'fs-lightbox-loaded');
+    addClass(wrapEl, 'fs-lightbox-wrap');
+    addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_element');
+    addClass(containerEl, 'fs-lightbox-element');
 
     containerEl.append(...item.targetEl.childNodes);
     mediaEl.append(containerEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    // if (item.caption) {
-    //   itemEl.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
-    // }
+    this.#checkCaption(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -449,6 +456,8 @@ class Lightbox {
       if (index === this.index) {
         addClass(item.el, 'fs-lightbox-active');
 
+        removeAttr(item.el, 'aria-hidden');
+
         if (!item.isLoaded) {
           this.#showLoading();
 
@@ -460,6 +469,8 @@ class Lightbox {
         once(item.el, 'transitionend', (e) => {
           this.#unloadItem(item);
         });
+
+        setAttr(item.el, 'aria-hidden', 'true');
       }
 
       if (index < this.index) {
@@ -471,17 +482,8 @@ class Lightbox {
       }
     });
 
-    // if (!this.loop) {
-    removeClass(this.controlPreviousEl, 'fs-lightbox-visible');
-    removeClass(this.controlNextEl, 'fs-lightbox-visible');
-    // }
-
-    if (this.index > 0) {
-      addClass(this.controlPreviousEl, 'fs-lightbox-visible');
-    }
-    if (this.index < this.items.length - 1) {
-      addClass(this.controlNextEl, 'fs-lightbox-visible');
-    }
+    setAttr(this.controlPreviousEl, 'disabled', (this.index === 0));
+    setAttr(this.controlNextEl, 'disabled', (this.index === this.items.length - 1));
   }
 
   //
@@ -528,6 +530,22 @@ class Lightbox {
 
   //
 
+  #showSiblings() {
+    siblings(this.lightboxEl).forEach((el) => {
+      setAttr(el, 'aria-hidden', el.dataset.lightboxAriaHidden || false);
+      delete el.dataset.lightboxAriaHidden;
+    });
+  }
+
+  #hideSiblings() {
+    siblings(this.lightboxEl).forEach((el) => {
+      el.dataset.lightboxAriaHidden = getAttr(el, 'aria-hidden') || '';
+      setAttr(el, 'aria-hidden', true);
+    });
+  }
+
+  //
+
   #checkIndex() {
     if (this.index < 0) {
       this.index = 0;
@@ -552,6 +570,12 @@ class Lightbox {
     }
 
     return false;
+  }
+
+  #checkCaption(item, el) {
+    if (item.caption) {
+      el.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
+    }
   }
 
   //

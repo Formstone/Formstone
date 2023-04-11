@@ -31,7 +31,6 @@
 .fs-navigation-reveal-nav.fs-navigation-enabled,
 .fs-navigation-overlay-nav.fs-navigation-enabled {
   width: var(--fs-navigation-offscreen-width);
-  height: 100%;
   height: calc(100% + 60px);
   position: fixed;
   top: 0;
@@ -40,7 +39,6 @@
   overflow-y: scroll;
   visibility: hidden;
   overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
 }
 
 .fs-navigation-reveal-nav.fs-navigation-animated {

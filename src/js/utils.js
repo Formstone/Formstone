@@ -31,6 +31,10 @@ export function falsey(v) {
 
 //
 
+export function el(tag) {
+  return document.createElement(tag);
+}
+
 export function select(selector, context) {
   return (context || document).querySelectorAll(selector);
 }

@@ -21,36 +21,30 @@ let banner = '/*! <%= pkg.name %> v<%= pkg.version %> [<%= filename %>] <%= date
 // Clean
 
 gulp.task('clean', () => {
-  return gulp.src(['dist/*', /*, 'docs/*',*/ 'src/css/*' ], { read: false })
+  return gulp.src(['dist/*', /*, 'docs/*',*/ 'src/css/*', 'src/scss/*' ], { read: false })
     .pipe(clean());
+});
+
+// Beutify Scripts
+gulp.task('beautify-scripts', () => {
+  return gulp.src(['./src/js/*'])
+    .pipe(beautify({
+      indent_size: 2,
+    }))
+    .pipe(gulp.dest('./src/js'));
+});
+
+// Beutify Styles
+gulp.task('beautify-styles', () => {
+  return gulp.src(['./src/less/*'])
+    .pipe(beautify.css({
+      indent_size: 2,
+    }))
+    .pipe(gulp.dest('./src/less'));
 });
 
 // Less
 gulp.task('bundle-styles', () => {
-  return gulp.src(['./src/less/**/*.less', '!./src/less/index.less'])
-    .pipe(less({
-      // plugins: [ new lessImportNPM() ],
-      // globalVars: pkg.src.vars
-    }))
-    .pipe(header(banner, {
-      pkg:  pkg,
-      date: date
-    }))
-    .pipe(gulp.dest('./src/css'));
-});
-
-gulp.task('convert-scss', () => {
-  return gulp.src(['./src/less/**/*.less', '!./src/less/index.less'])
-    .pipe(lessToScss())
-    .pipe(header(banner, {
-      pkg:  pkg,
-      date: date
-    }))
-    .pipe(gulp.dest('./src/scss'));
-});
-
-// Less
-gulp.task('styles', () => {
   return gulp.src('./src/less/index.less')
     .pipe(less({
       // plugins: [ new lessImportNPM() ],
@@ -68,37 +62,9 @@ gulp.task('styles', () => {
     .pipe(gulp.dest('./dist/'));
 });
 
-// // JS
-// gulp.task('scripts', function() {
-//   return gulp.src(['./src/js/**/*.js'])
-//     // .pipe(header(banner, {
-//     //   pkg:  pkg,
-//     //   date: date
-//     // }))
-//     .pipe(gulp.dest('./src/js'));
-// });
-
 // JS
 gulp.task('bundle-scripts', () => {
   return gulp.src('./src/js/index.js')
-  // return gulp.src('./src/js/**/*.js')
-    // .pipe(webpack(require('./webpack.config.js')))
-    // .pipe(jshint())
-    // .pipe(esbuild({
-    //   // outdir: './',
-    //   outfile: 'formstone-esbuild.js',
-    //   bundle: true,
-    //   minify: true,
-    //   // format: 'iife',
-    //   // drop: ['console'],
-    //   // sourcemap: 'linked',
-    //   platform: 'browser',
-    //   // legalbanners: 'none'
-    //   globalName: 'Formstone',
-    //   // external: [
-    //   //   './utils.js'
-    //   // ]
-    // }))
     .pipe(webpack({
       // mode: 'production',
       mode: 'development',
@@ -120,22 +86,35 @@ gulp.task('bundle-scripts', () => {
     .pipe(gulp.dest('./dist'));
 });
 
-// Beutify Scripts
-gulp.task('beautify-scripts', () => {
-  return gulp.src(['./src/js/*'])
-    .pipe(beautify({
-      indent_size: 2,
+// Convert Less to CSS
+gulp.task('convert-css', () => {
+  return gulp.src(['./src/less/**/*.less', '!./src/less/index.less'])
+    .pipe(less({
+      // plugins: [ new lessImportNPM() ],
+      // globalVars: pkg.src.vars
     }))
-    .pipe(gulp.dest('./src/js'));
-});
-
-// Beutify Styles
-gulp.task('beautify-styles', () => {
-  return gulp.src(['./src/css/*'])
     .pipe(beautify.css({
       indent_size: 2,
     }))
+    .pipe(header(banner, {
+      pkg:  pkg,
+      date: date
+    }))
     .pipe(gulp.dest('./src/css'));
+});
+
+// Convert Less to SCSS
+gulp.task('convert-scss', () => {
+  return gulp.src(['./src/less/**/*.less' /*, '!./src/less/index.less'*/])
+    .pipe(lessToScss())
+    .pipe(beautify.css({
+      indent_size: 2,
+    }))
+    .pipe(header(banner, {
+      pkg:  pkg,
+      date: date
+    }))
+    .pipe(gulp.dest('./src/scss'));
 });
 
 // License
@@ -153,27 +132,18 @@ gulp.task('license', function(done) {
 
 // Tasks
 
-gulp.task('build', gulp.series([
+gulp.task('default', gulp.series([
   'clean',
-  // 'scripts',
-  'styles',
-  'bundle-scripts',
-  'bundle-styles',
   'beautify-scripts',
   'beautify-styles',
+  'bundle-scripts',
+  'bundle-styles',
+  'convert-css',
+  'convert-scss',
   'license',
 ]));
 
-gulp.task('default', gulp.series([
-  // 'clean',
-  'build'
-]));
-
 gulp.task('dev', gulp.series(['default', (done) => {
-  gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['styles', 'bundle-styles']));
+  gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['bundle-styles']));
   gulp.watch('./src/js/**/*.js', { cwd: './' }, gulp.series(['bundle-scripts']));
-  // gulp.watch('./src/docs/**/*', ['buildDocs', 'zetzer']);
-
-  // gulp.watch('./demo/css/src/**/*', ['demoStyles']);
-  // gulp.watch('./demo/js/src/**/*', ['demoScripts']);
 }]));

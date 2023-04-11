@@ -325,14 +325,14 @@ class Navigation {
 
   #showSiblings() {
     this.#getSiblings().forEach((el) => {
-      setAttr(el, 'aria-hidden', el.dataset.navAriaHidden || false);
+      setAttr(el, 'aria-hidden', el.dataset.navigationAriaHidden || false);
       delete el.dataset.navigationAriaHidden;
     });
   }
 
   #hideSiblings() {
     this.#getSiblings().forEach((el) => {
-      el.dataset.navigationAriaHidden = getAttr(el, 'aria-hidden');
+      el.dataset.navigationAriaHidden = getAttr(el, 'aria-hidden') || '';
       setAttr(el, 'aria-hidden', true);
     });
   }

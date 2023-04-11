@@ -1,6 +1,4 @@
 /*! formstone v2.0.0-1 [navigation.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
-// Config
-
 $fs-navigation-offscreen-background: #fff;
 $fs-navigation-offscreen-width: 80vw;
 $fs-navigation-offscreen-zindex: 0;
@@ -36,34 +34,9 @@ $fs-navigation-push-content-zindex: 1;
     --fs-navigation-push-content-zindex: $fs-navigation-push-content-zindex;
   }
 
-  // &#{&}-enabled {
-
-  // }
-
-  // &,
-  // &:after,
-  // &:before,
-  // *,
-  // *:after,
-  // *:before {
-  //   box-sizing: border-box;
-  //   transition: none;
-  //   user-select: none !important;
-  // }
-
   // Toggle
 
   &-toggle-nav &-enabled:not(&-open) {
-    // width: 1px !important;
-    // height: 1px !important;
-
-    // position: absolute !important;
-
-    // clip: rect(1px, 1px, 1px, 1px) !important;
-    // margin: 0 !important;
-    // overflow: hidden !important;
-    // padding: 0 !important;
-
     visibility: hidden;
   }
 
@@ -78,9 +51,7 @@ $fs-navigation-push-content-zindex: 1;
     display: block;
   }
 
-  &-toggle-handle &-open {
-
-  }
+  &-toggle-handle &-open {}
 
   // Overlay
 
@@ -88,8 +59,7 @@ $fs-navigation-push-content-zindex: 1;
   &-reveal-nav &-enabled,
   &-overlay-nav &-enabled {
     width: var(--fs-navigation-offscreen-width);
-    height: 100%;
-    height: unquote("calc(100% + 60px)"); // TODO
+    height: calc(100% + 60px); // ??
 
     position: fixed;
     top: 0;
@@ -100,13 +70,7 @@ $fs-navigation-push-content-zindex: 1;
     visibility: hidden;
 
     overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
   }
-
-  // &-push-nav &-enabled,
-  // &-reveal-nav &-enabled {
-  //   visibility: hidden;
-  // }
 
   //
 
@@ -162,13 +126,9 @@ $fs-navigation-push-content-zindex: 1;
     z-index: var(--fs-navigation-overlay-zindex);
   }
 
-  &-overlay-left-nav &-enabled {
+  &-overlay-left-nav &-enabled {}
 
-  }
-
-  &-overlay-right-nav &-enabled {
-
-  }
+  &-overlay-right-nav &-enabled {}
 
   // open
 
@@ -239,14 +199,10 @@ $fs-navigation-push-content-zindex: 1;
   }
 
   &-reveal-left-content &-enabled,
-  &-push-left-content &-enabled {
-
-  }
+  &-push-left-content &-enabled {}
 
   &-reveal-right-content &-enabled,
-  &-push-right-content &-enabled {
-
-  }
+  &-push-right-content &-enabled {}
 
   // open
 
@@ -259,14 +215,4 @@ $fs-navigation-push-content-zindex: 1;
   &-push-right-content &-open {
     transform: translate3d(calc(var(--fs-navigation-offscreen-width) * -1), 0, 0);
   }
-
-  // Handle
-
-  &-handle &-enabled {
-    // @include fs_button;
-  }
-
-  // &-lock {
-  //   overflow: hidden !important;
-  // }
 }

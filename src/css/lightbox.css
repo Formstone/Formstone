@@ -1,21 +1,4 @@
 /*! formstone v2.0.0-1 [lightbox.css] 2023-04-11 | GPL-3.0 License | formstone.it */
-/*
-
-.fs-lightbox
-    .fs-lightbox-overlay
-
-    .fs-lightbox-container
-
-        .fs-lightbox-slide
-
-            .fs-lightbox-media (image/video/iframe)
-
-    .fs-lightbox-close
-
-    .fs-lightbox-next
-
-    .fs-lightbox-prev
-*/
 .fs-lightbox {
   --fs-lightbox-duration: 0.25s;
   --fs-lightbox-timing: linear;
@@ -151,22 +134,9 @@
   width: 100%;
 }
 
-.fs-lightbox-video:before {
-  float: left;
-  width: 1px;
-  margin-left: -1px;
-  padding-bottom: 56.25%;
-  display: block;
-  content: '';
-}
-
 .fs-lightbox-video iframe {
+  aspect-ratio: 16 / 9;
   width: 100%;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .fs-lightbox-iframe iframe {
