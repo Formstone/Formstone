@@ -1,0 +1,16 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.renderWhitespace": "boundary",
+  "files.trimTrailingWhitespace": true,
+  "html-css-class-completion.includeGlobPattern": "wp-content/themes/**/*.{css,less,html}",
+  "html-css-class-completion.excludeGlobPattern": "**/*/node_modules",
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#4ba6dd",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#4ba6dd99",
+    "titleBar.inactiveForeground": "#15202b99",
+    "commandCenter.border": "#15202b99"
+  },
+  "peacock.color": "4BA6DD"
+}

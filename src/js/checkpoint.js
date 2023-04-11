@@ -1,319 +1,202 @@
-/* global define */
+import {
+  extend,
+  select,
+  trigger,
+  addClass,
+  removeClass,
+  type
+} from './utils.js';
 
-(function(factory) {
-    if (typeof define === "function" && define.amd) {
-      define([
-        "jquery",
-        "./core",
-      ], factory);
+// Class
+
+class CheckPoint {
+
+  static #_guid = 1;
+
+  static #_defaults = {
+    intersect: 'bottom',
+    offset: '0px',
+    reverse: false
+  };
+
+  static defaults(options) {
+    this.#_defaults = extend(true, this.#_defaults, options);
+  }
+
+  static construct(selector, options) {
+    let targets = select(selector);
+
+    targets.forEach((el) => {
+      if (!el.CheckPoint) {
+        new CheckPoint(el, options);
+      }
+    });
+
+    return targets;
+  }
+
+  //
+
+  constructor(el, options) {
+    if (el.CheckPoint) {
+      console.warn('Checkpoint: Instance already exists', el);
+      return;
+    }
+
+    // Parse JSON Options
+
+    let optionsData = {};
+    let dataset = el.dataset;
+
+    try {
+      optionsData = JSON.parse(dataset.checkpointOptions || '{}');
+    } catch (e) {
+      console.warn('Checkpoint: Error parsing options JSON', el);
+    }
+
+    // Internal Data
+
+    Object.assign(this, extend(true, this.constructor.#_defaults, options || {}, optionsData));
+
+    this.el = el;
+    this.guid = this.constructor.#_guid++;
+    this.guidEl = `fs-checkpoint-element-${this.guid}`;
+
+    this.enabled = false;
+    this.active = false;
+    this.parent = dataset.checkpointParent || null;
+    this.parentEl = this.parent ? select(this.parent)[0] : null;
+    this.container = dataset.checkpointContainer || null;
+
+    addClass(this.el, this.guidEl);
+
+    this.target = this.container || `.${this.guidEl}`;
+    this.targetEl = select(this.target);
+
+    // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
+    this.intersect = dataset.checkpointIntersect || this.intersect;
+    this.offset = dataset.checkpointOffset || this.offset;
+
+    this.margin = `0px 0px -${this.offset} 0px`;
+    this.edge = parseInt(this.offset, 10);
+    this.percent = this.offset.includes('%') ? (this.offset / 100) : null;
+
+    this.observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        this.#observe(entry);
+      });
+    }, {
+      root: this.parentEl || null,
+      threshold: 0,
+      rootMargin: this.margin
+    });
+
+    this.enable();
+
+    el.CheckPoint = this;
+  }
+
+  destroy() {
+    this.disable();
+
+    removeClass(this.el, this.guidEl);
+
+    this.observer = null;
+
+    this.el.CheckPoint = null;
+
+    delete this.el.CheckPoint;
+  }
+
+  //
+
+  #observe(entry) {
+    let height = this.parentEl ? this.parentEl.innerHeight : window.innerHeight;
+    let edge = height - (this.percent ? (height * this.percent) : this.edge);
+
+    if (entry.isIntersecting || entry.boundingClientRect.top < edge) {
+      this.activate();
     } else {
-      factory(jQuery, Formstone);
+      this.deactivate();
     }
-  }(function($, Formstone) {
+  }
 
-    "use strict";
+  //
 
-    /**
-     * @method private
-     * @name resize
-     * @description Handles window resize
-     */
-
-    function resize() {
-      WindowHeight = $Window.height();
-
-      Functions.iterate.call($Instances, resizeInstance);
+  enable() {
+    if (this.enabled) {
+      return;
     }
 
-    /**
-     * @method private
-     * @name raf
-     * @description Handles request animation frame
-     */
+    this.enabled = true;
 
-    function raf() {
-      ScrollTop = $Window.scrollTop();
+    addClass(this.el, 'fs-checkpoint');
 
-      if (ScrollTop < 0) {
-        ScrollTop = 0;
-      }
+    this.targetEl.forEach((el) => {
+      this.observer.observe(el);
+    });
+  }
 
-      if (ScrollTop !== OldScrollTop) {
-        renderRAF();
-
-        OldScrollTop = ScrollTop;
-      }
-
-      Functions.iterate.call($Instances, scrollInstance);
+  disable() {
+    if (!this.enabled) {
+      return;
     }
 
-    /**
-     * @method private
-     * @name cacheInstances
-     * @description Caches active instances
-     */
+    this.deactivate();
 
-    function cacheInstances() {
-      $Instances = $(Classes.base);
+    this.enabled = false;
 
-      resize();
+    removeClass(this.el, 'fs-checkpoint', 'fs-checkpoint-active');
+
+    this.targetEl.forEach((el) => {
+      this.observer.unobserve(el);
+    });
+  }
+
+  //
+
+  activate() {
+    if (!this.enabled || this.active) {
+      return;
     }
 
-    /**
-     * @method private
-     * @name construct
-     * @description Builds instance.
-     * @param data [object] "Instance data"
-     */
+    this.active = true;
 
-    function construct(data) {
-      data.initialized = false;
+    addClass(this.el, 'fs-checkpoint-active');
+    trigger(this.el, 'activate.checkpoint', {});
+  }
 
-      var $parent    = $(data.$el.data("checkpoint-parent")),
-          $container = $(data.$el.data("checkpoint-container")),
-          intersect  = data.$el.data("checkpoint-intersect"),
-          offset     = data.$el.data("checkpoint-offset");
-
-      if (intersect) {
-        data.intersect = intersect;
-      }
-      if (offset) {
-        data.offset = offset;
-      }
-
-      var intersectParts = data.intersect.split("-");
-
-      data.windowIntersect = intersectParts[0];
-      data.elIntersect = intersectParts[1];
-      data.visible = false;
-
-      data.$target = ($container.length) ? $container : data.$el;
-
-      data.hasParent = ($parent.length > 0);
-      data.$parent   = $parent;
-
-      var $images = data.$target.find("img");
-
-      if ($images.length) {
-        $images.on(Events.load, data, resizeInstance);
-      }
-
-      data.$el.addClass(RawClasses.base);
-
-      data.initialized = true;
+  deactivate() {
+    if (!this.enabled || !this.active) {
+      return;
     }
 
-    /**
-     * @method private
-     * @name postConstruct
-     * @description Run post build.
-     * @param data [object] "Instance data"
-     */
+    this.active = false;
 
-    function postConstruct(data) {
-      cacheInstances();
-      resize();
-    }
+    removeClass(this.el, 'fs-checkpoint-active');
+    trigger(this.el, 'deactivate.checkpoint', {});
+  }
 
-    /**
-     * @method private
-     * @name destruct
-     * @description Tears down instance.
-     * @param data [object] "Instance data"
-     */
+};
 
-    function destruct(data) {
-      data.$el.removeClass(RawClasses.base);
+// jQuery Wrapper
 
-      cacheInstances();
-    }
+if (typeof jQuery !== 'undefined') {
 
-    /**
-     * @method private
-     * @name renderRAF
-     * @description Updates DOM based on animation values
-     */
-
-    function renderRAF() {
-      Functions.iterate.call($Instances, checkInstance);
-    }
-
-    function scrollInstance(data) {
-      if (!data.hasParent) {
-        return;
-      }
-
-      var parentScroll = data.$parent.scrollTop();
-
-      if (parentScroll !== data.parentScroll) {
-        checkInstance(data);
-
-        data.parentScroll = parentScroll;
-      }
-    }
-
-    /**
-     * @method
-     * @name resize
-     * @description Updates instance.
-     * @example $(".target").checkpoint("resize");
-     */
-
-    /**
-     * @method private
-     * @name resizeInstance
-     * @description Handle window resize event
-     * @param data [object] "Instance data"
-     */
-
-    function resizeInstance(data) {
-      if (!data.initialized) {
-        return;
-      }
-
-      data.parentHeight = (data.hasParent) ? data.$parent.outerHeight(false) : WindowHeight;
-
-      switch (data.windowIntersect) {
-        case "top":
-          data.windowCheck = 0 - data.offset;
-          break;
-        case "middle":
-        case "center":
-          data.windowCheck = (data.parentHeight / 2) - data.offset;
-          break;
-        case "bottom":
-          data.windowCheck = data.parentHeight - data.offset;
-          break;
-        default:
-          break;
-      }
-
-      data.elOffset = data.$target.offset();
-
-      switch (data.elIntersect) {
-        case "top":
-          data.elCheck = data.elOffset.top;
-          break;
-        case "middle":
-          data.elCheck = data.elOffset.top + (data.$target.outerHeight() / 2);
-          break;
-        case "bottom":
-          data.elCheck = data.elOffset.top + data.$target.outerHeight();
-          break;
-        default:
-          break;
-      }
-
-      if (data.hasParent) {
-        var parentOffset = data.$parent.offset();
-        data.elCheck -= parentOffset.top;
-      }
-
-      checkInstance(data);
-    }
-
-    /**
-     * @method private
-     * @name checkInstance
-     * @description Handle window scroll event
-     * @param data [object] "Instance data"
-     */
-
-    function checkInstance(data) {
-      if (!data.initialized) {
-        return;
-      }
-
-      var check = data.windowCheck + ((data.hasParent) ? data.parentScroll : ScrollTop);
-
-      if (check >= data.elCheck) {
-        if (!data.active) {
-          data.$el.trigger(Events.activate);
+  (($) => {
+    $.fn['checkpoint'] = function(options, ...args) {
+      return $(this).each((index, el) => {
+        if (!options || type(options) === 'object') {
+          new CheckPoint(el, options);
+        } else if (el.CheckPoint && type(el.CheckPoint[options]) === 'function') {
+          el.CheckPoint[options](...args);
         }
+      });
+    };
+  })(jQuery);
 
-        data.active = true;
-        data.$el.addClass(RawClasses.active);
-      } else {
-        if (data.reverse) {
-          if (data.active) {
-            data.$el.trigger(Events.deactivate);
-          }
+}
 
-          data.active = false;
-          data.$el.removeClass(RawClasses.active);
-        }
-      }
-    }
+// Export
 
-    /**
-     * @plugin
-     * @name Checkpoint
-     * @description A jQuery plugin for animating visible elements.
-     * @type widget
-     * @main checkpoint.js
-     * @main checkpoint.css
-     * @dependency jQuery
-     * @dependency core.js
-     */
-
-    var Plugin = Formstone.Plugin("checkpoint", {
-        widget: true,
-
-        /**
-         * @options
-         * @param intersect [string] <'bottom-top'> "Position of intersection"
-         * @param offset [int] <0> "Element offset for activating animation"
-         * @param reverse [boolean] <false> "Deactivate animation when scrolling back"
-         */
-
-        defaults: {
-          intersect: 'bottom-top',
-          offset: 0,
-          reverse: false,
-        },
-
-        classes: [
-          "active"
-        ],
-
-        /**
-         * @events
-         * @event activate.checkpoint "Checkpoint activated"
-         * @event deactivate.checkpoint "Checkpoint deactivated"
-         */
-
-        events: {
-          activate: "activate",
-          deactivate: "deactivate"
-        },
-
-        methods: {
-          _construct: construct,
-          _postConstruct: postConstruct,
-          _destruct: destruct,
-          _resize: resize,
-          _raf: raf,
-
-          resize: resizeInstance
-        }
-      }),
-
-      // Localize References
-
-      Namespace = Plugin.namespace,
-      Classes = Plugin.classes,
-      RawClasses = Classes.raw,
-      Events = Plugin.events,
-      Functions = Plugin.functions,
-
-      Window = Formstone.window,
-      $Window = Formstone.$window,
-      $Body,
-      WindowHeight = 0,
-      ScrollTop = 0,
-      OldScrollTop = 0,
-      $Instances = [];
-
-  })
-
-);
+export default CheckPoint;

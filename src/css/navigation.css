@@ -1,0 +1,150 @@
+/*! formstone v2.0.0-1 [navigation.css] 2023-04-11 | GPL-3.0 License | formstone.it */
+.fs-navigation,
+.fs-navigation-content {
+  --fs-navigation-offscreen-background: #fff;
+  --fs-navigation-offscreen-width: 80vw;
+  --fs-navigation-offscreen-zindex: 0;
+  --fs-navigation-offscreen-duration: 0.2s;
+  --fs-navigation-offscreen-timing: ease;
+  --fs-navigation-overlay-zindex: 3;
+  --fs-navigation-overlay-content-background: rgba(0, 0, 0, 0.8);
+  --fs-navigation-overlay-content-zindex: 2;
+  --fs-navigation-push-zindex: 0;
+  --fs-navigation-push-content-zindex: 1;
+}
+
+.fs-navigation-toggle-nav.fs-navigation-enabled:not(.fs-navigation-open) {
+  visibility: hidden;
+}
+
+.fs-navigation-toggle-nav.fs-navigation-open {
+  visibility: visible;
+}
+
+.fs-navigation-toggle-handle.fs-navigation-enabled {
+  width: 100%;
+  cursor: pointer;
+  display: block;
+}
+
+.fs-navigation-push-nav.fs-navigation-enabled,
+.fs-navigation-reveal-nav.fs-navigation-enabled,
+.fs-navigation-overlay-nav.fs-navigation-enabled {
+  width: var(--fs-navigation-offscreen-width);
+  height: 100%;
+  height: calc(100% + 60px);
+  position: fixed;
+  top: 0;
+  background: var(--fs-navigation-offscreen-background);
+  display: block;
+  overflow-y: scroll;
+  visibility: hidden;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fs-navigation-reveal-nav.fs-navigation-animated {
+  transition: visibility 0.001s linear var(--fs-navigation-offscreen-duration);
+}
+
+.fs-navigation-push-nav.fs-navigation-animated,
+.fs-navigation-overlay-nav.fs-navigation-animated {
+  transition: transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), visibility 0.001s linear var(--fs-navigation-offscreen-duration);
+}
+
+.fs-navigation-push-nav.fs-navigation-enabled,
+.fs-navigation-reveal-nav.fs-navigation-enabled {
+  z-index: var(--fs-navigation-push-zindex);
+}
+
+.fs-navigation-push-left-nav.fs-navigation-enabled,
+.fs-navigation-reveal-left-nav.fs-navigation-enabled,
+.fs-navigation-overlay-left-nav.fs-navigation-enabled {
+  left: 0;
+}
+
+.fs-navigation-push-right-nav.fs-navigation-enabled,
+.fs-navigation-reveal-right-nav.fs-navigation-enabled,
+.fs-navigation-overlay-right-nav.fs-navigation-enabled {
+  right: 0;
+}
+
+.fs-navigation-push-left-nav.fs-navigation-enabled,
+.fs-navigation-overlay-left-nav.fs-navigation-enabled {
+  transform: translate3d(calc(var(--fs-navigation-offscreen-width) * -1), 0, 0);
+}
+
+.fs-navigation-push-right-nav.fs-navigation-enabled,
+.fs-navigation-overlay-right-nav.fs-navigation-enabled {
+  transform: translate3d(var(--fs-navigation-offscreen-width), 0, 0);
+}
+
+.fs-navigation-overlay-nav.fs-navigation-enabled {
+  z-index: var(--fs-navigation-overlay-zindex);
+}
+
+.fs-navigation-reveal-nav.fs-navigation-open {
+  visibility: visible;
+  transition: visibility 0.001s linear;
+}
+
+.fs-navigation-push-nav.fs-navigation-open,
+.fs-navigation-overlay-nav.fs-navigation-open {
+  transform: translate3d(0, 0, 0);
+  transition: transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), visibility 0.001s linear;
+  visibility: visible;
+}
+
+.fs-navigation-push-handle.fs-navigation-enabled,
+.fs-navigation-overlay-handle.fs-navigation-enabled {
+  cursor: pointer;
+  display: block;
+}
+
+.fs-navigation-overlay-content:before {
+  width: 100%;
+  height: 100%;
+  height: calc(100% + 60px);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--fs-navigation-overlay-content-zindex);
+  background: var(--fs-navigation-overlay-content-background);
+  content: '';
+  display: block;
+  opacity: 0;
+  overflow-y: scroll;
+  overscroll-behavior: contain;
+  transition: opacity var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), visibility var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
+  visibility: hidden;
+}
+
+.fs-navigation-overlay-content.fs-navigation-open:before {
+  opacity: 1;
+  visibility: visible;
+}
+
+.fs-navigation-reveal-content.fs-navigation-enabled,
+.fs-navigation-push-content.fs-navigation-enabled {
+  position: relative;
+  z-index: var(--fs-navigation-push-content-zindex);
+  display: block;
+  transform: translate3d(0, 0, 0);
+}
+
+.fs-navigation-reveal-content.fs-navigation-animated,
+.fs-navigation-push-content.fs-navigation-animated {
+  transition: transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
+}
+
+.fs-navigation-reveal-left-content.fs-navigation-open,
+.fs-navigation-push-left-content.fs-navigation-open {
+  transform: translate3d(var(--fs-navigation-offscreen-width), 0, 0);
+}
+
+.fs-navigation-reveal-right-content.fs-navigation-open,
+.fs-navigation-push-right-content.fs-navigation-open {
+  transform: translate3d(calc(var(--fs-navigation-offscreen-width) * -1), 0, 0);
+}

@@ -1,284 +1,229 @@
-/* global define */
+import MediaQuery from './mediaquery.js';
+import {
+  extend,
+  select,
+  on,
+  off,
+  trigger,
+  addClass,
+  removeClass,
+  hasAttr,
+  type
+} from './utils.js';
 
-(function(factory) {
-    if (typeof define === "function" && define.amd) {
-      define([
-        "jquery",
-        "./core",
-        "./mediaquery"
-      ], factory);
-    } else {
-      factory(jQuery, Formstone);
-    }
-  }(function($, Formstone) {
+// Class
 
-    "use strict";
+class Swap {
 
-    /**
-     * @method private
-     * @name construct
-     * @description Builds instance.
-     * @param data [object] "Instance data"
-     */
+  static #_guid = 1;
 
-    function construct(data) {
-      data.enabled = false;
-      data.active = false;
+  static #_defaults = {
+    classes: {
+      enabled: 'fs-swap-enabled',
+      active: 'fs-swap-active',
+    },
+    collapse: true,
+    maxWidth: Infinity,
+    minWidth: '0px',
+  };
 
-      data.classes = $.extend(true, {}, Classes, data.classes);
+  static defaults(options) {
+    this.#_defaults = extend(true, this.#_defaults, options);
+  }
 
-      data.target = this.data(Namespace + "-target");
-      data.$target = $(data.target).addClass(data.classes.raw.target);
+  static construct(selector, options) {
+    let targets = select(selector);
 
-      data.mq = "(max-width:" + (data.maxWidth === Infinity ? "100000px" : data.maxWidth) + ")";
-
-      // live query for linked to avoid missing new elements
-      var linked = this.data(Namespace + "-linked");
-      data.linked = linked ? '[data-' + Namespace + '-linked="' + linked + '"]' : false;
-
-      // live query for the group to avoid missing new elements
-      var group = this.data(Namespace + "-group");
-      data.group = group ? '[data-' + Namespace + '-group="' + group + '"]' : false;
-
-      data.$swaps = $().add(this).add(data.$target);
-
-      this.on(Events.click + data.dotGuid, data, onClick);
-    }
-
-    /**
-     * @method private
-     * @name postConstruct
-     * @description Run post build.
-     * @param data [object] "Instance data"
-     */
-
-    function postConstruct(data) {
-      if (!data.collapse && data.group && !$(data.group).filter("[data-" + Namespace + "-active]").length) {
-        $(data.group).eq(0).attr("data-" + Namespace + "-active", "true");
+    targets.forEach((el) => {
+      if (!el.Swap) {
+        new Swap(el, options);
       }
+    });
 
-      // Should be activate when enabled
-      data.onEnable = this.data(Namespace + "-active") || false;
+    return targets;
+  }
 
-      // Media Query support
-      $.fsMediaquery("bind", data.rawGuid, data.mq, {
-        enter: function() {
-          enable.call(data.$el, data, true);
-        },
-        leave: function() {
-          disable.call(data.$el, data, true);
+  //
+
+  constructor(el, options) {
+    if (el.Swap) {
+      console.warn('Swap: Instance already exists', el);
+      return;
+    }
+
+    // Parse JSON Options
+
+    let optionsData = {};
+
+    try {
+      optionsData = JSON.parse(el.dataset.swapOptions || '{}');
+    } catch (e) {
+      console.warn('Swap: Error parsing options JSON', el);
+    }
+
+    // Internal Data
+
+    Object.assign(this, extend(true, this.constructor.#_defaults, options || {}, optionsData));
+
+    this.el = el;
+    this.guid = this.constructor.#_guid++;
+    this.guidEl = `fs-swap-element-${this.guid}`;
+    this.guidTarget = `fs-swap-target-${this.guid}`;
+
+    this.enabled = false;
+    // this.active = el.dataset.swapActive || false;
+    this.group = el.dataset.swapGroup ? `[data-swap-group="${el.dataset.swapGroup}"]` : false;
+    this.target = el.dataset.swapTarget || null;
+    this.targetEl = select(this.target);
+    // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
+
+    let maxWidth = (this.maxWidth === Infinity ? '100000px' : this.maxWidth);
+
+    this.mq = `(min-width: ${this.minWidth}) and (max-width: ${maxWidth})`;
+
+    addClass(this.el, this.guidEl);
+    addClass(this.targetEl, this.guidTarget);
+
+    this.toggleEl = select(`.${this.guidEl}, .${this.guidTarget}`);
+
+    MediaQuery.bind(this.guidEl, this.mq, {
+      enter: () => {
+        this.enable();
+      },
+      leave: () => {
+        this.disable();
+      }
+    });
+
+    el.Swap = this;
+  }
+
+  destroy() {
+    this.disable();
+
+    removeClass(this.toggleEl, this.guidEl, this.guidTarget);
+
+    this.el.Swap = null;
+
+    delete this.el.Swap;
+  }
+
+  //
+
+  enable() {
+    if (this.enabled) {
+      return;
+    }
+
+    this.enabled = true;
+
+    addClass(this.toggleEl, this.classes.enabled);
+
+    on(this.el, 'click', this.#onClick);
+
+    if (!this.collapse && this.group) {
+      let groupItems = select(this.group);
+      let activeItems = Array.from(groupItems).filter((el) => {
+        return hasAttr(el, 'data-swap-active');
+      });
+
+      if (!activeItems.length) {
+        groupItems[0].dataset.swapActive = 'true';
+      }
+    }
+
+    trigger(this.toggleEl, 'enable.swap');
+
+    if (this.el.dataset.swapActive) {
+      this.activate();
+    }
+  }
+
+  disable() {
+    if (!this.enabled) {
+      return;
+    }
+
+    this.enabled = false;
+
+    removeClass(this.toggleEl, this.classes.enabled, this.classes.active);
+
+    off(this.el, 'click', this.#onClick);
+
+    trigger(this.toggleEl, 'disable.swap');
+  }
+
+  //
+
+  activate() {
+    if (!this.enabled || this.active) {
+      return;
+    }
+
+    this.active = true;
+
+    addClass(this.toggleEl, this.classes.active);
+
+    trigger(this.toggleEl, 'activate.swap');
+
+    if (this.group) {
+      select(this.group).forEach((el) => {
+        if (el.Swap && !el.classList.contains(this.guidEl)) {
+          el.Swap.deactivate(true);
         }
       });
     }
+  }
 
-    /**
-     * @method private
-     * @name destruct
-     * @description Tears down instance.
-     * @param data [object] "Instance data"
-     */
-
-    function destruct(data) {
-      $.fsMediaquery("unbind", data.rawGuid);
-
-      data.$swaps.removeClass([data.classes.raw.enabled, data.classes.raw.active].join(" "))
-        .off(Events.namespace);
+  deactivate(internal) {
+    if (!this.enabled || !this.active) {
+      return;
     }
 
-    /**
-     * @method
-     * @name activate
-     * @description Activate instance.
-     * @example $(".target").swap("activate");
-     */
+    this.active = false;
 
-    function activate(data, fromLinked) {
-      if (data.enabled && !data.active) {
-        if (data.group && !fromLinked) {
-          // Deactivates grouped instances
-          $(data.group).not(data.$el).not(data.linked)[Plugin.namespaceClean]("deactivate", true);
-        }
+    removeClass(this.toggleEl, this.classes.active);
 
-        // index in group
-        var index = (data.group) ? $(data.group).index(data.$el) : null;
-
-        data.$swaps.addClass(data.classes.raw.active);
-
-        if (!fromLinked) {
-          if (data.linked) {
-            // Linked handles
-            $(data.linked).not(data.$el)[Plugin.namespaceClean]("activate", true);
-          }
-        }
-
-        this.trigger(Events.activate, [index]);
-
-        data.active = true;
-      }
+    if (!internal) {
+      trigger(this.toggleEl, 'deactivate.swap');
     }
+  }
 
-    /**
-     * @method
-     * @name deactivate
-     * @description Deactivates instance.
-     * @example $(".target").swap("deactivate");
-     */
+  //
 
-    function deactivate(data, fromLinked) {
-      if (data.enabled && data.active) {
-        data.$swaps.removeClass(data.classes.raw.active);
+  #onClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-        if (!fromLinked) {
-          if (data.linked) {
-            // Linked handles
-            $(data.linked).not(data.$el)[Plugin.namespaceClean]("deactivate", true);
-          }
-        }
+    let instance = this.Swap;
 
-        this.trigger(Events.deactivate);
-
-        data.active = false;
-      }
+    if (instance.active && instance.collapse) {
+      instance.deactivate();
+    } else {
+      instance.activate();
     }
+  }
 
-    /**
-     * @method
-     * @name enable
-     * @description Enables instance.
-     * @example $(".target").swap("enable");
-     */
+};
 
-    function enable(data, fromLinked) {
-      if (!data.enabled) {
-        data.enabled = true;
+// jQuery Wrapper
 
-        data.$swaps.addClass(data.classes.raw.enabled);
+if (typeof jQuery !== 'undefined') {
 
-        if (!fromLinked) {
-          // Linked handles
-          $(data.linked).not(data.$el)[Plugin.namespaceClean]("enable");
+  (($) => {
+    $.fn['swap'] = function(options, ...args) {
+      return $(this).each((index, el) => {
+        if (!options || type(options) === 'object') {
+          new Swap(el, options);
+        } else if (el.Swap && type(el.Swap[options]) === 'function') {
+          el.Swap[options](...args);
         }
+      });
+    };
+  })(jQuery);
 
-        this.trigger(Events.enable);
+}
 
-        if (data.onEnable) {
-          data.active = false;
-          activate.call(this, data);
-        } else {
-          data.active = true;
-          deactivate.call(this, data);
-        }
-      }
-    }
+// Export
 
-    /**
-     * @method
-     * @name disable
-     * @description Disables instance.
-     * @example $(".target").swap("disable");
-     */
-
-    function disable(data, fromLinked) {
-      if (data.enabled) {
-        data.enabled = false;
-
-        data.$swaps.removeClass([data.classes.raw.enabled, data.classes.raw.active].join(" "));
-
-        if (!fromLinked) {
-          // Linked handles
-          $(data.linked).not(data.$el)[Plugin.namespaceClean]("disable");
-        }
-
-        this.trigger(Events.disable);
-      }
-    }
-
-    /**
-     * @method private
-     * @name onClick
-     * @description Handles click nav click.
-     * @param e [object] "Event data"
-     */
-
-    function onClick(e) {
-      Functions.killEvent(e);
-
-      var data = e.data;
-
-      if (data.active && data.collapse) {
-        deactivate.call(data.$el, data);
-      } else {
-        activate.call(data.$el, data);
-      }
-    }
-
-    /**
-     * @plugin
-     * @name Swap
-     * @description A jQuery plugin for toggling states.
-     * @type widget
-     * @main swap.js
-     * @dependency jQuery
-     * @dependency core.js
-     * @dependency mediaquery.js
-     */
-
-    var Plugin = Formstone.Plugin("swap", {
-        widget: true,
-
-        /**
-         * @options
-         * @param collapse [boolean] <true> "Allow swap to collapse it's target"
-         * @param maxWidth [string] <Infinity> "Width at which to auto-disable plugin"
-         */
-
-        defaults: {
-          collapse: true,
-          maxWidth: Infinity
-        },
-
-        classes: [
-          "target",
-          "enabled",
-          "active"
-        ],
-
-        /**
-         * @events
-         * @event activate.swap "Swap activated"
-         * @event deactivate.swap "Swap deactivated"
-         * @event enable.swap "Swap enabled"
-         * @event disable.swap "Swap diabled"
-         */
-
-        events: {
-          activate: "activate",
-          deactivate: "deactivate",
-          enable: "enable",
-          disable: "disable"
-        },
-
-        methods: {
-          _construct: construct,
-          _postConstruct: postConstruct,
-          _destruct: destruct,
-
-          // Public Methods
-
-          activate: activate,
-          deactivate: deactivate,
-          enable: enable,
-          disable: disable
-        }
-      }),
-
-      // Localize References
-
-      Namespace = Plugin.namespace,
-      Classes = Plugin.classes,
-      Events = Plugin.events,
-      Functions = Plugin.functions;
-
-  })
-
-);
+export default Swap;

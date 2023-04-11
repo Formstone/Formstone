@@ -1,41 +1,42 @@
+/*! formstone v2.0.0-1 [navigation.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
 // Config
 
-@fs-navigation-offscreen-background: #fff;
-@fs-navigation-offscreen-width: 80vw;
-@fs-navigation-offscreen-zindex: 0;
+$fs-navigation-offscreen-background: #fff;
+$fs-navigation-offscreen-width: 80vw;
+$fs-navigation-offscreen-zindex: 0;
 
-@fs-navigation-offscreen-duration: 0.2s;
-@fs-navigation-offscreen-timing: ease;
+$fs-navigation-offscreen-duration: 0.2s;
+$fs-navigation-offscreen-timing: ease;
 
-@fs-navigation-overlay-zindex: 3;
+$fs-navigation-overlay-zindex: 3;
 
-@fs-navigation-overlay-content-background: rgba(0, 0, 0, 0.8);
-@fs-navigation-overlay-content-zindex: 2;
+$fs-navigation-overlay-content-background: rgba(0, 0, 0, 0.8);
+$fs-navigation-overlay-content-zindex: 2;
 
-@fs-navigation-push-zindex: 0;
-@fs-navigation-push-content-zindex: 1;
+$fs-navigation-push-zindex: 0;
+$fs-navigation-push-content-zindex: 1;
 
 .fs-navigation {
 
   &,
   &-content {
-    --fs-navigation-offscreen-background: @fs-navigation-offscreen-background;
-    --fs-navigation-offscreen-width: @fs-navigation-offscreen-width;
-    --fs-navigation-offscreen-zindex: @fs-navigation-offscreen-zindex;
+    --fs-navigation-offscreen-background: $fs-navigation-offscreen-background;
+    --fs-navigation-offscreen-width: $fs-navigation-offscreen-width;
+    --fs-navigation-offscreen-zindex: $fs-navigation-offscreen-zindex;
 
-    --fs-navigation-offscreen-duration: @fs-navigation-offscreen-duration;
-    --fs-navigation-offscreen-timing: @fs-navigation-offscreen-timing;
+    --fs-navigation-offscreen-duration: $fs-navigation-offscreen-duration;
+    --fs-navigation-offscreen-timing: $fs-navigation-offscreen-timing;
 
-    --fs-navigation-overlay-zindex: @fs-navigation-overlay-zindex;
+    --fs-navigation-overlay-zindex: $fs-navigation-overlay-zindex;
 
-    --fs-navigation-overlay-content-background: @fs-navigation-overlay-content-background;
-    --fs-navigation-overlay-content-zindex: @fs-navigation-overlay-content-zindex;
+    --fs-navigation-overlay-content-background: $fs-navigation-overlay-content-background;
+    --fs-navigation-overlay-content-zindex: $fs-navigation-overlay-content-zindex;
 
-    --fs-navigation-push-zindex: @fs-navigation-push-zindex;
-    --fs-navigation-push-content-zindex: @fs-navigation-push-content-zindex;
+    --fs-navigation-push-zindex: $fs-navigation-push-zindex;
+    --fs-navigation-push-content-zindex: $fs-navigation-push-content-zindex;
   }
 
-  // &&-enabled {
+  // &#{&}-enabled {
 
   // }
 
@@ -52,7 +53,7 @@
 
   // Toggle
 
-  &-toggle-nav&-enabled:not(&-open) {
+  &-toggle-nav &-enabled:not(&-open) {
     // width: 1px !important;
     // height: 1px !important;
 
@@ -66,29 +67,29 @@
     visibility: hidden;
   }
 
-  &-toggle-nav&-open {
+  &-toggle-nav &-open {
     visibility: visible;
   }
 
-  &-toggle-handle&-enabled {
+  &-toggle-handle &-enabled {
     width: 100%;
 
     cursor: pointer;
     display: block;
   }
 
-  &-toggle-handle&-open {
+  &-toggle-handle &-open {
 
   }
 
   // Overlay
 
-  &-push-nav&-enabled,
-  &-reveal-nav&-enabled,
-  &-overlay-nav&-enabled {
+  &-push-nav &-enabled,
+  &-reveal-nav &-enabled,
+  &-overlay-nav &-enabled {
     width: var(--fs-navigation-offscreen-width);
     height: 100%;
-    height: ~"calc(100% + 60px)"; // TODO
+    height: unquote("calc(100% + 60px)"); // TODO
 
     position: fixed;
     top: 0;
@@ -102,19 +103,19 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  // &-push-nav&-enabled,
-  // &-reveal-nav&-enabled {
+  // &-push-nav &-enabled,
+  // &-reveal-nav &-enabled {
   //   visibility: hidden;
   // }
 
   //
 
-  &-reveal-nav&-animated {
+  &-reveal-nav &-animated {
     transition: visibility 0.001s linear var(--fs-navigation-offscreen-duration);
   }
 
-  &-push-nav&-animated,
-  &-overlay-nav&-animated {
+  &-push-nav &-animated,
+  &-overlay-nav &-animated {
     transition:
       transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
       visibility 0.001s linear var(--fs-navigation-offscreen-duration);
@@ -122,20 +123,20 @@
 
   // reveal / push / overlay
 
-  &-push-nav&-enabled,
-  &-reveal-nav&-enabled {
+  &-push-nav &-enabled,
+  &-reveal-nav &-enabled {
     z-index: var(--fs-navigation-push-zindex);
   }
 
-  &-push-left-nav&-enabled,
-  &-reveal-left-nav&-enabled,
-  &-overlay-left-nav&-enabled {
+  &-push-left-nav &-enabled,
+  &-reveal-left-nav &-enabled,
+  &-overlay-left-nav &-enabled {
     left: 0;
   }
 
-  &-push-right-nav&-enabled,
-  &-reveal-right-nav&-enabled,
-  &-overlay-right-nav&-enabled {
+  &-push-right-nav &-enabled,
+  &-reveal-right-nav &-enabled,
+  &-overlay-right-nav &-enabled {
     right: 0;
   }
 
@@ -145,39 +146,39 @@
 
   // push / overlay
 
-  &-push-left-nav&-enabled,
-  &-overlay-left-nav&-enabled {
+  &-push-left-nav &-enabled,
+  &-overlay-left-nav &-enabled {
     transform: translate3d(calc(var(--fs-navigation-offscreen-width) * -1), 0, 0);
   }
 
-  &-push-right-nav&-enabled,
-  &-overlay-right-nav&-enabled {
+  &-push-right-nav &-enabled,
+  &-overlay-right-nav &-enabled {
     transform: translate3d(var(--fs-navigation-offscreen-width), 0, 0);
   }
 
   // overlay
 
-  &-overlay-nav&-enabled {
+  &-overlay-nav &-enabled {
     z-index: var(--fs-navigation-overlay-zindex);
   }
 
-  &-overlay-left-nav&-enabled {
+  &-overlay-left-nav &-enabled {
 
   }
 
-  &-overlay-right-nav&-enabled {
+  &-overlay-right-nav &-enabled {
 
   }
 
   // open
 
-  &-reveal-nav&-open {
+  &-reveal-nav &-open {
     visibility: visible;
     transition: visibility 0.001s linear;
   }
 
-  &-push-nav&-open,
-  &-overlay-nav&-open {
+  &-push-nav &-open,
+  &-overlay-nav &-open {
     transform: translate3d(0, 0, 0);
     transition:
       transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
@@ -185,9 +186,9 @@
     visibility: visible;
   }
 
-  &-push-handle&-enabled,
-  &-overlay-handle&-enabled {
-    // .fs_button;
+  &-push-handle &-enabled,
+  &-overlay-handle &-enabled {
+    // @include fs_button;
 
     cursor: pointer;
     display: block;
@@ -196,7 +197,7 @@
   &-overlay-content:before {
     width: 100%;
     height: 100%;
-    height: ~"calc(100% + 60px)";
+    height: unquote("calc(100% + 60px)");
 
     position: fixed;
     top: 0;
@@ -217,13 +218,13 @@
     visibility: hidden;
   }
 
-  &-overlay-content&-open:before {
+  &-overlay-content &-open:before {
     opacity: 1;
     visibility: visible;
   }
 
-  &-reveal-content&-enabled,
-  &-push-content&-enabled {
+  &-reveal-content &-enabled,
+  &-push-content &-enabled {
     position: relative;
     z-index: var(--fs-navigation-push-content-zindex);
 
@@ -231,38 +232,38 @@
     transform: translate3d(0, 0, 0);
   }
 
-  &-reveal-content&-animated,
-  &-push-content&-animated {
+  &-reveal-content &-animated,
+  &-push-content &-animated {
     transition:
       transform var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
   }
 
-  &-reveal-left-content&-enabled,
-  &-push-left-content&-enabled {
+  &-reveal-left-content &-enabled,
+  &-push-left-content &-enabled {
 
   }
 
-  &-reveal-right-content&-enabled,
-  &-push-right-content&-enabled {
+  &-reveal-right-content &-enabled,
+  &-push-right-content &-enabled {
 
   }
 
   // open
 
-  &-reveal-left-content&-open,
-  &-push-left-content&-open {
+  &-reveal-left-content &-open,
+  &-push-left-content &-open {
     transform: translate3d(var(--fs-navigation-offscreen-width), 0, 0);
   }
 
-  &-reveal-right-content&-open,
-  &-push-right-content&-open {
+  &-reveal-right-content &-open,
+  &-push-right-content &-open {
     transform: translate3d(calc(var(--fs-navigation-offscreen-width) * -1), 0, 0);
   }
 
   // Handle
 
-  &-handle&-enabled {
-    // .fs_button;
+  &-handle &-enabled {
+    // @include fs_button;
   }
 
   // &-lock {

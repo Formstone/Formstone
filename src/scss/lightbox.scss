@@ -1,3 +1,4 @@
+/*! formstone v2.0.0-1 [lightbox.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
 /*
 
 .fs-lightbox
@@ -7,7 +8,7 @@
 
         .fs-lightbox-slide
 
-            .fs-lightbox-media (image/video/iframe)
+            @include fs-lightbox-media(image/video/iframe);
 
     .fs-lightbox-close
 
@@ -16,44 +17,44 @@
     .fs-lightbox-prev
 */
 
-@fs-lightbox-mobile-max-width: 739px;
+$fs-lightbox-mobile-max-width: 739px;
 
-@fs-lightbox-duration: 0.25s;
-@fs-lightbox-timing: linear;
+$fs-lightbox-duration: 0.25s;
+$fs-lightbox-timing: linear;
 
-@fs-lightbox-overlay-bg: fade(#000, 90);
+$fs-lightbox-overlay-bg: rgba(#000, 90);
 
-@fs-lightbox-loading-color: #fff;
-@fs-lightbox-loading-size: 40px;
-@fs-lightbox-loading-spread: 5px;
-@fs-lightbox-loading-duration: 0.75s;
+$fs-lightbox-loading-color: #fff;
+$fs-lightbox-loading-size: 40px;
+$fs-lightbox-loading-spread: 5px;
+$fs-lightbox-loading-duration: 0.75s;
 
-@fs-lightbox-item-duration: 0.25s;
-@fs-lightbox-item-timing: ease;
+$fs-lightbox-item-duration: 0.25s;
+$fs-lightbox-item-timing: ease;
 
-@fs-lightbox-details-bg: fade(#000, 60);
-@fs-lightbox-details-color: #fff;
-@fs-lightbox-details-font: 16px / 1.4 sans-serif;
-@fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-top, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px);
+$fs-lightbox-details-bg: rgba(#000, 60);
+$fs-lightbox-details-color: #fff;
+$fs-lightbox-details-font: 16px / 1.4 sans-serif;
+$fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-top, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px);
 
 .fs-lightbox {
-    --fs-lightbox-duration: @fs-lightbox-duration;
-    --fs-lightbox-timing: @fs-lightbox-timing;
+    --fs-lightbox-duration: $fs-lightbox-duration;
+    --fs-lightbox-timing: $fs-lightbox-timing;
 
-    --fs-lightbox-overlay-bg: @fs-lightbox-overlay-bg;
+    --fs-lightbox-overlay-bg: $fs-lightbox-overlay-bg;
 
-    --fs-lightbox-loading-color: @fs-lightbox-loading-color;
-    --fs-lightbox-loading-size: @fs-lightbox-loading-size;
-    --fs-lightbox-loading-spread: @fs-lightbox-loading-spread;
-    --fs-lightbox-loading-duration: @fs-lightbox-loading-duration;
+    --fs-lightbox-loading-color: $fs-lightbox-loading-color;
+    --fs-lightbox-loading-size: $fs-lightbox-loading-size;
+    --fs-lightbox-loading-spread: $fs-lightbox-loading-spread;
+    --fs-lightbox-loading-duration: $fs-lightbox-loading-duration;
 
-    --fs-lightbox-item-duration: @fs-lightbox-item-duration;
-    --fs-lightbox-item-timing: @fs-lightbox-item-timing;
+    --fs-lightbox-item-duration: $fs-lightbox-item-duration;
+    --fs-lightbox-item-timing: $fs-lightbox-item-timing;
 
-    --fs-lightbox-details-bg: @fs-lightbox-details-bg;
-    --fs-lightbox-details-color: @fs-lightbox-details-color;
-    --fs-lightbox-details-font: @fs-lightbox-details-font;
-    --fs-lightbox-details-padding: @fs-lightbox-details-padding;
+    --fs-lightbox-details-bg: $fs-lightbox-details-bg;
+    --fs-lightbox-details-color: $fs-lightbox-details-color;
+    --fs-lightbox-details-font: $fs-lightbox-details-font;
+    --fs-lightbox-details-padding: $fs-lightbox-details-padding;
 
     height: 100vh;
     width: 100vw;
@@ -115,7 +116,7 @@
         user-select: none;
     }
 
-    &-container&-touching {
+    &-container &-touching {
         cursor: grabbing;
     }
 
@@ -148,11 +149,11 @@
         }
     }
 
-    &-item&-active&-loaded {
+    &-item &-active &-loaded {
         opacity: 1;
     }
 
-    &-container&-touching &-item {
+    &-container &-touching &-item {
         transition: none;
     }
 
@@ -270,13 +271,13 @@
         }
     }
 
-    &-item&-active &-details {
+    &-item &-active &-details {
         opacity: 1;
         transition-delay: var(--fs-lightbox-item-duration);
         transition-duration: var(--fs-lightbox-item-duration);
     }
 
-    &-container&-touching &-item&-active &-details {
+    &-container &-touching &-item &-active &-details {
         opacity: 0;
         transition-delay: 0.001s;
         transition-duration: 0s;
@@ -333,7 +334,7 @@
         opacity: 0.5;
         transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
 
-        @media screen and (max-width: @fs-lightbox-mobile-max-width) {
+        @media screen and (max-width: $fs-lightbox-mobile-max-width) {
             top: auto;
         }
 
@@ -346,7 +347,7 @@
         }
     }
 
-    &-control&-visible {
+    &-control &-visible {
         cursor: pointer;
         opacity: 1;
     }
@@ -376,7 +377,7 @@
         transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
     }
 
-    &-loading&-visible {
+    &-loading &-visible {
         opacity: 1;
     }
 }

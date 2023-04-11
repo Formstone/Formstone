@@ -2,6 +2,12 @@
 
 <!-- -->
 
+### 2.0.0
+
+* ES6 Modules (with jQuery adaptors)
+* Added component wrappers for consistant API (Carousel requires Swiper.js; Lightbox requires GLightbox)
+* Removed legacy components in favor of native browser functionality (Grid, Analytics, ASAP, Checkbox, Dropdown, Equalize, Number, Pagination, Range, Scrollbar, Sticky, Tooltip, Touch, Transition, Upload)
+
 ### 1.4.22
 
 * Fixed greedy selector in Tabs

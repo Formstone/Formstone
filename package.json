@@ -3,62 +3,37 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "1.4.22",
+  "version": "2.0.0-1",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Formstone/Formstone/"
   },
   "scripts": {},
-  "homepage": "http://formstone.it/",
+  "homepage": "https://formstone.it/",
   "homepage_short": "formstone.it",
-  "demo": "http://formstone.it/demo/",
+  "demo": "https://formstone.it/demo/",
   "license": "GPL-3.0",
-  "main": "dist/js/core.js",
+  "main": "dist/js/bundle.js",
+  "module": "src/index.js",
   "author": {
     "name": "Ben Plum",
     "email": "mr@benplum.com",
-    "url": "http://www.benplum.com"
-  },
-  "dependencies": {
-    "jquery": "^3.5.1"
+    "url": "https://www.benplum.com"
   },
   "devDependencies": {
-    "fs-sync": "^1.0.6",
+    "dayjs": "^1.11.7",
     "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^7.0.1",
-    "gulp-banner": "^0.1.3",
+    "gulp-autoprefixer": "^8.0.0",
     "gulp-beautify": "^3.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
-    "gulp-clip-empty-files": "^0.1.2",
-    "gulp-cssbeautify": "^3.0.0",
     "gulp-header": "^2.0.9",
-    "gulp-html-beautify": "^1.0.1",
-    "gulp-include": "^2.4.1",
-    "gulp-jshint": "^2.1.0",
-    "gulp-less": "^4.0.1",
-    "gulp-modernizr": "^4.0.1",
+    "gulp-less": "^5.0.0",
     "gulp-rename": "^2.0.0",
-    "gulp-replace-include": "^1.3.1",
-    "gulp-sequence": "^1.0.0",
-    "gulp-uglify": "^3.0.2",
-    "gulp-zetzer": "^1.0.4",
-    "jshint": "^2.12.0",
-    "less-plugin-npm-import": "^2.1.0",
-    "moment": "^2.29.1",
-    "normalize-css": "^2.3.1",
-    "prismjs": "^1.22.0"
+    "webpack-stream": "^7.0.0"
   },
-  "src": {
-    "vars": {
-      "mq_min_ht_sm": "500",
-      "mq_min_ht": "800",
-      "mq_min_xs": "320",
-      "mq_min_sm": "500",
-      "mq_min_md": "740",
-      "mq_min_lg": "980",
-      "mq_min_xl": "1220"
-    }
+  "dependencies": {
+    "gulp-less-to-scss": "^0.0.9"
   }
 }

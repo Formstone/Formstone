@@ -1,19 +1,20 @@
+/*! formstone v2.0.0-1 [checkpoint.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
 // Config
 
-@fs-checkpoint-offset: 50px;
-@fs-checkpoint-duration: 0.5s;
-@fs-checkpoint-scale-in: 0.5;
-@fs-checkpoint-scale-out: 1.25;
-@fs-checkpoint-rotate: 90deg;
-@fs-checkpoint-perspective: 3000px;
+$fs-checkpoint-offset: 50px;
+$fs-checkpoint-duration: 0.5s;
+$fs-checkpoint-scale-in: 0.5;
+$fs-checkpoint-scale-out: 1.25;
+$fs-checkpoint-rotate: 90deg;
+$fs-checkpoint-perspective: 3000px;
 
 .fs-checkpoint {
-  --fs-checkpoint-duration: @fs-checkpoint-duration;
-  --fs-checkpoint-offset: @fs-checkpoint-offset;
-  --fs-checkpoint-scale-in: @fs-checkpoint-scale-in;
-  --fs-checkpoint-scale-out: @fs-checkpoint-scale-out;
-  --fs-checkpoint-rotate: @fs-checkpoint-rotate;
-  --fs-checkpoint-perspective: @fs-checkpoint-perspective;
+  --fs-checkpoint-duration: $fs-checkpoint-duration;
+  --fs-checkpoint-offset: $fs-checkpoint-offset;
+  --fs-checkpoint-scale-in: $fs-checkpoint-scale-in;
+  --fs-checkpoint-scale-out: $fs-checkpoint-scale-out;
+  --fs-checkpoint-rotate: $fs-checkpoint-rotate;
+  --fs-checkpoint-perspective: $fs-checkpoint-perspective;
 }
 
 // FADE

@@ -1,9 +1,10 @@
+/*! formstone v2.0.0-1 [background.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
 // Config
 
-@fs-background-transition-duration: 0.15s;
+$fs-background-transition-duration: 0.15s;
 
 .fs-background {
-  --fs-background-transition-duration: @fs-background-transition-duration;
+  --fs-background-transition-duration: $fs-background-transition-duration;
 
   //
 
