@@ -66,21 +66,7 @@ class Cookie {
       expires: -604800000 // -7 days
     }));
   }
-}
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $['cookie'] = (method, ...args) => {
-      if (type(Cookie[method]) === 'function') {
-        return Cookie[method](...args);
-      }
-    };
-  })(jQuery);
-
-}
+};
 
 // Export
 

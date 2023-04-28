@@ -1,4 +1,4 @@
-import * as Utils from './utils.js';
+import * as Utils from '../js/utils.js';
 
 import Background from './background.js';
 import CheckPoint from './checkpoint.js';
@@ -8,8 +8,6 @@ import MediaQuery from './mediaquery.js';
 import Navigation from './navigation';
 import Swap from './swap.js';
 import Tabs from './tabs.js';
-
-// import Lightbox from './adaptor/lightbox.js';
 
 export {
   Background,
@@ -21,4 +19,4 @@ export {
   Swap,
   Tabs,
   Utils
-};
+}

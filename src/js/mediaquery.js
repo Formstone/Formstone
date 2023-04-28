@@ -110,21 +110,7 @@ class MediaQuery {
     return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g, '');
   }
 
-}
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $['cookie'] = (method, ...args) => {
-      if (type(MediaQuery[method]) === 'function') {
-        return MediaQuery[method](...args);
-      }
-    };
-  })(jQuery);
-
-}
+};
 
 // Export
 

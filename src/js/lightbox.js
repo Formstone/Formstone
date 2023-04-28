@@ -5,7 +5,7 @@ import {
   setAttr,
   removeAttr,
   extend,
-  el,
+  element,
   select,
   siblings,
   on,
@@ -47,11 +47,6 @@ class Lightbox {
   <button type="button" class="fs-lightbox-control fs-lightbox-control_previous" aria-label="Previous">[previous]</button>
   <button type="button" class="fs-lightbox-control fs-lightbox-control_next" aria-label="Next">[next]</button>
 </div>`,
-      //       item: `
-      // <div class="fs-lightbox-item">
-      //   <div class="fs-lightbox-media"></div>
-      //   <div class="fs-lightbox-details"></div>
-      // </div>`,
       close: `<span class="fs-lightbox-sr">Close</span><svg viewBox="0 0 24 24" fill="none"><path d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>`,
       loading: '<span class="fs-lightbox-sr">Loading</span>',
       previous: `<span class="fs-lightbox-sr">Previous</span><svg viewBox="0 0 24 24" fill="none"><path d="M15 19L8 12L15 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
@@ -85,10 +80,6 @@ class Lightbox {
     return targets;
   }
 
-  static onClick() {
-
-  }
-
   //
 
   constructor(el, options) {
@@ -115,7 +106,7 @@ class Lightbox {
     this.el = el;
     this.guid = this.constructor.#_guid++;
     this.guidClass = `fs-lightbox-element-${this.guid}`;
-    this.gallery = el.dataset.lightboxGallery || null;
+    this.gallery = dataset.lightboxGallery || null;
     this.isOpen = false;
     this.isTouching = false;
 
@@ -126,17 +117,19 @@ class Lightbox {
     this.el.addEventListener('click', this.#onClick);
   }
 
-  // destroy() {
-  //   this.close();
+  //
 
-  //   removeClass(this.el, this.guidClass);
+  destroy() {
+    this.close();
 
-  //   this.el.removeEventListener('click', this.#onClick);
+    removeClass(this.el, this.guidClass);
 
-  //   this.el.Lightbox = null;
+    this.el.removeEventListener('click', this.#onClick);
 
-  //   delete this.el.Lightbox;
-  // }
+    this.el.Lightbox = null;
+
+    delete this.el.Lightbox;
+  }
 
   //
 
@@ -285,16 +278,6 @@ class Lightbox {
       addClass(this.lightboxEl, 'fs-lightbox-gallery');
     }
 
-    this.#drawItems();
-
-    once(this.closeEl, 'click', this.listeners.close);
-    on(this.controlPreviousEl, 'click', this.listeners.previous);
-    on(this.controlNextEl, 'click', this.listeners.next);
-    on(this.containerEl, 'click', this.listeners.container);
-    on(window, 'keydown', this.listeners.keydown);
-  }
-
-  #drawItems() {
     this.items.forEach((item, index) => {
       if (item.isImage) {
         this.#drawImage(item, index);
@@ -313,13 +296,21 @@ class Lightbox {
         on(item.mediaEl, 'pointerdown', this.listeners.pointerdown);
       }
     });
+
+    once(this.closeEl, 'click', this.listeners.close);
+    on(this.controlPreviousEl, 'click', this.listeners.previous);
+    on(this.controlNextEl, 'click', this.listeners.next);
+    on(this.containerEl, 'click', this.listeners.container);
+    on(window, 'keydown', this.listeners.keydown);
   }
 
+  //
+
   #drawImage(item, index) {
-    let itemEl = el('div');
-    let wrapEl = el('div');
-    let mediaEl = el('div');
-    let imgEl = el('img');
+    let itemEl = element('div');
+    let wrapEl = element('div');
+    let mediaEl = element('div');
+    let imgEl = element('img');
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
     addClass(wrapEl, 'fs-lightbox-wrap');
@@ -357,11 +348,11 @@ class Lightbox {
 
     let source = `${url}?${parts.join('&')}`;
 
-    let itemEl = el('div');
-    let wrapEl = el('div');
-    let mediaEl = el('div');
-    let videoEl = el('div');
-    let iframeEl = el('iframe');
+    let itemEl = element('div');
+    let wrapEl = element('div');
+    let mediaEl = element('div');
+    let videoEl = element('div');
+    let iframeEl = element('iframe');
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
     addClass(wrapEl, 'fs-lightbox-wrap');
@@ -389,11 +380,11 @@ class Lightbox {
   }
 
   #drawIframe(item, index) {
-    let itemEl = el('div');
-    let wrapEl = el('div');
-    let mediaEl = el('div');
-    let containerEl = el('div');
-    let iframeEl = el('iframe');
+    let itemEl = element('div');
+    let wrapEl = element('div');
+    let mediaEl = element('div');
+    let containerEl = element('div');
+    let iframeEl = element('iframe');
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
     addClass(wrapEl, 'fs-lightbox-wrap');
@@ -420,10 +411,10 @@ class Lightbox {
   }
 
   #drawElement(item, index) {
-    let itemEl = el('div');
-    let wrapEl = el('div');
-    let mediaEl = el('div');
-    let containerEl = el('div');
+    let itemEl = element('div');
+    let wrapEl = element('div');
+    let mediaEl = element('div');
+    let containerEl = element('div');
 
     item.targetEl = select(item.hash)[0];
 
@@ -682,26 +673,6 @@ class Lightbox {
   }
 
 };
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['lightbox'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || type(options) === 'object') {
-          el.Lightbox = new Lightbox(el, options);
-        } else if (el.Lightbox) {
-          if (type(el.Lightbox[options]) === 'function') {
-            el.Lightbox[options](...args);
-          }
-        }
-      });
-    };
-  })(jQuery);
-
-}
 
 // Export
 

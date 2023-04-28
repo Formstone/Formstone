@@ -9,13 +9,21 @@
     "type": "git",
     "url": "https://github.com/Formstone/Formstone/"
   },
-  "scripts": {},
+  "scripts": {
+    "gulp": "NODE_ENV='development' gulp",
+    "gulp-build": "NODE_ENV='production' gulp"
+  },
   "homepage": "https://formstone.it/",
   "homepage_short": "formstone.it",
   "demo": "https://formstone.it/demo/",
   "license": "GPL-3.0",
-  "main": "dist/js/bundle.js",
-  "module": "src/index.js",
+  "exports": {
+    ".": "./src/js/index.js",
+    "./*": "./src/js/*/*.js",
+    "./jquery": "./src/jquery/index.js",
+    "./jquery/*": "./src/jquery/*.js"
+  },
+  "browser": "dist/js/bundle.js",
   "author": {
     "name": "Ben Plum",
     "email": "mr@benplum.com",
@@ -30,10 +38,8 @@
     "gulp-clean-css": "^4.3.0",
     "gulp-header": "^2.0.9",
     "gulp-less": "^5.0.0",
+    "gulp-less-to-scss": "^0.0.9",
     "gulp-rename": "^2.0.0",
     "webpack-stream": "^7.0.0"
-  },
-  "dependencies": {
-    "gulp-less-to-scss": "^0.0.9"
   }
 }

@@ -1,1 +1,31 @@
-/*! formstone v2.0.0-1 [tabs.scss] 2023-04-11 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-1 [tabs.scss] 2023-04-28 | GPL-3.0 License | formstone.it */
+.fs-tabs {
+
+  &-tab &-enabled {
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+  }
+
+  &-content &-enabled {
+    box-sizing: border-box;
+    display: none;
+  }
+
+  &-content &-active {
+    display: block;
+  }
+
+  //
+
+  &-tab &-mobile,
+  &-tab_mobile,
+  &-tab_mobile &-active {
+    display: none;
+  }
+
+  &-tab_mobile &-mobile,
+  &-tab_mobile &-mobile &-active {
+    display: block;
+  }
+}

@@ -1,6 +1,7 @@
 import MediaQuery from './mediaquery.js';
 import {
   extend,
+  element,
   select,
   once,
   trigger,
@@ -76,7 +77,7 @@ class Background {
 
     //
 
-    this.container = document.createElement('div');
+    this.container = element('div');
     addClass(this.container, 'fs-background-container');
     setAttr(this.container, 'aria-hidden', 'true');
     this.container.tabIndex = -1;
@@ -221,7 +222,7 @@ class Background {
   #loadImage(source) {
     this.layerGuid++;
 
-    let media = document.createElement('div');
+    let media = element('div');
 
     media.ariaHidden = true;
     media.className = `fs-background-media fs-background-image`; // fs-background-layer-${this.layerGuid}`;
@@ -254,8 +255,8 @@ class Background {
 
     this.layerGuid++;
 
-    let media = document.createElement('div');
-    let video = document.createElement('video');
+    let media = element('div');
+    let video = element('video');
 
     media.ariaHidden = true;
     media.className = 'fs-background-media fs-background-video';
@@ -278,21 +279,21 @@ class Background {
     }
 
     if (source.webm) {
-      let src = document.createElement('source');
+      let src = element('source');
       src.type = 'video/webm';
       src.src = source.webm;
 
       video.append(src);
     }
     if (source.mp4) {
-      let src = document.createElement('source');
+      let src = element('source');
       src.type = 'video/mp4';
       src.src = source.mp4;
 
       video.append(src);
     }
     if (source.ogg) {
-      let src = document.createElement('source');
+      let src = element('source');
       src.type = 'video/ogg';
       src.src = source.ogg;
 
@@ -334,8 +335,8 @@ class Background {
 
     this.layerGuid++;
 
-    if (!document.querySelectorAll(`script[src*="${ytURL}/iframe_api"]`).length) {
-      let script = document.createElement('script');
+    if (!select(`script[src*="${ytURL}/iframe_api"]`).length) {
+      let script = element('script');
       script.src = `//www.${ytURL}/iframe_api`;
       document.head.append(script);
     }
@@ -347,8 +348,8 @@ class Background {
       });
     } else {
       let guid = `fs-background-${this.guid}-${this.layerGuid}`;
-      let media = document.createElement('div');
-      let video = document.createElement('div');
+      let media = element('div');
+      let video = element('div');
 
       video.id = guid;
 
@@ -385,7 +386,7 @@ class Background {
           onReady: (e) => {
             // console.log('onReady', e);
 
-            this.container.querySelector('iframe').tabIndex = -1;
+            select('iframe', this.container)[0].tabIndex = -1;
 
             this.playerReady = true;
             // data.player.setPlaybackQuality('highres');
@@ -420,7 +421,7 @@ class Background {
               this.player.playVideo();
             }
 
-            // Fix for Safari's overly secure security settings...
+            // Fix for Safari's overly secure security settings
             // this.el.find(Classes.embed)
             //   .addClass(RawClasses.ready);
           },
@@ -494,7 +495,7 @@ class Background {
     this.mute = true;
   }
 
-  // Mute / Unmute is now blocked unless the user interacts with the video...
+  // Mute / Unmute is now blocked unless the user interacts with the video
 
   unmute() {
     if (this.isYouTube && this.playerReady) {
@@ -566,24 +567,6 @@ window.onYouTubeIframeAPIReady = () => {
 
   onYouTubeReady();
 };
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['background'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || type(options) === 'object') {
-          new Background(el, options);
-        } else if (el.Background && type(el.Background[options]) === 'function') {
-          el.Background[options](...args);
-        }
-      });
-    };
-  })(jQuery);
-
-}
 
 // Export
 

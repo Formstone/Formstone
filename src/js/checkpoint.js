@@ -60,7 +60,7 @@ class CheckPoint {
 
     this.el = el;
     this.guid = this.constructor.#_guid++;
-    this.guidEl = `fs-checkpoint-element-${this.guid}`;
+    this.guidClass = `fs-checkpoint-element-${this.guid}`;
 
     this.enabled = false;
     this.active = false;
@@ -68,9 +68,9 @@ class CheckPoint {
     this.parentEl = this.parent ? select(this.parent)[0] : null;
     this.container = dataset.checkpointContainer || null;
 
-    addClass(this.el, this.guidEl);
+    addClass(this.el, this.guidClass);
 
-    this.target = this.container || `.${this.guidEl}`;
+    this.target = this.container || `.${this.guidClass}`;
     this.targetEl = select(this.target);
 
     // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
@@ -99,7 +99,7 @@ class CheckPoint {
   destroy() {
     this.disable();
 
-    removeClass(this.el, this.guidEl);
+    removeClass(this.el, this.guidClass);
 
     this.observer = null;
 
@@ -178,24 +178,6 @@ class CheckPoint {
   }
 
 };
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['checkpoint'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || type(options) === 'object') {
-          new CheckPoint(el, options);
-        } else if (el.CheckPoint && type(el.CheckPoint[options]) === 'function') {
-          el.CheckPoint[options](...args);
-        }
-      });
-    };
-  })(jQuery);
-
-}
 
 // Export
 

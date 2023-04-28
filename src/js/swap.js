@@ -6,6 +6,7 @@ import {
   off,
   trigger,
   addClass,
+  hasClass,
   removeClass,
   hasAttr,
   type
@@ -54,9 +55,10 @@ class Swap {
     // Parse JSON Options
 
     let optionsData = {};
+    let dataset = el.dataset;
 
     try {
-      optionsData = JSON.parse(el.dataset.swapOptions || '{}');
+      optionsData = JSON.parse(dataset.swapOptions || '{}');
     } catch (e) {
       console.warn('Swap: Error parsing options JSON', el);
     }
@@ -67,13 +69,14 @@ class Swap {
 
     this.el = el;
     this.guid = this.constructor.#_guid++;
-    this.guidEl = `fs-swap-element-${this.guid}`;
+    this.guidClass = `fs-swap-element-${this.guid}`;
     this.guidTarget = `fs-swap-target-${this.guid}`;
 
     this.enabled = false;
     // this.active = el.dataset.swapActive || false;
-    this.group = el.dataset.swapGroup ? `[data-swap-group="${el.dataset.swapGroup}"]` : false;
-    this.target = el.dataset.swapTarget || null;
+    this.group = dataset.swapGroup ? `[data-swap-group="${dataset.swapGroup}"]` : false;
+    this.linked = dataset.swapLinked ? `[data-swap-linked="${dataset.swapLinked}"]` : false;
+    this.target = dataset.swapTarget || null;
     this.targetEl = select(this.target);
     // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
 
@@ -81,12 +84,12 @@ class Swap {
 
     this.mq = `(min-width: ${this.minWidth}) and (max-width: ${maxWidth})`;
 
-    addClass(this.el, this.guidEl);
+    addClass(this.el, this.guidClass);
     addClass(this.targetEl, this.guidTarget);
 
-    this.toggleEl = select(`.${this.guidEl}, .${this.guidTarget}`);
+    this.toggleEl = select(`.${this.guidClass}, .${this.guidTarget}`);
 
-    MediaQuery.bind(this.guidEl, this.mq, {
+    MediaQuery.bind(this.guidClass, this.mq, {
       enter: () => {
         this.enable();
       },
@@ -101,7 +104,7 @@ class Swap {
   destroy() {
     this.disable();
 
-    removeClass(this.toggleEl, this.guidEl, this.guidTarget);
+    removeClass(this.toggleEl, this.guidClass, this.guidTarget);
 
     this.el.Swap = null;
 
@@ -110,7 +113,7 @@ class Swap {
 
   //
 
-  enable() {
+  enable(internal) {
     if (this.enabled) {
       return;
     }
@@ -137,9 +140,17 @@ class Swap {
     if (this.el.dataset.swapActive) {
       this.activate();
     }
+
+    if (!internal && this.linked) {
+      select(this.linked).forEach((el) => {
+        if (el.Swap && !hasClass(el, this.guidClass)) {
+          el.Swap.enable(true);
+        }
+      });
+    }
   }
 
-  disable() {
+  disable(internal) {
     if (!this.enabled) {
       return;
     }
@@ -151,11 +162,19 @@ class Swap {
     off(this.el, 'click', this.#onClick);
 
     trigger(this.toggleEl, 'disable.swap');
+
+    if (!internal && this.linked) {
+      select(this.linked).forEach((el) => {
+        if (el.Swap && !hasClass(el, this.guidClass)) {
+          el.Swap.disable(true);
+        }
+      });
+    }
   }
 
   //
 
-  activate() {
+  activate(internal) {
     if (!this.enabled || this.active) {
       return;
     }
@@ -164,11 +183,21 @@ class Swap {
 
     addClass(this.toggleEl, this.classes.active);
 
-    trigger(this.toggleEl, 'activate.swap');
+    if (!internal) {
+      trigger(this.toggleEl, 'activate.swap');
+
+      if (this.linked) {
+        select(this.linked).forEach((el) => {
+          if (el.Swap && !hasClass(el, this.guidClass)) {
+            el.Swap.activate(true);
+          }
+        });
+      }
+    }
 
     if (this.group) {
-      select(this.group).forEach((el) => {
-        if (el.Swap && !el.classList.contains(this.guidEl)) {
+      select(this.linked ? `${this.group}:not(${this.linked})` : this.group).forEach((el) => {
+        if (el.Swap && !hasClass(el, this.guidClass)) {
           el.Swap.deactivate(true);
         }
       });
@@ -186,6 +215,14 @@ class Swap {
 
     if (!internal) {
       trigger(this.toggleEl, 'deactivate.swap');
+
+      if (this.linked) {
+        select(this.linked).forEach((el) => {
+          if (el.Swap && !hasClass(el, this.guidClass)) {
+            el.Swap.deactivate(true);
+          }
+        });
+      }
     }
   }
 
@@ -205,24 +242,6 @@ class Swap {
   }
 
 };
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['swap'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || type(options) === 'object') {
-          new Swap(el, options);
-        } else if (el.Swap && type(el.Swap[options]) === 'function') {
-          el.Swap[options](...args);
-        }
-      });
-    };
-  })(jQuery);
-
-}
 
 // Export
 

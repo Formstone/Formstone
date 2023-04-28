@@ -77,8 +77,8 @@ class Navigation {
     // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
     this.isOpen = false;
 
-    this.handle = select(dataset.navigationHandle);
-    this.content = select(dataset.navigationContent);
+    this.handleEl = select(dataset.navigationHandle);
+    this.contentEl = select(dataset.navigationContent);
 
     this.isToggle = (this.type === 'toggle');
 
@@ -92,9 +92,9 @@ class Navigation {
 
     //
 
-    addClass(el, ...this.navClasses);
-    addClass(this.handle, ...this.handleClasses);
-    addClass(this.content, ...this.contentClasses);
+    addClass(el, this.navClasses);
+    addClass(this.handleEl, this.handleClasses);
+    addClass(this.contentEl, this.contentClasses);
 
     //
 
@@ -122,16 +122,16 @@ class Navigation {
       enable: this.#onEnable(this),
       disable: this.#onDisable(this),
       body: this.#onBodyClick(this),
-      keydown: this.#oKeyDown(this),
+      keydown: this.#oKeyDown(this)
     };
 
-    setAttr(this.handle, {
+    setAttr(this.handleEl, {
       'data-swap-target': `.${this.guidClass}`,
-      'data-swap-linked': `.${this.guidHandle}`,
+      'data-swap-linked': `${this.guidHandle}`,
       'data-swap-group': 'fs-navigation'
     });
 
-    this.handle.forEach((handle) => {
+    this.handleEl.forEach((handle) => {
       setAttr(handle, 'data-tabindex', handle.tabIndex);
       handle.tabIndex = 0;
 
@@ -158,19 +158,19 @@ class Navigation {
   destroy() {
     this.listeners.disable.call();
 
-    removeClass(this.el, ...this.navClasses);
-    removeClass(this.handle, ...this.handleClasses);
-    removeClass(this.content, ...this.contentClasses);
+    removeClass(this.el, this.navClasses);
+    removeClass(this.handleEl, this.handleClasses);
+    removeClass(this.contentEl, this.contentClasses);
     removeAttr(this.el, 'aria-hidden');
     this.tabIndex = this.originalTabIndex;
 
-    removeAttr(this.handle, [
+    removeAttr(this.handleEl, [
       'data-swap-target',
       'data-swap-linked',
       'data-swap-group'
     ]);
 
-    this.handle.forEach((handle) => {
+    this.handleEl.forEach((handle) => {
       handle.tabIndex = getAttr(handle, 'data-tabindex');
       removeAttr(handle, 'data-tabindex');
 
@@ -190,13 +190,13 @@ class Navigation {
   //
 
   enable() {
-    this.handle.forEach((handle) => {
+    this.handleEl.forEach((handle) => {
       handle.Swap.enable();
     });
   }
 
   disable() {
-    this.handle.forEach((handle) => {
+    this.handleEl.forEach((handle) => {
       handle.Swap.disable();
     });
   }
@@ -204,11 +204,11 @@ class Navigation {
   //
 
   open() {
-    this.handle[0].Swap.activate();
+    this.handleEl[0].Swap.activate();
   }
 
   close() {
-    this.handle[0].Swap.deactivate();
+    this.handleEl[0].Swap.deactivate();
   }
 
   //
@@ -224,17 +224,17 @@ class Navigation {
         });
       }
 
-      setAttr(this.handle, 'aria-controls', this.elId);
+      setAttr(this.handleEl, 'aria-controls', this.elId);
 
       if (this.isToggle) {
-        setAttr(this.handle, 'aria-expanded', 'false');
+        setAttr(this.handleEl, 'aria-expanded', 'false');
       }
 
-      addClass(this.content, 'fs-navigation-enabled');
+      addClass(this.contentEl, 'fs-navigation-enabled');
 
       setTimeout(() => {
         addClass(this.el, 'fs-navigation-animated');
-        addClass(this.content, 'fs-navigation-animated');
+        addClass(this.contentEl, 'fs-navigation-animated');
       }, 0);
     };
   }
@@ -250,13 +250,13 @@ class Navigation {
         'id': this.originalId || false
       });
 
-      removeAttr(this.handle, [
+      removeAttr(this.handleEl, [
         'aria-controls',
         'aria-expanded'
       ]);
 
       removeClass(this.el, 'fs-navigation-animated');
-      removeClass(this.content, 'fs-navigation-enabled', 'fs-navigation-animated', this.contentOpenClasses);
+      removeClass(this.contentEl, 'fs-navigation-enabled', 'fs-navigation-animated', this.contentOpenClasses);
     };
   }
 
@@ -264,14 +264,14 @@ class Navigation {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'false');
 
-      addClass(this.content, this.contentOpenClasses);
+      addClass(this.contentEl, this.contentOpenClasses);
 
       if (!this.isToggle) {
         // setAttr(this.content, 'aria-hidden', 'true');
         //setAttr(this.#siblingsClean(this.content), 'aria-hidden', 'true');
         this.#hideSiblings();
       } else {
-        setAttr(this.handle, 'aria-expanded', 'true');
+        setAttr(this.handleEl, 'aria-expanded', 'true');
       }
 
       on(document.body, 'click', this.listeners.body);
@@ -283,7 +283,7 @@ class Navigation {
         this.isOpen = true;
 
         setTimeout(() => {
-          (this.el.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')[0] || this.el).focus();
+          (select('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', this.el)[0] || this.el).focus();
         }, 50);
       }
     };
@@ -293,14 +293,14 @@ class Navigation {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'true');
 
-      removeClass(this.content, ...this.contentOpenClasses);
+      removeClass(this.content, this.contentOpenClasses);
 
       if (!this.isToggle) {
         // removeAttr(siblings(this.el), 'aria-hidden');
         this.#showSiblings();
       }
 
-      setAttr(this.handle, 'aria-expanded', 'false');
+      setAttr(this.handleEl, 'aria-expanded', 'false');
 
       off(document.body, 'click', this.listeners.body);
       off(document.body, 'keydown', this.listeners.keydown);
@@ -308,7 +308,7 @@ class Navigation {
       if (this.isOpen) {
         trigger(this.el, 'close.navigation');
 
-        this.handle[0].focus();
+        this.handleEl[0].focus();
 
         this.isOpen = false;
       }
@@ -356,24 +356,6 @@ class Navigation {
   }
 
 };
-
-// jQuery Wrapper
-
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['navigation'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || type(options) === 'object') {
-          new Navigation(el, options);
-        } else if (el.Navigation && type(el.Navigation[options]) === 'function') {
-          el.Navigation[options](...args);
-        }
-      });
-    };
-  })(jQuery);
-
-}
 
 // Export
 

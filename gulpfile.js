@@ -25,7 +25,7 @@ gulp.task('clean', () => {
     .pipe(clean());
 });
 
-// Beutify Scripts
+// Beautify Scripts
 gulp.task('beautify-scripts', () => {
   return gulp.src(['./src/js/*'])
     .pipe(beautify({
@@ -34,7 +34,16 @@ gulp.task('beautify-scripts', () => {
     .pipe(gulp.dest('./src/js'));
 });
 
-// Beutify Styles
+// Beautify Scripts jQuery
+gulp.task('beautify-scripts-jq', () => {
+  return gulp.src(['./src/jquery/*'])
+    .pipe(beautify({
+      indent_size: 2,
+    }))
+    .pipe(gulp.dest('./src/jquery'));
+});
+
+// Beautify Styles
 gulp.task('beautify-styles', () => {
   return gulp.src(['./src/less/*'])
     .pipe(beautify.css({
@@ -66,12 +75,37 @@ gulp.task('bundle-styles', () => {
 gulp.task('bundle-scripts', () => {
   return gulp.src('./src/js/index.js')
     .pipe(webpack({
-      // mode: 'production',
-      mode: 'development',
+      mode: process.env.NODE_ENV || 'development',
       entry: './src/js/index.js',
       output: {
         path: __dirname + '/dist/js',
         filename: 'formstone.js',
+        globalObject: 'window',
+        library: {
+          name: 'Formstone',
+          type: 'umd'
+        }
+      }
+    }))
+    .pipe(header(banner, {
+      pkg:  pkg,
+      date: date
+    }))
+    .pipe(gulp.dest('./dist'));
+});
+
+// jQuery
+gulp.task('bundle-scripts-jq', () => {
+  return gulp.src('./src/jquery/index.js')
+    .pipe(webpack({
+      mode: process.env.NODE_ENV || 'development',
+      entry: './src/jquery/index.js',
+      externals: {
+        jquery: 'jQuery'
+      },
+      output: {
+        path: __dirname + '/dist/js',
+        filename: 'formstone.jquery.js',
         globalObject: 'window',
         library: {
           name: 'Formstone',
@@ -138,6 +172,10 @@ gulp.task('default', gulp.series([
   'beautify-styles',
   'bundle-scripts',
   'bundle-styles',
+  //
+  'beautify-scripts-jq',
+  'bundle-scripts-jq',
+  //
   'convert-css',
   'convert-scss',
   'license',
@@ -145,5 +183,20 @@ gulp.task('default', gulp.series([
 
 gulp.task('dev', gulp.series(['default', (done) => {
   gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['bundle-styles']));
-  gulp.watch('./src/js/**/*.js', { cwd: './' }, gulp.series(['bundle-scripts']));
+  gulp.watch(['./src/js/**/*.js','./src/jquery/**/*.js'], { cwd: './' }, gulp.series(['bundle-scripts', 'bundle-scripts-jq']));
 }]));
+
+// // Demo
+
+// gulp.task('demo', gulp.series([
+//   'clean-demo',
+//   'beautify-demo-scripts',
+//   'beautify-demo-styles',
+//   'bundle-demo-scripts',
+//   'bundle-demo-styles',
+// ]));
+
+// gulp.task('dev-demo', gulp.series(['default', (done) => {
+//   gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['bundle-styles']));
+//   gulp.watch('./src/js/**/*.js', { cwd: './' }, gulp.series(['bundle-scripts']));
+// }]));

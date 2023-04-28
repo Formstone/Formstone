@@ -1,4 +1,8 @@
-/*! formstone v2.0.0-1 [navigation.css] 2023-04-11 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-1 [navigation.css] 2023-04-28 | GPL-3.0 License | formstone.it */
+.fs-navigation {
+  box-sizing: border-box;
+}
+
 .fs-navigation,
 .fs-navigation-content {
   --fs-navigation-offscreen-background: #fff;
