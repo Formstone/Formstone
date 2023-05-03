@@ -1,19 +1,10 @@
-import jQuery from 'jquery';
 import Cookie from '../js/cookie.js';
 
-// jQuery Wrapper
+import {
+  utility
+} from './adaptor.js';
 
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $['cookie'] = (method, ...args) => {
-      if (typeof Cookie[method] === 'function') {
-        return Cookie[method](...args);
-      }
-    };
-  })(jQuery);
-
-}
+utility(Cookie, 'Cookie');
 
 // Export
 

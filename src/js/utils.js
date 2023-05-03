@@ -10,7 +10,7 @@ export function ready(cb) {
 }
 
 export function isReady() {
-  _readyCallbacks.forEach((cb) => {
+  iterate(_readyCallbacks, (cb) => {
     cb.call();
   });
 }
@@ -27,6 +27,14 @@ export function proto(item) {
 
 export function falsey(v) {
   return (type(v) === 'undefined' || v === false || v === null);
+}
+
+export function isFn(v) {
+  return (type(v) === 'function');
+}
+
+export function isObj(v) {
+  return (type(v) === 'function');
 }
 
 //
@@ -56,12 +64,16 @@ export function iterable(target) {
   });
 }
 
+export function iterate(target, cb) {
+  iterable(target).forEach(cb);
+}
+
 //
 
 export function on(target, event, cb, options) {
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     el.addEventListener(event, cb, options || null);
-  })
+  });
 }
 
 export function once(target, event, cb, options) {
@@ -72,13 +84,13 @@ export function once(target, event, cb, options) {
 }
 
 export function off(target, event, cb) {
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     el.removeEventListener(event, cb);
   })
 }
 
 export function trigger(target, event, detail) {
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     el.dispatchEvent(new CustomEvent(event, {
       detail: detail || null
     }));
@@ -106,7 +118,7 @@ export function hasClass(target, c) {
 export function addClass(target, ...classes) {
   classes = normalizeClasses(...classes);
 
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     el.classList.add(...classes);
   });
 }
@@ -114,7 +126,7 @@ export function addClass(target, ...classes) {
 export function removeClass(target, ...classes) {
   classes = normalizeClasses(...classes);
 
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     el.classList.remove(...classes);
   });
 }
@@ -142,7 +154,7 @@ export function normalizeAttrs(attr, value) {
 export function setAttr(target, attr, value) {
   attr = normalizeAttrs(attr, value);
 
-  iterable(target).forEach((el) => {
+  iterate(target, (el) => {
     for (let [a, v] of attr) {
       if (falsey(v)) {
         removeAttr(target, a);
@@ -158,8 +170,8 @@ export function removeAttr(target, attr) {
     attr = [attr];
   }
 
-  iterable(target).forEach((el) => {
-    attr.forEach((a) => {
+  iterate(target, (el) => {
+    iterate(attr, (a) => {
       el.removeAttribute(a);
     });
   });

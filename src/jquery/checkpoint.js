@@ -1,23 +1,12 @@
-import jQuery from 'jquery';
 import CheckPoint from '../js/checkpoint.js';
 
-// jQuery Wrapper
+import {
+  widget,
+  utility
+} from './adaptor.js';
 
-if (typeof jQuery !== 'undefined') {
-
-  (($) => {
-    $.fn['checkpoint'] = function(options, ...args) {
-      return $(this).each((index, el) => {
-        if (!options || typeof options === 'object') {
-          new CheckPoint(el, options);
-        } else if (el.CheckPoint && typeof el.CheckPoint[options] === 'function') {
-          el.CheckPoint[options](...args);
-        }
-      });
-    };
-  })(jQuery);
-
-}
+widget(CheckPoint, 'CheckPoint');
+utility(CheckPoint, 'CheckPoint');
 
 // Export
 

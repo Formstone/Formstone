@@ -21,7 +21,10 @@
     ".": "./src/js/index.js",
     "./*": "./src/js/*/*.js",
     "./jquery": "./src/jquery/index.js",
-    "./jquery/*": "./src/jquery/*.js"
+    "./jquery/*": "./src/jquery/*.js",
+    "./*.css": "./src/css/*/*.css",
+    "./*.less": "./src/less/*/*.less",
+    "./*.scss": "./src/scss/*/*.scss"
   },
   "browser": "dist/js/bundle.js",
   "author": {

@@ -1,10 +1,10 @@
 import {
   extend,
   select,
+  iterate,
   trigger,
   addClass,
-  removeClass,
-  type
+  removeClass
 } from './utils.js';
 
 // Class
@@ -26,7 +26,7 @@ class CheckPoint {
   static construct(selector, options) {
     let targets = select(selector);
 
-    targets.forEach((el) => {
+    iterate(targets, (el) => {
       if (!el.CheckPoint) {
         new CheckPoint(el, options);
       }
@@ -73,16 +73,15 @@ class CheckPoint {
     this.target = this.container || `.${this.guidClass}`;
     this.targetEl = select(this.target);
 
-    // this = extend(true, this.constructor.#_defaults, options || {}, optionsData);
     this.intersect = dataset.checkpointIntersect || this.intersect;
     this.offset = dataset.checkpointOffset || this.offset;
 
     this.margin = `0px 0px -${this.offset} 0px`;
     this.edge = parseInt(this.offset, 10);
-    this.percent = this.offset.includes('%') ? (this.offset / 100) : null;
+    this.percent = this.offset.includes('%') ? (this.edge / 100) : null;
 
     this.observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
+      iterate(entries, (entry) => {
         this.#observe(entry);
       });
     }, {
@@ -132,7 +131,7 @@ class CheckPoint {
 
     addClass(this.el, 'fs-checkpoint');
 
-    this.targetEl.forEach((el) => {
+    iterate(this.targetEl, (el) => {
       this.observer.observe(el);
     });
   }
@@ -148,7 +147,7 @@ class CheckPoint {
 
     removeClass(this.el, 'fs-checkpoint', 'fs-checkpoint-active');
 
-    this.targetEl.forEach((el) => {
+    iterate(this.targetEl, (el) => {
       this.observer.unobserve(el);
     });
   }

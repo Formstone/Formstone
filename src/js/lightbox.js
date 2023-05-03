@@ -8,10 +8,10 @@ import {
   element,
   select,
   siblings,
+  iterate,
   on,
   off,
-  once,
-  type
+  once
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -71,7 +71,7 @@ class Lightbox {
   static construct(selector, options) {
     let targets = select(selector);
 
-    targets.forEach((el) => {
+    iterate(targets, (el) => {
       if (!el.Lightbox) {
         el.Lightbox = new Lightbox(el, options);
       }
@@ -180,7 +180,7 @@ class Lightbox {
     off(window, 'keydown', this.listeners.keydown);
 
     once(this.lightboxEl, 'transitionend', (e) => {
-      this.items.forEach((item, index) => {
+      iterate(this.items, (item, index) => {
         if (item.isElement) {
           item.targetEl.append(...item.mediaEl.childNodes);
         }
@@ -226,7 +226,7 @@ class Lightbox {
 
     this.items = [];
 
-    targets.forEach((el, i) => {
+    iterate(targets, (el, i) => {
       if (el.tagName === 'A') {
         let source = el.href;
         let hash = el.hash;
@@ -278,7 +278,7 @@ class Lightbox {
       addClass(this.lightboxEl, 'fs-lightbox-gallery');
     }
 
-    this.items.forEach((item, index) => {
+    iterate(this.items, (item, index) => {
       if (item.isImage) {
         this.#drawImage(item, index);
       }
@@ -441,7 +441,7 @@ class Lightbox {
   //
 
   #setPositions() {
-    this.items.forEach((item, index) => {
+    iterate(this.items, (item, index) => {
       removeClass(item.el, 'fs-lightbox-active', 'fs-lightbox-item_previous', 'fs-lightbox-item_next');
 
       if (index === this.index) {
@@ -482,7 +482,7 @@ class Lightbox {
   #loadItem(item) {
     let media = select('[data-src]', item.el);
 
-    media.forEach((m) => {
+    iterate(media, (m) => {
       once(m, 'load', (e) => {
         addClass(item.el, 'fs-lightbox-loaded');
 
@@ -499,7 +499,7 @@ class Lightbox {
     if ((item.isVideo || item.isIframe) && item.isLoaded) {
       let media = select('[data-src]', item.el);
 
-      media.forEach((m) => {
+      iterate(media, (m) => {
         m.src = '';
       });
 
@@ -522,14 +522,14 @@ class Lightbox {
   //
 
   #showSiblings() {
-    siblings(this.lightboxEl).forEach((el) => {
+    iterate(siblings(this.lightboxEl), (el) => {
       setAttr(el, 'aria-hidden', el.dataset.lightboxAriaHidden || false);
       delete el.dataset.lightboxAriaHidden;
     });
   }
 
   #hideSiblings() {
-    siblings(this.lightboxEl).forEach((el) => {
+    iterate(siblings(this.lightboxEl), (el) => {
       el.dataset.lightboxAriaHidden = getAttr(el, 'aria-hidden') || '';
       setAttr(el, 'aria-hidden', true);
     });

@@ -3,6 +3,7 @@ import {
   extend,
   element,
   select,
+  iterate,
   once,
   trigger,
   addClass,
@@ -38,7 +39,7 @@ class Background {
   static construct(selector, options) {
     let targets = select(selector);
 
-    targets.forEach((el) => {
+    iterate(targets, (el) => {
       if (!el.Background) {
         new Background(el, options);
       }
@@ -89,7 +90,7 @@ class Background {
       addClass(el, 'fs-background-lazy');
 
       this.observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
+        iterate(entries, (entry) => {
           this.#observe(entry);
         });
       }, {
@@ -163,7 +164,7 @@ class Background {
           let sources = [];
           let keys = [];
 
-          Object.keys(source).forEach((key) => {
+          iterate(Object.keys(source), (key) => {
             keys.push(key);
           });
 
@@ -530,7 +531,7 @@ class Background {
       this.onLoadTimer = setTimeout(() => {
         let extra = select(`div:not([data-background-layer="${layer}"]):not([data-background-layer="${this.layerGuid}"])`, this.container);
 
-        extra.forEach((node) => {
+        iterate(extra, (node) => {
           node.remove();
         });
       }, 500);
@@ -551,7 +552,7 @@ let YouTubeQueue = [];
 function onYouTubeReady() {
   YouTubeReady = true;
 
-  YouTubeQueue.forEach((item) => {
+  iterate(YouTubeQueue, (item) => {
     item.el.load(item.source);
   });
 

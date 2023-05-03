@@ -1,7 +1,5 @@
-/*! formstone v2.0.0-1 [tabs.css] 2023-04-28 | GPL-3.0 License | formstone.it */
 .fs-tabs-tab.fs-tabs-enabled {
   box-sizing: border-box;
-  border: none;
   cursor: pointer;
 }
 
@@ -12,6 +10,10 @@
 
 .fs-tabs-content.fs-tabs-active {
   display: block;
+}
+
+.fs-tabs-tab_mobile.fs-tabs-mobile {
+  appearance: none;
 }
 
 .fs-tabs-tab.fs-tabs-mobile,

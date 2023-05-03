@@ -2,14 +2,14 @@ import MediaQuery from './mediaquery.js';
 import {
   extend,
   select,
+  iterate,
   on,
   off,
   trigger,
   addClass,
   hasClass,
   removeClass,
-  hasAttr,
-  type
+  hasAttr
 } from './utils.js';
 
 // Class
@@ -35,7 +35,7 @@ class Swap {
   static construct(selector, options) {
     let targets = select(selector);
 
-    targets.forEach((el) => {
+    iterate(targets, (el) => {
       if (!el.Swap) {
         new Swap(el, options);
       }
@@ -142,7 +142,7 @@ class Swap {
     }
 
     if (!internal && this.linked) {
-      select(this.linked).forEach((el) => {
+      iterate(select(this.linked), (el) => {
         if (el.Swap && !hasClass(el, this.guidClass)) {
           el.Swap.enable(true);
         }
@@ -156,6 +156,7 @@ class Swap {
     }
 
     this.enabled = false;
+    this.active = false;
 
     removeClass(this.toggleEl, this.classes.enabled, this.classes.active);
 
@@ -164,7 +165,7 @@ class Swap {
     trigger(this.toggleEl, 'disable.swap');
 
     if (!internal && this.linked) {
-      select(this.linked).forEach((el) => {
+      iterate(select(this.linked), (el) => {
         if (el.Swap && !hasClass(el, this.guidClass)) {
           el.Swap.disable(true);
         }
@@ -187,7 +188,7 @@ class Swap {
       trigger(this.toggleEl, 'activate.swap');
 
       if (this.linked) {
-        select(this.linked).forEach((el) => {
+        iterate(select(this.linked), (el) => {
           if (el.Swap && !hasClass(el, this.guidClass)) {
             el.Swap.activate(true);
           }
@@ -196,7 +197,7 @@ class Swap {
     }
 
     if (this.group) {
-      select(this.linked ? `${this.group}:not(${this.linked})` : this.group).forEach((el) => {
+      iterate(select(this.linked ? `${this.group}:not(${this.linked})` : this.group), (el) => {
         if (el.Swap && !hasClass(el, this.guidClass)) {
           el.Swap.deactivate(true);
         }
@@ -217,7 +218,7 @@ class Swap {
       trigger(this.toggleEl, 'deactivate.swap');
 
       if (this.linked) {
-        select(this.linked).forEach((el) => {
+        iterate(select(this.linked), (el) => {
           if (el.Swap && !hasClass(el, this.guidClass)) {
             el.Swap.deactivate(true);
           }

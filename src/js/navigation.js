@@ -3,6 +3,7 @@ import {
   extend,
   select,
   siblings,
+  iterate,
   on,
   off,
   trigger,
@@ -38,7 +39,7 @@ class Navigation {
   static construct(selector, options) {
     let targets = select(selector);
 
-    targets.forEach((el) => {
+    iterate(targets, (el) => {
       if (!el.Navigation) {
         new Navigation(el, options);
       }
@@ -131,7 +132,7 @@ class Navigation {
       'data-swap-group': 'fs-navigation'
     });
 
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       setAttr(handle, 'data-tabindex', handle.tabIndex);
       handle.tabIndex = 0;
 
@@ -170,7 +171,7 @@ class Navigation {
       'data-swap-group'
     ]);
 
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       handle.tabIndex = getAttr(handle, 'data-tabindex');
       removeAttr(handle, 'data-tabindex');
 
@@ -190,13 +191,13 @@ class Navigation {
   //
 
   enable() {
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       handle.Swap.enable();
     });
   }
 
   disable() {
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       handle.Swap.disable();
     });
   }
@@ -293,7 +294,7 @@ class Navigation {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'true');
 
-      removeClass(this.content, this.contentOpenClasses);
+      removeClass(this.contentEl, this.contentOpenClasses);
 
       if (!this.isToggle) {
         // removeAttr(siblings(this.el), 'aria-hidden');
@@ -324,14 +325,14 @@ class Navigation {
   }
 
   #showSiblings() {
-    this.#getSiblings().forEach((el) => {
+    iterate(this.#getSiblings(), (el) => {
       setAttr(el, 'aria-hidden', el.dataset.navigationAriaHidden || false);
       delete el.dataset.navigationAriaHidden;
     });
   }
 
   #hideSiblings() {
-    this.#getSiblings().forEach((el) => {
+    iterate(this.#getSiblings(), (el) => {
       el.dataset.navigationAriaHidden = getAttr(el, 'aria-hidden') || '';
       setAttr(el, 'aria-hidden', true);
     });

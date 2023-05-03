@@ -3,7 +3,6 @@ let clean = require('gulp-clean');
 let beautify = require('gulp-beautify');
 var cleanCSS = require('gulp-clean-css');
 let dayjs = require('dayjs');
-// let esbuild = require('gulp-esbuild');
 var fs = require('fs');
 let gulp = require('gulp');
 let header = require('gulp-header');
@@ -64,7 +63,7 @@ gulp.task('bundle-styles', () => {
       // compatibility: 'ie10'
     }))
     .pipe(header(banner, {
-      pkg:  pkg,
+      pkg: pkg,
       date: date
     }))
     .pipe(rename('formstone.css'))
@@ -88,7 +87,7 @@ gulp.task('bundle-scripts', () => {
       }
     }))
     .pipe(header(banner, {
-      pkg:  pkg,
+      pkg: pkg,
       date: date
     }))
     .pipe(gulp.dest('./dist'));
@@ -114,7 +113,7 @@ gulp.task('bundle-scripts-jq', () => {
       }
     }))
     .pipe(header(banner, {
-      pkg:  pkg,
+      pkg: pkg,
       date: date
     }))
     .pipe(gulp.dest('./dist'));
@@ -130,22 +129,18 @@ gulp.task('convert-css', () => {
     .pipe(beautify.css({
       indent_size: 2,
     }))
-    .pipe(header(banner, {
-      pkg:  pkg,
-      date: date
-    }))
     .pipe(gulp.dest('./src/css'));
 });
 
 // Convert Less to SCSS
 gulp.task('convert-scss', () => {
-  return gulp.src(['./src/less/**/*.less' /*, '!./src/less/index.less'*/])
+  return gulp.src(['./src/less/**/*.less'])
     .pipe(lessToScss())
     .pipe(beautify.css({
       indent_size: 2,
     }))
     .pipe(header(banner, {
-      pkg:  pkg,
+      pkg: pkg,
       date: date
     }))
     .pipe(gulp.dest('./src/scss'));
@@ -185,18 +180,3 @@ gulp.task('dev', gulp.series(['default', (done) => {
   gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['bundle-styles']));
   gulp.watch(['./src/js/**/*.js','./src/jquery/**/*.js'], { cwd: './' }, gulp.series(['bundle-scripts', 'bundle-scripts-jq']));
 }]));
-
-// // Demo
-
-// gulp.task('demo', gulp.series([
-//   'clean-demo',
-//   'beautify-demo-scripts',
-//   'beautify-demo-styles',
-//   'bundle-demo-scripts',
-//   'bundle-demo-styles',
-// ]));
-
-// gulp.task('dev-demo', gulp.series(['default', (done) => {
-//   gulp.watch('./src/less/**/*.less', { cwd: './' }, gulp.series(['bundle-styles']));
-//   gulp.watch('./src/js/**/*.js', { cwd: './' }, gulp.series(['bundle-scripts']));
-// }]));

@@ -4,16 +4,14 @@ import {
   extend,
   element,
   select,
-  // siblings,
+  iterate,
   on,
   off,
-  // trigger,
   addClass,
   removeClass,
   getAttr,
   setAttr,
-  removeAttr,
-  type
+  removeAttr
 } from './utils.js';
 
 // Class
@@ -317,15 +315,13 @@ class Tabs {
   //
 
   #mobileEnable() {
-    console.log('mobile');
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       addClass(handle, 'fs-tabs-mobile');
     });
   }
 
   #mobileDisable() {
-    console.log('leave mobile');
-    this.handleEl.forEach((handle) => {
+    iterate(this.handleEl, (handle) => {
       removeClass(handle, 'fs-tabs-mobile');
     });
   }

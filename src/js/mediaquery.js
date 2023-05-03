@@ -1,5 +1,6 @@
 import {
-  on
+  on,
+  iterate
 } from './utils.js';
 
 // Class
@@ -27,7 +28,7 @@ class MediaQuery {
       });
     }
 
-    Object.entries(data).forEach((entry) => {
+    iterate(Object.entries(data), (entry) => {
       let action = entry[0];
       let cb = entry[1];
 
@@ -74,7 +75,7 @@ class MediaQuery {
       }
     } else {
       // Unbind all
-      Object.entries(this.#_bindings).forEach((entry) => {
+      iterate(Object.entries(this.#_bindings), (entry) => {
         // let mqKey = entry[0];
         let binding = entry[1];
 
@@ -95,7 +96,7 @@ class MediaQuery {
     let action = e.matches ? 'enter' : 'leave';
 
     if (binding && (binding.active || (!binding.active && e.matches))) {
-      Object.entries(binding[action]).forEach((entry) => {
+      iterate(Object.entries(binding[action]), (entry) => {
         // let key = entry[0];
         let cb = entry[1];
 

@@ -1,4 +1,3 @@
-/*! formstone v2.0.0-1 [lightbox.scss] 2023-04-28 | GPL-3.0 License | formstone.it */
 $fs-lightbox-mobile-max-width: 739px;
 
 $fs-lightbox-duration: 0.25s;
@@ -212,6 +211,10 @@ $fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(en
 
       background: #000;
     }
+  }
+
+  &-iframe &-close {
+    background: rgba(0, 0, 0, 0.8);
   }
 
   &-element {

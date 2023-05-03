@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formstone</title>
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet">
+    <link href="/demo/css/demo.css" rel="stylesheet">
+
+    <link href="../dist/formstone.css" rel="stylesheet">
+
+    <script type="importmap">
+      {
+        "imports": {
+          "formstone": "../src/jquery/index.js",
+          "jquery": "//code.jquery.com/jquery-3.6.4.min.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import 'jquery';
+      import {
+        Background,
+        CheckPoint,
+        Cookie,
+        Lightbox,
+        MediaQuery,
+        Navigation,
+        Swap,
+        Tabs,
+        Utils
+      } from 'formstone';
+
+      Utils.ready(() => {
+
+        console.log('Utils: Ready');
+
+        // Background
+
+        $('.js-background').background();
+
+        // CheckPoint
+
+        $.checkpoint('defaults', {
+          offset: '20%'
+        });
+
+        $('.js-checkpoint').checkpoint();
+
+        // Cookie
+
+        $.cookie('set', 'foo', 'bar', {});
+        $.cookie('set', 'fizz', 'bat', {});
+
+        console.log('Cookie foo: ', $.cookie('get', 'foo'));
+        console.log('Cookie fizz: ', $.cookie('get', 'fizz'));
+
+        $.cookie('delete', 'foo');
+
+        console.log('Cookie foo: ', $.cookie('get', 'foo'));
+
+        $.cookie('set', 'foo', 'new', {});
+
+        console.log('Cookie foo: ', $.cookie('get', 'foo'));
+
+        // Lightbox
+
+        $('.js-lightbox').lightbox();
+
+        // MediaQuery
+
+        $.mediaquery('bind', 'switch-sizes', '(min-width: 740px)', {
+          enter: () => {
+            console.log('Enter >740px');
+          },
+          leave: () => {
+            console.log('Leave >740px');
+          }
+        });
+
+        $.mediaquery('bind', 'desktop', '(min-width: 740px)', {
+          enter: () => {
+            console.log('Desktop Enter');
+          },
+        });
+
+        $.mediaquery('bind', 'desktop', '(min-width: 740px)', {
+          enter: () => {
+            console.log('Desktop Enter 2 (Should Fail)');
+          },
+        });
+
+        $.mediaquery('bind', 'mobile', '(max-width: 740px)', {
+          enter: () => {
+            console.log('Mobile Enter');
+          },
+          leave: () => {
+            console.log('Mobile Leave');
+          },
+        });
+
+        $.mediaquery('unbind', 'desktop');
+        $.mediaquery('unbind', 'mobile', '(max-width: 740px)');
+
+        // Navigation
+
+        $('.js-navigation').navigation();
+
+        // Swap
+
+        $.swap('defaults', {
+          collapse: false
+        });
+
+        $('.js-swap').swap();
+
+        // Tabs
+
+        $('.js-tabs').tabs();
+
+        // Utils
+
+      });
+    </script>
+
+  </head>
+  <body>
+
+    <main>
+
+      <div class="section">
+        <h1>jQuery Module Import</h1>
+      </div>
+
+      <!-- Background -->
+
+      <div class="section" id="background">
+        <h2>Background</h2>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'
+        >
+        </div>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":{"0px":"//spacehold.it/800x450/1.jpg","980px":"//spacehold.it/1600x900/2.jpg"},"alt":"Background Image"}'
+        >
+        </div>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":{"webm":"//spacehold.it/video/video.webm","mp4":"//spacehold.it/video/video.mp4","ogg":"//spacehold.it/video/video.ogv","poster":"//spacehold.it/video/poster.jpg"},"alt":"Background Image"}'
+        >
+        </div>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":{"youtube":"https://www.youtube.com/watch?v=ScMzIvxBSi4"}}'
+        >
+        </div>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":{"youtube":"https://www.youtube-nocookie.com/watch?v=ScMzIvxBSi4","poster":"//spacehold.it/1600x900/5.jpg"}}'
+        >
+        </div>
+
+        <div class="demo_background js-background"
+          data-background-options='{"source":"//spacehold.it/1600x900/3.jpg","lazy":true}'
+        >
+        </div>
+      </div>
+
+
+      <!--CheckPoint -->
+
+      <div class="section" id="checkpoint">
+        <h2>CheckPoint</h2>
+
+
+        <div class="demo_checkpoint js-checkpoint checkpoint_1"
+          data-checkpoint-animation="fade-up"
+        >
+          Checkpoint (20%)
+        </div>
+
+        <div class="demo_checkpoint js-checkpoint checkpoint_2"
+          data-checkpoint-animation="fade-up"
+          data-checkpoint-offset="60%"
+        >
+          Checkpoint (60%)
+        </div>
+
+        <div class="demo_checkpoint js-checkpoint checkpoint_3"
+          data-checkpoint-animation="fade-up"
+          data-checkpoint-offset="300px"
+        >
+          Checkpoint (300px)
+        </div>
+
+        <div class="demo_checkpoint checkpoint_4">
+          <div class="demo_checkpoint_nested js-checkpoint"
+            data-checkpoint-animation="fade-in"
+            data-checkpoint-container=".checkpoint_4"
+          >
+            Checkpoint (20%)
+          </div>
+        </div>
+
+        <div class="demo_checkpoint demo_checkpoint_overflow checkpoint_5">
+          <div class="demo_checkpoint demo_checkpoint_nested js-checkpoint"
+            data-checkpoint-animation="fade-in"
+            data-checkpoint-parent=".checkpoint_5"
+            data-checkpoint-offset="50px"
+          >
+            Checkpoint (50px)
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Cookie -->
+
+      <div class="section" id="cookie">
+        <h2>Cookie</h2>
+
+      </div>
+
+
+      <!-- Lightbox -->
+
+      <div class="section" id="lightbox">
+        <h2>Lightbox</h2>
+
+        <h3>Single</h3>
+        <div class="demo_lightbox_set">
+          <a href="//spacehold.it/1600x900/1.jpg" class="demo_lightbox js-lightbox"
+            data-title="Ultricies Ipsum Purus Vulputate"
+          >
+            <img src="//spacehold.it/400x300/1.jpg" alt="">
+          </a>
+          <a href="//spacehold.it/1600x900/2.jpg" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+          >
+            <img src="//spacehold.it/400x300/2.jpg" alt="">
+          </a>
+          <a href="https://www.youtube-nocookie.com/embed/Ga6RYejo6Hk" class="demo_lightbox js-lightbox"
+            data-lightbox-caption="Ipsum Adipiscing Condimentum Venenatis"
+          >
+            <img src="//spacehold.it/400x300/1.jpg" alt="">
+          </a>
+        </div>
+
+        <h3>Gallery</h3>
+        <div class="demo_lightbox_set">
+          <a href="//spacehold.it/1600x900/7.jpg" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-1"
+            title="Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
+          >
+            <img src="//spacehold.it/400x300/7.jpg" alt="">
+          </a>
+          <a href="//spacehold.it/900x900/8.jpg" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-1"
+            data-lightbox-caption="Nullam id dolor id nibh ultricies vehicula ut id elit."
+          >
+            <img src="//spacehold.it/400x300/8.jpg" alt="">
+          </a>
+          <a href="//spacehold.it/1600x900/9.jpg" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-1"
+            title="Etiam porta sem malesuada magna mollis euismod."
+          >
+            <img src="//spacehold.it/400x300/9.jpg" alt="">
+          </a>
+        </div>
+
+        <h3>Video</h3>
+        <div class="demo_lightbox_set">
+          <a href="https://www.youtube.com/embed/Ga6RYejo6Hk" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-2"
+            data-lightbox-caption="YouTube Video"
+          >
+            <img src="//spacehold.it/400x300/1.jpg" alt="">
+          </a>
+          <a href="https://www.youtube-nocookie.com/embed/Ga6RYejo6Hk" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-2"
+            data-lightbox-caption="YouTube No Cookie"
+          >
+            <img src="//spacehold.it/400x300/1.jpg" alt="">
+          </a>
+          <a href="https://vimeo.com/115041822" class="demo_lightbox js-lightbox"
+            data-lightbox-options='{}'
+            data-lightbox-gallery="lightbox-2"
+            data-lightbox-caption="Vimeo Video"
+          >
+            <img src="//spacehold.it/400x300/2.jpg" alt="">
+          </a>
+        </div>
+
+        <h3>Inline & iFrames</h3>
+        <div class="demo_lightbox_set">
+          <a href="#lightbox_inline" class="demo_lightbox js-lightbox button"
+            data-title="Title here"
+            data-lightbox-gallery="lightbox-inline-iframe"
+            data-lightbox-caption="Inline Content"
+          >
+            Inline Content
+          </a>
+          <div id="lightbox_inline" style="display: none;">
+            <div style="background: white; padding: 20px; height: 500px; width: 500px;">
+              <h2>Adipiscing Vulputate Elit</h2>
+              <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum.</p>
+            </div>
+          </div>
+          <a href="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1700%20South%20Rd&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" class="demo_lightbox js-lightbox button" target="_blank"
+            data-title="Title here"
+            data-lightbox-gallery="lightbox-inline-iframe"
+            data-lightbox-caption="Google Map"
+          >
+            Google Map
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- MediaQuery -->
+
+
+      <!-- Navigation -->
+
+      <div class="section" id="navigation">
+        <h2>Navigation</h2>
+
+        <div class="demo_navigation_set">
+          <a href="#nav_toggle" class="demo_navigation_handle button" id="nav_handle_toggle">Menu</a>
+          <nav class="demo_navigation_nav toggle_nav js-navigation" id="nav_toggle"
+            data-navigation-handle="#nav_handle_toggle"
+            data-navigation-options='{"type":"toggle","maxWidth":"10000px"}'
+          >
+            <a href="#" class="button">One</a>
+            <a href="#" class="button">Two</a>
+            <a href="#" class="button">Three</a>
+          </nav>
+        </div>
+
+
+        <div class="demo_navigation_set">
+          <a href="#nav_overlay_left" class="demo_navigation_handle button" id="nav_handle_overlay_left">Menu Overlay Left</a>
+
+          <a href="#nav_overlay_right" class="demo_navigation_handle button" id="nav_handle_overlay_right">Menu Overlay Right</a>
+
+          <a href="#nav_reveal_left" class="demo_navigation_handle button" id="nav_handle_reveal_left">Menu Reveal Left</a>
+
+          <a href="#nav_reveal_right" class="demo_navigation_handle button" id="nav_handle_reveal_right">Menu Reveal Right</a>
+
+          <a href="#nav_push_left" class="demo_navigation_handle button" id="nav_handle_push_left">Menu Push Left</a>
+
+          <a href="#nav_push_right" class="demo_navigation_handle button" id="nav_handle_push_right">Menu Push Right</a>
+        </div>
+      </div>
+
+
+      <!-- Swap -->
+
+      <div class="section" id="swap">
+        <h2>Swap</h2>
+
+        <div class="demo_swap_set">
+          <h3>No Collapse</h3>
+
+          <a href="#swap_1_1" class="demo_swap_handle button js-swap"
+            data-swap-options='{"collapse":false,"foo":"bar"}'
+            data-swap-target="#swap_1_1"
+            data-swap-group="swap_1"
+          >
+            Handle 1
+          </a>
+
+          <div id="swap_1_1" class="demo_swap_target">
+            Target 1
+          </div>
+
+          <a href="#swap_1_2" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_1_2"
+            data-swap-group="swap_1"
+            data-swap-active="true"
+          >
+            Handle 2
+          </a>
+
+          <div id="swap_1_2" class="demo_swap_target">
+            Target 2
+          </div>
+
+          <a href="#swap_1_3" class="demo_swap_handle button js-swap"
+            data-swap-options='{foo}'
+            data-swap-target="#swap_1_3"
+            data-swap-group="swap_1"
+          >
+            Handle 3
+          </a>
+
+          <div id="swap_1_3" class="demo_swap_target">
+            Target 3
+          </div>
+
+          <a href="#swap_1_4" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_1_4"
+            data-swap-group="swap_1"
+          >
+            Handle 4
+          </a>
+
+          <div id="swap_1_4" class="demo_swap_target">
+            Target 4
+          </div>
+        </div>
+
+        <div class="demo_swap_set">
+          <h3>Collapse</h3>
+
+          <a href="#swap_2_1" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_2_1"
+            data-swap-group="swap_2"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 1
+          </a>
+
+          <div id="swap_2_1" class="demo_swap_target">
+            Target 1
+          </div>
+
+          <a href="#swap_2_2" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_2_2"
+            data-swap-group="swap_2"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 2
+          </a>
+
+          <div id="swap_2_2" class="demo_swap_target">
+            Target 2
+          </div>
+
+          <a href="#swap_2_3" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_2_3"
+            data-swap-group="swap_2"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 3
+          </a>
+
+          <div id="swap_2_3" class="demo_swap_target">
+            Target 3
+          </div>
+        </div>
+
+        <div class="demo_swap_set">
+          <h3>Linked Handles</h3>
+
+          <a href="#swap_3_1" class="demo_swap_handle swap_3_1 button js-swap"
+            data-swap-target="#swap_3_1"
+            data-swap-linked="swap_3_1"
+            data-swap-group="swap_3"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 1 - 1
+          </a>
+
+          <div id="swap_3_1" class="demo_swap_target">
+            Target 1
+          </div>
+
+          <a href="#swap_3_1" class="demo_swap_handle swap_3_1 button js-swap"
+            data-swap-target="#swap_3_1"
+            data-swap-linked="swap_3_1"
+            data-swap-group="swap_3"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 1 - 2
+          </a>
+
+          <a href="#swap_3_2" class="demo_swap_handle swap_3_2 button js-swap"
+            data-swap-target="#swap_3_2"
+            data-swap-linked="swap_3_2"
+            data-swap-group="swap_3"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 2 - 1
+          </a>
+
+          <div id="swap_3_2" class="demo_swap_target">
+            Target 2
+          </div>
+
+          <a href="#swap_3_2" class="demo_swap_handle swap_3_2 button js-swap"
+            data-swap-target="#swap_3_2"
+            data-swap-linked="swap_3_2"
+            data-swap-group="swap_3"
+            data-swap-options='{"collapse":true}'
+          >
+            Handle 2 - 2
+          </a>
+        </div>
+
+
+        <div class="demo_swap_set">
+          <h3>Min / Max Width</h3>
+          <a href="#swap_4_1" class="demo_swap_handle button js-swap"
+            data-swap-target="#swap_4_1"
+            data-swap-group="swap_4"
+            data-swap-options='{"collapse":true,"minWidth":"500px","maxWidth":"980px"}'
+          >
+            Handle 1
+          </a>
+
+          <div id="swap_4_1" class="demo_swap_target">
+            Target 1
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Tabs -->
+
+      <div class="section" id="tabs">
+        <h2>Tabs</h2>
+
+        <nav class="demo_tabs_container tabs_container-1">
+          <a href="#tabs-1-1" class="demo_tabs button js-tabs"
+            data-tabs-group="tabs_1"
+            data-tabs-container=".tabs_container-1"
+            data-tabs-active="true"
+          >
+            One
+          </a>
+          <a href="#tabs-1-2" class="demo_tabs button js-tabs"
+            data-tabs-group="tabs_1"
+            data-tabs-container=".tabs_container-1"
+          >
+            Two
+          </a>
+          <a href="#tabs-1-3" class="demo_tabs button js-tabs"
+            data-tabs-group="tabs_1"
+            data-tabs-container=".tabs_container-1"
+          >
+            Three
+          </a>
+          <!-- <a href="#tabs-1-4" class="demo_tabs button"
+            data-tabs-group="tabs_1"
+            data-tabs-container=".tabs_container-1"
+          >
+            Four
+          </a> -->
+        </nav>
+        <div class="demo_tabs_target" id="tabs-1-1">
+          Target 1
+        </div>
+        <div class="demo_tabs_target" id="tabs-1-2">
+          Target 2
+        </div>
+        <div class="demo_tabs_target" id="tabs-1-3">
+          Target 3
+        </div>
+        <!-- <div class="demo_tabs_target" id="tabs-1-4">
+          Target 4
+        </div> -->
+      </div>
+
+    </main>
+
+    <!--  -->
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_overlay_left"
+      data-navigation-handle="#nav_handle_overlay_left"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"overlay","gravity":"left"}'
+    >
+      <h3>Overlay - Left</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_overlay_right"
+      data-navigation-handle="#nav_handle_overlay_right"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"overlay","gravity":"right"}'
+    >
+      <h3>Overlay - Right</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_reveal_left"
+      data-navigation-handle="#nav_handle_reveal_left"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"reveal","gravity":"left"}'
+    >
+      <h3>Reveal - Left</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_reveal_right"
+      data-navigation-handle="#nav_handle_reveal_right"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"reveal","gravity":"right"}'
+    >
+      <h3>Reveal - Right</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_push_left"
+      data-navigation-handle="#nav_handle_push_left"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"push","gravity":"left"}'
+    >
+      <h3>Push - Left</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+    <nav class="demo_navigation_overlay js-navigation" id="nav_push_right"
+      data-navigation-handle="#nav_handle_push_right"
+      data-navigation-content="main"
+      data-navigation-options='{"type":"push","gravity":"right"}'
+    >
+      <h3>Push - Right</h3>
+      <div class="demo_navigation_nav">
+        <a href="#" class="button">One</a>
+        <a href="#" class="button">Two</a>
+        <a href="#" class="button">Three</a>
+      </div>
+    </nav>
+
+  </body>
+</html>

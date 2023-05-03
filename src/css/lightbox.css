@@ -1,4 +1,3 @@
-/*! formstone v2.0.0-1 [lightbox.css] 2023-04-28 | GPL-3.0 License | formstone.it */
 .fs-lightbox {
   --fs-lightbox-duration: 0.25s;
   --fs-lightbox-timing: linear;
@@ -149,6 +148,10 @@
   height: calc(100vh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   width: calc(100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px));
   background: #000;
+}
+
+.fs-lightbox-iframe .fs-lightbox-close {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .fs-lightbox-element {

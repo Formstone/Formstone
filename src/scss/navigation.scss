@@ -1,4 +1,3 @@
-/*! formstone v2.0.0-1 [navigation.scss] 2023-04-28 | GPL-3.0 License | formstone.it */
 $fs-navigation-offscreen-background: #fff;
 $fs-navigation-offscreen-width: 80vw;
 $fs-navigation-offscreen-zindex: 0;
@@ -38,11 +37,11 @@ $fs-navigation-push-content-zindex: 1;
   // Toggle
 
   &-toggle-nav &-enabled:not(&-open) {
-    visibility: hidden;
+    display: none;
   }
 
   &-toggle-nav &-open {
-    visibility: visible;
+    // display: block;
   }
 
   &-toggle-handle &-enabled {
