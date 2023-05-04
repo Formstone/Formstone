@@ -14,3 +14,7 @@ npm-debug.log
 .idea
 
 # Custom
+
+.htaccess
+index.html
+index.php
