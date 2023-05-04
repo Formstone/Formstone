@@ -73,7 +73,7 @@ class Lightbox {
 
     iterate(targets, (el) => {
       if (!el.Lightbox) {
-        el.Lightbox = new Lightbox(el, options);
+        new Lightbox(el, options);
       }
     });
 
@@ -115,6 +115,8 @@ class Lightbox {
     addClass(this.el, this.guidClass);
 
     this.el.addEventListener('click', this.#onClick);
+
+    el.Lightbox = this;
   }
 
   //

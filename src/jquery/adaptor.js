@@ -9,7 +9,7 @@ export function widget(Plugin, Namespace) {
       return $(this).each((index, el) => {
         if (!options || isObj(options)) {
           new Plugin(el, options);
-        } else if (el[Namespace] && typeof el[Namespace][options] === 'function') {
+        } else if (el[Namespace] && isFn(el[Namespace][options])) {
           el[Namespace][options](...args);
         }
       });
