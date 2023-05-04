@@ -184,7 +184,7 @@ class Lightbox {
     once(this.lightboxEl, 'transitionend', (e) => {
       iterate(this.items, (item, index) => {
         if (item.isElement) {
-          item.targetEl.append(...item.mediaEl.childNodes);
+          item.targetEl.append(...item.frameEl.childNodes);
         }
       });
 
@@ -353,13 +353,13 @@ class Lightbox {
     let itemEl = element('div');
     let wrapEl = element('div');
     let mediaEl = element('div');
-    let videoEl = element('div');
+    let frameEl = element('div');
     let iframeEl = element('iframe');
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
     addClass(wrapEl, 'fs-lightbox-wrap');
     addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_video');
-    addClass(videoEl, 'fs-lightbox-video');
+    addClass(frameEl, 'fs-lightbox-video');
 
     setAttr(iframeEl, {
       'frameborder': '0',
@@ -368,8 +368,8 @@ class Lightbox {
       'data-src': source
     });
 
-    videoEl.append(iframeEl);
-    mediaEl.append(videoEl);
+    frameEl.append(iframeEl);
+    mediaEl.append(frameEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
@@ -385,13 +385,13 @@ class Lightbox {
     let itemEl = element('div');
     let wrapEl = element('div');
     let mediaEl = element('div');
-    let containerEl = element('div');
+    let frameEl = element('div');
     let iframeEl = element('iframe');
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`);
     addClass(wrapEl, 'fs-lightbox-wrap');
     addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_iframe');
-    addClass(containerEl, 'fs-lightbox-iframe');
+    addClass(frameEl, 'fs-lightbox-iframe');
 
     setAttr(iframeEl, {
       'frameborder': '0',
@@ -399,8 +399,8 @@ class Lightbox {
       'data-src': item.source
     });
 
-    containerEl.append(iframeEl);
-    mediaEl.append(containerEl);
+    frameEl.append(iframeEl);
+    mediaEl.append(frameEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
@@ -410,23 +410,24 @@ class Lightbox {
 
     item.el = itemEl;
     item.mediaEl = mediaEl;
+    item.frameEl = frameEl;
   }
 
   #drawElement(item, index) {
     let itemEl = element('div');
     let wrapEl = element('div');
     let mediaEl = element('div');
-    let containerEl = element('div');
+    let frameEl = element('div');
 
     item.targetEl = select(item.hash)[0];
 
     addClass(itemEl, 'fs-lightbox-item', `fs-lightbox-item_${index}`, 'fs-lightbox-loaded');
     addClass(wrapEl, 'fs-lightbox-wrap');
     addClass(mediaEl, 'fs-lightbox-media', 'fs-lightbox-media_element');
-    addClass(containerEl, 'fs-lightbox-element');
+    addClass(frameEl, 'fs-lightbox-element');
 
-    containerEl.append(...item.targetEl.childNodes);
-    mediaEl.append(containerEl);
+    frameEl.append(...item.targetEl.childNodes);
+    mediaEl.append(frameEl);
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
@@ -438,6 +439,7 @@ class Lightbox {
 
     item.el = itemEl;
     item.mediaEl = mediaEl;
+    item.frameEl = frameEl;
   }
 
   //
