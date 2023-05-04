@@ -120,7 +120,7 @@
   flex-grow: 1;
 }
 
-.fs-lightbox-image img {
+.fs-lightbox-media_image img {
   height: auto;
   width: auto;
   min-width: 200px;
