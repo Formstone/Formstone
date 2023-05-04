@@ -10,7 +10,9 @@ import {
   removeClass,
   getAttr,
   setAttr,
-  type
+  // type,
+  isFn,
+  isObj
 } from './utils.js';
 
 // Class
@@ -150,8 +152,8 @@ class Background {
       this.playerReady = true;
       this.playing = false;
 
-      this.isVideo = (type(source) === 'object' && !!(source.mp4 || source.ogg || source.webm));
-      this.isYouTube = (!this.isVideo && type(source) === 'object' && !!source.youtube);
+      this.isVideo = (isObj(source) && !!(source.mp4 || source.ogg || source.webm));
+      this.isYouTube = (!this.isVideo && isObj(source) && !!source.youtube);
       this.isImage = (!this.isVideo && !this.isYouTube);
 
       // Load Image
@@ -160,7 +162,7 @@ class Background {
         let newSource = source;
 
         // Responsive image handling
-        if (type(source) === 'object') {
+        if (isObj(source)) {
           let sources = [];
           let keys = [];
 
@@ -559,7 +561,7 @@ function onYouTubeReady() {
   YouTubeQueue = [];
 }
 
-let originalYouTubeCallback = (type(window.onYouTubeIframeAPIReady) == 'function') ? window.onYouTubeIframeAPIReady : null;
+let originalYouTubeCallback = (isFn(window.onYouTubeIframeAPIReady)) ? window.onYouTubeIframeAPIReady : null;
 
 window.onYouTubeIframeAPIReady = () => {
   if (originalYouTubeCallback) {

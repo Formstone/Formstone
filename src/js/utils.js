@@ -26,7 +26,7 @@ export function proto(item) {
 }
 
 export function falsey(v) {
-  return (type(v) === 'undefined' || v === false || v === null);
+  return (isU(v) || v === false || v === null);
 }
 
 export function isFn(v) {
@@ -34,7 +34,11 @@ export function isFn(v) {
 }
 
 export function isObj(v) {
-  return (type(v) === 'function');
+  return (type(v) === 'object');
+}
+
+export function isU(v) {
+  return (type(v) === 'undefined');
 }
 
 //
@@ -80,7 +84,7 @@ export function once(target, event, cb, options) {
   on(target, event, cb, extend({
     once: true,
     capture: (options === true)
-  }, (type(options) === 'object') ? options : {}));
+  }, (isObj(options)) ? options : {}));
 }
 
 export function off(target, event, cb) {

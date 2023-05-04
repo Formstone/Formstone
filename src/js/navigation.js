@@ -12,7 +12,8 @@ import {
   getAttr,
   setAttr,
   removeAttr,
-  type
+  // type,
+  isU
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -320,7 +321,7 @@ class Navigation {
 
   #getSiblings() {
     return siblings(this.el).filter((el) => {
-      return type(el.Navigation) === 'undefined';
+      return isU(el.Navigation);
     });
   }
 
