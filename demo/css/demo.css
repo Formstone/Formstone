@@ -46,6 +46,10 @@ a:hover {
   color: white;
 } */
 
+main {
+  background: white;
+}
+
 .section {
   width: 94%;
   max-width: 1000px;
