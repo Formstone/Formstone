@@ -6,7 +6,7 @@ import {
 export function widget(Plugin, Namespace) {
   if (typeof jQuery !== 'undefined') {
     jQuery.fn[Namespace.toLowerCase()] = function(options, ...args) {
-      return $(this).each((index, el) => {
+      return jQuery(this).each((index, el) => {
         if (!options || isObj(options)) {
           new Plugin(el, options);
         } else if (el[Namespace] && isFn(el[Namespace][options])) {
