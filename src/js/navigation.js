@@ -137,16 +137,17 @@ class Navigation {
       setAttr(handle, 'data-tabindex', handle.tabIndex);
       handle.tabIndex = 0;
 
-      on(handle, 'activate.swap', this.listeners.open);
-      on(handle, 'deactivate.swap', this.listeners.close);
-      on(handle, 'enable.swap', this.listeners.enable);
-      on(handle, 'disable.swap', this.listeners.disable);
+      on(handle, 'swap:activate', this.listeners.open);
+      on(handle, 'swap:deactivate', this.listeners.close);
+      on(handle, 'swap:enable', this.listeners.enable);
+      on(handle, 'swap:disable', this.listeners.disable);
     });
 
     Swap.construct(`.${this.guidHandle}`, {
       classes: {
         enabled: 'fs-navigation-enabled',
         active: 'fs-navigation-open',
+        inactive: 'fs-navigation-closed',
       },
       collapse: true,
       maxWidth: this.maxWidth
@@ -280,7 +281,7 @@ class Navigation {
       on(document.body, 'keydown', this.listeners.keydown);
 
       if (!this.isOpen) {
-        trigger(this.el, 'open.navigation');
+        trigger(this.el, 'navigation:open');
 
         this.isOpen = true;
 
@@ -308,7 +309,7 @@ class Navigation {
       off(document.body, 'keydown', this.listeners.keydown);
 
       if (this.isOpen) {
-        trigger(this.el, 'close.navigation');
+        trigger(this.el, 'navigation:close');
 
         this.handleEl[0].focus();
 

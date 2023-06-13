@@ -216,7 +216,7 @@ class Background {
         this.#loadYouTube(source);
       }
     } else {
-      trigger(this.el, 'loaded.background');
+      trigger(this.el, 'background:loaded');
     }
   }
 
@@ -541,7 +541,7 @@ class Background {
 
     media.style.opacity = 1;
 
-    trigger(this.el, 'loaded.background');
+    trigger(this.el, 'background:loaded');
   }
 
 };

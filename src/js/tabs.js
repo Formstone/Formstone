@@ -161,8 +161,8 @@ class Tabs {
 
       // on(handle, 'activate.swap', this.listeners.activate);
       // on(handle, 'deactivate.swap', this.listeners.deactivate);
-      on(handle, 'enable.swap', this.listeners.enable);
-      on(handle, 'disable.swap', this.listeners.disable);
+      on(handle, 'swap:enable', this.listeners.enable);
+      on(handle, 'swap:disable', this.listeners.disable);
     });
 
     MediaQuery.bind(this.guidClass, this.mq, {
@@ -180,6 +180,7 @@ class Tabs {
       classes: {
         enabled: 'fs-tabs-enabled',
         active: 'fs-tabs-active',
+        inactive: 'fs-tabs-inactive',
       },
       collapse: true,
       maxWidth: this.maxWidth

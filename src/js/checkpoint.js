@@ -162,7 +162,7 @@ class CheckPoint {
     this.active = true;
 
     addClass(this.el, 'fs-checkpoint-active');
-    trigger(this.el, 'activate.checkpoint', {});
+    trigger(this.el, 'checkpoint:activate', {});
   }
 
   deactivate() {
@@ -173,7 +173,7 @@ class CheckPoint {
     this.active = false;
 
     removeClass(this.el, 'fs-checkpoint-active');
-    trigger(this.el, 'deactivate.checkpoint', {});
+    trigger(this.el, 'checkpoint:deactivate', {});
   }
 
 };

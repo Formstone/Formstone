@@ -14,6 +14,8 @@ import {
 
 // Class
 
+// TODO look into events
+
 class Swap {
 
   static #_guid = 1;
@@ -22,6 +24,7 @@ class Swap {
     classes: {
       enabled: 'fs-swap-enabled',
       active: 'fs-swap-active',
+      inactive: 'fs-swap-inactive',
     },
     collapse: true,
     maxWidth: Infinity,
@@ -120,7 +123,7 @@ class Swap {
 
     this.enabled = true;
 
-    addClass(this.toggleEl, this.classes.enabled);
+    addClass(this.toggleEl, this.classes.enabled, this.classes.inactive);
 
     on(this.el, 'click', this.#onClick);
 
@@ -135,7 +138,7 @@ class Swap {
       }
     }
 
-    trigger(this.toggleEl, 'enable.swap');
+    trigger(this.toggleEl, 'swap:enable');
 
     if (this.el.dataset.swapActive) {
       this.activate();
@@ -158,11 +161,11 @@ class Swap {
     this.enabled = false;
     this.active = false;
 
-    removeClass(this.toggleEl, this.classes.enabled, this.classes.active);
+    removeClass(this.toggleEl, this.classes.enabled, this.classes.active, this.classes.inactive);
 
     off(this.el, 'click', this.#onClick);
 
-    trigger(this.toggleEl, 'disable.swap');
+    trigger(this.toggleEl, 'swap:disable');
 
     if (!internal && this.linked) {
       iterate(select(this.linked), (el) => {
@@ -182,10 +185,11 @@ class Swap {
 
     this.active = true;
 
+    removeClass(this.toggleEl, this.classes.inactive);
     addClass(this.toggleEl, this.classes.active);
 
     if (!internal) {
-      trigger(this.toggleEl, 'activate.swap');
+      trigger(this.toggleEl, 'swap:activate');
 
       if (this.linked) {
         iterate(select(this.linked), (el) => {
@@ -213,9 +217,10 @@ class Swap {
     this.active = false;
 
     removeClass(this.toggleEl, this.classes.active);
+    addClass(this.toggleEl, this.classes.inactive);
 
     if (!internal) {
-      trigger(this.toggleEl, 'deactivate.swap');
+      trigger(this.toggleEl, 'swap:deactivate');
 
       if (this.linked) {
         iterate(select(this.linked), (el) => {

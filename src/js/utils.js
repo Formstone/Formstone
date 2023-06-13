@@ -90,7 +90,7 @@ export function once(target, event, cb, options) {
 export function off(target, event, cb) {
   iterate(target, (el) => {
     el.removeEventListener(event, cb);
-  })
+  });
 }
 
 export function trigger(target, event, detail) {
@@ -98,7 +98,7 @@ export function trigger(target, event, detail) {
     el.dispatchEvent(new CustomEvent(event, {
       detail: detail || null
     }));
-  })
+  });
 }
 
 //
