@@ -177,10 +177,10 @@ class Navigation {
       handle.tabIndex = getAttr(handle, 'data-tabindex');
       removeAttr(handle, 'data-tabindex');
 
-      off(handle, 'activate.swap', this.listeners.open);
-      off(handle, 'deactivate.swap', this.listeners.close);
-      off(handle, 'enable.swap', this.listeners.enable);
-      off(handle, 'disable.swap', this.listeners.disable);
+      off(handle, 'swap:activate', this.listeners.open);
+      off(handle, 'swap:deactivate', this.listeners.close);
+      off(handle, 'swap:enable', this.listeners.enable);
+      off(handle, 'swap:disable', this.listeners.disable);
 
       handle.Swap.destroy();
     });

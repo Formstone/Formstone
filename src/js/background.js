@@ -403,6 +403,8 @@ class Background {
             } else {
               this.player.pauseVideo();
             }
+
+            // TODO trigger ready event?
           },
           onStateChange: (e) => {
             // console.log('onStateChange', e);
@@ -462,6 +464,8 @@ class Background {
       }
     }
 
+    // TODO trigger play event?
+
     this.playing = true;
   }
 
@@ -480,6 +484,8 @@ class Background {
       }
     }
 
+    // TODO trigger pause event?
+
     this.playing = false;
   }
 
@@ -494,6 +500,8 @@ class Background {
         video[0].muted = true;
       }
     }
+
+    // TODO trigger mute event?
 
     this.mute = true;
   }
@@ -516,8 +524,14 @@ class Background {
       }
     }
 
+    // TODO trigger unmute event?
+
     this.mute = false;
   }
+
+  // TODO unload method and event?
+
+  // TODO set background video volume and event?
 
   //
 
@@ -540,6 +554,8 @@ class Background {
     });
 
     media.style.opacity = 1;
+
+    // TODO handle errors and trigger events?
 
     trigger(this.el, 'background:loaded');
   }

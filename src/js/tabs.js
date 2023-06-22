@@ -146,7 +146,7 @@ class Tabs {
     //
 
     this.listeners = {
-      // activate: this.#onActivate(this),
+      activate: this.#onActivate(this),
       // deactivate: this.#onDeactivate(this),
       enable: this.#onEnable(this),
       disable: this.#onDisable(this)
@@ -159,8 +159,8 @@ class Tabs {
         'data-swap-group': `${this.group}`
       });
 
-      // on(handle, 'activate.swap', this.listeners.activate);
-      // on(handle, 'deactivate.swap', this.listeners.deactivate);
+      on(handle, 'swap:activate', this.listeners.activate);
+      // on(handle, 'swap:deactivate', this.listeners.deactivate);
       on(handle, 'swap:enable', this.listeners.enable);
       on(handle, 'swap:disable', this.listeners.disable);
     });
@@ -205,8 +205,10 @@ class Tabs {
     ]);
 
     this.handleEl.forEach((handle) => {
-      off(handle, 'enable.swap', this.listeners.enable);
-      off(handle, 'disable.swap', this.listeners.disable);
+      off(handle, 'swap:activate', this.listeners.activate);
+      // off(handle, 'swap:deactivate', this.listeners.deactivate);
+      off(handle, 'swap:enable', this.listeners.enable);
+      off(handle, 'swap:disable', this.listeners.disable);
 
       handle.Swap.destroy();
     });
@@ -304,8 +306,9 @@ class Tabs {
   }
 
   #onActivate() {
-    //   return (e) => {
-    //   };
+    return (e) => {
+      // window.location.hash = this.el.hash;
+    };
   }
 
   #onDeactivate() {

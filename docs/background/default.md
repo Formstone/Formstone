@@ -38,3 +38,42 @@ Utils.ready(() => {
 Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
 
 Donec sed odio dui. Aenean lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Vestibulum id ligula porta felis euismod semper. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
+
+## Options
+
+| Name | Type | Default | Description |
+| -- | -- | -- | --|
+| `alt` | string | `''` | Image `alt` attribute |
+| `autoPlay` | boolean | `true` | Autoplay video |
+| `lazy` | boolean | `false` | Lazy load media on scroll |
+| `lazyOffset` | string | `'100px'` | Distance from bottom of window |
+| `loop` | boolean | `true` | Loop video |
+| `mute` | boolean | `true` | Mute video |
+| `source` | string OR object | `null` | Source image (string or object) or video (object) |
+| `youtubeOptions` | object | `{}` | Options passed to YouTube player |
+
+## Methods
+
+| Name | Parameters | Description |
+| -- | -- | -- |
+| `contruct(selector, options)` | `selector`: Selector string to target<br>`options`: Object containing instance options | Initializes plugin on target elements |
+| `defaults(options)` | `options`: Object containing default options | Sets default options for future initialization |
+| `destroy()` |  | Removes plugin and all related data |
+| `load(source)` | `source`: String OR object containing source media | Loads source media |
+| `mute()` |  | Mutes current video |
+| `pause()` |  | Pauses current video |
+| `play()` |  | Plays current video |
+| `unload()` |  | Unloads current media |
+| `unmute()` |  | Unmutes current video |
+
+## Events
+
+| Name | Description |
+| -- | --|
+| `background:loaded` | Background media loaded |
+| `background:ready` | Background media ready |
+| `background:play` | Background media is paused |
+| `background:pause` | Background media is playing |
+| `background:mute` | Background media is muted |
+| `background:unmute` | Background media is unmuted |
+| `background:error` | Background media error |
