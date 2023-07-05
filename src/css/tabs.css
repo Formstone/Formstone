@@ -1,4 +1,5 @@
-.fs-tabs-tab.fs-tabs-enabled {
+.fs-tabs-tab.fs-tabs-enabled,
+.fs-tabs-tab_mobile.fs-tabs-enabled {
   box-sizing: border-box;
   cursor: pointer;
 }

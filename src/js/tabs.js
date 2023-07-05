@@ -182,7 +182,7 @@ class Tabs {
         active: 'fs-tabs-active',
         inactive: 'fs-tabs-inactive',
       },
-      collapse: true,
+      collapse: false,
       maxWidth: this.maxWidth
     });
 

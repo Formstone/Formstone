@@ -456,13 +456,13 @@ class Lightbox {
         if (!item.isLoaded) {
           this.#showLoading();
 
-          this.#loadItem(item);
+          this.#loadItem(item, index);
         } else {
           this.#hideLoading();
         }
       } else {
         once(item.el, 'transitionend', (e) => {
-          this.#unloadItem(item);
+          this.#unloadItem(item, index);
         });
 
         setAttr(item.el, 'aria-hidden', 'true');
@@ -483,7 +483,11 @@ class Lightbox {
 
   //
 
-  #loadItem(item) {
+  #loadItem(item, index) {
+    if (index !== this.index) {
+      return;
+    }
+
     let media = select('[data-src]', item.el);
 
     iterate(media, (m) => {
@@ -499,7 +503,11 @@ class Lightbox {
     });
   }
 
-  #unloadItem(item) {
+  #unloadItem(item, index) {
+    if (index == this.index) {
+      return;
+    }
+
     if ((item.isVideo || item.isIframe) && item.isLoaded) {
       let media = select('[data-src]', item.el);
 
