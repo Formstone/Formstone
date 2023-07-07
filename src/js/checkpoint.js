@@ -64,6 +64,7 @@ class CheckPoint {
 
     this.enabled = false;
     this.active = false;
+    this.hasActived = false;
     this.parent = dataset.checkpointParent || null;
     this.parentEl = this.parent ? select(this.parent)[0] : null;
     this.container = dataset.checkpointContainer || null;
@@ -160,13 +161,14 @@ class CheckPoint {
     }
 
     this.active = true;
+    this.hasActived = true;
 
     addClass(this.el, 'fs-checkpoint-active');
     trigger(this.el, 'checkpoint:activate', {});
   }
 
   deactivate() {
-    if (!this.enabled || !this.active) {
+    if (!this.enabled || !this.active || this.hasActived) {
       return;
     }
 

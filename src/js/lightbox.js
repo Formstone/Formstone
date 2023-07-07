@@ -1,3 +1,4 @@
+// import MediaQuery from './mediaquery.js';
 import {
   addClass,
   removeClass,
@@ -47,10 +48,15 @@ class Lightbox {
   <button type="button" class="fs-lightbox-control fs-lightbox-control_previous" aria-label="Previous">[previous]</button>
   <button type="button" class="fs-lightbox-control fs-lightbox-control_next" aria-label="Next">[next]</button>
 </div>`,
-      close: `<span class="fs-lightbox-sr">Close</span><svg viewBox="0 0 24 24" fill="none"><path d="M18 18L12 12M12 12L6 6M12 12L18 6M12 12L6 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>`,
+      zoom: `
+<button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_in" aria-label="Zoom In">[zoomIn]</button>
+<button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_out" aria-label="Zoom Out">[zoomOut]</button>`,
+      close: `<span class="fs-lightbox-sr">Close</span><svg viewBox="-6 -6 24 24" fill="currentColor"><path d="M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z"></path></svg>`,
       loading: '<span class="fs-lightbox-sr">Loading</span>',
-      previous: `<span class="fs-lightbox-sr">Previous</span><svg viewBox="0 0 24 24" fill="none"><path d="M15 19L8 12L15 5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
-      next: `<span class="fs-lightbox-sr">Next</span><svg viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`
+      previous: `<span class="fs-lightbox-sr">Previous</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M3.414 7.657l3.95 3.95A1 1 0 0 1 5.95 13.02L.293 7.364a.997.997 0 0 1 0-1.414L5.95.293a1 1 0 1 1 1.414 1.414l-3.95 3.95H13a1 1 0 0 1 0 2H3.414z"></path></svg>`,
+      next: `<span class="fs-lightbox-sr">Next</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M10.586 5.657l-3.95-3.95A1 1 0 0 1 8.05.293l5.657 5.657a.997.997 0 0 1 0 1.414L8.05 13.021a1 1 0 1 1-1.414-1.414l3.95-3.95H1a1 1 0 1 1 0-2h9.586z"></path></svg>`,
+      zoomIn: `<span class="fs-lightbox-sr">Zoom In</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM9 7h2a1 1 0 0 1 0 2H9v2a1 1 0 0 1-2 0V9H5a1 1 0 1 1 0-2h2V5a1 1 0 1 1 2 0v2z"></path></svg>`,
+      zoomOut: `<span class="fs-lightbox-sr">Zoom Out</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM5 7h6a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2z"></path></svg>`
     },
     videoProviders: {
       youtube: {
@@ -114,7 +120,7 @@ class Lightbox {
 
     addClass(this.el, this.guidClass);
 
-    this.el.addEventListener('click', this.#onClick);
+    on(this.el, 'click', this.#onClick);
 
     el.Lightbox = this;
   }
@@ -126,7 +132,7 @@ class Lightbox {
 
     removeClass(this.el, this.guidClass);
 
-    this.el.removeEventListener('click', this.#onClick);
+    off(this.el, 'click', this.#onClick);
 
     this.el.Lightbox = null;
 
@@ -153,6 +159,8 @@ class Lightbox {
       'pointerdown': this.#onPointerDown(),
       'pointermove': this.#onPointerMove(),
       'pointerup': this.#onPointerUp(),
+      'zoomin': this.#onZoomIn(),
+      'zoomout': this.#onZoomOut(),
     };
 
     this.#draw();
@@ -251,7 +259,8 @@ class Lightbox {
           isVideo: isVideo,
           isIframe: isIframe,
           isElement: isElement,
-          caption: el.dataset.lightboxCaption || getAttr(el, 'title')
+          caption: el.dataset.lightboxCaption || getAttr(el, 'title'),
+          zoomed: false,
         });
       }
     });
@@ -334,6 +343,22 @@ class Lightbox {
 
     item.el = itemEl;
     item.mediaEl = mediaEl;
+
+    // zoom
+
+    let zoom = this.templates.zoom
+      .replace('[zoomIn]', this.templates.zoomIn)
+      .replace('[zoomOut]', this.templates.zoomOut);
+
+    wrapEl.insertAdjacentHTML('beforeend', zoom);
+
+    let zoomInEl = select('.fs-lightbox-zoom_in', itemEl)[0];
+    let zoomOutEl = select('.fs-lightbox-zoom_out', itemEl)[0];
+
+    console.log(zoomInEl);
+
+    on(zoomInEl, 'click', this.listeners.zoomin);
+    on(zoomOutEl, 'click', this.listeners.zoomout);
   }
 
   #drawVideo(item, index) {
@@ -508,6 +533,10 @@ class Lightbox {
       return;
     }
 
+    if (item.isImage) {
+      this.#resetZoom(item);
+    }
+
     if ((item.isVideo || item.isIframe) && item.isLoaded) {
       let media = select('[data-src]', item.el);
 
@@ -650,29 +679,41 @@ class Lightbox {
 
   #onPointerMove() {
     return (e) => {
-      let diff = -(this.pointerStartX - e.clientX);
+      let item = this.items[this.index];
 
-      this.items[this.index].el.style.transform = `translate3d(${diff}px, 0, 0)`;
+      if (item.zoomed) {
+        // handle pan
+      } else {
+        let diff = -(this.pointerStartX - e.clientX);
+
+        item.el.style.transform = `translate3d(${diff}px, 0, 0)`;
+      }
     }
   }
 
   #onPointerUp() {
     return (e) => {
+      let item = this.items[this.index];
+
       removeClass(this.containerEl, 'fs-lightbox-touching');
 
       off(this.containerEl, 'pointermove', this.listeners.pointermove);
       off(this.containerEl, 'pointerup', this.listeners.pointerup);
 
-      let diff = this.pointerStartX - e.clientX;
+      if (item.zoomed) {
+        // handle pan
+      } else {
+        let diff = this.pointerStartX - e.clientX;
 
-      this.items[this.index].el.style.transform = null;
+        item.el.style.transform = null;
 
-      if (Math.abs(diff) > this.threshold) {
-        if (diff < 0) {
-          this.previous();
-        }
-        if (diff > 0) {
-          this.next();
+        if (Math.abs(diff) > this.threshold) {
+          if (diff < 0) {
+            this.previous();
+          }
+          if (diff > 0) {
+            this.next();
+          }
         }
       }
 
@@ -682,6 +723,44 @@ class Lightbox {
         e.stopPropagation(); // prevent closing when swiping
       }, true);
     }
+  }
+
+  //
+
+  #onZoomIn() {
+    return (e) => {
+      e.stopPropagation();
+
+      console.log('Zoom in');
+
+      let item = this.items[this.index];
+
+      item.zoomed = true;
+
+      addClass(item.el, 'fs-lightbox-zoomed');
+
+      console.log(item, item.el);
+    }
+  }
+
+  #onZoomOut() {
+    return (e) => {
+      e.stopPropagation();
+
+      console.log('Zoom out');
+
+      let item = this.items[this.index];
+
+      this.#resetZoom(item);
+    }
+  }
+
+  #resetZoom(item) {
+    item.zoomed = false;
+
+    removeClass(item.el, 'fs-lightbox-zoomed');
+
+    // item.el.style.transform
   }
 
 };

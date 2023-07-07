@@ -18,6 +18,9 @@
 @fs-lightbox-details-font: 16px / 1.4 sans-serif;
 @fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-top, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px);
 
+@fs-lightbox-button-background: fade(#000, 80);
+@fs-lightbox-button-color: #fff;
+
 .fs-lightbox {
   --fs-lightbox-duration: @fs-lightbox-duration;
   --fs-lightbox-timing: @fs-lightbox-timing;
@@ -36,6 +39,9 @@
   --fs-lightbox-details-color: @fs-lightbox-details-color;
   --fs-lightbox-details-font: @fs-lightbox-details-font;
   --fs-lightbox-details-padding: @fs-lightbox-details-padding;
+
+  --fs-lightbox-button-background: @fs-lightbox-button-background;
+  --fs-lightbox-button-color: @fs-lightbox-button-color;
 
   height: 100vh;
   width: 100vw;
@@ -148,6 +154,8 @@
 
     display: flex;
     justify-content: center;
+
+    position: relative;
   }
 
   //
@@ -214,7 +222,8 @@
   }
 
   &-iframe &-close {
-    background: rgba(0, 0, 0, 0.8);
+    // background: var(--fs-lightbox-button-background);
+    // color: var(--fs-lightbox-button-color);
   }
 
   &-element {
@@ -276,9 +285,15 @@
 
     appearance: none;
 
-    background: transparent;
+    background: var(--fs-lightbox-button-background);
     border: none;
+    color: var(--fs-lightbox-button-color);
     cursor: pointer;
+    padding: 0;
+
+    svg {
+      width: 30px;
+    }
   }
 
   //
@@ -302,9 +317,11 @@
 
     appearance: none;
 
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--fs-lightbox-button-background);
     border: none;
+    color: var(--fs-lightbox-button-color);
     margin: auto;
+    padding: 0;
     opacity: 0.5;
     transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
 
@@ -319,11 +336,52 @@
     &_next {
       right: 0;
     }
+
+    svg {
+      width: 28px;
+    }
   }
 
   &-control:not([disabled]) {
     cursor: pointer;
     opacity: 1;
+  }
+
+  //
+
+  &-zoom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 40px;
+
+    position: absolute;
+    bottom: env(safe-area-inset-bottom, 0px);
+    right: env(safe-area-inset-right, 0px);
+    z-index: 2;
+
+    appearance: none;
+
+    background: var(--fs-lightbox-button-background);
+    border: none;
+    color: var(--fs-lightbox-button-color);
+    display: none;
+    margin: auto;
+    padding: 0;
+    // opacity: 0.5;
+    // transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
+
+    &_in {
+      display: block;
+    }
+
+    &_out {}
+
+    svg {
+      width: 28px;
+    }
   }
 
   //

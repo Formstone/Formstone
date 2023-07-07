@@ -8,18 +8,25 @@ visible: true
 
 Maecenas sed diam eget risus varius blandit sit amet non magna. Curabitur blandit tempus porttitor. Donec sed odio dui. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus.
 
+## Demos
+
+### Image
+
 <figure class="js-editor" markdown="1">
 
 ```html
 <div class="demo_background js-background"
-  data-background-options='{"source":"//spacehold.it/1600x900/1.jpg"}'
+  data-background-options='{
+    "source": "//spacehold.it/1600x900/1.jpg",
+    "alt": "Background Image"
+  }'
 >
+  <!-- -->
 </div>
 ```
 
 ```js
-// import Background from 'formstone/background';
-// import Utils from 'formstone/utils'
+import { Background, Utils } from 'Formstone';
 
 Utils.ready(() => {
   Background.construct('.js-background');
@@ -28,7 +35,43 @@ Utils.ready(() => {
 
 ```css
 .demo_background {
-  height: 400px;
+  aspect-ratio: 16/9;
+}
+```
+
+</figure>
+
+### Video
+
+<figure class="js-editor" markdown="1">
+
+```html
+<div class="demo_background js-background"
+  data-background-options='{
+    "source": {
+      "webm": "//spacehold.it/video/video.webm",
+      "mp4": "//spacehold.it/video/video.mp4",
+      "ogg": "//spacehold.it/video/video.ogv",
+      "poster": "//spacehold.it/video/poster.jpg"
+    },
+    "alt": "Background Video"
+  }'
+>
+  <!-- -->
+</div>
+```
+
+```js
+import { Background, Utils } from 'Formstone';
+
+Utils.ready(() => {
+  Background.construct('.js-background');
+});
+```
+
+```css
+.demo_background {
+  aspect-ratio: 16/9;
 }
 ```
 
