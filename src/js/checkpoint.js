@@ -168,7 +168,7 @@ class CheckPoint {
   }
 
   deactivate() {
-    if (!this.enabled || !this.active || this.hasActived) {
+    if (!this.enabled || !this.active || (!this.reverse && this.hasActived)) {
       return;
     }
 
