@@ -74,12 +74,8 @@ class CheckPoint {
     this.target = this.container || `.${this.guidClass}`;
     this.targetEl = select(this.target);
 
-    console.log(dataset.checkpointOffset, this.offset);
-
     // this.intersect = dataset.checkpointIntersect || this.intersect;
     this.offset = dataset.checkpointOffset || this.offset;
-
-    console.log(this.offset);
 
     this.margin = `0px 0px -${this.offset} 0px`;
     this.edge = parseInt(this.offset, 10);

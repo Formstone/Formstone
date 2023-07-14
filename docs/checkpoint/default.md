@@ -31,6 +31,7 @@ Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magn
 ```html
 <div class="demo_checkpoint js-checkpoint"
   data-checkpoint-animation="fade-in"
+  data-checkpoint-offset="20%"
 >
   <code>fade-in</code>
 </div>
@@ -64,9 +65,8 @@ Donec ullamcorper nulla non metus auctor fringilla. Praesent commodo cursus magn
 import { CheckPoint, Utils } from 'Formstone';
 
 Utils.ready(() => {
-  CheckPoint.construct('.js-checkpoint', {
-    intersect: 'middle',
-    offset: '500px',
+  let cps = CheckPoint.construct('.js-checkpoint', {
+    offset: '25%',
     reverse: true,
   });
 });

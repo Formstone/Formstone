@@ -11,4 +11,6 @@ content:
 
 Learn about the stuff!
 
-[Lightbox](./lightbox)
+<!-- * [Background](./background)
+* [CheckPoint](./checkpoint)
+* [Lightbox](./lightbox) -->
