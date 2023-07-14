@@ -39,6 +39,12 @@
 
         // CheckPoint
 
+        let checkpointElsAlt = CheckPoint.construct('.js-checkpoint_alt', {
+          'offset': '400px',
+        });
+
+        console.log('-----');
+
         CheckPoint.defaults({
           offset: '20%'
         });
@@ -172,6 +178,12 @@
       <div class="section" id="checkpoint">
         <h2>CheckPoint</h2>
 
+        <div class="demo_checkpoint js-checkpoint_alt checkpoint_1"
+          data-checkpoint-animation="fade-up"
+          data-checkpoint-options='{"reverse":true}'
+        >
+          Checkpoint (Alt)
+        </div>
 
         <div class="demo_checkpoint js-checkpoint checkpoint_1"
           data-checkpoint-animation="fade-up"

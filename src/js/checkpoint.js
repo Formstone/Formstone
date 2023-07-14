@@ -14,7 +14,7 @@ class CheckPoint {
   static #_guid = 1;
 
   static #_defaults = {
-    intersect: 'bottom',
+    // intersect: 'bottom',
     offset: '0px',
     reverse: false
   };
@@ -74,8 +74,12 @@ class CheckPoint {
     this.target = this.container || `.${this.guidClass}`;
     this.targetEl = select(this.target);
 
-    this.intersect = dataset.checkpointIntersect || this.intersect;
+    console.log(dataset.checkpointOffset, this.offset);
+
+    // this.intersect = dataset.checkpointIntersect || this.intersect;
     this.offset = dataset.checkpointOffset || this.offset;
+
+    console.log(this.offset);
 
     this.margin = `0px 0px -${this.offset} 0px`;
     this.edge = parseInt(this.offset, 10);
@@ -86,7 +90,7 @@ class CheckPoint {
         this.#observe(entry);
       });
     }, {
-      root: this.parentEl || null,
+      root: this.parentEl || document,
       threshold: 0,
       rootMargin: this.margin
     });
