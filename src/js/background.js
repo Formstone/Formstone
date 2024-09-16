@@ -267,6 +267,8 @@ class Background {
 
     setAttr(media, 'data-background-layer', this.layerGuid);
 
+    setAttr(video, 'playsinline', '');
+
     video.playsinline = true;
     video.preload = 'auto';
     video.tabIndex = -1;

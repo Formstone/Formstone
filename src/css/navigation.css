@@ -16,6 +16,14 @@
   --fs-navigation-push-content-zindex: 1;
 }
 
+@media (prefers-reduced-motion) {
+
+  .fs-navigation,
+  .fs-navigation-content {
+    --fs-navigation-offscreen-duration: 0s;
+  }
+}
+
 .fs-navigation-toggle-nav.fs-navigation-enabled:not(.fs-navigation-open) {
   display: none;
 }
@@ -114,7 +122,7 @@
   opacity: 0;
   overflow-y: scroll;
   overscroll-behavior: contain;
-  transition: opacity var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), visibility var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
+  transition: background var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), opacity var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing), visibility var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
   visibility: hidden;
 }
 

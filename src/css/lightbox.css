@@ -21,6 +21,14 @@
   transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
 }
 
+@media (prefers-reduced-motion) {
+  .fs-lightbox {
+    --fs-lightbox-duration: 0s;
+    --fs-lightbox-loading-duration: 0s;
+    --fs-lightbox-item-duration: 0s;
+  }
+}
+
 .fs-lightbox,
 .fs-lightbox * {
   box-sizing: border-box;
@@ -257,33 +265,6 @@
 .fs-lightbox-control:not([disabled]) {
   cursor: pointer;
   opacity: 1;
-}
-
-.fs-lightbox-zoom {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  bottom: env(safe-area-inset-bottom, 0px);
-  right: env(safe-area-inset-right, 0px);
-  z-index: 2;
-  appearance: none;
-  background: var(--fs-lightbox-button-background);
-  border: none;
-  color: var(--fs-lightbox-button-color);
-  display: none;
-  margin: auto;
-  padding: 0;
-}
-
-.fs-lightbox-zoom_in {
-  display: block;
-}
-
-.fs-lightbox-zoom svg {
-  width: 28px;
 }
 
 .fs-lightbox-loading {

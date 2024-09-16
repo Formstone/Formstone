@@ -48,15 +48,15 @@ class Lightbox {
   <button type="button" class="fs-lightbox-control fs-lightbox-control_previous" aria-label="Previous">[previous]</button>
   <button type="button" class="fs-lightbox-control fs-lightbox-control_next" aria-label="Next">[next]</button>
 </div>`,
-      zoom: `
-<button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_in" aria-label="Zoom In">[zoomIn]</button>
-<button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_out" aria-label="Zoom Out">[zoomOut]</button>`,
+      //       zoom: `
+      // <button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_in" aria-label="Zoom In">[zoomIn]</button>
+      // <button type="button" class="fs-lightbox-zoom fs-lightbox-zoom_out" aria-label="Zoom Out">[zoomOut]</button>`,
       close: `<span class="fs-lightbox-sr">Close</span><svg viewBox="-6 -6 24 24" fill="currentColor"><path d="M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z"></path></svg>`,
       loading: '<span class="fs-lightbox-sr">Loading</span>',
       previous: `<span class="fs-lightbox-sr">Previous</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M3.414 7.657l3.95 3.95A1 1 0 0 1 5.95 13.02L.293 7.364a.997.997 0 0 1 0-1.414L5.95.293a1 1 0 1 1 1.414 1.414l-3.95 3.95H13a1 1 0 0 1 0 2H3.414z"></path></svg>`,
       next: `<span class="fs-lightbox-sr">Next</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M10.586 5.657l-3.95-3.95A1 1 0 0 1 8.05.293l5.657 5.657a.997.997 0 0 1 0 1.414L8.05 13.021a1 1 0 1 1-1.414-1.414l3.95-3.95H1a1 1 0 1 1 0-2h9.586z"></path></svg>`,
-      zoomIn: `<span class="fs-lightbox-sr">Zoom In</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM9 7h2a1 1 0 0 1 0 2H9v2a1 1 0 0 1-2 0V9H5a1 1 0 1 1 0-2h2V5a1 1 0 1 1 2 0v2z"></path></svg>`,
-      zoomOut: `<span class="fs-lightbox-sr">Zoom Out</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM5 7h6a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2z"></path></svg>`
+      // zoomIn: `<span class="fs-lightbox-sr">Zoom In</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM9 7h2a1 1 0 0 1 0 2H9v2a1 1 0 0 1-2 0V9H5a1 1 0 1 1 0-2h2V5a1 1 0 1 1 2 0v2z"></path></svg>`,
+      // zoomOut: `<span class="fs-lightbox-sr">Zoom Out</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM5 7h6a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2z"></path></svg>`
     },
     videoProviders: {
       youtube: {
@@ -159,8 +159,8 @@ class Lightbox {
       'pointerdown': this.#onPointerDown(),
       'pointermove': this.#onPointerMove(),
       'pointerup': this.#onPointerUp(),
-      'zoomin': this.#onZoomIn(),
-      'zoomout': this.#onZoomOut(),
+      // 'zoomin': this.#onZoomIn(),
+      // 'zoomout': this.#onZoomOut(),
     };
 
     this.#draw();
@@ -260,7 +260,7 @@ class Lightbox {
           isIframe: isIframe,
           isElement: isElement,
           caption: el.dataset.lightboxCaption || getAttr(el, 'title'),
-          zoomed: false,
+          // zoomed: false,
         });
       }
     });
@@ -344,21 +344,21 @@ class Lightbox {
     item.el = itemEl;
     item.mediaEl = mediaEl;
 
-    // zoom
+    // // zoom
 
-    let zoom = this.templates.zoom
-      .replace('[zoomIn]', this.templates.zoomIn)
-      .replace('[zoomOut]', this.templates.zoomOut);
+    // let zoom = this.templates.zoom
+    //   .replace('[zoomIn]', this.templates.zoomIn)
+    //   .replace('[zoomOut]', this.templates.zoomOut);
 
-    wrapEl.insertAdjacentHTML('beforeend', zoom);
+    // itemEl.insertAdjacentHTML('beforeend', zoom);
 
-    let zoomInEl = select('.fs-lightbox-zoom_in', itemEl)[0];
-    let zoomOutEl = select('.fs-lightbox-zoom_out', itemEl)[0];
+    // let zoomInEl = select('.fs-lightbox-zoom_in', itemEl)[0];
+    // let zoomOutEl = select('.fs-lightbox-zoom_out', itemEl)[0];
 
-    console.log(zoomInEl);
+    // console.log(zoomInEl);
 
-    on(zoomInEl, 'click', this.listeners.zoomin);
-    on(zoomOutEl, 'click', this.listeners.zoomout);
+    // on(zoomInEl, 'click', this.listeners.zoomin);
+    // on(zoomOutEl, 'click', this.listeners.zoomout);
   }
 
   #drawVideo(item, index) {
@@ -533,9 +533,9 @@ class Lightbox {
       return;
     }
 
-    if (item.isImage) {
-      this.#resetZoom(item);
-    }
+    // if (item.isImage) {
+    //   this.#resetZoom(item);
+    // }
 
     if ((item.isVideo || item.isIframe) && item.isLoaded) {
       let media = select('[data-src]', item.el);
@@ -667,6 +667,7 @@ class Lightbox {
     return (e) => {
       this.isTouching = true;
       this.pointerStartX = e.clientX;
+      this.pointerStartY = e.clientY;
 
       this.containerEl.setPointerCapture(e.pointerId);
 
@@ -681,13 +682,17 @@ class Lightbox {
     return (e) => {
       let item = this.items[this.index];
 
-      if (item.zoomed) {
-        // handle pan
-      } else {
-        let diff = -(this.pointerStartX - e.clientX);
+      // if (item.zoomed) {
+      //   // handle pan
+      //   let diffX = -(this.pointerStartX - e.clientX);
+      //   let diffY = -(this.pointerStartY - e.clientY);
 
-        item.el.style.transform = `translate3d(${diff}px, 0, 0)`;
-      }
+
+      // } else {
+      let diff = -(this.pointerStartX - e.clientX);
+
+      item.el.style.transform = `translate3d(${diff}px, 0, 0)`;
+      // }
     }
   }
 
@@ -700,22 +705,22 @@ class Lightbox {
       off(this.containerEl, 'pointermove', this.listeners.pointermove);
       off(this.containerEl, 'pointerup', this.listeners.pointerup);
 
-      if (item.zoomed) {
-        // handle pan
-      } else {
-        let diff = this.pointerStartX - e.clientX;
+      // if (item.zoomed) {
+      //   // handle pan
+      // } else {
+      let diff = this.pointerStartX - e.clientX;
 
-        item.el.style.transform = null;
+      item.el.style.transform = null;
 
-        if (Math.abs(diff) > this.threshold) {
-          if (diff < 0) {
-            this.previous();
-          }
-          if (diff > 0) {
-            this.next();
-          }
+      if (Math.abs(diff) > this.threshold) {
+        if (diff < 0) {
+          this.previous();
+        }
+        if (diff > 0) {
+          this.next();
         }
       }
+      // }
 
       this.isTouching = false;
 
@@ -725,43 +730,43 @@ class Lightbox {
     }
   }
 
-  //
+  // //
 
-  #onZoomIn() {
-    return (e) => {
-      e.stopPropagation();
+  // #onZoomIn() {
+  //   return (e) => {
+  //     e.stopPropagation();
 
-      console.log('Zoom in');
+  //     console.log('Zoom in');
 
-      let item = this.items[this.index];
+  //     let item = this.items[this.index];
 
-      item.zoomed = true;
+  //     item.zoomed = true;
 
-      addClass(item.el, 'fs-lightbox-zoomed');
+  //     addClass(item.el, 'fs-lightbox-zoomed');
 
-      console.log(item, item.el);
-    }
-  }
+  //     console.log(item, item.el);
+  //   }
+  // }
 
-  #onZoomOut() {
-    return (e) => {
-      e.stopPropagation();
+  // #onZoomOut() {
+  //   return (e) => {
+  //     e.stopPropagation();
 
-      console.log('Zoom out');
+  //     console.log('Zoom out');
 
-      let item = this.items[this.index];
+  //     let item = this.items[this.index];
 
-      this.#resetZoom(item);
-    }
-  }
+  //     this.#resetZoom(item);
+  //   }
+  // }
 
-  #resetZoom(item) {
-    item.zoomed = false;
+  // #resetZoom(item) {
+  //   item.zoomed = false;
 
-    removeClass(item.el, 'fs-lightbox-zoomed');
+  //   removeClass(item.el, 'fs-lightbox-zoomed');
 
-    // item.el.style.transform
-  }
+  //   // item.el.style.transform
+  // }
 
 };
 

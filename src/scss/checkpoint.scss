@@ -1,4 +1,4 @@
-/*! formstone v2.0.0-2 [checkpoint.scss] 2023-07-14 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-2 [checkpoint.scss] 2024-09-16 | GPL-3.0 License | formstone.it */
 $fs-checkpoint-offset: 50px;
 $fs-checkpoint-duration: 0.5s;
 $fs-checkpoint-scale-in: 0.5;
@@ -13,6 +13,13 @@ $fs-checkpoint-perspective: 3000px;
   --fs-checkpoint-scale-out: $fs-checkpoint-scale-out;
   --fs-checkpoint-rotate: $fs-checkpoint-rotate;
   --fs-checkpoint-perspective: $fs-checkpoint-perspective;
+
+  @media (prefers-reduced-motion) {
+
+    & {
+      --fs-checkpoint-duration: 0s;
+    }
+  }
 }
 
 // FADE

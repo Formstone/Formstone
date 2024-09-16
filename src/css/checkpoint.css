@@ -7,6 +7,12 @@
   --fs-checkpoint-perspective: 3000px;
 }
 
+@media (prefers-reduced-motion) {
+  .fs-checkpoint {
+    --fs-checkpoint-duration: 0s;
+  }
+}
+
 [data-checkpoint-animation="fade-in"],
 [data-checkpoint-animation="fade-up"],
 [data-checkpoint-animation="fade-down"],

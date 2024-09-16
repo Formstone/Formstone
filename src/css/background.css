@@ -1,6 +1,12 @@
 .fs-background {
-  --fs-background-transition-duration: 0.15s;
+  --fs-background-duration: 0.15s;
   position: relative;
+}
+
+@media (prefers-reduced-motion) {
+  .fs-background {
+    --fs-background-duration: 0s;
+  }
 }
 
 .fs-background,
@@ -29,7 +35,7 @@
   background-position: center;
   background-size: cover;
   opacity: 0;
-  transition: opacity var(--fs-background-transition-duration) linear;
+  transition: opacity var(--fs-background-duration) linear;
 }
 
 .fs-background-media img,

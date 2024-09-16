@@ -43,6 +43,17 @@
   --fs-lightbox-button-background: @fs-lightbox-button-background;
   --fs-lightbox-button-color: @fs-lightbox-button-color;
 
+  @media (prefers-reduced-motion) {
+
+    & {
+      --fs-lightbox-duration: 0s;
+      --fs-lightbox-loading-duration: 0s;
+      --fs-lightbox-item-duration: 0s;
+    }
+  }
+
+  //
+
   height: 100vh;
   width: 100vw;
 
@@ -143,6 +154,11 @@
   &-item&-active&-loaded {
     opacity: 1;
   }
+
+  // &-item&-zoomed img {
+  //   max-height: none;
+  //   max-width: none;
+  // }
 
   &-container&-touching &-item {
     transition: none;
@@ -349,40 +365,44 @@
 
   //
 
-  &-zoom {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  // &-zoom {
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
 
-    height: 40px;
-    width: 40px;
+  //   height: 40px;
+  //   width: 40px;
 
-    position: absolute;
-    bottom: env(safe-area-inset-bottom, 0px);
-    right: env(safe-area-inset-right, 0px);
-    z-index: 2;
+  //   position: absolute;
+  //   bottom: env(safe-area-inset-bottom, 0px);
+  //   right: env(safe-area-inset-right, 0px);
+  //   z-index: 2;
 
-    appearance: none;
+  //   appearance: none;
 
-    background: var(--fs-lightbox-button-background);
-    border: none;
-    color: var(--fs-lightbox-button-color);
-    display: none;
-    margin: auto;
-    padding: 0;
-    // opacity: 0.5;
-    // transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
+  //   background: var(--fs-lightbox-button-background);
+  //   border: none;
+  //   color: var(--fs-lightbox-button-color);
+  //   display: none;
+  //   margin: auto;
+  //   padding: 0;
+  //   // opacity: 0.5;
+  //   // transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
 
-    &_in {
-      display: block;
-    }
+  //   &_in {
+  //     right: calc(env(safe-area-inset-right, 0px) + 40px);
 
-    &_out {}
+  //     display: block;
+  //   }
 
-    svg {
-      width: 28px;
-    }
-  }
+  //   &_out {
+  //     display: block;
+  //   }
+
+  //   svg {
+  //     width: 28px;
+  //   }
+  // }
 
   //
 

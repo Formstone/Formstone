@@ -1,4 +1,4 @@
-/*! formstone v2.0.0-2 [navigation.scss] 2023-07-14 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-2 [navigation.scss] 2024-09-16 | GPL-3.0 License | formstone.it */
 $fs-navigation-offscreen-background: #fff;
 $fs-navigation-offscreen-width: 80vw;
 $fs-navigation-offscreen-zindex: 0;
@@ -33,6 +33,13 @@ $fs-navigation-push-content-zindex: 1;
 
     --fs-navigation-push-zindex: $fs-navigation-push-zindex;
     --fs-navigation-push-content-zindex: $fs-navigation-push-content-zindex;
+
+    @media (prefers-reduced-motion) {
+
+      & {
+        --fs-navigation-offscreen-duration: 0s;
+      }
+    }
   }
 
   // Toggle
@@ -174,6 +181,7 @@ $fs-navigation-push-content-zindex: 1;
     overflow-y: scroll;
     overscroll-behavior: contain;
     transition:
+      background var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
       opacity var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
       visibility var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
     visibility: hidden;

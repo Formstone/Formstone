@@ -1,8 +1,15 @@
-/*! formstone v2.0.0-2 [background.scss] 2023-07-14 | GPL-3.0 License | formstone.it */
-$fs-background-transition-duration: 0.15s;
+/*! formstone v2.0.0-2 [background.scss] 2024-09-16 | GPL-3.0 License | formstone.it */
+$fs-background-duration: 0.15s;
 
 .fs-background {
-  --fs-background-transition-duration: $fs-background-transition-duration;
+  --fs-background-duration: $fs-background-duration;
+
+  @media (prefers-reduced-motion) {
+
+    & {
+      --fs-background-duration: 0s;
+    }
+  }
 
   //
 
@@ -43,7 +50,7 @@ $fs-background-transition-duration: 0.15s;
     background-position: center;
     background-size: cover;
     opacity: 0;
-    transition: opacity var(--fs-background-transition-duration) linear;
+    transition: opacity var(--fs-background-duration) linear;
 
     img,
     video,

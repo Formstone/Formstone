@@ -12,6 +12,13 @@
   --fs-checkpoint-scale-out: @fs-checkpoint-scale-out;
   --fs-checkpoint-rotate: @fs-checkpoint-rotate;
   --fs-checkpoint-perspective: @fs-checkpoint-perspective;
+
+  @media (prefers-reduced-motion) {
+
+    & {
+      --fs-checkpoint-duration: 0s;
+    }
+  }
 }
 
 // FADE

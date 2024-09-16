@@ -10,9 +10,9 @@ Maecenas sed diam eget risus varius blandit sit amet non magna. Curabitur blandi
 
 ## Demos
 
-### Image
+### Image {#demo-video}
 
-<figure class="js-editor" markdown="1">
+<figure class="example js-editor checkpoint_demo" markdown="1">
 
 ```html
 <div class="demo_background js-background"
@@ -41,9 +41,10 @@ Utils.ready(() => {
 
 </figure>
 
-### Video
 
-<figure class="js-editor" markdown="1">
+### Video {#demo-video}
+
+<figure class="example js-editor checkpoint_demo" markdown="1">
 
 ```html
 <div class="demo_background js-background"
@@ -76,6 +77,21 @@ Utils.ready(() => {
 ```
 
 </figure>
+
+
+<!-- LOCAL STYLES -->
+
+<style>
+  .demo playground-preview {
+    aspect-ratio: 3/2;
+  }
+
+  .demo.fs-swap-active playground-preview {
+    aspect-ratio: unset;
+    height: 70vh;
+  }
+</style>
+
 
 
 Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna. Etiam porta sem malesuada magna mollis euismod. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.

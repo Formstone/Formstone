@@ -32,6 +32,13 @@
 
     --fs-navigation-push-zindex: @fs-navigation-push-zindex;
     --fs-navigation-push-content-zindex: @fs-navigation-push-content-zindex;
+
+    @media (prefers-reduced-motion) {
+
+      & {
+        --fs-navigation-offscreen-duration: 0s;
+      }
+    }
   }
 
   // Toggle
@@ -173,6 +180,7 @@
     overflow-y: scroll;
     overscroll-behavior: contain;
     transition:
+      background var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
       opacity var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing),
       visibility var(--fs-navigation-offscreen-duration) var(--fs-navigation-offscreen-timing);
     visibility: hidden;
