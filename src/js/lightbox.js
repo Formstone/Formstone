@@ -12,7 +12,8 @@ import {
   iterate,
   on,
   off,
-  once
+  once,
+  trigger
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -175,6 +176,8 @@ class Lightbox {
       this.isOpen = true;
 
       this.lightboxEl.focus();
+
+      trigger(this.el, 'lightbox:open');
     }, 0);
   }
 
@@ -201,6 +204,8 @@ class Lightbox {
       this.isOpen = false;
 
       this.el.focus();
+
+      trigger(this.el, 'lightbox:close');
     });
   }
 
