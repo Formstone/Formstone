@@ -177,7 +177,9 @@ class Lightbox {
 
       this.lightboxEl.focus();
 
-      trigger(this.el, 'lightbox:open');
+      trigger(window, 'lightbox:open', {
+        el: this.el
+      });
     }, 0);
   }
 
@@ -205,7 +207,9 @@ class Lightbox {
 
       this.el.focus();
 
-      trigger(this.el, 'lightbox:close');
+      trigger(window, 'lightbox:close', {
+        el: this.el
+      });
     });
   }
 
