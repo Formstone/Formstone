@@ -1,4 +1,4 @@
-/*! formstone v2.0.0-2 [formstone.jquery.js] 2024-10-08 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-2 [formstone.jquery.js] 2024-10-11 | GPL-3.0 License | formstone.it */
 /*
  * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
  * This devtool is neither made for production nor for readable output files.

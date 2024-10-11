@@ -1,4 +1,4 @@
-/*! formstone v2.0.0-2 [background.scss] 2024-10-08 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.0-2 [background.scss] 2024-10-11 | GPL-3.0 License | formstone.it */
 $fs-background-duration: 0.15s;
 
 .fs-background {
@@ -44,6 +44,9 @@ $fs-background-duration: 0.15s;
 
   &-media {
     grid-area: fs-background-stack;
+
+    min-height: 0;
+    min-width: 0;
 
     z-index: 1;
 
