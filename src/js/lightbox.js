@@ -758,6 +758,9 @@ class Lightbox {
         if (hasClass(e.target, 'fs-lightbox-next')) {
           this.next();
         }
+        if (hasClass(e.target, 'fs-lightbox-close')) {
+          this.close();
+        }
 
         e.stopPropagation(); // prevent closing when swiping
       }, true);
