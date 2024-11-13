@@ -652,8 +652,22 @@ class Lightbox {
 
       if (e.target !== item && !item.contains(e.target)) {
         this.close();
+      } else {
+        this.#checkClick(e);
       }
     };
+  }
+
+  #checkClick(e) {
+    if (hasClass(e.target, 'fs-lightbox-trigger-previous')) {
+      this.previous();
+    }
+    if (hasClass(e.target, 'fs-lightbox-trigger-next')) {
+      this.next();
+    }
+    if (hasClass(e.target, 'fs-lightbox-trigger-close')) {
+      this.close();
+    }
   }
 
   #onClose() {
@@ -752,15 +766,17 @@ class Lightbox {
       this.isTouching = false;
 
       once(this.containerEl, 'click', (e) => {
-        if (hasClass(e.target, 'fs-lightbox-previous')) {
-          this.previous();
-        }
-        if (hasClass(e.target, 'fs-lightbox-next')) {
-          this.next();
-        }
-        if (hasClass(e.target, 'fs-lightbox-close')) {
-          this.close();
-        }
+        // if (hasClass(e.target, 'fs-lightbox-previous')) {
+        //   this.previous();
+        // }
+        // if (hasClass(e.target, 'fs-lightbox-next')) {
+        //   this.next();
+        // }
+        // if (hasClass(e.target, 'fs-lightbox-close')) {
+        //   this.close();
+        // }
+
+        this.#checkClick(e);
 
         e.stopPropagation(); // prevent closing when swiping
       }, true);
