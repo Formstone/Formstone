@@ -35,6 +35,7 @@ class Lightbox {
   static #_guid = 1;
 
   static #_defaults = {
+    customClass: '',
     fileTypes: /\.(jpg|sjpg|jpeg|png|gif)/i,
     iframeWidth: '900px',
     // loop: false,
@@ -293,6 +294,8 @@ class Lightbox {
     this.containerEl = select('.fs-lightbox-container', this.lightboxEl)[0];
     this.controlPreviousEl = select('.fs-lightbox-control_previous', this.lightboxEl)[0];
     this.controlNextEl = select('.fs-lightbox-control_next', this.lightboxEl)[0];
+
+    addClass(this.lightboxEl, this.customClass);
 
     if (this.items.length > 1) {
       addClass(this.lightboxEl, 'fs-lightbox-gallery');
