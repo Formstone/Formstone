@@ -2,6 +2,7 @@
 import {
   addClass,
   removeClass,
+  hasClass,
   getAttr,
   setAttr,
   removeAttr,
@@ -197,6 +198,9 @@ class Lightbox {
     off(window, 'lightbox:previous', this.listeners.previous);
     off(window, 'lightbox:next', this.listeners.next);
     off(window, 'lightbox:close', this.listeners.close);
+
+    // off(select('.fs-lightbox-previous', this.el), 'click', this.listeners.previous);
+    // off(select('.fs-lightbox-next', this.el), 'click', this.listeners.next);
 
     once(this.lightboxEl, 'transitionend', (e) => {
       iterate(this.items, (item, index) => {
@@ -483,6 +487,11 @@ class Lightbox {
     item.el = itemEl;
     item.mediaEl = mediaEl;
     item.frameEl = frameEl;
+
+    // on(select('.fs-lightbox-previous', item.el), 'click', () => {
+    //   console.log(this);
+    // });
+    // on(select('.fs-lightbox-next', item.el), 'click', this.listeners.next);
   }
 
   //
@@ -743,6 +752,13 @@ class Lightbox {
       this.isTouching = false;
 
       once(this.containerEl, 'click', (e) => {
+        if (hasClass(e.target, 'fs-lightbox-previous')) {
+          this.previous();
+        }
+        if (hasClass(e.target, 'fs-lightbox-next')) {
+          this.next();
+        }
+
         e.stopPropagation(); // prevent closing when swiping
       }, true);
     }
