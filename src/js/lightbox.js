@@ -194,6 +194,9 @@ class Lightbox {
     this.#showSiblings();
 
     off(window, 'keydown', this.listeners.keydown);
+    off(window, 'lightbox:previous', this.listeners.previous);
+    off(window, 'lightbox:next', this.listeners.next);
+    off(window, 'lightbox:close', this.listeners.close);
 
     once(this.lightboxEl, 'transitionend', (e) => {
       iterate(this.items, (item, index) => {
@@ -325,6 +328,9 @@ class Lightbox {
     on(this.controlNextEl, 'click', this.listeners.next);
     on(this.containerEl, 'click', this.listeners.container);
     on(window, 'keydown', this.listeners.keydown);
+    on(window, 'lightbox:previous', this.listeners.previous);
+    on(window, 'lightbox:next', this.listeners.next);
+    on(window, 'lightbox:close', this.listeners.close);
   }
 
   //
