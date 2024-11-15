@@ -706,16 +706,22 @@ class Lightbox {
 
   #onPointerDown() {
     return (e) => {
-      this.isTouching = true;
-      this.pointerStartX = e.clientX;
-      this.pointerStartY = e.clientY;
+      if (
+        !hasClass(e.target, 'fs-lightbox-trigger-previous') &&
+        !hasClass(e.target, 'fs-lightbox-trigger-next') &&
+        !hasClass(e.target, 'fs-lightbox-trigger-close')
+      ) {
+        this.isTouching = true;
+        this.pointerStartX = e.clientX;
+        this.pointerStartY = e.clientY;
 
-      this.containerEl.setPointerCapture(e.pointerId);
+        this.containerEl.setPointerCapture(e.pointerId);
 
-      addClass(this.containerEl, 'fs-lightbox-touching');
+        addClass(this.containerEl, 'fs-lightbox-touching');
 
-      on(this.containerEl, 'pointermove', this.listeners.pointermove);
-      on(this.containerEl, 'pointerup', this.listeners.pointerup);
+        on(this.containerEl, 'pointermove', this.listeners.pointermove);
+        on(this.containerEl, 'pointerup', this.listeners.pointerup);
+      }
     }
   }
 
@@ -766,18 +772,6 @@ class Lightbox {
       this.isTouching = false;
 
       once(this.containerEl, 'click', (e) => {
-        // if (hasClass(e.target, 'fs-lightbox-previous')) {
-        //   this.previous();
-        // }
-        // if (hasClass(e.target, 'fs-lightbox-next')) {
-        //   this.next();
-        // }
-        // if (hasClass(e.target, 'fs-lightbox-close')) {
-        //   this.close();
-        // }
-
-        this.#checkClick(e);
-
         e.stopPropagation(); // prevent closing when swiping
       }, true);
     }
