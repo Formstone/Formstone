@@ -182,7 +182,7 @@ class Lightbox {
       trigger(window, 'lightbox:open', {
         el: this.el
       });
-    }, 0);
+    }, 10);
   }
 
   close() {
