@@ -202,12 +202,18 @@ class Lightbox {
     // off(select('.fs-lightbox-previous', this.el), 'click', this.listeners.previous);
     // off(select('.fs-lightbox-next', this.el), 'click', this.listeners.next);
 
-    once(this.lightboxEl, 'transitionend', (e) => {
+    let cb = (e) => {
+      if (!hasClass(e.target, 'fs-lightbox')) {
+        return;
+      }
+
       iterate(this.items, (item, index) => {
         if (item.isElement) {
           item.targetEl.append(...item.frameEl.childNodes);
         }
       });
+
+      off(this.lightboxEl, 'transitionend', cb);
 
       this.lightboxEl.remove();
 
@@ -218,7 +224,9 @@ class Lightbox {
       trigger(window, 'lightbox:close', {
         el: this.el
       });
-    });
+    };
+
+    on(this.lightboxEl, 'transitionend', cb);
   }
 
   //

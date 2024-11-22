@@ -40,11 +40,13 @@ a:hover {
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
+  transition: all 0.15s linear;
 }
-/* .button:hover {
+.button:hover,
+.button:focus {
   background: black;
   color: white;
-} */
+}
 
 main {
   background: white;
