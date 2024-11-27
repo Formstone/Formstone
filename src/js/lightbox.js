@@ -22,7 +22,8 @@ import {
 // Formatters
 
 function formatYouTube(parts) {
-  return '//www.youtube.com/embed/' + parts[1];
+  console.log(parts);
+  return '//www.youtube.com/embed/' + parts[2];
 }
 
 function formatVimeo(parts) {
@@ -63,7 +64,7 @@ class Lightbox {
     },
     videoProviders: {
       youtube: {
-        pattern: /(?:(?:youtube\.com|youtube-nocookie\.com)\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/,
+        pattern: /^(?:(?:https|http):\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be|youtube-nocookie\.com).*?(?:\/|v\/|u\/|embed\/|shorts\/|watch\?v=|(?<username>user\/))(?<id>[\w\-]{11})(?:\?|&|$)/,
         format: formatYouTube
       },
       vimeo: {
