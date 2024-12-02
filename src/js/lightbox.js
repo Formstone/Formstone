@@ -421,6 +421,7 @@ class Lightbox {
       'frameborder': '0',
       'seamless': 'seamless',
       'allowfullscreen': '',
+      'allow': 'autoplay; encrypted-media',
       'data-src': source
     });
 
