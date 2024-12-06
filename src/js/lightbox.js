@@ -154,6 +154,8 @@ class Lightbox {
 
     this.#buildItems();
 
+    this.maxIndex = this.items.length - 1;
+
     this.listeners = {
       'close': this.#onClose(),
       'next': this.#onNext(),
@@ -530,17 +532,21 @@ class Lightbox {
         setAttr(item.el, 'aria-hidden', 'true');
       }
 
-      if (index < this.index) {
+      if (this.loop && this.index == this.maxIndex && index == 0) {
+        addClass(item.el, 'fs-lightbox-item_next');
+      } else if (this.loop && this.index == 0 && index == this.maxIndex) {
         addClass(item.el, 'fs-lightbox-item_previous');
-      }
-
-      if (index > this.index) {
+      } else if (index < this.index) {
+        addClass(item.el, 'fs-lightbox-item_previous');
+      } else if (index > this.index) {
         addClass(item.el, 'fs-lightbox-item_next');
       }
     });
 
-    setAttr(this.controlPreviousEl, 'disabled', (this.index === 0));
-    setAttr(this.controlNextEl, 'disabled', (this.index === this.items.length - 1));
+    if (!this.loop) {
+      setAttr(this.controlPreviousEl, 'disabled', (this.index === 0));
+      setAttr(this.controlNextEl, 'disabled', (this.index === this.maxIndex));
+    }
   }
 
   //
@@ -617,10 +623,10 @@ class Lightbox {
 
   #checkIndex() {
     if (this.index < 0) {
-      this.index = 0;
+      this.index = this.loop ? this.maxIndex : 0;
     }
     if (this.index >= this.items.length) {
-      this.index = this.items.length - 1;
+      this.index = this.loop ? 0 : this.maxIndex;
     }
   }
 
