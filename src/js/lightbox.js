@@ -271,8 +271,8 @@ class Lightbox {
         let type = el.dataset.lightboxType || '';
         let isImage = (type === 'image') || this.#checkImage(source);
         let isVideo = (type === 'video') || !!this.#checkVideo(source);
-        let isIframe = (type === 'url') || (!isImage && !isVideo && source.substr(0, 4) === 'http' && !hash);
-        let isElement = (type === 'element') || (!isImage && !isVideo && !isIframe && (source.indexOf(window.location.href) < 0 && hash.substr(0, 1) === '#'));
+        let isElement = (type === 'element') || (!isImage && !isVideo && (source.indexOf(window.location.href) > -1 && hash.substr(0, 1) === '#'));
+        let isIframe = (type === 'url') || (!isImage && !isVideo && !isElement && source.substr(0, 4) === 'http');
 
         if (!this.index && el == this.el) {
           this.index = i;
