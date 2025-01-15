@@ -6,7 +6,9 @@
 
 Library of modular front end components.
 
-<!-- [Documentation](docs/README.md) <br>--> [Changelog](CHANGELOG.md) <!-- <br>[Licensing](https://formstone.it/license) -->
+<!-- [Documentation](docs/README.md) <br>-->
+[Changelog](CHANGELOG.md)
+<!-- <br>[Licensing](https://formstone.it/license) -->
 
 ### License
 
