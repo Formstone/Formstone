@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.0.1
+
+* Added slide ordinal number option to LightBox
+
 ### 2.0.0
 
 * Refactored code base using modern JS with module loading

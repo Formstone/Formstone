@@ -22,7 +22,6 @@ import {
 // Formatters
 
 function formatYouTube(parts) {
-  console.log(parts);
   return '//www.youtube.com/embed/' + parts[2];
 }
 
@@ -38,10 +37,11 @@ class Lightbox {
 
   static #_defaults = {
     customClass: '',
-    fileTypes: /\.(jpg|sjpg|jpeg|png|gif)/i,
-    iframeWidth: '900px',
+    fileTypes: /\.(jpg|sjpg|jpeg|png|gif|webp)/i,
+    // iframeWidth: '900px',
     // loop: false,
     threshold: 50,
+    ordinal: true,
     templates: {
       container: `
 <div class="fs-lightbox" role="dialog" aria-modal="true">
@@ -59,6 +59,7 @@ class Lightbox {
       loading: '<span class="fs-lightbox-sr">Loading</span>',
       previous: `<span class="fs-lightbox-sr">Previous</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M3.414 7.657l3.95 3.95A1 1 0 0 1 5.95 13.02L.293 7.364a.997.997 0 0 1 0-1.414L5.95.293a1 1 0 1 1 1.414 1.414l-3.95 3.95H13a1 1 0 0 1 0 2H3.414z"></path></svg>`,
       next: `<span class="fs-lightbox-sr">Next</span><svg viewBox="-5 -5 24 24" fill="currentColor"><path d="M10.586 5.657l-3.95-3.95A1 1 0 0 1 8.05.293l5.657 5.657a.997.997 0 0 1 0 1.414L8.05 13.021a1 1 0 1 1-1.414-1.414l3.95-3.95H1a1 1 0 1 1 0-2h9.586z"></path></svg>`,
+      ordinal: `<span class="current">[current]</span> of <span class="total">[total]</span>`
       // zoomIn: `<span class="fs-lightbox-sr">Zoom In</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM9 7h2a1 1 0 0 1 0 2H9v2a1 1 0 0 1-2 0V9H5a1 1 0 1 1 0-2h2V5a1 1 0 1 1 2 0v2z"></path></svg>`,
       // zoomOut: `<span class="fs-lightbox-sr">Zoom Out</span><svg viewBox="-2.5 -2.5 24 24" fill="currentColor"><path d="M8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12zm6.32-1.094l3.58 3.58a1 1 0 1 1-1.415 1.413l-3.58-3.58a8 8 0 1 1 1.414-1.414zM5 7h6a1 1 0 0 1 0 2H5a1 1 0 1 1 0-2z"></path></svg>`
     },
@@ -279,6 +280,7 @@ class Lightbox {
         }
 
         this.items.push({
+          index: i,
           source: source,
           hash: hash,
           // type: type,
@@ -370,7 +372,7 @@ class Lightbox {
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    this.#checkCaption(item, itemEl);
+    this.#checkDetails(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -432,7 +434,7 @@ class Lightbox {
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    this.#checkCaption(item, itemEl);
+    this.#checkDetails(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -463,7 +465,7 @@ class Lightbox {
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    this.#checkCaption(item, itemEl);
+    this.#checkDetails(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -490,7 +492,7 @@ class Lightbox {
     wrapEl.append(mediaEl);
     itemEl.append(wrapEl);
 
-    this.#checkCaption(item, itemEl);
+    this.#checkDetails(item, itemEl);
 
     this.containerEl.append(itemEl);
 
@@ -647,9 +649,23 @@ class Lightbox {
     return false;
   }
 
-  #checkCaption(item, el) {
+  #checkDetails(item, el) {
+    let details = '';
+
+    if (this.items.length > 1 && this.ordinal) {
+      let ordinal = this.templates.ordinal
+        .replace('[current]', item.index + 1)
+        .replace('[total]', this.items.length);
+
+      details += `<div class="fs-lightbox-ordinal">${ordinal}</div>`;
+    }
+
     if (item.caption) {
-      el.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${item.caption}</div>`);
+      details += `<div class="fs-lightbox-caption">${item.caption}</div>`;
+    }
+
+    if (details !== '') {
+      el.insertAdjacentHTML('beforeend', `<div class="fs-lightbox-details">${details}</div>`);
     }
   }
 

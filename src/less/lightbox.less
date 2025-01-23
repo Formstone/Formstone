@@ -17,6 +17,7 @@
 @fs-lightbox-details-color: #fff;
 @fs-lightbox-details-font: 16px / 1.4 sans-serif;
 @fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-top, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px);
+@fs-lightbox-details-gap: 10px;
 
 @fs-lightbox-button-background: fade(#000, 80);
 @fs-lightbox-button-color: #fff;
@@ -39,6 +40,7 @@
   --fs-lightbox-details-color: @fs-lightbox-details-color;
   --fs-lightbox-details-font: @fs-lightbox-details-font;
   --fs-lightbox-details-padding: @fs-lightbox-details-padding;
+  --fs-lightbox-details-gap: @fs-lightbox-details-gap;
 
   --fs-lightbox-button-background: @fs-lightbox-button-background;
   --fs-lightbox-button-color: @fs-lightbox-button-color;
@@ -252,6 +254,10 @@
   //
 
   &-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--fs-lightbox-details-gap);
+
     position: absolute;
     right: 0;
     bottom: 0;

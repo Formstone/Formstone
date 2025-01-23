@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
     "url": "https://www.benplum.com"
   },
   "devDependencies": {
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.13",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
     "gulp-beautify": "^3.0.0",
