@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.0.2
+
+* Added RTL support to LightBox
+
 ### 2.0.1
 
 * Added slide ordinal number option to LightBox

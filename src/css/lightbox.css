@@ -105,6 +105,14 @@
   opacity: 1;
 }
 
+.fs-lightbox-rtl .fs-lightbox-item_previous {
+  transform: translate(100%, 0);
+}
+
+.fs-lightbox-rtl .fs-lightbox-item_next {
+  transform: translate(-100%, 0);
+}
+
 .fs-lightbox-container.fs-lightbox-touching .fs-lightbox-item {
   transition: none;
 }
@@ -264,6 +272,20 @@
 
 .fs-lightbox-control svg {
   width: 28px;
+}
+
+.fs-lightbox-rtl .fs-lightbox-control svg {
+  transform: scale(-1);
+}
+
+.fs-lightbox-rtl .fs-lightbox-control_previous {
+  left: unset;
+  right: 0;
+}
+
+.fs-lightbox-rtl .fs-lightbox-control_next {
+  right: unset;
+  left: 0;
 }
 
 .fs-lightbox-control:not([disabled]) {

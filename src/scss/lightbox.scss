@@ -1,4 +1,4 @@
-/*! formstone v2.0.1 [lightbox.scss] 2025-01-23 | GPL-3.0 License | formstone.it */
+/*! formstone v2.0.2 [lightbox.scss] 2025-02-05 | GPL-3.0 License | formstone.it */
 $fs-lightbox-mobile-max-width: 739px;
 
 $fs-lightbox-duration: 0.25s;
@@ -157,6 +157,21 @@ $fs-lightbox-button-color: #fff;
   &-item &-active &-loaded {
     opacity: 1;
   }
+
+  //
+
+  &-rtl &-item {
+
+    &_previous {
+      transform: translate(100%, 0);
+    }
+
+    &_next {
+      transform: translate(-100%, 0);
+    }
+  }
+
+  //
 
   // &-item &-zoomed img {
   //   max-height: none;
@@ -364,6 +379,27 @@ $fs-lightbox-button-color: #fff;
       width: 28px;
     }
   }
+
+  //
+
+  &-rtl &-control {
+
+    svg {
+      transform: scale(-1);
+    }
+
+    &_previous {
+      left: unset;
+      right: 0;
+    }
+
+    &_next {
+      right: unset;
+      left: 0;
+    }
+  }
+
+  //
 
   &-control:not([disabled]) {
     cursor: pointer;

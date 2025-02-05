@@ -36,6 +36,7 @@ class Lightbox {
   static #_guid = 1;
 
   static #_defaults = {
+    direction: document.dir,
     customClass: '',
     fileTypes: /\.(jpg|sjpg|jpeg|png|gif|webp)/i,
     // iframeWidth: '900px',
@@ -120,6 +121,7 @@ class Lightbox {
     this.gallery = dataset.lightboxGallery || null;
     this.isOpen = false;
     this.isTouching = false;
+    this.isRTL = this.direction == 'rtl';
 
     //
 
@@ -317,6 +319,10 @@ class Lightbox {
 
     addClass(this.lightboxEl, this.customClass);
 
+    if (this.isRTL) {
+      addClass(this.lightboxEl, `fs-lightbox-rtl`);
+    }
+
     if (this.items.length > 1) {
       addClass(this.lightboxEl, 'fs-lightbox-gallery');
     }
@@ -348,6 +354,8 @@ class Lightbox {
     on(window, 'lightbox:previous', this.listeners.previous);
     on(window, 'lightbox:next', this.listeners.next);
     on(window, 'lightbox:close', this.listeners.close);
+
+    console.log(this);
   }
 
   //
@@ -723,10 +731,18 @@ class Lightbox {
   #onKeyDown() {
     return (e) => {
       if (e.key === 'ArrowLeft') {
-        this.previous();
+        if (this.isRTL) {
+          this.next();
+        } else {
+          this.previous();
+        }
       }
       if (e.key === 'ArrowRight') {
-        this.next();
+        if (this.isRTL) {
+          this.previous();
+        } else {
+          this.next();
+        }
       }
       if (e.key === 'Escape') {
         this.close();
@@ -793,10 +809,18 @@ class Lightbox {
 
       if (Math.abs(diff) > this.threshold) {
         if (diff < 0) {
-          this.previous();
+          if (this.isRTL) {
+            this.next();
+          } else {
+            this.previous();
+          }
         }
         if (diff > 0) {
-          this.next();
+          if (this.isRTL) {
+            this.previous();
+          } else {
+            this.next();
+          }
         }
       }
       // }

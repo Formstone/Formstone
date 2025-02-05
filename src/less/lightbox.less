@@ -157,6 +157,21 @@
     opacity: 1;
   }
 
+  //
+
+  &-rtl &-item {
+
+    &_previous {
+      transform: translate(100%, 0);
+    }
+
+    &_next {
+      transform: translate(-100%, 0);
+    }
+  }
+
+  //
+
   // &-item&-zoomed img {
   //   max-height: none;
   //   max-width: none;
@@ -363,6 +378,27 @@
       width: 28px;
     }
   }
+
+  //
+
+  &-rtl &-control {
+
+    svg {
+      transform: scale(-1);
+    }
+
+    &_previous {
+      left: unset;
+      right: 0;
+    }
+
+    &_next {
+      right: unset;
+      left: 0;
+    }
+  }
+
+  //
 
   &-control:not([disabled]) {
     cursor: pointer;
