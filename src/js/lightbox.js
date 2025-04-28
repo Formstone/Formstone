@@ -183,7 +183,8 @@ class Lightbox {
 
       this.isOpen = true;
 
-      this.lightboxEl.focus();
+      // this.lightboxEl.focus();
+      this.closeEl.focus();
 
       trigger(window, 'lightbox:open', {
         el: this.el
@@ -269,12 +270,13 @@ class Lightbox {
 
     iterate(targets, (el, i) => {
       if (el.tagName === 'A') {
-        let source = el.href;
+        let url = window.location.href.replace(window.location.hash, '');
         let hash = el.hash;
+        let source = el.href.replace(hash, '');
         let type = el.dataset.lightboxType || '';
         let isImage = (type === 'image') || this.#checkImage(source);
         let isVideo = (type === 'video') || !!this.#checkVideo(source);
-        let isElement = (type === 'element') || (!isImage && !isVideo && (source.indexOf(window.location.href) > -1 && hash.substr(0, 1) === '#'));
+        let isElement = (type === 'element') || (!isImage && !isVideo && (source.indexOf(url) > -1 && hash.substr(0, 1) === '#'));
         let isIframe = (type === 'url') || (!isImage && !isVideo && !isElement && source.substr(0, 4) === 'http');
 
         if (!this.index && el == this.el) {
@@ -354,8 +356,6 @@ class Lightbox {
     on(window, 'lightbox:previous', this.listeners.previous);
     on(window, 'lightbox:next', this.listeners.next);
     on(window, 'lightbox:close', this.listeners.close);
-
-    console.log(this);
   }
 
   //

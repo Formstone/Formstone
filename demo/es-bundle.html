@@ -16,6 +16,7 @@
         Cookie,
         Lightbox,
         MediaQuery,
+        Modal,
         Navigation,
         Swap,
         Tabs,
@@ -57,6 +58,10 @@
         // Lightbox
 
         let lightboxEls = Lightbox.construct('.js-lightbox');
+
+        // Modals
+
+        let modalEls = Modal.construct('.js-modal');
 
         // MediaQuery
 
@@ -216,7 +221,6 @@
 
       </div>
 
-
       <!-- Lightbox -->
 
       <div class="section" id="lightbox">
@@ -349,6 +353,26 @@
           </a>
         </div>
 
+      </div>
+
+
+      <!-- Modal -->
+
+      <div class="section" id="modal">
+        <h2>Modal</h2>
+
+        <div class="demo_modal_set">
+          <a href="#modal_inline" class="demo_modal js-modal button">
+            Modal Content
+          </a>
+        </div>
+        <div id="modal_inline" style="display: none;">
+          <div style="background: white; padding: 20px; height: 500px; width: 500px;">
+            <h2>Adipiscing Vulputate Elit</h2>
+            <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum.</p>
+            <button type="button" class="fs-modal-trigger-close button">Close</button>
+          </div>
+        </div>
       </div>
 
 

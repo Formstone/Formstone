@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.0
+
+* Added Modal plugin
+
 ### 2.0.2
 
 * Added RTL support to LightBox

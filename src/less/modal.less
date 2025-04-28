@@ -1,0 +1,145 @@
+@fs-modal-mobile-max-width: 739px;
+
+@fs-modal-duration: 0.25s;
+@fs-modal-timing: linear;
+
+@fs-modal-overlay-bg: fade(#000, 90);
+@fs-modal-container-bg: #fff;
+
+@fs-modal-button-background: #fff;
+@fs-modal-button-color: #000;
+
+.fs-modal {
+  --fs-modal-duration: @fs-modal-duration;
+  --fs-modal-timing: @fs-modal-timing;
+
+  --fs-modal-overlay-bg: @fs-modal-overlay-bg;
+  --fs-modal-container-bg: @fs-modal-container-bg;
+
+  --fs-modal-button-background: @fs-modal-button-background;
+  --fs-modal-button-color: @fs-modal-button-color;
+
+  @media (prefers-reduced-motion) {
+
+    & {
+      --fs-modal-duration: 0s;
+      --fs-modal-loading-duration: 0s;
+      --fs-modal-item-duration: 0s;
+    }
+  }
+
+  //
+
+  height: 100vh;
+  width: 100vw;
+
+  z-index: 999;
+
+  opacity: 0;
+  transition: opacity var(--fs-modal-duration) var(--fs-modal-timing);
+
+  &,
+  & * {
+    box-sizing: border-box;
+  }
+
+  //
+
+  &-open {
+    opacity: 1;
+  }
+
+  //
+
+  &,
+  &-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  &-overlay {
+    z-index: 0;
+
+    background: var(--fs-modal-overlay-bg);
+  }
+
+  //
+
+  &-sr {
+    width: 1px !important;
+    height: 1px !important;
+
+    position: absolute !important;
+
+    border-width: 0 !important;
+    clip: rect(0, 0, 0, 0) !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  //
+
+  &-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+  }
+
+  &-wrap {
+    max-width: 100%;
+    max-height: 100%;
+
+    position: relative;
+
+    background: var(--modal-container-bg);
+    overflow: auto;
+  }
+
+  &-frame {
+    // max-width: 100%;
+    // max-height: 100%;
+  }
+
+  //
+
+  &-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 40px;
+
+    position: absolute;
+    top: env(safe-area-inset-top, 0px);
+    right: env(safe-area-inset-right, 0px);
+    z-index: 2;
+
+    appearance: none;
+
+    background: var(--fs-modal-button-background);
+    border: none;
+    color: var(--fs-modal-button-color);
+    cursor: pointer;
+    padding: 0;
+
+    svg {
+      width: 30px;
+    }
+  }
+}
