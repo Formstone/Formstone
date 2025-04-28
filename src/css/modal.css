@@ -73,7 +73,7 @@
   max-width: 100%;
   max-height: 100%;
   position: relative;
-  background: var(--modal-container-bg);
+  background: var(--fs-modal-container-bg);
   overflow: auto;
 }
 
