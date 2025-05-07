@@ -25,6 +25,7 @@
         Cookie,
         Lightbox,
         MediaQuery,
+        Modal,
         Navigation,
         Swap,
         Tabs,
@@ -66,6 +67,10 @@
         // Lightbox
 
         $('.js-lightbox').lightbox();
+
+        // Modals
+
+        $('.js-modal').modal();
 
         // MediaQuery
 
@@ -196,19 +201,28 @@
           Checkpoint (300px)
         </div>
 
-        <div class="demo_checkpoint checkpoint_4">
+        <div class="demo_checkpoint js-checkpoint"
+          data-checkpoint-animation="fade-in"
+          data-checkpoint-trigger=".checkpoint_4"
+          data-checkpoint-offset="50px"
+        >
+          Checkpoint, Trigger (20%)
+        </div>
+        <div class="demo_checkpoint demo_checkpoint_trigger checkpoint_4">Trigger</div>
+
+        <div class="demo_checkpoint checkpoint_5">
           <div class="demo_checkpoint_nested js-checkpoint"
             data-checkpoint-animation="fade-in"
-            data-checkpoint-container=".checkpoint_4"
+            data-checkpoint-container=".checkpoint_5"
           >
-            Checkpoint (20%)
+            Checkpoint, Container (20%)
           </div>
         </div>
 
-        <div class="demo_checkpoint demo_checkpoint_overflow checkpoint_5">
+        <div class="demo_checkpoint demo_checkpoint_overflow checkpoint_6">
           <div class="demo_checkpoint demo_checkpoint_nested js-checkpoint"
             data-checkpoint-animation="fade-in"
-            data-checkpoint-parent=".checkpoint_5"
+            data-checkpoint-parent=".checkpoint_6"
             data-checkpoint-offset="50px"
           >
             Checkpoint (50px)
@@ -329,6 +343,12 @@
         <div class="demo_lightbox_set">
           <a href="#lightbox_inline" class="demo_lightbox js-lightbox button"
             data-title="Title here"
+            data-lightbox-caption="Inline Content"
+          >
+            Inline Content Single
+          </a>
+          <a href="#lightbox_inline" class="demo_lightbox js-lightbox button"
+            data-title="Title here"
             data-lightbox-gallery="lightbox-inline-iframe"
             data-lightbox-caption="Inline Content"
           >
@@ -352,6 +372,26 @@
           </a>
         </div>
 
+      </div>
+
+
+      <!-- Modal -->
+
+      <div class="section" id="modal">
+        <h2>Modal</h2>
+
+        <div class="demo_modal_set">
+          <a href="#modal_inline" class="demo_modal js-modal button">
+            Modal Content
+          </a>
+        </div>
+        <div id="modal_inline" style="display: none;">
+          <div style="background: white; padding: 20px; height: 500px; width: 500px;">
+            <h2>Adipiscing Vulputate Elit</h2>
+            <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum.</p>
+            <button type="button" class="fs-modal-trigger-close button">Close</button>
+          </div>
+        </div>
       </div>
 
 

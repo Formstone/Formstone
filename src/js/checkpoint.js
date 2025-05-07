@@ -67,11 +67,11 @@ class CheckPoint {
     this.hasActived = false;
     this.parent = dataset.checkpointParent || null;
     this.parentEl = this.parent ? select(this.parent)[0] : null;
-    this.container = dataset.checkpointContainer || null;
+    this.trigger = dataset.checkpointTrigger || dataset.checkpointContainer || null;
 
     addClass(this.el, this.guidClass);
 
-    this.target = this.container || `.${this.guidClass}`;
+    this.target = this.trigger || `.${this.guidClass}`;
     this.targetEl = select(this.target);
 
     // this.intersect = dataset.checkpointIntersect || this.intersect;

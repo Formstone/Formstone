@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 2.1.1
+
+* Normalized Checkpoint trigger
+* Updated demos
+
 ### 2.1.0
 
 * Added Modal plugin

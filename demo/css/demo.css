@@ -87,7 +87,7 @@ h3 {
 @media screen and (min-width: 980px) {
 
   .demo_background {
-  aspect-ratio: 16 / 9;
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -151,6 +151,10 @@ h3 {
 .demo_checkpoint_overflow .demo_checkpoint_nested {
   margin-top: 400px;
   margin-bottom: 0;
+}
+
+.demo_checkpoint_trigger {
+  aspect-ratio: unset;
 }
 
 

@@ -192,19 +192,28 @@
           Checkpoint (300px)
         </div>
 
-        <div class="demo_checkpoint checkpoint_4">
+        <div class="demo_checkpoint js-checkpoint"
+          data-checkpoint-animation="fade-in"
+          data-checkpoint-trigger=".checkpoint_4"
+          data-checkpoint-offset="50px"
+        >
+          Checkpoint, Trigger (20%)
+        </div>
+        <div class="demo_checkpoint demo_checkpoint_trigger checkpoint_4">Trigger</div>
+
+        <div class="demo_checkpoint checkpoint_5">
           <div class="demo_checkpoint_nested js-checkpoint"
             data-checkpoint-animation="fade-in"
-            data-checkpoint-container=".checkpoint_4"
+            data-checkpoint-container=".checkpoint_5"
           >
-            Checkpoint (20%)
+            Checkpoint, Container (20%)
           </div>
         </div>
 
-        <div class="demo_checkpoint demo_checkpoint_overflow checkpoint_5">
+        <div class="demo_checkpoint demo_checkpoint_overflow checkpoint_6">
           <div class="demo_checkpoint demo_checkpoint_nested js-checkpoint"
             data-checkpoint-animation="fade-in"
-            data-checkpoint-parent=".checkpoint_5"
+            data-checkpoint-parent=".checkpoint_6"
             data-checkpoint-offset="50px"
           >
             Checkpoint (50px)
