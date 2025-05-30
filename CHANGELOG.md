@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.2
+
+* Ally work
+
 ### 2.1.1
 
 * Normalized Checkpoint trigger

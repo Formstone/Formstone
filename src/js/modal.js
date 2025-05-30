@@ -1,20 +1,24 @@
 // import MediaQuery from './mediaquery.js';
 import {
-  addClass,
-  removeClass,
-  hasClass,
-  getAttr,
-  setAttr,
-  removeAttr,
   extend,
-  element,
+  //
   select,
   siblings,
   iterate,
+  //
   on,
   off,
   once,
-  trigger
+  trigger,
+  //
+  addClass,
+  removeClass,
+  hasClass,
+  //
+  getAttr,
+  setAttr,
+  updateAttr,
+  restoreAttr,
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -210,18 +214,12 @@ class Modal {
 
   //
 
-  #showSiblings() {
-    iterate(siblings(this.modalEl), (el) => {
-      setAttr(el, 'aria-hidden', el.dataset.modalAriaHidden || false);
-      delete el.dataset.modalAriaHidden;
-    });
+  #hideSiblings() {
+    updateAttr(siblings(this.modalEl), 'aria-hidden', 'true', 'modal');
   }
 
-  #hideSiblings() {
-    iterate(siblings(this.modalEl), (el) => {
-      el.dataset.modalAriaHidden = getAttr(el, 'aria-hidden') || '';
-      setAttr(el, 'aria-hidden', true);
-    });
+  #showSiblings() {
+    restoreAttr(siblings(this.modalEl), 'aria-hidden', 'modal');
   }
 
   //

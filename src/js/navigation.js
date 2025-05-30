@@ -1,19 +1,24 @@
 import Swap from './swap.js';
 import {
+  isU,
   extend,
+  //
   select,
   siblings,
   iterate,
+  //
   on,
   off,
   trigger,
+  //
   addClass,
   removeClass,
+  //
   getAttr,
   setAttr,
   removeAttr,
-  // type,
-  isU
+  updateAttr,
+  restoreAttr,
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -28,7 +33,8 @@ class Navigation {
     gravity: 'left',
     label: 'Menu',
     maxWidth: '980px',
-    type: 'toggle'
+    type: 'toggle',
+    focusables: 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
   };
 
   //
@@ -100,10 +106,9 @@ class Navigation {
 
     //
 
-    this.originalTabIndex = this.el.tabIndex;
-    this.el.tabIndex = -1;
-
+    // this.originalTabindex = getAttr(this.el, 'tabindex');
     this.originalRole = getAttr(this.el, 'role');
+    this.originalHidden = getAttr(this.el, 'aria-hidden');
     this.originalLabel = getAttr(this.el, 'aria-label');
     this.originalModal = getAttr(this.el, 'aria-modal');
 
@@ -134,7 +139,7 @@ class Navigation {
     });
 
     iterate(this.handleEl, (handle) => {
-      setAttr(handle, 'data-tabindex', handle.tabIndex);
+      setAttr(handle, 'data-navigation-tabindex', handle.tabIndex);
       handle.tabIndex = 0;
 
       on(handle, 'swap:activate', this.listeners.open);
@@ -165,7 +170,6 @@ class Navigation {
     removeClass(this.handleEl, this.handleClasses);
     removeClass(this.contentEl, this.contentClasses);
     removeAttr(this.el, 'aria-hidden');
-    this.tabIndex = this.originalTabIndex;
 
     removeAttr(this.handleEl, [
       'data-swap-target',
@@ -174,8 +178,8 @@ class Navigation {
     ]);
 
     iterate(this.handleEl, (handle) => {
-      handle.tabIndex = getAttr(handle, 'data-tabindex');
-      removeAttr(handle, 'data-tabindex');
+      handle.tabIndex = getAttr(handle, 'data-navigation-tabindex');
+      removeAttr(handle, 'data-navigation-tabindex');
 
       off(handle, 'swap:activate', this.listeners.open);
       off(handle, 'swap:deactivate', this.listeners.close);
@@ -233,6 +237,10 @@ class Navigation {
         setAttr(this.handleEl, 'aria-expanded', 'false');
       }
 
+      // this.el.tabIndex = -1;
+
+      this.#hideFocusables();
+
       addClass(this.contentEl, 'fs-navigation-enabled');
 
       setTimeout(() => {
@@ -248,10 +256,19 @@ class Navigation {
 
       setAttr(this.el, {
         'role': this.originalRole || false,
+        'aria-hidden': this.originalHidden || false,
         'aria-label': this.originaLabel || false,
-        'aria-modal': this.originaModal || false,
+        'aria-modal': this.originalModal || false,
         'id': this.originalId || false
       });
+
+      // if (this.originalTabindex) {
+      //   this.el.tabIndex = this.originalTabindex;
+      // } else {
+      //   removeAttr(this.el, 'tabindex');
+      // }
+
+      this.#showFocusables();
 
       removeAttr(this.handleEl, [
         'aria-controls',
@@ -267,11 +284,11 @@ class Navigation {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'false');
 
+      this.#showFocusables();
+
       addClass(this.contentEl, this.contentOpenClasses);
 
       if (!this.isToggle) {
-        // setAttr(this.content, 'aria-hidden', 'true');
-        //setAttr(this.#siblingsClean(this.content), 'aria-hidden', 'true');
         this.#hideSiblings();
       } else {
         setAttr(this.handleEl, 'aria-expanded', 'true');
@@ -296,10 +313,12 @@ class Navigation {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'true');
 
+      this.#hideFocusables();
+
       removeClass(this.contentEl, this.contentOpenClasses);
 
       if (!this.isToggle) {
-        // removeAttr(siblings(this.el), 'aria-hidden');
+        // restoreAttr(this.#getSiblings(), 'aria-hidden', 'navigation');
         this.#showSiblings();
       }
 
@@ -326,18 +345,26 @@ class Navigation {
     });
   }
 
-  #showSiblings() {
-    iterate(this.#getSiblings(), (el) => {
-      setAttr(el, 'aria-hidden', el.dataset.navigationAriaHidden || false);
-      delete el.dataset.navigationAriaHidden;
-    });
+  #hideSiblings() {
+    updateAttr(this.#getSiblings(), 'aria-hidden', 'true', 'navigation');
   }
 
-  #hideSiblings() {
-    iterate(this.#getSiblings(), (el) => {
-      el.dataset.navigationAriaHidden = getAttr(el, 'aria-hidden') || '';
-      setAttr(el, 'aria-hidden', true);
-    });
+  #showSiblings() {
+    restoreAttr(this.#getSiblings(), 'aria-hidden', 'navigation');
+  }
+
+  //
+
+  #getFocusables() {
+    return select(this.focusables, this.el);
+  }
+
+  #hideFocusables() {
+    updateAttr(this.#getFocusables(), 'tabindex', '-1', 'navigation');
+  }
+
+  #showFocusables() {
+    restoreAttr(this.#getFocusables(), 'tabindex', 'navigation');
   }
 
   //

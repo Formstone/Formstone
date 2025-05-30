@@ -1,6 +1,6 @@
 import {
+  type,
   extend,
-  type
 } from './utils.js';
 
 // Class

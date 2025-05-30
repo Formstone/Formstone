@@ -1,20 +1,26 @@
 // import MediaQuery from './mediaquery.js';
 import {
-  addClass,
-  removeClass,
-  hasClass,
-  getAttr,
-  setAttr,
-  removeAttr,
   extend,
+  //
   element,
   select,
   siblings,
   iterate,
+  //
   on,
   off,
   once,
-  trigger
+  trigger,
+  //
+  addClass,
+  removeClass,
+  hasClass,
+  //
+  getAttr,
+  setAttr,
+  removeAttr,
+  updateAttr,
+  restoreAttr,
 } from './utils.js';
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
@@ -373,7 +379,8 @@ class Lightbox {
 
     setAttr(imgEl, {
       'data-src': item.source,
-      'draggable': 'false'
+      'draggable': 'false',
+      'alt': item.caption || '',
     });
 
     mediaEl.append(imgEl);
@@ -434,7 +441,8 @@ class Lightbox {
       'seamless': 'seamless',
       'allowfullscreen': '',
       'allow': 'autoplay; encrypted-media',
-      'data-src': source
+      'data-src': source,
+      'title': item.caption || 'Lightbox Video',
     });
 
     frameEl.append(iframeEl);
@@ -465,7 +473,8 @@ class Lightbox {
     setAttr(iframeEl, {
       'frameborder': '0',
       'seamless': 'seamless',
-      'data-src': item.source
+      'data-src': item.source,
+      'title': item.caption || 'Lightbox iFrame',
     });
 
     frameEl.append(iframeEl);
@@ -605,28 +614,22 @@ class Lightbox {
 
   //
 
-  #showLoading() {
-    addClass(this.loadingEl, 'fs-lightbox-visible');
-  }
-
   #hideLoading() {
     removeClass(this.loadingEl, 'fs-lightbox-visible');
   }
 
-  //
-
-  #showSiblings() {
-    iterate(siblings(this.lightboxEl), (el) => {
-      setAttr(el, 'aria-hidden', el.dataset.lightboxAriaHidden || false);
-      delete el.dataset.lightboxAriaHidden;
-    });
+  #showLoading() {
+    addClass(this.loadingEl, 'fs-lightbox-visible');
   }
 
+  //
+
   #hideSiblings() {
-    iterate(siblings(this.lightboxEl), (el) => {
-      el.dataset.lightboxAriaHidden = getAttr(el, 'aria-hidden') || '';
-      setAttr(el, 'aria-hidden', true);
-    });
+    updateAttr(siblings(this.lightboxEl), 'aria-hidden', 'true', 'lightbox');
+  }
+
+  #showSiblings() {
+    restoreAttr(siblings(this.lightboxEl), 'aria-hidden', 'lightbox');
   }
 
   //

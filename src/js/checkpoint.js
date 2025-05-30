@@ -1,10 +1,13 @@
 import {
   extend,
+  //
   select,
   iterate,
+  //
   trigger,
+  //
   addClass,
-  removeClass
+  removeClass,
 } from './utils.js';
 
 // Class

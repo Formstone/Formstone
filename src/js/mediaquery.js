@@ -1,6 +1,7 @@
 import {
+  iterate,
+  //
   on,
-  iterate
 } from './utils.js';
 
 // Class

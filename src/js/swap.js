@@ -1,15 +1,19 @@
 import MediaQuery from './mediaquery.js';
 import {
   extend,
+  //
   select,
   iterate,
+  //
   on,
   off,
   trigger,
+  //
   addClass,
   hasClass,
   removeClass,
-  hasAttr
+  //
+  hasAttr,
 } from './utils.js';
 
 // Class

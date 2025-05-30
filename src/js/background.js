@@ -1,18 +1,21 @@
 import MediaQuery from './mediaquery.js';
 import {
+  isFn,
+  isObj,
   extend,
+  //
   element,
   select,
   iterate,
+  //
   once,
   trigger,
+  //
   addClass,
   removeClass,
+  //
   getAttr,
   setAttr,
-  // type,
-  isFn,
-  isObj
 } from './utils.js';
 
 // Class
@@ -22,7 +25,7 @@ class Background {
   static #_guid = 1;
 
   static #_defaults = {
-    alt: '',
+    // alt: '',
     autoPlay: true,
     lazy: false,
     lazyOffset: '100px',
@@ -82,8 +85,11 @@ class Background {
 
     this.container = element('div');
     addClass(this.container, 'fs-background-container');
-    setAttr(this.container, 'aria-hidden', 'true');
-    this.container.tabIndex = -1;
+    setAttr(this.container, {
+      'aria-hidden': 'true',
+      'role': 'presentation',
+      'tabindex': '-1',
+    });
 
     el.append(this.container);
     addClass(el, 'fs-background', this.guidClass);
@@ -267,11 +273,13 @@ class Background {
 
     setAttr(media, 'data-background-layer', this.layerGuid);
 
-    setAttr(video, 'playsinline', '');
-
-    video.playsinline = true;
-    video.preload = 'auto';
-    video.tabIndex = -1;
+    setAttr(video, {
+      'playsinline': '',
+      'playsinline': 'true',
+      'preload': 'auto',
+      'role': 'presentation',
+      'tabindex': '-1',
+    });
 
     if (this.loop) {
       video.loop = true;
@@ -391,10 +399,17 @@ class Background {
           onReady: (e) => {
             // console.log('onReady', e);
 
-            select('iframe', this.container)[0].tabIndex = -1;
+            let iframe = select('iframe', this.container);
+
+            setAttr(iframe, {
+              'role': 'presentation',
+              'tabindex': '-1',
+            });
 
             this.playerReady = true;
             // data.player.setPlaybackQuality('highres');
+
+
 
             if (this.mute) {
               this.player.mute();

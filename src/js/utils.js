@@ -41,6 +41,35 @@ export function isU(v) {
   return (type(v) === 'undefined');
 }
 
+export function extend(...args) {
+  let extended = {};
+  let deep = false;
+  let i = 0;
+
+  if (type(args[0]) === 'boolean') {
+    deep = args[0];
+    i++;
+  }
+
+  let merge = (obj) => {
+    for (let prop in obj) {
+      if (Object.hasOwn(obj, prop)) {
+        if (deep && proto(obj[prop]) === '[object Object]') {
+          extended[prop] = extend(extended[prop], obj[prop]);
+        } else {
+          extended[prop] = obj[prop];
+        }
+      }
+    }
+  };
+
+  for (; i < args.length; i++) {
+    merge(args[i]);
+  }
+
+  return extended;
+}
+
 //
 
 export function element(tag) {
@@ -183,31 +212,28 @@ export function removeAttr(target, attr) {
 
 //
 
-export function extend(...args) {
-  let extended = {};
-  let deep = false;
-  let i = 0;
+export function updateAttr(els, attr, value, handle) {
+  let key = camelCase([handle, attr].join('-'));
 
-  if (type(args[0]) === 'boolean') {
-    deep = args[0];
-    i++;
-  }
+  iterate(els, (el) => {
+    el.dataset[key] = getAttr(el, attr) || '';
+    setAttr(el, attr, value);
+  });
+}
 
-  let merge = (obj) => {
-    for (let prop in obj) {
-      if (Object.hasOwn(obj, prop)) {
-        if (deep && proto(obj[prop]) === '[object Object]') {
-          extended[prop] = extend(extended[prop], obj[prop]);
-        } else {
-          extended[prop] = obj[prop];
-        }
-      }
-    }
-  };
+export function restoreAttr(els, attr, handle) {
+  let key = camelCase([handle, attr].join('-'));
 
-  for (; i < args.length; i++) {
-    merge(args[i]);
-  }
+  iterate(els, (el) => {
+    setAttr(el, attr, el.dataset[key] || false);
+    delete el.dataset[key];
+  });
+}
 
-  return extended;
+//
+
+export function camelCase(string) {
+  return string.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, char) => {
+    return char.toUpperCase();
+  });
 }

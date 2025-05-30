@@ -2,16 +2,20 @@ import MediaQuery from './mediaquery.js';
 import Swap from './swap.js';
 import {
   extend,
+  //
   element,
   select,
   iterate,
+  //
   on,
   off,
+  //
   addClass,
   removeClass,
+  //
   getAttr,
   setAttr,
-  removeAttr
+  removeAttr,
 } from './utils.js';
 
 // Class
@@ -251,7 +255,7 @@ class Tabs {
 
       setAttr(this.contentEl, {
         'role': 'tabpanel',
-        'aria-labeledby': this.elId
+        'aria-labelledby': this.elId
       });
 
       setAttr(this.containerEl, {
@@ -289,7 +293,7 @@ class Tabs {
     return (e) => {
       removeAttr(this.el, 'role', 'aria-controls');
 
-      removeAttr(this.contentEl, 'role', 'aria-labeledby');
+      removeAttr(this.contentEl, 'role', 'aria-labelledby');
 
       removeAttr(this.containerEl, 'role');
 
@@ -321,12 +325,14 @@ class Tabs {
   #mobileEnable() {
     iterate(this.handleEl, (handle) => {
       addClass(handle, 'fs-tabs-mobile');
+      removeAttr(handle, 'aria-hidden');
     });
   }
 
   #mobileDisable() {
     iterate(this.handleEl, (handle) => {
       removeClass(handle, 'fs-tabs-mobile');
+      setAttr(handle, 'aria-hidden', 'true');
     });
   }
 
