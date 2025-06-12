@@ -291,7 +291,7 @@ class Lightbox {
 
         this.items.push({
           index: i,
-          source: source,
+          source: el.href,
           hash: hash,
           // type: type,
           isLoaded: false,

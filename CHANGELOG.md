@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.3
+
+* Fixed iFrame url in Lightbox
+
 ### 2.1.2
 
 * Ally work

@@ -95,7 +95,8 @@ class Tabs {
 
     setAttr(this.mobileEl, {
       'type': 'button',
-      'aria-hidden': 'true'
+      'aria-hidden': 'true',
+      'tabindex': '-1',
     });
 
     addClass(el, 'fs-tabs-tab', this.guidClass);
@@ -325,15 +326,33 @@ class Tabs {
   #mobileEnable() {
     iterate(this.handleEl, (handle) => {
       addClass(handle, 'fs-tabs-mobile');
-      removeAttr(handle, 'aria-hidden');
     });
+
+    setAttr(this.el, {
+      'aria-hidden': 'true',
+      'tabindex': '-1',
+    });
+
+    removeAttr(this.mobileEl, [
+      'aria-hidden',
+      'tabindex'
+    ]);
   }
 
   #mobileDisable() {
     iterate(this.handleEl, (handle) => {
       removeClass(handle, 'fs-tabs-mobile');
-      setAttr(handle, 'aria-hidden', 'true');
     });
+
+    setAttr(this.mobileEl, {
+      'aria-hidden': 'true',
+      'tabindex': '-1'
+    });
+
+    removeAttr(this.el, [
+      'aria-hidden',
+      'tabindex'
+    ]);
   }
 
 };
