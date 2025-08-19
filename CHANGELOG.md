@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.4
+
+* Fixed event in Modal
+
 ### 2.1.3
 
 * Fixed iFrame url in Lightbox

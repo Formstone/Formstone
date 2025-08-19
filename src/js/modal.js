@@ -209,7 +209,7 @@ class Modal {
     once(this.closeEl, 'click', this.listeners.close);
     on(this.containerEl, 'click', this.listeners.container);
     on(window, 'keydown', this.listeners.keydown);
-    on(window, 'lightbox:close', this.listeners.close);
+    on(window, 'modal:close', this.listeners.close);
   }
 
   //
