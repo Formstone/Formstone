@@ -23,6 +23,8 @@ import {
 
 // Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
 
+let ModalInstance;
+
 // Class
 
 class Modal {
@@ -31,6 +33,7 @@ class Modal {
 
   static #_defaults = {
     customClass: '',
+    returnFocus: true,
     templates: {
       container: `
 <div class="fs-modal" role="dialog" aria-modal="true">
@@ -120,35 +123,49 @@ class Modal {
       return;
     }
 
-    this.hash = this.el.hash;
-    this.targetEl = select(this.hash)[0];
+    let promise;
 
-    if (!this.targetEl) {
-      return;
+    if (ModalInstance) {
+      promise = ModalInstance.close();
+    } else {
+      promise = new Promise((resolve, reject) => {
+        resolve(this.el);
+      });
     }
 
-    this.listeners = {
-      'close': this.#onClose(),
-      'container': this.#onContainerClick(),
-      'keydown': this.#onKeyDown(),
-    };
+    promise.then(() => {
+      this.hash = this.el.hash;
+      this.targetEl = select(this.hash)[0];
 
-    this.#draw();
+      if (!this.targetEl) {
+        return;
+      }
 
-    this.#hideSiblings();
+      this.listeners = {
+        'close': this.#onClose(),
+        'container': this.#onContainerClick(),
+        'keydown': this.#onKeyDown(),
+      };
 
-    setTimeout(() => {
-      addClass(this.modalEl, 'fs-modal-open');
+      this.#draw();
 
-      this.isOpen = true;
+      this.#hideSiblings();
 
-      // this.frameEl.childNodes[0].focus();
-      this.closeEl.focus();
+      setTimeout(() => {
+        addClass(this.modalEl, 'fs-modal-open');
 
-      trigger(window, 'modal:open', {
-        el: this.el
-      });
-    }, 10);
+        this.isOpen = true;
+
+        // this.frameEl.childNodes[0].focus();
+        this.closeEl.focus();
+
+        ModalInstance = this;
+
+        trigger(window, 'modal:open', {
+          el: this.el
+        });
+      }, 10);
+    });
   }
 
   close() {
@@ -163,27 +180,37 @@ class Modal {
     off(window, 'keydown', this.listeners.keydown);
     off(window, 'modal:close', this.listeners.close);
 
-    let cb = (e) => {
-      if (!hasClass(e.target, 'fs-modal')) {
-        return;
-      }
+    let promise = new Promise((resolve, reject) => {
+      let cb = (e) => {
+        if (!hasClass(e.target, 'fs-modal')) {
+          return;
+        }
 
-      this.targetEl.append(...this.frameEl.childNodes);
+        this.targetEl.append(...this.frameEl.childNodes);
 
-      off(this.modalEl, 'transitionend', cb);
+        off(this.modalEl, 'transitionend', cb);
 
-      this.modalEl.remove();
+        this.modalEl.remove();
 
-      this.isOpen = false;
+        this.isOpen = false;
 
-      this.el.focus();
+        if (this.returnFocus) {
+          this.el.focus();
+        }
 
-      trigger(window, 'modal:close', {
-        el: this.el
-      });
-    };
+        trigger(window, 'modal:close', {
+          el: this.el
+        });
 
-    on(this.modalEl, 'transitionend', cb);
+        ModalInstance = null;
+
+        resolve(this.el);
+      };
+
+      on(this.modalEl, 'transitionend', cb);
+    });
+
+    return promise;
   }
 
   //

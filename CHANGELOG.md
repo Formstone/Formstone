@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.5
+
+* Fixed duplicate Lightbox and Modal issue
+
 ### 2.1.4
 
 * Fixed event in Modal

@@ -35,6 +35,10 @@ function formatVimeo(parts) {
   return '//player.vimeo.com/video/' + parts[3];
 }
 
+//
+
+let LightboxInstance;
+
 // Class
 
 class Lightbox {
@@ -49,6 +53,7 @@ class Lightbox {
     // loop: false,
     threshold: 50,
     ordinal: true,
+    returnFocus: true,
     templates: {
       container: `
 <div class="fs-lightbox" role="dialog" aria-modal="true">
@@ -159,43 +164,57 @@ class Lightbox {
       return;
     }
 
-    this.index = index;
+    let promise;
 
-    this.#buildItems();
-
-    this.maxIndex = this.items.length - 1;
-
-    this.listeners = {
-      'close': this.#onClose(),
-      'next': this.#onNext(),
-      'previous': this.#onPrevious(),
-      'container': this.#onContainerClick(),
-      'keydown': this.#onKeyDown(),
-      'pointerdown': this.#onPointerDown(),
-      'pointermove': this.#onPointerMove(),
-      'pointerup': this.#onPointerUp(),
-      // 'zoomin': this.#onZoomIn(),
-      // 'zoomout': this.#onZoomOut(),
-    };
-
-    this.#draw();
-
-    this.#setPositions();
-
-    this.#hideSiblings();
-
-    setTimeout(() => {
-      addClass(this.lightboxEl, 'fs-lightbox-open');
-
-      this.isOpen = true;
-
-      // this.lightboxEl.focus();
-      this.closeEl.focus();
-
-      trigger(window, 'lightbox:open', {
-        el: this.el
+    if (LightboxInstance) {
+      promise = LightboxInstance.close();
+    } else {
+      promise = new Promise((resolve, reject) => {
+        resolve(this.el);
       });
-    }, 10);
+    }
+
+    promise.then(() => {
+      this.index = index;
+
+      this.#buildItems();
+
+      this.maxIndex = this.items.length - 1;
+
+      this.listeners = {
+        'close': this.#onClose(),
+        'next': this.#onNext(),
+        'previous': this.#onPrevious(),
+        'container': this.#onContainerClick(),
+        'keydown': this.#onKeyDown(),
+        'pointerdown': this.#onPointerDown(),
+        'pointermove': this.#onPointerMove(),
+        'pointerup': this.#onPointerUp(),
+        // 'zoomin': this.#onZoomIn(),
+        // 'zoomout': this.#onZoomOut(),
+      };
+
+      this.#draw();
+
+      this.#setPositions();
+
+      this.#hideSiblings();
+
+      setTimeout(() => {
+        addClass(this.lightboxEl, 'fs-lightbox-open');
+
+        this.isOpen = true;
+
+        // this.lightboxEl.focus();
+        this.closeEl.focus();
+
+        LightboxInstance = this;
+
+        trigger(window, 'lightbox:open', {
+          el: this.el
+        });
+      }, 10);
+    });
   }
 
   close() {
@@ -215,31 +234,41 @@ class Lightbox {
     // off(select('.fs-lightbox-previous', this.el), 'click', this.listeners.previous);
     // off(select('.fs-lightbox-next', this.el), 'click', this.listeners.next);
 
-    let cb = (e) => {
-      if (!hasClass(e.target, 'fs-lightbox')) {
-        return;
-      }
-
-      iterate(this.items, (item, index) => {
-        if (item.isElement) {
-          item.targetEl.append(...item.frameEl.childNodes);
+    let promise = new Promise((resolve, reject) => {
+      let cb = (e) => {
+        if (!hasClass(e.target, 'fs-lightbox')) {
+          return;
         }
-      });
 
-      off(this.lightboxEl, 'transitionend', cb);
+        iterate(this.items, (item, index) => {
+          if (item.isElement) {
+            item.targetEl.append(...item.frameEl.childNodes);
+          }
+        });
 
-      this.lightboxEl.remove();
+        off(this.lightboxEl, 'transitionend', cb);
 
-      this.isOpen = false;
+        this.lightboxEl.remove();
 
-      this.el.focus();
+        this.isOpen = false;
 
-      trigger(window, 'lightbox:close', {
-        el: this.el
-      });
-    };
+        if (this.returnFocus) {
+          this.el.focus();
+        }
 
-    on(this.lightboxEl, 'transitionend', cb);
+        trigger(window, 'lightbox:close', {
+          el: this.el
+        });
+
+        LightboxInstance = null;
+
+        resolve(this.el);
+      };
+
+      on(this.lightboxEl, 'transitionend', cb);
+    });
+
+    return promise;
   }
 
   //
