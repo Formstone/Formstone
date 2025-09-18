@@ -3,6 +3,7 @@ import {
   isFn,
   isObj,
   extend,
+  falsey,
   //
   element,
   select,
@@ -158,7 +159,7 @@ class Background {
       this.playerReady = true;
       this.playing = false;
 
-      this.isVideo = (isObj(source) && !!(source.mp4 || source.ogg || source.webm));
+      this.isVideo = (isObj(source) && (!falsey(source.mp4) || !falsey(source.ogg) || !falsey(source.webm)));
       this.isYouTube = (!this.isVideo && isObj(source) && !!source.youtube);
       this.isImage = (!this.isVideo && !this.isYouTube);
 

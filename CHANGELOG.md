@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.6
+
+* Fixed options in Background
+
 ### 2.1.5
 
 * Fixed duplicate Lightbox and Modal issue
