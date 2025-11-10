@@ -141,6 +141,8 @@ export function normalizeClasses(...classes) {
     return c !== '';
   });
 
+  classes = classes.join(' ').split(' ');
+
   return classes;
 }
 

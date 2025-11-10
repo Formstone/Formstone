@@ -410,8 +410,6 @@ class Background {
             this.playerReady = true;
             // data.player.setPlaybackQuality('highres');
 
-
-
             if (this.mute) {
               this.player.mute();
             }

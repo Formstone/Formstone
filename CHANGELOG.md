@@ -2,6 +2,11 @@
 
 <!-- -->
 
+### 2.1.7
+
+* Fixed issue with space delineated class names
+* Added events in Tabs
+
 ### 2.1.6
 
 * Fixed options in Background

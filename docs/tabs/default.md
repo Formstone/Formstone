@@ -4,4 +4,337 @@ published: true
 visible: true
 ---
 
-# Tabs!
+# Tabs
+
+Simple, mobile-friendly tabs.
+
+<div class="docs_menu" markdown="1">
+
+* [Demos](#demo)
+* [Options](#options)
+* [Methods](#methods)
+* [Events](#events)
+* [Styles](#styles)
+
+</div>
+
+
+<hr class="divider">
+
+
+## Demos {#demo}
+
+<div class="docs_menu" markdown="1">
+
+* [Basic](#demo-basic)
+
+</div>
+
+### Basic {#demo-basic}
+
+Create a set of tabs using links.
+
+<figure class="demo js-editor" markdown="1">
+
+```html
+<nav class="demo_tabs_menu">
+  <a href="#tab-1" class="demo_tabs_link js-tabs"
+    data-tabs-group="demo_tabs"
+    data-tabs-active="true"
+  >
+    Tab One
+  </a>
+  <a href="#tab-2" class="demo_tabs_link js-tabs"
+    data-tabs-group="demo_tabs"
+  >
+    Tab Two
+  </a>
+  <a href="#tab-3" class="demo_tabs_link js-tabs"
+    data-tabs-group="demo_tabs"
+  >
+    Tab Three
+  </a>
+</nav>
+<div class="demo_tabs_item" id="tab-1">
+  Target One
+</div>
+<div class="demo_tabs_item" id="tab-2">
+  Target two
+</div>
+<div class="demo_tabs_item" id="tab-3">
+  Target Three
+</div>
+```
+
+```js
+import { Tabs, Utils } from 'Formstone';
+
+Utils.ready(() => {
+  Tabs.construct('.js-tabs', {
+    mobileMaxWidth: '500px',
+  });
+});
+```
+
+```css
+@import 'path/to/formstone/dist/formstone.css';/* playground-hide */
+body {
+  padding: 10vh;
+}
+
+.demo_tabs_menu {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.demo_tabs_link,
+.fs-tabs-tab_mobile {
+  display: block;
+  background: var(--color-blue);
+  border: var(--border-size) solid var(--color-black);
+  border-radius: var(--border-size);
+  color: var(--color-black);
+  line-height: 1;
+  padding: 10px 15px;
+  text-decoration: none;
+}
+.fs-tabs-tab_mobile {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.demo_tabs_item.fs-tabs-active + .fs-tabs-tab_mobile {
+  margin-top: 10px;
+}
+
+.demo_tabs_link.fs-tabs-active,
+.fs-tabs-tab_mobile.fs-tabs-active {
+  background: var(--color-yellow);
+}
+
+.demo_tabs_item.fs-tabs-enabled:not(.fs-tabs-active) {
+  display: none;
+}
+.fs-tabs-tab_mobile:not(.fs-tabs-enabled) {
+  display: none;
+}
+
+.demo_tabs_item {
+  background: var(--color-gray-5);
+  border: var(--border-size) solid var(--color-black);
+  border-radius: var(--border-size);
+  padding: 20px;
+}
+/* playground-hide-end */
+```
+
+</figure>
+
+<!-- LOCAL STYLES -->
+
+<style>
+  .demo playground-preview {
+    height: 360px;
+  }
+
+  @media (min-width: 550px) {
+
+    .demo playground-preview {
+      height: 260px;
+    }
+  }
+
+  .demo.fs-swap-active playground-preview {
+    aspect-ratio: unset;
+    height: 70vh;
+  }
+</style>
+
+
+<hr class="divider">
+
+<div class="docs" markdown="1">
+
+
+## Options {#options}
+
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-tabs-options` attribute containing a properly formatted JSON object to the target elment.
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `maxWidth` | `string` | `Infinity` | Width to auto-disable plugin |
+| `mobileMaxWidth` | `string` | `740px` | Width to disable mobile styles |
+
+
+<hr class="divider">
+
+
+## Methods {#methods}
+
+Methods are publicly available to all active instances, unless otherwise stated.
+
+| Name | Description |
+| -- | -- |
+| [`.activate()`](#method-activate) | Activates instance |
+| [`.construct()`](#method-construct) | Initializes plugin on target elements |
+| [`.deactivate()`](#method-deactivate) | Deactivates instance |
+| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.destroy()`](#method-destroy) | Removes plugin and all related data |
+| [`.disable()`](#method-disable) | Disables instance |
+| [`.enable()`](#method-enable) | Enables instance |
+
+
+### .activate() {#method-activate}
+
+Activates instance.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.Tabs.activate();
+```
+</figure>
+
+
+### .construct() {#method-construct}
+
+Initializes plugin on target elements.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `selector` | `string` (required) | `''` | Selector string to target |
+| `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+let targets = Tabs.construct('.js-tabs');
+```
+</figure>
+
+<figure class="example js-example" markdown="1">
+```js
+let targets = Tabs.construct('.js-tabs', {
+  mobileMaxWidth: '500px'
+});
+```
+</figure>
+
+
+### .deactivate() {#method-deactivate}
+
+Deactivates instance.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.Tabs.deactive();
+```
+</figure>
+
+
+### .defaults() {#method-defaults}
+
+Sets default options for future initialization.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `options` | `object` (required) | `{}` | Object containing default options |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Tabs.defaults({
+  mobileMaxWidth: '500px'
+});
+```
+</figure>
+
+
+### .destroy() {#method-destroy}
+
+Removes plugin and all related data.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.Tabs.destroy();
+```
+</figure>
+
+
+### .disable() {#method-disable}
+
+Disables instance.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.Tabs.disable();
+```
+</figure>
+
+
+### .enable() {#method-enable}
+
+Enables instance.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.Tabs.enable();
+```
+</figure>
+
+
+<hr class="divider">
+
+
+## Events {#events}
+
+Events are triggered on the target instance's element, unless otherwise stated.
+
+| Name | Description |
+| -- | -- |
+| `tabs:activate` | Tab activated |
+| `tabs:deactivate` | Tab deactivated |
+| `tabs:disable` | Tab disabled |
+| `tabs:enable` | Tab enabled |
+
+
+<hr class="divider">
+
+
+## Styles {#styles}
+
+<!-- CSS custom properties are used to modify default styles.
+
+| Property | Default | Description |
+| -- | -- | -- |
+| `--fs-background-duration` | `0.15s` | Transition duration | -->
+
+Classes allow deeper customization and indicate the current state of a specific instance.
+
+| Classname | Type | Description |
+| -- | -- | -- |
+| `.fs-tabs-tab` | `element` | Target elmement |
+| `.fs-tabs-tab_mobile` | `element` | Mobile tab elmement |
+| `.fs-tabs-content` | `element` | Content elmement |
+| `.fs-tabs-enabled` | `modifier` | Indicates enabled state |
+| `.fs-tabs-active` | `modifier` | Indicates active state |
+
+
+
+
+</div>

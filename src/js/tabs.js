@@ -9,6 +9,7 @@ import {
   //
   on,
   off,
+  trigger,
   //
   addClass,
   removeClass,
@@ -26,7 +27,7 @@ class Tabs {
 
   static #_defaults = {
     maxWidth: Infinity,
-    mobileMaxWidth: '980px'
+    mobileMaxWidth: '740px'
   };
 
   //
@@ -75,7 +76,7 @@ class Tabs {
     this.guidClass = `fs-tabs-element-${this.guid}`;
     this.guidContent = `fs-tabs-content-${this.guid}`;
 
-    let mobileMaxWidth = (this.mobileMaxWidth === Infinity ? '100000px' : this.mobileMaxWidth);
+    let mobileMaxWidth = ((this.mobileMaxWidth === Infinity || this.mobileMaxWidth === 'Infinity') ? '100000px' : this.mobileMaxWidth);
 
     this.mq = `(max-width: ${mobileMaxWidth})`;
 
@@ -152,7 +153,7 @@ class Tabs {
 
     this.listeners = {
       activate: this.#onActivate(this),
-      // deactivate: this.#onDeactivate(this),
+      deactivate: this.#onDeactivate(this),
       enable: this.#onEnable(this),
       disable: this.#onDisable(this)
     };
@@ -165,7 +166,7 @@ class Tabs {
       });
 
       on(handle, 'swap:activate', this.listeners.activate);
-      // on(handle, 'swap:deactivate', this.listeners.deactivate);
+      on(handle, 'swap:deactivate', this.listeners.deactivate);
       on(handle, 'swap:enable', this.listeners.enable);
       on(handle, 'swap:disable', this.listeners.disable);
     });
@@ -266,6 +267,8 @@ class Tabs {
       addClass(this.contentEl, 'fs-tabs-enabled');
       addClass(this.contentEl, 'fs-tabs-enabled');
 
+      trigger(this.el, 'tabs:enable');
+
       // setAttr(this.el, 'aria-label', this.label);
 
       // if (!this.isToggle) {
@@ -300,6 +303,8 @@ class Tabs {
 
       removeClass(this.contentEl, 'fs-tabs-enabled');
 
+      trigger(this.el, 'tabs:disable');
+
       // SHOULD BE IN ENABLE / DISABLE
       // setAttr(this.el, {
       //   'role': this.originalRole || false,
@@ -312,13 +317,16 @@ class Tabs {
 
   #onActivate() {
     return (e) => {
+      trigger(this.el, 'tabs:activate');
+
       // window.location.hash = this.el.hash;
     };
   }
 
   #onDeactivate() {
-    //   return (e) => {
-    //   };
+    return (e) => {
+      trigger(this.el, 'tabs:deactivate');
+    };
   }
 
   //

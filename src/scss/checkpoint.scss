@@ -1,18 +1,18 @@
-/*! formstone v2.1.6 [checkpoint.scss] 2025-09-18 | GPL-3.0 License | formstone.it */
-$fs-checkpoint-offset: 50px;
+/*! formstone v2.1.7 [checkpoint.scss] 2025-11-10 | GPL-3.0 License | formstone.it */
 $fs-checkpoint-duration: 0.5s;
+$fs-checkpoint-distance: 50px;
+$fs-checkpoint-perspective: 3000px;
+$fs-checkpoint-rotate: 90deg;
 $fs-checkpoint-scale-in: 0.5;
 $fs-checkpoint-scale-out: 1.25;
-$fs-checkpoint-rotate: 90deg;
-$fs-checkpoint-perspective: 3000px;
 
 .fs-checkpoint {
   --fs-checkpoint-duration: $fs-checkpoint-duration;
-  --fs-checkpoint-offset: $fs-checkpoint-offset;
+  --fs-checkpoint-distance: $fs-checkpoint-distance;
+  --fs-checkpoint-perspective: $fs-checkpoint-perspective;
+  --fs-checkpoint-rotate: $fs-checkpoint-rotate;
   --fs-checkpoint-scale-in: $fs-checkpoint-scale-in;
   --fs-checkpoint-scale-out: $fs-checkpoint-scale-out;
-  --fs-checkpoint-rotate: $fs-checkpoint-rotate;
-  --fs-checkpoint-perspective: $fs-checkpoint-perspective;
 
   @media (prefers-reduced-motion) {
 
@@ -40,11 +40,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="fade-up"] {
-  transform: translateY(var(--fs-checkpoint-offset));
+  transform: translateY(var(--fs-checkpoint-distance));
 }
 
 [data-checkpoint-animation="fade-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1));
 }
 
 [data-checkpoint-animation="fade-up"],
@@ -56,11 +56,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="fade-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1));
 }
 
 [data-checkpoint-animation="fade-right"] {
-  transform: translateX(var(--fs-checkpoint-offset));
+  transform: translateX(var(--fs-checkpoint-distance));
 }
 
 [data-checkpoint-animation="fade-left"],
@@ -93,11 +93,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="zoom-in-up"] {
-  transform: translateY(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateY(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in"],
@@ -110,11 +110,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="zoom-in-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-right"] {
-  transform: translateX(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateX(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-left"],
@@ -147,11 +147,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="zoom-out-up"] {
-  transform: translateY(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateY(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out"],
@@ -164,11 +164,11 @@ $fs-checkpoint-perspective: 3000px;
 }
 
 [data-checkpoint-animation="zoom-out-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-right"] {
-  transform: translateX(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateX(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-left"],

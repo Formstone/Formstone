@@ -1,10 +1,10 @@
 .fs-checkpoint {
   --fs-checkpoint-duration: 0.5s;
-  --fs-checkpoint-offset: 50px;
+  --fs-checkpoint-distance: 50px;
+  --fs-checkpoint-perspective: 3000px;
+  --fs-checkpoint-rotate: 90deg;
   --fs-checkpoint-scale-in: 0.5;
   --fs-checkpoint-scale-out: 1.25;
-  --fs-checkpoint-rotate: 90deg;
-  --fs-checkpoint-perspective: 3000px;
 }
 
 @media (prefers-reduced-motion) {
@@ -31,11 +31,11 @@
 }
 
 [data-checkpoint-animation="fade-up"] {
-  transform: translateY(var(--fs-checkpoint-offset));
+  transform: translateY(var(--fs-checkpoint-distance));
 }
 
 [data-checkpoint-animation="fade-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1));
 }
 
 [data-checkpoint-animation="fade-up"].fs-checkpoint-active,
@@ -44,11 +44,11 @@
 }
 
 [data-checkpoint-animation="fade-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1));
 }
 
 [data-checkpoint-animation="fade-right"] {
-  transform: translateX(var(--fs-checkpoint-offset));
+  transform: translateX(var(--fs-checkpoint-distance));
 }
 
 [data-checkpoint-animation="fade-left"].fs-checkpoint-active,
@@ -78,11 +78,11 @@
 }
 
 [data-checkpoint-animation="zoom-in-up"] {
-  transform: translateY(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateY(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in"].fs-checkpoint-active,
@@ -92,11 +92,11 @@
 }
 
 [data-checkpoint-animation="zoom-in-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-right"] {
-  transform: translateX(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-in));
+  transform: translateX(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-in));
 }
 
 [data-checkpoint-animation="zoom-in-left"].fs-checkpoint-active,
@@ -126,11 +126,11 @@
 }
 
 [data-checkpoint-animation="zoom-out-up"] {
-  transform: translateY(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateY(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-down"] {
-  transform: translateY(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateY(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out"].fs-checkpoint-active,
@@ -140,11 +140,11 @@
 }
 
 [data-checkpoint-animation="zoom-out-left"] {
-  transform: translateX(calc(var(--fs-checkpoint-offset) * -1)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateX(calc(var(--fs-checkpoint-distance) * -1)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-right"] {
-  transform: translateX(var(--fs-checkpoint-offset)) scale(var(--fs-checkpoint-scale-out));
+  transform: translateX(var(--fs-checkpoint-distance)) scale(var(--fs-checkpoint-scale-out));
 }
 
 [data-checkpoint-animation="zoom-out-left"].fs-checkpoint-active,

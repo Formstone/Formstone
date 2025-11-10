@@ -3,7 +3,7 @@
   "id": "formstone",
   "codename": "formstone",
   "realname": "Formstone",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "description": "Library of modular front end components.",
   "repository": {
     "type": "git",
@@ -26,7 +26,8 @@
     "./*.less": "./src/less/*.less",
     "./*.scss": "./src/scss/*.scss"
   },
-  "browser": "dist/js/bundle.js",
+  "browser": "./dist/formstone.js",
+  "main": "./src/js/index.js",
   "author": {
     "name": "Ben Plum",
     "email": "mr@benplum.com",

@@ -470,6 +470,7 @@ class Lightbox {
       'seamless': 'seamless',
       'allowfullscreen': '',
       'allow': 'autoplay; encrypted-media',
+      'referrerpolicy': 'strict-origin-when-cross-origin',
       'data-src': source,
       'title': item.caption || 'Lightbox Video',
     });
