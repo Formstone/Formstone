@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.8
+
+* Fixed issue with empty class names
+
 ### 2.1.7
 
 * Fixed issue with space delineated class names

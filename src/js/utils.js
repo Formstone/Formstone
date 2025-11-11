@@ -137,11 +137,11 @@ export function normalizeClasses(...classes) {
     classes = classes[0];
   }
 
+  classes = classes.join(' ').split(' ');
+
   classes = classes.filter((c) => {
     return c !== '';
   });
-
-  classes = classes.join(' ').split(' ');
 
   return classes;
 }
