@@ -2,6 +2,10 @@
 
 <!-- -->
 
+### 2.1.9
+
+* Fixed issue with links in Lightbox
+
 ### 2.1.8
 
 * Fixed issue with empty class names

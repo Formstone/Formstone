@@ -42,7 +42,7 @@ Create a new Background by passing the source image URL at initialization.
 ```html
 <div class="demo_background js-background"
 data-background-options='{
-  "source": "//spacehold.it/1600x900/1.jpg",
+  "source": "//spaceholder.dev/1600x900/1.jpg",
   "alt": "Background Image"
 }'>
   <!-- playground-hide -->
@@ -91,8 +91,8 @@ Create a responsive-friendly Background by defining key/value pairs containing t
 <div class="demo_background js-background"
 data-background-options='{
   "source": {
-    "0": "//spacehold.it/800x450/1.jpg",
-    "740": "//spacehold.it/1600x900/3.jpg"
+    "0": "//spaceholder.dev/800x450/1.jpg",
+    "740": "//spaceholder.dev/1600x900/3.jpg"
   },
   "alt": "Background Image"
 }'>
@@ -142,10 +142,10 @@ Create a video Background by defining proper browser-specific source video URLs,
 <div class="demo_background js-background"
 data-background-options='{
   "source": {
-    "webm": "//spacehold.it/video/video.webm",
-    "mp4": "//spacehold.it/video/video.mp4",
-    "ogg": "//spacehold.it/video/video.ogv",
-    "poster": "//spacehold.it/video/poster.jpg"
+    "webm": "//spaceholder.dev/video/video.webm",
+    "mp4": "//spaceholder.dev/video/video.mp4",
+    "ogg": "//spaceholder.dev/video/video.ogv",
+    "poster": "//spaceholder.dev/video/poster.jpg"
   },
   "alt": "Background Video"
 }'>

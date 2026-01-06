@@ -790,7 +790,8 @@ class Lightbox {
       if (
         !hasClass(e.target, 'fs-lightbox-trigger-previous') &&
         !hasClass(e.target, 'fs-lightbox-trigger-next') &&
-        !hasClass(e.target, 'fs-lightbox-trigger-close')
+        !hasClass(e.target, 'fs-lightbox-trigger-close') &&
+        e.target.tagName !== 'A' // don't act on links
       ) {
         this.isTouching = true;
         this.pointerStartX = e.clientX;
