@@ -13,6 +13,7 @@ import {
   //
   addClass,
   removeClass,
+  hasClass,
   //
   getAttr,
   setAttr,
@@ -27,7 +28,9 @@ class Tabs {
 
   static #_defaults = {
     maxWidth: Infinity,
-    mobileMaxWidth: '740px'
+    mobileMaxWidth: '740px',
+    automatic: true,
+    label: 'Tabs'
   };
 
   //
@@ -155,7 +158,8 @@ class Tabs {
       activate: this.#onActivate(this),
       deactivate: this.#onDeactivate(this),
       enable: this.#onEnable(this),
-      disable: this.#onDisable(this)
+      disable: this.#onDisable(this),
+      keydown: this.#onKeyDown(this)
     };
 
     this.handleEl.forEach((handle) => {
@@ -170,6 +174,8 @@ class Tabs {
       on(handle, 'swap:enable', this.listeners.enable);
       on(handle, 'swap:disable', this.listeners.disable);
     });
+
+    on(this.el, 'keydown', this.listeners.keydown);
 
     MediaQuery.bind(this.guidClass, this.mq, {
       enter: () => {
@@ -204,19 +210,23 @@ class Tabs {
     removeClass(this.contentEl, 'fs-tabs-content', this.guidContent);
     removeClass(this.containerEl, 'fs-tabs-container');
 
-    removeAttr(this.handle, [
-      'data-swap-target',
-      'data-swap-linked',
-      'data-swap-group'
-    ]);
+    off(this.el, 'keydown', this.listeners.keydown);
 
     this.handleEl.forEach((handle) => {
+      removeAttr(handle, [
+        'data-swap-target',
+        'data-swap-linked',
+        'data-swap-group'
+      ]);
+
       off(handle, 'swap:activate', this.listeners.activate);
-      // off(handle, 'swap:deactivate', this.listeners.deactivate);
+      off(handle, 'swap:deactivate', this.listeners.deactivate);
       off(handle, 'swap:enable', this.listeners.enable);
       off(handle, 'swap:disable', this.listeners.disable);
 
-      handle.Swap.destroy();
+      if (handle.Swap) {
+        handle.Swap.destroy();
+      }
     });
 
     this.mobileEl.remove();
@@ -261,11 +271,20 @@ class Tabs {
       });
 
       setAttr(this.containerEl, {
-        'role': 'tablist'
+        'role': 'tablist',
+        'aria-label': this.label
       });
 
-      addClass(this.contentEl, 'fs-tabs-enabled');
-      addClass(this.contentEl, 'fs-tabs-enabled');
+      let isActive = getAttr(this.el, 'data-swap-active') === 'true';
+
+      setAttr(this.el, {
+        'aria-selected': isActive ? 'true' : 'false',
+        'tabindex': isActive ? '0' : '-1'
+      });
+
+      if (select('a, button, input, [tabindex="0"]', this.contentEl).length === 0) {
+        setAttr(this.contentEl, 'tabindex', '0');
+      }
 
       trigger(this.el, 'tabs:enable');
 
@@ -295,13 +314,11 @@ class Tabs {
 
   #onDisable() {
     return (e) => {
-      removeAttr(this.el, 'role', 'aria-controls');
+      removeAttr(this.el, ['role', 'aria-controls', 'aria-selected', 'tabindex']);
 
-      removeAttr(this.contentEl, 'role', 'aria-labelledby');
+      removeAttr(this.contentEl, ['role', 'aria-labelledby', 'tabindex']);
 
-      removeAttr(this.containerEl, 'role');
-
-      removeClass(this.contentEl, 'fs-tabs-enabled');
+      removeAttr(this.containerEl, ['role', 'aria-label']);
 
       trigger(this.el, 'tabs:disable');
 
@@ -317,6 +334,18 @@ class Tabs {
 
   #onActivate() {
     return (e) => {
+      if (this.group) {
+        iterate(select(`[data-tabs-group="${this.group}"]`), (el) => {
+          if (el.Tabs && el !== this.el) {
+            setAttr(el, { 'aria-selected': 'false', 'tabindex': '-1' });
+            setAttr(el.Tabs.mobileEl, { 'aria-expanded': 'false' });
+          }
+        });
+      }
+
+      setAttr(this.el, { 'aria-selected': 'true', 'tabindex': '0' });
+      setAttr(this.mobileEl, { 'aria-expanded': 'true' });
+
       trigger(this.el, 'tabs:activate');
 
       // window.location.hash = this.el.hash;
@@ -325,7 +354,35 @@ class Tabs {
 
   #onDeactivate() {
     return (e) => {
+      setAttr(this.el, { 'aria-selected': 'false', 'tabindex': '-1' });
+      setAttr(this.mobileEl, { 'aria-expanded': 'false' });
+
       trigger(this.el, 'tabs:deactivate');
+    };
+  }
+
+  #onKeyDown() {
+    return (e) => {
+      let tabs = Array.from(select(`[role="tab"]`, this.containerEl));
+      let index = tabs.indexOf(e.currentTarget);
+      let next;
+
+      if (e.key === 'ArrowRight') next = tabs[(index + 1) % tabs.length];
+
+      if (e.key === 'ArrowLeft') next = tabs[(index - 1 + tabs.length) % tabs.length];
+
+      if (e.key === 'Home') next = tabs[0];
+
+      if (e.key === 'End') next = tabs[tabs.length - 1];
+
+      if (next) {
+        e.preventDefault();
+        next.focus();
+
+        if (this.automatic && !hasClass(this.el, 'fs-tabs-mobile')) {
+          next.click();
+        }
+      }
     };
   }
 
@@ -341,10 +398,14 @@ class Tabs {
       'tabindex': '-1',
     });
 
-    removeAttr(this.mobileEl, [
-      'aria-hidden',
-      'tabindex'
-    ]);
+    let isActive = getAttr(this.el, 'data-swap-active') === 'true';
+
+    setAttr(this.mobileEl, {
+      'aria-hidden': 'false',
+      'aria-controls': this.contentId,
+      'aria-expanded': isActive ? 'true' : 'false',
+      'tabindex': '0'
+    });
   }
 
   #mobileDisable() {
@@ -356,6 +417,8 @@ class Tabs {
       'aria-hidden': 'true',
       'tabindex': '-1'
     });
+
+    removeAttr(this.mobileEl, ['aria-controls', 'aria-expanded']);
 
     removeAttr(this.el, [
       'aria-hidden',
