@@ -1,4 +1,4 @@
-/*! formstone v2.1.9 [modal.scss] 2026-01-06 | GPL-3.0 License | formstone.it */
+/*! formstone v2.1.9 [modal.scss] 2026-02-10 | GPL-3.0 License | formstone.it */
 $fs-modal-mobile-max-width: 739px;
 
 $fs-modal-duration: 0.25s;
@@ -33,38 +33,59 @@ $fs-modal-button-color: #000;
 
   height: 100vh;
   width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
 
-  z-index: 999;
+  position: fixed;
+  inset: 0;
+
+  background: transparent;
+  border: none;
+  margin: 0;
 
   opacity: 0;
-  transition: opacity var(--fs-modal-duration) var(--fs-modal-timing);
+  overflow: hidden;
+  padding: 0;
+  transition: display var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete,
+  opacity var(--fs-modal-duration) var(--fs-modal-timing),
+  overlay var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete;
+
+  $starting-style {
+    opacity: 0;
+  }
+
+  &[open] {
+    display: flex;
+  }
+
+  //
 
   &,
   & * {
     box-sizing: border-box;
   }
 
+  &::backdrop {
+    background: var(--fs-modal-overlay-bg);
+    opacity: 0;
+    transition:
+      display var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete,
+      opacity var(--fs-modal-duration) var(--fs-modal-timing),
+      overlay var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete;
+  }
+
   //
 
   &-open {
     opacity: 1;
-  }
 
-  //
+    &::backdrop {
+      opacity: 1;
 
-  &,
-  &-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-
-  &-overlay {
-    z-index: 0;
-
-    background: var(--fs-modal-overlay-bg);
+      $starting-style {
+        opacity: 0;
+      }
+    }
   }
 
   //

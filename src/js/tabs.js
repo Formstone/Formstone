@@ -20,6 +20,9 @@ import {
   removeAttr,
 } from './utils.js';
 
+
+// Accessibility work by @nhall
+
 // Class
 
 class Tabs {
@@ -337,14 +340,24 @@ class Tabs {
       if (this.group) {
         iterate(select(`[data-tabs-group="${this.group}"]`), (el) => {
           if (el.Tabs && el !== this.el) {
-            setAttr(el, { 'aria-selected': 'false', 'tabindex': '-1' });
-            setAttr(el.Tabs.mobileEl, { 'aria-expanded': 'false' });
+            setAttr(el, {
+              'aria-selected': 'false',
+              'tabindex': '-1'
+            });
+            setAttr(el.Tabs.mobileEl, {
+              'aria-expanded': 'false'
+            });
           }
         });
       }
 
-      setAttr(this.el, { 'aria-selected': 'true', 'tabindex': '0' });
-      setAttr(this.mobileEl, { 'aria-expanded': 'true' });
+      setAttr(this.el, {
+        'aria-selected': 'true',
+        'tabindex': '0'
+      });
+      setAttr(this.mobileEl, {
+        'aria-expanded': 'true'
+      });
 
       trigger(this.el, 'tabs:activate');
 
@@ -354,8 +367,13 @@ class Tabs {
 
   #onDeactivate() {
     return (e) => {
-      setAttr(this.el, { 'aria-selected': 'false', 'tabindex': '-1' });
-      setAttr(this.mobileEl, { 'aria-expanded': 'false' });
+      setAttr(this.el, {
+        'aria-selected': 'false',
+        'tabindex': '-1'
+      });
+      setAttr(this.mobileEl, {
+        'aria-expanded': 'false'
+      });
 
       trigger(this.el, 'tabs:deactivate');
     };

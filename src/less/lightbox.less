@@ -71,28 +71,23 @@
   opacity: 0;
   overflow: hidden;
   padding: 0;
-  transition:
-    display var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete,
-    opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing),
-    overlay var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete;
+  transition: display var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete,
+  opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing),
+  overlay var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete;
+
+  @starting-style {
+    opacity: 0;
+  }
 
   &[open] {
     display: flex;
   }
 
+  //
+
   &,
   & * {
     box-sizing: border-box;
-  }
-
-  //
-
-  &-open {
-    opacity: 1;
-
-    @starting-style {
-      opacity: 0;
-    }
   }
 
   &::backdrop {
@@ -104,29 +99,18 @@
       overlay var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete;
   }
 
-  &-open::backdrop {
-    opacity: 1;
-
-    @starting-style {
-      opacity: 0;
-    }
-  }
-
   //
 
-  &,
-  &-overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
+  &-open {
+    opacity: 1;
 
-  &-overlay {
-    z-index: 0;
+    &::backdrop {
+      opacity: 1;
 
-    background: var(--fs-lightbox-overlay-bg);
+      @starting-style {
+        opacity: 0;
+      }
+    }
   }
 
   //
