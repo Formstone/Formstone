@@ -214,14 +214,6 @@ body::before {
 }/* playground-hide-end */
 ```
 
-```less
-
-```
-
-```scss
-@import 'npm://formstone/src/less/background.scss';
-```
-
 </figure>
 
 
@@ -633,7 +625,7 @@ body::before {
 
 ## Options {#options}
 
-Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-checkpoint-options` attribute containing a properly formatted JSON object to the target elment.
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-checkpoint-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | --|
@@ -778,7 +770,7 @@ Classes allow deeper customization and indicate the current state of a specific 
 
 | Classname | Type | Description |
 | -- | -- | -- |
-| `.fs-checkpoint` | `element` | Target elmement |
-| `.fs-checkpoint-active` | `modifer` | Indicates active state |
+| `.fs-checkpoint` | `element` | Target element |
+| `.fs-checkpoint-active` | `modifier` | Indicates active state |
 
 </div>

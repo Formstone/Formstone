@@ -158,7 +158,7 @@ body {
 
 ## Options {#options}
 
-Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-tabs-options` attribute containing a properly formatted JSON object to the target elment.
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-tabs-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
@@ -328,11 +328,12 @@ Classes allow deeper customization and indicate the current state of a specific 
 
 | Classname | Type | Description |
 | -- | -- | -- |
-| `.fs-tabs-tab` | `element` | Target elmement |
-| `.fs-tabs-tab_mobile` | `element` | Mobile tab elmement |
-| `.fs-tabs-content` | `element` | Content elmement |
+| `.fs-tabs-tab` | `element` | Target element |
+| `.fs-tabs-tab_mobile` | `element` | Mobile tab element |
+| `.fs-tabs-content` | `element` | Content element |
 | `.fs-tabs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-tabs-active` | `modifier` | Indicates active state |
+| `.fs-tabs-inactive` | `modifier` | Indicates inactive state |
 
 
 

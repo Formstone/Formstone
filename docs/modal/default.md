@@ -1,12 +1,12 @@
 ---
-title: Swap
+title: Modal
 published: true
 visible: true
 ---
 
-# Swap
+# Modal
 
-Simple element swapping.
+Simple modal dialogs.
 
 <div class="docs_menu" markdown="1">
 
@@ -32,7 +32,7 @@ Simple element swapping.
 
 ### Basic {#demo-basic}
 
-Swap classes on a target element.
+Open an element in a modal.
 
 <figure class="demo js-editor" markdown="1">
 
@@ -41,7 +41,7 @@ Swap classes on a target element.
 ```
 
 ```js
-import { Swap, Utils } from 'Formstone';
+import { Modal, Utils } from 'Formstone';
 
 Utils.ready(() => {
   // Demo coming soon
@@ -62,13 +62,13 @@ Utils.ready(() => {
 
 ## Options {#options}
 
-Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-swap-options` attribute containing a properly formatted JSON object to the target element.
+Set global options by passing a valid object to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-modal-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `collapse` | `boolean` | `true` | Allow instance to collapse |
-| `maxWidth` | `string` | `Infinity` | Width to auto-disable plugin |
-| `minWidth` | `string` | `'0px'` | Width to auto-enable plugin |
+| `customClass` | `string` | `''` | Custom class for dialog |
+| `returnFocus` | `boolean` | `true` | Return focus to trigger after closing |
+| `templates` | `object` | `...` | Display templates |
 
 
 <hr class="divider">
@@ -80,24 +80,22 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.activate()`](#method-activate) | Activates instance |
+| [`.close()`](#method-close) | Closes active instance |
 | [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.deactivate()`](#method-deactivate) | Deactivates instance |
 | [`.defaults()`](#method-defaults) | Sets default options for future initialization |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
-| [`.disable()`](#method-disable) | Disables instance |
-| [`.enable()`](#method-enable) | Enables instance |
+| [`.open()`](#method-open) | Opens instance |
 
 
-### .activate() {#method-activate}
+### .close() {#method-close}
 
-Activates instance.
+Closes active instance.
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Swap.activate();
+el.Modal.close();
 ```
 </figure>
 
@@ -117,20 +115,7 @@ Initializes plugin on target elements.
 
 <figure class="example js-example" markdown="1">
 ```js
-let targets = Swap.construct('.js-swap');
-```
-</figure>
-
-
-### .deactivate() {#method-deactivate}
-
-Deactivates instance.
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-el.Swap.deactivate();
+let targets = Modal.construct('.js-modal');
 ```
 </figure>
 
@@ -149,8 +134,8 @@ Sets default options for future initialization.
 
 <figure class="example js-example" markdown="1">
 ```js
-Swap.defaults({
-  collapse: false
+Modal.defaults({
+  customClass: 'custom'
 });
 ```
 </figure>
@@ -164,33 +149,20 @@ Removes plugin and all related data.
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Swap.destroy();
+el.Modal.destroy();
 ```
 </figure>
 
 
-### .disable() {#method-disable}
+### .open() {#method-open}
 
-Disables instance.
+Opens instance.
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Swap.disable();
-```
-</figure>
-
-
-### .enable() {#method-enable}
-
-Enables instance.
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-el.Swap.enable();
+el.Modal.open();
 ```
 </figure>
 
@@ -200,14 +172,12 @@ el.Swap.enable();
 
 ## Events {#events}
 
-Events are triggered on the target instance's element, unless otherwise stated.
+Events are triggered on the window object.
 
 | Name | Description |
 | -- | -- |
-| `swap:activate` | Instance activated |
-| `swap:deactivate` | Instance deactivated |
-| `swap:enable` | Instance enabled |
-| `swap:disable` | Instance disabled |
+| `modal:open` | Modal opened |
+| `modal:close` | Modal closed |
 
 
 <hr class="divider">
@@ -215,13 +185,27 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 ## Styles {#styles}
 
+CSS custom properties are used to modify default styles.
+
+| Property | Default | Description |
+| -- | -- | -- |
+| `--fs-modal-duration` | `0.25s` | Modal transition duration |
+| `--fs-modal-timing` | `linear` | Modal transition timing |
+| `--fs-modal-overlay-bg` | `rgba(0, 0, 0, 0.9)` | Overlay background color |
+| `--fs-modal-container-bg` | `#fff` | Content container background |
+| `--fs-modal-button-background` | `#fff` | Close button background |
+| `--fs-modal-button-color` | `#000` | Close button icon color |
+
 Classes allow deeper customization and indicate the current state of a specific instance.
 
 | Classname | Type | Description |
 | -- | -- | -- |
-| `.fs-swap-enabled` | `modifier` | Indicates enabled state |
-| `.fs-swap-active` | `modifier` | Indicates active state |
-| `.fs-swap-inactive` | `modifier` | Indicates inactive state |
+| `.fs-modal` | `element` | Modal element |
+| `.fs-modal-container` | `element` | Content container element |
+| `.fs-modal-wrap` | `element` | Content wrapper element |
+| `.fs-modal-frame` | `element` | Content frame element |
+| `.fs-modal-close` | `element` | Close button element |
+| `.fs-modal-open` | `modifier` | Indicates open state |
 
 
 </div>

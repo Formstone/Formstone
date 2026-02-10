@@ -255,7 +255,7 @@ Utils.ready(() => {
 
 ## Options {#options}
 
-Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-background-options` attribute containing a properly formatted JSON object to the target elment.
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-background-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
@@ -528,7 +528,7 @@ Classes allow deeper customization and indicate the current state of a specific 
 
 | Classname | Type | Description |
 | -- | -- | -- |
-| `.fs-background` | `element` | Target elmement |
+| `.fs-background` | `element` | Target element |
 | `.fs-background-container` | `element` | Media container element |
 | `.fs-background-media` | `element` | Media element |
 | `.fs-background-image` | `modifier` | Indicates image media |

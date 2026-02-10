@@ -11,7 +11,7 @@
   --fs-lightbox-details-bg: rgba(0, 0, 0, 0.6);
   --fs-lightbox-details-color: #fff;
   --fs-lightbox-details-font: 16px / 1.4 sans-serif;
-  --fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-top, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px);
+  --fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-right, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px) calc(env(safe-area-inset-left, 0px) + 60px);
   --fs-lightbox-details-gap: 10px;
   --fs-lightbox-button-background: rgba(0, 0, 0, 0.8);
   --fs-lightbox-button-color: #fff;
