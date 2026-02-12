@@ -119,7 +119,10 @@ class MediaQuery {
   }
 
   /**
+   * Handles media query match state changes
    * @private
+   * @param {MediaQueryListEvent} e - Media query change event
+   * @returns {void}
    */
   static #onBindingChange(e) {
     let mqkey = MediaQuery.#createKey(e.media);
@@ -139,7 +142,10 @@ class MediaQuery {
   }
 
   /**
+   * Creates a normalized key from media query text
    * @private
+   * @param {string} text - Media query text
+   * @returns {string} Normalized key string
    */
   static #createKey(text) {
     return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g, '');

@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Navigation - Responsive navigation menus
+ */
+
 import Swap from './swap.js';
 import {
   isU,
@@ -25,10 +29,31 @@ import {
 
 // Class
 
+/**
+ * Navigation class for responsive menus with toggle, push, reveal, and overlay modes
+ * @class
+ */
 class Navigation {
 
+  /**
+   * @type {number}
+   * @private
+   */
   static #_guid = 1;
 
+  /**
+   * @typedef {Object} NavigationOptions
+   * @property {string} [gravity='left'] - Navigation gravity (left, right)
+   * @property {string} [label='Menu'] - Accessibility label
+   * @property {string} [maxWidth='980px'] - Width to auto-disable plugin
+   * @property {string} [type='toggle'] - Navigation type (toggle, push, reveal, overlay)
+   * @property {string} [focusables] - Selector for focusable elements
+   */
+
+  /**
+   * @type {NavigationOptions}
+   * @private
+   */
   static #_defaults = {
     gravity: 'left',
     label: 'Menu',
@@ -39,10 +64,27 @@ class Navigation {
 
   //
 
+  /**
+   * Sets default options for future Navigation instances
+   * @param {NavigationOptions} options - Object containing default options
+   * @example
+   * Navigation.defaults({
+   *   type: 'push'
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes Navigation plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {NavigationOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * Navigation.construct('.js-navigation');
+   * Navigation.construct('.js-navigation', { type: 'overlay' });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -57,6 +99,12 @@ class Navigation {
 
   //
 
+  /**
+   * Creates a new Navigation instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {NavigationOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Navigation) {
       console.warn('Navigation: Instance already exists', el);
@@ -93,8 +141,8 @@ class Navigation {
     let typeClass = `fs-navigation-${this.type}`;
     let gravityClass = (!this.isToggle) ? `${typeClass}-${this.gravity}` : '';
 
-    this.navClasses = ['fs-navigation', this.guidClass, `${typeClass}-nav`, `${gravityClass}-nav`];
-    this.handleClasses = ['fs-navigation-handle', this.guidHandle, `${typeClass}-handle`, `${gravityClass}-handle`];
+    this.navClasses = ['fs-navigation', this.guidClass, `${typeClass}-nav`, (gravityClass ? `${gravityClass}-nav` : '')];
+    this.handleClasses = ['fs-navigation-handle', this.guidHandle, `${typeClass}-handle`, (gravityClass ? `${gravityClass}-handle` : '')];
     this.contentClasses = ['fs-navigation-content', `${typeClass}-content`];
     this.contentOpenClasses = ['fs-navigation-open', `${gravityClass}-content`];
 
@@ -163,6 +211,11 @@ class Navigation {
 
   //
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.Navigation.destroy();
+   */
   destroy() {
     this.listeners.disable.call();
 
@@ -196,12 +249,22 @@ class Navigation {
 
   //
 
+  /**
+   * Enables navigation instance
+   * @example
+   * el.Navigation.enable();
+   */
   enable() {
     iterate(this.handleEl, (handle) => {
       handle.Swap.enable();
     });
   }
 
+  /**
+   * Disables navigation instance
+   * @example
+   * el.Navigation.disable();
+   */
   disable() {
     iterate(this.handleEl, (handle) => {
       handle.Swap.disable();
@@ -210,16 +273,31 @@ class Navigation {
 
   //
 
+  /**
+   * Opens navigation instance
+   * @example
+   * el.Navigation.open();
+   */
   open() {
     this.handleEl[0].Swap.activate();
   }
 
+  /**
+   * Closes navigation instance
+   * @example
+   * el.Navigation.close();
+   */
   close() {
     this.handleEl[0].Swap.deactivate();
   }
 
   //
 
+  /**
+   * Returns enable handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onEnable() {
     return (e) => {
       setAttr(this.el, 'aria-label', this.label);
@@ -250,6 +328,11 @@ class Navigation {
     };
   }
 
+  /**
+   * Returns disable handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onDisable() {
     return (e) => {
       this.listeners.close.call();
@@ -280,6 +363,11 @@ class Navigation {
     };
   }
 
+  /**
+   * Returns open handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onOpen() {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'false');
@@ -309,6 +397,11 @@ class Navigation {
     };
   }
 
+  /**
+   * Returns close handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onClose() {
     return (e) => {
       setAttr(this.el, 'aria-hidden', 'true');
@@ -339,36 +432,71 @@ class Navigation {
 
   //
 
+  /**
+   * Gets sibling elements outside Navigation instances
+   * @private
+   * @returns {Element[]} Array of sibling elements
+   */
   #getSiblings() {
     return siblings(this.el).filter((el) => {
       return isU(el.Navigation);
     });
   }
 
+  /**
+   * Hides sibling elements from assistive technologies
+   * @private
+   * @returns {void}
+   */
   #hideSiblings() {
     updateAttr(this.#getSiblings(), 'aria-hidden', 'true', 'navigation');
   }
 
+  /**
+   * Restores sibling element accessibility attributes
+   * @private
+   * @returns {void}
+   */
   #showSiblings() {
     restoreAttr(this.#getSiblings(), 'aria-hidden', 'navigation');
   }
 
   //
 
+  /**
+   * Gets focusable elements within the navigation element
+   * @private
+   * @returns {NodeList} NodeList of focusable elements
+   */
   #getFocusables() {
     return select(this.focusables, this.el);
   }
 
+  /**
+   * Disables focus on focusable child elements
+   * @private
+   * @returns {void}
+   */
   #hideFocusables() {
     updateAttr(this.#getFocusables(), 'tabindex', '-1', 'navigation');
   }
 
+  /**
+   * Restores focus on focusable child elements
+   * @private
+   * @returns {void}
+   */
   #showFocusables() {
     restoreAttr(this.#getFocusables(), 'tabindex', 'navigation');
   }
 
   //
 
+  /**
+   * Returns body click handler for outside-click close behavior
+   * @private
+   * @returns {(e: MouseEvent) => void} Event handler function
+   */
   #onBodyClick() {
     return (e) => {
       if (e.target !== this.el && !this.el.contains(e.target)) {
@@ -377,6 +505,11 @@ class Navigation {
     };
   }
 
+  /**
+   * Returns keydown handler for Escape key close behavior
+   * @private
+   * @returns {(e: KeyboardEvent) => void} Event handler function
+   */
   #oKeyDown() {
     return (e) => {
       if (e.key === 'Escape') {

@@ -17,7 +17,6 @@
   "homepage_short": "formstone.it",
   "demo": "https://formstone.it/demo/",
   "license": "GPL-3.0",
-  "type": "module",
   "exports": {
     ".": {
       "import": "./src/js/index.js",

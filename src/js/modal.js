@@ -262,7 +262,9 @@ class Modal {
   }
 
   /**
+   * Cleans up modal state and restores moved content
    * @private
+   * @returns {void}
    */
   #cleanUp() {
     this.targetEl.append(...this.frameEl.childNodes);
@@ -285,7 +287,9 @@ class Modal {
   //
 
   /**
+   * Renders modal UI and binds event listeners
    * @private
+   * @returns {void}
    */
   #draw() {
     let html = this.templates.container
@@ -316,7 +320,10 @@ class Modal {
   //
 
   /**
+   * Handles click on modal trigger element
    * @private
+   * @param {MouseEvent} e - Click event
+   * @returns {void}
    */
   #onClick(e) {
     e.preventDefault();
@@ -326,7 +333,9 @@ class Modal {
   }
 
   /**
+   * Returns container click handler for outside-click close behavior
    * @private
+   * @returns {(e: MouseEvent) => void} Event handler function
    */
   #onContainerClick() {
     return (e) => {
@@ -339,7 +348,10 @@ class Modal {
   }
 
   /**
+   * Checks click targets for modal action triggers
    * @private
+   * @param {MouseEvent} e - Click event
+   * @returns {void}
    */
   #checkClick(e) {
     if (hasClass(e.target, 'fs-modal-trigger-close')) {
@@ -348,7 +360,9 @@ class Modal {
   }
 
   /**
+   * Returns close handler for modal close events
    * @private
+   * @returns {(e: Event) => void} Event handler function
    */
   #onClose() {
     return (e) => {

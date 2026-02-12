@@ -191,6 +191,7 @@ class Background {
    * Internal IntersectionObserver callback for lazy loading
    * @private
    * @param {IntersectionObserverEntry} entry - Intersection observer entry
+   * @returns {void}
    */
   #observe(entry) {
     if (entry.isIntersecting) {
@@ -203,6 +204,7 @@ class Background {
   /**
    * Performs the initial load of media
    * @private
+   * @returns {void}
    */
   #initialLoad() {
     let source = this.source;
@@ -323,6 +325,7 @@ class Background {
    * Loads an image background
    * @private
    * @param {string} source - Image URL
+   * @returns {void}
    */
   #loadImage(source) {
     this.layerGuid++;
@@ -357,6 +360,7 @@ class Background {
    * Loads a video background
    * @private
    * @param {Object} source - Video source object containing mp4, webm, ogg, and poster URLs
+   * @returns {void}
    */
   #loadVideo(source) {
     if (source.poster) {
@@ -436,6 +440,7 @@ class Background {
    * Loads a YouTube video background
    * @private
    * @param {Object} source - Source object containing youtube URL and optional poster
+   * @returns {void}
    */
   #loadYouTube(source) {
     // let parts = source.youtube.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);
@@ -680,6 +685,7 @@ class Background {
    * Handles media load completion
    * @private
    * @param {Element} media - The loaded media element
+   * @returns {void}
    * @fires background:loaded
    */
   #onLoad(media) {
@@ -726,6 +732,7 @@ let YouTubeQueue = [];
 /**
  * Processes queued YouTube backgrounds once API is ready
  * @private
+ * @returns {void}
  */
 function onYouTubeReady() {
   YouTubeReady = true;

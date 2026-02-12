@@ -339,7 +339,9 @@ class Lightbox {
   }
 
   /**
+   * Cleans up lightbox state and restores moved content
    * @private
+   * @returns {void}
    */
   #cleanUp() {
 
@@ -406,7 +408,9 @@ class Lightbox {
   //
 
   /**
+   * Builds item metadata from matching gallery elements
    * @private
+   * @returns {void}
    */
   #buildItems() {
     this.selector = this.gallery ? `[data-lightbox-gallery="${this.gallery}"]` : `.${this.guidClass}`;
@@ -450,7 +454,9 @@ class Lightbox {
   //
 
   /**
+   * Renders lightbox UI and binds event listeners
    * @private
+   * @returns {void}
    */
   #draw() {
     let html = this.templates.container
@@ -515,7 +521,11 @@ class Lightbox {
   //
 
   /**
+   * Renders image item markup
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #drawImage(item, index) {
     let itemEl = element('div');
@@ -563,7 +573,11 @@ class Lightbox {
   }
 
   /**
+   * Renders video item markup
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #drawVideo(item, index) {
     let url = this.#checkVideo(item.source);
@@ -614,7 +628,11 @@ class Lightbox {
   }
 
   /**
+   * Renders iframe item markup
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #drawIframe(item, index) {
     let itemEl = element('div');
@@ -650,7 +668,11 @@ class Lightbox {
   }
 
   /**
+   * Renders inline element item markup
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #drawElement(item, index) {
     let itemEl = element('div');
@@ -689,7 +711,9 @@ class Lightbox {
   //
 
   /**
+   * Updates item classes and media load states for current index
    * @private
+   * @returns {void}
    */
   #setPositions() {
     iterate(this.items, (item, index) => {
@@ -737,7 +761,11 @@ class Lightbox {
   //
 
   /**
+   * Loads media sources for an item when active
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #loadItem(item, index) {
     if (index !== this.index) {
@@ -760,7 +788,11 @@ class Lightbox {
   }
 
   /**
+   * Unloads media sources for non-active items
    * @private
+   * @param {Object} item - Item data object
+   * @param {number} index - Item index
+   * @returns {void}
    */
   #unloadItem(item, index) {
     if (index == this.index) {
@@ -787,7 +819,9 @@ class Lightbox {
   //
 
   /**
+   * Hides loading indicator
    * @private
+   * @returns {void}
    */
   #hideLoading() {
     removeClass(this.loadingEl, 'fs-lightbox-visible');
@@ -796,7 +830,9 @@ class Lightbox {
   }
 
   /**
+   * Shows loading indicator
    * @private
+   * @returns {void}
    */
   #showLoading() {
     addClass(this.loadingEl, 'fs-lightbox-visible');
@@ -807,7 +843,9 @@ class Lightbox {
   //
 
   /**
+   * Normalizes index to valid bounds
    * @private
+   * @returns {void}
    */
   #checkIndex() {
     if (this.index < 0) {
@@ -819,14 +857,20 @@ class Lightbox {
   }
 
   /**
+   * Checks whether source is an image
    * @private
+   * @param {string} source - Source URL
+   * @returns {boolean} True when source is an image
    */
   #checkImage(source) {
     return (source.match(this.fileTypes) !== null || source.substr(0, 10) === 'data:image');
   }
 
   /**
+   * Checks whether source matches a supported video provider
    * @private
+   * @param {string} source - Source URL
+   * @returns {string|boolean} Formatted provider URL or false
    */
   #checkVideo(source) {
     for (let i in this.videoProviders) {
@@ -842,7 +886,11 @@ class Lightbox {
   }
 
   /**
+   * Renders ordinal and caption details for an item
    * @private
+   * @param {Object} item - Item data object
+   * @param {Element} el - Item container element
+   * @returns {void}
    */
   #checkDetails(item, el) {
     let details = '';
@@ -865,7 +913,9 @@ class Lightbox {
   }
 
   /**
+   * Updates status text for the active item
    * @private
+   * @returns {void}
    */
   #updateStatus() {
     if (this.statusEl) {
@@ -876,7 +926,10 @@ class Lightbox {
   //
 
   /**
+   * Handles click on lightbox trigger element
    * @private
+   * @param {MouseEvent} e - Click event
+   * @returns {void}
    */
   #onClick(e) {
     e.preventDefault();
@@ -886,7 +939,9 @@ class Lightbox {
   }
 
   /**
+   * Returns container click handler for outside-click close behavior
    * @private
+   * @returns {(e: MouseEvent) => void} Event handler function
    */
   #onContainerClick() {
     return (e) => {
@@ -901,7 +956,10 @@ class Lightbox {
   }
 
   /**
+   * Checks click targets for lightbox action triggers
    * @private
+   * @param {MouseEvent} e - Click event
+   * @returns {void}
    */
   #checkClick(e) {
     if (hasClass(e.target, 'fs-lightbox-trigger-previous')) {
@@ -916,7 +974,9 @@ class Lightbox {
   }
 
   /**
+   * Returns close handler for lightbox close events
    * @private
+   * @returns {(e: Event) => void} Event handler function
    */
   #onClose() {
     return (e) => {
@@ -925,7 +985,9 @@ class Lightbox {
   }
 
   /**
+   * Returns previous handler for lightbox navigation events
    * @private
+   * @returns {(e: Event) => void} Event handler function
    */
   #onPrevious() {
     return (e) => {
@@ -934,7 +996,9 @@ class Lightbox {
   }
 
   /**
+   * Returns next handler for lightbox navigation events
    * @private
+   * @returns {(e: Event) => void} Event handler function
    */
   #onNext() {
     return (e) => {
@@ -943,7 +1007,9 @@ class Lightbox {
   }
 
   /**
+   * Returns keydown handler for keyboard navigation
    * @private
+   * @returns {(e: KeyboardEvent) => void} Event handler function
    */
   #onKeyDown() {
     return (e) => {
@@ -967,7 +1033,9 @@ class Lightbox {
   //
 
   /**
+   * Returns pointerdown handler for swipe navigation
    * @private
+   * @returns {(e: PointerEvent) => void} Event handler function
    */
   #onPointerDown() {
     return (e) => {
@@ -992,7 +1060,9 @@ class Lightbox {
   }
 
   /**
+   * Returns pointermove handler for swipe drag updates
    * @private
+   * @returns {(e: PointerEvent) => void} Event handler function
    */
   #onPointerMove() {
     return (e) => {
@@ -1012,7 +1082,9 @@ class Lightbox {
   }
 
   /**
+   * Returns pointerup handler for completing swipe gestures
    * @private
+   * @returns {(e: PointerEvent) => void} Event handler function
    */
   #onPointerUp() {
     return (e) => {

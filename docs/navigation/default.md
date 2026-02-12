@@ -69,7 +69,16 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `gravity` | `string` | `'left'` | Navigation gravity (left, right) |
 | `label` | `string` | `'Menu'` | Accessibility label |
 | `maxWidth` | `string` | `'980px'` | Width to auto-disable plugin |
-| `type` | `string` | `'toggle'` | Navigation type (toggle, push, overlay) |
+| `type` | `string` | `'toggle'` | Navigation type (toggle, push, reveal, overlay) |
+| `focusables` | `string` | `'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'` | Focusable elements |
+
+Data attributes provide configuration options and can be set directly on the target element.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-navigation-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+| `data-navigation-handle` | `string` | Selector for navigation handle element |
+| `data-navigation-content` | `string` | Selector for content element |
 
 
 <hr class="divider">
@@ -81,13 +90,13 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.close()`](#method-close) | Closes instance |
+| [`.close()`](#method-close) | Closes navigation instance |
 | [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.defaults()`](#method-defaults) | Sets default options for future instances |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
-| [`.disable()`](#method-disable) | Disables instance |
-| [`.enable()`](#method-enable) | Enables instance |
-| [`.open()`](#method-open) | Opens instance |
+| [`.disable()`](#method-disable) | Disables navigation instance |
+| [`.enable()`](#method-enable) | Enables navigation instance |
+| [`.open()`](#method-open) | Opens navigation instance |
 
 
 ### .close() {#method-close}
@@ -107,6 +116,10 @@ el.Navigation.close();
 
 Initializes plugin on target elements.
 
+#### Returns
+
+`NodeList` of target elements.
+
 #### Parameters
 
 | Name | Type | Default | Description |
@@ -119,6 +132,7 @@ Initializes plugin on target elements.
 <figure class="example js-example" markdown="1">
 ```js
 let targets = Navigation.construct('.js-navigation');
+Navigation.construct('.js-navigation', { type: 'overlay' });
 ```
 </figure>
 
@@ -240,6 +254,38 @@ Classes allow deeper customization and indicate the current state of a specific 
 | `.fs-navigation-open` | `modifier` | Indicates open state |
 | `.fs-navigation-closed` | `modifier` | Indicates closed state |
 | `.fs-navigation-animated` | `modifier` | Indicates animated state |
+| `.fs-navigation-toggle-nav` | `modifier` | Toggle-mode navigation panel |
+| `.fs-navigation-toggle-handle` | `modifier` | Toggle-mode navigation handle |
+| `.fs-navigation-push` | `modifier` | Push-mode |
+| `.fs-navigation-push-nav` | `modifier` | Push-mode navigation panel |
+| `.fs-navigation-push-left-nav` | `modifier` | Push-mode gravity |
+| `.fs-navigation-push-right-nav` | `modifier` | Push-mode gravity |
+| `.fs-navigation-push-handle` | `modifier` | Push-mode navigation handle |
+| `.fs-navigation-push-left-handle` | `modifier` | Push-mode gravity |
+| `.fs-navigation-push-right-handle` | `modifier` | Push-mode gravity |
+| `.fs-navigation-push-content` | `modifier` | Push-mode navigation handle |
+| `.fs-navigation-push-left-content` | `modifier` | Push-mode gravity |
+| `.fs-navigation-push-right-content` | `modifier` | Push-mode gravity |
+| `.fs-navigation-reveal` | `modifier` | Reveal-mode |
+| `.fs-navigation-reveal-nav` | `modifier` | Reveal-mode navigation panel |
+| `.fs-navigation-reveal-left-nav` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-reveal-right-nav` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-reveal-handle` | `modifier` | Reveal-mode navigation handle |
+| `.fs-navigation-reveal-left-handle` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-reveal-right-handle` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-reveal-content` | `modifier` | Reveal-mode navigation handle |
+| `.fs-navigation-reveal-left-content` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-reveal-right-content` | `modifier` | Reveal-mode gravity |
+| `.fs-navigation-overlay` | `modifier` | Overlay-mode |
+| `.fs-navigation-overlay-nav` | `modifier` | Overlay-mode navigation panel |
+| `.fs-navigation-overlay-left-nav` | `modifier` | Overlay-mode gravity |
+| `.fs-navigation-overlay-right-nav` | `modifier` | Overlay-mode gravity |
+| `.fs-navigation-overlay-handle` | `modifier` | Overlay-mode navigation handle |
+| `.fs-navigation-overlay-left-handle` | `modifier` | Overlay-mode gravity |
+| `.fs-navigation-overlay-right-handle` | `modifier` | Overlay-mode gravity |
+| `.fs-navigation-overlay-content` | `modifier` | Overlay-mode content wrapper |
+| `.fs-navigation-overlay-left-content` | `modifier` | Overlay-mode gravity |
+| `.fs-navigation-overlay-right-content` | `modifier` | Overlay-mode gravity |
 
 
 </div>

@@ -167,6 +167,7 @@ class CheckPoint {
    * Internal IntersectionObserver callback
    * @private
    * @param {IntersectionObserverEntry} entry - Intersection observer entry
+   * @returns {void}
    */
   #observe(entry) {
     let height = this.parentEl ? this.parentEl.innerHeight : window.innerHeight;
