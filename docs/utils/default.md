@@ -61,20 +61,20 @@ Methods are publicly available as static methods on the `Utils` class.
 
 ### .ready() {#method-ready}
 
-Executes callback when DOM is ready, or immediately if already loaded.
+Executes a callback when the DOM is ready, or immediately if already loaded.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `cb` | `function` | Callback function |
+| `cb` | `function` | Callback function to execute |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
 Utils.ready(() => {
-  // DOM is ready
+  console.log('DOM is ready');
 });
 ```
 </figure>
@@ -87,35 +87,35 @@ Utils.ready(() => {
 
 ### .type() {#method-type}
 
-Returns the native `typeof` of an item.
+Returns the JavaScript type of an item.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `item` | `any` | Item to check |
+| `item` | `any` | The item to check |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `string` | The `typeof` result |
+| `string` | The type of the item ('string', 'number', 'boolean', 'object', 'function', 'undefined', 'symbol', 'bigint') |
 
 ### .falsey() {#method-falsey}
 
-Checks if a value is "falsey" (undefined, null, or false).
+Checks if a value is falsey (undefined, false, or null).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `v` | `any` | Value to check |
+| `v` | `any` | The value to check |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `boolean` | True if falsey |
+| `boolean` | True if the value is undefined, false, or null |
 
 ### .isFn() {#method-isfn}
 
@@ -173,26 +173,30 @@ Checks if a value is undefined.
 
 ### .extend() {#method-extend}
 
-Deep or shallow merge of objects.
+Extends objects by merging properties from one or more source objects.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `deep` | `boolean` (optional) | Whether to perform deep merge |
+| `deep` | `boolean` (optional) | If first argument is boolean, enables deep merge |
 | `...args` | `object` | Objects to merge |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `object` | The merged object |
+| `object` | The extended object |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-let options = Utils.extend(true, defaults, userOptions);
+// Shallow merge
+Utils.extend({a: 1}, {b: 2}); // {a: 1, b: 2}
+
+// Deep merge
+Utils.extend(true, {a: {x: 1}}, {a: {y: 2}}); // {a: {x: 1, y: 2}}
 ```
 </figure>
 
@@ -204,52 +208,69 @@ let options = Utils.extend(true, defaults, userOptions);
 
 ### .select() {#method-select}
 
-Selects elements via query selector.
+Selects all elements matching a CSS selector.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `selector` | `string` | Selector string |
-| `context` | `element` (optional) | Context to search within |
+| `selector` | `string` | CSS selector string |
+| `context` | `element|Document` (optional) | Context element or document to search within (defaults to document) |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `NodeList` | Collection of matching elements |
+| `NodeList` | NodeList of matching elements |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+const buttons = Utils.select('.btn');
+const inputs = Utils.select('input', form);
+```
+</figure>
 
 ### .element() {#method-element}
 
-Creates a new element.
+Creates a new DOM element.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `tag` | `string` | HTML tag name |
+| `tag` | `string` | The HTML tag name to create |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `element` | The new element |
+| `element` | The created element |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+const div = Utils.element('div');
+```
+</figure>
 
 ### .siblings() {#method-siblings}
 
-Returns siblings of an element.
+Gets all sibling elements of a node.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `node` | `element` | Element to find siblings for |
+| `node` | `element` | The element to get siblings for |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `array` | Collection of sibling elements |
+| `array` | Array of sibling elements |
 
 
 <hr class="divider">
@@ -259,30 +280,30 @@ Returns siblings of an element.
 
 ### .iterate() {#method-iterate}
 
-Iterates over an array, NodeList, or single element.
+Iterates over a target and executes a callback for each item.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target item(s) to iterate |
-| `cb` | `function` | Callback function |
+| `target` | `element|NodeList|array|any` | The target to iterate over |
+| `cb` | `function` | Callback function to execute for each item |
 
 ### .iterable() {#method-iterable}
 
-Normalizes an item into an array for iteration.
+Converts a value to an iterable array.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target item to normalize |
+| `target` | `any` | The target to convert (Element, NodeList, Array, or any value) |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `array` | Normalized collection |
+| `array` | Array of non-falsey items |
 
 
 <hr class="divider">
@@ -292,53 +313,70 @@ Normalizes an item into an array for iteration.
 
 ### .on() {#method-on}
 
-Adds event listener(s) to target(s).
+Adds event listener(s) to element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `event` | `string` | Event name |
-| `cb` | `function` | Callback function |
-| `options` | `object` (optional) | Event listener options |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `event` | `string` | The event name |
+| `cb` | `function` | The event handler callback |
+| `options` | `object|boolean` (optional) | Event listener options |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.on(button, 'click', handleClick);
+Utils.on(Utils.select('.item'), 'mouseenter', handleHover);
+```
+</figure>
 
 ### .once() {#method-once}
 
-Adds a one-time event listener to target(s).
+Adds a one-time event listener to element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `event` | `string` | Event name |
-| `cb` | `function` | Callback function |
-| `options` | `object` (optional) | Event listener options |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `event` | `string` | The event name |
+| `cb` | `function` | The event handler callback |
+| `options` | `object|boolean` (optional) | Event listener options |
 
 ### .off() {#method-off}
 
-Removes event listener(s) from target(s).
+Removes event listener(s) from element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `event` | `string` | Event name |
-| `cb` | `function` | Callback function |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `event` | `string` | The event name |
+| `cb` | `function` | The event handler callback to remove |
 
 ### .trigger() {#method-trigger}
 
-Triggers a custom event on target(s).
+Dispatches a custom event on element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `event` | `string` | Event name |
-| `detail` | `any` (optional) | Custom event detail |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `event` | `string` | The event name |
+| `detail` | `any` (optional) | Optional detail data to pass with the event |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.trigger(element, 'customEvent', {data: 'value'});
+```
+</figure>
 
 
 <hr class="divider">
@@ -348,25 +386,43 @@ Triggers a custom event on target(s).
 
 ### .addClass() {#method-addclass}
 
-Adds class(es) to target(s).
+Adds class(es) to element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `...classes` | `string` | Class names |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `...classes` | `string` | Class names to add |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.addClass(element, 'active');
+Utils.addClass(Utils.select('.item'), 'highlight', 'selected');
+```
+</figure>
 
 ### .removeClass() {#method-removeclass}
 
-Removes class(es) from target(s).
+Removes class(es) from element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `...classes` | `string` | Class names |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `...classes` | `string` | Class names to remove |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.removeClass(element, 'active');
+Utils.removeClass(Utils.select('.item'), 'highlight', 'selected');
+```
+</figure>
 
 ### .hasClass() {#method-hasclass}
 
@@ -376,14 +432,14 @@ Checks if an element has a class.
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `element` | Target element |
-| `c` | `string` | Class name |
+| `target` | `element` | The target element |
+| `c` | `string` | The class name to check |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `boolean` | True if class exists |
+| `boolean` | True if the element has the class |
 
 
 <hr class="divider">
@@ -393,32 +449,41 @@ Checks if an element has a class.
 
 ### .setAttr() {#method-setattr}
 
-Sets attribute(s) on target(s).
+Sets attribute(s) on element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `attr` | `string|object` | Attribute name or object of attributes |
-| `value` | `string` (optional) | Attribute value |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `attr` | `string|object` | Attribute name or object of attribute key-value pairs |
+| `value` | `string` (optional) | Attribute value (when attr is a string). If falsey, removes the attribute |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.setAttr(element, 'data-id', '123');
+Utils.setAttr(element, {id: 'myId', 'data-type': 'primary'});
+```
+</figure>
 
 ### .getAttr() {#method-getattr}
 
-Returns an attribute value from an element.
+Gets an attribute value from an element.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `element` | Target element |
-| `attr` | `string` | Attribute name |
+| `target` | `element` | The target element |
+| `attr` | `string` | The attribute name |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `string` | Attribute value |
+| `string|null` | The attribute value or null if not present |
 
 ### .hasAttr() {#method-hasattr}
 
@@ -428,50 +493,59 @@ Checks if an element has an attribute.
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `element` | Target element |
-| `attr` | `string` | Attribute name |
+| `target` | `element` | The target element |
+| `attr` | `string` | The attribute name |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `boolean` | True if attribute exists |
+| `boolean` | True if the element has the attribute |
 
 ### .removeAttr() {#method-removeattr}
 
-Removes attribute(s) from target(s).
+Removes attribute(s) from element(s).
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `target` | `any` | Target element(s) |
-| `attr` | `string|array` | Attribute name(s) |
+| `target` | `element|NodeList|array` | The target element(s) |
+| `attr` | `string|array` | Attribute name(s) to remove |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.removeAttr(element, 'disabled');
+Utils.removeAttr(element, ['disabled', 'hidden']);
+```
+</figure>
 
 ### .updateAttr() {#method-updateattr}
 
-Preserves an attribute's current value in a data attribute before updating it.
+Updates an attribute value and stores the original in a data attribute.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `els` | `any` | Target element(s) |
-| `attr` | `string` | Attribute name |
-| `value` | `string` | New value |
-| `handle` | `string` | Plugin handle for the data key |
+| `els` | `element|NodeList|array` | The target element(s) |
+| `attr` | `string` | The attribute name to update |
+| `value` | `string` | The new attribute value |
+| `handle` | `string` | A handle used to namespace the backup data attribute |
 
 ### .restoreAttr() {#method-restoreattr}
 
-Restores an attribute's value from its preserved data attribute.
+Restores an attribute to its original value from a data attribute.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `els` | `any` | Target element(s) |
-| `attr` | `string` | Attribute name |
-| `handle` | `string` | Plugin handle for the data key |
+| `els` | `element|NodeList|array` | The target element(s) |
+| `attr` | `string` | The attribute name to restore |
+| `handle` | `string` | The handle used when the attribute was updated |
 
 
 <hr class="divider">
@@ -481,18 +555,27 @@ Restores an attribute's value from its preserved data attribute.
 
 ### .camelCase() {#method-camelcase}
 
-Converts a string to camelCase.
+Converts a hyphenated or space-separated string to camelCase.
 
 #### Parameters
 
 | Name | Type | Description |
 | -- | -- | -- |
-| `string` | `string` | String to convert |
+| `string` | `string` | The string to convert |
 
 #### Returns
 
 | Type | Description |
 | -- | -- |
-| `string` | CamelCased string |
+| `string` | The camelCased string |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Utils.camelCase('my-data-attr'); // 'myDataAttr'
+Utils.camelCase('background color'); // 'backgroundColor'
+```
+</figure>
 
 </div>

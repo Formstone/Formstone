@@ -262,10 +262,10 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `alt` | `string` | `''` | Image `alt` attribute |
 | `autoPlay` | `boolean` | `true` | Autoplay video |
 | `lazy` | `boolean` | `false` | Lazy load media on scroll |
-| `lazyOffset` | `string` | `'100px'` | Distance from bottom of window |
+| `lazyOffset` | `string` | `'100px'` | Distance from bottom of window for lazy loading |
 | `loop` | `boolean` | `true` | Loop video |
 | `mute` | `boolean` | `true` | Mute video |
-| `source` | `string | object` | `null` | Source image (string or object) or video (object) |
+| `source` | `string | object` | `null` | Source image URL (string or responsive object) or video object |
 | `youtubeOptions` | `object` | `{}` | Options passed to YouTube player |
 
 
@@ -278,26 +278,32 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.construct()`](#method-construct) | Initializes Background plugin on target elements |
+| [`.defaults()`](#method-defaults) | Sets default options for future Background instances |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
 | [`.load()`](#method-load) | Loads new source media |
 | [`.mute()`](#method-mute) | Mutes current video |
 | [`.pause()`](#method-pause) | Pauses current video |
 | [`.play()`](#method-play) | Plays current video |
-| [`.unload()`](#method-unload) | Unloads current media |
 | [`.unmute()`](#method-unmute) | Unmutes current video |
 
 
 ### .construct() {#method-construct}
 
-Initializes plugin on target elements.
+Initializes Background plugin on target elements.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
 | `selector` | `string` (required) | `''` | Selector string to target |
+| `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
 | `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
 
 #### Examples
@@ -320,13 +326,13 @@ let targets = Background.construct('.js-background', {
 
 ### .defaults() {#method-defaults}
 
-Sets default options for future initialization.
+Sets default options for future Background instances.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `options` | `object` (required) | `{}` | Object containing default options |
+| `options` | `object` (required) | `{}` | Object containing default [options](#options) |
 
 #### Examples
 
@@ -361,18 +367,20 @@ Loads new source media.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `source` | `string | object` (required) | `null` | Source image (string or object) or video (object) |
+| `source` | `string | object` (required) | `null` | Source image URL (string or responsive object) or video object |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
+// Load single image
 el.Background.load('/path/to/image.jpg');
 ```
 </figure>
 
 <figure class="example js-example" markdown="1">
 ```js
+// Load responsive images
 el.Background.load({
   0: '/path/to/small-image.jpg',
   740: '/path/to/large-image.jpg'
@@ -382,8 +390,10 @@ el.Background.load({
 
 <figure class="example js-example" markdown="1">
 ```js
+// Load video
 el.Background.load({
   mp4: '/path/to/video.mp4',
+  webm: '/path/to/video.webm',
   poster: '/path/to/poster.jpg'
 });
 ```
@@ -391,8 +401,9 @@ el.Background.load({
 
 <figure class="example js-example" markdown="1">
 ```js
+// Load YouTube video
 el.Background.load({
-  youtube: 'https://www.youtube.com/watch?v=VIDEO_ID',
+  youtube: 'https://www.youtube.com/watch?v=VIDEO_ID'
 });
 ```
 </figure>
@@ -437,19 +448,6 @@ el.Background.play();
 </figure>
 
 
-### .unload() {#method-unload}
-
-Unloads current media.
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-el.Background.unload();
-```
-</figure>
-
-
 ### .unmute() {#method-unmute}
 
 Unmutes current video.
@@ -463,38 +461,6 @@ el.Background.unmute();
 </figure>
 
 
-
-<!-- ```js
-// Javascript
-import { Background, Utils } from 'Formstone';
-
-let targets = Background.construct('.js-background', {
-  // ...
-});
-
-Utils.iterate(targets, (el) => {
-  el.Background && el.Background.load('new-source.jpg');
-});
-
-Utils.on(targets, 'background:loaded', (e) => {
-  // ...
-});
-
-
-// jQuery
-
-let $targets = $('.js-background').background({
-  // ...
-});
-
-$targets.background('load', 'new-source.jpg');
-
-$targets.on('background:loaded', (e) => {
-  // ...
-});
-``` -->
-
-
 <hr class="divider">
 
 
@@ -505,12 +471,6 @@ Events are triggered on the target instance's element, unless otherwise stated.
 | Name | Description |
 | -- | -- |
 | `background:loaded` | Background media loaded |
-| `background:ready` | Background media ready |
-| `background:play` | Background media is paused |
-| `background:pause` | Background media is playing |
-| `background:mute` | Background media is muted |
-| `background:unmute` | Background media is unmuted |
-| `background:error` | Background media error |
 
 
 <hr class="divider">

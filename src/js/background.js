@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Full-frame, responsive image and video backgrounds
+ */
+
 import MediaQuery from './mediaquery.js';
 import {
   isFn,
@@ -21,10 +25,33 @@ import {
 
 // Class
 
+/**
+ * Background class for creating full-frame responsive image and video backgrounds
+ * @class
+ */
 class Background {
 
+  /**
+   * @type {number}
+   * @private
+   */
   static #_guid = 1;
 
+  /**
+   * @typedef {Object} BackgroundOptions
+   * @property {boolean} [autoPlay=true] - Autoplay video
+   * @property {boolean} [lazy=false] - Lazy load media on scroll
+   * @property {string} [lazyOffset='100px'] - Distance from bottom of window for lazy loading
+   * @property {boolean} [loop=true] - Loop video
+   * @property {boolean} [mute=true] - Mute video
+   * @property {string|Object} [source=null] - Source image (string or object) or video (object)
+   * @property {Object} [youtubeOptions={}] - Options passed to YouTube player
+   */
+
+  /**
+   * @type {BackgroundOptions}
+   * @private
+   */
   static #_defaults = {
     // alt: '',
     autoPlay: true,
@@ -38,10 +65,28 @@ class Background {
 
   //
 
+  /**
+   * Sets default options for future Background instances
+   * @param {BackgroundOptions} options - Object containing default options
+   * @example
+   * Background.defaults({
+   *   lazy: true,
+   *   lazyOffset: '10vh'
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes Background plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {BackgroundOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * Background.construct('.js-background');
+   * Background.construct('.js-background', { lazy: true });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -56,6 +101,12 @@ class Background {
 
   //
 
+  /**
+   * Creates a new Background instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {BackgroundOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Background) {
       console.warn('Background: Instance already exists', el);
@@ -119,6 +170,11 @@ class Background {
 
   //
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.Background.destroy();
+   */
   destroy() {
     this.container.remove();
 
@@ -131,6 +187,11 @@ class Background {
 
   //
 
+  /**
+   * Internal IntersectionObserver callback for lazy loading
+   * @private
+   * @param {IntersectionObserverEntry} entry - Intersection observer entry
+   */
   #observe(entry) {
     if (entry.isIntersecting) {
       this.observer.unobserve(this.el);
@@ -139,6 +200,10 @@ class Background {
     }
   }
 
+  /**
+   * Performs the initial load of media
+   * @private
+   */
   #initialLoad() {
     let source = this.source;
     this.source = '';
@@ -147,6 +212,31 @@ class Background {
 
   //
 
+  /**
+   * Loads new source media
+   * @param {string|Object} source - Source image URL (string or responsive object) or video object
+   * @fires background:loaded
+   * @example
+   * // Load single image
+   * el.Background.load('/path/to/image.jpg');
+   * 
+   * // Load responsive images
+   * el.Background.load({
+   *   0: '/path/to/small.jpg',
+   *   740: '/path/to/large.jpg'
+   * });
+   * 
+   * // Load video
+   * el.Background.load({
+   *   mp4: '/path/to/video.mp4',
+   *   poster: '/path/to/poster.jpg'
+   * });
+   * 
+   * // Load YouTube
+   * el.Background.load({
+   *   youtube: 'https://www.youtube.com/watch?v=VIDEO_ID'
+   * });
+   */
   load(source) {
     addClass(this.el, 'fs-background-loaded');
 
@@ -229,6 +319,11 @@ class Background {
 
   //
 
+  /**
+   * Loads an image background
+   * @private
+   * @param {string} source - Image URL
+   */
   #loadImage(source) {
     this.layerGuid++;
 
@@ -258,6 +353,11 @@ class Background {
 
   //
 
+  /**
+   * Loads a video background
+   * @private
+   * @param {Object} source - Video source object containing mp4, webm, ogg, and poster URLs
+   */
   #loadVideo(source) {
     if (source.poster) {
       this.#loadImage(source.poster);
@@ -332,6 +432,11 @@ class Background {
 
   //
 
+  /**
+   * Loads a YouTube video background
+   * @private
+   * @param {Object} source - Source object containing youtube URL and optional poster
+   */
   #loadYouTube(source) {
     // let parts = source.youtube.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);
     let parts = source.youtube.match(/(?:(?:youtube\.com|youtube-nocookie\.com)\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i);
@@ -465,6 +570,11 @@ class Background {
 
   //
 
+  /**
+   * Plays current video
+   * @example
+   * el.Background.play();
+   */
   play() {
     if (this.isYouTube) {
       if (this.playerReady) {
@@ -485,6 +595,11 @@ class Background {
     this.playing = true;
   }
 
+  /**
+   * Pauses current video
+   * @example
+   * el.Background.pause();
+   */
   pause() {
     if (this.isYouTube) {
       if (this.playerReady) {
@@ -505,6 +620,11 @@ class Background {
     this.playing = false;
   }
 
+  /**
+   * Mutes current video
+   * @example
+   * el.Background.mute();
+   */
   mute() {
     if (this.isYouTube && this.playerReady) {
       this.player.mute();
@@ -524,6 +644,11 @@ class Background {
 
   // Mute / Unmute is now blocked unless the user interacts with the video
 
+  /**
+   * Unmutes current video
+   * @example
+   * el.Background.unmute();
+   */
   unmute() {
     if (this.isYouTube && this.playerReady) {
       this.player.unMute();
@@ -551,6 +676,12 @@ class Background {
 
   //
 
+  /**
+   * Handles media load completion
+   * @private
+   * @param {Element} media - The loaded media element
+   * @fires background:loaded
+   */
   #onLoad(media) {
     let layer = getAttr(media, 'data-background-layer');
 
@@ -580,9 +711,22 @@ class Background {
 
 // YouTube Helper
 
+/**
+ * @type {boolean}
+ * @private
+ */
 let YouTubeReady = false;
+
+/**
+ * @type {Array<{el: Background, source: Object}>}
+ * @private
+ */
 let YouTubeQueue = [];
 
+/**
+ * Processes queued YouTube backgrounds once API is ready
+ * @private
+ */
 function onYouTubeReady() {
   YouTubeReady = true;
 
