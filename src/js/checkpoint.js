@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Checkpoint - Animate elements on scroll
+ */
+
 import {
   extend,
   //
@@ -12,20 +16,55 @@ import {
 
 // Class
 
+/**
+ * CheckPoint class for animating elements on scroll
+ * @class
+ */
 class CheckPoint {
 
+  /**
+   * @type {number}
+   * @private
+   */
   static #_guid = 1;
 
+  /**
+   * @typedef {Object} CheckPointOptions
+   * @property {string} [offset='0px'] - Element offset for activating animation (pixels or percentage)
+   * @property {boolean} [reverse=false] - Deactivate animation when scrolling back
+   */
+
+  /**
+   * @type {CheckPointOptions}
+   * @private
+   */
   static #_defaults = {
     // intersect: 'bottom',
     offset: '0px',
     reverse: false
   };
 
+  /**
+   * Sets default options for future CheckPoint instances
+   * @param {CheckPointOptions} options - Object containing default options
+   * @example
+   * CheckPoint.defaults({
+   *   reverse: true
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes CheckPoint plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {CheckPointOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * CheckPoint.construct('.js-checkpoint');
+   * CheckPoint.construct('.js-checkpoint', { reverse: true });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -40,6 +79,12 @@ class CheckPoint {
 
   //
 
+  /**
+   * Creates a new CheckPoint instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {CheckPointOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.CheckPoint) {
       console.warn('Checkpoint: Instance already exists', el);
@@ -99,6 +144,11 @@ class CheckPoint {
     el.CheckPoint = this;
   }
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.CheckPoint.destroy();
+   */
   destroy() {
     this.disable();
 
@@ -113,6 +163,11 @@ class CheckPoint {
 
   //
 
+  /**
+   * Internal IntersectionObserver callback
+   * @private
+   * @param {IntersectionObserverEntry} entry - Intersection observer entry
+   */
   #observe(entry) {
     let height = this.parentEl ? this.parentEl.innerHeight : window.innerHeight;
     let edge = height - (this.percent ? (height * this.percent) : this.edge);
@@ -126,6 +181,11 @@ class CheckPoint {
 
   //
 
+  /**
+   * Enables the CheckPoint instance
+   * @example
+   * el.CheckPoint.enable();
+   */
   enable() {
     if (this.enabled) {
       return;
@@ -140,6 +200,11 @@ class CheckPoint {
     });
   }
 
+  /**
+   * Disables the CheckPoint instance
+   * @example
+   * el.CheckPoint.disable();
+   */
   disable() {
     if (!this.enabled) {
       return;
@@ -158,6 +223,12 @@ class CheckPoint {
 
   //
 
+  /**
+   * Activates the checkpoint animation
+   * @fires checkpoint:activate
+   * @example
+   * el.CheckPoint.activate();
+   */
   activate() {
     if (!this.enabled || this.active) {
       return;
@@ -170,6 +241,12 @@ class CheckPoint {
     trigger(this.el, 'checkpoint:activate', {});
   }
 
+  /**
+   * Deactivates the checkpoint animation
+   * @fires checkpoint:deactivate
+   * @example
+   * el.CheckPoint.deactivate();
+   */
   deactivate() {
     if (!this.enabled || !this.active || (!this.reverse && this.hasActived)) {
       return;

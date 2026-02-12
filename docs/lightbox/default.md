@@ -62,18 +62,27 @@ Utils.ready(() => {
 
 ## Options {#options}
 
-Set global options by passing a valid object to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute containing a properly formatted JSON object to the target element.
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-lightbox-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `customClass` | `string` | `''` | Custom class for dialog |
+| `customClass` | `string` | `''` | Custom CSS class for lightbox dialog |
 | `direction` | `string` | `document.dir` | Content direction (ltr, rtl) |
-| `fileTypes` | `regex` | `/\.(jpg\|jpeg\|png\|gif\|webp)/i` | Supported image file types |
+| `fileTypes` | `RegExp` | `/\.(jpg\|sjpg\|jpeg\|png\|gif\|webp)/i` | Supported image file extensions |
 | `label` | `string` | `'Gallery'` | Accessibility label |
-| `ordinal` | `boolean` | `true` | Show gallery index |
-| `threshold` | `int` | `50` | Swipe threshold |
-| `templates` | `object` | `...` | Display templates |
+| `ordinal` | `boolean` | `true` | Show gallery position indicator |
+| `threshold` | `number` | `50` | Swipe threshold in pixels |
+| `templates` | `object` | `...` | HTML templates for UI components |
 | `videoProviders` | `object` | `...` | Video provider patterns and formatters |
+
+Data attributes provide configuration options and can be set directly on the target element.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-lightbox-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+| `data-lightbox-gallery` | `string` | Gallery group identifier for navigation |
+| `data-lightbox-type` | `string` | Force content type: 'image', 'video', 'element', or 'url' |
+| `data-lightbox-caption` | `string` | Caption text to display |
 
 
 <hr class="divider">
@@ -85,19 +94,25 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.close()`](#method-close) | Closes active instance |
-| [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.close()`](#method-close) | Closes active lightbox instance |
+| [`.construct()`](#method-construct) | Initializes Lightbox plugin on target elements |
+| [`.defaults()`](#method-defaults) | Sets default options for future Lightbox instances |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
-| [`.jump()`](#method-jump) | Jumps to specific index |
-| [`.next()`](#method-next) | Jumps to next item |
-| [`.open()`](#method-open) | Opens instance |
-| [`.previous()`](#method-previous) | Jumps to previous item |
+| [`.jump()`](#method-jump) | Jumps to specific gallery index |
+| [`.next()`](#method-next) | Advances to next gallery item |
+| [`.open()`](#method-open) | Opens lightbox at specified index |
+| [`.previous()`](#method-previous) | Goes back to previous gallery item |
 
 
 ### .close() {#method-close}
 
-Closes active instance.
+Closes active lightbox instance.
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `Promise` | Promise that resolves when close transition completes |
 
 #### Examples
 
@@ -110,7 +125,7 @@ el.Lightbox.close();
 
 ### .construct() {#method-construct}
 
-Initializes plugin on target elements.
+Initializes Lightbox plugin on target elements.
 
 #### Parameters
 
@@ -118,6 +133,12 @@ Initializes plugin on target elements.
 | -- | -- | -- | -- |
 | `selector` | `string` (required) | `''` | Selector string to target |
 | `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
 
 #### Examples
 
@@ -127,23 +148,33 @@ let targets = Lightbox.construct('.js-lightbox');
 ```
 </figure>
 
+<figure class="example js-example" markdown="1">
+```js
+let targets = Lightbox.construct('.js-lightbox', {
+  customClass: 'photo-gallery',
+  threshold: 100
+});
+```
+</figure>
+
 
 ### .defaults() {#method-defaults}
 
-Sets default options for future initialization.
+Sets default options for future Lightbox instances.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `options` | `object` (required) | `{}` | Object containing default options |
+| `options` | `object` (required) | `{}` | Object containing default [options](#options) |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
 Lightbox.defaults({
-  customClass: 'custom'
+  customClass: 'my-lightbox',
+  threshold: 100
 });
 ```
 </figure>
@@ -164,13 +195,13 @@ el.Lightbox.destroy();
 
 ### .jump() {#method-jump}
 
-Jumps to specific index.
+Jumps to specific gallery index.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `index` | `int` (required) | `0` | Target index |
+| `index` | `number` (required) | `0` | Target index |
 
 #### Examples
 
@@ -183,7 +214,7 @@ el.Lightbox.jump(2);
 
 ### .next() {#method-next}
 
-Jumps to next item.
+Advances to next gallery item.
 
 #### Examples
 
@@ -196,13 +227,13 @@ el.Lightbox.next();
 
 ### .open() {#method-open}
 
-Opens instance.
+Opens lightbox at specified index.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `index` | `int` (optional) | `0` | Starting index |
+| `index` | `number` (optional) | `undefined` | Starting index |
 
 #### Examples
 
@@ -212,10 +243,16 @@ el.Lightbox.open();
 ```
 </figure>
 
+<figure class="example js-example" markdown="1">
+```js
+el.Lightbox.open(2);
+```
+</figure>
+
 
 ### .previous() {#method-previous}
 
-Jumps to previous item.
+Goes back to previous gallery item.
 
 #### Examples
 

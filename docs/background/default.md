@@ -268,6 +268,12 @@ Set instance options by passing a valid object at initialization, or to the publ
 | `source` | `string | object` | `null` | Source image URL (string or responsive object) or video object |
 | `youtubeOptions` | `object` | `{}` | Options passed to YouTube player |
 
+Data attributes provide configuration options and can be set directly on the target element.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-background-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+
 
 <hr class="divider">
 
@@ -304,7 +310,6 @@ Initializes Background plugin on target elements.
 | Type | Description |
 | -- | -- |
 | `NodeList` | NodeList of target elements |
-| `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
 
 #### Examples
 

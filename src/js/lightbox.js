@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Lightbox - Accessible lightbox for images, videos, and elements
+ */
+
 // import MediaQuery from './mediaquery.js';
 import {
   extend,
@@ -37,8 +41,22 @@ function formatVimeo(parts) {
 
 let LightboxInstance;
 
-// Class
+/**
+ * @typedef {Object} LightboxOptions
+ * @property {string} [direction=document.dir] - Content direction ('ltr' or 'rtl')
+ * @property {string} [customClass=''] - Custom CSS class to add to lightbox dialog
+ * @property {string} [label='Gallery'] - Accessibility label for the lightbox
+ * @property {RegExp} [fileTypes=/\.(jpg|sjpg|jpeg|png|gif|webp)/i] - Regular expression to match image file extensions
+ * @property {number} [threshold=50] - Swipe threshold in pixels for touch navigation
+ * @property {boolean} [ordinal=true] - Show gallery position indicator (e.g., "1 of 5")
+ * @property {Object} [templates] - HTML templates for lightbox components
+ * @property {Object} [videoProviders] - Video provider patterns and URL formatters for YouTube and Vimeo
+ */
 
+/**
+ * Lightbox class for displaying images, videos, and inline elements
+ * @class
+ */
 class Lightbox {
 
   static #_guid = 1;
@@ -85,10 +103,37 @@ class Lightbox {
     }
   };
 
+  /**
+   * Sets default options for future Lightbox instances
+   * @param {LightboxOptions} options - Object containing default options
+   * @example
+   * Lightbox.defaults({
+   *   customClass: 'my-lightbox',
+   *   threshold: 100
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * @static
+   * @param {string} selector - CSS selector string to target elements (typically links)
+   * @param {LightboxOptions} [options] - Instance-specific options
+   * @returns {Array<Element>} Array of initialized elements
+   * @description Initializes Lightbox on all elements matching the selector. Each element
+   * should be a link (anchor tag) pointing to the media to display. Skips elements that
+   * already have Lightbox initialized.
+   * @example
+   * // Initialize on all links with class 'lightbox'
+   * Lightbox.construct('.lightbox');
+   *
+   * // Initialize with options
+   * Lightbox.construct('.gallery', {
+   *   customClass: 'photo-gallery',
+   *   threshold: 100
+   * });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -103,6 +148,12 @@ class Lightbox {
 
   //
 
+  /**
+   * Creates a new Lightbox instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {LightboxOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Lightbox) {
       console.warn('Lightbox: Instance already exists', el);
@@ -163,6 +214,14 @@ class Lightbox {
 
   //
 
+  /**
+   * @public
+   * @description Destroys the Lightbox instance, removing all event listeners and data.
+   * Automatically closes the lightbox if open. Cleans up the element and removes the
+   * Lightbox property.
+   * @example
+   * el.Lightbox.destroy();
+   */
   destroy() {
     this.close();
 
@@ -177,6 +236,13 @@ class Lightbox {
 
   //
 
+  /**
+   * Opens lightbox instance at specified index
+   * @param {number} [index] - Optional index to open (defaults to trigger's position)
+   * @example
+   * el.Lightbox.open();
+   * el.Lightbox.open(2);
+   */
   open(index) {
     let promise = LightboxInstance ? LightboxInstance.close() : Promise.resolve();
 
@@ -226,6 +292,12 @@ class Lightbox {
     });
   }
 
+  /**
+   * Closes active lightbox instance
+   * @returns {Promise} Promise that resolves when close transition completes
+   * @example
+   * el.Lightbox.close();
+   */
   close() {
     if (!this.isOpen) {
       return;
@@ -266,6 +338,9 @@ class Lightbox {
     return promise;
   }
 
+  /**
+   * @private
+   */
   #cleanUp() {
 
     iterate(this.items, (item, index) => {
@@ -291,6 +366,11 @@ class Lightbox {
 
   //
 
+  /**
+   * Advances to next gallery item
+   * @example
+   * el.Lightbox.next();
+   */
   next() {
     this.index++;
     this.#checkIndex();
@@ -298,6 +378,11 @@ class Lightbox {
     this.#setPositions();
   }
 
+  /**
+   * Goes back to previous gallery item
+   * @example
+   * el.Lightbox.previous();
+   */
   previous() {
     this.index--;
     this.#checkIndex();
@@ -305,6 +390,12 @@ class Lightbox {
     this.#setPositions();
   }
 
+  /**
+   * Jumps to specific gallery index
+   * @param {number} index - Target index
+   * @example
+   * el.Lightbox.jump(3);
+   */
   jump(index) {
     this.index = index;
     this.#checkIndex();
@@ -314,6 +405,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #buildItems() {
     this.selector = this.gallery ? `[data-lightbox-gallery="${this.gallery}"]` : `.${this.guidClass}`;
 
@@ -355,6 +449,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #draw() {
     let html = this.templates.container
       .replace('[close]', this.templates.close)
@@ -417,6 +514,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #drawImage(item, index) {
     let itemEl = element('div');
     let wrapEl = element('div');
@@ -462,6 +562,9 @@ class Lightbox {
     // on(zoomOutEl, 'click', this.listeners.zoomout);
   }
 
+  /**
+   * @private
+   */
   #drawVideo(item, index) {
     let url = this.#checkVideo(item.source);
     let qs = item.source.split('?');
@@ -510,6 +613,9 @@ class Lightbox {
     item.mediaEl = mediaEl;
   }
 
+  /**
+   * @private
+   */
   #drawIframe(item, index) {
     let itemEl = element('div');
     let wrapEl = element('div');
@@ -543,6 +649,9 @@ class Lightbox {
     item.frameEl = frameEl;
   }
 
+  /**
+   * @private
+   */
   #drawElement(item, index) {
     let itemEl = element('div');
     let wrapEl = element('div');
@@ -579,6 +688,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #setPositions() {
     iterate(this.items, (item, index) => {
       removeClass(item.el, 'fs-lightbox-active', 'fs-lightbox-item_previous', 'fs-lightbox-item_next');
@@ -624,6 +736,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #loadItem(item, index) {
     if (index !== this.index) {
       return;
@@ -644,6 +759,9 @@ class Lightbox {
     });
   }
 
+  /**
+   * @private
+   */
   #unloadItem(item, index) {
     if (index == this.index) {
       return;
@@ -668,12 +786,18 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #hideLoading() {
     removeClass(this.loadingEl, 'fs-lightbox-visible');
     setAttr(this.loadingEl, 'aria-hidden', 'true');
     setAttr(this.lightboxEl, 'aria-busy', 'false');
   }
 
+  /**
+   * @private
+   */
   #showLoading() {
     addClass(this.loadingEl, 'fs-lightbox-visible');
     removeAttr(this.loadingEl, 'aria-hidden');
@@ -682,6 +806,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #checkIndex() {
     if (this.index < 0) {
       this.index = this.loop ? this.maxIndex : 0;
@@ -691,10 +818,16 @@ class Lightbox {
     }
   }
 
+  /**
+   * @private
+   */
   #checkImage(source) {
     return (source.match(this.fileTypes) !== null || source.substr(0, 10) === 'data:image');
   }
 
+  /**
+   * @private
+   */
   #checkVideo(source) {
     for (let i in this.videoProviders) {
       let provider = this.videoProviders[i];
@@ -708,6 +841,9 @@ class Lightbox {
     return false;
   }
 
+  /**
+   * @private
+   */
   #checkDetails(item, el) {
     let details = '';
 
@@ -728,6 +864,9 @@ class Lightbox {
     }
   }
 
+  /**
+   * @private
+   */
   #updateStatus() {
     if (this.statusEl) {
       this.statusEl.textContent = `${this.label}: ${this.index + 1} of ${this.items.length}`;
@@ -736,6 +875,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #onClick(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -743,6 +885,9 @@ class Lightbox {
     this.Lightbox.open();
   }
 
+  /**
+   * @private
+   */
   #onContainerClick() {
     return (e) => {
       let item = this.items[this.index].mediaEl;
@@ -755,6 +900,9 @@ class Lightbox {
     };
   }
 
+  /**
+   * @private
+   */
   #checkClick(e) {
     if (hasClass(e.target, 'fs-lightbox-trigger-previous')) {
       this.previous();
@@ -767,24 +915,36 @@ class Lightbox {
     }
   }
 
+  /**
+   * @private
+   */
   #onClose() {
     return (e) => {
       this.close();
     };
   }
 
+  /**
+   * @private
+   */
   #onPrevious() {
     return (e) => {
       this.previous();
     };
   }
 
+  /**
+   * @private
+   */
   #onNext() {
     return (e) => {
       this.next();
     };
   }
 
+  /**
+   * @private
+   */
   #onKeyDown() {
     return (e) => {
       if (e.key === 'ArrowLeft') {
@@ -806,6 +966,9 @@ class Lightbox {
 
   //
 
+  /**
+   * @private
+   */
   #onPointerDown() {
     return (e) => {
       if (
@@ -828,6 +991,9 @@ class Lightbox {
     }
   }
 
+  /**
+   * @private
+   */
   #onPointerMove() {
     return (e) => {
       let item = this.items[this.index];
@@ -845,6 +1011,9 @@ class Lightbox {
     }
   }
 
+  /**
+   * @private
+   */
   #onPointerUp() {
     return (e) => {
       let item = this.items[this.index];

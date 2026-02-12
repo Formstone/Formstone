@@ -59,36 +59,36 @@ Utils.ready(() => {
 
 ## Methods {#methods}
 
-Methods are publicly available, unless otherwise stated.
+Methods are publicly available static methods.
 
 | Name | Description |
 | -- | -- |
-| [`.bind()`](#method-bind) | Binds to a media query |
-| [`.unbind()`](#method-unbind) | Unbinds from a media query |
+| [`.bind()`](#method-bind) | Binds callbacks to a media query |
+| [`.unbind()`](#method-unbind) | Unbinds callbacks from a media query |
 
 
 ### .bind() {#method-bind}
 
-Binds to a media query.
+Binds callbacks to a media query.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `key` | `string` (required) | `''` | Unique key |
-| `media` | `string` (required) | `''` | Media query string |
-| `data` | `object` (required) | `{}` | Object containing `enter` and `leave` callbacks |
+| `key` | `string` (required) | `''` | Unique identifier for this binding |
+| `media` | `string` (required) | `''` | Media query string (e.g., '(min-width: 768px)') |
+| `data` | `object` (required) | `{}` | Object containing `enter` and/or `leave` callback functions |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-MediaQuery.bind('unique-key', '(min-width: 500px)', {
+MediaQuery.bind('mobile', '(max-width: 740px)', {
   enter: function() {
-    console.log('Enter 500px');
+    console.log('Mobile view');
   },
   leave: function() {
-    console.log('Leave 500px');
+    console.log('Desktop view');
   }
 });
 ```
@@ -97,25 +97,28 @@ MediaQuery.bind('unique-key', '(min-width: 500px)', {
 
 ### .unbind() {#method-unbind}
 
-Unbinds from a media query.
+Unbinds callbacks from a media query.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `key` | `string` (required) | `''` | Unique key |
-| `media` | `string` (optional) | `''` | Specific media query string to unbind |
+| `key` | `string` (required) | `''` | Unique identifier for the binding to remove |
+| `media` | `string` (optional) | `''` | Specific media query string (omit to unbind from all) |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-MediaQuery.unbind('unique-key');
+MediaQuery.unbind('mobile');
 ```
 </figure>
 
-
-<hr class="divider">
+<figure class="example js-example" markdown="1">
+```js
+MediaQuery.unbind('mobile', '(max-width: 740px)');
+```
+</figure>
 
 
 </div>

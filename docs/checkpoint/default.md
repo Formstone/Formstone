@@ -629,8 +629,19 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | -- | -- | -- | --|
-| `offset` | `int` | `0` | Element offset for activating animation |
+| `offset` | `string` | `'0px'` | Element offset for activating animation (pixels or percentage) |
 | `reverse` | `boolean` | `false` | Deactivate animation when scrolling back |
+
+Data attributes provide additional configuration options and can be set directly on the target element.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-checkpoint-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+| `data-checkpoint-animation` | `string` | Animation type (e.g., `fade-in`, `zoom-in-up`, `flip-left`) |
+| `data-checkpoint-offset` | `string` | Custom offset value, overrides the option (pixels or percentage) |
+| `data-checkpoint-parent` | `string` | Selector for a scrollable parent container |
+| `data-checkpoint-trigger` | `string` | Selector for a custom trigger element |
+| `data-checkpoint-container` | `string` | Selector for parent trigger element |
 
 
 <hr class="divider">
@@ -642,16 +653,18 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.enable()`](#method-enable) | Enables instance |
-| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.construct()`](#method-construct) | Initializes CheckPoint plugin on target elements |
+| [`.defaults()`](#method-defaults) | Sets default options for future CheckPoint instances |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
-| [`.disable()`](#method-disable) | Disables instance |
+| [`.enable()`](#method-enable) | Enables the CheckPoint instance |
+| [`.disable()`](#method-disable) | Disables the CheckPoint instance |
+| [`.activate()`](#method-activate) | Activates the checkpoint animation |
+| [`.deactivate()`](#method-deactivate) | Deactivates the checkpoint animation |
 
 
 ### .construct() {#method-construct}
 
-Initializes plugin on target elements.
+Initializes CheckPoint plugin on target elements.
 
 #### Parameters
 
@@ -660,51 +673,44 @@ Initializes plugin on target elements.
 | `selector` | `string` (required) | `''` | Selector string to target |
 | `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
 
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
+
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-let targets = Checkpoint.construct('.js-checkpoint');
+let targets = CheckPoint.construct('.js-checkpoint');
 ```
 </figure>
 
 <figure class="example js-example" markdown="1">
 ```js
-let targets = Checkpoint.construct('.js-checkpoint', {
+let targets = CheckPoint.construct('.js-checkpoint', {
   reverse: true
 });
 ```
 </figure>
 
 
-### .enable() {#method-enable}
-
-Enables instance.
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-el.Checkpoint.enable();
-```
-</figure>
-
-
 ### .defaults() {#method-defaults}
 
-Sets default options for future initialization.
+Sets default options for future CheckPoint instances.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | --|
-| `options` | `object` (required) | `{}` | Object containing default options |
+| `options` | `object` (required) | `{}` | Object containing default [options](#options) |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-Checkpoint.defaults({
+CheckPoint.defaults({
   reverse: true
 });
 ```
@@ -719,20 +725,59 @@ Removes plugin and all related data.
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Checkpoint.destroy();
+el.CheckPoint.destroy();
+```
+</figure>
+
+
+### .enable() {#method-enable}
+
+Enables the CheckPoint instance.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.CheckPoint.enable();
 ```
 </figure>
 
 
 ### .disable() {#method-disable}
 
-Diables instance.
+Disables the CheckPoint instance.
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Checkpoint.disable();
+el.CheckPoint.disable();
+```
+</figure>
+
+
+### .activate() {#method-activate}
+
+Activates the checkpoint animation.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.CheckPoint.activate();
+```
+</figure>
+
+
+### .deactivate() {#method-deactivate}
+
+Deactivates the checkpoint animation.
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+el.CheckPoint.deactivate();
 ```
 </figure>
 
@@ -746,8 +791,8 @@ Events are triggered on the target instance's element, unless otherwise stated.
 
 | Name | Description |
 | -- | --|
-| `checkpoint:activate` | Animation activated |
-| `checkpoint:deactivate` | Animation deactivated |
+| `checkpoint:activate` | Checkpoint animation activated |
+| `checkpoint:deactivate` | Checkpoint animation deactivated |
 
 
 <hr class="divider">
@@ -759,12 +804,12 @@ CSS custom properties are used to modify default styles.
 
 | Property | Default | Description |
 | -- | -- | -- |
-| `--fs-checkpoint-duration` | `0.15s` | Transition duration (all) |
+| `--fs-checkpoint-duration` | `0.5s` | Transition duration (all animations) |
 | `--fs-checkpoint-distance` | `50px` | Translate distance (fade, zoom) |
-| `--fs-checkpoint-perspective` | `3000px` | Perspective value (all) |
-| `--fs-checkpoint-rotate` | `90deg` | Scale amount (flip) |
-| `--fs-checkpoint-scale-in` | `0.5` | Scale amount (zoom) |
-| `--fs-checkpoint-scale-out` | `1.25` | Scale amount (zoom) |
+| `--fs-checkpoint-perspective` | `3000px` | Perspective value (flip) |
+| `--fs-checkpoint-rotate` | `90deg` | Rotation amount (flip) |
+| `--fs-checkpoint-scale-in` | `0.5` | Scale amount (zoom-in) |
+| `--fs-checkpoint-scale-out` | `1.25` | Scale amount (zoom-out) |
 
 Classes allow deeper customization and indicate the current state of a specific instance.
 

@@ -1,5 +1,5 @@
 /**
- * @fileoverview Full-frame, responsive image and video backgrounds
+ * @fileoverview Background - Full-frame, responsive image and video backgrounds
  */
 
 import MediaQuery from './mediaquery.js';
@@ -219,19 +219,19 @@ class Background {
    * @example
    * // Load single image
    * el.Background.load('/path/to/image.jpg');
-   * 
+   *
    * // Load responsive images
    * el.Background.load({
    *   0: '/path/to/small.jpg',
    *   740: '/path/to/large.jpg'
    * });
-   * 
+   *
    * // Load video
    * el.Background.load({
    *   mp4: '/path/to/video.mp4',
    *   poster: '/path/to/poster.jpg'
    * });
-   * 
+   *
    * // Load YouTube
    * el.Background.load({
    *   youtube: 'https://www.youtube.com/watch?v=VIDEO_ID'

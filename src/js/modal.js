@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Modal - Simple modal dialog component
+ */
+
 // import MediaQuery from './mediaquery.js';
 import {
   extend,
@@ -23,8 +27,17 @@ import {
 
 let ModalInstance;
 
-// Class
+/**
+ * @typedef {Object} ModalOptions
+ * @property {string} [customClass=''] - Custom CSS class for modal dialog
+ * @property {boolean} [returnFocus=true] - Return focus to trigger after closing
+ * @property {Object} [templates] - HTML templates for modal components
+ */
 
+/**
+ * Modal class for displaying inline page content
+ * @class
+ */
 class Modal {
 
   static #_guid = 1;
@@ -46,10 +59,27 @@ class Modal {
     },
   };
 
+  /**
+   * Sets default options for future Modal instances
+   * @param {ModalOptions} options - Object containing default options
+   * @example
+   * Modal.defaults({
+   *   customClass: 'my-modal'
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes Modal plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {ModalOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * Modal.construct('.js-modal');
+   * Modal.construct('.js-modal', { customClass: 'custom-modal' });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -64,6 +94,12 @@ class Modal {
 
   //
 
+  /**
+   * Creates a new Modal instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {ModalOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Modal) {
       console.warn('Modal: Instance already exists', el);
@@ -118,6 +154,11 @@ class Modal {
 
   //
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.Modal.destroy();
+   */
   destroy() {
     this.close();
 
@@ -132,6 +173,11 @@ class Modal {
 
   //
 
+  /**
+   * Opens modal instance
+   * @example
+   * el.Modal.open();
+   */
   open() {
     let promise = ModalInstance ? ModalInstance.close() : Promise.resolve();
 
@@ -172,6 +218,12 @@ class Modal {
     });
   }
 
+  /**
+   * Closes active modal instance
+   * @returns {Promise} Promise that resolves when close transition completes
+   * @example
+   * el.Modal.close();
+   */
   close() {
     if (!this.isOpen) {
       return;
@@ -209,6 +261,9 @@ class Modal {
     return promise;
   }
 
+  /**
+   * @private
+   */
   #cleanUp() {
     this.targetEl.append(...this.frameEl.childNodes);
 
@@ -229,6 +284,9 @@ class Modal {
 
   //
 
+  /**
+   * @private
+   */
   #draw() {
     let html = this.templates.container
       .replace('[close]', this.templates.close);
@@ -257,6 +315,9 @@ class Modal {
 
   //
 
+  /**
+   * @private
+   */
   #onClick(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -264,6 +325,9 @@ class Modal {
     this.Modal.open();
   }
 
+  /**
+   * @private
+   */
   #onContainerClick() {
     return (e) => {
       if (e.target !== this.wrapEl && !this.wrapEl.contains(e.target)) {
@@ -274,12 +338,18 @@ class Modal {
     };
   }
 
+  /**
+   * @private
+   */
   #checkClick(e) {
     if (hasClass(e.target, 'fs-modal-trigger-close')) {
       this.close();
     }
   }
 
+  /**
+   * @private
+   */
   #onClose() {
     return (e) => {
       this.close();

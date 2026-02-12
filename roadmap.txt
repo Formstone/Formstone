@@ -1,0 +1,124 @@
+# Formstone Code Improvement Roadmap
+
+## High Priority
+
+### 1. Replace `var` with `let`/`const`
+- [ ] cookie.js line 82: Change `var i` to `let i` in for loop
+- [ ] Review all files for any remaining `var` declarations
+
+### 2. Remove or Document Commented Code
+- [ ] background.js: Remove or explain commented options like `// alt: ''`
+- [ ] checkpoint.js: Review commented `// intersect` code
+- [ ] Add comments explaining why code is preserved if needed for future features
+
+### 3. Resolve TODO Comments
+- [ ] background.js: Implement or remove YouTube event TODOs:
+  - TODO trigger ready event?
+  - TODO trigger play event?
+  - TODO trigger pause event?
+  - TODO trigger mute event?
+  - TODO trigger unmute event?
+  - TODO unload method and event?
+  - TODO set background video volume and event?
+- [ ] Consider creating GitHub issues for feature TODOs
+- [ ] Remove resolved TODOs
+
+## Medium Priority
+
+### 4. Extract Magic Numbers to Constants
+- [ ] cookie.js: Create constants for time values
+  ```javascript
+  const WEEK_IN_MS = 7 * 24 * 60 * 60 * 1000;
+  expires: WEEK_IN_MS, // instead of 604800000
+  ```
+
+### 5. Extract Magic Strings to Constants
+- [ ] Create constants file for class names:
+  ```javascript
+  const CLASSES = {
+    BACKGROUND: 'fs-background',
+    BACKGROUND_ACTIVE: 'fs-background-active',
+    CHECKPOINT: 'fs-checkpoint',
+    CHECKPOINT_ACTIVE: 'fs-checkpoint-active'
+  };
+  ```
+- [ ] Create constants for event names:
+  ```javascript
+  const EVENTS = {
+    BACKGROUND_LOADED: 'background:loaded',
+    CHECKPOINT_ACTIVATE: 'checkpoint:activate',
+    CHECKPOINT_DEACTIVATE: 'checkpoint:deactivate'
+  };
+  ```
+
+### 6. Improve Error Handling
+- [ ] Decide on strategy for existing instances:
+  - Return existing instance instead of undefined?
+  - Throw error instead of console.warn?
+- [ ] Add try-catch blocks for critical operations
+- [ ] Consider runtime type validation for options
+
+### 7. Extract Complex Regex
+- [ ] background.js: Extract YouTube URL regex to named constant with documentation
+  ```javascript
+  /**
+   * Matches YouTube and YouTube-nocookie URLs
+   * Captures 11-character video ID
+   */
+  const YOUTUBE_URL_REGEX = /(?:(?:youtube\.com|youtube-nocookie\.com)\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i;
+  ```
+
+### 8. Consistent Dataset Access
+- [ ] Standardize optional chaining/fallback patterns:
+  ```javascript
+  dataset.checkpointOptions || '{}' // ✓ Consistent
+  dataset?.backgroundOptions ?? '{}' // ✓ Modern alternative
+  ```
+
+## Low Priority (Nice to Have)
+
+### 9. Add Method Chaining Support
+- [ ] Consider returning `this` from methods that don't return values:
+  - enable(), disable(), activate(), deactivate()
+  - play(), pause(), mute(), unmute()
+- [ ] Document chainable methods in JSDoc with `@returns {this}`
+
+### 10. TypeScript Definitions
+- [ ] Create .d.ts files for better IDE support
+- [ ] Already have excellent JSDoc - could auto-generate from that
+
+### 11. Event System Documentation
+- [ ] Document YouTube event callbacks with expected structure
+- [ ] Create type definitions for event detail objects
+- [ ] Standardize event naming convention across all components
+
+### 12. Component Method Organization
+- [ ] Establish consistent method ordering:
+  1. Static properties and methods
+  2. Constructor
+  3. Public instance methods
+  4. Private methods (#methods)
+
+## Completed ✓
+- [x] Add JSDoc documentation to utils.js
+- [x] Add JSDoc documentation to background.js
+- [x] Add JSDoc documentation to checkpoint.js
+- [x] Add JSDoc documentation to cookie.js
+- [x] Update markdown documentation for all components
+- [x] Document CSS/LESS files with IntelliSense-friendly comments
+
+## Notes
+
+### Strengths to Maintain
+- Modern ES6+ syntax and features
+- Private field encapsulation with `#` syntax
+- Consistent architecture patterns across components
+- Instance management via element attachment
+- IntersectionObserver for performance
+- Clear, descriptive naming
+
+### Future Considerations
+- Consider bundling common options/constants into shared config file
+- Evaluate adding automated testing for critical paths
+- Consider semantic versioning for breaking changes
+- Document migration guides for any API changes

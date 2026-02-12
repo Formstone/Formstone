@@ -67,8 +67,8 @@ Set global options by passing a valid object to the public [`.defaults()`](#meth
 | `domain` | `string` | `null` | Cookie domain |
 | `expires` | `number` | `604800000` | Expiration time in milliseconds (default 7 days) |
 | `path` | `string` | `null` | Cookie path |
-| `samesite` | `string` | `'Lax'` | SameSite attribute |
-| `secure` | `boolean` | `null` | Secure attribute |
+| `samesite` | `string` | `'Lax'` | SameSite attribute ('Strict', 'Lax', or 'None') |
+| `secure` | `boolean` | `null` | Secure attribute (requires HTTPS) |
 
 
 <hr class="divider">
@@ -80,68 +80,30 @@ Methods are publicly available, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.delete()`](#method-delete) | Deletes a cookie |
-| [`.defaults()`](#method-defaults) | Sets default options for future use |
-| [`.get()`](#method-get) | Returns a cookie value |
+| [`.defaults()`](#method-defaults) | Sets default options for all future cookie operations |
 | [`.set()`](#method-set) | Sets a cookie value |
-
-
-### .delete() {#method-delete}
-
-Deletes a cookie.
-
-#### Parameters
-
-| Name | Type | Default | Description |
-| -- | -- | -- | -- |
-| `key` | `string` (required) | `''` | Cookie key |
-| `options` | `object` (optional) | `{}` | Object containing [options](#options) |
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-Cookie.delete('key');
-```
-</figure>
+| [`.get()`](#method-get) | Gets a cookie value by key |
+| [`.delete()`](#method-delete) | Deletes a cookie |
 
 
 ### .defaults() {#method-defaults}
 
-Sets default options for future use.
+Sets default options for all future cookie operations.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `options` | `object` (required) | `{}` | Object containing default options |
+| `options` | `object` (required) | `{}` | Object containing default [options](#options) |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
 Cookie.defaults({
-  expires: 3600000 // 1 hour
+  expires: 3600000, // 1 hour
+  secure: true
 });
-```
-</figure>
-
-
-### .get() {#method-get}
-
-Returns a cookie value.
-
-#### Parameters
-
-| Name | Type | Default | Description |
-| -- | -- | -- | -- |
-| `key` | `string` (required) | `''` | Cookie key |
-
-#### Examples
-
-<figure class="example js-example" markdown="1">
-```js
-let value = Cookie.get('key');
 ```
 </figure>
 
@@ -154,7 +116,7 @@ Sets a cookie value.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `key` | `string` (required) | `''` | Cookie key |
+| `key` | `string` (required) | `''` | Cookie key/name |
 | `value` | `string` (required) | `''` | Cookie value |
 | `options` | `object` (optional) | `{}` | Object containing [options](#options) |
 
@@ -162,6 +124,78 @@ Sets a cookie value.
 
 <figure class="example js-example" markdown="1">
 ```js
-Cookie.set('key', 'value');
+// Set a basic cookie
+Cookie.set('username', 'john');
 ```
 </figure>
+
+<figure class="example js-example" markdown="1">
+```js
+// Set a cookie with custom options
+Cookie.set('token', 'abc123', {
+  expires: 3600000, // 1 hour
+  secure: true,
+  samesite: 'Strict'
+});
+```
+</figure>
+
+
+### .get() {#method-get}
+
+Gets a cookie value by key.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `key` | `string` (required) | `''` | Cookie key/name |
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `string|null` | Cookie value or null if not found |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+let username = Cookie.get('username');
+if (username) {
+  console.log('Welcome back, ' + username);
+}
+```
+</figure>
+
+
+### .delete() {#method-delete}
+
+Deletes a cookie by setting its expiration to the past.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `key` | `string` (required) | `''` | Cookie key/name |
+| `options` | `object` (optional) | `{}` | Object containing [options](#options) (domain and path should match the original cookie) |
+
+#### Examples
+
+<figure class="example js-example" markdown="1">
+```js
+Cookie.delete('username');
+```
+</figure>
+
+<figure class="example js-example" markdown="1">
+```js
+// Delete cookie with specific domain/path
+Cookie.delete('token', {
+  domain: '.example.com',
+  path: '/'
+});
+```
+</figure>
+
+</div>

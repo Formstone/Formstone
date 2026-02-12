@@ -62,13 +62,13 @@ Utils.ready(() => {
 
 ## Options {#options}
 
-Set global options by passing a valid object to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-modal-options` attribute containing a properly formatted JSON object to the target element.
+Set instance options by passing a valid object at initialization, or to the public [`.defaults()`](#method-defaults) method. Custom options for a specific instance can also be set by attaching a `data-modal-options` attribute containing a properly formatted JSON object to the target element.
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `customClass` | `string` | `''` | Custom class for dialog |
+| `customClass` | `string` | `''` | Custom CSS class for modal dialog |
 | `returnFocus` | `boolean` | `true` | Return focus to trigger after closing |
-| `templates` | `object` | `...` | Display templates |
+| `templates` | `object` | `...` | HTML templates for modal components |
 
 
 <hr class="divider">
@@ -80,16 +80,22 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 | Name | Description |
 | -- | -- |
-| [`.close()`](#method-close) | Closes active instance |
-| [`.construct()`](#method-construct) | Initializes plugin on target elements |
-| [`.defaults()`](#method-defaults) | Sets default options for future initialization |
+| [`.close()`](#method-close) | Closes active modal instance |
+| [`.construct()`](#method-construct) | Initializes Modal plugin on target elements |
+| [`.defaults()`](#method-defaults) | Sets default options for future Modal instances |
 | [`.destroy()`](#method-destroy) | Removes plugin and all related data |
-| [`.open()`](#method-open) | Opens instance |
+| [`.open()`](#method-open) | Opens modal instance |
 
 
 ### .close() {#method-close}
 
-Closes active instance.
+Closes active modal instance.
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `Promise` | Promise that resolves when close transition completes |
 
 #### Examples
 
@@ -102,7 +108,7 @@ el.Modal.close();
 
 ### .construct() {#method-construct}
 
-Initializes plugin on target elements.
+Initializes Modal plugin on target elements.
 
 #### Parameters
 
@@ -110,6 +116,12 @@ Initializes plugin on target elements.
 | -- | -- | -- | -- |
 | `selector` | `string` (required) | `''` | Selector string to target |
 | `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
+
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
 
 #### Examples
 
@@ -119,23 +131,32 @@ let targets = Modal.construct('.js-modal');
 ```
 </figure>
 
+<figure class="example js-example" markdown="1">
+```js
+let targets = Modal.construct('.js-modal', {
+  customClass: 'custom-modal'
+});
+```
+</figure>
+
 
 ### .defaults() {#method-defaults}
 
-Sets default options for future initialization.
+Sets default options for future Modal instances.
 
 #### Parameters
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `options` | `object` (required) | `{}` | Object containing default options |
+| `options` | `object` (required) | `{}` | Object containing default [options](#options) |
 
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
 Modal.defaults({
-  customClass: 'custom'
+  customClass: 'my-modal',
+  returnFocus: false
 });
 ```
 </figure>

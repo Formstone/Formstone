@@ -1,3 +1,7 @@
+/**
+ * @fileoverview MediaQuery - Responsive media query events
+ */
+
 import {
   iterate,
   //
@@ -6,10 +10,25 @@ import {
 
 // Class
 
+/**
+ * MediaQuery class for managing responsive media query events
+ * @class
+ */
 class MediaQuery {
 
   static #_bindings = {};
 
+  /**
+   * Binds callbacks to a media query
+   * @param {string} key - Unique identifier for this binding
+   * @param {string} media - Media query string (e.g., '(min-width: 768px)')
+   * @param {Object} data - Object containing enter and/or leave callback functions
+   * @example
+   * MediaQuery.bind('mobile', '(max-width: 740px)', {
+   *   enter: () => { console.log('Mobile view'); },
+   *   leave: () => { console.log('Desktop view'); }
+   * });
+   */
   static bind(key, media, data) {
     key = this.#createKey(key);
 
@@ -56,6 +75,14 @@ class MediaQuery {
     }
   }
 
+  /**
+   * Unbinds callbacks from a media query
+   * @param {string} key - Unique identifier for the binding to remove
+   * @param {string} [media] - Optional media query string to unbind from specific query
+   * @example
+   * MediaQuery.unbind('mobile');
+   * MediaQuery.unbind('mobile', '(max-width: 740px)');
+   */
   static unbind(key, media) {
     if (!key) {
       return;
@@ -91,6 +118,9 @@ class MediaQuery {
     }
   }
 
+  /**
+   * @private
+   */
   static #onBindingChange(e) {
     let mqkey = MediaQuery.#createKey(e.media);
     let binding = this.#_bindings[mqkey];
@@ -108,6 +138,9 @@ class MediaQuery {
     }
   }
 
+  /**
+   * @private
+   */
   static #createKey(text) {
     return text.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '').replace(/^\s+|\s+$/g, '');
   }

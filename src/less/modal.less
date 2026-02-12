@@ -1,24 +1,100 @@
+/**
+ * @module Modal
+ * @description Styles for simple modal dialog component with native dialog element.
+ * Displays inline page content in centered modal overlay with close button.
+ */
+
+/**
+ * LESS Variables
+ * @type {number}
+ * @default 739px
+ * @description Maximum viewport width considered mobile
+ */
 @fs-modal-mobile-max-width: 739px;
 
+/**
+ * @type {number}
+ * @default 0.25s
+ * @description Modal open/close transition duration
+ */
 @fs-modal-duration: 0.25s;
+
+/**
+ * @type {string}
+ * @default linear
+ * @description Modal open/close transition timing function
+ */
 @fs-modal-timing: linear;
 
+/**
+ * @type {color}
+ * @default rgba(0, 0, 0, 0.9)
+ * @description Dialog backdrop overlay color
+ */
 @fs-modal-overlay-bg: fade(#000, 90);
+
+/**
+ * @type {color}
+ * @default #fff
+ * @description Modal content container background color
+ */
 @fs-modal-container-bg: #fff;
 
+/**
+ * @type {color}
+ * @default #fff
+ * @description Close button background color
+ */
 @fs-modal-button-background: #fff;
+
+/**
+ * @type {color}
+ * @default #000
+ * @description Close button icon color
+ */
 @fs-modal-button-color: #000;
 
+/**
+ * @selector .fs-modal
+ * @description Main modal dialog element. Uses native HTML dialog with custom properties
+ * for theming. Supports @starting-style for entry animations and respects prefers-reduced-motion.
+ */
 .fs-modal {
+  /**
+   * CSS Custom Properties - Timing
+   * Override these properties to customize modal animation timing
+   */
+
+  /** @property {time} --fs-modal-duration - Modal open/close transition duration */
   --fs-modal-duration: @fs-modal-duration;
+
+  /** @property {keyword} --fs-modal-timing - Modal open/close transition timing function */
   --fs-modal-timing: @fs-modal-timing;
 
+  /**
+   * CSS Custom Properties - Colors
+   */
+
+  /** @property {color} --fs-modal-overlay-bg - Dialog backdrop overlay color */
   --fs-modal-overlay-bg: @fs-modal-overlay-bg;
+
+  /** @property {color} --fs-modal-container-bg - Modal content container background */
   --fs-modal-container-bg: @fs-modal-container-bg;
 
+  /**
+   * CSS Custom Properties - Close Button
+   */
+
+  /** @property {color} --fs-modal-button-background - Close button background color */
   --fs-modal-button-background: @fs-modal-button-background;
+
+  /** @property {color} --fs-modal-button-color - Close button icon color */
   --fs-modal-button-color: @fs-modal-button-color;
 
+  /**
+   * Accessibility - Reduced Motion
+   * Disables all animations when user prefers reduced motion
+   */
   @media (prefers-reduced-motion) {
 
     & {
@@ -75,6 +151,11 @@
 
   //
 
+  /**
+   * @modifier .fs-modal-open
+   * @description Open state modifier. Applied after modal is shown to trigger transition.
+   * Dialog and backdrop fade to full opacity.
+   */
   &-open {
     opacity: 1;
 
@@ -89,6 +170,11 @@
 
   //
 
+  /**
+   * @selector .fs-modal-sr
+   * @description Screen reader only content. Visually hidden but accessible to assistive tech.
+   * Used for accessible button labels.
+   */
   &-sr {
     width: 1px !important;
     height: 1px !important;
@@ -105,6 +191,11 @@
 
   //
 
+  /**
+   * @selector .fs-modal-container
+   * @description Main content container that holds the modal wrap. Positioned absolutely to fill
+   * dialog and uses flexbox to center content.
+   */
   &-container {
     position: absolute;
     top: 0;
@@ -121,6 +212,11 @@
     user-select: none;
   }
 
+  /**
+   * @selector .fs-modal-wrap
+   * @description Content wrapper with background and scrolling behavior. Constrains to viewport
+   * dimensions and provides white background by default.
+   */
   &-wrap {
     max-width: 100%;
     max-height: 100%;
@@ -131,6 +227,10 @@
     overflow: auto;
   }
 
+  /**
+   * @selector .fs-modal-frame
+   * @description Content frame that holds the inline page content moved into the modal.
+   */
   &-frame {
     // max-width: 100%;
     // max-height: 100%;
@@ -138,6 +238,10 @@
 
   //
 
+  /**
+   * @selector .fs-modal-close
+   * @description Close button. Fixed at top-right with safe area offset.
+   */
   &-close {
     display: flex;
     align-items: center;

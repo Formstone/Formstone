@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Cookie - Simple cookie management utility
+ */
+
 import {
   type,
   extend,
@@ -5,8 +9,25 @@ import {
 
 // Class
 
+/**
+ * Cookie class for managing browser cookies
+ * @class
+ */
 class Cookie {
 
+  /**
+   * @typedef {Object} CookieOptions
+   * @property {string} [domain=null] - Cookie domain
+   * @property {number} [expires=604800000] - Expiration time in milliseconds (default 7 days)
+   * @property {string} [path=null] - Cookie path
+   * @property {string} [samesite='Lax'] - SameSite attribute ('Strict', 'Lax', or 'None')
+   * @property {boolean} [secure=null] - Secure attribute
+   */
+
+  /**
+   * @type {CookieOptions}
+   * @private
+   */
   static #_defaults = {
     domain: null,
     expires: 604800000, // 7 days
@@ -15,12 +36,37 @@ class Cookie {
     secure: null
   };
 
+  /**
+   * Sets default options for all future cookie operations
+   * @param {CookieOptions} options - Object containing default options
+   * @example
+   * Cookie.defaults({
+   *   expires: 3600000, // 1 hour
+   *   secure: true
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
   //
 
+  /**
+   * Sets a cookie value
+   * @param {string} key - Cookie key/name
+   * @param {string} value - Cookie value
+   * @param {CookieOptions} [options={}] - Object containing cookie options
+   * @example
+   * // Set a basic cookie
+   * Cookie.set('username', 'john');
+   *
+   * // Set a cookie with custom expiration
+   * Cookie.set('token', 'abc123', {
+   *   expires: 3600000, // 1 hour
+   *   secure: true,
+   *   samesite: 'Strict'
+   * });
+   */
   static set(key, value, options) {
     let expiration = false;
     let date = new Date();
@@ -46,6 +92,16 @@ class Cookie {
     document.cookie = `${key}=${value}${expires}${maxAge}${domain}${path}${samesite}${secure}`;
   }
 
+  /**
+   * Gets a cookie value by key
+   * @param {string} key - Cookie key/name
+   * @returns {string|null} Cookie value or null if not found
+   * @example
+   * let username = Cookie.get('username');
+   * if (username) {
+   *   console.log('Welcome back, ' + username);
+   * }
+   */
   static get(key) {
     let keyString = `${key}=`;
     let cookies = document.cookie.split(';');
@@ -61,6 +117,19 @@ class Cookie {
     return null;
   }
 
+  /**
+   * Deletes a cookie by setting its expiration to the past
+   * @param {string} key - Cookie key/name
+   * @param {CookieOptions} [options={}] - Object containing cookie options (domain and path should match the original cookie)
+   * @example
+   * Cookie.delete('username');
+   *
+   * // Delete cookie with specific domain/path
+   * Cookie.delete('token', {
+   *   domain: '.example.com',
+   *   path: '/'
+   * });
+   */
   static delete(key, options) {
     this.set(key, '', extend({}, options, {
       expires: -604800000 // -7 days
