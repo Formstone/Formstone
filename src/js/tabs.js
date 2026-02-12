@@ -169,7 +169,7 @@ class Tabs {
       setAttr(el, 'id', this.elId);
     }
 
-    this.originalContentId = getAttr(el, 'id');
+    this.originalContentId = getAttr(this.contentEl, 'id');
 
     if (this.originalContentId) {
       this.contentId = this.originalContentId;
@@ -226,11 +226,9 @@ class Tabs {
 
     MediaQuery.bind(this.guidClass, this.mq, {
       enter: () => {
-        console.log('enter');
         this.#mobileEnable();
       },
       leave: () => {
-        console.log('leave');
         this.#mobileDisable();
       }
     });

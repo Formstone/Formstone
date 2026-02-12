@@ -1052,6 +1052,7 @@ class Lightbox {
 
         on(this.containerEl, 'pointermove', this.listeners.pointermove);
         on(this.containerEl, 'pointerup', this.listeners.pointerup);
+        on(this.containerEl, 'pointercancel', this.listeners.pointerup);
       }
     }
   }
@@ -1091,6 +1092,7 @@ class Lightbox {
 
       off(this.containerEl, 'pointermove', this.listeners.pointermove);
       off(this.containerEl, 'pointerup', this.listeners.pointerup);
+      off(this.containerEl, 'pointercancel', this.listeners.pointerup);
 
       // if (item.zoomed) {
       //   // handle pan

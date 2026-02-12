@@ -86,9 +86,11 @@ class MediaQuery {
       return;
     }
 
+    key = this.#createKey(key);
+
     if (media) {
       // Unbind specific MQ
-      var mqKey = this.#createKey(media);
+      let mqKey = this.#createKey(media);
 
       if (this.#_bindings[mqKey]) {
         if (this.#_bindings[mqKey].enter[key]) {

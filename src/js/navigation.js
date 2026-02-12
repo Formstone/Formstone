@@ -174,7 +174,7 @@ class Navigation {
       enable: this.#onEnable(this),
       disable: this.#onDisable(this),
       body: this.#onBodyClick(this),
-      keydown: this.#oKeyDown(this)
+      keydown: this.#onKeyDown(this)
     };
 
     setAttr(this.handleEl, {
@@ -337,7 +337,7 @@ class Navigation {
       setAttr(this.el, {
         'role': this.originalRole || false,
         'aria-hidden': this.originalHidden || false,
-        'aria-label': this.originaLabel || false,
+        'aria-label': this.originalLabel || false,
         'aria-modal': this.originalModal || false,
         'id': this.originalId || false
       });
@@ -507,7 +507,7 @@ class Navigation {
    * @private
    * @returns {(e: KeyboardEvent) => void} Event handler function
    */
-  #oKeyDown() {
+  #onKeyDown() {
     return (e) => {
       if (e.key === 'Escape') {
         this.close();

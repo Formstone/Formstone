@@ -152,6 +152,7 @@ class CheckPoint {
 
     removeClass(this.el, this.guidClass);
 
+    this.observer.disconnect();
     this.observer = null;
 
     this.el.CheckPoint = null;

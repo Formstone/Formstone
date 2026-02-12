@@ -75,7 +75,7 @@ class Cookie {
 
     if (type(options.expires) === 'number') {
       date.setTime(date.getTime() + options.expires);
-      expiration = date.toGMTString();
+      expiration = date.toUTCString();
     }
 
     let domain = (options.domain) ? '; domain=' + options.domain : '';
@@ -104,7 +104,7 @@ class Cookie {
     let keyString = `${key}=`;
     let cookies = document.cookie.split(';');
 
-    for (var i = 0; i < cookies.length; i++) {
+    for (let i = 0; i < cookies.length; i++) {
       let cookie = cookies[i].trim();
 
       if (cookie.indexOf(keyString) === 0) {

@@ -3,6 +3,11 @@
  */
 
 /**
+ * @type {boolean}
+ * @private
+ */
+let _readyBound = false;
+/**
  * @type {Function[]}
  * @private
  */
@@ -19,7 +24,11 @@ let _readyCallbacks = [];
 export function ready(cb) {
   if (document.readyState === 'loading') {
     _readyCallbacks.push(cb);
-    document.addEventListener('DOMContentLoaded', isReady, false);
+
+    if (!_readyBound) {
+      _readyBound = true;
+      document.addEventListener('DOMContentLoaded', isReady, false);
+    }
   } else {
     cb.call();
   }
@@ -29,7 +38,7 @@ export function ready(cb) {
  * Internal function to execute all ready callbacks
  * @private
  */
-export function isReady() {
+function isReady() {
   iterate(_readyCallbacks, (cb) => {
     cb.call();
   });

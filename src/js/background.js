@@ -377,7 +377,6 @@ class Background {
     setAttr(media, 'data-background-layer', this.layerGuid);
 
     setAttr(video, {
-      'playsinline': '',
       'playsinline': 'true',
       'preload': 'auto',
       'role': 'presentation',
@@ -610,7 +609,7 @@ class Background {
       } else {
         this.autoPlay = false;
       }
-    } else if (this.video) {
+    } else if (this.isVideo) {
       let video = select('video', this.container);
 
       if (video.length) {
@@ -632,7 +631,7 @@ class Background {
     if (this.isYouTube && this.playerReady) {
       this.player.mute();
       // this.player.setVolume(0);
-    } else if (this.video) {
+    } else if (this.isVideo) {
       let video = select('video', this.container);
 
       if (video.length) {
@@ -660,7 +659,7 @@ class Background {
       if (this.playing) {
         this.player.playVideo();
       }
-    } else if (this.video) {
+    } else if (this.isVideo) {
       let video = select('video', this.container);
 
       if (video.length) {
