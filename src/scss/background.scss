@@ -1,7 +1,34 @@
-/*! formstone v2.1.9 [background.scss] 2026-02-10 | GPL-3.0 License | formstone.it */
+/*! formstone v2.1.9 [background.scss] 2026-02-11 | GPL-3.0 License | formstone.it */
+/**
+ * Full-frame, responsive image and video backgrounds
+ * $module background
+ */
+
+/**
+ * Default transition duration for background media transitions
+ * $type {time}
+ * $default 0.15s
+ */
 $fs-background-duration: 0.15s;
 
+/**
+ * Primary background component
+ * Creates a full-frame background with support for images, videos, and YouTube embeds
+ *
+ * $selector .fs-background
+ * $modifier .fs-background-loaded - Applied when media has loaded
+ * $modifier .fs-background-lazy - Applied when lazy loading is enabled
+ * $example
+ *   <div class="fs-background">
+ *     <!-- Content here -->
+ *   </div>
+ */
 .fs-background {
+  /**
+   * Transition duration for opacity changes
+   * Overridable via custom property
+   * $type {time}
+   */
   --fs-background-duration: $fs-background-duration;
 
   @media (prefers-reduced-motion) {
@@ -21,8 +48,12 @@ $fs-background-duration: 0.15s;
     transition: none;
   }
 
-  // Container
-
+  /**
+   * Container element for background media
+   * Uses CSS Grid to stack multiple media layers
+   *
+   * $selector .fs-background-container
+   */
   &-container {
     display: grid;
     grid-template-areas: 'fs-background-stack';
@@ -31,17 +62,18 @@ $fs-background-duration: 0.15s;
     height: 100%;
 
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     z-index: 0;
 
     overflow: hidden;
   }
 
-  // Media
-
+  /**
+   * Media element for background content
+   * Handles images, videos, and embeds with proper sizing and positioning
+   *
+   * $selector .fs-background-media
+   */
   &-media {
     grid-area: fs-background-stack;
 
@@ -75,16 +107,30 @@ $fs-background-duration: 0.15s;
     }
   }
 
+
   &-image,
   &-video {
     width: 100%;
     height: 100%;
   }
 
+  /**
+   * Image background media type
+   * $selector .fs-background-image
+   */
   &-image {}
 
+  /**
+   * Video background media type
+   * $selector .fs-background-video
+   */
   &-video {}
 
+  /**
+   * Embedded media type (YouTube)
+   * Maintains 16:9 aspect ratio and centers content
+   * $selector .fs-background-embed
+   */
   &-embed {
     aspect-ratio: 16 / 9;
 
@@ -100,10 +146,7 @@ $fs-background-duration: 0.15s;
       height: 100%;
 
       position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      inset: 0;
       z-index: 1;
 
       content: '';

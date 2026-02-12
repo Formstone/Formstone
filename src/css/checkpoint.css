@@ -1,9 +1,79 @@
+/**
+ * Animate elements on scroll
+ * @module checkpoint
+ */
+/**
+ * Default transition duration for checkpoint animations
+ * @type {time}
+ * @default 0.5s
+ */
+/**
+ * Default translate distance for fade and zoom animations
+ * @type {length}
+ * @default 50px
+ */
+/**
+ * Perspective value for flip animations
+ * @type {length}
+ * @default 3000px
+ */
+/**
+ * Rotation amount for flip animations
+ * @type {angle}
+ * @default 90deg
+ */
+/**
+ * Scale amount for zoom-in animations
+ * @type {number}
+ * @default 0.5
+ */
+/**
+ * Scale amount for zoom-out animations
+ * @type {number}
+ * @default 1.25
+ */
+/**
+ * Primary checkpoint component
+ * Enables scroll-based animations on elements
+ *
+ * @selector .fs-checkpoint
+ * @modifier .fs-checkpoint-active - Applied when animation is activated
+ * @example
+ *   <div class="fs-checkpoint" data-checkpoint-animation="fade-in">
+ *     Content
+ *   </div>
+ */
 .fs-checkpoint {
+  /**
+   * Transition duration for all animations
+   * Overridable via custom property
+   * @type {time}
+   */
   --fs-checkpoint-duration: 0.5s;
+  /**
+   * Translate distance for fade and zoom animations
+   * @type {length}
+   */
   --fs-checkpoint-distance: 50px;
+  /**
+   * Perspective value for flip animations
+   * @type {length}
+   */
   --fs-checkpoint-perspective: 3000px;
+  /**
+   * Rotation amount for flip animations
+   * @type {angle}
+   */
   --fs-checkpoint-rotate: 90deg;
+  /**
+   * Scale amount for zoom-in animations
+   * @type {number}
+   */
   --fs-checkpoint-scale-in: 0.5;
+  /**
+   * Scale amount for zoom-out animations
+   * @type {number}
+   */
   --fs-checkpoint-scale-out: 1.25;
 }
 
@@ -13,6 +83,20 @@
   }
 }
 
+/**
+ * Fade animations
+ * Elements fade in from invisible state
+ *
+ * @animation fade-in - Fade in without movement
+ * @animation fade-up - Fade in while moving up
+ * @animation fade-down - Fade in while moving down
+ * @animation fade-left - Fade in while moving from right to left
+ * @animation fade-right - Fade in while moving from left to right
+ * @example
+ *   <div class="fs-checkpoint" data-checkpoint-animation="fade-up">
+ *     Content
+ *   </div>
+ */
 [data-checkpoint-animation="fade-in"],
 [data-checkpoint-animation="fade-up"],
 [data-checkpoint-animation="fade-down"],
@@ -56,6 +140,20 @@
   transform: translateX(0);
 }
 
+/**
+ * Zoom-in animations
+ * Elements scale up from smaller size while fading in
+ *
+ * @animation zoom-in - Zoom in without movement
+ * @animation zoom-in-up - Zoom in while moving up
+ * @animation zoom-in-down - Zoom in while moving down
+ * @animation zoom-in-left - Zoom in while moving from right to left
+ * @animation zoom-in-right - Zoom in while moving from left to right
+ * @example
+ *   <div class="fs-checkpoint" data-checkpoint-animation="zoom-in-up">
+ *     Content
+ *   </div>
+ */
 [data-checkpoint-animation="zoom-in"],
 [data-checkpoint-animation="zoom-in-up"],
 [data-checkpoint-animation="zoom-in-down"],
@@ -104,6 +202,20 @@
   transform: translateX(0) scale(1);
 }
 
+/**
+ * Zoom-out animations
+ * Elements scale down from larger size while fading in
+ *
+ * @animation zoom-out - Zoom out without movement
+ * @animation zoom-out-up - Zoom out while moving up
+ * @animation zoom-out-down - Zoom out while moving down
+ * @animation zoom-out-left - Zoom out while moving from right to left
+ * @animation zoom-out-right - Zoom out while moving from left to right
+ * @example
+ *   <div class="fs-checkpoint" data-checkpoint-animation="zoom-out-up">
+ *     Content
+ *   </div>
+ */
 [data-checkpoint-animation="zoom-out"],
 [data-checkpoint-animation="zoom-out-up"],
 [data-checkpoint-animation="zoom-out-down"],
@@ -152,6 +264,19 @@
   transform: translateX(0) scale(1);
 }
 
+/**
+ * Flip animations
+ * Elements rotate into view with 3D perspective
+ *
+ * @animation flip-up - Flip from bottom to top
+ * @animation flip-down - Flip from top to bottom
+ * @animation flip-left - Flip from right to left
+ * @animation flip-right - Flip from left to right
+ * @example
+ *   <div class="fs-checkpoint" data-checkpoint-animation="flip-left">
+ *     Content
+ *   </div>
+ */
 [data-checkpoint-animation="flip-up"],
 [data-checkpoint-animation="flip-down"],
 [data-checkpoint-animation="flip-left"],

@@ -1,20 +1,155 @@
+/**
+ * @module Lightbox
+ * @description Styles for accessible lightbox component with native dialog element.
+ * Supports images, videos (YouTube/Vimeo), iframes, and inline elements with gallery navigation.
+ */
+/**
+ * LESS Variables
+ * @type {number}
+ * @default 739px
+ * @description Maximum viewport width considered mobile (affects button positioning)
+ */
+/**
+ * @type {number}
+ * @default 0.25s
+ * @description Lightbox open/close transition duration
+ */
+/**
+ * @type {string}
+ * @default linear
+ * @description Lightbox open/close transition timing function
+ */
+/**
+ * @type {color}
+ * @default rgba(0, 0, 0, 0.9)
+ * @description Dialog backdrop overlay color
+ */
+/**
+ * @type {color}
+ * @default #fff
+ * @description Loading spinner color
+ */
+/**
+ * @type {number}
+ * @default 40px
+ * @description Loading spinner diameter
+ */
+/**
+ * @type {number}
+ * @default 5px
+ * @description Loading spinner border thickness
+ */
+/**
+ * @type {number}
+ * @default 0.75s
+ * @description Loading spinner rotation animation duration
+ */
+/**
+ * @type {number}
+ * @default 0.25s
+ * @description Item transition duration when switching between gallery items
+ */
+/**
+ * @type {string}
+ * @default ease
+ * @description Item transition timing function
+ */
+/**
+ * @type {color}
+ * @default rgba(0, 0, 0, 0.6)
+ * @description Details area (caption/ordinal) background color
+ */
+/**
+ * @type {color}
+ * @default #fff
+ * @description Details area text color
+ */
+/**
+ * @type {string}
+ * @default 16px / 1.4 sans-serif
+ * @description Details area font stack (size, line-height, family)
+ */
+/**
+ * @type {string}
+ * @default ...
+ * @description Details area padding with safe area insets for notched devices
+ */
+/**
+ * @type {number}
+ * @default 10px
+ * @description Gap between caption and ordinal in details area
+ */
+/**
+ * @type {color}
+ * @default rgba(0, 0, 0, 0.8)
+ * @description Control button (close, next, previous) background color
+ */
+/**
+ * @type {color}
+ * @default #fff
+ * @description Control button icon/text color
+ */
+/**
+ * @selector .fs-lightbox
+ * @description Main lightbox dialog element. Uses native HTML dialog with custom properties
+ * for theming. Supports @starting-style for entry animations and respects prefers-reduced-motion.
+ */
 .fs-lightbox {
+  /**
+   * CSS Custom Properties - Timing
+   * Override these properties to customize lightbox animation timing
+   */
+  /** @property {time} --fs-lightbox-duration - Lightbox open/close transition duration */
   --fs-lightbox-duration: 0.25s;
+  /** @property {keyword} --fs-lightbox-timing - Lightbox open/close transition timing function */
   --fs-lightbox-timing: linear;
+  /**
+   * CSS Custom Properties - Overlay
+   */
+  /** @property {color} --fs-lightbox-overlay-bg - Dialog backdrop overlay color */
   --fs-lightbox-overlay-bg: rgba(0, 0, 0, 0.9);
+  /**
+   * CSS Custom Properties - Loading Spinner
+   */
+  /** @property {color} --fs-lightbox-loading-color - Loading spinner color */
   --fs-lightbox-loading-color: #fff;
+  /** @property {length} --fs-lightbox-loading-size - Loading spinner diameter */
   --fs-lightbox-loading-size: 40px;
+  /** @property {length} --fs-lightbox-loading-spread - Loading spinner border thickness */
   --fs-lightbox-loading-spread: 5px;
+  /** @property {time} --fs-lightbox-loading-duration - Loading spinner rotation animation duration */
   --fs-lightbox-loading-duration: 0.75s;
+  /**
+   * CSS Custom Properties - Gallery Items
+   */
+  /** @property {time} --fs-lightbox-item-duration - Item transition duration when switching between gallery items */
   --fs-lightbox-item-duration: 0.25s;
+  /** @property {keyword} --fs-lightbox-item-timing - Item transition timing function */
   --fs-lightbox-item-timing: ease;
+  /**
+   * CSS Custom Properties - Details Area (Caption/Ordinal)
+   */
+  /** @property {color} --fs-lightbox-details-bg - Details area background color (gradient start) */
   --fs-lightbox-details-bg: rgba(0, 0, 0, 0.6);
+  /** @property {color} --fs-lightbox-details-color - Details area text color */
   --fs-lightbox-details-color: #fff;
+  /** @property {font} --fs-lightbox-details-font - Details area font stack (size, line-height, family) */
   --fs-lightbox-details-font: 16px / 1.4 sans-serif;
+  /** @property {length} --fs-lightbox-details-padding - Details area padding with safe area insets */
   --fs-lightbox-details-padding: calc(env(safe-area-inset-top, 0px) + 40px) calc(env(safe-area-inset-right, 0px) + 60px) calc(env(safe-area-inset-bottom, 0px) + 40px) calc(env(safe-area-inset-left, 0px) + 60px);
+  /** @property {length} --fs-lightbox-details-gap - Gap between caption and ordinal in details area */
   --fs-lightbox-details-gap: 10px;
+  /**
+   * CSS Custom Properties - Control Buttons (Close, Previous, Next)
+   */
+  /** @property {color} --fs-lightbox-button-background - Control button background color */
   --fs-lightbox-button-background: rgba(0, 0, 0, 0.8);
+  /** @property {color} --fs-lightbox-button-color - Control button icon/text color */
   --fs-lightbox-button-color: #fff;
+  /**
+   * Accessibility - Reduced Motion
+   * Disables all animations when user prefers reduced motion
+   */
   height: 100vh;
   width: 100vw;
   max-height: 100vh;
@@ -28,6 +163,111 @@
   overflow: hidden;
   padding: 0;
   transition: display var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete, opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing), overlay var(--fs-lightbox-duration) var(--fs-lightbox-timing) allow-discrete;
+  /**
+   * @modifier .fs-lightbox-open
+   * @description Open state modifier. Applied after modal is shown to trigger transition.
+   * Dialog and backdrop fade to full opacity.
+   */
+  /**
+   * @selector .fs-lightbox-sr
+   * @description Screen reader only content. Visually hidden but accessible to assistive tech.
+   * Used for accessible button labels and status announcements.
+   */
+  /**
+   * @selector .fs-lightbox-container
+   * @description Main content container that holds all gallery items. Positioned absolutely
+   * to fill dialog and handle pointer events for swipe navigation.
+   */
+  /**
+   * @modifier .fs-lightbox-touching
+   * @description Applied to container during active touch/pointer drag. Changes cursor to
+   * grabbing state.
+   */
+  /**
+   * @selector .fs-lightbox-item
+   * @description Individual gallery item element. Contains wrap, media, and details.
+   * Positioned absolutely and uses transforms for slide transitions between items.
+   */
+  /**
+   * @modifier .fs-lightbox-active.fs-lightbox-loaded
+   * @description Combined state for active item that has finished loading. Fades to full opacity.
+   */
+  /**
+   * @selector .fs-lightbox-rtl .fs-lightbox-item
+   * @description RTL direction overrides. Reverses previous/next transform directions.
+   */
+  /**
+   * @selector .fs-lightbox-container.fs-lightbox-touching .fs-lightbox-item
+   * @description Disables transitions during touch drag for immediate transform feedback.
+   */
+  /**
+   * @selector .fs-lightbox-wrap
+   * @description Inner wrapper for media content. Provides flexbox centering within item bounds.
+   */
+  /**
+   * @selector .fs-lightbox-media
+   * @description Media container. Holds the actual content (image, video iframe, etc.).
+   * Constrains to viewport dimensions.
+   */
+  /**
+   * @modifier .fs-lightbox-media_video
+   * @description Video media type modifier. Sets max-width and allows growth for responsive embed.
+   */
+  /**
+   * @modifier .fs-lightbox-media_image
+   * @description Image media type modifier. Constrains image dimensions and prevents user interaction.
+   */
+  /**
+   * @selector .fs-lightbox-video
+   * @description Video iframe container. Maintains 16:9 aspect ratio via aspect-ratio property.
+   */
+  /**
+   * @selector .fs-lightbox-iframe
+   * @description Generic iframe container. Sets iframe to full viewport dimensions minus safe areas.
+   */
+  /**
+   * @selector .fs-lightbox-element
+   * @description Inline element container. Allows scrolling for content that exceeds viewport.
+   */
+  /**
+   * @selector .fs-lightbox-details
+   * @description Details section at bottom of active item. Contains caption and ordinal position.
+   * Gradient background and delayed fade-in on item change.
+   */
+  /**
+   * @selector .fs-lightbox-item.fs-lightbox-active .fs-lightbox-details
+   * @description Details visible state. Fades in with delay after item transition completes.
+   */
+  /**
+   * @selector .fs-lightbox-container.fs-lightbox-touching .fs-lightbox-item.fs-lightbox-active .fs-lightbox-details
+   * @description Details hidden during touch interaction. Improves visibility of content being swiped.
+   */
+  /**
+   * @selector .fs-lightbox-close
+   * @description Close button. Fixed at top-right with safe area offset. Always visible.
+   */
+  /**
+   * @selector .fs-lightbox-control
+   * @description Previous/next navigation buttons. Hidden for single-item lightboxes.
+   * Vertically centered on desktop, bottom-aligned on mobile.
+   */
+  /**
+   * @selector .fs-lightbox-rtl .fs-lightbox-control
+   * @description RTL overrides for navigation buttons. Swaps left/right positioning and flips icons.
+   */
+  /**
+   * @selector .fs-lightbox-control:not([disabled])
+   * @description Enabled control buttons. Full opacity and clickable cursor.
+   */
+  /**
+   * @selector .fs-lightbox-loading
+   * @description Loading spinner. Centered in viewport, animated border-spin. Hidden by default,
+   * shown via .fs-lightbox-visible modifier during content load.
+   */
+  /**
+   * @modifier .fs-lightbox-visible
+   * @description Visible state for loading spinner. Fades to full opacity.
+   */
 }
 
 @media (prefers-reduced-motion) {
@@ -107,6 +347,14 @@
   opacity: 0;
   transition: opacity var(--fs-lightbox-item-duration) var(--fs-lightbox-item-timing), transform var(--fs-lightbox-item-duration) var(--fs-lightbox-item-timing);
   transform: none;
+  /**
+     * @modifier .fs-lightbox-item_previous
+     * @description Previous item modifier. Item is translated -100% to the left (or right in RTL).
+     */
+  /**
+     * @modifier .fs-lightbox-item_next
+     * @description Next item modifier. Item is translated 100% to the right (or left in RTL).
+     */
 }
 
 .fs-lightbox-item_previous {
@@ -270,6 +518,14 @@
   padding: 0;
   opacity: 0.5;
   transition: opacity var(--fs-lightbox-duration) var(--fs-lightbox-timing);
+  /**
+     * @modifier .fs-lightbox-control_previous
+     * @description Previous button modifier. Positioned on left edge (or right in RTL).
+     */
+  /**
+     * @modifier .fs-lightbox-control_next
+     * @description Next button modifier. Positioned on right edge (or left in RTL).
+     */
 }
 
 @media screen and (max-width: 739px) {
@@ -333,6 +589,10 @@
   opacity: 1;
 }
 
+/**
+ * @keyframes fs-lightbox-loading-spin
+ * @description Loading spinner rotation animation. Infinite 360-degree rotation.
+ */
 @keyframes fs-lightbox-loading-spin {
   from {
     transform: rotate(0deg);

@@ -1,10 +1,76 @@
+/**
+ * @module Modal
+ * @description Styles for simple modal dialog component with native dialog element.
+ * Displays inline page content in centered modal overlay with close button.
+ */
+/**
+ * LESS Variables
+ * @type {number}
+ * @default 739px
+ * @description Maximum viewport width considered mobile
+ */
+/**
+ * @type {number}
+ * @default 0.25s
+ * @description Modal open/close transition duration
+ */
+/**
+ * @type {string}
+ * @default linear
+ * @description Modal open/close transition timing function
+ */
+/**
+ * @type {color}
+ * @default rgba(0, 0, 0, 0.9)
+ * @description Dialog backdrop overlay color
+ */
+/**
+ * @type {color}
+ * @default #fff
+ * @description Modal content container background color
+ */
+/**
+ * @type {color}
+ * @default #fff
+ * @description Close button background color
+ */
+/**
+ * @type {color}
+ * @default #000
+ * @description Close button icon color
+ */
+/**
+ * @selector .fs-modal
+ * @description Main modal dialog element. Uses native HTML dialog with custom properties
+ * for theming. Supports @starting-style for entry animations and respects prefers-reduced-motion.
+ */
 .fs-modal {
+  /**
+   * CSS Custom Properties - Timing
+   * Override these properties to customize modal animation timing
+   */
+  /** @property {time} --fs-modal-duration - Modal open/close transition duration */
   --fs-modal-duration: 0.25s;
+  /** @property {keyword} --fs-modal-timing - Modal open/close transition timing function */
   --fs-modal-timing: linear;
+  /**
+   * CSS Custom Properties - Colors
+   */
+  /** @property {color} --fs-modal-overlay-bg - Dialog backdrop overlay color */
   --fs-modal-overlay-bg: rgba(0, 0, 0, 0.9);
+  /** @property {color} --fs-modal-container-bg - Modal content container background */
   --fs-modal-container-bg: #fff;
+  /**
+   * CSS Custom Properties - Close Button
+   */
+  /** @property {color} --fs-modal-button-background - Close button background color */
   --fs-modal-button-background: #fff;
+  /** @property {color} --fs-modal-button-color - Close button icon color */
   --fs-modal-button-color: #000;
+  /**
+   * Accessibility - Reduced Motion
+   * Disables all animations when user prefers reduced motion
+   */
   height: 100vh;
   width: 100vw;
   max-height: 100vh;
@@ -18,6 +84,34 @@
   overflow: hidden;
   padding: 0;
   transition: display var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete, opacity var(--fs-modal-duration) var(--fs-modal-timing), overlay var(--fs-modal-duration) var(--fs-modal-timing) allow-discrete;
+  /**
+   * @modifier .fs-modal-open
+   * @description Open state modifier. Applied after modal is shown to trigger transition.
+   * Dialog and backdrop fade to full opacity.
+   */
+  /**
+   * @selector .fs-modal-sr
+   * @description Screen reader only content. Visually hidden but accessible to assistive tech.
+   * Used for accessible button labels.
+   */
+  /**
+   * @selector .fs-modal-container
+   * @description Main content container that holds the modal wrap. Positioned absolutely to fill
+   * dialog and uses flexbox to center content.
+   */
+  /**
+   * @selector .fs-modal-wrap
+   * @description Content wrapper with background and scrolling behavior. Constrains to viewport
+   * dimensions and provides white background by default.
+   */
+  /**
+   * @selector .fs-modal-frame
+   * @description Content frame that holds the inline page content moved into the modal.
+   */
+  /**
+   * @selector .fs-modal-close
+   * @description Close button. Fixed at top-right with safe area offset.
+   */
 }
 
 @media (prefers-reduced-motion) {
