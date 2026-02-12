@@ -17,8 +17,12 @@
   "homepage_short": "formstone.it",
   "demo": "https://formstone.it/demo/",
   "license": "GPL-3.0",
+  "type": "module",
   "exports": {
-    ".": "./src/js/index.js",
+    ".": {
+      "import": "./src/js/index.js",
+      "require": "./dist/formstone.js"
+    },
     "./*": "./src/js/*.js",
     "./jquery": "./src/jquery/index.js",
     "./jquery/*": "./src/jquery/*.js",
@@ -45,5 +49,10 @@
     "gulp-less-to-scss": "^0.0.9",
     "gulp-rename": "^2.0.0",
     "webpack-stream": "^7.0.0"
-  }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "sideEffects": false
 }
