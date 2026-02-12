@@ -1,5 +1,6 @@
 /**
  * @fileoverview Navigation - Responsive navigation menus
+ * Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
  */
 
 import Swap from './swap.js';
@@ -24,8 +25,6 @@ import {
   updateAttr,
   restoreAttr,
 } from './utils.js';
-
-// Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
 
 // Class
 

@@ -9,6 +9,7 @@ let header = require('gulp-header');
 let less = require('gulp-less');
 let lessToScss = require('gulp-less-to-scss');
 let rename = require('gulp-rename');
+var strip = require('gulp-strip-comments');
 let webpack = require('webpack-stream');
 
 // Vars
@@ -128,6 +129,10 @@ gulp.task('convert-css', () => {
     }))
     .pipe(beautify.css({
       indent_size: 2,
+    }))
+    .pipe(header(banner, {
+      pkg: pkg,
+      date: date
     }))
     .pipe(gulp.dest('./src/css'));
 });

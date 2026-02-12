@@ -1,5 +1,7 @@
 /**
  * @fileoverview Modal - Simple modal dialog component
+ * Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
+ * Updated with work by @nhall
  */
 
 // import MediaQuery from './mediaquery.js';
@@ -21,9 +23,6 @@ import {
   getAttr,
   setAttr,
 } from './utils.js';
-
-// Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
-// Updated based on work by @nhall
 
 let ModalInstance;
 

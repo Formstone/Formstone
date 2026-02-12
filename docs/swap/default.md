@@ -6,7 +6,7 @@ visible: true
 
 # Swap
 
-Simple element swapping.
+Simple element classname swapping.
 
 <div class="docs_menu" markdown="1">
 
@@ -66,9 +66,23 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
+| `classes` | `object` | `...` | State classes applied by the plugin |
+| `classes.enabled` | `string` | `'fs-swap-enabled'` | Class applied when instance is enabled |
+| `classes.active` | `string` | `'fs-swap-active'` | Class applied when instance is active |
+| `classes.inactive` | `string` | `'fs-swap-inactive'` | Class applied when instance is inactive |
 | `collapse` | `boolean` | `true` | Allow instance to collapse |
-| `maxWidth` | `string` | `Infinity` | Width to auto-disable plugin |
+| `maxWidth` | `string | number` | `Infinity` | Maximum viewport width to enable plugin |
 | `minWidth` | `string` | `'0px'` | Width to auto-enable plugin |
+
+Data attributes can be used for instance setup.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-swap-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+| `data-swap-target` | `string` | Selector for element(s) that should share swap state classes |
+| `data-swap-group` | `string` | Group key for mutually exclusive swap behavior |
+| `data-swap-linked` | `string` | Link key for synchronized swap instances |
+| `data-swap-active` | `string` | Marks an instance as active by default when enabled |
 
 
 <hr class="divider">
@@ -93,6 +107,12 @@ Methods are publicly available to all active instances, unless otherwise stated.
 
 Activates instance.
 
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `internal` | `boolean` (optional) | `false` | Internal flag to prevent linked recursion |
+
 #### Examples
 
 <figure class="example js-example" markdown="1">
@@ -106,6 +126,12 @@ el.Swap.activate();
 
 Initializes plugin on target elements.
 
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
+
 #### Parameters
 
 | Name | Type | Default | Description |
@@ -118,6 +144,7 @@ Initializes plugin on target elements.
 <figure class="example js-example" markdown="1">
 ```js
 let targets = Swap.construct('.js-swap');
+Swap.construct('.js-swap', { collapse: false });
 ```
 </figure>
 
@@ -125,6 +152,12 @@ let targets = Swap.construct('.js-swap');
 ### .deactivate() {#method-deactivate}
 
 Deactivates instance.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `internal` | `boolean` (optional) | `false` | Internal flag to prevent linked recursion |
 
 #### Examples
 
@@ -173,6 +206,12 @@ el.Swap.destroy();
 
 Disables instance.
 
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `internal` | `boolean` (optional) | `false` | Internal flag to prevent linked recursion |
+
 #### Examples
 
 <figure class="example js-example" markdown="1">
@@ -185,6 +224,12 @@ el.Swap.disable();
 ### .enable() {#method-enable}
 
 Enables instance.
+
+#### Parameters
+
+| Name | Type | Default | Description |
+| -- | -- | -- | -- |
+| `internal` | `boolean` (optional) | `false` | Internal flag to prevent linked recursion |
 
 #### Examples
 

@@ -1,5 +1,7 @@
 /**
  * @fileoverview Lightbox - Accessible lightbox for images, videos, and elements
+ * Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
+ * Updated with work by @nhall
  */
 
 // import MediaQuery from './mediaquery.js';
@@ -23,9 +25,6 @@ import {
   setAttr,
   removeAttr,
 } from './utils.js';
-
-// Accessibility based on https://plousia.com/blog/how-create-accessible-mobile-menu
-// Updated with work by @nhall
 
 // Formatters
 

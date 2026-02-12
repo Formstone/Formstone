@@ -118,7 +118,9 @@ Initializes plugin on target elements.
 
 #### Returns
 
-`NodeList` of target elements.
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
 
 #### Parameters
 

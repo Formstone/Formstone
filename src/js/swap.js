@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Swap - Simple element classname swapping
+ */
+
 import MediaQuery from './mediaquery.js';
 import {
   extend,
@@ -20,10 +24,33 @@ import {
 
 // TODO look into events
 
+/**
+ * Swap class for responsive state toggling across linked and grouped elements
+ * @class
+ */
 class Swap {
 
+  /**
+   * @type {number}
+   * @private
+   */
   static #_guid = 1;
 
+  /**
+   * @typedef {Object} SwapOptions
+   * @property {Object} [classes] - CSS classes for enabled, active, and inactive states
+   * @property {string} [classes.enabled='fs-swap-enabled'] - Enabled state class
+   * @property {string} [classes.active='fs-swap-active'] - Active state class
+   * @property {string} [classes.inactive='fs-swap-inactive'] - Inactive state class
+   * @property {boolean} [collapse=true] - Allow active item to deactivate on click
+   * @property {string|number} [maxWidth=Infinity] - Maximum viewport width to enable swap
+   * @property {string} [minWidth='0px'] - Minimum viewport width to enable swap
+   */
+
+  /**
+   * @type {SwapOptions}
+   * @private
+   */
   static #_defaults = {
     classes: {
       enabled: 'fs-swap-enabled',
@@ -35,10 +62,28 @@ class Swap {
     minWidth: '0px',
   };
 
+  /**
+   * Sets default options for future Swap instances
+   * @param {SwapOptions} options - Object containing default options
+   * @example
+   * Swap.defaults({
+   *   collapse: false,
+   *   maxWidth: '980px'
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes Swap plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {SwapOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * Swap.construct('.js-swap');
+   * Swap.construct('.js-swap', { collapse: false });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -53,6 +98,12 @@ class Swap {
 
   //
 
+  /**
+   * Creates a new Swap instance
+   * @constructor
+   * @param {Element} el - The target element
+   * @param {SwapOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Swap) {
       console.warn('Swap: Instance already exists', el);
@@ -108,6 +159,11 @@ class Swap {
     el.Swap = this;
   }
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.Swap.destroy();
+   */
   destroy() {
     this.disable();
 
@@ -120,6 +176,13 @@ class Swap {
 
   //
 
+  /**
+   * Enables swap instance
+   * @param {boolean} [internal=false] - Internal call flag to prevent linked recursion
+   * @returns {void}
+   * @example
+   * el.Swap.enable();
+   */
   enable(internal) {
     if (this.enabled) {
       return;
@@ -157,6 +220,13 @@ class Swap {
     }
   }
 
+  /**
+   * Disables swap instance
+   * @param {boolean} [internal=false] - Internal call flag to prevent linked recursion
+   * @returns {void}
+   * @example
+   * el.Swap.disable();
+   */
   disable(internal) {
     if (!this.enabled) {
       return;
@@ -182,6 +252,13 @@ class Swap {
 
   //
 
+  /**
+   * Activates swap instance
+   * @param {boolean} [internal=false] - Internal call flag to prevent linked recursion
+   * @returns {void}
+   * @example
+   * el.Swap.activate();
+   */
   activate(internal) {
     if (!this.enabled || this.active) {
       return;
@@ -213,6 +290,13 @@ class Swap {
     }
   }
 
+  /**
+   * Deactivates swap instance
+   * @param {boolean} [internal=false] - Internal call flag to prevent linked recursion
+   * @returns {void}
+   * @example
+   * el.Swap.deactivate();
+   */
   deactivate(internal) {
     if (!this.enabled || !this.active) {
       return;
@@ -238,6 +322,12 @@ class Swap {
 
   //
 
+  /**
+   * Handles click events and toggles instance state
+   * @private
+   * @param {MouseEvent} e - Click event
+   * @returns {void}
+   */
   #onClick(e) {
     e.preventDefault();
     e.stopPropagation();

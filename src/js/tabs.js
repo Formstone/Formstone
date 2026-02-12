@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Tabs - Simple, mobile-friendly tabs
+ * Accessibility work by @nhall
+ */
+
 import MediaQuery from './mediaquery.js';
 import Swap from './swap.js';
 import {
@@ -20,15 +25,32 @@ import {
   removeAttr,
 } from './utils.js';
 
-
-// Accessibility work by @nhall
-
 // Class
 
+/**
+ * Tabs class for responsive tab interfaces
+ * @class
+ */
 class Tabs {
 
+  /**
+   * @type {number}
+   * @private
+   */
   static #_guid = 1;
 
+  /**
+   * @typedef {Object} TabsOptions
+   * @property {string|number} [maxWidth=Infinity] - Maximum viewport width to enable tabs
+   * @property {string|number} [mobileMaxWidth='740px'] - Maximum viewport width for mobile tab mode
+   * @property {boolean} [automatic=true] - Automatically activate focused tabs with keyboard navigation
+   * @property {string} [label='Tabs'] - Accessibility label for the tab list
+   */
+
+  /**
+   * @type {TabsOptions}
+   * @private
+   */
   static #_defaults = {
     maxWidth: Infinity,
     mobileMaxWidth: '740px',
@@ -38,10 +60,28 @@ class Tabs {
 
   //
 
+  /**
+   * Sets default options for future Tabs instances
+   * @param {TabsOptions} options - Object containing default options
+   * @example
+   * Tabs.defaults({
+   *   automatic: false,
+   *   mobileMaxWidth: '960px'
+   * });
+   */
   static defaults(options) {
     this.#_defaults = extend(true, this.#_defaults, options);
   }
 
+  /**
+   * Initializes Tabs plugin on target elements
+   * @param {string} selector - Selector string to target
+   * @param {TabsOptions} [options={}] - Object containing instance options
+   * @returns {NodeList} NodeList of target elements
+   * @example
+   * Tabs.construct('.js-tabs');
+   * Tabs.construct('.js-tabs', { automatic: false });
+   */
   static construct(selector, options) {
     let targets = select(selector);
 
@@ -56,6 +96,12 @@ class Tabs {
 
   //
 
+  /**
+   * Creates a new Tabs instance
+   * @constructor
+   * @param {Element} el - The target tab element
+   * @param {TabsOptions} [options={}] - Configuration options
+   */
   constructor(el, options) {
     if (el.Tabs) {
       console.warn('Tabs: Instance already exists', el);
@@ -206,6 +252,11 @@ class Tabs {
 
   //
 
+  /**
+   * Removes plugin and all related data
+   * @example
+   * el.Tabs.destroy();
+   */
   destroy() {
     this.listeners.disable.call();
 
@@ -241,26 +292,51 @@ class Tabs {
 
   //
 
+  /**
+   * Enables tabs instance
+   * @example
+   * el.Tabs.enable();
+   */
   enable() {
     this.el.Swap.enable();
   }
 
+  /**
+   * Disables tabs instance
+   * @example
+   * el.Tabs.disable();
+   */
   disable() {
     this.el.Swap.disable();
   }
 
   //
 
+  /**
+   * Activates tabs instance
+   * @example
+   * el.Tabs.activate();
+   */
   activate() {
     this.el.Swap.activate();
   }
 
+  /**
+   * Deactivates tabs instance
+   * @example
+   * el.Tabs.deactivate();
+   */
   deactivate() {
     this.el.Swap.deactivate();
   }
 
   //
 
+  /**
+   * Returns enable handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onEnable() {
     return (e) => {
       setAttr(this.el, {
@@ -315,6 +391,11 @@ class Tabs {
     };
   }
 
+  /**
+   * Returns disable handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onDisable() {
     return (e) => {
       removeAttr(this.el, ['role', 'aria-controls', 'aria-selected', 'tabindex']);
@@ -335,6 +416,11 @@ class Tabs {
     };
   }
 
+  /**
+   * Returns activate handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onActivate() {
     return (e) => {
       if (this.group) {
@@ -365,6 +451,11 @@ class Tabs {
     };
   }
 
+  /**
+   * Returns deactivate handler for swap events
+   * @private
+   * @returns {(e: Event) => void} Event handler function
+   */
   #onDeactivate() {
     return (e) => {
       setAttr(this.el, {
@@ -379,6 +470,11 @@ class Tabs {
     };
   }
 
+  /**
+   * Returns keydown handler for tab keyboard navigation
+   * @private
+   * @returns {(e: KeyboardEvent) => void} Event handler function
+   */
   #onKeyDown() {
     return (e) => {
       let tabs = Array.from(select(`[role="tab"]`, this.containerEl));
@@ -406,6 +502,11 @@ class Tabs {
 
   //
 
+  /**
+   * Enables mobile tab behavior
+   * @private
+   * @returns {void}
+   */
   #mobileEnable() {
     iterate(this.handleEl, (handle) => {
       addClass(handle, 'fs-tabs-mobile');
@@ -426,6 +527,11 @@ class Tabs {
     });
   }
 
+  /**
+   * Disables mobile tab behavior
+   * @private
+   * @returns {void}
+   */
   #mobileDisable() {
     iterate(this.handleEl, (handle) => {
       removeClass(handle, 'fs-tabs-mobile');

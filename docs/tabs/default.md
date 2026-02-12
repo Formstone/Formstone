@@ -162,8 +162,19 @@ Set instance options by passing a valid object at initialization, or to the publ
 
 | Name | Type | Default | Description |
 | -- | -- | -- | -- |
-| `maxWidth` | `string` | `Infinity` | Width to auto-disable plugin |
-| `mobileMaxWidth` | `string` | `740px` | Width to disable mobile styles |
+| `maxWidth` | `string | number` | `Infinity` | Maximum viewport width to enable tabs |
+| `mobileMaxWidth` | `string | number` | `'740px'` | Maximum viewport width for mobile tab mode |
+| `automatic` | `boolean` | `true` | Automatically activate focused tabs with keyboard navigation |
+| `label` | `string` | `'Tabs'` | Accessibility label for the tablist |
+
+Data attributes provide configuration options and can be set directly on the target element.
+
+| Name | Type | Description |
+| -- | -- | -- |
+| `data-tabs-options` | `string` (JSON) | JSON encoded object containing [instance options](#options) |
+| `data-tabs-container` | `string` | Selector for tablist container element |
+| `data-tabs-group` | `string` | Group key for related tab links |
+| `data-tabs-active` | `string` | Marks a tab as active on initialization |
 
 
 <hr class="divider">
@@ -208,11 +219,18 @@ Initializes plugin on target elements.
 | `selector` | `string` (required) | `''` | Selector string to target |
 | `options` | `object` (optional) | `{}` | Object containing [instance options](#options) |
 
+#### Returns
+
+| Type | Description |
+| -- | -- |
+| `NodeList` | NodeList of target elements |
+
 #### Examples
 
 <figure class="example js-example" markdown="1">
 ```js
 let targets = Tabs.construct('.js-tabs');
+Tabs.construct('.js-tabs', { automatic: false });
 ```
 </figure>
 
@@ -233,7 +251,7 @@ Deactivates instance.
 
 <figure class="example js-example" markdown="1">
 ```js
-el.Tabs.deactive();
+el.Tabs.deactivate();
 ```
 </figure>
 
@@ -253,6 +271,7 @@ Sets default options for future initialization.
 <figure class="example js-example" markdown="1">
 ```js
 Tabs.defaults({
+  automatic: false,
   mobileMaxWidth: '500px'
 });
 ```
@@ -331,9 +350,11 @@ Classes allow deeper customization and indicate the current state of a specific 
 | `.fs-tabs-tab` | `element` | Target element |
 | `.fs-tabs-tab_mobile` | `element` | Mobile tab element |
 | `.fs-tabs-content` | `element` | Content element |
+| `.fs-tabs-container` | `element` | Tab container element |
 | `.fs-tabs-enabled` | `modifier` | Indicates enabled state |
 | `.fs-tabs-active` | `modifier` | Indicates active state |
 | `.fs-tabs-inactive` | `modifier` | Indicates inactive state |
+| `.fs-tabs-mobile` | `modifier` | Indicates mobile tab mode |
 
 
 

@@ -1,3 +1,48 @@
+/*! formstone v2.1.9 [tabs.css] 2026-02-12 | GPL-3.0 License | formstone.it */
+/**
+ * Responsive tab interfaces with desktop and mobile states
+ * @module tabs
+ */
+/**
+ * Primary tabs component
+ * Handles tab controls, content visibility, and mobile presentation states
+ *
+ * @selector .fs-tabs
+ * @modifier .fs-tabs-enabled - Applied when tabs are enabled
+ * @modifier .fs-tabs-active - Applied when a tab/content pair is active
+ * @modifier .fs-tabs-mobile - Applied when mobile tab mode is active
+ */
+.fs-tabs {
+  /**
+   * Enabled state styles for desktop and mobile tab controls
+   * @selector .fs-tabs-tab.fs-tabs-enabled
+   * @selector .fs-tabs-tab_mobile.fs-tabs-enabled
+   */
+  /**
+   * Enabled state styles for tab content panels
+   * @selector .fs-tabs-content.fs-tabs-enabled
+   */
+  /**
+   * Active state for visible tab content panel
+   * @selector .fs-tabs-content.fs-tabs-active
+   */
+  /**
+   * Mobile-specific appearance reset for generated mobile tab button
+   * @selector .fs-tabs-tab_mobile.fs-tabs-mobile
+   */
+  /**
+   * Hidden state for desktop tabs and inactive mobile controls in mobile mode
+   * @selector .fs-tabs-tab.fs-tabs-mobile
+   * @selector .fs-tabs-tab_mobile
+   * @selector .fs-tabs-tab_mobile.fs-tabs-active
+   */
+  /**
+   * Visible state for mobile tab controls in mobile mode
+   * @selector .fs-tabs-tab_mobile.fs-tabs-mobile
+   * @selector .fs-tabs-tab_mobile.fs-tabs-mobile.fs-tabs-active
+   */
+}
+
 .fs-tabs-tab.fs-tabs-enabled,
 .fs-tabs-tab_mobile.fs-tabs-enabled {
   box-sizing: border-box;
