@@ -25,8 +25,6 @@ import {
   removeAttr,
 } from './utils.js';
 
-// Class
-
 /**
  * Tabs class for responsive tab interfaces
  * @class

@@ -9,7 +9,9 @@ let header = require('gulp-header');
 let less = require('gulp-less');
 let lessToScss = require('gulp-less-to-scss');
 let rename = require('gulp-rename');
-var strip = require('gulp-strip-comments');
+// let strip = require('gulp-strip-comments');
+let stripCssComments = require('gulp-strip-css-comments').default;
+var removeEmptyLines = require('gulp-remove-empty-lines');
 let webpack = require('webpack-stream');
 
 // Vars
@@ -127,6 +129,8 @@ gulp.task('convert-css', () => {
       // plugins: [ new lessImportNPM() ],
       // globalVars: pkg.src.vars
     }))
+    .pipe(stripCssComments())
+    .pipe(removeEmptyLines())
     .pipe(beautify.css({
       indent_size: 2,
     }))

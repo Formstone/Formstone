@@ -357,6 +357,4 @@ Classes allow deeper customization and indicate the current state of a specific 
 | `.fs-tabs-mobile` | `modifier` | Indicates mobile tab mode |
 
 
-
-
 </div>

@@ -8,8 +8,6 @@ import {
   on,
 } from './utils.js';
 
-// Class
-
 /**
  * MediaQuery class for managing responsive media query events
  * @class

@@ -26,8 +26,6 @@ import {
   restoreAttr,
 } from './utils.js';
 
-// Class
-
 /**
  * Navigation class for responsive menus with toggle, push, reveal, and overlay modes
  * @class

@@ -36,8 +36,6 @@ function formatVimeo(parts) {
   return '//player.vimeo.com/video/' + parts[3];
 }
 
-//
-
 let LightboxInstance;
 
 /**

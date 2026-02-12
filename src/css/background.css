@@ -1,58 +1,7 @@
 /*! formstone v2.1.9 [background.css] 2026-02-12 | GPL-3.0 License | formstone.it */
-/**
- * Full-frame, responsive image and video backgrounds
- * @module background
- */
-/**
- * Default transition duration for background media transitions
- * @type {time}
- * @default 0.15s
- */
-/**
- * Primary background component
- * Creates a full-frame background with support for images, videos, and YouTube embeds
- *
- * @selector .fs-background
- * @modifier .fs-background-loaded - Applied when media has loaded
- * @modifier .fs-background-lazy - Applied when lazy loading is enabled
- * @example
- *   <div class="fs-background">
- *     <!-- Content here -->
- *   </div>
- */
 .fs-background {
-  /**
-   * Transition duration for opacity changes
-   * Overridable via custom property
-   * @type {time}
-   */
   --fs-background-duration: 0.15s;
   position: relative;
-  /**
-   * Container element for background media
-   * Uses CSS Grid to stack multiple media layers
-   *
-   * @selector .fs-background-container
-   */
-  /**
-   * Media element for background content
-   * Handles images, videos, and embeds with proper sizing and positioning
-   *
-   * @selector .fs-background-media
-   */
-  /**
-   * Image background media type
-   * @selector .fs-background-image
-   */
-  /**
-   * Video background media type
-   * @selector .fs-background-video
-   */
-  /**
-   * Embedded media type (YouTube)
-   * Maintains 16:9 aspect ratio and centers content
-   * @selector .fs-background-embed
-   */
 }
 
 @media (prefers-reduced-motion) {

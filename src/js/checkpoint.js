@@ -14,8 +14,6 @@ import {
   removeClass,
 } from './utils.js';
 
-// Class
-
 /**
  * CheckPoint class for animating elements on scroll
  * @class

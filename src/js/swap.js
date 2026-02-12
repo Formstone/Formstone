@@ -20,8 +20,6 @@ import {
   hasAttr,
 } from './utils.js';
 
-// Class
-
 // TODO look into events
 
 /**

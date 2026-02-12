@@ -23,8 +23,6 @@ import {
   setAttr,
 } from './utils.js';
 
-// Class
-
 /**
  * Background class for creating full-frame responsive image and video backgrounds
  * @class

@@ -7,8 +7,6 @@ import {
   extend,
 } from './utils.js';
 
-// Class
-
 /**
  * Cookie class for managing browser cookies
  * @class
